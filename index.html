@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>슬랙 클론 코딩</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script>
+        function 인증번호요청기능() {
+            const 나의인증번호 = String(Math.floor(Math.random() * 1000000)).padStart(6, "0")
+            document.getElementById("인증번호보여주는곳").innerText = 나의인증번호
+
+        }
+    </script>
+</head>
+<body>
+     <!-- 구조를 파악할 때, space-between으로 쪼갤 수 있는 지 여부로 파악하면 명확하게 파악 가능 -->
+    <div class="가장큰배경">
+        <div class="헤더">
+            <div class="헤더__왼쪽영역">
+                <img src="./assets/icons/arrow_left.png" width="32px" height="32px" />
+                <img src="./assets/icons/arrow_right.png" width="32px" height="32px" />
+                <img src="./assets/icons/time.png" width="32px" height="32px" />
+            </div>
+            <div class="헤더__오른쪽영역">
+                <img src="./assets/images/searchbar.png" alt="" width="920px" height="48px">
+                <div class="헤더__오른쪽영역__프로필설정">
+                    <img src="./assets/icons/badge.png" alt="" width="111px" height="48px">
+                    <img src="./assets/icons/help.png" alt="" width="32px" height="32px" >
+                </div>
+            </div>
+        </div>
+        <div class="바디">
+            <div class="바디__사이드바왼쪽"></div>
+            <!-- bem 방식으로 작성하는 것이 수정하기도 용이하고 명확함 -->
+            <div class="바디__메인">
+                <div class="바디__메인__메뉴">
+
+                </div>
+                <div class="바디__메인__회원가입">
+                    <div class="코드캠프__텍스트">코드캠프에 가입하고 <br> 개발자로 커리어 점프 하세요.</div>
+                    <div class="회원가입__묶음">
+                        <div class="바디__메인__회원가입__정보란">
+                            <div class="정보란__인풋">이름<input type="text" placeholder="이름을 입력해주세요."></div>
+                            <div class="정보란__인풋">이메일 <input type="text" placeholder="이메일을 입력해주세요."></div>
+                            <div class="정보란__인풋">비밀번호<input type="text" placeholder="비밀번호를 입력해주세요."></div>
+                            <div class="정보란__인풋">전화번호<input type="text" placeholder="010으로 시작, '-'를 꼭 입력해주세요."></div>
+                            <div>
+                                <div>
+
+                                </div>
+                                <div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="회원가입__동의가입">
+
+                        <button>가입</button>
+                    </div>
+                </div>
+                <div class="바디__메인__사진">
+
+                </div>
+            </div>
+            <div class="바디__사이드바오른쪽">
+                <!-- 실제로는 빈 공간이지만, AI 바이브코딩을 위해서는 빈 공간이라도 div를 만들어주는 것이 좋음 -->
+            </div>
+        </div>
+        <div class="푸터">
+
+        </div>
+    </div>
+</body>
+</html>
