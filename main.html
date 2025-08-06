@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Main </title>
+    <link rel="stylesheet" href="./main.css">
+    <script src="./main.js"></script>
+</head>
+<body>
+    <div class="Container_Wrapper"> 
+        <div class="Header">
+            <div class="Header_Title">
+                <div class="Header_Left_Menu">
+                    <img class="Header_Left_Menu_Icon" src="./public/icons/arrow_left.png">
+                    <img class="Header_Left_Menu_Icon" src="./public/icons/arrow_right.png">
+                    <img class="Header_Left_Menu_Icon" src="./public/icons/time.png">
+                </div>
+                <div class="Search_Menu">
+                    <div class="Search_Input_Wrapper">
+                        <img src="./public/icons/search.png" alt="">
+                        <input class="Search_Input" type="text" placeholder="수강생을 검색해 보세요.">
+                    </div>
+                    <div class="Header_Icon_Menu_Wrapper">
+                        <div class="Header_Icon_Tag">
+                            <img id="Header_Icon_Logo" src="./public/icons/logo_codecamp2.png">
+                            <p id="Header_Icon_Menu_Text">수강생</p>
+                        </div>
+                        <img id="Header_Icon_Help" src="./public/icons/help.png">
+                    </div>
+                    </div>
+            </div>
+        </div>
+        <div class="Middle_Wrapper">
+        <div class="Side_Menu">
+                <img id="Side_Menu_Wrapper_Img" src="./public/icons/채널 이미지.png"/>
+            <div class="Side_Menu_Wrapper">
+                <div class="Side_Menu_Wrapper_Icon_Group">
+                    <img id="Home_Icon" src="./public/icons/home.png"/>
+                    <p class="Side_Menu_Wrapper_Icon_Group_Text">홈</p>
+                </div>
+                    <div class="Side_Menu_Wrapper_Icon_Group">
+                        <img class="Side_Icons" src="./public/icons/home-1.png"/>
+                        <p class="Side_Menu_Wrapper_Icon_Group_Text">채널</p>
+                    </div>
+                    <div class="Side_Menu_Wrapper_Icon_Group">
+                        <img class="Side_Icons" src="./public/icons/notifications.png"/>
+                        <p class="Side_Menu_Wrapper_Icon_Group_Text">알림</p>
+                    </div>
+                    <div class="Side_Menu_Wrapper_Icon_Group">
+                        <img class="Side_Icons" src="./public/icons/bookmark.png"/>
+                        <p id="Bookmark_Icon" class="Side_Menu_Wrapper_Icon_Group_Text">북마크</p>
+                    </div>
+                    <div class="Side_Menu_Wrapper_Icon_Group">
+                        <img class="Side_Icons" src="./public/icons/more_meatball.png"/>
+                        <p id="More_Icon" class="Side_Menu_Wrapper_Icon_Group_Text">더보기</p>
+                    </div>
+
+            </div>
+                <div class="Side_Menu_Bottom_Icon_Group">
+                    <div class="Side_Menu_Bottom_Icon_Group_Icon_Wrapper">
+                        <img class="Side_Icons" src="./public/icons/프로필 추가.png"/>
+                    </div>
+                        <div class="Side_Menu_Bottom_Icon_Group_Icon_Wrapper">
+                            <img class="Side_Icons" src="./public/icons/내 프로필_A.png"/>
+                        </div>
+                    </div>
+                </div>
+        <div class="Container">
+            <!--좌측 리스트 메뉴 -->
+            <div class="Left_Body">
+                <div class="Title_Area">
+                    <p>코드캠프</p>
+                    <div class="Icon_Group">
+                        <div class="Icon_Area">
+                            <img  src="./public/icons/filter.png">
+                        </div>
+                        <div class="Icon_Area">
+                            <img src="./public/icons/Vector4.png">
+                        </div>
+                    </div>
+                </div>
+                <button class="MoveToDetailBtn">
+                    <img class="Icon_Area" src="./public/icons/Vector5.png">
+                    서약서 자세히 보기
+                </button>
+                <div class="DivLine"></div>
+
+
+                <div class="List_Menu">
+                    <div class="Info_Wrapper">
+                        <div class="Info">
+                            <img id="List_Icon" src="./public/icons/logo_codecamp.png">코드캠프 13기
+                        </div>
+                        <button class="Info_btn">수강중</button>
+                    </div>
+
+                        <div class="List_Wrapper">
+                            <div class="List_Title">
+                                <img id="List_Icon" src="./public/icons/Vector.png">수강생 리스트
+                            </div>
+                            <img class="Icon_Area" src="./public/icons/arrow_down.png">
+                        </div>
+
+                        <div class="User_List_Wrapper" style="display: none;">
+                                <div class="User_List">
+                                    <img id="User_Icon" src="./public/icons/Mask group.png">수강생 1
+                                </div>
+                        </div>
+                        <div id="Contents_Area" disabled="true">
+                            <div class="Contents_Area">
+                                현재 가입한 멤버가 없어요. <br>
+                                회원가입 해보세요.
+                            </div>
+                            <button class="Signup_Btn" id="Signup_Btn" disabled="true">
+                                <img id="List_Icon" src="./public/icons/person_add.png">가입하기
+                            </button>
+                        </div>
+                        <div class="List_Wrapper">
+                            <div class="List_Title">
+                                <img id="List_Icon" src="./public/icons/channel_list.png">채널
+                            </div>
+                            <img class="Icon_Area" src="./public/icons/arrow_down.png">
+                        </div>
+                        
+                        <ul class="Contents_List">
+                            <li><img src="./public/icons/tag.png">채널 1</li>
+                            <li><img src="./public/icons/tag.png">채널 2</li>
+                            <li><img src="./public/icons/tag.png">채널 3</li>
+                            <li><img src="./public/icons/tag.png">채널 4</li>
+                        </ul>
+                        <div class="List_Wrapper">
+                            <div class="Block_Member_List">
+                                <img id="List_Icon" src="./public/icons/skull.png">차단 멤버 리스트
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <!-- 우측 회원가입 폼 -->
+            <div class="Body">
+                <h2 class="Form_Title">코드캠프에 가입하고 <br>개발자로 커리어 점프 하세요.</h2>
+                <div class="Form_Container">
+                    <div class="Input_Wrapper">
+                        <label class="Input_Title_Label">이름</label>
+                        <input class="Input" type="text" id="name" placeholder="이름을 입력해주세요">
+                    </div>
+                    <div class="error" id="error__name"></div>
+
+                    <div class="Input_Wrapper">
+                        <label class="Input_Title_Label ">아이디</label>
+                        <input class="Input" type="text" id="email" placeholder="네이버,구글,한메일 카카오 계정만 입력">
+                    </div>
+                    <div class="error" id="error__email"></div>
+
+                    <div class="Input_Wrapper">
+                        <label class=" Input_Title_Label">비밀번호</label>
+                        <input class="Input" type="password" placeholder="비밀번호를 입력해주세요">
+                    </div>
+                    <div class="error" id="error__password"></div>
+
+
+                    <div class="Input_Wrapper">
+                        <label class=" Input_Title_Label">비밀번호 확인</label>
+                        <input class="Input" type="password" id="password__check" placeholder="비밀번호를 입력해주세요">
+                    </div>
+                    <div class="error" id="error__password__check"></div>
+
+                    <div class="Input_Wrapper">
+                        <label class="Input_Title_Label">전화번호</label>
+                        <input  class="Input" type="text" id="phoneNumber" placeholder="010으로 시작,'-'를 꼭 입력해주세요" maxlength="15">
+                    </div>
+                    <div class="error" id="error__phone"></div>
+
+                    <div class="Access_Btn_Wrapper">
+                        <div class="Verify_Group">
+                            <div class="Verify_Code" id="Token">000000</div>
+                            <button class="Token_Button" id="Token_Button" type="button" onclick="getToken()">인증번호 요청</button>
+                        </div>
+                        <div class="Verify_Group">
+                            <div class="Token__Timer" id="Token__Timer" style="display:none;">3:00</div>
+                            <button class="Token__Timer__Confirm__Button" id="Token__Timer__Confirm__Button" type="button" onclick="getTokenTimerConfirm()" disabled>인증하기</button>
+                        </div>
+                    </div>
+
+
+                    <div class="Textarea_Wrapper">
+                        <label class="Textarea_Label">자기소개</label>
+                        <textarea class="Textarea" cols="30" rows="10" placeholder="자기소개를 입력해주세요"></textarea>
+                    </div>
+
+                    <div class="Gender_Wrapper">
+                        <label class="Gender_Label">성별</label>
+                        <div class="Gender_Group">
+                            <input class="Gender-input" type="radio" name="gender" id="gender_man" value="male"/>
+                            <span>남성</span>
+                            <input class="Gender-input" type="radio" name="gender" id="gender_woman" value="female"/>
+                            <span>여성</span>
+                        </div>
+                    </div>
+                    <!-- <div class="error" id="error__gender"></div> -->
+                    <div class="AgreementWrappper">
+                        <input class="Checkbox" type="checkbox" id="agreement" />
+                        <label for="agreement">집에는 씻으러만 가는데 동의합니다.</label>
+                    </div>
+                    <button id="Signup_Button" class="Signup_Button" type="button" onclick="signin()" disabled>가입</button>
+                </div>
+            </div>
+            <div>
+                <img class="img" src="./public/images/main1.png" alt="">
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <!-- 모달1번 -->
+    <div id="signupModal" class="modal" style="display:none;">
+        <div class="modal-content">
+          <h2 class="modalTitle">codecamp 내용 :</h2>
+          <p id="modalMessage"></p>
+          <button id="modalConfirmBtn" class="modalConfirmBtn">확인</button>
+        </div>
+      </div>
+      
+      <!-- 모달2번 -->
+      <div id="signupModal2" class="modal modal-second" style="display:none;">
+        <div class="modal-content modal-content-second">
+          <h2 class="modalTitle">codecamp 내용 :</h2>
+          <p id="modalMessage2"></p>
+          <button id="modalConfirmBtn2" class="modalConfirmBtn">확인</button>
+        </div>
+      </div>
+</body>
+</html>
