@@ -1,0 +1,497 @@
+* {
+    box-sizing: border-box;
+    border: 0;
+    margin: 0;
+}
+
+.main-background {
+    background-color: #491449;
+    width: 1920px;
+    height: 1208px;
+}
+.main-header{
+    height: 80px;
+    padding: 0 80px;
+    display: flex;
+}
+.main-header-leftContainer {
+    width: 400px;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 16px 0;
+    padding-right: 24px;
+    gap: 16px;
+}
+.main-header-rightContainer {
+    width:1360px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.main-header-search {
+    width: 920px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    padding: 0 12px;
+    padding-left: 16px;
+    background-color: #955C98;
+}
+.main-header-input {
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    padding-left: 8px;
+    background-color: #955C98;
+}
+.main-header-input::placeholder {
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+.main-header-input-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 163px;
+}
+.main-user-count-button {
+    width: 111px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #713574;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+.main-header-button-text {
+    font-size: 18px;
+    color: #FFFFFF;
+}
+
+.main-contents-background{
+    width: 100%;
+    height: 1048px;
+    display: flex;
+    padding-right: 80px;
+}
+.main-menuBar {
+    width: 80px;
+    padding: 0 20px;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.main-menuBar-top {
+    height: 448px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.main-menu-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 40px;
+    height: 384px;
+
+}
+.main-menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40px;
+    height: 64px;
+}
+.main-menu-label {
+    color: #FFFFFF;
+    font-size: 14px;
+    margin-top: 8px;
+}
+.main-menuBar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.main-container {
+    width: 1760px;
+    height: 1048px;
+    display: flex;
+}
+.main-leftContainer {
+    background-color: #713574;
+    width: 400px;
+    height: 100%;
+    border-radius: 8px 0 0 8px;
+    padding: 20px;
+}
+.main-L-container-top {
+    width: 360px;
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+}
+.main-L-container-title {
+    color: #FFFFFF;
+    font-size: 24px;
+}
+.main-L-container-title-icons {
+    display: flex;
+    gap: 8px;
+}
+.main-left-white-button {
+    margin: 24px 0;
+    width: 360px;
+    height: 40px;
+    text-align: center;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+.main-L-white-button-text {
+    color: #491449;
+    font-size: 20px;
+}
+.main-line {
+    width: 360px;
+    border: 1px solid #955C98;
+    margin-bottom: 24px;
+}
+.main-L-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 488px;
+    gap:25px
+}
+.main-L-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.main-L-content-label {
+    display: flex;
+    gap: 8px;
+}
+.main-L-content-text {
+    font-size: 22px;
+    color: #FFFFFF;
+    text-align: center;
+}
+.main-indicator{
+    font-size: 16px;
+    width: 66px;
+    height: 32px;
+    padding: 4px 12px;
+    background-color: #FFFFFF33;
+    border-radius: 8px;
+    padding-top: 7px;
+    color: #FFFFFF;
+}
+.main-L-inviteBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.main-L-invite-textBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 104px;
+    margin: 25px 0 20px 0;
+}
+.main-L-invite-text {
+    font-size: 14px;
+    color: #C9AAC9;
+    text-align: center;
+    line-height: 20px;
+}
+.main-addPerson-button{
+    width: 126px;
+    height: 40px;
+    background-color: #491449;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4.5px;
+    margin-top: 4px;
+}
+.main-addPerson-button-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+.main-user-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 25px;
+    padding-left: 15px;
+    cursor: pointer;
+    display: none;
+}
+.main-user-name {
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+.main-channel-box-container{
+    margin-top: 12px;
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.main-channel-box{
+    width: 360px;
+    height: 32px;
+    color: #D4D3D3;   
+    padding: 4px 16px;
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.main-channel-icon{
+    color: #D4D3D3;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.main-rightContainer {
+    background-color: #D5BCE4;
+    width: 1360px;
+    height: 100%;
+    display: flex;
+}
+.main-formSection {
+    width: 680px;
+    height: 100%;
+    padding: 0 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.main-imageSection {
+    width: 680px;
+    height: 100%;
+    background-image: url(./asset/slackMain.png);
+    filter: drop-shadow(0px 0px 20px #D389FF);
+    background-size: cover;
+    background-position: center;
+}
+.main-form-title {
+    margin-top: 40px;
+    font-size: 40px;
+    font-weight: 800;
+    color: #491449;
+    line-height: 56px;
+    text-align: center;
+}
+.main-form-wrapper {
+    padding: 0 56px;
+}
+
+.main-form-top {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.main-input-wrapper {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+.main-input-error-msg {
+    position: absolute;
+    bottom: -16px;
+    left: 130px;
+    color: #E84F4F;
+    font-size: 12px;
+    display: none;
+}
+.main-label {
+    width: 120px;
+    height: 44px;
+    text-align: left;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 0;
+    color: #333333;
+}
+.main-input {
+    width: 320px;
+    height: 44px;
+    padding-left: 12px;
+    border-radius: 8px;
+}
+.main-button-section {
+    width: 448px;
+    height: 92px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    margin-top: 20px;
+    gap: 12px;
+}
+
+.main-number {
+    font-size: 18px;
+    margin-right: 12px;
+    color: #955C98;
+}
+.main-number-button {
+    width: 136px;
+    height: 40px;
+    border: 1px solid #491449;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    font-size: 20px;
+    color: #491449;
+    font-weight: 600;
+    cursor: pointer;
+}
+.main-timer {
+    font-size: 18px;
+    color: #E84F4F;
+    display: none;
+    margin-right: 12px;
+}
+.main-button-section-bottom {
+    width: 136px;
+    height: 40px;
+    color: #F2F2F2;
+    background-color: #C7C7C7;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.main-form-bottom {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.main-input-large-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.main-input-large {
+    width: 320px;
+    height: 116px;
+    border-radius: 8px;
+    padding: 8px 12px;
+    vertical-align: top;
+    resize: none;
+}
+.main-radio-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.main-radio-wrapper {
+    width: 200px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-radio {
+    width: 20px;
+    height: 20px;
+    font-size: 18px;
+    border:3px solid #919191;
+    border-radius: 50%;
+    background-color: #D5BCE4;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none; 
+    -ms-appearance: none;
+    -o-appearance: none;
+}
+.main-radio:checked {
+    background-color: #491449;
+    border: 5px solid #D5BCE4;
+    box-shadow: 0 0 0 2.5px #491449;
+}
+.main-radio-text {
+    font-size: 18px;
+    margin-left: 8px;
+    margin-right: 40px;
+    text-align: center;
+}
+.main-submit-section {
+    height: 92px;
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.main-submit-section-top {
+    width: 448px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+.main-checkbox {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    padding: 0.25em;
+    width: 1em;
+    height: 1em;
+    border: 2px solid #491449;
+    cursor: pointer;
+    background-color: transparent;
+    position: relative;
+}
+
+.main-checkbox:checked {
+    border-color: #491449;
+    background-color: transparent;
+}
+
+.main-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 8px;
+    border: 2px solid #491449;
+    border-top: none;
+    border-left: none;
+    transform: translate(-50%, -60%) rotate(45deg);
+}
+.main-checkbox-text {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333333;
+}
+.main-submit-section-bottom-button {
+    width: 448px;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #C7C7C7;
+    color: #F2F2F2;
+    font-size: 20px;
+}
