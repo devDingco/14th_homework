@@ -39,25 +39,38 @@
                     <div class="코드캠프__텍스트">코드캠프에 가입하고 <br> 개발자로 커리어 점프 하세요.</div>
                     <div class="회원가입__묶음">
                         <div class="바디__메인__회원가입__정보란">
-                            <div class="정보란__인풋">이름<input type="text" placeholder="이름을 입력해주세요."></div>
-                            <div class="정보란__인풋">이메일 <input type="text" placeholder="이메일을 입력해주세요."></div>
-                            <div class="정보란__인풋">비밀번호<input type="text" placeholder="비밀번호를 입력해주세요."></div>
-                            <div class="정보란__인풋">전화번호<input type="text" placeholder="010으로 시작, '-'를 꼭 입력해주세요."></div>
+                            <div class="정보란__인풋">이름<input class="input__위쪽" type="text" placeholder="이름을 입력해주세요."></div>
+                            <div class="정보란__인풋">이메일 <input class="input__위쪽" type="text" placeholder="이메일을 입력해주세요."></div>
+                            <div class="정보란__인풋">비밀번호<input class="input__위쪽" type="text" placeholder="비밀번호를 입력해주세요."></div>
+                            <div class="정보란__인풋">전화번호<input class="input__위쪽" type="text" placeholder="010으로 시작, '-'를 꼭 입력해주세요."></div>
                             <div>
-                                <div>
-
+                                <div class="인증번호__오른쪽정렬">
+                                    <div id="인증번호보여주는곳">000000</div>
+                                    <button class="버튼" onclick="인증번호요청기능()">인증번호 요청</button>
                                 </div>
+                                <div class="인증번호__오른쪽정렬"><button class="버튼">인증 하기</button></div>
+                            </div>
+                            <div class="자기소개__인풋" style="width: 448px; height: 118px;"><div class="자기소개__텍스트">자기소개</div><textarea class="input__아래쪽" type="text" placeholder="자기소개를 입력해 주세요."></textarea></div>
+                            <div class="성별영역">
+                                <div class="성별">성별</div>   
+                                <div class="요소영역">
+                                    <div id="남성"><input class="radio" type="radio" name="gender">남성 </div>
+                                    <div id="여성"><input class="radio" type="radio" name="gender">여성 </div>
+                                </div>
+                            </div>
+                            <div class="동의">    
                                 <div>
-                                    
+                                    <input type="checkbox"> 집에는 씻으러만 가는데 동의합니다. <br>
+                                </div>
+                                <div class="회원가입__동의가입">
+                                    <button class="가입버튼" >가입</button>
                                 </div>
                             </div>
                         </div>
+                        
 
                     </div>
-                    <div class="회원가입__동의가입">
-
-                        <button>가입</button>
-                    </div>
+                    
                 </div>
                 <div class="바디__메인__사진">
 
