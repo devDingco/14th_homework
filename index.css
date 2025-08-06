@@ -150,12 +150,20 @@ textarea::placeholder {
     display: flex;
     text-align: center;
     margin-right: 12px;
+    color: purple;
+    
 }
+
+
 
 .버튼{
     width: 136px;
     height: 40px;
     border-radius: 5px;
+    color: purple;
+    border-color: purple;
+    font-weight: bolder;
+    font-size: 20px;
 }
 
 .자기소개__인풋{
