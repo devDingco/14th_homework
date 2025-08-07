@@ -11,21 +11,25 @@
   <div id="header"></div>
 
   <!-- 메인 컨텐츠 -->
-  <div id="main"></div>
-
+  <div class="container">
+    <div id="main"></div>
+    <div id="form"></div>
+  </div>
   <!-- 푸터 -->
   <div id="footer"></div>
 
   <script>
-    Promise.all([
-      fetch("header.html").then(res => res.text()),
-      fetch("main.html").then(res => res.text()),
-      fetch("footer.html").then(res => res.text())
-    ]).then(([header, main, footer]) => {
-      document.getElementById("header").innerHTML = header;
-      document.getElementById("main").innerHTML = main;
-      document.getElementById("footer").innerHTML = footer;
-    });
+Promise.all([
+  fetch("header.html").then(res => res.text()),
+  fetch("main.html").then(res => res.text()),
+  fetch("form.html").then(res => res.text()),     // ← 폼 추가
+  fetch("footer.html").then(res => res.text())
+]).then(([header, main, form, footer]) => {
+  document.getElementById("header").innerHTML = header;
+  document.getElementById("main").innerHTML = main;
+  document.getElementById("form").innerHTML = form;   // ← 폼 삽입
+  document.getElementById("footer").innerHTML = footer;
+});
   </script>
   <script src="script.js"></script>
 </body>

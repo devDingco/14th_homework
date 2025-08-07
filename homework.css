@@ -373,4 +373,91 @@
   .emotion.etc { color: #864fbd; }
 
   
+  .footer p:first-child {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  #footer{
+    background-color: var(--bg-light);
+    color: #666;
+
+  }
+  .footer {
+    margin-top: 80px;
+    padding: 30px 20px;
+    text-align: start; /* 👈 왼쪽 정렬 */
+    font-size: 14px;
+    max-width: 1200px; /* 👈 콘텐츠 폭 제한 */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+  }
+
+  .diary-form {
+    width: 300px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--form-shadow);
+    padding: 24px; /* ✅ 전체 내부 여백 넉넉하게 */
+    flex-shrink: 0;
+  }
+  
+  .diary-form h2 {
+    font-size: 18px;
+    margin-bottom: 24px; /* ✅ 제목과 다음 항목 사이 간격 */
+  }
+  
+  .mood-group {
+    margin-bottom: 24px; /* ✅ 감정 선택과 다음 요소 간격 */
+  }
+  
+  .mood-group p {
+    font-size: 14px;
+    margin-bottom: 12px;
+    font-weight: bold;
+  }
+  
+  .mood-group label {
+    display: inline-block;
+    margin-right: 12px;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  
+  .diary-form input[type="text"] {
+    margin-bottom: 16px; /* ✅ 제목 input 아래 간격 */
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+  }
+  
+  .diary-form textarea {
+    height: 100px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 16px; /* ✅ textarea와 버튼 사이 간격 */
+  }
+  
+  .diary-form button[type="submit"] {
+    padding: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #ccc;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
   
