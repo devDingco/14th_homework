@@ -60,16 +60,9 @@ button:disabled{
   justify-content: space-between;
 }
 .footer{
-  position: sticky;
-  bottom: 0;
-  display: flex;
-  height: 160px;
-  background-color: var(--color-gray-50);
-  width: 1920px;
-  justify-content: center;
-}
-.footer-wrapper{
   width: 1168px;
+  height: 160px;
+  display: flex;
   background-color: var(--color-gray-50);
   padding: 24px 20px;
   display: flex;

@@ -22,71 +22,7 @@
     <div class="main">
 
       <div class="main__gallery">
-        <div class="main__gallery__card">
-          <img src="./assets/images/sad.png" />
-          <div class="main__gallery__card__info">
-            <div class="main__gallery__card__info__sub">
-              <span>슬퍼요</span>
-              <span>2024. 03. 12</span>
-            </div>
-            <p class="title01">타이틀 영역 입니다. 한줄까지만 노출 됩니다.</p>
-          </div>
-        </div>
-
-        <div class="main__gallery__card">
-          <img src="./assets/images/surprise.png" />
-          <div class="main__gallery__card__info">
-            <div class="main__gallery__card__info__sub">
-              <span>놀랐어요</span>
-              <span>2024. 03. 12</span>
-            </div>
-            <p class="title01">타이틀 영역 입니다.</p>
-          </div>
-        </div>
-
-        <div class="main__gallery__card">
-          <img src="./assets/images/angry.png" />
-          <div class="main__gallery__card__info">
-            <div class="main__gallery__card__info__sub">
-              <span>화나요</span>
-              <span>2024. 03. 12</span>
-            </div>
-            <p class="title01">타이틀 영역 입니다. 한줄까지만 노출 됩니다.</p>
-          </div>
-        </div>
-
-        <div class="main__gallery__card">
-          <img src="./assets/images/happy.png" />
-          <div class="main__gallery__card__info">
-            <div class="main__gallery__card__info__sub">
-              <span>행복해요</span>
-              <span>2024. 03. 12</span>
-            </div>
-            <p class="title01">타이틀 영역 입니다.</p>
-          </div>
-        </div>
-
-        <div class="main__gallery__card">
-          <img src="./assets/images/etc.png" />
-          <div class="main__gallery__card__info">
-            <div class="main__gallery__card__info__sub">
-              <span>기타</span>
-              <span>2024. 03. 12</span>
-            </div>
-            <p class="title01">타이틀 영역 입니다. 한줄까지만 노출 됩니다.</p>
-          </div>
-        </div>
-
-        <div class="main__gallery__card">
-          <img src="./assets/images/happy.png" />
-          <div class="main__gallery__card__info">
-            <div class="main__gallery__card__info__sub">
-              <span>행복해요</span>
-              <span>2024. 03. 12</span>
-            </div>
-            <p class="title01">타이틀 영역 입니다.</p>
-          </div>
-        </div>
+        
       </div>
 
       <form class="main__diary-form">
@@ -95,40 +31,44 @@
           <h3>오늘 기분은 어땟나요?</h3>
           <div class="mood-select-box">
             <label for="happy"><input id="happy" name="mood" type="radio">행복해요</label>
-            <label><input name="mood" type="radio">슬퍼요</label>
-            <label><input name="mood" type="radio">놀랐어요</label>
-            <label><input name="mood" type="radio">화나요</label>
-            <label><input name="mood" type="radio">기타</label>
+            <label for="sad"><input id="sad" name="mood" type="radio">슬퍼요</label>
+            <label for="surprise"><input id="surprise" name="mood" type="radio">놀랐어요</label>
+            <label for="angry"><input id="angry" name="mood" type="radio">화나요</label>
+            <label for="etc"><input id="etc" name="mood" type="radio">기타</label>
           </div>
         </div>
 
         <div class="main-diary-input-form">
           <div class="main-diary-input">
-            <label for="diary-form-title" class="body02_s">제목</label>
-            <input type="text" id="diary-form-title"
+            <label for="title" class="body02_s">제목</label>
+            <input type="text" id="title" onchange="checkContents()"
             placeholder="제목을 입력해 주세요."/>
           </div>
           <div class="main-diary-input">
-            <label for="diary-form-contents" class="body02_s">내용</label>
-            <textarea name="" id="diary-form-contents"
+            <label for="contents" class="body02_s">내용</label>
+            <textarea name="" id="contents" onchange="checkContents()"
             placeholder="내용을 입력해 주세요." style="height: 128px;"></textarea>
           </div>
         </div>
 
-        <button type="submit" disabled>등록하기</button>
+        <button id="submit-button" type="submit" disabled>등록하기</button>
 
       </form>
     </div>
     <!-- footer -->
-    
-  </div>
-  <div class="footer">
-    <div class="footer-wrapper">
-      <h4>지호의 다이어리</h4>
-      <p>대표: {name}</p>
-      <p>Copyright © 2024.{name} Co, Ltd</p>
+    <div class="footer">
+      <!-- <div class="footer-wrapper"> -->
+        <h4>지호의 다이어리</h4>
+        <p>대표: {name}</p>
+        <p>Copyright © 2024.{name} Co, Ltd</p>
+      <!-- </div> -->
     </div>
   </div>
+  
   <script src="./js/script.js"></script>
+  <script src="./js/form.js"></script>
+  <script src="./js/checkContents.js"></script>
+  <script src="./js/formatUtils.js"></script>
+  <script src="./js/constants.js"></script>
 </body>
 </html>

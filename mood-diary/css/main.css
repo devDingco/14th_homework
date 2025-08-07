@@ -4,6 +4,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+  overflow-y: scroll;
 }
 .main__gallery__card{
   width: 380px;
