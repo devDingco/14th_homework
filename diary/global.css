@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* 라이트 테마 색상 (피그마 기반) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f2f2f2;
+    --text-primary: #000000;
+    --text-secondary: #1c1c1c;
+    --text-tertiary: #5f5f5f;
+    --text-quaternary: #919191;
+    --text-muted: #ababab;
+    --border-primary: #c7c7c7;
+    --border-accent: #000000;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --card-bg: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #c7c7c7;
+    --input-placeholder: #ababab;
+    --radio-border: #c7c7c7;
+    --radio-selected: #000000;
+    --button-bg: #000000;
+    --button-text: #ffffff;
+    --footer-bg: #f2f2f2;
+    --footer-text: #5f5f5f;
+    --footer-info: #919191;
+    --toggle-bg: #e4e4e4;
+    --toggle-text: #1c1c1c;
+    /* 셀렉트박스 색상 */
+    --select-bg: #ffffff;
+    --select-border: #c7c7c7;
+    --select-text: #1c1c1c;
+    --select-placeholder: #ababab;
+    --select-option-bg: #ffffff;
+    --select-option-hover: #f2f2f2;
+    --select-option-selected-bg: rgba(58, 181, 15, 0.05);
+    --select-option-selected-text: #299C00;
+    --select-option-text: #1c1c1c;
+    --select-dropdown-shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    /* 다크 테마 색상 (피그마 기반) */
+    --bg-primary: #1c1c1c;
+    --bg-secondary: #333333;
+    --bg-tertiary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #e4e4e4;
+    --text-tertiary: #c7c7c7;
+    --text-quaternary: #ababab;
+    --text-muted: #777777;
+    --border-primary: #5f5f5f;
+    --border-accent: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --card-bg: #333333;
+    --input-bg: #2d2d2d;
+    --input-border: #5f5f5f;
+    --input-placeholder: #777777;
+    --radio-border: #5f5f5f;
+    --radio-selected: #ffffff;
+    --button-bg: #ffffff;
+    --button-text: #000000;
+    --footer-bg: #2d2d2d;
+    --footer-text: #c7c7c7;
+    --footer-info: #ababab;
+    --toggle-bg: #3ad84a;
+    --toggle-text: #e4e4e4;
+    /* 셀렉트박스 색상 */
+    --select-bg: #000000;
+    --select-border: #5f5f5f;
+    --select-text: #e4e4e4;
+    --select-placeholder: #777777;
+    --select-option-bg: #1c1c1c;
+    --select-option-hover: #333333;
+    --select-option-selected-bg: #ffffff;
+    --select-option-text: #e4e4e4;
+    --select-dropdown-shadow: rgba(0, 0, 0, 0.3);
+}
+
+body {
+    background-color: var(--bg-primary);
+    font-family: 'pretendard', sans-serif;
+    max-width: 1920px;
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+textarea {
+    resize: none;
+    outline: none;
+}
+
+input {
+    outline: none;
+}
