@@ -13,3 +13,73 @@
     opacity: 1;
     gap: 24px;    
 }
+
+#top_container {
+    display: flex;
+    width: 100%;
+    height: 240px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    padding-right: 20px;
+    padding-left: 20px;    
+}
+
+#bottom_container {
+    width: 100%;
+    height: 1257px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 42px;
+}
+
+#storage_container {
+    display: flex;
+    width: 100%;
+    height: 48px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 32px;
+}
+
+#storage_navigation_container {
+    width: 100%;
+    height: 48px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+#diary_container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 24px;
+}
+
+#diary_box_container {
+    width: 784px;
+    height: 1167px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 24px;    
+}
+
+#write_diary_container {
+    width: 360px;
+    height: 604px;
+    min-width: 360px;
+    max-width: 760px;
+    border-radius: 16px;
+    border-width: 1px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 40px;
+    padding: 24px;    
+}
+

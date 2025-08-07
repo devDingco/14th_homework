@@ -2,8 +2,12 @@
     box-sizing: border-box;
 }
 
+p {
+    margin: 0;
+}
+
 body {
-    /* margin: 0; */
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,8 +31,9 @@ body {
     justify-content: center;
     width: 1168px;
     min-width: 1168px;
-    height: 720px;
+    /* 피그마 레이아웃 720 */
+    /* height: 720px; */
     angle: 0 deg;
     opacity: 1;
-    background-color: rgba(217, 217, 217, 1);
+    /* background-color: rgba(217, 217, 217, 1); */
 }
