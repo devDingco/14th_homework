@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>나만의 일기장장</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="./index.js"></script>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <div class="header_frame">
+                <img src="./assets/images/LOGO.png"/>                
+            </div>
+        </div>
+        <div class="body"> 
+            <div class="body_banner">
+                <img src="./assets/images/banner.png"/>
+            </div>
+            <div class="body_main">
+                <div class="body_main_top">
+                    <div class="body_main_top_active">일기보관함</div>
+                    <div class="body_main_top_default">사진보관함</div>
+                </div>
+                <div class="body_main_bottom">
+                    <div class="card_area">
+                        <div class="card_section">
+                            <div class="card">
+                                <img src="./assets/images/mood_sad.png" width="380px" height="285px"/>
+                                <div class="card_text">
+                                    <div class="card_subtitle_area">
+                                        <div class="card_subtitle_mood">슬퍼요</div>
+                                        <div class="card_subtitle_date">2024.03.12</div>
+                                    </div>
+                                    <div class="card_title">
+                                        타이틀 영역입니다. 한줄까지만 노출됩니다.
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="card">
+                                <img src="./assets/images/mood_suprise.png" width="380px" height="285px"/>
+                                <div class="card_text">
+                                    <div class="card_subtitle_area">
+                                        <div class="card_subtitle_mood">놀랐어요</div>
+                                        <div class="card_subtitle_date">2024.03.12</div>
+                                    </div>
+                                    <div class="card_title">
+                                        타이틀 영역입니다. 한줄까지만 노출됩니다.
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+
+                        <div class="card_section">
+                            <div class="card">
+                                <img src="./assets/images/mood_mad.png" width="380px" height="285px"/>
+                                <div class="card_text">
+                                    <div class="card_subtitle_area">
+                                        <div class="card_subtitle_mood">화나요</div>
+                                        <div class="card_subtitle_date">2024.03.12</div>
+                                    </div>
+                                    <div class="card_title">
+                                        타이틀 영역입니다. 한줄까지만 노출됩니다.
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="card">
+                                <img src="./assets/images/mood_happy.png" width="380px" height="285px"/>
+                                <div class="card_text">
+                                    <div class="card_subtitle_area">
+                                        <div class="card_subtitle_mood">행복해요</div>
+                                        <div class="card_subtitle_date">2024.03.12</div>
+                                    </div>
+                                    <div class="card_title">
+                                        타이틀 영역입니다. 한줄까지만 노출됩니다.
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+
+                        <div class="card_section">
+                            <div class="card">
+                                <img src="./assets/images/mood_think.png" width="380px" height="285px"/>
+                                <div class="card_text">
+                                    <div class="card_subtitle_area">
+                                        <div class="card_subtitle_mood">기타</div>
+                                        <div class="card_subtitle_date">2024.03.12</div>
+                                    </div>
+                                    <div class="card_title">
+                                        타이틀 영역입니다. 한줄까지만 노출됩니다.
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="card">
+                                <img src="./assets/images/mood_sad.png" width="380px" height="285px"/>
+                                <div class="card_text">
+                                    <div class="card_subtitle_area">
+                                        <div class="card_subtitle_mood">슬퍼요</div>
+                                        <div class="card_subtitle_date">2024.03.12</div>
+                                    </div>
+                                    <div class="card_title">
+                                        타이틀 영역입니다. 한줄까지만 노출됩니다.
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="diary_area">
+                        <div class="title">📍일기쓰기</div>
+                        <div class="diary_content">
+                            <div class="mood_area">
+                                <div class="mood_title">오늘 기분은 어땠나요?</div>
+                                <div class="mood_select">
+                                    <div class="mood_radio_group">                                        
+                                        <input
+                                        type="radio"
+                                        id="happy"
+                                        name="mood"
+                                        />
+                                        <div class="radio_gap"></div>
+                                        <label for="happy" class="radio_text">행복해요</label>                                        
+                                    </div>
+
+                                    <div class="mood_radio_group">                                        
+                                        <input
+                                        type="radio"
+                                        id="sad"
+                                        name="mood"
+                                        />
+                                        <div class="radio_gap"></div>
+                                        <label for="sad" class="radio_text">슬퍼요</label>                                        
+                                    </div>
+
+                                    <div class="mood_radio_group">                                        
+                                        <input
+                                        type="radio"
+                                        id="suprise"
+                                        name="mood"
+                                        />
+                                        <div class="radio_gap"></div>
+                                        <label for="suprise" class="radio_text">놀랐어요</label>                                        
+                                    </div>
+
+                                    <div class="mood_radio_group">                                        
+                                        <input
+                                        type="radio"
+                                        id="mad"
+                                        name="mood"
+                                        />
+                                        <div class="radio_gap"></div>
+                                        <label for="mad" class="radio_text">화나요</label>                                        
+                                    </div>
+
+                                    <div class="mood_radio_group">                                        
+                                        <input
+                                        type="radio"
+                                        id="etc"
+                                        name="mood"
+                                        />
+                                        <div class="radio_gap"></div>
+                                        <label for="etc" class="radio_text">기타</label>                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="text_area">
+                                <div class="text_input_area">
+                                    <div class="text_title">제목</div>
+                                    <input
+                                    id="제목입력창"
+                                    class="input_box"
+                                    type="title" 
+                                    placeholder="제목을 입력해 주세요.">                                    
+                                </div>
+                                <div class="text_input_area">
+                                    <div class="text_title">내용</div>
+                                    <textarea
+                                    id="내용입력창"
+                                    class="input_box2"
+                                    type="content" 
+                                    placeholder="내용을 입력해 주세요."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button>
+                            <img src="./assets/images/save_button.png" width="312px" height="48px"/>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footer_area">
+                <div class="footer_title">민지의 다이어리</div>
+                <div class="footer_info">대표:{name}</div>
+                <div class="copyright">Copyright © 2024. {name} Co., Ltd.</div>                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
