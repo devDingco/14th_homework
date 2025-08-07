@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>slack clone coding - homework</title>
+    <link rel = "stylesheet" href = "./index.css" />
+    <script src="./index.js"></script>
+</head>
+<body>
+    <div class="background">
+        <div class="header">
+            <div class="header__left">
+                <img src="./assets/icons/arrow_left.svg" class="icon_deco_L" />
+                <img src="./assets/icons/arrow_right.svg" class="icon_deco_L" />
+                <img src="./assets/icons/time.svg" class="icon_deco_L" />
+            </div>
+            <div class="header__right">
+                <div class="header__right__search"></div>
+                <div class="header__right__button">
+                    <div class="right__button__student">
+                        <img src="./assets/icons/logo_codecamp_L.svg" class="icon_deco_L" />
+                        <span class="text_10">수강생</span>
+                    </div>
+                    <img src="./assets/icons/help.svg" class="icon_deco_L"/>
+                </div>
+            </div>
+        </div>
+        <div class="body">
+            <div class="body__leftsidebar">
+
+            </div>
+            <div class="body__main">
+                <div class="body__main__menu">
+                    <div class="text_2 main__menu__title">
+                        <div>타이틀</div>
+                        <div class="menu__title__filter">
+                            <img src="./assets/icons/filter.svg" class="icon_deco_M" />
+                            <img src="./assets/icons/edit.svg" class="icon_deco_M" />
+                        </div>
+                    </div>
+                    <div class="text_3 main__menu__contract">
+                        <img src="./assets/icons/contract_edit.svg" class="icon_deco_M" />
+                        <div class="menu__contract__text">서약서 자세히 보기</div>
+                    </div>
+                    <hr />
+                    <div class="main__menu__content">
+                        <div class="text_3 menu__content__title">
+                            <div class="content__title__tab">
+                                <img src="./assets/icons/logo_codecamp_M.svg" class="icon_deco_M" />
+                                코드캠프 14기
+                            </div>
+                            <button class="text_4 content_title__button">수강중</button>
+                        </div>
+                        <div class="menu__content__student">
+                            <div class="text_3 menu__content__title">
+                                <div class="content__title__tab">
+                                    <img src="./assets/icons/group.svg" class="icon_deco_M" />
+                                    수강생 리스트
+                                </div>
+                                <img src="./assets/icons/arrow_down.svg" class="icon_deco_M" />
+                            </div>
+                            <div class="content__student__list">
+                                <div class="text_5 student__list">
+                                    현재 가입한 멤버가 없어요.<br />회원가입 해보세요.
+                                </div>
+                                <button class="text_3 content__student__button">
+                                    <img src="./assets/icons/person_add.svg" class="icon_deco_M" />
+                                    가입하기
+                                </button>
+                            </div>
+                        </div>
+                        <div class="menu__content__channel">
+                            <div class="text_3 menu__content__title">
+                                <div class="content__title__tab">
+                                    <img src="./assets/icons/channel_list.svg" class="icon_deco_M" />
+                                    채널
+                                </div>
+                                <img src="./assets/icons/arrow_down.svg" class="icon_deco_M" />
+                            </div>
+                            <div class="content__channel__list">
+                                <div class="text_6 channel_name">
+                                    <img src="./assets/icons/tag.svg" class="icon_deco_S">
+                                    채널 1
+                                </div>
+                                <div class="text_6 channel_name">
+                                    <img src="./assets/icons/tag.svg" class="icon_deco_S">
+                                    채널 2
+                                </div>
+                                <div class="text_6 channel_name">
+                                    <img src="./assets/icons/tag.svg" class="icon_deco_S">
+                                    채널 3
+                                </div>
+                                <div class="text_6 channel_name">
+                                    <img src="./assets/icons/tag.svg" class="icon_deco_S">
+                                    채널 4
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text_3 menu__content__title">
+                            <div class="content__title__tab">
+                                <img src="./assets/icons/skull.svg" class="icon_deco_M" />
+                                차단 멤버 리스트
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="body__main__context">
+                    <div class="main__context__signup">
+                        <div class="context__signup__title text_8">코드캠프에 가입하고<br />개발자로 커리어 점프 하세요.</div>
+                        <div class="context__signup__list">
+                            <div class="context__signup__form">
+                                <div class="text_9 input__name">이름</div>
+                                <input type="text" class="text_10 input__text" placeholder="이름을 입력해 주세요." />
+                            </div>
+                            <div class="context__signup__form">
+                                <div class="text_9 input__name">이메일</div>
+                                <input type="text" class="text_10 input__text" placeholder="네이버,구글,한메일,카카오 계정만 입력" />
+                            </div>
+                            <div class="context__signup__form">
+                                <div class="text_9 input__name">비밀번호</div>
+                                <input type="password" class="text_10 input__text" placeholder="비밀번호를 입력해 주세요." />
+                            </div>
+                            <div class="context__signup__form">
+                                <div class="text_9 input__name">비밀번호 확인</div>
+                                <input type="password" class="text_10 input__text" placeholder="비밀번호를 한번 더 입력해 주세요." />
+                            </div>
+                            <div class="context__signup__form">
+                                <div class="text_9 input__name">전화번호</div>
+                                <input type="text" class="text_10 input__text" placeholder="010으로 시작, '-'를 꼭 입력해 주세요." />
+                            </div>
+                            <div class="context__signup__auth">
+                                <div class="signup__auth__number">
+                                    <div id="auth__number" class="text_6">000000</div>
+                                    <button id="auth__number__button" class="text_3">인증번호 요청</button>
+                                </div>
+                                <div class="signup__auth__timer">
+                                    <div id="auth__timer" class="text_6"></div>
+                                    <button id="auth__complete__button" class="text_3">인증 하기</button>
+                                </div>
+                            </div>
+                            <div class="context__signup__introduce">
+                                <div class="text_9 input__name">자기소개</div>
+                                <textarea class="text_10" placeholder="자기소개를 입력해 주세요."></textarea>
+                            </div>
+                            <div class="context__signup__radio">
+                                <div class="text_9 input__name">성별</div>
+                                <div class="text_10 input__radio">
+                                    <div class="radio__name">
+                                        <input type="radio" name="gender" class="radio" />남성
+                                    </div>
+                                    <div class="radio__name">
+                                        <input type="radio" name="gender" class="radio" />여성
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text_9 context__signup__checkbox">
+                                <input type="checkbox" class="input__checkbox" />
+                                집에는 씻으러만 가는데 동의합니다.
+                            </div>
+                            <button class="text_3 context__signup__complete">가입하기</button>
+                        </div>
+
+                    </div>
+                    <div class="main__context__image"></div>
+                </div>
+            </div>
+            <div class="body__rightsidebar">
+
+            </div>
+        </div>
+        <div class="footer">
+
+        </div>
+    </div>
+</body>
+</html>
