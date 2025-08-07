@@ -1,0 +1,300 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+.가장큰배경 {
+  width: 1920px;
+  height: 1208px;
+  background-image: url('./assets/images/bg1.png');
+}
+.헤더 {
+  width: 1920px;
+  height: 80px;
+  display: flex;
+}
+
+.헤더__왼쪽영역 {
+  width: 480px;
+  height: 80px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  padding-right: 16px;
+}
+.헤더__오른쪽영역 {
+  width: 1440px;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 80px;
+}
+.헤더__오른쪽영역__프로필설정 {
+  width: 163px;
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.바디 {
+  width: 1920px;
+  height: 1048px;
+
+  display: flex;
+}
+.바디__사이드바왼쪽 {
+  width: 80px;
+  height: 1048px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  padding-top: 16px;
+}
+
+.바디__사이드바로고 {
+  padding-bottom: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.바디__사이드바상단 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.바디__사이드바상단 > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  text-align: center;
+}
+
+.바디__사이드바상단 img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 4px;
+}
+
+.바디__사이드바상단 span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.바디__사이드바하단 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.바디__사이드바하단 img {
+  width: 40px;
+  height: 40px;
+}
+.바디__메인 {
+  width: 1760px;
+  height: 1048px;
+  background-image: url('./assets/images/bg2.png');
+  display: flex;
+}
+.바디__메인__메뉴 {
+  width: 360px;
+  height: 632px;
+  padding: 20px;
+}
+.바디__메인__코드캠프 {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24px;
+  color: #ffffff;
+}
+.바디__메인__코드캠프__서약서 {
+  width: 360px;
+  height: 40px;
+  margin: 24px 0px;
+  font-size: 20px;
+  color: #491449;
+  border-radius: 10px;
+}
+hr {
+  border: none;
+
+  height: 1px;
+  background-color: #955c98;
+}
+.바디__메인__코드캠프__13기 {
+  font-size: 22px;
+  color: #ffffff;
+}
+.바디__메인__코드캠프__13기 button {
+  color: #ffffff;
+}
+.바디__메인__메뉴 {
+  width: 400px;
+  height: 1048px;
+
+  display: flex;
+  flex-direction: column;
+}
+.바디__메인__메뉴 div:nth-child(2) {
+  text-align: center;
+}
+.바디__메인__메뉴 div:nth-child(4) {
+  display: flex;
+  justify-content: space-between;
+}
+.바디__메인__메뉴 div:nth-child(5) {
+  display: flex;
+  justify-content: space-between;
+}
+.바디__메인__회원가입컨테이너 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.바디__메인__회원가입제목 {
+  text-align: center;
+  padding: 40px;
+  font-size: 40px;
+  color: #491449;
+}
+.바디__메인__회원가입 {
+  width: 680px;
+  height: 1048px;
+}
+.바디__메인__입력그룹 {
+  display: flex;
+
+  align-items: center;
+  margin-bottom: 20px;
+}
+.바디__메인__입력그룹 label {
+  width: 120px;
+  font-size: 20px;
+}
+.바디__메인__입력그룹 input {
+  width: 320px;
+  height: 44px;
+  border-radius: 5px;
+  border-color: #c7c7c7;
+  font-size: 18px;
+  padding: 12px;
+}
+.바디__메인__인증전체영역 {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.바디__메인__인증첫줄 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.바디__메인__인증둘째줄 {
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+}
+
+.바디__메인__인증요청버튼 {
+  width: 136px;
+  height: 40px;
+  padding: 8px 12px;
+  background-color: #ffffff;
+  color: #491449;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+}
+.바디__메인__인증둘째줄 button {
+  width: 136px;
+  height: 40px;
+  padding: 8px 12px;
+  background-color: #491449;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+}
+#인증번호보여주는곳 {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  font-size: 18px;
+  color: #955c98;
+}
+.바디__메인__입력그룹 textarea {
+  width: 320px;
+  height: 116px;
+  resize: none;
+  font-size: 18px;
+  padding: 12px 8px;
+}
+
+.바디__메인__성별네임 {
+  font-size: 20px;
+  width: 120px;
+  height: 24px;
+}
+.바디__메인__성별선택 div {
+  display: flex;
+  padding: 10px 0px;
+}
+.바디__메인__성별체크 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 168px;
+  height: 24px;
+  text-align: center;
+}
+.바디__메인__성별체크 label {
+  padding-left: 8px;
+  font-size: 18px;
+}
+#female {
+  width: 24px;
+  height: 24px;
+}
+#male {
+  width: 24px;
+  height: 24px;
+}
+
+.바디__메인__체크박스그룹 {
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+}
+.가입버튼 {
+  width: 448px;
+  height: 48px;
+}
+.바디__메인__사진 {
+  width: 680px;
+  height: 1048px;
+  background-image: url('./assets/images/picture.png');
+}
+
+.바디__사이드바오른쪽 {
+  width: 80px;
+  height: 1048px;
+}
+.푸터 {
+  width: 1920px;
+  height: 80px;
+}
