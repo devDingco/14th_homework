@@ -1,0 +1,13 @@
+/* 감정 배경 색상 */
+.mood-sad { background-color: #DDF0FF; }
+.mood-surprised { background-color: #FFF5CC; }
+.mood-angry { background-color: #DADADA; }
+.mood-happy { background-color: #FFE4E1; }
+.mood-etc { background-color: #EEDBFF; }
+
+/* 감정 텍스트 색상 */
+.emotion.sad { color: #2292d4; }
+.emotion.surprised { color: #e4a800; }
+.emotion.angry { color: #333333; }
+.emotion.happy { color: #e26262; }
+.emotion.etc { color: #864fbd; }

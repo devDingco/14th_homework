@@ -1,0 +1,114 @@
+.diary-form {
+  width: 320px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  padding: 24px;
+  padding-top:36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: inherit;
+}
+
+/* 제목 */
+.diary-form h2 {
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 감정 선택 문구 */
+.mood-group p {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* 감정 라벨들을 가로 정렬 */
+.mood-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mood-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.mood-options label {
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+/* input, textarea 공통 스타일 */
+.diary-form input[type="text"],
+.diary-form textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+  resize: none;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+/* textarea 높이 */
+.diary-form textarea {
+  height: 100px;
+}
+
+/* 버튼 */
+.diary-form button[type="submit"] {
+  padding: 12px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #ccc;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.diary-form button[type="submit"]:hover {
+  background-color: #bbb;
+}
+
+/* 라디오 버튼 포인트 색 */
+.mood-group input[type="radio"] {
+  accent-color: black;
+  cursor: pointer;
+}
+.diary-form label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  display: block; /* ✅ 인라인에서 블록요소로 변경하여 줄바꿈 처리 */
+  color: #333;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.diary-form label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  display: block;
+  color: #333;
+}
