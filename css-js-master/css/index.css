@@ -26,6 +26,7 @@ body {
     flex-direction: column;
     justify-content: center;
     width: 1168px;
+    min-width: 1168px;
     height: 720px;
     angle: 0 deg;
     opacity: 1;
