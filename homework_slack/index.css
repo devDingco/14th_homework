@@ -1,0 +1,354 @@
+* {
+    box-sizing: border-box;
+    margin:0px;
+    padding:0px;            
+}
+.가장큰배경 {
+    width:1920px;
+    height:1208px;
+    background-image: url("./assets/images/bg1.png")
+}
+.헤더{
+    width:1920px;
+    height:80px;
+    display: flex;
+}
+.헤더_왼쪽영역{
+    width:480px;
+    height:80px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap:16px;
+    padding-right:16px;
+
+}
+.헤더_오른쪽영역{
+    width:1440px;
+    height:80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right:80px;
+    
+}
+.헤더_오른쪽영역_프로필설정{
+    width:163px;
+    height:48px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+.바디{
+    width:1920px;
+    height:1048px;
+    display: flex;
+}
+.바디_사이드바왼쪽{
+    width:80px;
+    height:1048px;
+
+}
+.바디_메인{
+    width:1760px;
+    height:1048px;
+    background-image:url("./assets/images/bg2.png");
+    display:flex;
+}
+.바디_메인_메뉴{
+    width: 400px;
+    height:1048px;
+    background-color:yellow;
+}
+.바디_메인_회원가입{
+    width: 680px;
+    height: 1048px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.바디_메인_회원가입_타이틀{
+    font-size: 40px;
+    font-weight: bold;
+    font-style: Pretendard Variable;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 520px;
+    text-align: center;
+    padding-bottom: 40px;
+    
+    
+}
+.바디_메인_회원가입_정보입력{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+    line-height: 24px;
+    gap:20px
+    
+}
+input{
+    border-radius: 8px;
+    border: 1px solid var(--gray-300, #C7C7C7);
+    background: var(--gray-W, #FFF);
+    display: flex;
+    width: 320px;
+    height: 44px;
+    padding: 8px 12px;
+    align-items: center;
+    gap: 10px;
+}
+input[type="radio"]{
+    color :#491449;
+    width: 24px;
+    height: 24px;
+    margin-right:10px;
+}
+input[type="checkbox"]{
+    color :#491449;
+    width: 24px;
+    height: 24px;
+}
+input[type="checkbox"]{
+    color :#491449;
+    width: 24px;
+    height: 24px;
+    margin-right:10px;
+}
+textarea{
+    border-radius: 8px;
+    border: 1px solid var(--gray-300, #C7C7C7);
+    background: var(--gray-W, #FFF);
+    display: flex;
+    width: 320px;
+    height: 116px;
+    padding: 8px 12px;
+    align-items: center;
+    gap: 10px;
+}
+.바디_메인_회원가입_이름{
+    width :520px ;
+    padding-left: 32px;
+    padding-right: 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gray-800, #333);
+    font-family: "Pretendard Variable";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 120% */
+    
+    
+}
+.바디_메인_회원가입_이메일{
+    width :520px ;
+    padding-left: 32px;
+    padding-right: 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gray-800, #333);
+    font-family: "Pretendard Variable";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; 
+}
+.바디_메인_회원가입_비밀번호{
+    width :520px ;
+    padding-left: 32px;
+    padding-right: 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gray-800, #333);
+    font-family: "Pretendard Variable";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; 
+}
+#비밀번호재입력alert{
+    width: 400px;
+    font-size: 14px;
+    color:red;
+    padding-left : 110px;
+}
+.바디_메인_회원가입_전화번호{
+    width :520px ;
+    padding-left: 32px;
+    padding-right: 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gray-800, #333);
+    font-family: "Pretendard Variable";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; 
+}
+.바디_메인_회원가입_인증{
+    width :520px ;
+    padding-left: 32px;
+    padding-right: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: end;
+    gap : 10px;
+    font-family: "Pretendard Variable";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+}
+.인증번호{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: flex-end; */
+    /* align-items: end; */
+}
+.남은시간{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: flex-end; */
+    /* align-items: end; */
+}
+#인증요청버튼 {
+    display: flex;
+    width: 136px;
+    min-width: 120px;
+    padding: 8px 12px;
+    margin-left: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    background-color: #491449;
+    color : white;
+}
+#인증하기버튼 {
+    display: flex;
+    width: 136px;
+    min-width: 120px;
+    padding: 8px 12px;
+    margin-left: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    background-color: gray;
+    
+
+}
+
+.바디_메인_회원가입_자기소개{
+    width :520px ;
+    padding-left: 32px;
+    padding-right: 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gray-800, #333);
+    font-family: "Pretendard Variable";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; 
+}
+.바디_메인_회원가입_성별{
+    width :520px ;
+    padding-left: 32px;
+    padding-right: 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gray-800, #333);
+    font-family: "Pretendard Variable";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; 
+}
+.라디오묶음{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:320px
+}
+.성별여자{
+    width: 160px;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    }
+.성별남자{
+    width: 160px;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+}
+
+.바디_메인_회원가입_동의{
+    width :520px ;
+    padding-top:24px;
+    padding-left: 32px;
+    padding-right: 32px;
+    color: var(--gray-800, #333);
+    font-family: "Pretendard Variable";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+
+}
+.바디_메인_회원가입_가입{
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 120% */
+    border-radius: 8px;
+    width: 448px;
+    height: 48px;
+    background-color: gray;
+}
+.바디_메인_사진{
+    width:680px;
+    height:1048px;
+    background-color: orange;
+    background-image: url("./assets/images/picture.png");
+}
+
+.바디_사이드바오른쪽{
+    width:80px;
+    height: 1048px;
+}
+.푸터{
+    width:1920px;
+    height:80px;
+}
