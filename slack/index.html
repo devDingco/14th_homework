@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>슬랙 클론 코딩</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script>
+      function 가입하기() {
+        alert("회원가입을 축하합니다\n(가입일시: 2025-08-06)");
+        document.getElementById("수강생보이는곳").innerText = "";
+      }
+
+      function 인증번호요청기능() {
+        const 나의인증번호 = String(
+          Math.floor(Math.random() * 1000000)
+        ).padStart(6, "0");
+        document.getElementById("인증번호보여주는곳").innerText = 나의인증번호;
+
+        let 시간 = 180;
+        setInterval(function () {
+          const 분 = Math.floor(시간 / 60);
+          const 초 = String(시간 % 60).padStart(2, "0");
+          document.getElementById("남은시간보여주는곳").innerText =
+            분 + ":" + 초;
+          시간 = 시간 - 1;
+        }, 1000);
+
+        document.getElementById("버튼").disabled = true;
+        document.getElementById("버튼").style = "color: red";
+      }
+      function 인증완료로변경() {
+        document.getElementById("인증하기버튼").innerText = "인증 완료";
+        document.getElementById("인증하기버튼").disabled = true;
+        document.getElementById("인증하기버튼").style = "color: red";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="가장큰배경">
+      <div class="헤더">
+        <div class="헤더__왼쪽영역">
+          <img src="./assets/icons/arrow_left.png" width="32px" height="32px" />
+          <img
+            src="./assets/icons/arrow_right.png"
+            width="32px"
+            height="32px" />
+          <img src="./assets/icons/time.png" width="32px" height="32px" />
+        </div>
+        <div class="헤더__오른쪽영역">
+          <img
+            src="./assets/images/searchbar.png"
+            width="920px"
+            height="48px" />
+          <div class="헤더__오른쪽영역__프로필설정">
+            <img src="./assets/icons/badge.png" width="111px" height="48" />
+            <img src="./assets/icons/help.png" width="32px" height="32px" />
+          </div>
+        </div>
+      </div>
+      <div class="바디">
+        <div class="바디__사이드바왼쪽">
+          <div>
+            <div class="바디__사이드바왼쪽__첫번째">
+              <img src="./assets/icons/Layer_1.svg" />
+            </div>
+            <div style="width: 40px; height: 24px"></div>
+            <div class="바디__사이드바왼쪽__두번째">
+              <div>
+                <img src="./assets/icons/home.svg" />
+                <div>홈</div>
+              </div>
+              <div>
+                <img src="./assets/icons/chat.svg" />
+                <div>대화</div>
+              </div>
+              <div>
+                <img src="./assets/icons/notifications.svg" />
+                <div>알림</div>
+              </div>
+              <div>
+                <img src="./assets/icons/bookmark.svg" />
+                <div>북마크</div>
+              </div>
+              <div>
+                <img src="./assets/icons/more_meatball.svg" />
+                <div>더 보기</div>
+              </div>
+            </div>
+          </div>
+          <div class="바디__사이드바왼쪽__세번째">
+            <img src="./assets/icons/profileplus.svg" />
+            <img
+              src="./assets/icons/fox.png"
+              style="
+                width: 35px;
+                height: 35px;
+                border-radius: 8px;
+                background-color: #b14bb6;
+              " />
+          </div>
+        </div>
+        <div class="바디__메인">
+          <div class="바디__메인__메뉴">
+            <div class="바디__메인__메뉴__첫번째">
+              코드캠프
+              <div>
+                <img
+                  src="./assets/icons/filter.png"
+                  width="24px"
+                  height="24px" />
+                <img src="./assets/icons/edit.png" width="24px" height="24px" />
+              </div>
+            </div>
+            <div style="width: 360px; height: 24px"></div>
+            <div class="바디__메인__메뉴__두번째">
+              <img
+                src="./assets/icons/contract_edit.svg"
+                style="padding-right: 8px" />
+              서약서 자세히 보기
+            </div>
+            <div style="width: 360px; height: 24px"></div>
+            <div
+              style="
+                width: 360px;
+                height: 1px;
+                background-color: #955c98;
+              "></div>
+            <div style="width: 360px; height: 24px"></div>
+            <div class="바디__메인__메뉴__세번째">
+              <div class="바디__메인__메뉴__세번째__왼쪽">
+                <img
+                  src="./assets/icons/logo_codecamp.svg"
+                  style="width: 24px; height: 24px" />
+                <div class="바디__메인__메뉴__세번째__왼쪽__14기">
+                  코드캠프 14기
+                </div>
+              </div>
+              <div class="바디__메인__메뉴__세번째__오른쪽">수강중</div>
+            </div>
+
+            <div style="width: 368px; height: 16px"></div>
+
+            <div class="바디__메인__메뉴__네번째">
+              <div class="바디__메인__메뉴__네번째__왼쪽">
+                <img
+                  src="./assets/icons/group_24dp_E8EAED_FILL0_wght300_GRAD0_opsz24 1 (1).svg"
+                  style="width: 24px; height: 24px" />
+                <div
+                  id="수강생리스트"
+                  class="바디__메인__메뉴__네번째__왼쪽__수강생리스트">
+                  수강생 리스트
+                </div>
+              </div>
+
+              <img
+                class="바디__메인__메뉴__네번째__오른쪽"
+                src="./assets/icons/arrow_down.svg"
+                style="width: 24px; height: 24px" />
+            </div>
+
+            <div class="수강생리스트업">
+              <div></div>
+            </div>
+
+            <div id="수강생보이는곳" class="바디__메인__메뉴__오번째">
+              현재 가입한 멤버가 없어요.<br />회원가입 해보세요.
+            </div>
+            <div style="width: 368px; height: 8px"></div>
+            <div class="바디__메인__메뉴__육번째">
+              <img
+                src="./assets/icons/person_add.svg"
+                style="padding-right: 8px" />
+              <div>가입하기</div>
+            </div>
+
+            <div style="width: 368px; height: 16px"></div>
+
+            <div class="바디__메인__메뉴__칠번째">
+              <div class="바디__메인__메뉴__칠번째__왼쪽">
+                <img
+                  src="./assets/icons/channel_list.svg"
+                  style="width: 24px; height: 24px" />
+                <div class="바디__메인__메뉴__칠번째__왼쪽__수강생리스트">
+                  채널
+                </div>
+              </div>
+              <img
+                class="바디__메인__메뉴__칠번째__오른쪽"
+                src="./assets/icons/arrow_down.svg"
+                style="width: 24px; height: 24px" />
+            </div>
+
+            <div style="width: 368px; height: 12px"></div>
+            <div class="바디__메인__메뉴__칠번째_채널">
+              <img src="./assets/icons/tag.svg" style="padding: 8px" />
+              채널 1
+            </div>
+            <div style="width: 368px; height: 8px"></div>
+
+            <div class="바디__메인__메뉴__칠번째_채널">
+              <img src="./assets/icons/tag.svg" style="padding: 8px" />
+              채널 2
+            </div>
+            <div style="width: 368px; height: 8px"></div>
+
+            <div class="바디__메인__메뉴__칠번째_채널">
+              <img src="./assets/icons/tag.svg" style="padding: 8px" />
+              채널 3
+            </div>
+            <div style="width: 368px; height: 8px"></div>
+
+            <div class="바디__메인__메뉴__칠번째_채널">
+              <img src="./assets/icons/tag.svg" style="padding: 8px" />
+              채널 4
+            </div>
+            <div style="width: 368px; height: 8px"></div>
+
+            <div style="width: 368px; height: 16px"></div>
+
+            <div class="바디__메인__메뉴__팔번째">
+              <div class="바디__메인__메뉴__팔번째__왼쪽">
+                <img
+                  src="./assets/icons/skull.svg"
+                  style="width: 24px; height: 24px" />
+                <div class="바디__메인__메뉴__팔번째__왼쪽__차단멤버리스트">
+                  차단 멤버 리스트
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="바디__메인__회원가입">
+            <div class="바디__메인__회원가입__타이틀">
+              코드캠프에 가입하고<br />개발자로 커리어 점프 하세요
+            </div>
+            <div style="width: 560px; height: 40px"></div>
+            <div class="바디__메인__회원가입__입력폼">
+              <div class="바디__메인__회원가입__입력폼__이름">
+                <div class="바디__메인__회원가입__입력폼__이름__라벨">이름</div>
+                <input
+                  id="이름인풋"
+                  class="바디__메인__회원가입__입력폼__이름__인풋"
+                  type="text"
+                  placeholder="이름을 입력해 주세요." />
+              </div>
+              <div class="바디__메인__회원가입__입력폼__이메일">
+                <div class="바디__메인__회원가입__입력폼__이메일__라벨">
+                  이메일
+                </div>
+                <input
+                  class="바디__메인__회원가입__입력폼__이메일__인풋"
+                  type="text"
+                  placeholder="네이버, 구글, 한메일, 카카오 계정만 입력" />
+              </div>
+              <div class="바디__메인__회원가입__입력폼__비밀번호">
+                <div class="바디__메인__회원가입__입력폼__비밀번호__라벨">
+                  비밀번호
+                </div>
+                <input
+                  class="바디__메인__회원가입__입력폼__비밀번호__인풋"
+                  type="text"
+                  placeholder="비밀번호를 입력해 주세요." />
+              </div>
+              <div class="바디__메인__회원가입__입력폼__전화번호">
+                <div class="바디__메인__회원가입__입력폼__전화번호__라벨">
+                  전화번호
+                </div>
+                <input
+                  class="바디__메인__회원가입__입력폼__전화번호__인풋"
+                  type="text"
+                  placeholder="010으로 시작, '-'를 꼭 입력해 주세요." />
+              </div>
+
+              <div>
+                <div class="바디__메인__회원가입__입력폼__인증번호요청">
+                  <div
+                    class="바디__메인__회원가입__입력폼__인증번호요청__첫번째">
+                    <div id="인증번호보여주는곳">000000</div>
+                    <button
+                      id="버튼"
+                      class="바디__메인__회원가입__입력폼__인증하기"
+                      onclick="인증번호요청기능()">
+                      인증번호 요청
+                    </button>
+                  </div>
+
+                  <div
+                    class="바디__메인__회원가입__입력폼__인증번호요청__두번째">
+                    <div id="남은시간보여주는곳">3:00</div>
+                    <button id="인증하기버튼" onclick="인증완료로변경()">
+                      인증 하기
+                    </button>
+                  </div>
+                </div>
+
+                <div class="바디__메인__회원가입__입력폼__자기소개">
+                  <div class="바디__메인__회원가입__입력폼__자기소개__라벨">
+                    자기소개
+                  </div>
+                  <input
+                    class="바디__메인__회원가입__입력폼__자기소개__인풋"
+                    type="text"
+                    placeholder="자기소개를 입력해 주세요." />
+                </div>
+              </div>
+              <div class="바디__메인__회원가입__입력폼__성별">
+                <div class="바디__메인__회원가입__입력폼__성별__라벨">성별</div>
+                <div class="바디__메인__회원가입__입력폼__성별__선택">
+                  <input type="radio" name="성별그룹" />남성
+                  <input type="radio" name="성별그룹" />여성
+                </div>
+              </div>
+            </div>
+            <div style="width: 560px; height: 20px"></div>
+            <div class="바디__메인__회원가입__가입">
+              <div>
+                <input type="checkbox" />
+                집에는 씻으러만 가는데 동의합니다.
+              </div>
+              <button
+                class="바디__메인__회원가입__가입__버튼"
+                onclick="가입하기()">
+                가입
+              </button>
+            </div>
+          </div>
+          <div class="바디__메인__사진"></div>
+        </div>
+        <div class="바디__사이드바오른쪽"></div>
+      </div>
+      <div class="푸터"></div>
+    </div>
+  </body>
+</html>
