@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    
+    <title>감정일기장</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./username.js"></script>
+    <script src="./CEO_name.js"></script>
+    <script src="./Corp_name.js"></script>
+   
+    
+
+</head>
+
+<body>
+    <div class="blank-left">
+
+    </div>
+    
+    <div class="main">
+
+        <div class="main__header">
+
+            <div class="main__header__structure">
+                <div id="이름입력하는곳"></div>의 다이어리에 오신 것을 환영합니다!
+           
+
+                </div>    
+                <div class =toggle>
+                    <img src="./assets/icons/toggle.png"  />
+                </div>
+
+            </div> 
+
+            <div class="main__header__img">
+                <img src="./assets/imgs/Rectangle 1.png" />
+                
+            </div>
+    
+
+        <div class="body">
+            <div class="body__tab">
+                <div class="body__tab__일기보관함">
+                    일기보관함
+                    <!-- 선택되면 볼드처리 글자에 줄치기 -->
+                </div>
+                <div class="body__tab__사진보관함">
+                    사진보관함
+                    <!-- 선택되면 볼드처리 글자에 줄치기 -->
+                    
+                </div>
+
+                <div>
+                    <img src="./assets/icons/드롭다운.png" />
+                    <!-- 전체 선택창 -->
+                    <img src="./assets/imgs/searchbar.png" />
+                    <!-- 검색어 입력창 -->
+                    <img src="./assets/icons/plusbut.png"/>
+                    <!-- 일기쓰기 -->
+                </div>
+
+            </div>
+            </div class="body__main">
+                <div class="body__main__감정표현">
+                    <div>
+
+                    </div>
+
+
+
+
+
+
+                </div>
+            
+                <div class="body__main__일기쓰기">
+                    
+                    <img src="./assets/icons/📍 일기 쓰기.png"/>
+                    
+                    <div>
+                        <b>오늘 기분은 어땠나요?</b>
+                    
+                    <input id="감정" type="radio" name="mood" /> 행복해요
+                    <input id="감정" type="radio" name="mood" /> 슬퍼요
+                    <input id="감정" type="radio" name="mood" /> 놀랐어요
+                    <input id="감정" type="radio" name="mood" /> 화나요
+                    <input id="감정" type="radio" name="mood" /> 기타
+                    
+                    </div>
+
+                    <div>
+                        <div>제목
+                        <!-- 텍스트박스 -->
+                        </div>
+                        <div>내용
+                         <!--텍스트박스  -->
+                        </div>
+                        <div>
+                            <img src="./assets/imgs/register_button.png" />
+
+                        </div>    
+                    </div>
+
+                </div>
+            
+            
+                
+            </div>
+
+
+
+        </div>
+
+        <div class="footer">
+            <div class="footer__corpname">
+            <b><div id="이름입력하는곳"></div> 의 다이어리</b>    
+            </div>            
+           
+            <div class="footer__CEO">
+                대표:<div id="footer__CEO__name"></div>     
+            </div>
+
+            <div class="footer__copyright">
+                Copyright ⓒ 2024. <div id="footer__Copyright_name"></div> Co., Ltd.
+                
+                
+            </div>
+
+
+        </div>
+
+        
+        
+    
+    </div>
+
+    <div class="blank-right">
+
+    </div>
+    
+</body>
+
+</html>
