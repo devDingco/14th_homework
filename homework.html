@@ -4,33 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>민지의 다이어리</title>
-  <link rel="stylesheet" href="./css/homework.css" />
+  <link rel="stylesheet" href="./css/base.css" />
+<link rel="stylesheet" href="./css/layout.css" />
+<link rel="stylesheet" href="./css/tabs.css" />
+<link rel="stylesheet" href="./css/card.css" />
+<link rel="stylesheet" href="./css/emotion.css" />
+<link rel="stylesheet" href="./css/form.css" />
+
 </head>
 <body>
-  <!-- 헤더 -->
   <div id="header"></div>
 
-  <!-- 메인 컨텐츠 -->
   <div class="container">
     <div id="main"></div>
     <div id="form"></div>
   </div>
-  <!-- 푸터 -->
+
   <div id="footer"></div>
 
-  <script>
-Promise.all([
-  fetch("./component/header.html").then(res => res.text()),
-  fetch("./component/main.html").then(res => res.text()),
-  fetch("./component/form.html").then(res => res.text()),     // ← 폼 추가
-  fetch("./component/footer.html").then(res => res.text())
-]).then(([header, main, form, footer]) => {
-  document.getElementById("header").innerHTML = header;
-  document.getElementById("main").innerHTML = main;
-  document.getElementById("form").innerHTML = form;   // ← 폼 삽입
-  document.getElementById("footer").innerHTML = footer;
-});
-  </script>
-  <script src="script.js"></script>
+  <!-- ✅ 오직 이 한 줄만 유지 -->
+<script src="./script/componentLoader.js"></script>
+<script src="./script/scriptLoader.js"></script>
+<script src="./script/cardClickHandler.js"></script>
+<script src="./script/app.js"></script>
 </body>
 </html>
