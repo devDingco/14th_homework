@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>민지의 다이어리</title>
-  <link rel="stylesheet" href="homework.css" />
+  <link rel="stylesheet" href="./css/homework.css" />
 </head>
 <body>
   <!-- 헤더 -->
@@ -20,10 +20,10 @@
 
   <script>
 Promise.all([
-  fetch("header.html").then(res => res.text()),
-  fetch("main.html").then(res => res.text()),
-  fetch("form.html").then(res => res.text()),     // ← 폼 추가
-  fetch("footer.html").then(res => res.text())
+  fetch("./component/header.html").then(res => res.text()),
+  fetch("./component/main.html").then(res => res.text()),
+  fetch("./component/form.html").then(res => res.text()),     // ← 폼 추가
+  fetch("./component/footer.html").then(res => res.text())
 ]).then(([header, main, form, footer]) => {
   document.getElementById("header").innerHTML = header;
   document.getElementById("main").innerHTML = main;
