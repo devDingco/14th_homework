@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>민지의 다이어리</title>
+  <link rel="stylesheet" href="homework.css" />
+</head>
+<body>
+  <!-- 헤더 -->
+  <div id="header"></div>
+
+  <!-- 메인 컨텐츠 -->
+  <div id="main"></div>
+
+  <!-- 푸터 -->
+  <div id="footer"></div>
+
+  <script>
+    Promise.all([
+      fetch("header.html").then(res => res.text()),
+      fetch("main.html").then(res => res.text()),
+      fetch("footer.html").then(res => res.text())
+    ]).then(([header, main, footer]) => {
+      document.getElementById("header").innerHTML = header;
+      document.getElementById("main").innerHTML = main;
+      document.getElementById("footer").innerHTML = footer;
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

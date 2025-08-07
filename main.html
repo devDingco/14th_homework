@@ -1,0 +1,150 @@
+<main class="container">
+    <section class="diary-list" id="diary-list">
+      <!-- 카드 여러 개 삽입 (당신이 작성한 그대로) -->
+      <!-- 예시 1개만 표시 -->
+      <div class="diary-card mood-sad">
+        <div class="card-top">
+          <div class="profile-wrapper">
+            <img src="images/sad.png" alt="sad" class="profile-img" />
+          </div>
+        </div>
+        <div class="card-bottom">
+          <div class="card-meta">
+            <span class="emotion sad">슬퍼요</span>
+            <span class="date">2024.03.12</span>
+          </div>
+          <div class="card-title">타이틀 영역 입니다. 한줄까지만 노출 됩니다.</div>
+        </div>
+      </div>
+      <div class="diary-card mood-sad">
+        <div class="card-top">
+          <div class="profile-wrapper">
+            <img src="images/sad.png" alt="sad" class="profile-img" />
+          </div>
+        </div>
+        <div class="card-bottom">
+          <div class="card-meta">
+            <span class="emotion sad">슬퍼요</span>
+            <span class="date">2024.03.12</span>
+          </div>
+          <div class="card-title">타이틀 영역 입니다. 한줄까지만 노출 됩니다.</div>
+        </div>
+      </div>
+
+
+
+      <div class="diary-card mood-sad">
+        <div class="card-top">
+          <div class="profile-wrapper">
+            <img src="images/sad.png" alt="sad" class="profile-img" />
+          </div>
+        </div>
+        <div class="card-bottom">
+          <div class="card-meta">
+            <span class="emotion sad">슬퍼요</span>
+            <span class="date">2024.03.12</span>
+          </div>
+          <div class="card-title">타이틀 영역 입니다. 한줄까지만 노출 됩니다.</div>
+        </div>
+      </div>
+
+
+
+      <div class="diary-card mood-angry">
+        <div class="card-top">
+          <div class="profile-wrapper">
+            <img src="images/angry.png" alt="sad" class="profile-img" />
+          </div>
+        </div>
+        <div class="card-bottom">
+          <div class="card-meta">
+            <span class="emotion angry">화나요</span>
+            <span class="date">2024.03.12</span>
+          </div>
+          <div class="card-title">타이틀 영역 입니다. 한줄까지만 노출 됩니다.</div>
+        </div>
+      </div>
+
+
+      <div class="diary-card mood-etc">
+        <div class="card-top">
+          <div class="profile-wrapper">
+            <img src="images/etc.png" alt="etc" class="profile-img" />
+          </div>
+        </div>
+        <div class="card-bottom">
+          <div class="card-meta">
+            <span class="emotion etc">etc</span>
+            <span class="date">2024.03.12</span>
+          </div>
+          <div class="card-title">타이틀 영역 입니다. 한줄까지만 노출 됩니다.</div>
+        </div>
+      </div>
+
+      <div class="diary-card mood-happy">
+        <div class="card-top">
+          <div class="profile-wrapper">
+            <img src="images/happy.png" alt="happy" class="profile-img" />
+          </div>
+        </div>
+        <div class="card-bottom">
+          <div class="card-meta">
+            <span class="emotion happy">행복해요</span>
+            <span class="date">2024.03.12</span>
+          </div>
+          <div class="card-title">타이틀 영역 입니다. 한줄까지만 노출 됩니다.</div>
+        </div>
+      </div>
+
+
+      <div class="diary-card mood-surprised">
+        <div class="card-top">
+          <div class="profile-wrapper">
+            <img src="images/surprised.png" alt="sad" class="profile-img" />
+          </div>
+        </div>
+        <div class="card-bottom">
+          <div class="card-meta">
+            <span class="emotion surprised">놀랐어요</span>
+            <span class="date">2024.03.12</span>
+          </div>
+          <div class="card-title">타이틀 영역 입니다. 한줄까지만 노출 됩니다.</div>
+        </div>
+      </div>
+
+
+      <div class="diary-card mood-happy">
+        <div class="card-top">
+          <div class="profile-wrapper">
+            <img src="images/happy.png" alt="happy" class="profile-img" />
+          </div>
+        </div>
+        <div class="card-bottom">
+          <div class="card-meta">
+            <span class="emotion happy">행복해요</span>
+            <span class="date">2024.03.12</span>
+          </div>
+          <div class="card-title">타이틀 영역 입니다. 한줄까지만 노출 됩니다.</div>
+        </div>
+      </div>
+      <!-- 나머지 카드도 동일하게 반복 -->
+    </section>
+  
+    <section class="diary-form">
+      <h2>📌 일기 쓰기</h2>
+      <form id="form">
+        <div class="mood-group">
+          <p>오늘 기분은 어떤가요?</p>
+          <label><input type="radio" name="mood" value="😊 행복해요" required /> 행복해요</label>
+          <label><input type="radio" name="mood" value="😢 슬퍼요" /> 슬퍼요</label>
+          <label><input type="radio" name="mood" value="😱 놀랐어요" /> 놀랐어요</label>
+          <label><input type="radio" name="mood" value="😡 화나요" /> 화나요</label>
+          <label><input type="radio" name="mood" value="🤔 기타" /> 기타</label>
+        </div>
+        <input type="text" name="title" placeholder="제목을 입력해 주세요." required />
+        <textarea name="content" placeholder="내용을 입력해 주세요." required></textarea>
+        <button type="submit">등록하기</button>
+      </form>
+    </section>
+  </main>
+  
