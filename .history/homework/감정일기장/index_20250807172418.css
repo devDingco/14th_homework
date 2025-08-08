@@ -1,0 +1,25 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+/* 메인전체사이즈 */
+.main {
+  width: 1168px;
+  margin: 0 auto;
+}
+
+nav {
+  display: flex;
+}
+.title__main {
+  min-height: 100vh;
+}
+.title__images {
+  flex-wrap: wrap;
+  height: 100%;
+}

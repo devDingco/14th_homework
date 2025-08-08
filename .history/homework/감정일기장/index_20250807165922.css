@@ -1,0 +1,13 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+/* 메인전체사이즈 */
+.main {
+  width: 1168px;
+  display: flex;
+  justify-content: center;
+}

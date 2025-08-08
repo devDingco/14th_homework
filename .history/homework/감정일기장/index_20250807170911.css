@@ -1,0 +1,11 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+/* 메인전체사이즈 */
+.main {
+  width: 1168px;
+  margin: 0 auto;
+}
