@@ -1,0 +1,385 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body {
+    width: 100vw;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
+.프레임 {
+    /* background-color: pink; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 1168px;
+    
+}
+/* .label {
+    display: flex;
+    width: 1920px;
+    padding: 32px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    
+    border-radius: 24px;
+    background: var(--Gray-B, #000);
+
+    color: var(--Gray-W, #FFF);
+    font-family: "SUIT Variable";
+    font-size: 80px;
+    font-style: normal;
+    
+} */
+
+
+.헤더 /*민지의다이어리*/ {
+    justify-content: flex-start;
+    width: 1168px;
+    height: 60px;
+    display: flex;
+    text-align: start;
+    align-items: center;
+
+    margin-bottom: 24px;
+
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.베개사진 {
+    height: 240px;
+    width: 100%;
+    /* min-width: 320px;
+    max-width: 1168px; */
+    /* align-self: stretch; */
+    background-size: cover;
+    border-radius: 24px;
+    object-fit: cover;
+    
+    margin-bottom: 24px;
+
+}
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
+.메인_바디 {
+    /* background-color: hotpink; */
+    display: flex;
+    flex-direction: column;
+}
+
+.메인_바디_상단글씨 {
+    display: flex;
+/* min-width: 204px; */
+    /* align-items: center; */
+    width: 1168px;
+    height: 48px;
+    gap: 16px;
+    
+    margin-bottom: 42px;
+
+}
+
+.메인_바디_상단글씨_일기보관함{
+    display: flex;
+    width: 119px;
+    height: 48px;
+    padding: 12px 8px;
+    justify-content: center;
+    align-items: center;
+    margin-right: 16px;
+
+    color: #000;
+    font-size: 24px;
+    font-style: normal;
+    letter-spacing: -0.24px;
+
+    background: none;
+    border: none;
+    border-bottom: 4px solid #000; 
+}
+
+.메인_바디_상단글씨_사진보관함{
+    display: flex;
+    width: 119px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--Gray-Gray-400, #ABABAB);
+    font-size: 24px;
+    font-style: normal;
+    letter-spacing: -0.24px;
+
+    background: none;
+    border: none;
+}
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
+.메인_바디_일기장 {
+    /* background-color: yellow; */
+    width: 1168px;
+    height: 1167px;
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+    /* flex-direction: row; */
+    margin-bottom: 40px;
+
+}
+
+.메인_바디_일기장_일기저장_ {
+    /* background-color: green; */
+    width: 784px;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+
+    flex-wrap: wrap;
+}
+
+.메인_바디_일기장_일기저장_A {
+    background-color: #fff;
+    width: 380px;
+    height: 373px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.메인_바디_일기장_일기저장_내용 {
+    display: flex;
+    flex-direction: column;
+}
+
+.메인_바디_일기장_일기저장_사진 {
+    /* background-color: yellow; */
+    border-radius: 16px;
+    display: flex;
+    width: 380px;
+    height: 285px;
+    
+    align-items: center;
+    align-self: stretch;
+}
+
+.메인_바디_일기장_일기저장_내용_감정과날짜 {
+    width: 380px;
+    height: 56px;
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.메인_바디_일기장_일기저장_내용_감정 {
+    color: #28B4E1;
+    font-size: 14px;
+    font-style: normal;
+
+}
+
+.메인_바디_일기장_일기저장_내용_날짜 {
+    color: var(--Gray-Gray-500, #919191);
+    font-size: 14px;
+    font-style: normal;
+}
+
+.메인_바디_일기장_일기저장_1_설명_타이틀 {
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+}
+
+.메인_바디_일기장_일기쓰기 {
+    background-color: firebrick;
+    padding: 24px;
+    width: 360px;
+    height: 604px;
+    display: flex;
+    flex-direction: column;
+
+    gap: 40px;
+
+    border-radius: 16px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+}
+
+.일기쓰기 {
+    color: #000;
+    font-size: 24px;
+    font-style: normal;
+}
+
+.오늘기분은어떗나요{
+    display: flex;
+    flex-direction: column;
+    width: 312px;
+    height: 108px;
+    gap: 16px;
+}
+
+.오늘기분은어떗나요_질문 {
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+}
+
+.일기쓰기_기분버튼 {
+    width: 312px;
+    height: 68;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-radius: 8px;
+    
+    color: var(--Gray-Gray-800, #333);
+    font-size: 18px;
+    font-style: normal;
+
+    flex-wrap: wrap;
+}
+
+.제목과내용{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.메인_바디_일기장_일기쓰기_제목 {
+    width: 312px;
+    height: 76px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.메인_바디_일기장_일기쓰기_제목텍스트 {
+    color: var(--Gray-Gray-800, #333);
+    font-size: 14px;
+    font-style: normal;
+}
+.제목을입력해주세요{
+    width: 312px;
+    height: 50px;
+    display: flex;
+    padding: 12px 16px;
+    align-items: center;
+    gap: 10px;
+
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+    /* align-self: stretch; */
+}
+
+
+.메인_바디_일기장_일기쓰기_내용{
+    width: 312px;
+    height: 156px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.메인_바디_일기장_일기쓰기_내용텍스트 {
+    color: var(--Gray-Gray-800, #333);
+    font-size: 14px;
+    font-style: normal;
+}
+.내용을입력해주세요{
+    display: flex;
+    width: 312px;
+    height: 128px;
+    padding: 12px 16px;
+    align-items: center;
+    gap: 10px;
+
+
+    
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+    /* align-self: stretch; */
+}
+/* .내용을입력해주세요::placeholder{
+    align-items: flex-start;
+} */
+.메인_바디_일기장_일기쓰기_등록하기{
+    display: flex;
+    height: 48px;
+    width: 312px;
+    padding: 8px 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+   
+    border-radius: 8px;
+    background: var(--Gray-Gray-300, #C7C7C7);
+
+    color: var(--Gray-Gray-50, #F2F2F2);
+    font-size: 18px;
+    font-style: normal;
+    }
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
+.하단 {
+    width: 1920px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items:center;
+    padding: 24px 20px;
+
+    background: var(--Gray-Gray-50, #F2F2F2);
+}
+
+.하단_글씨 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 1168px;
+    height: 112px;
+
+    gap: 32px;
+}
+.하단_글씨_민지의다이어리{
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px; /* 80% */
+    letter-spacing: -0.2px;
+}
+.하단_글씨_name{
+    color: var(--Gray-Gray-700, #5F5F5F);
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 114.286% */
+    letter-spacing: -0.14px;
+}
+.하단_글씨_copyright{
+    color: var(--Gray-Gray-500, #919191);
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 16px; /* 114.286% */
+    letter-spacing: -0.14px;
+}
