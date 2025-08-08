@@ -1,0 +1,61 @@
+ <!DOCTYPE html>
+ <html lang="ko">
+ <head>
+   <script src="./index.js"></script>
+    <link rel="stylesheet" href="./index.css">
+    <title>민지의 다이어리</title>
+ </head>
+ <body>
+   <div class="가장큰배경">
+      <div class="헤더">
+         <div class="헤더__제목">
+            <span>민지의 다이어리</span>
+         </div>  
+      </div>
+      <div class="바디">
+         <div class="바디__배너">
+            <img src="./assets/images/배너.png" alt="">
+         </div>
+         <div class="바디__메인섹션">
+            <div class="바디__메인섹션__메뉴섹션"></div>
+            <div class="바디__메인섹션__아티클섹션">
+               <div class="바디__메인섹션__아티클섹션__일기칸" id="일기칸">
+               
+                  
+
+               </div>   
+               <div class="바디__메인섹션__아티클섹션__일기쓰기칸">
+                  <div class="바디__메인섹션__아티클섹션__일기쓰기칸__머리">
+                     <img src="./assets/icons/일기쓰기.png" alt="">
+                  </div>
+                  <div class="바디__메인섹션__아티클섹션__일기쓰기칸__감정상태선택">
+                     <p>오늘기분은 어떘나요?</p>
+                     <input type="radio" name="감정" value="행복"> 행복해요
+                     <input type="radio" name="감정" value="슬픔"> 슬퍼요
+                     <input type="radio" name="감정" value="놀람"> 놀랐어요
+                     <input type="radio" name="감정" value="화남"> 화나요
+                     <input type="radio" name="감정" value="기타"> 기타
+                  </div>
+                  <div class="바디__메인섹션__아티클섹션__일기쓰기칸__제목입력">
+                     <div>제목</div>
+                     <input id="입력한제목" placeholder="제목을 입력해주세요"></input>
+                  </div>
+                  <div class="바디__메인섹션__아티클섹션__일기쓰기칸__내용입력">
+                     <div>내용</div>
+                     <input id="입력한내용" placeholder="내용을 입력해주세요"></input>
+                  </div>
+                  <div class="바디__메인섹션__아티클섹션__일기쓰기칸__등록하기버튼">
+                     <button onclick="일기등록()">
+                        
+                        <img src="./assets/images/등록하기.png" alt="">
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="푸터"></div>
+   </div>
+    
+ </body>
+ </html>
