@@ -1,0 +1,105 @@
+.web_headline01 {
+    font-weight: semibold;
+    font-size: 48px;
+    line-height: 60px;
+}
+
+.web_headline02 {
+    font-weight: semibold;
+    font-size: 36px;
+    line-height: 48px;
+}
+
+.web_headline03 {
+    font-weight: semibold;
+    font-size: 28px;
+    line-height: 36px;
+}
+
+
+.headline01 {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 32px;
+}
+.headline02 {
+    font-weight: extrabold;
+    font-size: 22px;
+    line-height: 30px;
+}
+.headline03 {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+
+.title01 {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+}
+.title02 {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+}
+.title03 {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+}
+.title04 {
+    font-weight: semibold;
+    font-size: 14px;
+    line-height: 22px;
+}
+.title05 {
+    font-weight: semibold;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+
+.body01 {
+    font-weight: medium;
+    font-size: 16px;
+    line-height: 24px;
+}
+.body02 {
+    font-weight: medium;
+    font-size: 14px;
+    line-height: 22px;
+}
+.body03 {
+    font-weight: medium;
+    font-size: 12px;
+    line-height: 18px;
+}
+.body04 {
+    font-weight: regular;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+
+.caption01 {
+    font-weight: semibold;
+    font-size: 12px;
+    line-height: 14px;
+}
+.caption02 {
+    font-weight: semibold;
+    font-size: 10px;
+    line-height: 12px;
+}
+.caption03 {
+    font-weight: medium;
+    font-size: 10px;
+    line-height: 12px;
+}
+.caption04 {
+    font-weight: medium;
+    font-size: 8px;
+    line-height: 10px;
+}
