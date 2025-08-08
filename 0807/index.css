@@ -1,0 +1,227 @@
+
+*{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body{
+    padding: 100px 100px 180px 100px;
+}
+
+
+.label{
+    background-color: black;
+    width: 1920px;
+    height: 164px;
+    /* padding: 100px; */
+    padding: 32px 695px 32px 695px;
+    margin-bottom: 100px ;
+}
+
+.label__내용{
+    /* background-color: brown   ; */
+    width: 530px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 40px;
+    
+}
+.main{
+    /* background-color: aquamarine; */
+    width: 1920px;
+    height: 1805px;
+}
+
+.head{
+    width: 1920px;
+    height: 60px;
+    display: flex;
+    justify-content: right ;
+    /* background-color: yellow; */
+}
+
+.head__내용{
+    width: 1168px;
+    height: 60px;
+    /* background-color: aquamarine; */
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#로고사진{
+    width: 1168px;
+    height: 240px;
+    /* margin-bottom: 24px; */
+}
+
+.body{
+    display: flex;
+    flex-direction: column;
+    /* background-color: brown; */
+}
+
+.일기사진선택{
+    width: 1168px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* background-color: aqua; */
+    margin-top: 24px;
+}
+
+.일기사진{
+    display: flex;
+    flex-direction: row;
+    
+    align-items: flex-start;
+    gap: 16px;
+    font-size: 25px;
+    /* background-color: blue; */
+
+}
+
+.일기메인{
+    width: 1168px;
+    height: 1167px;
+    display: flex;
+    flex-direction: row;
+
+    /* background-color: blueviolet; */
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.일기목록{
+    /* background-color: greenyellow; */
+    width: 784px;
+    height: 1167px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:24px;
+    
+}
+
+.일기작성{
+    width: 360px;
+    height: 604px;
+    /* background-color: greenyellow; */
+    display: flex;
+    align-items: start;
+    gap:40px;
+    padding: 24px;
+    
+}
+
+.일기작성__헤드{
+    font-size: 30px;
+}
+
+.일기작성__헤드__내용{
+    font-size: 30px;
+}
+
+.일기작성__메인{
+    width: 312px;
+    height: 404px;
+    display: flex;
+    align-items: flex-start;
+    align-items: start;
+}
+
+.일기작성__메인__기분어땠어{
+    display: flex;
+    align-items: flex-start;
+    gap:16px;
+    margin-bottom: 40px;
+    /* background-color: black; */
+
+}
+
+.일기작성__메인__기분어땠어__내용{
+    font-size: 20px;
+}
+
+.일기작성__메인__기분선택{
+    /* background-color: aquamarine; */
+    width: 312px;
+    height: 68px;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    /* align-items: flex-start; */
+    gap:20px
+}
+
+.일기작성__메인__기분선택__라디오{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    
+}
+
+.일기작성__메인__기분선택__진짜선택{
+    /* gap: 20px; */
+}
+
+.일기작성__메인__제목{
+    width: 312px;
+    height: 76px;
+    margin-bottom: 24px;
+    gap: 8px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.일기작성__메인__내용{
+    width: 312px;
+    height: 156px;
+    gap: 8px;
+    display: flex;
+    align-items: flex-start;
+}
+
+#제목입력{
+    width: 312px;
+    height: 48px;
+}
+
+#내용입력{
+    width: 312px;
+    height: 128px;
+}
+
+.일기작성__등록{
+    width: 312px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+}
+
+.footer{
+    width: 1920px;
+    height: 160px;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    /* padding: 24px 376px 24px 376px; */
+
+}
+
+.footer__내용{
+    width: 1168px;
+    height: 112px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 32px;
+    /* margin: 24px 376px 24px 376px ; */
+    /* background-color: aqua; */
+}

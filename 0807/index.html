@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>감정일기장</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="./index.js"></script>
+
+</head>
+<body>
+
+    <div class="label">
+        <div class="label__내용"><h1>일기보관함_메인</h1></div>
+    </div>
+
+    <div class="main">
+        <div class="head">
+            <div class="head__내용"><h4>민지의 다이어리</h4></div>
+        </div>
+
+        <div class="body">
+            <img src="./assets/images/Rectangle1.png" alt="">
+            <div>
+                <div class="일기사진선택">
+                    <div class="일기사진">
+                        <div>일기보관함</div>
+                        <div>사진보관함</div>
+                    </div>
+                </div>
+                <div class="일기메인">
+                    <div class="일기목록">
+                   
+                        <div class="일기">
+                            
+                            <div><img src="./assets/images/Frame 47.png" alt=""></div>
+                            <div>
+                                <div>
+                                    <div>슬퍼요</div>
+                                    <div>2024.03.12</div>
+                                </div>
+                                <div>타이틀 영역 입니다. 한줄까지만 노출됩니다.</div>
+                            </div>
+                        </div>
+                        <div class="일기">
+                            <div><img src="./assets/images/Frame 47.png" alt="" ></div>
+                            <div>
+                                <div>
+                                    <div>슬퍼요</div>
+                                    <div>2024.03.12</div>
+                                </div>
+                                <div>타이틀 영역 입니다. 한줄까지만 노출됩니다.</div>
+                            </div>
+                        </div>
+                        <div class="일기">
+                            <div><img src="./assets/images/Frame 47.png" alt=""></div>
+                            <div>
+                                <div>
+                                    <div>슬퍼요</div>
+                                    <div>2024.03.12</div>
+                                </div>
+                                <div>타이틀 영역 입니다. 한줄까지만 노출됩니다.</div>
+                            </div>
+                        </div>   <div class="일기">
+                            <div><img src="./assets/images/Frame 47.png" alt=""></div>
+                            <div>
+                                <div>
+                                    <div>슬퍼요</div>
+                                    <div>2024.03.12</div>
+                                </div>
+                                <div>타이틀 영역 입니다. 한줄까지만 노출됩니다.</div>
+                            </div>
+                        </div>   <div class="일기">
+                            <div><img src="./assets/images/Frame 47.png" alt=""></div>
+                            <div>
+                                <div>
+                                    <div>슬퍼요</div>
+                                    <div>2024.03.12</div>
+                                </div>
+                                <div>타이틀 영역 입니다. 한줄까지만 노출됩니다.</div>
+                            </div>
+                        </div>   <div class="일기">
+                            <div><img src="./assets/images/Frame 47.png" alt=""></div>
+                            <div>
+                                <div>
+                                    <div>슬퍼요</div>
+                                    <div>2024.03.12</div>
+                                </div>
+                                <div>타이틀 영역 입니다. 한줄까지만 노출됩니다.</div>
+                            </div>
+                        </div>       
+                    </div>
+
+                    <div = class="일기작성">
+                        <div class="일기작성__헤드">                           
+                            <div class="일기작성__헤드__내용"><b>📍 일기 쓰기</b></div>
+                        </div>
+                        <div class="일기작성__메인">
+                            <div class="일기작성__메인__기분어땠어">
+                                <div class="일기작성__메인__기분어땠어__내용">
+                                    <b>오늘 기분은 어땠나요?</b>
+                                </div>
+                                <div class="일기작성__메인__기분선택">
+                                    <div class="일기작성__메인__기분선택__라디오">
+                                        <div>
+                                            <input type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택" value="happy" onclick="입력확인()">
+                                        </div>  
+                                        <div>행복해요</div>
+
+                                    </div>
+                                    <div class="일기작성__메인__기분선택__라디오">
+                                        <div>
+                                            <input type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택" value="sad" onclick="입력확인()">
+                                        </div>  
+                                        <div>슬퍼요</div>
+                                    </div>
+                                    <div class="일기작성__메인__기분선택__라디오">
+                                        <div>
+                                            <input type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택" value="surprised" onclick="입력확인()">
+                                        </div>  
+                                        <div>놀랐어요</div>
+                                    </div>
+                                    <div class="일기작성__메인__기분선택__라디오">
+                                        <div>
+                                            <input type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택" value="angry" onclick="입력확인()">
+                                        </div>  
+                                        <div>화나요</div>
+                                    </div>
+                                    <div class="일기작성__메인__기분선택__라디오">
+                                        <div>
+                                            <input type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택" value="other" onclick="입력확인()">
+                                        </div>  
+                                        <div>기타</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="일기작성__메인__제목">
+                                    <div>제목</div>
+                                    <input type="text" placeholder="제목을 입력해주세요" id="제목입력" oninput="입력확인()">
+                                </div>
+                                <div class="일기작성__메인__내용">
+                                    <div>내용</div>
+                                    <input type="text" placeholder="내용을 입력해주세요" id="내용입력" oninput="입력확인()">
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="일기작성__등록()" id="등록하기" >등록하기</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer">
+            <div class="footer__내용">
+                <div><b>민지의 다이어리</b></div>
+                <div>대표</div>
+                <div>Copyright @ 2024</div>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
