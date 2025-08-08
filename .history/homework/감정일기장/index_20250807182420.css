@@ -1,0 +1,62 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+/* 메인전체사이즈 */
+.main {
+  width: 1168px;
+  margin: 0 auto;
+}
+/* 네비 */
+nav {
+  display: flex;
+  font-size: 24px;
+  gap: 24px;
+  padding-top: 24px;
+}
+/* 타이틀메인 */
+.title__main {
+  min-height: 100vh;
+  display: flex;
+  gap: 24px;
+  padding-top: 42px;
+}
+.title__images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2열 */
+  grid-template-rows: repeat(3, 1fr); /* 3행 */
+  height: 100%;
+  gap: 24px;
+}
+
+.title__text {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 타이틀감정 */
+.title__sad {
+  color: #28b4e1;
+}
+
+.title__happy {
+  color: #ea5757;
+}
+
+.title__surprised {
+  color: #d59029;
+}
+
+.title__angry {
+  color: #777777;
+}
+/* 타이틀오른쪽 */
+.title__right {
+  width: 360px;
+  height: 604px;
+}
