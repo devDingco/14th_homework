@@ -1,0 +1,12 @@
+.container {
+    width: 1920px;
+    height: 1821px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.diar-card {
+    width: 380px;
+    height: 285px;
+}
