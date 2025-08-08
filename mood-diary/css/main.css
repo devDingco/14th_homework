@@ -1,0 +1,117 @@
+.main__gallery{
+  width: 784px;
+  height: 1167px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  overflow-y: scroll;
+}
+.main__gallery__card{
+  width: 380px;
+  height: 374px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  gap: 16px;
+  border-radius: 16px;
+}
+.main__gallery__card img{
+  width: 380px;
+  height: 285px;
+  border-radius: 16px;
+}
+.main__gallery__card__info{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 56px;
+  gap: 8px;
+  padding: 0 8px;
+}
+.main__gallery__card__info__sub{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.main__gallery__card__info__sub span{
+
+}
+.main__gallery__card__info p{
+
+}
+
+/* diary form */
+.main__diary-form{
+  width: 360px;
+  height: 604px;
+  padding: 24px;
+  border-radius: 16px;
+  border: solid 1px var(--color-gray-200);
+  display: flex;
+  flex-direction: column;
+  gap:40px;
+  background-color: #fff;
+}
+.main__diary-form h2{
+
+}
+.select-box{
+  width: 312px;
+  height: 108px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.select-box h3{
+
+}
+.mood-select-box{
+  width: 100%;
+  height: 68px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.mood-select-box label{
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mood-select-box input[type="radio"]{
+  width: 24px;
+  height: 24px;
+  accent-color: var(--color-black);
+}
+.main-diary-input-form{
+  width: 312px;
+  height: 256px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.main-diary-input{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.main-diary-input input,
+.main-diary-input textarea{
+  padding: 12px 16px;
+  border-radius: 8px;
+  outline: none;
+  border: solid 1px var(--color-gray-200);
+  color: var(--color-black);
+  resize: none;
+}
+
+.main-diary-input input::placeholder,
+.main-diary-input textarea::placeholder{
+  color: var(--color-gray-400);
+}
+
+.main__diary-form button{
+  height: 48px;
+  border-radius: 8px;
+}

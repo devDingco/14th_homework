@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>슬랙 클론 코딩</title>
+  <link rel="stylesheet" href="./root.css">
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./sidebar.css">
+  <link rel="stylesheet" href="./menu.css">
+  <link rel="stylesheet" href="./signup.css">
+  <!-- <script>
+    console.log(JSON.parse(localStorage.getItem("수강생리스트")))
+  </script> -->
+</head>
+
+<body>
+  <div class="container">
+    <!-- header -->
+    <div class="header">
+      <div class="header__left">       
+        <img src="./assets/icons/arrow_left.png" width="32px" height="32px">
+        <img src="./assets/icons/arrow_right.png" width="32px" height="32px">
+        <img src="./assets/icons/time.png" width="32px" height="32px">
+      </div>
+      <div class="header__right">
+        <img src="./assets/images/searchbar.png" width="920px" height="48px">
+        <div class="header__right__profile-settings">
+          <img src="./assets/icons/badge.png" width="111px" height="48px">
+          <img src="./assets/icons/help.png" width="32px" height="32px">
+        </div>
+      </div>
+    </div>
+
+    <!-- body -->
+    <div class="body">
+
+      <!-- body__sidebar:l -->
+      <div class="body__sidebar-left">
+        <div class="body__sidebar-left__top">
+          <img src="./assets/images/channel_img.png"/>
+          <div class="body__sidebar-left__top__menu">
+            <div class="body__sidebar-left__top__menu__wrapper">
+              <img src="./assets/icons/home.png"/>
+              <p>홈</p>
+            </div>
+            <div class="body__sidebar-left__top__menu__wrapper">
+              <img src="./assets/icons/message.png"/>
+              <p>대화</p>
+            </div>
+            <div class="body__sidebar-left__top__menu__wrapper">
+              <img src="./assets/icons/notifications.png"/>
+              <p>알림</p>
+            </div>
+            <div class="body__sidebar-left__top__menu__wrapper">
+              <img src="./assets/icons/bookmark.png"/>
+              <p>북마크</p>
+            </div>
+            <div class="body__sidebar-left__top__menu__wrapper">
+              <img src="./assets/icons/more_meatball.png"/>
+              <p>더보기</p>
+            </div>
+          </div>
+        </div>
+        <div class="body__sidebar-left__down">
+          <img src="./assets/icons/profile_add.png"/>
+          <img src="./assets/images/my_profile.png"/>
+        </div>
+      </div>
+
+      <!-- body__main -->
+      <div class="body__main">
+         <!-- body__main[0] -->
+        <div class="body__main__menu">
+
+          <div class="body__main__menu__title">
+            <p>코드캠프</p>
+            <div class="body__main__menu__title__icons">
+              <img src="./assets/icons/filter.png"/>
+              <img src="./assets/icons/edit.png"/>
+            </div>
+          </div>
+
+          <div class="body__main__menu__button">
+            <img src="./assets/icons/contract_edit.png"/>
+            <p>서약서 자세히 보기</p>
+          </div>
+
+          <div class="body__main__menu__line"></div>
+
+          <div class="wrapper">
+          <div class="body__main__menu__area">
+            <div class="body__main__menu__area-left">
+              <img src="./assets/icons/logo_codecamp.png"/>
+              <p>코드캠프 13기</p>
+            </div>
+            <button>수강중</button>
+          </div>
+          
+          <div class="inner">
+            <div class="body__main__menu__area">
+              <div class="body__main__menu__area-left">
+                <img src="./assets/icons/group.png"/>
+                <p>수강생리스트</p>
+              </div>
+              <img src="./assets/icons/arrow_down.png"/>
+            </div>
+
+            <div class="body__main__menu__list">
+              <div class="body__main__menu__list__none">
+                현재 가입한 멤버가 없어요.<br/>
+                  회원가입 해보세요.
+              <button>
+                <img src="./assets/icons/person_add.png" />
+                가입하기
+              </button>
+              </div>
+                
+            </div>
+        </div>
+        <div class="inner">
+          <div class="body__main__menu__area">
+            <div class="body__main__menu__area-left">
+              <img src="./assets/icons/channel_list.png"/>
+              <p>채널</p>
+            </div>
+            <img src="./assets/icons/arrow_down.png"/>
+          </div>
+
+          <div class="body__main__menu__channel__list">
+            <div class="body__main__menu__channel">
+              <img src="./assets/icons/tag.png"/>
+              <span>채널1</span>
+            </div>
+            <div class="body__main__menu__channel">
+              <img src="./assets/icons/tag.png"/>
+              <span>채널2</span>
+            </div>
+            <div class="body__main__menu__channel">
+              <img src="./assets/icons/tag.png"/>
+              <span>채널3</span>
+            </div>
+            <div class="body__main__menu__channel">
+              <img src="./assets/icons/tag.png"/>
+              <span>채널4</span>
+            </div>
+          </div>
+        </div>  
+          <div class="body__main__menu__area">
+            <div class="body__main__menu__area-left">
+              <img src="./assets/icons/skull.png"/>
+              <p>차단 멤버 리스트</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- body__main[1] -->
+      <div class="body__main__signup">
+        <div class="title">
+          <h1>코드캠프에 가입하고</h1>
+          <h1>개발자로 커리어 점프 하세요.</h1>
+        </div>
+
+        <form class="body__main__signup__form">
+          <div class="body__main__signup__input">
+          <label for="name">이름</label>
+          <div class="body__main__signup__input__wrapper">
+            <input id="name" type="text" placeholder="이름을 입력해주세요.">
+            <span id="name-error" class="error">테스트 에러메시지입니다.</span>
+          </div>
+          </div>
+
+          <div class="body__main__signup__input">
+          <label for="email">이메일</label>
+          <div class="body__main__signup__input__wrapper">
+            <input id="email" type="text" placeholder="네이버,구글,한메일,카카오 계정만 입력">
+            <span id="email-error" class="error">테스트 에러메시지입니다.</span>
+          </div>
+          </div>
+
+          <div class="body__main__signup__input">
+          <label for="password">비밀번호</label>
+          <div class="body__main__signup__input__wrapper">
+            <input id="password" type="password" placeholder="비밀번호를 입력해 주세요.">
+            <span id="password-error" class="error">테스트 에러메시지입니다.</span>
+          </div>
+          </div>
+
+          <div class="body__main__signup__input">
+          <label for="passwordConfirm">비밀번호 확인</label>
+          <div class="body__main__signup__input__wrapper">
+            <input id="passwordConfirm" type="password" placeholder="비밀번호를 한번 더 입력해 주세요.">
+            <span id="passwordConfirm-error" class="error">테스트 에러메시지입니다.</span>
+          </div>
+          </div>
+
+          <div class="body__main__signup__input">
+          <label for="phoneNumber">전화번호</label>
+          <div class="body__main__signup__input__wrapper">
+            <input id="phoneNumber" oninput="changeNumber();" type="text" maxlength="13" oninput="changeNumber()"
+              placeholder="010으로 시작, '-'를 꼭 입력해 주세요.">
+            <span id="phoneNumber-error" class="error">테스트 에러메시지입니다.</span>
+          </div>
+          </div>
+
+          <div class="body__main__signup__auth">
+          <div class="request-auth">
+            <span id="auth-number">000000</span>
+            <button id="request-button" type="button" onclick="auth()">인증번호 요청</button>
+          </div>
+          <div class="timer-auth">
+            <span id="timer">3:00</span>
+            <button id="auth-button" disabled="true" onclick="authComplete()">인증 하기</button>
+          </div>
+          
+          </div>
+
+          <div class="body__main__signup__textarea">
+          <label for="intro">자기소개</label>
+          <textarea id="intro" placeholder="자기소개를 입력해 주세요."></textarea>
+          </div>
+
+          <div class="body__main__signup__radio">
+          <label for="gender">성별</label>
+          <div class="select-gender">
+            <div class="select">
+              <input id="male" type="radio" name="gender"><span>남성</span>
+            </div>
+            <div class="select">
+              <input id="female" type="radio" name="gender"><span>여성</span>
+            </div>
+          </div>
+          </div>
+
+          <div class="body__main__signup__checkbox">
+          <input id="checkbox" type="checkbox">
+          <div>집에는 씻으러만 가는데 동의합니다.</div>
+          </div>
+
+          <button id="signup-button" class="body__main__signup__button" 
+          type="submit" disabled="true">가입</button>
+        </form>
+      </div>
+      <!-- body__main[2] -->
+      <div class="body__main__picture"></div>
+    </div>
+      <!-- body__sidebar:r -->
+      <div class="body__sidebar-right"></div>
+    </div>
+
+    <!-- footer -->
+    <div class="footer"></div>
+  </div>
+  <script src="./auth.js"></script>
+  <script src="./form.js"></script>
+  <script src="./changeNumber.js"></script>
+  <script src="./formatStudent.js"></script>
+</body>
+</html>
