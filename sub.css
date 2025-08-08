@@ -1,0 +1,87 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
+.가장큰배경{
+    width: 1920px;
+    height: 1080px;
+}
+.큰배경{
+    width: 1920px;
+    height: 445px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.헤더{
+    width: 1880px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+
+}
+.헤더__타이틀{
+    width: 1168px;
+    height: 60px;
+
+}
+.바디{
+    width: 1880px;
+    height: 321px;
+    display: flex;
+    justify-content: center;
+}
+.바디__메인{
+    width: 1168px;
+    height: 321px;
+    display: flex;
+    flex-direction: column;
+}
+.바디__메인__타이틀섹션{
+    width: 1168px;
+    height: 84px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.바디__메인__타이틀섹션__타이틀{
+    width: 1168px;
+    height: 36px;
+    border-bottom: 2px solid black;
+    
+}
+.바디__메인__타이틀섹션__이모지섹션{
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+}
+.바디__메인__타이틀섹션__이모지섹션__이모지{
+    width: 109px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+}
+.바디__메인__타이틀섹션__이모지섹션__이모지 > img{
+    width: 32px;
+    height: 32px;
+}
+.바디__메인__타이틀섹션__이모지섹션__이모지 > span{
+    font-size: 20px;
+}
+.바디__메인__타이틀섹션__이모지섹션__날짜{
+    width: 107px;
+    height: 20px;
+}
+.바디__메인__아티클섹션{
+    width: 1168px;
+    height: 133px;
+}
+.바디__메인__수정섹션{
+    width: 1168px;
+    height: 40px;
+    display: flex;
+    justify-content: end;
+}
