@@ -1,0 +1,126 @@
+/* base.css */
+/* 1. 전체 페이지의 높이 기준을 100%로 설정 */
+html, body {
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+/* 2. 모든 요소 박스 모델 초기화 */
+
+
+
+:root {
+  --primary-color: #000;
+  --secondary-color: #999;
+  --border-color: #e0e0e0;
+  --bg-light: #f9f9f9;
+  --form-shadow: rgba(0, 0, 0, 0.08) 0px 2px 8px;
+  --font: 'Pretendard', sans-serif;
+}
+
+/* reset + 기본 폰트 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  background-color: #fff;
+  color: var(--primary-color);
+}
+
+/* 접근성 숨김 텍스트 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 1024px) {
+  .diary-list {
+    max-width: 100%;
+  }
+
+  .diary-form {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  main.container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .diary-card {
+    width: 100%;
+  }
+}
+
+
+
+/* 전체 높이 고정 구조 */
+/* 전체 리셋 및 기초 설정 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font);
+  background-color: #fff;
+  color: var(--primary-color);
+}
+
+/* wrapper: 전체를 감싸는 flex 박스 */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 전체 뷰포트 채움 */
+}
+
+/* main: 내용이 없을 때 푸터 밀착시키는 핵심 */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px; /* 너의 기존 레이아웃에 맞춰 조정 가능 */
+}
+
+/* footer */
+footer {
+  background: #f5f5f5;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+}
+
+
+
+
+
+@media (max-width: 768px) {
+  .diary-list {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .diary-form {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .container {
+    padding: 12px;
+  }
+}
+

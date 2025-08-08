@@ -1,0 +1,37 @@
+[
+  {
+    "mood": "sad",
+    "emotionText": "슬퍼요",
+    "date": "2024.03.12",
+    "title": "슬펐던 하루입니다.",
+    "image": "images/sad.png"
+  },
+  {
+    "mood": "happy",
+    "emotionText": "행복해요",
+    "date": "2024.03.12",
+    "title": "정말 행복한 하루였습니다.",
+    "image": "images/happy.png"
+  },
+  {
+    "mood": "angry",
+    "emotionText": "화나요",
+    "date": "2024.03.12",
+    "title": "열받는 하루였어요.",
+    "image": "images/angry.png"
+  },
+  {
+    "mood": "surprised",
+    "emotionText": "놀랐어요",
+    "date": "2024.03.12",
+    "title": "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
+    "image": "images/surprised.png"
+  },
+  {
+    "mood": "etc",
+    "emotionText": "그냥 그래요",
+    "date": "2024.03.12",
+    "title": "뭔가 설명하기 어려운 하루",
+    "image": "images/etc.png"
+  }
+]
