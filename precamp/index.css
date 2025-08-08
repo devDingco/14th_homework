@@ -56,7 +56,7 @@ div{
 .text_1 {
 
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 20px;
 
 }
@@ -190,11 +190,40 @@ div{
 
 .header__right__search {
 
+
     width: 920px;
     height: 48px;
-    background-color: aquamarine;
+    border-radius: 8px;
+    padding: 8px 16px;
+    background-color: #955C98;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    align-items: center;
+    gap: 8px;
+
 
 }
+
+.header__searchbar{
+
+    width: 100%;
+    height: 32px;
+    border: 0px;
+    background-color: transparent;
+    outline: none;
+
+    color: #EFE6EF;
+
+}
+
+.header__searchbar::placeholder{
+
+    color: #EFE6EF;
+
+}
+
 
 .header__right__button {
 
@@ -239,7 +268,56 @@ div{
 
     width: 80px;
     padding: 16px 20px;
-    background-color: red;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+
+}
+
+.body__leftsidebar__top{
+
+    height: 448px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    gap: 24px;
+
+}
+
+.leftsidebar__top__icon{
+
+    height: 384px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;    
+    gap: 16px;
+
+    text-align: center;
+    color: #E4E4E4;
+
+}
+
+.leftsidebar__icon{
+
+    height: 64px;
+
+    gap: 4px;
+
+}
+
+.body__leftsidebar__profile{
+
+    height: 96px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
 
 }
 
@@ -262,6 +340,7 @@ div{
 
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     justify-content: baseline;
     gap: 24px;
 
@@ -327,6 +406,7 @@ hr{
 .main__menu__content {
 
     width: 360px;
+    height: 861px;
 
     display: flex;
     flex-direction: column;
@@ -535,14 +615,21 @@ hr{
     width: 320px;
     height: 44px;
     border: solid 1px #C7C7C7;
+    outline: none;
     border-radius: 8px;
     padding: 8px 12px;
     background-color: #FFFFFF;
 
+    color: #333333;
+
+}
+
+.input__text::placeholder{
 
     color: #ABABAB;
 
 }
+
 
 .context__signup__auth {
 
@@ -642,9 +729,18 @@ textarea{
     width: 320px;
     height: 116px;
     border: solid 1px #C7C7C7;
+    outline: none;
     border-radius: 8px;
     padding: 8px 12px;
     background-color: #FFFFFF;
+
+    color: #333333;
+
+}
+
+textarea::placeholder{
+
+    color: #ABABAB;
 
 }
 

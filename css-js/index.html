@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>일기보관함</title>
+    <link rel = "stylesheet" href = "./index.css" />
+    <script src="./index.js"></script>    
+</head>
+<body>
+    <div class="background">
+            <div class="main">
+                <div class="main__header">
+                    <div class="main__header__title">
+                        민지의 다이어리
+                    </div>
+                </div>
+                <div class="main__frame">
+                    <div class="main__frame__banner"></div>
+                    <div class="main__frame__content">
+                        <div class="frame__content__tab">
+                            <div class="content__tab__menu">
+                                일기보관함
+                            </div>
+                            <div class="content__tab__menu">
+                                사진보관함
+                            </div>
+                        </div>
+                        <div class="frame__content__diary">
+                            <div class="content__diary__list">
+                                다이어리 내용 표시
+                            </div>
+                            <div class="content__diary__form">
+                                <div class="diary__form__title">📍 일기 쓰기</div>
+                                <div class="diary__form__input">
+                                    <div class="form__input__feeling">
+                                        오늘 기분은 어땟나요?
+                                        <div class="input__feeling__radio">
+                                            <div id="feeling" >
+                                                <input type="radio" name="radio__feeling" />행복해요
+                                            </div>
+                                            <div id="feeling" >
+                                                <input type="radio" name="radio__feeling" />슬퍼요
+                                            </div>
+                                            <div id="feeling" >
+                                                <input type="radio" name="radio__feeling" />놀랐어요
+                                            </div>
+                                            <div id="feeling" >
+                                                <input type="radio" name="radio__feeling" />화나요
+                                            </div>
+                                            <div id="feeling" >
+                                                <input type="radio" name="radio__feeling" />기타
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form__input__text">
+                                        <div class="input__text__title">
+                                            제목
+                                            <input type="text" placeholder="제목을 입력해 주세요." id="title__feeling"/>
+                                        </div>
+                                        <div class="input__text__context">
+                                            내용
+                                            <textarea placeholder="내용을 입력해 주세요." id="context__feeling"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="diary__form__button">등록하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page">
+
+            </div>
+            <div class="footer">
+                 <div class="footer__container">
+                    <div id="footer__title">민지의 다이어리</div>
+                    <div id="footer__name">대표 : {name}</div>
+                    <div id="footer__copyright">Copyright © 2024. {name} Co., Ltd.</div>
+                 </div>
+            </div>
+    </div>
+</body>
+</html>
