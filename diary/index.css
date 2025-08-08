@@ -1,0 +1,268 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.헤더 {
+  width: 1920px;
+  height: 60px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.헤더__정렬 {
+  width: 1168px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.헤더__정렬__로고 {
+  width: 120px;
+  height: 40px;
+  align-items: center;
+  display: flex;
+}
+
+.헤더__정렬__로고__이름 {
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.배너 {
+  width: 1920px;
+  height: 240px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.내비게이션 {
+  width: 1920px;
+  height: 48px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.내비게이션__정렬 {
+  width: 1168px;
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+}
+.내비게이션__정렬__왼쪽 {
+  width: 254px;
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.내비게이션__정렬__왼쪽__일기보관함 {
+  /* width: 119px; */
+  height: 48px;
+  padding: 12px 8px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  border-bottom: 2px solid #000;
+}
+.내비게이션__정렬__왼쪽__사진보관함 {
+  /* width: 119px; */
+  height: 48px;
+  padding: 12px 8px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  color: #ababab;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.바디 {
+  width: 1920px;
+  height: 1167px;
+  display: flex;
+  justify-content: center;
+}
+.바디__정렬 {
+  width: 1168px;
+  height: 1167px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.바디__정렬__목록 {
+  width: 784px;
+  height: 1167px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.바디__정렬__목록__첫번째 {
+  width: 380px;
+  height: 373px;
+}
+
+.바디__정렬__목록__첫번째__내용 {
+  width: 380px;
+  height: 72px;
+  padding: 0 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.바디__정렬__목록__첫번째__내용__감정날짜 {
+  width: 364px;
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.바디__정렬__목록__첫번째__내용__감정날짜__감정 {
+  font-size: 14px;
+}
+.바디__정렬__목록__첫번째__내용__감정날짜__날짜 {
+  font-size: 14px;
+  color: #919191;
+}
+
+.바디__정렬__목록__첫번째__내용__타이틀 {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.바디__정렬__일기쓰기 {
+  width: 360px;
+  height: 600px;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid #d4d3d3;
+  display: flex;
+  flex-direction: column;
+}
+
+.바디__정렬__일기쓰기__타이틀 {
+  width: 312px;
+  height: 24px;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+}
+.바디__정렬__일기쓰기__오기어 {
+  width: 312px;
+  height: 24px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+}
+.바디__정렬__일기쓰기__라디오 {
+  gap: 20px;
+  width: 312px;
+  height: 68px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.바디__정렬__일기쓰기__라디오__감정 {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.바디__정렬__일기쓰기__제목 {
+  display: flex;
+  flex-direction: column;
+}
+
+.바디__정렬__일기쓰기__제목__라벨 {
+  width: 312px;
+  height: 20px;
+  color: #333;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.바디__정렬__일기쓰기__제목__인풋 {
+  width: 312px;
+  height: 48px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.바디__정렬__일기쓰기__제목__라벨__인풋__입력창 {
+  width: 280px;
+  height: 24px;
+  border: none;
+}
+
+.바디__정렬__일기쓰기__내용 {
+  display: flex;
+  flex-direction: column;
+}
+
+.바디__정렬__일기쓰기__내용__라벨 {
+  width: 312px;
+  height: 20px;
+  color: #333;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.바디__정렬__일기쓰기__내용__인풋 {
+  padding: 12px 16px;
+  width: 312px;
+  height: 128px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.바디__정렬__일기쓰기__내용__라벨__인풋__입력창 {
+  width: 280px;
+  height: 24px;
+  border: none;
+}
+
+.바디__정렬__일기쓰기__등록 {
+  padding: 8px 16px;
+  width: 312px;
+  height: 48px;
+  border-radius: 8px;
+  background-color: #c7c7c7;
+  display: flex;
+  justify-content: center;
+}
+
+.바디__정렬__일기쓰기__등록__버튼 {
+  border: none;
+  background-color: transparent;
+}
