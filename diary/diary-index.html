@@ -26,20 +26,22 @@
 
             <div class="일기보관함">
 
-                <div class="일기틀">
-                    <div id="감정이미지"></div>
+                <div class="empty-message">아직 작성된 일기가 없습니다.</div>
+
+                <!-- <div class="일기틀">
+                    <div class="감정이미지"></div>
                     <div class="일기속성">
                         <div class="일기속성1">
-                            <div id="감정">슬퍼요</div>
-                            <div id="날짜표시">2025. 8. 7.</div>
+                            <div class="감정">슬퍼요</div>
+                            <div class="날짜표시">2025. 8. 7.</div>
                         </div>
                         <div class="일기속성2">
-                            <div id="타이틀">
+                            <div class="타이틀">
                                 타이틀 영역입니다. 한줄까지만 노출 됩니다.
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 
@@ -76,12 +78,19 @@
                 </div>
                 <div class="입력틀">
                     <div class="소제목">내용</div>
-                    <textarea id="내용__내용입력" placeholder="제목을 입력해 주세요."></textarea>
+                    <textarea id="내용__내용입력" placeholder="내용을 입력해 주세요."></textarea>
                 </div>
                 <button id="등록하기버튼" onclick="WriteNewDiary()">등록하기</button>
 
             </div>
 
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer__main">
+            <div class="첫번째줄">유진이의 다이어리</div>
+            <div class="두번째줄">대표 : 신유진</div>
+            <div class="세번째줄">Copyright © 2024. {name} Co., Ltd.</div>
         </div>
     </div>
 </body>
