@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diary</title>
+    <!-- <link rel="stylesheet" href="/assets/styles/global.css" /> -->
+
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- HEADER -->
+      <header>
+        <div id="logo">
+          <span class="myName"></span>
+        </div>
+        <div class="darkModeBtn">
+          <span>다크모드</span>
+          <img src="./assets/images/icons/toggle.png" alt="" />
+        </div>
+      </header>
+      <!-- MAIN -->
+      <main>
+        <div class="coverImg">
+          <img src="./assets/images/images/Rectangle 1.png" alt="" />
+        </div>
+        <nav class="storageList">
+          <ul>
+            <li><span>일기보관함</span></li>
+            <li><span>사진보관함</span></li>
+          </ul>
+        </nav>
+        <div class="content">
+          <div class="content_left">
+            <!-- CARD -->
+            <div class="card">
+              <img src="./assets/images/images/슬퍼요 (m).png" alt="" />
+              <div class="cardInfo">
+                <span style="color: #28b4e1">슬퍼요</span>
+                <span style="color: #919191">2024. 03. 12</span>
+              </div>
+              <div class="cardTitle">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
+            </div>
+            <div class="card">
+              <img src="./assets/images/images/놀랐어요 (m).png" alt="" />
+              <div class="cardInfo">
+                <span style="color: #d59029">놀랐어요</span>
+                <span style="color: #919191">2024. 03. 12</span>
+              </div>
+              <div class="cardTitle">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
+            </div>
+            <div class="card">
+              <img src="./assets/images/images/화나요 (m).png" alt="" />
+              <div class="cardInfo">
+                <span style="color: #777777">화나요</span>
+                <span style="color: #919191">2024. 03. 12</span>
+              </div>
+              <div class="cardTitle">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
+            </div>
+            <div class="card">
+              <img src="./assets/images/images/행복해요 (m).png" alt="" />
+              <div class="cardInfo">
+                <span style="color: #ea5757">행복해요</span>
+                <span style="color: #919191">2024. 03. 12</span>
+              </div>
+              <div class="cardTitle">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
+            </div>
+            <div class="card">
+              <img src="./assets/images/images/기타 (m).png" alt="" />
+              <div class="cardInfo">
+                <span style="color: #28b4e1">기타</span>
+                <span style="color: #919191">2024. 03. 12</span>
+              </div>
+              <div class="cardTitle">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
+            </div>
+            <div class="card">
+              <img src="./assets/images/images/행복해요 (m).png" alt="" />
+              <div class="cardInfo">
+                <span style="color: #ea5757">행복해요</span>
+                <span style="color: #919191">2024. 03. 12</span>
+              </div>
+              <div class="cardTitle">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
+            </div>
+          </div>
+
+          <form class="content_right" action="#">
+            <div class="content_right__title">📍 일기 쓰기</div>
+            <div class="content_right__content">
+              <h1>오늘 기분은 어땟나요?</h1>
+
+              <div class="selectCard" id="selectGroup">
+                <div>
+                  <input type="radio" id="행복해요" value="행복해요" name="group" checked />
+                  <label for="행복해요">행복해요</label>
+                </div>
+                <div>
+                  <input type="radio" id="슬퍼요" value="슬퍼요" name="group" />
+                  <label for="슬퍼요">슬퍼요</label>
+                </div>
+                <div>
+                  <input type="radio" id="놀랐어요" value="놀랐어요" name="group" />
+                  <label for="놀랐어요">놀랐어요</label>
+                </div>
+                <div>
+                  <input type="radio" id="화나요" value="화나요" name="group" />
+                  <label for="화나요">화나요</label>
+                </div>
+                <div>
+                  <input type="radio" id="기타" value="기타" name="group" />
+                  <label for="기타">기타</label>
+                </div>
+              </div>
+              <div class="flex-col">
+                <label class="text-ms" for="title">제목</label>
+                <input id="title" class="input-layout" type="text" placeholder="제목을 입력해 주세요." />
+              </div>
+
+              <div class="flex-col">
+                <label class="text-ms" for="context">내용</label>
+                <!-- <input type="text" /> -->
+                <textarea
+                  id="content"
+                  class="input-layout"
+                  name=""
+                  id=""
+                  placeholder="내용을 입력해 주세요."
+                ></textarea>
+              </div>
+            </div>
+            <button class="submitDiaryBtn" disabled>등록하기</button>
+          </form>
+        </div>
+      </main>
+      <footer class="footer">
+        <span class="a">민지의 다이어리</span>
+        <span class="ceo"></span>
+        <span class="c">Copyright © 2024. {name} Co., Ltd.</span>
+      </footer>
+    </div>
+  </body>
+</html>
