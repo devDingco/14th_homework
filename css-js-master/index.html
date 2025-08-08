@@ -24,27 +24,77 @@
             </div>
             <div id="main_container" class="">
                 <div id="top_container" class="">
-                    <img class="main_image" src="./images/Rectangle 1.png">
+                    <img src="./images/Rectangle 1.png">
                 </div>
                 <!-- frame 18 -->
                 <div id="bottom_container" class="">
                     <!-- 네비게이션 => 일기보관함/사진보관함  -->
                     <div id="storage_container" class="">
-                        <div id="storage_navigation_container" class="">
-                            <p>일기보관함</p>
-                            <p>사진보관함</p>
+                        <div id="storage_tab_container" class="">
+                            <a id="storage_tab_on">
+                                <p>일기보관함</p>
+                            </a>
+                            <a id="storage_tab_off">
+                                <p>사진보관함</p>
+                            </a>
                         </div>
                     </div>
                     <!-- frame 16 -->
                     <div id="diary_container" class="">
                         <!-- 일기보관함 -->
-                        <div id="diary_box_container" class="test_orange">
-
+                        <div id="diary_box_container" class="">
+                            <div class="diary_content test_orange"></div>
+                            <div class="diary_content test_orange"></div>
+                            <div class="diary_content test_orange"></div>
+                            <div class="diary_content test_orange"></div>
+                            <div class="diary_content test_orange"></div>
+                            <div class="diary_content test_orange"></div>
                         </div>
                         <!-- 사진보관함 -->
                         <!-- <div></div> -->
-                        <div id="write_diary_container" class="test_aqua">
-
+                        <div id="write_diary_container" class="">
+                            <p class="headline01">📍 일기 쓰기</p>
+                            <div id="writing_container">
+                                <div id="feeling_choice_container" class="">
+                                    <p class="headline01">오늘 기분은 어땟나요?</p>
+                                    <div id="feeling_radio_container">
+                                        <div id="feeling_radio_content">
+                                            <input type="radio"/><p>행복해요</p>
+                                        </div>
+                                        <div id="feeling_radio_content">
+                                            <input type="radio"/><p>슬퍼요</p>
+                                        </div>
+                                        <div id="feeling_radio_content">
+                                            <input type="radio"/><p>놀랐어요</p>
+                                        </div>
+                                        <div id="feeling_radio_content">
+                                            <input type="radio"/><p>화나요</p>
+                                        </div>
+                                        <div id="feeling_radio_content">
+                                            <input type="radio"/><p>기타</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="writing_content_container" class="">
+                                    <div id="writing_title_container" class="">
+                                        <p class="body04">제목</p>
+                                        <div id="title_input_container">
+                                            <textarea id="title_input" placeholder="제목을 입력해 주세요."></textarea>
+                                        </div>
+                                    </div>
+                                    <div id="writing_detail_container" class="">
+                                        <p class="body04">내용</p>
+                                        <div id="detail_input_container">
+                                            <textarea id="detail_input" placeholder="내용을 입력해 주세요."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="writing_confirm_container">
+                                <button onClick="test()">
+                                    <p>등록하기</p>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -60,5 +110,6 @@
             </div>
         </div>
     </div>
+    <script src="./js/main.js"></script>
 </body>
 </html>
