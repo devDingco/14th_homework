@@ -4,9 +4,64 @@
     <title>슬랙 클론 코딩</title>
     <link rel="stylesheet" href="./index.css" />
     <script>
+      let 수강생모음 = [];
+
+      function 수강생확인() {
+        if (수강생모음.length === 0) {
+          document.getElementById("수강생보이는곳").style = "display: block";
+        } else if (수강생모음.length !== 0) {
+          document.getElementById("수강생보이는곳").style = "display: none";
+        }
+      }
+
+      function 수강생만들기() {
+        let 수강생 = 수강생모음[수강생모음.length - 1];
+        const 수강생목록 = `<div class="새로운수강생CSS"><img src="./assets/icons/fox.png" /><div class="수강생리스트보여주는곳">${수강생.이름}</div></div>`;
+
+        window.document.getElementById("수강생리스트보여주는곳").innerHTML =
+          수강생목록;
+      }
+
       function 가입하기() {
-        alert("회원가입을 축하합니다\n(가입일시: 2025-08-06)");
-        document.getElementById("수강생보이는곳").innerText = "";
+        const 오늘날짜 = new Date();
+        const 오늘년월일 =
+          오늘날짜.getFullYear() +
+          "-" +
+          (오늘날짜.getMonth() + 1) +
+          "-" +
+          오늘날짜.getDate();
+
+        alert(`회원가입을 축하합니다.\n(가입일시:${오늘년월일})`);
+
+        const 입력한이름 = document.getElementById("이름인풋").value;
+        const 입력한이메일 = document.getElementById("이메일인풋").value;
+        const 입력한전화번호 = document.getElementById("전화번호인풋").value;
+        const 입력한자기소개 = document.getElementById("자기소개인풋").value;
+        let 내가입력한성별 = "";
+
+        const 남자성별선택 = document.getElementById("male");
+        const 여자성별선택 = document.getElementById("female");
+
+        if (남자성별선택.checked) {
+          내가입력한성별 = "남성";
+        } else if (여자성별선택.checked) {
+          내가입력한성별 = "여성";
+        }
+
+        const 새로운수강생 = {
+          이름: 입력한이름,
+          이메일: 입력한이메일,
+          전화번호: 입력한전화번호,
+          자기소개: 입력한자기소개,
+          성별: 내가입력한성별,
+          가입일시: 오늘년월일,
+        };
+
+        수강생모음.push(새로운수강생);
+
+        수강생만들기();
+
+        수강생확인();
       }
 
       function 인증번호요청기능() {
@@ -157,22 +212,24 @@
                 style="width: 24px; height: 24px" />
             </div>
 
-            <div class="수강생리스트업">
-              <div></div>
+            <div id="수강생보이는곳" class="오육번째">
+              <div class="바디__메인__메뉴__오번째">
+                현재 가입한 멤버가 없어요.<br />회원가입 해보세요.
+              </div>
+              <div style="width: 368px; height: 8px"></div>
+              <div class="가입하기정렬">
+                <div class="바디__메인__메뉴__육번째">
+                  <img
+                    src="./assets/icons/person_add.svg"
+                    style="padding-right: 8px" />
+                  가입하기
+                </div>
+              </div>
             </div>
 
-            <div id="수강생보이는곳" class="바디__메인__메뉴__오번째">
-              현재 가입한 멤버가 없어요.<br />회원가입 해보세요.
-            </div>
-            <div style="width: 368px; height: 8px"></div>
-            <div class="바디__메인__메뉴__육번째">
-              <img
-                src="./assets/icons/person_add.svg"
-                style="padding-right: 8px" />
-              <div>가입하기</div>
-            </div>
+            <div id="수강생리스트보여주는곳"></div>
 
-            <div style="width: 368px; height: 16px"></div>
+            <div style="width: 368px; min-height: 16px"></div>
 
             <div class="바디__메인__메뉴__칠번째">
               <div class="바디__메인__메뉴__칠번째__왼쪽">
@@ -247,6 +304,7 @@
                   이메일
                 </div>
                 <input
+                  id="이메일인풋"
                   class="바디__메인__회원가입__입력폼__이메일__인풋"
                   type="text"
                   placeholder="네이버, 구글, 한메일, 카카오 계정만 입력" />
@@ -256,6 +314,7 @@
                   비밀번호
                 </div>
                 <input
+                  id="전화번호인풋"
                   class="바디__메인__회원가입__입력폼__비밀번호__인풋"
                   type="text"
                   placeholder="비밀번호를 입력해 주세요." />
@@ -297,6 +356,7 @@
                     자기소개
                   </div>
                   <input
+                    id="자기소개인풋"
                     class="바디__메인__회원가입__입력폼__자기소개__인풋"
                     type="text"
                     placeholder="자기소개를 입력해 주세요." />
@@ -305,8 +365,8 @@
               <div class="바디__메인__회원가입__입력폼__성별">
                 <div class="바디__메인__회원가입__입력폼__성별__라벨">성별</div>
                 <div class="바디__메인__회원가입__입력폼__성별__선택">
-                  <input type="radio" name="성별그룹" />남성
-                  <input type="radio" name="성별그룹" />여성
+                  <input type="radio" id="male" name="성별그룹" />남성
+                  <input type="radio" id="female" name="성별그룹" />여성
                 </div>
               </div>
             </div>
