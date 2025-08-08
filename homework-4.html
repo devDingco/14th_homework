@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>일기보관함_메인</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="main-title">일기보관함_메인</header>
+
+    <nav class="nav">
+      <a href="#" class="nav-link">일기보관함_최초</a>
+    </nav>
+
+    <div class="banner">
+      <span class="tag">민지의 다이어리</span>
+      <img src="your-image.jpg" alt="배너 이미지" class="banner-image" />
+    </div>
+
+    <div class="tab-menu">
+      <button class="tab active">일기보관함</button>
+      <button class="tab">사진보관함</button>
+    </div>
+
+    <main class="content">
+      <section class="diary-grid">
+        <!-- 반복 카드 -->
+        <div class="diary-card" style="background-color: #D9F1FF;">
+          <img src="emoji1.png" alt="이모지" class="emoji" />
+          <div class="info">
+            <span class="tag blue">소확행</span>
+            <span class="date">2024.08.06</span>
+          </div>
+          <p>타이틀 영역 입니다. 타이틀부분 노출 됩니다.</p>
+        </div>
+        <div class="diary-card" style="background-color: #FFF2BE;">
+          <img src="emoji2.png" alt="이모지" class="emoji" />
+          <div class="info">
+            <span class="tag orange">보통기분</span>
+            <span class="date">2024.08.12</span>
+          </div>
+          <p>타이틀 영역 입니다.</p>
+        </div>
+        <div class="diary-card" style="background-color: #F4F4F4;">
+          <img src="emoji3.png" alt="이모지" class="emoji" />
+          <div class="info">
+            <span class="tag gray">보통</span>
+            <span class="date">2024.08.13</span>
+          </div>
+          <p>타이틀 영역 입니다. 타이틀부분 노출 됩니다.</p>
+        </div>
+        <div class="diary-card" style="background-color: #FFE7EC;">
+          <img src="emoji4.png" alt="이모지" class="emoji" />
+          <div class="info">
+            <span class="tag red">감정기록</span>
+            <span class="date">2024.08.12</span>
+          </div>
+          <p>타이틀 영역 입니다.</p>
+        </div>
+        <div class="diary-card" style="background-color: #F1EDFF;">
+          <img src="emoji5.png" alt="이모지" class="emoji" />
+          <div class="info">
+            <span class="tag purple">기록</span>
+            <span class="date">2024.08.13</span>
+          </div>
+          <p>타이틀 영역 입니다. 타이틀부분 노출 됩니다.</p>
+        </div>
+        <div class="diary-card" style="background-color: #FFE7EC;">
+          <img src="emoji6.png" alt="이모지" class="emoji" />
+          <div class="info">
+            <span class="tag red">보통기분</span>
+            <span class="date">2024.08.12</span>
+          </div>
+          <p>타이틀 영역 입니다.</p>
+        </div>
+      </section>
+
+      <aside class="diary-form">
+        <h3>📌 일기 쓰기</h3>
+        <p>오늘 기분은 어떠신가요?</p>
+        <div class="mood-options">
+          <label><input type="radio" name="mood" /> 행복했어요</label>
+          <label><input type="radio" name="mood" /> 슬펐어요</label>
+          <label><input type="radio" name="mood" /> 놀랐어요</label>
+        </div>
+        <div class="feeling-options">
+          <label><input type="radio" name="feeling" /> 화났음</label>
+          <label><input type="radio" name="feeling" /> 기뻤음</label>
+        </div>
+        <input type="text" placeholder="제목을 입력해주세요." />
+        <textarea placeholder="내용을 입력해주세요."></textarea>
+        <button>등록하기</button>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <p>민지의 다이어리</p>
+      <p class="copyright">Copyright ⓒ 2024. {name} Co., Ltd.</p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코드캠프 가입</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #8A2BE2; /* 보라색 배경 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background-color: #8A2BE2; /* 상단 보라색 바 */
+        }
+        .profile-image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-image img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid #8A2BE2;
+            object-fit: cover;
+        }
+        h1 {
+            color: #8A2BE2;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        h2 {
+            color: #555;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group .sub-text {
+            font-size: 0.9em;
+            color: #777;
+            margin-left: 15px;
+            margin-top: 3px;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 25px 0;
+        }
+        .auth-box {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .auth-btn {
+            background-color: #8A2BE2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .gender-options {
+            margin: 15px 0;
+        }
+        .gender-options label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        .submit-btn {
+            background-color: #8A2BE2;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .checkbox-group {
+            margin: 20px 0;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-image">
+            <!-- 흰색 패딩 입은 여성 사진 -->
+            <img src="https://i.imgur.com/JqYeERn.jpg" alt="흰색 패딩 입은 여성">
+        </div>
+
+        <h1>코드캠프에 가입하고</h1>
+        <h2>개발자로 커리어 점프 하세요.</h2>
+
+        <div class="form-group">
+            <label>이름</label>
+            <div class="sub-text">이름을 입력해 주세요.</div>
+        </div>
+
+        <div class="form-group">
+            <label>이메일</label>
+            <div class="sub-text">네이버, 구글, 한메일, 카카오 계정만 입력.</div>
+        </div>
+
+        <div class="form-group">
+            <label>비밀번호</label>
+            <div class="sub-text">비밀번호를 입력해 주세요.</div>
+        </div>
+
+        <div class="form-group">
+            <label>전화번호</label>
+            <div class="sub-text">010으로 시작, '-'를 꼭 입력해 주세요.</div>
+        </div>
+
+        <hr>
+
+        <div class="auth-box">
+            <h3>인증번호 요청</h3>
+            <button class="auth-btn">인증하기</button>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+            <label>자기소개</label>
+            <div class="sub-text">자기소개를 입력해 주세요.</div>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+            <label>성별</label>
+            <div class="gender-options">
+                <label><input type="radio" name="gender"> 남성</label>
+                <label><input type="radio" name="gender"> 여성</label>
+            </div>
+        </div>
+
+        <div class="checkbox-group">
+            <label>
+                <input type="checkbox">
+                집에는 씻으려만 가는데 동의합니다.
+            </label>
+        </div>
+
+        <button class="submit-btn">가입</button>
+    </div>
+</body>
+</html>
