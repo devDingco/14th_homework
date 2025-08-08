@@ -1,0 +1,337 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.가장큰배경 {
+  width: 1920px;
+  height: 1208px;
+  background-image: url("./assets/images/bg1.png");
+}
+
+.헤더 {
+  /* flex 디폴트 값은 row 세로로 하고 싶으면 flex-direction 사용 */
+  display: flex;
+  width: 1920px;
+  height: 80px;
+}
+
+.헤더__왼쪽영역 {
+  width: 480px;
+  height: 80px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  padding-right: 16px;
+}
+
+.헤더__오른쪽영역 {
+  width: 1440px;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 80px;
+}
+
+.헤더__오른쪽영역__프로필설정 {
+  width: 163px;
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.바디 {
+  display: flex;
+  width: 1920px;
+  height: 1048px;
+}
+
+.바디__사이드바왼쪽 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 80px;
+  height: 1048px;
+  padding: 20px 20px 0px 20px;
+}
+
+#logo {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 24px;
+}
+
+.아이콘_모음집 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.아이콘모음 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.아이콘소개 {
+  font-size: 14px;
+  color:#E4E4E4;
+  text-align: center;
+}
+
+.왼쪽하단 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.바디__메인 {
+  display: flex;
+  width: 1760px;
+  height: 1048px;
+  background-image: url("./assets/images/bg2.png");
+}
+
+.바디__메인__메뉴 {
+  width: 400px;
+  height: 1048px;
+  padding: 20px;
+}
+
+.메뉴__위쪽 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 24px;
+}
+
+.메뉴__코드캠프상단바 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.코드캠프글자 {
+  color: #FFF;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.아이콘두개 {
+  display: flex;
+  gap: 8px;
+}
+
+.상단바라인 {
+  width: 360px;
+  height: 1px;
+  background-color: #955C98;
+  margin-bottom: 24px;
+}
+
+.메뉴__아래쪽 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 16px;
+}
+
+.코드캠프13기바 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.바왼쪽 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.바왼쪽글자 {
+  color: #FFF;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.수강생리스트바 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.리스트바왼쪽 {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.수강생리스트글자 {
+  color: #FFF;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.바디__메인__회원가입 {
+  display: flex;
+  flex-direction: column;
+  width: 680px;
+  height: 1048px;
+  padding: 60px;
+}
+.회원가입__타이틀 {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 56px;
+  text-align: center;
+  width: 560px;
+  height: 112px;
+  color: #491449;
+  margin-bottom: 40px;
+}
+.회원가입__입력 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 560px;
+  gap: 20px;
+  padding: 0px, 56px;
+  /* background-color: aqua; */
+}
+.회원가입__입력__틀 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.회원가입__입력__글자 {
+  font-size: 20px;
+  font-weight: 500;
+}
+.회원가입__입력__박스 {
+  width: 320px;
+  height: 44px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-300, #C7C7C7);
+  background: var(--gray-W, #FFF);
+}
+.회원가입__입력__인증번호 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  width: 100%;
+}
+.인증번호요청구역 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#인증번호보여주는곳 {
+  color: #955C98;
+  font-size: 18px;
+}
+
+#인증번호요청버튼 {
+  display: flex;
+  width: 136px;
+  min-width: 120px;
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  color:#FFF;
+  font-size: 19px;
+  color: #491449;
+  border: 1px solid #491449;
+  background-color: #ffffff;
+  border: none;
+}
+
+.인증하기구역 {
+   display: flex;
+   gap: 10px;
+   align-items: center;
+}
+
+#타이머 {
+   color: #955C98;
+   font-size: 18px;
+}
+
+#인증하기버튼 {
+  display: flex;
+  width: 136px;
+  min-width: 120px;
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  color:#FFF;
+  font-size: 19px;
+  border: none;
+  background: #491449;
+}
+.회원가입__입력__자기소개틀 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.회원가입__입력__자기소개박스 {
+  width: 320px;
+  height: 116px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-300, #C7C7C7);
+  background: var(--gray-W, #FFF);
+}
+.회원가입__입력__성별 {
+  display: flex;
+  justify-content: flex-start;
+  width: 320px;
+  gap: 5px;
+}
+.가입버튼 {
+  display: flex;
+  min-width: 120px;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 8px;
+  color:#FFF;
+  font-size: 20px;
+  background-color: #491449;
+}
+.바디__메인__사진 {
+  width: 680px;
+  height: 1048px;
+  background-image: url("./assets/images/picture.png");
+}
+
+/* 비어있는 공간이지만 바이브 코딩에선 필요해서 div 처리 */
+.바디__사이드바오른쪽 {
+  width: 80px;
+  height: 1048px;
+}
+
+.푸터 {
+  width: 1920px;
+  height: 80px;
+}

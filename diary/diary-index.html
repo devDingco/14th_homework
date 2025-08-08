@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>나의 감정일기장</title>
+    <link rel="stylesheet" href="./diary-index.css" />
+    <script src="./diary-index.js"></script>
+</head>
+<body>
+    <div class="바탕">
+        <div class="헤더">
+            <div class="헤더__이름">유진이의 다이어리</div>
+        </div>
+
+        <div class="배너"></div>
+
+        <div class="메뉴">
+            <div class="선택메뉴">
+                <div class="선택메뉴이름">일기보관함</div>
+            </div>
+            <div class="미선택메뉴">
+                <div class="미선택메뉴이름">사진보관함</div>
+            </div>
+        </div>
+
+        <div class="내용">
+
+            <div class="일기보관함">
+
+                <div class="일기틀">
+                    <div id="감정이미지"></div>
+                    <div class="일기속성">
+                        <div class="일기속성1">
+                            <div id="감정">슬퍼요</div>
+                            <div id="날짜표시">2025. 8. 7.</div>
+                        </div>
+                        <div class="일기속성2">
+                            <div id="타이틀">
+                                타이틀 영역입니다. 한줄까지만 노출 됩니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="일기쓰기구역">
+                <div class="일기쓰기__타이틀">📍 일기 쓰기</div>
+                <div class="기분체크구역">
+                    <div class="기분체크질문">오늘 기분은 어땠나요?</div>
+                    <div class="기분체크목록">
+                        <div class="기분체크틀">
+                            <input type="radio" name="feel" value="행복해요"/>
+                            <div class="기분">행복해요</div>
+                        </div>
+                        <div class="기분체크틀">
+                            <input type="radio" name="feel" value="슬퍼요"/>
+                            <div class="기분">슬퍼요</div>
+                        </div>
+                        <div class="기분체크틀">
+                            <input type="radio" name="feel" value="놀랐어요"/>
+                            <div class="기분">놀랐어요</div>
+                        </div>
+                        <div class="기분체크틀">
+                            <input type="radio" name="feel" value="화나요"/>
+                            <div class="기분">화나요</div>
+                        </div>
+                        <div class="기분체크틀">
+                            <input type="radio" name="feel" value="기타"/>
+                            <div class="기분">기타</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="입력틀">
+                    <div class="소제목">제목</div>
+                    <textarea id="제목__내용입력" placeholder="제목을 입력해 주세요."></textarea>
+                </div>
+                <div class="입력틀">
+                    <div class="소제목">내용</div>
+                    <textarea id="내용__내용입력" placeholder="제목을 입력해 주세요."></textarea>
+                </div>
+                <button id="등록하기버튼" onclick="WriteNewDiary()">등록하기</button>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
