@@ -13,40 +13,40 @@ form.addEventListener('submit', (e) => {
   const _contents = e.target.contents.value.trim()
 
   if (isValid()) {
+
+    //TODO: 직관적으로 diaryId 받아오게 수정
+    diaryId = diaryId ?? (diaryList.length > 0 ? diaryList[diaryList.length - 1].id + 1 : 0)
     const newDiary = {
-      id: diaryList.length > 0 ? diaryList[diaryList.length - 1].id + 1 : 0,
+      id: +diaryId,
       mood: isHappy + isSad + isSurprise + isAngry + isEtc,
       title: _title,
       contents: _contents,
       date: getCurrentDate()
     }
 
-    //양식 맞춰서 푸쉬해야함...
-    diaryList.push(newDiary)
-    addCardOnGallery(formattedDiary(newDiary))
+    diaryList[diaryId] = newDiary
+    storeDiaryList(diaryList)
     alert("일기가 제출되었습니다.")
-    console.log(diaryList)
+    location.replace('./index.html')
   }
 })
 
-//TODO: window가 로드시, 감정 일기장 리스트 출력
-window.onload = function () {
-  addCardsOnGallery(diaryList)
-}
-
 // 전체 카드 화면 출력하는 함수(반복문)
+// FIX: 일기 핉터될 때 구조 생각하기 : diaryList가 필터링된 걸 넣어야 함..
 const addCardsOnGallery = (diaryList) => {
   diaryList.map(formattedDiary).forEach(addCardOnGallery)
 }
 
 // 카드 1개 추가 함수
 // TODO: innerHTML -> addElements로 변환
+// TODO(CSS): flex-wrap이 된 후, 공간에 의해 카드 정렬이 이상함
 const addCardOnGallery = (obj) => {
   const { id, mood, date, title, image, color } = obj
 
   const container = document.querySelector(".main__gallery")
   container.innerHTML += `
-    <div id=${id} class="main__gallery__card">
+  <a href="./detail.html?diaryId=${id}">
+    <div id=${id} class="main__gallery__card" onclick="onClick(${id})">
       <img src="${image}" />
       <div class="main__gallery__card__info">
         <div class="main__gallery__card__info__sub">
@@ -56,16 +56,11 @@ const addCardOnGallery = (obj) => {
         <p class="title01">${title}</p>
       </div>
     </div>
+  </a>
   `
 }
 
-// FIX: 해당 컴포넌트를 클릭했을때 다른 클래스이름이 잡히는 경우가 존재
 // FIX: alert에 출력되는 양식만들어서 제출
-// 선택한 id(class가 body__main__menu__list__student일때만)를 가져오는 함수
-const onClick = (e) => {
-  if (e.target.classList[0] === "main__gallery__card") {
-    const clickedId = e.target.id
-    alert(JSON.stringify(formattedDiary(getDiary(clickedId)[0])))
-  }
+const onClick = (id) => {
+  alert(`${JSON.stringify(formattedDiary(getDiaryById(id)[0]))}`)
 }
-document.addEventListener("click", onClick)
