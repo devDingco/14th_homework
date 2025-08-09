@@ -6,15 +6,32 @@ body{
   align-items: center;
   flex-direction: column;
 }
+a:link{
+  text-decoration: none;
+  color: var(--color-black)
+}
+a:visited,a:active{
+  color: var(--color-black)
+}
 button{
   outline: none;
   border: none;
   background-color: var(--color-black);
   color: var(--color-gray-50);
+  cursor: pointer;
 }
 button:disabled{
   background-color: var(--color-gray-300);
   color: var(--color-gray-50);
+}
+.dark-button{
+  background-color: var(--color-black);
+  color: var(--color-gray-50);
+}
+.light-button{
+  border: solid 1px var(--color-black);
+  background-color: var(--color-white);
+  color: var(--color-black);
 }
 .active{
   border-bottom: solid 2px var(--color-black);
@@ -44,7 +61,7 @@ button:disabled{
   align-items: center;
   gap: 16px;
   height: 48px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 .navigator span{
   width: 119px;
@@ -52,6 +69,18 @@ button:disabled{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.filter{
+  height: 32px;
+  margin-bottom: 42px;
+}
+.filter .dropdown{
+  min-width: 120px;
+  height: 100%;
+  border-radius: 8px;
+  -moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
 }
 .main{
   width: 100%;
