@@ -139,3 +139,7 @@
   font-size: 18px;
   margin-top: 24px;
 }
+
+.main-diary-active button:last-child:active{
+  transform: rotatez(45deg);
+}
