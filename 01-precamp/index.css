@@ -1,0 +1,301 @@
+       * {
+           box-sizing: border-box;
+           margin: 0px;
+           padding: 0px;
+           /* 마진은 알겠는데 패딩은 왜? */
+           /* 언더바랑 그냥 바랑 뭔차이  */
+           /* __이거는 무슨뜻 */
+    
+           
+       }
+
+       .가장큰배경 {
+           width: 1920px;
+           height: 1208px;
+           background-image: url(./assets/images/bg1.png);
+       }
+
+       .헤더 {
+           width: 1920px;
+           height: 80px;
+           display: flex;
+       }
+
+       .헤더__왼쪽 {
+           width: 480px;
+           height: 80px;
+           display: flex;
+           justify-content: flex-end;
+           align-items: center;
+           gap: 16px;
+           padding-right: 16px;
+       }
+
+       .헤더__오른쪽 {
+           width: 1440px;
+           height: 80px;
+           display: flex;
+           font-display: row;
+           justify-content: space-between;
+           align-items: center;
+           padding-right: 80px;
+       }
+       .헤더__오른쪽__프로필설정{
+        width: 163px;
+        height: 48px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+       }
+
+       .바디 {
+           width: 1920px;
+           height: 1048px;
+           display: flex;
+       }
+
+       .바디__사이드바왼쪽 {
+           width: 80px;
+           height: 1048px;
+
+       }
+
+       .바디__메인 {
+           width: 1760px;
+           height: 1048px;
+           background-image: url("./assets/images/bg2.png");
+           display: flex;
+       }
+
+       .바디__메인__메뉴 {
+           width: 400px;
+           height: 1048px;
+           padding: 20px;
+           
+       }
+       .바디__메인__메뉴__머리{
+        display: flex;
+        justify-content: space-between;
+        width: 360px;
+        height: 32px;
+        padding-top: 4px;
+        padding-bottom: 4px; 
+        color: white;
+        margin-bottom: 24px;
+       }
+       
+       .바디__메인__메뉴__서약서{
+        display: flex;
+        justify-content: center;
+        width: 360px;
+        height: 40px;
+        margin-bottom: 24px;
+       }
+       
+       .바디__메인__메뉴__코드캠프13기{
+        display: flex;
+        justify-content: space-between;
+        width: 360px;
+        height: 40px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin-bottom: 16px;
+       }
+       .바디__메인__메뉴__코드캠프13기 > button {
+        width: 66px;
+        height: 32px;
+        padding: 4px 12px 4px 12px;
+        color: white;
+        background-color: rgb(140, 98, 140);
+       }
+       .바디__메인__메뉴__수강생{
+        display: flex;
+        justify-content: space-between;
+        width: 360px;
+        height: 40px;
+        margin-bottom: 12px;
+       }
+       .바디__메인__메뉴__수강생 > div{
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        color: white;
+       }
+       .바디__메인__메뉴__수강생리스트{
+        display: flex;
+        flex-direction: column;
+        width: 360px;
+        height: 104px;
+        color: rgb(214, 203, 203);
+        font-size: 14px;
+        margin-bottom: 16px;
+       }
+       .바디__메인__메뉴__수강생리스트 > p{
+        margin: 8px 106px 8px 106px;
+       }
+       .바디__메인__메뉴__수강생리스트__수강생모음{
+        display: flex;
+        margin-top: 8px;
+        border: 1px solid #000;
+        align-items: center;
+       }
+       .바디__메인__메뉴__수강생리스트__가입하기{
+        padding: 8px 106px 8px 106px;
+       }
+       .바디__메인__메뉴__채널{
+        display: flex;
+        justify-content: space-between;
+        width: 360px;
+        height: 40px;
+        padding: 4px 0px;
+        margin-bottom: 12px;
+        color: white;
+       }
+       .바디__메인__메뉴__채널 > div{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+       }
+       .바디__메인__메뉴__채널리스트{
+        display: flex;
+        flex-direction: column;
+        width: 360px;
+        height: 152px;
+        margin-bottom: 16px;
+       }
+       .바디__메인__메뉴__채널리스트 > div{
+        padding: 4px 0px;
+       }
+       .바디__메인__메뉴__차단멤버{
+        display: flex;
+        align-items: center;
+        width: 360px;
+        height: 32px;
+        padding: 4px 0px;
+        color: white;
+       }
+       .바디__메인__메뉴__차단멤버리스트{}
+    
+
+       .바디__메인__회원가입 {
+           width: 680px;
+           height: 1048px;
+           display: flex;
+           flex-direction: column;
+           padding-right: 60px;
+           padding-left: 60px;
+           padding-top: 40px;
+           font-size: 24px;
+           
+       }
+       .바디__메인__회원가입__제목 {
+        
+        text-align:center;
+        margin-bottom: 40px;
+        padding-right: 56px;
+        padding-left: 56px;
+        
+       }
+       .바디__메인__회원가입__제목 > h1 {
+        font-size: 40px;
+       }
+
+       .바디__메인__회원가입__폼{
+        display: flex;
+        flex-direction: column;
+        padding-right: 56px;
+        padding-left: 56px;
+       }
+       
+       
+       .바디__메인__회원가입__폼 >.항목{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        height: 44px;
+       }
+       .바디__메인__회원가입__폼 > .항목 > div{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 20px;
+       }
+        .항목 > :nth-child(2){
+        padding-right: 10px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        padding-left: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+        width: 320px;
+        
+      }
+      .바디__메인__회원가입__폼 :nth-child(6){
+        height: 116px;
+      }
+    .인증하는곳{
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        margin-bottom: 20px;
+    }
+    .인증하는곳 > div{
+        height: 40px;
+        
+    }
+    .인증하는곳 > div > button  {
+        width: 136px;
+        height: 40px;
+        border-radius: 8px;
+    }
+    .성별체크{
+        display: flex;
+        
+        justify-content: space-between;
+        align-items: center;
+        font-size: 20px;
+    }   
+    .성별체크 >div {
+        margin-bottom: 20px;
+    }
+    .성별체크 > :nth-child(2){
+        font-size: 18px;
+        
+        width: 320px;
+
+    }
+    .동의체크{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 50px;
+        padding-right: 50px;
+        align-items: center;
+    }
+    .동의체크 :nth-child(1){
+        font-size: 20px;
+    }
+    .동의체크 > button {
+        background-color: #C7C7C7;
+        height: 48px;
+        color: white;
+        width: 448px;
+    }
+       .바디__메인__사진 {
+           width: 680px;
+           height: 1048px;
+           background-image: url("./assets/images/picture.png");
+       }
+
+       .바디__사이드바오른쪽 {
+           width: 80px;
+           height: 1048px;
+
+       }
+
+       .푸터 {
+           width: 1920px;
+           height: 80px;
+
+       }
+      

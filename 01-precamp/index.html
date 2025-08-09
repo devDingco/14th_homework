@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>슬랙 클론 코딩</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./index.js"></script>
+</head>
+
+<body>
+    <div class="가장큰배경">
+        <div class="헤더">
+            <div class="헤더__왼쪽">
+                <img src="./assets/icons/arrow_left.png" width="32px" height="32px" />
+                <img src="./assets/icons/arrow_right.png" width="32px" height="32px" />
+                <img src="./assets/icons/time.png" width="32px" height="32px" />
+            </div>
+            <div class="헤더__오른쪽">
+                <img src="./assets/images/searchbar.png" width="920px" height="48px" />
+                <div class="헤더__오른쪽__프로필설정">
+                    <img src="./assets/icons/badge.png" width="111px" height="48px" />
+                    <img src="./assets/icons/help.png" width="32px" height="32px" />
+                </div>
+            </div>
+        </div>
+        <div class="바디">
+            <div class="바디__사이드바왼쪽"></div>
+            <div class="바디__메인">
+                <div class="바디__메인__메뉴">
+                    <div class="바디__메인__메뉴__머리">
+                        <h1>코드캠프</h1>
+                        <img src="./assets/icons/머리.png" alt="">
+                    </div>
+                    
+                    <div class="바디__메인__메뉴__서약서" >
+                        <img src="./assets/icons/서약서.png" alt="">
+                    </div>
+                    <div class="바디__메인__메뉴__코드캠프13기">
+                        <img src="./assets/icons/코드캠프13기.png" alt="">
+                        <button>
+                            수강중
+                        </button>
+                    </div>
+                    <div class="바디__메인__메뉴__수강생">
+                        <div>
+                            <img src="./assets/icons/수강생리스트.png" alt="">
+                            <span>수강생리스트</span>
+                        </div>
+                        <img src="./assets/icons/수강생리스트_아래.png" alt="">
+                    </div>
+                    <div class="바디__메인__메뉴__수강생리스트" id="수강생보여주는곳">
+                        <p>현재 가입한 멤버가 없어요</p>
+                        <!-- <div class="바디__메인__메뉴__수강생리스트__수강생모음" onclick="수강생정보보여주기">
+                            <img src="./assets/icons/프로필이미지.png" alt="">
+                            <div class="바디__메인__메뉴__수강생리스트__수강생모음__수강생이름">${수강생.이름}</div> -->
+                        <!-- </div> -->
+                        
+                        <p>회원가입 해보세요.</p>
+                        <div class="바디__메인__메뉴__수강생리스트__가입하기">
+                            <img src="./assets/icons/가입하기 버튼.png" alt="">
+                        </div>
+                    </div>
+                    <div class="바디__메인__메뉴__채널">
+                        <div>
+                            <img src="./assets/icons/채널.png" alt="">
+                            <span>채널</span>
+                        </div>
+                        <img src="./assets/icons/수강생리스트_아래.png" alt="">
+                    </div>
+                    <div class="바디__메인__메뉴__채널리스트">
+                        <div>
+                            <img src="./assets/icons/채널리스트1.png" alt="">
+                        </div>
+                        <div>
+                            <img src="./assets/icons/채널리스트2.png" alt="">
+                        </div>
+                        <div>
+                            <img src="./assets/icons/채널리스트3.png" alt="">
+                        </div>
+                        <div>
+                            <img src="./assets/icons/채널리스트4.png" alt="">
+                        </div>
+                    </div>
+                    <div class="바디__메인__메뉴__차단멤버">
+                        <img src="./assets/icons/차단멤버.png" alt="">
+                        <span>차단 멤버 리스트</span>
+                    </div>
+                    <div class="바디__메인__메뉴__차단멤버리스트"></div>
+                </div>
+                <div class="바디__메인__회원가입">
+
+                    <div class="바디__메인__회원가입__제목">
+                        <h1>코드캠프에 가입하고</h1>
+                        <h1>개발자로 커리어 점프하세요</h1>
+                    </div>
+                    <div class="바디__메인__회원가입__폼">
+                        <div class="항목">
+                            <div>
+                                <span>이름</span>
+                            </div>
+                            <input type="text" placeholder="이름을 입력해주세요" id="이름입력창"/>
+                        </div>
+
+                        <div class="항목">
+                            <div>
+                                <span>이메일</span>
+                            </div>
+                            <input type="email" placeholder="네이버,구글.한메일,카카오 계정만입력" id="이메일입력창" />
+                        </div>
+                        <div class="항목">
+                            <div>
+                                <span>비밀번호</span>
+                            </div>
+                            <input type="password" placeholder="비밀번호를 입력해주세요" id="비밀번호입력창" />
+                        </div>
+                        
+                        <div class="항목">
+                            <div>
+                                <span>전화번호</span>
+                            </div>
+                            <input type="tel" placeholder="010으로 시작, '-'를 꼭 입력해주세요" id="전화번호입력창"/>
+                        </div>
+                        <div class="인증하는곳">
+                            <div>
+                                <span id="인증번호요청">000000</span>
+                                <button onclick="인증번호요청기능()"><img src="./assets/images/인증번호요청.png" alt=""></button>
+                            </div>
+                            <div>
+                                <span id="남은시간보여주는곳">03:00</span>
+                                <button onclick="인증완료기능()" id="인증하기버튼"><img src="./assets/images/인증전.png" alt=""></button>
+                            </div>
+
+                        </div>
+                        <div class="항목">
+                            <div>
+                                <span>자기소개</span> 
+                            </div>
+                            <textarea name="" id="자기소개입력창" placeholder="자기소개를 입력해주세요" ></textarea>
+                        </div>
+                        <div class="성별체크">
+                            <div>
+                                <span>성별</span>
+                            </div>
+                            <div>
+                                <input type="radio" name="성별" value="남성">남성
+                                <input type="radio" name="성별" value="여성">여성
+                            </div>
+                        </div>
+                        <div class="동의체크">
+                            <div>
+                                <input type="checkbox" name="동의체크">
+                                <span>집에는 씻으러만 가는데 동의합니다</span>
+                            </div>
+                            <button onclick="회원가입기능()">가입</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="바디__메인__사진"> 
+                </div>
+            </div>
+            <div class="바디__사이드바오른쪽"></div>
+        </div>
+        <div class="푸터">
+        </div>
+
+    </div>
+</body>
+
+</html>
