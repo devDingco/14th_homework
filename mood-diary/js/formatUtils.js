@@ -3,6 +3,10 @@ const getMoodImage = (mood) => {
   return MOOD_IMAGES[mood]
 }
 
+const getMoodIcon = (mood) => {
+  return MOOD_ICONS[mood]
+}
+
 const getMoodLabel = (mood) => {
   return MOOD_KOR[mood]
 }
@@ -30,12 +34,14 @@ const formattedDiary = (obj) => {
     mood: getMoodLabel(mood),
     title: title,
     contents: contents,
+    icon: getMoodIcon(mood),
     image: getMoodImage(mood),
     color: getMoodFontColor(mood),
     date: date
   }
 }
 
-const getDiary = (id) => {
-  return diaryList.filter((diary)=>diary.id === +id)
-}
+// FIX: 미완성
+// const getDiaryListByMood = (mood) => {
+//   return mood==="전체" ?? diaryList.filter((diary)=>diary.mood === mood)
+// }

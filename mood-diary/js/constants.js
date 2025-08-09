@@ -7,6 +7,14 @@ const MOOD_IMAGES = {
   etc: "./assets/images/etc.png",
 }
 
+const MOOD_ICONS = {
+  happy: "./assets/icons/happy.png",
+  sad: "./assets/icons/sad.png",
+  surprise: "./assets/icons/surprise.png",
+  angry: "./assets/icons/angry.png",
+  etc: "./assets/icons/etc.png",
+}
+
 const MOOD_KOR = {
   happy: "행복해요",
   sad: "슬퍼요",
@@ -23,48 +31,5 @@ const MOOD_FONT_COLOR = {
   etc: '#A229ED'
 };
 
-
-let diaryList = [
-  {
-    id: 0,
-    mood: "sad",
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-    contents: "내용내용내용"
-  },
-  {
-    id: 1,
-    mood: "surprise",
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-    contents: "내용내용내용"
-  },
-  {
-    id: 2,
-    mood: "angry",
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-    contents: "내용내용내용"
-  },
-  {
-    id: 3,
-    mood: "happy",
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-    contents: "내용내용내용"
-  },
-  {
-    id: 4,
-    mood: "etc",
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-    contents: "내용내용내용"
-  },
-  {
-    id: 5,
-    mood: "happy",
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-    contents: "내용내용내용"
-  },
-]
+//로컬스토리지 관리 키
+const DIARY_KEY = "my_diary"
