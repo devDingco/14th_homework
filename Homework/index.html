@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+    <title>slack clone coding</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./auth.js"></script>
+    <script src="./phone.js"></script>¬
+</head>
+    
+<body>
+    <div class="bg1">
+        <div class="header">
+            <div class="header__left">
+                <img src="./assets/icons/arrow_left.png" width="32px" height="32px" />
+                <img src="./assets/icons/arrow_right.png" width="32px" height="32px" />
+                <img src="./assets/icons/time.png" width="32" height="32px" />
+            </div>        
+            <div class="header__right">
+                <img src="./assets/icons/searchbar.png" width="920px" height="48px"  />
+                <div class="header__right__profile">
+                    <img src="./assets/icons/badge.png"  />
+                    <img src="./assets/icons/help.png" width="32px" height="32px"/>
+                </div>    
+            </div>
+        </div>
+        
+        <div class="body">
+            <div class="body__side_bar">
+                
+                <div class="body__side_bar__channel"><img src="./assets/icons/channel_img.png"  /> </div>
+                <div><img src="./assets/icons/home.png"  /> <br /> <span class="white_text_14px">홈</span> </div>
+                <div><img src="./assets/icons/talk.png"  /> <br /> <span class="white_text_14px">대화 </span></div>
+                <div><img src="./assets/icons/notifications.png"  /> <br /> <span class="white_text_14px">알림 </span></div> 
+                <div><img src="./assets/icons/bookmark.png"  /> <br /> <span class="white_text_14px">북마크</span> </div>
+                <div><img src="./assets/icons/more_meatball.png"  /> <br /> <span class="white_text_14px">더보기</span> </div>
+                    <div class="body__sidebar__left__bottom"> <br />
+                        <img src="./assets/icons/add_profile.png"  /> <br />
+                        <img src="./assets/icons/17.png"  />
+                    </div>            
+            </div>              
+
+            <div class="body__main">
+                <div class="body__main__menu">
+                        
+                        <div class="body__main__menu__header">
+                            <div class="body__main__header__camp">
+                                코드캠프
+                            </div>
+                            <div class="body__main__header__side">
+                                <img src="./assets/icons/filter.png" />
+                                <img src="./assets/icons/edit.png" />
+                            </div>
+
+
+                        </div>
+
+                        <div class="body__main__detailoath"> <img src="./assets/icons/서약서 자세히 보기 버튼.png">
+                        </div>
+                        <!-- 선긋기 -->
+                    <div class="body__main__line"><hr ></div>
+                    
+                    <div class="body__main__menu__list">
+                            <div class="body__main__list__gen"> 
+                                <div class="body__main__list__gen__left">
+                                    <div class="기수이미지">
+                                    <img src="./assets/icons/logo_codecamp_white.png" />
+                                    </div>
+                                    <span class="white_text_22px">코드캠프 13기</span>
+                                </div>    
+
+                                <div class="body__main__list__gen__right"><span class="white_text_16px">수강중</span></div>
+                            </div>  
+
+                            <div class="수강생-리스트-본체">
+                                <div class="수강생-리스트">
+                                    <div class="수강생-리스트-좌">
+                                    <img class="수강생아이콘" src="./assets/icons/수강생 리스트.svg"/><span class="white_text_22px">수강생 리스트</span></div>
+                                    <div class="수강생-리스트-우"><img src="./assets/icons/arrow_down.png" /> </div>
+                                </div>
+                                <div class="가입멤버없음">
+                                <div class="가입멤버없음-글씨">현재 가입한 멤버가 없어요. <br /> 회원가입 해보세요.</div></div>
+                                <div class="가입하기버튼"><img src="assets/icons/가입하기 버튼.png" /></div>
+                            </div>  
+
+                        <div class="채널-본체">
+                            <div class="채널-본체-정렬">
+                                <div class="채널-본체-정렬-좌">
+                                    <div><img src="./assets/icons/channel_list.png" /></div>
+                                    <span class="white_text_22px">채널</span>
+                                </div>
+                                
+                                <div class="채널-본체-정렬-우"><img src="./assets/icons/arrow_down.png" /> </div>
+                            </div>
+                            <div class="채널리스트통합"> 
+                                        <div class="채널-1"><img src="./assets/icons/tag.svg"/><span class="채널텍스트">채널 1</span></div>
+                                        
+                                        <div class="채널-2"><img src="./assets/icons/tag.svg"/><span class="채널텍스트">채널 2</span></div>
+                                        
+                                        <div class="채널-3"><img src="./assets/icons/tag.svg"/><span class="채널텍스트">채널 3</span></div>
+                                        
+                                        <div class="채널-4"><img src="./assets/icons/tag.svg"/><span class="채널텍스트">채널 4</span></div>
+                            </div>
+                        </div>
+                              
+                        <div class="차단멤버리스트"><img src="./assets/icons/skull.png" /><span class="차단멤버텍스트"> 차단 멤버 리스트</span></div>
+
+                    </div>
+                    
+                </div>
+
+                <div class="body__main__signup">
+                    <div class="회원가입타이틀">
+                    코드캠프에 가입하고<br />개발자로 커리어 점프 하세요.
+                    </div>
+                    <div class="입력창">    
+                        <div class="이름">이름<input class="입력창텍스트_18px" type="text" placeholder="이름을 입력해 주세요." /> </div>
+                        <div class="이메일">이메일<input class="입력창텍스트_18px" type="text" placeholder="이메일을 입력해주세요."/> </div>
+                        <div> 에러메세지 출력용 </div>
+                
+                        <div class="비밀번호">비밀번호 <input class="입력창텍스트_18px" type="password" placeholder="비밀번호를 입력해 주세요"/> </div>
+                        <div class="비밀번호확인">비밀번호 확인<input class="입력창텍스트_18px" type="password" placeholder="비밀번호를 한번 더 입력해 주세요."/></div>
+                        <div> 에러메세지 출력용 </div>
+                
+                        <div class="전화번호">전화번호 <input class="입력창텍스트_18px" id="입력전번" type="text" oninput="전화번호가리기()" placeholder="010으로 시작, '-'를 꼭 입력해 주세요."/></div>
+                        <div> 에러메세지 출력용 </div>    
+                        <div class="인증번호큰타래">
+                            <div class="인증번호묶음">    
+                                <div  id="인증번호보여주는곳" > 000000 <button id="버튼" onclick="인증번호요청기능()"> 인증번호 요청하기 </button></div>
+                            </div>
+                            <div class="인증번호묶음2">
+                                <div id="남은시간보여주는곳">3:00
+                                </div>     
+                                <button>인증 하기</button> 
+                            </div>                            
+                        </div>
+
+                        <div class="자기소개"><div class="자기소개글자">자기소개</div> <input class="자기소개텍스트_18px" type="text" placeholder="자기소개를 입력해주세요" /></div> 
+                        
+                        <div class="성별">성별
+                            <div class="라디오버튼관리">
+                        <input class="라디오패딩"  type="radio" name="gender" /> <span class="텍스트_18px"">남성 </span> 
+                        <input class="라디오패딩"  type="radio" name="gender" /> <span class="텍스트_18px">여성 </span>
+                            </div>
+                        </div>
+                        
+
+                            
+                        <div class="동의"><div class="동의체크박스"><input type="checkbox" /></div> 집에는 씻으러만 가는데 동의합니다.</div>
+                        <img class="가입" src="./assets/icons/button_primary.png">    
+                    </div>
+                </div>
+                <div class="body__main__picture">
+
+                </div>
+
+            </div>
+            
+            <div class="body__side_bar__right">
+                
+            </div>
+             
+        
+        
+        </div>
+        
+        <div class="footer">
+
+        </div>
+        
+    </div>
+</body>
+</html>
+
