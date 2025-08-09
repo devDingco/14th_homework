@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/root.css">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/detail.css">
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title01 header">지호의 다이어리</h1>
+ 
+    <div class="detail-main">
+      <h2 class="detail-main-title" id="detailTitle">{이것은 타이틀입니다.}</h2>
+
+      <div class="detail-main-contents">
+        <div class="detail-main-property">
+          <div>
+            <img id="detailIcon" src="./assets/icons/happy.png"/>
+            <span id="detailMood">{행복해요}</span>
+          </div>
+          <p class="body02_s" id="detailDate">{2024. 07. 12} 작성</p>
+        </div>
+        <div class="detail-main-contents-container">
+          <p class="detail-main-contents-title">내용</p>
+          <p class="detail-main-contents-contents" id="detailContents">{많은 내용들}</p>
+        </div>
+        <button onclick="viewModifyContent()">수정</button>
+      </div>
+
+    </div>
+    <form id="detail-modify-form" class="main__diary-form" style="display: none;">
+      <div class="select-box">
+        <h3>오늘 기분은 어땟나요?</h3>
+        <div class="mood-select-box">
+          <label for="happy"><input id="happy" name="mood" type="radio">행복해요</label>
+          <label for="sad"><input id="sad" name="mood" type="radio">슬퍼요</label>
+          <label for="surprise"><input id="surprise" name="mood" type="radio">놀랐어요</label>
+          <label for="angry"><input id="angry" name="mood" type="radio">화나요</label>
+          <label for="etc"><input id="etc" name="mood" type="radio">기타</label>
+        </div>
+      </div>
+
+      <div class="main-diary-input-form">
+        <div class="main-diary-input">
+          <label for="title" class="body02_s">제목</label>
+          <input type="text" id="title"
+          placeholder="제목을 입력해 주세요."/>
+        </div>
+        <div class="main-diary-input">
+          <label for="contents" class="body02_s">내용</label>
+          <textarea name="" id="contents"
+          placeholder="내용을 입력해 주세요." style="height: 128px;"></textarea>
+        </div>
+      </div>
+      <div class="main-diary-active">
+        <button class="light-button" type="button" onclick="moveBack()">취소</button>
+        <button type="submit">수정 하기</button>
+      </div>
+    </form>
+  </div>
+  <script src="./js/script.js"></script>
+  <script src="./js/checkContents.js"></script>
+  <script src="./js/form.js"></script>
+  <script src="./js/formatUtils.js"></script>
+  <script src="./js/constants.js"></script>
+  <script src="./js/userDiary.js"></script>
+</body>
+</html>
