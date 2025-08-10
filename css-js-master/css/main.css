@@ -121,6 +121,8 @@
 }
 
 .diary_content {
+    display: flex;
+    flex-direction: column;
     width: 380px;
     height: 373px;
     min-width: 380px;
@@ -130,6 +132,16 @@
     opacity: 1;
     gap: 16px;
     padding-bottom: 16px;
+}
+
+.diary_content > img {
+    width: 380px;
+    height: 285px;
+    border-radius: 16px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    padding: 12px;    
 }
 
 #feeling_choice_container {

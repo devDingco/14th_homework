@@ -37,18 +37,13 @@
                             <a id="storage_tab_off">
                                 <p>사진보관함</p>
                             </a>
+                            <button onclick="deleteLocalStorage()">로컬스토리지 삭제 버튼</button>
                         </div>
                     </div>
                     <!-- frame 16 -->
                     <div id="diary_container" class="">
                         <!-- 일기보관함 -->
                         <div id="diary_box_container" class="">
-                            <div class="diary_content test_orange"></div>
-                            <div class="diary_content test_orange"></div>
-                            <div class="diary_content test_orange"></div>
-                            <div class="diary_content test_orange"></div>
-                            <div class="diary_content test_orange"></div>
-                            <div class="diary_content test_orange"></div>
                         </div>
                         <!-- 사진보관함 -->
                         <!-- <div></div> -->
@@ -57,23 +52,23 @@
                             <div id="writing_container">
                                 <div id="feeling_choice_container" class="">
                                     <p class="headline01">오늘 기분은 어땟나요?</p>
-                                    <div id="feeling_radio_container">
-                                        <div id="feeling_radio_content">
-                                            <input type="radio"/><p>행복해요</p>
-                                        </div>
-                                        <div id="feeling_radio_content">
-                                            <input type="radio"/><p>슬퍼요</p>
-                                        </div>
-                                        <div id="feeling_radio_content">
-                                            <input type="radio"/><p>놀랐어요</p>
-                                        </div>
-                                        <div id="feeling_radio_content">
-                                            <input type="radio"/><p>화나요</p>
-                                        </div>
-                                        <div id="feeling_radio_content">
-                                            <input type="radio"/><p>기타</p>
-                                        </div>
-                                    </div>
+                                    <form id="feeling_radio_container">
+                                        <label id="feeling_radio_content">
+                                            <input type="radio" name="feel" value="행복해요"/><p>행복해요</p>
+                                        </label>
+                                        <label id="feeling_radio_content">
+                                                <input type="radio" name="feel" value="슬퍼요"/><p>슬퍼요</p>
+                                        </label>
+                                        <label id="feeling_radio_content">
+                                                <input type="radio" name="feel" value="놀랐어요"/><p>놀랐어요</p>
+                                        </label>
+                                        <label id="feeling_radio_content">
+                                                <input type="radio" name="feel" value="화나요"/><p>화나요</p>
+                                        </label>
+                                        <label id="feeling_radio_content">
+                                                <input type="radio" name="feel" value="기타"/><p>기타</p>
+                                        </label>
+                                    </form>
                                 </div>
                                 <div id="writing_content_container" class="">
                                     <div id="writing_title_container" class="">
@@ -91,7 +86,7 @@
                                 </div>
                             </div>
                             <div id="writing_confirm_container">
-                                <button onClick="test()">
+                                <button type="button" id="resisterContent">
                                     <p>등록하기</p>
                                 </button>
                             </div>
@@ -111,5 +106,8 @@
         </div>
     </div>
     <script src="./js/main.js"></script>
+    <script src="./function/toLocalStorage.js"></script>
+    <script src="./function/deleteLocalstorage.js"></script>
+    <script src="./function/viewDiary.js"></script>
 </body>
 </html>
