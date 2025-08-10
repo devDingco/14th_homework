@@ -1,7 +1,7 @@
 #section_1{
     width: 2120px;
     height: 2369px;
-    background-color: aqua;
+    background-color: #D4d3d3;
     border-radius: 2px;
     border-width: 1px;
     angle: 0 deg;
@@ -44,9 +44,9 @@
 #일기보관함_최초{
     width: 1920px;
     height: 1805px;
-    background-color: bisque;
     angle: 0 deg;
     opacity: 1;
+    background-color: white;
     
 }
 
@@ -56,7 +56,8 @@
     angle: 0 deg;
     opacity: 1;
     gap: 40px;
-    background-color: brown;
+    display: flex;
+    flex-direction: column;
 }
 
 #frame_20{
@@ -65,9 +66,10 @@
     angle: 0 deg;
     opacity: 1;
     gap: 24px;
-    background-color: blueviolet;
     margin-bottom: 40px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 #header{
@@ -78,13 +80,20 @@
     padding-right: 20px;
     padding-left: 20px;
     gap: 10px;
-    background-color: tomato;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
 }
 
 #frame_2{
+    font-family: Pretendard Variable;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 16px;
+    letter-spacing: -1%;
+
     width: 1168px;
     height: 60px;
     min-width: 320px;
@@ -92,7 +101,7 @@
     angle: 0 deg;
     opacity: 1;
     gap: 10px;
-    background-color: bisque;
+    line-height: 60px;
 }
 
 #frame_19{
@@ -101,7 +110,8 @@
     angle: 0 deg;
     opacity: 1;
     gap: 24px;
-    background-color: gray;
+    display: flex;
+    flex-direction: column;
 }
 
 #frame_4{
@@ -112,7 +122,6 @@
     padding-right: 20px;
     padding-left: 20px;
     gap: 10px;
-    background-color: wheat;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -136,11 +145,11 @@
     angle: 0 deg;
     opacity: 1;
     gap: 42px;
-    background-color: olivedrab;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 30px;
 }
 
 #frame_17{
@@ -149,8 +158,9 @@
     angle: 0 deg;
     opacity: 1;
     gap: 32px;
-    background-color: red;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 #frame_7{
@@ -161,12 +171,57 @@
     padding-right: 20px;
     padding-left: 20px;
     gap: 10px;
-    background-color: orange;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     
 }
+
+#frame_14{
+    width: 1880px;
+    height: 32px;
+    angle: 0 deg;
+    opacity: 1;
+    padding-right: 20px;
+    padding-left: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#frame_13{
+    width: 1168px;
+    height: 32px;
+    min-width: 320px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;
+    
+}
+
+#frame_12{
+    width: 1168px;
+    height: 32px;
+    min-width: 320px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 16px;
+
+}
+
+#드롭다운새거{
+    width: 120px;
+    height: 32px;
+    min-width: 120px;
+    border-radius: 8px;
+    border-width: 1px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    padding: 4px;
+    
+}
+
 
 #frame_6{
     width: 1168px;
@@ -177,7 +232,6 @@
     opacity: 1;
     gap: 16px;
     box-sizing: border-box;
-    background-color: aquamarine;
 }
 
 #frame_9{
@@ -187,7 +241,6 @@
     angle: 0 deg;
     opacity: 1;
     gap: 16px;  
-    background-color: orchid;  
     display: flex;
     
 }
@@ -206,8 +259,14 @@
     border-bottom-width: 2px;
     box-sizing: border-box;
     text-align: center;
+    white-space : nowrap;
+    font-family: Pretendard Variable;
+    font-weight: 700;
+    font-style: Bold;
     font-size: 24px;
-    white-space : nowrap
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
 }
 
 #frame_16{
@@ -217,25 +276,269 @@
     angle: 0 deg;
     opacity: 1;
     gap: 24px;
-    background-color: green;
+    display: flex;
+    margin-top: 50px;
+}
+
+.frame_30{
+    width: 784px;
+    height: 373px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 24px;
+    display: flex;
+}
+
+.frame_25{
+    width: 380px;
+    height: 373px;
+ 
+    border-radius: 16px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 16px;
+    padding-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    transition: 
+                transform 0.5s,
+                box-shadow 0.5s,
+                filter 0.8s ease;
+}
+.frame_25:hover{
+    transform: scale(1.05);
+    box-shadow:10px 10px 20px #ddd;
+
+}
+
+.frame_25:hover .frame_47{
+    filter: blur(7px);
+}
+
+
+.frame_47{
+    width: 380px;
+    height: 285px;
+    border-radius: 16px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    padding: 12px;
+    box-sizing: border-box;
+
+    background-image: url("./assets/482545f2394c18eb9129e4d3f22f03a59519cfdc.png");
+    background-repeat: no-repeat;
+    background-size : contain;
+
+        transition: filter 0.5s ease;
+}
+
+.profile{
+    width: 380px;
+    height: 285px;
+    
+}
+
+
+.frame_26{
+    width: 380px;
+    height: 56px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;
+    padding-right: 8px;
+    padding-left: 8px;
+    box-sizing: border-box;
+}
+
+.frame_27{
+    width: 364px;
+    height: 24px;
+    justify-content: space-between;
+    angle: 0 deg;
+    opacity: 1;
+    display: flex;
+
+}
+
+.frame_24{
+    width: 364px;
+    height: 24px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+#frame_106{
+    width: 784px;
+    height: 1167px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#frame_98{
+    width: 360px;
+    height: 604px;
+    min-width: 360px;
+    max-width: 760px;
+    border-radius: 16px;
+    border: 1px solid #D4d3d3;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 40px;
+    padding: 24px;    
+    background-color: white;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+#기본_선택_영역{
+    width: 312px;
+    height: 108px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 16px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+
+#frame_61{
+    width: 312px;
+    height: 68px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 20px;  
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.radio{
+    border-radius: 8px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;
+    white-space : nowrap;
+}
+
+
+#텍스트_영역{
+    width: 312px;
+    height: 256px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 24px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+#frame_64{
+    width: 312px;
+    height: 76px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+
+#input_63{
+    width: 312px;
+    height: 48px;
+    border-radius: 8px;
+    border-width: 1px;
+    border: 1px solid #D4d3d3;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
     box-sizing: border-box;
     
 }
 
 
+#input_63_2{
+    width: 312px;
+    height: 128px;
+    border-radius: 8px;
+    border-width: 1px;
+    border: 1px solid #D4d3d3;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    box-sizing: border-box;
+    text-align: start;
+    resize: none;
+}
 
+#frame_65{
+    width: 312px;
+    height: 156px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
 
+#frame_66{
+    width: 312px;
+    height: 404px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 40px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
 
+#버튼영역{
+    width: 312px;
+    height: 48px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 16px;
+    box-sizing: border-box;
+    border: 1px solid #D4d3d3;
+    background-color: #C7C7C7;
+}
 
-
-
-
-
-
-
-
-
-
+#드롭다운{
+    width: 312px;
+    height: 48px;
+    border-radius: 8px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    padding-top: 8px;
+    padding-right: 10px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
 
 #footer{
     width: 1920px;
@@ -248,6 +551,37 @@
     padding-left: 20px;
     gap: 10px;
     border-top-width: 1px;
-    background-color: orange;
+    background-color: gray;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+#frame_107{
+    width: 1168px;
+    height: 112px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+#frame_110{
+    width: 1168px;
+    height: 16px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;
+    font-family: Pretendard Variable;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    leading-trim: NONE;
+    line-height: 16px;
+    letter-spacing: -1%;
+
 }
