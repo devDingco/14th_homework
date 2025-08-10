@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>일기보관함_필터 (이모지 포함)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background: #ececec; margin: 0; font-family: 'Noto Sans KR', sans-serif; display: flex; justify-content: center; padding: 16px; }
+    .page { width: 980px; background: white; padding: 24px; box-shadow: inset 0 0 0 4px rgba(0,0,0,0.05); border-radius: 6px; }
+    .header { background: #000; color: white; padding: 20px; font-size: 32px; border-radius: 8px; text-align: center; margin-bottom: 24px; }
+    .main { display: flex; gap: 24px; }
+    .left { flex: 1; }
+    .filter { margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+    .filter .label { background: #000; color: #fff; padding: 6px 10px; border-radius: 4px; font-size: 12px; }
+    .filter select { border: 1px dashed #f1a7a7; padding: 6px; border-radius: 4px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .card { border-radius: 12px; padding: 16px; display: flex; flex-direction: column; align-items: center; background: #f5f5f5; }
+    .card:nth-child(1) { background: #dff8ff; }
+    .card:nth-child(2) { background: #fff5d9; }
+    .card:nth-child(3) { background: #eee; }
+    .card:nth-child(4) { background: #ffecec; }
+    .card:nth-child(5) { background: #e9dcff; }
+    .card:nth-child(6) { background: #ffdfe8; }
+    .card img { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 12px; }
+    .card .title { font-size: 14px; font-weight: bold; }
+    .card .subtitle { font-size: 12px; color: #555; margin-top: 6px; text-align: center; }
+    .right { width: 260px; }
+    .form { border: 1px solid #ddd; border-radius: 8px; padding: 16px; background: #fff; }
+    .form h3 { margin-top: 0; }
+    .form label { display: block; margin-bottom: 4px; font-size: 13px; }
+    .form input[type="text"], .form textarea { width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; margin-bottom: 10px; }
+    .form textarea { height: 80px; resize: vertical; }
+    .form button { width: 100%; padding: 10px; background: #ccc; color: #fff; border: none; border-radius: 4px; cursor: not-allowed; }
+    .footer { font-size: 12px; color: #888; text-align: center; margin-top: 24px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">일기보관함_필터</div>
+    <div class="main">
+      <div class="left">
+        <div class="filter">
+          <div class="label">필터 드롭다운 리스트 추가</div>
+          <select><option>전체</option><option>행복해요</option><option>슬퍼요</option><option>놀랐어요</option><option>화나요</option><option>기타</option></select>
+        </div>
+        <div class="grid">
+          <div class="card"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/openmoji/292/woman-wearing-turban_1fa73.png" alt="woman wearing turban"><div class="title">슬퍼요</div><div class="subtitle">타이틀 영역 입니다. 한줄짜리만 노출 됩니다.</div></div>
+          <div class="card"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/openmoji/292/woman-wearing-turban_1fa73.png" alt="woman wearing turban"><div class="title">놀랐어요</div><div class="subtitle">타이틀 영역 입니다.</div></div>
+          <div class="card"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/openmoji/292/woman-wearing-turban_1fa73.png" alt="woman wearing turban"><div class="title">화나요</div><div class="subtitle">타이틀 영역 입니다. 한줄까지.</div></div>
+          <div class="card"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/openmoji/292/woman-wearing-turban_1fa73.png" alt="woman wearing turban"><div class="title">행복해요</div><div class="subtitle">타이틀 영역 입니다.</div></div>
+          <div class="card"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/openmoji/292/woman-wearing-turban_1fa73.png" alt="woman wearing turban"><div class="title">기타</div><div class="subtitle">타이틀 영역 입니다.</div></div>
+          <div class="card"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/openmoji/292/woman-wearing-turban_1fa73.png" alt="woman wearing turban"><div class="title">행복해요</div><div class="subtitle">타이틀 영역 입니다.</div></div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="form">
+          <h3>일기 쓰기</h3>
+          <label>오늘 기분은 어떠셨나요?</label>
+          <label><input type="radio" name="mood"> 행복해요</label>
+          <label><input type="radio" name="mood"> 슬퍼요</label>
+          <label><input type="radio" name="mood"> 놀랐어요</label>
+          <label><input type="radio" name="mood"> 화나요</label>
+          <label><input type="radio" name="mood"> 기타</label>
+          <input type="text" placeholder="제목을 입력해 주세요.">
+          <textarea placeholder="내용을 입력해 주세요."></textarea>
+          <button disabled>등록하기</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer">민지의 다이어리 — Copyright © 2024. (이름)</div>
+  </div>
+</body>
+</html>
