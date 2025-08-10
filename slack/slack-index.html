@@ -2,66 +2,72 @@
 <html lang="ko">
   <head>
     <title>슬랙 클론 코딩</title>
-    <link rel="stylesheet" href="../slack/slack-index.css" />
     <script src="../slack/slack-index.js"></script>
+    <link rel="stylesheet" href="../slack/slack-index.css" />
   </head>
   <body>
-    <div class="가장큰배경">
+    <div class="bg1">
+
       <div class="헤더">
         <div class="헤더__왼쪽영역">
-          <img src="./assets/icons/arrow_left.png" width="32px" height="32px" />
-          <img
-            src="./assets/icons/arrow_right.png"
-            width="32px"
-            height="32px" />
-          <img src="./assets/icons/time.png" width="32px" height="32px" />
+          <img src="./assets/icons/arrow_left.png" class="icon_1" />
+          <img src="./assets/icons/arrow_right.png" class="icon_1" />
+          <img src="./assets/icons/time.png" class="icon_1" />
         </div>
         <div class="헤더__오른쪽영역">
-          <img
-            src="./assets/images/searchbar.png"
-            width="920px"
-            height="48px" />
+          <img src="./assets/images/searchbar.png" width="920px" height="48px" />
           <div class="헤더__오른쪽영역__프로필설정">
             <img src="./assets/icons/badge.png" width="111px" height="48" />
-            <img src="./assets/icons/help.png" width="32px" height="32px" />
+            <img src="./assets/icons/help.png" class="icon_1" />
           </div>
         </div>
       </div>
+      <!-- 헤더 -->
+
       <div class="바디">
+
         <div class="바디__사이드바왼쪽">
-          <div>
-            <img id="logo" src="./assets/icons/logo.png" />
-          <div class="아이콘_모음집">
-            <div class="아이콘모음">
-              <img src="./assets/icons/home.png" width="40px" height="40px"/>
-              <div class="아이콘소개">홈</div>
-            </div>
-            <div class="아이콘모음">
-              <img src="./assets/icons/message.png" width="40px" height="40px"/>
-              <div class="아이콘소개">대화</div>
-            </div>
-            <div class="아이콘모음">
-              <img src="./assets/icons/bell.png" width="40px" height="40px"/>
-              <div class="아이콘소개">알림</div>
-            </div>
-            <div class="아이콘모음">
-              <img src="./assets/icons/bookmark.png" width="40px" height="40px"/>
-              <div class="아이콘소개">북마크</div>
-            </div>
-            <div class="아이콘모음">
-              <img src="./assets/icons/three_dots.png" width="40px" height="40px"/>
-              <div class="아이콘소개">더 보기</div>
+
+          <div class="왼쪽상단">
+            <img src="./assets/icons/logo.png" class="logo" />
+            <div class="아이콘_모음집">
+              <div class="아이콘모음">
+                <img src="./assets/icons/home.png" class="icon_2" />
+                <div class="아이콘소개">홈</div>
+              </div>
+              <div class="아이콘모음">
+                <img src="./assets/icons/message.png" class="icon_2" />
+                <div class="아이콘소개">대화</div>
+              </div>
+              <div class="아이콘모음">
+                <img src="./assets/icons/bell.png" class="icon_2" />
+                <div class="아이콘소개">알림</div>
+              </div>
+              <div class="아이콘모음">
+                <img src="./assets/icons/bookmark.png" class="icon_2" />
+                <div class="아이콘소개">북마크</div>
+              </div>
+              <div class="아이콘모음">
+                <img src="./assets/icons/three_dots.png" class="icon_2"/>
+                <div class="아이콘소개">더보기</div>
+              </div>
             </div>
           </div>
-          </div>
-          <div class="왼쪽하단">
-            <img src="./assets/icons/plus.png" width="40px" height="40px"/>
-            <img src="./assets/icons/fox.png" width="35px" height="35px"/>
-          </div>
+
+            <div class="왼쪽하단">
+              <img src="./assets/icons/plus.png" class="icon_2"/>
+              <img src="./assets/icons/fox.png" class="icon_1"/>
+            </div>
+
         </div>
+        <!-- 바디__사이드바왼쪽 -->
+
         <div class="바디__메인">
+
           <div class="바디__메인__메뉴">
+
             <div class="메뉴__위쪽">
+
               <div class="메뉴__코드캠프상단바">
                 <div class="코드캠프글자">코드캠프</div>
                 <div class="아이콘두개">
@@ -71,8 +77,12 @@
               </div>
               <img src="./assets/images/button2.png"/>
               <div class="상단바라인"></div>
+
             </div>
+            <!-- 메뉴__위쪽 -->
+
             <div class="메뉴__아래쪽">
+
               <div class="코드캠프13기바">
                 <div class="바왼쪽">
                   <img src="./assets/icons/logo2.png">
@@ -80,58 +90,117 @@
                 </div>
                 <img src="./assets/icons/badge2.png">
               </div>
-              <div class="수강생리스트바">
-                <div class="리스트바왼쪽">
-                  <img src="./assets/icons/people.png">
-                  <div class="수강생리스트글자">수강생 리스트</div>
+
+              <div class="수강생리스트구역">
+
+                <div class="수강생리스트바">
+                  <div class="수강생리스트__왼쪽">
+                    <img src="./assets/icons/people.png">
+                    <div class="리스트글자">수강생 리스트</div>
+                  </div>
+                  <img src="./assets/icons/arrow_down.png">
                 </div>
-                <img src="./assets/icons/arrow_down.png">
+  
+                <div class="empty__sign">
+                  <div class="empty__문구">현재 가입한 멤버가 없어요. <br />
+                    회원가입 해보세요
+                  </div>
+                  <img src="./assets/images/button_sign.png" class="가입하기__버튼" />
+                </div>
+
               </div>
+              <!-- 수강생리스트구역 -->
+
+              <div class="채널구역">
+
+                <div class="채널바">
+                  <div class="채널바__왼쪽">
+                    <img src="./assets/icons/channel_list.png">
+                    <div class="리스트글자">채널</div>
+                  </div>
+                  <img src="./assets/icons/arrow_down.png">
+                </div>
+
+                <div class="채널모음집">
+                  <div class="채널">
+                    <img src="./assets/images/channel_1.png" width="328px" height="24px"/>
+                  </div>
+                  <div class="채널">
+                    <img src="./assets/images/channel_2.png" width="328px" height="24px"/>
+                  </div>
+                  <div class="채널">
+                    <img src="./assets/images/channel_3.png" width="328px" height="24px"/>
+                  </div>
+                  <div class="채널">
+                    <img src="./assets/images/channel_4.png" width="328px" height="24px"/>
+                  </div>
+                </div>
+
+              </div>
+              <!-- 채널구역 -->
+
             </div>
+            <!-- 메뉴__아래쪽 -->
+          
           </div>
+          <!-- 바디__메인__메뉴 -->
+
           <div class="바디__메인__회원가입">
+
               <div class="회원가입__타이틀">
                코드캠프에 가입하고<br>
                개발자로 커리어 점프 하세요.
               </div>
 
               <div class="회원가입__입력">
+
                 <div class="회원가입__입력__틀">
                   <div class="회원가입__입력__글자">이름</div>
                   <input class="회원가입__입력__박스" type="text" placeholder="이름을 입력해 주세요.">
                 </div>
+
                 <div class="회원가입__입력__틀">
                   <div class="회원가입__입력__글자">이메일</div>
                   <input class="회원가입__입력__박스" type="text" placeholder="네이버, 구글, 한메일, 카카오 계정만 입력">
                 </div>
+
                 <div class="회원가입__입력__틀">
                   <div class="회원가입__입력__글자">비밀번호</div>
                   <input class="회원가입__입력__박스" type="password" placeholder="비밀번호를 입력해 주세요.">
                 </div>
+
                 <div class="회원가입__입력__틀">
                   <div class="회원가입__입력__글자">비밀번호 확인</div>
                   <input class="회원가입__입력__박스" type="password" placeholder="비밀번호를 한번 더 입력해 주세요.">
                 </div>
+
                 <div class="회원가입__입력__틀">
                   <div class="회원가입__입력__글자">전화번호</div>
                   <input class="회원가입__입력__박스" type="text" placeholder="010으로 시작, '-'를 꼭 입력해 주세요.">
                 </div>
+
                 <div class="회원가입__입력__인증번호">
+
                   <div class="인증번호요청구역">
                     <span id="인증번호보여주는곳">000000</span>
                     <button id="인증번호요청버튼" onclick="인증번호요청기능()">
                     인증번호 요청</button></div>
+
                   <div class="인증하기구역">
                     <div id="타이머">3:00 </div>
                     <button id="인증하기버튼" onclick="인증완료()">인증하기
                     </button>
                   </div>
+
                 </div>
+                <!-- 회원가입__입력__인증번호 -->
+
                 <div class="회원가입__입력__자기소개틀">
                  <div class="회원가입__입력__글자">자기소개</div>
                  <textarea class="회원가입__입력__자기소개박스" type="text"
                         placeholder="자기소개를 입력해 주세요."></textarea>
                 </div>
+
                 <div class="회원가입__입력__틀">
                   <div class="회원가입__입력__글자">성별</div>
                   <div class="회원가입__입력__성별">
@@ -139,17 +208,32 @@
                     <input type="radio" name="gender" /><div>여성</div>
                   </div>
                 </div>
+                
                 <div class="회원가입__입력__체크박스">
                   <input type="checkbox" /> 집에는 씻으러만 가는데 동의합니다.
                 </div>
                 <button class="가입버튼">가입</button>
+
               </div>
+              <!-- 회원가입__입력 -->
+
           </div>
+          <!-- 바디__메인__회원가입 -->
+
           <div class="바디__메인__사진"></div>
+        
         </div>
+        <!-- 바디__메인 -->
+
         <div class="바디__사이드바오른쪽"></div>
+
       </div>
+      <!-- 바디 -->
+
       <div class="푸터"></div>
+
     </div>
+    <!-- bg1 -->
+
   </body>
 </html>
