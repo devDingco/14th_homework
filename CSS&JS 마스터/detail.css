@@ -1,0 +1,285 @@
+#일기상세_최초{
+    width: 1920px;
+    height: 1080px;
+    angle: 0 deg;
+    opacity: 1;
+    /* background-color: orange; */
+}
+
+#frame_75{
+    width: 1920px;
+    height: 445px;
+    angle: 0 deg;
+    opacity: 1;
+    padding-right: 20px;
+    padding-left: 20px;
+    gap: 64px;
+    /* background-color: aqua; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+#header{
+    width: 1880px;
+    height: 60px;
+    angle: 0 deg;
+    opacity: 1;
+    padding-right: 20px;
+    padding-left: 20px;
+    gap: 10px;
+    /* background-color: blue; */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    line-height: 60px;
+}
+
+#frame_2{
+    width: 1168px;
+    height: 60px;
+    min-width: 320px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    /* background-color: blueviolet; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#logo{
+    font-family: Pretendard Variable;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 16px;
+    letter-spacing: -1%;
+
+}
+
+#frame_74{
+    width: 1880px;
+    height: 321px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 24px;
+    /* background-color: whitesmoke; */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+#frame_79{
+    width: 1168px;
+    height: 321px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    padding-bottom: 16px;
+    gap: 24px;
+    border-bottom-width: 1px;
+    /* background-color: tomato; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+#frame_76{
+    width: 1168px;
+    height: 84px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 16px;
+    /* background-color: darkmagenta; */
+}
+
+#타이틀{
+    width: 1168px;
+    height: 36px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    padding-bottom: 12px;
+    gap: 10px;
+    border-bottom: 2px solid black; 
+    font-family: Pretendard Variable;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 22px;
+    leading-trim: NONE;
+    line-height: 36px;
+    letter-spacing: -1%;
+}
+
+#감정_날짜{
+    width: 1168px;
+    height: 32px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    /* background-color: teal; */
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+#frame_84{
+    width: 109px;
+    height: 32px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;    
+    /* background-color: turquoise; */
+    box-sizing: border-box;
+    line-height: 32px;
+}
+
+#날짜{
+    width: 107px;
+    height: 20px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;
+    /* background-color: springgreen;     */
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+#date{
+    width: 74px;
+    height: 20px;
+    angle: 0 deg;
+    opacity: 1;
+    box-sizing: border-box;
+    font-family: Pretendard Variable;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    leading-trim: NONE;
+    line-height: 20px;
+    letter-spacing: -1%;
+
+}
+
+#작성{
+    width: 25px;
+    height: 20px;
+    angle: 0 deg;
+    opacity: 1;    
+    /* background-color: aliceblue; */
+    box-sizing: border-box;
+    font-family: Pretendard Variable;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    leading-trim: NONE;
+    line-height: 20px;
+    letter-spacing: -1%;
+    
+}
+
+#frame_77{
+    width: 1168px;
+    height: 133px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 12px;
+    border-bottom-width: 1px;
+    /* background-color: pink; */
+
+}
+
+#내용_영역{
+    width: 1168px;
+    height: 133px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 13px;
+    /* background-color: orange; */
+    display: flex;
+    flex-direction: column;
+}
+
+#내용_레이블{
+    width: 1168px;
+    height: 20px;
+    angle: 0 deg;
+    opacity: 1;  
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 20px;
+    letter-spacing: -1%;
+    
+}
+
+#내용{
+    width: 1168px;
+    height: 100px;
+    angle: 0 deg;
+    opacity: 1;
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 20px;
+    letter-spacing: -1%;
+    
+}
+
+#frame_73{
+    width: 1168px;
+    height: 40px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 16px;
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+#드롭다운{
+    width: 51px;
+    height: 40px;
+    border-radius: 8px;
+    border-width: 1px;
+    angle: 0 deg;
+    opacity: 1;
+    padding-top: 8px;
+    padding-right: 10px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    gap: 10px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);    
+    background: var(--Gray-W, #FFFFFF);
+}
+
+#수정{
+    width: 31px;
+    height: 24px;
+    angle: 0 deg;
+    opacity: 1;
+    /* background-color: yellow; */
+    box-sizing: border-box;
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 17px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    text-align: center;
+}
