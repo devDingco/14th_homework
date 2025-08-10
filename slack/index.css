@@ -393,6 +393,32 @@
   align-items: center;
   gap: 10px;
 }
+
+.바디__메인__회원가입__입력폼__비밀번호확인 {
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  display: flex;
+  width: 448px;
+  height: 44px;
+}
+.바디__메인__회원가입__입력폼__비밀번호확인__라벨 {
+  display: flex;
+  padding: 10px 0;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.바디__메인__회원가입__입력폼__비밀번호확인__인풋 {
+  display: flex;
+  width: 320px;
+  height: 44px;
+  padding: 8px 12px;
+  align-items: center;
+  gap: 10px;
+}
+
 .바디__메인__회원가입__입력폼__전화번호 {
   justify-content: space-between;
   align-items: center;

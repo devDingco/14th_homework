@@ -32,11 +32,10 @@
     </div>
 
     <div style="width: 1920px; height: 42px"></div>
-
     <div class="바디">
       <div class="바디__정렬">
-        <div class="바디__정렬__목록">
-          <div class="바디__정렬__목록__첫번째">
+        <div id="일기추가보이는곳" class="바디__정렬__목록">
+          <!-- <div class="바디__정렬__목록__첫번째">
             <img
               src="./images/Frame 47.png"
               style="width: 380px; height: 285px" />
@@ -57,7 +56,7 @@
               </div>
               <div style="width: 380px; height: 16px"></div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="바디__정렬__일기쓰기">
           <div class="바디__정렬__일기쓰기__타이틀">📍일기쓰기</div>
@@ -97,16 +96,16 @@
       </div>
       <div style="width: 312px; height: 40px"></div>
       <div class="바디__정렬__일기쓰기__내용">
-        <div id="내용" class="바디__정렬__일기쓰기__내용__라벨">내용</div>
+        <div  class="바디__정렬__일기쓰기__내용__라벨">내용</div>
         <div style="width: 312px; height: 8px"></div>
 
         <div class="바디__정렬__일기쓰기__내용__인풋">
-          <input class="바디__정렬__일기쓰기__내용__라벨__인풋__입력창"
+          <input id="내용" class="바디__정렬__일기쓰기__내용__라벨__인풋__입력창"
            type="text" placeholder="내용을 입력해 주세요.">
         </div>
       </div>
       <div style="width: 312px; height: 40px"></div>
-      <div class="바디__정렬__일기쓰기__등록"><button onclick="등록하기" class="바디__정렬__일기쓰기__등록__버튼">등록하기</button></div>
+      <div class="바디__정렬__일기쓰기__등록"><button onclick="등록하기()" class="바디__정렬__일기쓰기__등록__버튼">등록하기</button></div>
       </div>
     </div>
 
