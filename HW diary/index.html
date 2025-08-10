@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>감정일기장</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./index.js"></script>
+    
+</head>
+<body>
+    <div class="background">
+        <div class="B_left">
+
+        </div>
+        <div class="center">
+            <div class="header">
+                <div class="header__title">
+                    <div class="header__title__text">민지의 다이어리</div>
+                    <div class="header__title__modSwitch">
+                        <div class="header__title__modSwitch__text">다크모드</div>
+                        <div class="header__title__modSwitch__switch"></div>
+                    </div>
+                </div>
+                <div class="header__img"><img src="./assets/imgs/Rectangle 1.png"/> </div>
+            </div>
+            <div class="body">
+                <div class="body__bump1"></div>
+                <div class="body__storage">
+                    <div class="body__storage__diary">일기보관함</div>
+                    <div class="body__storage__picture">사진보관함</div>
+                </div>
+                <div class="body__bump2"></div>
+                <div class="body_insidebox">
+                <div class="body__search">
+                    <!-- <div class="body_serch_align">
+                        <div class="body__search__selection">
+                            <div class="body__search__selection_text"><div>전체</div></div>
+                            <img class="body__search__selection_down"src="./assets/imgs/down_fill_light_m.svg"/>
+                        </div>
+                        <div class="body__seacrh__gapright"></div>
+                        <div class="body__search__searchbar"><img src="./assets/imgs/search_outline_light_m.svg"/>검색어를 입력해주세요
+                        </div>
+                    </div> -->
+                    <div class="body__search__writeadiary">
+
+                        <!-- 윗주석이랑 + 일기 쓰기 버튼이랑 셋트임 구조 잘못됨 -->
+                        <div class="body__seacrh__header"><img src="./assets/icons/📍 일기 쓰기.png"/></div>
+                            <!-- <div class="bump40"></div> -->
+                            <div class="body__search__body">
+                                <div class="body__search__after__header"> 오늘 기분은 어땠나요?</div>
+                                <!-- <div class="bump 16"></div> -->
+                                <div class="body__search_radio">
+                       
+                                    <input class="radiotext" id="happy" type="radio" name="mood" /> 행복해요
+                                    <input class="radiotext" id="sad" type="radio" name="mood" /> 슬퍼요
+                                    <input class="radiotext" id="shocked" type="radio" name="mood" /> 놀랐어요
+                                    <input class="radiotext"id="angry" type="radio" name="mood" /> 화나요
+                                    <input class="radiotext" id="etc" type="radio" name="mood" /> 기타
+                        
+                                </div>
+                                <!-- <div class="bump40"></div> -->
+                                <div class="body__search__inputbox">
+                                    <div class="diarywritetext">제목</div>  
+                                    <div class="bump8"></div>
+                                    <div>
+                                        <input class="diary__title" id="id_diary__title()" type="text" placeholder="제목을 입력해 주세요.">
+                                    </div>
+                                    
+
+                                <div class="bump24"></div>
+
+                                
+                                    <div class="diarywritetext">내용</div>
+                                    <div class="bump8"></div>
+                                    <textarea class="diary__textarea" id="id_diary__contextarea" placeholder="내용을 입력해 주세요."> </textarea>
+                                
+                                </div>
+
+                            </div>
+
+                                <div class="bump40"></div>
+                                
+                                <button class="register" onclick="registerDiary()"><div class="regButtontext">등록하기</div></button>
+                                
+                        <!--버튼클릭 전환용 시작줄 <div class="body__search__writeadiary_txt">+ 일기쓰기</div> -->
+
+                    </div>
+                </div>
+                <div class="body__main">
+                            <div class="body__main_diary" id="diary-list-container">
+                                <div class="card" id="picbox1" > 
+                                    
+                                </div>
+                                <div class="card" id="picbox2">
+
+                                     </div>
+                                <div class="card" id="picbox3">
+
+                                     </div>
+                                <div class="card" id="picbox4"> 
+
+                                </div>
+                                <div class="card" id="picbox5"> 
+
+                                </div>
+                                <div class="card" id="picbox1"> 
+
+                                </div>
+
+                            <!-- <div class="body__main__nothing">등록된일기가 없습니다.</div> -->
+                            </div>
+                </div>
+                <div class="body__pagenumbering"><div class="body__pagenumbering__text">1</div></div>
+
+            </div>
+            </div>
+            <div class="footer">
+                <div class="footer__title">민지의 다이어리</div>
+                <div class="footer__CEO">대표:{name}</div>
+                <div class="footer__Copyright">Copyright © 2024. {name} Co., Ltd.</div>
+            </div>
+
+        </div>
+        <div class="B_right">
+
+        </div>
+    </div>
+
+</body>
+</html>
