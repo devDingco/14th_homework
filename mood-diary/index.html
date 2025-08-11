@@ -19,8 +19,18 @@
       <span class="headline01 inActive">사진보관함</span>
     </div>
 
-    <div class="main">
+    <div class="filter">
+      <select id="dropdown" class="dropdown" onchange="selectedMood()">
+        <option name="dropdown">전체</option>
+        <option name="dropdown" value="happy">행복해요</option>
+        <option name="dropdown" value="sad">슬퍼요</option>
+        <option name="dropdown" value="surprise">놀랐어요</option>
+        <option name="dropdown" value="angry">화나요</option>
+        <option name="dropdown" value="etc">기타</option>
+      </select>
+    </div>
 
+    <div class="main">
       <div class="main__gallery">
         
       </div>
@@ -70,5 +80,6 @@
   <script src="./js/checkContents.js"></script>
   <script src="./js/formatUtils.js"></script>
   <script src="./js/constants.js"></script>
+  <script src="./js/userDiary.js"></script>
 </body>
 </html>
