@@ -3,15 +3,12 @@
 
 기술 스택: JS, HTML, CSS
 ---
-
-RULL: {
 coding Convention: snake-case 를 사용합니다. <br/>
 파일명은 camelCase를 사용 합니다. <br/>
 최신 구현된 기능은 기존 파일을 복제하여 신규 파일에서 작업해 주가합니다. <br/>
 icon, image 는 public 파일에서 관리합니다. <br/>
 
-commit -m"" : 기본적인 양식은 [YY:MM:DD]를 작성후 추가된 기능을 작성합니다.<br/>
-}
+commit -m"" : [YY:MM:DD]를 작성후 추가된 기능을 작성합니다.<br/>
 
 ---
 
