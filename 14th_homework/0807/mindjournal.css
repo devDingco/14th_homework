@@ -1,0 +1,151 @@
+/* 전체 기본 설정 */
+body {
+  font-family: 'Arial', sans-serif;
+  background: #f5f5f5;
+  padding: 2rem;
+}
+
+/* 카드 컨테이너 */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* 카드 링크(카드를 클릭하면 상세페이지로 이동) */
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  margin: 0.6rem;
+}
+
+/* 카드 스타일 */
+.card {
+  border-radius: 10px;
+  width: 270px;
+  padding: 1rem;
+  transition: transform 0.5s ease, filter 0.5s ease; /* 0.5초 부드럽게 */
+}
+
+.card:hover {
+  transform: scale(1.1);   /* 110% 확대 */
+  filter: blur(2px);       /* 흐릿한 효과 */
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.card p {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 헤더 */
+header {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 0.8rem 0;
+}
+
+/* 배너 */
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.banner img {
+  width: 980px;
+  height: auto;
+}
+
+/* 내비게이션 */
+.navigation {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  background-color: white;
+  padding: 1rem;
+}
+
+.navigation .tab {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.navigation .tab:hover {
+  transform: rotateZ(30deg);
+}
+
+.navigation .tab.active {
+  background-color: #ffcbcb;
+  font-weight: bold;
+}
+
+/* 다이어리 섹션 */
+.diary-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+/* 다이어리 폼 */
+.diary-form {
+  flex: 1;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+/* 감정 선택 */
+.emotion-select label {
+  margin-right: 0.8rem;
+}
+
+/* 입력 필드 */
+#title, #content {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 97%;
+}
+
+/* 등록 버튼 (기울기 애니메이션도 사용 가능) */
+button[type="submit"] {
+  padding: 0.5rem 1rem;
+  background-color: gray;
+  color: white;
+  border: none;
+  width: 97%;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+/* 수정 완료 버튼의 기울기 클래스(상세페이지에서 사용) */
+button.rotate {
+  transform: rotateZ(20deg);
+}
+
+/* 푸터 */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background-color: #eee;
+  margin-top: 2rem;
+}

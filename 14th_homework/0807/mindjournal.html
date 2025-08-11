@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>감정일기</title>
+  <link rel="stylesheet" href="./mindjournal.css" />
+</head>
+<body>
+  <header>
+    <h1>일기보관함_메인</h1>
+  </header>
+
+  <main>
+    <section class="banner">
+      <img src="./Rectangle 1.png" alt="배너 이미지" />
+    </section>
+
+    <nav class="navigation">
+      <button class="tab active">일기보관함</button>
+      <button class="tab">사진보관함</button>
+    </nav>
+
+    <section class="diary-section">
+      <div class="card-container" id="cardContainer">
+        <!-- JS로 카드가 여기에 추가됩니다 (초기엔 비어있음) -->
+      </div>
+
+      <aside class="diary-form">
+        <h2>일기 쓰기</h2>
+        <form id="diaryForm">
+          <label>오늘 기분은 어땠나요?</label><br><br>
+          <div class="emotion-select">
+            <label><input type="radio" name="emotion" value="happy" /> 행복해요</label>
+            <label><input type="radio" name="emotion" value="sad" /> 슬퍼요</label>
+            <label><input type="radio" name="emotion" value="surprised" /> 놀랐어요</label>
+            <label><input type="radio" name="emotion" value="angry" /> 화나요</label>
+            <label><input type="radio" name="emotion" value="etc" /> 기타</label>
+          </div>
+          <br>
+
+          <label>제목</label><br>
+          <input type="text" id="title" placeholder="제목을 입력해 주세요." required /><br>
+          <label>내용</label><br>
+          <textarea id="content" placeholder="내용을 입력해 주세요." required></textarea><br>
+          <button type="submit">등록하기</button>
+        </form>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <p>민지의 다이어리</p>
+  </footer>
+
+  <script src="./mindjournal.js"></script>
+</body>
+</html>
