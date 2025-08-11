@@ -125,7 +125,7 @@
     gap: 8;
     border-radius: 100px;
     border: 1px solid var(--input-border);
-    background: var(--input-bg) url(/diary/public/icons/search_24dp_5F6368_FILL1_wght400_GRAD0_opsz24\ 1.svg) no-repeat 16px center;
+    background: var(--input-bg) url(/public/icons/search_24dp_5F6368_FILL1_wght400_GRAD0_opsz24\ 1.svg) no-repeat 16px center;
     background-size: 20px;
     padding-left: 48px;
     color: var(--text-primary);
@@ -148,6 +148,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 18px;
+    cursor: pointer;
 }
 
 [data-theme="dark"] .writing_button {
@@ -156,44 +157,64 @@
 }
 
 .contents_wrapper {
-    display: flex;
     width: 1168px;
     max-height: 1167px;
     gap: 24px;
 }
-
+/* 등록된 일기 없을떄 css */
+.card_section_empty {
+    width: 100%;
+    height: 104px;
+    padding: 40px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-quaternary);
+}
 .card_section {
-    width: 784px;
+    width: 100%;
     max-height: 1167px;
     height: auto;
     background-color: var(--card-bg);
     transition: background-color 0.3s ease;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 24px;
+    border-radius: 16px;
 }
-
 .card_item {
-    width: 380px;
-    /* height: 357px; */
-    /* margin-bottom: 50px; */
-
-}
-.card_item_image{
-    width: 100%;
-    height: 285px;
+    width: 274px;
+    height: 280px;
     position: relative;
     border-radius: 16px;
 }
+.card_item:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.16);
+}
+.card_item_image{
+    width: 274px;
+    height: 208px;
+    border-radius: 16px;
+}
+.card_item:hover .card_item_image {
+    filter: blur(3px);
+}
 .close_icon {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 8px;
+    right: 8px;
+}
+.close_icon:hover {
+    cursor: pointer;
+    opacity: 0.5;
 }
 
 .card_item_content {
     padding: 0 8px;
     margin: 16px 0;
+    margin-bottom: 0;
 }
 .card_item_top {
     display: flex;
@@ -217,128 +238,65 @@
     font-weight: 700;
 }
 
-.writing_section {
-    width: 360px;
-    height: 604px;
-    border: 1px solid var(--border-primary);
-    border-radius: 16px;
-    padding: 24px;
+/* 페이지네이션 */
+.pagination_wrapper {
+    width: 288px;
+    height: 32px;
+    margin: 40px auto 44px auto;
     display: flex;
-    flex-direction: column;
-    gap: 40px;
-    background-color: var(--card-bg);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
-
-.writing_title{
-    width: 100%;
-    height: 24px;
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text-primary);
-    transition: color 0.3s ease;
-}
-
-.writing_radio_section{
+.pagination_arrow {
+    width: 32px;
+    height: 32px;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--pagination-text);
+    font-size: 20px;
+}
+.pagination_arrow:hover {
+    opacity: 0.5;
+}
+.pagination_arrow.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.pagination_arrow.allow {
+    color: var(--pagination-active-text);
+}
+.number_wrapper {
+    /* width: 100%; */
+    display: flex;
     gap: 16px;
 }
-
-.radio_title{
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text-primary);
+.pagination_item {
+    width: 32px;
+    height: 32px;
+    /* padding: 10px; */
+    font-size: 16px;
+    color: var(--pagination-text);
+    font-weight: 500;
     transition: color 0.3s ease;
-}
-
-.radio_group_wrapper{
-    display: flex;
-    align-items: center;
-    align-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.radio_group{
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-.radio{
-    width: 20px;
-    height: 20px;
-    accent-color: var(--radio-selected);
-    transition: accent-color 0.3s ease;
+.pagination_item:hover {
+    color: var(--pagination-active-text);
 }
-
-.feeling{
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    margin-left: 8px;
-    transition: color 0.3s ease;
-}
-
-.writing_text_wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.label{
-    font-size: 16px;
+.pagination_item.active {
+    color: var(--pagination-active-text);
+    background-color: var(--pagination-bg-active);
+    border-radius: 8px;
     font-weight: 600;
-    color: var(--text-primary);
-    transition: color 0.3s ease;
 }
-
-.input{
-    padding: 12px 16px;
-    border: 1px solid var(--input-border);
-    border-radius: 8px;
-    font-size: 16px;
-    background-color: var(--input-bg);
-    color: var(--text-primary);
-    transition: all 0.3s ease;
-}
-
-.input::placeholder {
-    color: var(--input-placeholder);
-}
-
-.textarea{
-    resize: none;
-    padding: 12px 16px;
-    border: 1px solid var(--input-border);
-    border-radius: 8px;
-    font-size: 16px;
-    background-color: var(--input-bg);
-    color: var(--text-primary);
-    min-height: 120px;
-    transition: all 0.3s ease;
-}
-
-.textarea::placeholder {
-    color: var(--input-placeholder);
-}
-
-button {
-    padding: 12px 24px;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-button:hover {
-    opacity: 0.9;
+.pagination_item.disabled {
+    display: none;
 }
 
 .footer {
@@ -467,6 +425,234 @@ button:hover {
     background-position: center;
 }
 
+/* 일기쓰기 모달 css */
+.modal_wrapper {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+.modal_wrapper.open {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.writing_section {
+    width: 640px;
+    height: 560px;
+    /* border: 1px solid var(--border-primary); */
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    background-color: var(--card-bg);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.writing_title{
+    width: 100%;
+    height: 24px;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.writing_radio_section{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.radio_title{
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.radio_group_wrapper{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.radio_group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.radio{
+    width: 20px;
+    height: 20px;
+    accent-color: var(--radio-selected);
+    transition: accent-color 0.3s ease;
+}
+
+.feeling{
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    margin-left: 8px;
+    transition: color 0.3s ease;
+}
+
+.writing_text_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--label-text);
+    transition: color 0.3s ease;
+}
+
+.input{
+    padding: 12px 16px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.input::placeholder {
+    color: var(--input-placeholder);
+}
+
+.textarea{
+    resize: none;
+    padding: 12px 16px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    min-height: 120px;
+    transition: all 0.3s ease;
+}
+
+.textarea::placeholder {
+    color: var(--input-placeholder);
+}
+
+.button_wrapper{
+    width: 224px;
+    height: 48px;
+    margin: 0 auto;
+    display: flex;
+    gap: 16px;
+}
+
+button {
+    width: 104px;
+    height: 48px;
+    padding: 8px 10px;
+    background-color: var(--button-disabled-bg);
+    color: var(--button-disabled-text);
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+button:hover {
+    opacity: 0.9;
+}
+button:not([disabled]).active {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+
+.cancel_button {
+    background-color: var(--button-cancel-bg);
+    color: var(--button-cancel-text);
+    border: 1px solid var(--button-cancel-border);
+}
+
+/* 일기등록 중첩모달 css */
+.confirm_modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+}
+.confirm_modal.open {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.confirm_wrapper {
+    width: 480px;
+    height: 200px;
+    background-color: var(--card-bg);
+    border-radius: 24px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.confirm_title {
+    width: 100%;
+    height: 24px;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 16px;
+}
+.confirm_text {
+    width: 100%;
+    height: 24px;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-align: center;
+}
+.confirm_button {
+    width: 100%;
+    height: 48px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: 1px solid var(--button-border);
+}
+.confirm_button:hover {
+    opacity: 0.8;
+}
+
+/* 일기등록 취소 모달 css */
+.cancel_modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+}
+.cancel_modal.open {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /* @media (max-width: 779px) {
     .container {
         width: 100%;

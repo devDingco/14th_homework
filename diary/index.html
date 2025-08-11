@@ -4,6 +4,7 @@
     <title>다이어리</title>
     <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="detail.css">
     <script src="index.js"></script>
 </head>
 <body>
@@ -19,7 +20,9 @@
         <div class="menu_wrapper">
             <div class="menu_top">
                 <span class="menu_item active">일기 보관함</span>
-                <span class="menu_item">사진 보관함</span>
+                <a href="photos.html">
+                    <span class="menu_item">사진 보관함</span>
+                </a>
             </div>
             <div class="menu_bottom">
                 <div class="search_wrapper">
@@ -39,12 +42,13 @@
                     </div>
                     <input type="text" class="search_input" placeholder="검색어를 입력해 주세요."/>
                 </div>
-                <div class="writing_button">
+                <div class="writing_button" onclick="onClickOpenModal()">
                     일기쓰기
                 </div>
             </div>
         </div>
         <div class="contents_wrapper">
+            <div class="card_section_empty">등록된 일기가 없습니다.</div>
             <div class="card_section">
                 <!-- <div class="card_item">
                     <div class="card_item_image">
@@ -83,28 +87,49 @@
                     </div>
                 </div> -->
             </div>
-            <div class="writing_section">
-                <div class="writing_title">📍 일기쓰기</div>
-                <div class="writing_radio_section">
-                    <div class="radio_title">오늘 기분은 어땠나요?</div>
-                    <div class="radio_group_wrapper">
-                        <div class="radio_group">
-                            <input class="radio" type="radio" name="feeling" value="행복해요"><span class="feeling">행복해요</span>
-                        </div>
-                        <div class="radio_group">
-                            <input class="radio" type="radio" name="feeling" value="슬퍼요"><span class="feeling">슬퍼요</span>
-                        </div>
-                        <div class="radio_group">
-                            <input class="radio" type="radio" name="feeling" value="놀랐어요"><span class="feeling">놀랐어요</span>
-                        </div>
-                        <div class="radio_group">
-                            <input class="radio" type="radio" name="feeling" value="화나요"><span class="feeling">화나요</span>
-                        </div>
-                        <div class="radio_group">
-                            <input class="radio" type="radio" name="feeling" value="기타"><span class="feeling">기타</span>
-                        </div>
+        </div>
+        <div class="pagination_wrapper">
+            <div id="arrow-left" class="pagination_arrow" onclick="onClickArrow('left')"><</div>
+            <div class="number_wrapper">
+                <!-- <span class="pagination_item active">1</span>
+                <span class="pagination_item">2</span>
+                <span class="pagination_item">3</span>
+                <span class="pagination_item">4</span>
+                <span class="pagination_item">5</span> -->
+            </div>
+            <div id="arrow-right" class="pagination_arrow" onclick="onClickArrow('right')">></div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer_title">민지의 다이어리</div>
+        <div class="footer_owner">대표 : 이윤재</div>
+        <div class="footer_info">Copyright &copy; 2025 leeYJ CO., Ltd.</div>
+    </div>
+
+    <!-- 일기 쓰기 모달 -->
+    <div class="modal_wrapper" id="modal">
+        <div class="writing_section">
+            <div class="writing_title">일기쓰기</div>
+            <div class="writing_radio_section">
+                <div class="radio_title">오늘 기분은 어땠나요?</div>
+                <div class="radio_group_wrapper">
+                    <div class="radio_group">
+                        <input class="radio" type="radio" name="feeling" value="행복해요"><span class="feeling">행복해요</span>
+                    </div>
+                    <div class="radio_group">
+                        <input class="radio" type="radio" name="feeling" value="슬퍼요"><span class="feeling">슬퍼요</span>
+                    </div>
+                    <div class="radio_group">
+                        <input class="radio" type="radio" name="feeling" value="놀랐어요"><span class="feeling">놀랐어요</span>
+                    </div>
+                    <div class="radio_group">
+                        <input class="radio" type="radio" name="feeling" value="화나요"><span class="feeling">화나요</span>
+                    </div>
+                    <div class="radio_group">
+                        <input class="radio" type="radio" name="feeling" value="기타"><span class="feeling">기타</span>
                     </div>
                 </div>
+            </div>
                 <div class="writing_text_wrapper">
                     <div class="label">제목</div>
                     <input id="diary_title" class="input" type="text" placeholder="제목을 입력해 주세요."/>
@@ -113,14 +138,51 @@
                     <div class="label">내용</div>
                     <textarea id="diary_content" class="textarea" type="text" placeholder="내용을 입력해 주세요."></textarea>
                 </div>
-                <button id="register_button" onclick="onClickRegisterButton()">등록하기</button>
-            </div>
+                <div class="button_wrapper">
+                    <button class="cancel_button" onclick="onClickOpenCancelModal()">닫기</button>
+                    <button id="register_button" onclick="onClickRegisterButton()" disabled>등록하기</button>
+                </div>
         </div>
     </div>
-    <div class="footer">
-        <div class="footer_title">민지의 다이어리</div>
-        <div class="footer_owner">대표 : 이윤재</div>
-        <div class="footer_info">Copyright &copy; 2025 leeYJ CO., Ltd.</div>
+
+    <!-- 일기 작성 확인 모달 재사용 가능 -->
+    <div class="confirm_modal" id="confirm_modal">
+        <div class="confirm_wrapper">
+            <div>
+                <div class="confirm_title">일기 등록 완료</div>
+                <div class="confirm_text">등록이 완료 되었습니다.</div>
+            </div>
+            <button class="confirm_button" onclick="onClickCloseConfirmModal()">확인</button>
+        </div>
+    </div>
+
+
+    <!-- 일기 등록 취소 모달 재사용 가능 -->
+    <div class="cancel_modal" id="cancel_modal">
+        <div class="confirm_wrapper">
+            <div>
+                <div class="confirm_title" id="cancel_title">일기 등록 취소</div>
+                <div class="confirm_text" id="cancel_text">일기 등록을 취소하시겠습니까?</div>
+            </div>
+            <div class="button_wrapper">
+                <button class="cancel_button" onclick="onClickCloseCancelModal()">계속 작성</button>
+                <button class="active" onclick="onClickCancelWriting()">등록 취소</button>
+            </div>        
+        </div>
+    </div>
+
+    <!-- 일기 삭제 모달 재사용 가능 -->
+    <div class="cancel_modal" id="delete_modal">
+        <div class="confirm_wrapper">
+            <div>
+                <div class="confirm_title" id="cancel_title">일기 삭제</div>
+                <div class="confirm_text" id="cancel_text">일기를 삭제 하시겠어요?</div>
+            </div>
+            <div class="button_wrapper">
+                <button class="cancel_button" onclick="onClickCloseDeleteModal()">취소</button>
+                <button class="active">삭제</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>

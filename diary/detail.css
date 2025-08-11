@@ -1,0 +1,278 @@
+.detail_wrapper {
+    width: 100%;
+    /* height: 586px; */
+    margin-top: 40px;
+}
+.detail_title {
+    width: 100%;
+    height: 24px;
+    margin-bottom: 12px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.detail_content_wrapper {
+    width: 100%;
+    /* height: 317px; */
+    border-top: 3px solid var(--border-accent);
+    border-bottom: 3px solid var(--border-accent);
+    padding: 16px 0;
+}
+.detail_content_top{
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.detail_feeling_section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.detail_date {
+    display: flex;
+    gap: 8px;
+}
+.detail_date span {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-quaternary);
+}
+.detail_content_section {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+.detail_content_label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.detail_content_text {
+    min-height: 100px;
+    height: 100%;
+    margin-top: 13px;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-primary);
+}
+.detail_content_copy_section {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+.copy_icon {
+    width: 24px;
+    height: 24px;
+    background:url(./public/icons/copy.png) no-repeat center center;
+    color: var(--button-copy-text);
+}
+.copy_text {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-quaternary);
+}
+.detail_content_button_section {
+    display: flex;
+    justify-content: end;
+    gap: 16px;
+    margin-top: 24px;
+}
+.detail_content_button {
+    width: 51px;
+    height: 40px;
+    padding: 0px;
+    border: 1px solid var(--button-detail-border);
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--button-detail-text);
+    background-color: var(--button-detail-bg);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.detail_review_wrapper {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.detail_review_title {
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 600;
+}
+.detail_review_input_area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+.detail_review_input {
+    width: 100%;
+    height: 48px;
+    padding: 12px 16px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+}
+.detail_review_input::placeholder {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--input-placeholder);
+}
+.detail_review_button {
+    width: 51px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+.detail_review_list {
+    margin-top: 4px;
+}
+.detail_review_empty {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-quaternary);
+    text-align: center;
+    margin: 40px 0;
+}
+.detail_review {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-secondary);
+}
+.detail_review:last-child {
+    border-bottom: none;
+}
+.detail_review_text {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+.detail_review_date {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-quaternary);
+}
+
+/* 기분 이미지 */
+.detail_feeling_image {
+    width: 32px;
+    height: 32px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+}
+.detail_feeling_text {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+/* 수정하기 */
+
+.detail_edit_wrapper {
+    display: none;
+}
+.edit_writing_section {
+    width: 100%;
+    height: 100%;
+    border-bottom: 3px solid var(--border-accent);
+    padding: 16px 0;
+}
+.edit_writing_radio_section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+.edit_radio_title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.edit_radio_group_wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+.edit_radio_group {
+    display: flex;
+    gap: 8px;
+}   
+.edit_radio_group input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--radio-selected);
+    transition: accent-color 0.3s ease;
+}
+.edit_feeling {
+    font-size: 18px;
+    font-weight: 500;
+}
+.edit_writing_text_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 24px;
+}
+.edit_label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--label-text);
+}
+.edit_input {
+    width: 100%;
+    height: 48px;
+    padding: 12px 16px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+.edit_textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px 16px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+}
+.edit_textarea::placeholder {
+    color: var(--input-placeholder);
+}
+.edit_button_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+}
+.edit_cancel_button {
+    background-color: var(--button-cancel-bg);
+    color: var(--button-cancel-text);
+    border: 1px solid var(--button-cancel-border);
+}
+#edit_register_button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
