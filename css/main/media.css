@@ -1,0 +1,19 @@
+/* 프로필/이미지 */
+main .profile-wrapper {
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 18px;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main .profile-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  pointer-events: auto !important;
+  cursor: pointer;
+}

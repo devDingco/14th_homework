@@ -39,7 +39,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 24px 24px;
+  padding: 20px 20px;
   padding-top: 0;
   max-width: 1200px;
   margin: 0 auto;
@@ -59,3 +59,7 @@ main {
   .diary-form { width: 100%; margin-top: 20px; }
   .container { padding: 12px; }
 }
+
+/* 왼쪽(#main)은 남는 공간을 모두 차지, 오른쪽(#form)은 고정폭 */
+.container > #main { flex: 1 1 0; min-width: 0; }  /* ← 핵심 */
+.container > #form { flex: 0 0 320px; }            /* 이미 320px이면 생략 가능 */

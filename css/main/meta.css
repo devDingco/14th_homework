@@ -1,0 +1,18 @@
+/* 메타/타이틀 */
+main .card-meta {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+}
+main .card-meta .date { color: #999; font-weight: normal; }
+main .card-meta .emotion { text-align: left; }
+main .card-title {
+  font-size: 15px;
+  font-weight: 600;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

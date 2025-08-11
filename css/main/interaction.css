@@ -1,0 +1,11 @@
+/* hover 효과: 확대 + 블러 */
+main .diary-card:hover {
+  transform: scale(1.1);
+  filter: blur(2px);
+  z-index: 3;
+}
+
+/* 모션 최소화 환경 */
+@media (prefers-reduced-motion: reduce) {
+  main .diary-card { transition: none; }
+}

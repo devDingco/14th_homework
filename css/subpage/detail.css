@@ -1,0 +1,93 @@
+/* reset & tokens */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root{
+  --text:#111; --muted:#8a8a8a; --line:#e6e6e6;
+  --bg:#fff; --chip:#f6f6f6; --btn-bg:#f3f3f3; --btn-bd:#dcdcdc;
+  --radius:12px; --container:960px;
+}
+html,body{ height:100%; }
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+               "Noto Sans KR", "Apple SD Gothic Neo", "Helvetica Neue", Arial,
+               "맑은 고딕", "Malgun Gothic", sans-serif;
+  color: var(--text);
+  background: #f7f7f7;
+}
+
+/* header */
+.page-header{ background:#fff; border-bottom:1px solid var(--line); }
+.page-header .container{ max-width:var(--container); margin:0 auto; padding:14px 20px; text-align:center; }
+.app-title{ font-size:14px; font-weight:700; }
+
+/* page container */
+.container{ max-width:var(--container); margin:0 auto; padding:24px 20px; }
+
+/* main paper 제거(플랫) */
+.detail{
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 24px 20px 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* head: title + date */
+.detail-head{
+  display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
+  margin: 18px 0 6px;
+}
+.title{ font-size:24px; font-weight:700; line-height:1.35; }
+.meta-right{ display:flex; gap:6px; align-items:center; color:var(--muted); font-size:12px; }
+
+/* submeta: avatar + emotion */
+.submeta{ display:flex; align-items:center; gap:8px; margin: 6px 0 10px; }
+.avatar{
+  width:20px; height:20px; display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--line); border-radius:50%; overflow:hidden; background:#fff;
+}
+.avatar img{ width:100%; height:100%; object-fit:cover; }
+.emotion{ font-size:13px; font-weight:600; color:#d44; }
+
+/* 타이틀 아래 굵은 가로선 */
+.divider{
+  border:0; border-top: 2px solid var(--line);   /* 굵게 */
+  margin: 8px 0 16px;                            /* 위아래 여백 */
+}
+
+/* 콘텐츠 블록: 라벨은 상단, 본문칩 아래 우측에 버튼 */
+.content-row{
+  display:flex; flex-direction:column; gap:12px; /* 세로 스택 */
+}
+.label{
+  font-size:13px; font-weight:700; color:#333;
+  /* 라벨은 문단 '상단'에 위치 */
+}
+.body{
+  background: var(--chip);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+.body p{ line-height:1.65; word-break: keep-all; }
+
+/* 버튼: 본문칩 '아래-오른쪽' */
+.actions{
+  align-self: flex-end;      /* 오른쪽 정렬 */
+  margin-top: 10px;          /* 칩과 간격 */
+}
+.btn{
+  writing-mode: horizontal-tb; white-space: nowrap;
+  display:inline-flex; align-items:center; justify-content:center;
+  height: 34px; min-width: 52px; padding: 0 10px;
+  font-size: 12px; border-radius: 10px;
+  border:1px solid var(--btn-bd); background: var(--btn-bg);
+  cursor:pointer;
+}
+.btn:hover{ filter: brightness(.98); }
+
+/* responsive */
+@media (max-width:768px){
+  .detail-head{ flex-direction:column; align-items:flex-start; gap:6px; }
+  .content-row{ gap:10px; }
+}
