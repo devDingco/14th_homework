@@ -23,8 +23,5 @@ document.addEventListener('DOMContentLoaded', function () {
       date: '25-08-11',
       emotion: '😊',
     };
-
-    diaryList.push(diary);
-    console.log('새일기추가', diary);
   });
 });

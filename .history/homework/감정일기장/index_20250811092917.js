@@ -25,6 +25,5 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     diaryList.push(diary);
-    console.log('새일기추가', diary);
   });
 });
