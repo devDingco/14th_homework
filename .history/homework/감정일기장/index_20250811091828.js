@@ -8,23 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const titleInput = document.getElementById('titleinput');
   const textInput = document.getElementById('textinput');
   const submitBtn = document.getElementById('submitBtn');
-
-  // 일기를 저장할 빈배열만들기
-  let diaryList = [];
-  // 버튼클릭이벤트 추가
-
-  submitBtn.addEventListener('click', function () {
-    console.log('버튼이클릭됨');
-
-    //일기객체만들기(숙제용)
-    const diary = {
-      title: '첫번째일기',
-      content: '자스배우는중입니다',
-      date: '25-08-11',
-      emotion: '😊',
-    };
-
-    diaryList.push(diary);
-    console.log('새일기추가', diary);
-  });
 });
+
+// 일기를 저장할 빈배열만들기
+let diaryList = [];
+// 버튼클릭이벤트 추가

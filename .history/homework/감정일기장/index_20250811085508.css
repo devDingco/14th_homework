@@ -205,3 +205,12 @@ footer {
 .title__images > div:hover {
   transform: scale(1.1);
 }
+
+/* 버튼 클릭 시 기울어짐 */
+.submit-btn {
+  transition: transform 0.5s ease;
+}
+
+.submit-btn:active {
+  transform: rotate(15deg);
+}

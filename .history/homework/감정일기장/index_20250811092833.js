@@ -21,10 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
       title: '첫번째일기',
       content: '자스배우는중입니다',
       date: '25-08-11',
-      emotion: '😊',
+      emotion: '',
     };
-
-    diaryList.push(diary);
-    console.log('새일기추가', diary);
   });
 });
