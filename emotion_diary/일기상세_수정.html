@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>일기상세_수정</title>
+    <link rel="stylesheet" href="./일기상세_수정.css">
+</head>
+<body>
+    <div class="프레임">
+        <p class="헤더">민지의 다이어리</p>
+        <div class="바디_내용">
+            <div class="오늘기분은어떗나요">
+                <p class="오늘기분은어떗나요_질문">오늘 기분은 어땟나요?</p>
+                <div class="일기쓰기_기분버튼">
+                    <input type="radio" name="기분상태" />행복해요
+                    <input type="radio" name="기분상태" />슬퍼요
+                    <input type="radio" name="기분상태" />놀랐어요 
+                    <input type="radio" name="기분상태" />화나요
+                    <input type="radio" name="기분상태" />기타 
+                </div>
+            </div>
+            <div class="제목과내용">
+                <div class="메인_바디_일기장_일기쓰기_제목">
+                    <p class="메인_바디_일기장_일기쓰기_제목텍스트">제목</p>
+                    <input type="text" placeholder="이것은 타이틀입니다." class="이것은타이틀입니다" />
+                </div>
+                <div class="메인_바디_일기장_일기쓰기_내용">
+                    <p class="메인_바디_일기장_일기쓰기_내용텍스트">내용</p>
+                    <input type="text" placeholder="내용이 들어갑니다 내용이 들어갑니다 내용이 들어갑니다"
+                    class="내용이들어갑니다" />
+                </div>
+            </div>
+            <div class="하단_버튼">
+                <button class="하단_버튼_취소">취소</button>
+                <button class="하단_버튼_수정하기" onclick="하단_버튼_수정하기_클릭">수정 하기</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
