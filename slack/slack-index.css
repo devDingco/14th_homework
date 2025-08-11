@@ -4,14 +4,13 @@
   box-sizing: border-box;
 }
 
-.가장큰배경 {
+.bg1 {
   width: 1920px;
   height: 1208px;
   background-image: url("./assets/images/bg1.png");
 }
 
 .헤더 {
-  /* flex 디폴트 값은 row 세로로 하고 싶으면 flex-direction 사용 */
   display: flex;
   width: 1920px;
   height: 80px;
@@ -25,6 +24,11 @@
   align-items: center;
   gap: 16px;
   padding-right: 16px;
+}
+
+.icon_1 {
+  width: 32px;
+  height: 32px;
 }
 
 .헤더__오른쪽영역 {
@@ -45,6 +49,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .바디 {
   display: flex;
   width: 1920px;
@@ -61,10 +66,11 @@
   padding: 20px 20px 0px 20px;
 }
 
-#logo {
+.logo {
   width: 40px;
   height: 40px;
   margin-bottom: 24px;
+  border-radius: 8px;
 }
 
 .아이콘_모음집 {
@@ -77,6 +83,11 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.icon_2 {
+  width: 40px;
+  height: 40px;
 }
 
 .아이콘소개 {
@@ -103,6 +114,7 @@
   width: 400px;
   height: 1048px;
   padding: 20px;
+  gap: 16px;
 }
 
 .메뉴__위쪽 {
@@ -152,6 +164,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 4px 0px;
 }
 
 .바왼쪽 {
@@ -166,23 +179,79 @@
   font-weight: 600;
 }
 
+.수강생리스트구역 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .수강생리스트바 {
   display: flex;
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  margin: 12px;
+  padding: 4px 0px;
 }
 
-.리스트바왼쪽 {
+.수강생리스트__왼쪽 {
   display: flex;
   gap: 8px;
-  align-items: center;
 }
 
-.수강생리스트글자 {
+.리스트글자 {
   color: #FFF;
   font-size: 22px;
   font-weight: 600;
+}
+
+.empty__sign {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 360px;
+  height: 104px;
+  gap: 8px;
+}
+
+.empty__문구 {
+  color: #C9AAC9;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  padding: 8px;
+}
+
+.가입하기__버튼 {
+  width: 126px;
+  height: 40px;
+}
+
+.채널바 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 4px 0px;
+}
+
+.채널바__왼쪽 {
+  display: flex;
+  gap: 8px;
+}
+
+.채널모음집 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.채널 {
+  width: 360px;
+  height: 32px;
+  padding: 4px 16px;
 }
 
 .바디__메인__회원가입 {

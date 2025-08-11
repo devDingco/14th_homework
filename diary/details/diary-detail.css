@@ -1,0 +1,181 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 화면 높이 최소 확보 */
+}
+
+.바탕 {
+    flex: 1; /* footer를 밀어내고 남은 공간 차지 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0px 376px 40px 376px;
+    width: 1168px;
+}
+
+.헤더 {
+    display: flex;
+    height: 60px;
+    min-width: 320px;
+    max-width: 1168px;
+    align-items: center;
+    align-self: stretch;
+    margin-bottom: 64px;
+}
+
+.헤더__이름 {
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.18px;
+}
+
+.변경되는구역 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.타이틀 {
+    display: flex;
+    max-width: 1168px;
+    padding-bottom: 12px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-bottom: 2px solid #000;
+    margin-bottom: 16px;
+
+    color: #000;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.22px;
+}
+
+.내용틀 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding-bottom: 16px;
+    align-self: stretch;
+    max-width: 1168px;
+}
+
+.감정날짜 {
+    display: flex;
+    justify-content: space-between;
+    width: 1168px;
+}
+
+.감정부모 {
+    height: 32px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.감정__아이콘__행복해요, .감정__아이콘__슬퍼요, .감정__아이콘__놀랐어요, .감정__아이콘__화나요, .감정__아이콘__기타 {
+    width: 32px;
+    height: 100%;
+    background-size: contain; /* 비율 유지하며 크기에 맞춤 */
+}
+
+/* 감정별 아이콘 등록 */
+
+.감정__아이콘__행복해요 {
+    background-image: url(../asset/icon/happy_icon.png);
+}
+
+.감정__아이콘__슬퍼요 {
+    background-image: url(../asset/icon/sad_icon.png);
+}
+
+.감정__아이콘__놀랐어요 {
+    background-image: url(../asset/icon/surprised_icon.png);
+}
+
+.감정__아이콘__화나요 {
+    background-image: url(../asset/icon/mad_icon.png);
+}
+
+.감정__아이콘__기타 {
+    background-image: url(../asset/icon/etc_icon.png);
+}
+
+/* 아이콘 등록 완료 */
+
+
+.감정 {
+    font-size: 20px;
+}
+
+/* 감정별 글자 color 등록 필요 */
+
+.날짜부모 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #919191;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.14px;
+}
+
+.내용구역 {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.내용__타이틀 {
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.16px;
+}
+
+.내용 {
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
+    letter-spacing: -0.16px;
+}
+
+.수정 {
+    display: flex;
+    justify-content: flex-end;
+
+    width: 1168px;
+    height: 40px;
+}
+
+.수정버튼 {
+    width: 51px;
+    height: 40px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #D4D3D3;
+    background: #FFF;
+
+    color: #1C1C1C;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.18px;
+}

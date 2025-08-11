@@ -4,18 +4,24 @@
     margin: 0;
 }
 
-.body {
-    width: 100vw;
+html, body {
+    height: 100%;
     margin: 0;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 화면 높이 최소 확보 */
+}
+
 .바탕 {
+    flex: 1; /* footer를 밀어내고 남은 공간 차지 */
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0px 376px;
+    margin: 0px 376px 40px 376px;
     gap: 24px;
-    height: 100vh;
     width: 100%;
 }
 
@@ -37,6 +43,7 @@
 
 .배너 {
     height: 240px;
+    flex-shrink: 0; /* 줄어들지 않게 */
     align-self: stretch;
     min-width: 320px;
     max-width: 1168px;
@@ -88,6 +95,26 @@
     letter-spacing: -0.24px;
 }
 
+.필터부모 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 320px;
+    max-width: 1168px;
+    align-self: stretch;
+}
+
+.필터 {
+    width: 112px;
+    height: 24px;
+    border-radius: 8px;
+    border: 1px solid #C7C7C7;
+    background: #FFF;
+
+    font-size: 16px;
+    font-weight: 500;
+}
+
 .내용 {
     display: flex;
     justify-content: flex-start;
@@ -115,14 +142,50 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
+    text-decoration: none;
+
+    transition:
+    filter 0.5s,
+    transform 0.5s;
 }
 
-.감정이미지 {
+.일기틀:hover {
+    filter:  blur(3px);
+    transform: scale(1.1);
+}
+
+/* 감정별 이미지 설정 */
+
+.감정이미지__행복해요, .감정이미지__슬퍼요, .감정이미지__놀랐어요, .감정이미지__화나요, .감정이미지__기타 {
     width: 380px;
     height: 285px;
     border-radius: 16px;
+}
+
+.감정이미지__행복해요{
+    background-image: url(./asset/image/happy.png);
+}
+
+.감정이미지__슬퍼요{
     background-image: url(./asset/image/sad.png);
 }
+
+.감정이미지__놀랐어요{
+    background-image: url(./asset/image/surprised.png);
+}
+
+.감정이미지__화나요{
+    background-image: url(./asset/image/mad.png);
+}
+
+.감정이미지__기타{
+    background-image: url(./asset/image/etc.png);
+    width: 100%;      /* 부모 박스 너비에 맞춤 */
+    height: 100%;     /* 부모 박스 높이에 맞춤 */
+    /* object-fit: cover; 비율 유지하면서 꽉 채우기 (잘리는 부분 있을 수 있음) */
+}
+
+/* 감정별 이미지 설정 완료 */
 
 .일기속성 {
     display: flex;
@@ -141,12 +204,35 @@
     height: 24px;
 }
 
-.감정 {
+/* 감정별 폰트 색상 설정 */
+
+.감정__행복해요, .감정__슬퍼요, .감정__놀랐어요, .감정__화나요, .감정__기타 {
     font-size: 14px;
     font-weight: 600;
     letter-spacing: -0.14px;
+}
+
+.감정__행복해요 {
+    color: #EA5757;
+}
+
+.감정__슬퍼요 {
     color: #28B4E1;
 }
+
+.감정__놀랐어요 {
+    color: #D59029;
+}
+
+.감정__화나요 {
+    color: #777;
+}
+
+.감정__기타 {
+    color: #A229ED;
+}
+
+/* 감정별 폰트 색상 설정 완료 */
 
 .날짜표시 {
     color: #919191;
@@ -269,6 +355,7 @@
 
 .footer {
     display: flex;
+    flex-shrink: 0; /* 줄어들지 않게 */
     align-items: center;
     background-color: #F2F2F2;
     padding : 24px;
