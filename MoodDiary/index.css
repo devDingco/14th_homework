@@ -109,6 +109,17 @@ body{
     
 }
 
+.기분카드{
+    width: 380px;
+    height: 285px;
+}
+
+.기분카드:hover{
+    width: 110%;
+    height: 110%;
+    filter: blur(5px);
+}
+
 .일기작성{
     width: 360px;
     height: 604px;

@@ -1,0 +1,97 @@
+*{
+    box-sizing: border-box;
+
+}
+
+body{
+    padding: 100px 100px 180px 100px;
+}
+
+
+.label{
+    background-color: black;
+    width: 1920px;
+    height: 164px;
+    /* padding: 100px; */
+    padding: 32px 695px 32px 695px;
+    margin-bottom: 100px ;
+}
+
+.label__메인{
+    /* background-color: brown   ; */
+    width: 530px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 40px;
+}
+
+.일기상세{
+    width: 1920px;
+    height: 445px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+
+.일기상세__다이어리{
+    width: 1880px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.일기상세__다이어리__제목{
+    width: 1168px;
+    height: 60px;
+}
+
+.일기상세__메인{
+    width: 1168px;
+    height: 321px;
+    gap: 24px;
+}
+
+.일기상세__메인__헤드{
+    width: 1168px;
+    height: 84px;
+    gap: 16px;
+}
+
+.일기상세__메인__헤드__타이틀{
+    gap: 12px;
+}
+
+.일기상세__메인__헤드__감정날짜{
+    display: flex;
+    justify-content: space-between;
+}
+
+.일기상세__메인__헤드__감정날짜__감정{
+    display: flex;
+    flex-direction: row;
+}
+
+.일기상세__메인__헤드__감정날짜__감정__감정이모티콘{
+    width: 32px;
+    height: 32px;
+}
+
+
+.일기상세__메인__내용{
+    width: 1168px;
+    height: 133px;
+    gap: 13px;
+}
+
+.일기상세__수정{
+    width: 1168;
+    height: 40px;
+}
