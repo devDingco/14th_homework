@@ -11,20 +11,44 @@
     --bg-tertiary: #f2f2f2;
     --text-primary: #000000;
     --text-secondary: #1c1c1c;
-    --text-tertiary: #5f5f5f;
+    --text-tertiary: #333;
     --text-quaternary: #919191;
     --text-muted: #ababab;
     --border-primary: #c7c7c7;
+    --border-secondary: #e4e4e4;
     --border-accent: #000000;
     --shadow: rgba(0, 0, 0, 0.1);
     --card-bg: #ffffff;
     --input-bg: #ffffff;
-    --input-border: #c7c7c7;
+    --input-border: #d4d3d3;
     --input-placeholder: #ababab;
     --radio-border: #c7c7c7;
     --radio-selected: #000000;
+
+    --pagination-text: #777;
+    --pagination-active-text: #000;
+    --pagination-bg-active: #f2f2f2;
+
+    --label-text: #333;
+
+    /* 버튼 색상 */
     --button-bg: #000000;
-    --button-text: #ffffff;
+    --button-text: #f2f2f2;
+    --button-disabled-bg: #c7c7c7;
+    --button-disabled-text: #f2f2f2;
+    
+    --button-cancel-bg: #ffffff;
+    --button-cancel-border: #000000;
+    --button-cancel-text: #1c1c1c;
+
+    /* 편지 상세 수정 / 삭제 전용 컬러 */
+    --button-detail-bg: #ffffff;
+    --button-detail-text: #1c1c1c;
+    --button-detail-border: #d4d3d3;
+    --button-copy-text: #1c1c1c;
+
+
+
     --footer-bg: #f2f2f2;
     --footer-text: #5f5f5f;
     --footer-info: #919191;
@@ -56,14 +80,36 @@
     --border-primary: #5f5f5f;
     --border-accent: #ffffff;
     --shadow: rgba(0, 0, 0, 0.3);
-    --card-bg: #333333;
-    --input-bg: #2d2d2d;
-    --input-border: #5f5f5f;
+    --card-bg: #1c1c1c;
+    --input-bg: #000;
+    --input-border: #333;
     --input-placeholder: #777777;
     --radio-border: #5f5f5f;
     --radio-selected: #ffffff;
-    --button-bg: #ffffff;
+
+    --label-text: #c7c7c7;
+
+    --pagination-text: #777;
+    --pagination-active-text: #e4e4e4;
+    --pagination-bg-active: #333;
+
+    /* 버튼 색상 */
+    --button-bg: #f2f2f2;
     --button-text: #000000;
+    --button-disabled-bg: #333;
+    --button-disabled-text: #777;
+
+    --button-cancel-border: #5f5f5f;
+    --button-cancel-bg: #1c1c1c;
+    --button-cancel-text: #fff;
+    
+    /* 편지 상세 수정 / 삭제 전용 컬러 */
+    --button-detail-bg: #1c1c1c;
+    --button-detail-text: #e4e4e4;
+    --button-detail-border: #333;
+    --button-copy-text: #c7c7c7;
+
+
     --footer-bg: #2d2d2d;
     --footer-text: #c7c7c7;
     --footer-info: #ababab;
