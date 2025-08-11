@@ -25,6 +25,10 @@ body {
     background-color: red;
 }
 
+.test_beige {
+    background-color: rgba(217, 217, 217, 1);;
+}
+
 #layout {
     display: flex;
     flex-direction: column;
