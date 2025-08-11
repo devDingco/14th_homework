@@ -20,6 +20,16 @@
       <button class="tab">사진보관함</button>
     </nav>
 
+    <!-- FILTER BAR (sticky) -->
+    <div id="filterBar" class="filter-bar">
+      <button class="filter-btn active" data-emotion="all">전체</button>
+      <button class="filter-btn" data-emotion="happy">행복</button>
+      <button class="filter-btn" data-emotion="sad">슬픔</button>
+      <button class="filter-btn" data-emotion="surprised">놀람</button>
+      <button class="filter-btn" data-emotion="angry">화남</button>
+      <button class="filter-btn" data-emotion="etc">기타</button>
+    </div>
+
     <section class="diary-section">
       <div class="card-container" id="cardContainer">
         <!-- JS로 카드가 여기에 추가됩니다 (초기엔 비어있음) -->
@@ -51,6 +61,9 @@
   <footer>
     <p>민지의 다이어리</p>
   </footer>
+
+  <!-- floating top button -->
+  <button id="scrollTopBtn" class="floating-btn" title="맨 위로">▲</button>
 
   <script src="./mindjournal.js"></script>
 </body>
