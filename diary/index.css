@@ -89,7 +89,11 @@
   font-style: normal;
   font-weight: 500;
 }
-
+.CSS일기보여주는곳 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
 .바디 {
   width: 1920px;
   height: 1167px;
@@ -100,7 +104,6 @@
   width: 1168px;
   height: 1167px;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 }
 
@@ -108,7 +111,9 @@
   width: 784px;
   height: 1167px;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  gap: 24px;
 }
 
 .바디__정렬__목록__첫번째 {
