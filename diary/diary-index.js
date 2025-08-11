@@ -1,14 +1,40 @@
-function renderDiaries() {
-    const savedDiaries = JSON.parse(localStorage.getItem("일기들목록")) || [];
-    const diaryContainer = document.querySelector(".일기보관함");
+// 삭제버튼 설정
+function 삭제하기(event, number) {
+    // 이벤트 전파 막기
+    event.stopPropagation();
+    event.preventDefault();
+
+    // 삭제 확인 알림
+    alert("일기가 삭제되었습니다.");
+
+    // 로컬스토리지에서 일기들 불러오기
+    let 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || [];
+
+    // 해당 number 제외하고 필터링
+    const 삭제후남은일기들 = 일기들.filter(el => el.number !== number);
+
+    // 로컬스토리지 저장
+    localStorage.setItem("일기들목록", JSON.stringify(삭제후남은일기들));
+
+    // 화면 갱신
+    renderDiaries();
+}
+
+
+// 새로운 일기 등록 함수
+function renderDiaries(filteredDiaries = null) {
+
+    const savedDiaries = filteredDiaries ?? JSON.parse(localStorage.getItem("일기들목록")) ?? []
+    const diaryContainer = document.querySelector(".일기보관함")
 
     if (savedDiaries.length > 0) {
-        const emptyMsg = document.querySelector(".empty-message");
-        if (emptyMsg) emptyMsg.remove();
-
+        const emptyMsg = document.querySelector(".empty-message")
+        if (emptyMsg) emptyMsg.remove()
+            
         const diaryHTML = savedDiaries.map((el) => `
             <a href="./details/diary-detail.html?number=${el.number}" class="일기틀">
                 <div class="감정이미지__${el.feeling}"></div>
+                <img class="삭제버튼" src="./asset/icon/close_icon.png" onclick="삭제하기(event, ${el.number})" />
                 <div class="일기속성">
                     <div class="일기속성1">
                         <div class="감정__${el.feeling}">${el.feeling}</div>
@@ -54,6 +80,50 @@ function WriteNewDiary() {
     // 목록 다시 렌더링
     renderDiaries();
 }
+
+// 플로팅버튼 - 스크롤 기능
+function 스크롤기능() {
+    window.scrollTo({ top: 0, behavior: "smooth"})
+}
+
+// 필터 함수
+function diaryFilter(selectedFeeling) {
+
+    let 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || []
+
+    // "전체"가 아니라면 해당 감정만 필터링
+    if (selectedFeeling !== "전체") {
+        일기들 = 일기들.filter(el => el.feeling === selectedFeeling)
+    }
+
+    // 필터링된 목록 랜더링
+    renderDiaries(일기들)
+
+}
+
+
+// 필터값 변경 시 이벤트
+
+window.addEventListener("DOMContentLoaded", () => {
+    // 첫 렌더링
+    renderDiaries();
+
+    // 필터 select 요소 이벤트 연결
+    const filterSelect = document.querySelector(".필터");
+    if (filterSelect) {
+        filterSelect.addEventListener("change", (event) => {
+            const selectedFeeling = event.target.value;
+            diaryFilter(selectedFeeling);
+
+            // event.target.style.backgroundColor = "black";
+            // event.target.style.color = "#E4E4E4";
+
+        });
+    }
+});
+
+
+
 
     // 화면에 일기카드 추가하기
 

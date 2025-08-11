@@ -12,7 +12,9 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    align-self: stretch;
     min-height: 100vh; /* 화면 높이 최소 확보 */
+    max-width: 1920px;
 }
 
 .바탕 {
@@ -20,9 +22,10 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
+    align-self: stretch;
     margin: 0px 376px 40px 376px;
-    width: 1168px;
+    max-width: 1168px;
 }
 
 .헤더 {
@@ -79,7 +82,8 @@ body {
 .감정날짜 {
     display: flex;
     justify-content: space-between;
-    width: 1168px;
+    align-self: stretch;
+    max-width: 1168px;
 }
 
 .감정부모 {
@@ -122,9 +126,33 @@ body {
 
 .감정 {
     font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
 }
 
-/* 감정별 글자 color 등록 필요 */
+/* 감정별 글자 color 등록 */
+
+.감정__행복해요 {
+    color: #EA5757;
+}
+
+.감정__슬퍼요 {
+    color: #28B4E1;
+}
+
+.감정__놀랐어요 {
+    color: #D59029;
+}
+
+.감정__화나요 {
+    color: #777;
+}
+
+.감정__기타 {
+    color: #A229ED;
+}
+
+/* 감정별 글자 color 등록 완료 */
 
 .날짜부모 {
     display: flex;
@@ -162,7 +190,8 @@ body {
     display: flex;
     justify-content: flex-end;
 
-    width: 1168px;
+    width: 100%;
+    max-width: 1168px;
     height: 40px;
 }
 
@@ -179,3 +208,122 @@ body {
     font-weight: 500;
     letter-spacing: -0.18px;
 }
+
+.변경된구역 {
+    display: flex;
+    max-width: 1168px;
+    padding-bottom: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    align-self: stretch;
+}
+
+.기분선택영역 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+}
+
+.기분선택영역_글자 {
+    color: #000;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+
+    align-self: stretch;
+}
+
+.라디오영역 {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.기분체크틀 {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.radio {
+    width: 24px;
+    height: 24px;
+}
+
+.기분 {
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.18px;
+}
+
+.입력영역 {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.입력글자 {
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.14px;
+}
+
+.입력텍스트 {
+    padding: 12px 16px;
+    max-width: 1168px;
+    /* height: 48px; */
+    align-self: stretch;
+
+    border-radius: 8px;
+    border: 1px solid #D4D3D3;
+    background: #FFF;
+
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.16px;
+}
+
+.버튼영역 {
+    display: flex;
+    justify-content: center;
+    max-width: 1168px;
+    gap: 16px;
+}
+
+.취소버튼, .수정하기버튼 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 104px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #000;
+
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.18px;
+}
+
+.취소버튼 {
+    background: #FFF;
+    color: #1C1C1C;
+}
+
+.수정하기버튼 {
+    background: #000;
+    color: #F2F2F2;
+
+    transition: transform 0.5s;
+}
+
+.수정하기버튼:hover {
+    transform: skew(-10deg);
+}
+
