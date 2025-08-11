@@ -27,10 +27,13 @@
           <p class="detail-main-contents-title">내용</p>
           <p class="detail-main-contents-contents" id="detailContents">{많은 내용들}</p>
         </div>
-        <button onclick="viewModifyContent()">수정</button>
+        <div class="detail-main-active">
+          <button class="light-button" onclick="viewModifyContent()">수정</button>
+          <button class="light-button" onclick="confirmDelete(event)">삭제</button>
+        </div>
       </div>
-
     </div>
+
     <form id="detail-modify-form" class="main__diary-form" style="display: none;">
       <div class="select-box">
         <h3>오늘 기분은 어땟나요?</h3>
@@ -60,6 +63,18 @@
         <button type="submit">수정 하기</button>
       </div>
     </form>
+
+    <!-- comments -->
+    <div class="detail-comments" id="comments">
+      <h2>회고</h2>
+      <div class="detail-comments-input">
+        <input id="detail-comments-input-input" type="text">
+        <button id="detail-comments-input-button" onclick="submitComment()">입력</button>
+      </div>
+    <div class="detail-comments-area">
+      
+    </div>
+    </div>
   </div>
   <script src="./js/script.js"></script>
   <script src="./js/checkContents.js"></script>
