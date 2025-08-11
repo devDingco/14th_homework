@@ -32,4 +32,4 @@ const MOOD_FONT_COLOR = {
 };
 
 //로컬스토리지 관리 키
-const DIARY_KEY = "my_diary"
+const DIARY_KEY = "MY_DIARY"

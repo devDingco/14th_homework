@@ -1,10 +1,20 @@
+.main > img{
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 8%;
+  right: 5%;
+  border-radius: 100%;
+}
+.main > img:hover{
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.16);
+}
 .main__gallery{
   width: 808px;
-  height: 1167px;
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  overflow-y: scroll;
 }
 .main__gallery__card{
   width: 380px;
@@ -15,19 +25,31 @@
   gap: 16px;
   border-radius: 16px;
   transition: all 0.5s;
+  position: relative;
 }
 .main__gallery__card:hover{
   width: calc(380px * 1.1 - 6px);
   height: calc(374px * 1.1 - 6px);
   box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.16);
-  border: solid 1px red;
 }
-.main__gallery__card img{
+.main__gallery__card__close{
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 12px;
+  right: 12px;
+  z-index: 5;
+  cursor: pointer;
+}
+.main__gallery__card__close:hover{
+
+}
+.main__gallery__card__image{
   width: 100%;
   height: 285px;
   border-radius: 16px;
 }
-.main__gallery__card img:hover{
+.main__gallery__card__image:hover{
   filter: blur(2px);
 }
 .main__gallery__card__info{
@@ -107,7 +129,7 @@
   flex-direction: column;
   gap: 8px;
 }
-.main-diary-input input,
+/* .main-diary-input input,
 .main-diary-input textarea{
   padding: 12px 16px;
   border-radius: 8px;
@@ -115,12 +137,12 @@
   border: solid 1px var(--color-gray-200);
   color: var(--color-black);
   resize: none;
-}
-
+} */
+/* 
 .main-diary-input input::placeholder,
 .main-diary-input textarea::placeholder{
   color: var(--color-gray-400);
-}
+} */
 
 .main__diary-form button{
   height: 48px;
