@@ -12,18 +12,18 @@
     <div id="app">
       <!-- HEADER -->
       <header>
-        <div id="logo">
+        <a id="logo" href="/">
           <span class="myName"></span>
-        </div>
+        </a>
         <div class="darkModeBtn">
           <span>다크모드</span>
-          <img src="./assets/images/icons/toggle.png" alt="" />
+          <img src="/assets/icons/toggle.png" alt="" />
         </div>
       </header>
       <!-- MAIN -->
       <main>
         <div class="coverImg">
-          <img src="./assets/images/images/Rectangle 1.png" alt="" />
+          <img src="/assets/images/Rectangle 1.png" alt="" />
         </div>
         <nav class="storageList">
           <ul>
@@ -31,11 +31,22 @@
             <li><span>사진보관함</span></li>
           </ul>
         </nav>
+        <div class="filter">
+          <select name="fill" id="fill-select">
+            <option value="">전체</option>
+            <option value="행복해요">행복해요</option>
+            <option value="슬퍼요">슬퍼요</option>
+            <option value="놀랐어요">놀랐어요</option>
+            <option value="화나요">화나요</option>
+            <option value="기타">기타</option>
+          </select>
+        </div>
+
         <div class="content">
-          <div class="content_left">
+          <div class="cardList">
             <!-- CARD -->
-            <div class="card">
-              <img src="./assets/images/images/슬퍼요 (m).png" alt="" />
+            <!-- <div class="card">
+              <img src="./assets/images/슬퍼요 (m).png" alt="" />
               <div class="cardInfo">
                 <span style="color: #28b4e1">슬퍼요</span>
                 <span style="color: #919191">2024. 03. 12</span>
@@ -43,7 +54,7 @@
               <div class="cardTitle">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
             </div>
             <div class="card">
-              <img src="./assets/images/images/놀랐어요 (m).png" alt="" />
+              <img src="./assets/images/놀랐어요 (m).png" alt="" />
               <div class="cardInfo">
                 <span style="color: #d59029">놀랐어요</span>
                 <span style="color: #919191">2024. 03. 12</span>
@@ -51,7 +62,7 @@
               <div class="cardTitle">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
             </div>
             <div class="card">
-              <img src="./assets/images/images/화나요 (m).png" alt="" />
+              <img src="./assets/images/화나요 (m).png" alt="" />
               <div class="cardInfo">
                 <span style="color: #777777">화나요</span>
                 <span style="color: #919191">2024. 03. 12</span>
@@ -59,7 +70,7 @@
               <div class="cardTitle">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
             </div>
             <div class="card">
-              <img src="./assets/images/images/행복해요 (m).png" alt="" />
+              <img src="./assets/images/행복해요 (m).png" alt="" />
               <div class="cardInfo">
                 <span style="color: #ea5757">행복해요</span>
                 <span style="color: #919191">2024. 03. 12</span>
@@ -67,7 +78,7 @@
               <div class="cardTitle">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
             </div>
             <div class="card">
-              <img src="./assets/images/images/기타 (m).png" alt="" />
+              <img src="./assets/images/기타 (m).png" alt="" />
               <div class="cardInfo">
                 <span style="color: #28b4e1">기타</span>
                 <span style="color: #919191">2024. 03. 12</span>
@@ -75,13 +86,13 @@
               <div class="cardTitle">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
             </div>
             <div class="card">
-              <img src="./assets/images/images/행복해요 (m).png" alt="" />
+              <img src="./assets/images/행복해요 (m).png" alt="" />
               <div class="cardInfo">
                 <span style="color: #ea5757">행복해요</span>
                 <span style="color: #919191">2024. 03. 12</span>
               </div>
               <div class="cardTitle">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
-            </div>
+            </div> -->
           </div>
 
           <form class="content_right" action="#">
@@ -118,7 +129,6 @@
 
               <div class="flex-col">
                 <label class="text-ms" for="context">내용</label>
-                <!-- <input type="text" /> -->
                 <textarea
                   id="content"
                   class="input-layout"

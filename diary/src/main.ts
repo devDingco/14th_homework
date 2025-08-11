@@ -1,52 +1,11 @@
 import '../assets/styles/global.css';
 import '../assets/styles/header.css';
 import '../assets/styles/main.css';
-
-type TCard = {
-  imgUrl: string;
-  state: string;
-  date: string;
-  title: string;
-};
-
-const newCard: TCard[] = [
-  {
-    imgUrl: './assets/images/images/슬퍼요 (m).png',
-    state: '슬퍼요',
-    date: '2024. 03. 12',
-    title: '타이틀 영역입니다. 한줄까지만 노출됩니다.',
-  },
-  {
-    imgUrl: './assets/images/images/놀랐어요 (m).png',
-    state: '놀랐어요',
-    date: '2024. 03. 12',
-    title: '타이틀 영역입니다. 한줄까지만 노출됩니다.',
-  },
-  {
-    imgUrl: './assets/images/images/화나요 (m).png',
-    state: '화나요',
-    date: '2024. 03. 12',
-    title: '타이틀 영역입니다. 한줄까지만 노출됩니다.',
-  },
-  {
-    imgUrl: './assets/images/images/행복해요 (m).png',
-    state: '행복해요',
-    date: '2024. 03. 12',
-    title: '타이틀 영역입니다. 한줄까지만 노출됩니다.',
-  },
-  {
-    imgUrl: './assets/images/images/기타 (m).png',
-    state: '기타',
-    date: '2024. 03. 12',
-    title: '타이틀 영역입니다. 한줄까지만 노출됩니다.',
-  },
-  {
-    imgUrl: './assets/images/images/행복해요 (m).png',
-    state: '행복해요',
-    date: '2024. 03. 12',
-    title: '타이틀 영역입니다. 한줄까지만 노출됩니다.',
-  },
-];
+import '../assets/styles/detail.css';
+import './storageControl';
+import { getLocalStorage, setLocalStorage } from './storageControl';
+import { switchTextColor } from './utils/switchTextColor';
+import type { TCard } from './storageControl';
 
 // const myName = prompt("이름을 입력하세요.");
 const myName = '민지';
@@ -54,13 +13,15 @@ const myName = '민지';
 const LogoEl = document.querySelector('.myName')! as HTMLSpanElement;
 const CompanyEl = document.querySelector('.a')! as HTMLSpanElement;
 const CeoEl = document.querySelector('.ceo')! as HTMLSpanElement;
-const CardEl = document.querySelector('.content_left')! as HTMLSpanElement;
+const cardListEl = document.querySelector('.cardList')! as HTMLSpanElement;
 
 // Form
 const formEl = document.querySelector('form')! as HTMLSpanElement;
 const titleInputEl = document.querySelector('#title')! as HTMLInputElement;
 const contentInputEl = document.querySelector('#content')! as HTMLInputElement;
 const submitDiaryBtnEl = document.querySelector('.submitDiaryBtn')! as HTMLButtonElement;
+
+// const cardListEl = document.querySelector('.cardList')! as HTMLButtonElement;
 
 LogoEl.innerText = `${myName}의 다이어리`;
 CompanyEl.innerText = `${myName}의 다이어리`;
@@ -72,15 +33,12 @@ const initForm = () => {
 };
 
 const submitForm = (e: SubmitEvent) => {
-  e.preventDefault(); // 폼 제출 기본 동작 방지
+  e.preventDefault();
 
   const selectedRadio = document.querySelector('input[name="group"]:checked') as HTMLInputElement;
 
-  // console.log(titleInputEl.value);
-  // console.log(contentInputEl.value);
-  // console.log(selectedRadio.value);
-  console.log('submit!');
-  const newData = {
+  const newData: TCard = {
+    id: Math.floor(Math.random() * 10000),
     imgUrl: titleInputEl.value,
     state: selectedRadio.value,
     date: `2025. 08. 07`,
@@ -88,56 +46,47 @@ const submitForm = (e: SubmitEvent) => {
     content: contentInputEl.value,
   };
 
-  console.log(newData);
-
-  newCard.push(newData);
+  // initialData.push(newData);
+  setLocalStorage(newData);
   addDiaryDom(newData);
   initForm();
   submitDiaryBtnEl.disabled = true;
   submitDiaryBtnEl.classList.remove('active');
-
-  console.log(newCard);
 };
 
 formEl.addEventListener('submit', submitForm);
 
-/**
- * <div class="card">
- *   <img src="./assets/images/images/행복해요 (m).png" alt="" />
- *   <div class="cardInfo">
- *     <span style="color: #ea5757">행복해요</span>
- *     <span style="color: #919191">2024. 03. 12</span>
- *   </div>
- *   <div class="cardTitle">타이틀 영역입니다. 한줄까지만 노출됩니다.</div>
- * </div>
- */
 const addDiaryDom = (props: TCard) => {
+  const link = document.createElement('a');
+  link.setAttribute('href', `./pages/diaryDetailPage?id=${props.id}`);
   // div
   const container = document.createElement('div');
   container.setAttribute('class', 'card');
   //
   const img = document.createElement('img');
-  img.setAttribute('src', `./assets/images/images/${props.state} (m).png`);
+  img.setAttribute('src', `./assets/images/${props.state} (m).png`);
   //
   const inner = document.createElement('div');
   inner.setAttribute('class', 'cardInfo');
 
   const state = document.createElement('span');
   state.innerText = props.state;
+  state.style.color = switchTextColor(props.state);
   const date = document.createElement('span');
   inner.appendChild(state);
   date.innerText = '2025. 08. 07';
-  // state.setAttribute('innerText', '2025. 08. 07');
+  date.style.color = `#919191`;
   inner.appendChild(date);
 
   const title = document.createElement('div');
-  title.innerText = props.title;
+  title.innerText = `${props.title.slice(0, 22)}...`;
   title.setAttribute('class', 'cardTitle');
 
+  link.appendChild(container);
   container.appendChild(img);
   container.appendChild(inner);
   container.appendChild(title);
-  CardEl.insertAdjacentElement('beforeend', container);
+  cardListEl.insertAdjacentElement('beforeend', link);
 
   modalCard();
 };
@@ -162,16 +111,17 @@ titleInputEl.addEventListener('input', checkInput);
 contentInputEl.addEventListener('input', checkInput);
 
 const alertFn = (index: number) => {
+  const curData = getLocalStorage();
   const text = `
-  ${newCard[index].title}
-  ${newCard[index].state}
-  ${newCard[index].date}
+  ${curData[index].title}
+  ${curData[index].state}
+  ${curData[index].date}
   `;
-  alert(text);
+  // alert(text);
 };
 
 const modalCard = () => {
-  const CardEls = document.querySelectorAll('.card') as NodeListOf<HTMLDivElement>;
+  const CardEls = document.querySelectorAll('.cardList') as NodeListOf<HTMLDivElement>;
 
   for (const [index, cardEl] of CardEls.entries()) {
     cardEl.removeEventListener;
@@ -180,3 +130,19 @@ const modalCard = () => {
 };
 
 modalCard();
+
+const displayDiaryDom = () => {
+  const diaryList = getLocalStorage();
+
+  // diaryList.forEach((card: TCard) => {
+  //   addDiaryDom(card);
+  // });
+
+  const displayDom = diaryList.map((card: TCard) => {
+    addDiaryDom(card);
+  });
+
+  cardListEl.insertAdjacentElement('beforeend', displayDom);
+};
+
+displayDiaryDom();

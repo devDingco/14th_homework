@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/detail.ts"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- HEADER -->
+      <header>
+        <a id="logo" href="/">
+          <span class="myName"></span>
+        </a>
+        <div class="darkModeBtn">
+          <span>다크모드</span>
+          <img src="/assets/icons/toggle.png" alt="" />
+        </div>
+      </header>
+      <!-- main -->
+      <main class="detail-layout">
+        <div class="detail-title">
+          <p class="detail-title-label">title</p>
+          <input name="editTitle" class="detail-title-input hidden" type="text" />
+        </div>
+        <div class="detail-head">
+          <div class="detail-head-profile">
+            <span>😀</span>
+            <span class="detail-state">행복해요</span>
+          </div>
+          <span class="detail-date">date</span>
+        </div>
+        <p class="detail-body-lable">내용</p>
+        <textarea name="editBody" class="detail-body-input hidden">내용</textarea>
+        <p class="detail-body">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam provident ullam vel corrupti iusto consequuntur
+          iste reiciendis reprehenderit ab, velit assumenda fuga eligendi maiores expedita, soluta quaerat esse illo
+          perspiciatis? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam provident ullam vel corrupti
+          iusto consequuntur iste reiciendis reprehenderit ab, velit assumenda fuga eligendi maiores expedita, soluta
+          quaerat esse illo perspiciatis? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam provident ullam
+          vel corrupti iusto consequuntur iste reiciendis reprehenderit ab, velit assumenda fuga eligendi maiores
+          expedita, soluta quaerat esse illo perspiciatis? Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Quam provident ullam vel corrupti iusto consequuntur iste reiciendis reprehenderit ab, velit assumenda fuga
+          eligendi maiores expedita, soluta quaerat esse illo perspiciatis?
+        </p>
+        <div class="detail-footer">
+          <button class="detail-footer-editBtn">수정</button>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
