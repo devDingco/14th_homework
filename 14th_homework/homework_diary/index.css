@@ -53,7 +53,7 @@
 .카드영역{
     width: 784px;
     height: 1209px;
-    background-color: rgb(24, 24, 19);
+    background-color: white;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -62,6 +62,7 @@
     align-items: flex-start;
 
 }
+
 .카드{
     width: 380px;
     height: 373px;
@@ -70,10 +71,21 @@
     gap:16px;
     justify-content: space-between;
 }
+.카드:hover{
+    filter :blur(1.5px);
+    animation-name: 효과;
+    animation-duration: 0.5s;
+
+}
+@keyframes 효과 {
+    to {
+        transform : blur(5px)
+    }
+}
 .카드이미지{
     width: 380px;
     height: 285px;
-    background-image: url("./assets/Frame1.png");
+    
 }
 .일기쓰기영역{
     width: 360px;

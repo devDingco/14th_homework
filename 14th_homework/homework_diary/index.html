@@ -17,25 +17,31 @@
             <div class="네비게이션영역"></div>
             <div id="" class="내용영역">
                 <div id="카드영역" class="카드영역">
-                    <div id="카드1" class="카드">
-                        <div id="" class="카드이미지"></div>
-                        <div id="" class="카드내용요약"></div>
-                    </div>
-                    <div id="카드2" class="카드">
-                        <div id="" class="카드이미지"></div>
-                        <div id="" class="카드내용요약"></div>
-                    </div>
-                    <div id="카드3" class="카드">
-                        <div id="" class="카드이미지"></div>
-                        <div id="" class="카드내용요약"></div>
-                    </div>
+                    
+                                               
                 </div>
                 <div class="일기쓰기영역">
                     <div class="제목">일기쓰기</div>
                     <div class-="입력영역">
-
+                        <div id= "기분" class="오늘의기분">
+                            <div>오늘 기분은 어땠나요?</div>
+                            <input id ="행복" class="오늘의기분" type="radio" name ="기분" />행복해요
+                            <input id ="슬픔" class="오늘의기분" type="radio" name ="기분" />슬퍼요
+                            <input id="놀람" class="오늘의기분" type="radio" name ="기분" />놀랐어요
+                            <input id="화남" class="오늘의기분" type="radio" name ="기분" />화나요
+                            <input id="기타" class="오늘의기분" type="radio" name ="기분" />기타
+                        </div>
+                        <div class="제목">
+                            <div>제목</div>
+                            <input id="오늘의제목" type="text" placeholder="제목을 입력해 주세요."/>
+                        </div>
+                        <div class="내용">
+                            <div>내용</div>
+                            <textarea id="오늘의내용" placeholder="내용을 입력해 주세요."></textarea>
+                        </div>
+            
                     </div>
-                    <button class="등록하기버튼" onclick="일기카드생성()">등록하기</button>
+                    <button class="등록하기버튼" onclick="일기카드목록()">등록하기</button>
                 </div>
             </div>
         </div>
