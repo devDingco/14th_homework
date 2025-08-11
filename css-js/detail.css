@@ -1,0 +1,430 @@
+*{
+
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+
+    font-family: 'Pretendard Variable';
+
+}
+
+body{
+
+    width: 100vp;
+    height: 100vp;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.background{
+
+    width: 1920px; /* 초기 너비 */
+    height: 1805px; /* 초기 높이 */
+    min-height: 894px; /* 최소 높이 */
+    max-height: 1726px; /* 최대 높이 */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+
+}
+
+.main{
+
+    width: 1920px;
+    height: 678px;
+    padding: 0px 20px;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
+    gap: 64px;
+
+}
+
+/* 상세 페이지 헤더 */
+.main__header{
+
+    width: 1920px;
+    height: 60px;
+    padding: 0px 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+/* 상세 페이지 헤더 - 타이틀 */
+.main__header__title{
+
+    width: 1168px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 16px;
+    letter-spacing: -1%;
+    color: #000000;
+
+}
+
+/* 상세 페이지 본문 */
+.main__frame {
+
+    width: 1880px;
+    height: 554px;
+
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+
+}
+
+/* 상세 페이지 본문 - 다이어리 */
+.main__frame__diary{
+
+    width: 1168px;
+    height: 357px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 16px;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+
+}
+
+/* 상세 페이지 본문 - 다이어리 타이틀 */
+.frame__diary__title {
+
+    width: 1168px;
+    height: 84px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+
+}
+
+.diary__title{
+
+    width: 100%;
+    height: 36px;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 12px;
+
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: #000000;
+
+}
+
+.diary__subtitle{
+
+    width: 100%;
+    height: 32px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.diary__subtitle__feeling{
+
+    height: 32px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -1%;
+
+}
+
+.sad
+{
+    color: #28B4E1;
+}
+
+.surprise{
+    color: #D59029;
+}
+
+.angry{
+    color: #777777;
+}
+
+.happy{
+    color: #EA5757;
+}
+
+.etc{
+    color: #A229ED;
+}
+
+
+
+.diary__subtitle__date{
+
+    width: 107px;
+    height: 20px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -1%;
+    white-space: nowrap;
+    color: #919191;
+
+}
+
+
+/* 상세 페이지 본문 - 다이어리 본문 */
+.frame__diary__context{
+
+    width: 1168px;
+    height: 169px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+
+}
+
+.diary__context{
+
+    width: 100%;
+    height: 133px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 13px;
+
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing:-1% ;
+    color: #000000;
+}
+
+.diary__context__text{
+
+    width: 100%;
+    height: 100px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -1%;
+    color: #333333;
+}
+
+.diary__copy{
+
+    width: 100%;
+    height: 24px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+}
+
+.diary__copy__botton{
+
+    width: 91px;
+    height: 24px;
+    border: none;
+    background-color: transparent;
+
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: #1C1C1C;
+
+}
+
+
+/* 상세 페이지 본문 - 다이어리 수정, 삭제 버튼 */
+.frame__diary__button{
+
+    width: 1168px;
+    height: 40px;
+
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+
+}
+
+.diary__button {
+
+    width: 51px;
+    height: 40px;
+    border: 1px solid #D4D3D3;
+    border-radius: 8px;
+    padding: 8px 10px;
+    background-color: #FFFFFF;
+
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    text-align: center;
+    color: #1C1C1C;
+    white-space: nowrap;
+
+}
+
+
+/* 상세 페이지 회고 */
+.main__frame__comment {
+
+    width: 1168px;
+    height: 205px;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    gap: 16px;
+
+}
+
+.frame__comment__form {
+
+    width: 1168px;
+    height: 85px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: #000000;
+
+}
+
+.comment__form {
+
+    width: 100%;
+    height: 48px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+}
+
+.diary__comment {
+
+    width: 1101px;
+    height: 48px;
+    border: 1px solid #D4D3D3;
+    border-radius: 8px;
+    outline: none;
+    padding: 12px 16px;
+    background-color: #FFFFFF;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: #000000;
+
+}
+
+.diary__comment::placeholder{
+
+    color: #ABABAB;
+
+}
+
+.comment__button {
+
+    width: 51px;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 10px;
+    background-color: #000000;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    text-align: center;
+    color: #FFFFFF;
+    white-space: nowrap;
+
+}
+
+.frame__comment__text{
+
+    width: 100%;
+    height: 104px;
+    padding:  40px 0px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    text-align: center;
+    color: #919191;
+
+}

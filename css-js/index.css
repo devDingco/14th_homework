@@ -1,9 +1,34 @@
+/* 
+.클래스명 {
+    width: ;
+    height: ;
+    border: ;
+    border-radius: ;
+    outline: none;
+    padding: ;
+    background-color: ;
+
+
+    display: ;
+    flex-direction: ;
+    justify-content: ;
+    align-items: ;
+    gap: ;
+
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 56px;
+    letter-spacing: ;
+    text-align: ;
+    color: ;
+
+}
+*/
+
 @font-face {
-	font-family: 'Pretendard Variable';
-	font-weight: 45 920;
-	font-style: normal;
-	font-display: swap;
-	src: url('./woff2/PretendardVariable.woff2') format('woff2-variations');
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-style: normal;
 }
 
 *{
@@ -120,6 +145,7 @@ body{
     align-items: center;
     gap: 42px;
 
+
 }
 
 .frame__content__tab {
@@ -152,6 +178,22 @@ body{
 
 }
 
+.tab__menu__disabled {
+
+    width: 119px;
+    height: 48px;
+    padding: 12px 8px;
+
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    letter-spacing: -1% ;
+    text-align: center;
+    color: #ABABAB;
+    white-space: nowrap;
+
+}
+
 .frame__content__diary {
 
     width: 1168px;
@@ -159,16 +201,193 @@ body{
 
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: baseline;
     gap: 24px;
+
+    transition: width 0.5s ease-out;
     
+}
+
+.frame__content__diary:has(.diary__card:hover){
+
+    width: 1200px;
+
 }
 
 .content__diary__list{
 
+    /* min-width: 784px; */
+    /* max-width: 816px; */
     width: 784px;
-    height: 1167px;
-    border: 1px solid #000000;
+    height: 1190px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: baseline;
+    align-content: flex-start;
+    gap: 24px;
+
+    transition: width 0.5s ease-out;
+
+}
+
+
+.content__diary__list:has(.diary__card:hover){
+
+    width: 860px;
+
+}
+
+a{
+    text-decoration: none;
+}
+
+.diary__card{
+
+    width: 380px;
+    height: 373px;
+    border-radius: 16px;
+    padding-bottom: 16px;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    gap: 16px;
+
+    transition: 
+    width 0.5s,
+    height 0.5s,
+    box-shadow 0.5s;
+
+
+}
+
+
+.diary__card:hover{
+
+    width: 412px;
+    height: 396px;
+    
+    box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.16);
+
+
+
+}
+
+.diary__card:hover .diary__card__subtitle{
+
+    width: 110%;
+
+}
+
+
+.diary__card__image{
+
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    /* background-image: url("./assets/images/sad_M.svg"); */
+    background-size: 100% 100%;
+
+    transition: 
+    width 0.5s,
+    filter 0.5s;
+
+}
+
+
+.diary__card:hover .diary__card__image{
+
+    width: 100%;
+    filter: blur(3px);
+
+}
+
+
+.diary__card__text{
+
+    width: 380px;
+    height: 56px;
+    padding: 0px 8px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+
+}
+
+.diary__card__subtitle{
+
+    width: 100%;
+    height: 24px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    transition: width 0.5s;
+
+}
+
+.diary__card__feeling{
+
+    width: 60px;
+
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -1%;
+
+}
+
+.sad
+{
+    color: #28B4E1;
+}
+
+.surprise{
+    color: #D59029;
+}
+
+.angry{
+    color: #777777;
+}
+
+.happy{
+    color: #EA5757;
+}
+
+.etc{
+    color: #A229ED;
+}
+
+#diary__card__date{
+
+    width: 100px;
+
+    font-weight: 400;
+    font-size: 14px;
+    text-align: right;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: #919191;
+}
+
+
+.diary__card__title{
+
+    width: 100%;
+    height: 24px;
+
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: #000000; 
 
 }
 
@@ -249,7 +468,7 @@ body{
 
 }
 
-#feeling{
+.feeling{
 
     height: 24px;
 
@@ -286,6 +505,12 @@ body{
     justify-content: space-between;
     gap: 8px;
 
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -1%;
+    color: #333333;
+
 }
 
 .input__text__context{
@@ -298,6 +523,12 @@ body{
     justify-content: space-between;
     gap: 8px;
 
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -1%;
+    color: #333333;
+
 }
 
 #title__feeling{
@@ -306,16 +537,20 @@ body{
     height: 48px;
     border: 1px solid #D4D3D3;
     border-radius: 8px;
+    outline: none;
     padding: 12px 16px;
     background-color: #FFFFFF;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: #333333;
 
 }
 
 #title__feeling::placeholder{
 
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
     color: #ABABAB;
 
 }
@@ -326,16 +561,20 @@ body{
     height: 128px;
     border: 1px solid #D4D3D3;
     border-radius: 8px;
+    outline: none;
     padding: 12px 16px;
     background-color: #FFFFFF;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: #333333;
 
 }
 
 #context__feeling::placeholder{
 
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
     color: #ABABAB;
 
 }
@@ -347,7 +586,7 @@ body{
     border: 0px;
     border-radius: 8px;
     padding: 8px 10px;
-    background-color: #C7C7C7;
+    background-color: #000000;
 
     font-weight: 600;
     font-size: 18px;
@@ -356,6 +595,13 @@ body{
     color: #F2F2F2;
 
 }
+.diary__form__button:disabled{
+
+    background-color: #C7C7C7;
+
+}
+
+
 
 .page{
 

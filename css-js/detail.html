@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>상세 페이지</title>
+    <link rel = "stylesheet" href = "./detail.css" />
+    <script src="./detail.js"></script>
+</head>
+<body>
+    <div class="background">
+        <div class="main">
+            <div class="main__header">
+                <div class="main__header__title">
+                    민지의 다이어리
+                </div>
+            </div>
+            <div class="main__frame">
+                <div class="main__frame__diary">
+                    <!-- id = "title" -->
+                    <div id="title" class="frame__diary__title">
+                        <!-- <div class="diary__title">이것은 타이틀 입니다.</div>
+                        <div class="diary__subtitle">
+                            <div class="diary__subtitle__feeling">
+                                <img src="./assets/images/happy_S.svg" width="32px" height="32px" />
+                                행복해요
+                            </div>
+                            <div class="diary__subtitle__date">
+                                <div id="write__date">2025. 08. 10</div>
+                                <div>작성</div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <!--  -->
+                    <div class="frame__diary__context">
+                        <div class="diary__context">
+                            <div>내용</div>
+                            <!-- id = "context" -->
+                            <div  id="context" class="diary__context__text"></div>
+                        </div>
+                        <div class="diary__copy">
+                            <button class="diary__copy__botton">
+                                <img src="./assets/icons/copy_outline_light_m.svg" />
+                                내용복사
+                            </button>
+                        </div>
+                    </div>
+                    <div class="frame__diary__button">
+                        <button class="diary__button">수정</button>
+                        <button class="diary__button">삭제</button>
+                    </div>
+                </div>
+                <div class="main__frame__comment">
+                    <div class="frame__comment__form">
+                        <div>회고</div>
+                        <div class="comment__form">
+                            <input type="text" placeholder="회고를 남겨보세요." class="diary__comment" />
+                            <button class="comment__button">입력</button>
+                        </div>
+
+                    </div>
+                    <div class="frame__comment__text">등록된 회고가 없습니다.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
