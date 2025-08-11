@@ -1,5 +1,7 @@
-/* 카드 리스트 */
-.diary-list {
+/* main.css — 메인 화면(카드/리스트) 전용 */
+
+/* 리스트 컨테이너 */
+main .diary-list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -7,7 +9,7 @@
 }
 
 /* 카드 기본 */
-.diary-card {
+main .diary-card {
   width: calc(50% - 10px);
   border-radius: 20px;
   padding: 0;
@@ -19,13 +21,10 @@
   transition: transform 0.2s ease;
   cursor: pointer;
 }
+main .diary-card:hover { transform: translateY(-4px); }
 
-
-.diary-card:hover {
-  transform: translateY(-4px);
-}
-
-.card-top {
+/* 카드 레이아웃 */
+main .card-top {
   width: 100%;
   padding: 40px 20px 30px;
   display: flex;
@@ -33,9 +32,8 @@
   align-items: center;
   justify-content: center;
 }
-
-.card-bottom {
-  background-color: white;
+main .card-bottom {
+  background-color: #fff;
   width: 100%;
   padding: 20px;
   display: flex;
@@ -43,25 +41,25 @@
   align-items: flex-start;
   gap: 8px;
 }
+main .card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
 
-.card-meta {
+/* 메타/타이틀 */
+main .card-meta {
   display: flex;
   justify-content: space-between;
   width: 100%;
   font-size: 14px;
   font-weight: bold;
 }
-
-.card-meta .date {
-  color: #999;
-  font-weight: normal;
-}
-
-.card-meta .emotion {
-  text-align: left;
-}
-
-.card-title {
+main .card-meta .date { color: #999; font-weight: normal; }
+main .card-meta .emotion { text-align: left; }
+main .card-title {
   font-size: 15px;
   font-weight: 600;
   width: 100%;
@@ -70,16 +68,9 @@
   text-overflow: ellipsis;
 }
 
-.card-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-}
-
-.profile-wrapper {
-  background-color: white;
+/* 아바타/이미지 */
+main .profile-wrapper {
+  background-color: #fff;
   border-radius: 50%;
   padding: 18px;
   width: 140px;
@@ -88,8 +79,7 @@
   align-items: center;
   justify-content: center;
 }
-
-.profile-img {
+main .profile-img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -98,8 +88,18 @@
   cursor: pointer;
 }
 
-.profile-wrapper img,
-.card-top,
-.card-bottom {
+/* 이벤트 누락 방지용 오버라이드 */
+main .profile-wrapper img,
+main .card-top,
+main .card-bottom {
   pointer-events: auto !important;
+}
+
+/* 메인 섹션의 반응형(카드/리스트 관련만) */
+@media (max-width: 1024px) {
+  main .diary-list { max-width: 100%; }
+  main .diary-card { width: 100%; }
+}
+@media (max-width: 768px) {
+  main .diary-list { flex-direction: column; gap: 16px; }
 }

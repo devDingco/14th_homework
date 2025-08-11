@@ -1,0 +1,8 @@
+:root {
+  --primary-color: #000;
+  --secondary-color: #999;
+  --border-color: #e0e0e0;
+  --bg-light: #f9f9f9;
+  --form-shadow: rgba(0, 0, 0, 0.08) 0px 2px 8px;
+  --font: 'Pretendard', sans-serif;
+}

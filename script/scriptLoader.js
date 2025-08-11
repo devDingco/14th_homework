@@ -2,8 +2,13 @@
 
 async function loadScriptsSequential() {
   const scriptsToLoad = [
-    "./script/diaryDetail.js",
-    "./script/diaryList.js",
+    "./script/utils/safe.js",
+    "./script/utils/dom.js",
+    "./script/diary/card.js",
+    "./script/diary/render.js",
+    "./script/diary/fetchRender.js",   // ← JSON 로드용
+    "./script/diaryDetail.js",         // 클릭 상세(커스텀 바인딩)
+    "./script/formHandler.js",
     "./script/main.js"
   ];
 

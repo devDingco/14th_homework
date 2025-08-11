@@ -1,0 +1,32 @@
+:root { --footer-height: 110px; }
+
+/* 고정 푸터 */
+#footer {
+  background-color: var(--bg-light);
+  color: #666;
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 -1px 6px rgba(0,0,0,0.05);
+}
+
+/* 컨텐츠가 푸터에 가려지지 않게 여백 확보 */
+body { padding-bottom: var(--footer-height); }
+
+.footer {
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+  padding: 30px 20px;
+  text-align: start;
+  font-size: 14px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.footer p:first-child {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}

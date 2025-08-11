@@ -1,3 +1,10 @@
+// main.js (최상단)
+window.diaryList = Array.isArray(window.diaryList) ? window.diaryList : [];
+
+whenReady(() => {
+  renderDiariesFromUrl("./script/json/data.json")
+    .catch(err => console.error("초기 렌더 실패:", err));
+});
 
 function renderDiaries(diaries) {
   const list = document.getElementById("diary-list");
