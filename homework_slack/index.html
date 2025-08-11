@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>슬랙 클론 코딩</title>
+    <link rel="stylesheet" href="./index.css"/>
+    <script src="./index.js"></script>
+</head>
+<body>
+    <div class="가장큰배경">
+        <div class="헤더">
+            <div class="헤더_왼쪽영역">
+                <img src="./assets/icons/arrow_left.png" width="32px" height="32px"/>
+                <img src="./assets/icons/arrow_right.png" width="32px" height="32px"/>
+                <img src="./assets/icons/time.png" width="32px" height="32px"/>
+            </div>
+            <div class="헤더_오른쪽영역">
+                <img src="./assets/images/searchbar.png" width="920px" height="48px"/>
+                <div class="헤더_오른쪽영역_프로필설정">
+                    <img src="./assets/icons/badge.png" width="111px" height="48px"/>
+                    <img src="./assets/icons/help.png" width="32px" height="32px"/>
+                </div>
+            </div>
+        </div>
+        <div class="바디">
+            <div class="바디_사이드바왼쪽"></div>
+            <div class="바디_메인">
+                <div class="바디_메인_메뉴">
+
+                </div>
+                <div class="바디_메인_회원가입">
+                    <div class="바디_메인_회원가입_타이틀">
+                        코드캠프에 가입하고<br/>개발자로 커리어 점프 하세요.</div>
+                    <div class="바디_메인_회원가입_정보입력">
+                        <div class="바디_메인_회원가입_이름">
+                            <div>이름</div>
+                            <input id="이름" type ="text" placeholder="이름을 입력해 주세요." oninput="가입활성기능()"/>
+                        </div>
+                        <div class="바디_메인_회원가입_이메일">
+                            <div>이메일</div>
+                            <input id="이메일" type ="text" placeholder="네이버,구글,카카오 계정만 입력" oninput="가입활성기능()"/>
+                        </div>
+                        <div class="바디_메인_회원가입_비밀번호">
+                            <div>비밀번호</div>
+                            <input id="비번" type ="password" placeholder="비밀번호를 입력해 주세요." oninput="가입활성기능()"/>
+                        </div>
+                        <div class="바디_메인_회원가입_비밀번호">
+                            <div>비밀번호 확인</div>
+                            <input id="비번확인" type ="password" placeholder="비밀번호를 한 번 더 입력해 주세요." oninput="가입활성기능()"/>
+                        </div>
+                        <div id="비밀번호재입력alert"></div>
+                        <div class="바디_메인_회원가입_전화번호">
+                            <div>전화번호</div>
+                            <input id="전화번호" type ="text" placeholder="010으로 시작, '-'를 꼭 입력해주세요." oninput="가입활성기능()"/>
+                        </div>
+                        <div class="바디_메인_회원가입_인증">
+                            <div class="인증번호">
+                                <div id="인증번호보여주는곳">000000</div>
+                                <button id = "인증요청버튼" onclick="인증번호요청기능()">인증번호 요청하기</button>
+                            </div>
+                            <div class="남은시간" >
+                                <div id="남은시간보여주는곳">3:00</div>
+                                <button id="인증하기버튼" onclick="인증하기()">인증하기</button>
+                            </div>
+                            
+                        </div>
+                        <div class="바디_메인_회원가입_자기소개">
+                            <div>자기소개</div>
+                            <textarea id="자기소개" placeholder="자기소개를 입력해주세요." oninput="가입활성기능()"></textarea>
+                        </div>
+                        <div class="바디_메인_회원가입_성별">
+                            <div>성별</div>
+                            <div class="라디오묶음"> 
+                                <div class="성별여자">
+                                    <input id="radio_1" type ="radio" name="성별" oninput="가입활성기능()"/>여자
+                                </div>
+                                <div class="성별남자">
+                                    <input id="radio_2" type="radio" name="성별" oninput="가입활성기능()"/>남자
+                                </div>    
+                            </div>
+                        </div>
+                        <div class="바디_메인_회원가입_동의">
+                            <input id="checkbox_" type ="checkbox" oninput="가입활성기능()"/>
+                            집으로 씻으러만 가는데 동의합니다.
+                        </div>
+                        <div>
+                            <button id="가입버튼" class="바디_메인_회원가입_가입" onclick="가입확인기능()">가입</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="바디_메인_사진"></div>
+            </div>
+            <div class="바디_사이드바오른쪽"></div>
+        </div>
+        <div class="푸터">
+
+        </div>
+    </div>
+</body>
+</html>
