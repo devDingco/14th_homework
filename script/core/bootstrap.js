@@ -16,9 +16,8 @@
 
   function haveRenderer() {
     return !!(
-      (w.DiaryList &&
-        (typeof w.DiaryList.renderDiaries === "function")) ||
-      typeof w.renderDiaries === "function"
+      (w.DiaryList && typeof w.DiaryList.renderDiaries === "function") ||
+      (typeof w.renderDiaries === "function")
     );
   }
 
@@ -26,9 +25,29 @@
     return d.getElementById("diary-list");
   }
 
-  // ✅ 초기 데이터: 상태에 주입(참조 유지) → 표준 렌더
+  function renderNow(list) {
+    try {
+      if (w.DiaryList && typeof w.DiaryList.renderDiaries === "function") {
+        w.DiaryList.renderDiaries(list || w.diaryList || []);
+      } else if (typeof w.renderDiaries === "function") {
+        w.renderDiaries(list || w.diaryList || []);
+      } else {
+        throw new Error("renderer not available");
+      }
+    } catch (e) {
+      console.error("초기 렌더 실패:", e);
+    }
+  }
+
+  // ✅ 초기 데이터: (1) 저장본 있으면 그걸로 렌더 (2) 없으면 fetch→hydrate→렌더
   async function hydrateAndRender(url) {
-    // 1) 데이터 로드 (실패 시 빈 배열로 진행)
+    // 1) 저장본/기존 상태가 있으면 그대로 렌더(덮어쓰기 방지)
+    if (Array.isArray(w.diaryList) && w.diaryList.length > 0) {
+      renderNow(w.diaryList);
+      return;
+    }
+
+    // 2) 저장본이 없으면 data.json 로드
     var data = [];
     try {
       var res = await fetch(url, { cache: "no-store" });
@@ -40,27 +59,16 @@
       data = [];
     }
 
-    // 2) 상태에 주입(참조 유지)
+    // 3) 상태에 주입(참조 유지)
     if (typeof w.hydrateDiaries === "function") {
       try { w.hydrateDiaries(data, "replace"); } catch (e) { console.warn("hydrateDiaries 실패:", e); }
     } else {
-      // 전역 배열 참조 유지
       w.diaryList = Array.isArray(w.diaryList) ? w.diaryList : [];
-      w.diaryList.splice(0, w.diaryList.length, ...data);
+      w.diaryList.splice(0, w.diaryList.length, ...(data || []));
     }
 
-    // 3) 렌더러로 그리기
-    try {
-      if (w.DiaryList && typeof w.DiaryList.renderDiaries === "function") {
-        w.DiaryList.renderDiaries(w.diaryList);
-      } else if (typeof w.renderDiaries === "function") {
-        w.renderDiaries(w.diaryList);
-      } else {
-        throw new Error("renderer not available");
-      }
-    } catch (e) {
-      console.error("초기 렌더 실패:", e);
-    }
+    // 4) 렌더
+    renderNow(w.diaryList);
   }
 
   w.bootstrapDiary = function bootstrapDiary(attempt) {

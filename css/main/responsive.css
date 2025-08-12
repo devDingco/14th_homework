@@ -5,3 +5,4 @@
 @media (max-width: 768px) {
   main .diary-list { flex-direction: column; gap: 16px; }
 }
+

@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>일기 상세 | 민지의 다이어리</title>
   <link rel="stylesheet" href="../css/subpage/detail.css" />
+  <link rel="stylesheet" href="../css/emotion.css" />
+    <link rel="stylesheet" href="../css/form.css" />
+
 </head>
 <body>
   <header class="page-header">
@@ -18,11 +21,14 @@
     <!-- 상단: 제목 / 작성일 -->
     <div class="detail-head">
       <h2 class="title">이것은 타이틀 입니다.</h2>
+
       <div class="meta-right">
         <span class="date">2024. 07. 12</span>
         <span class="muted">작성</span>
       </div>
+
     </div>
+                <hr class="divider" />
 
     <!-- 감정/프로필 -->
     <div class="submeta">
@@ -32,7 +38,6 @@
       <span class="emotion">행복해요</span>
     </div>
 
-    <hr class="divider" />
 
     <!-- 본문: 라벨 / 내용 / 버튼(우측) -->
     <section class="content-row">
@@ -50,6 +55,7 @@
     <div id="edit-slot" hidden></div>
   </main>
 <script src="../script/diaryDetail.js" defer></script>
+<script src="../script/diaryDetail.edit.js" defer></script>
 
 </body>
 </html>
