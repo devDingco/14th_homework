@@ -20,3 +20,10 @@ document.getElementById("title").innerHTML = `
 </div>`
 
 document.getElementById("context").innerText = diaryCardList[cardIndex].card_context}
+
+
+function diaryEdit() {
+
+    location.href = `./edit.html?number=${cardIndex}`;
+
+}

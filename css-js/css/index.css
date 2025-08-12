@@ -128,7 +128,7 @@ body{
     width: 1168px;
     height: 240px;
     border-radius: 24px;
-    background-image: url("./assets/images/banner.jpg") ;
+    background-image: url("../assets/images/banner.jpg") ;
     background-position: center;
     background-size: 100% auto; 
 
@@ -145,6 +145,23 @@ body{
     align-items: center;
     gap: 42px;
 
+
+
+
+}
+
+.frame__content__navigator {
+
+    width: 1920px;
+    height: 112px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+
+    position: sticky;
 
 }
 
@@ -194,6 +211,31 @@ body{
 
 }
 
+.frame__content__filter{
+    width: 1168px;
+    height: 32px;
+
+
+}
+
+.feeling__filter {
+
+    width: 112px;
+    height: 32p  x;
+    border: 1px solid #C7C7C7;
+    border-radius: 8px;
+    padding: 4px;
+    
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1% ;
+    color: #1C1C1C;
+    white-space: nowrap; 
+
+}
+
 .frame__content__diary {
 
     width: 1168px;
@@ -205,6 +247,8 @@ body{
     gap: 24px;
 
     transition: width 0.5s ease-out;
+
+    overflow: scroll;
     
 }
 
@@ -219,7 +263,7 @@ body{
     /* min-width: 784px; */
     /* max-width: 816px; */
     width: 784px;
-    height: 1190px;
+    height: 1167px;
 
     display: flex;
     flex-direction: row;
@@ -229,6 +273,14 @@ body{
     gap: 24px;
 
     transition: width 0.5s ease-out;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1% ;
+    text-align: center;
+    color: #919191;
+    white-space: nowrap;
 
 }
 
@@ -242,6 +294,35 @@ body{
 a{
     text-decoration: none;
 }
+
+#delete__button{
+
+    width: 24px;
+    height: 24px;
+
+    position: relative;
+    top: -255px;
+    left: -40px;
+
+    transition: 
+    width 0.5s,
+    height 0.5s,
+    top 0.5s,
+    left 0.5s;
+
+}
+
+.diary__card:hover #delete__button{
+
+    width: 27px;
+    height: 27px;
+
+    position: relative;
+    top: -275px;
+    left: -45px;
+
+}
+
 
 .diary__card{
 
@@ -341,6 +422,7 @@ a{
     font-size: 14px;
     line-height: 20px;
     letter-spacing: -1%;
+    text-align: left;
 
 }
 
@@ -387,6 +469,7 @@ a{
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -1%;
+    text-align: left;
     color: #000000; 
 
 }
@@ -474,6 +557,7 @@ a{
 
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 8px;
 
     font-weight: 500;
@@ -482,6 +566,16 @@ a{
     letter-spacing: -1%;
 
 }
+
+.feeling input[type="radio"]{
+
+    width: 24px;
+    height: 24px;
+    border: 2px solid #777777;
+    accent-color: #000000; /* 라디오 버튼이 선택되었을 때 색상 */
+
+}
+
 
 .form__input__text{
 
@@ -601,7 +695,13 @@ a{
 
 }
 
+#floating__button{
 
+    position: relative;
+    top: -80px;
+    left: 564px;
+
+}
 
 .page{
 

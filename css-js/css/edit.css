@@ -1,0 +1,413 @@
+*{
+
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+
+    font-family: 'Pretendard Variable';
+
+}
+
+body{
+
+    width: 100vp;
+    height: 100vp;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.background{
+
+    width: 1920px; /* 초기 너비 */
+    height: 1805px; /* 초기 높이 */
+    min-height: 894px; /* 최소 높이 */
+    max-height: 1726px; /* 최대 높이 */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+
+}
+
+.main{
+
+    width: 1920px;
+    height: 678px;
+    padding: 0px 20px;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
+    gap: 64px;
+
+}
+
+/* 수정 페이지 헤더 */
+.main__header{
+
+    width: 1920px;
+    height: 60px;
+    padding: 0px 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+/* 수정 페이지 헤더 - 타이틀 */
+.main__header__title{
+
+    width: 1168px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 16px;
+    letter-spacing: -1%;
+    color: #000000;
+
+}
+
+/* 수정 페이지 본문 */
+.main__frame {
+
+    width: 1880px;
+    height: 554px;
+
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+
+}
+
+/* 수정 페이지 본문 - 수정 폼 */
+.main__frame__edit{
+
+    width: 1168px;
+    height: 432px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 16px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+
+
+}
+
+.frame__edit__feeling{
+
+    width: 100%;
+    height: 64px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: #000000;
+
+}
+
+.edit__feeling__radio {
+
+    width: 100%;
+    height: 24px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    gap: 20px;
+
+}
+
+.feeling {
+
+    height: 24px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    align-items: center;
+    gap: 8px;
+
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: -1%;
+    color: #333333;
+
+}
+
+.feeling input[type="radio"]{
+
+    width: 24px;
+    height: 24px;
+    border: 2px solid #777777;
+    accent-color: #000000; /* 라디오 버튼이 선택되었을 때 색상 */
+
+}
+
+.frame__edit__title {
+
+    height: 76px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -1%;
+    color: #333333;
+
+}
+
+.edit__title__form {
+
+    width: 100%;
+    height: 48px;
+    border: 1px solid #D4D3D3;
+    border-radius: 8px;
+    outline: none;
+    padding: 12px 16px;
+    background-color: #FFFFFF;
+
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: #000000;
+
+}
+
+.frame__edit__context {
+
+    height: 156px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -1%;
+    color: #333333;
+
+}
+
+.edit__context__form {
+
+    width: 100%;
+    height: 128px;
+    border: 1px solid #D4D3D3;
+    border-radius: 8px;
+    outline: none;
+    padding: 12px 16px;
+    background-color: #FFFFFF;
+
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: #000000;
+
+}
+
+.frame__edit__button {
+
+    height: 48px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+
+}
+
+#cancel__button {
+
+    width: 104px;
+    height: 48px;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    padding: 8px 10px;
+    background-color: #FFFFFF;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    text-align: center;
+    white-space: nowrap;
+    color: #1C1C1C;
+
+}
+
+#edit__button {
+
+    width: 104px;
+    height: 48px;
+    border-radius: 8px;
+    padding: 8px 10px;
+    background-color: #000000;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    text-align: center;
+    white-space: nowrap;
+    color: #F2F2F2;
+
+}
+
+/* 수정 페이지 회고 */
+.main__frame__comment {
+
+    width: 1168px;
+    height: 205px;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    gap: 16px;
+
+}
+
+.frame__comment__form {
+
+    width: 1168px;
+    height: 85px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: #000000;
+
+}
+
+.comment__form {
+
+    width: 100%;
+    height: 48px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+}
+
+.diary__comment {
+
+    width: 1101px;
+    height: 48px;
+    border: 1px solid #D4D3D3;
+    border-radius: 8px;
+    outline: none;
+    padding: 12px 16px;
+    background-color: #FFFFFF;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: #000000;
+
+}
+
+.diary__comment:disabled {
+    
+    border: none;
+    background-color: #F2F2F2;
+
+}
+
+.diary__comment::placeholder{
+
+    color: #ABABAB;
+
+}
+
+.comment__button {
+
+    width: 51px;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 10px;
+    background-color: #000000;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    text-align: center;
+    color: #FFFFFF;
+    white-space: nowrap;
+
+}
+
+.comment__button:disabled{
+
+    background-color: #C7C7C7;
+    color: #F2F2F2;
+
+}
+
+
+.frame__comment__text{
+
+    width: 100%;
+    height: 104px;
+    padding:  40px 0px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    text-align: center;
+    color: #919191;
+
+}
