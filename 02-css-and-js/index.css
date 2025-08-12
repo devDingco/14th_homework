@@ -36,14 +36,37 @@
 }
 .바디__메인섹션{
     width: 1920px;
-    height: 1257px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .바디__메인섹션__메뉴섹션{
     width: 1920px;
-    height: 48px;
+    display: flex;
+    justify-content: center;
+    
+}
+
+
+.바디__메인섹션__메뉴섹션__메뉴{
+  
+    width: 1168px;
+}
+.바디__메인섹션__필터섹션{
+    width: 1920px;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0px;
+    z-index: 10;
+    
+    
+}
+.바디__메인섹션__필터섹션__필터{
+    width: 1168px;
+    backdrop-filter: blur(10px);
+    
+
 }
 .바디__메인섹션__아티클섹션{
     display: flex;
@@ -65,15 +88,29 @@
     width: 380px;
     height: 373px;
     transition: transform 0.5s;
+    
+    position: relative;
 }
 .바디__메인섹션__아티클섹션__일기칸__일기장:hover{
     filter: blur(3px);
     transform: scale(1.1);
+
     
 }
 .바디__메인섹션__아티클섹션__일기칸__일기장 > div{
     display: flex;
     justify-content: space-between;
+}
+.바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    z-index: 10;
 }
 .바디__메인섹션__아티클섹션__일기쓰기칸{
     width: 360px;
@@ -109,7 +146,20 @@
     height: 48px;
 }
 
+.플로팅버튼{
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    border: 0px solid #000;
+    background-color: white;
+}
 .푸터{
     width: 1920px; 
     height: 160px;
 }
+
+.색상반전 {
+    filter: invert(1);
+  }

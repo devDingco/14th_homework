@@ -17,7 +17,29 @@
             <img src="./assets/images/배너.png" alt="">
          </div>
          <div class="바디__메인섹션">
-            <div class="바디__메인섹션__메뉴섹션"></div>
+            <!-- 메뉴섹션 -->
+            <div class="바디__메인섹션__메뉴섹션">
+               <div class="바디__메인섹션__메뉴섹션__메뉴">
+                     <span>일기보관함</span>
+                     <span>사진보관함</span>
+               </div>
+            </div>
+            <!-- 필터섹션 -->
+            <div class="바디__메인섹션__필터섹션">
+                  <div class="바디__메인섹션__필터섹션__필터">
+                     <select id="필터" onchange="필터링기능(event)">
+                        <option >전체</option>
+                        <option value="행복선택">행복</option>
+                        <option value="슬픔선택">슬픔</option>
+                        <option value="놀람선택">놀람</option>
+                        <option value="화남선택">화남</option>
+                        <option value="기타선택">기타</option>
+                    </select>
+                  
+                 </div>
+            </div>
+               
+            <!-- 아티클섹션 -->
             <div class="바디__메인섹션__아티클섹션">
                <div class="바디__메인섹션__아티클섹션__일기칸" id="일기칸">
                
@@ -54,6 +76,9 @@
             </div>
          </div>
       </div>
+      <button onclick="스크롤맨위로기능()" class="플로팅버튼" id="플로팅버튼">
+         <img src="./assets/icons/플로팅버튼.png" alt="">
+      </button>
       <div class="푸터"></div>
    </div>
     

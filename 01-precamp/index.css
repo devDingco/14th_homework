@@ -224,11 +224,27 @@
         padding-top: 12px;
         padding-bottom: 12px;
         padding-left: 10px;
-        border: 1px solid #ccc;
         border-radius: 8px;
         font-size: 16px;
         width: 320px;
         
+      }
+      #비밀번호에러메세지뜨는곳{
+        display: none;
+        color: red;
+      }
+
+      #전화번호하이픈에러메세지뜨는곳{
+        display: none;
+        color: red;
+    }
+      #전화번호에러메세지뜨는곳{
+        display: none;
+        color: red;
+    }
+    #이메일에러메세지뜨는곳{
+        display: none;
+        color: red;
       }
       .바디__메인__회원가입__폼 :nth-child(6){
         height: 116px;
@@ -298,4 +314,7 @@
            height: 80px;
 
        }
-      
+
+       .error {
+        border: 1px solid red;
+      }
