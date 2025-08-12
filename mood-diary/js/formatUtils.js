@@ -27,7 +27,7 @@ const getCurrentDate = () => {
 
 // diaryList 출력 양식에 맞추기
 const formattedDiary = (obj) => {
-  const { id, mood, title, contents, date } = obj
+  const { id, mood, title, contents, date, comments} = obj
   
   return {
     id: id,
@@ -37,11 +37,7 @@ const formattedDiary = (obj) => {
     icon: getMoodIcon(mood),
     image: getMoodImage(mood),
     color: getMoodFontColor(mood),
-    date: date
+    date: date,
+    comments: comments
   }
 }
-
-// FIX: 미완성
-// const getDiaryListByMood = (mood) => {
-//   return mood==="전체" ?? diaryList.filter((diary)=>diary.mood === mood)
-// }
