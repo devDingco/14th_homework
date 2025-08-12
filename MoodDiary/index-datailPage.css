@@ -94,4 +94,6 @@ body{
 .일기상세__수정{
     width: 1168;
     height: 40px;
+    display: flex;
+    justify-content: end;
 }

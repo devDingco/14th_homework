@@ -51,6 +51,8 @@ const 일기목록 = location.search
             </div>
             <div class="일기상세__수정">
                 <button>수정</button>
+                <button>삭제</button>
+                
              </div>
         </div>`
     

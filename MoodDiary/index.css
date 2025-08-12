@@ -1,9 +1,9 @@
 
 *{
     box-sizing: border-box;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; */
 }
 
 body{
@@ -29,8 +29,14 @@ body{
     align-items: center;
     color: white;
     font-size: 40px;
-    
 }
+
+#사진{
+    width: 1168px;
+    height: 240px;
+}
+
+
 .main{
     /* background-color: aquamarine; */
     width: 1920px;
@@ -70,10 +76,19 @@ body{
     width: 1168px;
     height: 48px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     /* background-color: aqua; */
     margin-top: 24px;
+    gap: 32px;
+    margin-bottom: 42px ;
+}
+
+#기분필터{
+    width: 120px;
+    height: 32px;
+
 }
 
 .일기사진{
@@ -96,6 +111,7 @@ body{
     /* background-color: blueviolet; */
     justify-content: space-between;
     align-items: flex-start;
+    
 }
 
 .일기목록{
@@ -106,18 +122,29 @@ body{
     flex-direction: row;
     flex-wrap: wrap;
     gap:24px;
+    overflow-y:scroll ;
     
 }
 
 .기분카드{
     width: 380px;
     height: 285px;
+
+    transition: width 0.5s, height 0.5s, filter 0.5s;
 }
 
 .기분카드:hover{
     width: 110%;
     height: 110%;
     filter: blur(5px);
+
+}
+
+.일기삭제버튼{
+    position: relative;
+    top: -345px;
+    left: 355px;
+    cursor: pointer;
 }
 
 .일기작성{
@@ -125,6 +152,8 @@ body{
     height: 604px;
     /* background-color: greenyellow; */
     display: flex;
+    flex-direction: column;
+    justify-content: right;
     align-items: start;
     gap:40px;
     padding: 24px;
@@ -143,12 +172,14 @@ body{
     width: 312px;
     height: 404px;
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     align-items: start;
 }
 
 .일기작성__메인__기분어땠어{
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     gap:16px;
     margin-bottom: 40px;
@@ -188,6 +219,7 @@ body{
     margin-bottom: 24px;
     gap: 8px;
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
 }
 
@@ -196,6 +228,8 @@ body{
     height: 156px;
     gap: 8px;
     display: flex;
+    flex-direction: column;
+
     align-items: flex-start;
 }
 
@@ -215,6 +249,20 @@ body{
     display: flex;
     justify-content: center;
 }
+
+.플로팅버튼{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: white;
+    border: 1px solid rgb(212, 207, 207);
+
+    position :absolute;
+    right: 100px;
+    /* bottom: 100px */
+}
+    
+
 
 .footer{
     width: 1920px;

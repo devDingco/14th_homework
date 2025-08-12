@@ -47,7 +47,6 @@ const 일기작성__등록 = () => {
     document.getElementById("제목입력").value = "";
     document.getElementById("내용입력").value = "";
     // document.querySelector("input[name='기분']:checked") = false;
-    
     입력확인();
 
 };
@@ -62,15 +61,16 @@ window.onload = () => {
     
     const 일기목록HTML = 일기목록.map((el,index)=>`
     <div class="일기">
-        <a href="./index-detailPage.html?number=${index}">
+        <a href="./index-detailPage.html?number=${index}" class="기분카드">
             <div><img src="./assets/images/${el.기분}.png" alt=""></div>
             <div>
                 <div>${el.기분}</div>
                 <div>${el.날짜}</div>
             </div>
             <div>${el.제목}</div>
-            </a>
-        </div>
+        </a>
+        <button class="일기삭제버튼">X</button>
+    </div>
     `).join("")
     
 
@@ -78,25 +78,45 @@ window.onload = () => {
 
 };
 
-// window.onload = () => {
-//     입력확인(); // 페이지 로드시 등록 버튼 초기 상태 설정
-// };
-// const 일기목록 = document.querySelector(".일기목록");
-// 일기목록.innerHTML = ""; // 기존 지우기
+const 플로팅버튼 = () => {
+    window.scrollTo({top: 0, behavior:"smooth"})
+}
 
-// for (let i = 0; i < 일기.length; i++){''
-//     document.innerHTML = `
-//         <div>
-//             <div><img src="./assets/images/&{일기[i].기분}.png" alt=""></div>
-//             <div>
-//                 <div>&{일기[i].기분}</div>
-//                 <div>&{일기[i].날짜}</div>
-//             </div>
-//             <div>&{일기[i].[제목]}</div>
-//         </div>
-                           
-//     `;
+const 기분필터 = (event) => {
+    // const 기분 =document.getElementById("기분필터").value
+    // console.log(기분)
 
-// }
+    const 저장된일기 = localStorage.getItem("일기목록")
+    const 일기목록 = JSON.parse(저장된일기 === null ? "[]" : 저장된일기)
+
+    const 셀렉기분 = event.target.value
+
+    let 필터목록 = [];
+    if(셀렉기분 === "all"){
+        필터목록 = 일기목록;
+    }else{
+        필터목록 = 일기목록.filter(el => el.기분 === 셀렉기분);
+    }
+
+    const 일기목록HTML = 필터목록.map((el,index)=>`
+    <div class="일기">
+        <a href="./index-detailPage.html?number=${index}" class="기분카드">
+            <div><img src="./assets/images/${el.기분}.png" alt=""></div>
+            <div>
+                <div>${el.기분}</div>
+                <div>${el.날짜}</div>
+            </div>
+            <div>${el.제목}</div>
+        </a>
+        <button class="일기삭제버튼">X</button>
+    </div>
+    `).join("")
+    
+
+    document.getElementById("일기목록").innerHTML = 일기목록HTML
+
+    }
+
+
 
 
