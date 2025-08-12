@@ -1,3 +1,16 @@
+#layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 1168px;
+    min-width: 1168px;
+    /* 피그마 레이아웃 720 */
+    /* height: 720px; */
+    angle: 0 deg;
+    opacity: 1;
+    /* background-color: rgba(217, 217, 217, 1); */
+}
+
 #main {
     width: 100%;
     height: 100%;
@@ -117,7 +130,7 @@
     height: 1167px;
     angle: 0 deg;
     opacity: 1;
-    gap: 24px;    
+    gap: 24px;
 }
 
 .diary_content {
@@ -132,6 +145,52 @@
     opacity: 1;
     gap: 16px;
     padding-bottom: 16px;
+}
+
+#view_content_detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 380px;
+    height: 56px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;
+    padding-right: 8px;
+    padding-left: 8px;    
+}
+
+#top_view_content_detail {
+    display: flex;
+    justify-content: space-between;
+    width: 364px;
+    height: 24px;
+    justify-content: space-between;
+    angle: 0 deg;
+    opacity: 1;    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#bottom_view_content_detail {
+    width: 364px;
+    height: 24px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#top_view_content_detail > p {
+    cursor: default;
+}
+
+#bottom_view_content_detail > a {
+    color: black;
+    text-decoration: none;
 }
 
 .diary_content > img {
@@ -324,6 +383,7 @@
     padding-bottom: 8px;
     padding-left: 10px;
     border: 0px;
+    cursor: pointer;
     background-color: rgba(199, 199, 199, 1);
 }
 

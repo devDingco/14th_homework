@@ -28,16 +28,3 @@ body {
 .test_beige {
     background-color: rgba(217, 217, 217, 1);;
 }
-
-#layout {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 1168px;
-    min-width: 1168px;
-    /* 피그마 레이아웃 720 */
-    /* height: 720px; */
-    angle: 0 deg;
-    opacity: 1;
-    /* background-color: rgba(217, 217, 217, 1); */
-}

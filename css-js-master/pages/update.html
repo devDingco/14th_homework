@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일기수정</title>
+    <link rel="stylesheet" href="../css/update.css"/>
+    <link rel="stylesheet" href="../css/main.css"/>
+    <link rel="stylesheet" href="../css/index.css"/>
+    <link rel="stylesheet" href="../css/header.css"/>
+    <link rel="stylesheet" href="../css/typography.css"/>
+    <script>
+        window.onload = () => {
+            getContentNumber()
+        }
+    </script>
+</head>
+<body>
+    <div id="layout">
+        <div id="header">
+            <div id="logo_frame" class="">
+                <p class="title03">민지의 다이어리</p>
+            </div>
+        </div>
+        <div id="main" class="">
+            <div id="update_feel_container">
+                <p>오늘 기분은 어땟나요?</p>
+                <form id="update_feeling_radio_container">
+                    <label id="feeling_radio_content">
+                        <input type="radio" name="feel" value="행복해요"/><p>행복해요</p>
+                    </label>
+                    <label id="feeling_radio_content">
+                        <input type="radio" name="feel" value="슬퍼요"/><p>슬퍼요</p>
+                    </label>
+                    <label id="feeling_radio_content">
+                        <input type="radio" name="feel" value="놀랐어요"/><p>놀랐어요</p>
+                    </label>
+                    <label id="feeling_radio_content">
+                        <input type="radio" name="feel" value="화나요"/><p>화나요</p>
+                    </label>
+                    <label id="feeling_radio_content">
+                        <input type="radio" name="feel" value="기타"/><p>기타</p>
+                    </label>
+                </form>
+            </div>
+            <div id="update_title_container">
+                <p>제목</p>
+                <div id="update_title_input_container">
+                    <textarea id="update_title_input">
+
+                    </textarea>
+                </div>
+            </div>
+            <div id="update_detail_container">
+                <p>내용</p>
+                <div id="update_detail_input_container">
+                    <textarea id="update_detail_input">
+
+                    </textarea>
+                </div>
+            </div>
+            <div id="update_button_frame">
+
+            </div>
+        </div>
+    </div>
+    <script src="../function/getContentNumber.js"></script>
+    <script src="../function/makeUpdateHtml.js"></script>
+</body>
+</html>
