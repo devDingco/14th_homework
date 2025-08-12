@@ -5,17 +5,17 @@
     
 </head>
 <body>
-    <div id ="제목">제목 : </div>
-    <div id ="내용">내용 : </div>
-    <div id = "기분">기분 : </div>
+    <div id ="제목"></div>
+    <div id ="내용"></div>
+    <div id = "기분"></div>
     <script>
         const 쿼드스트링 = location.search
         const 잘게나누어담은통 = new URLSearchParams(쿼드스트링)
         const 카드인덱스 = 잘게나누어담은통.get('number')     
         let 카드내용 = JSON.parse(localStorage.getItem("일기카드들"))     
-        document.getElementById("제목").innerText = 카드내용[카드인덱스].제목
-        document.getElementById("내용").innerText = 카드내용[카드인덱스].내용
-        document.getElementById("기분").innerText= 카드내용[카드인덱스].기분
+        document.getElementById("제목").innerText = "제목 : " + 카드내용[카드인덱스].제목
+        document.getElementById("내용").innerText = "내용 : " + 카드내용[카드인덱스].내용
+        document.getElementById("기분").innerText= "기분 : " +카드내용[카드인덱스].기분
         
     </script>
 </html>
