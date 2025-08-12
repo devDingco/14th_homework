@@ -115,6 +115,32 @@ body {
 
     font-size: 16px;
     font-weight: 500;
+    color: black;
+
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.필터.fixed {
+    position: fixed;
+    top: 5px;
+    left: 376px;
+    z-index: 100;
+
+    /* 고정 상태에서도 기본 스타일 유지 */
+    width: 112px;
+    height: 24px;
+    border-radius: 8px;
+    border: 1px solid #C7C7C7;
+    background: #FFF;
+
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+.필터.focused {
+    background-color: black;
+    color: #E4E4E4;
 }
 
 .내용 {
@@ -402,4 +428,55 @@ body {
     right: 300px;
     bottom: 100px;
     cursor: pointer;
+}
+
+
+@media (max-width: 360px) {
+    .바탕 {
+        flex-direction: column;
+        margin: 0 16px 40px 16px; /* 좌우 마진을 작게 */
+        width: auto; /* 필요하면 조절 */ 
+    }
+
+    .헤더 {
+        order: 1;
+    }
+    .배너 {
+        order: 2;
+    }
+
+    .메뉴 {
+        order: 3;
+    }
+
+    .일기쓰기구역 {
+        order: 4;
+    }
+
+    .필터부모 {
+        order: 5;
+    }
+
+    .내용 {
+        order: 6;
+    }
+
+    .일기보관함 {
+        display: grid;
+        flex-wrap: nowrap;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .일기틀 {
+        width: 100%;
+        min-width: auto;
+        max-width: 100%;
+    }
+
+    .footer__main {
+        width: 100%;
+    }
 }

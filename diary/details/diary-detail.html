@@ -42,10 +42,23 @@
                         내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다
                         내용이 들어갑니다</div>
                 </div>
-            </div> -->
+            </div>
+                <div class="수정삭제구역">
+                    <button class="수정버튼" onclick="수정화면()">수정</button>
+                    <button class="수정버튼" onclick="삭제하기(event, ${선택된일기.number})">삭제</button>
+                </div>-->
         </div>
-        <div class="수정">
-            <button class="수정버튼" onclick="수정화면()">수정</button>
+        <!-- 변경되는구역 -->
+        <div class="회고영역">
+            <div class="회고타이틀">회고</div>
+            <div class="회고인풋영역">
+                <textarea class="회고인풋" placeholder="회고를 남겨보세요."></textarea>
+                <button class="입력버튼" onclick="newComment()">입력</button>
+            </div>
+            <div class="댓글영역">
+                <!-- <div class="댓글내용">${el.comment_content}</div>
+                <div class="댓글날짜">[${el.comment_date}]</div> -->
+            </div>
         </div>
     </div>
 </body>
