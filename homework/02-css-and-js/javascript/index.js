@@ -4,6 +4,19 @@ window.onload = () => {
   // 1. 시작하면 일기 목록에 그리기
   JS_일기그리기기능();
 };
+
+window.onscroll = function () {
+  const selectElement = document.querySelector(".filter");
+
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    // 2. 스크롤이 조금이라도 내려갔으면? 배경색 변경하기
+    selectElement.classList.add("inverted");
+  } else {
+    selectElement.classList.remove("inverted"); // 스크롤이 맨 위로 올라가면 원래 색으으로 복귀
+  }
+};
+
+
 const JS_일기그리기기능 = () => {
   // 1. 스토리지에 저장된 일기목록 가져오기
   const 스토리지에저장된일기목록 =
@@ -20,57 +33,40 @@ const JS_일기그리기기능 = () => {
       <div class="card_area">
           <div class="diary_image">
             ${el.기분 === "행복"
-        ? '<img class="mood_image" src="./assets/images/mood_happy.png" alt="행복" />'
-        : ""
-      }
+              ? '<img class="mood_image" src="./assets/images/mood_happy.png" alt="행복" />'
+              : ""}
             ${el.기분 === "슬픔"
-        ? '<img class="mood_image" src="./assets/images/mood_sad.png" alt="슬픔" />'
-        : ""
-      }
+              ? '<img class="mood_image" src="./assets/images/mood_sad.png" alt="슬픔" />'
+              : ""}
             ${el.기분 === "놀람"
-        ? '<img class="mood_image" src="./assets/images/mood_surprise.png" alt="놀람" />'
-        : ""
-      }
+              ? '<img class="mood_image" src="./assets/images/mood_surprise.png" alt="놀람" />'
+              : ""}
             ${el.기분 === "화남"
-        ? '<img class="mood_image" src="./assets/images/mood_mad.png" alt="화남" />'
-        : ""
-      }
+              ? '<img class="mood_image" src="./assets/images/mood_mad.png" alt="화남" />'
+              : ""}
             ${el.기분 === "기타"
-        ? '<img class="mood_image" src="./assets/images/mood_think.png" alt="기타" />'
-        : ""
-      }
+              ? '<img class="mood_image" src="./assets/images/mood_think.png" alt="기타" />'
+              : ""}
           </div>
           <div class="diary_content">
-            ${el.기분 === "행복"
-        ? `<div class="diary_mood CSS_행복">행복해요</div>`
-        : ""
-      }
-            ${el.기분 === "슬픔"
-        ? `<div class="diary_mood CSS_슬픔">슬퍼요</div>`
-        : ""
-      }
-            ${el.기분 === "놀람"
-        ? `<div class="diary_mood CSS_놀람">놀랐어요</div>`
-        : ""
-      }
-            ${el.기분 === "화남"
-        ? `<div class="diary_mood CSS_화남">화나요</div>`
-        : ""
-      }
-            ${el.기분 === "기타"
-        ? `<div class="diary_mood CSS_기타">기타</div>`
-        : ""
-      }
+            ${el.기분 === "행복" ? `<div class="diary_mood CSS_행복">행복해요</div>` : ""}
+            ${el.기분 === "슬픔" ? `<div class="diary_mood CSS_슬픔">슬퍼요</div>` : ""}
+            ${el.기분 === "놀람" ? `<div class="diary_mood CSS_놀람">놀랐어요</div>` : ""}
+            ${el.기분 === "화남" ? `<div class="diary_mood CSS_화남">화나요</div>` : ""}
+            ${el.기분 === "기타" ? `<div class="diary_mood CSS_기타">기타</div>` : ""}
             <div class="diary_date">${el.작성일}</div>
           </div>
-          <div class="diary_title"> ${el.제목}</div>
+          <div class="diary_title">${el.제목}</div>
+        </a>
+        <img class="delete_button" src="./assets/images/close_icon.png"
+             onclick="JS_일기삭제기능(event, ${index})" />
       </div>
-    </a>
-  `;
+    `;
   }
 
   window.document.getElementById("HTML_일기보여주는곳").innerHTML =
     HTML_새로운일기도화지;
+  
 };
 
 
@@ -297,7 +293,9 @@ const JS_필터링기능 = (event) => {
         }
                 <div class="diary_date">${el.작성일}</div>
               </div>
-              <div class="diary_title"> ${el.제목}</div>
+              <div class="diary_title"> ${el.제목}</div> 
+            </div>
+            <img class="delete_button" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index})" />
           </div>
         </a>
       `
@@ -335,3 +333,20 @@ const 스크롤기능 = () => {
   window.scrollTo({top:0, behavior:"smooth"}) 
 }
 
+function JS_일기삭제기능(event, 일기번호) {
+  // 1. 이 버튼 하위에 있는 모든 태그들의 기본기능 막기 => <a /> 태그 이동 막기
+  event.preventDefault();
+
+  const 스토리지에저장된일기목록 =
+    window.localStorage.getItem("민지의일기목록");
+  const 일기목록 = 스토리지에저장된일기목록
+    ? JSON.parse(스토리지에저장된일기목록)
+    : [];
+  // 2. 클릭된 일기번호 삭제하기
+  const 삭제후일기목록 = 일기목록.filter((_, index) => index !== 일기번호);
+  // 3. 삭제된 일기목록 다시 저장하기
+  window.localStorage.setItem("민지의일기목록", JSON.stringify(삭제후일기목록));
+  alert("삭제되었습니다.");
+  // 4. 삭제된 일기목록 화면에 다시 그리기
+  JS_일기그리기기능();
+}
