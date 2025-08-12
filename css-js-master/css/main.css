@@ -131,15 +131,16 @@
     angle: 0 deg;
     opacity: 1;
     gap: 24px;
+    overflow-y: scroll;
 }
 
 .diary_content {
     display: flex;
     flex-direction: column;
-    width: 380px;
+    width: 350px;
     height: 373px;
-    min-width: 380px;
-    max-width: 380px;
+    min-width: 350px;
+    max-width: 350px;
     border-radius: 16px;
     angle: 0 deg;
     opacity: 1;
