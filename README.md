@@ -20,7 +20,15 @@ photo-list-page, <br/>
 infinite-scroll, <br/>
 dark-mode, <br/>
 create-board, <br/>
-pop-up-modal
+pop-up-modal, <br/>
+toast, <br/>
+px, rem 변경, <br/>
+comment, <br/>
+delete-card, <br/>
+update-card, <br/>
+floatingButton <br/>
 
 (구현된 화면) <br/>
-<img width="636" height="624" alt="main" src="https://github.com/user-attachments/assets/90aebd25-587b-4f6b-98e1-0d1189422aa1" />
+<img src="./cardPage(1).png">
+<img src="./cardPage(2).png">
+<img src="./cardPage(3).png">
