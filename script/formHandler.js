@@ -1,66 +1,83 @@
 // script/formHandler.js
-(function (w) {
+(function (w, d) {
   "use strict";
 
-  // 라디오 value(이모지/한글/영문 어떤 형태든) → 내부 코드로 정규화
-  function normalizeMood(v) {
-    v = String(v || "").toLowerCase();
-    if (v.includes("행복") || v.includes("happy") || v.includes("😊")) return { mood: "happy",     emotionText: "행복해요" };
-    if (v.includes("슬퍼") || v.includes("sad")   || v.includes("😢")) return { mood: "sad",       emotionText: "슬퍼요" };
-    if (v.includes("놀랐") || v.includes("surpris")|| v.includes("😮")) return { mood: "surprised", emotionText: "놀랐어요" };
-    if (v.includes("화나") || v.includes("angry") || v.includes("😡")) return { mood: "angry",     emotionText: "화나요" };
-    return { mood: "etc", emotionText: "기타" };
-  }
+  // 중복 바인딩 방지
+  if (w.__DIARY_FORM_BOUND__) return;
 
-  function bind() {
-    // componentLoader로 주입되었을 때/직접 있을 때 모두 지원
-    const root = document.getElementById("form");
-    const form = (root && root.querySelector("form.diary-form")) || document.querySelector("form.diary-form");
-    if (!form || form.dataset.bound === "1") return false;
+  // 라디오 값 → 내부 mood 코드 매핑
+  var MOOD_MAP = {
+    "😊 행복해요": "happy",
+    "😢 슬퍼요": "sad",
+    "😮 놀랐어요": "surprised",
+    "😡 화나요": "angry",
+    "❓ 기타": "etc"
+  };
 
-    form.addEventListener("submit", function (ev) {
-      ev.preventDefault();
+  function handleSubmit(e) {
+    // .diary-form 의 submit만 처리 (위임)
+    var form = e.target && e.target.closest && e.target.closest("form.diary-form");
+    if (!form) return;
 
-      const fd = new FormData(form);
-      const moodRaw = fd.get("mood");
-      const { mood, emotionText } = normalizeMood(moodRaw);
-      const title   = (fd.get("title")   || "").trim();
-      const content = (fd.get("content") || "").trim();
+    e.preventDefault(); // ✅ 새로고침/페이지이동 방지
 
+    try {
+      var fd = new FormData(form);
+      var rawMood = fd.get("mood") || "";
+      var mood = MOOD_MAP[rawMood] || rawMood || "etc";
+
+      var title = (fd.get("title") || "").trim();
+      var content = (fd.get("content") || "").trim();
+
+      // 최소 유효성 체크 (store에서 2차 검증/보정)
       if (!title) {
         alert("제목을 입력해 주세요.");
-        form.querySelector("#title")?.focus();
         return;
       }
 
-      const newDiary = { mood, emotionText, title, content };
+      var entry = {
+        id: String(Date.now()),
+        mood: mood,
+        title: title,
+        content: content,
+        date: new Date().toISOString().slice(0, 10),
+        image: "./images/" + mood + ".png",
+        emotionText: ({happy:"행복해요", sad:"슬퍼요", angry:"화나요", surprised:"놀랐어요", etc:"기타"})[mood]
+      };
+
+      // ✅ 1순위: store 경유 (상태 push + 렌더 포함)
       if (typeof w.addDiary === "function") {
-        w.addDiary(newDiary);           // ➜ diaryStore.js가 이미지/날짜 등 보정 후 renderDiaries 호출
-        // 입력값 정리(라디오는 유지, 텍스트만 초기화)
-        const t = form.querySelector("#title");   if (t) t.value = "";
-        const c = form.querySelector("#content"); if (c) c.value = "";
+        w.addDiary(entry);
       } else {
-        console.warn("addDiary 가 없습니다. diaryStore.js 로딩 순서를 확인하세요.");
+        // ✅ 2순위: 직접 push 후 표준 렌더 호출 (폴백)
+        w.diaryList = Array.isArray(w.diaryList) ? w.diaryList : [];
+        w.diaryList.push(entry);
+
+        if (w.DiaryList && typeof w.DiaryList.renderDiaries === "function") {
+          w.DiaryList.renderDiaries(w.diaryList);
+        } else if (typeof w.renderDiaries === "function") {
+          w.renderDiaries(w.diaryList);
+        } else {
+          console.warn("⚠️ 렌더러를 찾지 못했습니다. 데이터만 추가됨.");
+        }
       }
-    }, { passive: false });
 
-    form.dataset.bound = "1";
-    console.log("✅ initDiaryForm: bound");
-    return true;
-  }
+      // (선택) 필터로 가려진 카드가 있다면 해제해서 새 카드 보이게
+      try { d.querySelectorAll(".diary-card.is-hidden").forEach(function(n){ n.classList.remove("is-hidden"); }); } catch {}
 
-  function init() {
-    if (bind()) return;
-    // 폼이 나중에 주입되는 경우 관찰 → 발견 즉시 바인딩
-    if ("MutationObserver" in w) {
-      const mo = new MutationObserver(() => { if (bind()) mo.disconnect(); });
-      mo.observe(document.documentElement, { childList: true, subtree: true });
+      // 폼 리셋
+      try { form.reset(); } catch {}
+    } catch (err) {
+      console.error("❌ 폼 처리 중 오류:", err);
     }
   }
 
-  // 외부에서 부를 수 있게 공개 + 자동 초기화
-  w.initDiaryForm = init;
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once: true });
-  else init();
+  // 문서 단위 위임: 동적 주입 폼도 항상 잡힘
+  d.addEventListener("submit", handleSubmit, false);
+  w.__DIARY_FORM_BOUND__ = true;
 
-})(window);
+  // 선택: 주입 직후를 위해 initDiaryForm 훅도 노출(이미 componentLoader에서 호출 중이라면 그대로 둠)
+  w.initDiaryForm = w.initDiaryForm || function(){ /* no-op: 위임이라 추가 작업 불필요 */ };
+
+  console.log("[formHandler] submit delegation bound");
+})(window, document);

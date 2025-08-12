@@ -9,9 +9,8 @@ main .diary-card {
   overflow: hidden;
   cursor: pointer;
 
-  /* 부드러운 전환 */
-  transition: transform 0.5s ease, filter 0.5s ease;
-  will-change: transform, filter;
+  transition: transform 0.5s ease;
+  will-change: transform;
   transform-origin: center center;
   position: relative;
   z-index: 1;
