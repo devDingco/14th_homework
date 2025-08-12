@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>숙제6</title>
+    <style>
+        #필터색변경 {
+          cursor: pointer;
+          position: sticky; 
+          top: 0;
+          width: 200px;
+          height: 50px;
+          transition: all 0.3s ease;
+        }
+        .기본 {
+          background-color: white;
+          color: black;
+        }        
+        .반전 {
+          background-color: black;
+          color: white;
+        }
+        #스크롤용 {
+            height: 1500px;
+            width: 500px;
+            background-color: yellowgreen;
+            overflow-y: scroll;
+        }
+        #Xbutton {
+    position:relative;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+}
+
+        .네모 {
+            height: 1400px;
+            background-color: lightgray;
+            margin-top: 20px;
+            padding: 20px;
+            
+        }
+        .사진박스 {
+            width: 200px;
+            height: 200px;
+            background-color: yellowgreen;
+        }
+    </style>
+</head>
+<div class="사진박스">
+    <button onclick="삭제기능()" id="Xbutton">X</button>   
+</div>
+
+<body id="123">
+    <div id="스크롤용">
+        <select id="필터색변경"> 
+            <option>전체</option>
+            <option>행복해요</option>
+            <option>슬퍼요</option>
+            <option>놀랐어요</option>
+            <option>화나요</option>
+            <option>기타</option>
+        </select> 
+        <div class="네모">
+         
+        </div>
+    </div>
+
+<img id="스크롤아이디" src="./윗방향.svg" />
+
+    <script>
+        const selectElement = document.getElementById('필터색변경');
+        const 스크롤용 = document.getElementById('스크롤용');
+
+        selectElement.classList.add('기본');
+        스크롤용.addEventListener('scroll', () => {
+            if (스크롤용.scrollTop > 0) {
+                selectElement.classList.remove('기본');
+                selectElement.classList.add('반전');
+            } else {
+                selectElement.classList.remove('반전');
+                selectElement.classList.add('기본');
+            }
+        });
+        const 삭제기능 = () => {
+           
+           event.stopPropagation() /
+
+            alert("event.stopPropagation으로 부모클릭 막기")
+        }
+        const 스크롤아이디= document.getElementById('스크롤아이디')
+        const 바디 = document.getElementById("123")
+
+        스크롤아이디.addEventListener('click', ()=> {
+            console.log("스크롤 버튼 누름")
+            // 스크롤용.scrollTo 는 여기선 용도에 안맞아서 작동안하게됨 
+            window.scrollTo({
+                top:0,
+                behavior:'smooth'
+            });
+        });
+
+    </script>
+</body>
+</html>
