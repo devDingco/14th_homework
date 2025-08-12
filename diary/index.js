@@ -1,4 +1,41 @@
-const 일기목록 = [];
+window.onload = () => {
+  HTML일기보여주기();
+};
+
+일기목록 = [];
+
+const HTML일기보여주기 = () => {
+  //스토리지에 있는 일기목록 가져오기
+  const 스토리지에저장된일기목록 =
+    localStorage.getItem("지윤이의일기목록") ?? "[]";
+  const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+
+  for (let index = 0; index < 일기목록.length; index++) {
+    document.getElementById("일기추가보이는곳").innerHTML += `
+   <div class="바디__정렬__목록__첫번째" onclick="게시글확인기능(${index})">
+            <img src=${일기목록[index].이미지}
+              style="width: 380px; height: 285px" />
+            <div style="width: 380px; height: 16px"></div>
+            <div class="바디__정렬__목록__첫번째__내용">
+              <div class="바디__정렬__목록__첫번째__내용__감정날짜">
+                <div class="바디__정렬__목록__첫번째__내용__감정날짜__감정">
+                  ${일기목록[index].감정}
+                </div>
+                <div class="바디__정렬__목록__첫번째__내용__감정날짜__날짜">
+                  ${일기목록[index].작성일}
+                </div>
+              </div>
+              <div style="width: 380px; height: 8px"></div>
+
+              <div class="바디__정렬__목록__첫번째__내용__타이틀">
+                ${일기목록[index].제목}
+              </div>
+              <div style="width: 380px; height: 16px"></div>
+            </div>
+          </div>
+  `;
+  }
+};
 
 // 일기등록
 const 등록하기 = () => {
@@ -50,28 +87,35 @@ const 등록하기 = () => {
     이미지: 이미지담는통,
   };
 
+  //  ?? <= 널 병합 연산자  ?? 왼쪽값이 null 또는 undefined이면 [] 빈배열로 하겠다 / stringify로 인해 문자열로 저장되어있으므로 "[]" 이렇게 사용
+  const 스토리지에저장된일기목록 =
+    localStorage.getItem("지윤이의일기목록") ?? "[]";
+  // localstorage에 저장된걸 자바스크립트로 불러올 때 parse사용
+  const 일기목록 = JSON.parse(스토리지에저장된일기목록);
   일기목록.push(일기담는통);
+  // 일기목록에 새로운 일기객체를 푸시하고 그 일기객체를 로컬스토리지에 JSON문자열로 변환해서 지윤이의일기목록(key)의 값으로 저장한다
+  localStorage.setItem("지윤이의일기목록", JSON.stringify(일기목록));
 
   const 일기번호 = 일기목록.length - 1;
 
   document.getElementById("일기추가보이는곳").innerHTML += `
    <div class="바디__정렬__목록__첫번째" onclick="게시글확인기능(${일기번호})">
-            <img src=${일기담는통.이미지}
+            <img src=${일기목록[일기번호].이미지}
               style="width: 380px; height: 285px" />
             <div style="width: 380px; height: 16px"></div>
             <div class="바디__정렬__목록__첫번째__내용">
               <div class="바디__정렬__목록__첫번째__내용__감정날짜">
                 <div class="바디__정렬__목록__첫번째__내용__감정날짜__감정">
-                  ${일기담는통.감정}
+                  ${일기목록[일기번호].감정}
                 </div>
                 <div class="바디__정렬__목록__첫번째__내용__감정날짜__날짜">
-                  ${일기담는통.작성일}
+                  ${일기목록[일기번호].작성일}
                 </div>
               </div>
               <div style="width: 380px; height: 8px"></div>
 
               <div class="바디__정렬__목록__첫번째__내용__타이틀">
-                ${일기담는통.제목}
+                ${일기목록[일기번호].제목}
               </div>
               <div style="width: 380px; height: 16px"></div>
             </div>
@@ -81,6 +125,10 @@ const 등록하기 = () => {
 };
 
 const 게시글확인기능 = (일기번호받는통) => {
+  const 스토리지에저장된일기목록 =
+    localStorage.getItem("지윤이의일기목록") ?? "[]";
+  const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+
   const 일기담는통 = 일기목록[일기번호받는통];
   const 제목담는통 = 일기담는통.제목;
   const 내용담는통 = 일기담는통.내용;
@@ -90,3 +138,5 @@ const 게시글확인기능 = (일기번호받는통) => {
     내용: ${내용담는통}
     `);
 };
+
+//

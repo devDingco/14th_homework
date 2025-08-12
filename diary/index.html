@@ -3,8 +3,7 @@
   <head>
     <title>감정일기장</title>
     <link rel="stylesheet" href="./index.css" />
-    <script src="./index.js">
-    </script>
+    <script src="./index.js"></script>
   </head>
   <body>
     <div class="헤더">
@@ -20,6 +19,7 @@
     <div class="배너">
       <img src="./images/Rectangle 1.png" />
     </div>
+
     <div style="width: 1920px; height: 24px"></div>
 
     <div class="내비게이션">
@@ -31,84 +31,135 @@
       </div>
     </div>
 
-    <div style="width: 1920px; height: 42px"></div>
-    <div class="바디">
-      <div class="바디__정렬">
-        <div id="일기추가보이는곳" class="바디__정렬__목록">
-          <!-- <div class="바디__정렬__목록__첫번째">
-            <img
-              src="./images/Frame 47.png"
-              style="width: 380px; height: 285px" />
-            <div style="width: 380px; height: 16px"></div>
-            <div class="바디__정렬__목록__첫번째__내용">
-              <div class="바디__정렬__목록__첫번째__내용__감정날짜">
-                <div class="바디__정렬__목록__첫번째__내용__감정날짜__감정">
-                  슬퍼요
-                </div>
-                <div class="바디__정렬__목록__첫번째__내용__감정날짜__날짜">
-                  2024. 03. 12
-                </div>
-              </div>
-              <div style="width: 380px; height: 8px"></div>
-
-              <div class="바디__정렬__목록__첫번째__내용__타이틀">
-                타이틀 영역입니다. 한줄까지만 노출됩니다.
-              </div>
-              <div style="width: 380px; height: 16px"></div>
-            </div>
-          </div> -->
-        </div>
-        <div class="바디__정렬__일기쓰기">
-          <div class="바디__정렬__일기쓰기__타이틀">📍일기쓰기</div>
-          <div style="width: 312px; height: 40px"></div>
-          <div class="바디__정렬__일기쓰기__오기어">오늘 기분은 어땟나요?</div>
-          <div style="width: 312px; height: 16px"></div>
-          <div class="바디__정렬__일기쓰기__라디오">
-            <div class="바디__정렬__일기쓰기__라디오__감정">
-              <input type="radio" style="width: 24px; height: 24px;" name="감정" value="행복해요" />행복해요
-            </div>
-            <div class="바디__정렬__일기쓰기__라디오__감정">
-              <input type="radio" style="width: 24px;
-              height: 24px;" name="감정" value="슬퍼요" />슬퍼요
-              </div>
-            <div class="바디__정렬__일기쓰기__라디오__감정">
-              <input type="radio" style="width: 24px;
-              height: 24px;" name="감정" value="놀랐어요" />놀랐어요
-              </div>
-              <div class="바디__정렬__일기쓰기__라디오__감정">
-                <input type="radio" style="width: 24px;
-                height: 24px;" name="감정" value="화나요" />화나요
-                </div>
-                <div class="바디__정렬__일기쓰기__라디오__감정">
-                  <input type="radio" style="width: 24px;
-                  height: 24px;" name="감정" value="기타" />기타
-                  </div>
-        </div>
-        <div style="width: 312px; height: 40px"></div>
-        <div class="바디__정렬__일기쓰기__제목">
-        <div class="바디__정렬__일기쓰기__제목__라벨">제목</div>
-        <div style="width: 312px; height: 8px"></div>
-
-        <div class="바디__정렬__일기쓰기__제목__인풋">
-          <input id="제목" class="바디__정렬__일기쓰기__제목__라벨__인풋__입력창"
-           type="text" placeholder="제목을 입력해 주세요.">
-        </div>
-      </div>
-      <div style="width: 312px; height: 40px"></div>
-      <div class="바디__정렬__일기쓰기__내용">
-        <div  class="바디__정렬__일기쓰기__내용__라벨">내용</div>
-        <div style="width: 312px; height: 8px"></div>
-
-        <div class="바디__정렬__일기쓰기__내용__인풋">
-          <input id="내용" class="바디__정렬__일기쓰기__내용__라벨__인풋__입력창"
-           type="text" placeholder="내용을 입력해 주세요.">
-        </div>
-      </div>
-      <div style="width: 312px; height: 40px"></div>
-      <div class="바디__정렬__일기쓰기__등록"><button onclick="등록하기()" class="바디__정렬__일기쓰기__등록__버튼">등록하기</button></div>
+    <div class="필터">
+      <div class="필터__정렬">
+        <select class="필터__정렬__선택">
+          <option value="">전체</option>
+          <option value="행복해요">행복해요</option>
+          <option value="슬퍼요">슬퍼요</option>
+          <option value="놀랐어요">놀랐어요</option>
+          <option value="화나요">화나요</option>
+          <option value="기타">기타</option>
+        </select>
       </div>
     </div>
 
-    <div class="푸터"></div>
+    <div class="바디">
+      <div class="바디__정렬">
+        <div id="일기추가보이는곳" class="바디__정렬__목록"></div>
+
+        <div class="바디__정렬__일기쓰기">
+          <div class="바디__정렬__일기쓰기__타이틀">📍일기쓰기</div>
+          <div style="width: 312px; height: 40px"></div>
+
+          <div class="바디__정렬__일기쓰기__오기어">오늘 기분은 어땠나요?</div>
+          <div style="width: 312px; height: 16px"></div>
+
+          <div class="바디__정렬__일기쓰기__라디오">
+            <div class="바디__정렬__일기쓰기__라디오__감정">
+              <input
+                type="radio"
+                style="width: 24px; height: 24px"
+                name="감정"
+                value="행복해요" />행복해요
+            </div>
+            <div class="바디__정렬__일기쓰기__라디오__감정">
+              <input
+                type="radio"
+                style="width: 24px; height: 24px"
+                name="감정"
+                value="슬퍼요" />슬퍼요
+            </div>
+            <div class="바디__정렬__일기쓰기__라디오__감정">
+              <input
+                type="radio"
+                style="width: 24px; height: 24px"
+                name="감정"
+                value="놀랐어요" />놀랐어요
+            </div>
+            <div class="바디__정렬__일기쓰기__라디오__감정">
+              <input
+                type="radio"
+                style="width: 24px; height: 24px"
+                name="감정"
+                value="화나요" />화나요
+            </div>
+            <div class="바디__정렬__일기쓰기__라디오__감정">
+              <input
+                type="radio"
+                style="width: 24px; height: 24px"
+                name="감정"
+                value="기타" />기타
+            </div>
+          </div>
+
+          <div style="width: 312px; height: 40px"></div>
+
+          <div class="바디__정렬__일기쓰기__제목">
+            <div class="바디__정렬__일기쓰기__제목__라벨">제목</div>
+            <div style="width: 312px; height: 8px"></div>
+            <div class="바디__정렬__일기쓰기__제목__인풋">
+              <input
+                id="제목"
+                class="바디__정렬__일기쓰기__제목__라벨__인풋__입력창"
+                type="text"
+                placeholder="제목을 입력해 주세요." />
+            </div>
+          </div>
+
+          <div style="width: 312px; height: 40px"></div>
+
+          <div class="바디__정렬__일기쓰기__내용">
+            <div class="바디__정렬__일기쓰기__내용__라벨">내용</div>
+            <div style="width: 312px; height: 8px"></div>
+            <div class="바디__정렬__일기쓰기__내용__인풋">
+              <input
+                id="내용"
+                class="바디__정렬__일기쓰기__내용__라벨__인풋__입력창"
+                type="text"
+                placeholder="내용을 입력해 주세요." />
+            </div>
+          </div>
+
+          <div style="width: 312px; height: 40px"></div>
+
+          <div class="바디__정렬__일기쓰기__등록">
+            <button
+              onclick="등록하기()"
+              class="바디__정렬__일기쓰기__등록__버튼">
+              등록하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="푸터">
+      <div class="푸터__내용">
+        <div style="font-size: 20px; font-style: normal; font-weight: 700">
+          지윤이의 다이어리
+        </div>
+        <div style="height: 32px"></div>
+        <div
+          style="
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            color: #5f5f5f;
+          ">
+          대표 : {name}
+        </div>
+        <div style="height: 32px"></div>
+        <div
+          style="
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            color: #5f5f5f;
+          ">
+          Copyright © 2024. {name} Co., Ltd.
+        </div>
+      </div>
+    </div>
   </body>
 </html>

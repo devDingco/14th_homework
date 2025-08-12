@@ -4,6 +4,12 @@
   margin: 0;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .헤더 {
   width: 1920px;
   height: 60px;
@@ -34,6 +40,14 @@
   font-style: normal;
 }
 
+.필터 {
+  width: 1920px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .배너 {
   width: 1920px;
   height: 240px;
@@ -56,6 +70,7 @@
   height: 48px;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 .내비게이션__정렬__왼쪽 {
   width: 254px;
@@ -89,14 +104,26 @@
   font-style: normal;
   font-weight: 500;
 }
+
+.필터__정렬 {
+  width: 1168px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+.필터__정렬__선택 {
+  width: 112px;
+  height: 24px;
+}
+
 .CSS일기보여주는곳 {
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
 }
+
 .바디 {
   width: 1920px;
-  height: 1167px;
   display: flex;
   justify-content: center;
 }
@@ -113,12 +140,19 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-content: flex-start;
   gap: 24px;
 }
 
 .바디__정렬__목록__첫번째 {
   width: 380px;
   height: 373px;
+  transition: 0.5s;
+}
+
+.바디__정렬__목록__첫번째:hover {
+  transform: scale(1.1);
+  filter: blur(2px);
 }
 
 .바디__정렬__목록__첫번째__내용 {
@@ -268,6 +302,136 @@
 }
 
 .바디__정렬__일기쓰기__등록__버튼 {
+  width: 312px;
   border: none;
   background-color: transparent;
+}
+
+.푸터 {
+  width: 1920px;
+  height: 160px;
+  padding: 24px 20px;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.푸터__내용 {
+  width: 1168px;
+  height: 112px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 디테일CSS */
+/* 디테일CSS */
+/* 디테일CSS */
+/* 디테일CSS */
+/* 디테일CSS */
+/* 디테일CSS */
+/* 디테일CSS */
+
+.디테일본문 {
+  width: 1880px;
+  height: 321px;
+  display: flex;
+  justify-content: center;
+}
+
+.디테일본문__정렬 {
+  width: 1168px;
+  height: 305px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.디테일본문__정렬__타이틀 {
+  width: 1168px;
+  height: 24px;
+  border-bottom: 2px solid #000;
+}
+
+.디테일본문__정렬__타이틀__내용 {
+  width: 186px;
+  height: 24px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  color: #000;
+}
+
+.디테일본문__정렬__감정날짜 {
+  width: 1168px;
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.디테일본문__정렬__감정날짜__왼쪽 {
+  width: 109px;
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.디테일본문__정렬__감정날짜__왼쪽__이모지 {
+  width: 24px;
+  height: 24px;
+}
+
+.디테일본문__정렬__감정날짜__왼쪽__감정 {
+  display: flex;
+  justify-content: center;
+}
+
+.디테일본문__정렬__감정날짜__오른쪽 {
+  width: 107px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.디테일본문__정렬__감정날짜__오른쪽__날짜 {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  color: #919191;
+}
+
+.디테일본문__정렬__감정날짜__오른쪽__작성수정 {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  color: #919191;
+}
+.디테일본문__정렬__내용라벨 {
+  width: 1168px;
+  height: 20px;
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.테일본문__정렬__내용보이는곳 {
+  width: 1168px;
+  height: 100px;
+}
+.테일본문__정렬__수정 {
+  width: 1168px;
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+.테일본문__정렬__수정__버튼 {
+  width: 51px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
 }
