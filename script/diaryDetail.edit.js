@@ -34,17 +34,71 @@
     if (i >= 0) return i;
     return list.findIndex(x => x && stableId(x)===id);
   }
-  function applyReadView(di){ // 읽기 화면 즉시 갱신(저장 후 사용)
-    var read = qs("#read-view"); if (!read) return;
-    var t = qs(".title", read);          if (t) t.textContent = txt(di.title,"(제목 없음)");
-    var dateEl = qs(".meta-right .date", read); if (dateEl) dateEl.textContent = txt(di.date,"");
-    var emoTxt = txt(di.emotionText, MOOD_TEXT[di.mood] || "기타");
-    var emoEl = qs(".submeta .emotion", read);  if (emoEl) emoEl.textContent = emoTxt;
-    var imgEl = qs(".submeta .avatar img", read);
-    if (imgEl) { imgEl.src = "../images/"+(di.mood||"etc")+".png"; imgEl.alt = emoTxt; }
-    var body = qs(".body", read);
-    if (body) { body.innerHTML = ""; var p=d.createElement("p"); p.textContent = txt(di.content, txt(di.desc,"")); body.appendChild(p); }
+
+  // 최신 스토어 상태로 di 보정
+  function freshenDiary(di){
+    try{
+      if (!di) return null;
+      var id = di.id || di.diaryId
+        || (w.DiaryStoreUtil && typeof w.DiaryStoreUtil.deriveId === "function" ? w.DiaryStoreUtil.deriveId(di) : stableId(di));
+      if (!isStr(id)) return di;
+      if (Array.isArray(w.diaryList)) {
+        var list = w.diaryList;
+        var idx = pickIndexById(list, id);
+        if (idx >= 0) return list[idx];
+      }
+      return di;
+    }catch(_){ return di; }
   }
+
+  // 읽기 화면 즉시 갱신(저장 후 사용)
+  function applyReadView(di){
+    var read = qs("#read-view"); if (!read) return;
+
+    var t = qs(".title", read);
+    if (t) t.textContent = txt(di.title,"(제목 없음)");
+
+    var dateEl = qs(".meta-right .date", read);
+    if (dateEl) dateEl.textContent = txt(di.date,"");
+
+    var emoTxt = txt(di.emotionText, MOOD_TEXT[di.mood] || "기타");
+    var emoEl = qs(".submeta .emotion", read);
+    if (emoEl) {
+      // 클래스 정합성 보장: 색상 테마 유지
+      emoEl.className = ("emotion " + (di.mood || "etc")).trim();
+      emoEl.textContent = emoTxt;
+    }
+
+    var imgEl = qs(".submeta .avatar img", read);
+    if (imgEl) {
+      imgEl.src = "../images/"+(di.mood||"etc")+".png";
+      imgEl.alt = emoTxt;
+      imgEl.onerror = function(){
+        if (imgEl && imgEl.src.indexOf("etc.png") === -1) imgEl.src = "../images/etc.png";
+      };
+    }
+
+    var body = qs(".body", read);
+    if (body) {
+      body.innerHTML = "";
+      var p=d.createElement("p");
+      p.textContent = txt(di.content, txt(di.desc,""));
+      body.appendChild(p);
+    }
+
+    // ✅ 수정 버튼을 항상 최신 모드 진입으로 재바인딩 (stale di 방지)
+    var editBtn = qs("#read-view .btn");
+    if (editBtn) {
+      editBtn.onclick = function(){
+        if (typeof w.enterEditMode === "function") {
+          try { w.enterEditMode(); } catch (e) { console.error(e); }
+        } else {
+          console.log("enterEditMode 미정의");
+        }
+      };
+    }
+  }
+
   function persistSession(list){
     try { sessionStorage.setItem("diaryCache", JSON.stringify(list)); } catch(_) {}
   }
@@ -53,7 +107,8 @@
   let formLoaded = false;
   async function ensureFormLoaded(){
     const slot = qs("#edit-slot");
-    if (!slot || formLoaded) return slot;
+    if (!slot) return null;
+    if (formLoaded) return slot;
     try{
       const res = await fetch("../component/form.html",{cache:"no-store"});
       if(!res.ok) throw new Error("HTTP "+res.status);
@@ -100,7 +155,7 @@
     return { submitBtn, cancelBtn: actions?.querySelector(".btn-cancel") || null };
   }
 
-  // ---------- 저장(로컬 업데이트) ----------
+  // ---------- 저장(로컬 업데이트: 안전 후퇴용) ----------
   function updateDiaryLocal(id, patch){
     if (!isStr(id)) return null;
     const list = Array.isArray(w.diaryList) ? w.diaryList : null;
@@ -132,8 +187,8 @@
   // ---------- 공개 API: enterEditMode ----------
   w.enterEditMode = async function (di) {
     try{
-      // 현재 항목 보강(없으면 전역 보관분 사용)
-      di = di || w.__CURRENT_DIARY__;
+      // 1) 대상 확보: 전달 인자 → 최신 스토어로 보정 → 없으면 전역
+      di = freshenDiary(di || w.__CURRENT_DIARY__);
       if (!di) { console.warn("수정 대상 일기 없음"); return; }
 
       const read = qs("#read-view");
@@ -155,23 +210,59 @@
         if (read) read.hidden = false;
       });
 
-      // 제출(저장)
+      // 제출(저장) — 중복 방지
+      let saving = false;
       form.onsubmit = function (e) {
         e.preventDefault();
+        if (saving) return;
+        saving = true;
+
+        // 버튼 잠금(UX)
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const prevLabel = submitBtn ? submitBtn.textContent : "";
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "저장 중..."; }
+
         try{
           // 수집
           const radios = form.querySelectorAll('input[name="mood"]');
           let moodLabel = "";
-          radios.forEach(r => { if (r.checked) { const lbl=r.closest("label"); moodLabel = (lbl? lbl.textContent.trim(): ""); }});
-          const mood = normalizeMood(moodLabel);
+          radios.forEach(r => {
+            if (r.checked) {
+              const lbl=r.closest("label");
+              moodLabel = (lbl? lbl.textContent.trim(): "");
+            }
+          });
+          // 선택 안 했다면 기존 mood 유지(etc로 덮어쓰기 방지)
+          const nextMood = moodLabel
+            ? (w.DiaryStoreUtil && w.DiaryStoreUtil.normalizeMood
+                ? w.DiaryStoreUtil.normalizeMood(moodLabel)
+                : normalizeMood(moodLabel))
+            : di.mood;
+
           const title = txt(form.querySelector("#title")?.value, "");
           const content = txt(form.querySelector("#content")?.value, "");
 
           if (!isStr(title)) { alert("제목을 입력해 주세요."); return; }
 
-          const updated = updateDiaryLocal(di.id || di.diaryId || stableId(di), {
-            mood, title, content
-          });
+          // 대상 id 계산(원본 id 우선, 없으면 deriveId/stableId)
+          const rawId = di.id || di.diaryId
+            || (w.DiaryStoreUtil && typeof w.DiaryStoreUtil.deriveId === "function"
+                  ? w.DiaryStoreUtil.deriveId(di)
+                  : stableId(di));
+
+          // 1차 경로: 정식 스토어 updateDiary
+          let updated = null;
+          if (typeof w.updateDiary === "function") {
+            updated = w.updateDiary(rawId, { mood: nextMood, title, content });
+          } else {
+            console.warn("updateDiary API 미탑재: 로컬 후퇴 경로 사용");
+          }
+
+          // 2차 경로: 안전 후퇴(세션 캐시만)
+          if (!updated) {
+            updated = updateDiaryLocal(rawId, { mood: nextMood, title, content });
+          }
+
           if (!updated) { alert("저장에 실패했습니다."); return; }
 
           // 읽기 화면 갱신 + 토글 복귀
@@ -183,6 +274,10 @@
         }catch(err){
           console.error("❌ 수정 저장 실패:", err);
           alert("수정 중 오류가 발생했습니다.");
+        } finally {
+          // 버튼 잠금 해제
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = prevLabel || "수정하기"; }
+          saving = false;
         }
       };
     }catch(e){

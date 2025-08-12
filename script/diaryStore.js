@@ -149,6 +149,65 @@
     }
   }
 
+  // ------ API: 수정 (★추가) ------
+  function findIndexByIdOrStable(id){
+    if (!isNonEmptyString(id)) return -1;
+    for (var i=0;i<state.length;i++){
+      var it = state[i];
+      if (!it) continue;
+      if (it.id === id || it.diaryId === id) return i;
+    }
+    for (var j=0;j<state.length;j++){
+      var it2 = state[j];
+      if (!it2) continue;
+      if (stableId(it2) === id) return j;
+    }
+    return -1;
+  }
+
+  function updateDiary(id, patch){
+    try{
+      if (!isNonEmptyString(id)) throw new Error("id가 유효하지 않습니다.");
+      if (!patch || typeof patch !== "object") throw new Error("patch가 유효하지 않습니다.");
+
+      var idx = findIndexByIdOrStable(id);
+      if (idx < 0) throw new Error("대상 일기를 찾을 수 없습니다.");
+
+      var prev = state[idx] || {};
+      var mood = normalizeMood(patch.mood || prev.mood);
+      var EMO_TXT = { happy:"행복해요", sad:"슬퍼요", angry:"화나요", surprised:"놀랐어요", etc:"기타" };
+
+      // 확장 필드 보존을 위해 prev를 먼저 펼치고, 업데이트 필드로 덮어씀
+      var draft = Object.assign({}, prev, {
+        id: prev.id || prev.diaryId || stableId(prev),
+        date: prev.date,                  // 날짜는 수정하지 않음(폼에도 없음)
+        image: prev.image,                // 이미지 경로 유지(없으면 validate에서 보정)
+        mood: mood,
+        emotionText: txt(patch.emotionText, txt(prev.emotionText, EMO_TXT[mood] || "기타")),
+        title: txt(patch.title, prev.title),
+        content: txt(patch.content, txt(prev.content, txt(prev.desc, "")))
+      });
+
+      // 검증/보정(필수값/기본값/경로 등)
+      var check = JSON.parse(JSON.stringify(draft));
+      validateDiary(check);
+
+      var next = Object.freeze(check);
+
+      // 같은 배열 참조 유지(사이드이펙트 최소화)
+      state.splice(idx, 1, next);
+
+      // 영속 저장 + 필요 시 목록 리렌더
+      saveToStorage();
+      scheduleRender();
+
+      return next;
+    }catch(e){
+      console.error("❌ updateDiary 실패:", e);
+      return null;
+    }
+  }
+
   // ------ API: 초기 주입/동기화 ------
   function hydrateDiaries(data, mode){
     if (!Array.isArray(data)) { console.warn("hydrateDiaries: 배열이 아님:", data); return; }
@@ -181,9 +240,10 @@
   // ------ 외부 노출 ------
   global.diaryList = state;
   global.addDiary = addDiary;
+  global.updateDiary = updateDiary;        // ★ 추가 노출
   global.getDiaries = getDiaries;
   global.hydrateDiaries = hydrateDiaries;
-  global.persistDiaries = saveToStorage; // 필요시 외부에서 강제 저장 호출
+  global.persistDiaries = saveToStorage;   // 필요시 외부에서 강제 저장 호출
 
   // ------ 부팅 시 저장본 반영 ------
   initFromStorage();

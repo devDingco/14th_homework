@@ -152,16 +152,16 @@
       }
 
       // 수정 버튼 → edit 모드 진입
-      var editBtn = qs("#read-view .btn");
-      if (editBtn) {
-        editBtn.onclick = function(){
-          if (typeof w.enterEditMode === "function") {
-            try { w.enterEditMode(di); } catch (e) { console.error(e); }
-          } else {
-            console.log("enterEditMode 미정의:", di);
-          }
-        };
-      }
+var editBtn = qs("#read-view .btn");
+if (editBtn) {
+  editBtn.onclick = function(){
+    if (typeof w.enterEditMode === "function") {
+      try { w.enterEditMode(); } catch (e) { console.error(e); }
+    } else {
+      console.log("enterEditMode 미정의");
+    }
+  };
+}
     } catch (e) {
       console.error("❌ 상세 렌더 실패:", e);
     }
