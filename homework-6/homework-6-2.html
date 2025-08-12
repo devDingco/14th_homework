@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>일기상세 클론</title>
+<style>
+  :root{
+    --page-bg:#d9d9d9;      /* 전체 회색 배경 */
+    --panel-bg:#ffffff;     /* 흰 컨텐츠 */
+    --frame:#efefef;        /* 내부 회색(둘레) */
+    --black:#000000;
+    --muted:#7a7a7a;
+    --accent:#1976d2;
+    --red:#ff6b6b;
+    --dashed:#f06b6b;
+  }
+  html,body{height:100%;margin:0;font-family: "Noto Sans KR",system-ui,Arial; background:var(--page-bg); color:#111;}
+  .outer{
+    padding:18px;
+    box-sizing:border-box;
+  }
+
+  /* 상단 섹션 라벨 */
+  .section-label{
+    display:inline-block;
+    background:#eee;
+    border-radius:6px;
+    padding:6px 10px;
+    font-size:13px;
+    color:#444;
+    margin-bottom:14px;
+  }
+
+  /* 큰 검은 제목 박스(rounded) */
+  .big-title{
+    background:var(--black);
+    color:#fff;
+    padding:18px 26px;
+    border-radius:14px;
+    display:block;
+    width:86%;
+    margin:10px 0 22px;
+    font-size:30px;
+    font-weight:800;
+    text-align:center;
+    position:relative;
+  }
+  .big-title::after{
+    content:"";
+    position:absolute;
+    left:20%;
+    right:20%;
+    bottom:6px;
+    height:4px;
+    background:var(--accent);
+    border-radius:2px;
+    transform:translateY(6px);
+  }
+
+  /* 내부 프레임 박스(흰 컨텐츠) */
+  .frame{
+    background:var(--panel-bg);
+    width:92%;
+    margin:12px auto;
+    padding:28px;
+    box-sizing:border-box;
+    border-radius:6px;
+    box-shadow: 0 0 0 12px rgba(0,0,0,0.02) inset;
+  }
+
+  /* 상단 데스크탑 표시 텍스트 (작은 회색) */
+  .subtle{
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+
+  /* 본문 영역: 제목/메타/본문 레이아웃 */
+  .post{
+    max-width:1100px;
+    margin:14px auto 24px;
+  }
+  .post .title{
+    font-weight:800;
+    font-size:14px;
+    margin-bottom:12px;
+  }
+  .post .headline{
+    border-top:3px solid #111;
+    margin-bottom:18px;
+    padding-top:10px;
+    font-size:13px;
+  }
+
+  .meta-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+  }
+  .mood{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    color:#d23a3a;
+    font-weight:700;
+  }
+  .mood svg{width:18px;height:18px}
+
+  .meta-date{font-size:12px;color:var(--muted);}
+
+  .content-text{
+    font-size:13px;
+    line-height:1.7;
+    color:#222;
+    margin-bottom:18px;
+    white-space:pre-wrap;
+  }
+
+  /* 수정/삭제 버튼 그룹 (작은 회색 버튼) */
+  .ctrls{
+    display:flex;
+    gap:8px;
+    justify-content:flex-end;
+    margin-bottom:6px;
+  }
+  .btn{
+    padding:6px 10px;
+    border-radius:8px;
+    border:1px solid #e0e0e0;
+    background:#fafafa;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .btn.danger{
+    background:#fff;
+    border:1px solid #ddd;
+    color:#333;
+  }
+
+  /* 주석/코멘트 추가 영역(빨간 점선 박스) */
+  .comment-wrap{
+    border-radius:10px;
+    padding:14px;
+    margin-top:26px;
+    position:relative;
+    border:3px dashed var(--dashed);
+    background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.9));
+  }
+
+  .comment-title{
+    position:absolute;
+    left:-84px;
+    top:18px;
+    transform:translateX(-8px);
+    background:#000;
+    color:#fff;
+    padding:6px 10px;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:700;
+  }
+
+  .comment-field{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    flex-wrap:wrap;
+  }
+  .comment-field input[type="text"]{
+    flex:1 1 640px;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ddd;
+    font-size:13px;
+  }
+  .comment-field button{
+    padding:10px 14px;
+    border-radius:8px;
+    border:0;
+    background:#111;
+    color:#fff;
+    cursor:pointer;
+    font-weight:700;
+  }
+
+  /* 왼쪽에 작은 라벨 (첨부파일 추가) */
+  .attach-label{
+    display:inline-block;
+    background:#111;
+    color:#fff;
+    padding:6px 10px;
+    border-radius:6px;
+    font-size:12px;
+    position:absolute;
+    left:-120px;
+    top:110px;
+  }
+
+  /* 예시 항목 목록 (이미 추가된 코멘트들) */
+  .comment-list{margin-top:12px;font-size:13px;color:#666;}
+  .comment-item{padding:8px 0;border-bottom:1px dashed #eee;color:#444;}
+  .comment-item .date{font-size:12px;color:var(--muted);}
+
+  /* 우측 작은 '삭제' 박스(버튼) */
+  .side-delete{
+    position:absolute;
+    right:28px;
+    top:36px;
+    background:#fff;
+    border:1px solid #eee;
+    padding:8px 10px;
+    border-radius:6px;
+    font-size:12px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.04);
+  }
+
+  /* footer 작은 화살표 */
+  .small-up{
+    width:24px;height:24px;border-radius:50%;
+    display:block;margin:26px auto 0;background:#fff;border:1px solid #eee;text-align:center;line-height:24px;color:#666;font-size:12px;
+  }
+
+  /* 반응형 */
+  @media (max-width:900px){
+    .big-title{font-size:22px;padding:12px}
+    .comment-field input[type="text"]{flex-basis:100%}
+    .frame{padding:18px}
+  }
+</style>
+</head>
+<body>
+  <div class="outer">
+    <div class="section-label">일기상세</div>
+    <div class="big-title">일기 상세_ 삭제 추가 & 회고 등록</div>
+
+    <div class="frame">
+      <div class="subtle">데스크탑_일기 상세_회고 있음</div>
+
+      <div class="post">
+        <div class="title">민지의 다이어리</div>
+
+        <div class="meta-row">
+          <div style="flex:1">
+            <div class="headline"><strong>이것은 타이틀 입니다.</strong></div>
+            <div class="mood">
+              <!-- 빨간 핀 아이콘 -->
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden>
+                <circle cx="12" cy="9" r="6" fill="#ff6b6b"></circle>
+              </svg>
+              행복해요
+            </div>
+            <div class="content-text">
+내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이
+            </div>
+          </div>
+
+          <div style="width:180px; position:relative;">
+            <div class="meta-date">2024. 03. 12 작성</div>
+
+            <!-- 우측 상단의 수정/삭제 버튼 -->
+            <div style="margin-top:18px;">
+              <div class="ctrls">
+                <button class="btn">수정</button>
+                <button class="btn danger">삭제</button>
+              </div>
+            </div>
+
+            <!-- 우측 작은 회색 박스(예: 섹션의 '메뉴') -->
+            <div class="side-delete">세부 추가</div>
+          </div>
+        </div>
+
+        <!-- 빨간 점선 박스: 회고(코멘트) 추가 영역 -->
+        <div style="position:relative;">
+          <div class="comment-wrap">
+            <div class="comment-title">회고/코멘트 추가</div>
+            <div class="attach-label">회고(회고문) 추가</div>
+
+            <div class="comment-field" style="margin-top:8px;">
+              <input type="text" placeholder="회고를 입력하세요. (예: 3월에 고치고 싶은 점... )" />
+              <button>입력</button>
+            </div>
+
+            <div class="comment-list">
+              <div class="comment-item">
+                3월에 자주 고치고 싶은 내용이 기록됩니다. <div class="date">[2024. 03. 24]</div>
+              </div>
+              <div class="comment-item">
+                지난주 피드백 반영 및 회고가 추가됩니다. <div class="date">[2024. 03. 22]</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="small-up">⌃</div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
