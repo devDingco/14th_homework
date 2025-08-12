@@ -107,3 +107,8 @@
 #update_button_frame > p {
     cursor: pointer;
 }
+
+#update_button_frame > a {
+    color: black;
+    text-decoration: none;
+}
