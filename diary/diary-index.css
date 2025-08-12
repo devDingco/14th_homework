@@ -12,6 +12,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    align-self: stretch;
     min-height: 100vh; /* 화면 높이 최소 확보 */
 }
 
@@ -20,6 +21,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-self: stretch;
     margin: 0px 376px 40px 376px;
     gap: 24px;
     width: 100%;
@@ -43,7 +45,7 @@ body {
 
 .배너 {
     height: 240px;
-    flex-shrink: 0; /* 줄어들지 않게 */
+    /* flex-shrink: 0; 줄어들지 않게 */
     align-self: stretch;
     min-width: 320px;
     max-width: 1168px;
@@ -143,6 +145,7 @@ body {
     align-items: flex-start;
     gap: 16px;
     text-decoration: none;
+    position: relative;
 
     transition:
     filter 0.5s,
@@ -152,6 +155,16 @@ body {
 .일기틀:hover {
     filter:  blur(3px);
     transform: scale(1.1);
+}
+
+.삭제버튼 {
+    /* width: 24px;
+    height: 24px; */
+
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
 }
 
 /* 감정별 이미지 설정 */
@@ -384,3 +397,9 @@ body {
     letter-spacing: -0.14px;
 }
 
+.플로팅버튼 {
+    position: fixed;
+    right: 300px;
+    bottom: 100px;
+    cursor: pointer;
+}
