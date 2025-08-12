@@ -51,6 +51,8 @@ header {
   color: white;
   text-align: center;
   padding: 0.8rem 0;
+  /* 여기서 뒤의 값을 0으로 주면 세로 폭이 짧아짐! */
+
 }
 
 /* 배너 */
@@ -109,6 +111,9 @@ header {
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  flex-shrink: 0; /* 공간이 부족해도 크기 줄이지 않음 */
+  min-width: 200px; /* 최소 폭 확보 */
+  box-sizing: border-box;
 }
 
 /* 감정 선택 */
@@ -148,4 +153,86 @@ footer {
   padding: 2rem;
   background-color: #eee;
   margin-top: 2rem;
+}
+
+/* ---------------------------
+   추가된 스타일 (숙제 요구사항)
+   ---------------------------*/
+
+/* 필터 바 (sticky, 색 반전 처리용) */
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.6rem;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.filter-bar .filter-btn {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+}
+.filter-bar .filter-btn.active {
+  background: #ffcbcb;
+}
+
+/* inverted: 스크롤 내리면 배경 반전 (요구사항) */
+.filter-bar.inverted {
+  background: #111;
+  color: #fff;
+}
+.filter-bar.inverted .filter-btn {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+/* 카드 삭제 버튼 (카드 위에 겹쳐서 배치) */
+.card .delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,0,0,0.95);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 30;
+  display: none; /* hover시에만 보이게 */
+}
+.card:hover .delete-btn {
+  display: block;
+}
+
+/* 플로팅 버튼 (맨 위로) */
+.floating-top {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #6b6b6b;
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  display: none; /* 스크롤 내리면 block으로 변경 */
+  z-index: 60;
+}
+
+/* 반응형: 작은 화면에서 카드 컨테이너 정렬 */
+@media (max-width: 900px) {
+  .diary-section { flex-direction: column; }
+  .card-container { justify-content: center; }
+  .filter-bar { overflow-x: auto; gap: 8px; }
 }
