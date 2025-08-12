@@ -1,0 +1,26 @@
+/* 프로필/이미지 */
+main .profile-wrapper {
+  background-color: #fff;
+  border-radius: 50%;
+  width: 14rem;      /* 기존 140px → 176px */
+  height: 14rem;
+  padding: 20px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main .profile-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  pointer-events: auto !important;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px){
+  main .profile-wrapper{ width: 160px; height: 160px; }
+}
+@media (max-width: 768px){
+  main .profile-wrapper{ width: 140px; height: 140px; }
+}

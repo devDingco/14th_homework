@@ -1,0 +1,13 @@
+/* 리스트 컨테이너 */
+main .diary-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex: 1;
+}
+/* #main 칼럼에서 가용 폭을 꽉 쓰게 */
+#main .diary-list {
+  width: 100%;
+  flex: 1 1 auto;
+  min-width: 0;
+}

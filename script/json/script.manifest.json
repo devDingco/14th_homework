@@ -1,0 +1,23 @@
+[
+  "./script/utils/safe.js",
+  "./script/utils/dom.js",
+"./script/diaryList.js",
+
+  "./script/diary/list/list.defaults.js",
+  "./script/diary/list/list.utils.js",
+  "./script/diary/list/list.normalize.js",
+  "./script/diary/list/list.card.js",
+  "./script/diary/list/list.render.js",
+  "./script/diary/list/list.bind.js",
+  "./script/diary/list/list.autorender.js",
+
+
+  "./script/diary/viewButton.template.js",
+  "./script/diary/viewButtonEnhancer.js",
+
+  "./script/diary/fetchRender.js",
+  "./script/diary/render.js",
+  "./script/diaryStore.js",
+  "./script/filterDropdown.js",
+  "./script/formHandler.js"
+]

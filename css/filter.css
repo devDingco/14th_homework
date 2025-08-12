@@ -1,0 +1,23 @@
+
+.diary-filter {
+  display: inline-flex;
+  
+  align-items: center;
+  gap: 8px;
+  padding: 0px 20px;
+  margin: 12px 0 20px;
+}
+
+#filter-select {
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: #fff;
+  font: inherit;
+  outline: none;
+}
+
+#filter-select:focus {
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+}

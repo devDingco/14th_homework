@@ -1,0 +1,41 @@
+/* hover 효과: 확대 + 블러 */
+main .diary-card:hover {
+  transform: scale(1.1);
+  z-index: 3;
+}
+
+/* 모션 최소화 환경 */
+@media (prefers-reduced-motion: reduce) {
+  main .diary-card { transition: none; }
+}
+
+main .diary-card:hover .card-top,
+main .diary-card:hover .card-title,
+main .diary-card:hover .card-meta .emotion,
+main .diary-card:hover .card-meta .date {
+  filter: blur(2px);
+  transition: filter 0.5s ease;
+}
+
+/* =========== 상세보기 버튼은 효과 제외 =========== */
+main .diary-card .btn-view-detail {
+  position: relative;
+  z-index: 5; /* 블러/확대 레이어 위 */
+}
+
+/* 부모가 1.1배로 커질 때, 버튼만 역스케일로 상쇄 */
+main .diary-card:hover .btn-view-detail {
+  /* blur 무시(상위에서 blur를 안 걸었으므로 이 줄은 안전장치) */
+  filter: none !important;
+
+  /* 역스케일: 1 / 1.1 ≈ 0.90909 */
+  transform: scale(calc(1 / 1.1));
+  transition: transform 0.5s ease;
+}
+
+/* (권장) 버튼 줄 정렬 안정화 */
+main .card-meta .meta-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

@@ -1,0 +1,32 @@
+/* 카드 내부 레이아웃 */
+main .card-top {
+  width: 100%;
+  padding: 40px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+main .card-bottom {
+  background-color: #fff;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+main .card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* 이벤트 누락 방지(클릭 등) */
+main .profile-wrapper img,
+main .card-top,
+main .card-bottom {
+  pointer-events: auto !important;
+}

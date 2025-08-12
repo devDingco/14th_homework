@@ -1,0 +1,13 @@
+.page-header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px 0 20px;
+}
+.page-header .title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}

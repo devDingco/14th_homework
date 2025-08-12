@@ -1,0 +1,7 @@
+/* 리스트 보조 반응형 */
+@media (max-width: 1024px) {
+  main .diary-list { max-width: 100%; }
+}
+@media (max-width: 768px) {
+  main .diary-list { flex-direction: column; gap: 16px; }
+}
