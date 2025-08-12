@@ -47,7 +47,11 @@
     --button-detail-border: #d4d3d3;
     --button-copy-text: #1c1c1c;
 
-
+    /* 편지 상세 수정중 회고 disabled */
+    --button-detail-review-disabled-bg: #f2f2f2;
+    --button-detail-review-disabled-text: #ababab;
+    --button-detail-review-disabled-button-text: #f2f2f2;
+    --button-detail-review-disabled-button-bg: #c7c7c7;
 
     --footer-bg: #f2f2f2;
     --footer-text: #5f5f5f;
@@ -109,6 +113,12 @@
     --button-detail-border: #333;
     --button-copy-text: #c7c7c7;
 
+    /* 편지 상세 수정중 회고 disabled */
+    --button-detail-review-disabled-bg: #333;
+    --button-detail-review-disabled-text: #5f5f5f;
+    --button-detail-review-disabled-button-text: #777;
+    --button-detail-review-disabled-button-bg: #333;
+    
 
     --footer-bg: #2d2d2d;
     --footer-text: #c7c7c7;
@@ -133,6 +143,11 @@ body {
     max-width: 1920px;
     color: var(--text-primary);
     transition: background-color 0.3s ease, color 0.3s ease;
+
+    @media (max-width: 779px) {
+        max-width: 779px;
+        padding: 0 20px;
+    }
 }
 
 a {

@@ -133,6 +133,10 @@ function changeFeelingText(feeling) {
 function openEditBox() {
     document.querySelector(".original_wrapper").style.display="none"
     document.querySelector(".detail_edit_wrapper").style.display="flex"
+    document.querySelector(".detail_review_input_area").classList.add('disabled')
+
+    document.querySelector(".detail_review_input_area").style.display='none'
+    document.querySelector(".detail_review_input_area_disabled").style.display='flex'
 
     bindDataToEditForm()
 }
@@ -140,6 +144,9 @@ function openEditBox() {
 function closeEditBox() {
     document.querySelector(".original_wrapper").style.display="block"
     document.querySelector(".detail_edit_wrapper").style.display="none"
+
+    document.querySelector(".detail_review_input_area").style.display='flex'
+    document.querySelector(".detail_review_input_area_disabled").style.display='none'
 }
 
 // 수정시 내용 바인딩
@@ -237,49 +244,23 @@ function updateDisplay() {
 
 // 내용 복사 로직
 function showToast(message) {
-    // 토스트
-    const toast = document.createElement('div');
-    toast.className = 'toast-message';
-    toast.textContent = message;
+    const toast = document.getElementById('toast-message');
+    const toastText = toast.querySelector('.toast-text');
     
-    // 스타일 적용
-    toast.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #333;
-        color: white;
-        padding: 12px 24px;
-        border-radius: 4px;
-        z-index: 1000;
-        opacity: 0;
-        transform: translateY(-20px);
-        transition: all 0.3s ease;
-    `;
+    toastText.textContent = message;
+    toast.classList.add('show');
     
-    document.body.appendChild(toast);
-    
-    // 애니메이션
+    // 3초 후 숨기기
     setTimeout(() => {
-        toast.style.opacity = '1';
-        toast.style.transform = 'translateY(0)';
-    }, 100);
-    
-    // 2초 후 제거
-    setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateY(-20px)';
-        setTimeout(() => {
-            document.body.removeChild(toast);
-        }, 300);
-    }, 2000);
+        toast.classList.remove('show');
+    }, 3000);
 }
 
 function onClickCopyButton() {
     const content = document.querySelector('.detail_content_text').textContent;
     
     navigator.clipboard.writeText(content).then(() => {
-        showToast('내용이 복사되었습니다!');
+        showToast('내용이 복사되었습니다.');
     });
     document.querySelector('.copy_text').textContent = '복사완료 !';
     setTimeout(() => {
@@ -340,3 +321,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+
+// 탑 스크롤 버튼
+function scrollToTop() {
+    const topButton = document.getElementById('top_button');
+    topButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}

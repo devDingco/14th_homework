@@ -124,8 +124,9 @@ function initCustomSelect() {
             // 화살표 상태 업데이트 (필터링된 페이지 수 기준)
             updateArrowStates(filteredTotalPages);
             
-            // 필터링된 데이터 렌더링
-            renderDiaries(currentDisplayData);
+            // 첫 번째 페이지 데이터만 렌더링 (12개씩)
+            const firstPageData = currentDisplayData.slice(0, perPage);
+            renderDiaries(firstPageData);
 
         });
     });
@@ -497,4 +498,15 @@ function onClickConfirmDelete(id) {
     data.splice(id, 1);
     localStorage.setItem('data', JSON.stringify(data));
     window.location.href = 'index.html';
+}
+
+// 탑 스크롤 버튼
+function scrollToTop() {
+    const topButton = document.getElementById('top_button');
+    topButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 }
