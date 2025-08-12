@@ -30,3 +30,20 @@ main .card-top,
 main .card-bottom {
   pointer-events: auto !important;
 }
+
+
+.diary-card { position: relative; } /* 이미 있으면 생략 */
+.diary-card .btn-delete-card{
+  position:absolute; top:10px; right:10px;
+  width:24px; height:24px; line-height:24px;
+  z-index: 10;
+  pointer-events: auto;
+  border-radius:50%; border:1px solid #e6e6e6; background:#fff;
+  font-weight:700; font-size:14px; color:#666;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:transform .2s ease, box-shadow .2s ease, background .15s;
+}
+.diary-card .btn-delete-card:hover{ transform: scale(1.08); box-shadow:0 4px 10px rgba(0,0,0,.08); }
+.diary-card .btn-delete-card:active{ transform: scale(.96); }
+.diary-card .btn-delete-card:focus-visible{ outline:2px solid #8ab4ff; outline-offset:2px; }
+

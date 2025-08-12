@@ -137,6 +137,9 @@
     // 버튼 텍스트/레이아웃
     const submitBtn = form.querySelector('button[type="submit"]');
     if (submitBtn) submitBtn.textContent = "수정하기";
+    form.classList.add("is-edit-mode");
+    if (submitBtn) submitBtn.classList.add("is-edit-submit");
+
     let actions = form.querySelector(".form-actions");
     if (!actions && submitBtn) {
       actions = d.createElement("div");

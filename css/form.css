@@ -1,5 +1,5 @@
 #form{
-  padding-top:4rem;
+  padding-top:  5rem;
 }
 .diary-form {
   width: 320px;
@@ -114,4 +114,41 @@
   margin-bottom: 6px;
   display: block;
   color: #333;
+}
+
+/* ===== 편집모드: '수정하기' 버튼 더 과감한 기울기 ===== */
+#edit-slot .diary-form.is-edit-mode button[type="submit"].is-edit-submit{
+  transition: transform 220ms cubic-bezier(.2,.85,.25,1.2), box-shadow 220ms ease;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-origin: center center;
+  position: relative; /* hover 시 그림자 겹침 방지 */
+  z-index: 0;
+}
+
+#edit-slot .diary-form.is-edit-mode button[type="submit"].is-edit-submit:hover{
+  /* 이전보다 각도/상승/스케일 업 */
+  transform: perspective(700px) rotateZ(-6deg) translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(0,0,0,.12);
+  z-index: 1;
+}
+
+#edit-slot .diary-form.is-edit-mode button[type="submit"].is-edit-submit:active{
+  /* 눌렀을 때 반대 방향으로 조금 더 과감하게 */
+  transform: perspective(700px) rotateZ(7deg) scale(0.98);
+  box-shadow: inset 0 2px 10px rgba(0,0,0,.16);
+}
+
+/* 키보드 접근성 */
+#edit-slot .diary-form.is-edit-mode button[type="submit"].is-edit-submit:focus-visible{
+  outline: 2px solid #8ab4ff;
+  outline-offset: 2px;
+}
+
+/* 모션 최소화 설정 사용자는 애니메이션 비활성화 */
+@media (prefers-reduced-motion: reduce){
+  #edit-slot .diary-form.is-edit-mode button[type="submit"].is-edit-submit{
+    transition: none;
+    transform: none !important;
+  }
 }

@@ -21,3 +21,112 @@
 #filter-select:focus {
   box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
 }
+
+/* 색 변수 (원하면 variables.css에 둬도 OK) */
+:root{
+  --filter-bg: rgba(255,255,255,.6);
+  --filter-fg: #222;
+  --filter-bg-scrolled: #111;   /* 반전 배경 */
+  --filter-fg-scrolled: #fff;   /* 반전 시 글자색 */
+}
+
+/* 스티키 바의 기본 상태 */
+.filter-bar{
+  position: sticky;     /* 스크롤 시 상단 고정 */
+  top: 0;               /* 헤더가 고정이면 그 높이만큼으로 변경 */
+  z-index: 100;         /* 카드보다 위에 */
+  background: var(--filter-bg);
+  color: var(--filter-fg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+/* 스크롤 감지되면 반전 */
+.filter-bar.is-scrolled{
+  background: var(--filter-bg-scrolled);
+  color: var(--filter-fg-scrolled);
+  box-shadow: 0 2px 14px rgba(0,0,0,.12);
+}
+
+/* 내부 컨트롤 대비 보강(선택사항) */
+.filter-bar.is-scrolled select,
+.filter-bar.is-scrolled button,
+.filter-bar.is-scrolled .tab{
+  color: var(--filter-fg-scrolled);
+  border-color: rgba(255,255,255,.35);
+  background: transparent;
+}
+.filter-bar.is-scrolled a { color: var(--filter-fg-scrolled); }
+
+/* 레이아웃 충돌 방지: 필터 위/아래 요소가 sticky와 겹치지 않도록 */
+#filter-slot { position: relative; z-index: 0; }
+
+/* 이미 있는 기본 레이아웃 유지 + sticky 속성 추가 */
+.diary-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;          /* 살짝 여백 추가(선택) */
+  margin: 12px 0 20px;
+
+  /* ⬇︎ sticky & theme */
+  position: sticky;           /* 상단 고정 */
+  top: 0;                     /* 헤더가 고정이면 그 높이로 조정 */
+  z-index: 100;               /* 카드 위에 올라오도록 */
+  background: var(--filter-bg);
+  color: var(--filter-fg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+/* 스크롤되면 반전 */
+.diary-filter.is-scrolled{
+  background: var(--filter-bg-scrolled);
+  color: var(--filter-fg-scrolled);
+  box-shadow: 0 2px 14px rgba(0,0,0,.12);
+}
+
+/* 내부 컨트롤(셀렉트 등) 반전 시 가독성 보강 */
+.diary-filter.is-scrolled select,
+.diary-filter.is-scrolled button,
+.diary-filter.is-scrolled .tab{
+  color: var(--filter-fg-scrolled);
+  border-color: rgba(255,255,255,.35);
+  background: transparent;
+}
+.diary-filter.is-scrolled a { color: var(--filter-fg-scrolled); }
+
+/* sticky가 다른 요소와 겹치지 않게 */
+#filter-slot { position: relative; z-index: 0; }
+
+/* 기존 select 스타일 유지 */
+#filter-select {
+  z-index:1000;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: #fff;
+  font: inherit;
+  outline: none;
+}
+#filter-select:focus {
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+}
+
+/* 색 변수(이미 있으니 그대로 사용) */
+:root{
+  --filter-bg: rgba(255,255,255,.6);
+  --filter-fg: #222;
+  --filter-bg-scrolled: #111;
+  --filter-fg-scrolled: #fff;
+}
+.diary-filter{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  /* 나머지 배경/트랜지션 등은 네가 둔 그대로 */
+}
+#filter-slot{ position: relative; z-index: 0; }
