@@ -36,8 +36,10 @@ const confirmUpdate = () => {
             return
         } else {
             toLocalStorage(updateArr)
+            document.getElementById("update_confirm_button").style = "transform: rotateZ(30deg); transition: 1s;"
             alert(`${indexToChange}번 일기가 수정되었습니다`)
-            window.location.assign(`http://localhost:${window.location.port}/css-js-master/index.html`)
+            // todo - 메인페이지로 이동
+            // window.location.assign(`http://localhost:${window.location.port}/css-js-master/index.html`)
         }
     } catch(e) {
         alert(e)
