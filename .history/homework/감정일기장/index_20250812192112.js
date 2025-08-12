@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
   function 일기를화면에그리기(일기데이터) {
     // 감정 텍스트에 따라 어떤 이미지를 보여줄지 정하는 객체
     const 이미지맵 = {
-      행복해요: 'main4.png',
-      슬퍼요: 'main1.png',
-      화나요: 'main3.png',
-      놀랐어요: 'main2.png',
-      기타: 'main5.png',
+      행복해요: 'main4.png', // 행복 = 노란색 이미지
+      슬퍼요: 'main1.png', // 슬픔 = 파란색 이미지
+      화나요: 'main3.png', // 화남 = 회색 이미지
+      놀랐어요: 'main2.png', // 놀람 = 주황색 이미지
+      기타: 'main5.png', // 기타 = 보라색 이미지
     };
 
     // 일기의 감정에 맞는 이미지 파일명 가져오기
