@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/responsive.css">
 </head>
 <body>
   <div class="container">
@@ -18,7 +19,6 @@
       <span class="headline01 active">일기보관함</span>
       <span class="headline01 inActive">사진보관함</span>
     </div>
-
     <div class="filter">
       <select id="dropdown" class="dropdown" onchange="selectedMood()">
         <option name="dropdown" value="total">전체</option>
@@ -29,8 +29,8 @@
         <option name="dropdown" value="etc">기타</option>
       </select>
     </div>
-
     <div class="main">
+      
       <div class="main__gallery">
         
       </div>
@@ -64,11 +64,12 @@
         <button id="submit-button" type="submit" disabled>등록하기</button>
 
       </form>
-      <img onclick="scrollToTop()" id="float-button" src="./assets/icons/up_light.png">
+     
     </div>
-    
+  
 
   </div>
+  <img onclick="scrollToTop()" id="float-button" src="./assets/icons/up_light.png">
       <!-- footer -->
       <div class="footer">
         <!-- <div class="footer-wrapper"> -->

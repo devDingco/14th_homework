@@ -7,10 +7,11 @@
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="./css/detail.css">
   <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/responsive.css">
 </head>
 <body>
   <div class="container">
-    <h1 class="title01 header">지호의 다이어리</h1>
+    <h1 class="title01 header" id="detailHeader">지호의 다이어리</h1>
  
     <div class="detail-main">
       <h2 class="detail-main-title" id="detailTitle">{이것은 타이틀입니다.}</h2>
@@ -37,7 +38,7 @@
     <form id="detail-modify-form" class="main__diary-form" style="display: none;">
       <div class="select-box">
         <h3>오늘 기분은 어땟나요?</h3>
-        <div class="mood-select-box">
+        <div class="mood-select-box detail-mood-select-box">
           <label for="happy"><input id="happy" name="mood" type="radio">행복해요</label>
           <label for="sad"><input id="sad" name="mood" type="radio">슬퍼요</label>
           <label for="surprise"><input id="surprise" name="mood" type="radio">놀랐어요</label>
@@ -68,13 +69,14 @@
     <div class="detail-comments" id="comments">
       <h2>회고</h2>
       <div class="detail-comments-input">
-        <input id="detail-comments-input-input" type="text">
+        <input id="detail-comments-input-input" type="text" placeholder="회고를 남겨보세요.">
         <button id="detail-comments-input-button" onclick="submitComment()">입력</button>
       </div>
-    <div class="detail-comments-area">
-      
+      <div class="detail-comments-area">
+        
+      </div>
     </div>
-    </div>
+    <img onclick="scrollToTop()" id="float-button" src="./assets/icons/up_light.png">
   </div>
   <script src="./js/script.js"></script>
   <script src="./js/checkContents.js"></script>
