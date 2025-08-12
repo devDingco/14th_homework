@@ -55,28 +55,10 @@ export const initialData: TCard[] = [
   },
 ];
 
-const initData = [
-  {
-    id: 12421512515,
-    imgUrl: '/assets/images/행복해요 (m).png',
-    state: '행복해요',
-    date: '2024. 03. 12',
-    title: '타이틀 영역입니다. 한줄까지만 노출됩니다.',
-    content:
-      '내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.',
-  },
-];
-
-// const newDiary = {
-//   imgUrl: './assets/images/행복해요 (m).png',
-//   state: '행복해요',
-//   date: '2024. 03. 12',
-//   title: '타이틀 영역입니다. 한줄까지만 노출됩니다.',
-// };
-
 // 초기데이터 설정
-const initLocalStorage = () => {
-  localStorage.setItem('myDiary', JSON.stringify(initData));
+export const initLocalStorage = (data: TCard[]) => {
+  const convertString = JSON.stringify(data);
+  localStorage.setItem('myDiary', convertString);
 };
 
 export const getLocalStorage = () => {
@@ -84,7 +66,7 @@ export const getLocalStorage = () => {
   const parseString = JSON.parse(myDiary);
 
   if (!myDiary) {
-    initLocalStorage();
+    initLocalStorage(initialData);
   }
 
   return parseString;
@@ -97,3 +79,4 @@ export const setLocalStorage = (newData: TCard) => {
   const convertString = JSON.stringify(updateData);
   localStorage.setItem('myDiary', convertString);
 };
+

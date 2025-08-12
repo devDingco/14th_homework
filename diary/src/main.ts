@@ -2,10 +2,13 @@ import '../assets/styles/global.css';
 import '../assets/styles/header.css';
 import '../assets/styles/main.css';
 import '../assets/styles/detail.css';
+import '../assets/styles/dropDownTest.css';
 import './storageControl';
-import { getLocalStorage, setLocalStorage } from './storageControl';
+import { getLocalStorage, initLocalStorage, setLocalStorage } from './storageControl';
 import { switchTextColor } from './utils/switchTextColor';
 import type { TCard } from './storageControl';
+import { formatDate } from './utils/formatDate';
+import './filterMenu';
 
 // const myName = prompt("이름을 입력하세요.");
 const myName = '민지';
@@ -20,8 +23,37 @@ const formEl = document.querySelector('form')! as HTMLSpanElement;
 const titleInputEl = document.querySelector('#title')! as HTMLInputElement;
 const contentInputEl = document.querySelector('#content')! as HTMLInputElement;
 const submitDiaryBtnEl = document.querySelector('.submitDiaryBtn')! as HTMLButtonElement;
+// const filterDiaryBtnEl = document.querySelector('#dropdown')! as HTMLDivElement;
+const filterDiaryBtnEl = document.querySelector('.dropdown-button')! as HTMLButtonElement;
+const dropdownEl = document.querySelector('.dropdown')! as HTMLSelectElement;
+const dropdownMenuEl = document.querySelector('.dropdown-menu')! as HTMLSelectElement;
+const dropdownMenuItemEl = document.querySelector('.dropdown-menu-item')! as HTMLSelectElement;
+
+const selectedItemEL = document.querySelector('.selected-item') as HTMLSpanElement;
+
+dropdownMenuItemEl.addEventListener('click', () => {
+  // const url = new URL('dqdqw/');
+  // window.location.replace(url);
+});
+
+dropdownEl.addEventListener('click', () => {
+  dropdownMenuEl.style.display = 'block';
+});
+
+// filterDiaryBtnEl.addEventListener('click', () => {
+//   const selectedValue = (e.target as HTMLSelectElement).value;
+//   console.log(selectedValue);
+// });
 
 // const cardListEl = document.querySelector('.cardList')! as HTMLButtonElement;
+
+const topScrollEl = document.querySelector('.topscroll')! as HTMLButtonElement;
+
+const mvTop = () => {
+  window.scrollTo({ top: 0 });
+};
+
+topScrollEl.addEventListener('click', mvTop);
 
 LogoEl.innerText = `${myName}의 다이어리`;
 CompanyEl.innerText = `${myName}의 다이어리`;
@@ -41,7 +73,7 @@ const submitForm = (e: SubmitEvent) => {
     id: Math.floor(Math.random() * 10000),
     imgUrl: titleInputEl.value,
     state: selectedRadio.value,
-    date: `2025. 08. 07`,
+    date: formatDate(),
     title: titleInputEl.value,
     content: contentInputEl.value,
   };
@@ -56,12 +88,28 @@ const submitForm = (e: SubmitEvent) => {
 
 formEl.addEventListener('submit', submitForm);
 
+const handleDeleteDiary = (e: MouseEvent) => {
+  e.preventDefault();
+  //
+  const parentId = (e.target as HTMLElement).closest('.card')?.id;
+  const prevData = getLocalStorage();
+
+  if (parentId) {
+    const filteredData = prevData.filter((data: TCard) => data.id !== parseInt(parentId));
+    initLocalStorage(filteredData);
+    window.location.reload();
+  }
+
+  console.log('삭제');
+};
+
 const addDiaryDom = (props: TCard) => {
   const link = document.createElement('a');
   link.setAttribute('href', `./pages/diaryDetailPage?id=${props.id}`);
   // div
   const container = document.createElement('div');
   container.setAttribute('class', 'card');
+  container.setAttribute('id', `${props.id}`);
   //
   const img = document.createElement('img');
   img.setAttribute('src', `./assets/images/${props.state} (m).png`);
@@ -74,7 +122,7 @@ const addDiaryDom = (props: TCard) => {
   state.style.color = switchTextColor(props.state);
   const date = document.createElement('span');
   inner.appendChild(state);
-  date.innerText = '2025. 08. 07';
+  date.innerText = props.date;
   date.style.color = `#919191`;
   inner.appendChild(date);
 
@@ -82,13 +130,23 @@ const addDiaryDom = (props: TCard) => {
   title.innerText = `${props.title.slice(0, 22)}...`;
   title.setAttribute('class', 'cardTitle');
 
+  // 삭제버튼
+  const deleteImg = document.createElement('img');
+  deleteImg.setAttribute('src', './assets/icons/close icon.svg');
+  deleteImg.classList.add('deleteDiaryBtn');
+
+  deleteImg.addEventListener('click', handleDeleteDiary);
+  // deleteImg.addEventListener('click', handleDeleteDiary.bind(props.id));
+
   link.appendChild(container);
   container.appendChild(img);
   container.appendChild(inner);
   container.appendChild(title);
+  container.appendChild(deleteImg);
+
   cardListEl.insertAdjacentElement('beforeend', link);
 
-  modalCard();
+  return link;
 };
 
 const checkInput = () => {
@@ -110,39 +168,64 @@ const checkInput = () => {
 titleInputEl.addEventListener('input', checkInput);
 contentInputEl.addEventListener('input', checkInput);
 
-const alertFn = (index: number) => {
-  const curData = getLocalStorage();
-  const text = `
-  ${curData[index].title}
-  ${curData[index].state}
-  ${curData[index].date}
-  `;
-  // alert(text);
-};
-
-const modalCard = () => {
-  const CardEls = document.querySelectorAll('.cardList') as NodeListOf<HTMLDivElement>;
-
-  for (const [index, cardEl] of CardEls.entries()) {
-    cardEl.removeEventListener;
-    cardEl.addEventListener('click', () => alertFn(index));
-  }
-};
-
-modalCard();
-
 const displayDiaryDom = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const selectedValue = urlParams.get('select');
   const diaryList = getLocalStorage();
+  let filteredData;
+  if (selectedValue === '전체') {
+    filteredData = diaryList;
+  } else {
+    filteredData = diaryList.filter((diary: TCard) => {
+      selectedItemEL.innerText = selectedValue || '전체';
 
-  // diaryList.forEach((card: TCard) => {
-  //   addDiaryDom(card);
-  // });
+      return selectedValue ? diary.state === selectedValue : true;
+    });
 
-  const displayDom = diaryList.map((card: TCard) => {
-    addDiaryDom(card);
+    // 선택 감정 replace
+  }
+
+  filteredData.forEach((card: TCard) => {
+    cardListEl.insertAdjacentElement('beforeend', addDiaryDom(card));
   });
-
-  cardListEl.insertAdjacentElement('beforeend', displayDom);
 };
 
 displayDiaryDom();
+
+// ==================== DELETE CODE ====================
+// const alertFn = (index: number) => {
+//   const curData = getLocalStorage();
+//   const text = `
+//   ${curData[index].title}
+//   ${curData[index].state}
+//   ${curData[index].date}
+//   `;
+//   // alert(text);
+// };
+
+// const modalCard = () => {
+//   const CardEls = document.querySelectorAll('.cardList') as NodeListOf<HTMLDivElement>;
+
+//   for (const [index, cardEl] of CardEls.entries()) {
+//     cardEl.removeEventListener;
+//     cardEl.addEventListener('click', () => alertFn(index));
+//   }
+// };
+
+// modalCard();
+// ==================== DELETE CODE ====================
+
+const handleScroll = () => {
+  const scrollPosition = window.scrollY;
+  console.log(scrollPosition);
+
+  if (scrollPosition > 0) {
+    filterDiaryBtnEl.style.backgroundColor = '#000000';
+    filterDiaryBtnEl.style.color = '#ffffff';
+  } else {
+    filterDiaryBtnEl.style.backgroundColor = '#ffffff';
+    filterDiaryBtnEl.style.color = '#000000';
+  }
+};
+
+window.addEventListener('scroll', handleScroll);

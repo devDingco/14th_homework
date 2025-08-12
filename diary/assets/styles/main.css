@@ -62,6 +62,7 @@ textarea {
 }
 
 .content {
+  position: relative;
   display: flex;
   gap: 24px;
 }
@@ -86,6 +87,8 @@ textarea {
   border-radius: 16px;
   border-width: 1px;
   padding: 24px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
 }
 .content_right__title {
   font-weight: 700;
@@ -145,6 +148,7 @@ textarea {
   max-width: 380px;
   padding-bottom: 16px;
   border-radius: 16px;
+  position: relative;
 }
 .card:hover {
   scale: 110%;
@@ -181,4 +185,20 @@ textarea {
 
 .invalidInput {
   border: 2px solid #e84f4f !important;
+}
+
+.topscroll {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  /* left: 0px; */
+}
+
+.deleteDiaryBtn {
+  position: absolute;
+  max-height: 24px;
+  max-width: 24px;
+  cursor: pointer;
+  right: 12px;
+  top: 12px;
 }

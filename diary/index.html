@@ -12,12 +12,14 @@
     <div id="app">
       <!-- HEADER -->
       <header>
-        <a id="logo" href="/">
-          <span class="myName"></span>
-        </a>
-        <div class="darkModeBtn">
-          <span>다크모드</span>
-          <img src="/assets/icons/toggle.png" alt="" />
+        <div>
+          <a id="logo" href="/">
+            <span class="myName"></span>
+          </a>
+          <div class="darkModeBtn">
+            <span>다크모드</span>
+            <img src="/assets/icons/toggle.png" alt="" />
+          </div>
         </div>
       </header>
       <!-- MAIN -->
@@ -31,18 +33,35 @@
             <li><span>사진보관함</span></li>
           </ul>
         </nav>
-        <div class="filter">
-          <select name="fill" id="fill-select">
+        <div class="filterState">
+          <!-- <select name="fill" id="filterState-select">
             <option value="">전체</option>
             <option value="행복해요">행복해요</option>
             <option value="슬퍼요">슬퍼요</option>
             <option value="놀랐어요">놀랐어요</option>
             <option value="화나요">화나요</option>
             <option value="기타">기타</option>
-          </select>
+          </select> -->
+          <div class="dropdown">
+            <button class="dropdown-button">
+              <span class="selected-item">전체</span>
+              <img src="./assets/icons/keyboard_arrow_down.svg" alt="" />
+            </button>
+            <ul class="dropdown-menu">
+              <li class="dropdown-menu-item">전체</li>
+              <li class="dropdown-menu-item">행복해요</li>
+              <li class="dropdown-menu-item">슬퍼요</li>
+              <li class="dropdown-menu-item">놀랐어요</li>
+              <li class="dropdown-menu-item">화나요</li>
+              <li class="dropdown-menu-item">기타</li>
+            </ul>
+          </div>
         </div>
 
         <div class="content">
+          <div class="topscroll">
+            <img src="./assets//icons/topscroll fab.svg" alt="" />
+          </div>
           <div class="cardList">
             <!-- CARD -->
             <!-- <div class="card">
@@ -143,9 +162,11 @@
         </div>
       </main>
       <footer class="footer">
-        <span class="a">민지의 다이어리</span>
-        <span class="ceo"></span>
-        <span class="c">Copyright © 2024. {name} Co., Ltd.</span>
+        <div>
+          <span class="a">민지의 다이어리</span>
+          <span class="ceo"></span>
+          <span class="c">Copyright © 2024. {name} Co., Ltd.</span>
+        </div>
       </footer>
     </div>
   </body>

@@ -9,45 +9,58 @@
     <script type="module" src="/src/detail.ts"></script>
   </head>
   <body>
-    <div id="app">
+    <div id="app-detail">
       <!-- HEADER -->
       <header>
-        <a id="logo" href="/">
-          <span class="myName"></span>
-        </a>
-        <div class="darkModeBtn">
-          <span>다크모드</span>
-          <img src="/assets/icons/toggle.png" alt="" />
+        <div>
+          <a id="logo" href="/">
+            <span class="myName">민지의다이어리</span>
+          </a>
+          <div class="darkModeBtn">
+            <span>다크모드</span>
+            <img src="/assets/icons/toggle.png" alt="" />
+          </div>
         </div>
       </header>
       <!-- main -->
-      <main class="detail-layout">
-        <div class="detail-title">
-          <p class="detail-title-label">title</p>
-          <input name="editTitle" class="detail-title-input hidden" type="text" />
-        </div>
-        <div class="detail-head">
-          <div class="detail-head-profile">
-            <span>😀</span>
-            <span class="detail-state">행복해요</span>
+      <main>
+        <div class="detail-layout">
+          <div class="detail-title">
+            <p class="detail-title-label">title</p>
+            <input name="editTitle" class="detail-title-input hidden" type="text" />
           </div>
-          <span class="detail-date">date</span>
+          <div class="detail-head">
+            <div class="detail-head-profile">
+              <span>😀</span>
+              <span class="detail-state">행복해요</span>
+            </div>
+            <span class="detail-date">date</span>
+          </div>
+          <p class="detail-body-lable">내용</p>
+          <textarea name="editBody" class="detail-body-input hidden">내용</textarea>
+          <p class="detail-body">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam provident ullam vel corrupti iusto
+            consequuntur iste reiciendis reprehenderit ab, velit assumenda fuga eligendi maiores expedita, soluta
+            quaerat esse illo perspiciatis? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam provident
+            ullam vel corrupti iusto consequuntur iste reiciendis reprehenderit ab, velit assumenda fuga eligendi
+            maiores expedita, soluta quaerat esse illo perspiciatis? Lorem ipsum, dolor sit amet consectetur adipisicing
+            elit. Quam provident ullam vel corrupti iusto consequuntur iste reiciendis reprehenderit ab, velit assumenda
+            fuga eligendi maiores expedita, soluta quaerat esse illo perspiciatis? Lorem ipsum, dolor sit amet
+            consectetur adipisicing elit. Quam provident ullam vel corrupti iusto consequuntur iste reiciendis
+            reprehenderit ab, velit assumenda fuga eligendi maiores expedita, soluta quaerat esse illo perspiciatis?
+          </p>
+          <div class="detail-footer">
+            <button class="detail-footer-editBtn">수정</button>
+          </div>
+          <div class="detail-footer-isEdit">
+            <button class="detail-footer-isEdit-cancelBtn">취소</button>
+            <button class="detail-footer-isEdit-saveBtn">수정하기</button>
+          </div>
         </div>
-        <p class="detail-body-lable">내용</p>
-        <textarea name="editBody" class="detail-body-input hidden">내용</textarea>
-        <p class="detail-body">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam provident ullam vel corrupti iusto consequuntur
-          iste reiciendis reprehenderit ab, velit assumenda fuga eligendi maiores expedita, soluta quaerat esse illo
-          perspiciatis? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam provident ullam vel corrupti
-          iusto consequuntur iste reiciendis reprehenderit ab, velit assumenda fuga eligendi maiores expedita, soluta
-          quaerat esse illo perspiciatis? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam provident ullam
-          vel corrupti iusto consequuntur iste reiciendis reprehenderit ab, velit assumenda fuga eligendi maiores
-          expedita, soluta quaerat esse illo perspiciatis? Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Quam provident ullam vel corrupti iusto consequuntur iste reiciendis reprehenderit ab, velit assumenda fuga
-          eligendi maiores expedita, soluta quaerat esse illo perspiciatis?
-        </p>
-        <div class="detail-footer">
-          <button class="detail-footer-editBtn">수정</button>
+        <div class="comment">회고</div>
+        <div class="comment-layout">
+          <input type="text" class="comment-input" />
+          <button>입력</button>
         </div>
       </main>
     </div>

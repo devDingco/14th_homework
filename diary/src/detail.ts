@@ -10,6 +10,9 @@ const detailBodyInputEl = document.querySelector('.detail-body-input')! as HTMLI
 const detailDateEl = document.querySelector('.detail-date')! as HTMLSpanElement;
 const detailStateEl = document.querySelector('.detail-state')! as HTMLSpanElement;
 const detailEditBtnEl = document.querySelector('.detail-footer-editBtn')! as HTMLSpanElement;
+const detailIsEditBtnEl = document.querySelector('.detail-footer-isEdit')! as HTMLSpanElement;
+const detailIsEditCancelBtnEl = document.querySelector('.detail-footer-isEdit-cancelBtn')! as HTMLSpanElement;
+const detailIsEditSaveBtnEl = document.querySelector('.detail-footer-isEdit-saveBtn')! as HTMLSpanElement;
 
 let isEdit = false;
 
@@ -29,11 +32,37 @@ const getParams = () => {
 
 getParams();
 
+const onEditCancel = () => {
+  isEdit = !isEdit;
+
+  if (isEdit) {
+    detailEditBtnEl.style.display = 'none';
+    detailIsEditBtnEl.style.display = 'flex';
+
+    detailTitleEl.style.display = 'none';
+    detailBodyEl.style.display = 'none';
+
+    detailTitleInputEl.style.display = 'flex';
+    detailBodyInputEl.style.display = 'flex';
+
+    detailTitleInputEl.value = detailTitleEl.innerText;
+    detailBodyInputEl.value = detailBodyEl.innerText;
+  } else if (!isEdit) {
+    detailEditBtnEl.style.display = 'block';
+    detailIsEditBtnEl.style.display = 'none';
+    detailTitleEl.style.display = 'flex';
+    detailBodyEl.style.display = 'flex';
+    detailTitleInputEl.style.display = 'none';
+    detailBodyInputEl.style.display = 'none';
+  }
+};
+
 const onEditBtn = () => {
   isEdit = !isEdit;
 
   if (isEdit) {
-    detailEditBtnEl.innerText = '수정하기';
+    detailEditBtnEl.style.display = 'none';
+    detailIsEditBtnEl.style.display = 'flex';
 
     detailTitleEl.style.display = 'none';
     detailBodyEl.style.display = 'none';
@@ -45,7 +74,8 @@ const onEditBtn = () => {
     detailBodyInputEl.value = detailBodyEl.innerText;
     detailEditBtnEl.classList.remove('test');
   } else if (!isEdit) {
-    detailEditBtnEl.innerText = '수정';
+    detailEditBtnEl.style.display = 'block';
+    detailIsEditBtnEl.style.display = 'none';
     detailTitleEl.style.display = 'flex';
     detailBodyEl.style.display = 'flex';
     detailTitleInputEl.style.display = 'none';
@@ -55,7 +85,8 @@ const onEditBtn = () => {
     detailBodyEl.innerText = detailBodyInputEl.value;
     detailEditBtnEl.classList.add('test');
   }
-  console.log('click edit');
 };
 
 detailEditBtnEl.addEventListener('click', onEditBtn);
+detailIsEditCancelBtnEl.addEventListener('click', onEditCancel);
+detailIsEditSaveBtnEl.addEventListener('click', onEditBtn);
