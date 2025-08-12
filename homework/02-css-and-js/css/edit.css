@@ -1,0 +1,234 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Pretendard Variable";
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 64px;
+    margin: 0 20px 40px;
+  }
+  
+  /* 헤더 */
+  .header {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+  }
+  
+  .edit_area {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    border-bottom: 1px solid #000;
+    padding-bottom: 16px;
+  }
+  
+  /* 기분 선택 */
+  .diary_mood_content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+  
+  .mood_title {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #000;
+  }
+  
+  .mood_select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #333;
+  }
+  
+  .mood_radio_button {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* 일기 인풋 */
+  .edit_text_area {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .edit_input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .input_label {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #333;
+  }
+  
+  #HTML_일기수정제목입력창,
+  #HTML_일기수정내용입력창 {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #d4d3d3;
+  }
+  
+  /* 수정 버튼 영역 */
+  .button_area {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+  
+  .button {
+    width: 104px;
+    height: 48px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+    cursor: pointer;
+  }
+  
+  .cancel_button {
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #1c1c1c;
+  }
+  
+  .edit_button {
+    background-color: #000;
+    color: #f2f2f2;
+  }
+  
+  .edit_button:hover {
+    transform: skew(-10deg, 0deg);
+  }
+  
+
+  /* 댓글 */
+.comment_area {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.comment_content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 13px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #000;
+}
+
+.comment_input_area {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+#HTML_댓글입력창 {    
+    appearance: none;
+    flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
+    border-radius: 8px;
+    border: none;
+    background-color: #f2f2f2;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+}
+#HTML_댓글입력창::placeholder {
+    color: #ababab;
+    font-family: inherit;
+    font-style: inherit;
+    font-size: inherit;
+}
+.comment_button{
+    height: 48px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #c7c7c7;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap; /* 버튼 텍스트가 줄바꿈되지 않도록 설정 */
+    flex-shrink: 0; /* 버튼 너비가 줄어들지 않도록 설정 */
+}
+
+.comment_list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.comment_item {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+#HTML_댓글보여주는곳 {
+    color: #000;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+}
+#HTML_댓글날짜보여주는곳 {
+    color: #777;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem;    
+}
+
+.comment_divider {
+    border: none; /* 기본 hr 태그의 테두리 제거 */
+    border-top: 1px solid #e4e4e4;
+    margin: 16px 0; 
+}

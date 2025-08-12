@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>일기상세페이지</title>
+    <link rel="stylesheet" href="./css/detail.css">
+    <script src="./javascript/detail.js"></script>
+</head>
+<body>
+    <!-- 헤더 -->
+    <div class="header">
+        <div>민지의 다이어리</div>
+    </div>
+    
+    <!-- 일기 상세 -->
+    <div class="diary_detail">
+        <!-- 일기 타이틀 영역 -->
+        <div class="diary_title">
+            <span id="HTML_일기상세제목보여주는곳"></span>
+
+            <div class="diary_info">
+                <div class="diary_mood">
+                    <img id="HTML_기분이미지보여주는곳" />
+                    <div id="HTML_일기기분보여주는곳"></div>
+                </div>
+                <div class="diary_date">
+                    <div id="HTML_날짜보여주는곳"></div>
+                    작성
+                </div>                
+            </div>
+        </div>
+        <!-- 일기 내용 영역 -->
+        <div class="diary_content">
+            <span>내용</span>
+            <span
+                id="HTML_일기상세내용보여주는곳"
+                class="diary_content_detail"
+            ></span>
+        </div>
+        <!-- 버튼 영역 -->
+        <div class="button_area">
+            <button class="edit_button" onclick="JS_수정하기기능()">
+                수정
+            </button>
+            <button class="delete_button" onclick="JS_삭제하기기능()">
+                삭제
+            </button>
+        </div>
+    </div>
+
+    <!-- 댓글 -->
+    <div class="comment_area">
+        <div class="comment_content">
+            <span>회고</span>
+            <div class="comment_input_area">
+                <input
+                    id="HTML_댓글입력창"
+                    type="text"
+                    placeholder="회고를 남겨보세요."
+                />
+                <button class="comment_button" onclick="JS_댓글달기기능()">
+                    입력
+                </button>
+            </div>
+        </div>
+        <div class="comment_list">
+            <div class="comment_item">
+                <div id="HTML_댓글보여주는곳"></div>
+                <div id="HTML_댓글날짜보여주는곳"></div>
+            </div>
+            <hr class="comment_divider"> 
+        </div>
+    </div>
+</body>
+</html>
