@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const diary = {
       title: userTitle,
       content: userContent,
-      date: new Date().toLocaleDateString(), //오늘날짜
+      date: '25-08-11',
       emotion: '😊',
     };
 
@@ -35,19 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const diaryListContainer = document.getElementById('diaryList');
     //현재 빈 배열에 정보(제목,내용)을 담고있지만 화면에는 보여지지 않음
     const 새일기 = document.createElement('div');
-    새일기.innerHTML = `<img src="./assets/images/main4.png" alt="" />
-  <div class="title__text__main">
-    <div class="title__text">
-      <div class="title__happy">${diary.emotion}</div>
-      <div>${diary.date}</div>
-    </div>
-    <div>${diary.title}</div>
-  </div>
-`;
-    새일기.addEventListener('click', function () {
-      alert(`제목:${diary.title},내용:${diary.content},날짜:{diary.date}`);
-    });
+    새일기.innerHTML = `<div>${diary.title}</div>`;
+
     diaryListContainer.appendChild(새일기);
-    console.log('새일기 추가완료');
   });
 });

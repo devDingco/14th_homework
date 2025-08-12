@@ -21,33 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const userContent = textInput.value;
 
     console.log('사용자가입력한제목', userTitle);
-    console.log('사용자가입력한내용', userContent);
-    const diary = {
-      title: userTitle,
-      content: userContent,
-      date: new Date().toLocaleDateString(), //오늘날짜
-      emotion: '😊',
-    };
+    console.log('사용자가입력한내용', textInput);
 
     diaryList.push(diary);
     console.log('새일기추가', diary);
-
-    const diaryListContainer = document.getElementById('diaryList');
-    //현재 빈 배열에 정보(제목,내용)을 담고있지만 화면에는 보여지지 않음
-    const 새일기 = document.createElement('div');
-    새일기.innerHTML = `<img src="./assets/images/main4.png" alt="" />
-  <div class="title__text__main">
-    <div class="title__text">
-      <div class="title__happy">${diary.emotion}</div>
-      <div>${diary.date}</div>
-    </div>
-    <div>${diary.title}</div>
-  </div>
-`;
-    새일기.addEventListener('click', function () {
-      alert(`제목:${diary.title},내용:${diary.content},날짜:{diary.date}`);
-    });
-    diaryListContainer.appendChild(새일기);
-    console.log('새일기 추가완료');
   });
 });

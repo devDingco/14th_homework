@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const diary = {
       title: userTitle,
       content: userContent,
-      date: new Date().toLocaleDateString(), //오늘날짜
+      date: new Date().toLocaleDateString(),//오늘날짜
       emotion: '😊',
     };
 
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
   </div>
 `;
     새일기.addEventListener('click', function () {
-      alert(`제목:${diary.title},내용:${diary.content},날짜:{diary.date}`);
+      alert(`제목:${diary.title}`,내용:${diary.content},날짜:{diary.date});
     });
     diaryListContainer.appendChild(새일기);
     console.log('새일기 추가완료');
