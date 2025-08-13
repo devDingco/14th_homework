@@ -133,6 +133,8 @@
     opacity: 1;
     gap: 24px;
     overflow-y: scroll;
+
+    /* position:absolute; */
 }
 
 .diary_content {
@@ -438,4 +440,20 @@
     padding: 4px;
     border: 1px solid var(--Gray-Gray-300, rgba(199, 199, 199, 1));
     background: var(--Gray-W, rgba(255, 255, 255, 1));
+}
+
+#diary_float_btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    border-width: 1px;
+    angle: 0 deg;
+    opacity: 1;
+    border: 1px solid var(--Gray-Gray-50, rgba(242, 242, 242, 1));
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    
+    position: fixed;
+    bottom: 100px;
+    left: 78%;
 }

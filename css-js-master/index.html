@@ -12,10 +12,6 @@
     <link rel="stylesheet" href="./css/img.css"/>
     <script>
         window.onload = () => {
-            // const localStorageArr = JSON.parse(localStorage.getItem("일기콘텐츠"))
-            //     console.log('window.onload -> ',localStorageArr)
-
-            //     document.getElementById("diary_box_container").innerHTML = makeMainHtml(localStorageArr)
             if (localStorage.getItem("일기콘텐츠")) {
                 const localStorageArr = JSON.parse(localStorage.getItem("일기콘텐츠"))
                 console.log('window.onload -> ',localStorageArr)
@@ -149,9 +145,10 @@
             </div>
         </div>
     </div>
+    <img id="diary_float_btn" onclick="toScrollTop()" src="./images/up_outline_light_xl.svg"/>
     <script src="./js/viewDiaryFilter.js"></script>
-    <script src="./js/index.js"></script>
     <script src="./js/makeMainHtml.js"></script>
+    <script src="./function/scroll.js"></script>
     <script src="./function/resistContent.js"></script>
     <script src="./function/toLocalStorage.js"></script>
     <script src="./function/deleteLocalstorage.js"></script>
