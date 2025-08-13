@@ -15,15 +15,37 @@
     align-items: ;
     gap: ;
 
-    font-weight: 800;
-    font-size: 40px;
-    line-height: 56px;
+    font-weight: ;
+    font-size: ;
+    line-height: ;
     letter-spacing: ;
     text-align: ;
     color: ;
 
 }
 */
+:root {
+    /* Width */
+    --width-full: 120rem; /* 최상위 컨테이너 너비 */
+    --width-content-main: 73rem; /* 메인 콘텐츠 영역 너비 */
+    --width-diary-list: 49rem; /* 일기 목록 너비 */
+    --width-diary-card: 23.75rem; /* 일기 카드 너비 */
+    --width-diary-form: 22.5rem; /* 일기 작성 폼 너비 */
+  
+    /* Font Weight */
+    --font-weight-bold: 700;
+    --font-weight-medium: 500;
+    --font-weight-regular: 400;
+    --font-weight-light: 300;
+    --font-weight-semi-bold: 600;
+  
+    /* Font Size */
+    --font-size-title-lg: 1.5rem; /* 탭, 폼 제목 */
+    --font-size-title-md: 1.125rem; /* 헤더, 카드 제목 */
+    --font-size-text-md: 1rem; /* 일반 텍스트, 입력 필드 */
+    --font-size-text-sm: 0.875rem; /* 날짜, 부제, 푸터 텍스트 */
+  }
+
 
 @font-face {
     font-family: 'Pretendard-Regular';
@@ -33,8 +55,8 @@
 
 *{
 
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 
     font-family: 'Pretendard Variable';
@@ -52,39 +74,40 @@ body{
 
 }
 
+
 .background{
 
-    width: 1920px; /* 초기 너비 */
-    height: 1805px; /* 초기 높이 */
-    min-height: 894px; /* 최소 높이 */
-    max-height: 1726px; /* 최대 높이 */
+    width: var(--width-full); /* 초기 너비 */
+    height: 112.8125rem; /* 초기 높이 */
+    /* min-height: 55.875rem; 최소 높이 */
+    /* max-height: 107.875rem; 최대 높이 */
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 40px;
+    gap: 2.5rem;
 
 }
 
 .main{
 
-    width: 1920px;
-    height: 1605px;
+    width: var(--width-full);
+    height: 100.313rem;
 
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 24px;
+    gap: 1.5rem;
 
 }
 
 .main__header{
 
-    width: 1920px;
-    height: 60px;
-    padding: 0px 20px;
+    width: var(--width-full);
+    height: 3.75rem;
+    padding: 0 1.25rem;
 
     display: flex;
     flex-direction: row;
@@ -94,17 +117,17 @@ body{
 
 .main__header__title{
 
-    width: 1168px;
-    height: 100%;
+    width: var(--width-content-main);
+    height: 3.75rem;
 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 16px;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-title-md);
+    line-height: 1rem;
     letter-spacing: -1%;
     color: #000000;
 
@@ -112,22 +135,22 @@ body{
 
 .main__frame{
 
-    width: 1920px;
-    height: 1521px;
+    width: var(--width-full);
+    height: 95.063rem;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 24px;
+    gap: 1.5rem;
 
 }
 
 .main__frame__banner{
 
-    width: 1168px;
-    height: 240px;
-    border-radius: 24px;
+    width: var(--width-content-main);
+    height: 15rem;
+    border-radius: 1.5rem;
     background-image: url("../assets/images/banner.jpg") ;
     background-position: center;
     background-size: 100% auto; 
@@ -136,14 +159,14 @@ body{
 
 .main__frame__content{
 
-    width: 1920px;
-    height: 1257px;
+    width: var(--width-full);
+    height: 82.5625rem;
 
     display: flex;
     flex-direction: column;
     justify-content: baseline;
     align-items: center;
-    gap: 42px;
+    gap: 2.625rem;
 
 
 
@@ -152,14 +175,14 @@ body{
 
 .frame__content__navigator {
 
-    width: 1920px;
-    height: 112px;
+    width: var(--width-full);
+    height: 7rem;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 32px;
+    gap: 2rem;
 
     position: sticky;
 
@@ -167,27 +190,27 @@ body{
 
 .frame__content__tab {
 
-    width: 1168px;
-    height: 48px;
+    width: var(--width-content-main);
+    height: 3rem;
 
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap: 16px;
+    gap: 1rem;
 
 }
 
 .content__tab__menu{
 
-    width: 119px;
-    height: 48px;
-    border-bottom: 2px solid #000000;
-    padding: 12px 8px;
+    width: 7.438rem;
+    height: 3rem;
+    border-bottom: 0.125rem solid #000000;
+    padding: 0.75rem 0.5rem;
 
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 24px;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-title-lg);
+    line-height: 1.5rem;
     letter-spacing: -1% ;
     text-align: center;
     color: #000000;
@@ -197,13 +220,13 @@ body{
 
 .tab__menu__disabled {
 
-    width: 119px;
-    height: 48px;
-    padding: 12px 8px;
+    width: 7.438rem;
+    height: 3rem;
+    padding: 0.75rem 0.5rem;
 
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 24px;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-title-lg);
+    line-height: 1.5rem;
     letter-spacing: -1% ;
     text-align: center;
     color: #ABABAB;
@@ -212,24 +235,24 @@ body{
 }
 
 .frame__content__filter{
-    width: 1168px;
-    height: 32px;
+    width: var(--width-content-main);
+    height: 2rem;
 
 
 }
 
 .feeling__filter {
 
-    width: 112px;
-    height: 32p  x;
-    border: 1px solid #C7C7C7;
-    border-radius: 8px;
-    padding: 4px;
+    width: 7.5rem;
+    height: 2rem;
+    border: 0.063rem solid #C7C7C7;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
     
 
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-text-md);
+    line-height: 1.5rem;
     letter-spacing: -1% ;
     color: #1C1C1C;
     white-space: nowrap; 
@@ -238,13 +261,13 @@ body{
 
 .frame__content__diary {
 
-    width: 1168px;
-    height: 1167px;
+    width: var(--width-content-main);
+    height: 73rem;
 
     display: flex;
     flex-direction: row;
     justify-content: baseline;
-    gap: 24px;
+    gap: 1.5rem;
 
     transition: width 0.5s ease-out;
 
@@ -254,29 +277,27 @@ body{
 
 .frame__content__diary:has(.diary__card:hover){
 
-    width: 1200px;
+    width: 75rem;
 
 }
 
 .content__diary__list{
 
-    /* min-width: 784px; */
-    /* max-width: 816px; */
-    width: 784px;
-    height: 1167px;
+    width: var(--width-diary-list);
+    height: var(--width-content-main);
 
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: baseline;
     align-content: flex-start;
-    gap: 24px;
+    gap: 1.5rem;
 
     transition: width 0.5s ease-out;
 
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-text-md);
+    line-height: 1.5rem;
     letter-spacing: -1% ;
     text-align: center;
     color: #919191;
@@ -287,7 +308,7 @@ body{
 
 .content__diary__list:has(.diary__card:hover){
 
-    width: 860px;
+    width: 53.75rem;
 
 }
 
@@ -297,12 +318,12 @@ a{
 
 #delete__button{
 
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
 
     position: relative;
-    top: -255px;
-    left: -40px;
+    top: -15.938rem;
+    left: -2.5rem;
 
     transition: 
     width 0.5s,
@@ -314,28 +335,28 @@ a{
 
 .diary__card:hover #delete__button{
 
-    width: 27px;
-    height: 27px;
+    width: 1.688rem;
+    height: 1.688rem;
 
     position: relative;
-    top: -275px;
-    left: -45px;
+    top: -17.188rem;
+    left: -2.813rem;
 
 }
 
 
 .diary__card{
 
-    width: 380px;
-    height: 373px;
-    border-radius: 16px;
-    padding-bottom: 16px;
+    width: var(--width-diary-card);
+    height: 23.313rem;
+    border-radius: 1rem;
+    padding-bottom: 1rem;
 
 
     display: flex;
     flex-direction: column;
     justify-content: baseline;
-    gap: 16px;
+    gap: 1rem;
 
     transition: 
     width 0.5s,
@@ -348,10 +369,10 @@ a{
 
 .diary__card:hover{
 
-    width: 412px;
-    height: 396px;
+    width: 25.75rem;
+    height: 24.75rem;
     
-    box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 0.125rem 1.875rem 0 rgba(0, 0, 0, 0.16);
 
 
 
@@ -368,7 +389,7 @@ a{
 
     width: 100%;
     height: 100%;
-    border-radius: 16px;
+    border-radius: 1rem;
     /* background-image: url("./assets/images/sad_M.svg"); */
     background-size: 100% 100%;
 
@@ -382,28 +403,28 @@ a{
 .diary__card:hover .diary__card__image{
 
     width: 100%;
-    filter: blur(3px);
+    filter: blur(0.188rem);
 
 }
 
 
 .diary__card__text{
 
-    width: 380px;
-    height: 56px;
-    padding: 0px 8px;
+    width: var(--width-diary-card);
+    height: 3.5rem;
+    padding: 0 0.5rem;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 8px;
+    gap: 0.5rem;
 
 }
 
 .diary__card__subtitle{
 
     width: 100%;
-    height: 24px;
+    height: 1.5rem;
 
     display: flex;
     flex-direction: row;
@@ -416,11 +437,11 @@ a{
 
 .diary__card__feeling{
 
-    width: 60px;
+    width: 3.75rem;
 
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 20px;
+    font-weight: var(--font-weight-semi-bold);
+    font-size: var(--font-size-text-sm);
+    line-height: 1.25rem;
     letter-spacing: -1%;
     text-align: left;
 
@@ -449,12 +470,12 @@ a{
 
 #diary__card__date{
 
-    width: 100px;
+    width: 6.25rem;
 
-    font-weight: 400;
-    font-size: 14px;
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-text-sm);
     text-align: right;
-    line-height: 24px;
+    line-height: 1.5rem;
     letter-spacing: -1%;
     color: #919191;
 }
@@ -463,11 +484,11 @@ a{
 .diary__card__title{
 
     width: 100%;
-    height: 24px;
+    height: 1.5rem;
 
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 24px;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-title-md);
+    line-height: 1.5rem;
     letter-spacing: -1%;
     text-align: left;
     color: #000000; 
@@ -476,28 +497,28 @@ a{
 
 .content__diary__form{
 
-    width: 360px;
-    height: 604px;
-    border: 1px solid #D4D3D3;
-    border-radius: 16px;
-    padding: 24px 24px;
+    width: var(--width-diary-form);
+    height: 37.75rem;
+    border: 0.063rem solid #D4D3D3;
+    border-radius: 1rem;
+    padding: 1.5rem 1.5rem;
     background-color: #FFFFFF;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 40px;
+    gap: 2.5rem;
 
 }
 
 .diary__form__title{
 
     width: 100%;
-    height: 24px;
+    height: 1.5rem;
 
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 24px;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-title-lg);
+    line-height: 1.5rem;
     letter-spacing: -1%;
     color: #000000;
 
@@ -506,12 +527,12 @@ a{
 .diary__form__input{
 
     width: 100%;
-    height: 404px;
+    height: 25.25rem;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 40px;
+    gap: 2.5rem;
 
 }
 
@@ -523,11 +544,11 @@ a{
     display: flex;
     flex-direction: column;
     justify-content: baseline;
-    gap: 16px;
+    gap: 1rem;
 
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
+    font-weight: var(--font-weight-semi-bold);
+    font-size: 1.25rem;
+    line-height: 1.5rem;
     letter-spacing: -1%;
     color: #000000;
 
@@ -536,16 +557,16 @@ a{
 .input__feeling__radio{
 
     width: 100%;
-    height: 68px;
+    height: 4.25rem;
 
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 1.25rem;
 
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 20px;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-title-md);
+    line-height: 1.25rem;
     letter-spacing: -1%;
     color: #333333;
 
@@ -553,25 +574,25 @@ a{
 
 .feeling{
 
-    height: 24px;
+    height: 1.5rem;
 
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
 
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 20px;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-title-md);
+    line-height: 1.25rem;
     letter-spacing: -1%;
 
 }
 
 .feeling input[type="radio"]{
 
-    width: 24px;
-    height: 24px;
-    border: 2px solid #777777;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 0.125rem solid #777777;
     accent-color: #000000; /* 라디오 버튼이 선택되었을 때 색상 */
 
 }
@@ -580,28 +601,28 @@ a{
 .form__input__text{
 
     width: 100%;
-    height: 256px;
+    height: 16rem;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 24px;
+    gap: 1.5rem;
 
 }
 
 .input__text__title{
 
     width: 100%;
-    height: 76px;
+    height: 4.75rem;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 8px;
+    gap: 0.5rem;
 
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-text-sm);
+    line-height: 1.25rem;
     letter-spacing: -1%;
     color: #333333;
 
@@ -610,16 +631,16 @@ a{
 .input__text__context{
 
     width: 100%;
-    height: 156px;
+    height: 9.75rem;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 8px;
+    gap: 0.5rem;
 
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-text-sm);
+    line-height: 1.25rem;
     letter-spacing: -1%;
     color: #333333;
 
@@ -628,16 +649,16 @@ a{
 #title__feeling{
 
     width: 100%;
-    height: 48px;
-    border: 1px solid #D4D3D3;
-    border-radius: 8px;
+    height: 3rem;
+    border: 0.063rem solid #D4D3D3;
+    border-radius: 0.5rem;
     outline: none;
-    padding: 12px 16px;
+    padding: 0.75rem 1rem;
     background-color: #FFFFFF;
 
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-text-md);
+    line-height: 1.5rem;
     letter-spacing: -1%;
     color: #333333;
 
@@ -652,16 +673,16 @@ a{
 #context__feeling{
 
     width: 100%;
-    height: 128px;
-    border: 1px solid #D4D3D3;
-    border-radius: 8px;
+    height: 8rem;
+    border: 0.063rem solid #D4D3D3;
+    border-radius: 0.5rem;
     outline: none;
-    padding: 12px 16px;
+    padding: 0.75rem 1rem;
     background-color: #FFFFFF;
 
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-text-md);
+    line-height: 1.5rem;
     letter-spacing: -1%;
     color: #333333;
 
@@ -676,15 +697,15 @@ a{
 .diary__form__button{
 
     width: 100%;
-    height: 48px;
-    border: 0px;
-    border-radius: 8px;
-    padding: 8px 10px;
+    height: 3rem;
+    border: 0;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.625rem;
     background-color: #000000;
 
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 24px;
+    font-weight: var(--font-weight-semi-bold);
+    font-size: var(--font-size-title-md);
+    line-height: 1.5rem;
     letter-spacing: -1%;
     color: #F2F2F2;
 
@@ -697,23 +718,19 @@ a{
 
 #floating__button{
 
+    width: 2.5rem;
+    height: 2.5rem;
+
     position: relative;
-    top: -80px;
-    left: 564px;
-
+    left: 35rem;
 }
 
-.page{
-
-
-
-}
 
 .footer{
 
-    width: 1920px;
-    height: 160px;
-    padding: 24px 20px;
+    width: var(--width-full);
+    height: 10rem;
+    padding: 1.5rem 1.25rem;
     background-color: #F2F2F2;
 
 
@@ -725,22 +742,22 @@ a{
 
 .footer__container{
 
-    width: 1168px;
-    height: 112px;
+    width: var(--width-content-main);
+    height: 7rem;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: baseline;
-    gap: 32px;
+    gap: 2rem;
 
 }
 
 #footer__title {
 
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 16px;
+    font-weight: var(--font-weight-bold);
+    font-size: 1.25rem;
+    line-height: 1rem;
     letter-spacing: -1%;
     color: #000000;
 
@@ -748,9 +765,9 @@ a{
 
 #footer__name {
 
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-text-sm);
+    line-height: 1rem;
     letter-spacing: -1%;
     color: #5F5F5F;
 
@@ -758,10 +775,46 @@ a{
 
 #footer__copyright {
 
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 16px;
+    font-weight: var(--font-weight-light);
+    font-size: var(--font-size-text-sm);
+    line-height: 1rem;
     letter-spacing: -1%;
     color: #919191;
 
 }
+
+/* 미디어 쿼리 부분 */
+
+@media(max-width: 75.5rem){
+
+    .background{
+        width: 75.5rem;
+    }
+
+    .main{
+        width: 75.5rem;
+    }
+    
+    .main__header{
+        width: 75.5rem;
+    }
+    
+    .main__frame{
+        width: 75.5rem;
+    }
+    
+    .main__frame__content{
+        width: 75.5rem;
+    }
+    
+    .frame__content__navigator {
+        width: 75.5rem;
+    }
+    
+    .footer{
+        width: 75.5rem;
+    }
+
+
+}
+

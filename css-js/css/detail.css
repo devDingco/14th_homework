@@ -409,15 +409,20 @@ body{
 
 }
 
+.comment__button:disabled {
+
+    background-color: #C7C7C7;
+
+}
+
 .frame__comment__text{
 
     width: 100%;
     height: 104px;
-    padding:  40px 0px;
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: baseline;
     gap: 12px;
 
     font-weight: 500;
@@ -426,5 +431,45 @@ body{
     letter-spacing: -1%;
     text-align: center;
     color: #919191;
+
+}
+
+.comment__none{
+
+    padding: 40px 0px
+
+}
+
+.comment__box{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    align-items: center;
+    gap: 12px;
+
+}
+
+.comment{
+
+    color: #000000;
+
+}
+
+hr{
+
+    height: 1px;
+    border: 1px solid #E4E4E4;
+
+}
+
+.comment__date{
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1%;
+    text-align: center;
+    color: #777777;
 
 }

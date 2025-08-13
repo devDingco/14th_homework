@@ -64,7 +64,8 @@ function getDiaryCard() {
         feeling: selectedFeeling[0],
         feeling_title: selectedFeeling[1],
         card_title: diaryTitle,
-        card_context: diaryContext
+        card_context: diaryContext,
+        comment: []
     }
 
     diaryCard.push(submitcard)
@@ -195,7 +196,7 @@ const viewFiltering = (event) => {
         } else {
             // 기존 배열 중 드롭다운에서 선택하지 않은 기분을 골랐을 때는 배열이 0이므로, 안내 문구 노출
             document.getElementById("card__list").innerText = "선택한 기분으로 작성된 일기가 없습니다."
-        } 
+        }
     
     }
 

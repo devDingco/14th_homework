@@ -52,12 +52,22 @@
                     <div class="frame__comment__form">
                         <div>회고</div>
                         <div class="comment__form">
-                            <input type="text" placeholder="회고를 남겨보세요." class="diary__comment" />
-                            <button class="comment__button">입력</button>
+                            <input id="comment__text" type="text" placeholder="회고를 남겨보세요." class="diary__comment" oninput="isCommentWritten()" />
+                            <button id="comment__button" class="comment__button" onclick="getDiaryComment()" disabled>입력</button>
                         </div>
 
                     </div>
-                    <div class="frame__comment__text">등록된 회고가 없습니다.</div>
+                    <div id="comment__textarea" class="frame__comment__text">
+                        <!-- <div class="comment__box">
+                            <div class="comment">3년이 지나고 다시 보니 이때가 그립다.</div>
+                            <div class="comment__date">[2024. 09. 24]</div>
+                        </div> -->
+                        <!-- <hr />
+                        <div class="comment__box">
+                            <div class="comment">3년이 지나고 다시 보니 이때가 그립다.</div>
+                            <div class="comment__date">[2024. 09. 24]</div>
+                        </div> -->
+                    </div>
                 </div>
             </div>
         </div>
