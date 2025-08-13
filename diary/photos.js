@@ -1,5 +1,6 @@
 // 전역 변수들
 let currentTheme = 'light';
+let currentRatio = 'default';
 
 // 저장된 테마 가져오기
 function getStoredTheme() {
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initCustomSelect();
 
+    createSkeleton(10)
     getImages()
 });
 
@@ -90,43 +92,86 @@ function initCustomSelect() {
 }
 
 function onClickSelect(value) {
+    currentRatio = value;
     const photo = document.querySelectorAll('.photos_item_image')
+    const photoItem = document.querySelectorAll('.photos_item')
     if(value === 'default') {
         photo.forEach(item =>{
+            item.style.aspectRatio = '1/1'
+        })
+        photoItem.forEach(item => {
             item.style.aspectRatio = '1/1'
         })
     } else if (value === "row") {
         photo.forEach(item => {
             item.style.aspectRatio = '4/3'
         })
+        photoItem.forEach(item => {
+            item.style.aspectRatio = '4/3'
+        })
     } else {
         photo.forEach( item => {
+            item.style.aspectRatio = '3/4'
+        })
+        photoItem.forEach(item => {
             item.style.aspectRatio = '3/4'
         })
     }
 }
 
-async function getImages() {
-    const response = await fetch('https://dog.ceo/api/breeds/image/random/5')
-    const data = await response.json()
-    const images = data.message
-    console.log(images)
+//스켈레톤 이미지 10개 생성
+function createSkeleton(count) {
+    for(let i = 0; i < count; i++) {
+        const skeleton = document.createElement('div')
+        skeleton.classList.add('photos_item', 'skeleton')
+        document.querySelector('.photos_contents').appendChild(skeleton)
+    }
+}
 
-    images.forEach(image => {
-        const photosItem = document.createElement('div')
-        photosItem.classList.add('photos_item')
-        photosItem.innerHTML = `<img src="${image}" alt="sampleImage" class="photos_item_image">`
-        document.querySelector('.photos_contents').appendChild(photosItem)
+// 비율 변환 함수
+function changeRatio(ratio) {
+    if(ratio === 'default') {
+        return '1/1'
+    } else if(ratio === 'row') {
+        return '4/3'
+    } else {
+        return '3/4'
+    }
+}
+
+// 스켈레톤을 이미지로 교체
+function changeSkeleton(images) {
+    const skeletons = document.querySelectorAll('.photos_item.skeleton')
+    images.map((image, index) => {
+        if(skeletons[index]) {
+            skeletons[index].style.aspectRatio = changeRatio(currentRatio)
+            skeletons[index].classList.remove('skeleton')
+            skeletons[index].innerHTML = `<img src="${image}" alt="sampleImage" class="photos_item_image">`
+        }
     })
 }
 
-function infiniteScroll() {
-    const isScrollEnded = window.innerHeight + window.scrollY + 100 >= document.body.offsetHeight;
-    if(isScrollEnded) {
-        getImages()
-    }
+async function getImages() {
+    const response = await fetch('https://dog.ceo/api/breeds/image/random/10')
+    const data = await response.json()
+    const images = data.message
+    changeSkeleton(images)
 }
-// 출처: https://dmswl98-dev.tistory.com/entry/Vanilla-Javascript-무한-스크롤infinite-scroll-구현하기
+
+let scrollTimeout;
+
+function infiniteScroll() {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+        const isScrollEnded = window.innerHeight + window.scrollY + 200 >= document.body.offsetHeight;
+        
+        if(isScrollEnded) {
+            createSkeleton(10)
+            getImages()
+            console.log('이미지 요청됨')
+        }
+    }, 150);
+}
 
 window.addEventListener('scroll', infiniteScroll)
 
