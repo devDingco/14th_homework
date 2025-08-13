@@ -1,0 +1,107 @@
+export default function DiaryEditMobile() {
+    return (
+      <div className="bg-gray-50 min-h-screen flex flex-col items-center p-4">
+        {/* 상단 검정 타이틀 */}
+        <div className="bg-black text-white text-2xl font-bold rounded-2xl px-6 py-4 mb-6">
+          일기 상세_모바일_수정
+        </div>
+  
+        {/* 상단 네비게이션 */}
+        <div className="w-full max-w-md text-sm text-blue-500 mb-4">
+          모바일_일기 상세_수정
+        </div>
+  
+        {/* 본문 카드 */}
+        <div className="w-full max-w-md bg-white rounded-lg shadow-sm p-4">
+          {/* 제목 + 뒤로가기 */}
+          <div className="flex items-center gap-2 mb-6">
+            <span className="text-2xl cursor-pointer">←</span>
+            <h2 className="text-lg font-bold">일기 수정</h2>
+          </div>
+  
+          {/* 오늘 기분 */}
+          <div className="mb-6">
+            <h3 className="font-semibold mb-3">오늘 기분은 어떘나요?</h3>
+            <div className="space-y-2">
+              {["행복해요", "슬퍼요", "놀랐어요", "화나요", "기타"].map((label, idx) => (
+                <label key={idx} className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="mood"
+                    defaultChecked={label === "행복해요"}
+                    className="w-4 h-4 accent-black"
+                  />
+                  <span>{label}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+  
+          {/* 제목 입력 */}
+          <div className="mb-4">
+            <h4 className="font-semibold mb-2">제목</h4>
+            <input
+              type="text"
+              defaultValue="이것은 타이틀 입니다."
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+            />
+          </div>
+  
+          {/* 내용 입력 */}
+          <div className="mb-6">
+            <h4 className="font-semibold mb-2">내용</h4>
+            <textarea
+              rows="5"
+              defaultValue={
+                "내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다"
+              }
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm resize-none"
+            />
+          </div>
+  
+          {/* 버튼 */}
+          <div className="flex gap-2 mb-6">
+            <button className="flex-1 border border-gray-400 rounded-lg px-4 py-2 text-sm">
+              취소
+            </button>
+            <button className="flex-1 bg-black text-white rounded-lg px-4 py-2 text-sm">
+              수정
+            </button>
+          </div>
+  
+          <hr className="mb-4" />
+  
+          {/* 회고 */}
+          <div className="mb-4">
+            <h4 className="font-bold mb-2">회고</h4>
+            <div className="flex gap-2 mb-4">
+              <input
+                type="text"
+                placeholder="수정중인땐 회고를 작성할 수 없어요."
+                disabled
+                className="flex-1 border border-gray-300 bg-gray-100 text-gray-400 rounded-lg px-3 py-2 text-sm"
+              />
+              <button
+                disabled
+                className="bg-gray-200 text-gray-400 rounded-lg px-4 py-2 text-sm"
+              >
+                입력
+              </button>
+            </div>
+          </div>
+  
+          {/* 회고 목록 */}
+          <div className="space-y-2">
+            <div className="bg-gray-100 rounded-lg px-3 py-2 text-sm flex justify-between">
+              <span>3년이 지나고 다시 보니 이때가 그립다.</span>
+              <span className="text-gray-500">[2024. 09. 24]</span>
+            </div>
+            <div className="bg-gray-100 rounded-lg px-3 py-2 text-sm flex justify-between">
+              <span>3년이 지나고 다시 보니 이때가 그립다.</span>
+              <span className="text-gray-500">[2024. 09. 21]</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
