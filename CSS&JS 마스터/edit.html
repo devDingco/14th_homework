@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>일기상세_수정</title>
+    <link rel="stylesheet" href="./edit.css" />
+    
+</head>
+<body>
+    <div class="일기상세_수정">
+        <div class="frame_75">
+            <div class="header">
+                <div class="frame_2">
+                    <div class="logo">민지의 다이어리</div>
+                </div>
+            </div>
+            <div class="frame_74">
+                <div class="frame_79">
+                    <div class="기분_선택_영역">
+                        오늘 기분은 어땠나요?
+                        <div class="frame_61" id="frame_61">
+                            <div class="radio"><input id="행복해요" class="radio_real" type="radio" name="feel">행복해요</div>
+                            <div class="radio"><input id="슬퍼요" class="radio_real" type="radio" name="feel">슬퍼요</div>
+                            <div class="radio"><input id="놀랐어요" class="radio_real" type="radio" name="feel">놀랐어요</div>
+                            <div class="radio"><input id="화나요" class="radio-real" type="radio" name="feel">화나요</div>
+                            <div class="radio"><input id="기타" class="radio-real" type="radio" name="feel">기타</div>
+                        </div>
+                    </div>
+                    <div class="frame_64">
+                        제목
+                        <input type="text" id="frame_63" >
+                        <!-- <input type="text" id="frame_63">123</input> -->
+                    </div>
+                    <div class="frame_65">
+                        내용
+                        <input type="text" id="frame_63_2">
+                    </div>
+                    <div class="버튼_영역">
+                        <button>취소</button>
+                        <button id="1번버튼" onclick="버튼비틀어('1번버튼')">수정하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="./edit.js"></script>
+</html>
