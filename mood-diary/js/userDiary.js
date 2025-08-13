@@ -9,7 +9,6 @@ const storeDiaryList = (array) => {
 
 //로컬스토리지 가져오는 함수
 const getDiaryList = () => {
-  console.log(JSON.parse(localStorage.getItem(DIARY_KEY)))
   return JSON.parse(localStorage.getItem(DIARY_KEY))
 }
 
@@ -31,7 +30,12 @@ const getDiaryById = (id) => {
 //ERROR: 현재, index.html과 detailPage.html에서 userDiary.js 파일을 동시 공유하고 있기 때문에 콘솔에 에러메시지기 찍힘
 // -> html별로 js 파일 나누기 고려 중
 //diaryId 기반 해당하는 값 html에 뿌리기
-const { mood, title, contents, icon, color, date,comments } = formattedDiary(getDiaryById(diaryId)[0])
+const { mood, title, contents, icon, color, date, comments } = formattedDiary(getDiaryById(diaryId)[0])
+const header = document.getElementById("detailHeader")
+header.innerText = "< 일기 상세" //TODO: 반응형에서만 되어야 함?
+header.addEventListener("click", () => {
+  location.replace('./index.html')
+})
 document.getElementById("detailTitle").innerText = title
 document.getElementById("detailIcon").src = icon
 document.getElementById("detailMood").innerText = mood
@@ -44,9 +48,14 @@ scrollToComments()
 //수정 클릭시 "detail-main"화면 숨기기 + "main__diary-form"화면 보이기 + 내부내용 넣어두기
 
 const viewModifyContent = () => {
+  const header = document.getElementById("detailHeader")
+  header.innerText = "〈 일기 수정" //TODO: 반응형에서만 되어야 함?
+  header.addEventListener("click", () => {
+    location.reload()
+  }) //반응형에서만..?
+
   document.querySelector(".detail-main").style.display = "none"
-  document.querySelector("#detail-modify-form").style.display = "inline"
-  document.querySelector("#detail-modify-form").style.border = "transparent"
+  document.querySelector("#detail-modify-form").style.display = "flex"
 
   //TODO: 변수네이밍 변경 및 forEach, Arry.from 기능 정리
   const temp = Array.from(document.querySelectorAll('input[name="mood"]'))
@@ -58,9 +67,10 @@ const viewModifyContent = () => {
   }
   document.querySelector("#title").value = title
   document.querySelector("#contents").value = contents
-
+  document.getElementById("detail-comments-input-input").placeholder = "수정중일땐 회고를 작성할 수 없어요."
   document.getElementById("detail-comments-input-input").disabled = true
   document.getElementById("detail-comments-input-button").disabled = true
+  
 }
 
 //수정페이지 -> 상세페이지로 이동하는 함수

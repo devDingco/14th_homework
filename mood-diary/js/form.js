@@ -75,7 +75,6 @@ const onClick = (id) => {
 
 }
 
-
 const confirmDelete = (event, id=diaryId) => {
   event.stopPropagation()
 
@@ -84,6 +83,7 @@ const confirmDelete = (event, id=diaryId) => {
     event.stopPropagation()
     diaryList = deleteDiaryById(event, id)
     storeDiaryList(diaryList)
+    alert("삭제 되었습니다.")
     location.replace('./index.html')
   }
 }
@@ -112,12 +112,20 @@ const filterByMood = (mood) => {
 
 const submitComment = () => {
   const commentContents = document.getElementById("detail-comments-input-input").value
-  let _comments = diaryList[diaryId].comments
+
+  let idx
+  if (diaryId) {
+    idx = diaryList.findIndex(val => val.id === +diaryId)
+  } else {
+    diaryId = diaryList.length > 0 ? diaryList[diaryList.length - 1].id + 1 : 0
+    idx = diaryList.length
+  }
+  let _comments = diaryList[idx].comments
 
   const comment = {
     id: _comments.length > 0 ? _comments[_comments.length - 1].id + 1 : 0,
     contents: commentContents,
-    date: `[${getCurrentDate()}]`
+    date: getCurrentDate()
   }
   _comments.push(comment)
   storeDiaryList(diaryList)
@@ -130,11 +138,11 @@ const addCommentsOnArea = (comments) => {
 
 const addCommentOnArea = (comment) => {
   const { id, contents, date } = comment
-  const container = document.querySelector(".detail-comments")
+  const container = document.querySelector(".detail-comments-area")
   container.innerHTML += `
   <div class="detail-comments-item">
     <h4>${contents}</h4>
-    <p>${date}</p>
+    <p>[${date}]</p>
   </div>
   `
 }

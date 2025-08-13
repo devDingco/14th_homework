@@ -1,43 +1,29 @@
-.main > img{
-  width: 40px;
-  height: 40px;
-  position: fixed;
-  bottom: 8%;
-  right: 5%;
-  border-radius: 100%;
-}
-.main > img:hover{
-  cursor: pointer;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.16);
-}
 .main__gallery{
-  width: 808px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6rem;
 }
 .main__gallery__card{
-  width: 380px;
-  height: 374px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  gap: 16px;
-  border-radius: 16px;
+  gap: 1.6rem;
+  border-radius: 1.6rem;
   transition: all 0.5s;
   position: relative;
 }
 .main__gallery__card:hover{
-  width: calc(380px * 1.1 - 6px);
-  height: calc(374px * 1.1 - 6px);
-  box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.16);
+  transform: scale(1.1);
+  box-shadow: 0 0.2rem 3rem 0 rgba(0, 0, 0, 0.16);
+  z-index: 4;
 }
 .main__gallery__card__close{
   position: absolute;
-  width: 24px;
-  height: 24px;
-  top: 12px;
-  right: 12px;
+  width: 2.4rem;
+  height: 2.4rem;
+  top: 1.2rem;
+  right: 1.2rem;
   z-index: 5;
   cursor: pointer;
 }
@@ -46,20 +32,20 @@
 }
 .main__gallery__card__image{
   width: 100%;
-  height: 285px;
-  border-radius: 16px;
+  object-fit: cover;
+  border-radius: 1.6rem;
 }
 .main__gallery__card__image:hover{
-  filter: blur(2px);
+  filter: blur(0.2rem);
 }
 .main__gallery__card__info{
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 56px;
-  gap: 8px;
-  padding: 0 8px;
+  height: 5.6rem;
+  gap: 0.8rem;
+  padding: 0 0.8rem;
 }
 .main__gallery__card__info__sub{
   display: flex;
@@ -75,91 +61,74 @@
 
 /* diary form */
 .main__diary-form{
-  min-width: 360px;
-  flex:1;
-  max-height: 604px;
-  padding: 24px;
-  border-radius: 16px;
-  border: solid 1px var(--color-gray-200);
+  min-width: 36rem;
+  /* max-height: 50rem; */
+  flex: 1;
+  padding: 2.4rem;
+  border-radius: 1.6rem;
+  border: solid 0.1rem var(--color-gray-200);
   display: flex;
   flex-direction: column;
-  gap:40px;
-  background-color: #fff;
+  gap: 2.4rem;
 }
 .main__diary-form h2{
 
 }
 .select-box{
   width: 100%;
-  height: 108px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 2rem;
 }
 .select-box h3{
 
 }
 .mood-select-box{
   width: 100%;
-  height: 68px;
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 2rem;
 }
 .mood-select-box label{
-  font-size: 18px;
+  font-size: 1.8rem;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
 }
 .mood-select-box input[type="radio"]{
-  width: 24px;
-  height: 24px;
+  width: 2.4rem;
+  height: 2.4rem;
   accent-color: var(--color-black);
 }
 .main-diary-input-form{
   width: 100%;
-  height: 256px;
+  height: 25.6rem;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 2.4rem;
 }
 .main-diary-input{
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.8rem;
 }
-/* .main-diary-input input,
-.main-diary-input textarea{
-  padding: 12px 16px;
-  border-radius: 8px;
-  outline: none;
-  border: solid 1px var(--color-gray-200);
-  color: var(--color-black);
-  resize: none;
-} */
-/* 
-.main-diary-input input::placeholder,
-.main-diary-input textarea::placeholder{
-  color: var(--color-gray-400);
-} */
 
 .main__diary-form button{
-  height: 48px;
-  border-radius: 8px;
+  height: 4.8rem;
 }
 .main-diary-active{
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 1.6rem;
+  border-bottom: solid 1px var(--color-black);
+  padding-bottom: 1.6rem;
 }
 
 .main-diary-active button{
-  width: 104px;
-  height: 48px;
-  font-size: 18px;
-  margin-top: 24px;
+  width: 10.4rem;
+  height: 4.8rem;
+  font-size: 1.8rem;
 }
 
 .main-diary-active button:last-child:active{

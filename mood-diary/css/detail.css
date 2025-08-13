@@ -1,35 +1,42 @@
 .detail-main{
   width: 100%;
-  border-bottom: solid 1px var(--color-black);
+  border-bottom: solid 0.1rem var(--color-black);
 }
-
+#detailHeader{
+}
+#detailHeader:hover{
+  /* text-decoration: underline; */
+}
+#detail-modify-form{
+  border-radius: 0;
+  border: transparent;
+  padding: 0;
+}
 .detail-main-title{
-  height: 36px;
-  border-bottom: solid 2px var(--color-black);
-  padding-bottom: 12px;
-  margin-top: 64px;
+  height: 3.6rem;
+  border-bottom: solid 0.2rem var(--color-black);
+  padding-bottom: 1.2rem;
 }
 .detail-main-contents{
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  margin: 16px 0;
+  gap: 2.4rem;
+  margin: 1.6rem 0;
 }
 .detail-main-property{
-  height: 32px;
+  height: 3.2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .detail-main-property > div{
-  width: 109px;
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
 }
 .detail-main img{
-  width: 32px;
+  width: 3.2rem;
 }
 .detail-main-property > p{
   color: var(--color-gray-500);
@@ -38,54 +45,54 @@
 .detail-main-contents-container{
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 1.3rem;
 }
 .detail-main-contents-title{
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 600;
 }
 .detail-main-contents-contents{
-  min-height: 100px;
+  min-height: 10rem;
 }
 .detail-main-active{
   margin-left: auto;
   display: flex;
-  gap: 16px;
+  gap: 1.6rem;
 }
 .detail-main-active button{
-  width: 51px;
-  height: 40px;
-  font-size: 18px;
+  width: 5.1rem;
+  height: 4rem;
+  font-size: 1.8rem;
 }
 
 .detail-comments{
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1.6rem;
 }
 .detail-comments-input{
   display: flex;
   justify-content: space-between;
-  gap: 16px;
+  gap: 1.6rem;
 }
 .detail-comments-input input{
   flex: 1;
-  font-size: 16px;
+  font-size: 1.6rem;
 }
 .detail-comments-input button{
-  font-size: 18px;
-  padding: 8px 10px;
+  font-size: 1.8rem;
+  padding: 0.8rem 1rem;
 }
 .detail-comments-area{
   display: flex;
-  align-items: center;
-  gap: 8px 12px;
+  flex-direction: column;
+  gap: 0.8rem 1.2rem;
 }
 .detail-comments-item{
   display: flex;
-  gap: 12px;
-  padding-bottom: 12px;
-  border-bottom: solid 1px var(--color-gray-100);
+  gap: 1.2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: solid 0.1rem var(--color-gray-100);
 }
 .detail-comments-item:last-child{
   border: none;
