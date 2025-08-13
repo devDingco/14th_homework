@@ -197,6 +197,9 @@
 }
 
 #img_frame {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     width: 380px;
     height: 285px;
 }
@@ -209,6 +212,13 @@
     opacity: 1;
     gap: 10px;
     padding: 12px;    
+}
+
+.diary_content > a > img:hover {
+    filter: blur(5px);
+    width: 110%;
+    height: 110%;
+    transition: 0.5s;
 }
 
 #feeling_choice_container {
