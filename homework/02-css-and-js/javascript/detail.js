@@ -55,6 +55,13 @@ window.onload = () => {
     window.document.getElementById("HTML_기분이미지보여주는곳").alt = 기분메시지;
     window.document.getElementById("HTML_날짜보여주는곳").innerHTML =
       일기담는통.작성일;
+
+    JS_댓글그리기기능(); 
+
+    const 댓글목록영역 = document.getElementById("HTML_댓글목록영역");
+    if (댓글목록영역) {
+      댓글목록영역.scrollIntoView({behavior: "smooth"});
+    }
     
 };
   
@@ -163,4 +170,41 @@ const JS_댓글그리기기능 = () => {
     `;
   });
   document.getElementById("HTML_댓글목록영역").innerHTML = HTML_새로운댓글목록;
+};
+
+const JS_뒤로가기기능 = () => {
+  window.history.back();
+};
+
+
+window.addEventListener("scroll", () => {
+  const 화면위에서푸터위까지길이 = document
+    .getElementById("HTML_푸터")
+    .getBoundingClientRect().top;
+  const 보이는화면길이 = window.innerHeight;
+
+  // 1. 푸터가 보일 때는, 화면과 상관없이 사진에 고정시키기
+  if (보이는화면길이 >= 화면위에서푸터위까지길이) {
+    document.getElementById("HTML_플로팅버튼").style = `
+      position: relative;
+      bottom: 0;
+      left: 97%;
+    `;
+
+    // 2. 푸터가 안보일 때는, 사진과 상관없이 화면에 고정시키기
+  } else {
+    document.getElementById("HTML_플로팅버튼").style = `
+      position: fixed;
+      bottom: 4rem;
+      right: 2rem;
+    `;
+  }
+});
+
+
+const JS_스크롤위로기능 = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 };

@@ -1,138 +1,146 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: "Pretendard Variable";
-  }
-  
-  body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 64px;
-    margin: 0 20px 40px;
-  }
-  
-  /* 헤더 */
-  .header {
-    width: 100%;
-    height: 60px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    text-align: left;
-    font-size: 18px;
-    font-weight: 700;
-    color: #000;
-  }
-  
-  .edit_area {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    width: 100%;
-    border-bottom: 1px solid #000;
-    padding-bottom: 16px;
-  }
-  
-  /* 기분 선택 */
-  .diary_mood_content {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-  }
-  
-  .mood_title {
-    font-size: 20px;
-    line-height: 24px;
-    font-weight: 600;
-    color: #000;
-  }
-  
-  .mood_select {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 20px;
-    color: #333;
-  }
-  
-  .mood_radio_button {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* 일기 인풋 */
-  .edit_text_area {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  
-  .edit_input {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .input_label {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    color: #333;
-  }
-  
-  #HTML_일기수정제목입력창,
-  #HTML_일기수정내용입력창 {
-    padding: 12px 16px;
-    border-radius: 8px;
-    border: 1px solid #d4d3d3;
-  }
-  
-  /* 수정 버튼 영역 */
-  .button_area {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-  }
-  
-  .button {
-    width: 104px;
-    height: 48px;
-    padding: 8px 10px;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 24px;
-    cursor: pointer;
-  }
-  
-  .cancel_button {
-    border: 1px solid #000;
-    background-color: #fff;
-    color: #1c1c1c;
-  }
-  
-  .edit_button {
-    background-color: #000;
-    color: #f2f2f2;
-  }
-  
-  .edit_button:hover {
-    transform: skew(-10deg, 0deg);
-  }
-  
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Pretendard Variable";
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem; /* 64px -> 4rem */
+  margin: 0 1.25rem 2.5rem; /* 20px -> 1.25rem, 40px -> 2.5rem */
+}
+
+/* 헤더 */
+.header_desktop {
+  display: block;
+  width: 100%;
+}
+
+.header_mobile {
+  display: none;
+}
+
+.header_title {
+  width: 100%;
+  height: 3.75rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1rem;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}  
+
+.edit_area {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* 24px -> 1.5rem */
+  width: 100%;
+  border-bottom: 0.0625rem solid #000; /* 1px -> 0.0625rem */
+  padding-bottom: 1rem; /* 16px -> 1rem */
+}
+
+/* 기분 선택 */
+.diary_mood_content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* 16px -> 1rem */
+  width: 100%;
+}
+
+.mood_title {
+  font-size: 1.25rem; /* 20px -> 1.25rem */
+  line-height: 1.5rem; /* 24px -> 1.5rem */
+  font-weight: 600;
+  color: #000;
+}
+
+.mood_select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem; /* 20px -> 1.25rem */
+  font-size: 1.125rem; /* 18px -> 1.125rem */
+  font-weight: 500;
+  line-height: 1.25rem; /* 20px -> 1.25rem */
+  color: #333;
+}
+
+.mood_radio_button {
+  display: flex;
+  gap: 0.5rem; /* 8px -> 0.5rem */
+  justify-content: center;
+  align-items: center;
+}
+
+/* 일기 인풋 */
+.edit_text_area {
+  font-size: 0.875rem; /* 14px -> 0.875rem */
+  font-weight: 500;
+  line-height: 1.25rem; /* 20px -> 1.25rem */
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* 24px -> 1.5rem */
+}
+
+.edit_input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* 8px -> 0.5rem */
+}
+
+.input_label {
+  font-size: 0.875rem; /* 14px -> 0.875rem */
+  font-weight: 500;
+  line-height: 1.25rem; /* 20px -> 1.25rem */
+  color: #333;
+}
+
+#HTML_일기수정제목입력창,
+#HTML_일기수정내용입력창 {
+  padding: 0.75rem 1rem; /* 12px -> 0.75rem, 16px -> 1rem */
+  border-radius: 0.5rem; /* 8px -> 0.5rem */
+  border: 0.0625rem solid #d4d3d3; /* 1px -> 0.0625rem */
+}
+
+/* 수정 버튼 영역 */
+.button_area {
+  display: flex;
+  justify-content: center;
+  gap: 1rem; /* 16px -> 1rem */
+}
+
+.button {
+  width: 6.5rem; /* 104px -> 6.5rem */
+  height: 3rem; /* 48px -> 3rem */
+  padding: 0.5rem 0.625rem; /* 8px -> 0.5rem, 10px -> 0.625rem */
+  border-radius: 0.5rem; /* 8px -> 0.5rem */
+  font-size: 1.125rem; /* 18px -> 1.125rem */
+  font-weight: 600;
+  line-height: 1.5rem; /* 24px -> 1.5rem */
+  cursor: pointer;
+}
+
+.cancel_button {
+  border: 0.0625rem solid #000; /* 1px -> 0.0625rem */
+  background-color: #fff;
+  color: #1c1c1c;
+}
+
+.edit_button {
+  background-color: #000;
+  color: #f2f2f2;
+}
+
+.edit_button:hover {
+  transform: skew(-10deg, 0deg);
+}
 
 /* 댓글 전체 영역*/
 .comment_area {
@@ -140,7 +148,7 @@
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: 1rem; /* 16px -> 1rem */
 }
 
 /* 댓글 제목 영역 */
@@ -149,10 +157,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 13px;
-  font-size: 18px;
+  gap: 0.8125rem; /* 13px -> 0.8125rem */
+  font-size: 1.125rem; /* 18px -> 1.125rem */
   font-weight: 600;
-  line-height: 24px;
+  line-height: 1.5rem; /* 24px -> 1.5rem */
   color: #000;
 }
 
@@ -161,22 +169,22 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 1rem; /* 16px -> 1rem */
 }
 
 /* 댓글 입력창 */
 #HTML_댓글입력창 {    
   appearance: none;
-  flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
-  border-radius: 8px;
+  flex-grow: 1;
+  border-radius: 0.5rem; /* 8px -> 0.5rem */
   background-color: #F2F2F2;
   color: #ababab;
   border: none;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem; /* 12px -> 0.75rem, 16px -> 1rem */
   text-align: left;
-  font-size: 16px;
+  font-size: 1rem; /* 16px -> 1rem */
   font-weight: 500;
-  line-height: 24px;
+  line-height: 1.5rem; /* 24px -> 1.5rem */
 }
 #HTML_댓글입력창::placeholder {
   color: #ababab;
@@ -187,21 +195,21 @@
 
 /* 댓글 등록 버튼 */
 .comment_button{
-  height: 48px;
-  padding: 8px 10px;
-  border-radius: 8px;
+  height: 3rem; /* 48px -> 3rem */
+  padding: 0.5rem 0.625rem; /* 8px -> 0.5rem, 10px -> 0.625rem */
+  border-radius: 0.5rem; /* 8px -> 0.5rem */
   background-color: #C7C7C7;
   color: #fff;
-  font-size: 18px;
+  font-size: 1.125rem; /* 18px -> 1.125rem */
   font-weight: 600;
-  line-height: 24px;
+  line-height: 1.5rem; /* 24px -> 1.5rem */
   border: none;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  white-space: nowrap; /* 버튼 텍스트가 줄바꿈되지 않도록 설정 */
-  flex-shrink: 0; /* 버튼 너비가 줄어들지 않도록 설정 */
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* 댓글 목록 영역 */
@@ -211,8 +219,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 12px;
-  margin-top: 16px    
+  gap: 0.75rem; /* 12px -> 0.75rem */
+  margin-top: 1rem; /* 16px -> 1rem */
 }
 
 /* 개별 댓글 항목 */
@@ -220,31 +228,144 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem; /* 12px -> 0.75rem */
 }
 
 /* 댓글 내용 */
 .comment_item .comment_content {
   color: #000;
-  font-size: 16px;
+  font-size: 1rem; /* 16px -> 1rem */
   font-weight: 500;
-  line-height: 24px;
+  line-height: 1.5rem; /* 24px -> 1.5rem */
   flex-shrink: 1;
 }
 /* 댓글 날짜 */
 .comment_date {
   color: #777;
-  font-size: 16px;
+  font-size: 1rem; /* 16px -> 1rem */
   font-weight: 400;
-  line-height: 24px;  
+  line-height: 1.5rem;  /* 24px -> 1.5rem */
   white-space: nowrap;
   flex-shrink: 0;  
 }
 
 /* 구분선 */
 .comment_divider {
-  border: none; /* 기본 hr 태그의 테두리 제거 */
-  border-top: 1px solid #e4e4e4;
-  margin: 16px 0; 
+  border: none;
+  border-top: 0.0625rem solid #e4e4e4; /* 1px -> 0.0625rem */
+  margin: 1rem 0; /* 16px -> 1rem */
   width: 100%;
+}
+
+
+.플로팅버튼 {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0.0625rem solid #f2f2f2;
+  border-radius: 50%; /* 원형 모양 */
+  box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+
+  position: fixed;
+  right: 2.5rem; /* 오른쪽에서 1.25rem 떨어진 위치 */
+  bottom: 2.5rem; /* 아래쪽에서 1.25rem 떨어진 위치 */
+  z-index: 1000; /* 다른 요소 위에 표시되도록 z-index 설정 */
+}
+
+
+@media (max-width: 849px) {
+  body {
+    gap: 2.5rem;
+  }
+
+  .header_desktop {
+    display: none;
+  }
+  
+  .header_mobile {
+    width: 100%;
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+  }
+   
+  .mood_title {
+    font-size: 1.25rem; /* 20px -> 1.25rem */
+    line-height: 1.5rem; /* 24px -> 1.5rem */
+    font-weight: 600;
+    color: #000;
+  }
+  
+  .mood_select {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .mood_radio_button {
+    display: flex;
+    gap: 0.5rem; /* 8px -> 0.5rem */
+    justify-content: center;
+    align-items: center;
+  }
+    
+  .input_label {
+    font-size: 0.875rem; /* 14px -> 0.875rem */
+    font-weight: 500;
+    line-height: 1.25rem; /* 20px -> 1.25rem */
+    color: #333;
+  }
+  
+  #HTML_일기수정제목입력창,
+  #HTML_일기수정내용입력창 {
+    border-radius: 0.5rem; /* 8px -> 0.5rem */
+    border: 0.0625rem solid #d4d3d3; /* 1px -> 0.0625rem */
+  }
+  
+  /* 수정 버튼 영역 */
+  .button_area {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* 16px -> 1rem */
+  }
+  
+  .button {
+    height: 3rem; /* 48px -> 3rem */    
+    font-size: 1.125rem; /* 18px -> 1.125rem */
+    font-weight: 600;
+    line-height: 1.5rem; /* 24px -> 1.5rem */
+  }  
+  
+  /* 댓글 입력영역 */
+  .comment_input_area {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* 16px -> 1rem */
+  } 
+ 
+  
+  /* 댓글 등록 버튼 */
+  .comment_button{
+    width: 20%;
+  }
+  
+  /* 댓글 목록 영역 */
+  #HTML_댓글목록영역 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.75rem; /* 12px -> 0.75rem */
+    margin-top: 1rem; /* 16px -> 1rem */
+  }
+  
+  .comment_item .comment_content {
+    font-size: 1rem; 
+    font-weight: 500;
+    line-height: 1.5rem; 
+  }  
+
+
 }
