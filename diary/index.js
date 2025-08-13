@@ -5,6 +5,8 @@ let currentTheme = 'light';
 // 일기 데이터
 let data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : [];
 let currentDisplayData = data; // 현재 표시할 데이터
+let searchValue = ""; // 검색어 전역 변수
+let isSearchMode = false; // 검색 모드 상태
 
 // 저장된 테마 가져오기
 function getStoredTheme() {
@@ -97,6 +99,11 @@ function initCustomSelect() {
                 currentDisplayData = data.filter(item => item.feeling === koreanValue);
             }
             
+            // 검색 모드가 활성화되어 있다면 검색 결과와 교집합
+            if (isSearchMode && searchValue) {
+                currentDisplayData = currentDisplayData.filter(item => item.title.includes(searchValue));
+            }
+            
             // 필터링된 데이터에 맞게 페이지네이션 재계산
             const filteredTotalPages = Math.ceil(currentDisplayData.length / perPage);
             
@@ -155,8 +162,14 @@ function setPagination() {
     const paginationWrapper = document.querySelector('.number_wrapper')
     const paginationArrows = document.querySelectorAll('.pagination_arrow')
     
+    // 기존 페이지네이션 아이템들 제거
+    paginationWrapper.innerHTML = '';
+    
+    // 검색 모드인지 확인하여 적절한 데이터 길이 사용
+    const dataLength = isSearchMode && searchValue ? data.filter(item => item.title.includes(searchValue)).length : data.length;
+    
     // 데이터가 12개 이하이면 화살표 비활성화
-    if (data.length < 12) {
+    if (dataLength < 12) {
         paginationArrows.forEach(arrow => {
             arrow.style.display = 'none';
         });
@@ -176,7 +189,8 @@ function setPagination() {
     }
 
     // 현재 페이지가 마지막 페이지라면 오른쪽 화살표 비활성화
-    if (currentPage === totalPages) {
+    const totalPagesToUse = Math.ceil(dataLength / perPage);
+    if (currentPage === totalPagesToUse) {
         document.getElementById('arrow-right').classList.add('disabled');
         document.getElementById('arrow-right').removeEventListener('click', () => onClickArrow('right'));
     } else {
@@ -184,14 +198,14 @@ function setPagination() {
         document.getElementById('arrow-right').addEventListener('click', () => onClickArrow('right'));
     }
 
-    for (let i = 1; i <= totalPages; i++) {
+    for (let i = 1; i <= totalPagesToUse; i++) {
         const paginationItem = document.createElement('span');
         paginationItem.classList.add('pagination_item');
         paginationItem.textContent = i;
         paginationItem.addEventListener('click', () => onClickPagination(i));
         
         // 첫 번째 페이지에 active 클래스 추가
-        if (i === 1 && data.length > 0) {
+        if (i === 1 && dataLength > 0) {
             paginationItem.classList.add('active');
         }
         
@@ -199,7 +213,7 @@ function setPagination() {
     }
     
     // 초기 화살표 상태 설정
-    updateArrowStates();
+    updateArrowStates(totalPagesToUse);
 }
 
 function onClickPagination(pageNum) {
@@ -220,8 +234,16 @@ function onClickPagination(pageNum) {
     // 화살표 상태 업데이트
     updateArrowStates();
     
+    // 검색 모드인지 확인하여 적절한 데이터 사용
+    let dataToSlice;
+    if (isSearchMode && searchValue) {
+        dataToSlice = data.filter(item => item.title.includes(searchValue));
+    } else {
+        dataToSlice = data;
+    }
+    
     // 페이지별 데이터 생성 및 렌더링
-    currentDisplayData = data.slice((pageNum - 1) * perPage, pageNum * perPage);
+    currentDisplayData = dataToSlice.slice((pageNum - 1) * perPage, pageNum * perPage);
     renderDiaries(currentDisplayData);
 }
 
@@ -245,12 +267,16 @@ function updateArrowStates(customTotalPages = null) {
 }
 
 function onClickArrow(arrow) {
+    // 검색 모드인지 확인하여 적절한 총 페이지 수 계산
+    const dataLength = isSearchMode && searchValue ? data.filter(item => item.title.includes(searchValue)).length : data.length;
+    const totalPagesToUse = Math.ceil(dataLength / perPage);
+    
     if (arrow === 'left') {
         currentPage = 1;
         onClickPagination(currentPage);
         console.log('현재 페이지 번호', currentPage);
     } else {
-        currentPage = totalPages;
+        currentPage = totalPagesToUse;
         onClickPagination(currentPage);
     }
 }
@@ -304,6 +330,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initCustomSelect();
     setPagination();
 
+    // 서치바 이벤트 리스너 추가
+    document.querySelector('.search_input').addEventListener('input', onClickSearchInput);
+    document.querySelector('.m_search_input').addEventListener('input', onClickSearchInput);
+
     // 첫 페이지 데이터로 초기 렌더링
     currentDisplayData = data.slice(0, perPage);
     renderDiaries(currentDisplayData);
@@ -318,12 +348,42 @@ document.addEventListener('DOMContentLoaded', () => {
         radio.addEventListener('change', checkInputs);
     });
 
+    // 스크롤시 셀렉트바 색상 변경
+    document.addEventListener('scroll', () => {
+        const selectTrigger = document.querySelector('.select_trigger');
+        const selectIcon = document.querySelector('.select_arrow');
+        selectTrigger.style.background = 'var(--select-text)';
+        selectTrigger.style.color = 'var(--select-bg)';
+        selectIcon.style.color = 'var(--select-bg)';
+    });
+    document.addEventListener('scrollend', () => {
+        const selectTrigger = document.querySelector('.select_trigger');
+        const selectIcon = document.querySelector('.select_arrow');
+        selectTrigger.style.background = 'var(--select-bg)';
+        selectTrigger.style.color = 'var(--select-text)';
+        selectIcon.style.color = 'var(--select-text)';
+    })
 });
 
 
 // 일기쓰기 모달 열기
 function onClickOpenModal() {
-    document.getElementById('modal').classList.add("open")
+    window.scrollTo({top: 0, behavior: 'auto'}); // auto쓰면 안기다려도 됨
+    document.getElementById('modal').classList.add("open");
+    document.body.style.overflow = 'hidden';
+    document.getElementById('modal').addEventListener('click', (e) => {
+        // e.preventDefault();
+        // e.stopPropagation();
+        if (e.target.classList.contains('modal_wrapper')) {
+            onClickCancelWriting();
+            // console.log('모달 외부 클릭됨');
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            onClickCancelWriting();
+        }
+    });
 }
 function onClickCloseModal() {
     onClickCloseCancelModal()
@@ -332,17 +392,40 @@ function onClickCloseModal() {
 
 // 일기 등록후 확인모달 열기
 function onClickOpenConfirmModal() {
+    document.getElementById('modal').classList.remove("open")
     document.getElementById('confirm_modal').classList.add("open")
+    document.getElementById('confirm_modal').addEventListener('click', (e) => {
+        if (e.target.classList.contains('confirm_modal')) {
+            onClickCloseConfirmModal();
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            onClickCloseConfirmModal();
+        }
+    });
 }
 function onClickCloseConfirmModal() {
     document.getElementById('confirm_modal').classList.remove("open")
     document.getElementById('modal').classList.remove("open")
+    document.body.style.overflow = 'auto';
     resetInputFields();
 }
 
 // 일기 쓰기 취소 모달 열기
 function onClickOpenCancelModal() {
     document.getElementById('cancel_modal').classList.add("open")
+    document.getElementById('cancel_modal').addEventListener('click', (e) => {
+        if (e.target.classList.contains('cancel_modal')) {
+            onClickCancelWriting();
+            // console.log('모달 외부 클릭됨');
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            onClickCancelWriting();
+        }
+    });
 }
 
 // 입력 필드 초기화 함수
@@ -364,6 +447,7 @@ function resetInputFields() {
 function onClickCancelWriting() {
     document.getElementById('cancel_modal').classList.remove("open")
     document.getElementById('modal').classList.remove("open")
+    document.body.style.overflow = 'auto';
     resetInputFields();
 }
 
@@ -483,14 +567,29 @@ function onClickDelete(id, event) {
     event.preventDefault();
     event.stopPropagation();
     // 모달의 삭제 버튼에 ID 설정
+    window.scrollTo({top: 0, behavior: 'auto'}); // auto쓰면 안기다려도 됨
+
     const deleteButton = document.querySelector('#delete_modal .active');
     deleteButton.onclick = () => onClickConfirmDelete(id);
     document.getElementById('delete_modal').classList.add("open");
+    document.body.style.overflow = 'hidden';
+    document.getElementById('delete_modal').addEventListener('click', (e) => {
+        if (e.target.classList.contains('cancel_modal')) {
+            onClickCloseDeleteModal();
+            // console.log('모달 외부 클릭됨');
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            onClickCloseDeleteModal();
+        }
+    });
 }
 
 // 모달 닫기
 function onClickCloseDeleteModal() {
     document.getElementById('delete_modal').classList.remove("open");
+    document.body.style.overflow = 'auto';
 }
 
 // 실제 삭제 실행
@@ -509,4 +608,37 @@ function scrollToTop() {
             behavior: 'smooth'
         });
     });
+}
+
+
+// 서치바 addevent리스너로 달아줄예정
+// 1000ms동안 반응 없으면 자동 반영
+// 엔터키에도 반응
+function onClickSearchInput() {
+    const deskTopValue = document.querySelector('.search_input').value
+    const mobileValue = document.querySelector('.m_search_input').value
+
+    // 검색어가 비어있으면 초기 상태로 복원
+    if(!deskTopValue && !mobileValue) {
+        searchValue = "";
+        isSearchMode = false;
+        currentDisplayData = data;
+        currentPage = 1;
+        setPagination();
+        renderDiaries(currentDisplayData.slice(0, perPage));
+        return;
+    }
+
+    // 검색어가 있으면 검색 모드로 설정
+    searchValue = deskTopValue || mobileValue;
+
+    setTimeout(() => {
+        if(searchValue) {
+            isSearchMode = true;
+            currentDisplayData = data.filter(item => item.title.includes(searchValue));
+            currentPage = 1; // 검색 시 첫 페이지로 리셋
+            setPagination(); // 페이지네이션 재설정
+            renderDiaries(currentDisplayData.slice(0, perPage)); // 첫 페이지만 렌더링
+        }
+    }, 1000)
 }
