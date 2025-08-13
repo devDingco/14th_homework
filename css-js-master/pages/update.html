@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/typography.css"/>
     <script>
         window.onload = () => {
-            getContentNumber()
+            makeUpdateHtml(getContentNumber())
         }
     </script>
 </head>
@@ -27,44 +27,33 @@
                 <p>오늘 기분은 어땟나요?</p>
                 <form id="update_feeling_radio_container">
                     <label id="feeling_radio_content">
-                        <input type="radio" name="feel" value="행복해요"/><p>행복해요</p>
+                        <input type="radio" name="feel" value="행복해요" id="행복해요"/><p>행복해요</p>
                     </label>
                     <label id="feeling_radio_content">
-                        <input type="radio" name="feel" value="슬퍼요"/><p>슬퍼요</p>
+                        <input type="radio" name="feel" value="슬퍼요" id="슬퍼요"/><p>슬퍼요</p>
                     </label>
                     <label id="feeling_radio_content">
-                        <input type="radio" name="feel" value="놀랐어요"/><p>놀랐어요</p>
+                        <input type="radio" name="feel" value="놀랐어요" id="놀랐어요"/><p>놀랐어요</p>
                     </label>
                     <label id="feeling_radio_content">
-                        <input type="radio" name="feel" value="화나요"/><p>화나요</p>
+                        <input type="radio" name="feel" value="화나요" id="화나요"/><p>화나요</p>
                     </label>
                     <label id="feeling_radio_content">
-                        <input type="radio" name="feel" value="기타"/><p>기타</p>
+                        <input type="radio" name="feel" value="기타" id="기타"/><p>기타</p>
                     </label>
                 </form>
             </div>
-            <div id="update_title_container">
-                <p>제목</p>
-                <div id="update_title_input_container">
-                    <textarea id="update_title_input">
-
-                    </textarea>
-                </div>
-            </div>
-            <div id="update_detail_container">
-                <p>내용</p>
-                <div id="update_detail_input_container">
-                    <textarea id="update_detail_input">
-
-                    </textarea>
-                </div>
+            <div id="update_html_flag">
             </div>
             <div id="update_button_frame">
-
+                <button type="button" id="update_cancel_button"><a href="../index.html">취소</a></button>
+                <button type="button" id="update_confirm_button" onclick="confirmUpdate()"><a>수정 하기</a></button>
             </div>
         </div>
     </div>
     <script src="../function/getContentNumber.js"></script>
     <script src="../function/makeUpdateHtml.js"></script>
+    <script src="../function/confirmUpdate.js"></script>
+    <script src="../function/toLocalStorage.js"></script>
 </body>
 </html>

@@ -58,8 +58,9 @@
 
 #storage_container {
     display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 48px;
+    height: 112px;
     angle: 0 deg;
     opacity: 1;
     gap: 32px;
@@ -131,15 +132,16 @@
     angle: 0 deg;
     opacity: 1;
     gap: 24px;
+    overflow-y: scroll;
 }
 
 .diary_content {
     display: flex;
     flex-direction: column;
-    width: 380px;
+    width: 350px;
     height: 373px;
-    min-width: 380px;
-    max-width: 380px;
+    min-width: 350px;
+    max-width: 350px;
     border-radius: 16px;
     angle: 0 deg;
     opacity: 1;
@@ -187,6 +189,7 @@
 #top_view_content_detail > p {
     cursor: default;
 }
+
 
 #bottom_view_content_detail > a {
     color: black;
@@ -396,4 +399,28 @@
     line-height: 24px;
     letter-spacing: -1%;
     color: rgba(242, 242, 242, 1);
+}
+
+#dairy_filter_container {
+    width: 1168px;
+    height: 32px;
+    min-width: 320px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;       
+}
+
+#diary_filter {
+    width: 120px;
+    height: 32px;
+    min-width: 120px;
+    border-radius: 8px;
+    border-width: 1px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    padding: 4px;
+    border: 1px solid var(--Gray-Gray-300, rgba(199, 199, 199, 1));
+    background: var(--Gray-W, rgba(255, 255, 255, 1));
 }

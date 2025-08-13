@@ -51,7 +51,7 @@ const makeDetailHtml = (contentObj) => {
         </div>
         <div id="detail_bottom_container" class="">
             <div id="update_button_frame">
-                <p class="body01">수정</p>
+                <a class="body01" href="../pages/update.html?number=${contentObj.number}">수정</a>
             </div>
         </div>
     `

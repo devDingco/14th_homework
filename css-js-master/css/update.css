@@ -12,6 +12,8 @@
 }
 
 #main {
+    display: flex;
+    flex-direction: column;
     width: 1168px;
     height: 432px;
     max-width: 1168px;
@@ -92,7 +94,7 @@
 }
 
 #update_detail_input {
-    width: 1168px;
+    width: 1136px;
     height: 100px;
     angle: 0 deg;
     opacity: 1;
@@ -112,9 +114,70 @@
 
 #update_button_frame {
     display: flex;
+    justify-content: center;
     width: 1168px;
     height: 48px;
     angle: 0 deg;
     opacity: 1;
     gap: 16px;    
+}
+
+#update_cancel_button {
+    width: 104px;
+    height: 48px;
+    border-radius: 8px;
+    border-width: 1px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    padding-top: 8px;
+    padding-right: 10px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    border: 1px solid var(--Gray-B, rgba(0, 0, 0, 1));
+    background: var(--Gray-W, rgba(255, 255, 255, 1));
+    cursor: pointer;
+}
+
+#update_cancel_button > a {
+    font-family: Pretendard Variable;
+    font-weight: 600px;
+    font-style: SemiBold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: black;
+    text-decoration: none;
+}
+
+#update_confirm_button {
+    width: 104px;
+    height: 48px;
+    border-radius: 8px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    padding-top: 8px;
+    padding-right: 10px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    background: var(--Gray-B, rgba(0, 0, 0, 1));
+    cursor: pointer;
+    
+    /* 수정하기 성공시 */
+    /* transform: rotateZ(30deg);
+    transition: 1s; */
+}
+
+#update_confirm_button > a {
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: var(--Gray-Gray-50, rgba(242, 242, 242, 1));
+    text-decoration: none;
 }
