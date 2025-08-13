@@ -49,36 +49,36 @@ function renderDiaries(filteredDiaries = null) {
 
         diaryContainer.innerHTML = diaryHTML
     } else {
-        diaryContainer.innerHTML = `<div class="empty-message">일기가 없습니다.</div>`;
+        diaryContainer.innerHTML = `<div class="empty-message">일기가 없습니다.</div>`
     }
 }
 
 // 초기 로드 시
-window.addEventListener("DOMContentLoaded", renderDiaries);
+window.addEventListener("DOMContentLoaded", renderDiaries)
 
 // 새 일기 작성
 function WriteNewDiary() {
-    const 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || [];
+    const 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || []
 
-    const number = 일기들.length > 0 ? 일기들[일기들.length - 1].number + 1 : 1;
-    const feeling = document.querySelector('input[name="feel"]:checked').value;
-    const title = document.getElementById("제목__내용입력").value;
-    const content = document.getElementById("내용__내용입력").value;
-    const date = new Date().toLocaleDateString();
+    const number = 일기들.length > 0 ? 일기들[일기들.length - 1].number + 1 : 1
+    const feeling = document.querySelector('input[name="feel"]:checked').value
+    const title = document.getElementById("제목__내용입력").value
+    const content = document.getElementById("내용__내용입력").value
+    const date = new Date().toLocaleDateString()
 
-    const 새로운일기 = { number, feeling, title, content, date };
+    const 새로운일기 = { number, feeling, title, content, date }
 
-    일기들.push(새로운일기);
-    localStorage.setItem("일기들목록", JSON.stringify(일기들));
+    일기들.push(새로운일기)
+    localStorage.setItem("일기들목록", JSON.stringify(일기들))
 
     // 입력창 초기화
-    document.getElementById("제목__내용입력").value = "";
-    document.getElementById("내용__내용입력").value = "";
-    const checkedRadio = document.querySelector('input[name="feel"]:checked');
-    if (checkedRadio) checkedRadio.checked = false;
+    document.getElementById("제목__내용입력").value = ""
+    document.getElementById("내용__내용입력").value = ""
+    const checkedRadio = document.querySelector('input[name="feel"]:checked')
+    if (checkedRadio) checkedRadio.checked = false
 
     // 목록 다시 렌더링
-    renderDiaries();
+    renderDiaries()
 }
 
 // 플로팅버튼 - 스크롤 기능
@@ -105,22 +105,49 @@ function diaryFilter(selectedFeeling) {
 // 필터값 변경 시 이벤트
 
 window.addEventListener("DOMContentLoaded", () => {
+
     // 첫 렌더링
-    renderDiaries();
+    renderDiaries()
 
     // 필터 select 요소 이벤트 연결
-    const filterSelect = document.querySelector(".필터");
-    if (filterSelect) {
+    const filterSelect = document.querySelector(".필터")
+
+    // if (filterSelect) {
         filterSelect.addEventListener("change", (event) => {
-            const selectedFeeling = event.target.value;
-            diaryFilter(selectedFeeling);
+            const selectedFeeling = event.target.value
+            diaryFilter(selectedFeeling)
 
-            // event.target.style.backgroundColor = "black";
-            // event.target.style.color = "#E4E4E4";
+            // event.target.style.backgroundColor = "black"
+            // event.target.style.color = "#E4E4E4"
 
-        });
-    }
+        })
+    // }
+})
+
+window.addEventListener("DOMContentLoaded", () => {
+    const filterSelect = document.querySelector(".필터")
+    const filterTop = filterSelect.offsetTop;  // 필터의 원래 위치 기억
+
+    // 스크롤 감지해서 fixed 활성화
+    window.addEventListener("scroll", () => {
+        if (window.scrollY >= filterTop) {
+            filterSelect.classList.add("fixed")  // 고정
+        } else {
+            filterSelect.classList.remove("fixed") // 고정 해제
+        }
+    });
+
+    // 선택창 열렸을 때 색 반전
+    filterSelect.addEventListener("focus", () => {
+        filterSelect.classList.add("focused");
+    });
+
+    // 선택창 닫혔을 때 색 원상복구
+    filterSelect.addEventListener("blur", () => {
+        filterSelect.classList.remove("focused");
+    });
 });
+
 
 
 
