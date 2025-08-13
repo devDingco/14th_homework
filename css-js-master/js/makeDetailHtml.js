@@ -49,10 +49,9 @@ const makeDetailHtml = (contentObj) => {
             <p class="title02">내용</p>
             <p>${contentObj.detail}</p>
         </div>
-        <div id="detail_bottom_container" class="">
-            <div id="update_button_frame">
-                <a class="body01" href="../pages/update.html?number=${contentObj.number}">수정</a>
-            </div>
+        <div id="detail_bottom_container" class="">            
+            <button class="body01 go_update_button" onclick="printUpdate()">수정</button>
+            <button class="body01 delete_button" onclick="">삭제</button>
         </div>
     `
     document.getElementById("main").innerHTML = contentHTML

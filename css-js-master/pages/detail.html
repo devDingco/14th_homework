@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>일기내용</title>
     <link rel="stylesheet" href="../css/detail.css"/>
+    <link rel="stylesheet" href="../css/update.css"/>
     <link rel="stylesheet" href="../css/index.css"/>
     <link rel="stylesheet" href="../css/header.css"/>
     <link rel="stylesheet" href="../css/typography.css"/>
@@ -24,8 +25,23 @@
         <div id="main" class="">
 
         </div>
+        <div id="reply_container" class="">
+            <div id="reply_content_frame">
+                <p class="title02">회고</p>
+                <div id="input_reply_frame">
+                    <textarea id="input_reply" placeholder="회고를 남겨보세요."></textarea>
+                    <button>입력</button>
+                </div>
+            </div>
+            <div id="reply_content_flag">
+
+            </div>
+        </div>
     </div>
     <script src="../js/makeDetailHtml.js"></script>
+    <script src="../js/makeUpdateHtml.js"></script>
     <script src="../feature/getContentNumber.js"></script>
+    <script src="../feature/confirmUpdate.js"></script>
+    <script src="../feature/toLocalStorage.js"></script>
 </body>
 </html>
