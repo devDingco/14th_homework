@@ -16,6 +16,43 @@ window.onscroll = function () {
   }
 };
 
+window.addEventListener("scroll", () => {  
+  const 보이는화면길이 = window.innerHeight
+  const 위에서푸터까지길이 = document
+    .getElementById("HTML_푸터")
+    .getBoundingClientRect().top
+
+  // 1. 푸터가 보일 때는, 화면과 상관없이 사진에 고정시키기
+  if (보이는화면길이 >= 위에서푸터까지길이) {
+    document.getElementById("HTML_플로팅버튼").style = `
+      position: relative;
+      bottom: 16rem;
+      left: 47%;
+    `;
+
+    // 2. 푸터가 안보일 때는, 사진과 상관없이 화면에 고정시키기
+  } else {
+    document.getElementById("HTML_플로팅버튼").style = `
+      position: fixed;
+      bottom: 4rem;
+      right: 2rem;
+    `;
+  }
+});
+
+const 스크롤길이 = () => {
+  const 스크롤내려간길이 =
+    window.document.getElementById("HTML_메인").scrollTop;
+
+  // 2. 스크롤이 조금이라도 내려갔으면? 배경색 변경하기
+  if (스크롤내려간길이 == 0) {
+    window.document.getElementById("HTML_필터").style =
+      "background-color: gray;";
+  } else {
+    window.document.getElementById("HTML_필터").style =
+      "background-color: red;";
+  }
+};
 
 const JS_일기그리기기능 = () => {
   // 1. 스토리지에 저장된 일기목록 가져오기
@@ -48,20 +85,23 @@ const JS_일기그리기기능 = () => {
               ? '<img class="mood_image" src="./assets/images/mood_think.png" alt="기타" />'
               : ""}
           </div>
-          <div class="diary_content">
-            ${el.기분 === "행복" ? `<div class="diary_mood CSS_행복">행복해요</div>` : ""}
-            ${el.기분 === "슬픔" ? `<div class="diary_mood CSS_슬픔">슬퍼요</div>` : ""}
-            ${el.기분 === "놀람" ? `<div class="diary_mood CSS_놀람">놀랐어요</div>` : ""}
-            ${el.기분 === "화남" ? `<div class="diary_mood CSS_화남">화나요</div>` : ""}
-            ${el.기분 === "기타" ? `<div class="diary_mood CSS_기타">기타</div>` : ""}
-            <div class="diary_date">${el.작성일}</div>
+          <div class="diary_info">
+            <div class="diary_content">
+              ${el.기분 === "행복" ? `<div class="diary_mood CSS_행복">행복해요</div>` : ""}
+              ${el.기분 === "슬픔" ? `<div class="diary_mood CSS_슬픔">슬퍼요</div>` : ""}
+              ${el.기분 === "놀람" ? `<div class="diary_mood CSS_놀람">놀랐어요</div>` : ""}
+              ${el.기분 === "화남" ? `<div class="diary_mood CSS_화남">화나요</div>` : ""}
+              ${el.기분 === "기타" ? `<div class="diary_mood CSS_기타">기타</div>` : ""}
+              <div class="diary_date">${el.작성일}</div>
+            </div>
+            <div class="diary_title">${el.제목}</div>
           </div>
-          <div class="diary_title">${el.제목}</div>
-        </a>
+        
         <img class="delete_button" src="./assets/images/close_icon.png"
              onclick="JS_일기삭제기능(event, ${index})" />
       </div>
-    `;
+    </a>  
+    `
   }
 
   window.document.getElementById("HTML_일기보여주는곳").innerHTML =
@@ -95,16 +135,6 @@ for (let i= 0; i< 기분선택버튼목록.length; i++) {
   if (el.checked) mood_area =el.value;
 }
 
-// let happy_area =
-//   window.document.getElementsByName("HTML_기분선택버튼")[0].checked === true;
-// let sad_area =
-//   window.document.getElementsByName("HTML_기분선택버튼")[1].checked === true;  
-// let surprise_area =
-//   window.document.getElementsByName("HTML_기분선택버튼")[2].checked === true;
-// let mad_area =
-//   window.document.getElementsByName("HTML_기분선택버튼")[3].checked === true;
-// let etc_area =
-//   window.document.getElementsByName("HTML_기분선택버튼")[4].checked === true;
 
 const diary_area = {
   제목: title_area,
@@ -121,79 +151,6 @@ const 스토리지에저장된일기목록 =
 
   JS_일기그리기기능();
 };
-
-// 일기목록.push(diary_area);
-
-// const 일기번호 = 일기목록.length -1;
-
-// const HTML_기존의일기도화지 = 
-//   window.document.getElementById("HTML_일기보여주는곳").innerHTML;
-
-// const HTML_새로운일기도화지 = `
-//   <div class="card_area" onclick="JS_글보기기능(${일기번호})">
-//     <div class="diary_image">
-//       ${
-//         happy_area === true
-//           ? '<img class="mood_image" src="./assets/images/mood_happy.png" alt="행복"/>'
-//           : ""
-//       }
-//       ${
-//         sad_area === true
-//           ? '<img class="mood_image" src="./assets/images/mood_sad.png" alt="슬픔"/>'
-//           : ""
-//       }
-//       ${
-//         surprise_area === true
-//           ? '<img class="mood_image" src="./assets/images/mood_suprise.png" alt="놀람"/>'
-//           : ""
-//       }
-//       ${
-//         mad_area === true
-//           ? '<img class="mood_image" src="./assets/images/mood_mad.png" alt="화남"/>'
-//           : ""
-//       }
-//       ${
-//         etc_area === true
-//           ? '<img class="mood_image" src="./assets/images/mood_think.png" alt="기타"/>'
-//           : ""
-//       }
-//     </div>
-//     <div class="diary_content">
-//       ${
-//         happy_area === true
-//           ? `<div class="diary_mood CSS_행복">행복해요</div>`
-//           : ""
-//       }
-//       ${
-//         sad_area === true
-//           ? `<div class="diary_mood CSS_슬픔">슬퍼요</div>`
-//           : ""
-//       }
-//       ${
-//         surprise_area === true
-//           ? `<div class="diary_mood CSS_놀람">놀랐어요</div>`
-//           : ""
-//       }
-//       ${
-//         mad_area === true
-//           ? `<div class="diary_mood CSS_화남">화나요</div>`
-//           : ""
-//       }
-//       ${
-//         etc_area === true
-//           ? `<div class="diary_mood CSS_기타">기타</div>`
-//           : ""
-//       }
-//       <div class="diary_date">${diary_area.작성일}</div>
-//     </div>
-//     <div class="diary_title"> ${diary_area.제목}</div>  
-  
-//   </div>
-// `
-
-// window.document.getElementById("HTML_일기보여주는곳").innerHTML =
-//       HTML_기존의일기도화지 + HTML_새로운일기도화지;
-// };
 
 const JS_글보기기능 = (일기번호받는통) => {
   const diary_area = 일기목록[일기번호받는통];
@@ -350,3 +307,4 @@ function JS_일기삭제기능(event, 일기번호) {
   // 4. 삭제된 일기목록 화면에 다시 그리기
   JS_일기그리기기능();
 }
+
