@@ -116,19 +116,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 스크롤 감지: filter-bar 배경 반전 + 플로팅 버튼 토글
+  // 스크롤 감지: filter-bar 배경 반전 (스크롤만 반전)
   window.addEventListener("scroll", () => {
     if (window.scrollY > 80) {
       filterBar.classList.add("inverted");
-      // show floating button
-      scrollTopBtn.style.display = "block";
     } else {
       filterBar.classList.remove("inverted");
-      scrollTopBtn.style.display = "none";
     }
   });
 
-  // 플로팅 버튼: 위로 부드럽게 스크롤
+  // 플로팅 버튼: 위로 부드럽게 스크롤 (항상 고정되는 건 CSS가 담당)
   scrollTopBtn.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
