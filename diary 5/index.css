@@ -1,0 +1,554 @@
+@import "./global.css";
+@import "./darkMode.css";
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    min-height: 89.4rem; /* 894px */
+    max-height: 172.8rem; /* 1728px */
+    margin: 0 auto;
+
+    @media (max-width: 78rem) { /* 780px */
+        width: 36rem; /* 360px */
+        height: 100%;
+        border: 0.1rem solid red; /* 1px */
+        margin: 0 auto;
+    }
+}
+
+
+
+.container {
+    width: 192rem; /* 1920px */
+    height: 100%;
+    margin: 0 auto;
+
+    @media (max-width: 78rem) { /* 780px */
+        width: 36rem; /* 360px */
+    }
+}
+
+.header {
+    width: 192rem; /* 1920px */
+    height: 6rem; /* 60px */
+    margin-bottom: 2.4rem; /* 24px */
+    margin: 0 auto;
+
+    @media (max-width: 78rem) { /* 780px */
+        width: 36rem; /* 360px */
+        height: 5.2rem; /* 52px */
+        border: 0.1rem solid red; /* 1px */
+        padding: 0 2rem; /* 0 20px */
+        margin: 0 auto;
+    }
+}
+
+.header-contents {
+    width: 116.8rem; /* 1168px */
+    height: 6rem; /* 60px */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+
+    @media (max-width: 78rem) { /* 780px */
+        width: 32rem; /* 320px */
+        margin: 0 auto;
+        display: flex;
+    }
+}
+
+.header-contents-title {
+    width: 12rem; /* 120px */
+    height: 4rem; /* 40px */
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 78rem) { /* 780px */
+        width: 100%;
+        border: 0.1rem solid red; /* 1px */
+        margin: 0 auto;
+    }
+}   
+
+.header-brand-link {
+    color: var(--black);
+    
+}
+
+.header-banner {
+    width: 192rem;
+    height: 24rem;
+    margin-bottom: 2.4rem;
+    margin: 0 auto;
+
+    @media (max-width: 78rem) {
+        max-width: 78rem;
+        width: 36rem;
+        border: 1px solid red;
+        margin: 0 auto;
+    }
+}
+
+.header-banner-img {
+    width: 116.8rem;
+    height: 24rem;
+    display: flex;
+    margin: 0 auto;
+    border-radius: 2.4rem;
+    object-fit: cover;
+}
+
+.body {
+    width: 100%;
+}
+
+.body-menu-selector-wrapper {
+    width: 192rem;
+    height: 11.2rem;
+    margin: 0 auto;
+}
+
+.body-menu {
+    width: 1168px;
+    height: 4.8rem;
+    margin: 0 auto;
+    margin-top: 2.4rem;
+    margin-bottom: 3.2rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.body-menu-item{
+    width: 11.9rem;
+    height: 4.8rem;
+    padding: 1.2rem 0.8rem 1.2rem 0.8rem;
+    margin-right: 1.6rem;
+    cursor: pointer;
+    color: var(--gray-40);
+}
+
+.body-menu-item.active {
+    border-bottom: 0.2rem solid black;
+    color: var(--black);
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: var(--gray-40);
+  }
+  
+
+
+
+
+.body-menu-item-title {
+    font-weight: 700; /* Bold */
+    font-size: 2.4rem;
+    line-height: 2.4rem;
+    letter-spacing: -0.24rem;
+}
+
+
+.seletor-with-searchBar-wrapper {
+    width: 116.8rem;
+    height: 4.8rem;
+    margin: 0 auto;
+    gap: 1.6rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+
+
+.body-selector {
+    width: 12rem;
+    height: 4.8rem;
+    position: relative;
+}
+
+.dropdown-container {
+    position: relative;
+    width: 12rem;
+    height: 4.8rem;
+}
+
+.dropdown-button {
+    width: 12rem;
+    height: 4.8rem;
+    border: 0.1rem solid var(--gray-30);
+    border-radius: 0.8rem;
+    background-color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+
+.dropdown-text {
+    color: var(--gray-80);
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    letter-spacing: -0.16rem;
+}
+
+.dropdown-icon {
+    width: 2.4rem;
+    height: 2.4rem;
+    transition: transform 0.2s ease;
+}
+
+.dropdown-button.active .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.8rem;
+    width: 12rem;
+    background-color: var(--white);
+    border: 0.1rem solid var(--gray-30);
+    border-radius: 0.8rem;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+    max-height: 288px;
+    overflow-y: auto;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item {
+    width: 12rem;
+    height: 4.8rem;
+    padding: 1.2rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: var(--gray-05);
+}
+
+.dropdown-item.active {
+    background-color: #f5fbf3;
+
+}
+
+.dropdown-item span {
+    color: var(--gray-80);
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    letter-spacing: -0.16rem;
+}
+
+.dropdown-item.active span {
+    color: #299c00;
+}
+
+.check-icon {
+    width: 1.6rem;
+    height: 1.6rem;
+    display: none;
+}
+
+.dropdown-item.active .check-icon {
+    display: block;
+}
+
+.search-container {
+    width: 32rem;
+    height: 4.8rem;
+    padding: 1.2rem 1.6rem;
+    border: 0.1rem solid var(--gray-30);
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.6rem;
+    color: var(--gray-80);
+}
+
+.search-input::placeholder {
+    color: var(--gray-40);
+}
+
+.search-icon {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-right: 0.8rem;
+}
+
+.add-diary-button {
+    width: 11rem;
+    height: 4.8rem;
+    border-radius: 0.8rem;
+    padding: 1rem 0.8rem;
+    border: none;
+    background-color: var(--black);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    margin-left: 59.4rem;
+}
+
+.body-contents {
+    width: 192rem;
+    height: 100%;
+    background-color: var(--white);
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3.2rem;
+}
+
+.body-contents-undefined-data {
+    color: var(--gray-40);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    text-align: center;
+    padding-top: 4rem;
+}
+
+.body-card-list {
+    width: 116.8rem;
+    height: auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.4rem;
+    align-content: start;
+}
+
+.diary-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 27.4rem;
+    height: 29.6rem;
+    background-color: var(--white);
+    border-radius: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.diary-card a.diary-card-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.diary-card-delete-button {
+    width: 2.4rem;
+    height: 2.4rem;
+    cursor: pointer;
+    display: flex;
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background-color: transparent;
+    border: none;
+    z-index: 2;
+}
+
+.diary-card-delete-button img {
+    width: 2.4rem;
+    height: 2.4rem;
+}
+
+.diary-card:hover {
+    box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.1);
+    width: 30.6rem;
+    height: 32rem;
+}
+
+.diary-card-image {
+    width: 27.4rem;
+    height: 20.8rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.diary-card-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 1.2rem;
+    object-fit: cover;
+}
+
+.diary-card:hover .diary-card-image {
+    width: 30.6rem;
+    height: 23.2rem;
+}
+
+.diary-card:hover .diary-card-image .diary-card-main-image {
+    filter: blur(0.4rem);
+    width: 100%;
+    height: 100%;
+}
+
+/* 호버 시에도 삭제 아이콘은 영향받지 않음 */
+.diary-card:hover .diary-card-delete-button img {
+    width: 2.4rem;
+    height: 2.4rem;
+    filter: none;
+}
+
+
+.diary-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    height: 5.6rem;
+    margin-bottom: 1.6rem;
+    margin-top: 1.6rem;
+}
+
+.card-tag-date-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 0.8rem;
+    align-items: center;
+}
+
+.diary-card-title {
+    color: var(--gray-90);
+   line-height: 2.4rem; 
+    height: 2.4rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    padding: 0 0.8rem;
+    letter-spacing: -0.05rem;
+}
+
+#card-tag-sad {
+    color: #28b4e1;
+}   
+
+#card-tag-happy {
+    color: #ea5757;
+}   
+
+#card-tag-surprised {
+    color: #d99000;
+}      
+
+#card-tag-angry {
+    color: var(--gray-60);
+}      
+
+#card-tag-etc {
+    color: #a229ed;
+}      
+
+
+
+
+
+
+
+.diary-card-date {
+    color: var(--gray-50);
+    margin: 0;
+    line-height: 2.4rem;
+}
+
+
+footer {
+    width: 192rem;
+    height: 16rem;
+    padding: 2.4rem;
+    margin: 0 auto;
+
+    background-color: var(--gray-05);
+    @media (max-width: 78rem) {
+        display: none;
+    }
+}
+
+.footer-contents {
+    width: 116.8rem;
+    height: 11.2rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#footer-copyright {
+    color: var(--gray-50);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    letter-spacing: -0.14rem;
+}
+
+
+.floating-button-wrapper {
+    position: fixed; /* 부모가 좌표계를 제공 (뷰포트 전체 덮음) */
+    inset: 0;       /* top:0; right:0; bottom:0; left:0; */
+    pointer-events: none; /* 내부 버튼만 클릭 가능하도록 */
+}
+
+.floating-button {
+    width: 4rem; /* 40px */
+    height: 4rem; /* 40px */
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 33%;
+    right: 27%;
+    pointer-events: auto;
+}
+
+.floating-button--bottom {
+    position: fixed;
+    top: 80%;
+    right: 27%;
+}
+

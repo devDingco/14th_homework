@@ -1,0 +1,141 @@
+@import "./global.css";
+@import "./index.css";
+@import "./pagiNation.css";
+
+.darkmode-wrapper {
+    width: 121px;
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle-input {
+    display: none;
+}
+
+.toggle-label {
+    position: relative;
+    display: block;
+    width: 58px;
+    height: 28px;
+    padding: 2px;
+    border-radius: 14px;
+    border: none;
+    background-color: var(--gray-10);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.toggle-label::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--white); /* 고정 흰색 */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    transform: translateY(-50%);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .toggle-label::before {
+    background-color: var(--white);
+}
+
+.toggle-input:checked + .toggle-label {
+    background-color: #3ad84a;
+}
+
+.toggle-input:checked + .toggle-label::before {
+    transform: translate(30px, -50%);
+    background-color: var(--black);
+
+}
+
+
+
+.dark-theme .toggle-input:checked + .toggle-label::before {
+    background-color: var(--black);
+}
+
+
+
+.darkmode-title {
+    width: 55px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -1.6px;
+}
+.darkmode-button {
+    width: 58px;
+    height: 28px;
+    border-radius: 20px;
+    border: none;
+}
+
+.dark-theme .add-diary-button {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.dark-theme .body-menu-item.active {
+    border-bottom: 2px solid var(--black);
+    color: var(--black);
+}
+
+.dark-theme .dropdown-menu {
+    background-color: #000000;
+}
+
+.dark-theme .dropdown-text {
+    color: var(--gray-30);
+}
+
+.dark-theme .dropdown-item {
+    color: var(--white);
+}
+
+.dark-theme .dropdown-item.active {
+    background-color: var(--white);
+}
+
+.dark-theme .dropdown-item.active span {
+    color: var(--black);
+}
+
+.dark-theme .dropdown-item span {
+    color: var(--gray-30);
+}
+
+/* 다크모드 카드 스타일 */
+.dark-theme .diary-card {
+    background-color: var(--gray-80);
+    border-color: var(--gray-70);
+}
+
+.dark-theme .diary-card-title body-bold-18 {
+    color: var(--white);
+}
+
+.dark-theme .diary-card-date {
+    color: var(--gray-40);
+}
+
+.dark-theme .body-card-list {
+    border-color: var(--gray-70);
+}
+
+.dark-theme .footer {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.dark-theme #footer-copyright {
+    color: var(--gray-50);
+}
