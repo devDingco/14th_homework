@@ -28,9 +28,13 @@
           <p class="detail-main-contents-title">내용</p>
           <p class="detail-main-contents-contents" id="detailContents">{많은 내용들}</p>
         </div>
+        <div class="detail-main-clipboard" onclick="copyContents()">
+          <img src="./assets/icons/copy.png" alt="">
+          <p>내용 복사</p>
+        </div>
         <div class="detail-main-active">
           <button class="light-button" onclick="viewModifyContent()">수정</button>
-          <button class="light-button" onclick="confirmDelete(event)">삭제</button>
+          <button class="light-button" onclick="openDeleteModal(event,'modal-delete')">삭제</button>
         </div>
       </div>
     </div>
@@ -51,7 +55,7 @@
         <div class="main-diary-input">
           <label for="title" class="body02_s">제목</label>
           <input type="text" id="title"
-          placeholder="제목을 입력해 주세요."/>
+          placeholder="제목을 입력해 주세요." />
         </div>
         <div class="main-diary-input">
           <label for="contents" class="body02_s">내용</label>
@@ -65,6 +69,7 @@
       </div>
     </form>
 
+
     <!-- comments -->
     <div class="detail-comments" id="comments">
       <h2>회고</h2>
@@ -72,10 +77,25 @@
         <input id="detail-comments-input-input" type="text" placeholder="회고를 남겨보세요.">
         <button id="detail-comments-input-button" onclick="submitComment()">입력</button>
       </div>
-      <div class="detail-comments-area">
-        
+      <div class="detail-comments-area"></div>
+    </div>
+
+    <!-- modal : 일기 삭제 -->
+    <div class="main-modal-group" id="modal-delete">
+      <div class="main-diary-form-bg" onclick="closeModal('modal-delete')"></div>
+        <div class="nested-modal-area">
+          <div>
+            <h3>일기 삭제</h3>
+            <p>일기를 삭제 하시겠어요?</p>
+          </div>
+          <div class="main-diary-active">
+            <button class="light-button" onclick="closeModal('modal-delete')">취소</button>
+            <button id="diary-delete-button">삭제</button>
+          </div>
+        </div>
       </div>
     </div>
+    <p class="toast-bottom">내용이 복사되었습니다.</p>
     <img onclick="scrollToTop()" id="float-button" src="./assets/icons/up_light.png">
   </div>
   <script src="./js/script.js"></script>
@@ -84,5 +104,6 @@
   <script src="./js/formatUtils.js"></script>
   <script src="./js/constants.js"></script>
   <script src="./js/userDiary.js"></script>
+  <script src="./js/modal.js"></script>
 </body>
 </html>
