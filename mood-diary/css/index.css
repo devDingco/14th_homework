@@ -84,11 +84,17 @@ textarea::placeholder{
   align-items: center;
   justify-content: center;
 }
-.filter{
+.multiple-functions{
   height: 3.2rem;
   top: 0;
   width: 100%;
   margin-bottom: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.filter{
+  height: 100%;
 }
 .filter .dropdown{
   width: 11.2rem;
@@ -98,6 +104,11 @@ textarea::placeholder{
   -moz-appearance: none;
 	-webkit-appearance: none;
 	appearance: none;
+  font-size: 1.6rem;
+}
+.multiple-functions button{
+  padding: 0.8rem 1rem;
+  font-size: 1.8rem;
 }
 .main{
   width: 100%;
