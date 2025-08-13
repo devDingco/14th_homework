@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="stylesheet" href="./editpage.css">
+    <script src="./editpage.js"></script>
+    <title>민지의 다이어리_수정페이지</title>
+</head>
+<body>
+    <div class="가장큰배경"> 
+        <div class="큰배경">
+        <div class="헤더">
+            <div class="헤더__타이틀">
+                <h3>
+                    민지의 다이어리
+                </h3>
+            </div>
+        </div>
+        <div class="바디">
+            <div class="바디__메인">
+                <div class="바디__메인__감정섹션">
+                    <h3>오늘 기분은 어땠나요?</h3>
+                    <div class="바디__메인__감정섹션__감정수정">
+                        <input type="radio" name="감정" value="행복해요">행복해요
+                        <input type="radio" name="감정" value="슬퍼요">슬퍼요
+                        <input type="radio" name="감정" value="놀랐어요">놀랐어요
+                        <input type="radio" name="감정" value="화나요">화나요
+                        <input type="radio" name="감정" value="기타">기타
+                    </div>
+                </div>
+                <div class="바디__메인__제목섹션">
+                    <span>제목</span>
+                    <input class="바디__메인__제목섹션__제목수정" id="일기수정제목입력창">
+                        
+                    </input>
+
+                </div>
+                <div class="바디__메인__내용섹션">
+                    <span>내용</span>
+                    <input class="바디__메인__내용섹션__내용수정" id="일기수정내용입력창">
+                        
+                    </input>
+
+                </div>
+                <div class="바디__메인__버튼섹션">
+                    <button class="바디__메인__버튼섹션__취소버튼"><img src="./assets/images/취소버튼.png" alt=""></button>
+                    <button onclick="수정하기기능()" class="바디__메인__버튼섹션__수정버튼"><img src="./assets/images/수정하기버튼.png" alt=""></button>
+
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
