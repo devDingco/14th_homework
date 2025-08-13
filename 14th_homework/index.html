@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>민지의 다이어리 - 일기보관함</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <div class="레이아웃">
+      <div class="헤더">
+        <div>민지의 다이어리</div>
+      </div>
+      <img class="배너이미지" src="./assets/images/banner.png" />
+
+      <!--내비게이션-->
+      <div class="탭">
+        <div class="클릭된탭">일기보관함</div>
+        <div class="클릭되지않은탭">사진보관함</div>
+      </div>
+
+      <div class="메인">
+        <!--일기 보여주는 곳-->
+        <div id="일기보여주는곳" class="일기보여주는곳">
+          <!-- 감정표현 카드들이 여기에 동적으로 추가 -->
+        </div>
+
+        <!--등록 상자-->
+        <div class="_일기등록">
+          <div class="등록_제목">📍일기 쓰기</div>
+          <div class="등록_내용_영역">
+            <div class="등록_내용">오늘 기분은 어땠나요?</div>
+            <div class="라디오그룹">
+              <div class="라디오버튼">
+                <input
+                  type="radio"
+                  name="HTML_기분선택버튼"
+                  value="행복"
+                  checked
+                />
+                <div>행복해요</div>
+              </div>
+              <div class="라디오버튼">
+                <input type="radio" name="HTML_기분선택버튼" value="슬픔" />
+                <div>슬퍼요</div>
+              </div>
+              <div class="라디오버튼">
+                <input type="radio" name="HTML_기분선택버튼" value="놀람" />
+                <div>놀랐어요</div>
+              </div>
+              <div class="라디오버튼">
+                <input type="radio" name="HTML_기분선택버튼" value="화남" />
+                <div>화나요</div>
+              </div>
+              <div class="라디오버튼">
+                <input type="radio" name="HTML_기분선택버튼" value="기타" />
+                <div>기타</div>
+              </div>
+            </div>
+          </div>
+          <div class="일기입력상자">
+            <div class="일기쓰기">
+              <div>제목</div>
+              <input
+                type="text"
+                id="HTML_제목입력창"
+                placeholder="제목을 입력해 주세요."
+              />
+            </div>
+            <div class="일기쓰기">
+              <div>내용</div>
+              <textarea
+                id="HTML_내용입력창"
+                rows="5"
+                placeholder="내용을 입력해 주세요."
+              ></textarea>
+            </div>
+          </div>
+          <div>
+            <button class="일기쓰기_등록버튼" onclick="JS_글쓰기기능()">
+              등록하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--푸터-->
+    <div class="푸터_영역">
+      <div class="푸터">
+        <div class="푸터_제목">민지의 다이어리</div>
+        <div class="푸터_대표">대표 : {name}</div>
+        <div class="푸터_Copyright">Copyright © 2024.{name} Co., Ltd.</div>
+      </div>
+    </div>
+  </body>
+</html>
