@@ -171,7 +171,25 @@ body {
     
     align-items: center;
     align-self: stretch;
+
+    transition: 0.5s;
 }
+.메인_바디_일기장_일기저장_사진:hover {
+    width: 110%;
+    height: 110%;
+    filter: blur(4px);
+/* 
+    animation
+    animation-duration: 0.5s; */
+}
+
+/* @keyframes 메인_바디_일기장_일기저장_사진 {
+    from {
+
+    }
+    
+} */
+
 
 .메인_바디_일기장_일기저장_내용_감정과날짜 {
     width: 380px;
@@ -182,8 +200,30 @@ body {
     align-items: center;
 }
 
-.메인_바디_일기장_일기저장_내용_감정 {
+.메인_바디_일기장_일기저장_내용_감정_슬퍼요 {
     color: #28B4E1;
+    font-size: 14px;
+    font-style: normal;
+
+}
+
+.메인_바디_일기장_일기저장_내용_감정_놀랐어요 {
+    color: #D59029;;
+    font-size: 14px;
+    font-style: normal;
+
+}.메인_바디_일기장_일기저장_내용_감정_화나요 {
+    color: #777;
+    font-size: 14px;
+    font-style: normal;
+
+}.메인_바디_일기장_일기저장_내용_감정_행복해요 {
+    color: #EA5757;
+    font-size: 14px;
+    font-style: normal;
+
+}.메인_바디_일기장_일기저장_내용_감정_기타 {
+    color: #A229ED;
     font-size: 14px;
     font-style: normal;
 
@@ -202,7 +242,7 @@ body {
 }
 
 .메인_바디_일기장_일기쓰기 {
-    background-color: firebrick;
+    /* background-color: firebrick; */
     padding: 24px;
     width: 360px;
     height: 604px;
@@ -330,6 +370,8 @@ body {
     color: var(--Gray-Gray-50, #F2F2F2);
     font-size: 18px;
     font-style: normal;
+
+    border: none;
     }
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
