@@ -1,285 +1,140 @@
 :root {
-  /* 기준 폰트 사이즈 (1rem = 16px) — 필요하면 사용자가 변경 가능 */
+  /* 1rem 기준 */
   font-size: 16px;
+  --bg: #f5f5f5;
+  --panel: #fff;
+  --ink: #111;
+  --muted: #6b6b6b;
+  --primary: #4e8cff;
+  --danger: #e74c3c;
+  --pink: #ffcbcb;
+  --radius: 0.75rem;
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
 }
 
-/* 전체 기본 설정 */
+/* 전체 */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
 body {
-  font-family: 'Arial', sans-serif;
-  background: #f5f5f5;
-  padding: 2rem;
   margin: 0;
-  box-sizing: border-box;
+  font-family: system-ui, -apple-system, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  padding: 0 0 5rem;
 }
-
-/* 카드 컨테이너 (기본: flex for desktop) */
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
-
-/* 카드 링크(카드를 클릭하면 상세페이지로 이동) */
-.card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  margin: 0.6rem;
-}
-
-/* 카드 스타일 */
-.card {
-  position: relative;
-  border-radius: 0.625rem; /* 10px */
-  width: 16.875rem; /* 270px */
-  padding: 1rem;
-  background: white;
-  transition: transform 0.5s ease, filter 0.5s ease; /* 0.5초 부드럽게 */
-  box-sizing: border-box;
-}
-
-.card:hover {
-  transform: scale(1.1);   /* 110% 확대 */
-  filter: blur(2px);       /* 흐릿한 효과 */
-}
-
-.card img {
-  width: 100%;
-  height: auto;
-  border-radius: 0.75rem; /* 12px */
-  display: block;
-}
-
-.card p {
-  margin-top: 0.5rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 0;
-}
+body.no-scroll { overflow: hidden; }
 
 /* 헤더 */
-header {
-  background-color: black;
-  color: white;
-  text-align: center;
-  padding: 0.8rem 0;
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .75rem 1rem; background: #000; color: #fff;
+}
+.site-header .primary {
+  background: var(--primary); color: #fff; border: 0; padding: .5rem .75rem;
+  border-radius: .5rem; cursor: pointer;
 }
 
 /* 배너 */
 .banner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  display: flex; justify-content: center; align-items: center;
+  margin: 1rem auto;
 }
-
 .banner img {
-  width: 61.25rem; /* 980px */
-  max-width: 100%;
-  height: auto;
-  display: block;
+  width: 61.25rem; max-width: 100%; height: auto; display: block;
 }
 
-/* 내비게이션 */
+/* 탭 */
 .navigation {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  background-color: white;
-  padding: 1rem;
+  display: flex; justify-content: center; gap: .75rem;
+  padding: .75rem; background: #fff;
 }
-
 .navigation .tab {
-  padding: 0.5rem 1rem;
-  border: none;
-  background-color: #e0e0e0;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: transform 0.5s;
+  padding: .5rem 1rem; border: 0; border-radius: .5rem; background: #eaeaea; cursor: pointer;
 }
+.navigation .tab.active { background: var(--pink); font-weight: 700; }
 
-.navigation .tab:hover {
-  transform: rotateZ(30deg);
-}
-
-.navigation .tab.active {
-  background-color: #ffcbcb;
-  font-weight: bold;
-}
-
-/* 다이어리 섹션 */
-.diary-section {
-  display: flex;
-  justify-content: space-between;
-  padding: 2rem;
-  gap: 2rem;
-  align-items: flex-start;
-  box-sizing: border-box;
-}
-
-/* 다이어리 폼 */
-.diary-form {
-  flex: 1;
-  background-color: white;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0.5rem rgba(0,0,0,0.08);
-  flex-shrink: 0; /* 공간이 부족해도 크기 줄이지 않음 */
-  min-width: 12.5rem; /* 200px */
-  box-sizing: border-box;
-}
-
-/* 감정 선택 */
-.emotion-select label {
-  margin-right: 0.8rem;
-}
-
-/* 입력 필드 */
-#title, #content {
-  margin: 0.5rem 0;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
-  width: 97%;
-  box-sizing: border-box;
-}
-
-/* 등록 버튼 */
-button[type="submit"] {
-  padding: 0.5rem 1rem;
-  background-color: gray;
-  color: white;
-  border: none;
-  width: 97%;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  transition: transform 0.5s;
-}
-
-/* 수정 완료 버튼의 기울기 클래스(상세페이지에서 사용) */
-button.rotate {
-  transform: rotateZ(20deg);
-}
-
-/* 푸터 */
-footer {
-  text-align: center;
-  padding: 2rem;
-  background-color: #eee;
-  margin-top: 2rem;
-}
-
-/* ---------------------------
-   추가된 스타일 (숙제 요구사항)
-   ---------------------------*/
-
-/* 필터 바 (sticky, 색 반전 처리용) */
+/* 필터 바 */
 .filter-bar {
-  display: flex;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0.6rem;
-  background: white;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  position: sticky; top: 3.25rem; z-index: 90;
+  display: flex; gap: .5rem; justify-content: center; align-items: center;
+  padding: .5rem; background: #fff; border-bottom: 1px solid rgba(0,0,0,.06);
+  transition: background-color .3s, color .3s;
 }
 .filter-bar .filter-btn {
-  padding: 0.375rem 0.625rem;
-  border-radius: 0.375rem;
-  border: none;
-  background: #eee;
-  cursor: pointer;
+  padding: .4rem .7rem; border: 0; border-radius: .5rem; background: #eee; cursor: pointer;
 }
-.filter-bar .filter-btn.active {
-  background: #ffcbcb;
-}
+.filter-bar .filter-btn.active { background: var(--pink); }
+.filter-bar.inverted { background: #111; color: #fff; }
+.filter-bar.inverted .filter-btn { background: rgba(255,255,255,.1); color: #fff; }
 
-/* inverted: 스크롤 내리면 배경 반전 (요구사항) */
-.filter-bar.inverted {
-  background: #111;
-  color: #fff;
+/* 카드 목록 */
+.diary-section { padding: 2rem 1rem; }
+.card-container {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
 }
-.filter-bar.inverted .filter-btn {
-  background: rgba(255,255,255,0.08);
-  color: #fff;
+.card-link { text-decoration: none; color: inherit; display: block; }
+.card {
+  position: relative; width: 16.875rem; padding: 1rem; border-radius: var(--radius);
+  background: var(--panel); box-shadow: var(--shadow);
+  transition: transform .4s, filter .4s;
 }
+.card:hover { transform: translateY(-4px); }
+.card img { width: 100%; border-radius: .75rem; display: block; }
+.card p { margin: .5rem 0 0; font-weight: 700; text-align: center; }
 
-/* 카드 삭제 버튼 (카드 위에 겹쳐서 배치) */
+/* 삭제 아이콘 */
 .card .delete-btn {
-  position: absolute;
-  top: 0.5rem; /* 8px */
-  right: 0.5rem;
-  width: 1.75rem; /* 28px */
-  height: 1.75rem;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255,0,0,0.95);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 30;
-  display: none; /* hover시에만 보이게 */
+  position: absolute; top: .5rem; right: .5rem; width: 1.8rem; height: 1.8rem;
+  border-radius: 50%; border: 0; background: var(--danger); color: #fff; font-weight: 700;
+  display: none; cursor: pointer;
 }
-.card:hover .delete-btn {
-  display: block;
+.card:hover .delete-btn { display: inline-flex; align-items: center; justify-content: center; }
+
+/* 플로팅 버튼(항상 고정) */
+.floating-btn, #scrollTopBtn {
+  position: fixed; right: 1rem; bottom: 1rem; width: 3.25rem; height: 3.25rem;
+  border-radius: 50%; border: 0; background: var(--muted); color: #fff; font-size: 1.1rem;
+  cursor: pointer; z-index: 120;
 }
 
-/* 플로팅 버튼 (맨 위로) - 항상 고정 (Section 04 요구) */
-.floating-btn,
-#scrollTopBtn {
-  position: fixed;
-  right: 1.125rem; /* 18px */
-  bottom: 1.125rem;
-  width: 3.25rem; /* 52px */
-  height: 3.25rem;
-  border-radius: 50%;
-  background: #6b6b6b;
-  color: white;
-  border: none;
-  font-size: 1.125rem;
-  cursor: pointer;
-  display: block; /* 항상 보이도록 */
-  z-index: 60;
+/* 모달 공통 */
+.modal { position: fixed; inset: 0; display: none; z-index: 200; }
+.modal.show { display: block; }
+.modal__backdrop {
+  position: absolute; inset: 0; background: rgba(0,0,0,.45);
 }
+.modal__panel {
+  position: relative; margin: 6vh auto 0; width: min(640px, 92vw);
+  background: #fff; border-radius: 1rem; box-shadow: var(--shadow); overflow: hidden;
+  animation: pop .18s ease-out;
+}
+.modal__panel.small { width: min(420px, 92vw); }
+.modal__header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .9rem 1rem; border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.modal__body { padding: 1rem; }
+.modal__actions { display: flex; gap: .5rem; justify-content: flex-end; padding: 0 1rem 1rem; }
 
-/* 반응형: 작은 화면에서 카드 컨테이너 정렬 -> grid로 전환 (한 줄에 2개) */
+@keyframes pop { from { transform: scale(.98); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* 버튼 */
+.primary { background: var(--primary); color: #fff; border: 0; padding: .6rem 1rem; border-radius: .6rem; cursor: pointer; }
+.ghost { background: #eee; color: #111; border: 0; padding: .6rem 1rem; border-radius: .6rem; cursor: pointer; }
+.danger { background: var(--danger); color: #fff; border: 0; padding: .6rem 1rem; border-radius: .6rem; cursor: pointer; }
+.icon-btn { background: transparent; border: 0; font-size: 1.25rem; cursor: pointer; }
+
+/* 입력 */
+.label { display: block; margin: .25rem 0 .25rem; font-weight: 700; }
+#title, #content {
+  width: 100%; padding: .6rem .7rem; border: 1px solid #ddd; border-radius: .5rem; outline: none;
+}
+#content { resize: vertical; min-height: 8rem; }
+
+/* 반응형: 모바일에서 카드 2열 */
 @media (max-width: 600px) {
-  /* 레이아웃을 세로로 쌓기 */
-  .diary-section {
-    flex-direction: column;
-    padding: 1rem;
-  }
-
-  /* 카드 컨테이너는 grid로 변경, 한 줄 2개 카드 */
-  .card-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-    width: 100%;
-  }
-
-  .card {
-    width: 100%; /* grid 내부에서는 가로 채우기 */
-  }
-
-  .diary-form {
-    order: -1; /* 모바일에서는 폼을 위로 올리고 카드 목록 아래에 배치(선택적) */
-    width: 100%;
-  }
-
-  .banner img {
-    width: 100%;
-  }
-}
-
-/* 중간 화면 브레이크포인트: 작은 태블릿 등 */
-@media (max-width: 900px) {
-  .diary-section { flex-direction: column; padding: 1.25rem; }
-  .card-container { justify-content: center; gap: 0.75rem; }
-  .filter-bar { overflow-x: auto; gap: 8px; }
+  .card-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+  .card { width: 100%; }
+  .filter-bar { top: 3.25rem; }
 }
