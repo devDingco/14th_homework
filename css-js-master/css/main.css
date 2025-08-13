@@ -196,7 +196,12 @@
     text-decoration: none;
 }
 
-.diary_content > img {
+#img_frame {
+    width: 380px;
+    height: 285px;
+}
+
+.diary_content > a > img {
     width: 380px;
     height: 285px;
     border-radius: 16px;

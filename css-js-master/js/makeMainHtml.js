@@ -37,7 +37,9 @@ const makeMainHtml = (contentArr) => {
         }
         return `
             <div id="diary#${v.number}" class="diary_content">
-                <img src="${imgSrc}"/>
+                <a id="img_frame" href="./pages/detail.html?number=${v.number}">
+                    <img src="${imgSrc}"/>
+                </a>
                 <div id="view_content_detail">
                     <div id="top_view_content_detail">
                         <p class="body01" style="color: ${feelColor}">
