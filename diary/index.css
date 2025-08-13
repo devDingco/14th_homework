@@ -177,7 +177,7 @@
         gap: 0.5rem;
         border-radius: 100px;
         border: 1px solid var(--input-border);
-        background: var(--input-bg) url(/public/icons/search_24dp_5F6368_FILL1_wght400_GRAD0_opsz24\ 1.svg) no-repeat 16px center;
+        background: var(--input-bg) url(./public/icons/search_24dp_5F6368_FILL1_wght400_GRAD0_opsz24\ 1.svg) no-repeat 16px center;
         background-size: 20px;
         padding-left: 2.5rem;
         color: var(--text-primary);
@@ -194,7 +194,7 @@
     gap: 0.5rem;
     border-radius: 100px;
     border: 1px solid var(--input-border);
-    background: var(--input-bg) url(/public/icons/search_24dp_5F6368_FILL1_wght400_GRAD0_opsz24\ 1.svg) no-repeat 16px center;
+    background: var(--input-bg) url(./public/icons/search_24dp_5F6368_FILL1_wght400_GRAD0_opsz24\ 1.svg) no-repeat 16px center;
     background-size: 20px;
     padding-left: 3rem;
     color: var(--text-primary);
