@@ -1,4 +1,4 @@
-const confirmUpdate = () => {
+const confirmUpdate = (key) => { // <string>
     const updateRadioFormData = new FormData(document.getElementById("update_feeling_radio_container"))
     const feelValue = updateRadioFormData.get("feel")
     const titleValue = document.getElementById("update_title_input").value
@@ -15,7 +15,7 @@ const confirmUpdate = () => {
         alert("내용을 비우지 마세요.")
     }
     
-    const localStorageArr = JSON.parse(localStorage.getItem("일기콘텐츠"))
+    const localStorageArr = JSON.parse(localStorage.getItem(key))
     let indexToChange = getContentNumber().number
 
     const objectToChange = {
@@ -35,7 +35,7 @@ const confirmUpdate = () => {
             alert("변경사항이 없습니다.")
             return
         } else {
-            toLocalStorage(updateArr)
+            toLocalStorage(updateArr,key)
             document.getElementById("update_confirm_button").style = "transform: rotateZ(30deg); transition: 1s;"
             alert(`${indexToChange}번 일기가 수정되었습니다`)
             // todo - 메인페이지로 이동
