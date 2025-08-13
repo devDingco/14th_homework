@@ -3,7 +3,7 @@
   <head>
     <title>상세페이지</title>
     <link rel="stylesheet" href="./index.css" />
-    <script src="./index.js"></script>
+    <script src="./detail.js"></script>
   </head>
   <body>
     <div class="헤더">
@@ -17,40 +17,36 @@
     <div class="디테일본문">
       <div class="디테일본문__정렬">
         <div class="디테일본문__정렬__타이틀">
-          <div class="디테일본문__정렬__타이틀__내용">
-            이것은 타이틀 입니다.
-          </div>
+          <div id="디테일제목" class="디테일본문__정렬__타이틀__내용"></div>
         </div>
         <div style="height: 16px"></div>
         <div class="디테일본문__정렬__감정날짜">
           <div class="디테일본문__정렬__감정날짜__왼쪽">
             <div>
               <img
-                class="디테일본문__정렬__감정날짜__왼쪽__이모지"
-                src="./images/minihappy.png" />
+                id="이모지"
+                class="디테일본문__정렬__감정날짜__왼쪽__이모지" />
             </div>
-            <div class="디테일본문__정렬__감정날짜__왼쪽__감정">행복해요</div>
+            <div
+              id="디테일감정"
+              class="디테일본문__정렬__감정날짜__왼쪽__감정"></div>
           </div>
           <div class="디테일본문__정렬__감정날짜__오른쪽">
-            <div class="디테일본문__정렬__감정날짜__오른쪽__날짜">
-              2025.08.11
-            </div>
+            <div
+              id="디테일날짜"
+              class="디테일본문__정렬__감정날짜__오른쪽__날짜"></div>
             <div class="디테일본문__정렬__감정날짜__오른쪽__작성수정">작성</div>
           </div>
         </div>
         <div style="height: 24px"></div>
         <div class="디테일본문__정렬__내용라벨">내용</div>
         <div style="height: 13px"></div>
-        <div class="테일본문__정렬__내용보이는곳">
-          내용이 들어갑니다 내용이 들어갑니다내용이 들어갑니다내용이
-          들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이
-          들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이
-          들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이
-          들어갑니다
-        </div>
+        <div id="디테일내용" class="테일본문__정렬__내용보이는곳"></div>
         <div style="height: 24px"></div>
         <div class="테일본문__정렬__수정">
-          <button class="테일본문__정렬__수정__버튼">수정</button>
+          <button class="테일본문__정렬__수정__버튼" onclick="수정하기기능()">
+            수정
+          </button>
         </div>
       </div>
     </div>

@@ -9,6 +9,10 @@ body {
   flex-direction: column;
   justify-content: center;
 }
+a {
+  color: black;
+  text-decoration-line: none;
+}
 
 .헤더 {
   width: 1920px;
@@ -379,13 +383,16 @@ body {
 }
 
 .디테일본문__정렬__감정날짜__왼쪽__이모지 {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
 }
 
 .디테일본문__정렬__감정날짜__왼쪽__감정 {
   display: flex;
   justify-content: center;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
 }
 
 .디테일본문__정렬__감정날짜__오른쪽 {
@@ -434,4 +441,114 @@ body {
   background-color: #fff;
   border-radius: 8px;
   border: 1px solid #d4d3d3;
+}
+
+/* edit CSS */
+/* edit CSS */
+/* edit CSS */
+/* edit CSS */
+/* edit CSS */
+/* edit CSS */
+/* edit CSS */
+/* edit CSS */
+/* edit CSS */
+/* edit CSS */
+
+.수정본문 {
+  width: 1880px;
+  height: 321px;
+  display: flex;
+  justify-content: center;
+}
+
+.수정본문__정렬__감정질문 {
+  width: 1168px;
+  height: 24px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.수정본문__정렬__라디오 {
+  width: 592px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.수정본문__정렬__라디오__감정 {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.수정본문__정렬__제목__라벨 {
+  width: 1168px;
+  height: 20px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.수정본문__정렬__제목__인풋 {
+  width: 1168px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: #fff;
+  padding: 12px 16px;
+}
+.수정본문__정렬__내용__라벨 {
+  width: 1168px;
+  height: 20px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.수정본문__정렬__내용__인풋 {
+  width: 1168px;
+  height: 128px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: #fff;
+  padding: 12px 16px;
+  resize: none;
+}
+.수정본문__정렬__버튼정렬 {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.수정본문__정렬__버튼정렬__취소 {
+  display: flex;
+  width: 104px;
+  height: 48px;
+  padding: 8px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #000;
+  background: #fff;
+  color: #1c1c1c;
+}
+
+.수정본문__정렬__버튼정렬__수정 {
+  display: flex;
+  width: 104px;
+  height: 48px;
+  padding: 8px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #f2f2f2;
+  border-radius: 8px;
+  background: #000;
 }

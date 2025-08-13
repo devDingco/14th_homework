@@ -12,7 +12,8 @@ const HTML일기보여주기 = () => {
 
   for (let index = 0; index < 일기목록.length; index++) {
     document.getElementById("일기추가보이는곳").innerHTML += `
-   <div class="바디__정렬__목록__첫번째" onclick="게시글확인기능(${index})">
+    <a href="./detail.html?number=${index}">
+    <div class="바디__정렬__목록__첫번째" onclick="게시글확인기능(${index})">
             <img src=${일기목록[index].이미지}
               style="width: 380px; height: 285px" />
             <div style="width: 380px; height: 16px"></div>
@@ -33,6 +34,7 @@ const HTML일기보여주기 = () => {
               <div style="width: 380px; height: 16px"></div>
             </div>
           </div>
+          </a>
   `;
   }
 };
@@ -133,10 +135,7 @@ const 게시글확인기능 = (일기번호받는통) => {
   const 제목담는통 = 일기담는통.제목;
   const 내용담는통 = 일기담는통.내용;
 
-  alert(`
-    제목: ${제목담는통}
-    내용: ${내용담는통}
-    `);
+  location.href = `./detail.html?일기번호=${일기번호받는통}`;
 };
 
 //
