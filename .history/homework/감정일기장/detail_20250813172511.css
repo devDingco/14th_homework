@@ -1,0 +1,28 @@
+/* 상세페이지 */
+.detail {
+  width: 1168px;
+  margin: 0 auto;
+}
+.detail__top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail__mood {
+  display: flex;
+  padding-bottom: 24px;
+}
+hr {
+  height: 3px;
+  background-color: black;
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
+.detail__내용 {
+  padding-bottom: 13px;
+}
+.수정버튼 {
+  display: flex;
+  justify-content: end;
+}

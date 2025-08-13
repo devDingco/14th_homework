@@ -238,7 +238,6 @@ hr {
 .상세페이지수정버튼 {
   display: flex;
   justify-content: end;
-  padding-top: 24px;
 }
 .상세페이지수정버튼 > button {
   width: 51px;

@@ -25,26 +25,23 @@ document.addEventListener('DOMContentLoaded', function () {
     // 일기가 들어갈 HTML 컨테이너 찾기
     const diaryListContainer = document.getElementById('diaryList');
 
-    // 새로운 일기 카드를 위한 div 요소 생성 (중요: 이벤트 추가 전에 먼저 생성!)
+    // 새로운 일기 카드를 위한 div 요소 생성
     const 새일기 = document.createElement('div');
 
     // 일기 카드의 HTML 내용 설정 (이미지, 감정, 날짜, 제목 포함)
     새일기.innerHTML = `
-   <img src="./assets/images/${일기이미지}" alt="" />
-   <div class="title__text__main">
-     <div class="title__text">
-       <div class="title__happy">${일기데이터.emotion}</div>    
-       <div>${일기데이터.date}</div>                            
-     </div>
-     <div>${일기데이터.title}</div>                             
-   </div>
- `;
+    <img src="./assets/images/${일기이미지}" alt="" />
+    <div class="title__text__main">
+      <div class="title__text">
+        <div class="title__happy">${일기데이터.emotion}</div>    
+        <div>${일기데이터.date}</div>                            
+      </div>
+      <div>${일기데이터.title}</div>                             
+    </div>
+  `;
 
-    // 일기 카드를 클릭했을 때 실행할 이벤트 추가 (요소 생성 후에 이벤트 추가!)
+    // 일기 카드를 클릭했을 때 상세 정보를 alert로 보여주는 이벤트 추가
     새일기.addEventListener('click', function () {
-      // 클릭한 일기의 전체 정보를 localStorage에 저장 (detail.html에서 사용하기 위해)
-      localStorage.setItem('선택된일기', JSON.stringify(일기데이터));
-      // 상세 페이지로 이동
       location.href = './detail.html';
     });
 

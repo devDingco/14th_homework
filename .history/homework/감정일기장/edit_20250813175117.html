@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>수정페이지</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="edit">
+      <h1>민지의 다이어리</h1>
+      <!-- 타이틀오른쪽영역 -->
+      <div class="edit__title__right">
+        <div class="edit__title__right__text">
+          <div>오늘 기분은 어땟나요?</div>
+        </div>
+        <!-- 인풋라디오 -->
+        <div class="edit__title__right__mood">
+          <div class="radio-item">
+            <input type="radio" id="happy" name="mood" />
+            <label for="happy">행복해요</label>
+          </div>
+          <div class="edit__radio-item">
+            <input type="radio" id="sad" name="mood" />
+            <label for="sad">슬퍼요</label>
+          </div>
+          <div class="edit__radio-item">
+            <input type="radio" id="surprised" name="mood" />
+            <label for="surprised">놀랐어요</label>
+          </div>
+          <div class="edit__radio-item">
+            <input type="radio" id="angry" name="mood" />
+            <label for="angry">화나요</label>
+          </div>
+          <div class="edit__radio-item">
+            <input type="radio" id="other" name="mood" />
+            <label for="other">기타</label>
+          </div>
+        </div>
+        <!-- 폼 영역 -->
+        <div class="edit__form-container">
+          <div class="edit__form-group">
+            <label class="form-label">제목</label>
+            <input
+              id="titleInput"
+              type="text"
+              class="form-input"
+              placeholder="제목을 입력해 주세요."
+            />
+          </div>
+          <div class="edit__form-group">
+            <label class="form-label">내용</label>
+            <textarea
+              id="textInput"
+              class="form-input form-textarea"
+              placeholder="내용을 입력해 주세요."
+            ></textarea>
+          </div>
+          <button class="edit__submit-btn" id="submitBtn">등록하기</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
