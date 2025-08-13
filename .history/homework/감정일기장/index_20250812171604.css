@@ -204,5 +204,9 @@ footer {
 
 .title__images > div:hover {
   transform: scale(1.1);
+}
+
+.title__images > div:hover {
+  transform: scale(1.1);
   filter: blur(2px); /* 흐릿한 효과 추가 */
 }
