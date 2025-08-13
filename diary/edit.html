@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>상세페이지</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./edit.js"></script>
+  </head>
+  <body>
+    <div class="헤더">
+      <div class="헤더__정렬">
+        <div class="헤더__정렬__로고">
+          <div class="헤더__정렬__로고__이름">지윤이의 일기장</div>
+        </div>
+      </div>
+    </div>
+    <div style="height: 64px"></div>
+    <div class="수정본문">
+      <div class="수정본문__정렬">
+        <div class="수정본문__정렬__감정질문">오늘 기분은 어땟나요?</div>
+        <div style="height: 16px"></div>
+        <div class="수정본문__정렬__라디오">
+          <div class="수정본문__정렬__라디오__감정">
+            <input
+              type="radio"
+              style="width: 24px; height: 24px"
+              name="감정"
+              value="행복해요" />행복해요
+          </div>
+          <div class="수정본문__정렬__라디오__감정">
+            <input
+              type="radio"
+              style="width: 24px; height: 24px"
+              name="감정"
+              value="슬퍼요" />슬퍼요
+          </div>
+          <div class="수정본문__정렬__라디오__감정">
+            <input
+              type="radio"
+              style="width: 24px; height: 24px"
+              name="감정"
+              value="놀랐어요" />놀랐어요
+          </div>
+          <div class="수정본문__정렬__라디오__감정">
+            <input
+              type="radio"
+              style="width: 24px; height: 24px"
+              name="감정"
+              value="화나요" />화나요
+          </div>
+          <div class="수정본문__정렬__라디오__감정">
+            <input
+              type="radio"
+              style="width: 24px; height: 24px"
+              name="감정"
+              value="기타" />기타
+          </div>
+        </div>
+        <div style="height: 24px"></div>
+        <div class="수정본문__정렬__제목__라벨">제목</div>
+        <div style="height: 8px"></div>
+        <input id="제목인풋" class="수정본문__정렬__제목__인풋" type="text" />
+        <div style="height: 24px"></div>
+        <div class="수정본문__정렬__내용__라벨">내용</div>
+        <textarea id="내용인풋" class="수정본문__정렬__내용__인풋"></textarea>
+        <div style="height: 24px"></div>
+        <div class="수정본문__정렬__버튼정렬">
+          <button
+            class="수정본문__정렬__버튼정렬__취소"
+            onclick="수정취소기능()">
+            취소
+          </button>
+          <button
+            class="수정본문__정렬__버튼정렬__수정"
+            onclick="수정하기기능()">
+            수정 하기
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
