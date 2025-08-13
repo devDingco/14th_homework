@@ -54,8 +54,8 @@ const addCardOnGallery = (obj) => {
   const container = document.querySelector(".main__gallery")
   container.innerHTML += `
   <a href="./detail.html?diaryId=${id}">
-    <div id=${id} class="main__gallery__card" onclick="onClick(${id})">
-      <img class="main__gallery__card__close" src="./assets/icons/close_light.png" onclick="confirmDelete(event, ${id})"/>
+    <div id=${id} class="main__gallery__card" onclick="onClick(event,${id})">
+      <img class="main__gallery__card__close" src="./assets/icons/close_light.png" onclick="openDeleteModal(event, 'nested-modal-delete', ${id});"/>
       <img class="main__gallery__card__image" src="${image}" />
       <div class="main__gallery__card__info">
         <div class="main__gallery__card__info__sub">
@@ -72,20 +72,21 @@ const addCardOnGallery = (obj) => {
 // FIX: alert에 출력되는 양식만들어서 제출
 const onClick = (id) => {
   alert(JSON.stringify(formattedDiary(getDiaryById(id)[0])))
-
 }
 
-const confirmDelete = (event, id=diaryId) => {
-  event.stopPropagation()
 
-  const ok = confirm(`${id}번째 일기를 삭제하시겠습니까?`)
-  if (ok) {
+const confirmDelete = (event, id) => {
+  const queryString = location.search
+  const findQueryString = new URLSearchParams(queryString)
+  const diaryId = findQueryString.get("diaryId") ?? id
+  // const ok = confirm(`${id}번째 일기를 삭제하시겠습니까?`)
+  // if (ok) {
     event.stopPropagation()
-    diaryList = deleteDiaryById(event, id)
+    diaryList = deleteDiaryById(event, diaryId)
     storeDiaryList(diaryList)
-    alert("삭제 되었습니다.")
-    location.replace('./index.html')
-  }
+    // alert("삭제 되었습니다.")
+    // location.replace('./index.html')
+  // }
 }
 
 const deleteDiaryById = (event, id) => {
