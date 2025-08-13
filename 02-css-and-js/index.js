@@ -32,19 +32,14 @@ const 일기리스트 = localStorage.getItem("일기목록")
       <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
         <a href="./sub.html?number=${index}">     
           <img 
-            src="./assets/images/${el.감정}.png" 
-            alt="">
+            src="./assets/images/${el.감정}.png" alt="">
           <div>
            <span>${el.감정}</span> 
            <span>${el.날짜}</span>
           </div> 
           <h2>${el.제목}</h2>
-          <button onclick="일기삭제기능(event, ${index})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
-                        x
-          </button>
-        </a> 
-        
-        
+          </a> 
+          <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${index})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
       </div>
   `).join("") // map 뒤에서 바로 조인하는것도 가능함 => 친구목록html.join("") 동일
   //3. html 최종 삽입하기

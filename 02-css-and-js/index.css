@@ -1,165 +1,231 @@
-*{
-    margin: 0px;
-    padding: 0px;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-.가장큰배경{
-    width: 1920px;
-    height: 1805px;
-}
-
-.헤더{
-    width: 1920px;
-    height: 60px;
-}
-.헤더__제목{
-    width: 1920px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-}
-.헤더__제목 > span{
-    width: 1168px;
-    
-}
-.바디{
-    width: 1920px;
-    height: 1521px;
+body {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+a{
+    appearance: none;
+    text-decoration: none;
 }
-.바디__배너{
-    height: 240px;
+
+.컨테이너 {
+
+    width: 100%;    
+    max-width: 1168px;
+  }
+
+.가장큰배경 {
+    width: 100%;
+    
+}
+
+
+.헤더 {
+    /* width: 120rem; */
+    width: 100%;
+    /* height: 3.75rem; */
+}
+.헤더__제목 {
+    /* width: 120rem; */
+    height: 3.75rem;
     display: flex;
     justify-content: center;
 }
-.바디__메인섹션{
-    width: 1920px;
+.헤더__제목 > span {
+    /* width: 73rem; */
+    width: 100%;
+}
+
+.바디 {
+    width: 100%;
+    /* max-width: 120rem; */
+}
+
+.바디__배너 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.바디__메인섹션 {
+    /* width: 120rem; */
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 2.4rem;
 }
-.바디__메인섹션__메뉴섹션{
-    width: 1920px;
+
+.바디__메인섹션__메뉴섹션 {
+    /* width: 120rem; */
+    width: 100%;
     display: flex;
     justify-content: center;
-    
 }
 
-
-.바디__메인섹션__메뉴섹션__메뉴{
-  
-    width: 1168px;
+.바디__메인섹션__메뉴섹션__메뉴 {
+    /* width: 73rem; */
+    width: 100%;
 }
-.바디__메인섹션__필터섹션{
-    width: 1920px;
+
+.바디__메인섹션__필터섹션 {
+    /* width: 120rem; */
+    width: 100%;
     display: flex;
     justify-content: center;
     position: sticky;
-    top: 0px;
+    top: 0;
     z-index: 10;
-    
-    
 }
-.바디__메인섹션__필터섹션__필터{
-    width: 1168px;
-    backdrop-filter: blur(10px);
-    
 
+.바디__메인섹션__필터섹션__필터 {
+    /* width: 73rem; */
+    width: 100%;
+    backdrop-filter: blur(10px);
 }
-.바디__메인섹션__아티클섹션{
+
+.바디__메인섹션__아티클섹션 {
     display: flex;
     flex-direction: row;
-    width: 1168px;
-    height: 1167px;
+    /* width: 73rem; */
+    /* height: 72.9375rem; */
+    width: 100%;
     justify-content: space-between;
 }
-.바디__메인섹션__아티클섹션__일기칸{
-    width: 784px;
-    height: 1167px;
+
+.바디__메인섹션__아티클섹션__일기칸 {
+    /* width: 49rem; */
+    /* height: 72.9375rem; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    
 }
-.바디__메인섹션__아티클섹션__일기칸__일기장{
-    width: 380px;
-    height: 373px;
+
+.바디__메인섹션__아티클섹션__일기칸__일기장 {
+    /* width: 23.75rem; */
+    /* height: 23.3125rem; */
     transition: transform 0.5s;
-    
     position: relative;
 }
-.바디__메인섹션__아티클섹션__일기칸__일기장:hover{
+
+.바디__메인섹션__아티클섹션__일기칸__일기장:hover {
     filter: blur(3px);
     transform: scale(1.1);
-
-    
 }
-.바디__메인섹션__아티클섹션__일기칸__일기장 > div{
+
+.바디__메인섹션__아티클섹션__일기칸__일기장 > div {
     display: flex;
     justify-content: space-between;
 }
-.바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼{
+
+.바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼 {
+    width: 100%;
     position: absolute;
-    top: 0px;
-    right: 0px;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    top: 0;
+    right: 0;
     cursor: pointer;
-    width: 80px;
-    height: 80px;
+    width: 4rem;
+    height: 4rem;
     z-index: 10;
-}
-.바디__메인섹션__아티클섹션__일기쓰기칸{
-    width: 360px;
-    height: 604px;
-    padding: 24px;
-}
-.바디__메인섹션__아티클섹션__일기쓰기칸__머리{
-    width: 312px;
-    height: 24px;
-}
-.바디__메인섹션__아티클섹션__일기쓰기칸__감정상태선택{
-    width: 312px;
-    height: 108px;
-    border: 1px solid #000;
-}
-.바디__메인섹션__아티클섹션__일기쓰기칸__제목입력{
-    width: 312px;
-    height: 76px;
-}
-.바디__메인섹션__아티클섹션__일기쓰기칸__제목입력 > input{
-    height: 48px;
-    width: 312px ;
-}
-.바디__메인섹션__아티클섹션__일기쓰기칸__내용입력{
-    height: 156px;
-}
-.바디__메인섹션__아티클섹션__일기쓰기칸__내용입력> input{
-    width: 312px;
-    height: 128px;
-}
-.바디__메인섹션__아티클섹션__일기쓰기칸__등록하기{
-    width: 312px;
-    height: 48px;
+    
 }
 
-.플로팅버튼{
-    width: 40px;
-    height: 40px;
+.바디__메인섹션__아티클섹션__일기쓰기칸 {
+    /* width: 22.5rem; */
+    /* height: 37.75rem; */
+    min-width: 22.5rem;
+    padding: 1.5rem;
+}
+
+.바디__메인섹션__아티클섹션__일기쓰기칸__머리 {
+    /* width: 19.5rem; */
+    /* height: 1.5rem; */
+    width: 100%;
+    height: auto;
+}
+
+.바디__메인섹션__아티클섹션__일기쓰기칸__감정상태선택 {
+    /* width: 19.5rem; */
+    width: 100%;
+    /* height: 6.75rem; */
+    min-height: 5rem;
+    border: 1px solid #000;
+}
+
+.바디__메인섹션__아티클섹션__일기쓰기칸__제목입력 {
+    /* width: 19.5rem; */
+    width: 100%;
+    /* height: 4.75rem; */
+}
+
+.바디__메인섹션__아티클섹션__일기쓰기칸__제목입력 > input {
+    height: 3rem;
+    /* width: 19.5rem; */
+    width: 100%;
+}
+
+.바디__메인섹션__아티클섹션__일기쓰기칸__내용입력 {
+    /* height: 9.75rem; */
+    width: 100%;
+}
+
+.바디__메인섹션__아티클섹션__일기쓰기칸__내용입력 > input {
+    /* width: 19.5rem; */
+    width: 100%;
+    /* height: 8rem; */
+    min-height: 8rem;
+}
+
+.바디__메인섹션__아티클섹션__일기쓰기칸__등록하기 {
+    /* width: 19.5rem; */
+    width: 100%;
+    height: 3rem;
+}
+
+.플로팅버튼 {
+    width: 2.5rem;
+    height: 2.5rem;
     position: fixed;
-    bottom: 40px;
-    right: 20px;
-    border: 0px solid #000;
+    bottom: 2.5rem;
+    right: 1.25rem;
+    border: 0 solid #000;
     background-color: white;
 }
+
 .푸터{
-    width: 1920px; 
-    height: 160px;
-}
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #f2f2f2;
+  }
+  
+  .푸터__푸터섹션 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .푸터__푸터섹션__제목 {
+    width: 100%;
+  }
+  
+  .푸터__푸터섹션__대표 {
+    width: 100%;
+  }
+  
+  .푸터__푸터섹션__카피라이트 {
+    width: 100%;
+  }
 
 .색상반전 {
     filter: invert(1);
-  }
+}

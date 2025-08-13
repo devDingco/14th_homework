@@ -1,96 +1,96 @@
-*{
+* {
     box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
-.가장큰배경{
-    width: 1920px;
-    height: 1080px;
+.가장큰배경 {
+    width: 120rem;
+    height: 67.5rem;
 }
-.큰배경{
-    width: 1920px;
-    height: 556px;
+.큰배경 {
+    width: 120rem;
+    height: 34.75rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
-.헤더{
-    width: 1880px;
-    height: 60px;
+.헤더 {
+    width: 117.5rem;
+    height: 3.75rem;
     display: flex;
     justify-content: center;
 }
-.헤더__타이틀{
-    width: 1168px;
-    height: 60px;
+.헤더__타이틀 {
+    width: 73rem;
+    height: 3.75rem;
     display: flex;
     align-items: center;
 }
 
-.바디{
-    width: 1880px;
-    height: 432px;
+.바디 {
+    width: 117.5rem;
+    height: 27rem;
     display: flex;
     justify-content: center;
 }
-.바디__메인{
-    width: 1168px;
-    height: 432px;
+.바디__메인 {
+    width: 73rem;
+    height: 27rem;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 1.5rem;
 }
-.바디__메인__감정섹션{
-    width: 1168px;
-    height: 64px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.바디__메인__감정섹션__감정수정{
-    width:592px;
-    height: 24px;
-    display: flex;
-    gap: 20px;
-}
-
-.바디__메인__제목섹션{
-    width: 1168px;
-    height: 76px;  
+.바디__메인__감정섹션 {
+    width: 73rem;
+    height: 4rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.바디__메인__제목섹션__제목수정{
-    width: 1168px;
-    height: 48px;
+.바디__메인__감정섹션__감정수정 {
+    width: 37rem;
+    height: 1.5rem;
+    display: flex;
+    gap: 1.25rem;
 }
 
-.바디__메인__내용섹션{
-    width: 1168px;
-    height: 156px;
+.바디__메인__제목섹션 {
+    width: 73rem;
+    height: 4.75rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.바디__메인__내용섹션__내용수정{
-    width: 1168px;
-    height: 128px;
+.바디__메인__제목섹션__제목수정 {
+    width: 73rem;
+    height: 3rem;
 }
 
-.바디__메인__버튼섹션{
-    width: 1168px;
-    height: 48px;
+.바디__메인__내용섹션 {
+    width: 73rem;
+    height: 9.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.바디__메인__내용섹션__내용수정 {
+    width: 73rem;
+    height: 8rem;
+}
+
+.바디__메인__버튼섹션 {
+    width: 73rem;
+    height: 3rem;
     display: flex;
     justify-content: center;
-    gap: 16px;
+    gap: 1rem;
 }
 
-.바디__메인__버튼섹션__취소버튼{
-    border: 0px solid #000;
+.바디__메인__버튼섹션__취소버튼 {
+    border: 0 solid #000;
 }
-.바디__메인__버튼섹션__수정버튼{
-    border: 0px solid #000;
+.바디__메인__버튼섹션__수정버튼 {
+    border: 0 solid #000;
 }

@@ -3,84 +3,94 @@
  <head>
    <script src="./index.js"></script>
     <link rel="stylesheet" href="./index.css">
+    <link
+      rel="stylesheet"
+      href="./mobile.css"
+      media="(max-width: 849px)"
+    />
     <title>민지의 다이어리</title>
  </head>
  <body>
-   <div class="가장큰배경">
-      <div class="헤더">
-         <div class="헤더__제목">
-            <span>민지의 다이어리</span>
-         </div>  
-      </div>
-      <div class="바디">
-         <div class="바디__배너">
-            <img src="./assets/images/배너.png" alt="">
+   <div class="컨테이너">
+      
+      <div class="가장큰배경">
+         <div class="헤더">
+            <div class="헤더__제목">
+               <span>민지의 다이어리</span>
+            </div>  
          </div>
-         <div class="바디__메인섹션">
-            <!-- 메뉴섹션 -->
-            <div class="바디__메인섹션__메뉴섹션">
-               <div class="바디__메인섹션__메뉴섹션__메뉴">
-                     <span>일기보관함</span>
-                     <span>사진보관함</span>
-               </div>
-            </div>
-            <!-- 필터섹션 -->
-            <div class="바디__메인섹션__필터섹션">
-                  <div class="바디__메인섹션__필터섹션__필터">
-                     <select id="필터" onchange="필터링기능(event)">
-                        <option >전체</option>
-                        <option value="행복선택">행복</option>
-                        <option value="슬픔선택">슬픔</option>
-                        <option value="놀람선택">놀람</option>
-                        <option value="화남선택">화남</option>
-                        <option value="기타선택">기타</option>
-                    </select>
-                  
-                 </div>
-            </div>
-               
-            <!-- 아티클섹션 -->
-            <div class="바디__메인섹션__아티클섹션">
-               <div class="바디__메인섹션__아티클섹션__일기칸" id="일기칸">
-               
-                  
-
-               </div>   
-               <div class="바디__메인섹션__아티클섹션__일기쓰기칸">
-                  <div class="바디__메인섹션__아티클섹션__일기쓰기칸__머리">
-                     <img src="./assets/icons/일기쓰기.png" alt=""    >
-                  </div>
-                  <div class="바디__메인섹션__아티클섹션__일기쓰기칸__감정상태선택">
-                     <p>오늘기분은 어떘나요?</p>
-                     <input type="radio" name="감정" value="행복해요"> 행복해요
-                     <input type="radio" name="감정" value="슬퍼요"> 슬퍼요
-                     <input type="radio" name="감정" value="놀랐어요"> 놀랐어요
-                     <input type="radio" name="감정" value="화나요"> 화나요
-                     <input type="radio" name="감정" value="기타"> 기타
-                  </div>
-                  <div class="바디__메인섹션__아티클섹션__일기쓰기칸__제목입력">
-                     <div>제목</div>
-                     <input id="입력한제목" placeholder="제목을 입력해주세요"></input>
-                  </div>
-                  <div class="바디__메인섹션__아티클섹션__일기쓰기칸__내용입력">
-                     <div>내용</div>
-                     <input id="입력한내용" placeholder="내용을 입력해주세요"></input>
-                  </div>
-                  <div class="바디__메인섹션__아티클섹션__일기쓰기칸__등록하기버튼">
-                     <button onclick="일기등록기능()">
-                        
-                        <img src="./assets/images/등록하기.png" alt="">
-                     </button>
+         <div class="바디">
+            <img class="바디__배너" src="./assets/images/배너.png" alt="">
+            
+            <div class="바디__메인섹션">
+               <!-- 메뉴섹션 -->
+               <div class="바디__메인섹션__메뉴섹션">
+                  <div class="바디__메인섹션__메뉴섹션__메뉴">
+                        <span>일기보관함</span>
+                        <span>사진보관함</span>
                   </div>
                </div>
+               <!-- 필터섹션 -->
+               <div class="바디__메인섹션__필터섹션">
+                     <div class="바디__메인섹션__필터섹션__필터">
+                        <select id="필터" onchange="필터링기능(event)">
+                           <option >전체</option>
+                           <option value="행복선택">행복</option>
+                           <option value="슬픔선택">슬픔</option>
+                           <option value="놀람선택">놀람</option>
+                           <option value="화남선택">화남</option>
+                           <option value="기타선택">기타</option>
+                       </select>
+                     
+                    </div>
+               </div>
+                  
+               <!-- 아티클섹션 -->
+               <div class="바디__메인섹션__아티클섹션">
+                  <div class="바디__메인섹션__아티클섹션__일기칸" id="일기칸">
+                  
+                     
+   
+                  </div>   
+                  <div class="바디__메인섹션__아티클섹션__일기쓰기칸">
+                     <div class="바디__메인섹션__아티클섹션__일기쓰기칸__머리">
+                        <img src="./assets/icons/일기쓰기.png" alt=""    >
+                     </div>
+                     <div class="바디__메인섹션__아티클섹션__일기쓰기칸__감정상태선택">
+                        <p>오늘기분은 어떘나요?</p>
+                        <input type="radio" name="감정" value="행복해요"> 행복해요
+                        <input type="radio" name="감정" value="슬퍼요"> 슬퍼요
+                        <input type="radio" name="감정" value="놀랐어요"> 놀랐어요
+                        <input type="radio" name="감정" value="화나요"> 화나요
+                        <input type="radio" name="감정" value="기타"> 기타
+                     </div>
+                     <div class="바디__메인섹션__아티클섹션__일기쓰기칸__제목입력">
+                        <div>제목</div>
+                        <input id="입력한제목" placeholder="제목을 입력해주세요"></input>
+                     </div>
+                     <div class="바디__메인섹션__아티클섹션__일기쓰기칸__내용입력">
+                        <div>내용</div>
+                        <input id="입력한내용" placeholder="내용을 입력해주세요"></input>
+                     </div>
+                     <div class="바디__메인섹션__아티클섹션__일기쓰기칸__등록하기버튼">
+                        <button onclick="일기등록기능()">
+                           
+                           <img src="./assets/images/등록하기.png" alt="">
+                        </button>
+                     </div>
+                  </div>
+               </div>
             </div>
          </div>
-      </div>
-      <button onclick="스크롤맨위로기능()" class="플로팅버튼" id="플로팅버튼">
-         <img src="./assets/icons/플로팅버튼.png" alt="">
-      </button>
-      <div class="푸터"></div>
-   </div>
-    
+         <button onclick="스크롤맨위로기능()" class="플로팅버튼" id="플로팅버튼">
+            <img src="./assets/icons/플로팅버튼.png" alt="">
+         </button>
+         <div id="푸터" class="푸터">
+            <div class="푸터__푸터섹션">
+              <div class="푸터__푸터섹션__제목">민지의 다이어리</div>
+              <p class="푸터__푸터섹션__대표">대표 : {name}</p>
+              <p class="푸터__푸터섹션__카피라이트">Copyright © 2024.{name} Co., Ltd.</p>
+            </div>
+         </div>
  </body>
  </html>
