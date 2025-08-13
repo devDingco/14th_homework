@@ -38,7 +38,7 @@ const makeDetailHtml = (contentObj) => {
             <div id="detail_feel_container">
                 <div id="detail_feel_frame">
                     <img src="${imgSrc}" width="32px"/>
-                    <p class="headline02" style="color: ${feelColor};">행복해요</p>
+                    <p class="headline02" style="color: ${feelColor};">${contentObj.feel}</p>
                 </div>
                 <div id="date_frame">
                     <p class="body04">${contentObj.date}</p>
