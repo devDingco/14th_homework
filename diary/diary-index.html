@@ -30,6 +30,8 @@
                 <option>놀랐어요</option>
                 <option>기타</option>
             </select>
+            <button class="일기쓰기버튼" onclick="modalOpen('diaryModalGroup')"></button>
+            <!-- 모달창 만들고 onclick="WriteNewDiary()" 연결-->
         </div>
         
 
@@ -56,7 +58,7 @@
 
             </div>
 
-            <div class="일기쓰기구역">
+            <!-- <div class="일기쓰기구역">
                 <div class="일기쓰기__타이틀">📍 일기 쓰기</div>
                 <div class="기분체크구역">
                     <div class="기분체크질문">오늘 기분은 어땠나요?</div>
@@ -93,7 +95,7 @@
                 </div>
                 <button id="등록하기버튼" onclick="WriteNewDiary()">등록하기</button>
 
-            </div>
+            </div> -->
 
         </div>
     </div>
@@ -107,5 +109,93 @@
     </div>
 
     <img src="./asset/icon/topscroll.png" class="플로팅버튼" onclick="스크롤기능()"/>
+
+    <!-- 모달 영역 -->
+
+    <!-- 일기 쓰기 모달 -->
+     <div id="diaryModalGroup" class="modal" onclick="modalClose('diaryModalGroup')">
+        <div class="diaryModal" onclick="event.stopPropagation()">
+            <div class="일기쓰기__타이틀">일기 쓰기</div>
+                <div class="기분체크구역">
+                    <div class="기분체크질문">오늘 기분은 어땠나요?</div>
+                    <div class="기분체크목록">
+                        <div class="기분체크틀">
+                            <input type="radio" name="feel" value="행복해요" class="radio"/>
+                            <div class="기분">행복해요</div>
+                        </div>
+                        <div class="기분체크틀">
+                            <input type="radio" name="feel" value="슬퍼요" class="radio"/>
+                            <div class="기분">슬퍼요</div>
+                        </div>
+                        <div class="기분체크틀">
+                            <input type="radio" name="feel" value="놀랐어요" class="radio"/>
+                            <div class="기분">놀랐어요</div>
+                        </div>
+                        <div class="기분체크틀">
+                            <input type="radio" name="feel" value="화나요" class="radio"/>
+                            <div class="기분">화나요</div>
+                        </div>
+                        <div class="기분체크틀">
+                            <input type="radio" name="feel" value="기타" class="radio"/>
+                            <div class="기분">기타</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="입력틀">
+                    <div class="소제목">제목</div>
+                    <textarea id="제목__내용입력" placeholder="제목을 입력해 주세요."></textarea>
+                </div>
+                <div class="입력틀">
+                    <div class="소제목">내용</div>
+                    <textarea id="내용__내용입력" placeholder="내용을 입력해 주세요."></textarea>
+                </div>
+                <div class="버튼영역">
+                    <button class="흰버튼" onclick="modalOpen('cancelModalGroup')">닫기</button>
+                    <button class="검정버튼" onclick="WriteNewDiary(); modalOpen('finishModalGroup')">
+                        등록하기</button>
+                </div>
+
+        </div>
+     </div>
+
+     <!-- 등록 완료 모달 -->
+     <div id="finishModalGroup" class="modal">
+        <div class="finishModal">
+            <div class="문구모음">
+                <div class="문구1">일기 등록 완료</div>
+                <div class="문구2">등록이 완료되었습니다.</div>
+            </div>
+            <button class="확인버튼" onclick="modalClose('전체닫기')">확인</button>
+        </div>
+     </div>
+
+     <!-- 일기 등록 취소 모달 -->
+     <div id="cancelModalGroup" class="modal">
+        <div class="cancelModal">
+            <div class="문구모음">
+                <div class="문구1">일기 등록 취소</div>
+                <div class="문구2">일기 등록을 취소하시겠어요?</div>
+            </div>
+            <div class="버튼영역">
+                <button class="흰버튼" onclick="modalClose('cancelModalGroup')">계속 작성</button>
+                <button class="검정버튼" onclick="modalClose('전체닫기')">등록취소</button>
+            </div>
+        </div>
+     </div>
+
+     <!-- 일기 삭제 모달 -->
+     <div id="deleteModalGroup" class="modal">
+        <div class="deleteModal">
+            <div class="문구모음">
+                <div class="문구1">일기 삭제</div>
+                <div class="문구2">일기를 삭제하시겠어요?</div>
+            </div>
+            <div class="버튼영역">
+                <button class="흰버튼" onclick="modalClose('deleteModalGroup')">취소</button>
+                <button class="검정버튼">삭제</button>
+            </div>
+        </div>
+     </div>
+
 </body>
 </html>

@@ -1,45 +1,42 @@
-// 일기 삭제버튼 미리 설정
-function 삭제하기(event, number) {
-    // 이벤트 전파 막기
-    // event.stopPropagation();
-    // event.preventDefault();
+// pagenumber 선언
+const CURRENT_DIARY_NUMBER = Number(new URLSearchParams(location.search).get('number'))
 
-    // 삭제 확인 알림
-    alert("일기가 삭제되었습니다.");
+
+// 일기 삭제버튼 미리 설정
+function 삭제하기(pagenumber) {
 
     // 로컬스토리지에서 일기들 불러오기
-    let 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || [];
+    let 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || []
 
     // 해당 number 제외하고 필터링
-    const 삭제후남은일기들 = 일기들.filter(el => el.number !== number);
+    const 삭제후남은일기들 = 일기들.filter(el => Number(el.number) !== Number(pagenumber))
 
     // 로컬스토리지 저장
-    localStorage.setItem("일기들목록", JSON.stringify(삭제후남은일기들));
+    localStorage.setItem("일기들목록", JSON.stringify(삭제후남은일기들))
 
-    // 화면 갱신
+    // 삭제 확인 알림
+    alert("일기가 삭제되었습니다.")
+
+    // 삭제 후 목록 페이지로 이동
     window.location.href = "../diary-index.html"
 }
 
 // 변경되는 구역 일기 내용
 function writing() {
 
-    // 페이지 number 찾기
-    const 쿼리스트링 = location.search
-    const params = new URLSearchParams(쿼리스트링)
-    const pagenumber = Number(params.get('number'));
-    console.log(pagenumber)
+    const pagenumber = CURRENT_DIARY_NUMBER
 
     // localStorage에서 일기들 꺼내기
     const 문자열일기들 = localStorage.getItem('일기들목록')
     const 일기들 = 문자열일기들 ? JSON.parse(문자열일기들) : []
 
     // number로 해당 일기 찾기
-    const 선택된일기 = 일기들.find(el => el.number === pagenumber);
+    const 선택된일기 = 일기들.find(el => el.number === pagenumber)
 
     // 해당 번호의 일기가 없으면 안내 메시지
     if (!선택된일기) {
-      document.querySelector(".변경되는구역").innerHTML = "<p>해당 일기를 찾을 수 없습니다.</p>";
-      return;
+      document.querySelector(".변경되는구역").innerHTML = "<p>해당 일기를 찾을 수 없습니다.</p>"
+      return
     }
 
     // 변경되는 구역 HTML 구성
@@ -60,9 +57,15 @@ function writing() {
                       <div class="내용">${선택된일기.content}</div>
                   </div>
               </div>
+              <div class="내용복사구역">
+                  <button class="내용복사버튼" onclick="copyContent()">
+                    <img src="../asset/icon/copy_icon.png" />
+                    <div class="복사버튼글자">내용 복사</div>
+                  </button>
+              </div>             
               <div class="수정삭제구역">
                   <button class="수정버튼" onclick="수정화면()">수정</button>
-                  <button class="수정버튼" onclick="삭제하기(event, ${선택된일기.number})">삭제</button>
+                  <button class="수정버튼" onclick="modalOpen('deleteModalGroup')">삭제</button>
               </div>
     `
 
@@ -74,16 +77,10 @@ function writing() {
 
 // 회고 구역 설정
 
-// 현재 보고 있는 일기의 number 가져오기
-function getCurrentDiaryNumber() {
-    const params = new URLSearchParams(location.search)
-    return Number(params.get('number'))
-}
-
 // 새로운 댓글 등록 함수
 function renderComments() {
 
-    const pagenumber = getCurrentDiaryNumber() // 현재 페이지 number 찾기
+    const pagenumber = CURRENT_DIARY_NUMBER
 
     const key = `댓글목록_${pagenumber}`
 
@@ -123,7 +120,7 @@ function renderComments() {
 // 새 댓글 작성
 function newComment() {
 
-    const pagenumber = getCurrentDiaryNumber() // 현재 페이지 number 찾기
+    const pagenumber = CURRENT_DIARY_NUMBER
 
     const key = `댓글목록_${pagenumber}`
 
@@ -134,6 +131,12 @@ function newComment() {
 
     const 새로운댓글 = { comment_content, comment_date }
 
+    // 빈 댓글 방지
+    if (!comment_content.trim()) {
+        alert("댓글 내용을 입력해주세요.");
+        return;
+    }
+
     댓글들.push(새로운댓글)
     localStorage.setItem(key, JSON.stringify(댓글들))
 
@@ -142,12 +145,14 @@ function newComment() {
 
     // 목록 새로고침
     renderComments()
+
 }
 
 // 초기 로드 시
 window.addEventListener("DOMContentLoaded", () => {
     writing()
     renderComments()
+    setupDeleteModal()
 })
 
 
@@ -155,31 +160,35 @@ window.addEventListener("DOMContentLoaded", () => {
 
 //수정화면 속 수정하기 버튼 함수 - 미리 지정
 function 수정하기() {
-    const 쿼리스트링 = location.search;
-    const params = new URLSearchParams(쿼리스트링);
-    const pagenumber = Number(params.get('number'));
+
+    const pagenumber = CURRENT_DIARY_NUMBER
   
     // 기존 데이터 불러오기
-    const 문자열일기들 = localStorage.getItem('일기들목록');
-    const 일기들 = 문자열일기들 ? JSON.parse(문자열일기들) : [];
+    const 문자열일기들 = localStorage.getItem('일기들목록')
+    const 일기들 = 문자열일기들 ? JSON.parse(문자열일기들) : []
   
-    const 선택된일기 = 일기들.find(el => el.number === pagenumber);
+    const 선택된일기 = 일기들.find(el => el.number === pagenumber)
   
     // 새 입력값 가져오기
-    const newFeeling = document.querySelector('input[name="feel"]:checked')?.value || 선택된일기.feeling;
-    const newTitle = document.querySelectorAll('.입력텍스트')[0].value;
-    const newContent = document.querySelectorAll('.입력텍스트')[1].value;
+    const newFeeling = document.querySelector('input[name="feel"]:checked')?.value || 선택된일기.feeling
+    const newTitle = document.querySelectorAll('.입력텍스트')[0].value
+    const newContent = document.querySelectorAll('.입력텍스트')[1].value
   
     // 수정값 덮어쓰기
-    선택된일기.feeling = newFeeling;
-    선택된일기.title = newTitle;
-    선택된일기.content = newContent;
+    선택된일기.feeling = newFeeling
+    선택된일기.title = newTitle
+    선택된일기.content = newContent
   
     // 저장
-    localStorage.setItem('일기들목록', JSON.stringify(일기들));
+    localStorage.setItem('일기들목록', JSON.stringify(일기들))
   
-    alert("수정이 완료되었습니다!");
-    location.reload();
+    alert("수정이 완료되었습니다!")
+    location.reload()
+
+    if (!선택된일기) {
+        alert("해당 일기를 찾을 수 없습니다.");
+        return;
+    }
   }
 
 //수정버튼 클릭 -> 수정화면 전환
@@ -189,10 +198,7 @@ function 수정화면() {
   document.querySelectorAll(".수정버튼")
   .forEach(el => el.remove());
 
-  // 페이지 number 찾기
-  const 쿼리스트링 = location.search
-  const params = new URLSearchParams(쿼리스트링)
-  const pagenumber = Number(params.get('number'));
+  const pagenumber = CURRENT_DIARY_NUMBER
 
   // localStorage에서 일기들 꺼내기
   const 문자열일기들 = localStorage.getItem('일기들목록')
@@ -263,7 +269,6 @@ function 수정화면() {
 
     })
 
-
     // 회고 입력창과 버튼 비활성화 + placeholder 변경
     const 회고인풋 = document.querySelector(".회고인풋")
     const 입력버튼 = document.querySelector(".입력버튼")
@@ -282,3 +287,91 @@ function 수정화면() {
     }
 
 }
+
+// 모달 영역
+
+function showToast() {
+
+    const copyToast = document.querySelector(".copyToast");
+
+    copyToast.classList.add("show");
+
+    setTimeout(() => {
+        copyToast.classList.remove("show");
+    }, 2000); // 2초 후 사라짐
+}
+
+function modalOpen(모달종류) {
+
+    // 스크롤 맨 위로 이동
+    window.scrollTo(0, 0)
+
+    document.getElementById(모달종류).style.display = "block"
+
+    // 뒷배경 스크롤 막기
+    document.body.style.overflow = 'hidden'
+}
+
+// 모달 닫기
+function modalClose(모달종류) {
+    if (모달종류 === "전체닫기") {
+        const modals = document.querySelectorAll('.modal')
+        modals.forEach(modal => {
+            modal.style.display = "none"
+        })
+    } else {
+        document.getElementById(모달종류).style.display = "none"
+    }
+
+    // 뒷배경 스크롤 다시 허용
+    document.body.style.overflow = ''
+}
+
+// ESC 키 눌렀을 때 모달 닫기
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' || event.key === 'Esc') {
+      const modals = document.querySelectorAll('.modal')
+      modals.forEach(modal => {
+        modal.style.display = 'none'
+      });
+    }
+  });
+
+
+//  삭제 모달 삭제버튼 설정
+function setupDeleteModal() {
+    const deleteBtn = document.querySelector('#deleteModalGroup .검정버튼')
+    if (deleteBtn) {
+        deleteBtn.addEventListener('click', () => {
+            삭제하기(CURRENT_DIARY_NUMBER)
+        })
+    }
+}
+
+// 내용 복사
+
+function copyContent() {
+
+    const 쿼리스트링 = location.search
+    const params = new URLSearchParams(쿼리스트링)
+    const pagenumber = Number(params.get('number'));
+  
+    // localStorage에서 일기들 꺼내기
+    const 문자열일기들 = localStorage.getItem('일기들목록')
+    const 일기들 = 문자열일기들 ? JSON.parse(문자열일기들) : []
+    const 선택된일기 = 일기들.find(el => el.number === pagenumber);
+
+    if (!선택된일기) {
+        alert("선택된 일기를 찾을 수 없습니다.");
+        return;
+      }
+
+    navigator.clipboard.writeText(선택된일기.content)
+    .then(() => {
+      showToast(); // 토스트 띄우기
+    })
+    .catch(() => {
+      alert("복사에 실패했습니다.");
+    });
+
+  }
