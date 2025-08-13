@@ -40,7 +40,8 @@
                             <button onclick="deleteLocalStorage()">로컬스토리지 삭제 버튼</button>
                         </div>
                         <div id="dairy_filter_container" class="">
-                            <select id="diary_filter" onchange="">
+                            <select id="diary_filter" onchange="viewDiaryFilter()">
+                                <option>기분을 선택하세요</option>
                                 <option value="행복해요">행복해요</option>
                                 <option value="슬퍼요">슬퍼요</option>
                                 <option value="놀랐어요">놀랐어요</option>
@@ -136,5 +137,7 @@
     <script src="./function/toLocalStorage.js"></script>
     <script src="./function/deleteLocalstorage.js"></script>
     <script src="./function/viewDiary.js"></script>
+    <script src="./function/viewDiaryFilter.js"></script>
+    <script src="./function/makeMainHtml.js"></script>
 </body>
 </html>
