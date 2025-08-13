@@ -10,6 +10,22 @@
     <link rel="stylesheet" href="./css/footer.css"/>
     <link rel="stylesheet" href="./css/typography.css"/>
     <link rel="stylesheet" href="./css/img.css"/>
+    <script>
+        window.onload = () => {
+            // const localStorageArr = JSON.parse(localStorage.getItem("일기콘텐츠"))
+            //     console.log('window.onload -> ',localStorageArr)
+
+            //     document.getElementById("diary_box_container").innerHTML = makeMainHtml(localStorageArr)
+            if (localStorage.getItem("일기콘텐츠")) {
+                const localStorageArr = JSON.parse(localStorage.getItem("일기콘텐츠"))
+                console.log('window.onload -> ',localStorageArr)
+
+                document.getElementById("diary_box_container").innerHTML = makeMainHtml(localStorageArr)
+            } else {
+                document.getElementById("diary_box_container").innerHTML = `<h1>작성된 일기가 없습니다!<h1>`
+            }
+        }
+    </script>
 </head>
 <body>
     <!-- todo => margin 376 flexible -->
@@ -54,23 +70,23 @@
                     <div id="diary_container" class="">
                         <!-- 일기보관함 -->
                         <div id="diary_box_container" class="">
-                            <!-- <div id="diary00" class="diary_content">
-                                <img src="./images/행복해요 (m).png">
+                            <!-- <div id="diary#0" class="diary_cont ent">
+                                <img src="./images//행복해요 (m).png"/>
                                 <div id="view_content_detail">
                                     <div id="top_view_content_detail">
-                                        <p class="body01" style="color: blue">
-                                            슬퍼요
+                                        <p class="body01" style="color: oarnge">
+                                            qweqweqweqwe
                                         </p>
-                                        <p class="body04">
-                                            2024. 03. 12
+                                        <p class="body04" style="color: rgba(145, 145, 145, 1);">
+                                            qweqweqweqweqweqweqweqw
                                         </p>
                                     </div>
                                     <div id="bottom_view_content_detail">
-                                        <p class="title01">
-                                            타이틀영역입니다. 한줄까지만 노출됩니다ㅏ아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ
-                                        </p>
+                                        <a class="title01" href="./pages/detail.html?number=${v.number}">
+                                            sdfasfasdfasdfasdfadsfasdfasdfasdfasdfad
+                                        </a>
                                     </div>
-                                </div>                                
+                                </div>
                             </div> -->
                         </div>
                         <!-- 사진보관함 -->
@@ -133,11 +149,12 @@
             </div>
         </div>
     </div>
-    <script src="./js/main.js"></script>
+    <script src="./js/viewDiaryFilter.js"></script>
+    <script src="./js/viewDiary.js"></script>
+    <script src="./js/makeMainHtml.js"></script>
+    <script src="./function/resistContent.js"></script>
     <script src="./function/toLocalStorage.js"></script>
     <script src="./function/deleteLocalstorage.js"></script>
-    <script src="./function/viewDiary.js"></script>
-    <script src="./function/viewDiaryFilter.js"></script>
-    <script src="./function/makeMainHtml.js"></script>
+    <script src="./function/deleteContent.js"></script>
 </body>
 </html>

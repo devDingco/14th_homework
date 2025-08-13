@@ -36,7 +36,7 @@ const makeMainHtml = (contentArr) => {
             default:
         }
         return `
-            <div id="diary${v.number}" class="diary_content">
+            <div id="diary#${v.number}" class="diary_content">
                 <img src="${imgSrc}"/>
                 <div id="view_content_detail">
                     <div id="top_view_content_detail">

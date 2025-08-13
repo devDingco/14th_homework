@@ -1,10 +1,3 @@
-window.onload = () => {
-    const localStorageArr = JSON.parse(localStorage.getItem("일기콘텐츠"))
-    console.log('window.onload -> ',localStorageArr)
-
-    document.getElementById("diary_box_container").innerHTML = makeMainHtml(localStorageArr)
-}
-
 // 일기 쓰기 => 등록하기 클릭시 작동
 document.getElementById("resisterContent").addEventListener("click", () => {
     const radioFormData = new FormData(document.getElementById("feeling_radio_container"))
@@ -51,8 +44,17 @@ document.getElementById("resisterContent").addEventListener("click", () => {
             }
             localStorageArr.push(contentObj)
 
-            console.log("로컬스토리지 저장 함수 실행")
-            toLocalStorage(localStorageArr)
+            try {
+                toLocalStorage(localStorageArr)
+                document.getElementById('detail_input').value = '';
+                document.getElementById('title_input').value = '';
+                document.querySelectorAll('input[name="feel"]').forEach(radio => {
+                    radio.checked = false;
+                });
+                document.getElementById("diary_box_container").innerHTML = makeMainHtml(localStorageArr)
+            } catch(e) {
+                console.log(e)
+            }
         } else {
             // 첫 컨텐츠 저장시
             // 선택 정보 세팅
@@ -65,7 +67,17 @@ document.getElementById("resisterContent").addEventListener("click", () => {
             }
             contentArray.push(contentObj)
             
-            toLocalStorage(contentArray)
+            try {
+                toLocalStorage(contentArray)
+                document.getElementById('detail_input').value = '';
+                document.getElementById('title_input').value = '';
+                document.querySelectorAll('input[name="feel"]').forEach(radio => {
+                    radio.checked = false;
+                });
+                document.getElementById("diary_box_container").innerHTML = makeMainHtml(contentArray)
+            } catch(e) {
+                console.log(e)
+            }
         }
     }
 })
