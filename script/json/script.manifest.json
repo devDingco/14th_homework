@@ -17,6 +17,7 @@
 
   "./script/diary/fetchRender.js",
   "./script/diary/render.js",
+  "./script/diary/store.util.js", 
   "./script/diaryStore.js",
   "./script/filterDropdown.js",
   "./script/formHandler.js"

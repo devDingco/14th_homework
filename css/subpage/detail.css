@@ -3,7 +3,7 @@
 :root{
   --text:#111; --muted:#8a8a8a; --line:#e6e6e6;
   --bg:#fff; --chip:#f6f6f6; --btn-bg:#f3f3f3; --btn-bd:#dcdcdc;
-  --radius:12px; --container:960px;
+  --radius:12px; --container:1040px; /* ↑ 기존 960 → 넓게 */
 }
 html,body{ height:100%; }
 body{
@@ -36,51 +36,61 @@ body{
 /* head: title + date */
 .detail-head{
   display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
-  margin: 18px 0 6px;
+  margin: 20px 0 10px; /* 살짝 여백 확대 */
 }
-.title{ font-size:24px; font-weight:700; line-height:1.35; }
-.meta-right{ display:flex; gap:6px; align-items:center; color:var(--muted); font-size:12px; }
+.title{
+  /* 더 크고 반응형 비율 */
+  font-weight:700; line-height:1.25;
+  font-size: clamp(22px, 1.6vw + 16px, 36px);
+}
+.meta-right{ display:flex; gap:6px; align-items:center; color:var(--muted); font-size:13px; }
 
 /* submeta: avatar + emotion */
-.submeta{ display:flex; align-items:center; gap:8px; margin: 6px 0 10px; }
+.submeta{ display:flex; align-items:center; gap:10px; margin: 8px 0 16px; }
 .avatar{
-  width:20px; height:20px; display:flex; align-items:center; justify-content:center;
+  /* 크게 */
+  width:36px; height:36px; display:flex; align-items:center; justify-content:center;
   border:1px solid var(--line); border-radius:50%; overflow:hidden; background:#fff;
 }
 .avatar img{ width:100%; height:100%; object-fit:cover; }
-.emotion{ font-size:13px; font-weight:600; color:#d44; }
+/* 색상 하드코딩 제거 → emotion.css의 .emotion.happy/.sad/... 규칙이 적용되도록 */
+.emotion{ font-size:16px; font-weight:700; }
 
 /* 타이틀 아래 굵은 가로선 */
 .divider{
-  border:0; border-top: 2px solid var(--line);   /* 굵게 */
-  margin: 8px 0 16px;                            /* 위아래 여백 */
+  border:0; border-top: 3px solid #111;   /* 더 굵고 진하게 */
+  margin: 10px 0 20px;                    /* 위아래 여백 확대 */
 }
 
 /* 콘텐츠 블록: 라벨은 상단, 본문칩 아래 우측에 버튼 */
 .content-row{
-  display:flex; flex-direction:column; gap:12px; /* 세로 스택 */
+  display:flex; flex-direction:column; gap:14px; /* 세로 스택 */
 }
 .label{
-  font-size:13px; font-weight:700; color:#333;
+  font-size:14px; font-weight:700; color:#333;
   /* 라벨은 문단 '상단'에 위치 */
 }
 .body{
   background: var(--chip);
   border-radius: 12px;
-  padding: 14px 18px;
+  padding: 16px 18px; /* 좀 더 여유 */
 }
-.body p{ line-height:1.65; word-break: keep-all; }
+.body p{
+  font-size:16px;
+  line-height:1.8;      /* 가독성 개선 */
+  word-break: keep-all;
+}
 
 /* 버튼: 본문칩 '아래-오른쪽' */
 .actions{
   align-self: flex-end;      /* 오른쪽 정렬 */
-  margin-top: 10px;          /* 칩과 간격 */
+  margin-top: 12px;          /* 칩과 간격 */
 }
 .btn{
   writing-mode: horizontal-tb; white-space: nowrap;
   display:inline-flex; align-items:center; justify-content:center;
-  height: 34px; min-width: 52px; padding: 0 10px;
-  font-size: 12px; border-radius: 10px;
+  height: 40px; min-width: 88px; padding: 0 16px; /* 더 큼 */
+  font-size: 14px; border-radius: 12px;
   border:1px solid var(--btn-bd); background: var(--btn-bg);
   cursor:pointer;
 }
@@ -90,4 +100,221 @@ body{
 @media (max-width:768px){
   .detail-head{ flex-direction:column; align-items:flex-start; gap:6px; }
   .content-row{ gap:10px; }
+  .title{ font-size: clamp(20px, 5.2vw, 28px); }
+  .avatar{ width:30px; height:30px; }
 }
+
+/* detail 화면 전용: form 확장/정돈 ------------------------------- */
+.detail .diary-form{
+  /* 카드처럼 보이지 않게 “종이 질감” 제거 */
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+
+  /* 넉넉한 내부 간격 + 중앙 정렬 */
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 12px 0;
+}
+
+.detail .diary-form .mood-group{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.detail .diary-form .mood-group > p{
+  margin: 0;
+  font-weight: 700;
+  min-width: 140px; /* 라벨 고정폭 */
+}
+
+.detail .diary-form .mood-options label{
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+.detail .diary-form .form-group{ margin: 14px 0; }
+.detail .diary-form label{
+  display: block;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.detail .diary-form input[type="text"],
+.detail .diary-form textarea{
+  width: 100%;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.detail .diary-form textarea{
+  min-height: 160px;
+  line-height: 1.6;
+}
+
+/* 버튼: 우측 정렬 + 두 개(취소/수정하기) 있을 때 보기 좋게 */
+.detail .diary-form .form-actions{
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* 목록 카드 호버 블러/확대 효과가 버튼에 번지지 않도록(보호) */
+.diary-card .btn-view-detail,
+.diary-card .btn-view-detail *{
+  pointer-events: auto !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+/* =========================
+   EDIT MODE (detail page)
+   오직 #edit-slot 안의 form만 스타일
+   ========================= */
+
+/* 폼 컨테이너 넓이/여백 */
+.detail #edit-slot .diary-form{
+  max-width: 1040px;      /* 넓게 */
+  margin: 0 auto;
+  padding: 16px 0 48px;
+}
+
+/* 상단 질문과 라디오를 좌/우로 배치 (데스크탑) */
+.detail #edit-slot .diary-form .mood-group{
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+  gap: 8px 24px;
+  margin-bottom: 20px;
+}
+.detail #edit-slot .diary-form .mood-group > p{
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(18px, 2vw, 24px);
+}
+
+/* 라디오와 라벨을 크게, 여백 넉넉히 */
+.detail #edit-slot .diary-form .mood-options label{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(16px, 1.3vw, 20px);
+  margin-right: 24px;
+  white-space: nowrap;
+}
+.detail #edit-slot .diary-form .mood-options input[type="radio"]{
+  width: 18px;
+  height: 18px;
+  accent-color: currentColor; /* 지원 브라우저에서 활성 색상 */
+}
+
+/* 입력 영역: 높이/글씨/여백 업 */
+.detail #edit-slot .diary-form .form-group{ margin: 18px 0; }
+.detail #edit-slot .diary-form label{
+  display: block;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.detail #edit-slot .diary-form input[type="text"],
+.detail #edit-slot .diary-form textarea{
+  width: 100%;
+  border-radius: 12px;
+  padding: 16px 18px;
+  font-size: 18px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+}
+.detail #edit-slot .diary-form input[type="text"]{ height: 56px; }
+.detail #edit-slot .diary-form textarea{
+  min-height: 240px;
+  line-height: 1.7;
+}
+
+/* 버튼 영역: 가운데 정렬, 크기 업 */
+.detail #edit-slot .diary-form .form-actions{
+  display: flex;
+  justify-content: center;   /* 가운데 정렬 */
+  gap: 16px;
+  margin-top: 22px;
+}
+.detail #edit-slot .diary-form .form-actions button{
+  height: 48px;
+  min-width: 128px;
+  font-size: 16px;
+  border-radius: 12px;
+}
+.detail #edit-slot .diary-form .btn-cancel{
+  background: transparent;
+  border: 1.5px solid var(--btn-bd);
+}
+.detail #edit-slot .diary-form button[type="submit"]{
+  background: #111;
+  color: #fff;
+  border: 1.5px solid #111;
+}
+.detail #edit-slot .diary-form button[type="submit"]:hover{
+  filter: brightness(.96);
+}
+
+/* 반응형: 폭이 좁으면 세로 스택 */
+@media (max-width: 900px){
+  .detail #edit-slot .diary-form{ padding: 8px 0 36px; }
+  .detail #edit-slot .diary-form .mood-group{
+    grid-template-columns: 1fr;
+    gap: 10px 0;
+  }
+  .detail #edit-slot .diary-form .mood-options label{ margin-right: 12px; }
+  .detail #edit-slot .diary-form input[type="text"]{ height: 48px; }
+  .detail #edit-slot .diary-form textarea{ min-height: 180px; }
+}
+
+/* 질문 아래에 라디오를 세로로 배치 */
+.detail #edit-slot .diary-form .mood-group{
+  display: flex;                    /* grid → flex */
+  flex-direction: column;           /* 세로 스택 */
+  align-items: flex-start;
+  gap: 12px;                        /* 질문과 옵션 간격 */
+  grid-template-columns: none;      /* 혹시 남아있을 grid 값 무력화 */
+}
+
+.detail #edit-slot .diary-form .mood-group > p{
+  margin: 0;
+  font-weight: 800;
+}
+
+.detail #edit-slot .diary-form .mood-options{
+  display: flex;
+  flex-wrap: wrap;                  /* 좁아지면 줄바꿈 */
+  gap: 12px 18px;                   /* 라디오 간격 */
+}
+
+
+/* detail 화면의 수정 모드: 기본 320px 폭을 덮어써서 넓게 */
+.detail #edit-slot .diary-form{
+  box-sizing: border-box;
+  /* 360px ~ 컨테이너까지, 화면폭에 맞춰 유연하게 */
+  width: clamp(360px, 92vw, var(--container));
+  max-width: none;             /* 기존 max-width와 충돌 방지 */
+  margin-inline: auto;         /* 가운데 정렬 */
+  padding: 16px 0 48px;        /* 기존 패딩 유지 */
+}
+
+/* (선택) 라디오 묶음은 이미 세로 스택으로 바꿨다면 유지 */
+.detail #edit-slot .diary-form .mood-group{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* 폼 안 컨트롤은 줄폭을 꽉 채우도록 유지 */
+.detail #edit-slot .diary-form input[type="text"],
+.detail #edit-slot .diary-form textarea{
+  width: 100%;
+}
+
+
+

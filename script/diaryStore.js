@@ -1,139 +1,260 @@
 // script/diaryStore.js
-(function (global) {
+(function (global, document) {
   "use strict";
 
-  // --- 상태: 전역 배열 참조 유지(재할당 금지) ---
-  // 기존에 window.diaryList가 배열이면 '그 참조'를 그대로 사용
-  // 아니면 새 배열을 만들고 그 참조를 전역에 등록
+  // ------ 전역 상태(참조 유지) ------
   var state = Array.isArray(global.diaryList) ? global.diaryList : [];
-  if (!Array.isArray(global.diaryList)) {
-    global.diaryList = state;
-  }
+  if (!Array.isArray(global.diaryList)) global.diaryList = state;
 
+  // ------ 상수/유틸 ------
   var ALLOWED_MOODS = ["happy", "sad", "angry", "surprised", "etc"];
+  var EMOJI_TO_MOOD = { "행복해요":"happy", "슬퍼요":"sad", "화나요":"angry", "놀랐어요":"surprised", "기타":"etc" };
+  var LS_KEY = "diaryList.v1";
+  var SS_KEY = "diaryCache";
 
-  // --- 유틸 ---
-  function isNonEmptyString(v) {
-    return typeof v === "string" && v.trim().length > 0;
+  function isNonEmptyString(v){ return typeof v === "string" && v.trim().length > 0; }
+  function txt(v, fb){ return isNonEmptyString(v) ? v : (fb || ""); }
+
+  function normalizeMood(input){
+    if (!isNonEmptyString(input)) return "etc";
+    var s = String(input).trim().replace(/^[^\w가-힣]+/, "");
+    if (EMOJI_TO_MOOD[s]) return EMOJI_TO_MOOD[s];
+    s = s.toLowerCase();
+    return ALLOWED_MOODS.indexOf(s) >= 0 ? s : "etc";
+  }
+  function normalizeDate(v){
+    try{
+      if (isNonEmptyString(v)){
+        var x = String(v).replace(/[\/\-]/g,".").trim();
+        var m = x.match(/^(\d{4})\.(\d{1,2})\.(\d{1,2})$/);
+        if (m){
+          var yy=m[1], mm=("0"+m[2]).slice(-2), dd=("0"+m[3]).slice(-2);
+          return yy+"."+mm+"."+dd;
+        }
+      }
+      var now = new Date(isNonEmptyString(v)?v:undefined);
+      if (isNaN(+now)) now = new Date();
+      var y=now.getFullYear(), mo=("0"+(now.getMonth()+1)).slice(-2), d=("0"+now.getDate()).slice(-2);
+      return y+"."+mo+"."+d;
+    }catch(_){
+      var t=new Date(); return t.getFullYear()+"."+("0"+(t.getMonth()+1)).slice(-2)+"."+("0"+t.getDate()).slice(-2);
+    }
+  }
+  function stableId(d){
+    var key = [
+      String(d.date||"").replace(/[\/\-]/g,".").trim().toLowerCase(),
+      String(d.title||"").trim().toLowerCase(),
+      String(d.mood||"").trim().toLowerCase()
+    ].join("|");
+    var h=0; for (var i=0;i<key.length;i++){ h=((h<<5)-h)+key.charCodeAt(i); h|=0; }
+    return "d"+Math.abs(h);
+  }
+  function existsId(id){
+    if (!isNonEmptyString(id)) return false;
+    for (var i=0;i<state.length;i++){
+      var it=state[i]; if (it && (it.id===id || it.diaryId===id)) return true;
+      if (it && stableId(it)===id) return true;
+    }
+    return false;
   }
 
-  function safeRender() {
-    try {
-      // 모듈 방식(권장)
-      if (global.DiaryList && typeof global.DiaryList.renderDiaries === "function") {
-        return global.DiaryList.renderDiaries(state);
-      }
-      // 구 전역 방식
-      if (typeof global.renderDiaries === "function") {
-        return global.renderDiaries(state);
-      }
-      // 렌더러가 아직 없을 수 있음(초기 부트 경합)
-      // 이 경우는 조용히 넘어감
-    } catch (e) {
-      console.error("렌더 호출 중 오류:", e);
-    }
+  // ------ 렌더 예약 ------
+  var renderScheduled=false;
+  function scheduleRender(){
+    if (renderScheduled) return;
+    renderScheduled=true;
+    requestAnimationFrame(function(){
+      renderScheduled=false;
+      try{
+        if (global.DiaryList && typeof global.DiaryList.renderDiaries==="function") {
+          global.DiaryList.renderDiaries(state);
+        } else if (typeof global.renderDiaries==="function") {
+          global.renderDiaries(state);
+        }
+      }catch(e){ console.error("렌더 호출 중 오류:", e); }
+    });
   }
 
-  // --- 검증/보정 ---
-  function validateDiary(d) {
-    if (!d || typeof d !== "object") {
-      throw new Error("newDiary는 객체여야 합니다.");
+  // ------ 영속 저장/불러오기 ------
+  function saveToStorage(){
+    try{
+      var json = JSON.stringify(state);
+      try { localStorage.setItem(LS_KEY, json); } catch(e){ console.warn("localStorage 저장 실패:", e); }
+      try { sessionStorage.setItem(SS_KEY, json); } catch(e){ /* optional */ }
+    }catch(e){
+      console.warn("리스트 직렬화 실패:", e);
     }
+  }
+  function loadFromStorage(){
+    try{
+      var raw = localStorage.getItem(LS_KEY);
+      if (raw){ var arr=JSON.parse(raw); if (Array.isArray(arr)) return arr; }
+    }catch(e){ console.warn("localStorage 로드 실패:", e); }
+    try{
+      var raw2 = sessionStorage.getItem(SS_KEY);
+      if (raw2){ var arr2=JSON.parse(raw2); if (Array.isArray(arr2)) return arr2; }
+    }catch(e){ /* ignore */ }
+    return null;
+  }
+  function initFromStorage(){
+    var persisted = loadFromStorage();
+    if (!Array.isArray(persisted)) return;
 
-    if (!isNonEmptyString(d.mood)) {
-      throw new Error("mood는 필수입니다.");
+    state.splice(0, state.length);
+    for (var i=0;i<persisted.length;i++){
+      var item = Object.assign({}, persisted[i]);
+      try{ validateDiary(item); }catch(_){}
+      state.push(Object.freeze(item));
     }
-    if (!ALLOWED_MOODS.includes(d.mood)) {
-      console.warn("허용하지 않는 mood 입니다. etc로 대체합니다.", d.mood);
-      d.mood = "etc";
-      if (!isNonEmptyString(d.emotionText)) d.emotionText = "기타";
-    }
+    scheduleRender();
+  }
 
-    if (!isNonEmptyString(d.title)) {
-      throw new Error("title은 필수입니다.");
-    }
-
-    if (!isNonEmptyString(d.date)) {
-      // 날짜 없으면 오늘 날짜(YYYY.MM.DD)로 보정
-      var now = new Date();
-      var yy = now.getFullYear();
-      var mm = String(now.getMonth() + 1).padStart(2, "0");
-      var dd = String(now.getDate()).padStart(2, "0");
-      d.date = yy + "." + mm + "." + dd;
-    }
-
-    // 이미지 없거나 경로 이상하면 기본 이미지 보정
-    if (!isNonEmptyString(d.image)) {
-      d.image = "./images/" + d.mood + ".png";
-    }
-
-    // 감정 텍스트 보정
-    if (!isNonEmptyString(d.emotionText)) {
-      var map = { happy: "행복해요", sad: "슬퍼요", angry: "화나요", surprised: "놀랐어요", etc: "기타" };
+  // ------ 검증/보정 ------
+  function validateDiary(d){
+    if (!d || typeof d!=="object") throw new Error("newDiary는 객체여야 합니다.");
+    d.mood = normalizeMood(d.mood);
+    if (!isNonEmptyString(d.title)) throw new Error("title은 필수입니다.");
+    d.date = normalizeDate(d.date);
+    if (!isNonEmptyString(d.image)) d.image = "./images/"+d.mood+".png";
+    if (!isNonEmptyString(d.emotionText)){
+      var map={happy:"행복해요", sad:"슬퍼요", angry:"화나요", surprised:"놀랐어요", etc:"기타"};
       d.emotionText = map[d.mood] || "기타";
     }
-
-    // id 보정(없으면 간단 생성)
-    if (!isNonEmptyString(d.id) && !isNonEmptyString(d.diaryId)) {
-      d.id = String(Date.now());
-    }
+    if (!isNonEmptyString(d.id) && !isNonEmptyString(d.diaryId)) d.id = stableId(d);
   }
 
-  // --- API: 추가 ---
-  function addDiary(newDiary) {
-    try {
-      var draft = JSON.parse(JSON.stringify(newDiary)); // 원본 보호
+  // ------ API: 추가 ------
+  function addDiary(newDiary){
+    try{
+      var draft = JSON.parse(JSON.stringify(newDiary||{}));
       validateDiary(draft);
-
-      var frozen = Object.freeze(draft); // 외부 변조 방지
-      state.push(frozen);
-
-      // 다음 페인트에 안전 렌더
-      requestAnimationFrame(safeRender);
-    } catch (err) {
+      var id = draft.id || draft.diaryId || stableId(draft);
+      if (existsId(id)) { console.warn("중복 id 일기 무시:", id); return; }
+      state.push(Object.freeze(draft));
+      saveToStorage();
+      scheduleRender();
+    }catch(err){
       console.error("❌ 일기 등록 실패:", err);
     }
   }
 
-  // --- API: 초기 데이터 주입/동기화(참조 유지) ---
-  // data 배열을 현재 state 배열 '참조를 유지한 채' 채워넣는다.
-  // mode: 'replace'(기본) → 전체 교체 / 'merge' → 뒤에 붙이기
-  function hydrateDiaries(data, mode) {
-    if (!Array.isArray(data)) {
-      console.warn("hydrateDiaries: 배열이 아닙니다. 무시:", data);
-      return;
+  // ------ API: 수정 ------
+  function findIndexByIdOrStable(id){
+    if (!isNonEmptyString(id)) return -1;
+    for (var i=0;i<state.length;i++){
+      var it = state[i];
+      if (!it) continue;
+      if (it.id === id || it.diaryId === id) return i;
     }
-    try {
-      if (mode === "merge") {
-        for (var i = 0; i < data.length; i++) {
-          var item = JSON.parse(JSON.stringify(data[i]));
-          try { validateDiary(item); } catch (_) {} // 초기 데이터는 관대하게
-          state.push(Object.freeze(item));
+    for (var j=0;j<state.length;j++){
+      var it2 = state[j];
+      if (!it2) continue;
+      if (stableId(it2) === id) return j;
+    }
+    return -1;
+  }
+
+  function updateDiary(id, patch){
+    try{
+      if (!isNonEmptyString(id)) throw new Error("id가 유효하지 않습니다.");
+      if (!patch || typeof patch !== "object") throw new Error("patch가 유효하지 않습니다.");
+
+      var idx = findIndexByIdOrStable(id);
+      if (idx < 0) throw new Error("대상 일기를 찾을 수 없습니다.");
+
+      var prev = state[idx] || {};
+      var mood = normalizeMood(patch.mood || prev.mood);
+      var EMO_TXT = { happy:"행복해요", sad:"슬퍼요", angry:"화나요", surprised:"놀랐어요", etc:"기타" };
+
+      var draft = Object.assign({}, prev, {
+        id: prev.id || prev.diaryId || stableId(prev),
+        date: prev.date,
+        image: prev.image,
+        mood: mood,
+        emotionText: isNonEmptyString(patch.emotionText) ? patch.emotionText : (EMO_TXT[mood] || "기타"),
+        title: txt(patch.title, prev.title),
+        content: txt(patch.content, txt(prev.content, txt(prev.desc, "")))
+      });
+
+      var check = JSON.parse(JSON.stringify(draft));
+      validateDiary(check);
+
+      var next = Object.freeze(check);
+      state.splice(idx, 1, next);
+      saveToStorage();
+      scheduleRender();
+      return next;
+    }catch(e){
+      console.error("❌ updateDiary 실패:", e);
+      return null;
+    }
+  }
+
+  // ------ API: 초기 주입/동기화 ------
+  function hydrateDiaries(data, mode){
+    if (!Array.isArray(data)) { console.warn("hydrateDiaries: 배열이 아님:", data); return; }
+    try{
+      if (mode === "merge"){
+        for (var i=0;i<data.length;i++){
+          var item = JSON.parse(JSON.stringify(data[i]||{}));
+          try { validateDiary(item); } catch(_){}
+          var id = item.id || item.diaryId || stableId(item);
+          if (!existsId(id)) state.push(Object.freeze(item));
         }
-      } else {
-        // replace: 기존 요소 제거 후 새로 채움 (참조 유지)
+      }else{
         state.splice(0, state.length);
-        for (var j = 0; j < data.length; j++) {
-          var it = JSON.parse(JSON.stringify(data[j]));
-          try { validateDiary(it); } catch (_) {}
+        for (var j=0;j<data.length;j++){
+          var it = JSON.parse(JSON.stringify(data[j]||{}));
+          try { validateDiary(it); } catch(_){}
           state.push(Object.freeze(it));
         }
       }
-      requestAnimationFrame(safeRender);
-    } catch (e) {
+      saveToStorage();
+      scheduleRender();
+    }catch(e){
       console.error("hydrateDiaries 실패:", e);
     }
   }
 
-  // --- API: 조회(사본) ---
-  function getDiaries() {
-    return state.slice();
-  }
+  // ------ API: 삭제 (신규) ------
+  function removeDiary(id){
+    try{
+      if (!isNonEmptyString(id)) throw new Error("id가 유효하지 않습니다.");
 
-  // --- 전역 노출 ---
-  global.diaryList = state;       // 동일 참조 유지
+      var idx = findIndexByIdOrStable(id);
+      if (idx < 0) {
+        console.warn("removeDiary: 대상 없음", id);
+        return false;
+      }
+
+      // 배열 참조 유지하며 제거
+      state.splice(idx, 1);
+
+      // 저장 + 리렌더
+      saveToStorage();
+      scheduleRender();
+      return true;
+    }catch(e){
+      console.error("❌ removeDiary 실패:", e);
+      return false;
+    }
+  }
+  // 윈도우에도 노출(기존 코드 호환)
+  window.removeDiary = removeDiary;
+
+  // ------ API: 조회 ------
+  function getDiaries(){ return state.slice(); }
+
+  // ------ 외부 노출 ------
+  global.diaryList = state;
   global.addDiary = addDiary;
+  global.updateDiary = updateDiary;
+  global.removeDiary = removeDiary;       // ★ 추가 노출
   global.getDiaries = getDiaries;
   global.hydrateDiaries = hydrateDiaries;
+  global.persistDiaries = saveToStorage;
 
-})(window);
+  // ------ 부팅 시 저장본 반영 ------
+  initFromStorage();
+
+})(window, document);
