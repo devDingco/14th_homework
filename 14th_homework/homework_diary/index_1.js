@@ -36,7 +36,7 @@ const 일기카드목록 = () =>{
     } 
     let 일기카드배열 = JSON.parse(localStorage.getItem("일기카드들")) || []
     일기카드배열.push(단일카드)
-    let 카드저장 = localStorage.setItem("일기카드들", JSON.stringify(일기카드배열))
+    localStorage.setItem("일기카드들", JSON.stringify(일기카드배열))
     let 카드내용 = JSON.parse(localStorage.getItem("일기카드들"))
     console.log("로컬저장후 불러옴", 카드내용, typeof(카드내용))
     let 이미지경로 = (ele, index)=>{
