@@ -21,14 +21,15 @@ infinite-scroll, <br/>
 dark-mode, <br/>
 create-board, <br/>
 pop-up-modal, <br/>
-toast, <br/>
-px, rem 변경, <br/>
-comment, <br/>
-delete-card, <br/>
-update-card, <br/>
-floatingButton <br/>
+복사하기, <br/>
+강아지 API연결,<br/>
+메인페이지 반응형CSS,<br/>
+사진보관함 반응형CSS,<br/>
+스켈레톤 화면,<br/>
 
-(구현된 화면) <br/>
-<img src="./cardPage(1).png">
-<img src="./cardPage(2).png">
-<img src="./cardPage(3).png">
+
+
+
+---
+
+현재 게시글상세보기 반응형 작업중
