@@ -238,14 +238,11 @@ hr {
 .상세페이지수정버튼 {
   display: flex;
   justify-content: end;
-  padding-top: 24px;
 }
 .상세페이지수정버튼 > button {
   width: 51px;
   height: 40px;
-  border: 1px solid #d4d3d3;
-  border-radius: 8px;
-  background-color: white;
+  border: 3px;
 }
 /* 수정페이지 */
 .edit {
