@@ -1,6 +1,5 @@
 .detail-main{
   width: 100%;
-  border-bottom: solid 0.1rem var(--color-black);
 }
 #detailHeader{
 }
@@ -21,7 +20,7 @@
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
-  margin: 1.6rem 0;
+  margin-top: 1.6rem;
 }
 .detail-main-property{
   height: 3.2rem;
@@ -54,6 +53,25 @@
 .detail-main-contents-contents{
   min-height: 10rem;
 }
+
+/* 클립보드 */
+.detail-main-clipboard{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+.detail-main-clipboard img{
+  width: 2.4rem;
+  height: 2.4rem;
+  /* cursor: pointer; */
+}
+.detail-main-clipboard p{
+  /* cursor: pointer; */
+}
+
+
 .detail-main-active{
   margin-left: auto;
   display: flex;
@@ -69,6 +87,8 @@
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  border-top: solid 1px var(--color-black);
+  padding-top: 1.6rem;
 }
 .detail-comments-input{
   display: flex;
@@ -99,4 +119,33 @@
 }
 .detail-comments-area p{
   color: var(--color-gray-600)
+}
+
+/* 토스트 메시지 */
+.toast-bottom{
+  background-color: var(--color-black);
+  font-size: 1.6rem;
+  color: var(--color-white);
+  padding: 1.6rem;
+  border-radius: 0.8rem;
+  position: absolute;
+  min-width: 32rem;
+  width: 90%;
+  max-width: 76rem;
+  text-align: center;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: copy-toast 2s ease;
+  opacity: 0;
+  display: none;
+}
+
+@keyframes copy-toast {
+  from{
+    opacity: 0%;
+  }
+  to{
+    opacity: 100%;
+  }
 }

@@ -30,3 +30,12 @@ const scrollToComments = () => {
   scrollArea.scrollIntoView({behavior:"smooth",block:"start"})
 }
 // window.addEventListener("scroll",scrollToComments)
+// 클립보드 저장함수
+const copyContents = () => {
+  navigator.clipboard.writeText(contents)
+  document.querySelector(".toast-bottom").style = "display:block"
+  setTimeout(() => {
+    document.querySelector(".toast-bottom").style = "display:none"
+  },2000)
+}
+

@@ -42,8 +42,11 @@ document.getElementById("detailMood").innerText = mood
 document.getElementById("detailContents").innerText = contents
 document.getElementById("detailDate").innerText = `${date} 작성`
 document.getElementById("detailMood").style.color = color
+
 addCommentsOnArea(comments)
 scrollToComments()
+
+
 // location.reload()
 //수정 클릭시 "detail-main"화면 숨기기 + "main__diary-form"화면 보이기 + 내부내용 넣어두기
 

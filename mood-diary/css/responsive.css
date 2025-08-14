@@ -13,6 +13,7 @@
     order: 2;
     width: 100%;
     place-items: center;
+    grid-template-columns: 1fr 1fr;
   }
   .main__gallery__card{
     width: 100%;
