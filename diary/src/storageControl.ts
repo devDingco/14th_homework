@@ -80,3 +80,4 @@ export const setLocalStorage = (newData: TCard) => {
   localStorage.setItem('myDiary', convertString);
 };
 
+  

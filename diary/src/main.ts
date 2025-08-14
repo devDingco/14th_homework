@@ -1,19 +1,15 @@
-import '../assets/styles/global.css';
-import '../assets/styles/header.css';
-import '../assets/styles/main.css';
-import '../assets/styles/detail.css';
-import '../assets/styles/dropDownTest.css';
 import './storageControl';
 import { getLocalStorage, initLocalStorage, setLocalStorage } from './storageControl';
 import { switchTextColor } from './utils/switchTextColor';
 import type { TCard } from './storageControl';
 import { formatDate } from './utils/formatDate';
 import './filterMenu';
+import { handleCloseModal, handleOpenModal } from './modal';
 
 // const myName = prompt("이름을 입력하세요.");
 const myName = '민지';
 
-const LogoEl = document.querySelector('.myName')! as HTMLSpanElement;
+const LogoEl = document.querySelector('.logo-text')! as HTMLSpanElement;
 const CompanyEl = document.querySelector('.a')! as HTMLSpanElement;
 const CeoEl = document.querySelector('.ceo')! as HTMLSpanElement;
 const cardListEl = document.querySelector('.cardList')! as HTMLSpanElement;
@@ -30,6 +26,9 @@ const dropdownMenuEl = document.querySelector('.dropdown-menu')! as HTMLSelectEl
 const dropdownMenuItemEl = document.querySelector('.dropdown-menu-item')! as HTMLSelectElement;
 
 const selectedItemEL = document.querySelector('.selected-item') as HTMLSpanElement;
+const addDiaryBtnEl = document.querySelector('.addDiaryBtn') as HTMLSpanElement;
+
+addDiaryBtnEl.addEventListener('click', handleOpenModal);
 
 dropdownMenuItemEl.addEventListener('click', () => {
   // const url = new URL('dqdqw/');
@@ -46,14 +45,6 @@ dropdownEl.addEventListener('click', () => {
 // });
 
 // const cardListEl = document.querySelector('.cardList')! as HTMLButtonElement;
-
-const topScrollEl = document.querySelector('.topscroll')! as HTMLButtonElement;
-
-const mvTop = () => {
-  window.scrollTo({ top: 0 });
-};
-
-topScrollEl.addEventListener('click', mvTop);
 
 LogoEl.innerText = `${myName}의 다이어리`;
 CompanyEl.innerText = `${myName}의 다이어리`;
@@ -84,6 +75,8 @@ const submitForm = (e: SubmitEvent) => {
   initForm();
   submitDiaryBtnEl.disabled = true;
   submitDiaryBtnEl.classList.remove('active');
+
+  handleCloseModal();
 };
 
 formEl.addEventListener('submit', submitForm);
@@ -100,7 +93,7 @@ const handleDeleteDiary = (e: MouseEvent) => {
     window.location.reload();
   }
 
-  console.log('삭제');
+  alert('삭제되었습니다.');
 };
 
 const addDiaryDom = (props: TCard) => {
@@ -113,6 +106,7 @@ const addDiaryDom = (props: TCard) => {
   //
   const img = document.createElement('img');
   img.setAttribute('src', `./assets/images/${props.state} (m).png`);
+  img.style = 'position: relative;';
   //
   const inner = document.createElement('div');
   inner.setAttribute('class', 'cardInfo');
@@ -132,7 +126,7 @@ const addDiaryDom = (props: TCard) => {
 
   // 삭제버튼
   const deleteImg = document.createElement('img');
-  deleteImg.setAttribute('src', './assets/icons/close icon.svg');
+  deleteImg.setAttribute('src', './assets/icons/close_icon.svg');
   deleteImg.classList.add('deleteDiaryBtn');
 
   deleteImg.addEventListener('click', handleDeleteDiary);

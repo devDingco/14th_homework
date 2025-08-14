@@ -1,0 +1,24 @@
+@media (min-width: 768px) {
+  .section-main {
+    flex-direction: row;
+  }
+  .section-main .cardList {
+    order: 1;
+  }
+  .section-main .new__diary {
+    order: 2;
+  }
+  .cardList {
+    display: flex;
+    gap: 24px;
+  }
+  .x-container {
+    padding: 0;
+  }
+  .selectCard {
+    flex-direction: row;
+  }
+  .formDiary {
+    gap: 40px;
+  }
+}
