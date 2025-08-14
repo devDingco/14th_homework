@@ -31,17 +31,45 @@ const 수정취소기능 = () => {
 };
 
 const 수정하기기능 = () => {
+  const 쿼리스트링 = window.location.search; // =>  ?number=0
+  const 잘게나누어담은통 = new URLSearchParams(쿼리스트링);
+  const 일기번호 = 잘게나누어담은통.get("number"); // => 0
+  // 스토리지에 저장된 일기목록 불러오기
+  const 로컬스토리지에저장된일기목록 =
+    localStorage.getItem("지윤이의일기목록") ?? "[]"; // getItem으로 "지윤이의일기목록"(key)의 value를 가져옴 만약 비어있으면  오른쪽 값 "[]"이것을 반환함
+  const 일기목록 = JSON.parse(로컬스토리지에저장된일기목록);
+
   const 수정된제목 = document.getElementById("제목인풋").value;
   const 수정된내용 = document.getElementById("내용인풋").value;
-  // const 수정된감정 = document.getElementsByName("감정");
+  // let 수정된감정 = document.getElementsByName("감정").forEach((el) => {
+  //   if (el.checked === true) {
+  //     el.value;
+  //   }
+  // });
+  const 수정된감정 = document.querySelector('input[name="감정"]:checked').value;
+
+  let 수정된이미지담는통 = "";
+  if (수정된감정 === "행복해요") {
+    수정된이미지담는통 = "./images/happy.png";
+  } else if (수정된감정 === "슬퍼요") {
+    수정된이미지담는통 = "./images/sad.png";
+  } else if (수정된감정 === "놀랐어요") {
+    수정된이미지담는통 = "./images/surprised.png";
+  } else if (수정된감정 === "화나요") {
+    수정된이미지담는통 = "./images/angry.png";
+  } else if (수정된감정 === "기타") {
+    수정된이미지담는통 = "./images/guitar.png";
+  }
 
   일기목록[일기번호] = {
+    감정: 수정된감정,
     제목: 수정된제목,
     내용: 수정된내용,
-    // 기분: 수정된감정,
     작성일: 일기목록[일기번호].작성일,
+    이미지: 수정된이미지담는통,
   };
 
+  console.log(수정된감정);
   localStorage.setItem("지윤이의일기목록", JSON.stringify(일기목록));
 
   location.replace(`./detail.html?number=${일기번호}`);

@@ -1,5 +1,9 @@
 window.onload = () => {
   // URL주소에서 일기번호가져오기
+  일기그리기기능();
+};
+
+const 일기그리기기능 = () => {
   const 쿼리스트링 = window.location.search; // =>  ?number=0
   const 잘게나누어담은통 = new URLSearchParams(쿼리스트링);
   const 일기번호 = 잘게나누어담은통.get("number"); // => 0
@@ -10,6 +14,7 @@ window.onload = () => {
   const 일기담는통 = 일기목록[일기번호];
 
   let 감정 = 일기담는통.감정;
+  let 이미지경로 = "";
   if (감정 === "행복해요") {
     이미지경로 = "./images/minihappy.png";
   } else if (감정 === "슬퍼요") {

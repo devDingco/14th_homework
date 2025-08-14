@@ -12,29 +12,37 @@ const HTML일기보여주기 = () => {
 
   for (let index = 0; index < 일기목록.length; index++) {
     document.getElementById("일기추가보이는곳").innerHTML += `
-    <a href="./detail.html?number=${index}">
-    <div class="바디__정렬__목록__첫번째" onclick="게시글확인기능(${index})">
-            <img src=${일기목록[index].이미지}
-              style="width: 380px; height: 285px" />
-            <div style="width: 380px; height: 16px"></div>
-            <div class="바디__정렬__목록__첫번째__내용">
-              <div class="바디__정렬__목록__첫번째__내용__감정날짜">
-                <div class="바디__정렬__목록__첫번째__내용__감정날짜__감정">
-                  ${일기목록[index].감정}
-                </div>
-                <div class="바디__정렬__목록__첫번째__내용__감정날짜__날짜">
-                  ${일기목록[index].작성일}
-                </div>
-              </div>
-              <div style="width: 380px; height: 8px"></div>
+<a href="./detail.html?number=${index}">
+  <div class="바디__정렬__목록__첫번째">
+    <img src="${일기목록[index].이미지}" style="width: 380px; height: 285px; border-radius: 16px; " />  
 
-              <div class="바디__정렬__목록__첫번째__내용__타이틀">
-                ${일기목록[index].제목}
-              </div>
-              <div style="width: 380px; height: 16px"></div>
-            </div>
-          </div>
-          </a>
+    <div style="width: 380px; height: 16px"></div>
+
+    <div class="바디__정렬__목록__첫번째__내용">
+      
+      <div class="바디__정렬__목록__첫번째__내용__감정날짜">
+        <div class="바디__정렬__목록__첫번째__내용__감정날짜__감정">
+          ${일기목록[index].감정}
+        </div>
+        <div class="바디__정렬__목록__첫번째__내용__감정날짜__날짜">
+          ${일기목록[index].작성일}
+        </div>
+      </div>
+
+      <div style="width: 380px; height: 8px"></div>
+
+      <div class="바디__정렬__목록__첫번째__내용__타이틀">
+        ${일기목록[index].제목}
+      </div>
+
+      <div style="width: 380px; height: 16px"></div>
+
+    </div>
+    <button class="삭제버튼" onclick="삭제하기기능(${index})"><img src="./images/closeicon.svg"></button>
+  </div>
+
+</a>
+
   `;
   }
 };
@@ -64,6 +72,7 @@ const 등록하기 = () => {
   // let 놀람담는통 = document.getElementById("감정")[2].checked === true;
   // let 화남담는통 = document.getElementById("감정")[3].checked === true;
   // let 기타담는통 = document.getElementById("감정")[4].checked === true;
+
   const 감정담는통 = document.querySelector('input[name="감정"]:checked').value;
   // 일기목록에 일기 추가하기
   // 배열 변수(일기담는통) 만들어CSS_일기사진서 빈배열(일기목록)에 push로 넣음
@@ -101,9 +110,8 @@ const 등록하기 = () => {
   const 일기번호 = 일기목록.length - 1;
 
   document.getElementById("일기추가보이는곳").innerHTML += `
-   <div class="바디__정렬__목록__첫번째" onclick="게시글확인기능(${일기번호})">
-            <img src=${일기목록[일기번호].이미지}
-              style="width: 380px; height: 285px" />
+          <div class="바디__정렬__목록__첫번째" onclick="게시글확인기능(${일기번호})">
+            <img src= "${일기목록[일기번호].이미지}" style="width: 380px; height: 285px; border-radius: 16px;"  />
             <div style="width: 380px; height: 16px"></div>
             <div class="바디__정렬__목록__첫번째__내용">
               <div class="바디__정렬__목록__첫번째__내용__감정날짜">
@@ -122,20 +130,20 @@ const 등록하기 = () => {
               <div style="width: 380px; height: 16px"></div>
             </div>
           </div>
-  
   `;
+  location.reload(true);
 };
 
-const 게시글확인기능 = (일기번호받는통) => {
+const 스크롤올리기 = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+const 삭제하기기능 = (index) => {
+  event.preventDefault();
+  console.log("삭제하기기능", index);
   const 스토리지에저장된일기목록 =
     localStorage.getItem("지윤이의일기목록") ?? "[]";
   const 일기목록 = JSON.parse(스토리지에저장된일기목록);
-
-  const 일기담는통 = 일기목록[일기번호받는통];
-  const 제목담는통 = 일기담는통.제목;
-  const 내용담는통 = 일기담는통.내용;
-
-  location.href = `./detail.html?일기번호=${일기번호받는통}`;
+  const 삭제하고남은배열 = 일기목록.filter((_, index) => index !== index);
+  console.log(삭제하고남은배열);
 };
-
-//
