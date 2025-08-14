@@ -10,6 +10,15 @@
     align-items: center;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+  }
+
+a:visited{
+    color: black;
+}
+
 .label{
     width: 1920px;
     height: 164px;
@@ -383,7 +392,10 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    
 }
+
+
 
 
 .frame_106{

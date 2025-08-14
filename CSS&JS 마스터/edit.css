@@ -1,0 +1,173 @@
+.일기상세_수정{
+    width: 1920px;
+    height: 1080px;
+    angle: 0 deg;
+    opacity: 1;
+}
+
+.frame_75{
+    width: 1920px;
+    height: 556px;
+    angle: 0 deg;
+    opacity: 1;
+    padding-right: 20px;
+    padding-left: 20px;
+    gap: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header{
+    width: 1880px;
+    height: 60px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.frame_2{
+    width: 1168px;
+    height: 60px;
+    min-width: 320px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+   
+}
+
+.logo{
+    width: 120px;
+    height: 40px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    font-family: Pretendard Variable;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 16px;
+    letter-spacing: -1%;
+    display: flex;
+    line-height: 40px;
+}
+
+.frame_74{
+    width: 1880px;
+    height: 432px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.frame_79{
+    width: 1168px;
+    height: 432px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    padding-bottom: 16px;
+    gap: 24px;
+    border-bottom-width: 1px;
+    display: flex;
+    flex-direction: column;
+}
+
+.기분_선택_영역{
+    width: 1168px;
+    height: 64px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 16px; 
+    display: flex;   
+    flex-direction: column;
+}
+
+.frame_61{
+    width: 592px;
+    height: 24px;
+    max-width: 592px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 20px;
+    display: flex;
+    
+}
+
+.frame_64{
+    width: 1168px;
+    height: 76px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+#frame_63{
+    width: 1168px;
+    height: 48px;
+    border-radius: 8px;
+    border-width: 1px;
+    angle: 0 deg;
+    opacity: 1;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    gap: 10px;
+}
+
+#frame_63_2{
+    width: 1168px;
+    height: 128px;
+    border-radius: 8px;
+    border-width: 1px;
+    angle: 0 deg;
+    opacity: 1;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    gap: 10px;
+}
+
+.frame_65{
+    width: 1168px;
+    height: 156px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.frame_63{
+    width: 1168px;
+    height: 128px;
+    border-radius: 8px;
+    border-width: 1px;
+    angle: 0 deg;
+    opacity: 1;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    gap: 10px;
+}
+
+.버튼_영역{
+    width: 1168px;
+    height: 48px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 16px;    
+    display: flex;
+    justify-content: center;
+}

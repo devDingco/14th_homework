@@ -28,7 +28,7 @@ const 일기그리기기능 = () => {
                                     <div class="작성날짜">${el.날짜}</div>   
                                 </div>
                                 <div class="frame_24">
-                                    ${el.내용}
+                                    ${el.제목}
                                 </div>
                             </div>
                         </div>
