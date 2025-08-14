@@ -124,6 +124,13 @@ function createSkeleton(count) {
     for(let i = 0; i < count; i++) {
         const skeleton = document.createElement('div')
         skeleton.classList.add('photos_item', 'skeleton')
+        if (currentRatio === 'default') {
+            skeleton.style.aspectRatio = '1/1'
+        } else if (currentRatio === 'row') {
+            skeleton.style.aspectRatio = '4/3'
+        } else {
+            skeleton.style.aspectRatio = '3/4'
+        }
         document.querySelector('.photos_contents').appendChild(skeleton)
     }
 }
@@ -142,11 +149,13 @@ function changeRatio(ratio) {
 // 스켈레톤을 이미지로 교체
 function changeSkeleton(images) {
     const skeletons = document.querySelectorAll('.photos_item.skeleton')
+    // const photo = document.querySelectorAll('.photos_item_image')
     images.map((image, index) => {
         if(skeletons[index]) {
             skeletons[index].style.aspectRatio = changeRatio(currentRatio)
             skeletons[index].classList.remove('skeleton')
-            skeletons[index].innerHTML = `<img src="${image}" alt="sampleImage" class="photos_item_image">`
+            skeletons[index].innerHTML = `<img src="${image}" alt="sampleImage" class="photos_item_image" style="aspect-ratio: ${changeRatio(currentRatio)}">`
+            // photo[index].style.aspectRatio = changeRatio(currentRatio)
         }
     })
 }
@@ -168,9 +177,8 @@ function infiniteScroll() {
         if(isScrollEnded) {
             createSkeleton(10)
             getImages()
-            console.log('이미지 요청됨')
         }
-    }, 150);
+    }, 1000);
 }
 
 window.addEventListener('scroll', infiniteScroll)
