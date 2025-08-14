@@ -7,8 +7,9 @@
   <link rel="stylesheet" href="./mindjournal.css" />
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <h1>일기보관함_메인</h1>
+    <button id="openWriteModal" class="primary">일기 등록</button>
   </header>
 
   <main>
@@ -18,7 +19,7 @@
 
     <nav class="navigation">
       <button class="tab active">일기보관함</button>
-      <button class="tab">사진보관함</button>
+      <button class="tab" disabled>사진보관함</button>
     </nav>
 
     <!-- FILTER BAR (sticky) -->
@@ -33,29 +34,8 @@
 
     <section class="diary-section">
       <div class="card-container" id="cardContainer">
-        <!-- JS로 카드가 여기에 추가됩니다 (초기엔 비어있음) -->
+        <!-- JS 렌더 -->
       </div>
-
-      <aside class="diary-form">
-        <h2>일기 쓰기</h2>
-        <form id="diaryForm">
-          <label>오늘 기분은 어땠나요?</label><br><br>
-          <div class="emotion-select">
-            <label><input type="radio" name="emotion" value="happy" /> 행복해요</label>
-            <label><input type="radio" name="emotion" value="sad" /> 슬퍼요</label>
-            <label><input type="radio" name="emotion" value="surprised" /> 놀랐어요</label>
-            <label><input type="radio" name="emotion" value="angry" /> 화나요</label>
-            <label><input type="radio" name="emotion" value="etc" /> 기타</label>
-          </div>
-          <br>
-
-          <label>제목</label><br>
-          <input type="text" id="title" placeholder="제목을 입력해 주세요." required /><br>
-          <label>내용</label><br>
-          <textarea id="content" placeholder="내용을 입력해 주세요." required></textarea><br>
-          <button type="submit">등록하기</button>
-        </form>
-      </aside>
     </section>
   </main>
 
@@ -64,7 +44,75 @@
   </footer>
 
   <!-- floating top button (항상 고정) -->
-  <button id="scrollTopBtn" class="floating-btn" title="맨 위로"> ▲ </button>
+  <button id="scrollTopBtn" class="floating-btn" title="맨 위로">▲</button>
+
+  <!-- 등록 모달 -->
+  <div id="writeModal" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="backdrop"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="writeTitle">
+      <header class="modal__header">
+        <h2 id="writeTitle">일기 쓰기</h2>
+        <button class="icon-btn" id="closeWriteModal" aria-label="닫기">×</button>
+      </header>
+
+      <form id="diaryForm" class="modal__body">
+        <label class="label">오늘 기분은 어땠나요?</label>
+        <div class="emotion-select">
+          <label><input type="radio" name="emotion" value="happy" /> 행복해요</label>
+          <label><input type="radio" name="emotion" value="sad" /> 슬퍼요</label>
+          <label><input type="radio" name="emotion" value="surprised" /> 놀랐어요</label>
+          <label><input type="radio" name="emotion" value="angry" /> 화나요</label>
+          <label><input type="radio" name="emotion" value="etc" /> 기타</label>
+        </div>
+
+        <label class="label" for="title">제목</label>
+        <input type="text" id="title" placeholder="제목을 입력해 주세요." required />
+
+        <label class="label" for="content">내용</label>
+        <textarea id="content" rows="6" placeholder="내용을 입력해 주세요." required></textarea>
+
+        <div class="modal__actions">
+          <button type="button" id="cancelWrite" class="ghost">취소</button>
+          <button type="submit" class="primary">등록하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 등록 완료(중첩) 모달 -->
+  <div id="successModal" class="modal nested" aria-hidden="true">
+    <div class="modal__backdrop" data-close="backdrop"></div>
+    <div class="modal__panel small" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+      <header class="modal__header">
+        <h3 id="successTitle">등록 완료</h3>
+        <button class="icon-btn" data-close="success">×</button>
+      </header>
+      <div class="modal__body">
+        <p>등록이 완료되었습니다.</p>
+      </div>
+      <div class="modal__actions">
+        <button class="primary" data-close="success">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 등록 취소(중첩) 모달 -->
+  <div id="cancelModal" class="modal nested" aria-hidden="true">
+    <div class="modal__backdrop" data-close="backdrop"></div>
+    <div class="modal__panel small" role="dialog" aria-modal="true" aria-labelledby="cancelTitle">
+      <header class="modal__header">
+        <h3 id="cancelTitle">일기 등록 취소</h3>
+        <button class="icon-btn" data-close="keep">×</button>
+      </header>
+      <div class="modal__body">
+        <p>작성 중인 내용을 취소하시겠어요?</p>
+      </div>
+      <div class="modal__actions">
+        <button class="ghost" data-close="keep">계속 작성</button>
+        <button class="danger" data-close="cancel-all">등록 취소</button>
+      </div>
+    </div>
+  </div>
 
   <script src="./mindjournal.js"></script>
 </body>
