@@ -319,6 +319,9 @@ document.addEventListener('DOMContentLoaded', () => {
     changeFeelingText(diaryDetail.feeling);
     document.querySelector('.detail_feeling_image').style.backgroundImage = `url(${diaryDetail.smallImage})`;
 
+    document.querySelector('.detail_header_title_mobile').addEventListener('click', () => {
+        window.history.back();
+    });
 });
 
 

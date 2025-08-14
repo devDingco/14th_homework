@@ -167,3 +167,33 @@ textarea {
 input {
     outline: none;
 }
+
+@keyframes nextPage {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes prevPage {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root) {
+    animation: prevPage 0.3s ease-in-out;
+}
+
+::view-transition-new(root) {
+    animation: nextPage 0.3s ease-in-out;
+}
