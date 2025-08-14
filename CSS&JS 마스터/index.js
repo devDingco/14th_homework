@@ -87,5 +87,100 @@ const 글쓰기기능 = () =>{
     일기그리기기능();
 }
 
-            
-    
+// const JS_필터링기능 = (event) => {
+//     const 선택한내용 = event.target.value;
+  
+//     const 스토리지에저장된일기목록 =
+//       window.localStorage.getItem("전달할것") ?? "[]";
+//     const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+//     let 필터링된일기목록;
+  
+//     switch (선택한내용) {
+//       case "HTML_행복선택": {
+//         필터링된일기목록 = 일기목록.filter((el) => el.기분 === "행복");
+//         break;
+//       }
+//       case "HTML_슬픔선택": {
+//         필터링된일기목록 = 일기목록.filter((el) => el.기분 === "슬픔");
+//         break;
+//       }
+//       case "HTML_놀람선택": {
+//         필터링된일기목록 = 일기목록.filter((el) => el.기분 === "놀람");
+//         break;
+//       }
+//       case "HTML_화남선택": {
+//         필터링된일기목록 = 일기목록.filter((el) => el.기분 === "화남");
+//         break;
+//       }
+//       case "HTML_기타선택": {
+//         필터링된일기목록 = 일기목록.filter((el) => el.기분 === "기타");
+//         break;
+//       }
+//       default: {
+//         필터링된일기목록 = 일기목록;
+//         break;
+//       }
+//     }
+  
+//     const HTML_새로운일기도화지 = 필터링된일기목록
+//       .map(
+//         (el, index) => `
+//           <a href="./detail.html?number=${index}">
+//             <div class="CSS_일기">
+//               <div class="CSS_일기사진">
+//                 ${el.기분 === "행복"
+//             ? '<img class="CSS_기분이미지" src="./assets/images/joy.png" alt="행복" />'
+//             : ""
+//           }
+//                 ${el.기분 === "슬픔"
+//             ? '<img class="CSS_기분이미지" src="./assets/images/sadness.png" alt="슬픔" />'
+//             : ""
+//           }
+//                 ${el.기분 === "놀람"
+//             ? '<img class="CSS_기분이미지" src="./assets/images/surprised.png" alt="놀람" />'
+//             : ""
+//           }
+//                 ${el.기분 === "화남"
+//             ? '<img class="CSS_기분이미지" src="./assets/images/anger.png" alt="화남" />'
+//             : ""
+//           }
+//                 ${el.기분 === "기타"
+//             ? '<img class="CSS_기분이미지" src="./assets/images/idontknownothing.png" alt="기타" />'
+//             : ""
+//           }
+//               </div>
+//               <div class="CSS_일기정보">
+//                 <div class="CSS_일기내용">
+//                   ${el.기분 === "행복"
+//             ? `<div class="CSS_기분 CSS_행복">행복해요</div>`
+//             : ""
+//           }
+//                   ${el.기분 === "슬픔"
+//             ? `<div class="CSS_기분 CSS_슬픔">슬퍼요</div>`
+//             : ""
+//           }
+//                   ${el.기분 === "놀람"
+//             ? `<div class="CSS_기분 CSS_놀람">놀랐어요</div>`
+//             : ""
+//           }
+//                   ${el.기분 === "화남"
+//             ? `<div class="CSS_기분 CSS_화남">화나요</div>`
+//             : ""
+//           }
+//                   ${el.기분 === "기타"
+//             ? `<div class="CSS_기분 CSS_기타">기타</div>`
+//             : ""
+//           }
+//                   <div class="CSS_날짜">${el.작성일}</div>
+//                 </div>
+//                 <div class="CSS_일기제목"> ${el.제목}</div>
+//               </div>
+//               <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index})" />
+//             </div>
+//           </a>
+//         `
+//       )
+//       .join("");
+//     window.document.getElementById("HTML_일기보여주는곳").innerHTML =
+//       HTML_새로운일기도화지;
+//   };

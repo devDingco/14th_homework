@@ -1,15 +1,15 @@
 const 쿼리스트링 = window.location.search;
 const 잘게나누어담은통 = new URLSearchParams(쿼리스트링);
-console.log(잘게나누어담은통)
 const 일기번호 = 잘게나누어담은통.get("number");
 
 const 스토리지에저장된일기목록 = window.localStorage.getItem("전달할것") ?? "[]";
 const 일기목록 = JSON.parse(스토리지에저장된일기목록);
 
 const 일기담는통 = 일기목록[일기번호];
+console.log(일기담는통)
 
 function movePageWithQueryString() {
-  let queryString = "?name=edit"; // 이동할 페이지에 전달할 쿼리 문자열
+  let queryString = `?edit=${일기번호}`; // 이동할 페이지에 전달할 쿼리 문자열
   let baseUrl = "./edit.html"; // 이동할 기본 페이지 경로
   window.location.href = baseUrl + queryString; // URL 변경 및 이동
 }
