@@ -1,0 +1,29 @@
+/* .바디__메인섹션 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  } */
+
+.컨테이너{
+    width: 100%;
+}
+.바디__메인섹션__아티클섹션{
+    display: flex;
+    flex-direction: column;
+}
+.바디__메인섹션__아티클섹션__일기칸{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4rem;
+  width: 100%;
+  order: 2;
+  position: relative;
+}
+.바디__메인섹션__아티클섹션__일기칸__일기장 > a > img {width: 100%;}
+
+.바디__메인섹션__아티클섹션__일기쓰기칸{
+    max-width: none;
+    width: 100%;
+    order: 1;
+}
