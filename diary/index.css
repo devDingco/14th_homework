@@ -7,7 +7,8 @@
     position: relative;
 
     @media (max-width: 779px) {
-        max-width: 20rem;
+        /* max-width: 20rem; */
+        margin: 0;
     }
 }
 
@@ -177,7 +178,7 @@
         gap: 0.5rem;
         border-radius: 100px;
         border: 1px solid var(--input-border);
-        background: var(--input-bg) url(/public/icons/search_24dp_5F6368_FILL1_wght400_GRAD0_opsz24\ 1.svg) no-repeat 16px center;
+        background: var(--input-bg) url(./public/icons/search_24dp_5F6368_FILL1_wght400_GRAD0_opsz24\ 1.svg) no-repeat 16px center;
         background-size: 20px;
         padding-left: 2.5rem;
         color: var(--text-primary);
@@ -194,7 +195,7 @@
     gap: 0.5rem;
     border-radius: 100px;
     border: 1px solid var(--input-border);
-    background: var(--input-bg) url(/public/icons/search_24dp_5F6368_FILL1_wght400_GRAD0_opsz24\ 1.svg) no-repeat 16px center;
+    background: var(--input-bg) url(./public/icons/search_24dp_5F6368_FILL1_wght400_GRAD0_opsz24\ 1.svg) no-repeat 16px center;
     background-size: 20px;
     padding-left: 3rem;
     color: var(--text-primary);
@@ -272,10 +273,11 @@
     border-radius: 16px;
 
     @media (max-width: 779px) {
-        width: 20rem;
+        /* width: 20rem; */
         grid-template-columns: repeat(2, 1fr);
         max-height: 92.875rem;
-        gap: 1rem;
+        /* gap: 1rem; */
+        /* gap: 2rem; */
     }
 }
 .card_item {
@@ -285,8 +287,8 @@
     border-radius: 16px;
 
     @media (max-width: 779px) {
-        width: 9.5rem;
-        height: 12rem;
+        width: 100%;
+        height: 100%;
     }
 }
 .card_item:hover {
@@ -300,7 +302,7 @@
     border-radius: 16px;
 
     @media (max-width: 779px) {
-        width: 9.5rem;
+        width: 100%;
         height: 7.25rem;
         /* height: 100%; */
         border-radius: 12px;
