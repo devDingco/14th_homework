@@ -18,14 +18,18 @@ window.onload = () => {
     window.document.getElementById("HTML_일기수정내용입력창").value =
       일기담는통.내용;
   
+    window.document.getElementsByName("HTML_기분선택버튼").forEach((el) => {
+      if(el.value === 일기담는통.기분) el.checked = true;
+    });
     const 기분선택버튼목록 = window.document.getElementsByName("HTML_기분선택버튼");
   
-    for (let i = 0; i < 기분선택버튼목록.length; i++) {
-      const el = 기분선택버튼목록[i];
-      if (el.value === 일기담는통.기분) {
-        el.checked = true;
-      }
-    }
+    // 위 코드와 동일한 기능 //
+    // for (let i = 0; i < 기분선택버튼목록.length; i++) {
+    //   const el = 기분선택버튼목록[i];
+    //   if (el.value === 일기담는통.기분) {
+    //     el.checked = true;
+    //   }
+    // }
     
     const 댓글목록 = 일기담는통.댓글목록 ?? [];
 
@@ -41,6 +45,7 @@ window.onload = () => {
         ${hasDivider ? '<hr class="comment_divider" />' : ''}
       `;
     });
+    
     document.getElementById("HTML_댓글목록영역").innerHTML = HTML_새로운댓글목록;
 };
 
@@ -87,4 +92,40 @@ const JS_수정취소기능 = () => {
   // 2. 상세페이지로 돌아가기
   window.location.replace(`./detail.html?number=${일기번호}`);
 };
-  
+
+const JS_뒤로가기기능 = () => {
+  window.history.back();
+};
+
+
+window.addEventListener("scroll", () => {
+  const 화면위에서푸터위까지길이 = document
+    .getElementById("HTML_푸터")
+    .getBoundingClientRect().top;
+  const 보이는화면길이 = window.innerHeight;
+
+  // 1. 푸터가 보일 때는, 화면과 상관없이 사진에 고정시키기
+  if (보이는화면길이 >= 화면위에서푸터위까지길이) {
+    document.getElementById("HTML_플로팅버튼").style = `
+      position: relative;
+      bottom: 0;
+      left: 97%;
+    `;
+
+    // 2. 푸터가 안보일 때는, 사진과 상관없이 화면에 고정시키기
+  } else {
+    document.getElementById("HTML_플로팅버튼").style = `
+      position: fixed;
+      bottom: 4rem;
+      right: 2rem;
+    `;
+  }
+});
+
+
+const JS_스크롤위로기능 = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+};
