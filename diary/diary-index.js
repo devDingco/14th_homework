@@ -1,23 +1,23 @@
 // 삭제버튼 설정
 function 삭제하기(event, number) {
     // 이벤트 전파 막기
-    event.stopPropagation();
-    event.preventDefault();
+    event.stopPropagation()
+    event.preventDefault()
 
     // 삭제 확인 알림
-    alert("일기가 삭제되었습니다.");
+    alert("일기가 삭제되었습니다.")
 
     // 로컬스토리지에서 일기들 불러오기
-    let 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || [];
+    let 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || []
 
     // 해당 number 제외하고 필터링
-    const 삭제후남은일기들 = 일기들.filter(el => el.number !== number);
+    const 삭제후남은일기들 = 일기들.filter(el => el.number !== number)
 
     // 로컬스토리지 저장
-    localStorage.setItem("일기들목록", JSON.stringify(삭제후남은일기들));
+    localStorage.setItem("일기들목록", JSON.stringify(삭제후남은일기들))
 
     // 화면 갱신
-    renderDiaries();
+    renderDiaries()
 }
 
 
@@ -34,7 +34,7 @@ function renderDiaries(filteredDiaries = null) {
         const diaryHTML = savedDiaries.map((el) => `
             <a href="./details/diary-detail.html?number=${el.number}" class="일기틀">
                 <div class="감정이미지__${el.feeling}"></div>
-                <img class="삭제버튼" src="./asset/icon/close_icon.png" onclick="삭제하기(event, ${el.number})" />
+                <img class="삭제버튼" src="./asset/icon/close_icon.png" onclick="openDeleteModal(event, ${el.number})" />
                 <div class="일기속성">
                     <div class="일기속성1">
                         <div class="감정__${el.feeling}">${el.feeling}</div>
@@ -149,7 +149,63 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// 모달 영역
 
+function modalOpen(모달종류) {
+
+    // 스크롤 맨 위로 이동
+    window.scrollTo(0, 0)
+
+    document.getElementById(모달종류).style.display = "block"
+
+    // 뒷배경 스크롤 막기
+    document.body.style.overflow = 'hidden'
+}
+
+function modalClose(모달종류) {
+    if (모달종류 === "전체닫기") {
+        const modals = document.querySelectorAll('.modal')
+        modals.forEach(modal => {
+            modal.style.display = "none"
+        })
+    } else {
+        document.getElementById(모달종류).style.display = "none"
+    }
+
+    // 뒷배경 스크롤 다시 허용
+    document.body.style.overflow = ''
+}
+
+// ESC 키 눌렀을 때 모달 닫기
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' || event.key === 'Esc') {
+      const modals = document.querySelectorAll('.modal');
+      modals.forEach(modal => {
+        modal.style.display = 'none';
+      });
+    }
+  });
+
+// 실제 삭제 + 모달 닫기
+function handleDelete(event, number) {
+
+    event.stopPropagation()
+    event.preventDefault() 
+
+    삭제하기(event, number)      // 삭제 처리
+    modalClose('전체닫기')        // 모달 닫기
+}
+
+// 모달 열기 + 삭제 버튼에 number 연결
+function openDeleteModal(event, number) {
+
+    event.stopPropagation() // 부모 <a> 클릭 막기
+    event.preventDefault()  // 링크 기본 동작 막기
+
+    const deleteBtn = document.querySelector("#deleteModalGroup .검정버튼")
+    deleteBtn.setAttribute("onclick", `handleDelete(event, ${number})`)
+    modalOpen('deleteModalGroup')
+}
 
 
     // 화면에 일기카드 추가하기
