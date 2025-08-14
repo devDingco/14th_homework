@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>일기 보관함_메인_등록</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+    }
+    /* 상단 검은 배너 */
+    header {
+        background-color: black;
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px 0;
+    }
+    /* 전체 컨테이너 */
+    .container {
+        display: flex;
+    }
+    /* 왼쪽 파란 영역 */
+    .sidebar {
+        background-color: #c8e4f7;
+        width: 80px;
+    }
+    /* 메인 컨텐츠 */
+    .main {
+        flex: 1;
+        padding: 40px;
+    }
+    /* 상단 이미지 영역 */
+    .banner {
+        background-color: #eee;
+        border-radius: 12px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    /* 탭 메뉴 */
+    .tabs {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    select {
+        margin-bottom: 20px;
+    }
+    /* 카드 그리드 */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+    .card {
+        border-radius: 12px;
+        padding: 20px;
+        color: #333;
+        position: relative;
+        text-align: center;
+        font-size: 14px;
+    }
+    .card .close {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .emoji {
+        font-size: 48px;
+        margin-bottom: 10px;
+    }
+    /* 버튼 */
+    .btn-area {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+    }
+    .btn {
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<header>일기 보관함_메인_등록</header>
+
+<div class="container">
+    <div class="sidebar"></div>
+    <div class="main">
+        <div class="banner">배너 이미지</div>
+
+        <div class="tabs">일기보관함 | 사진보관함</div>
+
+        <div class="btn-area">
+            <button class="btn">+ 일기쓰기</button>
+        </div>
+
+        <select>
+            <option>전체</option>
+        </select>
+
+        <div class="grid">
+            <div class="card" style="background-color:#d6f0f9;">
+                <span class="close">×</span>
+                <div class="emoji">👩‍🦱🧢</div>
+                <strong>슬퍼요</strong><br>
+                타이틀 영역입니다. 한줄제목 노출<br>
+                2024.03.12
+            </div>
+            <div class="card" style="background-color:#ffe7a8;">
+                <span class="close">×</span>
+                <div class="emoji">👩‍🦱🧢</div>
+                <strong>놀랐어요</strong><br>
+                타이틀 영역입니다.<br>
+                2024.03.12
+            </div>
+            <div class="card" style="background-color:#ddd;">
+                <span class="close">×</span>
+                <div class="emoji">👩‍🦱🧢</div>
+                <strong>화나요</strong><br>
+                타이틀 영역입니다.<br>
+                2024.03.12
+            </div>
+            <div class="card" style="background-color:#ffd6d6;">
+                <span class="close">×</span>
+                <div class="emoji">👩‍🦱🧢</div>
+                <strong>행복해요</strong><br>
+                타이틀 영역입니다.<br>
+                2024.03.12
+            </div>
+            <!-- 나머지 카드들도 동일하게 복제 -->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

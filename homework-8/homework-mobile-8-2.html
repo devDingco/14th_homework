@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>일기 보관함</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px;
+  }
+
+  /* 상단 헤더 */
+  .header {
+    background-color: black;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 90%;
+    max-width: 400px;
+  }
+
+  /* 모달 배경 */
+  .modal {
+    background-color: #888888;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-sizing: border-box;
+  }
+
+  /* 다이어리 제목 */
+  .diary-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  /* 흰색 카드 */
+  .diary-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  /* 감정 선택 */
+  .emotion-group {
+    margin-bottom: 15px;
+  }
+
+  .emotion-group label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+
+  .emotion-group input[type="radio"] {
+    margin-right: 10px;
+  }
+
+  /* 제목과 내용 input */
+  input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+
+  textarea {
+    resize: none;
+    height: 100px;
+  }
+
+  /* 버튼 */
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .button-group button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 1px solid black;
+  }
+
+  .button-group .close-btn {
+    background-color: white;
+  }
+
+  .button-group .submit-btn {
+    background-color: #ccc;
+    border: none;
+    color: white;
+    cursor: not-allowed;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">일기 보관함_메인_모바일_등록</div>
+
+<div class="modal">
+  <div class="diary-title">민지의 다이어리</div>
+
+  <div class="diary-card">
+    <div class="diary-section">
+      <strong>일기 쓰기</strong>
+      <p>오늘 기분은 어땠나요?</p>
+      <div class="emotion-group">
+        <label><input type="radio" name="emotion" checked>행복해요</label>
+        <label><input type="radio" name="emotion">슬퍼요</label>
+        <label><input type="radio" name="emotion">놀랐어요</label>
+        <label><input type="radio" name="emotion">화나요</label>
+        <label><input type="radio" name="emotion">기타</label>
+      </div>
+      <label>제목</label>
+      <input type="text" placeholder="제목을 입력해 주세요.">
+      <label>내용</label>
+      <textarea placeholder="내용을 입력해 주세요."></textarea>
+      <div class="button-group">
+        <button class="close-btn">닫기</button>
+        <button class="submit-btn" disabled>등록하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

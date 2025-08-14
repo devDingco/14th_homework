@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>일기 보관함_메인_등록_중첩 모달</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+    /* 어두운 배경 */
+    .modal-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    /* 첫 번째 모달 */
+    .modal {
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        width: 400px;
+        box-sizing: border-box;
+        position: relative;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .modal h2 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        font-size: 18px;
+    }
+    /* 기분 선택 */
+    .mood {
+        margin-bottom: 20px;
+    }
+    .mood label {
+        margin-right: 10px;
+    }
+    /* 입력 박스 */
+    input[type="text"], textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 16px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+    textarea {
+        height: 100px;
+        resize: none;
+    }
+    /* 버튼 영역 */
+    .buttons {
+        text-align: right;
+    }
+    .btn {
+        padding: 8px 16px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        background-color: white;
+        cursor: pointer;
+        margin-left: 8px;
+        font-size: 14px;
+    }
+    .btn-primary {
+        background-color: black;
+        color: white;
+        border: none;
+    }
+    /* 중첩 모달 */
+    .nested-modal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        width: 280px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 10;
+    }
+    .nested-modal h3 {
+        margin-top: 0;
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+    .nested-modal p {
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+    .nested-modal button {
+        width: 100%;
+        padding: 10px;
+        background: black;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<!-- 첫 번째 모달 배경 -->
+<div class="modal-bg">
+    <!-- 첫 번째 모달 -->
+    <div class="modal">
+        <h2>일기 쓰기</h2>
+        
+        <div class="mood">
+            오늘 기분은 어땠나요? <br><br>
+            <label><input type="radio" name="mood"> 행복해요</label>
+            <label><input type="radio" name="mood"> 슬퍼요</label>
+            <label><input type="radio" name="mood"> 짜증나요</label>
+            <label><input type="radio" name="mood"> 화나요</label>
+            <label><input type="radio" name="mood"> 기타</label>
+        </div>
+        
+        <input type="text" placeholder="제목을 입력해 주세요.">
+        <textarea placeholder="내용을 입력해 주세요."></textarea>
+        
+        <div class="buttons">
+            <button class="btn">닫기</button>
+            <button class="btn btn-primary">등록하기</button>
+        </div>
+
+        <!-- 중첩 모달 -->
+        <div class="nested-modal">
+            <h3>일기 등록 완료</h3>
+            <p>등록이 완료 되었습니다.</p>
+            <button>확인</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
