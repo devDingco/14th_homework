@@ -37,7 +37,7 @@
                             <div  id="context" class="diary__context__text"></div>
                         </div>
                         <div class="diary__copy">
-                            <button class="diary__copy__botton">
+                            <button class="diary__copy__botton" onclick="copyDiary()">
                                 <img src="./assets/icons/copy_outline_light_m.svg" />
                                 내용복사
                             </button>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="frame__diary__button">
                         <button class="diary__button" onclick="diaryEdit()">수정</button>
-                        <button class="diary__button">삭제</button>
+                        <button class="diary__button" onclick="deleteDiaryCard()">삭제</button>
                     </div>
                 </div>
                 <div class="main__frame__comment">
@@ -70,6 +70,7 @@
                     </div>
                 </div>
             </div>
+            <img src="./assets/icons/up_outline_light_xl.svg" id="floating__button" onclick="scrollpage()"/>
         </div>
     </div>
 </body>

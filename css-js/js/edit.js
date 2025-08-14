@@ -6,6 +6,7 @@ const diaryCards = localStorage.getItem("diaryCardList")
 const diaryCardList = JSON.parse(diaryCards === null ? "[]" : diaryCards)
 const currentDiaryCard = diaryCardList[cardIndex]
 const feelingOfToday = currentDiaryCard.feeling
+const diaryCommentList = diaryCardList[cardIndex].comment === null ?  "[]" : diaryCardList[cardIndex].comment
 
 window.onload = () => {
 
@@ -32,7 +33,18 @@ window.onload = () => {
             내용
             <textarea id="context__feeling" class="edit__context__form">${currentDiaryCard.card_context}</textarea>
     `
+    // 회고 내용 불러오기
+    addDiaryComment()
+
 }
+window.addEventListener("scroll", floatingButton)
+window.addEventListener("load", () => {
+    addDiaryComment()
+    floatingButton()
+})
+window.addEventListener("resize", floatingButton)
+
+
 let selectedFeeling;
 function editDiaryCard() {
 
@@ -82,4 +94,39 @@ feelings.forEach((el, index) => {
 
     location.href = `./detail.html?number=${cardIndex}`
 
+}
+
+function addDiaryComment() {
+
+    if (diaryCommentList.length >= 1){
+
+        const diaryComment_HTML = diaryCommentList.map((el, index) => `
+            <div class="comment__box">
+                <div class="comment">${diaryCommentList[index].comment}</div>
+                <div class="comment__date">[${diaryCommentList[index].date}]</div>
+            </div>
+            <hr />        
+        `).join("")
+        document.getElementById("comment__textarea").innerHTML = diaryComment_HTML
+
+    } else{
+        document.getElementById("comment__textarea").innerHTML = `
+        <div class="comment__none">등록된 회고가 없습니다.</div>
+        `
+    }
+
+
+}
+
+function floatingButton(){
+    const innerHeight = window.innerHeight
+    const innerWidth = window.innerWidth
+
+    document.getElementById("floating__button").style = `
+        position: fixed;
+        top: ${innerHeight*0.9}px;
+        left: ${innerWidth*0.9}px;
+
+        z-index: 99;
+    `
 }

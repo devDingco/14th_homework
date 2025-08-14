@@ -122,10 +122,8 @@ function addDiaryCard() {
         const diaryCard_HTML = diaryCard.map((el,index)=>`
         <a href="./detail.html?number=${index}">
             <div class="diary__card">
-                <div id="card__image__icon">
-                    <img class="diary__card__image" src="./assets/images/${diaryCard[index].feeling}_M.svg" />
-                    <img id="delete__button" src="./assets/icons/close_outline_light_m.svg" onclick="deleteDiaryCard(event, ${index})" />
-                </div>
+                <img class="diary__card__image" src="./assets/images/${diaryCard[index].feeling}_M.svg" />
+                <img id="delete__button" src="./assets/icons/close_outline_light_m.svg" onclick="deleteDiaryCard(event, ${index})" />
                 <div class="diary__card__text">
                     <div class="diary__card__subtitle">
                         <div class="diary__card__feeling ${diaryCard[index].feeling}">${diaryCard[index].feeling_title}</div>
@@ -221,6 +219,9 @@ window.onload = () => {
     })
 
 }
+window.addEventListener("scroll", floatingButton)
+window.addEventListener("resize", floatingButton)
+window.addEventListener("load", floatingButton)
 
 // 플로팅 버튼 선택 시, 요소 맨 위로 이동
 function scrollpage () {
@@ -228,7 +229,6 @@ function scrollpage () {
     document.getElementById("frame__diary__list").scrollTo({ top: 0, behavior: "smooth" })
 
 }
-
 
 // 다이어리 카드 삭제 함수
 function deleteDiaryCard (event, index) {
@@ -247,4 +247,17 @@ function deleteDiaryCard (event, index) {
     // 다이어리 카드 만들기 함수 실행
     addDiaryCard();
 
+}
+
+function floatingButton(){
+    const innerHeight = window.innerHeight
+    const innerWidth = window.innerWidth
+
+    document.getElementById("floating__button").style = `
+        position: fixed;
+        top: ${innerHeight*0.9}px;
+        left: ${innerWidth*0.9}px;
+
+        z-index: 99;
+    `
 }

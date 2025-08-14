@@ -7,9 +7,9 @@ const diaryCardList = JSON.parse(diaryCards === null ? "[]" : diaryCards)
 
 window.onload = () => {
 document.getElementById("title").innerHTML = `
-<div class="diary__title">${diaryCardList[cardIndex].card_title}</div>
+<div id="diary__title" class="diary__title">${diaryCardList[cardIndex].card_title}</div>
 <div class="diary__subtitle">
-    <div class="diary__subtitle__feeling ${diaryCardList[cardIndex].feeling}">
+    <div id="diary__feeling" class="diary__subtitle__feeling ${diaryCardList[cardIndex].feeling}">
         <img src="./assets/images/${diaryCardList[cardIndex].feeling}_S.svg" width="32px" height="32px" />
         ${diaryCardList[cardIndex].feeling_title}
     </div>
@@ -21,6 +21,13 @@ document.getElementById("title").innerHTML = `
 
 document.getElementById("context").innerText = diaryCardList[cardIndex].card_context}
 
+window.addEventListener("scroll", floatingButton)
+window.addEventListener("load", () => {
+    addDiaryComment()
+    floatingButton()
+
+})
+window.addEventListener("resize", floatingButton)
 
 function diaryEdit() {
 
@@ -124,4 +131,47 @@ function addDiaryComment() {
 
 }
 
-window.addEventListener("load", addDiaryComment)
+function floatingButton(){
+    const innerHeight = window.innerHeight
+    const innerWidth = window.innerWidth
+
+    document.getElementById("floating__button").style = `
+        position: fixed;
+        top: ${innerHeight*0.9}px;
+        left: ${innerWidth*0.9}px;
+
+        z-index: 99;
+    `
+}
+
+function deleteDiaryCard(){
+
+    // 현재 카드 배열에서 현재 페이지 다이어리 삭제
+    diaryCardList.splice(cardIndex,1);
+
+    // 삭제 후 localStorage업데이트
+    localStorage.setItem("diaryCardList",JSON.stringify(diaryCardList))
+
+    // 삭제 안내 알럿
+    alert("삭제되었습니다.");
+
+    // 현재 일기가 삭제되었으므로, index.html로 넘어가게끔 설정
+    location.href = `./index.html`;
+
+}
+
+const copyDiary = () => {
+
+    const diaryTitle = document.getElementById("diary__title").innerText
+    const diaryFeeling = document.getElementById("diary__feeling").innerText
+    const textDiary = document.getElementById("context").innerText
+    const writeDate = document.getElementById("write__date").innerText
+
+    navigator.clipboard.writeText(`
+제목: ${diaryTitle}
+작성일: ${writeDate}
+기분: ${diaryFeeling}
+내용: ${textDiary}`)
+
+    alert("내용이 복사되었습니다.")
+}
