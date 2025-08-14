@@ -5,7 +5,7 @@
     width: 1168px;
     min-width: 1168px;
     /* 피그마 레이아웃 720 */
-    height: 445px;
+    /* height: 445px; */
     angle: 0 deg;
     opacity: 1;
     /* background-color: rgba(217, 217, 217, 1); */
@@ -14,14 +14,16 @@
 #main {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     width: 1168px;
-    height: 321px;
+    height: 554px;
     max-width: 1168px;
     angle: 0 deg;
     opacity: 1;
     gap: 24px;
     padding-bottom: 16px;
-    border-bottom-width: 1px;
+    border-bottom-width: 2px;
+    border-bottom: 2px solid rgba(0, 0, 0, 1);
 }
 
 #detail_top_container {
@@ -75,7 +77,6 @@
     angle: 0 deg;
     opacity: 1;
     gap: 12px;
-    border-bottom-width: 1px;    
 }
 
 #detail_bottom_container {
@@ -86,10 +87,11 @@
     max-width: 1168px;
     angle: 0 deg;
     opacity: 1;
-    gap: 16px;    
+    gap: 16px;
 }
 
-#update_button_frame {
+#detail_button_frame {
+    display: flex;
     width: 51px;
     height: 40px;
     border-radius: 8px;
@@ -104,11 +106,95 @@
     border: 1px solid var(--Gray-Gray-200, rgba(212, 211, 211, 1))
 }
 
-#update_button_frame > p {
+#detail_bottom_container > button {
+    width: 51px;
+    height: 40px;
+    border-radius: 8px;
+    border-width: 1px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    padding-top: 8px;
+    padding-right: 10px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    background: var(--Gray-W, rgba(255, 255, 255, 1));
+    border: 1px solid var(--Gray-Gray-200, rgba(212, 211, 211, 1));
     cursor: pointer;
 }
 
-#update_button_frame > a {
-    color: black;
-    text-decoration: none;
+#reply_container {
+    width: 1168px;
+    height: 173px;
+    max-width: 1168px;
+    border-radius: 16px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 16px;
+}
+
+#reply_content_frame {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    width: 1168px;
+    height: 85px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 13px;    
+}
+
+#input_reply_frame {
+    display: flex;
+    width: 1168px;
+    height: 48px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 16px;    
+}
+
+#input_reply_frame > textarea {
+    width: 1101px;
+    height: 48px;
+    border-radius: 8px;
+    border-width: 1px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    background: var(--Gray-W, rgba(255, 255, 255, 1));
+    border: 1px solid var(--Gray-Gray-200, rgba(212, 211, 211, 1));    
+    resize: none;
+}
+
+#input_reply_frame > button {
+    width: 51px;
+    height: 48px;
+    border-radius: 8px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    padding-top: 8px;
+    padding-right: 10px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    color: white;
+    background: var(--Gray-B, rgba(0, 0, 0, 1));
+    cursor: pointer;
+}
+
+#input_reply_frame {
+    width: 1168px;
+    height: 48px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 16px;    
+}
+
+#reply_content_flag {
+
 }
