@@ -20,7 +20,6 @@ function 삭제하기(event, number) {
     renderDiaries()
 }
 
-
 // 새로운 일기 등록 함수
 function renderDiaries(filteredDiaries = null) {
 
@@ -81,11 +80,6 @@ function WriteNewDiary() {
     renderDiaries()
 }
 
-// 플로팅버튼 - 스크롤 기능
-function 스크롤기능() {
-    window.scrollTo({ top: 0, behavior: "smooth"})
-}
-
 // 필터 함수
 function diaryFilter(selectedFeeling) {
 
@@ -101,7 +95,6 @@ function diaryFilter(selectedFeeling) {
 
 }
 
-
 // 필터값 변경 시 이벤트
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -110,7 +103,7 @@ window.addEventListener("DOMContentLoaded", () => {
     renderDiaries()
 
     // 필터 select 요소 이벤트 연결
-    const filterSelect = document.querySelector(".필터")
+    const filterSelect = document.querySelector(".일기필터")
 
     // if (filterSelect) {
         filterSelect.addEventListener("change", (event) => {
@@ -125,17 +118,8 @@ window.addEventListener("DOMContentLoaded", () => {
 })
 
 window.addEventListener("DOMContentLoaded", () => {
-    const filterSelect = document.querySelector(".필터")
-    const filterTop = filterSelect.offsetTop;  // 필터의 원래 위치 기억
 
-    // 스크롤 감지해서 fixed 활성화
-    window.addEventListener("scroll", () => {
-        if (window.scrollY >= filterTop) {
-            filterSelect.classList.add("fixed")  // 고정
-        } else {
-            filterSelect.classList.remove("fixed") // 고정 해제
-        }
-    });
+    const filterSelect = document.querySelector(".필터")
 
     // 선택창 열렸을 때 색 반전
     filterSelect.addEventListener("focus", () => {
@@ -147,6 +131,12 @@ window.addEventListener("DOMContentLoaded", () => {
         filterSelect.classList.remove("focused");
     });
 });
+
+// 플로팅버튼 - 스크롤 기능
+function 스크롤기능() {
+    window.scrollTo({ top: 0, behavior: "smooth"})
+}
+
 
 
 // 모달 영역
@@ -181,10 +171,10 @@ document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape' || event.key === 'Esc') {
       const modals = document.querySelectorAll('.modal');
       modals.forEach(modal => {
-        modal.style.display = 'none';
-      });
+        modal.style.display = 'none'
+      })
     }
-  });
+  })
 
 // 실제 삭제 + 모달 닫기
 function handleDelete(event, number) {
@@ -206,6 +196,96 @@ function openDeleteModal(event, number) {
     deleteBtn.setAttribute("onclick", `handleDelete(event, ${number})`)
     modalOpen('deleteModalGroup')
 }
+
+
+// 메뉴 이동
+const 메뉴이동 = (메뉴이름) => {
+    // 모든 메뉴에서 active 제거
+    document.querySelectorAll(".메뉴전체").forEach(메뉴 => {
+        메뉴.classList.remove("active")
+    })
+
+    // 선택한 메뉴만 active 추가
+    const 선택한메뉴 = document.querySelector(`.${메뉴이름}`)
+    if (선택한메뉴) {
+        선택한메뉴.classList.add("active")
+    }
+    console.log('현재 선택된 메뉴', 선택한메뉴)
+    // 강아지불러오는기능()
+}
+
+// 초기화면 설정 (페이지 로드 시)
+window.addEventListener("DOMContentLoaded", () => {
+    메뉴이동('메뉴__일기보관함')
+})
+
+// 사진보관함
+
+// 강아지 불러오는 기능
+const 강아지불러오는기능 = () => {
+    console.log("강아지불러오는기능 실행됨")
+
+    fetch('https://dog.ceo/api/breeds/image/random/10')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+
+            const 이미지다운로드주소들 = data.message
+            const 상태 = data.status
+            console.log(`이미지다운로드주소들: ${이미지다운로드주소들}`)
+            console.log(`상태: ${상태}`)
+
+            document.getElementById('강아지보여주는곳').innerHTML =
+                이미지다운로드주소들
+                    .map(url => `<img src="${url}" class="보관된사진" width="300px" />`)
+                    .join('')
+        console.log('강아지 HTML 생성됨')
+        })
+        .catch(error => {
+            console.error('강아지 불러오기 실패:', error)
+        })
+}
+
+// 사진보관함 메뉴 클릭 시 이벤트
+
+window.addEventListener("DOMContentLoaded", () => {
+    강아지불러오는기능()
+    
+    // const 사진보관함메뉴 = document.getElementById('사진보관함ID')
+    // 사진보관함메뉴.addEventListener('click', () => {
+    //     메뉴이동('메뉴__사진보관함')
+    // })
+
+})
+
+
+// 사진필터 설정
+
+function pictureFilter(selectedSize) {
+
+    document.querySelectorAll(".보관된사진").forEach((el) => {
+        if (selectedSize === "기본") {
+            el.style.aspectRatio = "1/1";
+        } else if (selectedSize === "가로형") {
+            el.style.aspectRatio = "4/3";
+        } else if (selectedSize === "세로형") {
+            el.style.aspectRatio = "3/4";
+        }
+    })
+
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    const filterSelect = document.querySelector(".사진필터")
+
+        filterSelect.addEventListener("change", (event) => {
+            const selectedSize = event.target.value
+            pictureFilter(selectedSize)
+        })
+
+})
+
 
 
     // 화면에 일기카드 추가하기

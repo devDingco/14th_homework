@@ -12,93 +12,121 @@
         </div>
 
         <div class="배너"></div>
-
+        <div class="메뉴전체 메뉴__일기보관함">
         <div class="메뉴">
             <div class="선택메뉴">
-                <div class="선택메뉴이름">일기보관함</div>
+                <div class="선택메뉴이름" onclick="메뉴이동('메뉴__일기보관함')">일기보관함</div>
             </div>
             <div class="미선택메뉴">
-                <div class="미선택메뉴이름">사진보관함</div>
+                <div class="미선택메뉴이름" onclick="메뉴이동('메뉴__사진보관함')">사진보관함</div>
             </div>
         </div>
-
-        <div class="필터부모">
-            <select class="필터">
-                <option>전체</option>
-                <option>행복해요</option>
-                <option>슬퍼요</option>
-                <option>놀랐어요</option>
-                <option>기타</option>
-            </select>
-            <button class="일기쓰기버튼" onclick="modalOpen('diaryModalGroup')"></button>
-            <!-- 모달창 만들고 onclick="WriteNewDiary()" 연결-->
-        </div>
         
-
-        <div class="내용">
-
-            <div class="일기보관함">
-
-                <div class="empty-message">아직 작성된 일기가 없습니다.</div>
-
-                <!-- <div class="일기틀">
-                    <div class="감정이미지"></div>
-                    <div class="일기속성">
-                        <div class="일기속성1">
-                            <div class="감정">슬퍼요</div>
-                            <div class="날짜표시">2025. 8. 7.</div>
+            <div class="필터부모 일기필터부모">
+                <select class="필터 일기필터">
+                    <option>전체</option>
+                    <option>행복해요</option>
+                    <option>슬퍼요</option>
+                    <option>놀랐어요</option>
+                    <option>화나요</option>
+                    <option>기타</option>
+                </select>
+                <button class="일기쓰기버튼" onclick="modalOpen('diaryModalGroup')"></button>
+                <!-- 모달창 만들고 onclick="WriteNewDiary()" 연결-->
+            </div>
+            
+    
+            <div class="내용">
+    
+                <div class="일기보관함">
+    
+                    <div class="empty-message">아직 작성된 일기가 없습니다.</div>
+    
+                    <!-- <div class="일기틀">
+                        <div class="감정이미지"></div>
+                        <div class="일기속성">
+                            <div class="일기속성1">
+                                <div class="감정">슬퍼요</div>
+                                <div class="날짜표시">2025. 8. 7.</div>
+                            </div>
+                            <div class="일기속성2">
+                                <div class="타이틀">
+                                    타이틀 영역입니다. 한줄까지만 노출 됩니다.
+                                </div>
+                            </div>
                         </div>
-                        <div class="일기속성2">
-                            <div class="타이틀">
-                                타이틀 영역입니다. 한줄까지만 노출 됩니다.
+                    </div> -->
+    
+                </div>
+    
+                <!-- <div class="일기쓰기구역">
+                    <div class="일기쓰기__타이틀">📍 일기 쓰기</div>
+                    <div class="기분체크구역">
+                        <div class="기분체크질문">오늘 기분은 어땠나요?</div>
+                        <div class="기분체크목록">
+                            <div class="기분체크틀">
+                                <input type="radio" name="feel" value="행복해요"/>
+                                <div class="기분">행복해요</div>
+                            </div>
+                            <div class="기분체크틀">
+                                <input type="radio" name="feel" value="슬퍼요"/>
+                                <div class="기분">슬퍼요</div>
+                            </div>
+                            <div class="기분체크틀">
+                                <input type="radio" name="feel" value="놀랐어요"/>
+                                <div class="기분">놀랐어요</div>
+                            </div>
+                            <div class="기분체크틀">
+                                <input type="radio" name="feel" value="화나요"/>
+                                <div class="기분">화나요</div>
+                            </div>
+                            <div class="기분체크틀">
+                                <input type="radio" name="feel" value="기타"/>
+                                <div class="기분">기타</div>
                             </div>
                         </div>
                     </div>
+                    <div class="입력틀">
+                        <div class="소제목">제목</div>
+                        <textarea id="제목__내용입력" placeholder="제목을 입력해 주세요."></textarea>
+                    </div>
+                    <div class="입력틀">
+                        <div class="소제목">내용</div>
+                        <textarea id="내용__내용입력" placeholder="내용을 입력해 주세요."></textarea>
+                    </div>
+                    <button id="등록하기버튼" onclick="WriteNewDiary()">등록하기</button>
+    
                 </div> -->
-
+    
             </div>
+        </div> <!-- 메뉴변경구역 -->
 
-            <!-- <div class="일기쓰기구역">
-                <div class="일기쓰기__타이틀">📍 일기 쓰기</div>
-                <div class="기분체크구역">
-                    <div class="기분체크질문">오늘 기분은 어땠나요?</div>
-                    <div class="기분체크목록">
-                        <div class="기분체크틀">
-                            <input type="radio" name="feel" value="행복해요"/>
-                            <div class="기분">행복해요</div>
-                        </div>
-                        <div class="기분체크틀">
-                            <input type="radio" name="feel" value="슬퍼요"/>
-                            <div class="기분">슬퍼요</div>
-                        </div>
-                        <div class="기분체크틀">
-                            <input type="radio" name="feel" value="놀랐어요"/>
-                            <div class="기분">놀랐어요</div>
-                        </div>
-                        <div class="기분체크틀">
-                            <input type="radio" name="feel" value="화나요"/>
-                            <div class="기분">화나요</div>
-                        </div>
-                        <div class="기분체크틀">
-                            <input type="radio" name="feel" value="기타"/>
-                            <div class="기분">기타</div>
-                        </div>
+        <!-- 사진보관함 -->
+        <div class="메뉴전체 메뉴__사진보관함">
+
+                <div class="메뉴">
+                    <div class="미선택메뉴">
+                        <div class="미선택메뉴이름" onclick="메뉴이동('메뉴__일기보관함')">일기보관함</div>
+                    </div>
+                    <div class="선택메뉴">
+                        <div class="선택메뉴이름" id="사진보관함ID ">사진보관함</div>
                     </div>
                 </div>
-                <div class="입력틀">
-                    <div class="소제목">제목</div>
-                    <textarea id="제목__내용입력" placeholder="제목을 입력해 주세요."></textarea>
+                <div class="필터부모 사진필터부모">
+                    <select class="필터 사진필터">
+                        <option>기본</option>
+                        <option>가로형</option>
+                        <option>세로형</option>
+                    </select>
                 </div>
-                <div class="입력틀">
-                    <div class="소제목">내용</div>
-                    <textarea id="내용__내용입력" placeholder="내용을 입력해 주세요."></textarea>
-                </div>
-                <button id="등록하기버튼" onclick="WriteNewDiary()">등록하기</button>
+                <div id="강아지보여주는곳">wdddcdc</div>
 
-            </div> -->
+        </div> <!-- 사진보관함 -->
 
-        </div>
+
     </div>
+
+
 
     <div class="footer">
         <div class="footer__main">
@@ -110,6 +138,7 @@
 
     <img src="./asset/icon/topscroll.png" class="플로팅버튼" onclick="스크롤기능()"/>
 
+    
     <!-- 모달 영역 -->
 
     <!-- 일기 쓰기 모달 -->
@@ -196,6 +225,8 @@
             </div>
         </div>
      </div>
+
+
 
 </body>
 </html>
