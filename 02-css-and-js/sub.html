@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
     <link rel="stylesheet" href="./sub.css">
+    <link rel="stylesheet" href="./modal.css">
     <script src="sub.js"></script>
     <title>민지의 다이어리_서브</title>
 </head>
@@ -27,10 +28,15 @@
                 </div>
                 <div class="바디__메인__아티클섹션">
                     <span>내용</span>
-                    <div id="내용나타는곳"></div>
+                    <div id="내용 나타는곳"></div>
+                    <div class="바디__메인__아티클섹션__내용복사영역">
+                        <img src="./assets/icons/복사아이콘.png" alt="">
+                        <span onclick="복사기능()">내용복사</span>
+                    </div>
                 </div>
                 <div class="바디__메인__수정섹션">
                     <button onclick="수정하러가기기능()">수정</button>
+                    <button onclick="삭제모달열기()">삭제</button>
                 </div>
 
 
@@ -47,6 +53,25 @@
                 <div id="회고그려지는곳" class="바디__회고__출력섹션">
                     
                 </div>
+            </div>
+            <!-- 삭제모달 -->
+            <div class="삭제모달그룹" id="삭제모달ID">
+                <div class="삭제모달배경"></div>
+                <div class="삭제모달창">
+                   <div class="삭제모달창__메시지섹션">
+                      <div class="삭제모달창__메시지섹션__상단">일기 등록 취소</div>
+                      <div class="삭제모달창__메시지섹션__하단">등록을 취소 하시겠습니까?</div>
+                   </div>
+                   <div class="삭제모달창__버튼영역">
+                      <button onclick="삭제모달닫기()" class="삭제모달창__버튼영역__취소버튼">취소</button>
+                      <button onclick="삭제모달닫기(); 일기삭제기능();"  class="삭제모달창__버튼영역__삭제버튼">삭제</button>
+
+                   </div>
+                </div>
+              </div>
+              <!-- 토스트 -->
+            <div class="토스트" id="토스트나오는곳">
+                내용이 복사되었습니다
             </div>
         </div>
         </div>

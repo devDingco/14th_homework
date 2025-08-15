@@ -75,6 +75,13 @@
 .바디__메인__아티클섹션 {
     width: 73rem;
     height: 8.3125rem;
+    display: flex;
+    flex-direction: column;
+}
+.바디__메인__아티클섹션__내용복사영역{
+    display: flex;
+    justify-content: end;
+    cursor: pointer;
 }
 .바디__메인__수정섹션 {
     width: 73rem;
@@ -128,4 +135,22 @@
     letter-spacing: -0.01em;
     line-height: 1.5rem;
     font-weight: 500;
+}
+
+
+
+.토스트{
+    display: none;
+    position: absolute;
+    bottom: 4rem;
+    left: calc(50% - 76rem / 2);
+    width: 76rem;
+    background-color: black;
+    color: white;
+    height: 5.6rem;
+
+    text-align: center;
+    line-height: 5.6rem;
+    
+    
 }

@@ -8,6 +8,11 @@
 .컨테이너{
     width: 100%;
 }
+
+.바디__메인섹션__필터섹션{
+  display: flex;
+  justify-content: space-between;
+}
 .바디__메인섹션__아티클섹션{
     display: flex;
     flex-direction: column;
@@ -19,11 +24,16 @@
   width: 100%;
   order: 2;
   position: relative;
+
 }
+.바디__메인섹션__아티클섹션__일기칸__일기장{
+  max-width: none;
+}
+
 .바디__메인섹션__아티클섹션__일기칸__일기장 > a > img {width: 100%;}
 
-.바디__메인섹션__아티클섹션__일기쓰기칸{
+/* .바디__메인섹션__아티클섹션__일기쓰기칸{
     max-width: none;
     width: 100%;
     order: 1;
-}
+} */
