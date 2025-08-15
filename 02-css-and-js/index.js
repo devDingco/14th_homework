@@ -84,19 +84,14 @@ const 필터된일기목록HTML = 필터된.map((el,index)=>`
       <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
         <a href="./sub.html?number=${index}">     
           <img 
-            src="./assets/images/${el.감정}.png" 
-            alt="">
+            src="./assets/images/${el.감정}.png" alt="">
           <div>
            <span>${el.감정}</span> 
            <span>${el.날짜}</span>
           </div> 
           <h2>${el.제목}</h2>
-          <button onclick="일기삭제기능(event, ${index})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
-                        x
-          </button>
-        </a> 
-        
-        
+          </a> 
+          <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${index})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
       </div>
   `).join("") // map 뒤에서 바로 조인하는것도 가능함 => 친구목록html.join("") 동일
   //3. html 최종 삽입하기
@@ -124,132 +119,45 @@ const 일기등록기능 = () =>{
     const 기존일기목록 = JSON.parse(localStorage.getItem("일기목록") || "[]");
     기존일기목록.push(입력한일기)
     localStorage.setItem("일기목록", JSON.stringify(기존일기목록));
-  일기들.push(입력한일기)
-  localStorage.setItem("일기목록",JSON.stringify(일기들))
 
-  일기입력하기()
+    일기입력하기()
 
+}
+// 등록모달
+const 등록모달열기 = () => {
+  document.getElementById("등록모달ID").style = "display : block"
+  document.body.style.overflow = "hidden";
+}
+const 등록모달닫기 = () => {
+  document.getElementById("등록모달ID").style = "display : none" 
+  document.body.style.overflow = "scroll";
+}
+
+//등록완료모달
+const 등록완료모달열기 = () => {
+  document.getElementById("등록완료모달ID").style = "display : block"
+}
+const 등록완료모달닫기 = () => {
+  document.getElementById("등록완료모달ID").style = "display : none" 
+}
+
+//등록취소모달
+const 등록취소모달열기 = () => {
+  document.getElementById("등록취소모달ID").style = "display : block"
+}
+const 등록취소모달닫기 = () => {
+  document.getElementById("등록취소모달ID").style = "display : none" 
 }
 
 
+// document.getElementById('등록완료버튼').addEventListener('click', () => {
+//   일기등록기능();
+//   등록완료모달닫기();
+// });
 
-// const 일기조회기능 = () =>{
-//   // 1. 친구목록 로컬스토리지에서 가져오기
-//   const 일기들 = localStorage.getItem("일기목록")
-//   const 일기목록배열 = JSON.parse(일기들 === null ? "[]" : 일기들)
-//   // 2. 배열을 반복해서 태그 만들기 (그리기)
-//   const 일기목록HTML = 일기목록배열.map((el,index)=>`
-//       <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
-//          <img 
-//             src="./assets/images/일기1.png" 
-//              alt="" 
-//               onclick='상세정보보기(${JSON.stringify(입력한일기)})'>
-//           <div>
-//            <span>${감정}</span> 
-//            <span>${날짜}</span>
-//          </div> 
-//           <h2>${제목}</h2>
-//         </div>
-//   `).join("") // map 뒤에서 바로 조인하는것도 가능함 => 친구목록html.join("") 동일
-//   //3. html 최종 삽입하기
-//   document.getElementById("일기칸").innerHTML = 일기목록HTML
+//  function 상세정보보기(일기목록) {
+//     alert(`제목: ${일기목록.제목}, 내용: ${일기목록.내용}, 날짜: ${일기목록.날짜}, 감정: ${일기목록.감정}`);
 // }
-
-// function 일기등록(){
-//     const 감정 = document.querySelector('input[name="감정"]:checked').value;
-//     const 제목 = document.getElementById("입력한제목").value;
-//     const 내용 = document.getElementById("입력한내용").value;
-    
-    
-//     const 오늘 = new Date();
-//     const 년 = 오늘.getFullYear();
-//     const 월 = String(오늘.getMonth() + 1).padStart(2, '0');
-//     const 일 = String(오늘.getDate()).padStart(2, '0');
-    
-//     const 날짜 = `${년}.${월}.${일}`
-
-//     const 입력한일기 ={
-//         감정: 감정, 제목: 제목, 내용: 내용 ,날짜: 날짜 
-//     }
-//    일기목록.push(입력한일기)
-//    console.log("추가되었습니다") 
-   
-//     if(감정 ==="슬픔"){
-//         document.getElementById("일기칸").innerHTML += `
-//         <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
-//          <img 
-//             src="./assets/images/일기1.png" 
-//              alt="" 
-//               onclick='상세정보보기(${JSON.stringify(입력한일기)})'>
-//           <div>
-//            <span>${감정}</span> 
-//            <span>${날짜}</span>
-//          </div> 
-//           <h2>${제목}</h2>
-//         </div>`;
-//     }else if(감정 ==="놀람"){
-//         document.getElementById("일기칸").innerHTML += `
-//         <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
-//          <img  
-//             src="./assets/images/일기2.png" 
-//              alt="" 
-//               onclick='상세정보보기(${JSON.stringify(입력한일기)})'>
-//           <div>
-//            <span>${감정}</span> 
-//            <span>${날짜}</span>
-//          </div> 
-//           <h2>${제목}</h2>
-//         </div>`;
-//     }else if(감정 === "화남"){
-//         document.getElementById("일기칸").innerHTML += `
-//         <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
-//          <img 
-//             src="./assets/images/일기3.png" 
-//              alt="" 
-//               onclick='상세정보보기(${JSON.stringify(입력한일기)})'>
-//           <div>
-//            <span>${감정}</span> 
-//            <span>${날짜}</span>
-//          </div> 
-//           <h2>${제목}</h2>
-//         </div>`;
-//     }else if(감정 === "행복"){
-//         document.getElementById("일기칸").innerHTML += `
-//         <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
-//          <img 
-//             src="./assets/images/일기4.png" 
-//              alt="" 
-//               onclick='상세정보보기(${JSON.stringify(입력한일기)})'>
-//           <div>
-//            <span>${감정}</span> 
-//            <span>${날짜}</span>
-//          </div> 
-//           <h2>${제목}</h2>
-//         </div>`;
-//     }else{
-//         document.getElementById("일기칸").innerHTML += `
-//         <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
-//          <img 
-//             src="./assets/images/일기5.png" 
-//              alt="" 
-//               onclick='상세정보보기(${JSON.stringify(입력한일기)})'>
-//           <div>
-//            <span>${감정}</span> 
-//            <span>${날짜}</span>
-//          </div> 
-//           <h2>${제목}</h2>
-//         </div>`;
-//     }
-
-
-   
-// }
-
- function 상세정보보기(일기목록) {
-    alert(`제목: ${일기목록.제목}, 내용: ${일기목록.내용}, 날짜: ${일기목록.날짜}, 감정: ${일기목록.감정}`);
-}
-
-// localStorage.setItem
 
 function 일기삭제기능(event, 일기인덱스) {
 
@@ -269,3 +177,15 @@ function 일기삭제기능(event, 일기인덱스) {
   // 4. 삭제된 일기목록 화면에 다시 그리기
   일기입력하기();
 }
+
+window.addEventListener("keydown",(event)=>{
+  if(event.key === "Escape") {
+    등록모달닫기();
+  }
+})
+
+const 스크롤위로기능 = () => {
+  window.scrollTo({
+    top: 0,
+  });
+};

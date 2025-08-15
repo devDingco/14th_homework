@@ -1,8 +1,10 @@
  <!DOCTYPE html>
  <html lang="ko">
  <head>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <script src="./index.js"></script>
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./modal.css">
     <link
       rel="stylesheet"
       href="./mobile.css"
@@ -32,6 +34,8 @@
                </div>
                <!-- 필터섹션 -->
                <div class="바디__메인섹션__필터섹션">
+                  <div class="바디__메인섹션__필터섹션__필터영역">
+
                      <div class="바디__메인섹션__필터섹션__필터">
                         <select id="필터" onchange="필터링기능(event)">
                            <option >전체</option>
@@ -43,6 +47,9 @@
                        </select>
                      
                     </div>
+                    
+                  </div>
+                  <button onclick="스크롤위로기능(); 등록모달열기();"><img src="./assets/icons/일기쓰기버튼.png" alt=""></button>
                </div>
                   
                <!-- 아티클섹션 -->
@@ -52,7 +59,74 @@
                      
    
                   </div>   
-                  <div class="바디__메인섹션__아티클섹션__일기쓰기칸">
+                  <!-- 모달섹션 -->
+               <div class="등록모달그룹" id="등록모달ID">
+                     <div onclick="등록모달닫기()" class="등록모달배경"></div>
+                     <div class="등록모달창">
+                        <div class="등록모달창__타이틀섹션">
+                              <h2>일기 쓰기</h2>
+                        </div>
+                        <div class="등록모달창__아티클섹션">
+                           <div class="등록모달창__아티클섹션__상단">
+                              <h3>오늘 기분은 어땠나요?</h3>
+                              <div>
+                                 <input type="radio" name="감정" value="행복해요"> 행복해요
+                                 <input type="radio" name="감정" value="슬퍼요"> 슬퍼요
+                                 <input type="radio" name="감정" value="놀랐어요"> 놀랐어요
+                                 <input type="radio" name="감정" value="화나요"> 화나요
+                                 <input type="radio" name="감정" value="기타"> 기타
+                              </div>
+                              
+                           </div>
+                           <div class="등록모달창__아티클섹션__하단">
+                              <div class="등록모달창__아티클섹션__하단__제목영역">
+                                 <span>제목</span>
+                                 <input id="입력한제목" placeholder="제목을 입력해주세요" type="text">
+                              </div>
+                              <div class="등록모달창__아티클섹션__하단__내용영역">
+                                 <span>내용</span>
+                                 <input id="입력한내용" placeholder="내용을 입력해주세요." type="text" name="" id="">
+                              </div>
+                              
+                           </div>
+                        </div>
+                        <div class="등록모달창__등록섹션">
+                           <button onclick="등록취소모달열기()" class="등록모달창__등록섹션__닫기버튼">닫기</button>
+                           <button onclick="등록완료모달열기()" class="등록모달창__등록섹션__등록버튼">등록하기</button>
+                        </div>
+                     </div>
+               </div>
+               
+               <!-- 중첩모달 (등록완료모달)-->
+                <div class="등록완료모달그룹" id="등록완료모달ID">
+                  <div onclick="일기등록기능(); 등록완료모달닫기(); 등록모달닫기();" class="등록완료모달배경"></div>
+                  <div class="등록완료모달창">
+                     <div class="등록완료모달창__메시지섹션">
+                        <div class="등록완료모달창__메시지섹션__상단">일기등록완료</div>
+                        <div class="등록완료모달창__메시지섹션__하단">등록이 완료되었습니다</div>
+                     </div>
+                     <button onclick="일기등록기능(); 등록완료모달닫기(); 등록모달닫기();" id="등록완료버튼" class="등록완료모달창__버튼">확인</button>
+                  </div>
+                </div>
+                <!-- 중첩모달(등록취소모달) -->
+                <div class="등록취소모달그룹" id="등록취소모달ID">
+                  <div class="등록취소모달배경"></div>
+                  <div class="등록취소모달창">
+                     <div class="등록취소모달창__메시지섹션">
+                        <div class="등록취소모달창__메시지섹션__상단">일기 등록 취소</div>
+                        <div class="등록취소모달창__메시지섹션__하단">등록을 취소 하시겠습니까?</div>
+                     </div>
+                     <div class="등록취소모달창__버튼영역">
+                        <button onclick="등록취소모달닫기()" class="등록취소모달창__버튼영역__계속작성버튼">계속 작성</button>
+                        <button onclick="등록취소모달닫기();등록모달닫기()"  class="등록취소모달창__버튼영역__등록취소버튼">등록 취소</button>
+
+                     </div>
+                  </div>
+                </div>
+
+
+
+                  <!-- <div class="바디__메인섹션__아티클섹션__일기쓰기칸">
                      <div class="바디__메인섹션__아티클섹션__일기쓰기칸__머리">
                         <img src="./assets/icons/일기쓰기.png" alt=""    >
                      </div>
@@ -78,7 +152,7 @@
                            <img src="./assets/images/등록하기.png" alt="">
                         </button>
                      </div>
-                  </div>
+                  </div> -->
                </div>
             </div>
          </div>
