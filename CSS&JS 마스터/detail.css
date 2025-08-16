@@ -276,8 +276,95 @@
     
 }
 
-#드롭다운{
+#frame_71{
+    width: 1880px;
+    height: 321px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 24px;
+    /* background-color: whitesmoke; */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+#버튼입력{
+    width: 1168px;
+    height: 48px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 16px;
+    display: flex;
+}
+
+#입력 {
     width: 51px;
+    height: 48px;
+    border-radius: 8px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 10px;
+    filter: invert(100%)
+}
+
+.회고인풋{
+    width: 1101px;
+    height: 48px;
+    border-radius: 8px;
+    border-width: 1px;
+    gap: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.CSS_회고목록{
+    display: flex;
+    border-bottom: 2px solid #e4e4e4;
+    padding: 12px;
+}
+
+.CSS_회고목록_마지막 {
+    display: flex;
+    padding: 12px;
+}
+
+.CSS_회고목록_날짜영역 {
+    font-size: 16px;
+    color: #777;
+    padding-left: 12px;
+}
+
+.CSS_회고목록_내용영역 {
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    line-height: 24px;
+    font-weight: 500;
+}
+  
+
+#frame_72{
+    width: 1168px;
+    height: 321px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    padding-bottom: 16px;
+    gap: 24px;
+    border-bottom-width: 1px;
+    /* background-color: tomato; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+}
+
+#드롭다운{
     height: 40px;
     border-radius: 8px;
     border-width: 1px;
