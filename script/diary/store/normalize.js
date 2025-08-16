@@ -4,14 +4,15 @@
   var C = w.DiaryStoreCore;
   if (!C) return;
 
-  // ── Fallbacks ───────────────────────────────────────────────────────────────
+  // 최후의 안전망만 유지: 라벨/이모지 매핑은 util.normalizeMood(→ DiaryConst)가 담당.
   function fbMood(x) {
-    if (typeof x !== "string" || !x.trim()) return "etc";
-    var s = String(x).trim().replace(/^[^\w가-힣]+/, "");
-    var MAP = { "행복해요":"happy", "슬퍼요":"sad", "화나요":"angry", "놀랐어요":"surprised", "기타":"etc" };
-    if (MAP[s]) return MAP[s];
-    s = s.toLowerCase();
-    return ["happy","sad","angry","surprised","etc"].indexOf(s) >= 0 ? s : "etc";
+    var s = (typeof x === "string") ? x.trim() : "";
+    if (!s) return "etc";
+    var allowed = (w.DiaryConst && Array.isArray(w.DiaryConst.EMOTIONS))
+      ? w.DiaryConst.EMOTIONS
+      : ["happy","sad","angry","surprised","etc"];
+    var low = s.toLowerCase();
+    return allowed.indexOf(low) >= 0 ? low : "etc";
   }
 
   function fbDate(v) {

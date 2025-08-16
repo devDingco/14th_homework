@@ -4,9 +4,12 @@
   var C = w.DiaryStoreCore;
   if (!C) return;
 
-  // emotionText 기본값 맵
-  var EMO = { happy: "행복해요", sad: "슬퍼요", angry: "화나요", surprised: "놀랐어요", etc: "기타" };
-
+  // emotionText: DiaryConst 우선, 실패 시 안전한 기본값
+  // 간결 폴백: 로더가 기본값을 주입하므로 최소만 유지
+  function emoText(mood) {
+    var map = w.DiaryConst && w.DiaryConst.emotionText;
+    return (map && map[mood]) || (map && map.etc) || "기타";
+  }
   function validateDiary(dy) {
     if (!dy || typeof dy !== "object") throw new Error("newDiary는 객체여야 합니다.");
 
@@ -16,9 +19,11 @@
     dy.date = C.normalizeDate(dy.date);
 
     // 파생 필드 채움
-    if (!C.isNonEmptyString(dy.image)) dy.image = "./images/" + dy.mood + ".png";
-    if (!C.isNonEmptyString(dy.emotionText)) dy.emotionText = EMO[dy.mood] || "기타";
-
+    if (!C.isNonEmptyString(dy.image)) {
+      dy.image = (w.DiaryConst && typeof w.DiaryConst.imageFor === "function")
+        ? w.DiaryConst.imageFor(dy.mood)
+        : ("./images/" + dy.mood + ".png"); // 안전 폴백
+    }   if (!C.isNonEmptyString(dy.emotionText)) dy.emotionText = emoText(dy.mood);
     // ID 보장
     if (!C.isNonEmptyString(dy.id) && !C.isNonEmptyString(dy.diaryId)) {
       dy.id = C.deriveId(dy);
