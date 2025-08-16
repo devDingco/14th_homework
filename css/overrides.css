@@ -1,0 +1,21 @@
+/* css/overrides.css — 안전 최소 수정만: footer 정위치 + 기본 폭만 표준화 */
+@layer overrides {
+  /* 페이지 폭: 너무 넓거나 좁지 않게만. existing 레이아웃은 유지 */
+  :root {
+    --page-max: 1120px;
+    --gutter: 20px;
+  }
+  body { min-width: 320px; }
+  /* 현재 container 클래스가 있다면 폭 표준화 (없어도 무해) */
+  .container { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* 핵심: footer 고정 해제 */
+  footer, .site-footer {
+    position: static !important;
+    inset: auto !important;   /* bottom/left/right 초기화 */
+    width: 100%;
+  }
+}
+/* filter: sticky 기반 */
+.filter-sticky { position: sticky; top: var(--sticky-top, 0px); z-index: 50; }
+
