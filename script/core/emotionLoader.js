@@ -1,62 +1,55 @@
-// script/diary/constants/emotions.loader.js
-(function (w) {
-  "use strict";
-
-  // 기본값(안전망). JSON 로드 성공 시 덮어씌움.
-  var defaults = {
-    allowed: ["happy","sad","angry","surprised","etc"],
-    labelToCode: {
-      "행복해요":"happy","슬퍼요":"sad","화나요":"angry","놀랐어요":"surprised","기타":"etc",
-      "😊 행복해요":"happy","😢 슬퍼요":"sad","😡 화나요":"angry","😮 놀랐어요":"surprised","❓ 기타":"etc"
-    },
-    emotionText: {
-      happy:"행복해요", sad:"슬퍼요", angry:"화나요", surprised:"놀랐어요", etc:"기타"
-    },
-    image: {
-      happy:"./images/happy.png", sad:"./images/sad.png", angry:"./images/angry.png",
-      surprised:"./images/surprised.png", etc:"./images/etc.png"
-    }
-  };
-
-  function trimStr(v){ return (typeof v === "string" ? v.trim() : ""); }
-  function moodFromInput(v, cfg){
-    var s = trimStr(v);
-    // 선행 이모지/기호 제거(예: "😊 행복해요")
-    s = s.replace(/^[^\w가-힣]+/, "");
-    if (cfg.labelToCode[s]) return cfg.labelToCode[s];
-    var low = s.toLowerCase();
-    return cfg.allowed.indexOf(low) >= 0 ? low : "etc";
-  }
-  function imageFor(m, cfg){ return cfg.image[m] || cfg.image.etc; }
-
-  // 전역 객체 초기화(한 번만)
-  if (!w.DiaryConst) w.DiaryConst = {};
-  if (w.DiaryConst.__EMO_INIT__) return;
-
-  // 즉시 기본 동작 제공
-  var cfg = Object.assign({}, defaults);
-  w.DiaryConst.EMOTIONS = cfg.allowed.slice();
-  w.DiaryConst.emotionText = Object.assign({}, cfg.emotionText);
-  w.DiaryConst.moodFromInput = function(v){ return moodFromInput(v, cfg); };
-  w.DiaryConst.imageFor = function(m){ return imageFor(m, cfg); };
-  w.DiaryConst.__EMO_INIT__ = true;
-
-  // 비동기 JSON 로드(성공 시 cfg 업데이트)
+// script/core/componentLoader.js
+async function loadComponents() {
   try {
-    fetch("./script/json/emotions.json", { cache: "no-store" })
-      .then(function(r){ return r.ok ? r.json() : defaults; })
-      .then(function(j){
-        cfg = Object.assign({}, defaults, j || {});
-        // 최신 값으로 다시 바인딩(기존 API는 동일)
-        w.DiaryConst.EMOTIONS = cfg.allowed.slice();
-        w.DiaryConst.emotionText = Object.assign({}, cfg.emotionText);
-        // 함수는 클로저 cfg를 참조하므로 새 cfg로 동작
-        console.log("[emotions.loader] emotions.json loaded");
-      })
-      .catch(function(){
-        console.warn("[emotions.loader] using defaults (json load failed)");
-      });
-  } catch(_) {
-    console.warn("[emotions.loader] using defaults (exception)");
+    const [header, main, form, footerRaw] = await Promise.all([
+      fetch("./component/header.html").then(r => r.ok ? r.text() : Promise.reject("header.html 불러오기 실패")),
+      fetch("./component/main.html").then(r => r.ok ? r.text() : Promise.reject("main.html 불러오기 실패")),
+      fetch("./component/form.html").then(r => r.ok ? r.text() : Promise.reject("form.html 불러오기 실패")),
+      fetch("./component/footer.html").then(r => r.ok ? r.text() : Promise.reject("footer.html 불러오기 실패")),
+    ]);
+
+    // 선택 컴포넌트: 필터/버튼 템플릿(없으면 건너뜀)
+    let filter = "", viewBtn = "", delBtn = "";
+    try { const r = await fetch("./component/filter.html"); if (r.ok) filter = await r.text(); } catch(e){ console.warn("⚠️ filter.html 로드 실패:", e); }
+    try { const r = await fetch("./component/diary/viewButton.html"); if (r.ok) viewBtn = await r.text(); } catch(e){ /* optional */ }
+    try { const r = await fetch("./component/diary/deleteButton.html"); if (r.ok) delBtn = await r.text(); } catch(e){ /* optional */ }
+
+    const footer = footerRaw
+      .replaceAll("{name}", "민지")
+      .replaceAll("{year}", String(new Date().getFullYear()))
+      .replaceAll("{appTitle}", "민지의 다이어리");
+
+    const headerEl = document.getElementById("header");
+    const mainEl   = document.getElementById("main");
+    const formEl   = document.getElementById("form");
+    const footerEl = document.getElementById("footer");
+    if (!headerEl || !mainEl || !formEl || !footerEl) throw new Error("❌ 대상 요소(id)가 하나 이상 존재하지 않습니다.");
+
+    headerEl.innerHTML = header;
+    mainEl.innerHTML   = main;
+    formEl.innerHTML   = form;
+    footerEl.innerHTML = footer;
+    if (window.initDiaryForm) window.initDiaryForm();
+
+    // ── 필터 주입: 리스트 바로 위에, 단 한 번만 ──
+    if (filter) {
+      const listEl = mainEl.querySelector("#diary-list");
+      let slot = mainEl.querySelector("#filter-slot");
+      if (!slot) { slot = document.createElement("div"); slot.id = "filter-slot"; }
+      if (listEl) mainEl.insertBefore(slot, listEl); else mainEl.prepend(slot);
+      slot.innerHTML = filter;
+      document.querySelectorAll("#diary-filter").forEach(el => { if (el.parentElement !== slot) el.remove(); });
+      if (window.DiaryFilter?.init) window.DiaryFilter.init("#filter-select");
+      if (window.alignFormToCardImageTop) window.alignFormToCardImageTop();
+    }
+
+    // ── 버튼 컴포넌트 템플릿을 코어 레지스트리에 등록 ──
+    if (window.Templates) {
+      if (viewBtn) window.Templates.set("diary.viewButton", viewBtn);
+      if (delBtn)  window.Templates.set("diary.deleteButton", delBtn);
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
   }
-})(window);
+}

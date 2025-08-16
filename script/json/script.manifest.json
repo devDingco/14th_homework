@@ -26,8 +26,6 @@
 "./script/diary/list/list.bind.js",
 "./script/diary/list/list.autorender.js",
 
-"./script/diary/viewButton.template.js",
-
 "./script/filter/filter.dropdown.js",
 "./script/filter/filter.sticky.core.js",
 "./script/filter/filter.sticky.runtime.js",

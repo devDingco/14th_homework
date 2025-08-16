@@ -2,75 +2,74 @@
 (function (w, d) {
   "use strict";
 
-  function makeButton() {
-    try {
-      if (w.DiaryViewButton && typeof w.DiaryViewButton.clone === "function") {
-        return w.DiaryViewButton.clone();
-      }
-    } catch(_) {}
-    var b = d.createElement("button");
-    b.type = "button";
-    b.className = "btn-view-detail";
-    b.setAttribute("data-role", "view-detail");
-    b.textContent = "상세보기";
-    return b;
-  }
+  var API = w.DiaryCardView = w.DiaryCardView || {};
+  if (API.inject) return; // 중복 정의 방지
 
-  function goDetail(getId, entry){
-    var id = (typeof getId === "function") ? getId() : "";
-    if (!id) return;
-    try {
-      if (typeof w.openDiaryDetail === "function") {
-        w.openDiaryDetail(id, entry);
-        return;
-      }
-    } catch(_) {}
-    try {
-      var url = "./subpage/detail.html?id=" + encodeURIComponent(id);
-      w.location.href = url;
-    } catch(e){ console.error("❌ 상세보기 이동 실패:", e); }
-  }
-
-  function bind(btn, getId, entry){
-    btn.addEventListener("click", function(ev){
-      ev.preventDefault(); ev.stopPropagation();
-      goDetail(getId, entry);
-    });
-    btn.addEventListener("keydown", function(ev){
-      if (ev.key === "Enter" || ev.key === " ") {
-        ev.preventDefault(); ev.stopPropagation();
-        goDetail(getId, entry);
-      }
-    });
-    btn.setAttribute("aria-label", "상세보기");
-  }
-
-  /**
-   * container(.meta-right)에 상세보기 버튼을 1회 주입한다.
-   * @param {Element} container - 보통 .meta-right 컨테이너
-   * @param {Function} getId - 현재 카드의 안전한 id를 반환하는 함수
-   * @param {Object} entry - 카드의 데이터(라우팅 보조)
-   */
-  function inject(container, getId, entry){
-    if (!container || !(container instanceof Element)) return null;
-    if (container.querySelector(".btn-view-detail")) return null;
-
-    var btn = makeButton();
-    try {
-      var id = (typeof getId === "function") ? getId() : "";
-      if (id) btn.dataset.diaryId = id;
-    } catch(_) {}
-
-    bind(btn, getId, entry);
-
-    var first = container.firstElementChild;
-    if (first && first.classList && first.classList.contains("date")) {
-      container.insertBefore(btn, first);
-    } else {
-      container.appendChild(btn);
+  function pickTemplateHTML() {
+    // 1) 코어 레지스트리 우선
+    if (w.Templates && typeof w.Templates.get === "function") {
+      var h = w.Templates.get("diary.viewButton");
+      if (typeof h === "string" && h.trim()) return h;
     }
-    return btn;
+    // 2) 레거시 JS 템플릿(현 매니페스트에 존재)
+    if (w.viewButtonTemplate && typeof w.viewButtonTemplate.html === "string") {
+      return w.viewButtonTemplate.html;
+    }
+    // 3) 초소형 폴백(문자열)
+    return '<button type="button" class="diary-view-btn" aria-label="상세 보기">자세히</button>';
   }
 
-  w.DiaryCardView = { inject: inject };
+  function makeButton(html) {
+    var wrap = d.createElement("span");
+    wrap.className = "meta-action meta-view";
+    wrap.innerHTML = html;
+
+    // 다양한 마크업을 폭넓게 지원
+    var btn = wrap.querySelector(
+      '[data-role="view-button"], .view-button, .btn-view, .diary-view-btn, button, a'
+    );
+    if (!btn) {
+      btn = d.createElement("button");
+      btn.type = "button";
+      btn.className = "diary-view-btn";
+      btn.textContent = "자세히";
+      wrap.appendChild(btn);
+    }
+    return { wrap: wrap, btn: btn };
+  }
+
+  API.inject = function inject(metaRight, getId, entry) {
+    try {
+      if (!metaRight) return;
+
+      var html = pickTemplateHTML();
+      var ui = makeButton(html);
+
+      // 이벤트: 카드 클릭과 충돌 없게 선 캡처 후 전파 차단
+      ui.btn.addEventListener(
+        "click",
+        function (e) {
+          try {
+            e.preventDefault();
+            e.stopPropagation();
+            var id =
+              (typeof getId === "function" ? getId() : null) ||
+              (entry && (entry.id || entry.diaryId)) ||
+              (w.DiaryId && typeof w.DiaryId.get === "function" ? w.DiaryId.get() : null);
+
+            if (typeof w.openDiaryDetail === "function") {
+              w.openDiaryDetail(id, entry || null);
+            }
+          } catch (err) {
+            console.error("view button click failed:", err);
+          }
+        },
+        true // capture 단계에서 먼저 잡아서 카드 클릭과 충돌 방지
+      );
+
+      metaRight.appendChild(ui.wrap);
+    } catch (e) {
+      console.error("DiaryCardView.inject failed:", e);
+    }
+  };
 })(window, document);
