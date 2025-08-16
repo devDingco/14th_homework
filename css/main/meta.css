@@ -16,3 +16,50 @@ main .card-title {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.card-meta .meta-right{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.btn-view-detail{
+  padding: 4px 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+.btn-view-detail:hover{ background:#f6f6f6; }
+
+/* === Override: 카드 영역의 상세보기 버튼 고정 스타일 ==================== */
+/* 다른 전역 button 규칙/필터 테마가 영향을 주더라도, 카드 내부에서는 이 값으로 확정 */
+.diary-card .btn-view-detail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  height: 28px;                 /* 기존 느낌 유지 (필요 시 30~32로 미세조정) */
+  padding: 4px 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  line-height: 1;
+
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+}
+
+.diary-card .btn-view-detail:hover {
+  background: #f6f6f6;
+}
+/* ======================================================================= */
+
+

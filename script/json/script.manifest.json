@@ -1,24 +1,35 @@
 [
   "./script/utils/safe.js",
   "./script/utils/dom.js",
-"./script/diaryList.js",
+  "./script/utils/id.util.js",
+
+  "./script/diary/store/core.js",
+  "./script/diary/store/util.js",
+  "./script/diary/store/normalize.js",
+  "./script/diary/store/validate.js",
+  "./script/diary/store/persist.js",
+  "./script/diary/store/lookup.js",
+  "./script/diary/store/render.js",
+  "./script/diary/store/api.js",
 
   "./script/diary/list/list.defaults.js",
   "./script/diary/list/list.utils.js",
   "./script/diary/list/list.normalize.js",
+
+  "./script/diary/list/list.card.view.js",
+  "./script/diary/list/list.card.delete.js",
   "./script/diary/list/list.card.js",
+  "./script/diary/list/card.click.js",
+  "./script/diary/list/detail.bind.adapter.js",
+
   "./script/diary/list/list.render.js",
   "./script/diary/list/list.bind.js",
   "./script/diary/list/list.autorender.js",
 
-
   "./script/diary/viewButton.template.js",
-  "./script/diary/viewButtonEnhancer.js",
-
-  "./script/diary/fetchRender.js",
-  "./script/diary/render.js",
-  "./script/diary/store.util.js", 
-  "./script/diaryStore.js",
-  "./script/filterDropdown.js",
-  "./script/formHandler.js"
+  
+  "./script/filter/filter.dropdown.js",
+  "./script/formHandler.js",
+  "./script/filter/filter.sticky.core.js",
+  "./script/filter/filter.sticky.runtime.js"
 ]

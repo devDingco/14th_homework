@@ -39,3 +39,19 @@ main .card-meta .meta-right {
   align-items: center;
   gap: 8px;
 }
+
+/* 카드 인터랙션 — main.css 에서 분리 */
+main .diary-card {
+  transition: transform 0.5s ease;
+  will-change: transform;
+  transform-origin: center center;
+  position: relative;
+  z-index: 1;              /* 기존 시각 레이어 유지 */
+}
+
+/* hover 확대 효과(기존 유지) */
+main .diary-card:hover {
+  transform: scale(1.1);
+  z-index: 3;              /* 필터는 body 승격 + z-index 4000+ 이라 충돌 없음 */
+}
+

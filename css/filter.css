@@ -130,3 +130,61 @@
   /* 나머지 배경/트랜지션 등은 네가 둔 그대로 */
 }
 #filter-slot{ position: relative; z-index: 0; }
+
+
+/* === Sticky Filter Override (단일 출처: filter.css 끝) =================== */
+:root {
+  --sticky-top: 0px;            /* 필요 시 헤더 높이에 맞춰 조정 */
+}
+
+/* data-속성 기준으로 단일 셀렉터 통일 */
+[data-sticky="filter"].diary-filter {
+  position: sticky;
+  top: var(--sticky-top);
+  /* 카드 위로 확실히 올라오도록: 동일 컨텍스트에서는 이 값이 승리 */
+  z-index: 2000;
+  /* 겹침 시 비주얼 안정화 */
+  background: var(--filter-bg, #fff);
+  color: var(--filter-fg, #222);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background-color .2s, color .2s, box-shadow .2s;
+  /* 내부/자식의 z-index 레이어가 밖으로 새지 않도록 */
+  isolation: isolate;
+}
+
+/* 스크롤 시(클래스 토글) 반전 */
+[data-sticky="filter"].diary-filter.is-scrolled {
+  background: var(--filter-bg-scrolled, #111);
+  color: var(--filter-fg-scrolled, #fff);
+  box-shadow: 0 2px 14px rgba(0,0,0,.12);
+}
+
+/* 셀렉트는 자체 z-index를 올릴 필요 없음(부모가 위에 있으므로) */
+#filter-select { position: relative; z-index: 0; }
+/* ======================================================================== */
+
+
+/* === Stacking Reset for Filter Context (filter.css 끝) =================== */
+/* 필터가 들어있는 상위 컨테이너의 스태킹 컨텍스트를 리셋 */
+.container,
+#main {
+  position: relative;          /* 안전한 기준 컨텍스트 */
+  z-index: auto;               /* 상위가 임의 z-index로 고정되지 않게 */
+  transform: none !important;  /* 강제 컨텍스트 해제 */
+  filter: none !important;
+  perspective: none !important;
+  will-change: auto !important;
+  overflow: visible;           /* sticky 영역이 잘리지 않게 (문제시 이 줄만 주석 처리) */
+}
+
+/* 다이어리 레이어 기본값(필터보다 한참 아래) */
+.diary-list,
+.diary-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* 카드 안의 삭제버튼은 카드 위지만, 여전히 필터(2000)보다 아래 */
+.btn-delete-card { z-index: 2; }
+/* ======================================================================== */

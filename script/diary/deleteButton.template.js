@@ -33,7 +33,7 @@
     b.type = "button";
     b.className = "btn-delete-card";
     b.setAttribute("data-role", "delete-card");
-    b.textContent = "×";
+    b.textContent = "x";
     return b;
   }
 

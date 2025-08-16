@@ -1,100 +1,52 @@
-// --- card.js 상단 근처: 버튼 템플릿 준비 ---
-const VIEW_BTN_URL = "./component/diary/viewButton.html";
-let viewBtnTpl = null;                 // <button> element (클론용)
+// script/diary/card.js — compatibility wrapper (no duplicate logic)
+(function (w, d) {
+  "use strict";
 
-function preloadViewBtn() {
-  if (viewBtnTpl) return;
-  fetch(VIEW_BTN_URL, { cache: "no-store" })
-    .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
-    .then(html => {
-      const wrap = document.createElement("div");
-      wrap.innerHTML = html.trim();
-      const btn = wrap.firstElementChild;
-      if (!btn || btn.tagName !== "BUTTON") throw new Error("invalid template");
-      viewBtnTpl = btn;
-    })
-    .catch(() => {
-      // 폴백: 텍스트 버튼
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "btn-view-detail";
-      b.setAttribute("data-role", "view-detail");
-      b.textContent = "상세보기";
-      viewBtnTpl = b;
-    });
-}
-preloadViewBtn();
+  var DL = w.DiaryList = w.DiaryList || {};
 
-function cloneViewBtn() {
-  return viewBtnTpl ? viewBtnTpl.cloneNode(true) : (function(){
-    const b = document.createElement("button");
-    b.type = "button"; b.className = "btn-view-detail"; b.setAttribute("data-role","view-detail"); b.textContent = "상세보기";
+  // 기존 card.js가 노출하던 API 대체: 템플릿은 DiaryViewButton에 위임
+  function cloneViewBtn() {
+    try {
+      if (w.DiaryViewButton && typeof w.DiaryViewButton.clone === "function") {
+        return w.DiaryViewButton.clone();
+      }
+    } catch (_) {}
+    // 최소 폴백
+    var b = d.createElement("button");
+    b.type = "button";
+    b.className = "btn-view-detail";
+    b.setAttribute("data-role", "view-detail");
+    b.textContent = "상세보기";
     return b;
-  })();
-}
+  }
 
-// --- 여기서부터 "카드 DOM 생성" 함수 본문에서 .card-meta 만드는 부분만 교체 ---
-function createCard(entry) {
-  // ... (상단 이미지/기본 구조는 기존대로)
-
-  const bottom = document.createElement("div");
-  bottom.className = "card-bottom";
-
-  const meta = document.createElement("div");
-  meta.className = "card-meta";
-
-  const emotion = document.createElement("span");
-  emotion.className = "emotion " + entry.mood;
-  emotion.textContent = entry.emotionText;
-
-  // 날짜 span
-  const date = document.createElement("span");
-  date.className = "date";
-  date.textContent = entry.date;
-
-  // 🔹 오른쪽 묶음: 버튼 + 날짜
-  const right = document.createElement("div");
-  right.className = "meta-right";
-
-  const btn = cloneViewBtn();
-  // 카드 id 표시(데이터에 맞게 id/diaryId 등 우선순위)
-  const diaryId = entry.id || entry.diaryId || (entry._raw && (entry._raw.id || entry._raw.diaryId)) || "";
-  if (diaryId) btn.dataset.diaryId = diaryId;
-
-  // 클릭 시 카드 클릭과 충돌 방지 및 라우팅 위임
-  btn.addEventListener("click", function (ev) {
-    ev.stopPropagation();
-    if (typeof window.openDiaryDetail === "function") {
-      try { window.openDiaryDetail(diaryId, entry); } catch (e) { /* noop */ }
-    } else {
-      // 임시: 디버그 로그
-      console.log("[view-detail]", diaryId, entry);
-      // 필요 시 임시 이동:
-      // if (diaryId) location.href = `./subpage/detail.html?id=${encodeURIComponent(diaryId)}`;
+  // 과거 createCard 호출 호환 → 표준 엔진으로 위임
+  function createCard(entry, opts) {
+    if (DL && typeof DL.createDiaryCard === "function") {
+      return DL.createDiaryCard(entry, opts);
     }
-  });
+    // 엔진 부재 폴백(크래시 방지용 최소 카드)
+    var card = d.createElement("div");
+    card.className = "diary-card";
+    var title = d.createElement("div");
+    title.className = "card-title";
+    title.textContent = (entry && entry.title) || "(제목 없음)";
+    card.appendChild(title);
+    return { card: card, data: entry || {} };
+  }
 
-  right.appendChild(btn);
-  right.appendChild(date);
+  // 전역 호환(과거 코드가 참조할 수 있음)
+  if (!w.cloneViewBtn) w.cloneViewBtn = cloneViewBtn;
+  if (!w.createCard) w.createCard = createCard;
 
-  meta.appendChild(emotion);
-  meta.appendChild(right);
-
-  const title = document.createElement("div");
-  title.className = "card-title";
-  title.textContent = entry.title;
-
-  bottom.appendChild(meta);
-  bottom.appendChild(title);
-
-  const card = document.createElement("div");
-  card.className = "diary-card mood-" + entry.mood;
-  // 카드에도 data-id를 남겨두면 이후 활용 용이
-  if (diaryId) card.dataset.diaryId = diaryId;
-
-  // ... (상단 .card-top 등 기존 코드 그대로 이어붙이기)
-  // card.appendChild(top);
-  card.appendChild(bottom);
-
-  return card;
-}
+  // 템플릿 선로딩은 전용 모듈에 위임(있을 때만)
+  try {
+    if (w.DiaryViewButton && typeof w.DiaryViewButton.ensure === "function") {
+      if (d.readyState === "loading") {
+        d.addEventListener("DOMContentLoaded", function () { w.DiaryViewButton.ensure(); }, { once: true });
+      } else {
+        w.DiaryViewButton.ensure();
+      }
+    }
+  } catch (_) {}
+})(window, document);

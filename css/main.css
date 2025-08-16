@@ -9,36 +9,3 @@
 @import url("./main/visibility.css");
 @import url("./main/responsive.css");  /* ← 반응형은 가장 마지막 */
 
-/* 메타 오른쪽 묶음: 버튼 + 날짜 나란히 */
-.card-meta .meta-right{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-/* 버튼 모양은 재사용 스타일로 */
-.btn-view-detail{
-  padding: 4px 10px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background: #fff;
-  font-size: 12px;
-  cursor: pointer;
-}
-.btn-view-detail:hover{ background:#f6f6f6; }
-
-main .diary-card {
-  /* 기존 transition 유지하되 filter는 제거 */
-  transition: transform 0.5s ease;
-  will-change: transform;
-  transform-origin: center center;
-  position: relative;
-  z-index: 1;
-}
-
-/* 카드 자체는 110%로 커진다 */
-main .diary-card:hover {
-  transform: scale(1.1);
-  z-index: 3;
-}
-
