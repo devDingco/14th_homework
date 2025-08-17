@@ -58,6 +58,5 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
     localStorage.setItem('저장된일기', JSON.stringify(전체일기목록));
-    location.href = './index.html';
   });
 });

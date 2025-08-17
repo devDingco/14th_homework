@@ -36,28 +36,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let 새감정 = '';
     if (행복라디오.checked) 새감정 = '행복해요';
     if (슬픔라디오.checked) 새감정 = '슬퍼요';
-    if (놀람라디오.checked) 새감정 = '놀랐어요';
-    if (화남라디오.checked) 새감정 = '화나요';
-    if (기타라디오.checked) 새감정 = '기타';
-
-    console.log('수정된데이터:', 새제목, 새내용, 새감정);
-    // 전체일기목록 가져오기
-    const 전체일기목록 = JSON.parse(localStorage.getItem('저장된일기'));
-
-    // 현재 수정하는 일기 찾아서 업데이트하기
-    // 반복문으로 하나씩 확인하기
-    for (let i = 0; i < 전체일기목록.length; i++) {
-      // 현재 보고 있는 일기가 수정하려는 일기와 같은가?
-      if (전체일기목록[i].title === 일기객체.title) {
-        // 제목이 같고
-        // 이 일기를 새로운 내용으로 바꾸자
-        전체일기목록[i].title = 새제목; // 제목 바꾸기
-        전체일기목록[i].content = 새내용; // 내용 바꾸기
-        전체일기목록[i].emotion = 새감정; // 감정 바꾸기
-        break; // 찾았으니까 멈춤
-      }
-    }
-    localStorage.setItem('저장된일기', JSON.stringify(전체일기목록));
-    location.href = './index.html';
+    if (놀랐어요.checked) 새감정 = '놀랐어요';
+    if (화나요.checked) 새감정 = '화나요';
+    if (기타.checked) 새감정 = '기타';
   });
 });
