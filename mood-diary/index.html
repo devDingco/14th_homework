@@ -2,139 +2,160 @@
 <html lang="ko">
 <head>
   <title>감정 일기장</title>
+
   <link rel="stylesheet" href="./css/root.css">
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="./css/main.css">
   <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="stylesheet" href="./css/detail.css">
 </head>
+
 <body>
   <div class="container">
-
     <h1 class="title01 header">지호의 다이어리</h1>
 
     <img src="./assets/images/rectangle.png"/>
 
-    <div class="navigator">
-      <span class="headline01 active">일기보관함</span>
-      <span class="headline01 inActive">사진보관함</span>
-    </div>
-    <div class="multiple-functions">
-      <div class="filter">
-        <select id="dropdown" class="dropdown" onchange="selectedMood()">
-          <option name="dropdown" value="total">전체</option>
-          <option name="dropdown" value="happy">행복해요</option>
-          <option name="dropdown" value="sad">슬퍼요</option>
-          <option name="dropdown" value="surprise">놀랐어요</option>
-          <option name="dropdown" value="angry">화나요</option>
-          <option name="dropdown" value="etc">기타</option>
-        </select>
-      </div>
-      <button onclick="openModal('main-diary-form')">+ 추가하기</button>
-    </div>
-    <div class="main">
-      
-      <div class="main__gallery"></div>
+    <nav class="navigator">
+      <span class="headline01 active" id="diary-box" onclick="toggleComponent('diary-box')">일기보관함</span>
+      <span class="headline01 inActive" id="photo-box" onclick="toggleComponent('photo-box')">사진보관함</span>
+    </nav>
 
-      <!-- modal : 일기 등록 -->
-      <div class="main-modal-group" id="main-diary-form">
-        <div class="main-diary-form-bg" onclick="closeModal('main-diary-form')"></div>
-        <form class="main__diary-form" id="myForm">
-          <h2>📍 일기 쓰기</h2>
-          <div class="select-box">
-            <h3>오늘 기분은 어땟나요?</h3>
-            <div class="mood-select-box">
-              <label for="happy"><input id="happy" name="mood" type="radio" onchange="checkContents()">행복해요</label>
-              <label for="sad"><input id="sad" name="mood" type="radio" onchange="checkContents()">슬퍼요</label>
-              <label for="surprise"><input id="surprise" name="mood" type="radio" onchange="checkContents()">놀랐어요</label>
-              <label for="angry"><input id="angry" name="mood" type="radio" onchange="checkContents()">화나요</label>
-              <label for="etc"><input id="etc" name="mood" type="radio" onchange="checkContents()">기타</label>
-            </div>
+    <!-- 일기보관함 -->
+    <main class="main">
+      <section id="diary-component">
+        <div class="multiple-functions">
+          <div class="filter">
+            <select id="dropdown" class="dropdown" onchange="selectedMood()">
+              <option name="dropdown" value="total">전체</option>
+              <option name="dropdown" value="happy">행복해요</option>
+              <option name="dropdown" value="sad">슬퍼요</option>
+              <option name="dropdown" value="surprise">놀랐어요</option>
+              <option name="dropdown" value="angry">화나요</option>
+              <option name="dropdown" value="etc">기타</option>
+            </select>
           </div>
-
-          <div class="main-diary-input-form">
-            <div class="main-diary-input">
-              <label for="title" class="body02_s">제목</label>
-              <input type="text" id="title" oninput="checkContents()"
-              placeholder="제목을 입력해 주세요."/>
-            </div>
-            <div class="main-diary-input">
-              <label for="contents" class="body02_s">내용</label>
-              <textarea name="" id="contents" oninput="checkContents()"
-              placeholder="내용을 입력해 주세요." style="height: 128px;"></textarea>
-            </div>
-          </div>
-          <div class="main-diary-active">
-            <button type="button" class="light-button" onclick="openModal('nested-modal-cancel')">닫기</button>
-            <button id="submit-button" type="button" disabled onclick="openModal('nested-modal-complete')">등록하기</button>
-          </div>
-        </form>
-      </div>
-
-      <!-- modal(중첩) : 일기 등록 완료-->
-      <div class="main-modal-group" id="nested-modal-complete">
-        <div class="main-diary-form-bg"></div>
-        <div class="nested-modal-area">
-          <div>
-            <h3>일기 등록 완료</h3>
-            <p>등록이 완료 되었습니다.</p>
-          </div>
-          <button form="myForm" type="submit">확인</button>
+          <button onclick="openModal('main-diary-form')">+ 추가하기</button>
         </div>
-      </div>
 
-      <!-- modal(중첩) : 일기 등록 취소 -->
-      <div class="main-modal-group" id="nested-modal-cancel">
-        <div class="main-diary-form-bg" onclick="closeModal('nested-modal-cancel')"></div>
-        <div class="nested-modal-area">
-          <div>
-            <h3>일기 등록 취소</h3>
-            <p>일기 등록을 취소 하시겠습니까?</p>
-          </div>
-          <div class="main-diary-active">
-            <button class="light-button" onclick="closeModal('nested-modal-cancel')">계속 작성</button>
-            <button onclick="closeModal('nested-modal-cancel');closeModal('main-diary-form')">등록 취소</button>
+        <div class="main__gallery"></div>
+
+        <!-- modal : 일기 등록 -->
+        <div class="main-modal-group" id="main-diary-form">
+          <div class="main-diary-form-bg" onclick="closeModal('main-diary-form')"></div>
+          <form class="main__diary-form" id="myForm">
+            <h2>📍 일기 쓰기</h2>
+
+            <div class="select-box">
+              <h3>오늘 기분은 어땟나요?</h3>
+              <div class="mood-select-box">
+                <label for="happy"><input id="happy" name="mood" type="radio" onchange="checkContents()">행복해요</label>
+                <label for="sad"><input id="sad" name="mood" type="radio" onchange="checkContents()">슬퍼요</label>
+                <label for="surprise"><input id="surprise" name="mood" type="radio" onchange="checkContents()">놀랐어요</label>
+                <label for="angry"><input id="angry" name="mood" type="radio" onchange="checkContents()">화나요</label>
+                <label for="etc"><input id="etc" name="mood" type="radio" onchange="checkContents()">기타</label>
+              </div>
+            </div>
+
+            <div class="main-diary-input-form">
+              <div class="main-diary-input">
+                <label for="title" class="body02_s">제목</label>
+                <input type="text" id="title" oninput="checkContents()"
+                placeholder="제목을 입력해 주세요."/>
+              </div>
+              <div class="main-diary-input">
+                <label for="contents" class="body02_s">내용</label>
+                <textarea name="" id="contents" oninput="checkContents()"
+                placeholder="내용을 입력해 주세요." style="height: 128px;"></textarea>
+              </div>
+            </div>
+            <div class="main-diary-active">
+              <button type="button" class="light-button" onclick="openModal('nested-modal-cancel')">닫기</button>
+              <button id="submit-button" type="button" disabled onclick="openModal('nested-modal-complete')">등록하기</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- modal(중첩) : 일기 등록 완료-->
+        <div class="main-modal-group" id="nested-modal-complete">
+          <div class="main-diary-form-bg"></div>
+          <div class="nested-modal-area">
+            <div>
+              <h3>일기 등록 완료</h3>
+              <p>등록이 완료 되었습니다.</p>
+            </div>
+            <button form="myForm" type="submit">확인</button>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- modal : 일기 삭제 -->
-    <div class="main-modal-group" id="nested-modal-delete">
-      <div class="main-diary-form-bg" onclick="closeModal('nested-modal-delete')"></div>
-        <div class="nested-modal-area">
-          <div>
-            <h3>일기 삭제</h3>
-            <p>일기를 삭제 하시겠어요?</p>
-          </div>
-          <div class="main-diary-active">
-            <button class="light-button" onclick="closeModal('nested-modal-delete')">취소</button>
-            <button id="diary-delete-button">삭제</button>
+        <!-- modal(중첩) : 일기 등록 취소 -->
+        <div class="main-modal-group" id="nested-modal-cancel">
+          <div class="main-diary-form-bg" onclick="closeModal('nested-modal-cancel')"></div>
+          <div class="nested-modal-area">
+            <div>
+              <h3>일기 등록 취소</h3>
+              <p>일기 등록을 취소 하시겠습니까?</p>
+            </div>
+            <div class="main-diary-active">
+              <button class="light-button" onclick="closeModal('nested-modal-cancel')">계속 작성</button>
+              <button onclick="closeModal('nested-modal-cancel');closeModal('main-diary-form')">등록 취소</button>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-  
+        <!-- modal : 일기 삭제 -->
+        <div class="main-modal-group" id="nested-modal-delete">
+          <div class="main-diary-form-bg" onclick="closeModal('nested-modal-delete')"></div>
+            <div class="nested-modal-area">
+              <div>
+                <h3>일기 삭제</h3>
+                <p>일기를 삭제 하시겠어요?</p>
+              </div>
+              <div class="main-diary-active">
+                <button class="light-button" onclick="closeModal('nested-modal-delete')">취소</button>
+                <button id="diary-delete-button">삭제</button>
+              </div>
+            </div>
+        </div>
+      </section>
 
+      <!-- 사진보관함 -->
+      <section id="photo-component" style="display: none;">
+        <div class="multiple-functions">
+          <div class="filter">
+            <select id="dropdown-ratio" class="dropdown" onchange="selectedRatio()">
+              <option name="dropdown-ratio" value="default">기본</option>
+              <option name="dropdown-ratio" value="horizontal">가로형</option>
+              <option name="dropdown-ratio" value="vertical">세로형</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="photo-dog" id="dog-gallery"></div>
+      </section>
+    </main>
+
+    <img onclick="scrollToTop()" id="float-button" src="./assets/icons/up_light.png">
   </div>
-  <img onclick="scrollToTop()" id="float-button" src="./assets/icons/up_light.png">
-      <!-- footer -->
-      <div class="footer">
-        <!-- <div class="footer-wrapper"> -->
-          <h4>지호의 다이어리</h4>
-          <p>대표: {name}</p>
-          <p>Copyright © 2024.{name} Co, Ltd</p>
-        <!-- </div> -->
-      </div>
+
+  <!-- footer -->
+  <div class="footer">
+      <h4>지호의 다이어리</h4>
+      <p>대표: {name}</p>
+      <p>Copyright © 2024.{name} Co, Ltd</p>
+  </div>
 
   <script src="./js/constants.js"></script>
   <script src="./js/formatUtils.js"></script>
+  <script src="./js/script.js"></script>
   <script src="./js/userDiary.js"></script>
 
   <script src="./js/checkContents.js"></script>
-  <script src="./js/script.js"></script>
+  
   <script src="./js/form.js"></script>
   <script src="./js/modal.js"></script>
+
+  <script src="./js/fetchData.js"></script>
 </body>
 </html>
