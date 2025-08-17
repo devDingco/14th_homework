@@ -33,13 +33,15 @@ const 일기리스트 = localStorage.getItem("일기목록")
         <a href="./sub.html?number=${index}">     
           <img 
             src="./assets/images/${el.감정}.png" alt="">
-          <div>
-           <span>${el.감정}</span> 
-           <span>${el.날짜}</span>
+          <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보">
+            <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정날짜">
+              <span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정">${el.감정}</span> 
+              <span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__날짜">${el.날짜}</span>
+            </div>
+            <h2 class="바디__메인섹션__아티클섹션__일기칸__일기장__제목">${el.제목}</h2>
           </div> 
-          <h2>${el.제목}</h2>
-          </a> 
-          <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${index})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
+        </a> 
+        <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${index})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
       </div>
   `).join("") // map 뒤에서 바로 조인하는것도 가능함 => 친구목록html.join("") 동일
   //3. html 최종 삽입하기
@@ -85,13 +87,15 @@ const 필터된일기목록HTML = 필터된.map((el,index)=>`
         <a href="./sub.html?number=${index}">     
           <img 
             src="./assets/images/${el.감정}.png" alt="">
-          <div>
-           <span>${el.감정}</span> 
-           <span>${el.날짜}</span>
+          <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보">
+            <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정날짜">
+              <span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정">${el.감정}</span> 
+              <span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__날짜">${el.날짜}</span>
+            </div>
+            <h2 class="바디__메인섹션__아티클섹션__일기칸__일기장__제목">${el.제목}</h2>
           </div> 
-          <h2>${el.제목}</h2>
-          </a> 
-          <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${index})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
+        </a> 
+        <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${index})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
       </div>
   `).join("") // map 뒤에서 바로 조인하는것도 가능함 => 친구목록html.join("") 동일
   //3. html 최종 삽입하기
@@ -189,3 +193,191 @@ const 스크롤위로기능 = () => {
     top: 0,
   });
 };
+
+
+
+// const 필터바꾸기기능 = ()=>{
+//   let 필터온오프여부 = document.getElementById("필터섹션").style.display
+//   if(필터온오프여부 === "block"){
+//     필터온오프여부 = "none";
+//   }else{
+//       필터온오프여부 = "block";
+//   } 
+// }
+const 필터바꾸기기능 = (선택한것) => {
+  const 필터섹션 = document.querySelector(".바디__메인섹션__필터섹션");
+  const 강아지필터섹션 = document.querySelector(".강아지필터섹션");
+  
+  // const 현재상태 = window.getComputedStyle(필터섹션).display; // ✅ 실제 값 읽기
+  
+  // if (현재상태 === "flex") {
+  //   필터섹션.style.display = "none";
+  //   강아지필터섹션.style.display = "flex"
+  // } else {
+  //   필터섹션.style.display = "flex";
+  //   강아지필터섹션.style.display = "none"
+  // }
+  switch(선택한것){
+    case "일기" : 필터섹션.style.display = "flex";
+    강아지필터섹션.style.display = "none";
+    break
+    case "강아지" : 필터섹션.style.display = "none";
+    강아지필터섹션.style.display = "flex";
+    
+  }
+};
+
+
+// const 강아지메뉴 =`
+//     <div id="이미지나오는곳"></div>
+//     <p>강아지목록</p>
+//     <p>강아지사진1</p>
+//     <p>강아지사진2</p>
+//     <p>강아지사진3</p>
+// `
+const 이미지선택변경 = (event) => {
+  const 선택값 = event.target.value;
+  
+  if (선택값 === "기본") {
+    이미지불러오는기능();  // 기존 기본형 이미지
+  } else if (선택값 === "가로") {
+    가로형이미지불러오는기능();
+  } else if (선택값 === "세로") {
+    세로형이미지불러오는기능();
+  }
+}
+
+
+  document.getElementById("이미지형태선택")
+  .addEventListener("change", 이미지선택변경);
+
+  
+function 이미지불러오는기능(){
+
+  // document.getElementById("이미지나오는곳").innerHTML = `<div class="스켈레톤"></div>`;
+    fetch("https://dog.ceo/api/breeds/image/random/10").then((받아온결과) =>{
+        받아온결과.json().then((객체만결과)=>{
+            console.log(객체만결과)
+            // document.getElementById("메뉴보여주는곳").innerHTML = 일기메뉴
+            const 이미지다운로드주소배열 = 객체만결과.message
+            const 상태 = 객체만결과.status
+            console.log(`이미지다운로드주소배열 : ${이미지다운로드주소배열}`)
+            console.log(`상태 : ${상태}`)
+
+            document.getElementById("이미지나오는곳").innerHTML = 이미지다운로드주소배열.map(el => { return `
+               <img class="바디__메인섹션_아티클섹션__일기칸__일기장__강아지이미지" src="${el}" >`
+            }).join("")
+            
+        })
+    })
+}
+// function 이미지불러오는기능(){
+//   fetch("https://dog.ceo/api/breeds/image/random/10")
+//     .then(res => res.json())
+//     .then(data => {
+//       const container = document.getElementById("이미지나오는곳");
+//       container.innerHTML = data.message.map(el => `<img src="${el}">`).join("");
+//     });
+// }
+
+function 가로형이미지불러오는기능(){
+  //document.getElementById("이미지나오는곳").innerHTML = `<div class="스켈레톤"></div>`;
+    fetch("https://dog.ceo/api/breeds/image/random/10").then((받아온결과) =>{
+        받아온결과.json().then((객체만결과)=>{
+            console.log(객체만결과)
+            // document.getElementById("메뉴보여주는곳").innerHTML = 일기메뉴
+            const 이미지다운로드주소배열 = 객체만결과.message
+            const 상태 = 객체만결과.status
+            console.log(`이미지다운로드주소배열 : ${이미지다운로드주소배열}`)
+            console.log(`상태 : ${상태}`)
+            document.getElementById("일기칸").innerHTML = `
+             <div id="이미지나오는곳">
+             </div>`
+            document.getElementById("이미지나오는곳").innerHTML = 이미지다운로드주소배열.map(el => { return `
+               <img class="바디__메인섹션_아티클섹션__일기칸__일기장__가로형이미지" src="${el}" >`
+            }).join("")
+            
+        })
+    })
+    
+}
+function 세로형이미지불러오는기능(){
+  //document.getElementById("이미지나오는곳").innerHTML = `<div class="스켈레톤"></div>`;
+    fetch("https://dog.ceo/api/breeds/image/random/10").then((받아온결과) =>{
+        받아온결과.json().then((객체만결과)=>{
+            console.log(객체만결과)
+            // document.getElementById("메뉴보여주는곳").innerHTML = 일기메뉴
+            const 이미지다운로드주소배열 = 객체만결과.message
+            const 상태 = 객체만결과.status
+            console.log(`이미지다운로드주소배열 : ${이미지다운로드주소배열}`)
+            console.log(`상태 : ${상태}`)
+            document.getElementById("일기칸").innerHTML = `
+             <div id="이미지나오는곳">
+             </div>`
+
+            document.getElementById("이미지나오는곳").innerHTML = 이미지다운로드주소배열.map(el => { return `
+               <img class="바디__메인섹션_아티클섹션__일기칸__일기장__세로형이미지" src="${el}" >`
+            }).join("")
+            
+        })
+    })
+}
+
+// const 일기메뉴스타일기능 = () =>{
+//   document.querySelector(".바디__메인섹션__아티클섹션__일기칸").classList.remove("강아지메뉴");
+//   document.querySelector(".바디__메인섹션__아티클섹션__일기칸").classList.add("바디__메인섹션_아티클섹센__일기칸");
+  
+// }
+// const 강아지메뉴스타일기능 = () =>{
+//   document.getElementById("이미지나오는곳").classList.add("강아지메뉴")
+//   document.getElementById("이미지나오는곳").classList.remove("바디__메인섹션_아티클섹센__일기칸")
+  
+// }
+const 일기메뉴스타일기능 = () =>{
+  document.getElementById("일기메뉴").classList.add("선택된메뉴")
+  document.getElementById("강아지메뉴").classList.remove("선택된메뉴")
+}
+const 강아지메뉴스타일기능 = () =>{
+  document.getElementById("강아지메뉴").classList.add("선택된메뉴")
+  document.getElementById("일기메뉴").classList.remove("선택된메뉴")
+}
+
+
+function 메뉴이동하기(내가클릭한것){
+  switch(내가클릭한것){
+    case "일기":
+      const 일기리스트 = localStorage.getItem("일기목록")
+      const 일기목록배열 = JSON.parse(일기리스트 === null ? "[]" : 일기리스트)
+      // 2. 배열을 반복해서 태그 만들기 (그리기)
+      const 일기목록HTML = 일기목록배열.map((el,index)=>`
+          <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
+            <a href="./sub.html?number=${index}">     
+              <img 
+                src="./assets/images/${el.감정}.png" alt="">
+              <div>
+               <span>${el.감정}</span> 
+               <span>${el.날짜}</span>
+              </div> 
+              <h2>${el.제목}</h2>
+              </a> 
+              <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${index})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
+          </div>
+      `).join("") // map 뒤에서 바로 조인하는것도 가능함 => 친구목록html.join("") 동일
+      //3. html 최종 삽입하기
+      
+        document.getElementById("일기칸").innerHTML = 일기목록HTML
+        필터바꾸기기능('일기');
+        일기메뉴스타일기능();
+        break;
+    case "강아지":
+   document.getElementById("일기칸").innerHTML = `
+    <div id="이미지나오는곳">
+    <div class="스켈레톤"></div>
+    </div>
+  `
+   
+   이미지불러오는기능();
+   필터바꾸기기능('강아지');
+   강아지메뉴스타일기능();
+}
+}

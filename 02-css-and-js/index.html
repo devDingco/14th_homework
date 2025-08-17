@@ -2,7 +2,8 @@
  <html lang="ko">
  <head>
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <script src="./index.js"></script>
+   <!-- <script src="./index.js"></script>
+   <script src="./component-dogs.js"></script> -->
     <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="./modal.css">
     <link
@@ -28,12 +29,12 @@
                <!-- 메뉴섹션 -->
                <div class="바디__메인섹션__메뉴섹션">
                   <div class="바디__메인섹션__메뉴섹션__메뉴">
-                        <span>일기보관함</span>
-                        <span>사진보관함</span>
+                        <div id="일기메뉴" class="선택된메뉴"  onclick="메뉴이동하기('일기')">일기보관함</div>
+                        <div id="강아지메뉴" onclick="메뉴이동하기('강아지')">사진보관함</div>
                   </div>
                </div>
                <!-- 필터섹션 -->
-               <div class="바디__메인섹션__필터섹션">
+               <div class="바디__메인섹션__필터섹션" id="필터섹션">
                   <div class="바디__메인섹션__필터섹션__필터영역">
 
                      <div class="바디__메인섹션__필터섹션__필터">
@@ -51,8 +52,18 @@
                   </div>
                   <button onclick="스크롤위로기능(); 등록모달열기();"><img src="./assets/icons/일기쓰기버튼.png" alt=""></button>
                </div>
-                  
+               <!-- 강아지필터 -->
+                <div class="강아지필터섹션">
+                   <div class="강아지필터섹션__강아지필터">
+                      <select id="이미지형태선택">
+                         <option value="기본">기본형</option>
+                         <option value="가로">가로형</option>₩
+                         <option value="세로">세로형</option>
+                       </select>
+                   </div>
+                </div>
                <!-- 아티클섹션 -->
+               
                <div class="바디__메인섹션__아티클섹션">
                   <div class="바디__메인섹션__아티클섹션__일기칸" id="일기칸">
                   
@@ -64,17 +75,36 @@
                      <div onclick="등록모달닫기()" class="등록모달배경"></div>
                      <div class="등록모달창">
                         <div class="등록모달창__타이틀섹션">
-                              <h2>일기 쓰기</h2>
+                              <h2>📍일기 쓰기</h2>
                         </div>
                         <div class="등록모달창__아티클섹션">
                            <div class="등록모달창__아티클섹션__상단">
                               <h3>오늘 기분은 어땠나요?</h3>
                               <div>
-                                 <input type="radio" name="감정" value="행복해요"> 행복해요
-                                 <input type="radio" name="감정" value="슬퍼요"> 슬퍼요
-                                 <input type="radio" name="감정" value="놀랐어요"> 놀랐어요
-                                 <input type="radio" name="감정" value="화나요"> 화나요
-                                 <input type="radio" name="감정" value="기타"> 기타
+                                 <div>
+                                 <input type="radio" name="감정" value="행복해요">
+                                    행복해요
+                                 </div>
+                                 <div>
+                                 <input type="radio" name="감정" value="슬퍼요">
+
+                                    슬퍼요
+                                 </div>
+                                 <div>
+                                 <input type="radio" name="감정" value="놀랐어요"> 
+                                    놀랐어요
+
+                                 </div>
+                                 <div>
+                                 <input type="radio" name="감정" value="화나요">
+
+                                    화나요
+                                 </div>
+                                 <div>
+                                 <input type="radio" name="감정" value="기타"> 
+                                    기타
+
+                                 </div>
                               </div>
                               
                            </div>
@@ -166,5 +196,9 @@
               <p class="푸터__푸터섹션__카피라이트">Copyright © 2024.{name} Co., Ltd.</p>
             </div>
          </div>
+
+
+         <script src="./index.js"></script>
+         <script src="./component-dogs.js"></script>
  </body>
  </html>
