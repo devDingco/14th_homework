@@ -1,3 +1,52 @@
+// // 서치바 설정
+// let 타이머
+
+// const 검색기능 = (event) => {
+
+//     clearTimeout(타이머) // 디바운싱
+
+//     타이머 = setTimeout(() => {
+
+//         const 검색어 = event.target.value.trim() // 앞뒤 공백 제거
+//         console.log("검색어:", 검색어)
+    
+//         // 검색 결과 필터링
+//         const 검색결과 = 검색어
+//             ? 일기들.filter((el) => el.includes(검색어))
+//             : 일기들 // 검색어 없으면 전체 보여주기
+
+//         console.log("검색결과:", 검색결과)
+
+//         // HTML 생성
+//         let diaryHTML = ""
+//         if (검색결과.length === 0) {
+//             diaryHTML = `<div class="검색없음">검색 결과가 없습니다.</div>`
+//         } else {
+//             diaryHTML = 검색결과
+//                 .map((el) => `
+//                     <a href="./details/diary-detail.html?number=${el.number}" class="일기틀">
+//                     <div class="감정이미지__${el.feeling}"></div>
+//                     <img class="삭제버튼" src="./asset/icon/close_icon.png" onclick="openDeleteModal(event, ${el.number})" />
+//                     <div class="일기속성">
+//                         <div class="일기속성1">
+//                             <div class="감정__${el.feeling}">${el.feeling}</div>
+//                             <div class="날짜표시">${el.date}</div>
+//                         </div>
+//                         <div class="일기속성2">
+//                             <div class="타이틀">${el.title}</div>
+//                         </div>
+//                     </div>
+//                 </a>`
+//                 )
+//                 .join("")
+//         }
+
+//         // container에 결과 뿌리기
+//         diaryContainer.innerHTML = diaryHTML
+//     }, 1000)
+
+// }
+
 // 삭제버튼 설정
 function 삭제하기(event, number) {
     // 이벤트 전파 막기
@@ -7,8 +56,7 @@ function 삭제하기(event, number) {
     // 삭제 확인 알림
     alert("일기가 삭제되었습니다.")
 
-    // 로컬스토리지에서 일기들 불러오기
-    let 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || []
+    const 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || []
 
     // 해당 number 제외하고 필터링
     const 삭제후남은일기들 = 일기들.filter(el => el.number !== number)
@@ -56,7 +104,9 @@ function renderDiaries(filteredDiaries = null) {
 window.addEventListener("DOMContentLoaded", renderDiaries)
 
 // 새 일기 작성
+
 function WriteNewDiary() {
+
     const 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || []
 
     const number = 일기들.length > 0 ? 일기들[일기들.length - 1].number + 1 : 1
@@ -80,8 +130,15 @@ function WriteNewDiary() {
     renderDiaries()
 }
 
+// 드롭다운
+const 일기드롭다운기능 = (event) => {
+    document.querySelector(".드롭다운제목").style = `--드롭다운변수: "${event.target.id}"`
+    document.querySelector(".드롭다운제목").click()  // 선택 후에 다시 클릭
+}
+
+
 // 필터 함수
-function diaryFilter(selectedFeeling) {
+function diaryDropdown(selectedFeeling) {
 
     let 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || []
 
@@ -95,28 +152,27 @@ function diaryFilter(selectedFeeling) {
 
 }
 
-// 필터값 변경 시 이벤트
-
+// 드롭다운 값 변경 시 이벤트
 window.addEventListener("DOMContentLoaded", () => {
 
     // 첫 렌더링
     renderDiaries()
 
-    // 필터 select 요소 이벤트 연결
-    const filterSelect = document.querySelector(".일기필터")
+    const dropdownSelect = document.querySelector(".드롭다운목록")
 
-    // if (filterSelect) {
-        filterSelect.addEventListener("change", (event) => {
-            const selectedFeeling = event.target.value
-            diaryFilter(selectedFeeling)
+        dropdownSelect.addEventListener("click", (event) => {
+            const selectedFeeling = event.target.id
+            diaryDropdown(selectedFeeling)
 
             // event.target.style.backgroundColor = "black"
             // event.target.style.color = "#E4E4E4"
 
         })
-    // }
+
 })
 
+
+// 필터 색반전
 window.addEventListener("DOMContentLoaded", () => {
 
     const filterSelect = document.querySelector(".필터")
@@ -197,6 +253,13 @@ function openDeleteModal(event, number) {
     modalOpen('deleteModalGroup')
 }
 
+// 토글기능
+const 토글기능 = () => {
+    const modals = document.querySelectorAll(".모달") // 여러 개 선택됨
+    modals.forEach(modal => {
+        modal.classList.toggle("다크모드")
+    })
+}
 
 // 메뉴 이동
 const 메뉴이동 = (메뉴이름) => {

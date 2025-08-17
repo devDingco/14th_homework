@@ -125,6 +125,119 @@ body {
     justify-content: space-between;
 }
 
+.드롭다운구역 {
+    display: flex;
+    justify-content: flex-start;
+    gap: 16px;
+}
+
+/* .일기드롭다운 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+} */
+
+.드롭다운제목 {
+    appearance: none;
+    width: 120px;
+    height: 48px;
+
+    border-radius: 8px;
+    border: 1px solid #C7C7C7;
+    background:#FFF;
+    padding: 12px 10px;
+    /* z-index: 1000;     */
+
+    color: #1C1C1C;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.16px;
+
+    --드롭다운변수: "전체"
+}
+
+.드롭다운제목::after {
+    content: var(--드롭다운변수);
+}
+
+.드롭다운제목:checked + ul {
+    display: block;
+}
+
+.드롭다운목록 {
+    display: none;
+    list-style: none;
+
+    position: absolute;   /* 기준 요소 기준으로 겹쳐 띄움 */
+    z-index: 1000;        /* 다른 div 위로 올라오도록 */
+
+    width: 120px;
+    border-radius: 8px;
+    border: 1px solid #C7C7C7;
+    background: #FFF;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.10);
+
+}
+
+.드롭다운목록 input {
+    display: none;
+
+    overflow: hidden;
+}
+
+.드롭다운목록 label {
+    padding: 12px;
+    display: block;
+
+    color: #5F5F5F;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -0.16px;
+}
+
+.드롭다운목록 label:hover {
+    background: rgba(58, 181, 15, 0.05);
+
+    color: #299C00;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.16px;
+}
+
+.서치바구역 {
+    position: relative;   /* 자식 absolute 기준 */
+    display: inline-block;
+}
+
+.서치아이콘 {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+
+    left: 16px;           /* input 왼쪽에서 16px */
+    top: 50%;             /* 부모 높이의 중앙 */
+    transform: translateY(-50%); /* 세로 가운데 맞춤 */
+    pointer-events: none; /* 아이콘 클릭 막고 input 포커스만 되게 */
+}
+
+.서치바 {
+    width: 320px;
+    height: 48px;
+    border-radius: 100px;
+    border: 1px solid #C7C7C7;
+    padding: 12px 16px 12px 48px;
+
+    color: #ABABAB;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.16px;
+}
+
+.서치바:focus {
+    outline: none;     /* 파란 아웃라인 제거 */
+    border-color: #C7C7C7; /* 원하는 색 유지 (안 쓰면 기본적으로 파랑으로 바뀜) */
+}
+
 .일기쓰기버튼 {
     width: 110px;
     height: 48px;
@@ -427,13 +540,14 @@ body {
     /* z-index: 9999;  최상단으로 올리기 */
 }
 
-.diaryModal, .finishModal, .cancelModal, .deleteModal {
+.모달 {
+    background-color: var(--기본배경색);
+
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 
-    background: #fff;
     border-radius: 24px;
     padding: 24px;
     gap: 40px;
@@ -441,6 +555,8 @@ body {
 
     display: flex;
     flex-direction: column;
+
+    transition: background-color 0.5s;
 }
 
 .diaryModal {
@@ -455,13 +571,118 @@ body {
     max-width: 760px;
 }
 
+.일기쓰기__상단구역 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .일기쓰기__타이틀 {
     text-align: start;
-    color: #000;
+    color: var(--기본글자색);
     font-size: 24px;
     font-weight: 700;
     letter-spacing: -0.24px;
 }
+
+.다크모드__토글 {
+    display: flex;
+    width: 90px;
+    height: 24px;
+    gap: 8px;
+
+    align-items: center;
+}
+
+.다크모드__글자 {
+    color: var(--흰버튼글자색);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.12px;
+}
+
+.토글클릭 {
+    appearance: none;
+    width: 40px;
+    height: 24px;
+    padding: 2px;
+
+    border-radius: 100px;
+    background: #E4E4E4;
+}
+
+.토글클릭::after {
+    display: block;
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+
+    transition: transform 0.3s;
+}
+
+.토글클릭:checked {
+    background-color: #3AD84A;
+}
+
+.토글클릭:checked::after {
+    transform: translate(calc(100% - 2px - 2px)); /* 좌우 2px 제외하고 맨 오른쪽으로 이동 */
+}
+
+/* 라이트모드 */
+:root {
+    --기본글자색: #000;
+    --기본배경색: #FFF;
+    --추가글자색: #333;
+    --인풋배경색: #FFF;
+    --인풋플레이스홀더색: #ABABAB;
+    --인풋보더색: #D4D3D3;
+    --검정버튼글자색: #F2F2F2;
+    --검정버튼배경색: #000;
+    --흰버튼글자색: #1C1C1C;
+    --흰버튼배경색: #FFF;
+}
+
+.다크모드 {
+    --기본글자색: #FFF;
+    --기본배경색: #1C1C1C;
+    --추가글자색: #C7C7C7;
+    --인풋배경색: #000;
+    --인풋플레이스홀더색: #777;
+    --인풋보더색: #333;
+    --검정버튼글자색: #000;
+    --검정버튼배경색: #F2F2F2;
+    --흰버튼글자색: #FFF;
+    --흰버튼배경색: #1C1C1C; 
+}
+
+.다크모드 {
+    color: var(--기본글자색);
+    background-color: var(--기본배경색);
+}
+
+.다크모드 input {
+    background-color: var(--인풋배경색);
+    color: var(--기본글자색);
+}
+
+.다크모드 input::placeholder {
+    color: var(--인풋플레이스홀더색);
+}
+
+.다크모드 흰버튼 {
+    color: var(--흰버튼글자색);
+    background-color: var(--흰버튼배경색);
+    border: var(--흰버튼글자색);
+}
+
+.다크모드 검정버튼 {
+    color: var(--검정버튼글자색);
+    background-color: var(--검정버튼배경색);
+    border: var(--검정버튼글자색);
+}
+
 
 .기분체크구역 {
     display: flex;
@@ -472,7 +693,7 @@ body {
 }
 
 .기분체크질문 {
-    color: #000;
+    color: var(--기본글자색);
     font-size: 20px;
     font-weight: 600;
     letter-spacing: -0.2px;
@@ -497,7 +718,7 @@ body {
 }
 
 .기분 {
-    color: #333;
+    color: var(--추가글자색);
     font-size: 18px;
     font-weight: 500;
     letter-spacing: -0.18px;
@@ -514,31 +735,26 @@ body {
     font-size: 14px;
     font-weight: 500;
     letter-spacing: -0.14px;
-    color: #333
+    color: var(--추가글자색)
+}
+
+#제목__내용입력, #내용__내용입력 {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--인풋보더색);
+    background: var(--인풋배경색);
+    padding: 12px 16px;
+
+    font-size: 16px;
+    color: var(--기본글자색);
 }
 
 #제목__내용입력 {
-    width: 100%;
     height: 48px;
-    border-radius: 8px;
-    border: 1px solid #D4D3D3;
-    background:#FFF;
-    padding: 12px 16px;
-
-    font-size: 16px;
-    color: #000;
 }
 
 #내용__내용입력 {
-    width: 100%;
     height: 128px;
-    border-radius: 8px;
-    border: 1px solid #D4D3D3;
-    background:#FFF;
-    padding: 12px 16px;
-
-    font-size: 16px;
-    color: #000;
 }
 
 .버튼영역 {
@@ -552,10 +768,10 @@ body {
     height: 48px;
     padding: 8px 10px;
     border-radius: 8px;
-    border: 1px solid #000;
-    background: #FFF;
+    border: 1px solid var(--흰버튼글자색);
+    background: var(--흰버튼배경색);
 
-    color: #1C1C1C;
+    color: var(--흰버튼글자색);
     font-size: 18px;
     font-weight: 600;
     letter-spacing: -0.18px;
@@ -566,10 +782,10 @@ body {
     height: 48px;
     border: none;
     border-radius: 8px;
-    background-color: #000;
+    background-color: var(--검정버튼배경색);
     padding: 8px 10px;
 
-    color: #F2F2F2;
+    color: var(--검정버튼글자색);
     font-size: 18px;
     font-weight: 600;
     letter-spacing: -0.18px;
@@ -593,7 +809,7 @@ body {
 
 .문구1 {
     align-self: stretch;
-    color: #000;
+    color: var(--기본글자색);
     text-align: center;
     font-size: 24px;
     font-weight: 700;
@@ -602,7 +818,7 @@ body {
 
 .문구2 {
     align-self: stretch;
-    color: #333;
+    color: var(--추가글자색);
     text-align: center;
     font-size: 20px;
     font-weight: 500;
@@ -614,9 +830,9 @@ body {
     padding: 8px 10px;
 
     border-radius: 8px;
-    background: #000;
+    background: var(--검정버튼배경색);
 
-    color: #FFF;
+    color: var(--검정버튼글자색);
     font-size: 18px;
     font-weight: 600;
     letter-spacing: -0.18px;
