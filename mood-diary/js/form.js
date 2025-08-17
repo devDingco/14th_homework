@@ -1,47 +1,49 @@
+//ERROR: 삭제 후, 폼 등록 1회가 안됨.
 const form = document.querySelector('.main__diary-form')
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault()
+if (form) {
+  form.addEventListener('submit', (e) => {
 
-  const isHappy = e.target.happy.checked ? "happy" : ""
-  const isSad = e.target.sad.checked ? "sad" : ""
-  const isSurprise = e.target.surprise.checked ? "surprise" : ""
-  const isAngry = e.target.angry.checked ? "angry" : ""
-  const isEtc = e.target.etc.checked ? "etc" : ""
+    e.preventDefault()
 
-  const _title = e.target.title.value.trim()
-  const _contents = e.target.contents.value.trim()
+    const isHappy = e.target.happy.checked ? "happy" : ""
+    const isSad = e.target.sad.checked ? "sad" : ""
+    const isSurprise = e.target.surprise.checked ? "surprise" : ""
+    const isAngry = e.target.angry.checked ? "angry" : ""
+    const isEtc = e.target.etc.checked ? "etc" : ""
 
-  if (isValid()) {
+    const _title = e.target.title.value.trim()
+    const _contents = e.target.contents.value.trim()
 
-    let idx
-    if (diaryId) {
-      idx = diaryList.findIndex(val => val.id === +diaryId)
-    } else {
-      diaryId = diaryList.length > 0 ? diaryList[diaryList.length - 1].id + 1 : 0
-      idx = diaryList.length
+    if (isValid()) {
+
+      let idx
+      if (diaryId) {
+        idx = diaryList.findIndex(val => val.id === +diaryId)
+      } else {
+        diaryId = diaryList.length > 0 ? diaryList[diaryList.length - 1].id + 1 : 0
+        idx = diaryList.length
+      }
+
+      const newDiary = {
+        id: +diaryId,
+        mood: isHappy + isSad + isSurprise + isAngry + isEtc,
+        title: _title,
+        contents: _contents,
+        date: getCurrentDate(),
+        comments: []
+      }
+      diaryList[idx] = newDiary
+      storeDiaryList(diaryList)
+      sessionStorage.setItem(TOAST_KEY, `${idx+1}번째 일기가 제출되었습니다.`)
+
+      location.replace('./index.html')
     }
-
-    const newDiary = {
-      id: +diaryId,
-      mood: isHappy + isSad + isSurprise + isAngry + isEtc,
-      title: _title,
-      contents: _contents,
-      date: getCurrentDate(),
-      comments: []
-    }
-
-    diaryList[idx] = newDiary
-    storeDiaryList(diaryList)
-    alert("일기가 제출되었습니다.")
-    location.replace('./index.html')
-  }
-})
+  })
+}
 
 // 전체 카드 화면 출력하는 함수(반복문)
-// FIX: 일기 핉터될 때 구조 생각하기 : diaryList가 필터링된 걸 넣어야 함..
 const addCardsOnGallery = (diaryList) => {
-  // const 
   return diaryList.map(formattedDiary).forEach(addCardOnGallery)
 }
 
@@ -69,24 +71,24 @@ const addCardOnGallery = (obj) => {
   `
 }
 
-// FIX: alert에 출력되는 양식만들어서 제출
-const onClick = (id) => {
-  alert(JSON.stringify(formattedDiary(getDiaryById(id)[0])))
-}
+// // FIX: alert에 출력되는 양식만들어서 제출
+// const onClick = (id) => {
+//   alert(JSON.stringify(formattedDiary(getDiaryById(id)[0])))
+// }
 
-
+// FIX: 모달(detail.html) 이중모달 띄워 삭제 체크하기...
 const confirmDelete = (event, id) => {
   const queryString = location.search
   const findQueryString = new URLSearchParams(queryString)
   const diaryId = findQueryString.get("diaryId") ?? id
-  // const ok = confirm(`${id}번째 일기를 삭제하시겠습니까?`)
-  // if (ok) {
-    event.stopPropagation()
-    diaryList = deleteDiaryById(event, diaryId)
-    storeDiaryList(diaryList)
-    // alert("삭제 되었습니다.")
-    // location.replace('./index.html')
-  // }
+
+  event.stopPropagation()
+  const idx = diaryList.findIndex(el => el.id === +diaryId)
+  diaryList = deleteDiaryById(event, diaryId)
+  storeDiaryList(diaryList)
+
+  sessionStorage.setItem(TOAST_KEY, `${idx + 1}번째 일기가 삭제되었습니다.`);
+  location.replace('./index.html')
 }
 
 const deleteDiaryById = (event, id) => {
