@@ -8,7 +8,9 @@ body{
   align-items: center;
   flex-direction: column;
   font-size: 1.6rem;
+  position: relative;
 }
+
 a:link{
   text-decoration: none;
   color: var(--color-black)
@@ -55,6 +57,7 @@ textarea::placeholder{
 }
 .inActive{
   border-bottom: solid 0.2rem transparent;
+  color: var(--color-gray-400);
 }
 
 .container{
@@ -83,12 +86,14 @@ textarea::placeholder{
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
+
 .multiple-functions{
   height: 3.2rem;
   top: 0;
   width: 100%;
-  margin-bottom: 0.8rem;
+  margin-bottom: 4.2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -110,13 +115,66 @@ textarea::placeholder{
   padding: 0.8rem 1rem;
   font-size: 1.8rem;
 }
+
 .main{
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 4.2rem;
+}
+
+.photo-dog{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 2.4rem;
-  justify-content: space-between;
-  align-items: flex-start;
+  position: static;
+}
+
+.photo-dog img{
+  object-fit: cover;
+  border-radius: 2.4rem;
+}
+
+/* 스켈레톤 css */
+.skeleton {
+  border-radius: 2.4rem;
+  background-color: var(--color-gray-300);
+  position: relative;
+  overflow: hidden;
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 1s infinite;
+}
+@keyframes shimmer {
+  100% { transform: translateX(50%); }
+}
+
+.default{
+  aspect-ratio: 1/1;
+  width: 64rem;
+}
+.horizontal{
+  aspect-ratio: 4/3;
+  width: 64rem;
+}
+.vertical{
+  aspect-ratio: 3/4;
+  width: 48rem;
 }
 
 #float-button{
@@ -133,12 +191,11 @@ textarea::placeholder{
 }
 
 .footer{
-  width: 116.8rem;
+  width: 100%;    
+  max-width: 116.8rem; 
   height: 11.2rem;
   display: flex;
   background-color: var(--color-gray-50);
   padding: 2.4rem 2rem;
-  display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
