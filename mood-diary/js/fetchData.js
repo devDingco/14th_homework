@@ -15,10 +15,11 @@ const fetchData = async () => {
 
 // 1. dog-gallery 호출 후 innerHTML에 div 태그 삽입 함수
 const addSkeleton = (count = 10) => {
+  const ratio = document.getElementById("dropdown-ratio").value
   const dogGallery = document.getElementById('dog-gallery')
-  dogGallery.innerHTML =
+  dogGallery.innerHTML +=
     Array.from({ length: count })
-    .map(()=> `<div class="skeleton default"></div>`).join('')
+    .map(()=> `<div class="skeleton ${ratio}"></div>`).join('')
 }
 
 // 2
@@ -104,3 +105,24 @@ const setImageRatio = (dogImage, ratio) => {
   }
 }
 
+
+let scrollTimer = null
+const infiniteScroll = () => {
+  const photoBox = document.getElementById('photo-box')
+  const isPhotoBox = photoBox.classList.contains('active')
+  
+  if(!isPhotoBox) return
+  if (scrollTimer) return
+  scrollTimer = setTimeout(() => {
+    scrollTimer = null
+  }, 1000)
+
+  const scrollTop = document.documentElement.scrollTop
+  const scrollHeight = document.documentElement.scrollHeight
+  const clientHeight = document.documentElement.clientHeight
+
+  const scrollPercent = scrollTop / (scrollHeight - clientHeight)
+  if (scrollPercent <= 0.99) return
+  showDogImages()
+}
+window.addEventListener('scroll', infiniteScroll)
