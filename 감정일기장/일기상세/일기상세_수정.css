@@ -1,7 +1,7 @@
 /*민지의다이어리*/ 
 *{
-    margin: 0px;
-    padding: 0px;
+    margin: 0rem;
+    padding: 0rem;
     box-sizing: border-box;
 }
 
@@ -16,8 +16,8 @@ body {
 }
 
 .프레임{ 
-    width: 1920px;
-    height: 556px;
+    width: 120rem;
+    height: 34.75rem;
     display: flex;
     flex-direction: column;
     /* justify-items: center; */
@@ -26,17 +26,17 @@ body {
 
 .헤더 {
     justify-content: flex-start;
-    width: 1168px;
-    height: 60px;
+    width: 73rem;
+    height: 3.75rem;
     display: flex;
     text-align: start;
     align-items: center;
 
     color: #000;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 700;
 
-    margin-bottom: 64px;
+    margin-bottom: 4rem;
 }
 
 
@@ -44,143 +44,147 @@ body {
     /* background-color: yellow; */
     display: flex;
     flex-direction: column;
-    width: 1168px;
-    height: 432px;
-    gap: 24px;
+    width: 73rem;
+    height: 27rem;
+    gap: 1.5rem;
+
+    padding-bottom: 1rem;
+    border-bottom: solid 0.0625rem black; 
 }
 
 .오늘기분은어떗나요{
     display: flex;
     flex-direction: column;
-    width: 1168px;
-    height: 64px;
-    gap: 16px;
+    width: 73rem;
+    height: 4rem;
+    gap: 1rem;
 }
 
 .오늘기분은어떗나요_질문 {
     color: #000;
-    font-size: 20px;
-    letter-spacing: -0.2px;
+    font-size: 1.25rem;
+    letter-spacing: -0.0125rem;
 }
 
 .일기쓰기_기분버튼 {
-    width: 1168px;
-    height: 64px;
+    width: 73rem;
+    height: 4rem;
     display: flex;
     align-items: center;
     align-content: center;
-    gap: 16px;
+    gap: 1rem;
     /* align-self: stretch; */
     flex-wrap: wrap;
 }
 
 .제목과내용{
-    width: 1168px;
-    height: 64px;
+    width: 73rem;
+    height: 4rem;
 
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 1.5rem;
 }
 
 .메인_바디_일기장_일기쓰기_제목 {
-    width: 1168px;
-    height: 76px;
+    width: 73rem;
+    height: 4.75rem;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
 }
 .메인_바디_일기장_일기쓰기_제목텍스트 {
     color: var(--Gray-Gray-800, #333);
-    font-size: 14px;
-    letter-spacing: -0.14px;
+    font-size: 0.875rem;
+    letter-spacing: -0.0088rem;
 }
 .이것은타이틀입니다{
 
     display: flex;
-    padding: 12px 16px;
+    padding: 0.75rem 1rem;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem;
     /* align-self: stretch; */
-    border-radius: 8px;
-    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    border-radius: 0.5rem;
+    border: 0.0625rem solid var(--Gray-Gray-200, #D4D3D3);
     background: var(--Gray-W, #FFF);
     
     color: var(--Gray-B, #000);
-    font-size: 16px;
-    letter-spacing: -0.16px;
+    font-size: 1rem;
+    letter-spacing: -0.01rem;
 }
 
 
 .메인_바디_일기장_일기쓰기_내용{
-    width: 1168px;
-    height: 156px;
+    width: 73rem;
+    height: 9.75rem;
     display: flex;
     flex-direction: column;
     
-    gap: 8px;
+    gap: 0.5rem;
 }
 .메인_바디_일기장_일기쓰기_내용텍스트 {
     color: var(--Gray-Gray-800, #333);
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 .내용이들어갑니다 {
     display: flex;
-    height: 128px;
-    padding: 12px 16px;
+    height: 8rem;
+    padding: 0.75rem 1rem;
     align-items: flex-start;
-    gap: 10px;
+    gap: 0.625rem;
     /* align-self: stretch; */
 
     color: var(--Gray-B, #000);
-    font-size: 16px;
-    letter-spacing: -0.16px;
+    font-size: 1rem;
+    letter-spacing: -0.01rem;
     
-    border-radius: 8px;
-    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    border-radius: 0.5rem;
+    border: 0.0625rem solid var(--Gray-Gray-200, #D4D3D3);
     background: var(--Gray-W, #FFF);
    
 }
 
 
 .하단_버튼 {
-    width: 1168px;
-    height: 48px;
+    width: 73rem;
+    height: 3rem;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 16px;
+    gap: 1rem;
     margin-top: auto;
+
     /* align-self: stretch; */
 }
 
 .하단_버튼_취소{
-    width: 104px;
-    height: 48px;
+    width: 6.5rem;
+    height: 3rem;
     text-align: center;
-    /* gap: 10px; */
+    /* gap: 0.625rem; */
 
-    border-radius: 8px;
-    border: 1px solid var(--Gray-B, #000);
+    border-radius: 0.5rem;
+    border: 0.0625rem solid var(--Gray-B, #000);
     background: var(--Gray-W, #FFF);
 
     color: var(--Gray-Gray-900, #1C1C1C);
-    font-size: 18px;
-    letter-spacing: -0.18px;
+    font-size: 1.125rem;
+    letter-spacing: -0.0112rem;
     }
 
 .하단_버튼_수정하기 {
-    width: 104px;
-    height: 48px;
+    width: 6.5rem;
+    height: 3rem;
     text-align: center;
-    /* gap: 10px; */
+    /* gap: 0.625rem; */
 
-    border-radius: 8px;
+    border-radius: 0.5rem;
     background: var(--Gray-B, #000);
 
     color: var(--Gray-Gray-50, #F2F2F2);
-    font-size: 18px;
-    letter-spacing: -0.18px;
+    font-size: 1.125rem;
+    letter-spacing: -0.0112rem;
 }
 
 .하단_버튼_수정하기_클릭 {
@@ -189,9 +193,107 @@ body {
 
 @keyframes 하단_버튼_수정하기_클릭 {
   0% { transform: translateX(0); }
-  50% { transform: translateX(-5px); }
-  100% { transform: translateX(5px); }
+  50% { transform: translateX(-0.3125rem); }
+  100% { transform: translateX(0.3125rem); }
 
 }
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ회고ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+.바디_회고 {
+    width: 73rem;
+    /* height: 10.8rem; */
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+#회고 {
+    color: #000;
+    font-size: 1.125rem;
+    line-height: 1.5rem; /* 133.333% */
+    letter-spacing: -0.01125rem;
+}
+
+.바디_회고_회고입력 {
+    width: 73rem;
+    height: 3rem;
+    
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    align-self: stretch;
+}
+
+#회고입력박스 {
+    width: 68.8rem;
+    height: 3rem;
+    padding: 0.75rem 1rem;
+    align-items: center;
+    gap: 0.625rem;
+
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--Gray-Gray-50, #F2F2F2);
+}
+
+#입력버튼 {
+    width: 3.2rem;
+    height: 3rem;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--Gray-Gray-300, #C7C7C7);
+
+    color: var(--Gray-W, #FFF);
+    font-size: 1.125rem;
+    line-height: 1.5rem; /* 133.333% */
+    letter-spacing: -0.01125rem;
+}
+
+#회고목록프레임 {
+    width: 73rem;
+    height: auto;
+
+    margin-top: 0.25rem;
+}
+
+.회고목록 {
+    width: 73rem;
+
+    display: flex;
+    padding: 0.75rem 0rem;
+
+    border-bottom: 1px solid #e4e4e4;
+    /* flex-wrap: wrap; */
+}
+
+.회고목록_마지막 {
+    display: flex;
+    padding: 0.75rem 0rem;
+}
+
+.새로운회고_내용 {
+    font-size: 1rem;
+    line-height: 1.5rem; 
+    letter-spacing: -0.01rem;
+}
+
+.새로운회고_작성일 {
+    color: var(--Gray-Gray-600, #777);
+    font-size: 1rem;
+    padding-left: 0.75rem;
+    line-height: 1.5rem; /* 150% */
+    letter-spacing: -0.01rem;
+}
+
+
+
+
 
 /* 왜 "프레임"으로 바디를 안 묶으니까 취소/수정하기 버튼이 계속 가운데로 간걸까... */

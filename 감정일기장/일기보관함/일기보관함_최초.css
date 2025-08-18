@@ -1,16 +1,17 @@
 * {
-    margin: 0px;
-    padding: 0px;
+    margin: 0rem;
+    padding: 0rem;
     box-sizing: border-box;
 }
 body {
-    width: 100vw;
+    /* width: 100vw;
     margin: 0;
-    height: 100vh;
+    height: 100vh; */
     display: flex;
     flex-direction: column;
     justify-items: center;
     align-items: center;
+    
 }
 
 a {
@@ -20,10 +21,12 @@ a {
 
 .프레임 {
     /* background-color: pink; */
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 1168px;
+    justify-content: center; */
+
+    max-width: 75.5rem;
+    margin: 0 2rem 4rem;
     
 }
 /* .label {
@@ -47,31 +50,30 @@ a {
 
 .헤더 /*민지의다이어리*/ {
     justify-content: flex-start;
-    width: 1168px;
-    height: 60px;
+    width: 100%;
+    height: 3.75rem;
     display: flex;
     text-align: start;
     align-items: center;
 
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
 
     color: #000;
-    font-size: 18px;
-    font-style: normal;
+    font-size: 1.125rem;
     font-weight: 700;
 }
 
 .베개사진 {
-    height: 240px;
+    height: 15rem;
     width: 100%;
     /* min-width: 320px;
     max-width: 1168px; */
     /* align-self: stretch; */
     background-size: cover;
-    border-radius: 24px;
+    border-radius: 1.5rem;
     object-fit: cover;
     
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
 
 }
 
@@ -87,54 +89,63 @@ a {
     display: flex;
 /* min-width: 204px; */
     /* align-items: center; */
-    width: 1168px;
-    height: 48px;
-    gap: 16px;
+    width: 100%;
+    height: 3rem;
+    gap: 1rem;
     
-    margin-bottom: 32px;
+    margin-bottom: 2rem;
 
 }
 
+.메인_바디_필터_배경 {
+    width: 100%;
+    height: 2rem;
+
+    position: sticky;
+    top: 0;
+    margin-bottom: 2.625rem;
+}
+
 .필터버튼 {
-    min-width: 120px;
-    padding: 4px;
-    border-radius: 8px;
-    border: 1px solid #c7c7c7;
-    height: 32px;
-    margin-bottom: 42px;
+    min-width: 7.5rem;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    border: 0.0625rem solid #c7c7c7;
+    height: 2rem;
+    margin-bottom: 2.625rem;
+    position: sticky;
+    top:0;
   }
 
 
 .메인_바디_상단글씨_일기보관함{
     display: flex;
-    width: 119px;
-    height: 48px;
-    padding: 12px 8px;
+    width: 7.4375rem;
+    height: 3rem;
+    padding: 0.75rem 0.5rem;
     justify-content: center;
     align-items: center;
-    margin-right: 16px;
+    margin-right: 1rem;
 
     color: #000;
-    font-size: 24px;
-    font-style: normal;
-    letter-spacing: -0.24px;
+    font-size: 1.5rem;
+    letter-spacing: -0.015rem;
 
     background: none;
     border: none;
-    border-bottom: 4px solid #000; 
+    border-bottom: 0.25rem solid #000; 
 }
 
 .메인_바디_상단글씨_사진보관함{
     display: flex;
-    width: 119px;
-    height: 48px;
+    width: 7.4375rem;
+    height: 3rem;
     justify-content: center;
     align-items: center;
 
     color: var(--Gray-Gray-400, #ABABAB);
-    font-size: 24px;
-    font-style: normal;
-    letter-spacing: -0.24px;
+    font-size: 1.5rem;
+    letter-spacing: -0.015rem;
 
     background: none;
     border: none;
@@ -143,42 +154,46 @@ a {
 
 .메인_바디_일기장 {
     /* background-color: yellow; */
-    /* border: solid 1px red; */
-    width: 1168px;
-    height: 1167px;
+    width: 100%;
+    height: 100%;
     display: flex;
-    gap: 24px;
+    gap: 1.5rem;
     justify-content: space-between;
     /* flex-direction: row; */
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
 
+    /* border: solid 0.0625rem red; */
 }
 
 #일기장전체틀 {
     /* background-color: green; */
-    width: 1168px;
+    width: 100%;
+    max-width: 73rem;
     /* height: auto; */
-    /* border: solid 1px blue; */
+    
     display: flex;
     justify-content: space-between;
     
+    /* border: solid 0.0625rem blue; */
 }
 
 #일기목록 {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    height: 373px;
+    height: 100%;
+    padding-right: 1.5rem;
+    gap: 1.5rem;
+    /* overflow:scroll; */
     
-    gap: 24px;
+    /* border: solid 0.0625rem rgb(137, 189, 68); */
 
-    /* border: solid 1px skyblue; */
 }
 
 /* .메인_바디_일기장_일기저장_A {
     background-color: #fff;
-    width: 380px;
-    height: 373px;
+    width: 23.75rem;
+    height: 23.3125rem;
     display: flex;
     flex-direction: column;
 
@@ -187,25 +202,26 @@ a {
 .메인_바디_일기장_일기저장_내용 {
     display: flex;
     flex-direction: column;
-    /* border: solid 1px green; */
+   
+    border: solid 0.0625rem green;
 }
 
 .메인_바디_일기장_일기저장_사진 {
     /* background-color: yellow; */
-    border-radius: 16px;
+    border-radius: 1rem;
     display: flex;
-    width: 380px;
-    height: 285px;
+    width: 100%;
+    height: 17.8125rem;
     
     align-items: center;
     align-self: stretch;
 
     transition: 0.5s;
 
-    /* border: solid 1px black; */
+    /* border: solid 0.0625rem black; */
 }
 .메인_바디_일기장_일기저장_사진:hover {
-    filter: blur(4px);
+    filter: blur(0.25rem);
     transform: scale(1.1);
 /* 
     animation
@@ -221,8 +237,8 @@ a {
 
 
 .메인_바디_일기장_일기저장_내용_감정과날짜 {
-    width: 380px;
-    height: 56px;
+    width: 100%;
+    height: 3.5rem;
     display: flex;
     /* flex-direction: row; */
     justify-content: space-between;
@@ -231,92 +247,98 @@ a {
 
 .메인_바디_일기장_일기저장_내용_감정_슬퍼요 {
     color: #28B4E1;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
 
 }
 
 .메인_바디_일기장_일기저장_내용_감정_놀랐어요 {
     color: #D59029;;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
 
 }.메인_바디_일기장_일기저장_내용_감정_화나요 {
     color: #777;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
 
 }.메인_바디_일기장_일기저장_내용_감정_행복해요 {
     color: #EA5757;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
 
 }.메인_바디_일기장_일기저장_내용_감정_기타 {
     color: #A229ED;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
 
 }
 
 .메인_바디_일기장_일기저장_내용_날짜 {
     color: var(--Gray-Gray-500, #919191);
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
 }
 
 .메인_바디_일기장_일기저장_1_설명_타이틀 {
     color: #000;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-style: normal;
 }
 
+.메인_바디_일기장_삭제버튼 {
+    position: relative;
+    right: -20.8rem;
+    top: -22.35rem;
+}
+
 .메인_바디_일기장_일기쓰기 {
-    background-color: firebrick;
-    padding: 24px;
-    width: 360px;
+    /* background-color: firebrick; */
+    padding: 1.5rem;
+    width: 22.5rem;
     height: fit-content;
 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 
-    gap: 40px;
+    gap: 2.5rem;
 
-    border-radius: 16px;
-    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    border-radius: 1rem;
+    border: 0.0625rem solid var(--Gray-Gray-200, #D4D3D3);
     background: var(--Gray-W, #FFF);
 }
 
 .일기쓰기 {
     color: #000;
-    font-size: 24px;
+    font-size: 1.5rem;
     font-style: normal;
 }
 
 .오늘기분은어떗나요{
     display: flex;
     flex-direction: column;
-    width: 312px;
-    height: 108px;
-    gap: 16px;
+    width: 19.5rem;
+    height: 6.75rem;
+    gap: 1rem;
 }
 
 .오늘기분은어떗나요_질문 {
     color: #000;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-style: normal;
 }
 
 .일기쓰기_기분버튼 {
-    width: 312px;
+    width: 19.5rem;
     height: 68;
     display: flex;
     align-items: center;
-    gap: 20px;
-    border-radius: 8px;
+    gap: 1.25rem;
+    border-radius: 0.5rem;
     
     color: var(--Gray-Gray-800, #333);
-    font-size: 18px;
+    font-size: 1.125rem;
     font-style: normal;
 
     flex-wrap: wrap;
@@ -325,60 +347,60 @@ a {
 .제목과내용{
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 1.5rem;
 }
 
 .메인_바디_일기장_일기쓰기_제목 {
-    width: 312px;
-    height: 76px;
+    width: 19.5rem;
+    height: 4.75rem;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
 }
 .메인_바디_일기장_일기쓰기_제목텍스트 {
     color: var(--Gray-Gray-800, #333);
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
 }
 .제목을입력해주세요{
-    width: 312px;
-    height: 50px;
+    width: 19.5rem;
+    height: 3.125rem;
     display: flex;
-    padding: 12px 16px;
+    padding: 0.75rem 1rem;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem;
 
-    border-radius: 8px;
-    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    border-radius: 0.5rem;
+    border: 0.0625rem solid var(--Gray-Gray-200, #D4D3D3);
     background: var(--Gray-W, #FFF);
     /* align-self: stretch; */
 }
 
 
 .메인_바디_일기장_일기쓰기_내용{
-    width: 312px;
-    height: 156px;
+    width: 19.5rem;
+    height: 9.75rem;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
 }
 .메인_바디_일기장_일기쓰기_내용텍스트 {
     color: var(--Gray-Gray-800, #333);
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
 }
 .내용을입력해주세요{
     display: flex;
-    width: 312px;
-    height: 128px;
-    padding: 12px 16px;
+    width: 19.5rem;
+    height: 8rem;
+    padding: 0.75rem 1rem;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem;
 
 
     
-    border-radius: 8px;
-    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    border-radius: 0.5rem;
+    border: 0.0625rem solid var(--Gray-Gray-200, #D4D3D3);
     background: var(--Gray-W, #FFF);
     /* align-self: stretch; */
 }
@@ -387,34 +409,50 @@ a {
 } */
 .메인_바디_일기장_일기쓰기_등록하기{
     display: flex;
-    height: 48px;
-    width: 312px;
-    padding: 8px 10px;
+    height: 3rem;
+    width: 19.5rem;
+    padding: 0.5rem 0.625rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem;
    
-    border-radius: 8px;
+    border-radius: 0.5rem;
     background: var(--Gray-Gray-300, #C7C7C7);
 
     color: var(--Gray-Gray-50, #F2F2F2);
-    font-size: 18px;
+    font-size: 1.125rem;
     font-style: normal;
 
     border: none;
     }
 
+.플로팅버튼 {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    position: fixed;
+    bottom: 9.5rem;
+    right: 23.5rem;
+}
+
+/* #플로팅버튼사진 {
+
+} */
+
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
 .하단 {
-    width: 1920px;
-    height: 160px;
+    width: 100%;
+    height: 7rem;
+    position: bottom;
+    bottom: 0rem;
+
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
     align-items:center;
-    padding: 24px 20px;
+    padding: 1.5rem 1.25rem;
 
     background: var(--Gray-Gray-50, #F2F2F2);
 }
@@ -424,35 +462,32 @@ a {
     flex-direction: column;
     justify-content: center;
 
-    width: 1168px;
-    height: 112px;
+    width: 100%;
+    max-width: 73rem;
+    height: 7rem;
 
-    gap: 32px;
+    gap: 2rem;
 }
 .하단_글씨_민지의다이어리{
     color: #000;
-    font-family: "Pretendard Variable";
-    font-size: 20px;
-    font-style: normal;
+    font-size: 1.25rem;
     font-weight: 700;
-    line-height: 16px; /* 80% */
-    letter-spacing: -0.2px;
+    line-height: 1rem; /* 80% */
+    letter-spacing: -0.0125rem;
 }
-.하단_글씨_name{
+/* .하단_글씨_name{
     color: var(--Gray-Gray-700, #5F5F5F);
     font-family: "Pretendard Variable";
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 16px; /* 114.286% */
-    letter-spacing: -0.14px;
-}
+    line-height: 1rem; /* 114.286% */
+    /* letter-spacing: -0.0088rem; */
+/* } */
 .하단_글씨_copyright{
     color: var(--Gray-Gray-500, #919191);
-    font-family: "Pretendard Variable";
-    font-size: 14px;
-    font-style: normal;
+    font-size: 0.875rem;
     font-weight: 300;
-    line-height: 16px; /* 114.286% */
-    letter-spacing: -0.14px;
+    line-height: 1rem; /* 114.286% */
+    letter-spacing: -0.0088rem;
 }
