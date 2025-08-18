@@ -18,8 +18,8 @@
     </section>
 
     <nav class="navigation">
-      <button class="tab active">일기보관함</button>
-      <button class="tab" disabled>사진보관함</button>
+      <button class="tab active" data-tab="diary">일기보관함</button>
+      <button class="tab" data-tab="photos">사진보관함</button>
     </nav>
 
     <!-- FILTER BAR (sticky) -->
@@ -30,6 +30,14 @@
       <button class="filter-btn" data-emotion="surprised">놀람</button>
       <button class="filter-btn" data-emotion="angry">화남</button>
       <button class="filter-btn" data-emotion="etc">기타</button>
+    </div>
+
+    <!-- 사진보관함 aspect-ratio 필터 -->
+    <div class="photo-filters" style="display:none;">
+      <button class="ratio-btn active" data-ratio="square">정사각</button>
+      <button class="ratio-btn" data-ratio="landscape">가로형</button>
+      <button class="ratio-btn" data-ratio="portrait">세로형</button>
+      <button class="ratio-btn" data-ratio="all">전체</button>
     </div>
 
     <section class="diary-section">
@@ -43,7 +51,6 @@
     <p>민지의 다이어리</p>
   </footer>
 
-  <!-- floating top button (항상 고정) -->
   <button id="scrollTopBtn" class="floating-btn" title="맨 위로">▲</button>
 
   <!-- 등록 모달 -->
@@ -79,7 +86,7 @@
     </div>
   </div>
 
-  <!-- 등록 완료(중첩) 모달 -->
+  <!-- 등록 완료 모달 -->
   <div id="successModal" class="modal nested" aria-hidden="true">
     <div class="modal__backdrop" data-close="backdrop"></div>
     <div class="modal__panel small" role="dialog" aria-modal="true" aria-labelledby="successTitle">
@@ -96,7 +103,7 @@
     </div>
   </div>
 
-  <!-- 등록 취소(중첩) 모달 -->
+  <!-- 등록 취소 모달 -->
   <div id="cancelModal" class="modal nested" aria-hidden="true">
     <div class="modal__backdrop" data-close="backdrop"></div>
     <div class="modal__panel small" role="dialog" aria-modal="true" aria-labelledby="cancelTitle">

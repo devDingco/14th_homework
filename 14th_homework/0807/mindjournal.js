@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterBtns = document.querySelectorAll(".filter-btn");
   const scrollTopBtn = document.getElementById("scrollTopBtn");
 
-  // 모달 엘리먼트들
+  // 모달 엘리먼트
   const writeModal = document.getElementById("writeModal");
   const successModal = document.getElementById("successModal");
   const cancelModal = document.getElementById("cancelModal");
@@ -29,20 +29,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -----------------------------
-  // 렌더 (filter -> map -> join)
+  // 카드 렌더링
   // -----------------------------
-  function renderCards() {
-    const filtered = diaries.filter(d => currentFilter === "all" || d.emotion === currentFilter);
-    const html = filtered.map(diary => `
-      <a class="card-link" href="detail.html?id=${diary.id}">
-        <div class="card" data-id="${diary.id}">
-          <button class="delete-btn" data-id="${diary.id}" title="삭제">×</button>
-          <img src="${emotionImages[diary.emotion] || emotionImages.etc}" alt="${diary.emotion}">
-          <p>${escapeHtml(diary.date)} - ${escapeHtml(diary.title)}</p>
-        </div>
-      </a>
-    `).join("");
-    cardContainer.innerHTML = html;
+  const photoFilters = document.querySelector(".photo-filters");
+  async function renderCards() {
+    if (currentFilter !== "photos") {
+      const filtered = diaries.filter(d => currentFilter === "all" || d.emotion === currentFilter);
+      const html = filtered.map(diary => `
+        <a class="card-link" href="detail.html?id=${diary.id}">
+          <div class="card" data-id="${diary.id}">
+            <button class="delete-btn" data-id="${diary.id}" title="삭제">×</button>
+            <img src="${emotionImages[diary.emotion] || emotionImages.etc}" alt="${diary.emotion}">
+            <p>${escapeHtml(diary.date)} - ${escapeHtml(diary.title)}</p>
+          </div>
+        </a>
+      `).join("");
+      cardContainer.innerHTML = html;
+      photoFilters.style.display = "none";
+    } else {
+      await fetchPhotos();
+    }
   }
 
   function escapeHtml(s = "") {
@@ -52,9 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .replace(/'/g, "&#39;");
   }
 
-  // -----------------------------
-  // 라디오 forEach로 추출
-  // -----------------------------
   function getSelectedEmotion() {
     let value = null;
     document.querySelectorAll("input[name='emotion']").forEach(r => {
@@ -64,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -----------------------------
-  // 카드 삭제 (버블링 방지)
+  // 카드 삭제
   // -----------------------------
   cardContainer.addEventListener("click", (e) => {
     const del = e.target.closest(".delete-btn");
@@ -79,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // -----------------------------
-  // 필터
+  // 감정 필터
   // -----------------------------
   filterBtns.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -91,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // -----------------------------
-  // 스크롤 효과 & 플로팅 버튼(고정은 CSS)
+  // 스크롤 & 플로팅 버튼
   // -----------------------------
   window.addEventListener("scroll", () => {
     if (window.scrollY > 80) filterBar.classList.add("inverted");
@@ -100,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
   scrollTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
   // -----------------------------
-  // 모달 유틸
+  // 모달
   // -----------------------------
   function openModal(modal) {
     modal.classList.add("show");
@@ -109,67 +112,50 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   function closeModal(modal) {
     modal.classList.remove("show");
-    // 다른 모달이 남아있으면 스크롤 잠금 유지
     const anyOpen = [...document.querySelectorAll(".modal")].some(m => m.classList.contains("show"));
     if (!anyOpen) document.body.classList.remove("no-scroll");
   }
 
-  // 등록 모달 열기/닫기
   openWriteModalBtn.addEventListener("click", () => {
     diaryForm.reset();
     openModal(writeModal);
   });
-  closeWriteModalBtn.addEventListener("click", () => {
-    openModal(cancelModal); // 닫기 누르면 '등록 취소' 중첩 모달
-  });
-  cancelWriteBtn.addEventListener("click", () => {
-    openModal(cancelModal);
-  });
+  closeWriteModalBtn.addEventListener("click", () => openModal(cancelModal));
+  cancelWriteBtn.addEventListener("click", () => openModal(cancelModal));
 
-  // 등록 취소 모달 버튼들
   cancelModal.addEventListener("click", (e) => {
     const keep = e.target.closest("[data-close='keep']");
     const cancelAll = e.target.closest("[data-close='cancel-all']");
     const backdrop = e.target.closest(".modal__backdrop");
-
-    if (keep || backdrop?.dataset.close === "backdrop") {
-      // 계속 작성: 취소 모달만 닫기
-      closeModal(cancelModal);
-    } else if (cancelAll) {
-      // 등록 취소: 두 모달 모두 닫기
+    if (keep || backdrop?.dataset.close === "backdrop") closeModal(cancelModal);
+    else if (cancelAll) {
       closeModal(cancelModal);
       closeModal(writeModal);
       diaryForm.reset();
     }
   });
 
-  // 등록 완료(중첩) 모달: 닫기/확인
   successModal.addEventListener("click", (e) => {
     const ok = e.target.closest("[data-close='success']");
     const backdrop = e.target.closest(".modal__backdrop");
     if (ok || backdrop?.dataset.close === "backdrop") {
       closeModal(successModal);
-      closeModal(writeModal); // 완료하면 작성 모달도 닫기
+      closeModal(writeModal);
     }
   });
 
-  // ESC로 모달 닫기 (최상단 모달만)
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      // 열려있는 모달 중 마지막(최상단) 닫기
       const opened = [...document.querySelectorAll(".modal.show")];
       if (opened.length) closeModal(opened[opened.length - 1]);
     }
   });
 
-  // 모달 바깥(배경) 클릭으로 닫기
   [writeModal, successModal, cancelModal].forEach(modal => {
     modal.addEventListener("click", (e) => {
       const backdrop = e.target.closest(".modal__backdrop");
       if (!backdrop) return;
-      // 요구사항: 등록 모달은 여백 클릭 시 종료
       if (modal === writeModal) closeModal(writeModal);
-      // 중첩 모달들은 이미 자체 로직에서 처리(위의 click 핸들러)
     });
   });
 
@@ -181,10 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const emotion = getSelectedEmotion();
     const title = document.getElementById("title").value.trim();
     const content = document.getElementById("content").value.trim();
-
     if (!emotion) return alert("기분을 선택해주세요!");
     if (!title || !content) return alert("제목과 내용을 모두 입력해주세요!");
-
     const newDiary = {
       id: Date.now(),
       emotion,
@@ -196,9 +180,49 @@ document.addEventListener("DOMContentLoaded", () => {
     diaries.push(newDiary);
     saveToStorage();
     renderCards();
-
-    // 완료 중첩 모달 표시
     openModal(successModal);
+  });
+
+  // -----------------------------
+  // 사진보관함
+  // -----------------------------
+  const ratioBtns = document.querySelectorAll(".ratio-btn");
+  async function fetchPhotos() {
+    photoFilters.style.display = "flex";
+    cardContainer.innerHTML = Array.from({length:10}).map(()=>`<div class="card skeleton"></div>`).join("");
+    try {
+      const res = await fetch("https://dog.ceo/api/breeds/image/random/10");
+      const data = await res.json();
+      const html = data.message.map(url => `<div class="card photo-card square"><img src="${url}" alt="강아지"></div>`).join("");
+      cardContainer.innerHTML = html;
+    } catch {
+      cardContainer.innerHTML = "<p>사진을 불러오는데 실패했습니다.</p>";
+    }
+  }
+
+  ratioBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      ratioBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const ratio = btn.dataset.ratio;
+      document.querySelectorAll(".photo-card").forEach(card => {
+        card.classList.remove("square","landscape","portrait");
+        if(ratio !== "all") card.classList.add(ratio);
+      });
+    });
+  });
+
+  // -----------------------------
+  // 탭 클릭 처리
+  // -----------------------------
+  const tabs = document.querySelectorAll(".tab");
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      currentFilter = tab.dataset.tab === "photos" ? "photos" : "all";
+      renderCards();
+    });
   });
 
   // 최초 렌더
