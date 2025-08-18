@@ -8,6 +8,11 @@
 .컨테이너{
     width: 100%;
 }
+
+.바디__메인섹션__필터섹션{
+  display: flex;
+  justify-content: space-between;
+}
 .바디__메인섹션__아티클섹션{
     display: flex;
     flex-direction: column;
@@ -19,11 +24,94 @@
   width: 100%;
   order: 2;
   position: relative;
+
 }
+.바디__메인섹션__아티클섹션__일기칸__일기장{
+  max-width: none;
+}
+
 .바디__메인섹션__아티클섹션__일기칸__일기장 > a > img {width: 100%;}
 
-.바디__메인섹션__아티클섹션__일기쓰기칸{
-    max-width: none;
-    width: 100%;
-    order: 1;
+.등록모달창{
+  top: calc(50% - 48rem / 2);
+  left: calc(50% - 32rem / 2);
+  width: 32rem;
+  height: 48rem;
+  gap: 2.4rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.등록모달창__타이틀섹션{
+  display: flex;
+  width: 27.2rem;
+  height: 2.4rem;
+  font-size: 2rem;  
+  font-weight: bold;
+}
+.등록모달창__타이틀섹션 > h2{
+  font-size: 2rem;
+}
+.등록모달창__아티클섹션{
+  width: 27.2rem;
+  height: 46rem;
+  gap: 2.4rem;
+  background: orange;
+}
+.등록모달창__아티클섹션__상단{
+  height: 20.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  border: 5px solid #000;
+}
+
+.등록모달창__아티클섹션__상단 >h3{
+  border: 5px solid skyblue;
+  font-size: 1.6rem;
+}
+.등록모달창__아티클섹션__상단 > div {
+  display: block;
+  border: 5px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1.2rem;
+}
+.등록모달창__아티클섹션__상단 > div >div{
+  height: 2.4rem;
+  font-size: 1.6rem;
+
+}
+
+.등록모달창__아티클섹션__하단{
+  width: 27.2rem;
+  height: 23.2rem;
+}
+.등록모달창__아티클섹션__하단__제목영역{
+  height: 6.4rem;
+}
+.등록모달창__아티클섹션__하단__제목영역 > span{
+  font-size: 1.2rem;
+}
+.등록모달창__아티클섹션__하단__제목영역 > input{
+  height: 4rem;
+}
+.등록모달창__아티클섹션__하단__내용영역{
+  height: 15.2rem;
+}
+.등록모달창__아티클섹션__하단__내용영역 > span{
+  font-size: 1.2rem;
+}
+.등록모달창__아티클섹션__하단__내용영역 > input{
+  height: 12.8rem;
+}
+.등록모달창__등록섹션{
+  width: 17.6rem;
+  height: 4rem;
+}
+.등록모달창__등록섹션__닫기버튼{
+  width: 8rem;
+}
+.등록모달창__등록섹션__등록버튼{
+  width: 8rem;
 }

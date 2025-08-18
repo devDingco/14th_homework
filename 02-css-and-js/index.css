@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-size: 10px;
     box-sizing: border-box;
 }
 
@@ -18,8 +19,8 @@ a{
 
 .컨테이너 {
 
-    width: 100%;    
-    max-width: 1168px;
+    /* max-width: 116.8rem; */
+    max-width: 116.8rem;
   }
 
 .가장큰배경 {
@@ -38,10 +39,17 @@ a{
     height: 3.75rem;
     display: flex;
     justify-content: center;
+    width: 100%;
+    height: 6rem;
+    
+    align-items: center;
+    
 }
 .헤더__제목 > span {
     /* width: 73rem; */
     width: 100%;
+    font-size: 1.8rem;
+    font-weight: 700;
 }
 
 .바디 {
@@ -69,45 +77,84 @@ a{
     width: 100%;
     display: flex;
     justify-content: center;
+    
 }
 
 .바디__메인섹션__메뉴섹션__메뉴 {
-    /* width: 73rem; */
+    display: flex;
     width: 100%;
+    gap: 2.4rem;
+    margin-top: 2.4rem;
+    margin-bottom: 4.2rem;
+    color: #ababab;
+}
+.바디__메인섹션__메뉴섹션__메뉴 > div {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem 0.8rem;
+    cursor: pointer;
+}
+
+.선택된메뉴{
+    border-bottom: 0.2rem solid #000;
+    display: flex;
+    color: #000;
 }
 
 .바디__메인섹션__필터섹션 {
-    /* width: 120rem; */
+    /* width: 12s0rem; */
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    top: 0;
+    position: sticky;
+    z-index: 2;
+}
+.바디__메인섹션__필터섹션__필터영역{
+    display: flex;
+    align-items: center;
+    width: 100%;
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 3;
+    backdrop-filter: blur(1rem);
 }
 
-.바디__메인섹션__필터섹션__필터 {
-    /* width: 73rem; */
-    width: 100%;
-    backdrop-filter: blur(10px);
+#필터{
+    min-width: 12rem;
+    padding: 0.4rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid #c7c7c7;
+    height: 3.2rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 2.4rem;
 }
 
 .바디__메인섹션__아티클섹션 {
     display: flex;
     flex-direction: row;
-    /* width: 73rem; */
-    /* height: 72.9375rem; */
     width: 100%;
-    justify-content: space-between;
 }
 
 .바디__메인섹션__아티클섹션__일기칸 {
-    /* width: 49rem; */
-    /* height: 72.9375rem; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 2.4rem;
+    width: 100%;
+}
+
+
+.바디__메인섹션__아티클섹션__일기칸__일기장 > a > img {
+    width: 100%;
+    object-fit: cover;
+    height: 20.8rem;
+
 }
 
 .바디__메인섹션__아티클섹션__일기칸__일기장 {
@@ -115,6 +162,8 @@ a{
     /* height: 23.3125rem; */
     transition: transform 0.5s;
     position: relative;
+    max-width: 27.4rem;
+    
 }
 
 .바디__메인섹션__아티클섹션__일기칸__일기장:hover {
@@ -127,6 +176,108 @@ a{
     justify-content: space-between;
 }
 
+.바디__메인섹션__아티클섹션__일기칸__일기장__일기정보{
+    display: flex;
+  flex-direction: column;
+  padding: 0 0.8rem 1.6rem;
+}
+
+.바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정날짜{
+    width: 100%;
+  display: flex;
+  gap: 1.6rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  font-size: 1.4rem;
+  color: #777;
+}
+.바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정{
+    width: 100%;
+  text-align: left;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 2rem;
+  text-wrap: nowrap;
+}
+.바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__날짜{
+    font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 2.4rem;
+  color: #919191;
+  text-align: right;
+  width: 100%;
+  text-wrap: nowrap;
+}
+.바디__메인섹션__아티클섹션__일기칸__일기장__제목{
+    width: 100%;
+  height: 1.8rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  overflow: hidden;
+  color: black;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+
+
+.강아지필터섹션{
+    width: 100%;
+    display: flex;
+    top: 0;
+    position: sticky;
+    z-index: 2;
+}
+.강아지필터섹션__강아지필터{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    backdrop-filter: blur(1rem);
+}
+#이미지형태선택{
+    min-width: 12rem;
+    padding: 0.4rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid #c7c7c7;
+    height: 3.2rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 2.4rem;
+}
+#이미지나오는곳{
+    width: 100%;
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    
+}
+.강아지메뉴{
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+}
+.바디__메인섹션_아티클섹션__일기칸__일기장__강아지이미지{
+    width: 640px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.바디__메인섹션_아티클섹션__일기칸__일기장__가로형이미지{
+    width: 640px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+.바디__메인섹션_아티클섹션__일기칸__일기장__세로형이미지{
+    height: 640px;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+}
+
+
 .바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼 {
     width: 100%;
     position: absolute;
@@ -135,16 +286,15 @@ a{
     cursor: pointer;
     width: 4rem;
     height: 4rem;
-    z-index: 10;
+    z-index: 2;
     
 }
 
-.바디__메인섹션__아티클섹션__일기쓰기칸 {
-    /* width: 22.5rem; */
-    /* height: 37.75rem; */
-    min-width: 22.5rem;
+/* .바디__메인섹션__아티클섹션__일기쓰기칸 {
+    width: 22.5rem;
+    height: 37.75rem;
     padding: 1.5rem;
-}
+} */
 
 .바디__메인섹션__아티클섹션__일기쓰기칸__머리 {
     /* width: 19.5rem; */
@@ -204,6 +354,7 @@ a{
 .푸터{
     width: 100%;
     display: flex;
+    padding: 2.4rem 2rem;
     justify-content: center;
     background-color: #f2f2f2;
   }
@@ -212,20 +363,72 @@ a{
     width: 100%;
     display: flex;
     flex-direction: column;
+    display: flex;
+    gap: 3.2rem;
   }
   
   .푸터__푸터섹션__제목 {
     width: 100%;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.6rem;
   }
   
   .푸터__푸터섹션__대표 {
     width: 100%;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+    color: #5f5f5f;
   }
   
   .푸터__푸터섹션__카피라이트 {
     width: 100%;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+    color: #919191;
   }
+
 
 .색상반전 {
     filter: invert(1);
 }
+
+
+.스켈레톤{
+    width: 100px;
+    height: 1000px;
+    background-color: skyblue;
+    filter: blur(60px);
+    animation-name: 스켈레톤;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes 스켈레톤{
+    from {
+        transform: translate(-400px,-400px) rotate(30deg);
+    }
+    to{
+        transform: translate(1200px,1000px) rotate(30deg);
+    }
+}
+
+
+/* @media (max-width: 980px) {
+.컨테이너{
+    width: 100%;
+}
+.바디__메인섹션__아티클섹션{
+    display: flex;
+    flex-direction: column;
+}
+.바디__메인섹션__아티클섹션__일기칸{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4rem;
+  width: 100%;
+  order: 2;
+  position: relative;
+} */

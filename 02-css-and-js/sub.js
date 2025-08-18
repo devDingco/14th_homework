@@ -111,3 +111,50 @@ const 수정하러가기기능 = () => {
     document.getElementById("회고그려지는곳").innerHTML = 새로운회고목록HTML;
   };
   
+  const 복사기능 = () => {
+    const 쿼리스트링 = location.search;
+    const 잘게나누어담은통 = new URLSearchParams(쿼리스트링);
+    const 일기인덱스 = 잘게나누어담은통.get("number")
+    
+    const 스토리지에저장된일기목록 =
+      localStorage.getItem("일기목록") ?? "[]";
+    const 일기목록 = JSON.parse(스토리지에저장된일기목록)
+    const 일기 = 일기목록[일기인덱스];
+    navigator.clipboard.writeText(일기.내용);
+    토스트기능(); 
+  }
+
+  const 토스트기능 = () => {
+    document.getElementById("토스트나오는곳").style.display = "block";
+    
+    setTimeout(() => {
+      document.getElementById("토스트나오는곳").style.display = "none";
+    }, 1000); 
+  }
+
+  //삭제모달
+const 삭제모달열기 = () => {
+  document.getElementById("삭제모달ID").style = "display : block"
+}
+const 삭제모달닫기 = () => {
+  document.getElementById("삭제모달ID").style = "display : none" 
+}
+
+function 일기삭제기능(event) {
+
+  const 쿼리스트링 = location.search;
+  const 잘게나누어담은통 = new URLSearchParams(쿼리스트링);
+  const 일기인덱스 = Number(잘게나누어담은통.get("number"));
+
+  const 스토리지에저장된일기목록 =
+    localStorage.getItem("일기목록");
+  const 일기목록 = 스토리지에저장된일기목록
+    ? JSON.parse(스토리지에저장된일기목록)
+    : [];
+  // 2. 클릭된 일기번호 삭제하기
+  const 삭제후일기목록 = 일기목록.filter((_, index) => index !== 일기인덱스);
+  // 3. 삭제된 일기목록 다시 저장하기
+  localStorage.setItem("일기목록", JSON.stringify(삭제후일기목록));
+  alert("삭제되었습니다.");
+  location.replace("./index.html")
+}
