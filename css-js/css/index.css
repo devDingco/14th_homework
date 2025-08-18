@@ -29,7 +29,7 @@
     --width-full: 120rem; /* 최상위 컨테이너 너비 */
     --width-content-main: 73rem; /* 메인 콘텐츠 영역 너비 */
     --width-diary-list: 49rem; /* 일기 목록 너비 */
-    --width-diary-card: 23.75rem; /* 일기 카드 너비 */
+    --width-diary-card: 17.125rem; /* 일기 카드 너비 */
     --width-diary-form: 22.5rem; /* 일기 작성 폼 너비 */
   
     /* Font Weight */
@@ -82,6 +82,8 @@ body{
     flex-direction: column;
     justify-content: space-between;
     gap: 2.5rem;
+
+    position: relative;
 }
 
 .main{
@@ -211,6 +213,10 @@ body{
 .frame__content__filter{
     width: var(--width-content-main);
     height: 2rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .feeling__filter {
@@ -229,6 +235,26 @@ body{
     white-space: nowrap; 
 }
 
+.add__diary__button {
+
+    height: 3rem;
+    padding: 0.5rem 0.62rem;
+    border-radius: 0.5rem;
+    background-color: #000000;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.25rem;
+
+    font-size: var(--font-size-title-md);
+    font-weight: var(--font-weight-semi-bold);
+    line-height: 1.5rem;
+    letter-spacing: -1%;
+    color: #FFFFFF;
+}
+
 .frame__content__diary {
     width: var(--width-content-main);
     height: 73rem;
@@ -238,7 +264,7 @@ body{
     justify-content: baseline;
     gap: 1.5rem;
 
-    transition: width 0.5s ease-out;
+    transition: width 0.3s linear;
 
     overflow: scroll;
 }
@@ -248,17 +274,17 @@ body{
 } */
 
 .content__diary__list{
-    width: var(--width-diary-list);
+    width: var(--width-content-main);
     height: 1167px;
 
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: baseline;
+    justify-content: flex-start;
     align-content: flex-start;
     gap: 1.5rem;
 
-    transition: width 0.5s ease-out;
+    transition: width 0.3s linear;
 
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-text-md);
@@ -276,6 +302,7 @@ body{
 
 a{
     text-decoration: none;
+    position: relative;
 }
 
 #delete__button{
@@ -284,7 +311,7 @@ a{
 
     position: absolute;
     top: 0.75rem;
-    left: 21.5rem;
+    right: 0.75rem;
 
     transition: 
     width 0.5s,
@@ -305,7 +332,7 @@ a{
 
 .diary__card{
     width: var(--width-diary-card);
-    height: 23.313rem;
+    height: 18.5rem;
     border-radius: 1rem;
     padding-bottom: 1rem;
 
@@ -313,12 +340,15 @@ a{
     display: flex;
     flex-direction: column;
     justify-content: baseline;
+    align-items: baseline;
     gap: 1rem;
 
     transition: 
     width 0.5s,
     height 0.5s,
     box-shadow 0.5s;
+
+    transition-timing-function: linear;
 }
 
 
@@ -432,202 +462,6 @@ a{
     color: #000000; 
 }
 
-.content__diary__form{
-    width: var(--width-diary-form);
-    height: 37.75rem;
-    border: 0.063rem solid #D4D3D3;
-    border-radius: 1rem;
-    padding: 1.5rem 1.5rem;
-    background-color: #FFFFFF;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 2.5rem; 
-}
-
-.diary__form__title{
-    width: 100%;
-    height: 1.5rem;
-
-    font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-title-lg);
-    line-height: 1.5rem;
-    letter-spacing: -1%;
-    color: #000000;
-}
-
-.diary__form__input{
-    width: 100%;
-    height: 25.25rem;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 2.5rem;
-}
-
-.form__input__feeling{
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: baseline;
-    gap: 1rem;
-
-    font-weight: var(--font-weight-semi-bold);
-    font-size: 1.25rem;
-    line-height: 1.5rem;
-    letter-spacing: -1%;
-    color: #000000;
-}
-
-.input__feeling__radio{
-    width: 100%;
-    height: 4.25rem;
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-
-    font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-title-md);
-    line-height: 1.25rem;
-    letter-spacing: -1%;
-    color: #333333;
-}
-
-.feeling{
-    height: 1.5rem;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-
-    font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-title-md);
-    line-height: 1.25rem;
-    letter-spacing: -1%;
-}
-
-.feeling input[type="radio"]{
-    width: 1.5rem;
-    height: 1.5rem;
-    border: 0.125rem solid #777777;
-    accent-color: #000000; /* 라디오 버튼이 선택되었을 때 색상 */
-}
-
-
-.form__input__text{
-    width: 100%;
-    height: 16rem;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1.5rem;
-}
-
-.input__text__title{
-    width: 100%;
-    height: 4.75rem;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 0.5rem;
-
-    font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-text-sm);
-    line-height: 1.25rem;
-    letter-spacing: -1%;
-    color: #333333;
-}
-
-.input__text__context{
-    width: 100%;
-    height: 9.75rem;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 0.5rem;
-
-    font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-text-sm);
-    line-height: 1.25rem;
-    letter-spacing: -1%;
-    color: #333333;
-}
-
-#title__feeling{
-    width: 100%;
-    height: 3rem;
-    border: 0.063rem solid #D4D3D3;
-    border-radius: 0.5rem;
-    outline: none;
-    padding: 0.75rem 1rem;
-    background-color: #FFFFFF;
-
-    font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-text-md);
-    line-height: 1.5rem;
-    letter-spacing: -1%;
-    color: #333333;
-}
-
-#title__feeling::placeholder{
-    color: #ABABAB;
-
-}
-
-#context__feeling{
-    width: 100%;
-    height: 8rem;
-    border: 0.063rem solid #D4D3D3;
-    border-radius: 0.5rem;
-    outline: none;
-    padding: 0.75rem 1rem;
-    background-color: #FFFFFF;
-
-    font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-text-md);
-    line-height: 1.5rem;
-    letter-spacing: -1%;
-    color: #333333;
-}
-
-#context__feeling::placeholder{
-    color: #ABABAB;
-}
-
-.diary__form__button{
-    width: 100%;
-    height: 3rem;
-    border: 0;
-    border-radius: 0.5rem;
-    padding: 0.5rem 0.625rem;
-    background-color: #000000;
-
-    font-weight: var(--font-weight-semi-bold);
-    font-size: var(--font-size-title-md);
-    line-height: 1.5rem;
-    letter-spacing: -1%;
-    color: #F2F2F2;
-}
-.diary__form__button:disabled{
-    background-color: #C7C7C7;
-}
-
-#floating__button{
-    width: 2.5rem;
-    height: 2.5rem;
-
-}
-
 
 .footer{
     width: var(--width-full);
@@ -676,6 +510,296 @@ a{
     color: #919191;
 }
 
+/* 모달 그룹 - 다이어리 작성 */
+#write__form__modal{
+    display: none;
+}
+
+.modal__group__write{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.modal__background{
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    opacity: 50%;
+}
+
+.modal__write__diary{
+    width: 40rem;
+    height: 35rem;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    background-color: #FFFFFF;
+    opacity: 100;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 2.5rem;
+    
+    position: absolute;
+	top: calc(50% - 35rem/2);
+	left: calc(50% - 40rem/2);
+}
+
+.modal__form__title{
+    font-size: var(--font-size-title-lg);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.5rem;
+    letter-spacing: -1%;
+}
+
+.modal__form__input{
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.form__input__feeling{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-semi-bold);
+    line-height: 1.5rem;
+}
+
+.input__feeling__radio{
+    display: flex;
+    flex-direction: row;
+    gap: 1.25rem;
+
+    font-size: var(--font-size-title-md);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25rem;
+    color: #333333;
+}
+
+.feeling{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.form__input__text{
+    display: flex;
+    flex-direction: column;
+    height: 16rem;
+
+    gap: 1.5rem;
+}
+
+.input__text__title{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    font-size: var(--font-size-text-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25rem;
+}
+
+#title__feeling{
+    width: 100%;
+    height: 3rem;
+    border: 0.063rem solid #D4D3D3;
+    border-radius: 0.5rem;
+    outline: none;
+    padding: 0.75rem 1rem;
+    background-color: #FFFFFF;
+    
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-text-md);
+    line-height: 1.5rem;
+    letter-spacing: -1%;
+    color: #333333;
+}
+    
+#title__feeling::placeholder{
+    color: #ABABAB;
+}
+
+.input__text__context{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    font-size: var(--font-size-text-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25rem;
+}
+    
+#context__feeling{
+    width: 100%;
+    height: 8rem;
+    border: 0.063rem solid #D4D3D3;
+    border-radius: 0.5rem;
+    outline: none;
+    padding: 0.75rem 1rem;
+    background-color: #FFFFFF;
+
+    font-weight: var(--font-weight-medium); 
+    font-size: var(--font-size-text-md);
+    line-height: 1.5rem;
+    letter-spacing: -1%;
+    color: #333333;
+}
+
+#context__feeling::placeholder{
+    color: #ABABAB;
+}
+
+.form__input__button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.modal__form__button{
+    width: 6.5rem;
+    height: 3rem;
+    padding: 0.5rem 0.625rem;
+    border-radius: 0.5rem;
+    border: none;
+
+    font-size: var(--font-size-title-md);
+    font-weight: var(--font-weight-semi-bold);
+    line-height: 1.5rem;
+    letter-spacing: -1%;
+    text-align: center;
+    white-space: nowrap;
+}
+
+#cancel__button{
+    background-color: #FFFFFF;
+    border: 0.0625rem solid #000000; 
+    color: #1C1C1C;
+}
+
+#diary__write__button{
+    background-color: #000000;
+    color: #F2F2F2;
+}
+
+#diary__write__button:disabled {
+    background-color: #C7C7C7;
+}
+
+#write__submit__modal{
+    display: none;
+}
+
+.modal__group__submit{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.modal__submit__write{
+    width: 30rem;
+    height: 12.5rem;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    background-color: #FFFFFF;
+
+
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+
+    position: absolute;
+	top: calc(50% - 12.5rem/2);
+	left: calc(50% - 30rem/2);
+}
+
+.modal__text{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5rem;
+    letter-spacing: -1%;
+    text-align: center;
+}
+
+.modal__title{
+    font-size: var(--font-size-title-lg);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.5rem;
+    letter-spacing: -1%;
+}
+
+.submit__modal__button{
+    width: 100%;
+    height: 3rem;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.625rem;
+    background-color: #000000;
+
+    font-size: var(--font-size-title-md);
+    font-weight: var(--font-weight-semi-bold);
+    line-height: 1.5rem;
+    letter-spacing: -1%;
+    color: #FFFFFF;
+}
+
+#write__close__modal{
+    display: none;
+}
+
+.modal__group__close{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.modal__close__write{
+    width: 30rem;
+    height: 12.5rem;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    background-color: #FFFFFF;
+
+
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+
+    position: absolute;
+	top: calc(50% - 12.5rem/2);
+	left: calc(50% - 30rem/2);
+}
+
+.modal__close__button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.31rem;
+}
+
+#keep__button{
+    background-color: #FFFFFF;
+    border: 0.0625rem solid #000000; 
+    color: #1C1C1C;
+}
+
+#close__button{
+    background-color: #000000;
+    color: #F2F2F2;
+}
+
 /* 미디어 쿼리 부분 */
 /* 1280px
 @media(max-width: 75.5rem){
@@ -691,7 +815,7 @@ a{
         width: 75rem;
     }
     .content__diary__list:has(.diary__card:hover){
-        width: 53.75rem;
+        width: 75rem;
     }
     .diary__card:hover #delete__button{
         width: 1.688rem;
@@ -699,11 +823,11 @@ a{
     
         position: absolute;
         top: 0.75rem;
-        left: 23rem;
+        right: 0.75rem;
     }
     .diary__card:hover{
-        width: 25.75rem;
-        height: 24.75rem;
+        width: 19.125rem;
+        height: 20rem;
         
         box-shadow: 0 0.125rem 1.875rem 0 rgba(0, 0, 0, 0.16);
     }

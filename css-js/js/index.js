@@ -47,6 +47,45 @@ function isDiaryWritten() {
 }
 
 
+
+/* 버튼 클릭 시, 모달 on */
+const viewModal = (modal__name) => {
+    document.getElementById(modal__name).style = "display: block"
+}
+
+/* 버튼 클릭 시, 모달 off */
+const closeModal = (modal__name) => {
+    document.getElementById(modal__name).style = "display: none"
+    clearDiaryForm()
+}
+
+/* 취소모달에서 계속 작성 클릭 시, 해당 모달만 꺼지게끔하기? */
+const keepWrite = () => {
+    document.getElementById('write__close__modal').style = "display: none"
+}
+
+/* 등록화면 모달에서 여백 클릭 시, 모달 종료 */
+
+document.addEventListener("click", (event) => {
+    const bgModal = document.getElementById('write__modal__background')
+    const writeModal = document.getElementById('write__form__modal').style.display
+
+    const isbgModal = bgModal.contains(event.target);
+
+    if(writeModal === "block" && isbgModal){
+        closeModal('write__form__modal')
+    }
+})
+
+
+/* 등록화면 모달에서 ESC 키 입력 시, 모달 종료 */
+window.addEventListener("keydown", (event) => {
+    if(event.key === "Escape" && writeModal === "block"){
+        closeModal('write__form__modal')
+    }
+})
+
+
 /* 등록하기 버튼이 클릭되면, 배열에 추가 */
 const diaryCard_list = localStorage.getItem("diaryCardList")
 const diaryCard = JSON.parse(diaryCard_list === null ? "[]" : diaryCard_list)
@@ -65,42 +104,17 @@ function getDiaryCard() {
         feeling_title: selectedFeeling[1],
         card_title: diaryTitle,
         card_context: diaryContext,
-        comment: []
+        comment: [] // 상세 화면에서 코멘트를 위한 빈 배열
     }
 
     diaryCard.push(submitcard)
     localStorage.setItem("diaryCardList",JSON.stringify(diaryCard))
 
-    alert(`
-        일기 제출 완료!
-
-        입력일: ${writeDate}
-
-        오늘의 기분은? ${selectedFeeling[1]}
-        제목: ${diaryTitle}
-
-        ${diaryContext}
-
-        `)
+    
+    viewModal('write__submit__modal')
 
 
 
-    /* 변수 초기화 하기 */
-    function clearDiaryForm() {
-        
-        const feeling = document.getElementsByName("radio__feeling")
-        
-        for (let i = 0; i < feeling.length ; i++) {
-            feeling[i].checked = false;
-        }
-
-        const title = document.getElementById("title__feeling")
-        const context = document.getElementById("context__feeling")
-
-        title.value = '';
-        context.value = '';
-
-    }
 
     // 등록하기 버튼을 다시 비활성화 시키기 위해 입력된 내용들 클리어하기
     clearDiaryForm()
@@ -114,6 +128,25 @@ function getDiaryCard() {
     addDiaryCard()
 
 }
+
+/* 변수 초기화 하기 */
+function clearDiaryForm() {
+    
+    const feeling = document.getElementsByName("radio__feeling")
+    
+    for (let i = 0; i < feeling.length ; i++) {
+        feeling[i].checked = false;
+    }
+
+    const title = document.getElementById("title__feeling")
+    const context = document.getElementById("context__feeling")
+
+    title.value = '';
+    context.value = '';
+
+}
+
+
 
 /* 다이어리 카드 리스트가 1개 이상일 때, 카드 추가하기 */
 function addDiaryCard() {

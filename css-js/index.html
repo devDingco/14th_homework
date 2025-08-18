@@ -34,6 +34,10 @@
                                     <option value="angry">화나요</option>
                                     <option value="etc">기타</option>
                                 </select>
+                                <button class="add__diary__button" onclick="viewModal('write__form__modal')">
+                                    <img src="./assets/icons/plus_outline_light_m.svg" />
+                                    일기쓰기
+                                </button>
                             </div>
                         </div>
                             <div id="frame__diary__list" class="frame__content__diary">
@@ -53,7 +57,8 @@
                                         </a> -->
                                     <!-- 여기까지 다이어리 상세 칸 리스트 -->
                                 </div>
-                                <div class="content__diary__form">
+                                <!-- 기존 다이어리 작성 폼 -->
+                                <!-- <div class="content__diary__form">
                                     <div class="diary__form__title">📍 일기 쓰기</div>
                                     <div class="diary__form__input">
                                         <div class="form__input__feeling">
@@ -88,7 +93,7 @@
                                         </div>
                                     </div>
                                     <button id="diary__write__button" class="diary__form__button" disabled onclick="getDiaryCard()">등록하기</button>
-                                </div>
+                                </div> -->
                                 
                             </div>
 
@@ -104,7 +109,80 @@
                     <div id="footer__copyright">Copyright © 2024. {name} Co., Ltd.</div>
                  </div>
             </div>
-
+            <div>
+                <!-- 일기 등록 폼 모달 -->
+                <div id="write__form__modal" class="modal__group__write">
+                    <div id="write__modal__background" class="modal__background"></div>
+                    <form class="modal__write__diary"  onsubmit="getDiaryCard()"> 
+                        <div class="modal__form__title">일기 쓰기</div>
+                        <div class="modal__form__input">
+                            <div class="form__input__feeling">
+                                오늘 기분은 어땟나요?
+                                <div class="input__feeling__radio">
+                                    <div class="feeling" >
+                                        <input id="happy" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />행복해요
+                                    </div>
+                                    <div class="feeling" >
+                                        <input id="sad" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />슬퍼요
+                                    </div>
+                                    <div class="feeling" >
+                                        <input id="surprise" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />놀랐어요
+                                    </div>
+                                    <div class="feeling" >
+                                        <input id="angry" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />화나요
+                                    </div>
+                                    <div class="feeling" >
+                                        <input id="etc" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />기타
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form__input__text">
+                                <div class="input__text__title">
+                                    제목 
+                                    <input type="text" placeholder="제목을 입력해 주세요." id="title__feeling" oninput="isDiaryWritten()" />
+                                </div>
+                                <div class="input__text__context">
+                                    내용
+                                    <textarea placeholder="내용을 입력해 주세요." id="context__feeling" oninput="isDiaryWritten()"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form__input__button">
+                            <button id="cancel__button" type="button" class="modal__form__button" onclick="viewModal('write__close__modal')">닫기</button>
+                            <button id="diary__write__button" type="submit" class="modal__form__button" disabled onclick="getDiaryCard()">등록하기</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- 일기 등록 후 완료 모달 -->
+                <div>
+                    <div id="write__submit__modal" class="modal__group__submit">
+                        <div class="modal__background"></div>
+                        <form class="modal__submit__write" onsubmit="closeModal('write__submit__modal')">
+                            <div class="modal__text">
+                                <div class="modal__title">일기 등록 완료</div>
+                                등록이 완료 되었습니다.
+                            </div>
+                            <button class="submit__modal__button" type="submit" onclick="closeModal('write__submit__modal')">확인</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- 일기 등록 취소 모달 -->
+                <div>
+                    <div id="write__close__modal" class="modal__group__close">
+                        <div class="modal__background"></div>
+                        <form class="modal__close__write">
+                            <div class="modal__text">
+                                <div class="modal__title">일기 등록 취소</div>
+                                일기 등록을 취소 하시겠어요?
+                            </div>
+                            <div class="modal__close__button">
+                                <button id="keep__button" class="modal__form__button" type="button" onclick="keepWrite()">계속 작성</button>
+                            <button id="close__button" class="modal__form__button" type="submit" onclick="closeModal('write__close__modal')">등록 취소</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
     </div>
 </body>
 </html>

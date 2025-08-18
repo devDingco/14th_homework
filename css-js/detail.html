@@ -45,7 +45,7 @@
                     </div>
                     <div class="frame__diary__button">
                         <button class="diary__button" onclick="diaryEdit()">수정</button>
-                        <button class="diary__button" onclick="deleteDiaryCard()">삭제</button>
+                        <button class="diary__button" onclick="viewModal('delete__modal')">삭제</button>
                     </div>
                 </div>
                 <div class="main__frame__comment">
@@ -71,6 +71,25 @@
                 </div>
             </div>
             <img src="./assets/icons/up_outline_light_xl.svg" id="floating__button" onclick="scrollpage()"/>
+        </div>
+        <div id="copy__toast" class="copy__message">
+            내용이 복사되었습니다.
+        </div>
+        <!-- 일기 삭제 모달 -->
+        <div>
+            <div id="delete__modal" class="modal__group__delete">
+                <div class="modal__background"></div>
+                <form class="modal__delete">
+                    <div class="modal__text">
+                        <div class="modal__title">일기 삭제</div>
+                        일기를 삭제 하시겠어요?
+                    </div>
+                    <div class="modal__delete__button">
+                        <button id="close__button" class="modal__form__button" type="button" onclick="keepWrite()">취소</button>
+                        <button id="delete__button" class="modal__form__button" type="submit" onclick="deleteDiaryCard()">삭제</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </body>
