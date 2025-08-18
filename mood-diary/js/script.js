@@ -55,3 +55,7 @@ const toastMessage = (contents) => {
     document.querySelector(".toast-bottom").style = "display:none"
   }, 2000)
 }
+
+const toggleDarkMode = () => {
+  document.body.classList.toggle('darkmode')
+}

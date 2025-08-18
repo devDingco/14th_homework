@@ -1,5 +1,11 @@
 // INFO: 모달 동작 관련 함수 모음
 const openModal = (id) => {
+  if (id === 'main-diary-form') {
+    const toggleBtn = document.querySelector('.toggle-btn');
+    toggleBtn.checked = false
+    document.body.classList.remove('darkmode')
+  }
+  
   const modal = document.getElementById(id)
   modal.style = "display: block;"
 
