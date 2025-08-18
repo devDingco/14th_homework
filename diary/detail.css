@@ -24,6 +24,7 @@
     color: var(--text-primary);
     padding-left: 2rem;
     position: relative;
+    pointer-events: none;
 
     @media (max-width: 779px) {
         display: flex;
@@ -44,6 +45,7 @@
     mask-size: contain;
     -webkit-mask: url(./public/icons/backArrow.svg) no-repeat center;
     -webkit-mask-size: contain;
+    pointer-events: all;
 }
 .detail_title {
     width: 100%;

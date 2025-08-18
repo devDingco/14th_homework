@@ -7,7 +7,6 @@
     position: relative;
 
     @media (max-width: 779px) {
-        /* max-width: 20rem; */
         margin: 0;
     }
 }
@@ -436,15 +435,15 @@
 
 .footer {
     width: 100%;
-    height: 10rem;
+    height: 15rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: var(--footer-bg);
-    margin-top: 2.5rem;
     gap: 2rem;
     transition: background-color 0.3s ease;
+    padding: 1.25rem 1.5rem;
 
     @media (max-width: 779px) {
         display: none;
@@ -453,25 +452,45 @@
 
 .footer_title {
     width: 73rem;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    transition: color 0.3s ease;
+    height: 1.5rem;
+    background-image: url(./public/images/logo.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .footer_owner {
     width: 73rem;
+    height: 5.5rem;
     font-size: 0.875rem;
     color: var(--footer-text);
-    transition: color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.footer_company_info_wrapper {
+    width: 100%;
+    height: 1rem;
+    display: flex;
+    align-items: center;
+}
+.footer_company_info {
+    color: var(--footer-text);
+    font-size: 0.875rem;
+    display: inline-block;
+}
+
+.footer_line {
+    color: var(--button-detail-border);
+    margin: 0 0.75rem;
 }
 
 .footer_info {
     width: 73rem;
+    height: 1.1rem;
     font-size: 0.875rem;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--footer-info);
-    transition: color 0.3s ease;
 }
 
 .custom_select {
@@ -884,7 +903,7 @@ button:not([disabled]).active {
 
 .top_button {
     position: fixed;
-    bottom: 15rem;
+    bottom: 16rem;
     right: calc((100vw - min(var(--container-max), 100vw)) / 1.5 + var(--fab-gap));
     z-index: 900;
 
