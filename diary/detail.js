@@ -1,6 +1,7 @@
 window.onload = () => {
   // URL주소에서 일기번호가져오기
   일기그리기기능();
+  댓글그리기기능();
 };
 
 const 일기그리기기능 = () => {
@@ -38,4 +39,80 @@ const 수정하기기능 = () => {
   const 일기번호 = 잘게나누어담은통.get("number");
 
   window.location.href = `./edit.html?number=${일기번호}`;
+};
+
+const 댓글등록기능 = () => {
+  const date = new Date();
+
+  const options = {
+    year: date.getFullYear(),
+    // toString <= 문자열로 반환  padStart(2,"0") <= 문자열의 길이가 2가 안되면 문자열 앞에 "0"을 붙여라
+    month: (date.getMonth() + 1).toString().padStart(2, "0"),
+    date: date.getDate().toString().padStart(2, "0"),
+  };
+
+  const 댓글담는통 = document.getElementById("댓글입력인풋").value;
+  const 날짜담는통 = `[${options.year}. ${options.month}. ${options.date}]`;
+  const 쿼리스트링 = window.location.search;
+  const 잘게나누어담은통 = new URLSearchParams(쿼리스트링);
+  const 일기번호 = 잘게나누어담은통.get("number");
+  const 전체회고담는통 = {
+    일기번호,
+    댓글: 댓글담는통,
+    날짜: 날짜담는통,
+  };
+
+  const 스토리지에저장된회고목록 =
+    localStorage.getItem("지윤이의회고목록") ?? "[]";
+  const 회고목록 = JSON.parse(스토리지에저장된회고목록);
+  회고목록.push(전체회고담는통);
+  localStorage.setItem("지윤이의회고목록", JSON.stringify(회고목록));
+
+  const 회고번호 = 회고목록.length - 1;
+
+  document.getElementById("댓글보이는곳").innerHTML = `
+  <div class="댓글창__정렬__댓글">
+  <div class="댓글창__정렬__댓글__추가">${회고목록[회고번호].댓글}</div>
+          <div class="댓글창__정렬__댓글__날짜">${회고목록[회고번호].날짜}</div>
+          </div>
+
+          <div
+            style="
+              width: 1168px;
+              height: 1px;
+              background-color: #e4e4e4;
+              margin-bottom: 12px;
+            "></div>
+  `;
+  location.reload(true);
+};
+
+const 댓글그리기기능 = () => {
+  const 쿼리스트링 = window.location.search; // =>  ?number=0
+  const 잘게나누어담은통 = new URLSearchParams(쿼리스트링);
+  const 일기번호 = 잘게나누어담은통.get("number");
+
+  const 스토리지에저장된회고목록 =
+    localStorage.getItem("지윤이의회고목록") ?? "[]";
+  const 회고목록 = JSON.parse(스토리지에저장된회고목록);
+
+  const 해당일기댓글 = 회고목록.filter((el) => el.일기번호 == 일기번호);
+
+  document.getElementById("댓글보이는곳").innerHTML += 해당일기댓글
+    .map(
+      (el) => `
+   <div class="댓글창__정렬__댓글">
+    <div class="댓글창__정렬__댓글__추가">${el.댓글}</div>
+    <div class="댓글창__정렬__댓글__날짜">${el.날짜}</div>
+    </div>
+    <div
+    style="
+       width: 1168px;
+       height: 1px;
+      background-color: #e4e4e4;
+       margin-bottom: 12px;
+        "></div>
+    `
+    )
+    .join("");
 };
