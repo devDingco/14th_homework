@@ -46,6 +46,7 @@
   height: 5.6rem;
   gap: 0.8rem;
   padding: 0 0.8rem;
+ 
 }
 .main__gallery__card__info__sub{
   display: flex;
@@ -56,7 +57,11 @@
 
 }
 .main__gallery__card__info p{
-
+  overflow: hidden;
+  display: -webkit-box; /* -webkit-line-clamp 를 위해 사용 */
+  -webkit-line-clamp: 1; /* 원하는 줄 수 설정 */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 }
 
 /* diary form */

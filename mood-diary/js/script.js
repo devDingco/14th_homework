@@ -1,6 +1,16 @@
 //window가 로드시, 감정 일기장 리스트 출력
 window.onload = function () {
+  const diaryList = getDiaryList(); 
   addCardsOnGallery(diaryList)
+
+
+  const message = sessionStorage.getItem(TOAST_KEY);
+  if (message) {
+    alert(message)
+    // ERROR: 토스트메시지 활용 시, submit 제출 후 제출 or 삭제 후 제출 한 번 씹힘
+    // toastMessage(message);
+    sessionStorage.removeItem(TOAST_KEY);
+  }
 }
 
 // test function
@@ -33,9 +43,15 @@ const scrollToComments = () => {
 // 클립보드 저장함수
 const copyContents = () => {
   navigator.clipboard.writeText(contents)
+  toastMessage('내용이 복사되었습니다.')
+}
+
+const toastMessage = (contents) => {
+  const body = document.body
+  body.innerHTML += `<p class="toast-bottom">${contents}</p>`
+
   document.querySelector(".toast-bottom").style = "display:block"
   setTimeout(() => {
     document.querySelector(".toast-bottom").style = "display:none"
-  },2000)
+  }, 2000)
 }
-

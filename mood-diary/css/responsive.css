@@ -18,6 +18,9 @@
   .main__gallery__card{
     width: 100%;
   }
+  .main__gallery__card__image{
+    min-height: 28.5rem;
+  }
   .main__diary-form{
     order: 1;
     /* min-width: 360px; */
@@ -30,5 +33,13 @@
   }
   .detail-comments{
     order:3;
+  }
+
+  /* 사진보관함 */
+  .photo-dog img{
+    width: 28rem;
+  }
+  .skeleton{
+    width: 28rem;
   }
 }

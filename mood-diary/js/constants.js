@@ -33,3 +33,7 @@ const MOOD_FONT_COLOR = {
 
 //로컬스토리지 관리 키
 const DIARY_KEY = "MY_DIARY"
+
+const TOAST_KEY = "MY_TOAST"
+
+const DOG_IMAGES_10 = `https://dog.ceo/api/breeds/image/random/${10}`

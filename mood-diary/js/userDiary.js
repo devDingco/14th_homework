@@ -9,7 +9,7 @@ const storeDiaryList = (array) => {
 
 //로컬스토리지 가져오는 함수
 const getDiaryList = () => {
-  return JSON.parse(localStorage.getItem(DIARY_KEY))
+  return JSON.parse(localStorage.getItem(DIARY_KEY) ?? '[]');
 }
 
 let diaryList = getDiaryList() ?? []
@@ -47,7 +47,6 @@ addCommentsOnArea(comments)
 scrollToComments()
 
 
-// location.reload()
 //수정 클릭시 "detail-main"화면 숨기기 + "main__diary-form"화면 보이기 + 내부내용 넣어두기
 
 const viewModifyContent = () => {
@@ -80,25 +79,3 @@ const viewModifyContent = () => {
 const moveBack = () => {
   location.reload()
 }
-
-//INFO: diaryList "[UPDATE]" 함수
-//form.js 재사용
-
-// mood가 전체가 아니게 선택된 경우,
-// 있던 틀 버리기 + 새 틀 추가 + 필터된 다이어리들 추가
-
-//INFO: diaryList "DELETE" 함수
-
-// const deleteDiary = () => {
-//   alert("클릭됨")
-//   // event.stopPropagation()
-//   // console.log(id)
-//   // alert(id)
-//   // const ok = confirm(`${id}번째 일기를 삭제하시겠습니까?`)
-//   // if (ok) {
-//   //   diaryList.filter((el)=>el.id !== +id)
-//   // }
-// }
-
-//INFO: diaryList "FILTER" 함수
-// test function
