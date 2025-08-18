@@ -1,0 +1,59 @@
+
+.pagination-item-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.pagination-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination-item-page-group {
+    display: flex;
+    gap: 16px;
+    padding: 8px 4px;
+}
+
+.pagination-item-page {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* 기본적으로 배경색 없음 */
+    cursor: pointer;
+}
+
+.pagination-item-page.active {
+    background-color: var(--gray-10); /* 선택된 페이지만 배경색 */
+}
+
+
+.pagination-item-prev {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.pagination-item-next {
+    width: 24px;
+    height: 24px;
+    margin-top: 0px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}

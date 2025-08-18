@@ -12,31 +12,18 @@ commit -m"" : [YY:MM:DD]를 작성후 추가된 기능을 작성합니다.<br/>
 
 
 
+
+폴더 설명
 ---
-
-구현된 기능<br/>
-pagination, <br/>
-sort, <br/>
-photo-list-page, <br/>
-infinite-scroll, <br/>
-dark-mode, <br/>
-create-board, <br/>
-pop-up-modal, <br/>
-복사하기, <br/>
-강아지 API연결,<br/>
-메인페이지 반응형CSS,<br/>
-사진보관함 반응형CSS,<br/>
-스켈레톤 화면,<br/>
-게시글 상세 반응형CSS, <br/>
-검색별 필터 기능,<br/>
-
+my-diary <br/>
+(알가정 먼둘가) <br/>
+HTML, JS, CSS 만 사용하여 구현된 프로젝트 <br/>
 ---
-
-
-[2025:08:14] 모든 기능 구현완료.
-
+my-app <br/>
+(순수 리액트) <br/>
+컴포넌트 모음집 <br/>
+___ 
+my-trip-app <br/>
+(리액트, 넥스트)<br/>
+여행 웹, 앱
 ---
-
-현재 작업중인 내용: 프로젝트 리팩토링
-
---
