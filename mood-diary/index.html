@@ -26,7 +26,7 @@
     <main class="main">
       <section id="diary-component">
         <div class="multiple-functions">
-          <div class="filter">
+          <!-- <div class="filter"> -->
             <select id="dropdown" class="dropdown" onchange="selectedMood()">
               <option name="dropdown" value="total">전체</option>
               <option name="dropdown" value="happy">행복해요</option>
@@ -35,7 +35,14 @@
               <option name="dropdown" value="angry">화나요</option>
               <option name="dropdown" value="etc">기타</option>
             </select>
-          </div>
+            <div class="searchbar">
+              <label class="icon" for="search-input">
+                <img src="./assets/icons/search.png" alt="">
+              </label>
+              <input type="text" placeholder="검색어를 입력해 주세요." id="search-input">
+            </div>
+          <!-- </div> -->
+
           <button onclick="openModal('main-diary-form')">+ 추가하기</button>
         </div>
 
@@ -45,7 +52,13 @@
         <div class="main-modal-group" id="main-diary-form">
           <div class="main-diary-form-bg" onclick="closeModal('main-diary-form')"></div>
           <form class="main__diary-form" id="myForm">
-            <h2>📍 일기 쓰기</h2>
+            <div class="modal-title">
+              <h2>📍 일기 쓰기</h2>
+              <div class="toggle-active">
+                <p>다크모드</p>
+                <input type="checkbox" class="toggle-btn" onclick="toggleDarkMode()">
+              </div>
+            </div>
 
             <div class="select-box">
               <h3>오늘 기분은 어땟나요?</h3>
