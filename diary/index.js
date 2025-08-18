@@ -13,7 +13,7 @@ const HTML일기보여주기 = () => {
   document.getElementById("일기추가보이는곳").innerHTML = 일기목록
     .map(
       (el, index) => `
-    <a href="./detail.html?number=${index}">
+    <a href="./detail.html?number=${index}#댓글창ID">
       <div class="바디__정렬__목록__첫번째">
         <img src="${el.이미지}" style="width: 380px; height: 285px; border-radius: 16px;" />  
 
@@ -232,7 +232,7 @@ const 필터링기능 = (event) => {
   document.getElementById("일기추가보이는곳").innerHTML = 필터링된일기목록
     .map(
       (el, index) => `
-  <a href="./detail.html?number=${index}">
+  <a href="./detail.html?number=${index}#댓글창ID">
     <div class="바디__정렬__목록__첫번째">
       <img src="${el.이미지}" style="width: 380px; height: 285px; border-radius: 16px;" />  
 
