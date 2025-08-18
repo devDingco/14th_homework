@@ -16,13 +16,25 @@
   }
 
   function normalizeMood(input) {
+    // ✅ 1) 신규 경로: DiaryConst 기반(성공 시 즉시 반환)
+    try {
+      var allowed = (w.DiaryConst && Array.isArray(w.DiaryConst.EMOTIONS))
+        ? w.DiaryConst.EMOTIONS : ALLOWED_MOODS;
+      if (w.DiaryConst && typeof w.DiaryConst.moodFromInput === "function") {
+        var m = w.DiaryConst.moodFromInput(input);
+        var low = (typeof m === "string" ? m.toLowerCase().trim() : "");
+        return allowed.indexOf(low) >= 0 ? low : "etc";
+      }
+    } catch (_ignore) {}
+
+    // ✅ 2) 레거시 폴백: 기존 구현(변경 없음)
     if (!isNonEmptyString(input)) return "etc";
     var s = String(input).trim();
     s = s.replace(/^[^\w가-힣]+/, "").trim();     // 이모지 등 제거
     if (EMOJI_TO_MOOD[s]) return EMOJI_TO_MOOD[s];
 
-    var low = s.toLowerCase();
-    return ALLOWED_MOODS.indexOf(low) >= 0 ? low : "etc";
+    var low2 = s.toLowerCase();
+    return ALLOWED_MOODS.indexOf(low2) >= 0 ? low2 : "etc";
   }
 
   function normalizeDate(v) {

@@ -1,0 +1,30 @@
+{
+  "allowed": ["happy", "sad", "angry", "surprised", "etc"],
+  "labelToCode": {
+    "행복해요": "happy",
+    "슬퍼요": "sad",
+    "화나요": "angry",
+    "놀랐어요": "surprised",
+    "기타": "etc",
+
+    "😊 행복해요": "happy",
+    "😢 슬퍼요": "sad",
+    "😡 화나요": "angry",
+    "😮 놀랐어요": "surprised",
+    "❓ 기타": "etc"
+  },
+  "emotionText": {
+    "happy": "행복해요",
+    "sad": "슬퍼요",
+    "angry": "화나요",
+    "surprised": "놀랐어요",
+    "etc": "기타"
+  },
+  "image": {
+    "happy": "./images/happy.png",
+    "sad": "./images/sad.png",
+    "angry": "./images/angry.png",
+    "surprised": "./images/surprised.png",
+    "etc": "./images/etc.png"
+  }
+}

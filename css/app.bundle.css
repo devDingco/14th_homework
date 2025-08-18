@@ -1,0 +1,42 @@
+/* css/app.bundle.css */
+/* 레거시 전체를 단일 레이어로 묶어서 현재 모습 그대로 ‘동결’ */
+
+@layer overrides, components, legacy;
+@layer legacy;
+
+/* --- Base & tokens --- */
+@import url("./variables.css") layer(legacy);
+@import url("./base.css") layer(legacy);
+@import url("./a11y.css") layer(legacy);
+
+/* --- Global layout --- */
+@import url("./header.css") layer(legacy);
+@import url("./banner.css") layer(legacy);
+@import url("./main.css") layer(legacy);
+@import url("./footer.css") layer(legacy);
+
+/* --- Components --- */
+@import url("./filter.css") layer(legacy);
+@import url("./form.css") layer(legacy);
+@import url("./tabs.css") layer(legacy);
+@import url("./emotion.css") layer(legacy);
+
+/* --- Main submodules --- */
+@import url("./main/card-base.css") layer(legacy);
+@import url("./main/card-structure.css") layer(legacy);
+@import url("./main/card-size.css") layer(legacy);
+@import url("./main/meta.css") layer(legacy);
+@import url("./main/list.css") layer(legacy);
+@import url("./main/interaction.css") layer(legacy);
+@import url("./main/visibility.css") layer(legacy);
+@import url("./main/media.css") layer(legacy);
+@import url("./main/responsive.css") layer(legacy);
+
+
+@import url("./components/filter.component.css") layer(components);
+/* --- Pages --- */
+@import url("./subpage/detail.css") layer(legacy);
+
+
+@import url("./overrides.css") layer(overrides);
+

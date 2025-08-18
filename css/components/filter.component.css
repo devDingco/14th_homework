@@ -1,0 +1,60 @@
+/* css/components/filter.component.css */
+@layer components {
+  :root{
+    --header-h: 0px;             /* header가 fixed가 아니므로 0. 필요시 이후 조정 */
+    --sticky-top: var(--header-h);
+    --filter-gutter: 12px;
+    --filter-radius: 10px;
+  }
+
+  /* slot은 메인 컨테이너의 흐름 상단에 자리 잡고, sticky 영역의 기준이 됨 */
+  #filter-slot { position: relative; margin: 8px 0 16px; }
+
+  /* 핵심: CSS-only sticky. 기존 fixed 클래스가 있어도 무력화 */
+  #filter-slot > .diary-filter,
+  #filter-slot > .diary-filter.fixed,
+  #filter-slot > .diary-filter.is-fixed {
+    position: sticky !important;
+    top: var(--sticky-top, 0px) !important;
+    z-index: 60;
+    display: flex;
+    gap: var(--filter-gutter);
+    align-items: center;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: var(--filter-radius);
+    background: rgba(255,255,255,0.85);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  /* 라벨은 화면 보조용일 가능성(sr-only). 기본 영향 최소화 */
+  #filter-slot .sr-only { position: absolute; width:1px; height:1px; overflow:hidden; clip: rect(0 0 0 0); white-space:nowrap; }
+
+  /* 셀렉트 최소 가독성 확보 (겹치는 전역 규칙 위에서 안전하게) */
+  #filter-select {
+    min-height: 36px;
+    padding: 6px 10px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.4;
+    background-color: #fff;
+    max-width: 100%;
+  }
+  #filter-select:focus {
+    outline: none;
+    border-color: rgba(0, 102, 255, 0.5);
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.15);
+  }
+
+  /* 작은 화면에서도 가로폭 충돌 최소화 */
+  @media (max-width: 480px) {
+    #filter-slot > .diary-filter {
+      padding: 8px 10px;
+      gap: 10px;
+    }
+    #filter-select { width: 100%; }
+  }
+}

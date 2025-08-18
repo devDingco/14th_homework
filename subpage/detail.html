@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>일기 상세 | 민지의 다이어리</title>
   <link rel="stylesheet" href="../css/subpage/detail.css" />
   <link rel="stylesheet" href="../css/emotion.css" />
@@ -52,11 +52,25 @@
   </main>
 
   <!-- ✅ 추가: 스토어 유틸/스토어를 먼저 로드 -->
-  <script src="../script/diary/store.util.js" defer></script>
-  <script src="../script/diaryStore.js" defer></script>
+  <script src="../script/diary/store/util.js" defer></script>
+<script src="../script/diary/store/core.js"></script>
+<script src="../script/diary/store/normalize.js"></script> 
+<script src="../script/diary/store/validate.js"></script>
+<script src="../script/diary/store/persist.js"></script>
+<script src="../script/diary/store/lookup.js"></script>
+<script src="../script/diary/store/render.js"></script>
+<script src="../script/diary/store/api.js"></script>
 
-  <!-- 기존 상세 스크립트 -->
-  <script src="../script/diaryDetail.js" defer></script>
-  <script src="../script/diaryDetail.edit.js" defer></script>
+<script src="../script/diary/detail/normalize.adapter.js"></script>
+<script src="../script/diary/detail/loader.js"></script>   <!-- ✅ 새 로더 -->
+
+<script src="../script/diary/detail/view.js"></script>   <!-- ✅ 새로 추가 -->
+<script src="../script/diary/detail/edit.util.js"></script>  <!-- ✅ 추가 -->
+<script src="../script/diary/detail/form.js"></script>   <!-- ✅ 새로 추가 -->
+<script src="../script/diary/detail/save.js"></script>  <!-- ✅ 추가 -->
+<script src="../script/diary/detail/actions.js"></script>  <!-- ✅ 추가 -->
+
+<script src="../script/diary/detail/entry.read.js"></script>
+<script src="../script/diary/detail/entry.edit.js"></script>
 </body>
 </html>
