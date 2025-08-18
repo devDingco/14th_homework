@@ -76,26 +76,33 @@ const JS_수정하기기능 = () => {
 };
   
 const JS_삭제하기기능 = () => {
+  모달열기("일기삭제모달그룹ID");
+};
 
-    const 쿼리스트링 = window.location.search;
-    const 잘게나누어담은통 = new URLSearchParams(쿼리스트링);
-    const 일기번호 = 잘게나누어담은통.get("number");
-    현재삭제할일기번호 = 일기번호;
+const JS_일기삭제확인기능 = () =>{
+  const 쿼리스트링 = window.location.search;
+  const 잘게나누어담은통 = new URLSearchParams(쿼리스트링);
+  const 일기번호 = 잘게나누어담은통.get("number");
+  현재삭제할일기번호 = 일기번호;
 
-    const 스토리지에저장된일기목록=
-      window.localStorage.getItem("민지의일기목록") ?? "[]"
-    const 일기목록 = JSON.parse(스토리지에저장된일기목록);
-    
-    if(현재삭제할일기번호 !== null) {
-      const 삭제후일기목록 = 일기목록.filter(
-        (_, index) => index !== parseInt(일기번호, 10)
-      );
-      window.localStorage.setItem("민지의일기목록", JSON.stringify(삭제후일기목록));
+  const 스토리지에저장된일기목록=
+    window.localStorage.getItem("민지의일기목록") ?? "[]"
+  const 일기목록 = JSON.parse(스토리지에저장된일기목록);
   
+  if(현재삭제할일기번호 !== null) {
+    // 1. 클릭된 일기번호 삭제하기
+    const 삭제후일기목록 = 일기목록.filter(
+      (_, index) => index !== parseInt(일기번호, 10)
+    );
+    // 2. 삭제된 일기목록 다시 저장하기
+    window.localStorage.setItem(
+      "민지의일기목록",
+      JSON.stringify(삭제후일기목록)
+    );
 
-    alert("삭제가 완료되었습니다.");
+    // 3. 메인페이지로 이동
     location.replace("./index.html");
-    }
+  }
 }
 
 const JS_댓글달기기능 = () => {
@@ -207,4 +214,23 @@ const JS_스크롤위로기능 = () => {
     top: 0,
     behavior: "smooth"
   });
+};
+
+const JS_복사하기기능 = () => {
+  // 1. 주소에서 일기번호 가져오기
+  const 쿼리스트링 = window.location.search;
+  const 잘게나누어담은통 = new URLSearchParams(쿼리스트링);
+  const 일기번호 = 잘게나누어담은통.get("number");
+
+  // 2. 스토리지에 저장된 일기목록 가져오기
+  const 스토리지에저장된일기목록 =
+    window.localStorage.getItem("민지의일기목록") ?? "[]";
+  const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+
+  // 3. 일기목록에서 현재일기번호 가져오기
+  const 일기담는통 = 일기목록[일기번호];
+
+  // 4. 일기내용 클립보드에 복사하기
+  navigator.clipboard.writeText(일기담는통.내용);
+  JS_복사토스트메시지실행기능();
 };

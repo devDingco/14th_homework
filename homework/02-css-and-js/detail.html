@@ -4,8 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>일기상세페이지</title>
-    <link rel="stylesheet" href="./css/detail.css">
+    <link rel="stylesheet" href="./css/detail.css">    
+    <link rel="stylesheet" href="./css/common.toast.css" />
+    <link rel="stylesheet" href="./css/common.modal.css" />
+
     <script src="./javascript/detail.js"></script>
+    <script src="./javascript/common.toast.js"></script>
+    <script src="./javascript/common.modal.js"></script>
 </head>
 <body>
     <!-- 헤더 -->
@@ -47,6 +52,17 @@
                 class="diary_content_detail"
             ></span>
         </div>
+
+        <!-- 내용 복사 -->
+         <div class="copy_button_area">
+            <button class="copy_button" onclick="JS_복사하기기능()">
+                <img
+                    src="./assets/images/copy.png"
+                    class="copy_button_icon"
+                />
+                <div class="copy_button_text">내용 복사</div>
+            </button>
+         </div>
         <!-- 버튼 영역 -->
         <div class="button_area">
             <button class="edit_button" onclick="JS_수정하기기능()">
@@ -73,6 +89,38 @@
             </button>
         </div>
         <div id="HTML_댓글목록영역"></div>
+    </div>
+
+    <!-- 복사토스트 -->
+    <div id="HTML_복사토스트메시지" class="CSS_복사토스트메시지">
+        내용이 복사되었습니다.
+    </div>
+
+
+    <!-- 일기 삭제 모달 -->
+    <div id="일기삭제모달그룹ID" class="모달그룹">
+        <div class="모달배경" onclick="모달닫기('일기삭제모달그룹ID')"></div>
+        <div class="일기삭제모달">
+            <div class="일기삭제모달_텍스트">
+                <b class="일기삭제모달_타이틀">일기 삭제</b>
+                <p class="일기삭제모달_내용">일기를 삭제하시겠어요?</p>
+            </div>
+            <div class="diary_button_group">
+                <button
+                    class=" 일기삭제모달_취소"
+                    onclick="모달닫기('일기삭제모달그룹ID');"                            
+                >
+                    취소
+                </button>
+
+                <button
+                    class="일기삭제모달_삭제"
+                    onclick="JS_일기삭제확인기능();" 
+                >
+                    삭제
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- 플로팅버튼 -->
