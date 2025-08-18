@@ -1,6 +1,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  font-size: 62.5%;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -12,13 +13,37 @@
 
 html,
 body {
-  max-width: 100vw;
+  max-width: 192rem;
+  margin: 0 auto;
+  min-height: 72rem;
   overflow-x: hidden;
+  background-color: var(--background-color);
+  border: 0.1rem solid red;
+
+  @media (max-width: 192rem) {
+    max-width: 192rem;
+  }
+
+  @media (max-width: 128rem) {
+    max-width: 128rem;
+  }
+  
+  @media (max-width: 102.4rem) {
+    max-width: 102.4rem;
+  }
+
+  @media (max-width: 76.8rem) {
+    max-width: 76.8rem;
+  }
+
+  @media (max-width: 48rem) {
+    max-width: 48rem;
+  }
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: var(--background-color);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -26,7 +51,6 @@ body {
 
 * {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
 }
 
@@ -40,3 +64,174 @@ a {
     color-scheme: dark;
   }
 }
+
+
+:root {
+  --background-color: #f0f0f0;
+  --white: #FFFFFF;
+  --gray-05: #F2F2F2;
+  --gray-10: #E4E4E4;
+  --gray-20: #D4D3D3;
+  --gray-30: #C7C7C7;
+  --gray-40: #ABABAB;
+  --gray-50: #919191;
+  --gray-60: #777777;
+  --gray-70: #5F5F5F;
+  --gray-80: #333333;
+  --gray-90: #1C1C1C;
+  --black: #000000;
+
+  --main-color: #2974E5;
+
+  --red: #F66A6A;
+}
+
+.b_28_36 {
+  font-weight: bold;
+  font-size: 2.8rem;
+  line-height: 3.6rem;
+}
+
+.b_24_32 {
+  font-weight: bold;
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+}
+
+.b_20_28 {
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: 2.8rem;
+}
+
+.b_18_24 {
+  font-weight: bold;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+}
+
+.b_16_24 {
+  font-weight: bold;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+.b_14_20 {
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+
+.sb_18_24 {
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+}
+
+.sb_16_24 {
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+.sb_14_20 {
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+
+.me_20_24 {
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 2.4rem;
+}
+
+.me_18_24 {
+  font-weight: 500;
+  font-size: 1.8rem;
+}
+
+.me_16_24 {
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+.me_16_20 {
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 2rem;
+}
+
+.me_14_20 {
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+
+.me_13_20 {
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 2rem;
+}
+
+.me_11_12 {
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.2rem;
+}
+
+.r_20_24 {
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.4rem;
+}
+
+.r_18_24 {
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+}
+
+.r_16_24 {
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+.r_14_20 {
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+
+.r_12_20 {
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 2rem;
+}
+
+.r_11_12 {
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.2rem;
+}
+
+.l_14_20 {
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+
+.l_12_20 {
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 2rem;
+}
+
+.me_12_20 {
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 2rem;
+}
+
