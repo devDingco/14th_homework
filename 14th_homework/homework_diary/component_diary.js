@@ -1,5 +1,5 @@
-let 단일카드
-let index
+// let 단일카드
+// let index
 
 const 단일카드객체생성 = () =>{
     let 오늘의제목 = document.getElementById("오늘의제목").value
@@ -26,7 +26,7 @@ const 단일카드객체생성 = () =>{
     }
 
     
-    단일카드 = {
+    let 단일카드 = {
         기분  : 오늘의기분,
         제목 : 오늘의제목,
         내용 : 오늘의내용
@@ -97,6 +97,12 @@ const 카드내용_이미지경로_배열생성 = ()=>{
 }
 
 const 카드태그생성= (index=-1) =>{
+    document.getElementById("일기쓰기").style = "display : none"
+    document.getElementById("일기쓰기모달배경").style = "display : none"
+
+    document.getElementById("등록완료모달").style = "display : none"
+    document.getElementById("등록완료모달배경").style = "display : none"
+
     let i
     let 태그배열 
     let [카드내용, 이미지경로] = 카드내용_이미지경로_배열생성()
@@ -176,7 +182,7 @@ const 카드태그생성= (index=-1) =>{
             }
     
         }
-    }
+    }   
 
 const 필터기능 = (event)=>{
     let 필터링전모든카드= JSON.parse(localStorage.getItem("일기카드들")) || []
@@ -270,11 +276,32 @@ const 카드삭제기능 = (event) =>{
 
 }
 
+const 일기쓰기노출기능= ()=>{
+    document.getElementById("일기쓰기").style = "display : flex"
+    document.getElementById("일기쓰기모달배경").style = "display : flex"
+}
+const 등록완료팝업생성 = () =>{ 
+    document.getElementById("등록완료모달").style = "display : flex"
+    document.getElementById("등록완료모달배경").style = "display : flex"
 
-window.onload = () =>{
+}
+
+
+const 일기보관함렌더링 = () =>{
     let 카드목록 = JSON.parse(localStorage.getItem("일기카드들")) || []
     if (카드목록[0]){
         카드태그생성()
     }
+    document.getElementById("필터일기쓰기버튼").innerHTML =`
+    <select onchange="필터기능(event)">
+        <option value="전체">전체</option>
+        <option value="행복">행복해요</option>
+        <option value="슬픔">슬퍼요</option>
+        <option value="놀람">놀랐어요</option>
+        <option value="화남">화나요</option>
+        <option value="기타">기타</option>
+    </select>      
+    <img id="일기쓰기버튼" class="일기쓰기버튼" onclick="일기쓰기노출기능()" src="./assets/드롭다운.png"/>`
 }
  
+window.일기보관함렌더링=일기보관함렌더링;

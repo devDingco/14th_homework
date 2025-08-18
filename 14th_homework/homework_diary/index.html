@@ -2,11 +2,45 @@
 <html lang="ko">
 <head>
     <title>감정일기</title>
-    <script src="./index_3.js"></script>
     <link rel="stylesheet" href="./index.css" />
 </head>
 <body>
+
     <div class="전체">
+        <div id="일기쓰기모달배경" class="일기쓰기모달배경">        
+        </div>
+        <div id="일기쓰기" class="일기쓰기영역">
+            <div class="제목">일기쓰기</div>
+            <div class="입력영역">
+                <div id= "기분" class="오늘의기분">
+                    <div>오늘 기분은 어땠나요?</div>
+                    <input id ="행복" class="오늘의기분" type="radio" name ="기분" />행복해요
+                    <input id ="슬픔" class="오늘의기분" type="radio" name ="기분" />슬퍼요
+                    <input id="놀람" class="오늘의기분" type="radio" name ="기분" />놀랐어요
+                    <input id="화남" class="오늘의기분" type="radio" name ="기분" />화나요
+                    <input id="기타" class="오늘의기분" type="radio" name ="기분" />기타
+                </div>
+                <div class="제목">
+                    <div>제목</div>
+                    <input id="오늘의제목" type="text" placeholder="제목을 입력해 주세요."/>
+                </div>
+                <div class="내용">
+                    <div>내용</div>
+                    <textarea id="오늘의내용" placeholder="내용을 입력해 주세요."></textarea>
+                </div>
+
+            </div>
+            <button class="등록하기버튼" onclick="등록완료팝업생성()" >등록하기</button>
+        </div>
+        <div id="등록완료모달배경" class="등록완료모달배경"></div>
+        <div id="등록완료모달" class="등록완료모달">
+            <div class="등록완료팝업">
+                <div>일기등록완료</div>
+                <div>등록이 완료 되었습니다.</div>
+                <button onclick="카드태그생성()">확인</button>
+            </div>
+        </div>
+      
         <div class="헤더">
             
         </div>
@@ -15,15 +49,29 @@
                 <div class="배너"></div>
             </div>
             <div class="네비게이션영역">
-                <div>네비게이션</div>
-                <select onchange="필터기능(event)">
-                    <option value="전체">전체</option>
-                    <option value="행복">행복해요</option>
-                    <option value="슬픔">슬퍼요</option>
-                    <option value="놀람">놀랐어요</option>
-                    <option value="화남">화나요</option>
-                    <option value="기타">기타</option>
-                </select>
+                <div width="376px"></div>
+                <div class="네비필터일기쓰기">
+                
+                    <div class="네비게이션">
+                        <button id ="일기" >일기보관함</button>
+                        <button id="사진">사진보관함</button>
+                    </div>
+                    
+                            
+            
+                    <div id="필터일기쓰기버튼" class="필터일기쓰기버튼">
+                        <select onchange="필터기능(event)">
+                            <option value="전체">전체</option>
+                            <option value="행복">행복해요</option>
+                            <option value="슬픔">슬퍼요</option>
+                            <option value="놀람">놀랐어요</option>
+                            <option value="화남">화나요</option>
+                            <option value="기타">기타</option>
+                        </select>      
+                        <img id="일기쓰기버튼" class="일기쓰기버튼" onclick="일기쓰기노출기능()" src="./assets/드롭다운.png"/>
+                </div>
+            </div>
+                <div width="376px"></div>       
             </div>
             
             <div id="" class="내용영역">
@@ -32,33 +80,15 @@
                     
                                                
                 </div>
-                <div class="일기쓰기영역">
-                    <div class="제목">일기쓰기</div>
-                    <div class-="입력영역">
-                        <div id= "기분" class="오늘의기분">
-                            <div>오늘 기분은 어땠나요?</div>
-                            <input id ="행복" class="오늘의기분" type="radio" name ="기분" />행복해요
-                            <input id ="슬픔" class="오늘의기분" type="radio" name ="기분" />슬퍼요
-                            <input id="놀람" class="오늘의기분" type="radio" name ="기분" />놀랐어요
-                            <input id="화남" class="오늘의기분" type="radio" name ="기분" />화나요
-                            <input id="기타" class="오늘의기분" type="radio" name ="기분" />기타
-                        </div>
-                        <div class="제목">
-                            <div>제목</div>
-                            <input id="오늘의제목" type="text" placeholder="제목을 입력해 주세요."/>
-                        </div>
-                        <div class="내용">
-                            <div>내용</div>
-                            <textarea id="오늘의내용" placeholder="내용을 입력해 주세요."></textarea>
-                        </div>
-            
-                    </div>
-                    <button class="등록하기버튼" onclick="카드태그생성()">등록하기</button>
-                    <!-- <button class="등록하기버튼" onclick="일기카드목록()">등록하기</button> -->
+                
                 </div>
             </div>
-        </div>
+
         <div class="푸터"></div>
     </div>
+   
+    <script src="./component_diary.js"></script>
+    <script src="./component_photo.js"></script>
+    <script src="./index.js"></script>
 </body>
 </html>

@@ -1,18 +1,76 @@
 .전체{
     background-color: beige;
     width : 1920px;
-    height : 1842px
+    height : 1654px;
+    position: absolute;
+    z-index: 1;
+
+}
+.일기쓰기모달배경{
+    display: none;
+
+
+    background-color: lightgray;
+    width : 1920px;
+    height : 1654px;
+    opacity: 0.7;
+    position: absolute;
+    z-index: 2;
+
+}
+.일기쓰기영역{
+    width: 640px;
+    height: 560px;
+    background-color: aquamarine;
+    top:calc(50% - 640px/2);
+    left:calc(50% - 560px/2);
+    display: none;
+    flex-direction: column;
+    gap:40px;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    z-index: 3;
+    opacity: 1;
+}
+.등록하기버튼{
+    width: 312px;
+    height: 48px;
+}
+.등록완료모달배경{
+    display: none;
+    background-color: black;
+    width : 1920px;
+    height : 1654px;
+    opacity: 0.4;
+    position: absolute;
+    z-index: 4;
+
+}
+.등록완료모달{
+    background-color: aliceblue;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 480px;
+    height: 200px;
+    position: absolute;
+    z-index: 5;
+    top:calc(50% - 480px/2);
+    left:calc(50% - 200px/2);
+
 }
 .헤더{
     width : 1920px;
-    height: 70px;
+    height: 60px;
     background-color: aqua;
 }
 
 
 .바디{
     width : 1920px;
-    height: 1521px;
+    /* height: 1521px; */
     background-color: aquamarine;
     display: flex;
     flex-direction: column;
@@ -36,11 +94,41 @@
 
 .네비게이션영역{
     width:1920px;
-    height: 112px;
-    background-color: blue;
+    height: 128px;
+    background-color: skyblue;
+    display: flex;
+    justify-content: center;
+
 }
+.네비필터일기쓰기{
+    width : 1168px;
+    /* height: 48px; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    gap: 32px;
+    /* align-items: center; */
+}
+.네비게이션{
+    width : 1168px;
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
 
-
+}
+.필터일기쓰기버튼{
+    display: flex;
+    height: 48px;
+    flex-direction: row;
+    justify-content: space-between ;
+    align-items: center;
+}
+.일기쓰기버튼{
+    width: 110px;
+    height: 48px;
+}
 .내용영역{
     width: 1920px;
     height: 1209px;
@@ -50,10 +138,11 @@
     justify-content: center;
     align-items: flex-start;
     gap:24px;
+   
 }
 .카드영역{
-    width: 784px;
-    height: 1209px;
+    width: 1168px;
+
     background-color: white;
     display: flex;
     flex-direction: row;
@@ -61,15 +150,18 @@
     gap:24px;
     flex-wrap: wrap;
     align-items: flex-start;
+
 }
 
 .카드{
-    width: 380px;
-    height: 373px;
+    width: 274px;
+    height: 296px;
     display: flex;
     flex-direction: column;
-    gap:16px;
+    gap:24px;
     justify-content: space-between;
+    /* align-items: flex-start; */
+  
 }
 .카드:hover{
     filter :blur(1.5px);
@@ -84,32 +176,28 @@
 }
 
 .카드이미지{
-    width: 380px;
-    height: 285px;
+    width: 274px;
+    height: 208px;
+    object-fit: contain;
     
 }
-.삭제버튼{
+.카드내용요약{}
+.첫줄{}
+.기분노출{}
+.날짜놀출{}
+.내용요약{}
+/* .삭제버튼{
     position: relative;
     top:5px;
     left: 365px;
     cursor:pointer
-}
-.일기쓰기영역{
-    width: 360px;
-    height: 604px;
-    background-color: aquamarine;
-    display: flex;
-    flex-direction: column;
-    gap:40px;
-    justify-content: space-between;
-    align-items: center;
-}
-.등록하기버튼{
-    width: 312px;
-    height: 48px;
+} */
+.강아지사진{
+    aspect-ratio: 1/1;
+    object-fit: cover;
 }
 .푸터{
     width : 1920px;
-    height: 227px;
+    height: 160px;
     background-color: blueviolet;
 }
