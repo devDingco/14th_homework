@@ -39,7 +39,7 @@
               <label class="icon" for="search-input">
                 <img src="./assets/icons/search.png" alt="">
               </label>
-              <input type="text" placeholder="검색어를 입력해 주세요." id="search-input">
+              <input type="text" placeholder="검색어를 입력해 주세요." id="search-input" oninput="getDiaryByTitle(event)">
             </div>
           <!-- </div> -->
 
@@ -168,7 +168,7 @@
   
   <script src="./js/form.js"></script>
   <script src="./js/modal.js"></script>
-
+  <script src="./js/debounce.js"></script>
   <script src="./js/fetchData.js"></script>
 </body>
 </html>
