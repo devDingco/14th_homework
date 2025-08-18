@@ -54,25 +54,18 @@ window.onload = () => {
 //5. 회고 화면에 그리기    
     회고그리기기능();
 
-    const 회고목록영역 = document.getElementById("HTML_회고목록영역");
-    if (회고목록영역) {
-      회고목록영역.scrollIntoView({ behavior: "smooth" });
-    }
+    회고로바로이동 ();
 
-    // 회고목록으로바로이동기능();
-    
+
+
 };
 
 
+const 회고로바로이동 = () => {
+    const 회고시작부분 = window.document.getElementById("회고");
+    회고시작부분.scrollIntoView({behavior: "smooth"});
+};
 
-// const 회고목록으로바로이동기능 = () => {
-//     window.addEventListener("load", () => {
-//         const 회고목록 = document.getElementById("바디_회고");
-//         if (회고목록) {
-//           회고목록.scrollIntoVeiw({ behavior: "smooth" });
-//         } 
-//     });
-// };
 
 const 수정페이지이동 = () => {
     // 주소에서 일기번호 가져오기 -> 현재 보고있는 페이지에 담긴 데이터를 가져와서 수정해야 하니까 가져오는 거!
@@ -180,4 +173,6 @@ const 회고그리기기능 = () => {
     `;
  });
  document.getElementById("회고목록프레임").innerHTML = 새로운회고목록;
+
+ document.getElementById("회고입력박스").value = ""     /* 목록에 새로운 데이터 추가 후, 입력칸에 써있는 데이터 지우기 */
 };
