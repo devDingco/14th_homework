@@ -90,10 +90,8 @@ textarea::placeholder{
 }
 
 .multiple-functions{
-  height: 3.2rem;
-  top: 0;
+  /* height: 3.2rem; */
   width: 100%;
-  margin-bottom: 4.2rem;
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
@@ -104,16 +102,71 @@ textarea::placeholder{
   align-items: flex-start;
   gap: 1.6rem;
 }
+
+/* dropdown */
 .dropdown{
-  width: 11.2rem;
-  padding: 0 1rem;
+  width: 12rem;
   height: 100%;
   border-radius: 0.8rem;
   -moz-appearance: none;
 	-webkit-appearance: none;
 	appearance: none;
   font-size: 1.6rem;
+  border: solid 0.1rem var(--color-gray-300);
+  position: relative;
 }
+.dropdown-title{
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  padding: 1.2rem 1rem;
+  color: var(--color-gray-900);
+  font-weight: 500;
+  --dropdown-title: "전체"
+}
+.dropdown-title::after{
+  content:var(--dropdown-title);
+}
+ .dropdown-title:checked + ul{
+  display: block;
+ }
+.dropdown-list{
+  position: absolute;
+  top: 4.8rem;
+  display: none;
+  border-radius: 0.8rem;
+  border: solid 0.1rem var(--color-gray-300);
+  overflow: hidden;
+  width: 100%;
+  z-index: 8;
+  background-color: #fff;
+}
+.dropdown-list input{
+  display: none;
+}
+.dropdown-list li{
+  width: 100%;
+  padding: 1.2rem;
+}
+.dropdown-list li:has(input:hover){
+  font-weight: 700;
+  color: #299C00;
+  background-color: #3AB50F0D;
+}
+.dropdown-list li:has(input:checked){
+  background-color: #3AB50F0D;
+  font-weight: 700;
+  color: #299C00;
+}
+.dropdown-list input:checked + label::after{
+  transform: translateX(100%);
+  content: "✓";
+  font-weight: 900;
+  float: right;
+  margin-right: 1rem;
+  color: #299C00;
+}
+
 
 .searchbar {
   display: flex;

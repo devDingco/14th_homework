@@ -26,22 +26,43 @@
     <main class="main">
       <section id="diary-component">
         <div class="multiple-functions">
-          <!-- <div class="filter"> -->
-            <select id="dropdown" class="dropdown" onchange="selectedMood()">
-              <option name="dropdown" value="total">전체</option>
-              <option name="dropdown" value="happy">행복해요</option>
-              <option name="dropdown" value="sad">슬퍼요</option>
-              <option name="dropdown" value="surprise">놀랐어요</option>
-              <option name="dropdown" value="angry">화나요</option>
-              <option name="dropdown" value="etc">기타</option>
-            </select>
-            <div class="searchbar">
-              <label class="icon" for="search-input">
-                <img src="./assets/icons/search.png" alt="">
-              </label>
-              <input type="text" placeholder="검색어를 입력해 주세요." id="search-input" oninput="getDiaryByTitle(event)">
-            </div>
-          <!-- </div> -->
+          <div class="dropdown">
+            <input type="checkbox" class="dropdown-title" id="dropdown-title-id" value="전체">
+            
+            <ul class="dropdown-list">
+              <li>
+                <input type="radio" name="dropdown" id="total" onclick="selectMood(event)">
+                <label for="total">전체</label>
+              </li>
+              <li>
+                <input type="radio" name="dropdown" id="happy" onclick="selectMood(event)">
+                <label for="happy">행복해요</label>
+              </li>
+              <li>
+                <input type="radio" name="dropdown" id="sad" onclick="selectMood(event)">
+                <label for="sad">슬퍼요</label>
+              </li>
+              <li>
+                <input type="radio" name="dropdown" id="surprise" onclick="selectMood(event)">
+                <label for="surprise">놀랐어요</label>
+              </li>
+              <li>
+                <input type="radio" name="dropdown" id="angry" onclick="selectMood(event)">
+                <label for="angry">화나요</label>
+              </li>
+              <li>
+                <input type="radio" name="dropdown" id="etc" onclick="selectMood(event)">
+                <label for="etc">기타</label>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="searchbar">
+            <label class="icon" for="search-input">
+              <img src="./assets/icons/search.png" alt="">
+            </label>
+            <input type="text" placeholder="검색어를 입력해 주세요." id="search-input" oninput="getDiaryByTitle(event)">
+          </div>
 
           <button onclick="openModal('main-diary-form')">+ 추가하기</button>
         </div>
