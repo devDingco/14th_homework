@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>일기상세_수정</title>
     <link rel="stylesheet" href="./일기상세_수정.css">
+    <script src="./일기상세_수정.js">
+    </script>
 </head>
 <body>
     <div class="프레임">
@@ -10,30 +14,41 @@
         <div class="바디_내용">
             <div class="오늘기분은어떗나요">
                 <p class="오늘기분은어떗나요_질문">오늘 기분은 어땟나요?</p>
-                <div class="일기쓰기_기분버튼">
-                    <input type="radio" name="기분상태" />행복해요
-                    <input type="radio" name="기분상태" />슬퍼요
-                    <input type="radio" name="기분상태" />놀랐어요 
-                    <input type="radio" name="기분상태" />화나요
-                    <input type="radio" name="기분상태" />기타 
+                <div class="일기쓰기_기분버튼" >
+                    <input type="radio" name="기분상태" value="행복" />행복해요
+                    <input type="radio" name="기분상태" value="슬픔"/>슬퍼요
+                    <input type="radio" name="기분상태" value="놀람"/>놀랐어요 
+                    <input type="radio" name="기분상태" value="화남"/>화나요
+                    <input type="radio" name="기분상태" value="기타"/>기타 
                 </div>
             </div>
             <div class="제목과내용">
                 <div class="메인_바디_일기장_일기쓰기_제목">
                     <p class="메인_바디_일기장_일기쓰기_제목텍스트">제목</p>
-                    <input type="text" placeholder="이것은 타이틀입니다." class="이것은타이틀입니다" />
+                    <input type="text" placeholder="이것은 타이틀입니다." 
+                    class="이것은타이틀입니다" id="이것은타이틀입니다" />
                 </div>
                 <div class="메인_바디_일기장_일기쓰기_내용">
                     <p class="메인_바디_일기장_일기쓰기_내용텍스트">내용</p>
                     <input type="text" placeholder="내용이 들어갑니다 내용이 들어갑니다 내용이 들어갑니다"
-                    class="내용이들어갑니다" />
+                    class="내용이들어갑니다" id="내용이들어갑니다" />
                 </div>
             </div>
             <div class="하단_버튼">
-                <button class="하단_버튼_취소">취소</button>
-                <button class="하단_버튼_수정하기" onclick="하단_버튼_수정하기_클릭">수정 하기</button>
+                <button class="하단_버튼_취소" onclick="수정취소하기기능()">취소</button>
+                <button class="하단_버튼_수정하기" onclick="수정완료하기기능()">수정 하기</button>
             </div>
         </div>
     </div>
+    <div class="바디_회고" id="바디_회고">
+        <p id="회고">회고</p>
+        <div class="바디_회고_회고입력">
+            <input type="text" id="회고입력박스" placeholder="수정중일때 회고를 작성할 수 없어요." disabled>
+            <button id="입력버튼" onclick="회고추가기능()" disabled>입력</button>
+        </div>
+    </div>        
+    <div id="회고목록프레임"></div>
+    
+
 </body>
 </html>

@@ -66,6 +66,8 @@ const 일기그리기기능 = () => {
                 </div>
                     <div class="메인_바디_일기장_일기저장_1_설명_타이틀"> ${el.제목} </div>
             </div>
+            <img class="메인_바디_일기장_삭제버튼" src="../icons/delete.svg" onclick="일기삭제기능(event, ${index})">
+            </div>
         </a>     
     `;
     }
@@ -150,9 +152,11 @@ const 필터링기능 = (event) => {
         필터링된일기목록 = 일기목록.filter ((el) => el.기분 === "놀람")
     } else if (선택한내용 === "화남선택") {
         필터링된일기목록 = 일기목록.filter ((el) => el.기분 === "화남")
+    } else if (선택한내용 === "기타선택") {
+        필터링된일기목록 = 일기목록.filter ((el) => el.기분 === "기타")
     } else {
-        필터링된일기목록 = 일기목록;
-    }
+        필터링된일기목록 = 일기목록
+    };
 
  const 새로운일기도화지 = 필터링된일기목록
     .map (
@@ -161,7 +165,7 @@ const 필터링기능 = (event) => {
             <div class="메인_바디_일기장_일기저장_">
                 <div class="메인_바디_일기장_일기저장_사진">
                         ${el.기분 === "행복"
-                    ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/joy .png" >'
+                    ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/joy.png" >'
                     : ""
                     }
                         ${el.기분 === "슬픔"
@@ -206,17 +210,51 @@ const 필터링기능 = (event) => {
                 </div>
                     <div class="메인_바디_일기장_일기저장_1_설명_타이틀"> ${el.제목} </div>
             </div>
+            <img class="메인_바디_일기장_삭제버튼" src="../icons/delete.svg" onclick="일기삭제기능(event, ${index})">
             </a>     
     `
     )
     .join("");
     document.getElementById("일기목록").innerHTML =
         새로운일기도화지;
+};
+
+const 화면맨위로올리기기능 = () => {
+    window.scrollTo({ top:0, behavior: "smooth"});
+};
+
+
+
+//스크롤내릴시필터색반전
+window.addEventListener("scroll", () => {
+    const 스크롤내려간길이 = window.scrollY;
+
+    if(스크롤내려간길이 > 0) {
+        document.getElementById("필터버튼").style = "filter: invert(100%);";
+    } else {
+        document.getElementById("필터버튼").style = "filter: invert(0%);";
+    }
+});
+
+const 일기삭제기능 = (event, 일기번호) => {
+// 1. 하위 태그들한테 기능 적용되는 거 막기 
+    event.preventDefault();
+//저장되어 있는 일기목록 불러오기
+    const 스토리지에저장된일기목록 =
+      window.localStorage.getItem("민지의일기보관함");
+    const 일기목록 = 스토리지에저장된일기목록 
+    ? JSON.parse(스토리지에저장된일기목록) : [];
+
+//2.클릭된 일기번호 삭제하기
+    const 삭제후일기목록 = 일기목록.filter((_, index) => index !== 일기번호);
+
+//3.삭제후 남은 목록들 다시 저장하기
+    window.localStorage.setItem("민지의일기보관함", JSON.stringify(삭제후일기목록));
+    alert("삭제되었습니다.");
+
+//4.삭제후 남은 목록들 화면에 다시 띄우기
+    일기그리기기능();
 }
-
-
-
-
 
 // let 일기보관함 = [];
 // // 일기장 배열에 새로운 일기 객체들 추가하기

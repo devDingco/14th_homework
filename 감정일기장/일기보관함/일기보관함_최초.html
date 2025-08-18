@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>감정일기장</title>
     <link rel="stylesheet" href="./일기보관함_최초.css"/>
-    <script src="./일기보관함_최초.js">        
+    <link rel="stylesheet" href="./일기보관함_최초_모바일.css" media="(max-width: 22.5rem)"/>  
+    <script src="./일기보관함_최초.js">      
     </script>
 </head>
 <body>
@@ -18,7 +21,7 @@
                         <button class="메인_바디_상단글씨_사진보관함">사진보관함</button>
                     </div>
                     <div class="메인_바디_필터_배경">
-                        <select class="필터버튼" onchange="필터링기능(event)">
+                        <select class="필터버튼" id="필터버튼" onchange="필터링기능(event)">
                           <option selected>전체</option>
                           <option value="행복선택">행복해요</option>
                           <option value="슬픔선택">슬퍼요</option>
@@ -30,8 +33,9 @@
 
                     <div class="메인_바디_일기장">
                         <div id="일기장전체틀" class="메인_바디_일기장_일기저장_"> 
-                            <div id="일기목록"></div>
                             
+                            <div id="일기목록"></div>
+
                             <div class="메인_바디_일기장_일기쓰기">    
                                 <p class="일기쓰기">📍 일기 쓰기</p>
                                 <div class="오늘기분은어떗나요">
@@ -44,6 +48,7 @@
                                         <input type="radio" name="기분상태" value="기타"/>기타 
                                     </div>
                                 </div>
+
                                 <div class="제목과내용">
                                     <div class="메인_바디_일기장_일기쓰기_제목">
                                         <p class="메인_바디_일기장_일기쓰기_제목텍스트">제목</p>
@@ -54,21 +59,25 @@
                                         <input type="text" placeholder="내용을 입력해 주세요." class="내용을입력해주세요" id="내용입력창" />
                                     </div>
                                 </div>
+                                
                                 <button class="메인_바디_일기장_일기쓰기_등록하기" id="등록하기버튼" onclick="글쓰기기능()">등록하기</button> 
+                            
                             </div>
                         </div>
                     </div>
+                   
+                        <img class="플로팅버튼" id="플로팅버튼사진" src="../icons/up_outline_light_xl.svg" 
+                          onclick="화면맨위로올리기기능()" > 
+                      
                 </div>
+            
         </div>
-
         <div class="하단">
             <div class="하단_글씨">
                 <p class="하단_글씨_민지의다이어리">민지의 다이어리</p>
-                <p class="하단_글씨_name">대표 : {name}</p>
+                <!-- <p class="하단_글씨_name">대표 : {name}</p> -->
                 <p class="하단_글씨_copyright">Copyright © 2024. {name} Co., Ltd.</p>
             </div>
         </div>
-    
-
 </body>
 </html>
