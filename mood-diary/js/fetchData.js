@@ -15,7 +15,8 @@ const fetchData = async () => {
 
 // 1. dog-gallery 호출 후 innerHTML에 div 태그 삽입 함수
 const addSkeleton = (count = 10) => {
-  const ratio = document.getElementById("dropdown-ratio").value
+  const checked = document.querySelector('input[name="dropdown"]:checked');
+  const ratio = checked.id || 'default';
   const dogGallery = document.getElementById('dog-gallery')
   dogGallery.innerHTML +=
     Array.from({ length: count })
@@ -30,6 +31,7 @@ const showDogImages = async () => {
   const dogImageUrls = await fetchData()
 
   const skeletons = document.querySelectorAll('.skeleton')
+  const ratio = document.querySelector('input[name="dropdown"]:checked')?.id || 'default'
 
   const count = dogImageUrls.length
   for (let i = 0; i < count; i++) {
@@ -38,7 +40,7 @@ const showDogImages = async () => {
 
     image.onload = () => {
       skeletons[i]?.replaceWith(image)
-      image.classList.add('dog-img','default')
+      image.classList.add('dog-img', ratio)
     }
   }
 }
@@ -78,12 +80,17 @@ const toggleComponent = (id) => {
   }
 }
 
-// 4. filter에서 선택된 값 가져온 후, setImageRatio 함수 호출
-const selectedRatio = () => {
-  const ratio = document.getElementById("dropdown-ratio").value
+// 4. dropdown에서 선택된 값 가져온 후, setImageRatio 함수 호출
+const selectRatio = (event) => {
+  const ratioId = event.target.id
+  const ratioLabel = getRatioLabel(ratioId) ?? "기본"
+  document.getElementById('dropdown-ratio').style = `--dropdown-title: "${ratioLabel}"`
+  document.getElementById('dropdown-ratio').click()
+
+
   const dogGallery = document.querySelectorAll('.dog-img')
 
-  dogGallery.forEach(dogImage => setImageRatio(dogImage, ratio))
+  dogGallery.forEach(dogImage => setImageRatio(dogImage, ratioId))
 }
 
 

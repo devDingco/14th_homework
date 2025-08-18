@@ -15,6 +15,9 @@ const getMoodFontColor = (mood) => {
   return MOOD_FONT_COLOR[mood]
 }
 
+const getRatioLabel = (ratio) => {
+  return RATIO_KOR[ratio]
+}
 //시간 관련 format 함수
 const getCurrentDate = () => {
   const now = new Date()
