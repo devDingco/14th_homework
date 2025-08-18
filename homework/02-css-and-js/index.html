@@ -4,13 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>나만의 일기장</title>
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/index.css">        
+    <link rel="stylesheet" href="./css/common.modal.css" />
     <link
         rel="stylesheet"
         href="./css/index.mobile.css"
         media="(max-width: 849px)"
     />
-    <script src="./javascript/index.js"></script>
+    <script src="./javascript/index.js"></script>    
+    <script src="./javascript/common.modal.js"></script>
 </head>
 <body>
     <div class="page">
@@ -24,77 +26,171 @@
             <div class="body_tab_active">일기보관함</div>
             <div class="body_tab_default">사진보관함</div>
         </div>
+        <div class="body_button_area">
+            <!--필터-->
+            
+            <select class="filter" onchange="JS_필터링기능(event)">                
+                <option selected>전체</option>
+                <option value="HTML_행복선택">행복해요</option>
+                <option value="HTML_슬픔선택">슬퍼요</option>
+                <option value="HTML_놀람선택">놀랐어요</option>
+                <option value="HTML_화남선택">화나요</option>
+                <option value="HTML_기타선택">기타</option>                           
+            </select>
+                                   
 
-        <!--필터-->
-        <select class="filter" onchange="JS_필터링기능(event)">
-            <option selected>전체</option>
-            <option value="HTML_행복선택">행복해요</option>
-            <option value="HTML_슬픔선택">슬퍼요</option>
-            <option value="HTML_놀람선택">놀랐어요</option>
-            <option value="HTML_화남선택">화나요</option>
-            <option value="HTML_기타선택">기타</option>
-        </select>
+            <!-- 일기등록 버튼 -->
+            <button class="diary_write_button" onclick="모달열기('등록모달그룹ID')">
+                <img src="./assets/images/add_icon.png"/>일기쓰기 
+            </button>
+        </div>
 
         <div class="body_main">
             <!-- 일기 보여주는 곳 -->
             <div id="HTML_일기보여주는곳" class="CSS_일기보여주는곳"></div>
 
-            <!-- 등록 상자 -->
-            <div class="diary_area">
-                <div class="title">📍일기쓰기</div>
-                <div class="diary_input_content">                           
-                    <div class="mood_title">오늘 기분은 어땠나요?</div>
-                    <div class="mood_select">
-                        <div class="mood_radio_button">                                        
+            <!-- 등록 모달 -->
+            <div id="등록모달그룹ID" class="모달그룹">
+                <div class="모달배경" onclick=" 모달닫기('등록모달그룹ID')"></div>
+
+                <div class="diary_area">
+                    <div class="title">📍일기쓰기</div>
+                    <div class="diary_input_content">                           
+                        <div class="mood_title">오늘 기분은 어땠나요?</div>
+                        <div class="mood_select">
+                            <div class="mood_radio_button">                                        
+                                <input
+                                type="radio"
+                                name="HTML_기분선택버튼"
+                                value="행복"
+                                checked
+                                />
+                                <div>행복해요</div>                                       
+                            </div>
+                            <div class="mood_radio_button">                                        
+                                <input type="radio" name="HTML_기분선택버튼" value="슬픔"/>
+                                <div>슬퍼요</div>                                       
+                            </div>
+                            <div class="mood_radio_button">                                        
+                                <input type="radio" name="HTML_기분선택버튼" value="놀람"/>
+                                <div>놀랐어요</div>                                       
+                            </div>
+                            <div class="mood_radio_button">                                        
+                                <input type="radio" name="HTML_기분선택버튼" value="화남"/>
+                                <div>화나요</div>                                       
+                            </div>
+                            <div class="mood_radio_button">                                        
+                                <input type="radio" name="HTML_기분선택버튼" value="기타"/>
+                                <div>기타</div>                                       
+                            </div>                                    
+                        </div>
+                    </div>                            
+                    <div class="text_area">
+                        <div class="text_input_area">
+                            <div>제목</div>
                             <input
-                            type="radio"
-                            name="HTML_기분선택버튼"
-                            value="행복"
-                            checked
-                            />
-                            <div>행복해요</div>                                       
+                                id="HTML_제목입력창"                                    
+                                type="text" 
+                                placeholder="제목을 입력해 주세요."
+                            />                                    
                         </div>
-                        <div class="mood_radio_button">                                        
-                            <input type="radio" name="HTML_기분선택버튼" value="슬픔"/>
-                            <div>슬퍼요</div>                                       
+                        <div class="text_input_area">
+                            <div>내용</div>
+                            <textarea
+                                id="HTML_내용입력창"
+                                rows="5"
+                                placeholder="내용을 입력해 주세요."
+                            ></textarea>
                         </div>
-                        <div class="mood_radio_button">                                        
-                            <input type="radio" name="HTML_기분선택버튼" value="놀람"/>
-                            <div>놀랐어요</div>                                       
-                        </div>
-                        <div class="mood_radio_button">                                        
-                            <input type="radio" name="HTML_기분선택버튼" value="화남"/>
-                            <div>화나요</div>                                       
-                        </div>
-                        <div class="mood_radio_button">                                        
-                            <input type="radio" name="HTML_기분선택버튼" value="기타"/>
-                            <div>기타</div>                                       
-                        </div>                                    
                     </div>
-                </div>                            
-                <div class="text_area">
-                    <div class="text_input_area">
-                        <div>제목</div>
-                        <input
-                            id="HTML_제목입력창"                                    
-                            type="text" 
-                            placeholder="제목을 입력해 주세요."
-                        />                                    
+                    <div class="diary_button_group"> 
+                        <button
+                            type="button"
+                            class="close_button"
+                            onclick="모달열기('등록취소모달그룹ID')"
+                        >
+                            닫기
+                        </button>
+                        <button 
+                            type="button"
+                            class="save_button"
+                            id="등록하기버튼"
+                            onclick="모달열기('등록완료모달그룹ID');JS_글쓰기기능();"
+                        >
+                            등록하기
+                        </button>
                     </div>
-                    <div class="text_input_area">
-                        <div>내용</div>
-                        <textarea
-                            id="HTML_내용입력창"
-                            rows="5"
-                            placeholder="내용을 입력해 주세요."
-                        ></textarea>
-                    </div>
-                </div> 
-                <button class="save_button" onclick="JS_글쓰기기능()">
-                    등록하기
-                </button>
+                </div>
+            </div>
+            
+            <!-- 등록완료모달 -->
+            <div id="등록완료모달그룹ID" class="모달그룹">
+                <div class="모달배경" onclick="모달닫기('등록완료모달그룹ID')"></div>      
+                <div class="등록완료모달">
+                    <div class="등록완료모달_텍스트">
+                        <b class="등록완료모달_타이틀">일기 등록 완료</b>
+                        <p class="등록완료모달_내용">등록이 완료되었습니다.</p>
+                    </div>                              
+                    <button 
+                        class="등록완료모달_확인"
+                        onclick="모달닫기('등록완료모달그룹ID'); 모달닫기('등록모달그룹ID');"
+                    >   
+                        확인
+                    </button>                                                                    
+                </div>
             </div>
 
+            <!-- 등록취소모달 -->
+            <div id="등록취소모달그룹ID" class="모달그룹">
+                <div class="모달배경"></div>
+                
+                <div class="등록완료모달">
+                    <div class="등록완료모달_텍스트"> 
+                        <b class="등록완료모달_타이틀">일기 등록 취소</b>
+                        <p class="등록완료모달_내용">일기 등록을 취소하시겠어요?</p>
+                    </div>
+                    <div class="diary_button_group">
+                        <button 
+                            class="등록완료모달_계속작성" 
+                            onclick="모달닫기('등록취소모달그룹ID')"
+                        >
+                            계속 작성
+                        </button>
+                        <button 
+                            class="등록완료모달_등록취소" 
+                            onclick="모달닫기('등록취소모달그룹ID'); 모달닫기('등록모달그룹ID');"
+                        >
+                            등록 취소
+                        </button>
+                    </div>
+                </div>
+            </div> 
+            
+            <!-- 일기삭제모달 -->
+            <div id="일기삭제모달그룹ID" class="모달그룹">
+                <div class="모달배경" onclick="모달닫기('일기삭제모달그룹ID')"></div>
+                <div class="일기삭제모달">
+                    <div class="일기삭제모달_텍스트">
+                        <b class="일기삭제모달_타이틀">일기 삭제</b>
+                        <p class="일기삭제모달_내용">일기를 삭제하시겠어요?</p>
+                    </div>
+                    <div class="diary_button_group">
+                        <button
+                            class=" 일기삭제모달_취소"
+                            onclick="모달닫기('일기삭제모달그룹ID');"                            
+                        >
+                            취소
+                        </button>
+
+                        <button
+                            class="일기삭제모달_삭제"
+                            onclick="JS_일기삭제기능(event, 일기번호);모달닫기('일기삭제모달그룹ID');" 
+                        >
+                            삭제
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
             

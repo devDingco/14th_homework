@@ -73,24 +73,60 @@ a {
     font-weight: 500;
 }
 
+.body_button_area {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 1rem 0.5rem;
+    flex-wrap: wrap;
+}
 /* 필터 */
+
 .filter {
+    display: flex;
+    justify-content: space-between;    
+    align-items: center;
     min-width: 7.5rem;
-    padding: 0.25rem;
-    border-radius: 0.5rem;
+    padding: 0.75rem 0.625rem;
+    border-radius: 8px;
     border: 0.0625rem solid #c7c7c7;
-    height: 2rem;
-    margin-bottom: 2.625rem;
+    height: 100%;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;    
+    margin-bottom: 2.62rem;
+
 
     position: sticky;
     top: 2.25rem;
     transition: all 0.3s ease;
 }
 
+.filter_drop_down {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
 .inverted {
     filter: invert(1);
     z-index: 100;
 }
+
+.diary_write_button {
+    display: flex;
+    height: 3rem;
+    padding: 0.5rem 0.625rem;
+    align-items: center;
+    gap: 0.25rem;
+    color: #fff;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    background-color: #000;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
 /* 일기 보여주는 곳 */
 .body_main {
     width: 100%;
@@ -117,7 +153,7 @@ a {
 .card_area:hover {
     transform: scale(1.1);
     box-shadow: 0 0.125rem 1.875rem 0 rgba(0, 0, 0, 0.16);
-    border-radius: 1rem;
+    border-radius: 16px;
 }
 
 .card_area:hover .diary_image {
@@ -212,25 +248,26 @@ a {
     overflow: hidden;
 }
 
-
-/* 일기등록 상자 */
 .diary_area {
-    width: 22.5rem;
-    min-width: 22.5rem;
+    width: 40rem;
+    min-width: 40rem;
     max-width: 47.5rem;
-    height: fit-content;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     gap: 2.5rem;
-    border-radius: 1rem;
+    border-radius: 24px;
     border: 0.0625rem solid #D4D3D3; 
     background:#fff;
     text-align: left;
     font-size: 1.5rem;
     color: #000;
+
+    position: absolute;
+    top: calc(50% - 560px / 2);
+    left: calc(50% - 640px / 2);
 }
 
 button img {
@@ -316,7 +353,7 @@ button img {
 #HTML_내용입력창 {
     appearance: none;
     width: 100%;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     background-color: #fff;
     border: 0.0625rem solid #D4D3D3;
     padding: 0.75rem 1rem;
@@ -336,22 +373,6 @@ button img {
     font-size: inherit;
 }
 
-.save_button {
-    width: 100%;
-    border-radius: 0.5rem;
-    background-color: #c7c7c7;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    border: 0rem;
-    justify-content: center;
-    padding: 0.5rem 0.625rem;
-    box-sizing: border-box;
-    font-size: 1.125rem;
-    font-weight: 600;
-    line-height: 1.5rem;
-    color: #f2f2f2;    
-}
 
 /* 푸터 영역 */
 
@@ -409,5 +430,5 @@ button img {
     position: fixed;
     right: 2.5rem; 
     bottom: 2.5rem; 
-    z-index: 1000; 
+    z-index: 999; 
 }

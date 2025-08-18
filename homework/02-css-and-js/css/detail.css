@@ -127,6 +127,34 @@ body {
     gap: 1rem;
 }
 
+.copy_button_area{
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.copy_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    border: none;
+    position: relative;
+    background-color: transparent;
+    cursor: pointer;
+}
+  
+.copy_button_icon {
+height: 1.5rem;
+}
+
+.copy_button_text {
+font-size: 1rem;
+font-weight: 400;
+line-height: 1.5rem;
+text-align: left;
+}
+
 .edit_button {
     padding: 0.5rem 0.625rem;
     border-radius: 0.5rem;
@@ -276,7 +304,7 @@ body {
     position: fixed;
     right: 2.5rem; /* 오른쪽에서 1.25rem 떨어진 위치 */
     bottom: 2.5rem; /* 아래쪽에서 1.25rem 떨어진 위치 */
-    z-index: 1000; /* 다른 요소 위에 표시되도록 z-index 설정 */
+    z-index: 999; /* 다른 요소 위에 표시되도록 z-index 설정 */
 }
 
 
