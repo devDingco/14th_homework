@@ -4,6 +4,10 @@
     margin: 0;
 }
 
+html {
+    font-size: 62.5%;
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -14,7 +18,9 @@ body {
     flex-direction: column;
     align-self: stretch;
     min-height: 100vh; /* 화면 높이 최소 확보 */
-    max-width: 1920px;
+    max-width: 192.0rem;
+
+    font-size: 1.6rem;
 }
 
 .바탕 {
@@ -24,80 +30,80 @@ body {
     justify-content: flex-start;
     align-items: flex-start;
     align-self: stretch;
-    margin: 0px 376px 40px 376px;
-    max-width: 1168px;
+    margin: 0 37.6rem 4.0rem 37.6rem;
+    max-width: 116.8rem;
 }
 
 .헤더 {
     display: flex;
-    height: 60px;
-    min-width: 320px;
-    max-width: 1168px;
+    height: 6.0rem;
+    min-width: 32.0rem;
+    max-width: 116.8rem;
     align-items: center;
     align-self: stretch;
-    margin-bottom: 64px;
+    margin-bottom: 6.4rem;
 }
 
 .헤더__이름 {
     color: #000;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 700;
-    letter-spacing: -0.18px;
+    letter-spacing: -0.018rem;
 }
 
 .변경되는구역 {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 24px;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
+    gap: 2.4rem;
+    margin-bottom: 2.4rem;
+    padding-bottom: 1.6rem;
 
-    border-bottom: 1px solid #000;
+    border-bottom: 0.1rem solid #000;
 }
 
 .타이틀 {
     display: flex;
-    max-width: 1168px;
-    padding-bottom: 12px;
+    max-width: 116.8rem;
+    padding-bottom: 1.2rem;
     align-items: center;
-    gap: 10px;
+    gap: 1.0rem;
     align-self: stretch;
-    border-bottom: 2px solid #000;
-    margin-bottom: 16px;
+    border-bottom: 0.2rem solid #000;
+    margin-bottom: 1.6rem;
 
     color: #000;
-    font-size: 22px;
+    font-size: 2.2rem;
     font-weight: 700;
-    letter-spacing: -0.22px;
+    letter-spacing: -0.022rem;
 }
 
 .내용틀 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
-    padding-bottom: 16px;
+    gap: 2.4rem;
+    padding-bottom: 1.6rem;
     align-self: stretch;
-    max-width: 1168px;
+    max-width: 116.8rem;
 }
 
 .감정날짜 {
     display: flex;
     justify-content: space-between;
     align-self: stretch;
-    max-width: 1168px;
+    max-width: 116.8rem;
 }
 
 .감정부모 {
-    height: 32px;
+    height: 3.2rem;
     display: flex;
-    gap: 8px;
+    gap: 0.8rem;
     align-items: center;
 }
 
 .감정__아이콘__행복해요, .감정__아이콘__슬퍼요, .감정__아이콘__놀랐어요, .감정__아이콘__화나요, .감정__아이콘__기타 {
-    width: 32px;
+    width: 3.2rem;
     height: 100%;
     background-size: contain; /* 비율 유지하며 크기에 맞춤 */
 }
@@ -128,9 +134,9 @@ body {
 
 
 .감정 {
-    font-size: 20px;
+    font-size: 2.0rem;
     font-weight: 600;
-    letter-spacing: -0.2px;
+    letter-spacing: -0.02rem;
 }
 
 /* 감정별 글자 color 등록 */
@@ -160,33 +166,33 @@ body {
 .날짜부모 {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.8rem;
 
     color: #919191;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: 400;
-    letter-spacing: -0.14px;
+    letter-spacing: -0.014rem;
 }
 
 .내용구역 {
     display: flex;
     flex-direction: column;
-    gap: 13px;
+    gap: 1.3rem;
 }
 
 .내용__타이틀 {
     color: #000;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 600;
-    letter-spacing: -0.16px;
+    letter-spacing: -0.016rem;
 }
 
 .내용 {
     color: #333;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 500;
-    line-height: 20px; /* 125% */
-    letter-spacing: -0.16px;
+    line-height: 2.0rem; /* 125% */
+    letter-spacing: -0.016rem;
 }
 
 .내용복사구역 {
@@ -198,8 +204,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 91px;
-    height: 24px;
+    width: 9.1rem;
+    height: 2.4rem;
     border: none;
     background-color: white;
 
@@ -212,9 +218,9 @@ body {
 
 .복사버튼글자 {
     color: #1C1C1C;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 400;
-    letter-spacing: -0.16px;
+    letter-spacing: -0.016rem;
 }
 
 .수정삭제구역 {
@@ -222,23 +228,23 @@ body {
     justify-content: flex-end;
 
     width: 100%;
-    max-width: 1168px;
-    height: 40px;
-    gap: 16px;
+    max-width: 116.8rem;
+    height: 4.0rem;
+    gap: 1.6rem;
 }
 
 .수정버튼 {
-    width: 51px;
-    height: 40px;
-    padding: 8px 10px;
-    border-radius: 8px;
-    border: 1px solid #D4D3D3;
+    width: 5.1rem;
+    height: 4.0rem;
+    padding: 0.8rem 1.0rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid #D4D3D3;
     background: #FFF;
 
     color: #1C1C1C;
-    font-size: 15px;
+    font-size: 1.5rem;
     font-weight: 500;
-    letter-spacing: -0.18px;
+    letter-spacing: -0.018rem;
 }
 
 .회고영역 {
@@ -251,44 +257,52 @@ body {
 .회고타이틀 {
     align-self: stretch;
     color: #000;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 600;
-    letter-spacing: -0.18px;
-    margin-bottom: 13px;
+    letter-spacing: -0.018rem;
+    margin-bottom: 1.3rem;
 }
 
 .회고인풋영역 {
     display: flex;
     justify-content: flex-start;
-    gap: 16px;
+    gap: 1.6rem;
 }
 
 .회고인풋 {
     display: flex;
     width: 100%;
-    height: 48px;
-    border-radius: 8px;
-    border: 1px solid #D4D3D3;
+    height: 4.8rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid #D4D3D3;
     background: #FFF;
-    padding: 12px 16px;
+    padding: 1.2rem 1.6rem;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 4px;
+    gap: 1.0rem;
+    margin-bottom: 0.4rem;
 
-    font-size: 16px;
+    font-size: 1.6rem;
+    color: #000;
+}
+
+.회고인풋::placeholder {
+    color: #ABABAB;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: -0.016rem;
 }
 
 .입력버튼 {
-    width: 51px;
-    height: 48px;
-    padding: 8px 10px;
-    border-radius: 8px;
+    width: 5.1rem;
+    height: 4.8rem;
+    padding: 0.8rem 1.0rem;
+    border-radius: 0.8rem;
     background: #000;
 
     color: #FFF;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: 600;
-    letter-spacing: -0.18px;
+    letter-spacing: -0.018px;
 }
 
 .댓글영역 {
@@ -299,25 +313,25 @@ body {
 .댓글틀 {
     display: flex;
     align-self: stretch;
-    gap: 12px;
+    gap: 1.2rem;
     align-items: center;
-    padding: 12px 0px;
-    border-bottom: solid #E4E4E4 1px;
+    padding: 1.2rem 0;
+    border-bottom: solid #E4E4E4 0.1rem;
 }
 
 .댓글내용 {
     color: #000;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 500;
-    line-height: 24px; /* 150% */
-    letter-spacing: -0.16px;
+    line-height: 2.4rem; /* 150% */
+    letter-spacing: -0.016rem;
 }
 
 .댓글날짜 {
     color: #777;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 400;
-    letter-spacing: -0.16px;
+    letter-spacing: -0.016rem;
 }
 
 /* .변경된구역 {
@@ -334,15 +348,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 1.6rem;
     align-self: stretch;
 }
 
 .기분선택영역_글자 {
     color: #000;
-    font-size: 20px;
+    font-size: 2.0rem;
     font-weight: 600;
-    letter-spacing: -0.2px;
+    letter-spacing: -0.02rem;
 
     align-self: stretch;
 }
@@ -350,61 +364,61 @@ body {
 .라디오영역 {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 2.0rem;
 }
 
 .기분체크틀 {
     display: flex;
-    gap: 20px;
+    gap: 2.0rem;
     align-items: center;
 }
 
 .radio {
-    width: 24px;
-    height: 24px;
+    width: 2.4rem;
+    height: 2.4rem;
 }
 
 .기분 {
     color: #333;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 500;
-    letter-spacing: -0.18px;
+    letter-spacing: -0.018rem;
 }
 
 .입력영역 {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.8rem;
 }
 
 .입력글자 {
     color: #333;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: 500;
-    letter-spacing: -0.14px;
+    letter-spacing: -0.014rem;
 }
 
 .입력텍스트 {
-    padding: 12px 16px;
-    max-width: 1168px;
-    /* height: 48px; */
+    padding: 1.2rem 1.6rem;
+    max-width: 116.8rem;
+    /* height: 4.8rem; */
     align-self: stretch;
 
-    border-radius: 8px;
-    border: 1px solid #D4D3D3;
+    border-radius: 0.8rem;
+    border: 0.1rem solid #D4D3D3;
     background: #FFF;
 
     color: #000;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 500;
-    letter-spacing: -0.16px;
+    letter-spacing: -0.016rem;
 }
 
 .버튼영역 {
     display: flex;
     justify-content: center;
-    max-width: 1168px;
-    gap: 16px;
+    max-width: 116.8rem;
+    gap: 1.6rem;
 }
 
 .취소버튼, .수정하기버튼 {
@@ -412,14 +426,14 @@ body {
     justify-content: center;
     align-items: center;
 
-    width: 104px;
-    height: 48px;
-    border-radius: 8px;
-    border: 1px solid #000;
+    width: 10.4rem;
+    height: 4.8rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid #000;
 
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 600;
-    letter-spacing: -0.18px;
+    letter-spacing: -0.018rem;
 }
 
 .취소버튼 {
@@ -447,22 +461,22 @@ body {
     bottom: 50px; /* 화면 맨 아래에서 50px 위 */
     transform: translateX(-50%);
 
-    width: 760px;
-    padding: 16px;
-    width: 760px;
+    width: 76.0rem;
+    padding: 1.6rem;
+    width: 76.0rem;
 
-    border-radius: 8px;
+    border-radius: 0.8rem;
     background: rgba(0, 0, 0, 0.90);
 
     text-align: center;
     color: #FFF;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 500;
-    letter-spacing: -0.16px;
+    letter-spacing: -0.016rem;
 
     opacity: 0;
     visibility: hidden;
-    transform: translate(-50%, 20px); /* 시작: 약간 아래 */
+    transform: translate(-50%, 2.0rem); /* 시작: 약간 아래 */
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
@@ -489,12 +503,12 @@ body {
     transform: translate(-50%, -50%);
 
     background: #fff;
-    border-radius: 24px;
-    padding: 24px;
-    gap: 40px;
+    border-radius: 2.4rem;
+    padding: 2.4rem;
+    gap: 4.0rem;
     /* z-index: 10000; 모달 배경보다 위 */
 
-    width: 480px;
+    width: 48.0rem;
 
     display: flex;
     flex-direction: column;
@@ -505,57 +519,57 @@ body {
     flex-direction: column;
     align-self: stretch;
 
-    gap: 16px;
+    gap: 1.6rem;
 }
 
 .문구1 {
     align-self: stretch;
     color: #000;
     text-align: center;
-    font-size: 24px;
+    font-size: 2.4rem;
     font-weight: 700;
-    letter-spacing: -0.24px;
+    letter-spacing: -0.024rem;
 }
 
 .문구2 {
     align-self: stretch;
     color: #333;
     text-align: center;
-    font-size: 20px;
+    font-size: 2.0rem;
     font-weight: 500;
-    letter-spacing: -0.2px;
+    letter-spacing: -0.02rem;
 }
 
 .버튼영역 {
     display: flex;
     justify-content: center;
-    gap: 16px;
+    gap: 1.6rem;
 }
 
 .흰버튼 {
-    width: 104px;
-    height: 48px;
-    padding: 8px 10px;
-    border-radius: 8px;
-    border: 1px solid #000;
+    width: 10.4rem;
+    height: 4.8rem;
+    padding: 0.8rem 1.0rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid #000;
     background: #FFF;
 
     color: #1C1C1C;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 600;
-    letter-spacing: -0.18px;
+    letter-spacing: -0.018rem;
 }
 
 .검정버튼 {
-    width: 104px;
-    height: 48px;
+    width: 10.4rem;
+    height: 4.8rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 0.8rem;
     background-color: #000;
-    padding: 8px 10px;
+    padding: 0.8rem 1.0rem;
 
     color: #F2F2F2;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 600;
-    letter-spacing: -0.18px;
+    letter-spacing: -0.018rem;
 }

@@ -155,7 +155,7 @@
                         <option>세로형</option>
                     </select>
                 </div>
-                <div id="강아지보여주는곳">wdddcdc</div>
+                <div id="강아지보여주는곳"></div>
 
         </div> <!-- 사진보관함 -->
 
@@ -178,7 +178,7 @@
     <!-- 모달 영역 -->
 
     <!-- 일기 쓰기 모달 -->
-     <div id="diaryModalGroup" class="modal" onclick="modalClose('diaryModalGroup')">
+     <div id="diaryModalGroup" class="modal" onclick="modalClose('diaryModalGroup'); 입력초기화()">
         <div class="diaryModal 모달" onclick="event.stopPropagation()">
 
             <div class="일기쓰기__상단구역">
@@ -227,7 +227,7 @@
 
             <div class="버튼영역">
                 <button class="흰버튼" onclick="modalOpen('cancelModalGroup')">닫기</button>
-                <button class="검정버튼" onclick="WriteNewDiary(); modalOpen('finishModalGroup')">
+                <button class="검정버튼" id="모달등록하기버튼" disabled onclick="modalOpen('finishModalGroup')">
                     등록하기</button>
             </div>
 
@@ -254,7 +254,7 @@
             </div>
             <div class="버튼영역">
                 <button class="흰버튼" onclick="modalClose('cancelModalGroup')">계속 작성</button>
-                <button class="검정버튼" onclick="modalClose('전체닫기')">등록취소</button>
+                <button class="검정버튼" onclick="modalClose('전체닫기'); 입력초기화()">등록취소</button>
             </div>
         </div>
      </div>
@@ -268,8 +268,19 @@
             </div>
             <div class="버튼영역">
                 <button class="흰버튼" onclick="modalClose('deleteModalGroup')">취소</button>
-                <button class="검정버튼">삭제</button>
+                <button class="검정버튼" onclick="modalOpen('delFinishModalGroup')">삭제</button>
             </div>
+        </div>
+     </div>
+
+    <!-- 삭제 완료 모달 -->
+     <div id="delFinishModalGroup" class="modal">
+        <div class="delFinishModal 모달">
+            <div class="문구모음">
+                <div class="문구1">일기 삭제 완료</div>
+                <div class="문구2">삭제가 완료되었습니다.</div>
+            </div>
+            <button class="확인버튼" onclick="modalClose('전체닫기')">확인</button>
         </div>
      </div>
 

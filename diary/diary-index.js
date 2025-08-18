@@ -1,51 +1,34 @@
-// // 서치바 설정
-// let 타이머
+// 서치바 설정
+let 타이머
 
-// const 검색기능 = (event) => {
+const 검색기능 = (event) => {
 
-//     clearTimeout(타이머) // 디바운싱
+    clearTimeout(타이머) // 디바운싱
 
-//     타이머 = setTimeout(() => {
+    타이머 = setTimeout(() => {
 
-//         const 검색어 = event.target.value.trim() // 앞뒤 공백 제거
-//         console.log("검색어:", 검색어)
+        const 검색어 = event.target.value.trim() // 앞뒤 공백 제거
+        console.log("검색어:", 검색어)
     
-//         // 검색 결과 필터링
-//         const 검색결과 = 검색어
-//             ? 일기들.filter((el) => el.includes(검색어))
-//             : 일기들 // 검색어 없으면 전체 보여주기
+        const 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || []
 
-//         console.log("검색결과:", 검색결과)
+        // 검색 결과 필터링
+        const 검색결과 = 검색어
+            ? 일기들.filter((el) =>
+                el.title.includes(검색어) ||
+                el.content.includes(검색어) ||
+                el.feeling.includes(검색어) ||
+                el.date.includes(검색어)
+            )
+            : 일기들
 
-//         // HTML 생성
-//         let diaryHTML = ""
-//         if (검색결과.length === 0) {
-//             diaryHTML = `<div class="검색없음">검색 결과가 없습니다.</div>`
-//         } else {
-//             diaryHTML = 검색결과
-//                 .map((el) => `
-//                     <a href="./details/diary-detail.html?number=${el.number}" class="일기틀">
-//                     <div class="감정이미지__${el.feeling}"></div>
-//                     <img class="삭제버튼" src="./asset/icon/close_icon.png" onclick="openDeleteModal(event, ${el.number})" />
-//                     <div class="일기속성">
-//                         <div class="일기속성1">
-//                             <div class="감정__${el.feeling}">${el.feeling}</div>
-//                             <div class="날짜표시">${el.date}</div>
-//                         </div>
-//                         <div class="일기속성2">
-//                             <div class="타이틀">${el.title}</div>
-//                         </div>
-//                     </div>
-//                 </a>`
-//                 )
-//                 .join("")
-//         }
+        console.log("검색결과:", 검색결과)
 
-//         // container에 결과 뿌리기
-//         diaryContainer.innerHTML = diaryHTML
-//     }, 1000)
+        // 👉 renderDiaries() 함수 재활용 (중복 코드 제거)
+        renderDiaries(검색결과)
+    }, 100) //
 
-// }
+}
 
 // 삭제버튼 설정
 function 삭제하기(event, number) {
@@ -54,9 +37,9 @@ function 삭제하기(event, number) {
     event.preventDefault()
 
     // 삭제 확인 알림
-    alert("일기가 삭제되었습니다.")
+    // alert("일기가 삭제되었습니다.")
 
-    const 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || []
+    let 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || []
 
     // 해당 number 제외하고 필터링
     const 삭제후남은일기들 = 일기들.filter(el => el.number !== number)
@@ -103,33 +86,6 @@ function renderDiaries(filteredDiaries = null) {
 // 초기 로드 시
 window.addEventListener("DOMContentLoaded", renderDiaries)
 
-// 새 일기 작성
-
-function WriteNewDiary() {
-
-    const 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || []
-
-    const number = 일기들.length > 0 ? 일기들[일기들.length - 1].number + 1 : 1
-    const feeling = document.querySelector('input[name="feel"]:checked').value
-    const title = document.getElementById("제목__내용입력").value
-    const content = document.getElementById("내용__내용입력").value
-    const date = new Date().toLocaleDateString()
-
-    const 새로운일기 = { number, feeling, title, content, date }
-
-    일기들.push(새로운일기)
-    localStorage.setItem("일기들목록", JSON.stringify(일기들))
-
-    // 입력창 초기화
-    document.getElementById("제목__내용입력").value = ""
-    document.getElementById("내용__내용입력").value = ""
-    const checkedRadio = document.querySelector('input[name="feel"]:checked')
-    if (checkedRadio) checkedRadio.checked = false
-
-    // 목록 다시 렌더링
-    renderDiaries()
-}
-
 // 드롭다운
 const 일기드롭다운기능 = (event) => {
     document.querySelector(".드롭다운제목").style = `--드롭다운변수: "${event.target.id}"`
@@ -171,7 +127,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 })
 
-
 // 필터 색반전
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -192,7 +147,6 @@ window.addEventListener("DOMContentLoaded", () => {
 function 스크롤기능() {
     window.scrollTo({ top: 0, behavior: "smooth"})
 }
-
 
 
 // 모달 영역
@@ -225,14 +179,92 @@ function modalClose(모달종류) {
 // ESC 키 눌렀을 때 모달 닫기
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape' || event.key === 'Esc') {
-      const modals = document.querySelectorAll('.modal');
+
+      const modals = document.querySelectorAll('.modal')
       modals.forEach(modal => {
         modal.style.display = 'none'
       })
+      
+      입력초기화()
     }
   })
 
-// 실제 삭제 + 모달 닫기
+// 일기 쓰기 모달 등록버튼 설정
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    // 요소 가져오기
+    const titleInput = document.getElementById('제목__내용입력')
+    const contentInput = document.getElementById('내용__내용입력')
+    const feelRadios = document.querySelectorAll('input[name="feel"]')
+    const submitBtn = document.getElementById("모달등록하기버튼")
+
+    // 버튼 활성화/비활성화 자동 체크
+    function checkDiaryInputs() {
+        const feelChecked = Array.from(feelRadios).some(radio => radio.checked)
+        const titleFilled = titleInput.value.trim() !== '' //양쪽 공백 없애기 - 공백은 입력으로 취급안함
+        const contentFilled = contentInput.value.trim() !== ''
+        submitBtn.disabled = !(feelChecked && titleFilled && contentFilled)
+    }
+
+    // 이벤트 등록
+    feelRadios.forEach(radio => radio.addEventListener('change', checkDiaryInputs))
+    titleInput.addEventListener('input', checkDiaryInputs)
+    contentInput.addEventListener('input', checkDiaryInputs)
+
+    // 초기 버튼 상태 체크
+    checkDiaryInputs()
+
+    // 새 일기 등록
+    submitBtn.addEventListener('click', () => {
+        let 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || []
+
+        const number = 일기들.length > 0 ? 일기들[일기들.length - 1].number + 1 : 1
+        const feeling = document.querySelector('input[name="feel"]:checked').value
+        const title = titleInput.value.trim()
+        const content = contentInput.value.trim()
+        const date = new Date().toLocaleDateString()
+
+        const 새로운일기 = { number, feeling, title, content, date }
+
+        일기들.push(새로운일기)
+        localStorage.setItem("일기들목록", JSON.stringify(일기들))
+
+        입력초기화()
+
+        // 화면 갱신
+        renderDiaries()
+    });
+});
+
+const 입력초기화 = () => {
+    const titleInput = document.getElementById('제목__내용입력')
+    const contentInput = document.getElementById('내용__내용입력')
+    const feelRadios = document.querySelectorAll('input[name="feel"]')
+    const submitBtn = document.getElementById("모달등록하기버튼")
+
+    // 입력 초기화
+    titleInput.value = ""
+    contentInput.value = ""
+    feelRadios.forEach(radio => radio.checked = false)
+    submitBtn.disabled = true  // 직접 비활성화
+
+    renderDiaries()
+}
+
+// deleteModalGroup 모달 열면서, delFinishModalGroup 삭제 버튼에 number 연결
+function openDeleteModal(event, number) {
+
+    event.stopPropagation() // 부모 <a> 클릭 막기
+    event.preventDefault()  // 링크 기본 동작 막기
+
+    modalOpen('deleteModalGroup')
+
+    const deleteBtn = document.querySelector("#delFinishModalGroup .확인버튼")
+    deleteBtn.addEventListener("click", (event) => handleDelete(event, number))
+}
+
+// delFinishModalGroup에서 삭제 + 모달 닫기
 function handleDelete(event, number) {
 
     event.stopPropagation()
@@ -240,17 +272,6 @@ function handleDelete(event, number) {
 
     삭제하기(event, number)      // 삭제 처리
     modalClose('전체닫기')        // 모달 닫기
-}
-
-// 모달 열기 + 삭제 버튼에 number 연결
-function openDeleteModal(event, number) {
-
-    event.stopPropagation() // 부모 <a> 클릭 막기
-    event.preventDefault()  // 링크 기본 동작 막기
-
-    const deleteBtn = document.querySelector("#deleteModalGroup .검정버튼")
-    deleteBtn.setAttribute("onclick", `handleDelete(event, ${number})`)
-    modalOpen('deleteModalGroup')
 }
 
 // 토글기능
@@ -284,29 +305,50 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // 사진보관함
 
-// 강아지 불러오는 기능
-const 강아지불러오는기능 = () => {
-    console.log("강아지불러오는기능 실행됨")
-
-    fetch('https://dog.ceo/api/breeds/image/random/10')
+// 공통: 강아지 1마리 불러오기
+const 강아지한마리그리기 = () => {
+    fetch('https://dog.ceo/api/breeds/image/random')
         .then(response => response.json())
         .then(data => {
-            console.log(data)
-
-            const 이미지다운로드주소들 = data.message
-            const 상태 = data.status
-            console.log(`이미지다운로드주소들: ${이미지다운로드주소들}`)
-            console.log(`상태: ${상태}`)
-
-            document.getElementById('강아지보여주는곳').innerHTML =
-                이미지다운로드주소들
-                    .map(url => `<img src="${url}" class="보관된사진" width="300px" />`)
-                    .join('')
-        console.log('강아지 HTML 생성됨')
+            const 이미지다운로드주소 = data.message
+            document.getElementById('강아지보여주는곳').innerHTML += `
+                <img src="${이미지다운로드주소}" class="보관된사진" width="300px" />`
         })
         .catch(error => {
             console.error('강아지 불러오기 실패:', error)
         })
+}
+
+// 초기 10마리 불러오기
+const 초기강아지로드 = (개수 = 10) => {
+    for (let i = 0; i < 개수; i++) {
+        강아지한마리그리기()
+    }
+}
+
+// 무한 스크롤
+const 강아지불러오는기능 = () => {
+    console.log("강아지불러오는기능 실행됨")
+
+    // 페이지 진입 시 미리 10마리
+    초기강아지로드(10)
+
+    let 타이머2 = "아직실행안함"
+    window.addEventListener("scroll", () => {
+        if (타이머2 !== "아직실행안함") return
+        타이머2 = setTimeout(() => {
+            타이머2 = "아직실행안함"
+        }, 100)
+
+        const 스크롤퍼센트 =
+            document.documentElement.scrollTop /
+            (document.documentElement.scrollHeight - document.documentElement.clientHeight)
+
+        if (스크롤퍼센트 >= 0.7) {
+            console.log("강아지를 추가로 그려줍니다.")
+            강아지한마리그리기()
+        }
+    })
 }
 
 // 사진보관함 메뉴 클릭 시 이벤트
@@ -348,78 +390,3 @@ window.addEventListener("DOMContentLoaded", () => {
         })
 
 })
-
-
-
-    // 화면에 일기카드 추가하기
-
-    // const 일기목록HTML = 일기들배열.map((el, index) => `
-    //     <a href="./diary-detail.html?number=${index}" class="일기틀">
-    //         <div class="감정이미지__${el.feeling}"></div>
-    //         <div class="일기속성">
-    //             <div class="일기속성1">
-    //                 <div class="감정__${el.feeling}">${el.feeling}</div>
-    //                 <div class="날짜표시">${el.date}</div>
-    //             </div>
-    //             <div class="일기속성2">
-    //                 <div class="타이틀">${el.title}</div>
-    //             </div>
-    //         </div>
-    //     </a>`
-    // ).join("")
-    
-    // 전에 썼던 코드 흔적 - createElement
-    // const 일기틀 = document.createElement('div')
-    // 일기틀.className = '일기틀'
-    // 일기틀.innerHTML =`
-    // <div class="감정이미지"></div>
-    // <div class="일기속성">
-    //     <div class="일기속성1">
-    //         <div class="감정">슬퍼요</div>
-    //         <div class="날짜표시">2025. 8. 7.</div>
-    //     </div>
-    //     <div class="일기속성2">
-    //         <div class="타이틀">
-    //             타이틀 영역입니다. 한줄까지만 노출 됩니다.
-    //         </div>
-    //     </div>
-    // </div>
-    // `
-
-    // 일기틀.querySelector(".감정").innerText = feeling
-    // 일기틀.querySelector(".날짜표시").innerText = date
-    // const 타이틀El = 일기틀.querySelector(".타이틀").innerText = title
-
-    // document.querySelector(".일기보관함").appendChild(일기틀)
-
-    // const 감정El = 일기틀.querySelector(".감정")
-    // const 감정이미지El = 일기틀.querySelector(".감정이미지")
-
-    // // 감정별 스타일 & 이미지
-    // if (feeling === "행복해요") {
-    //     감정El.style.color = "#EA5757"
-    //     감정이미지El.style.backgroundImage = "url(./asset/image/happy.png)"
-    // } else if (feeling === "슬퍼요") {
-    //     감정El.style.color = "#28B4E1"
-    //     감정이미지El.style.backgroundImage = "url(./asset/image/sad.png)"
-    // } else if (feeling === "놀랐어요") {
-    //     감정El.style.color = "#D59029"
-    //     감정이미지El.style.backgroundImage = "url(./asset/image/surprised.png)"
-    // } else if (feeling === "화나요") {
-    //     감정El.style.color = "#777"
-    //     감정이미지El.style.backgroundImage = "url(./asset/image/mad.png)"
-    // } else {
-    //     // 기타 감정 기본 스타일
-    //     감정El.style.color = "#000"
-    //     감정이미지El.style.backgroundImage = "none"
-    // }
-
-
-    // 일기틀.addEventListener("click", () => {
-    //     alert(
-    //       `기분: ${새로운일기.feeling}\n` +
-    //       `날짜: ${새로운일기.date}\n` +
-    //       `제목: ${새로운일기.title}\n` +
-    //       `내용: ${새로운일기.content}`
-    //     )
-    //   })
