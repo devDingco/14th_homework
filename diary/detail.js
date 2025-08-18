@@ -265,7 +265,7 @@ function onClickCopyButton() {
     document.querySelector('.copy_text').textContent = '복사완료 !';
     setTimeout(() => {
         document.querySelector('.copy_text').textContent = '내용 복사';
-    }, 2000);
+    }, 3000);
 }
 // 삭제모달 로직
 function onClickDeleteButton() {

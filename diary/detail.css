@@ -497,14 +497,14 @@
 
 /* 토스트 메시지 */
 .toast-message {
-    position: absolute;
+    position: fixed;
     width: 47.5rem;
     height: 3.5rem;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    bottom: 50%;
+    bottom: 5%;
     left: 50%;
     transform: translateX(-50%) translateY(-1.25rem);
     background: #000000E5;
