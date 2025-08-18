@@ -6,12 +6,12 @@
 
 
 .header {
-  width: 100%;
+  width: 128rem;
   height: 8rem;
-  background-color: #fff;
-  border: 1px solid red;
+  background-color: #ffffff;
   padding: 2rem 0rem; 
   display: flex;
+  margin: 0 auto;
 }
 
 .header_left_container {

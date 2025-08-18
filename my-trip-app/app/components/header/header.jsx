@@ -1,7 +1,7 @@
 "use client";
 
 import "./header.css";
-import "../../../app/globals.css";
+import "../../../app/global.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
