@@ -57,7 +57,5 @@ document.addEventListener('DOMContentLoaded', function () {
         break; // 찾았으니까 멈춤
       }
     }
-    localStorage.setItem('저장된일기', JSON.stringify(전체일기목록));
-    location.href = './index.html';
   });
 });

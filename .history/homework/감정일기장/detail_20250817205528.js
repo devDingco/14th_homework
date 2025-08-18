@@ -28,8 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // detail.js에서 이미지 태그에 크기 속성 추가
   감정이미지요소.innerHTML = `<img src="./assets/images/${일기이미지}" alt="" width="32" height="32" />`;
 
+
   const 수정버튼 = document.getElementById('editBtn');
-  수정버튼.addEventListener('click', function () {
-    location.href = './edit.html';
-  });
+  수정버튼.addEventListener('click'function(){
+    location.href='./edit.html'
+  })
 });
