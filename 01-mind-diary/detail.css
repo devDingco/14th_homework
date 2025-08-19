@@ -7,7 +7,7 @@
     max-width: 73rem;
     padding-bottom: 1rem;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 1.5rem;
     align-self: stretch;
 }
@@ -48,10 +48,48 @@
     letter-spacing: -0.01rem;
 }
 
+.기능버튼컨테이너 {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+
+.복사토스트 {
+    display: flex;
+    position: fixed;
+    inset: auto auto 2.5rem auto;
+    width: 80%;
+    max-width: 47.5rem;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.5rem;
+    background: rgba(0, 0, 0, 0.90);
+    color: #FFF;
+    font-family: "Pretendard Variable";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem;
+    /* 150% */
+    letter-spacing: -0.01rem;
+    z-index: 10;
+
+    opacity: 0;
+    transition: opacity ease 0.6s;
+}
+
+.복사토스트.활성화됨 {
+    opacity: 1;
+}
+
+
 .일기상세버튼컨테이너 {
     display: flex;
     max-width: 73rem;
-    justify-content: flex-end;
+    justify-content: end;
     align-items: center;
     gap: 1rem;
     align-self: stretch;

@@ -1,21 +1,33 @@
-
-
 // DOM이 완전히 로드된 후 스크립트 실행
 document.addEventListener("DOMContentLoaded", () => {
     // --- 변수 및 상수 그룹화 ---
     const 일기목록 = JSON.parse(localStorage.getItem("민지의일기목록") ?? "[]");
     const 카드목록 = document.querySelector(".카드목록");
     const 카드목록_offsetTop = 카드목록.offsetTop;
-    const 기분필터 = document.querySelector("#기분필터드롭다운");
+    const 기분필터 = document.querySelector("#기분필터");
+    const 프로그레시브블러 = document.querySelector("#프로그레시브블러");
     const 제목텍스트 = document.querySelector('.일기텍스트 input[type="text"]');
     const 내용텍스트 = document.querySelector('.일기텍스트 textarea');
     const 기분라디오 = document.querySelectorAll('input[name="기분"]');
     const 등록하기버튼 = document.querySelector("#일기등록버튼");
 
+    let 삭제할일기 = null;
 
     // 모달관련기능
-    const 모달열기 = (id) => document.getElementById(id).style.display = "flex";
-    const 모달닫기 = (id) => document.getElementById(id).style.display = "none";
+    const 모달열기 = (id) => {
+        document.getElementById(id).style.display = "flex";
+        document.body.classList.add("no-scroll");
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
+    
+    const 모달닫기 = (id) => {
+        document.getElementById(id).style.display = "none";
+        document.body.classList.remove("no-scroll");
+    };
+
 
 
     // 모달을 여는 버튼
@@ -29,26 +41,51 @@ document.addEventListener("DOMContentLoaded", () => {
     const 일기등록취소모달닫기버튼 = document.querySelector("#일기계속작성버튼");
     일기등록취소모달닫기버튼.addEventListener("click", () => 모달닫기('일기등록취소모달'));
 
-    const 일기등록취소버튼 =  document.querySelector("#일기등록취소버튼");
+    const 일기등록취소버튼 = document.querySelector("#일기등록취소버튼");
     일기등록취소버튼.addEventListener("click", () => {
         // 입력 필드 초기화
         document.querySelector('.일기텍스트 input[type="text"]').value = "";
         document.querySelector('.일기텍스트 textarea').value = "";
-        
+
         // 라디오 버튼 초기화 (선택 해제)
         document.querySelectorAll('input[name="기분"]').forEach(radio => {
             radio.checked = false;
         });
-    
+
         // 모달 닫기
-        모달닫기('일기등록취소모달'); 
+        모달닫기('일기등록취소모달');
         모달닫기('일기쓰기모달');
     });
+
+    const 일기삭제확인모달닫기버튼 = document.querySelector("#일기삭제취소버튼");
+    일기삭제확인모달닫기버튼.addEventListener("click", () => 모달닫기('일기삭제확인모달'));
+
     // 모달 배경 클릭 시 닫기
     const 일기쓰기모달배경 = document.querySelector("#일기쓰기모달");
     일기쓰기모달배경.addEventListener("click", () => 모달닫기('일기쓰기모달'));
     const 일기등록취소모달배경 = document.querySelector("#일기등록취소모달");
     일기등록취소모달배경.addEventListener("click", () => 모달닫기('일기등록취소모달'));
+    const 일기삭제확인모달배경 = document.querySelector("#일기삭제확인모달");
+    일기삭제확인모달배경.addEventListener("click", () => 모달닫기('일기삭제확인모달'));
+
+    // ESC 키 입력 시 모달 닫는 동작
+    window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            const 일기쓰기모달 = document.getElementById("일기쓰기모달");
+            const 일기등록취소모달 = document.getElementById("일기등록취소모달");
+            const 일기삭제확인모달 = document.getElementById("일기삭제확인모달");
+
+            // 1. 일기등록취소모달이 열려있다면 먼저 닫는다. (가장 위에 있는 모달)
+            if (일기등록취소모달 && 일기등록취소모달.style.display === "flex") {
+                모달닫기('일기등록취소모달');
+            }
+            // 2. 그렇지 않고, 일기쓰기모달이 열려있다면 일기등록취소모달을 연다.
+            else if (일기쓰기모달 && 일기쓰기모달.style.display === "flex") {
+                모달열기('일기등록취소모달');
+            }
+            else { 모달닫기('일기삭제확인모달'); }
+        }
+    });
 
     // 모달 패널(내부 컨텐츠) 클릭 시 이벤트 버블링 방지
     const 모달패널들 = document.querySelectorAll(".모달패널");
@@ -57,15 +94,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-
-
-
-    // --- 1. 일기 목록 렌더링 기능 ---
+    // --- 일기 목록 렌더링 기능 ---
     const 렌더일기목록 = (필터값 = "전체") => {
         const 필터된목록 = 필터값 === "전체" ? 일기목록 : 일기목록.filter(diary => diary.기분 === 필터값);
         const 카드HTML = 필터된목록.map(diary => `
-            <div class="카드" onclick="location.href='detail.html?id=${diary.고유아이디}'">
-                <img src="./assets/icons/close-icon.svg" class="카드삭제버튼" onclick="event.stopPropagation(); deleteDiary('${diary.고유아이디}')">
+            <div class="카드" data-id="${diary.고유아이디}">
+                <img src="./assets/icons/close-icon.svg" class="카드삭제버튼">
                 <div class="${diary.기분}카드썸네일"></div>
                 <div class="카드텍스트컨테이너">
                     <div class="기분과날짜">
@@ -82,19 +116,11 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     렌더일기목록();
 
-    // --- 2. 기분 필터 드롭다운 변경 이벤트 ---
+    // --- 기분 필터 드롭다운 변경 이벤트 ---
     기분필터.addEventListener("change", e => 렌더일기목록(e.target.value));
 
-    // --- 3. 일기 삭제 기능 ---
-    window.deleteDiary = (고유아이디) => {
-        if (confirm("정말로 이 일기를 삭제하시겠어요?")) {
-            const 업데이트된목록 = 일기목록.filter(diary => diary.고유아이디 != 고유아이디);
-            localStorage.setItem("민지의일기목록", JSON.stringify(업데이트된목록));
-            location.reload();
-        }
-    };
 
-    // --- 4. 일기 등록 기능 ---
+    // --- 일기 등록 기능 ---
     const handleDiarySubmit = () => {
         const selectedMood = document.querySelector('input[name="기분"]:checked');
         if (!selectedMood) return;
@@ -114,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     };
 
-    // --- 5. 제출 버튼 활성화/비활성화 기능 ---
+    // --- 제출 버튼 활성화/비활성화 기능 ---
     const checkFormValidity = () => {
         const isMoodSelected = document.querySelector('input[name="기분"]:checked');
         const isTitleFilled = 제목텍스트.value.trim() !== "";
@@ -127,19 +153,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // --- 7. 스크롤 이벤트 (컨트롤바 색상 변경) ---
+    // --- 스크롤 이벤트 (컨트롤바 색상 변경) ---
     window.addEventListener('scroll', () => {
         if (window.scrollY >= 카드목록_offsetTop) {
             기분필터.classList.add('scrolled');
+            프로그레시브블러.classList.add('scrolled');
         } else {
             기분필터.classList.remove('scrolled');
+            프로그레시브블러.classList.remove('scrolled');
         }
     });
 
-    // --- 8. 이벤트 리스너 ---
+    // --- 이벤트 리스너 ---
     등록하기버튼.addEventListener("click", handleDiarySubmit);
     제목텍스트.addEventListener("input", checkFormValidity);
     내용텍스트.addEventListener("input", checkFormValidity);
     기분라디오.forEach(radio => radio.addEventListener("change", checkFormValidity));
+    카드목록.addEventListener("click", (e) => {
+        // 클릭된 요소가 삭제 버튼인지 확인합니다.
+        if (e.target.classList.contains("카드삭제버튼")) {
+            e.stopPropagation();
+            const card = e.target.closest(".카드");
+            if (card) {
+                삭제할일기 = card.dataset.id;
+                모달열기('일기삭제확인모달');
+            }
+        }
+        // 삭제 버튼이 아닌 카드의 다른 부분을 클릭했을 때 상세 페이지로 이동
+        else {
+            const card = e.target.closest(".카드");
+            if (card) {
+                const diaryId = card.dataset.id;
+                location.href = `detail.html?id=${diaryId}`;
+            }
+        }
+    });
+    const 일기삭제확인버튼 = document.querySelector("#일기삭제확인버튼");
+    일기삭제확인버튼.addEventListener("click", () => {
+        if (삭제할일기) {
+            // 실제 삭제 로직: 일기목록 배열에서 해당 일기 삭제 후 localStorage 업데이트
+            const 삭제후일기목록 = 일기목록.filter(일기 => 일기.고유아이디 !== Number(삭제할일기));
+            localStorage.setItem("민지의일기목록", JSON.stringify(삭제후일기목록));
 
+            // 페이지 새로고침
+            location.reload();
+        }
+    });
 });

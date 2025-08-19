@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>감정기록 일기장</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./gallery.css" />
+    <script src="./gallery.js"></script>
+</head>
+
+<body>
+    <div class="전체컨테이너">
+        <div class="내용컨테이너">
+            <div class="gradient-blur" id="프로그레시브블러">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <img src="./assets/icons/topscroll-fab.svg" class="메인플로팅버튼"
+                onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+            <div class="헤더">
+                <a href="./index.html">
+                    <h1>민지의 다이어리</h1>
+                </a>
+            </div>
+            <div class="상단배너이미지"></div>
+            <div class="탭바">
+                <a href="./index.html">
+                    <div class="탭바항목_선택안됨">
+                        일기보관함
+                    </div>
+                </a>
+                <a href="./gallery.html">
+                    <div class="탭바항목_선택됨">
+                        사진보관함
+                    </div>
+                </a>
+            </div>
+            <div class="컨트롤바" id="컨트롤바">
+                <select class="필터드롭다운" id="사진필터">
+                    <option value="기본형" selected>기본형</option>
+                    <option value="가로형">가로형</option>
+                    <option value="세로형">세로형</option>
+                </select>
+            </div>
+
+            <div class="사진목록" id="강아지보여주는곳">
+                <div class="스켈레톤컨테이너" id="스켈레톤로딩">
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                </div>
+                </div>
+
+        </div>
+        <div class="푸터">
+            <div class="푸터텍스트컨테이너">
+                <span class="푸터텍스트1">민지의 다이어리</span>
+                <span class="푸터텍스트2">대표 : {name}</span>
+                <span class="푸터텍스트3">Copyright © 2024. {name} Co., Ltd.</span>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+
+</body>
+
+</html>
