@@ -200,6 +200,16 @@ const makeUpdateHtml = (contentObj) => {
     document.getElementById("input_reply").style = "background: var(--Gray-Gray-50, rgba(242, 242, 242, 1));"
 }
 
+const makeReplyHtml = (contentObj) => {
+    const contentHTML = contentObj.reply.map((v) => {
+        return `
+            <h1>${v}</h1>
+        `
+    }).join("")
+
+    document.getElementById("reply_content_flag").innerHTML = contentHTML
+}
+
 // 일기 번호를 받아 수정화면 생성
 const printUpdate = () => {
     makeUpdateHtml(getContentNumber())

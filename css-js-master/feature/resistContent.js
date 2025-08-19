@@ -92,21 +92,28 @@ const resistReply = (key) => { // "회고콘텐츠"
 
     const replyValue = document.getElementById("input_reply").value
     const replyArr = localStorageArr[indexToChange].reply
-    replyArr.push(replyValue)
-    
-    const objectToChange = {
-        number: indexToChange,
-        date: localStorageArr[indexToChange].date,
-        feel: localStorageArr[indexToChange].feel,
-        title: localStorageArr[indexToChange].title,
-        detail: localStorageArr[indexToChange].detail,
-        reply: replyArr
-    }
 
-    const updateArr = localStorageArr.map((v, i) => {
-        return i === indexToChange ? v = objectToChange : v
-    })
+    if  (replyValue === "") {
+        alert("회고를 입력해주세요.")
+    } else {
+        replyArr.push(replyValue)
     
-    toLocalStorage(updateArr,key)
-    document.getElementById('input_reply').value = '';
+        const objectToChange = {
+            number: indexToChange,
+            date: localStorageArr[indexToChange].date,
+            feel: localStorageArr[indexToChange].feel,
+            title: localStorageArr[indexToChange].title,
+            detail: localStorageArr[indexToChange].detail,
+            reply: replyArr
+        }
+    
+        const updateArr = localStorageArr.map((v, i) => {
+            return i === indexToChange ? v = objectToChange : v
+        })
+        
+        toLocalStorage(updateArr,key)
+    
+        document.getElementById('input_reply').value = '';
+        makeReplyHtml(objectToChange)
+    }
 }
