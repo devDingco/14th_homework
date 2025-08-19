@@ -1,0 +1,58 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+h1 {
+  font-size: 18px;
+  padding-top: 46px;
+  padding-bottom: 46px;
+}
+
+/* 수정페이지 */
+.edit {
+  width: 1168px;
+  margin: 0 auto;
+}
+.edit__title__right__text {
+  padding-top: 18px;
+  padding-bottom: 16px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.edit__title__right__mood {
+  display: flex;
+  gap: 20px;
+}
+.edit__form-group {
+  margin: 24px 0px;
+}
+
+.취소수정버튼 {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.취소버튼 {
+  width: 104px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #000000;
+  background-color: white;
+}
+.수정버튼 {
+  width: 104px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #000000;
+  color: white;
+  background-color: black;
+}

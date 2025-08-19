@@ -15,7 +15,7 @@ h1 {
 /* 메인전체사이즈 */
 .main {
   width: 1168px;
-  margin: 0 auto;
+  margin: auto;
 }
 /* 네비 */
 nav {
@@ -333,4 +333,19 @@ hr {
 .dropdown-item:last-child {
   border-bottom: none;
   border-radius: 0 0 5px 5px;
+}
+
+/* 삭제버튼 */
+.diaryCard {
+  position: relative;
+}
+.delete-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+}
+.scrollTop {
+  margin-left: 300px;
 }

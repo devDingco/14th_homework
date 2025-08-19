@@ -8,7 +8,37 @@ document.addEventListener('DOMContentLoaded', function () {
   const 감정텍스트요소 = document.getElementById('detailEmotion');
   const 날짜요소 = document.getElementById('detailDate');
   const 내용요소 = document.getElementById('detailContent');
+  const 삭제버튼 = document.getElementById('delBtn');
+  const 회고인풋 = document.getElementById('회고인풋');
+  const 회고버튼 = document.getElementById('회고버튼');
+  const 회고영역 = document.getElementById('회고영역');
 
+  회고버튼.addEventListener('click', function () {
+    const 입력한내용 = 회고인풋.value;
+    console.log('입력한내용', 입력한내용);
+
+    localStorage.setItem('회고', 입력한내용);
+    console.log('저장됨');
+
+    const 저장된회고 = localStorage.getItem('회고');
+    console.log('저장되었던회고', 저장된회고);
+
+    회고영역.innerHTML = ' <div id="회고댓글">3년후의 나는 어떨까?</div>
+        <div id="날짜영역">날짜영역</div>
+    '
+  });
+
+  function 일기삭제하기(삭제할제목) {
+    let diaryList = JSON.parse(localStorage.getItem('저장된일기')) || [];
+    diaryList = diaryList.filter((일기) => 일기.title !== 삭제할제목);
+    localStorage.setItem('저장된일기', JSON.stringify(diaryList));
+    location.href = './index.html';
+  }
+  삭제버튼.addEventListener('click', function () {
+    const 현재일기 = JSON.parse(localStorage.getItem('선택된일기'));
+    일기삭제하기(현재일기.title);
+  });
+  window.일기삭제하기 = 일기삭제하기;
   제목요소.textContent = 일기객체.title;
   감정텍스트요소.textContent = 일기객체.emotion;
   날짜요소.textContent = 일기객체.date;

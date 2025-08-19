@@ -4,10 +4,17 @@ document.addEventListener('DOMContentLoaded', function () {
   const titleInput = document.getElementById('titleInput'); // 제목 입력창
   const textInput = document.getElementById('textInput'); // 내용 입력창
   const submitBtn = document.getElementById('submitBtn'); // 등록 버튼
+  const scrollBtn = docoumnt.getElementById('');
 
   // 3단계: 일기들을 저장할 빈 배열 만들기 (모든 일기 데이터가 여기에 저장됨)
   let diaryList = [];
-
+  function 일기삭제하기(삭제할제목) {
+    // 삭제하고 저장하고 새로고침
+    diaryList = diaryList.filter((일기) => 일기.title !== 삭제할제목);
+    localStorage.setItem('저장된일기', JSON.stringify(diaryList));
+    location.reload();
+  }
+  window.일기삭제하기 = 일기삭제하기;
   // 공통 함수: 일기를 화면에 그리는 함수 (중복 코드를 줄이기 위해 함수로 만듦)
   function 일기를화면에그리기(일기데이터) {
     // 감정 텍스트에 따라 어떤 이미지를 보여줄지 정하는 객체
@@ -30,13 +37,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 일기 카드의 HTML 내용 설정 (이미지, 감정, 날짜, 제목 포함)
     새일기.innerHTML = `
+    <div class = 'diaryCard'> 
     <img src="./assets/images/${일기이미지}" alt="" />
+    <button class="delete-btn" onclick="event.stopPropagation();일기삭제하기('${일기데이터.title}')">
+        <img src="./assets/images/close icon.png" alt="삭제" class="delete-icon">
+        </button>
     <div class="title__text__main">
       <div class="title__text">
         <div class="title__happy">${일기데이터.emotion}</div>    
         <div>${일기데이터.date}</div>                            
       </div>
       <div>${일기데이터.title}</div>                             
+    </div>
     </div>
   `;
 
