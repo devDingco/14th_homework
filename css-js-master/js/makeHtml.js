@@ -1,3 +1,4 @@
+// 메인페이지 화면
 const makeMainHtml = (contentArr) => {
     const contentHTML = contentArr.map((v) => {
         let imgSrc
@@ -65,6 +66,7 @@ const makeMainHtml = (contentArr) => {
     return contentHTML
 }
 
+// 상세페이지 화면
 const makeDetailHtml = (contentObj) => {
     let imgSrc
     let feelColor
@@ -124,6 +126,7 @@ const makeDetailHtml = (contentObj) => {
     document.getElementById("main").innerHTML = contentHTML
 }
 
+// 상세페이지 - 수정 화면
 const makeUpdateHtml = (contentObj) => {
     const contentHTML = `
     <div id="update_feel_container">
@@ -197,6 +200,7 @@ const makeUpdateHtml = (contentObj) => {
     document.getElementById("input_reply").style = "background: var(--Gray-Gray-50, rgba(242, 242, 242, 1));"
 }
 
+// 일기 번호를 받아 수정화면 생성
 const printUpdate = () => {
     makeUpdateHtml(getContentNumber())
 }

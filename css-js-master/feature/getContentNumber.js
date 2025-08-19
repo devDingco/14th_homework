@@ -1,3 +1,4 @@
+// URL 에서 쿼리스트링으로 컨텐츠 인덱스 받아오기
 const getContentNumber = () => {
     const url = location.search
     const qs = new URLSearchParams(url)

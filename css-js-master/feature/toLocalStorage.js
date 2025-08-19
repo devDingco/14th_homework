@@ -1,4 +1,4 @@
-// 로컬스토리지에 일기 저장
+// 로컬스토리지에 정보 저장
 const toLocalStorage = (arr,key) => { // <array, string>
     // 로컬스토리지 키 등록
     if (key === ("일기콘텐츠" || "회고콘텐츠")) {

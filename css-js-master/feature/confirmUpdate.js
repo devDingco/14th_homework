@@ -1,3 +1,4 @@
+// 상세페이지 - 수정 에서 수정하기 버튼 클릭시 작동
 const confirmUpdate = (key) => { // <string>
     const updateRadioFormData = new FormData(document.getElementById("update_feeling_radio_container"))
     const feelValue = updateRadioFormData.get("feel")
