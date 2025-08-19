@@ -1,11 +1,6 @@
 const 일기들 = [];  
 
-window.onload = () => {
-  console.log("민지의 다이어리에 오신 것을 환영합니다.");
-  
-  // 1. 시작하면 일기 목록에 그리기
-  일기입력하기();
-};
+
 
 window.onscroll = function () {
   const selectElement = document.getElementById("드랍다운제목ID");
@@ -24,11 +19,15 @@ function 스크롤맨위로기능() {
 
 
 
-const 일기입력하기 = () =>{
+const 일기입력하기 = (클릭한페이지) =>{
 const 일기리스트 = localStorage.getItem("일기목록")
   const 일기목록배열 = JSON.parse(일기리스트 === null ? "[]" : 일기리스트)
-  // 2. 배열을 반복해서 태그 만들기 (그리기)
-  const 일기목록HTML = 일기목록배열.map((el,index)=>`
+  
+  const 필터된배열 = 일기목록배열.filter((el,index) => {
+    const 건너뛴횟수 = 클릭한페이지 -1;
+    return 건너뛴횟수 * 12 <= index && index < 12 * 클릭한페이지      
+  });
+  const 일기목록HTML = 필터된배열.map((el,index)=>`
       <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
         <a href="./sub.html?number=${index}">     
           <img 
@@ -68,6 +67,7 @@ const 일기리스트 = localStorage.getItem("일기목록")
   //3. html 최종 삽입하기
   
     document.getElementById("일기칸").innerHTML = 일기목록HTML
+    
 }
 
 const 필터링기능 = (event) =>{
@@ -165,7 +165,8 @@ const 일기등록기능 = () =>{
     기존일기목록.push(입력한일기)
     localStorage.setItem("일기목록", JSON.stringify(기존일기목록));
 
-    일기입력하기()
+    일기입력하기(시작페이지);
+    페이지그리기기능(시작페이지);
 
 }
 // 등록모달
@@ -211,7 +212,8 @@ function 일기삭제기능(event, 일기인덱스) {
   localStorage.setItem("일기목록", JSON.stringify(삭제후일기목록));
   alert("삭제되었습니다.");
   // 4. 삭제된 일기목록 화면에 다시 그리기
-  일기입력하기();
+  일기입력하기(시작페이지);
+  페이지그리기기능(시작페이지);
 }
 
 window.addEventListener("keydown",(event)=>{
@@ -336,7 +338,8 @@ const 강아지메뉴스타일기능 = () =>{
 function 메뉴이동하기(내가클릭한것){
   switch(내가클릭한것){
     case "일기":
-        일기입력하기();
+        일기입력하기(시작페이지);
+        페이지그리기기능(시작페이지);
         필터바꾸기기능('일기');
         일기메뉴스타일기능();
         break;
@@ -361,7 +364,7 @@ const 선택기능 = (event) => {
 
 
 
-        
+        //검색기능
             let 타이머 = "아직실행안함"
 const 검색기능 = (event) =>{
             const 일기리스트 = localStorage.getItem("일기목록")
@@ -414,7 +417,7 @@ const 검색기능 = (event) =>{
 
         }
         
-        
+        //무한 스크롤
           let 타이머2 = "아직실행안함"
         window.addEventListener("scroll",()=>{
             if(타이머2==="아직실행안함"){
@@ -438,3 +441,52 @@ const 검색기능 = (event) =>{
                 }, 1000);
             }
         })
+ // 페이지네이션
+  window.onload = () => {
+          일기입력하기(시작페이지);
+          페이지그리기기능(시작페이지);
+        };
+        
+
+        
+        let 시작페이지 = 1
+        
+
+
+const 페이지그리기기능 = (클릭한페이지) =>{
+  일기목록배열= JSON.parse(localStorage.getItem("일기목록"))
+  const 마지막페이지 = Math.ceil(일기목록배열.length / 12)
+  const 페이지박스 =  new Array(5).fill("페이지")
+  const 페이지html = 페이지박스.map((el,index)=> {
+    const 페이지번호 = 시작페이지 + index
+    return 페이지번호 <= 마지막페이지 ? `
+         <button onclick="일기입력하기(${페이지번호}); 페이지그리기기능(${페이지번호});" class="${클릭한페이지 === 페이지번호 ? '클릭된' : '클릭안된'}">${페이지번호}</button> 
+    ` : ""
+    
+}).join("")
+  document.getElementById("페이지보여주는곳").innerHTML = 페이지html
+  if(마지막페이지 > 1){
+    document.getElementById("이전페이지").style = "display : inline"
+    document.getElementById("다음페이지").style = "display : inline"
+  }
+}
+
+const 다음페이지기능 = () =>{
+  일기목록배열= JSON.parse(localStorage.getItem("일기목록"))
+  const 마지막페이지 = Math.ceil(일기목록배열.length / 12)
+  if(마지막페이지 <= 시작페이지 +5){
+    return
+  }
+  시작페이지 = 시작페이지 + 5
+  페이지그리기기능(시작페이지);
+  일기입력하기(시작페이지);
+}
+
+const 이전페이지기능 = () =>{
+  if(시작페이지 ===1){
+    return
+  }
+  시작페이지 = 시작페이지 - 5
+  페이지그리기기능(시작페이지);
+  일기입력하기(시작페이지)
+}
