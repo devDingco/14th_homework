@@ -39,6 +39,9 @@ const confirmUpdate = (key) => { // <string>
             document.getElementById("update_confirm_button").style = "transform: rotateZ(30deg); transition: 1s;"
             alert(`${indexToChange}번 일기가 수정되었습니다`)
             // todo - 메인페이지로 이동
+            setTimeout(() => {
+                window.location.assign(`http://localhost:${window.location.port}/css-js-master/index.html`)
+            }, 1000)
             // window.location.assign(`http://localhost:${window.location.port}/css-js-master/index.html`)
         }
     } catch(e) {
