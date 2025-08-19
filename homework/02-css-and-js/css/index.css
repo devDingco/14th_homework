@@ -49,11 +49,23 @@ a {
     gap: 1rem;
     margin-top: 1.5rem;
     margin-bottom: 2rem;
-    font-size: 1.5rem;
-    line-height: 1.5rem;
-    }
+}
 
-.body_tab_active {
+.body_tab_text {
+   cursor: pointer;
+   line-height: 1.5rem;
+   font-size: 1.5rem;
+   font-weight: 700;
+   color: #000;
+
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   padding: 1.2rem 0.8rem;
+}
+
+/* .body_tab_active {
     width: 7.5rem;
     height: 3rem;
     display: flex;
@@ -61,9 +73,9 @@ a {
     align-items: center;
     font-weight: 700;
     border-bottom: 0.125rem solid black;
-}
+} */
 
-.body_tab_default {
+/* .body_tab_default {
     width: 7.5rem;
     height: 3rem;
     display: flex;
@@ -71,35 +83,31 @@ a {
     align-items: center;
     color: #ababab;
     font-weight: 500;
-}
+} */
 
 .body_button_area {
     display: flex;
     width: 100%;
+    gap: 1.6rem;
     justify-content: space-between;
-    gap: 1rem 0.5rem;
-    flex-wrap: wrap;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(1rem);
+    margin-bottom: 3.2rem;
+    z-index: 1;   
 }
 /* 필터 */
 
 .filter {
-    display: flex;
-    justify-content: space-between;    
-    align-items: center;
     min-width: 7.5rem;
     padding: 0.75rem 0.625rem;
     border-radius: 8px;
     border: 0.0625rem solid #c7c7c7;
-    height: 100%;
+    height: 3.2rem;
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5rem;    
-    margin-bottom: 2.62rem;
-
-
-    position: sticky;
-    top: 2.25rem;
-    transition: all 0.3s ease;
 }
 
 .filter_drop_down {
@@ -182,6 +190,7 @@ a {
 .mood_image {
     height: 100%;
     width: 100%;
+    object-fit: cover;
 }
 
 .diary_content {
@@ -191,7 +200,6 @@ a {
     justify-content: space-between;
     font-size: 0.875rem;
     color: #777;
-    padding: 0rem 0.5rem;
 }
 
 .diary_info {
@@ -199,13 +207,16 @@ a {
     flex-direction: column;
     padding: 0 0.5rem;
     gap: 0.5rem;
+    flex-grow: 1;
 }
 
 .diary_mood {
+    width: 100%;
     text-align: left;
     font-size: 0.875rem;
     font-weight: 600;
-    line-height: 1.2;
+    line-height: 1.2rem;
+    white-space: nowrap;
 }
 .CSS_행복 {
     color: #EA5757;
@@ -228,11 +239,13 @@ a {
 }
 
 .diary_date {
+    width: 100%;
     color: #919191;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.2;
     text-align: right;
+    white-space: nowrap;
 }
 
 .diary_title {
@@ -242,7 +255,6 @@ a {
     font-size: 1.125rem;
     font-weight: 700;
     line-height: 1.5rem;
-    padding: 0rem 0.5rem;
     color: #000;
     margin-bottom: 1rem;
     overflow: hidden;
@@ -431,4 +443,60 @@ button img {
     right: 2.5rem; 
     bottom: 2.5rem; 
     z-index: 999; 
+}
+
+/* 사진보관함 */
+#HTML_사진보관함필터,
+#HTML_사진보관함메인 {
+  display: none;
+}
+.CSS_강아지사진보여주는곳,
+.CSS_스켈레톤 {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    justify-content: center;
+    align-items: center;    
+}
+
+.CSS_강아지사진 {
+    max-width: 63rem;
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 2.4rem;
+}
+
+.CSS_스켈레톤박스 {
+    max-width: 63rem;
+    width: 100%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background-color: lightgray;
+    border-radius: 2.4rem;
+}
+
+.CSS_스켈레톤막대기 {
+    width: 100px;
+    height: 1000px;
+    background-color: white;
+    filter: blur(70px);
+  
+    animation-name: 스켈레톤애니메이션;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes 스켈레톤애니메이션 {
+    from {
+      transform:
+      translate(-400px, -400px)
+      rotate(30deg);
+    }
+  
+    to {
+      transform:
+      translate(700px, 200px)
+      rotate(30deg);
+    }
 }
