@@ -3,7 +3,9 @@ let 일기 = [];
 
 const 입력확인 = () => {
     const 제목 = document.getElementById("제목입력").value.trim();
+
     const 내용 = document.getElementById("내용입력").value.trim();
+
     const 기분 = document.querySelector("input[name='기분']:checked");
     const 등록버튼 = document.getElementById("등록하기");
     등록버튼.disabled = !(제목 && 내용 && 기분);
@@ -11,34 +13,45 @@ const 입력확인 = () => {
 
 const 일기작성__등록 = () => {
     const 제목 = document.getElementById("제목입력").value;
+    console.log("제목: "+제목)
+
     const 내용 = document.getElementById("내용입력").value;
+    console.log("내용: "+내용)
+
     const 날짜 = new Date().toLocaleDateString();
+
     const 기분요소 = document.querySelector("input[name='기분']:checked");
     const 기분 = 기분요소 ? 기분요소.value : "none";
 
     const 일기저장 = { 제목, 내용, 기분, 날짜 };
+    console.log("일기저장: "+일기저장)
 
     // 기존 데이터 불러오기
     const 저장된일기 = localStorage.getItem("일기목록")
+    console.log("저장된일기: "+저장된일기 )
+
     const 일기목록 = JSON.parse(저장된일기 === null ? "[]" : 저장된일기)
+    console.log("일기목록: "+일기목록 )
 
     일기목록.push(일기저장)
+    console.log(일기목록)
    
     localStorage.setItem("일기목록",JSON.stringify(일기목록))
-    // 일기.push(일기저장);
+
 
     
     const 일기목록HTML = 일기목록.map((el,index)=>`
     <div class="일기">
-        <a href="./index-detailPage.html?number=${index}">
-            <div><img src="./assets/images/${el.기분}.png" alt=""></div>
+        <a href="./index-detailPage.html?number=${index}" >
+            <div><img src="./assets/images/${el.기분}.png" alt="" class="기분카드"></div>
             <div>
                 <div>${el.기분}</div>
                 <div>${el.날짜}</div>
             </div>
             <div>${el.제목}</div>
-            </a>
-        </div>
+        </a>
+        <button class="일기삭제버튼">X</button>
+    </div>
     `).join("")
     
 
@@ -48,6 +61,8 @@ const 일기작성__등록 = () => {
     document.getElementById("내용입력").value = "";
     // document.querySelector("input[name='기분']:checked") = false;
     입력확인();
+
+    document.getElementById("일기작성모달").style = "display: none"
 
 };
 
@@ -61,8 +76,8 @@ window.onload = () => {
     
     const 일기목록HTML = 일기목록.map((el,index)=>`
     <div class="일기">
-        <a href="./index-detailPage.html?number=${index}" class="기분카드">
-            <div><img src="./assets/images/${el.기분}.png" alt=""></div>
+        <a href="./index-detailPage.html?number=${index}" >
+            <div><img src="./assets/images/${el.기분}.png" alt="" class="기분카드"></div>
             <div>
                 <div>${el.기분}</div>
                 <div>${el.날짜}</div>
@@ -100,8 +115,8 @@ const 기분필터 = (event) => {
 
     const 일기목록HTML = 필터목록.map((el,index)=>`
     <div class="일기">
-        <a href="./index-detailPage.html?number=${index}" class="기분카드">
-            <div><img src="./assets/images/${el.기분}.png" alt=""></div>
+        <a href="./index-detailPage.html?number=${index}" >
+            <div><img src="./assets/images/${el.기분}.png" alt="" class="기분카드"></div>
             <div>
                 <div>${el.기분}</div>
                 <div>${el.날짜}</div>
@@ -115,6 +130,14 @@ const 기분필터 = (event) => {
 
     document.getElementById("일기목록").innerHTML = 일기목록HTML
 
+    }
+
+    const 모달열기 = (모달종류) => {
+        document.getElementById(모달종류).style = "display: block"
+    }
+
+    const 모달닫기 = (모달종류) => {
+        document.getElementById(모달종류).style = "display: none"
     }
 
 

@@ -1,131 +1,151 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <title>감정일기장</title>
     <link rel="stylesheet" href="./index.css">
     <script src="./index.js"></script>
 
 </head>
+
 <body>
 
-    <div class="label">
+
+    <!-- <div class="label">
         <div class="label__내용"><h1>일기보관함_메인</h1></div>
-    </div>
+    </div> -->
 
     <div class="main">
         <div class="head">
-            <div class="head__내용"><h4>민지의 다이어리</h4></div>
+            <div class="head__내용">
+                <h4>민지의 다이어리</h4>
+            </div>
         </div>
 
         <div class="body">
             <img src="./assets/images/Rectangle1.png" alt="" id="사진">
-            <div>
-                <div class="일기사진선택">
-                    <div class="일기사진">
-                        <div>일기보관함</div>
-                        <div>사진보관함</div>
+
+            <div class="일기사진선택">
+                <div class="일기사진">
+                    <div>일기보관함</div>
+                    <div>사진보관함</div>
+                </div>
+                <div class="필터일기등록">
+                    <select name="" id="기분필터" onchange="기분필터(event)">
+                        <option value="all">전체</option>
+                        <option value="happy">행복해요</option>
+                        <option value="sad">슬퍼요</option>
+                        <option value="surprised">놀랐어요</option>
+                        <option value="angry">화나요</option>
+                        <option value="other">기타</option>
+                    </select>
+
+                    <div>
+                        <button onclick="모달열기('일기작성모달')" class="일기쓰기버튼">+ 일기쓰기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="일기메인">
+                <div class="일기목록" id="일기목록">
+
+                </div>
+
+
+            </div>
+            <button class="플로팅버튼" onclick="플로팅버튼()">
+                <img src="./assets/images/Vector.png" alt="">
+            </button>
+            <div class="footer">
+                <div class="footer__내용">
+                    <div class="footer__내용__내용"><b>민지의 다이어리</b></div>
+                    <div class="footer__내용__내용">대표 : {name}</div>
+                    <div class="footer__내용__내용">Copyright @ 2024</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="footer">
+        <div class="footer__내용">
+            <div><b>민지의 다이어리</b></div>
+            <div>대표</div>
+            <div>Copyright @ 2024</div>
+        </div>
+    </div> -->
+
+        <div class="모달그룹" id="일기작성모달">
+            <div class="모달배경" onclick="모달닫기('일기작성모달')"> </div>
+            <div class="일기작성">
+                <div class="일기작성__헤드">
+                    <div class="일기작성__헤드__내용"><b>📍 일기 쓰기</b></div>
+                </div>
+                <div class="일기작성__메인">
+                    <div class="일기작성__메인__기분어땠어">
+                        <div class="일기작성__메인__기분어땠어__내용">
+                            <b>오늘 기분은 어땠나요?</b>
+                        </div>
+                        <div class="일기작성__메인__기분선택">
+                            <div class="일기작성__메인__기분선택__라디오">
+                                <div>
+                                    <input id="기분라디오" type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택" value="happy"
+                                        onclick="입력확인()">
+                                </div>
+                                <div>행복해요</div>
+
+                            </div>
+                            <div class="일기작성__메인__기분선택__라디오">
+                                <div>
+                                    <input id="기분라디오" type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택" value="sad"
+                                        onclick="입력확인()">
+                                </div>
+                                <div>슬퍼요</div>
+                            </div>
+                            <div class="일기작성__메인__기분선택__라디오">
+                                <div>
+                                    <input id="기분라디오" type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택"
+                                        value="surprised" onclick="입력확인()">
+                                </div>
+                                <div>놀랐어요</div>
+                            </div>
+                            <div class="일기작성__메인__기분선택__라디오">
+                                <div>
+                                    <input id="기분라디오" type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택" value="angry"
+                                        onclick="입력확인()">
+                                </div>
+                                <div>화나요</div>
+                            </div>
+                            <div class="일기작성__메인__기분선택__라디오">
+                                <div>
+                                    <input id="기분라디오" type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택" value="other"
+                                        onclick="입력확인()">
+                                </div>
+                                <div>기타</div>
+                            </div>
+                        </div>
                     </div>
                     <div>
-                        <select name="" id="기분필터" onchange="기분필터(event)">
-                            <option value="all">전체</option>
-                            <option value="happy">행복해요</option>
-                            <option value="sad">슬퍼요</option>
-                            <option value="surprised">놀랐어요</option>
-                            <option value="angry">화나요</option>
-                            <option value="other">기타</option>
-                        </select>
+                        <div class="일기작성__메인__제목">
+                            <div>제목</div>
+                            <input type="text" placeholder="제목을 입력해주세요" id="제목입력" oninput="입력확인()">
+                        </div>
+                        <div class="일기작성__메인__내용">
+                            <div>내용</div>
+                            <input type="text" placeholder="내용을 입력해주세요" id="내용입력" oninput="입력확인()">
+                        </div>
                     </div>
                 </div>
-               
-                <div class="일기메인">
-                    <div class="일기목록" id="일기목록">
-                
-                        <!-- <div class="일기">
-                            <a href="./index-detailPage.html?number=${index}" class="기분카드">
-                                <div><img src="./assets/images/${el.기분}.png" alt=""></div>
-                                <div>
-                                    <div>${el.기분}</div>
-                                    <div>${el.날짜}</div>
-                                </div>
-                                <div>${el.제목}</div>
-                            </a>
-                            <button class="일기삭제버튼">X</button>
-                        </div>
-                        `).join("") -->
-                    </div>
-
-                    <div class="일기작성">
-                        <div class="일기작성__헤드">                           
-                            <div class="일기작성__헤드__내용"><b>📍 일기 쓰기</b></div>
-                        </div>
-                        <div class="일기작성__메인">
-                            <div class="일기작성__메인__기분어땠어">
-                                <div class="일기작성__메인__기분어땠어__내용">
-                                    <b>오늘 기분은 어땠나요?</b>
-                                </div>
-                                <div class="일기작성__메인__기분선택">
-                                    <div class="일기작성__메인__기분선택__라디오">
-                                        <div>
-                                            <input type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택" value="happy" onclick="입력확인()">
-                                        </div>  
-                                        <div>행복해요</div>
-
-                                    </div>
-                                    <div class="일기작성__메인__기분선택__라디오">
-                                        <div>
-                                            <input type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택" value="sad" onclick="입력확인()">
-                                        </div>  
-                                        <div>슬퍼요</div>
-                                    </div>
-                                    <div class="일기작성__메인__기분선택__라디오">
-                                        <div>
-                                            <input type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택" value="surprised" onclick="입력확인()">
-                                        </div>  
-                                        <div>놀랐어요</div>
-                                    </div>
-                                    <div class="일기작성__메인__기분선택__라디오">
-                                        <div>
-                                            <input type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택" value="angry" onclick="입력확인()">
-                                        </div>  
-                                        <div>화나요</div>
-                                    </div>
-                                    <div class="일기작성__메인__기분선택__라디오">
-                                        <div>
-                                            <input type="radio" name="기분" class="일기작성__메인__기분선택__진짜선택" value="other" onclick="입력확인()">
-                                        </div>  
-                                        <div>기타</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="일기작성__메인__제목">
-                                    <div>제목</div>
-                                    <input type="text" placeholder="제목을 입력해주세요" id="제목입력" oninput="입력확인()">
-                                </div>
-                                <div class="일기작성__메인__내용">
-                                    <div>내용</div>
-                                    <input type="text" placeholder="내용을 입력해주세요" id="내용입력" oninput="입력확인()">
-                                </div>
-                            </div>
-                        </div>
-                        <button onclick="일기작성__등록()" id="등록하기" disabled>등록하기</button>
-                    </div>
+                <div class="일기작성닫기등록">
+                    <button id="닫기" onclick="모달닫기('일기작성모달')">닫기</button>
+                    <button onclick="일기작성__등록()" id="등록하기" disabled>등록하기</button>
                 </div>
             </div>
 
-        </div>
-        <button class="플로팅버튼" onclick="플로팅버튼()">
-            <img src="./assets/images/Vector.png" alt="">
-        </button>
-        <div class="footer">
-            <div class="footer__내용">
-                <div><b>민지의 다이어리</b></div>
-                <div>대표</div>
-                <div>Copyright @ 2024</div>
-            </div>
         </div>
     </div>
+    </div>
 
-    
+
+
 </body>
+
 </html>
