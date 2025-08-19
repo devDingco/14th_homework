@@ -170,4 +170,14 @@ const JS_필터링기능 = (event) => {
       HTML_새로운일기도화지;
   };
 
+  const 모달열기 = (모달종류) => {
+    document.getElementById(모달종류).style = "display: block"
+}
+
+  const 모달닫기 = (모달종류) => {
+    document.getElementById(모달종류).style = "display: none"
+    if(모달종류 === '등록완료모달그룹ID'){
+        document.getElementById('등록모달그룹ID').style = "display: none"
+    }
+}
 //   <img class="CSS_삭제버튼" src="./assets/images/deleteButton.png" onclick="JS_일기삭제기능(event, ${index})" />

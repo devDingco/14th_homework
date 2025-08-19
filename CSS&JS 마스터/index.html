@@ -6,7 +6,7 @@
     <script src="./index.js"></script>
 </head>
 <body>
-    <div class="section_1">
+    <div class="section_1" id="section_1">
         <div class="일기보관함_최초">
             
                 
@@ -20,7 +20,7 @@
                             <img class="sofa" src="./assets/Rectangle 1.png" alt="">
                         </div>
                         <div class="frame_18">
-                            <div class="frame_17">
+                            
                                 <div class="frame_7">
                                     <div class="frame_6">
                                         <div class="frame_9">
@@ -31,26 +31,27 @@
                                 </div>
                                 <div class="frame_14">
                                     <div class="frame_13">
-                                    <div class="frame_12">
-                                        <select name="" id="드롭다운새거" onchange="JS_필터링기능(event)">
-                                            <option selected>전체</option>
-                                            <option value="HTML_행복선택">행복해요</option>
-                                            <option value="HTML_슬픔선택">슬퍼요</option>
-                                            <option value="HTML_놀람선택">놀랐어요</option>
-                                            <option value="HTML_화남선택">화나요</option>
-                                            <option value="HTML_기타선택">기타</option>
-                                        </select>
+                                        <div class="frame_12">
+                                            <select name="" id="드롭다운새거" onchange="JS_필터링기능(event)">
+                                                <option selected>전체</option>
+                                                <option value="HTML_행복선택">행복해요</option>
+                                                <option value="HTML_슬픔선택">슬퍼요</option>
+                                                <option value="HTML_놀람선택">놀랐어요</option>
+                                                <option value="HTML_화남선택">화나요</option>
+                                                <option value="HTML_기타선택">기타</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    </div>
+                                    <button onclick="모달열기('등록모달그룹ID')">+ 일기쓰기</button>
                                 </div>
-                            </div>
-                            <div class="frame_16">
+                            
+                            <!-- <div class="frame_16"> -->
                                 <div class="frame_106" id="frame_106">         
                                 
                                 </div>
                                 
-                                <div class="frame_98" id="frame_98">
-                                    <div class="일기쓰기">📍 일기 쓰기</div>
+                                <!-- <div class="frame_98" id="frame_98"> -->
+                                    <!-- <div class="일기쓰기">📍 일기 쓰기</div>
                                     <div class="frame_66">
                                         <div class="기본_선택_영역">
                                             <div class="mood_select">오늘 기분은 어땟나요?</div>
@@ -77,10 +78,10 @@
                                         <div class="드롭다운">
                                             등록하기
                                         </div>
-                                    </button>
+                                    </button> -->
                                     <button class="위로버튼" onclick="위로()"><img src="./assets/to_top.png" alt="" style="width: 70%; height: 70%; margin-top: 5px;"></button>
-                                </div>
-                            </div>
+                                <!-- </div> -->
+                            <!-- </div> -->
                         </div>
                     </div>
                 
@@ -107,11 +108,63 @@
                 </div>
             
         </div>
+        <button onclick="모달열기('등록모달그룹ID')">모달열기</button>
+    <!-- 동록모달 -->
+    <div id="등록모달그룹ID" class="모달그룹">
+        <div class="모달배경" onclick="모달닫기('등록모달그룹ID')"></div>
+        <div class="등록모달">
+            <div class="일기_쓰기">일기 쓰기</div>
+            <div class="frame_66">
+                <div class="기분_선택_영역">
+                    <div class="mood_select">오늘 기분은 어땟나요?</div>
+                        <div class="frame_61" id="frame_61">
+                            <div class="radio"><input id="행복해요" class="radio_real" type="radio" name="feel">행복해요</div>
+                            <div class="radio"><input id="슬퍼요" class="radio_real" type="radio" name="feel">슬퍼요</div>
+                            <div class="radio"><input id="놀랐어요" class="radio_real" type="radio" name="feel">놀랐어요</div>
+                            <div class="radio"><input id="화나요" class="radio-real" type="radio" name="feel">화나요</div>
+                            <div class="radio"><input id="기타" class="radio-real" type="radio" name="feel">기타</div>
+                        </div>
+                    </div>
+                <div class="텍스트_영역">
+                    <div class="frame_64">
+                        제목
+                            <input class="input_63" id="input_63" type="text" placeholder="제목을 입력해 주세요.">
+                    </div>
+                    <div class="frame_65">
+                        내용
+                            <textarea class="input_63_2" id="input_63_2" type="text" placeholder="내용을 입력해 주세요."></textarea>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="버튼영역"><button onclick="모달열기('등록완료모달그룹ID')">등록하기</button></div> -->
+            <div class="버튼영역_group">  
+                <!-- <button id="createPostButton" class="버튼영역" type="submit" onclick="글쓰기기능()">
+                    <div class="드롭다운">
+                        닫기
+                    </div>
+                </button> -->
+                <button id="createPostButton" class="버튼영역" type="submit" onclick="글쓰기기능()">
+                    <div class="드롭다운">
+                        등록하기
+                    </div>
+                </button>
+            </div> 
+        </div>
+    </div>
 
-
-
+    <!-- 등록완료모달 -->
+    <div id="등록완료모달그룹ID" class="모달그룹">
+        <div class="모달배경" onclick="모달닫기('등록완료모달그룹ID')"></div>
+        <div class="등록완료모달">
+            <p>등록이 완료되었습니다.</p>
+        </div>
+    </div>
 
 
     </div>
+
+
+
+
 </body>
 </html>
