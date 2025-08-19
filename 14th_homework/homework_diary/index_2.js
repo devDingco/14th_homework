@@ -100,9 +100,14 @@ const 카드태그생성= (index=-1) =>{
     let i
     let 태그배열 
     let [카드내용, 이미지경로] = 카드내용_이미지경로_배열생성()
-    // console.log("카드내용_이미지경로 배열", 카드내용_이미지경로, Array.isArray(카드내용_이미지경로))
-    // let 카드내용 = 카드내용_이미지경로[0]
-    // let 이미지경로 = 카드내용_이미지경로[1]
+
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2,0);
+    const day = String(today.getDate()).padStart(2,0);
+    const 현재날짜 = `${year}.${month}.${day}`
+    console.log("현재날짜", 현재날짜)
+
     console.log("카드내용!!!!", 카드내용)
     console.log("이미지경로!!! ", 이미지경로 )
     document.getElementById("카드영역").innerHTML=""   
@@ -123,7 +128,7 @@ const 카드태그생성= (index=-1) =>{
                                             <div class="기분노출">
                                                 <div>${카드내용[i].기분}</div>
                                             </div>
-                                            <div class="날짜노출">'00.00.00'</div>
+                                            <div class="날짜노출">${현재날짜}</div>
                                         </div>
                                         <div class="내용요약">
                                             <div>${카드내용[i].내용}</div>
@@ -162,7 +167,7 @@ const 카드태그생성= (index=-1) =>{
                                                 <div class="기분노출">
                                                     <div>${카드내용[index[i]].기분}</div>
                                                 </div>
-                                                <div class="날짜노출">'00.00.00'</div>
+                                                <div class="날짜노출">${현재날짜}</div>
                                             </div>
                                             <div class="내용요약">
                                                 <div>${카드내용[index[i]].내용}</div>
@@ -177,6 +182,13 @@ const 카드태그생성= (index=-1) =>{
     
         }
     }
+const 현재날짜 = ()=>{
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2,0);
+    const day = String(today.getDate()).padStart(2,0);
+    return `${year}.${month}.${day}`
+}
 
 const 필터기능 = (event)=>{
     let 필터링전모든카드= JSON.parse(localStorage.getItem("일기카드들")) || []

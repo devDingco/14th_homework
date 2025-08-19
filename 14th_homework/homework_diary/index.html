@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ko">
 <head>
     <title>감정일기</title>
@@ -7,10 +7,14 @@
 <body>
 
     <div class="전체">
-        <div id="일기쓰기모달배경" class="일기쓰기모달배경">        
+        <div id="일기쓰기모달배경" class="일기쓰기모달배경">     
         </div>
         <div id="일기쓰기" class="일기쓰기영역">
-            <div class="제목">일기쓰기</div>
+            
+            <div class="일기쓰기모달상단">
+                <div class="팝업제목">일기쓰기</div>
+                <div>다크모드<input id="토글" class="토글" type="checkbox" onclick="다크모드기능(event)"></div>
+            </div>
             <div class="입력영역">
                 <div id= "기분" class="오늘의기분">
                     <div>오늘 기분은 어땠나요?</div>
@@ -28,19 +32,32 @@
                     <div>내용</div>
                     <textarea id="오늘의내용" placeholder="내용을 입력해 주세요."></textarea>
                 </div>
-
             </div>
-            <button class="등록하기버튼" onclick="등록완료팝업생성()" >등록하기</button>
+            <div class="일기_등록_취소_버튼">
+                <button class="닫기버튼" onclick="등록취소팝업생성()" >닫기</button>
+                <button class="등록하기버튼" onclick="등록완료팝업생성()" >등록</button>
+            </div>
         </div>
-        <div id="등록완료모달배경" class="등록완료모달배경"></div>
+            
+
+       
+        <div id="모달배경_2" class="모달배경_2"></div>
         <div id="등록완료모달" class="등록완료모달">
-            <div class="등록완료팝업">
+        
                 <div>일기등록완료</div>
                 <div>등록이 완료 되었습니다.</div>
-                <button onclick="카드태그생성()">확인</button>
+                <button class="등록완료확인버튼" onclick="카드태그생성()">확인</button>
+            
+        </div>
+        <div id="등록취소모달" class="등록취소모달">
+            <div>일기 등록 취소</div> 
+            <div>일기등록을 취소 하시겠어요?</div>
+            <div id="등록취소모달버튼">
+                <button id="계속작성">계속작성</button>
+                <button id="등록취소">등록취소</button>
             </div>
         </div>
-      
+    
         <div class="헤더">
             
         </div>
@@ -56,21 +73,25 @@
                         <button id ="일기" >일기보관함</button>
                         <button id="사진">사진보관함</button>
                     </div>
+                                      
                     
-                            
-            
                     <div id="필터일기쓰기버튼" class="필터일기쓰기버튼">
-                        <select onchange="필터기능(event)">
-                            <option value="전체">전체</option>
-                            <option value="행복">행복해요</option>
-                            <option value="슬픔">슬퍼요</option>
-                            <option value="놀람">놀랐어요</option>
-                            <option value="화남">화나요</option>
-                            <option value="기타">기타</option>
-                        </select>      
+                        <div class="필터검색기능">
+                            <select onchange="필터기능(event)">
+                                <option value="전체">전체</option>
+                                <option value="행복">행복해요</option>
+                                <option value="슬픔">슬퍼요</option>
+                                <option value="놀람">놀랐어요</option>
+                                <option value="화남">화나요</option>
+                                <option value="기타">기타</option>
+                            </select>
+                            <input type="text" placeholder="검색어를 입력해 주세요." oninput="검색기능(event)">      
+                        </div>
+                    
+
                         <img id="일기쓰기버튼" class="일기쓰기버튼" onclick="일기쓰기노출기능()" src="./assets/드롭다운.png"/>
+                    </div>
                 </div>
-            </div>
                 <div width="376px"></div>       
             </div>
             
@@ -81,8 +102,8 @@
                                                
                 </div>
                 
-                </div>
             </div>
+        </div>
 
         <div class="푸터"></div>
     </div>

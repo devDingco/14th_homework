@@ -25,11 +25,18 @@ const 단일카드객체생성 = () =>{
         }
     }
 
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2,0);
+    const day = String(today.getDate()).padStart(2,0);
+    const 오늘의날짜 = `${year}.${month}.${day}`
     
     let 단일카드 = {
+    
         기분  : 오늘의기분,
         제목 : 오늘의제목,
-        내용 : 오늘의내용
+        내용 : 오늘의내용,
+        날짜 : 오늘의날짜
     }
     if (document.getElementById("오늘의제목").value){
         return 단일카드
@@ -46,24 +53,23 @@ const 카드내용_이미지경로_배열생성 = ()=>{
     if(document.getElementById("오늘의제목").value){
         단일카드 = 단일카드객체생성() 
         일기카드배열.push(단일카드)
-        console.log("일기카드배열",일기카드배열)
+
         localStorage.setItem("일기카드들", JSON.stringify(일기카드배열))
         let 카드내용 = JSON.parse(localStorage.getItem("일기카드들"))
-        // console.log("로컬저장후 불러옴", 카드내용, Array.isArray(카드내용))
         let 이미지경로 = (ele)=>{
             
-                if(ele.기분 === "행복해요"){
-                    image_url = './assets/Frame4.png'
-                }else if(ele.기분 === "슬퍼요"){
-                    image_url = './assets/Frame1.png'
-                }else if(ele.기분 === "놀랐어요"){
-                    image_url = './assets/Frame2.png'
-                }else if(ele.기분 === "화나요"){
-                    image_url = './assets/Frame3.png'
-                }else if(ele.기분 === "기타"){
-                    image_url = './assets/Frame5.png'
-                }
-            return image_url
+            if(ele.기분 === "행복해요"){
+                image_url = './assets/Frame4.png'
+            }else if(ele.기분 === "슬퍼요"){
+                image_url = './assets/Frame1.png'
+            }else if(ele.기분 === "놀랐어요"){
+                image_url = './assets/Frame2.png'
+            }else if(ele.기분 === "화나요"){
+                image_url = './assets/Frame3.png'
+            }else if(ele.기분 === "기타"){
+                image_url = './assets/Frame5.png'
+            }
+        return image_url
         
         }
         
@@ -101,14 +107,13 @@ const 카드태그생성= (index=-1) =>{
     document.getElementById("일기쓰기모달배경").style = "display : none"
 
     document.getElementById("등록완료모달").style = "display : none"
-    document.getElementById("등록완료모달배경").style = "display : none"
+    document.getElementById("모달배경_2").style = "display : none"
 
     let i
     let 태그배열 
     let [카드내용, 이미지경로] = 카드내용_이미지경로_배열생성()
-    // console.log("카드내용_이미지경로 배열", 카드내용_이미지경로, Array.isArray(카드내용_이미지경로))
-    // let 카드내용 = 카드내용_이미지경로[0]
-    // let 이미지경로 = 카드내용_이미지경로[1]
+
+
     console.log("카드내용!!!!", 카드내용)
     console.log("이미지경로!!! ", 이미지경로 )
     document.getElementById("카드영역").innerHTML=""   
@@ -124,12 +129,12 @@ const 카드태그생성= (index=-1) =>{
                                 <div id="카드이미지${index}" class="카드이미지" style="background-image: url(${image_url_})">
                                     <button id="${index}" class="삭제버튼" onclick='카드삭제기능(event)'>X</button>
                                 </div>                            
-                                    <div id="" class="카드내용요약">
+                                    <div id="카드내용요약" class="카드내용요약">
                                         <div class="첫줄">
                                             <div class="기분노출">
-                                                <div>${카드내용[i].기분}</div>
+                                                ${카드내용[i].기분}
                                             </div>
-                                            <div class="날짜노출">'00.00.00'</div>
+                                            <div class="날짜노출">${카드내용[i].날짜}</div>
                                         </div>
                                         <div class="내용요약">
                                             <div>${카드내용[i].내용}</div>
@@ -153,8 +158,7 @@ const 카드태그생성= (index=-1) =>{
 
         }
     else{
-        console.log("왜불러")
-        // let 카드내용 = JSON.parse(localStorage.getItem("일기카드들")) || []
+
         for (i =0 ; i < index.length; i++){
             
             let image_url_=이미지경로[index[i]]
@@ -163,12 +167,12 @@ const 카드태그생성= (index=-1) =>{
                                         <div id="카드이미지${index[i]}" class="카드이미지" style="background-image: url(${image_url_})">
                                             <button id="${index[i]}" class="삭제버튼" onclick='카드삭제기능(event)'>X</button>
                                         </div>                            
-                                        <div id="" class="카드내용요약">
+                                        <div id="카드내용요약" class="카드내용요약">
                                             <div class="첫줄">
                                                 <div class="기분노출">
-                                                    <div>${카드내용[index[i]].기분}</div>
+                                                    ${카드내용[index[i]].기분}
                                                 </div>
-                                                <div class="날짜노출">'00.00.00'</div>
+                                                <div class="날짜노출">${카드내용[index[i]].날짜}</div>
                                             </div>
                                             <div class="내용요약">
                                                 <div>${카드내용[index[i]].내용}</div>
@@ -282,26 +286,65 @@ const 일기쓰기노출기능= ()=>{
 }
 const 등록완료팝업생성 = () =>{ 
     document.getElementById("등록완료모달").style = "display : flex"
-    document.getElementById("등록완료모달배경").style = "display : flex"
+    document.getElementById("모달배경_2").style = "display : flex"
 
 }
-
+const 등록취소팝업생성 = () =>{
+    document.getElementById("등록취소모달").style = "display : flex"
+    document.getElementById("모달배경_2").style = "display : flex"
+}
 
 const 일기보관함렌더링 = () =>{
     let 카드목록 = JSON.parse(localStorage.getItem("일기카드들")) || []
     if (카드목록[0]){
         카드태그생성()
-    }
+    }else{document.getElementById("카드영역").innerHTML=''}
     document.getElementById("필터일기쓰기버튼").innerHTML =`
-    <select onchange="필터기능(event)">
-        <option value="전체">전체</option>
-        <option value="행복">행복해요</option>
-        <option value="슬픔">슬퍼요</option>
-        <option value="놀람">놀랐어요</option>
-        <option value="화남">화나요</option>
-        <option value="기타">기타</option>
-    </select>      
-    <img id="일기쓰기버튼" class="일기쓰기버튼" onclick="일기쓰기노출기능()" src="./assets/드롭다운.png"/>`
+         <div class="필터검색기능">
+            <select onchange="필터기능(event)">
+                <option value="전체">전체</option>
+                <option value="행복">행복해요</option>
+                <option value="슬픔">슬퍼요</option>
+                <option value="놀람">놀랐어요</option>
+                <option value="화남">화나요</option>
+                <option value="기타">기타</option>
+            </select>
+            <input type="text" placeholder="검색어를 입력해 주세요." oninput="검색기능(event)">      
+        </div>
+        <img id="일기쓰기버튼" class="일기쓰기버튼" onclick="일기쓰기노출기능()" src="./assets/드롭다운.png"/>`
 }
- 
+
+document.getElementById("계속작성").addEventListener("click", ()=>{
+    document.getElementById("등록취소모달").style = "display : none"
+    document.getElementById("모달배경_2").style = "display : none"
+})
+
+document.getElementById("등록취소").addEventListener("click", ()=>{
+    document.getElementById("일기쓰기").style = "display : none"
+    document.getElementById("일기쓰기모달배경").style = "display : none"
+        document.getElementById("등록취소모달").style = "display : none"
+    document.getElementById("모달배경_2").style = "display : none"
+})
+
+let 타이머
+const 검색기능=(event)=>{
+    clearTimeout(타이머)
+    const 일기카드배열 = JSON.parse(localStorage.getItem("일기카드들")) ||[]
+    타이머 = setTimeout(()=>{
+        const 내가검색한제목 = event.target.value
+        console.log("내가검색한제목", 내가검색한제목)
+        const 검색결과 = 일기카드배열.filter((ele)=>{return ele.제목.includes(내가검색한제목)
+        })
+        console.log("검색결과", 검색결과)
+        const 검색된일기원래인덱스 = 검색결과.map((ele)=>{return 일기카드배열.indexOf(ele)})
+        console.log("검색된일기원래인덱스", 검색된일기원래인덱스)
+
+        카드태그생성(검색된일기원래인덱스)
+    }, 2000)
+
+}
+
+const 다크모드기능=(event)=>{
+    document.body.classList.toggle("다크모드만들기")
+}
 window.일기보관함렌더링=일기보관함렌더링;
