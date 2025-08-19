@@ -1,156 +1,150 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>감정일기</title>
-  <link rel="stylesheet" href="./mindjournal.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>감정일기</title>
+    <link rel="stylesheet" href="./mindjournal.css" />
 </head>
 <body>
-  <header class="site-header">
-    <h1>일기보관함_메인</h1>
-    <button id="openWriteModal" class="primary">일기 등록</button>
-  </header>
+    <header class="site-header">
+        <h1>일기보관함_메인</h1>
+        <button id="openWriteModal" class="primary">일기 등록</button>
+    </header>
 
-  <main>
-    <section class="banner">
-      <img src="./Rectangle 1.png" alt="배너 이미지" />
-    </section>
+    <main>
+        <section class="banner">
+            <img src="./Rectangle 1.png" alt="배너 이미지" />
+        </section>
 
-    <nav class="navigation">
-      <button class="tab active" data-tab="diary">일기보관함</button>
-      <button class="tab" data-tab="photos">사진보관함</button>
-    </nav>
+        <nav class="navigation">
+            <button class="tab active" data-tab="diary">일기보관함</button>
+            <button class="tab" data-tab="photos">사진보관함</button>
+        </nav>
 
-    <!-- FILTER BAR (sticky) -->
-    <!-- <div id="filterBar" class="filter-bar">
-      <button class="filter-btn active" data-emotion="all">전체</button>
-      <button class="filter-btn" data-emotion="happy">행복</button>
-      <button class="filter-btn" data-emotion="sad">슬픔</button>
-      <button class="filter-btn" data-emotion="surprised">놀람</button>
-      <button class="filter-btn" data-emotion="angry">화남</button>
-      <button class="filter-btn" data-emotion="etc">기타</button>
-    </div> -->
-
-    <!-- ✅ 추가: 드롭다운 필터 (디자인용, 기존 버튼 유지) -->
-    <div class="filter-dropdown-bar">
-      <label for="filterDropdown" class="visually-hidden">감정 드롭다운</label>
-      <div class="dropdown custom">
-        <select id="filterDropdown" class="filter-dropdown" aria-label="감정 드롭다운">
-          <option value="all">전체</option>
-          <option value="happy">행복해요</option>
-          <option value="sad">슬퍼요</option>
-          <option value="surprised">놀랐어요</option>
-          <option value="angry">화나요</option>
-          <option value="etc">기타</option>
-        </select>
-        <span class="dropdown__icon" aria-hidden="true">▼</span>
-      </div>
-    </div>
-
-    <!-- ✅ 추가: 제목 검색 (디바운싱 1000ms) -->
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="제목 검색..." autocomplete="off" aria-label="제목 검색" />
-    </div>
-
-    <!-- 사진보관함 aspect-ratio 필터 -->
-    <div class="photo-filters" style="display:none;">
-      <button class="ratio-btn active" data-ratio="square">정사각</button>
-      <button class="ratio-btn" data-ratio="landscape">가로형</button>
-      <button class="ratio-btn" data-ratio="portrait">세로형</button>
-      <button class="ratio-btn" data-ratio="all">전체</button>
-    </div>
-
-    <section class="diary-section">
-      <div class="card-container" id="cardContainer">
-        <!-- JS 렌더 -->
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>민지의 다이어리</p>
-  </footer>
-
-  <button id="scrollTopBtn" class="floating-btn" title="맨 위로">▲</button>
-
-  <!-- 등록 모달 -->
-  <div id="writeModal" class="modal" aria-hidden="true">
-    <div class="modal__backdrop" data-close="backdrop"></div>
-    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="writeTitle">
-      <header class="modal__header">
-        <h2 id="writeTitle">일기 쓰기</h2>
-        <button class="icon-btn" id="closeWriteModal" aria-label="닫기">×</button>
-      </header>
-
-      <form id="diaryForm" class="modal__body">
-        <!-- ✅ 추가: 모달 다크모드 토글 -->
-        <div class="modal-theme-toggle" aria-label="모달 다크모드">
-          <span class="toggle-label">모달 다크모드</span>
-          <label class="toggle">
-            <input type="checkbox" id="modalDarkSwitch" />
-            <span class="toggle__slider"></span>
-          </label>
+        <div id="filterBar" class="filter-bar">
+            <button class="filter-btn active" data-emotion="all">전체</button>
+            <button class="filter-btn" data-emotion="happy">행복</button>
+            <button class="filter-btn" data-emotion="sad">슬픔</button>
+            <button class="filter-btn" data-emotion="surprised">놀람</button>
+            <button class="filter-btn" data-emotion="angry">화남</button>
+            <button class="filter-btn" data-emotion="etc">기타</button>
         </div>
 
-        <label class="label">오늘 기분은 어땠나요?</label>
-        <div class="emotion-select">
-          <label><input type="radio" name="emotion" value="happy" /> 행복해요</label>
-          <label><input type="radio" name="emotion" value="sad" /> 슬퍼요</label>
-          <label><input type="radio" name="emotion" value="surprised" /> 놀랐어요</label>
-          <label><input type="radio" name="emotion" value="angry" /> 화나요</label>
-          <label><input type="radio" name="emotion" value="etc" /> 기타</label>
+        <div class="filter-dropdown-bar">
+            <label for="filterDropdown" class="visually-hidden">감정 드롭다운</label>
+            <div class="dropdown custom">
+                <select id="filterDropdown" class="filter-dropdown" aria-label="감정 드롭다운">
+                    <option value="all">전체</option>
+                    <option value="happy">행복해요</option>
+                    <option value="sad">슬퍼요</option>
+                    <option value="surprised">놀랐어요</option>
+                    <option value="angry">화나요</option>
+                    <option value="etc">기타</option>
+                </select>
+                <span class="dropdown__icon" aria-hidden="true">▼</span>
+            </div>
         </div>
 
-        <label class="label" for="title">제목</label>
-        <input type="text" id="title" placeholder="제목을 입력해 주세요." required />
-
-        <label class="label" for="content">내용</label>
-        <textarea id="content" rows="6" placeholder="내용을 입력해 주세요." required></textarea>
-
-        <div class="modal__actions">
-          <button type="button" id="cancelWrite" class="ghost">취소</button>
-          <button type="submit" class="primary">등록하기</button>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="제목 검색..." autocomplete="off" aria-label="제목 검색" />
         </div>
-      </form>
-    </div>
-  </div>
 
-  <!-- 등록 완료 모달 -->
-  <div id="successModal" class="modal nested" aria-hidden="true">
-    <div class="modal__backdrop" data-close="backdrop"></div>
-    <div class="modal__panel small" role="dialog" aria-modal="true" aria-labelledby="successTitle">
-      <header class="modal__header">
-        <h3 id="successTitle">등록 완료</h3>
-        <button class="icon-btn" data-close="success">×</button>
-      </header>
-      <div class="modal__body">
-        <p>등록이 완료되었습니다.</p>
-      </div>
-      <div class="modal__actions">
-        <button class="primary" data-close="success">확인</button>
-      </div>
-    </div>
-  </div>
+        <div class="photo-filters" style="display:none;">
+            <button class="ratio-btn active" data-ratio="square">정사각</button>
+            <button class="ratio-btn" data-ratio="landscape">가로형</button>
+            <button class="ratio-btn" data-ratio="portrait">세로형</button>
+            <button class="ratio-btn" data-ratio="all">전체</button>
+        </div>
 
-  <!-- 등록 취소 모달 -->
-  <div id="cancelModal" class="modal nested" aria-hidden="true">
-    <div class="modal__backdrop" data-close="backdrop"></div>
-    <div class="modal__panel small" role="dialog" aria-modal="true" aria-labelledby="cancelTitle">
-      <header class="modal__header">
-        <h3 id="cancelTitle">일기 등록 취소</h3>
-        <button class="icon-btn" data-close="keep">×</button>
-      </header>
-      <div class="modal__body">
-        <p>작성 중인 내용을 취소하시겠어요?</p>
-      </div>
-      <div class="modal__actions">
-        <button class="ghost" data-close="keep">계속 작성</button>
-        <button class="danger" data-close="cancel-all">등록 취소</button>
-      </div>
-    </div>
-  </div>
+        <section class="diary-section">
+            <div class="card-container" id="cardContainer"></div>
+        </section>
+    </main>
 
-  <script src="./mindjournal.js"></script>
+    <div id="pagination" class="pagination-container"></div>
+
+    <footer>
+        <p>민지의 다이어리</p>
+    </footer>
+
+    <button id="scrollTopBtn" class="floating-btn" title="맨 위로">▲</button>
+
+    <div id="writeModal" class="modal">
+        <div class="modal__backdrop"></div>
+        <div class="modal__panel small">
+            <header class="modal__header">
+                <h3>새 일기 쓰기</h3>
+                <button class="icon-btn" id="closeWriteModal">×</button>
+            </header>
+            <div class="modal__body">
+                <div class="modal-theme-toggle">
+                    <span>모달 다크모드</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="modalDarkSwitch">
+                        <span class="toggle__slider"></span>
+                    </label>
+                </div>
+                <form id="diaryForm">
+                    <label class="label">오늘 기분은 어땠나요?</label>
+                    <div class="emotion-selection">
+                        <input type="radio" name="emotion" value="happy" id="emotion-happy" required />
+                        <label for="emotion-happy"><img src="./행복해요 (m).png" alt="행복한 표정" /></label>
+                        <input type="radio" name="emotion" value="sad" id="emotion-sad" required />
+                        <label for="emotion-sad"><img src="./슬퍼요 (m).png" alt="슬픈 표정" /></label>
+                        <input type="radio" name="emotion" value="surprised" id="emotion-surprised" required />
+                        <label for="emotion-surprised"><img src="./놀랐어요 (m).png" alt="놀란 표정" /></label>
+                        <input type="radio" name="emotion" value="angry" id="emotion-angry" required />
+                        <label for="emotion-angry"><img src="./화나요 (m).png" alt="화난 표정" /></label>
+                        <input type="radio" name="emotion" value="etc" id="emotion-etc" required />
+                        <label for="emotion-etc"><img src="./기타 (m).png" alt="기타 표정" /></label>
+                    </div>
+                    <label for="title" class="label">제목</label>
+                    <input type="text" id="title" placeholder="제목을 입력하세요" required>
+                    <label for="content" class="label">내용</label>
+                    <textarea id="content" placeholder="내용을 입력하세요" required></textarea>
+                </form>
+            </div>
+            <div class="modal__actions">
+                <button type="button" class="ghost" id="cancelWrite">취소</button>
+                <button type="submit" class="primary" form="diaryForm">작성 완료</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="successModal">
+        <div class="modal__backdrop"></div>
+        <div class="modal__panel small">
+            <header class="modal__header">
+                <h3>등록 완료</h3>
+                <button class="icon-btn" data-close="success">×</button>
+            </header>
+            <div class="modal__body">
+                <p>등록이 완료되었습니다.</p>
+            </div>
+            <div class="modal__actions">
+                <button class="primary" data-close="success">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="cancelModal">
+        <div class="modal__backdrop"></div>
+        <div class="modal__panel small">
+            <header class="modal__header">
+                <h3>일기 등록 취소</h3>
+                <button class="icon-btn" data-close="keep">×</button>
+            </header>
+            <div class="modal__body">
+                <p>작성 중인 내용을 취소하시겠어요?</p>
+            </div>
+            <div class="modal__actions">
+                <button class="ghost" data-close="keep">계속 작성</button>
+                <button class="danger" data-close="cancel-all">등록 취소</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./mindjournal.js"></script>
 </body>
 </html>
