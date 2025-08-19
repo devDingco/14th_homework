@@ -24,7 +24,8 @@ const confirmUpdate = (key) => { // <string>
         date: localStorageArr[indexToChange].date,
         feel: feelValue,
         title: titleValue,
-        detail: detailValue
+        detail: detailValue,
+        reply: localStorageArr.reply
     }
     
     const updateArr = localStorageArr.map((v, i) => {

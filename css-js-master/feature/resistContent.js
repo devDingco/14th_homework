@@ -40,7 +40,8 @@ const resistContent = (key) => { // string
                 date: currentDate,
                 feel: feelValue,
                 title: titleValue,
-                detail: detailValue
+                detail: detailValue,
+                reply: []
             }
             localStorageArr.push(contentObj)
 
@@ -63,7 +64,8 @@ const resistContent = (key) => { // string
                 date: currentDate,
                 feel: feelValue,
                 title: titleValue,
-                detail: detailValue
+                detail: detailValue,
+                reply: []
             }
             contentArray.push(contentObj)
             
@@ -82,3 +84,29 @@ const resistContent = (key) => { // string
     }
 }
 
+// 상세페이지 회고 등록
+const resistReply = (key) => { // "회고콘텐츠"
+    const localStorageArr = JSON.parse(localStorage.getItem("일기콘텐츠"))
+    
+    let indexToChange = getContentNumber().number    
+
+    const replyValue = document.getElementById("input_reply").value
+    const replyArr = localStorageArr[indexToChange].reply
+    replyArr.push(replyValue)
+    
+    const objectToChange = {
+        number: indexToChange,
+        date: localStorageArr[indexToChange].date,
+        feel: localStorageArr[indexToChange].feel,
+        title: localStorageArr[indexToChange].title,
+        detail: localStorageArr[indexToChange].detail,
+        reply: replyArr
+    }
+
+    const updateArr = localStorageArr.map((v, i) => {
+        return i === indexToChange ? v = objectToChange : v
+    })
+    
+    toLocalStorage(updateArr,key)
+    document.getElementById('input_reply').value = '';
+}
