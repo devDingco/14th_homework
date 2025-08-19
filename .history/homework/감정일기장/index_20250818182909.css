@@ -292,13 +292,7 @@ hr {
 }
 
 /* 드롭다운 */
-.dropdown-container {
-  position: relative;
-  display: inline-block;
-  margin: 20px 0;
-}
 .dropdown-btn {
-  font-size: 16px;
   width: 120px;
   height: 32px;
   background-color: white;
@@ -307,30 +301,4 @@ hr {
   padding: 4px;
   border: 1px solid #c7c7c7;
   background-image: url('./assets/images/arrow.png');
-  background-repeat: no-repeat;
-  background-position: right 0px center;
-}
-/* 드롭다운 메뉴 */
-.dropdown-menu {
-  display: none; /* 처음엔 숨김 */
-  position: absolute;
-  top: 100%; /* 버튼 바로 아래 */
-  left: 0;
-  right: 0;
-  background: #e4e4e4;
-  border: 1px solid #c7c7c7;
-  border-top: none; /* 버튼과 연결되게 */
-  border-radius: 0 0 5px 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-.dropdown-item {
-  padding: 4px 12px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.dropdown-item:last-child {
-  border-bottom: none;
-  border-radius: 0 0 5px 5px;
 }

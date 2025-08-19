@@ -325,9 +325,10 @@ hr {
   z-index: 1000;
 }
 .dropdown-item {
-  padding: 4px 12px;
+  padding: 8px 12px;
   cursor: pointer;
   font-size: 14px;
+  /* border-bottom: 1px solid #f0f0f0; */
 }
 
 .dropdown-item:last-child {

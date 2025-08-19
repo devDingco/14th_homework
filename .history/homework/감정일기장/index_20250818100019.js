@@ -135,32 +135,4 @@ document.addEventListener('DOMContentLoaded', function () {
       dropdownMenu.style.display = 'block';
     }
   });
-  const dropdownItems = document.querySelectorAll('.dropdown-item');
-
-  dropdownItems.forEach((item) => {
-    item.addEventListener('click', function () {
-      const selectedText = this.textContent;
-      dropdownBtn.textContent = selectedText;
-      dropdownMenu.style.display = 'none';
-
-      // 필터링 기능 추가
-      필터링하기(selectedText);
-    });
-  });
-
-  // 필터링 함수는 밖으로 빼기
-  function 필터링하기(선택된감정) {
-    const diaryListContainer = document.getElementById('diaryList');
-    diaryListContainer.innerHTML = '';
-
-    if (선택된감정 === '전체') {
-      diaryList.map((일기) => 일기를화면에그리기(일기));
-    } else {
-      diaryList.map((일기) => {
-        if (일기.emotion === 선택된감정) {
-          일기를화면에그리기(일기);
-        }
-      });
-    }
-  }
 });

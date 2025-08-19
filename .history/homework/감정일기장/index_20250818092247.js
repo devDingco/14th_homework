@@ -30,15 +30,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 일기 카드의 HTML 내용 설정 (이미지, 감정, 날짜, 제목 포함)
     새일기.innerHTML = `
-    <img src="./assets/images/${일기이미지}" alt="" />
-    <div class="title__text__main">
-      <div class="title__text">
-        <div class="title__happy">${일기데이터.emotion}</div>    
-        <div>${일기데이터.date}</div>                            
-      </div>
-      <div>${일기데이터.title}</div>                             
-    </div>
-  `;
+   <img src="./assets/images/${일기이미지}" alt="" />
+   <div class="title__text__main">
+     <div class="title__text">
+       <div class="title__happy">${일기데이터.emotion}</div>    
+       <div>${일기데이터.date}</div>                            
+     </div>
+     <div>${일기데이터.title}</div>                             
+   </div>
+ `;
 
     // 일기 카드를 클릭했을 때 실행할 이벤트 추가 (요소 생성 후에 이벤트 추가!)
     새일기.addEventListener('click', function () {
@@ -124,43 +124,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log('새일기 추가완료'); // 완료 확인용
   });
-
-  const dropdownBtn = document.getElementById('dropdownBtn');
-  const dropdownMenu = document.getElementById('dropdownMenu');
-
-  dropdownBtn.addEventListener('click', function () {
-    if (dropdownMenu.style.display === 'block') {
-      dropdownMenu.style.display = 'none';
-    } else {
-      dropdownMenu.style.display = 'block';
-    }
-  });
-  const dropdownItems = document.querySelectorAll('.dropdown-item');
-
-  dropdownItems.forEach((item) => {
-    item.addEventListener('click', function () {
-      const selectedText = this.textContent;
-      dropdownBtn.textContent = selectedText;
-      dropdownMenu.style.display = 'none';
-
-      // 필터링 기능 추가
-      필터링하기(selectedText);
-    });
-  });
-
-  // 필터링 함수는 밖으로 빼기
-  function 필터링하기(선택된감정) {
-    const diaryListContainer = document.getElementById('diaryList');
-    diaryListContainer.innerHTML = '';
-
-    if (선택된감정 === '전체') {
-      diaryList.map((일기) => 일기를화면에그리기(일기));
-    } else {
-      diaryList.map((일기) => {
-        if (일기.emotion === 선택된감정) {
-          일기를화면에그리기(일기);
-        }
-      });
-    }
-  }
 });
