@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Document</title>
+    <style>
+        /* 사진보관함 */
+        #HTML_사진보관함필터,
+        #HTML_사진보관함메인 {
+        display: none;
+        }
+        .CSS_강아지사진보여주는곳,
+        .CSS_스켈레톤 {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            justify-content: center;
+            align-items: center;    
+        }
+
+        .CSS_강아지사진 {
+            max-width: 63rem;
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 2.4rem;
+        }
+
+    </style>
+    <script>
+    const JS_강아지사진그리기기능 = () => {
+  
+        fetch("https://dog.ceo/api/breeds/image/random/10").then((받아온결과)=>{
+            받아온결과.json().then((객체로변경한결과) => {
+
+                const 사진주소 = 객체로변경한결과.message;
+
+                const HTML_강아지사진리스트 = 사진주소
+                    .map(
+                    (el, index) => `
+                        <img class="CSS_강아지사진 src="${el}" alt="강아지사진${index}" />
+                    `
+                    ).join("");  
+
+                // console.log(`이미지다운로드주소들: ${이미지다운로드주소들}`)
+                // console.log(`상태: ${상태}`)
+                
+                document.getElementById("HTML_강아지사진보여주는곳").innerHTML =
+                    HTML_강아지사진리스트;              
+                         
+            });
+        });
+    };    
+    </script>
+</head>
+<body>
+     <!-- 사진보관함  -->
+     <main id="HTML_사진보관함메인" class=" body_main">
+        <div
+            id="HTML_강아지사진보여주는곳"
+            class="CSS_강아지사진보여주는곳"
+        ></div>        
+    </main>
+</body>
+</html>
