@@ -8,7 +8,7 @@ window.onload = () => {
 };
 
 window.onscroll = function () {
-  const selectElement = document.getElementById("필터");
+  const selectElement = document.getElementById("드랍다운제목ID");
   if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
     
     selectElement.classList.add("색상반전");
@@ -35,7 +35,28 @@ const 일기리스트 = localStorage.getItem("일기목록")
             src="./assets/images/${el.감정}.png" alt="">
           <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보">
             <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정날짜">
-              <span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정">${el.감정}</span> 
+              
+              ${el.감정 === "행복해요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__행복">행복해요</span>'
+                : ""
+              }
+              ${el.감정 === "슬퍼요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__슬픔">슬퍼요</span>'
+                : ""
+              }
+              ${el.감정 === "놀랐어요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__놀람">놀랐어요</span>'
+                : ""
+              }
+              ${el.감정 === "화나요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__화남">화나요</span>'
+                : ""
+              }
+              ${el.감정 === "기타"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__기타">기타</span>'
+                : ""
+              }
+              
               <span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__날짜">${el.날짜}</span>
             </div>
             <h2 class="바디__메인섹션__아티클섹션__일기칸__일기장__제목">${el.제목}</h2>
@@ -56,15 +77,14 @@ const 필터링기능 = (event) =>{
   console.log(event.target) //내가 행동한 태그 => 셀렉트태그
   console.log(event.target.value) // 태그에서 밸류 선택
   console.log(일기들)
-// const 일기들 = [ 
-//   {감정 : "" , 날짜 ::"" 제목:""" 내용:""},
-
-
-// ]
 const 내가선택한필터 = event.target.value
 console.log(event.target) 
 let 필터된 = 일기목록배열
 
+if(내가선택한필터 === "전체선택"){
+  필터된 = 일기목록배열
+  
+}
 if(내가선택한필터 === "행복선택"){
   필터된 = 일기목록배열.filter(el => el.감정 === "행복해요")
   
@@ -89,7 +109,28 @@ const 필터된일기목록HTML = 필터된.map((el,index)=>`
             src="./assets/images/${el.감정}.png" alt="">
           <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보">
             <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정날짜">
-              <span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정">${el.감정}</span> 
+              
+              ${el.감정 === "행복해요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__행복">행복해요</span>'
+                : ""
+              }
+              ${el.감정 === "슬퍼요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__슬픔">슬퍼요</span>'
+                : ""
+              }
+              ${el.감정 === "놀랐어요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__놀람">놀랐어요</span>'
+                : ""
+              }
+              ${el.감정 === "화나요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__화남">화나요</span>'
+                : ""
+              }
+              ${el.감정 === "기타"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__기타">기타</span>'
+                : ""
+              }
+              
               <span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__날짜">${el.날짜}</span>
             </div>
             <h2 class="바디__메인섹션__아티클섹션__일기칸__일기장__제목">${el.제목}</h2>
@@ -154,15 +195,6 @@ const 등록취소모달닫기 = () => {
 }
 
 
-// document.getElementById('등록완료버튼').addEventListener('click', () => {
-//   일기등록기능();
-//   등록완료모달닫기();
-// });
-
-//  function 상세정보보기(일기목록) {
-//     alert(`제목: ${일기목록.제목}, 내용: ${일기목록.내용}, 날짜: ${일기목록.날짜}, 감정: ${일기목록.감정}`);
-// }
-
 function 일기삭제기능(event, 일기인덱스) {
 
   // 1. 이 버튼 하위에 있는 모든 태그들의 기본기능 막기 => <a /> 태그 이동 막기
@@ -196,27 +228,10 @@ const 스크롤위로기능 = () => {
 
 
 
-// const 필터바꾸기기능 = ()=>{
-//   let 필터온오프여부 = document.getElementById("필터섹션").style.display
-//   if(필터온오프여부 === "block"){
-//     필터온오프여부 = "none";
-//   }else{
-//       필터온오프여부 = "block";
-//   } 
-// }
 const 필터바꾸기기능 = (선택한것) => {
   const 필터섹션 = document.querySelector(".바디__메인섹션__필터섹션");
   const 강아지필터섹션 = document.querySelector(".강아지필터섹션");
   
-  // const 현재상태 = window.getComputedStyle(필터섹션).display; // ✅ 실제 값 읽기
-  
-  // if (현재상태 === "flex") {
-  //   필터섹션.style.display = "none";
-  //   강아지필터섹션.style.display = "flex"
-  // } else {
-  //   필터섹션.style.display = "flex";
-  //   강아지필터섹션.style.display = "none"
-  // }
   switch(선택한것){
     case "일기" : 필터섹션.style.display = "flex";
     강아지필터섹션.style.display = "none";
@@ -228,13 +243,6 @@ const 필터바꾸기기능 = (선택한것) => {
 };
 
 
-// const 강아지메뉴 =`
-//     <div id="이미지나오는곳"></div>
-//     <p>강아지목록</p>
-//     <p>강아지사진1</p>
-//     <p>강아지사진2</p>
-//     <p>강아지사진3</p>
-// `
 const 이미지선택변경 = (event) => {
   const 선택값 = event.target.value;
   
@@ -271,14 +279,6 @@ function 이미지불러오는기능(){
         })
     })
 }
-// function 이미지불러오는기능(){
-//   fetch("https://dog.ceo/api/breeds/image/random/10")
-//     .then(res => res.json())
-//     .then(data => {
-//       const container = document.getElementById("이미지나오는곳");
-//       container.innerHTML = data.message.map(el => `<img src="${el}">`).join("");
-//     });
-// }
 
 function 가로형이미지불러오는기능(){
   //document.getElementById("이미지나오는곳").innerHTML = `<div class="스켈레톤"></div>`;
@@ -323,16 +323,6 @@ function 세로형이미지불러오는기능(){
     })
 }
 
-// const 일기메뉴스타일기능 = () =>{
-//   document.querySelector(".바디__메인섹션__아티클섹션__일기칸").classList.remove("강아지메뉴");
-//   document.querySelector(".바디__메인섹션__아티클섹션__일기칸").classList.add("바디__메인섹션_아티클섹센__일기칸");
-  
-// }
-// const 강아지메뉴스타일기능 = () =>{
-//   document.getElementById("이미지나오는곳").classList.add("강아지메뉴")
-//   document.getElementById("이미지나오는곳").classList.remove("바디__메인섹션_아티클섹센__일기칸")
-  
-// }
 const 일기메뉴스타일기능 = () =>{
   document.getElementById("일기메뉴").classList.add("선택된메뉴")
   document.getElementById("강아지메뉴").classList.remove("선택된메뉴")
@@ -346,26 +336,7 @@ const 강아지메뉴스타일기능 = () =>{
 function 메뉴이동하기(내가클릭한것){
   switch(내가클릭한것){
     case "일기":
-      const 일기리스트 = localStorage.getItem("일기목록")
-      const 일기목록배열 = JSON.parse(일기리스트 === null ? "[]" : 일기리스트)
-      // 2. 배열을 반복해서 태그 만들기 (그리기)
-      const 일기목록HTML = 일기목록배열.map((el,index)=>`
-          <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
-            <a href="./sub.html?number=${index}">     
-              <img 
-                src="./assets/images/${el.감정}.png" alt="">
-              <div>
-               <span>${el.감정}</span> 
-               <span>${el.날짜}</span>
-              </div> 
-              <h2>${el.제목}</h2>
-              </a> 
-              <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${index})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
-          </div>
-      `).join("") // map 뒤에서 바로 조인하는것도 가능함 => 친구목록html.join("") 동일
-      //3. html 최종 삽입하기
-      
-        document.getElementById("일기칸").innerHTML = 일기목록HTML
+        일기입력하기();
         필터바꾸기기능('일기');
         일기메뉴스타일기능();
         break;
@@ -381,3 +352,89 @@ function 메뉴이동하기(내가클릭한것){
    강아지메뉴스타일기능();
 }
 }
+
+const 선택기능 = (event) => {
+  document.getElementById("드랍다운제목ID").style = `--필터변수 : "${event.target.id}"`
+  document.getElementById("드랍다운제목ID").click()
+}
+
+
+
+
+        
+            let 타이머 = "아직실행안함"
+const 검색기능 = (event) =>{
+            const 일기리스트 = localStorage.getItem("일기목록")
+            const 일기목록배열 = JSON.parse(일기리스트 === null ? "[]" : 일기리스트)
+            
+            clearTimeout(타이머)
+            타이머 = setTimeout(() => {
+                const 내가검색한단어 = event.target.value
+                const 검색결과들 = 일기목록배열.filter( (el) => { return el.제목.includes(내가검색한단어)})
+                const 검색된일기목록HTML = 검색결과들.map((el,index)=>`
+      <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
+        <a href="./sub.html?number=${index}">     
+          <img 
+            src="./assets/images/${el.감정}.png" alt="">
+          <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보">
+            <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정날짜">
+              
+              ${el.감정 === "행복해요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__행복">행복해요</span>'
+                : ""
+              }
+              ${el.감정 === "슬퍼요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__슬픔">슬퍼요</span>'
+                : ""
+              }
+              ${el.감정 === "놀랐어요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__놀람">놀랐어요</span>'
+                : ""
+              }
+              ${el.감정 === "화나요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__화남">화나요</span>'
+                : ""
+              }
+              ${el.감정 === "기타"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__기타">기타</span>'
+                : ""
+              }
+              
+              <span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__날짜">${el.날짜}</span>
+            </div>
+            <h2 class="바디__메인섹션__아티클섹션__일기칸__일기장__제목">${el.제목}</h2>
+          </div> 
+        </a> 
+        <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${index})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
+      </div>
+  `).join("") // map 뒤에서 바로 조인하는것도 가능함 => 친구목록html.join("") 동일
+  //3. html 최종 삽입하기
+    document.getElementById("일기칸").innerHTML = 검색된일기목록HTML
+            }, 1000);
+
+        }
+        
+        
+          let 타이머2 = "아직실행안함"
+        window.addEventListener("scroll",()=>{
+            if(타이머2==="아직실행안함"){
+                const 스크롤합 = document.documentElement.scrollTop + document.documentElement.clientHeight
+                 
+                const 전체스크롤 = document.documentElement.scrollHeight
+                
+                if(전체스크롤 === 스크롤합){
+                  fetch("https://dog.ceo/api/breeds/image/random/10").then((받아온결과) =>{
+                                   받아온결과.json().then((이미지다운로드주소배열) =>{
+                                     const 이미지배열 = 이미지다운로드주소배열.message;
+                                    document.getElementById("이미지나오는곳").innerHTML += 이미지배열.map(el => { return `
+                                        <img class="바디__메인섹션_아티클섹션__일기칸__일기장__강아지이미지" src="${el}" >`
+                                     }).join("")
+            
+                                    })
+                                })
+                }
+                타이머 = setTimeout(() => {
+                    타이머2 = "아직실행안함"                  
+                }, 1000);
+            }
+        })

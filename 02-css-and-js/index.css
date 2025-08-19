@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+li,ul{
+    margin: 0;
+    padding: 0;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -121,10 +126,100 @@ a{
     position: sticky;
     top: 0;
     z-index: 3;
-    backdrop-filter: blur(1rem);
+    backdrop-filter: blur(1rem)
+    
+}
+.바디__메인섹션__필터섹션__필터영역__서치바영역 {
+    display: flex;
+    gap: 0.8rem;
+    min-width: 32rem;
+    max-width: 36rem;
+    height: 4.8rem;
+    position: absolute;
+    left: 13.6rem;
+    border-radius: 10rem;
+    border: 1px solid #C7C7C7;
+    padding: 1.2rem 1.6rem 1.2rem 1.6rem;
+    
+}
+.바디__메인섹션__필터섹션__필터영역__서치바영역__서치바{
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    appearance: none;
+    border: 0px;
+    /* border: 1px solid #000; */
 }
 
-#필터{
+.바디__메인섹션__필터섹션__필터__드랍다운제목{
+    display: block;
+    appearance: none;
+    min-width: 12rem;
+    height: 4.8rem;
+    padding: 0.4rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid #c7c7c7;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 2.4rem;
+    padding: 1.2rem 8rem 1.2rem 1.2rem;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    --필터변수 : "전체"
+    
+}
+
+.바디__메인섹션__필터섹션__필터__드랍다운제목::after{
+    content: var(--필터변수)
+    
+}
+/* .바디__메인섹션__필터섹션__필터__드랍다운제목:checked + {
+    background-color: yellow;
+} */
+.바디__메인섹션__필터섹션__필터__드랍다운제목:checked + .바디__메인섹션__필터섹션__필터__드랍다운목록{
+    display: block;
+}
+.바디__메인섹션__필터섹션__필터__드랍다운목록{
+    display: none;
+    min-width: 12rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid #c7c7c7;
+    line-height: 2.4rem;
+    overflow: hidden;
+
+    position: absolute;
+    top: 4.8rem;
+    left: 0;
+    
+}
+
+.바디__메인섹션__필터섹션__필터__드랍다운목록 input{
+    appearance: none;
+    display: none;
+
+}
+.바디__메인섹션__필터섹션__필터__드랍다운목록 label {
+    padding: 1.2rem 6.6rem 1.2rem 1.2rem;
+    display: block; 
+    /* label은 인라인요소로 높이가 없으므로 블럭으로 변경 */
+    
+    min-width: 12rem;
+    height: 4.8rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 2.4rem;
+    background-color: white;
+}
+.바디__메인섹션__필터섹션__필터__드랍다운목록 label:hover{
+    
+    color: #299C00;
+   } 
+
+
+/* #필터{
     min-width: 12rem;
     padding: 0.4rem;
     border-radius: 0.8rem;
@@ -133,7 +228,7 @@ a{
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 2.4rem;
-}
+} */
 
 .바디__메인섹션__아티클섹션 {
     display: flex;
@@ -194,13 +289,50 @@ a{
   font-size: 1.4rem;
   color: #777;
 }
-.바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정{
+.바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__행복{
     width: 100%;
   text-align: left;
   font-size: 1.4rem;
   font-weight: 600;
   line-height: 2rem;
   text-wrap: nowrap;
+  color: #ea5757;
+}
+.바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__슬픔{
+    width: 100%;
+  text-align: left;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 2rem;
+  text-wrap: nowrap;
+  color: #28b4e1;
+}
+.바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__놀람{
+    width: 100%;
+  text-align: left;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 2rem;
+  text-wrap: nowrap;
+  color: #d59029;
+}
+.바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__화남{
+    width: 100%;
+  text-align: left;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 2rem;
+  text-wrap: nowrap;
+  color: #777;
+}
+.바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__기타{
+    width: 100%;
+  text-align: left;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 2rem;
+  text-wrap: nowrap;
+  color: #a229ed;
 }
 .바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__날짜{
     font-size: 1.4rem;
@@ -229,6 +361,7 @@ a{
     top: 0;
     position: sticky;
     z-index: 2;
+    display: none;
 }
 .강아지필터섹션__강아지필터{
     display: flex;
@@ -392,7 +525,8 @@ a{
 
 
 .색상반전 {
-    filter: invert(1);
+    background: black;
+    color: white;
 }
 
 
@@ -415,20 +549,3 @@ a{
     }
 }
 
-
-/* @media (max-width: 980px) {
-.컨테이너{
-    width: 100%;
-}
-.바디__메인섹션__아티클섹션{
-    display: flex;
-    flex-direction: column;
-}
-.바디__메인섹션__아티클섹션__일기칸{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.4rem;
-  width: 100%;
-  order: 2;
-  position: relative;
-} */

@@ -1,36 +1,34 @@
- <!DOCTYPE html>
- <html lang="ko">
- <head>
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <!-- <script src="./index.js"></script>
    <script src="./component-dogs.js"></script> -->
-    <link rel="stylesheet" href="./index.css">
-    <link rel="stylesheet" href="./modal.css">
-    <link
-      rel="stylesheet"
-      href="./mobile.css"
-      media="(max-width: 849px)"
-    />
-    <title>민지의 다이어리</title>
- </head>
- <body>
+   <link rel="stylesheet" href="./index.css">
+   <link rel="stylesheet" href="./modal.css">
+   <link rel="stylesheet" href="./mobile.css" media="(max-width: 849px)" />
+   <title>민지의 다이어리</title>
+</head>
+
+<body>
    <div class="컨테이너">
-      
+
       <div class="가장큰배경">
          <div class="헤더">
             <div class="헤더__제목">
                <span>민지의 다이어리</span>
-            </div>  
+            </div>
          </div>
          <div class="바디">
             <img class="바디__배너" src="./assets/images/배너.png" alt="">
-            
+
             <div class="바디__메인섹션">
                <!-- 메뉴섹션 -->
                <div class="바디__메인섹션__메뉴섹션">
                   <div class="바디__메인섹션__메뉴섹션__메뉴">
-                        <div id="일기메뉴" class="선택된메뉴"  onclick="메뉴이동하기('일기')">일기보관함</div>
-                        <div id="강아지메뉴" onclick="메뉴이동하기('강아지')">사진보관함</div>
+                     <div id="일기메뉴" class="선택된메뉴" onclick="메뉴이동하기('일기')">일기보관함</div>
+                     <div id="강아지메뉴" onclick="메뉴이동하기('강아지')">사진보관함</div>
                   </div>
                </div>
                <!-- 필터섹션 -->
@@ -38,75 +36,99 @@
                   <div class="바디__메인섹션__필터섹션__필터영역">
 
                      <div class="바디__메인섹션__필터섹션__필터">
-                        <select id="필터" onchange="필터링기능(event)">
-                           <option >전체</option>
-                           <option value="행복선택">행복</option>
-                           <option value="슬픔선택">슬픔</option>
-                           <option value="놀람선택">놀람</option>
-                           <option value="화남선택">화남</option>
-                           <option value="기타선택">기타</option>
-                       </select>
+                        <input type="checkbox" name="" class="바디__메인섹션__필터섹션__필터__드랍다운제목" id="드랍다운제목ID">
+                        <ul class="바디__메인섹션__필터섹션__필터__드랍다운목록" onchange="필터링기능(event)">
+                           <li>
+                              <input type="radio" name="감정" id="전체" value="전체선택" onclick="선택기능(event)">
+                              <label for="전체">전체</label>
+                           </li>
+                           <li>
+                              <input type="radio" name="감정" id="행복해요" value="행복선택" onclick="선택기능(event)">
+                              <label for="행복해요">행복해요</label>
+                           </li>
+                           <li>
+                              <input type="radio" name="감정" id="슬퍼요" value="슬픔선택" onclick="선택기능(event)">
+                              <label for="슬퍼요">슬퍼요</label>
+                           </li>
+                           <li>
+                              <input type="radio" name="감정" id="놀랐어요" value="놀람선택" onclick="선택기능(event)">
+                              <label for="놀랐어요">놀랐어요</label>
+                           </li>
+                           <li>
+                              <input type="radio" name="감정" id="화나요" value="화남선택" onclick="선택기능(event)">
+                              <label for="화나요">화나요</label>
+                           </li>
+                           <li>
+                              <input type="radio" name="감정" id="기타" value="기타선택" onclick="선택기능(event)">
+                              <label for="기타">기타</label>
+                           </li>
+                        </ul>
+
+
+                     </div>
+                     <div class="바디__메인섹션__필터섹션__필터영역__서치바영역">
+                        <img src="./assets/icons/서치바.png" alt="">
+                        <input class="바디__메인섹션__필터섹션__필터영역__서치바영역__서치바" type="text" placeholder="검색하세요" oninput="검색기능(event)">
+                     </div>
                      
-                    </div>
-                    
                   </div>
                   <button onclick="스크롤위로기능(); 등록모달열기();"><img src="./assets/icons/일기쓰기버튼.png" alt=""></button>
                </div>
                <!-- 강아지필터 -->
-                <div class="강아지필터섹션">
-                   <div class="강아지필터섹션__강아지필터">
-                      <select id="이미지형태선택">
-                         <option value="기본">기본형</option>
-                         <option value="가로">가로형</option>₩
-                         <option value="세로">세로형</option>
-                       </select>
-                   </div>
-                </div>
+               <div class="강아지필터섹션">
+                  <div class="강아지필터섹션__강아지필터">
+                     <select id="이미지형태선택">
+                        <option value="기본">기본형</option>
+                        <option value="가로">가로형</option>
+                        <option value="세로">세로형</option>
+                     </select>
+                  </div>
+               </div>
                <!-- 아티클섹션 -->
-               
+
                <div class="바디__메인섹션__아티클섹션">
                   <div class="바디__메인섹션__아티클섹션__일기칸" id="일기칸">
-                  
-                     
-   
-                  </div>   
+
+
+
+                  </div>
                   <!-- 모달섹션 -->
-               <div class="등록모달그룹" id="등록모달ID">
+                  <div class="등록모달그룹" id="등록모달ID">
                      <div onclick="등록모달닫기()" class="등록모달배경"></div>
                      <div class="등록모달창">
                         <div class="등록모달창__타이틀섹션">
-                              <h2>📍일기 쓰기</h2>
+                           <h2>📍일기 쓰기</h2>
                         </div>
                         <div class="등록모달창__아티클섹션">
                            <div class="등록모달창__아티클섹션__상단">
                               <h3>오늘 기분은 어땠나요?</h3>
                               <div>
                                  <div>
-                                 <input type="radio" name="감정" value="행복해요">
+                                    <input type="radio" name="감정" value="행복해요">
                                     행복해요
                                  </div>
                                  <div>
-                                 <input type="radio" name="감정" value="슬퍼요">
+                                    <input type="radio" name="감정" value="슬퍼요">
 
                                     슬퍼요
                                  </div>
                                  <div>
-                                 <input type="radio" name="감정" value="놀랐어요"> 
+                                    <input type="radio" name="감정" value="놀랐어요">
                                     놀랐어요
 
                                  </div>
                                  <div>
-                                 <input type="radio" name="감정" value="화나요">
+                                    <input type="radio" name="감정" value="화나요">
 
                                     화나요
                                  </div>
                                  <div>
-                                 <input type="radio" name="감정" value="기타"> 
+                                    <input type="radio" name="감정" value="기타">
                                     기타
 
                                  </div>
                               </div>
-                              
+
                            </div>
                            <div class="등록모달창__아티클섹션__하단">
                               <div class="등록모달창__아티클섹션__하단__제목영역">
@@ -117,7 +139,7 @@
                                  <span>내용</span>
                                  <input id="입력한내용" placeholder="내용을 입력해주세요." type="text" name="" id="">
                               </div>
-                              
+
                            </div>
                         </div>
                         <div class="등록모달창__등록섹션">
@@ -125,34 +147,34 @@
                            <button onclick="등록완료모달열기()" class="등록모달창__등록섹션__등록버튼">등록하기</button>
                         </div>
                      </div>
-               </div>
-               
-               <!-- 중첩모달 (등록완료모달)-->
-                <div class="등록완료모달그룹" id="등록완료모달ID">
-                  <div onclick="일기등록기능(); 등록완료모달닫기(); 등록모달닫기();" class="등록완료모달배경"></div>
-                  <div class="등록완료모달창">
-                     <div class="등록완료모달창__메시지섹션">
-                        <div class="등록완료모달창__메시지섹션__상단">일기등록완료</div>
-                        <div class="등록완료모달창__메시지섹션__하단">등록이 완료되었습니다</div>
-                     </div>
-                     <button onclick="일기등록기능(); 등록완료모달닫기(); 등록모달닫기();" id="등록완료버튼" class="등록완료모달창__버튼">확인</button>
                   </div>
-                </div>
-                <!-- 중첩모달(등록취소모달) -->
-                <div class="등록취소모달그룹" id="등록취소모달ID">
-                  <div class="등록취소모달배경"></div>
-                  <div class="등록취소모달창">
-                     <div class="등록취소모달창__메시지섹션">
-                        <div class="등록취소모달창__메시지섹션__상단">일기 등록 취소</div>
-                        <div class="등록취소모달창__메시지섹션__하단">등록을 취소 하시겠습니까?</div>
-                     </div>
-                     <div class="등록취소모달창__버튼영역">
-                        <button onclick="등록취소모달닫기()" class="등록취소모달창__버튼영역__계속작성버튼">계속 작성</button>
-                        <button onclick="등록취소모달닫기();등록모달닫기()"  class="등록취소모달창__버튼영역__등록취소버튼">등록 취소</button>
 
+                  <!-- 중첩모달 (등록완료모달)-->
+                  <div class="등록완료모달그룹" id="등록완료모달ID">
+                     <div onclick="일기등록기능(); 등록완료모달닫기(); 등록모달닫기();" class="등록완료모달배경"></div>
+                     <div class="등록완료모달창">
+                        <div class="등록완료모달창__메시지섹션">
+                           <div class="등록완료모달창__메시지섹션__상단">일기등록완료</div>
+                           <div class="등록완료모달창__메시지섹션__하단">등록이 완료되었습니다</div>
+                        </div>
+                        <button onclick="일기등록기능(); 등록완료모달닫기(); 등록모달닫기();" id="등록완료버튼" class="등록완료모달창__버튼">확인</button>
                      </div>
                   </div>
-                </div>
+                  <!-- 중첩모달(등록취소모달) -->
+                  <div class="등록취소모달그룹" id="등록취소모달ID">
+                     <div class="등록취소모달배경"></div>
+                     <div class="등록취소모달창">
+                        <div class="등록취소모달창__메시지섹션">
+                           <div class="등록취소모달창__메시지섹션__상단">일기 등록 취소</div>
+                           <div class="등록취소모달창__메시지섹션__하단">등록을 취소 하시겠습니까?</div>
+                        </div>
+                        <div class="등록취소모달창__버튼영역">
+                           <button onclick="등록취소모달닫기()" class="등록취소모달창__버튼영역__계속작성버튼">계속 작성</button>
+                           <button onclick="등록취소모달닫기();등록모달닫기()" class="등록취소모달창__버튼영역__등록취소버튼">등록 취소</button>
+
+                        </div>
+                     </div>
+                  </div>
 
 
 
@@ -191,14 +213,15 @@
          </button>
          <div id="푸터" class="푸터">
             <div class="푸터__푸터섹션">
-              <div class="푸터__푸터섹션__제목">민지의 다이어리</div>
-              <p class="푸터__푸터섹션__대표">대표 : {name}</p>
-              <p class="푸터__푸터섹션__카피라이트">Copyright © 2024.{name} Co., Ltd.</p>
+               <div class="푸터__푸터섹션__제목">민지의 다이어리</div>
+               <p class="푸터__푸터섹션__대표">대표 : {name}</p>
+               <p class="푸터__푸터섹션__카피라이트">Copyright © 2024.{name} Co., Ltd.</p>
             </div>
          </div>
 
 
          <script src="./index.js"></script>
          <script src="./component-dogs.js"></script>
- </body>
- </html>
+</body>
+
+</html>
