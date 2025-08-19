@@ -4,6 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterBtns = document.querySelectorAll(".filter-btn");
   const scrollTopBtn = document.getElementById("scrollTopBtn");
 
+  // ✅ 추가: 드롭다운/검색/모달 다크토글 참조
+  const filterDropdown = document.getElementById("filterDropdown");
+  const searchInput = document.getElementById("searchInput");
+  const modalDarkSwitch = document.getElementById("modalDarkSwitch");
+
   // 모달 엘리먼트
   const writeModal = document.getElementById("writeModal");
   const successModal = document.getElementById("successModal");
@@ -23,34 +28,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let diaries = JSON.parse(localStorage.getItem("diaries")) || [];
   let currentFilter = "all";
+  // ✅ 추가: 검색어 상태
+  let searchQuery = "";
 
   function saveToStorage() {
     localStorage.setItem("diaries", JSON.stringify(diaries));
   }
 
   // -----------------------------
-  // 카드 렌더링
+  // 유틸: escape
   // -----------------------------
-  const photoFilters = document.querySelector(".photo-filters");
-  async function renderCards() {
-    if (currentFilter !== "photos") {
-      const filtered = diaries.filter(d => currentFilter === "all" || d.emotion === currentFilter);
-      const html = filtered.map(diary => `
-        <a class="card-link" href="detail.html?id=${diary.id}">
-          <div class="card" data-id="${diary.id}">
-            <button class="delete-btn" data-id="${diary.id}" title="삭제">×</button>
-            <img src="${emotionImages[diary.emotion] || emotionImages.etc}" alt="${diary.emotion}">
-            <p>${escapeHtml(diary.date)} - ${escapeHtml(diary.title)}</p>
-          </div>
-        </a>
-      `).join("");
-      cardContainer.innerHTML = html;
-      photoFilters.style.display = "none";
-    } else {
-      await fetchPhotos();
-    }
-  }
-
   function escapeHtml(s = "") {
     return String(s)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;")
@@ -64,6 +51,62 @@ document.addEventListener("DOMContentLoaded", () => {
       if (r.checked) value = r.value;
     });
     return value;
+  }
+
+  // ✅ 추가: 디바운스/스로틀
+  function debounce(fn, delay = 1000) {
+    let t;
+    return (...args) => {
+      clearTimeout(t);
+      t = setTimeout(() => fn(...args), delay);
+    };
+  }
+  function throttle(fn, delay = 1000) {
+    let last = 0;
+    let timer = null;
+    return (...args) => {
+      const now = Date.now();
+      const remaining = delay - (now - last);
+      if (remaining <= 0) {
+        last = now;
+        fn(...args);
+      } else if (!timer) {
+        timer = setTimeout(() => {
+          last = Date.now();
+          timer = null;
+          fn(...args);
+        }, remaining);
+      }
+    };
+  }
+
+  // -----------------------------
+  // 카드 렌더링
+  // -----------------------------
+  const photoFilters = document.querySelector(".photo-filters");
+
+  async function renderCards() {
+    if (currentFilter !== "photos") {
+      // ✅ 검색 + 감정 필터 동시 적용
+      const q = searchQuery.trim().toLowerCase();
+      const filtered = diaries.filter(d =>
+        (currentFilter === "all" || d.emotion === currentFilter) &&
+        (q === "" || (d.title || "").toLowerCase().includes(q))
+      );
+      const html = filtered.map(diary => `
+        <a class="card-link" href="detail.html?id=${diary.id}">
+          <div class="card" data-id="${diary.id}">
+            <button class="delete-btn" data-id="${diary.id}" title="삭제">×</button>
+            <img src="${emotionImages[diary.emotion] || emotionImages.etc}" alt="${diary.emotion}">
+            <p>${escapeHtml(diary.date)} - ${escapeHtml(diary.title)}</p>
+          </div>
+        </a>
+      `).join("");
+      cardContainer.innerHTML = html;
+      photoFilters.style.display = "none";
+    } else {
+      await fetchPhotos(); // 사진 탭 처음 진입 시 10개 로드
+    }
   }
 
   // -----------------------------
@@ -82,16 +125,33 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // -----------------------------
-  // 감정 필터
+  // 감정 필터 버튼
   // -----------------------------
+  function syncDropdownToFilter() {
+    if (filterDropdown) filterDropdown.value = currentFilter;
+  }
+  function syncButtonsToFilter() {
+    filterBtns.forEach(b => b.classList.toggle("active", b.dataset.emotion === currentFilter));
+  }
+
   filterBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       filterBtns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       currentFilter = btn.dataset.emotion;
+      syncDropdownToFilter();
       renderCards();
     });
   });
+
+  // ✅ 드롭다운으로도 필터 변경 (디자인 과제)
+  if (filterDropdown) {
+    filterDropdown.addEventListener("change", () => {
+      currentFilter = filterDropdown.value;
+      syncButtonsToFilter();
+      renderCards();
+    });
+  }
 
   // -----------------------------
   // 스크롤 & 플로팅 버튼
@@ -118,6 +178,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   openWriteModalBtn.addEventListener("click", () => {
     diaryForm.reset();
+    // 저장된 모달 다크모드 적용 보장
+    applyModalTheme(loadModalDarkPref());
+    if (modalDarkSwitch) modalDarkSwitch.checked = loadModalDarkPref();
     openModal(writeModal);
   });
   closeWriteModalBtn.addEventListener("click", () => openModal(cancelModal));
@@ -160,6 +223,29 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // -----------------------------
+  // ✅ 모달 다크모드 (토글 → 세 모달 모두 적용)
+  // -----------------------------
+  function applyModalTheme(isDark) {
+    [writeModal, successModal, cancelModal].forEach(m => m && m.classList.toggle("dark", !!isDark));
+  }
+  function loadModalDarkPref() {
+    return localStorage.getItem("modalDark") === "1";
+  }
+  function saveModalDarkPref(on) {
+    localStorage.setItem("modalDark", on ? "1" : "0");
+  }
+  // 초기 적용
+  applyModalTheme(loadModalDarkPref());
+  if (modalDarkSwitch) {
+    modalDarkSwitch.checked = loadModalDarkPref();
+    modalDarkSwitch.addEventListener("change", (e) => {
+      const on = e.target.checked;
+      saveModalDarkPref(on);
+      applyModalTheme(on);
+    });
+  }
+
+  // -----------------------------
   // 일기 등록
   // -----------------------------
   diaryForm.addEventListener("submit", (e) => {
@@ -184,19 +270,38 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // -----------------------------
-  // 사진보관함
+  // 사진보관함 + ✅ 무한스크롤(스로틀 1000ms)
   // -----------------------------
   const ratioBtns = document.querySelectorAll(".ratio-btn");
-  async function fetchPhotos() {
+  let isLoadingPhotos = false;
+  const PHOTOS_BATCH = 10;
+
+  function getActiveRatio() {
+    const active = document.querySelector(".ratio-btn.active");
+    return active ? active.dataset.ratio : "square";
+  }
+
+  async function fetchPhotos(append = false) {
     photoFilters.style.display = "flex";
-    cardContainer.innerHTML = Array.from({length:10}).map(()=>`<div class="card skeleton"></div>`).join("");
+    if (!append) {
+      cardContainer.innerHTML = Array.from({length:PHOTOS_BATCH}).map(()=>`<div class="card skeleton"></div>`).join("");
+    }
+    const ratio = getActiveRatio();
     try {
-      const res = await fetch("https://dog.ceo/api/breeds/image/random/10");
+      isLoadingPhotos = true;
+      const res = await fetch(`https://dog.ceo/api/breeds/image/random/${PHOTOS_BATCH}`);
       const data = await res.json();
-      const html = data.message.map(url => `<div class="card photo-card square"><img src="${url}" alt="강아지"></div>`).join("");
-      cardContainer.innerHTML = html;
+      const html = (data.message || []).map(url => `
+        <div class="card photo-card ${ratio === "all" ? "square" : ratio}">
+          <img src="${url}" alt="강아지">
+        </div>
+      `).join("");
+      if (append) cardContainer.insertAdjacentHTML("beforeend", html);
+      else cardContainer.innerHTML = html;
     } catch {
-      cardContainer.innerHTML = "<p>사진을 불러오는데 실패했습니다.</p>";
+      if (!append) cardContainer.innerHTML = "<p>사진을 불러오는데 실패했습니다.</p>";
+    } finally {
+      isLoadingPhotos = false;
     }
   }
 
@@ -208,9 +313,18 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelectorAll(".photo-card").forEach(card => {
         card.classList.remove("square","landscape","portrait");
         if(ratio !== "all") card.classList.add(ratio);
+        else card.classList.add("square");
       });
     });
   });
+
+  // ✅ 스크롤 하단 도달 시 10개씩 추가 로드 (스로틀 1000ms)
+  const handleInfinite = throttle(() => {
+    if (currentFilter !== "photos" || isLoadingPhotos) return;
+    const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
+    if (nearBottom) fetchPhotos(true);
+  }, 1000);
+  window.addEventListener("scroll", handleInfinite);
 
   // -----------------------------
   // 탭 클릭 처리
@@ -221,10 +335,23 @@ document.addEventListener("DOMContentLoaded", () => {
       tabs.forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
       currentFilter = tab.dataset.tab === "photos" ? "photos" : "all";
+      // 탭 전환 시 검색은 유지하되, 사진탭에서는 적용하지 않음
       renderCards();
     });
   });
 
-  // 최초 렌더
+  // -----------------------------
+  // ✅ 검색(디바운싱 1000ms)
+  // -----------------------------
+  if (searchInput) {
+    const doSearch = debounce((val) => {
+      searchQuery = (val || "").toLowerCase();
+      if (currentFilter !== "photos") renderCards();
+    }, 1000);
+    searchInput.addEventListener("input", (e) => doSearch(e.target.value));
+  }
+
+  // 최초 렌더 + 초기 동기화
+  syncDropdownToFilter();
   renderCards();
 });
