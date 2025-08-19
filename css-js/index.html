@@ -4,6 +4,8 @@
     <title>일기보관함</title>
     <link rel = "stylesheet" href = "./css/index.css" />
     <script src="./js/index.js"></script>    
+    <script src="./js/index-diary.js"></script>
+    <script src="./js/index-image.js"></script>
 </head>
 <body>
     <div class="background">
@@ -18,12 +20,12 @@
                     <div class="main__frame__content">
                         <div class="frame__content__navigator">
                             <div class="frame__content__tab">
-                                <div class="content__tab__menu">
+                                <button id="click__diary__list" class="content__tab__menu" onclick="changeMenu('click__diary__list')">
                                     일기보관함
-                                </div>
-                                <div class="tab__menu__disabled">
+                                </button>
+                                <button id="click__image__list" class="tab__menu__disabled" onclick="changeMenu('click__image__list')"">
                                     사진보관함
-                                </div>
+                                </button>
                             </div>
                             <div class="frame__content__filter">
                                 <select id="filter" class="feeling__filter" onchange="viewFiltering(event)">
@@ -40,63 +42,61 @@
                                 </button>
                             </div>
                         </div>
-                            <div id="frame__diary__list" class="frame__content__diary">
-                                <div id="card__list" class="content__diary__list">
-                                    <!-- 다이어리 상세 내용 이미지 -->
-                                    <!-- <a href="./detail.html?number=${index}">
-                                        <div class="diary__card">
-                                            <img class="diary__card__image" src="./assets/images/${diaryCard[index].feeling}_M.svg" />
-                                            <div class="diary__card__text">
-                                                <div class="diary__card__subtitle">
-                                                    <div class="diary__card__feeling ${diaryCard[index].feeling}">${diaryCard[index].feeling_title}</div>
-                                                    <div id="diary__card__date">${diaryCard[index].date}</div>
-                                                </div>
-                                                <div class="diary__card__title">${diaryCard[index].card_title}</div>
+                        <div id="frame__diary__list" class="frame__content__diary">
+                            <div id="card__list" class="content__diary__list">
+                                <!-- 다이어리 상세 내용 이미지 -->
+                                <!-- <a href="./detail.html?number=${index}">
+                                    <div class="diary__card">
+                                        <img class="diary__card__image" src="./assets/images/${diaryCard[index].feeling}_M.svg" />
+                                        <div class="diary__card__text">
+                                            <div class="diary__card__subtitle">
+                                                <div class="diary__card__feeling ${diaryCard[index].feeling}">${diaryCard[index].feeling_title}</div>
+                                                <div id="diary__card__date">${diaryCard[index].date}</div>
                                             </div>
+                                            <div class="diary__card__title">${diaryCard[index].card_title}</div>
                                         </div>
-                                        </a> -->
-                                    <!-- 여기까지 다이어리 상세 칸 리스트 -->
-                                </div>
-                                <!-- 기존 다이어리 작성 폼 -->
-                                <!-- <div class="content__diary__form">
-                                    <div class="diary__form__title">📍 일기 쓰기</div>
-                                    <div class="diary__form__input">
-                                        <div class="form__input__feeling">
-                                            오늘 기분은 어땟나요?
-                                            <div class="input__feeling__radio">
-                                                <div class="feeling" >
-                                                    <input id="happy" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />행복해요
-                                                </div>
-                                                <div class="feeling" >
-                                                    <input id="sad" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />슬퍼요
-                                                </div>
-                                                <div class="feeling" >
-                                                    <input id="surprise" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />놀랐어요
-                                                </div>
-                                                <div class="feeling" >
-                                                    <input id="angry" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />화나요
-                                                </div>
-                                                <div class="feeling" >
-                                                    <input id="etc" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />기타
-                                                </div>
+                                    </div>
+                                    </a> -->
+                                <!-- 여기까지 다이어리 상세 칸 리스트 -->
+                            </div>
+                            <!-- 기존 다이어리 작성 폼 -->
+                            <!-- <div class="content__diary__form">
+                                <div class="diary__form__title">📍 일기 쓰기</div>
+                                <div class="diary__form__input">
+                                    <div class="form__input__feeling">
+                                        오늘 기분은 어땟나요?
+                                        <div class="input__feeling__radio">
+                                            <div class="feeling" >
+                                                <input id="happy" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />행복해요
                                             </div>
-                                        </div>
-                                        <div class="form__input__text">
-                                            <div class="input__text__title">
-                                                제목
-                                                <input type="text" placeholder="제목을 입력해 주세요." id="title__feeling" oninput="isDiaryWritten()" />
+                                            <div class="feeling" >
+                                                <input id="sad" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />슬퍼요
                                             </div>
-                                            <div class="input__text__context">
-                                                내용
-                                                <textarea placeholder="내용을 입력해 주세요." id="context__feeling" oninput="isDiaryWritten()"></textarea>
+                                            <div class="feeling" >
+                                                <input id="surprise" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />놀랐어요
+                                            </div>
+                                            <div class="feeling" >
+                                                <input id="angry" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />화나요
+                                            </div>
+                                            <div class="feeling" >
+                                                <input id="etc" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />기타
                                             </div>
                                         </div>
                                     </div>
-                                    <button id="diary__write__button" class="diary__form__button" disabled onclick="getDiaryCard()">등록하기</button>
-                                </div> -->
-                                
-                            </div>
-
+                                    <div class="form__input__text">
+                                        <div class="input__text__title">
+                                            제목
+                                            <input type="text" placeholder="제목을 입력해 주세요." id="title__feeling" oninput="isDiaryWritten()" />
+                                        </div>
+                                        <div class="input__text__context">
+                                            내용
+                                            <textarea placeholder="내용을 입력해 주세요." id="context__feeling" oninput="isDiaryWritten()"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button id="diary__write__button" class="diary__form__button" disabled onclick="getDiaryCard()">등록하기</button>
+                            </div> -->
+                        </div>
                     </div>
                 </div>
                 <img src="./assets/icons/up_outline_light_xl.svg" id="floating__button" onclick="scrollpage()"/>

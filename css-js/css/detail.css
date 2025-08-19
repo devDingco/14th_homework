@@ -656,4 +656,23 @@ hr {
       font-size: 0.75rem;
       line-height: 1rem;
   }
+  .modal__delete{
+    width: var(--width-content-main);
+    height: 9.75rem;
+
+    gap: 1.5rem;
+    left: calc(50% - 20rem/2);
+  }
+  .modal__title{
+      font-size: var(--font-size-text-md);
+      line-height: 1.25rem;
+  }
+  .modal__text{
+      font-size: var(--font-size-text-sm);
+      line-height: 1rem;
+  }
+  .modal__form__button{
+    height: 2.5rem;
+    font-size: var(--font-size-text-md);
+  }
 }

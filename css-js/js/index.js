@@ -1,3 +1,62 @@
+/* 메뉴 이동 */
+// const changeMenu = (clicked) => {
+//     switch(clicked){
+//         case "click__diary__list":{
+//             document.getElementById("frame__diary__list").innerHTML = diary__list
+//             document.getElementById("click__diary__list").classList.remove("tab__menu__disabled")
+//             document.getElementById("click__diary__list").classList.add("content__tab__menu")
+//             document.getElementById("click__image__list").classList.remove("content__tab__menu")
+//             document.getElementById("click__image__list").classList.add("tab__menu__disabled")
+//             addDiaryCard()
+//             break;
+//         }
+//         case "click__image__list":{
+//             document.getElementById("frame__diary__list").innerHTML = `<div class=dog__list>${image__list}</div>`
+//             document.getElementById("click__image__list").classList.remove("tab__menu__disabled")
+//             document.getElementById("click__image__list").classList.add("content__tab__menu")
+//             document.getElementById("click__diary__list").classList.remove("content__tab__menu")
+//             document.getElementById("click__diary__list").classList.add("tab__menu__disabled")
+//             break;
+//         }
+//     }
+// }
+
+const changeMenu = (clicked) => {
+    // 선택된 메뉴 객체
+    // 비활성화할 메뉴, 불러올 변수, 불러올 함수
+    const targetMenu = {
+        "click__diary__list":{
+            disabledID: "click__image__list",
+            content: diary__list,
+            callback: addDiaryCard
+        },
+        "click__image__list":{
+            disabledID: "click__diary__list",
+            content: `<div class=dog__list>${image__list}</div>`,
+            callback: addImageCard
+        }
+    }
+
+    const selected = targetMenu[clicked];
+    if (!selected) return
+
+    // 선택된 탭 활성화
+    document.getElementById(clicked).classList.remove("tab__menu__disabled")
+    document.getElementById(clicked).classList.add("content__tab__menu")
+
+    // 다른 탭 비활성화
+    document.getElementById(selected.disabledID).classList.remove("content__tab__menu")
+    document.getElementById(selected.disabledID).classList.add("tab__menu__disabled")    
+
+    // HTML추가
+    document.getElementById("frame__diary__list").innerHTML = selected.content;
+
+    // 함수 실행
+    selected.callback();
+
+}
+
+
 /* 다이어리 입력 폼을 다 채우면 버튼 활성화 */
 // selectedFeeling: 기분 선택
 let selectedFeeling;
@@ -46,17 +105,30 @@ function isDiaryWritten() {
     }
 }
 
+/* 스크롤 막기 */
+const disabledScroll = () => {
+    document.body.style.overflow = "hidden";
+}
+
+/* 스크롤 활성화 */
+const enableScroll = () => {
+    document.body.style.overflow = "auto";
+}
 
 
 /* 버튼 클릭 시, 모달 on */
 const viewModal = (modal__name) => {
+    document.getElementById("frame__diary__list").scrollTo({ top: 0, behavior: "smooth" })
+    window.scrollTo({ top: 0, behavior: "smooth"})
     document.getElementById(modal__name).style = "display: block"
+    disabledScroll()
 }
 
 /* 버튼 클릭 시, 모달 off */
 const closeModal = (modal__name) => {
     document.getElementById(modal__name).style = "display: none"
     clearDiaryForm()
+    enableScroll()
 }
 
 /* 취소모달에서 계속 작성 클릭 시, 해당 모달만 꺼지게끔하기? */
@@ -80,6 +152,9 @@ document.addEventListener("click", (event) => {
 
 /* 등록화면 모달에서 ESC 키 입력 시, 모달 종료 */
 window.addEventListener("keydown", (event) => {
+
+    const writeModal = document.getElementById('write__form__modal').style.display
+
     if(event.key === "Escape" && writeModal === "block"){
         closeModal('write__form__modal')
     }
@@ -145,8 +220,6 @@ function clearDiaryForm() {
     context.value = '';
 
 }
-
-
 
 /* 다이어리 카드 리스트가 1개 이상일 때, 카드 추가하기 */
 function addDiaryCard() {

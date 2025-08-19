@@ -175,8 +175,6 @@ const copyDiary = () => {
 기분: ${diaryFeeling}
 내용: ${textDiary}`)
 
-
-
 }
 
 const copyToastMessage = () => {
@@ -192,12 +190,25 @@ const copyToastMessage = () => {
 
 }
 
+/* 스크롤 막기 */
+const disabledScroll = () => {
+    document.body.style.overflow = "hidden";
+}
+
+/* 스크롤 활성화 */
+const enableScroll = () => {
+    document.body.style.overflow = "auto";
+}
+
 /* 버튼 클릭 시, 모달 on */
 const viewModal = (modal__name) => {
+    window.scrollTo({ top: 0, behavior: "smooth"})
     document.getElementById(modal__name).style = "display: block"
+    disabledScroll()
 }
 
 /* 취소모달에서 계속 작성 클릭 시, 해당 모달만 꺼지게끔하기? */
 const keepWrite = () => {
     document.getElementById('delete__modal').style = "display: none"
+    enableScroll()
 }
