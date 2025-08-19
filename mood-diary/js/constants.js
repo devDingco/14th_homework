@@ -29,7 +29,13 @@ const MOOD_FONT_COLOR = {
   surprise: '#D59029',
   angry: '#777',
   etc: '#A229ED'
-};
+}
+
+const RATIO_KOR = {
+  default: "기본",
+  horizontal: "가로형",
+  vertical: "세로형"
+}
 
 //로컬스토리지 관리 키
 const DIARY_KEY = "MY_DIARY"

@@ -96,9 +96,13 @@ const deleteDiaryById = (event, id) => {
   return diaryList.filter((el)=>el.id !== +id)
 }
 
-const selectedMood = () => {
-  const mood = document.getElementById("dropdown").value
-  return filterByMood(mood)
+const selectMood = (event) => {
+  const moodId = event.target.id
+  const moodLabel = getMoodLabel(moodId) ?? "전체"
+  document.getElementById('dropdown-title-id').style = `--dropdown-title: "${moodLabel}"`
+  document.getElementById('dropdown-title-id').click()
+
+  return filterByMood(moodId)
 }
 
 const filterByMood = (mood) => {

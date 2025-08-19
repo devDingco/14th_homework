@@ -22,17 +22,17 @@ const scrollToTop = () => {
 	window.scrollTo({ top: 0, behavior: "smooth" })
 }
 
-let scrolling
-const changeFilterColor = () => {
-  const dropdown = document.getElementById("dropdown")
-  dropdown.style = "background-color: var(--color-black); color:var(--color-white);"
+// let scrolling
+// const changeFilterColor = () => {
+//   const dropdown = document.getElementById("dropdown")
+//   dropdown.style = "background-color: var(--color-black); color:var(--color-white);"
 
-  clearTimeout(scrolling);
-  scrolling = setTimeout(() => {
-    dropdown.style = "background-color: var(--color-white);color: var(--color-black);"
-  },100)
-}
-window.addEventListener('scroll', changeFilterColor)
+//   clearTimeout(scrolling);
+//   scrolling = setTimeout(() => {
+//     dropdown.style = "background-color: var(--color-white);color: var(--color-black);"
+//   },100)
+// }
+// window.addEventListener('scroll', changeFilterColor)
 
 
 const scrollToComments = () => {
@@ -54,4 +54,8 @@ const toastMessage = (contents) => {
   setTimeout(() => {
     document.querySelector(".toast-bottom").style = "display:none"
   }, 2000)
+}
+
+const toggleDarkMode = () => {
+  document.body.classList.toggle('darkmode')
 }

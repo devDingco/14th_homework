@@ -19,7 +19,45 @@
   --color-gray-400: #ABABAB;
   --color-gray-500: #919191;
   --color-gray-600: #777;
+  --color-gray-700: #5F5F5F;
+  --color-gray-800: #333333;
+  --color-gray-900: #1C1C1C;
   --color-black: #000;
+
+  /* light mode */
+  --font-color: var(--color-black);
+  --sm-font-color: var(--color-gray-800);
+  --bg-color: var(--color-white);
+  --input-border-color: var(--color-gray-200);
+  --input-bg-color: var(--color-white);
+  --input-font-color: var(--color-black);
+  --placeholder-color: var(--color-gray-400);
+  --accent-color: var(--color-black);
+  --btn-left-border-color: var(--color-black);
+  --btn-left-font-color: var(--color-gray-900);
+  --btn-left-bg-color: var(--color-white);
+  --btn-right-font-color: var(--color-white);
+  --btn-right-bg-color: var(--color-black);
+  --btn-disabled-bg-color: var(--color-gray-300);
+  --btn-disabled-font-color: var(--color-white);
+}
+
+.darkmode{
+  --font-color: var(--color-white);
+  --sm-font-color: var(--color-gray-300);
+  --bg-color: var(--color-gray-900);
+  --input-border-color: var(--color-gray-800);
+  --input-bg-color: var(--color-black);
+  --input-font-color: var(--color-white);
+  --placeholder-color: var(--color-gray-600);
+  --accent-color: var(--color-white);
+  --btn-left-border-color: var(--color-gray-700);
+  --btn-left-font-color: var(--color-white);
+  --btn-left-bg-color: var(--color-gray-900);
+  --btn-right-font-color: var(--color-black);
+  --btn-right-bg-color: var(--color-gray-50);
+  --btn-disabled-bg-color: var(--color-gray-800);
+  --btn-disabled-font-color: var(--color-gray-600);
 }
 
 /* web headline */

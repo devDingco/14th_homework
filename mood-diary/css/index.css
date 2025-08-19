@@ -90,30 +90,157 @@ textarea::placeholder{
 }
 
 .multiple-functions{
-  height: 3.2rem;
-  top: 0;
+  /* height: 3.2rem; */
   width: 100%;
-  margin-bottom: 4.2rem;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
 }
 .filter{
   height: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.6rem;
 }
-.filter .dropdown{
-  width: 11.2rem;
-  padding: 0 1rem;
+
+/* dropdown */
+.dropdown{
+  width: 12rem;
   height: 100%;
   border-radius: 0.8rem;
   -moz-appearance: none;
 	-webkit-appearance: none;
 	appearance: none;
   font-size: 1.6rem;
+  border: solid 0.1rem var(--color-gray-300);
+  position: relative;
 }
+.dropdown-title{
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  padding: 1.2rem 1rem;
+  color: var(--color-gray-900);
+  font-weight: 500;
+  --dropdown-title: "전체"
+}
+.dropdown-title::after{
+  content:var(--dropdown-title);
+}
+ .dropdown-title:checked + ul{
+  display: block;
+ }
+.dropdown-list{
+  position: absolute;
+  top: 4.8rem;
+  display: none;
+  border-radius: 0.8rem;
+  border: solid 0.1rem var(--color-gray-300);
+  overflow: hidden;
+  width: 100%;
+  z-index: 8;
+  background-color: #fff;
+}
+.dropdown-list input{
+  display: none;
+}
+.dropdown-list li{
+  width: 100%;
+  padding: 1.2rem;
+}
+.dropdown-list li:has(input:hover){
+  font-weight: 700;
+  color: #299C00;
+  background-color: #3AB50F0D;
+}
+.dropdown-list li:has(input:checked){
+  background-color: #3AB50F0D;
+  font-weight: 700;
+  color: #299C00;
+}
+.dropdown-list input:checked + label::after{
+  transform: translateX(100%);
+  content: "✓";
+  font-weight: 900;
+  float: right;
+  margin-right: 1rem;
+  color: #299C00;
+}
+
+
+.searchbar {
+  display: flex;
+  width: 32rem;
+  height: 4.8rem;
+  align-items: center;
+  border: solid 0.1rem var(--color-gray-300);
+  padding: 1.2rem 1.6rem;
+  border-radius: 10rem;
+  gap: 0.8rem;
+}
+.searchbar .icon {
+  height: 2.4rem;
+  width: 2.4rem;
+  /* background-color: #0000EE; */
+ 
+}
+.searchbar .icon img{
+  width: 100%;
+}
+.searchbar input { 
+  padding: 0;
+  margin: 0;  
+  font-size: 1.6rem;
+  border: none;
+  border-radius: 0;
+  flex: 1;
+  /* padding: 0 0 0 2.4rem; */
+}
+
 .multiple-functions button{
   padding: 0.8rem 1rem;
   font-size: 1.8rem;
+  margin-left: auto;
+}
+
+.modal-title{
+  display: flex;
+  justify-content: space-between;
+}
+/* 토글버튼 */
+.toggle-active{
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.toggle-active p{
+  font-size: 1.2rem;
+  color: var(--font-color);
+}
+.toggle-btn{ 
+  appearance: none;
+  width: 4rem;
+  height: 2.4rem;
+  padding: 0.2rem;
+  background-color: var(--color-gray-100);
+  border-radius: 10rem;
+  border: none;
+}
+.toggle-btn::after{
+  display: block;
+  content:'';
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--color-white);
+  border-radius: 50%;
+}
+.toggle-btn:checked{
+  background-color: #3AD84A;
+}
+.toggle-btn:checked::after{
+  
+  transform: translateX(calc(100% - 0.4rem));
 }
 
 .main{

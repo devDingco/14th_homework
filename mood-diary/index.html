@@ -26,17 +26,45 @@
     <main class="main">
       <section id="diary-component">
         <div class="multiple-functions">
-          <div class="filter">
-            <select id="dropdown" class="dropdown" onchange="selectedMood()">
-              <option name="dropdown" value="total">전체</option>
-              <option name="dropdown" value="happy">행복해요</option>
-              <option name="dropdown" value="sad">슬퍼요</option>
-              <option name="dropdown" value="surprise">놀랐어요</option>
-              <option name="dropdown" value="angry">화나요</option>
-              <option name="dropdown" value="etc">기타</option>
-            </select>
+          <div class="dropdown">
+            <input type="checkbox" class="dropdown-title" id="dropdown-title-id" value="전체">
+            
+            <ul class="dropdown-list">
+              <li>
+                <input type="radio" name="dropdown" id="total" onclick="selectMood(event)">
+                <label for="total">전체</label>
+              </li>
+              <li>
+                <input type="radio" name="dropdown" id="happy" onclick="selectMood(event)">
+                <label for="happy">행복해요</label>
+              </li>
+              <li>
+                <input type="radio" name="dropdown" id="sad" onclick="selectMood(event)">
+                <label for="sad">슬퍼요</label>
+              </li>
+              <li>
+                <input type="radio" name="dropdown" id="surprise" onclick="selectMood(event)">
+                <label for="surprise">놀랐어요</label>
+              </li>
+              <li>
+                <input type="radio" name="dropdown" id="angry" onclick="selectMood(event)">
+                <label for="angry">화나요</label>
+              </li>
+              <li>
+                <input type="radio" name="dropdown" id="etc" onclick="selectMood(event)">
+                <label for="etc">기타</label>
+              </li>
+            </ul>
           </div>
-          <button onclick="openModal('main-diary-form')">+ 추가하기</button>
+
+          <div class="searchbar">
+            <label class="icon" for="search-input">
+              <img src="./assets/icons/search.png" alt="">
+            </label>
+            <input type="text" placeholder="검색어를 입력해 주세요." id="search-input" oninput="getDiaryByTitle(event)">
+          </div>
+
+          <button onclick="openModal('main-diary-form')">+ 일기쓰기</button>
         </div>
 
         <div class="main__gallery"></div>
@@ -45,7 +73,13 @@
         <div class="main-modal-group" id="main-diary-form">
           <div class="main-diary-form-bg" onclick="closeModal('main-diary-form')"></div>
           <form class="main__diary-form" id="myForm">
-            <h2>📍 일기 쓰기</h2>
+            <div class="modal-title">
+              <h2>📍 일기 쓰기</h2>
+              <div class="toggle-active">
+                <p>다크모드</p>
+                <input type="checkbox" class="toggle-btn" onclick="toggleDarkMode()">
+              </div>
+            </div>
 
             <div class="select-box">
               <h3>오늘 기분은 어땟나요?</h3>
@@ -123,12 +157,23 @@
       <!-- 사진보관함 -->
       <section id="photo-component" style="display: none;">
         <div class="multiple-functions">
-          <div class="filter">
-            <select id="dropdown-ratio" class="dropdown" onchange="selectedRatio()">
-              <option name="dropdown-ratio" value="default">기본</option>
-              <option name="dropdown-ratio" value="horizontal">가로형</option>
-              <option name="dropdown-ratio" value="vertical">세로형</option>
-            </select>
+          <div class="dropdown">
+            <input type="checkbox" class="dropdown-title" id="dropdown-ratio"/>
+
+            <ul class="dropdown-list">
+              <li>
+                <input type="radio" name="dropdown" id="default" onclick="selectRatio(event)" checked>
+                <label for="default">기본</label>
+              </li>
+              <li>
+                <input type="radio" name="dropdown" id="horizontal" onclick="selectRatio(event)">
+                <label for="horizontal">가로형</label>
+              </li>
+              <li>
+                <input type="radio" name="dropdown" id="vertical" onclick="selectRatio(event)">
+                <label for="vertical">세로형</label>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -155,7 +200,7 @@
   
   <script src="./js/form.js"></script>
   <script src="./js/modal.js"></script>
-
+  <script src="./js/debounce.js"></script>
   <script src="./js/fetchData.js"></script>
 </body>
 </html>
