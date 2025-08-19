@@ -139,28 +139,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
   dropdownItems.forEach((item) => {
     item.addEventListener('click', function () {
+      // 클릭한 텍스트를 버튼에 표시
       const selectedText = this.textContent;
       dropdownBtn.textContent = selectedText;
+
+      // 메뉴 닫기
       dropdownMenu.style.display = 'none';
 
-      // 필터링 기능 추가
+      console.log('선택됨:', selectedText);
       필터링하기(selectedText);
     });
-  });
+    
 
-  // 필터링 함수는 밖으로 빼기
-  function 필터링하기(선택된감정) {
-    const diaryListContainer = document.getElementById('diaryList');
-    diaryListContainer.innerHTML = '';
+        
+        function 필터링하기(선택된감정) {
+          // 일기 목록 화면 비우기
+          const diaryListContainer = document.getElementById('diaryList');
+          diaryListContainer.innerHTML = '';
 
-    if (선택된감정 === '전체') {
-      diaryList.map((일기) => 일기를화면에그리기(일기));
-    } else {
-      diaryList.map((일기) => {
-        if (일기.emotion === 선택된감정) {
-          일기를화면에그리기(일기);
+          // 조건에 맞는 일기들만 다시 그리기
+          if (선택된감정 === '전체') {
+            // 전체면 모든 일기 보여주기
+            diaryList.map((일기) => 일기를화면에그리기(일기));
+          } else {
+            // 특정 감정만 필터링해서 보여주기
+            diaryList.map((일기) => {
+              if (일기.emotion === 선택된감정) {
+                일기를화면에그리기(일기);
+              }
+            });
+          }
         }
       });
-    }
-  }
+    });
+  });
 });

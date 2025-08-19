@@ -4,10 +4,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const titleInput = document.getElementById('titleInput'); // 제목 입력창
   const textInput = document.getElementById('textInput'); // 내용 입력창
   const submitBtn = document.getElementById('submitBtn'); // 등록 버튼
-
+  const dropdownBtn = document.getElementById('dropdownBtn');
+  const dropdownMenu = document.getElementById('dropdownMenu');
   // 3단계: 일기들을 저장할 빈 배열 만들기 (모든 일기 데이터가 여기에 저장됨)
   let diaryList = [];
 
+  // 🆕 드롭다운 기능 함수 (일기를화면에그리기 함수 위에)
+  dropdownBtn.addEventListener('click', function () {
+    if (dropdownMenu.style.display === 'block') {
+      dropdownMenu.style.display = 'none';
+    } else {
+      dropdownMenu.style.display = 'block';
+    }
+  });
   // 공통 함수: 일기를 화면에 그리는 함수 (중복 코드를 줄이기 위해 함수로 만듦)
   function 일기를화면에그리기(일기데이터) {
     // 감정 텍스트에 따라 어떤 이미지를 보여줄지 정하는 객체
@@ -124,43 +133,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log('새일기 추가완료'); // 완료 확인용
   });
-
-  const dropdownBtn = document.getElementById('dropdownBtn');
-  const dropdownMenu = document.getElementById('dropdownMenu');
-
-  dropdownBtn.addEventListener('click', function () {
-    if (dropdownMenu.style.display === 'block') {
-      dropdownMenu.style.display = 'none';
-    } else {
-      dropdownMenu.style.display = 'block';
-    }
-  });
-  const dropdownItems = document.querySelectorAll('.dropdown-item');
-
-  dropdownItems.forEach((item) => {
-    item.addEventListener('click', function () {
-      const selectedText = this.textContent;
-      dropdownBtn.textContent = selectedText;
-      dropdownMenu.style.display = 'none';
-
-      // 필터링 기능 추가
-      필터링하기(selectedText);
-    });
-  });
-
-  // 필터링 함수는 밖으로 빼기
-  function 필터링하기(선택된감정) {
-    const diaryListContainer = document.getElementById('diaryList');
-    diaryListContainer.innerHTML = '';
-
-    if (선택된감정 === '전체') {
-      diaryList.map((일기) => 일기를화면에그리기(일기));
-    } else {
-      diaryList.map((일기) => {
-        if (일기.emotion === 선택된감정) {
-          일기를화면에그리기(일기);
-        }
-      });
-    }
-  }
 });
