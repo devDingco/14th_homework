@@ -290,14 +290,10 @@ window.onload = () => {
     window.scrollTo({top:0, behavior:"smooth"}) 
   }
   
-  const JS_일기삭제기능 = (event, 일기번호) => {
+  function JS_일기삭제기능(event, 일기번호) {
     // 1. 이 버튼 하위에 있는 모든 태그들의 기본기능 막기 => <a /> 태그 이동 막기
     event.preventDefault();
-    모달열기("일기삭제모달그룹ID");
-    JS_일기삭제확인기능(일기번호);
-  };
   
-  const JS_일기삭제확인기능 = (일기번호) =>{
     const 스토리지에저장된일기목록 =
       window.localStorage.getItem("민지의일기목록");
     const 일기목록 = 스토리지에저장된일기목록
@@ -307,6 +303,7 @@ window.onload = () => {
     const 삭제후일기목록 = 일기목록.filter((_, index) => index !== 일기번호);
     // 3. 삭제된 일기목록 다시 저장하기
     window.localStorage.setItem("민지의일기목록", JSON.stringify(삭제후일기목록));
+    alert("삭제되었습니다.");
     // 4. 삭제된 일기목록 화면에 다시 그리기
     JS_일기그리기기능();
   }
