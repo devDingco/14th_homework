@@ -109,4 +109,59 @@
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
+  position: relative;
+}
+
+.profile_dropdown {
+  position: absolute;
+  top: 0rem;
+  right: 0;
+  width: 24rem;
+  background: var(--white);
+  border-radius: 0.8rem;
+  border: 1px solid var(--gray-10);
+  padding: 2rem;
+  display: none;
+  z-index: 1000;
+
+}
+
+.profile_dropdown.open { 
+  display: block;
+}
+
+.profile_header { 
+  display: flex; 
+  align-items: center; 
+  gap: 0.8rem; 
+}
+
+.profile_divider { 
+  height: 1px; 
+  background: var(--gray-10);
+  margin: 1.2rem 0; 
+}
+
+.profile_row { 
+  display: flex; 
+  align-items: center; 
+  gap: 0.8rem; 
+}
+
+.profile_action { 
+  display: flex;
+  align-items: center;
+  gap: 0.8rem; 
+  width: 100%; 
+  padding: 0.8rem 0; 
+  background: transparent; 
+  border: none; 
+  cursor: pointer; 
+  color: var(--black);
+}
+
+.up_arrow_icon {
+  position: absolute;
+  right: 1.4rem;
+  
 }

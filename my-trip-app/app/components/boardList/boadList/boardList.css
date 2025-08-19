@@ -1,0 +1,93 @@
+
+
+.boardlist_container {
+    width: 128rem; 
+    height: auto;
+    margin: 0 auto; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
+    padding: 2.4 4.8rem;
+    border-radius: 1.6rem;
+    }
+
+.board_table { 
+    margin: 0 auto;
+    height: auto;
+    background: var(--white); 
+    width: 118.4rem;
+    }
+
+.board_thead, .tr { 
+    display: grid; 
+    grid-template-columns: 6.4rem 1fr 10rem 10rem; 
+    align-items: center; 
+    padding: 0 2.4rem;
+    gap: 0.8rem;
+}
+
+
+.board_thead { 
+    height: 5.2rem; 
+    color: var(--gray-90); 
+    margin-bottom: 0.8rem;
+
+    
+    }
+
+    
+    .th-title {
+        text-align: left;
+    }
+    
+    .th-date {
+        text-align: center;
+    }
+    
+
+.board_tbody .tr { 
+    height: 4.8rem; ; 
+    border-radius: 0.8rem;
+    border: 1px solid var(--gray-10);
+    gap: 0.8rem;
+    padding: 0 2.4rem;
+    }
+
+.board_tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.td { color: var(--gray-90); 
+    }
+
+.td-num {
+    color: var(--gray-50);
+}
+
+   
+.td-date {
+    text-align: center;
+    color: var(--gray-50);
+}
+
+.title_link { 
+    color: var(--gray-90); 
+    }
+    
+    .title_link:hover { 
+        text-decoration: underline; 
+        }
+
+.title_link:hover { 
+    text-decoration: underline; 
+    }
+
+/* 반응형 최소 */
+@media (max-width: 768px) {
+  .board_thead, .tr { 
+    grid-template-columns: 6rem 1fr 12rem 12rem; 
+    border-radius: 0.8rem;
+    }
+}
+
+
