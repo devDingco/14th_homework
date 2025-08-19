@@ -39,7 +39,7 @@ const HTML일기보여주기 = () => {
         </div>
 
         <button class="삭제버튼" onclick="삭제하기기능(event,${index})">
-          <img src="./images/closeicon.svg">
+          <img class="일기사진" src="./images/closeicon.svg">
         </button>
       </div>
     </a>

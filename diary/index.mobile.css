@@ -1,0 +1,33 @@
+.바디__정렬 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.바디__정렬__일기쓰기 {
+  order: 1;
+  min-width: 19.5rem;
+  width: 100%;
+}
+
+.바디__정렬__목록 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  gap: 2.4rem;
+  order: 2;
+}
+
+.일기사진 {
+  width: 100%;
+}
+.바디__정렬__목록__첫번째 {
+  max-width: none;
+  width: 100%;
+}
+.바디__정렬 {
+  display: flex;
+  flex-direction: column;
+}

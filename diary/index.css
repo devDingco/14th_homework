@@ -15,34 +15,34 @@ a {
 }
 
 .헤더 {
-  max-width: 1920px;
+  max-width: 120rem;
   width: 100%;
-  height: 60px;
-  padding: 0 20px;
+  height: 3.75rem;
+  padding: 0 1.25rem;
   display: flex;
   justify-content: center;
 }
 
 .헤더__정렬 {
-  max-width: 1168px;
+  max-width: 73rem;
   width: 100%;
-  height: 60px;
+  height: 3.75rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .헤더__정렬__로고 {
-  max-width: 120px;
+  max-width: 7.5rem;
   width: 100%;
-  height: 40px;
+  height: 2.5rem;
   align-items: center;
   display: flex;
 }
 
 .헤더__정렬__로고__이름 {
   align-items: center;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
   font-style: normal;
 }
@@ -51,129 +51,141 @@ a {
   position: sticky;
   top: 0;
   left: 0;
-  max-width: 1920px;
+  max-width: 120rem;
   width: 100%;
-  height: 42px;
+  height: 2.625rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .필터__정렬__선택 {
-  max-width: 120px;
+  max-width: 7.5rem;
   width: 100%;
-  height: 32px;
+  height: 2rem;
 }
 
 .배너 {
-  max-width: 1920px;
+  max-width: 120rem;
   width: 100%;
-  height: 240px;
-  padding: 0 20px;
+  min-height: 15rem;
+  padding: 0 1.25rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
+/* .배너 img {
+  max-width: 100%;
+  display: block;
+} */
 
 .내비게이션 {
-  max-width: 1920px;
+  max-width: 120rem;
   width: 100%;
-  height: 48px;
-  padding: 0 20px;
+  height: 3rem;
+  padding: 0 1.25rem;
   display: flex;
   justify-content: center;
 }
 
 .내비게이션__정렬 {
-  max-width: 1168px;
+  max-width: 73rem;
   width: 100%;
-  height: 48px;
+  height: 3rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 .내비게이션__정렬__왼쪽 {
-  max-width: 254px;
+  max-width: 15.875rem;
   width: 100%;
-  height: 48px;
+  height: 3rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 .내비게이션__정렬__왼쪽__일기보관함 {
-  /* width: 119px; */
-  height: 48px;
-  padding: 12px 8px;
+  width: 100%;
+  height: 3rem;
+  padding: 0.75rem 0.5rem;
   align-items: center;
   display: flex;
   justify-content: center;
   color: #000;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
-  border-bottom: 2px solid #000;
+  border-bottom: 0.125rem solid #000;
 }
 .내비게이션__정렬__왼쪽__사진보관함 {
-  /* width: 119px; */
-  height: 48px;
-  padding: 12px 8px;
+  width: 100%;
+  height: 3rem;
+  padding: 0.75rem 0.5rem;
   align-items: center;
   display: flex;
   justify-content: center;
   color: #ababab;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 500;
 }
 
 .플로팅버튼이미지 {
-  width: 40px;
-  height: 40px;
+  max-width: 2.5rem;
+  width: 100%;
 }
 .플로팅버튼 {
   position: fixed;
-  right: 30px;
-  bottom: 30px;
+  right: 1.875rem;
+  bottom: 1.875rem;
 }
 
 .필터__정렬 {
-  width: 1168px;
-  height: 32px;
+  max-width: 73rem;
+  width: 100%;
+  height: 2rem;
   display: flex;
   align-items: center;
 }
 
-.CSS일기보여주는곳 {
+/* .CSS일기보여주는곳 {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
-}
+
+  gap: 1.5rem;
+} */
 
 .바디 {
-  width: 1920px;
+  max-width: 120rem;
+  width: 100%;
+  height: auto;
   display: flex;
   justify-content: center;
 }
 .바디__정렬 {
-  width: 1168px;
-  height: 1167px;
+  max-width: 73rem;
+  width: 100%;
+  /* max-height: 72.9375rem; */
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
 .바디__정렬__목록 {
-  width: 784px;
-  height: 1167px;
+  min-width: 49rem;
+  width: 100%;
+  /* height: 72.9375rem; */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-content: flex-start;
-  gap: 24px;
+  gap: 1.5rem;
 }
 
 .바디__정렬__목록__첫번째 {
-  width: 380px;
-  height: 373px;
+  max-width: 23.75rem;
+  width: 100%;
+  height: 23.3125rem;
   transition: 0.5s;
   position: relative;
 }
@@ -186,45 +198,47 @@ a {
   transition: 0.5s;
 }
 .바디__정렬__목록__첫번째 > img:hover {
-  filter: blur(2px);
+  filter: blur(0.125rem);
 }
 
 .바디__정렬__목록__첫번째__내용 {
-  width: 380px;
-  height: 72px;
-  padding: 0 8px;
+  max-width: 23.75rem;
+  width: 100%;
+  height: 4.5rem;
+  padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .바디__정렬__목록__첫번째__내용__감정날짜 {
-  width: 364px;
-  height: 24px;
+  max-width: 22.75rem;
+  width: 100%;
+  height: 1.5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 .바디__정렬__목록__첫번째__내용__감정날짜__감정 {
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 .바디__정렬__목록__첫번째__내용__감정날짜__날짜 {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #919191;
 }
 
 .바디__정렬__목록__첫번째__내용__타이틀 {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px;
+  line-height: 1.5rem;
 }
 .삭제버튼 {
   cursor: pointer;
-  width: 24px;
-  height: 24px;
-  top: 7px;
-  right: 20px;
+  width: 1.5rem;
+  height: 1.5rem;
+  top: 0.4375rem;
+  right: 1.25rem;
   border: none;
   background-color: transparent;
   position: absolute;
@@ -232,45 +246,49 @@ a {
 }
 
 .바디__정렬__일기쓰기 {
-  width: 360px;
-  height: 600px;
-  padding: 24px;
+  min-width: 19.5rem;
+  width: 100%;
+  /* max-height: 37.5rem; */
+  padding: 1.5rem;
   border-radius: 16px;
-  border: 1px solid #d4d3d3;
+  border: 0.0625rem solid #d4d3d3;
   display: flex;
   flex-direction: column;
 }
 
 .바디__정렬__일기쓰기__타이틀 {
-  width: 312px;
-  height: 24px;
-  font-size: 24px;
+  min-width: 19.5rem;
+  width: 100%;
+  height: 1.5rem;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
 }
 .바디__정렬__일기쓰기__오기어 {
-  width: 312px;
-  height: 24px;
-  font-size: 20px;
+  min-width: 19.5rem;
+  width: 100%;
+  height: 1.5rem;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 600;
 }
 .바디__정렬__일기쓰기__라디오 {
-  gap: 20px;
-  width: 312px;
-  height: 68px;
+  gap: 1.25rem;
+  min-width: 19.5rem;
+  width: 100%;
+  /* height: 4.25rem; */
   display: flex;
   flex-wrap: wrap;
 }
 
 .바디__정렬__일기쓰기__라디오__감정 {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 500;
-  height: 24px;
+  line-height: 1.5rem;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .바디__정렬__일기쓰기__제목 {
@@ -279,67 +297,75 @@ a {
 }
 
 .바디__정렬__일기쓰기__제목__라벨 {
-  width: 312px;
-  height: 20px;
+  max-width: 19.5rem;
+  width: 100%;
+  height: 1.25rem;
   color: #333;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
 }
 
 .바디__정렬__일기쓰기__제목__인풋 {
-  width: 312px;
-  height: 48px;
+  min-width: 19.5rem;
+  width: 100%;
+  height: 3rem;
   background-color: #fff;
   border-radius: 8px;
-  border: 1px solid #d4d3d3;
+  border: 0.0625rem solid #d4d3d3;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  padding: 10px;
 }
 
 .바디__정렬__일기쓰기__제목__라벨__인풋__입력창 {
-  width: 280px;
-  height: 24px;
+  max-width: 17.5rem;
+  width: 100%;
+  height: 1.5rem;
   border: none;
 }
 
 .바디__정렬__일기쓰기__내용 {
   display: flex;
   flex-direction: column;
+  height: auto;
 }
 
 .바디__정렬__일기쓰기__내용__라벨 {
-  width: 312px;
-  height: 20px;
+  max-width: 19.5rem;
+  width: 100%;
+  height: 1.25rem;
   color: #333;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
 }
 
 .바디__정렬__일기쓰기__내용__인풋 {
-  padding: 12px 16px;
-  width: 312px;
-  height: 128px;
+  padding: 0.75rem 1rem;
+  min-width: 19.5rem;
+  width: 100%;
+  height: 8rem;
   background-color: #fff;
   border-radius: 8px;
-  border: 1px solid #d4d3d3;
+  border: 0.0625rem solid #d4d3d3;
   display: flex;
-  justify-content: center;
-  /* align-items: center; */
+  /* justify-content: center; */
 }
 
 .바디__정렬__일기쓰기__내용__라벨__인풋__입력창 {
-  width: 280px;
-  height: 24px;
+  max-width: 17.5rem;
+  width: 100%;
+  min-height: 1.5rem;
   border: none;
 }
 
 .바디__정렬__일기쓰기__등록 {
-  padding: 8px 16px;
-  width: 312px;
-  height: 48px;
+  padding: 0.5rem 1rem;
+  min-width: 19.5rem;
+  width: 100%;
+  height: 3rem;
   border-radius: 8px;
   background-color: #c7c7c7;
   display: flex;
@@ -347,15 +373,17 @@ a {
 }
 
 .바디__정렬__일기쓰기__등록__버튼 {
-  width: 312px;
+  max-width: 19.5rem;
+  width: 100%;
   border: none;
   background-color: transparent;
 }
 
 .푸터 {
-  width: 1920px;
-  height: 160px;
-  padding: 24px 20px;
+  max-width: 120rem;
+  width: 100%;
+  height: 10rem;
+  padding: 1.5rem 1.25rem;
   background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
@@ -363,205 +391,216 @@ a {
   align-items: center;
 }
 .푸터__내용 {
-  width: 1168px;
-  height: 112px;
+  max-width: 73rem;
+  width: 100%;
+  height: 7rem;
   display: flex;
   flex-direction: column;
 }
 
 /* 디테일CSS */
-/* 디테일CSS */
-/* 디테일CSS */
-/* 디테일CSS */
-/* 디테일CSS */
-/* 디테일CSS */
-/* 디테일CSS */
 
 .디테일본문 {
-  width: 1920px;
-  /* height: 321px; */
+  max-width: 120rem;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .디테일본문__정렬 {
-  width: 1168px;
-  height: 305px;
+  max-width: 73rem;
+  width: 100%;
+  height: 19.0625rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .디테일본문__정렬__타이틀 {
-  width: 1168px;
-  height: 24px;
-  border-bottom: 2px solid #000;
+  max-width: 73rem;
+  width: 100%;
+  height: 1.5rem;
+  border-bottom: 0.125rem solid #000;
 }
 
 .디테일본문__정렬__타이틀__내용 {
-  min-width: 186px;
-  height: 24px;
-  font-size: 20px;
+  min-width: 11.625rem;
+  height: 1.5rem;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 700;
   color: #000;
 }
 
 .디테일본문__정렬__감정날짜 {
-  width: 1168px;
-  height: 32px;
+  max-width: 73rem;
+  width: 100%;
+  height: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .디테일본문__정렬__감정날짜__왼쪽 {
-  width: 109px;
-  height: 32px;
+  max-width: 6.8125rem;
+  width: 100%;
+  height: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .디테일본문__정렬__감정날짜__왼쪽__이모지 {
-  width: 32px;
-  height: 32px;
+  max-width: 2rem;
+  width: 100%;
+  height: 2rem;
 }
 
 .디테일본문__정렬__감정날짜__왼쪽__감정 {
   display: flex;
   justify-content: center;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 600;
 }
 
 .디테일본문__정렬__감정날짜__오른쪽 {
-  width: 107px;
-  height: 20px;
+  max-width: 6.6875rem;
+  width: 100%;
+  height: 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .디테일본문__정렬__감정날짜__오른쪽__날짜 {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
   color: #919191;
 }
 
 .디테일본문__정렬__감정날짜__오른쪽__작성수정 {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
   color: #919191;
 }
 .디테일본문__정렬__내용라벨 {
-  width: 1168px;
-  height: 20px;
+  max-width: 73rem;
+  width: 100%;
+  height: 1.25rem;
   color: #000;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
 }
 
-.테일본문__정렬__내용보이는곳 {
-  width: 1168px;
-  height: 100px;
+.디테일본문__정렬__내용보이는곳 {
+  max-width: 73rem;
+  width: 100%;
+  height: 6.25rem;
 }
-.테일본문__정렬__수정 {
-  width: 1168px;
-  height: 40px;
+.디테일본문__정렬__수정 {
+  max-width: 73rem;
+  width: 100%;
+  height: 2.5rem;
   display: flex;
   justify-content: flex-end;
 }
-.테일본문__정렬__수정__버튼 {
-  width: 51px;
-  height: 40px;
+.디테일본문__정렬__수정__버튼 {
+  max-width: 3.1875rem;
+  width: 100%;
+  height: 2.5rem;
   background-color: #fff;
   border-radius: 8px;
-  border: 1px solid #d4d3d3;
+  border: 0.0625rem solid #d4d3d3;
 }
-.테일본문__정렬__삭제__버튼 {
-  width: 51px;
-  height: 40px;
+.디테일본문__정렬__삭제__버튼 {
+  max-width: 3.1875rem;
+  width: 100%;
+  height: 2.5rem;
   background-color: #fff;
   border-radius: 8px;
-  border: 1px solid #d4d3d3;
-  margin-left: 16px;
+  border: 0.0625rem solid #d4d3d3;
+  margin-left: 1rem;
 }
 .댓글창 {
-  width: 1920px;
+  max-width: 120rem;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .댓글창__정렬 {
-  width: 1198px;
-  height: 202px;
+  max-width: 74.875rem; /* 1198px */
+  width: 100%;
+  min-height: 12.625rem; /* 202px */
   flex-shrink: 0;
-  padding: 18px 12px;
+  padding: 1.125rem 0.75rem; /* 18px 12px */
   display: flex;
   flex-direction: column;
 }
 .댓글창__정렬__회고 {
-  font-size: 18px;
+  font-size: 1.125rem; /* 18px */
   font-style: normal;
   font-weight: 600;
-  height: 24px;
+  height: 1.5rem; /* 24px */
 }
 .댓글창__정렬__인풋 {
-  width: 1101px;
-  height: 48px;
-  padding: 12px 16px;
+  max-width: 68.8125rem; /* 1101px */
+  width: 100%;
+  height: 3rem; /* 48px */
+  padding: 0.75rem 1rem; /* 12px 16px */
   border-radius: 8px;
-  border: 1px solid #d4d3d3;
+  border: 0.0625rem solid #d4d3d3;
   background: #fff;
 }
 
 .댓글창__정렬__댓글입력창 {
-  width: 1168px;
-  height: 48px;
+  max-width: 73rem; /* 1168px */
+  width: 100%;
+  height: 3rem; /* 48px */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 0.75rem; /* 12px */
 }
 .댓글창__정렬__댓글입력창__인풋 {
-  width: 1101px;
-  height: 48px;
-  padding: 12px 16px;
+  max-width: 68.8125rem; /* 1101px */
+  width: 100%;
+  height: 3rem; /* 48px */
+  padding: 0.75rem 1rem; /* 12px 16px */
   border-radius: 8px;
-  border: 1px solid #d4d3d3;
+  border: 0.0625rem solid #d4d3d3;
 }
 
 .댓글창__정렬__댓글입력창__입력버튼 {
   display: flex;
-  height: 48px;
-  padding: 8px 10px;
+  height: 3rem; /* 48px */
+  padding: 0.5rem 0.625rem; /* 8px 10px */
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 10px;
+  gap: 0.625rem; /* 10px */
   border-radius: 8px;
   background: #000;
-  font-size: 18px;
+  font-size: 1.125rem; /* 18px */
   font-style: normal;
   font-weight: 600;
   color: #fff;
 }
 .댓글창__정렬__댓글입력창__입력버튼2 {
   display: flex;
-  height: 48px;
-  padding: 8px 10px;
+  height: 3rem; /* 48px */
+  padding: 0.5rem 0.625rem; /* 8px 10px */
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 10px;
+  gap: 0.625rem; /* 10px */
   border-radius: 8px;
   background: #c7c7c7;
-  font-size: 18px;
+  font-size: 1.125rem; /* 18px */
   font-style: normal;
   font-weight: 600;
   color: #fff;
@@ -569,127 +608,132 @@ a {
 }
 
 .댓글창__정렬__댓글 {
-  width: 1168px;
-  height: 24px;
+  max-width: 73rem; /* 1168px */
+  width: 100%;
+  height: 1.5rem; /* 24px */
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 0.75rem; /* 12px */
 }
 .댓글창__정렬__댓글__추가 {
-  font-size: 16px;
+  font-size: 1rem; /* 16px */
   font-style: normal;
   font-weight: 500;
-  margin-right: 12px;
+  margin-right: 0.75rem; /* 12px */
 }
 .댓글창__정렬__댓글__날짜 {
-  font-size: 16px;
+  font-size: 1rem; /* 16px */
   font-style: normal;
   font-weight: 400;
   color: #777;
 }
-/* edit CSS */
-/* edit CSS */
-/* edit CSS */
-/* edit CSS */
-/* edit CSS */
-/* edit CSS */
-/* edit CSS */
-/* edit CSS */
-/* edit CSS */
+
 /* edit CSS */
 
 .수정본문 {
-  width: 1880px;
-  height: 432px;
+  max-width: 117.5rem; /* 1880px */
+  width: 100%;
+  min-height: 27rem; /* 432px */
   display: flex;
   justify-content: center;
 }
-
+.수정본문__정렬 {
+  max-width: 73rem; /* 1168px */
+  width: 100%;
+}
 .수정본문__정렬__감정질문 {
-  width: 1168px;
-  height: 24px;
-  font-size: 20px;
+  max-width: 73rem; /* 1168px */
+  width: 100%;
+  height: 1.5rem; /* 24px */
+  font-size: 1.25rem; /* 20px */
   font-style: normal;
   font-weight: 600;
 }
 
 .수정본문__정렬__라디오 {
-  width: 592px;
-  height: 24px;
+  max-width: 37rem; /* 592px */
+  width: 100%;
+  height: 1.5rem; /* 24px */
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 1.25rem; /* 20px */
 }
 
 .수정본문__정렬__라디오__감정 {
-  font-size: 18px;
+  font-size: 1.125rem; /* 18px */
   font-style: normal;
   font-weight: 500;
-  height: 24px;
+  height: 1.5rem;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 8px;
 }
 
 .수정본문__정렬__제목__라벨 {
-  width: 1168px;
-  height: 20px;
-  font-size: 14px;
+  max-width: 73rem; /* 1168px */
+  width: 100%;
+  height: 1.25rem; /* 20px */
+  font-size: 0.875rem; /* 14px */
   font-style: normal;
   font-weight: 500;
 }
 
 .수정본문__정렬__제목__인풋 {
-  width: 1168px;
-  height: 48px;
+  max-width: 73rem; /* 1168px */
+  width: 100%;
+  height: 3rem; /* 48px */
   border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  border: 0.0625rem solid #d4d3d3;
   background: #fff;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem; /* 12px 16px */
 }
 .수정본문__정렬__내용__라벨 {
-  width: 1168px;
-  height: 20px;
-  font-size: 14px;
+  max-width: 73rem; /* 1168px */
+  width: 100%;
+  height: 1.25rem; /* 20px */
+  font-size: 0.875rem; /* 14px */
   font-style: normal;
   font-weight: 500;
 }
 
 .수정본문__정렬__내용__인풋 {
-  width: 1168px;
-  height: 128px;
+  max-width: 73rem; /* 1168px */
+  width: 100%;
+  height: 8rem; /* 128px */
   border-radius: 8px;
-  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  border: 0.0625rem solid #d4d3d3;
   background: #fff;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem; /* 12px 16px */
   resize: none;
 }
 .수정본문__정렬__버튼정렬 {
-  height: 48px;
+  height: 3rem; /* 48px */
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 1rem; /* 16px */
 }
 
 .수정본문__정렬__버튼정렬__취소 {
   display: flex;
-  width: 104px;
-  height: 48px;
-  padding: 8px 10px;
+  max-width: 6.5rem; /* 104px */
+  width: 100%;
+  height: 3rem; /* 48px */
+  padding: 0.5rem 0.625rem; /* 8px 10px */
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  border: 1px solid #000;
+  border: 0.0625rem solid #000;
   background: #fff;
   color: #1c1c1c;
 }
 
 .수정본문__정렬__버튼정렬__수정 {
   display: flex;
-  width: 104px;
-  height: 48px;
-  padding: 8px 10px;
+  max-width: 6.5rem; /* 104px */
+  width: 100%;
+  height: 3rem; /* 48px */
+  padding: 0.5rem 0.625rem; /* 8px 10px */
   flex-direction: column;
   justify-content: center;
   align-items: center;
