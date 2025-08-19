@@ -1,8 +1,15 @@
-.메인_바디_일기장 {
+.프레임 {
+    margin: 0rem 1.25rem;
+}
+
+#일기장전체틀 {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1.5rem;
 }
 
 #일기목록 {
@@ -10,9 +17,16 @@
     grid-template-columns: 1fr 1fr;
 
     width: 100%;
-    /* gap: ; */
+    max-width: none;
+    order: 3;
+}
 
-    order: 2;
+.메인_바디_일기장_일기쓰기 {
+    max-width: 45.625rem;
+}
+
+.메인_바디_일기장_일기저장_{
+    max-width: none;
 }
 
 .메인_바디_일기장_일기저장_사진 {
@@ -23,4 +37,15 @@
     width: 100%;
     order: 1;
     max-width: none;
+    margin: 0;
+}
+
+.메인_바디_필터_배경 {
+    order: 2;
+}
+
+.메인_바디_일기장 {
+    width: 100%;
+    max-width: none;
+    
 }
