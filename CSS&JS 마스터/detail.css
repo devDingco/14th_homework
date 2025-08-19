@@ -401,6 +401,14 @@
     text-align: center;
 }
 
+#삭제{
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 1.063rem;
+    line-height: 1.5rem;
+}
+
 #HTML_기분이미지보여주는곳 {
     width: 2rem;
     height: 2rem;
