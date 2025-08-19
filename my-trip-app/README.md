@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 14th_homework ✈️🏨
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![Responsive](https://img.shields.io/badge/Responsive-Yes-brightgreen)
+![License](https://img.shields.io/badge/Copyright-CodeCamp-blue)
 
+---
+
+## 📌 프로젝트 개요
+**TRip TRip **는 여행자와 숙소 제공자를 연결하는 **여행 커뮤니티 & 커머스 플랫폼**입니다.  
+
+- 여행자: 여행지 소식 공유 & 다른 유저와 소통  
+- 숙소 예약: 원하는 숙소를 검색·예약  
+- 숙소 제공자: 내 숙소를 등록하고 판매  
+
+---
+
+## ⚙️ 기술 스택
+- **Frontend**: React, Next.js  
+- **Responsive UI**: Desktop, Tablet, Mobile 대응  
+- **Core Languages**: JavaScript, HTML, CSS  
+
+---
+
+## 📂 파일 구조 및 코딩 컨벤션
+📌 **Coding Convention**
+- 변수/함수명: `snake_case`  
+- 파일명: `camelCase`  
+- 아이콘 & 이미지: `public` 디렉토리 관리  
+- 폴더 구조: 기능별로 분리  
+
+📌 **Commit 규칙**
 ```bash
+git commit -m "[YY:MM:DD] 추가된 기능 설명"
+
+
+--- 
+**시작명령어**
+
 npm run dev
 # or
 yarn dev
 # or
-pnpm dev
-# or
-bun dev
 ```
+--
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+**로그인 테스트 계정**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+user@example.com
+P@ssword123!
