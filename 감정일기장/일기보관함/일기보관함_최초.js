@@ -267,49 +267,14 @@ const 일기삭제기능 = (event, 일기번호) => {
     일기그리기기능();
 }
 
-// let 일기보관함 = [];
-// // 일기장 배열에 새로운 일기 객체들 추가하기
-
-// const 새로운일기 = {
-//     기분상태: 기분,
-//     제목: 제목,
-//     내용: 내용,
-// }
-// 일기보관함.push(새로운일기);
-// console.log(일기보관함)
 
 
 
-//추가한 일기 데이터 저장해놓기//
 
 
-// let 일기목록 = [];
-
-// const 등록버튼 = document.querySelector(".메인_바디_일기장_일기쓰기_등록하기");
-//   if (등록버튼) {
-//   }
-
-//   일기보관함.push(새일기);
 
 
-// const 일기상세내용들 = () => {
-//     const 기분 = document.getElementsBy ("기분상태")[0].value;
-//     const 제목 = document.getElementsByClassName("제목을입력해주세요")[0].value;
-//     const 내용 = document.getElementsByClassName("내용을입력해주세요")[0].value;
-// }
-// console.log(일기상세내용들)
 
-// function 카드클릭시일기보이기 (작성된일기항목) {
-//     const 일기장 = [작성된일기항목];
-//     alert(
-//         `기분: ${일기상세내용들.기분} 
-//         제목 : ${일기상세내용들.제목을입력해주세요}
-//         내용 : ${일기상세내용들.내용을입력해주세요}
-//         `
-//     );
-//   }
-
-// function 일기뒤에추가하기 (){
     
 // // 일기쓰기 칸에 들어가는 내용들 변수명 추가
 // const 기분선택 = document.querySelectorAll('input[name="기분상태"]');
@@ -332,25 +297,3 @@ const 일기삭제기능 = (event, 일기번호) => {
 //     }
 // }
 
-
-
-// // const 일기장추가 = [새로운일기]
-
-
-// // const 일기등록하기 = () => {
-// //     document.getElementById("일기장전체틀").innerHTML= `
-// //     <div class="메인_바디_일기장_일기저장_A">
-// //         <img src="../images/8aed48b7b19da762c846d560f8bfcde81d4efdc5.png" class="메인_바디_일기장_일기저장_사진">
-// //         <div class="메인_바디_일기장_일기저장_내용">
-// //             <div class="메인_바디_일기장_일기저장_내용_감정과날짜">
-// //                 <div class="메인_바디_일기장_일기저장_내용_감정_슬퍼요"> $ </div>
-// //                 <div class="메인_바디_일기장_일기저장_내용_날짜"> 2024.03.12 </div>
-// //             </div>
-// //             <div class="메인_바디_일기장_일기저장_설명_타이틀"> ${일기보관함[0].내용}
-// //             </div>
-// //         </div>
-// //     </div>`
-
-// //     console.log(일기등록하기).data
-
-// }

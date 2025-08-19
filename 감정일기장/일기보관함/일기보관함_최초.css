@@ -80,7 +80,7 @@ a {
 
 }
 
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
 .메인_바디 {
     display: flex;
@@ -114,6 +114,13 @@ a {
     top:0;
 }
 
+.메인_바디_일기장_필터일기쓰기버튼 {
+    width: 100%;
+    display: flex;
+    
+    justify-content: space-between;
+}
+
 .필터버튼 {
     max-width: 7.5rem;
     width: 100%;
@@ -123,6 +130,26 @@ a {
     height: 2rem;   
   }
 
+.일기쓰기버튼 {
+    max-width: 6.875rem;
+    width: 100%;
+    height: 3rem;
+    padding: 0.5rem 0.625rem;
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.625rem;
+
+    border-radius: 0.5rem;
+    background: var(--Gray-B, #000);
+
+    color: var(--Gray-W, #FFF);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem; /* 133.333% */
+    letter-spacing: -0.01125rem;
+}
 
 .메인_바디_상단글씨_일기보관함{
     display: flex;
@@ -158,11 +185,7 @@ a {
     background: none;
     border: none;
 }
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-
-/* .메인_바디_일기장 {
-   
-} */
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ메인_바디_일기장ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
 #일기장전체틀 {
     width: 100%; 
@@ -175,7 +198,6 @@ a {
     margin-bottom: 2.5rem;
    
     /* height: auto; */
-        
     /* border: solid 0.0625rem blue; */
 }
 
@@ -188,29 +210,32 @@ a {
 
     width: 100%;
     height: 100%;
-    max-width: 49rem;
+    max-width: 73rem;
     
     /* margin: 1.5rem; */
     gap: 1.5rem;
     /* overflow:scroll; */
     
     /* border: solid 0.0625rem pink; */
-
 }
 
 .메인_바디_일기장_일기저장_ {
     background-color: #fff;
-    max-width: 23.75rem; 
+    max-width: 17.125rem; 
     width: 100%;
-
+    max-height: 18.5rem;  
     height: 100%;
+
+    /* gap: 1rem; */
 
     display: flex;
     flex-direction: column;
 }  
+
 .메인_바디_일기장_일기저장프레임_ {
-    max-width: 23.75rem;
-    width: 100%;    
+    max-width: 73rem;
+    width: 100%;
+      
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -221,6 +246,7 @@ a {
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-width: 17.125rem;
    
     /* border: solid 0.0625rem green; */
 }
@@ -229,9 +255,12 @@ a {
     /* background-color: yellow; */
     border-radius: 1rem;
     display: flex;
+
+    max-width: 17.125rem;
     width: 100%;
-    height: 100%;
-    
+    height: 13rem;
+    /* height: 100%; */
+    margin-bottom: 1rem;
     align-items: center;
     align-self: stretch;
 
@@ -240,6 +269,7 @@ a {
     position: relative;
     /* border: solid 0.0625rem black; */
 }
+
 .메인_바디_일기장_일기저장_사진:hover {
     filter: blur(0.25rem);
     transform: scale(1.1);
@@ -247,9 +277,13 @@ a {
 
 
 .메인_바디_일기장_일기저장_내용_감정과날짜 {
+    max-width: 17.125rem;
     width: 100%;
-    height: 3.5rem;
+    height: 1.5rem;
     display: flex;
+
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
     /* flex-direction: row; */
     justify-content: space-between;
     align-items: center;
@@ -259,24 +293,19 @@ a {
     color: #28B4E1;
     font-size: 0.875rem;
     font-style: normal;
-
 }
-
 .메인_바디_일기장_일기저장_내용_감정_놀랐어요 {
     color: #D59029;;
     font-size: 0.875rem;
     font-style: normal;
-
 }.메인_바디_일기장_일기저장_내용_감정_화나요 {
     color: #777;
     font-size: 0.875rem;
     font-style: normal;
-
 }.메인_바디_일기장_일기저장_내용_감정_행복해요 {
     color: #EA5757;
     font-size: 0.875rem;
     font-style: normal;
-
 }.메인_바디_일기장_일기저장_내용_감정_기타 {
     color: #A229ED;
     font-size: 0.875rem;
@@ -291,6 +320,11 @@ a {
 }
 
 .메인_바디_일기장_일기저장_1_설명_타이틀 {
+    max-width: 17.125rem;
+    width: 100%;
+    height: 1.5rem;
+    padding: 0.5rem;
+
     color: #000;
     font-size: 1.125rem;
     font-style: normal;
@@ -437,10 +471,38 @@ a {
 /* .내용을입력해주세요::placeholder{
     align-items: flex-start;
 } */
+.일기쓰기_닫기등록버튼 {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.메인_바디_일기장_일기쓰기_닫기{
+    display: flex;
+    width: 6.5rem;
+    height: 3rem;
+    padding: 0.5rem 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+
+    border-radius: 0.5rem;
+    border: 1px solid var(--ay-B, #000);
+    background: var(--Gray-W, #FFF);
+
+    color: var(--Gray-Gray-900, #1C1C1C);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem; /* 133.333% */
+    letter-spacing: -0.01125rem;
+
+}
+
 .메인_바디_일기장_일기쓰기_등록하기{
     display: flex;
     height: 3rem;
-    width: 100%;
+    width: 6.5rem;
     padding: 0.5rem 0.625rem;
     flex-direction: column;
     justify-content: center;
@@ -452,7 +514,11 @@ a {
 
     color: var(--Gray-Gray-50, #F2F2F2);
     font-size: 1.125rem;
-    font-style: normal;
+    color: var(--Gray-Gray-50, #F2F2F2);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem; /* 133.333% */
+    letter-spacing: -0.01125rem;
 
     border: none;
     }
@@ -472,7 +538,7 @@ a {
 
 } */
 
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ하단ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
 .하단 {
     width: 100%;
