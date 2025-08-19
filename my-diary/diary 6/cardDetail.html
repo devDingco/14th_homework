@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Diary</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./global.css">
+    <link rel="stylesheet" href="./darkMode.css">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./cardDetail.css">
+    <link rel="stylesheet" href="./modal.css">
+    <script src="./diaryUtils.js"></script>
+    <script src="./darkMode.js"></script>
+    <script src="./index.js"></script>
+    <script src="./deleteCardData.js"></script>
+    <script src="./modal.js"></script>
+</head>
+<body class="card-detail-body">
+    <header class="header">
+        <div class="header-contents">
+            <a href="./index.html" class="headline-bold-24 header-brand-link" style="color: var(--black);">민지의 다이어리</a>
+            <div class="darkmode-wrapper">
+                <p class="darkmode-title title-regular-16">다크모드</p>
+                <input type="checkbox" class="toggle-input" id="toggle" onclick="toggleTheme()"/>
+                <label class="toggle-label" for="toggle" > </label>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="body">
+            <div class="update-content-wrapper" style="display: none;">
+
+                <div class="update-content-body">
+                    <div class="update-content-body-title-wrapper">
+                        <p class="update-content-body-title title-semibold-20">오늘 기분은 어땠나요?</p>
+                    </div>
+                    <div class="update-content-body-input-wrapper">
+                        <div class="update-content-body-input-item">
+                            <input type="radio" name="editMood" value="행복해요" class="update-content-body-input">
+                            <p class="update-content-body-input-text body-medium-18">행복해요</p>
+                        </div>
+                        <div class="update-content-body-input-item">
+                            <input type="radio" name="editMood" value="슬퍼요" class="update-content-body-input">
+                            <p class="update-content-body-input-text body-medium-18">슬퍼요</p>
+                        </div>
+                        <div class="update-content-body-input-item">
+                            <input type ="radio" name="editMood" value="기타" class="update-content-body-input">
+                            <p class="update-content-body-input-text body-medium-18">기타</p>
+                        </div>
+                        <div class="update-content-body-input-item">
+                            <input type="radio" name="editMood" value="놀랐어요" class="update-content-body-input">
+                            <p class="update-content-body-input-text body-medium-18">놀랐어요</p>
+                        </div>
+                        <div class="update-content-body-input-item">
+                            <input type="radio" name="editMood" value="화나요" class="update-content-body-input">
+                            <p class="update-content-body-input-text body-medium-18">화나요</p>
+                        </div>
+                    </div>
+                    <div class="update-content-body-diary-title-wrapper">
+                        <p class="update-content-body-diary-title body-medium-14">제목</p>
+                        <input id="editTitle" class="diary-title-input" placeholder="제목을 입력해 주세요."></input>
+                    </div>
+                    <div class="update-content-body-diary-textarea-wrapper">
+                        <p class="update-content-body-diary-content-title body-medium-14">내용</p>
+                        <textarea id="editContent" class="diary-content-textarea" placeholder="내용을 입력해 주세요."></textarea>
+                    </div>
+                </div>
+                <div class="update-content-body-btn-group">
+                    <button id="editCancelBtn" class="update-content-body-btn title-semibold-18">취소</button>
+                    <button id="editSubmitBtn" type="button" class="update-content-body-btn title-semibold-18">수정하기</button>
+                </div>
+            </div>
+            <div class="card-detail-body-contents">
+                
+                <div class="content-header">
+                    <div class="content-header-title-wrapper">
+                        <span class="content-header-title headline-bold-22">이것은 타이틀 입니다.</span>
+                    </div>
+                    <div class="content-header-data-wrapper">
+                        <div class="content-header-icon-tag-wrapper">
+                            <img class="content-header-icon" src="./public/images/행복해요 (s).png" alt="calendar">
+                            <div class="content-header-mood">
+                                <span class="content-header-mood-title title-semibold-20">행복해요</span>
+                            </div>
+                        </div>
+                        <div class="content-header-dateTime-wrapper">
+                            <span class="content-header-date body-regular-14">2025.01.01</span>
+                            <span class="body-regular-14">작성</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-body">
+                    <span class="content-body-title title-semibold-18">내용</span>
+                    <textarea class="content-body-text body-medium-16">내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다</textarea>
+                    <div class="content-body-icon-wrapper">
+                        <img class="content-body-icon" src="./public/icons/light/copy_outline_light_m.svg" alt="calendar">
+                        <span class="content-body-icon-title title-regular-16">내용 복사</span>
+                    </div>
+                    <div class="content-body-btn-group">
+                        <button id="editOpenBtn" class="content-body-btn">
+                            <span class="content-body-btn-title title-medium-16">수정</span>
+                        </button>
+                        <button id="deleteOpenBtn" class="content-body-btn">
+                            <span class="content-body-btn-title title-medium-16">삭제</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-comment-wrapper">
+            <div class="content-comment-title-wrapper">
+                <span class="content-comment-title title-semibold-18">회고</span>
+            </div>
+            <div class="content-comment-input-wrapper">
+                <textarea name="comment" id="comment" class="content-comment-textarea body-medium-16" placeholder="회고를 남겨보세요"></textarea>
+                <button id="commentSubmit" class="content-comment-btn" type="button">
+                    <span class="content-comment-btn-title title-semibold-18">입력</span>
+                </button>
+            </div>
+            <div id="commentList" class="content-comment-list"></div>
+            <div class="content-comment-no-data" style="display: none;">
+                <span class="content-comment-no-data-title title-medium-16">등록된 회고가 없습니다.</span>
+            </div>
+        </div>
+
+        <div class="info-close-modal-wrapper" id="deleteConfirmOverlay" style="display: none;">
+            <div class="info-close-modal" id="deleteConfirmModal">
+                <p class="info-close-modal-title headline-bold-24">일기 삭제</p>
+                <p class="info-close-modal-content body-medium-16">일기를 삭제 하시겠어요?</p>
+                <div class="info-close-modal-btn-wrapper">
+                    <button class="info-close-modal-close-btn title-semibold-18" onclick="closeDeleteConfirm()">취소</button>
+                    <button class="info-close-modal-cancel-btn title-semibold-18" onclick="confirmDelete(event)">삭제</button>
+                </div>
+            </div>
+        </div>
+    
+    <footer class="detail-page-footer">    
+        <div class="detail-page-footer-contents">
+            <div class="footer-logo-wrapper">
+                <img src="./public/images/Group 427321930.png" alt="logo_ico" class="footer-logo-icon">
+                <p class="headline-bold-20">code.camp</p>
+            </div>
+            <div class="footer-contents-wrapper">
+                <p class="body-regular-14">법인 명: 딩코</p>
+                <p class="space-area body-regular-14">|</p>
+                <p class="body-regular-14">사업자등록번호 : 123-45-67890</p>
+            </div>
+            <p class="body-regular-14">정보통신판매업 신고번호: 제 2025-서울강남-0123호</p>
+            <div class="footer-contents-wrapper">
+                <p class="body-regular-14">주소: 서울특별시 강남구 테헤란로 123-1 (논현동)</p>
+                <p class="space-area body-regular-14">|</p>
+                <p class="body-regular-14">대표 : 민지</p>
+            </div>
+            <p class="body-regular-14">고객센터: 070 - 1234 - 5678</p>
+            <p id="footer-copyright">Copyright 2025. Minji Diary all rights reserved.</p>
+        </div>
+    </footer>
+    <script src="./cardDetail.js"></script>
+    <script src="./comment.js"></script>
+  </body>
+</html>

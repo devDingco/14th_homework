@@ -1,0 +1,275 @@
+@import "./global.css";
+@import "./index.css";
+
+.darkmode-wrapper {
+    width: 12.1rem; /* 121px */
+    height: 3.2rem; /* 32px */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 78rem) { /* 780px */
+        gap: 0.8rem; /* 8px */
+        width: 9rem; /* 90px */
+        height: 2.4rem; /* 24px */
+        
+    }
+}
+
+.toggle-input {
+    display: none;
+}
+
+.toggle-label {
+    position: relative;
+    display: block;
+    width: 5.8rem; /* 58px */
+    height: 2.8rem; /* 28px */
+    padding: 0.2rem; /* 2px */
+    border-radius: 1.4rem; /* 14px */
+    border: none;
+    background-color: var(--gray-10);
+    cursor: pointer;
+}
+
+
+.toggle-label::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0.2rem; /* 2px */
+    width: 2.4rem; /* 24px */
+    height: 2.4rem; /* 24px */
+    border-radius: 50%;
+    background-color: var(--white); /* 고정 흰색 */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    transform: translateY(-50%);
+    box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.3); /* 2px */
+}
+
+.dark-theme .toggle-label::before {
+    background-color: var(--white);
+}
+
+.toggle-input:checked + .toggle-label {
+    background-color: #3ad84a;
+}
+
+.toggle-input:checked + .toggle-label::before {
+    transform: translate(3rem, -50%); /* 30px */
+    background-color: var(--black);
+
+}
+
+
+
+.dark-theme .toggle-input:checked + .toggle-label::before {
+    background-color: var(--black);
+}
+
+
+
+.darkmode-title {
+    width: 5.5rem; /* 55px */
+    height: 2.4rem; /* 24px */
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.1rem; /* -1.6px */
+
+    @media (max-width: 78rem) { /* 780px */
+        width: 4.4rem; /* 44px */
+        height: 2.4rem; /* 24px */
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem; /* 12px */
+        letter-spacing: -0.2rem; /* -2px */
+
+    }
+}
+.darkmode-button {
+    width: 5.8rem; /* 58px */
+    height: 2.8rem; /* 28px */
+    border-radius: 2rem; /* 20px */
+    border: none;
+
+    @media (max-width: 78rem) { /* 780px */
+        width: 4rem; /* 40px */
+        height: 2.4rem; /* 24px */
+        border-radius: 1.2rem; /* 12px */
+    }
+}
+
+.dark-theme .add-diary-button {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.dark-theme .body-menu-item.active {
+    border-bottom: 0.2rem solid var(--black); /* 2px */
+    color: var(--black);
+}
+
+.dark-theme .dropdown-menu {
+    background-color: #000000;
+}
+
+.dark-theme .dropdown-text {
+    color: var(--gray-30);
+}
+
+.dark-theme .dropdown-item {
+    color: var(--white);
+}
+
+.dark-theme .dropdown-item.active {
+    background-color: var(--white);
+}
+
+.dark-theme .dropdown-item.active span {
+    color: var(--black);
+}
+
+.dark-theme .dropdown-item span {
+    color: var(--gray-30);
+}
+
+/* 다크모드 카드 스타일 */
+.dark-theme .diary-card {
+    background-color: var(--white);
+    border: 0.1rem solid var(--gray-20); /* 1px */
+}
+
+.dark-theme .diary-card-title body-bold-18 {
+    color: var(--white);
+}
+
+.dark-theme .diary-card-date {
+    color: var(--gray-40);
+}
+
+.dark-theme .body-card-list {
+    border-color: var(--gray-70);
+}
+
+.dark-theme .footer {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.dark-theme #footer-copyright {
+    color: var(--gray-50);
+}
+
+.dark-theme .content-body-text {
+    color: #D4D3D3;
+    background-color: var(--white);
+}
+
+.dark-theme .content-body-icon-title {
+    color: var(--gray-40);
+}
+
+.dark-theme .content-header-dateTime-wrapper {
+    color: var(--gray-30);
+}
+
+.dark-theme .diary-title-input {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.dark-theme .diary-title-input::placeholder {
+    color: var(--gray-40);
+}
+
+.dark-theme .diary-content-textarea {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.dark-theme .diary-content-textarea::placeholder {
+    color: var(--gray-40);
+}
+
+.dark-theme .modal-body-input-item input:checked {
+    background-color: transparent;
+    border: 0.2rem solid var(--black); /* 2px */
+}
+
+
+.dark-theme .modal-body-input-item input:checked::before {
+    background-color: var(--black);
+}
+
+.dark-theme .modal-close-btn {
+    color: var(--black);
+    border: 0.1rem solid var(--gray-30); /* 1px */
+}
+
+.dark-theme .modal-submit-btn:disabled {
+    background-color: var(--gray-20);
+    color: var(--gray-40);
+}
+
+.dark-theme .modal-submit-btn {
+    font-weight: 700;
+}
+
+.dark-theme .header-brand-link {
+    color: var(--black);
+}
+
+
+.dark-theme .content-body-btn {
+    background-color: var(--white);
+    border: 0.1rem solid var(--gray-20); /* 1px */
+    color: var(--black);
+}
+
+.dark-theme .content-comment-textarea {
+    background-color: var(--white);
+    border: 0.1rem solid var(--gray-20); /* 1px */
+}
+
+.dark-theme .content-comment-textarea::placeholder {
+    color: var(--gray-40);
+}
+
+.dark-theme .content-comment-btn {
+    background-color: var(--white);
+    border: 0.1rem solid var(--gray-20); /* 1px */
+    color: var(--black);
+}
+
+.dark-theme .content-comment-textarea:disabled {
+    background-color: var(--gray-20);
+    color: var(--gray-30);
+}
+
+.dark-theme .content-comment-btn:disabled {
+    background-color: var(--gray-20);
+    color: var(--gray-30);
+}
+
+.dark-theme #editSubmitBtn {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.dark-theme #editCancelBtn {
+    background-color: var(--white);
+    color: var(--black);
+    border: 0.1rem solid var(--gray-20); /* 1px */
+}
+
+.dark-theme .update-content-body-input-item input:checked::before {
+    background-color: var(--black);
+}
+
+.dark-theme .update-content-body-input-item input:checked {
+    background-color: transparent;
+    border: 0.2rem solid var(--black); /* 2px */
+    
+}
+

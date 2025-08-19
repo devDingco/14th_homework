@@ -1,0 +1,22 @@
+.cardList_container {
+  width: 128rem;
+  height: 21.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid red;
+  margin: 0 auto;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.cardList_item_container {
+  display: flex;
+  gap: 3.2rem;
+}   
+
+.cardList_item {
+  width: 29.6rem;
+  height: 15.2rem;
+  border: 1px solid blue;
+}
