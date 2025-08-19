@@ -4,12 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Diary</title>
-    <link rel="stylesheet" href="/assets/styles/global.css" />
-    <link rel="stylesheet" href="/assets/styles/main.css" />
-    <link rel="stylesheet" href="/assets/styles/newDiary.css" />
-    <link rel="stylesheet" href="/assets/styles/mediaQuery.css" />
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/newDiary.css" />
+    <link rel="stylesheet" href="/styles/mediaQuery.css" />
+    <link rel="stylesheet" href="/styles/skeleton.css" />
+    <link rel="stylesheet" href="/styles/sub.css" />
 
     <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/searchDiary.ts"></script>
+    <script type="module" src="/src/darkmode.ts"></script>
   </head>
   <body>
     <div id="app">
@@ -86,49 +90,95 @@
         </a>
         <div class="darkModeBtn">
           <span class="darkModeText">다크모드</span>
-          <img src="/assets/icons/toggle.png" alt="" />
+          <input id="darkmodeBtn" type="checkbox" class="toggle" />
         </div>
       </header>
       <!-- MAIN -->
       <main class="main x-container">
         <div class="banner">
-          <img src="/assets/images/0da87750d72d05561bfdb209c688de2957f78ef1.jpg" alt="" />
+          <img src="/images/0da87750d72d05561bfdb209c688de2957f78ef1.jpg" alt="" />
         </div>
+        <!-- 일기보관함 / 사진보관함 -->
         <nav class="storageList">
-          <ul>
-            <li><span class="activeMenu">일기보관함</span></li>
-            <li><span>사진보관함</span></li>
+          <ul class="tabList">
+            <li class="tab_diary activeMenu">일기보관함</li>
+            <li class="tab_image">사진보관함</li>
           </ul>
         </nav>
-        <!-- Filter -->
-        <div class="filterState">
-          <div class="dropdown">
-            <button class="dropdown-button">
-              <span class="selected-item">전체</span>
-              <img src="./assets/icons/keyboard_arrow_down.svg" alt="" />
+
+        <div class="section-main">
+          <div class="search-filter-new">
+            <!-- 검색 -->
+            <div class="search-diary">
+              <img width="24px" src="/icons/search.svg" alt="searchIcon" />
+              <input id="search-input" type="text" placeholder="검색어를 입력해 주세요." />
+            </div>
+
+            <!-- 필터버튼, 새 일기 작성 -->
+            <div class="filter-new">
+              <div class="dropdown-diary">
+                <button class="dropdown-button">
+                  <span class="selected-item">전체</span>
+                  <img src="/icons/arrow_drop_down_24dp_5F6368_FILL1_wght400_GRAD0_opsz24 1.svg" alt="" />
+                </button>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-menu-item">전체</li>
+                  <li class="dropdown-menu-item">행복해요</li>
+                  <li class="dropdown-menu-item">슬퍼요</li>
+                  <li class="dropdown-menu-item">놀랐어요</li>
+                  <li class="dropdown-menu-item">화나요</li>
+                  <li class="dropdown-menu-item">기타</li>
+                </ul>
+              </div>
+              <button class="addDiaryBtn">
+                <img src="/icons/addDiary.svg" alt="" />
+                <span>일기쓰기</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="cardContainer">
+            <div class="cardList"></div>
+          </div>
+          <div class="empty-diary">
+            <p>등록된 일기가 없습니다.</p>
+          </div>
+        </div>
+
+        <div class="section-sub">
+          <div class="dropdown-img" style="display: none">
+            <button class="img-dropdown-button">
+              <span class="img-selected-item">기본</span>
+              <img src="/icons/arrow_drop_down_24dp_5F6368_FILL1_wght400_GRAD0_opsz24 1.svg" alt="" />
             </button>
-            <ul class="dropdown-menu">
-              <li class="dropdown-menu-item">전체</li>
-              <li class="dropdown-menu-item">행복해요</li>
-              <li class="dropdown-menu-item">슬퍼요</li>
-              <li class="dropdown-menu-item">놀랐어요</li>
-              <li class="dropdown-menu-item">화나요</li>
-              <li class="dropdown-menu-item">기타</li>
+            <ul class="img-dropdown-menu">
+              <li id="basic" class="img-dropdown-menu-item">기본</li>
+              <li id="horizontal" class="img-dropdown-menu-item">가로형</li>
+              <li id="vertical" class="img-dropdown-menu-item">세로형</li>
             </ul>
           </div>
-          <button class="addDiaryBtn">
-            <img src="./assets/icons/addDiary.svg" alt="" />
-            <span>일기쓰기</span>
-          </button>
+        </div>
+        <!-- 사진보관함 -->
+
+        <div class="section-image" style="display: none">
+          <div class="skeleton-list">
+            <div class="basic-ratio-1-1 skeleton">
+              <hr />
+              <hr />
+            </div>
+            <div class="basic-ratio-1-1 skeleton">
+              <hr />
+              <hr />
+            </div>
+            <div class="basic-ratio-1-1 skeleton">
+              <hr />
+              <hr />
+            </div>
+          </div>
         </div>
 
         <div class="topscroll">
-          <img src="./assets/icons/topscroll fab.svg" alt="" />
-        </div>
-
-        <div class="section-main">
-          <!-- 메인 섹션 -->
-          <div class="cardList"></div>
+          <img src="./k/icons/topscroll fab.svg" alt="" />
         </div>
       </main>
       <footer class="footer x-container">

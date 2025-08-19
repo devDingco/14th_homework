@@ -1,59 +1,9 @@
-export type TCard = {
-  id: number;
-  imgUrl: string;
-  state: string;
-  date: string;
-  title: string;
-  content: string;
-};
+import type { TCard } from './types';
 
-export const initialData: TCard[] = [
-  {
-    id: 1232132,
-    imgUrl: '/assets/images/슬퍼요 (m).png',
-    state: '슬퍼요',
-    date: '2024. 03. 12',
-    title: '타이틀 영역입니다. 한줄까지만 노출됩니다.',
-    content:
-      '내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.',
-  },
-  {
-    id: 123,
-    imgUrl: '/assets/images/놀랐어요 (m).png',
-    state: '놀랐어요',
-    date: '2024. 03. 12',
-    title: '타이틀 영역입니다. 한줄까지만 노출됩니다.',
-    content:
-      '내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.',
-  },
-  {
-    id: 345,
-    imgUrl: '/assets/images/화나요 (m).png',
-    state: '화나요',
-    date: '2024. 03. 12',
-    title: '타이틀 영역입니다. 한줄까지만 노출됩니다.',
-    content:
-      '내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.',
-  },
-  {
-    id: 213,
-    imgUrl: '/assets/images/행복해요 (m).png',
-    state: '행복해요',
-    date: '2024. 03. 12',
-    title: '타이틀 영역입니다. 한줄까지만 노출됩니다.',
-    content:
-      '내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.',
-  },
-  {
-    id: 86574,
-    imgUrl: '/assets/images/기타 (m).png',
-    state: '기타',
-    date: '2024. 03. 12',
-    title: '타이틀 영역입니다. 한줄까지만 노출됩니다.',
-    content:
-      '내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.내용 영역입니다. 여러줄이 노출됩니다. 내용 영역입니다. 여러줄이 노출됩니다.',
-  },
-];
+const emptyDiaryEl = document.querySelector('.empty-diary') as HTMLSpanElement;
+const cardContainerEl = document.querySelector('.cardContainer')! as HTMLSpanElement;
+
+export const initialData: TCard[] = [];
 
 // 초기데이터 설정
 export const initLocalStorage = (data: TCard[]) => {
@@ -66,7 +16,9 @@ export const getLocalStorage = () => {
   const parseString = JSON.parse(myDiary);
 
   if (!myDiary) {
-    initLocalStorage(initialData);
+    emptyDiaryEl.style.display = 'flex';
+  } else {
+    cardContainerEl.style.display = 'grid';
   }
 
   return parseString;
@@ -74,10 +26,31 @@ export const getLocalStorage = () => {
 
 export const setLocalStorage = (newData: TCard) => {
   // 데이터 추가
-  const prevData = getLocalStorage();
-  const updateData = [...prevData, newData];
+  const prevData: TCard[] = getLocalStorage();
+  let updateData: TCard[];
+
+  if (!prevData) {
+    updateData = [newData];
+  } else {
+    updateData = [...prevData, newData];
+  }
+
   const convertString = JSON.stringify(updateData);
   localStorage.setItem('myDiary', convertString);
 };
 
-  
+export const fetchDogData = async (): Promise<string[]> => {
+  console.log('Run fetchDogData');
+  // await setTime;
+
+  const res = await fetch('https://dog.ceo/api/breeds/image/random/10');
+  const data = await res.json();
+  return data.message;
+};
+
+export const getLocalStorageDetail = () => {
+  const myDiary = localStorage.getItem('myDiary')!;
+  const parseString = JSON.parse(myDiary);
+
+  return parseString;
+};

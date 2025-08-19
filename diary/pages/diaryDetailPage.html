@@ -4,22 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="/styles/diaryDetail.css" />
+    <link rel="stylesheet" href="/styles/detail.css" />
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/sub.css" />
 
-    <script type="module" src="/src/main.ts"></script>
     <script type="module" src="/src/detail.ts"></script>
   </head>
   <body>
     <div id="app-detail">
       <!-- HEADER -->
-      <header>
-        <div>
-          <a id="logo" href="/">
-            <span class="myName">민지의다이어리</span>
-          </a>
-          <div class="darkModeBtn">
-            <span>다크모드</span>
-            <img src="/assets/icons/toggle.png" alt="" />
-          </div>
+      <header class="header">
+        <a id="logo" href="/">
+          <!-- <span class="logo-text">민지의 다이어리</span> -->
+          <span class="logo-text">&lt; 일기 상세</span>
+        </a>
+        <div class="darkModeBtn">
+          <span class="darkModeText">다크모드</span>
+          <img src="/icons/toggle.png" alt="" />
         </div>
       </header>
       <!-- main -->
@@ -34,34 +36,37 @@
               <span>😀</span>
               <span class="detail-state">행복해요</span>
             </div>
-            <span class="detail-date">date</span>
+            <div class="detail-date">
+              <span class="detail-date-label">date</span>
+              <span>작성</span>
+            </div>
           </div>
           <p class="detail-body-lable">내용</p>
           <textarea name="editBody" class="detail-body-input hidden">내용</textarea>
-          <p class="detail-body">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam provident ullam vel corrupti iusto
-            consequuntur iste reiciendis reprehenderit ab, velit assumenda fuga eligendi maiores expedita, soluta
-            quaerat esse illo perspiciatis? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam provident
-            ullam vel corrupti iusto consequuntur iste reiciendis reprehenderit ab, velit assumenda fuga eligendi
-            maiores expedita, soluta quaerat esse illo perspiciatis? Lorem ipsum, dolor sit amet consectetur adipisicing
-            elit. Quam provident ullam vel corrupti iusto consequuntur iste reiciendis reprehenderit ab, velit assumenda
-            fuga eligendi maiores expedita, soluta quaerat esse illo perspiciatis? Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit. Quam provident ullam vel corrupti iusto consequuntur iste reiciendis
-            reprehenderit ab, velit assumenda fuga eligendi maiores expedita, soluta quaerat esse illo perspiciatis?
-          </p>
+          <p class="detail-body"></p>
+          <!-- 복사 -->
+          <div class="text-copy">
+            <img src="/icons/content_copy.svg" />
+            <button class="detail-footer-copy">내용 복사</button>
+          </div>
+
+          <!-- 수정 / 삭제 -->
           <div class="detail-footer">
             <button class="detail-footer-editBtn">수정</button>
+            <button class="detail-footer-deleteBtn">삭제</button>
           </div>
           <div class="detail-footer-isEdit">
             <button class="detail-footer-isEdit-cancelBtn">취소</button>
             <button class="detail-footer-isEdit-saveBtn">수정하기</button>
           </div>
         </div>
+
+        <!-- 회고 -->
         <div class="comment">회고</div>
-        <div class="comment-layout">
-          <input type="text" class="comment-input" />
+        <form class="comment-layout">
+          <input type="text" class="comment-input" placeholder="회고를 남겨보세요." />
           <button>입력</button>
-        </div>
+        </form>
       </main>
     </div>
   </body>
