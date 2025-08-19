@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>일기 상세</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #fafafa;
+    }
+    header {
+        background: black;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 40px;
+    }
+    .subtitle {
+        font-size: 14px;
+        margin-bottom: 20px;
+        color: #555;
+    }
+    .title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .title {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 0;
+    }
+    .date {
+        font-size: 14px;
+        color: #999;
+    }
+    .mood {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+    }
+    .mood img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        margin-right: 6px;
+    }
+    .content {
+        margin-bottom: 20px;
+        line-height: 1.6;
+        font-size: 14px;
+    }
+    .btn-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 40px;
+    }
+    .btn {
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        background: white;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    /* 댓글 */
+    h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .comment-box {
+        display: flex;
+        margin-bottom: 20px;
+    }
+    .comment-box input {
+        flex: 1;
+        padding: 8px;
+        border-radius: 6px 0 0 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+    .comment-box button {
+        padding: 8px 16px;
+        background: black;
+        color: white;
+        border: none;
+        border-radius: 0 6px 6px 0;
+        cursor: pointer;
+    }
+    .comment {
+        background: #f4f4f4;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .comment-date {
+        color: #999;
+        font-size: 12px;
+        margin-left: 10px;
+    }
+</style>
+</head>
+<body>
+
+<header>일기 상세_메인_토스트</header>
+
+<div class="container">
+    <div class="subtitle">민지의 다이어리</div>
+
+    <div class="title-row">
+        <h2 class="title">이것은 타이틀 입니다.</h2>
+        <div class="date">2024.07.12 작성</div>
+    </div>
+
+    <div class="mood">
+        <img src="https://twemoji.maxcdn.com/v/latest/svg/1f60a.svg" alt="행복">
+        <span style="color:red;">행복해요</span>
+    </div>
+
+    <div class="content">
+        내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다
+    </div>
+
+    <div class="btn-row">
+        <button class="btn">내용 복사</button>
+        <button class="btn">수정</button>
+        <button class="btn">삭제</button>
+    </div>
+
+    <h3>최고</h3>
+    <div class="comment-box">
+        <input type="text" placeholder="댓글을 남기세요.">
+        <button>입력</button>
+    </div>
+
+    <div class="comment">
+        <span>3년이 지나고 다시 보니 예뻐서 그립다.</span>
+        <span class="comment-date">[2024.09.24]</span>
+    </div>
+    <div class="comment">
+        <span>3년이 지나고 다시 보니 예뻐서 그립다.</span>
+        <span class="comment-date">[2024.09.24]</span>
+    </div>
+</div>
+
+</body>
+</html>

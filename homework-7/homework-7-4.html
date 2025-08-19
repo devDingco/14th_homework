@@ -1,0 +1,87 @@
+export default function DiaryDetailMobile() {
+    return (
+      <div className="bg-gray-50 min-h-screen flex flex-col items-center p-4">
+        {/* 상단 검정 타이틀 */}
+        <div className="bg-black text-white text-2xl font-bold rounded-2xl px-6 py-4 mb-6">
+          일기 상세_모바일
+        </div>
+  
+        {/* 상단 네비게이션 */}
+        <div className="w-full max-w-md text-sm text-blue-500 mb-2">
+          모바일_일기 상세_회고 있음
+        </div>
+  
+        {/* 본문 카드 */}
+        <div className="w-full max-w-md bg-white rounded-lg shadow-sm p-4">
+          {/* 뒤로가기 & 타이틀 */}
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-2xl cursor-pointer">←</span>
+            <h2 className="text-lg font-bold">일기 상세</h2>
+          </div>
+  
+          {/* 제목 */}
+          <h3 className="text-lg font-bold mb-2">이것은 타이틀 입니다.</h3>
+          <hr className="border-black mb-4" />
+  
+          {/* 작성자 정보 */}
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Apple_Memoji_Girl_With_Hat.png/200px-Apple_Memoji_Girl_With_Hat.png"
+                alt="작성자"
+                className="w-6 h-6 rounded-full"
+              />
+              <span className="text-red-500 text-sm font-medium">행복해요</span>
+            </div>
+            <span className="text-gray-500 text-sm">2024. 07. 12 작성</span>
+          </div>
+  
+          {/* 내용 */}
+          <div className="mb-4">
+            <h4 className="font-bold mb-2">내용</h4>
+            <p className="text-sm leading-relaxed text-gray-800">
+              내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이
+              들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이
+              들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이
+              들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이
+              들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이
+              들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다
+            </p>
+          </div>
+  
+          {/* 수정 / 삭제 버튼 */}
+          <div className="flex gap-2 mb-6">
+            <button className="border border-gray-400 rounded-lg px-4 py-1 text-sm">수정</button>
+            <button className="border border-gray-400 rounded-lg px-4 py-1 text-sm">삭제</button>
+          </div>
+  
+          <hr className="mb-4" />
+  
+          {/* 회고 입력 */}
+          <div className="mb-4">
+            <h4 className="font-bold mb-2">회고</h4>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                placeholder="회고를 남겨보세요."
+                className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm"
+              />
+              <button className="bg-black text-white rounded-lg px-4 py-2 text-sm">입력</button>
+            </div>
+          </div>
+  
+          {/* 회고 목록 */}
+          <div className="space-y-2">
+            <div className="bg-gray-100 rounded-lg px-3 py-2 text-sm flex justify-between">
+              <span>3년이 지나고 다시 보니 이때가 그립다.</span>
+              <span className="text-gray-500">[2024. 09. 24]</span>
+            </div>
+            <div className="bg-gray-100 rounded-lg px-3 py-2 text-sm flex justify-between">
+              <span>3년이 지나고 다시 보니 이때가 그립다.</span>
+              <span className="text-gray-500">[2024. 09. 21]</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
