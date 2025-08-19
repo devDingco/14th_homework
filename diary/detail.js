@@ -78,7 +78,8 @@ const 댓글등록기능 = () => {
 
           <div
             style="
-              width: 1168px;
+              max-width: 1168px;
+              width: 100%;
               height: 1px;
               background-color: #e4e4e4;
               margin-bottom: 12px;
@@ -107,7 +108,8 @@ const 댓글그리기기능 = () => {
     </div>
     <div
     style="
-       width: 1168px;
+       max-width: 1168px;
+       width: 100%;
        height: 1px;
       background-color: #e4e4e4;
        margin-bottom: 12px;

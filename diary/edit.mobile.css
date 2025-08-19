@@ -1,0 +1,12 @@
+@media (max-width: 849px) {
+  html {
+    padding: 20px 40px;
+  }
+
+  .수정본문__정렬__라디오 {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    height: auto;
+  }
+}
