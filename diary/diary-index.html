@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    
     <title>나의 감정일기장</title>
+
+    <script src="./JS/diary-pagenation.js"></script>
     <script src="./diary-index.js"></script>
+    <script src="./JS/diary-modal.js"></script>
+    <script src="./JS/diary-picture.js"></script>
+
+    <link rel="stylesheet" href="./CSS/diary-pagenation.css" />
     <link rel="stylesheet" href="./diary-index.css" />
+    <link rel="stylesheet" href="./CSS/diary-modal.css" />
+    <link rel="stylesheet" href="./CSS/diary-picture.css" />
+
 </head>
 <body>
     <div class="바탕">
@@ -159,8 +169,14 @@
 
         </div> <!-- 사진보관함 -->
 
+        <!-- 페이지네이션 -->
+        <div class="페이지네이션">
+            <button class="이전페이지버튼" onclick="이전페이지이동()"></button>
+            <div class="페이지번호구역"></div>
+            <button class="다음페이지버튼" onclick="다음페이지이동()"></button>
+        </div>
 
-    </div>
+    </div> <!-- 바탕 -->
 
 
 

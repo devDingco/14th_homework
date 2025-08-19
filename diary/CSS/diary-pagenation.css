@@ -1,0 +1,57 @@
+/* 페이지네이션 */
+
+.페이지네이션 {
+    width: 116.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* align-self: stretch; */
+
+    gap: 0.8rem;
+}
+
+.이전페이지버튼, .다음페이지버튼 {
+    width: 2.4rem;
+    height: 2.4rem;
+
+    border: none;
+    background-color: transparent;
+
+    background-size: cover;      /* 배경 이미지가 요소를 꽉 채우도록 */
+    background-position: center; /* 중앙에 위치하도록 */
+    background-repeat: no-repeat; /* 반복 방지 */
+}
+
+
+.이전페이지버튼 {
+    background-image: url(../asset/icon/left_page.png);
+}
+
+.다음페이지버튼 {
+    background-image: url(../asset/icon/right_page.png);
+}
+
+.페이지번호구역 {
+    display: flex;
+    justify-content: center;
+    gap: 1.6rem;
+}
+
+.페이지번호 {
+    width: 3.2rem;
+    height: 3.2rem;
+
+    background-color: transparent;
+    border: transparent;
+
+    color: #777;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: -0.016rem;
+}
+
+.pageActive {
+    border-radius: 0.8rem;
+    background: #F2F2F2;
+}
