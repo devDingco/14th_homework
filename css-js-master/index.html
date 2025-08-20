@@ -15,8 +15,7 @@
             if (localStorage.getItem("일기콘텐츠")) {
                 const localStorageArr = JSON.parse(localStorage.getItem("일기콘텐츠"))
                 console.log('window.onload -> ',localStorageArr)
-
-                document.getElementById("diary_box_container").innerHTML = makeMainHtml(localStorageArr)
+                makeMainHtml(localStorageArr)
             } else {
                 document.getElementById("diary_box_container").innerHTML = `<h1>작성된 일기가 없습니다!<h1>`
             }
@@ -147,7 +146,7 @@
     </div>
     <img id="diary_float_btn" onclick="toScrollTop()" src="./images/up_outline_light_xl.svg"/>
     <script src="./js/viewDiaryFilter.js"></script>
-    <script src="./js/makeMainHtml.js"></script>
+    <script src="./js/makeHtml.js"></script>
     <script src="./feature/scroll.js"></script>
     <script src="./feature/resistContent.js"></script>
     <script src="./feature/toLocalStorage.js"></script>

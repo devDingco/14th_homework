@@ -1,3 +1,4 @@
+// 상세페이지 - 수정 에서 수정하기 버튼 클릭시 작동
 const confirmUpdate = (key) => { // <string>
     const updateRadioFormData = new FormData(document.getElementById("update_feeling_radio_container"))
     const feelValue = updateRadioFormData.get("feel")
@@ -23,7 +24,8 @@ const confirmUpdate = (key) => { // <string>
         date: localStorageArr[indexToChange].date,
         feel: feelValue,
         title: titleValue,
-        detail: detailValue
+        detail: detailValue,
+        reply: localStorageArr.reply
     }
     
     const updateArr = localStorageArr.map((v, i) => {
@@ -39,6 +41,9 @@ const confirmUpdate = (key) => { // <string>
             document.getElementById("update_confirm_button").style = "transform: rotateZ(30deg); transition: 1s;"
             alert(`${indexToChange}번 일기가 수정되었습니다`)
             // todo - 메인페이지로 이동
+            setTimeout(() => {
+                window.location.assign(`http://localhost:${window.location.port}/css-js-master/index.html`)
+            }, 1000)
             // window.location.assign(`http://localhost:${window.location.port}/css-js-master/index.html`)
         }
     } catch(e) {
