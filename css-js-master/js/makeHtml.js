@@ -203,7 +203,11 @@ const makeUpdateHtml = (contentObj) => {
 const makeReplyHtml = (contentObj) => {
     const contentHTML = contentObj.reply.map((v) => {
         return `
-            <h1>${v}</h1>
+            <div class="reply_text_frame">
+                <p id="reply_text">${v.content}</p>
+                <p id="reply_date">[${v.date}]</p>
+            </div>
+            <hr>
         `
     }).join("")
 

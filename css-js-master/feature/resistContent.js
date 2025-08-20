@@ -92,12 +92,20 @@ const resistReply = (key) => { // "회고콘텐츠"
 
     const replyValue = document.getElementById("input_reply").value
     const replyArr = localStorageArr[indexToChange].reply
+    const currentDate = 
+        `
+        ${new Date().getFullYear()}. ${new Date().getMonth() + 1}. ${new Date().getDate()}
+        `
+    const replyObj = {
+        content: replyValue,
+        date: currentDate
+    }
 
     if  (replyValue === "") {
         alert("회고를 입력해주세요.")
     } else {
-        replyArr.push(replyValue)
-    
+        replyArr.push(replyObj)
+
         const objectToChange = {
             number: indexToChange,
             date: localStorageArr[indexToChange].date,

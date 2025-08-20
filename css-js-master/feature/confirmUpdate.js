@@ -25,7 +25,7 @@ const confirmUpdate = (key) => { // <string>
         feel: feelValue,
         title: titleValue,
         detail: detailValue,
-        reply: localStorageArr.reply
+        reply: localStorageArr[indexToChange].reply
     }
     
     const updateArr = localStorageArr.map((v, i) => {
@@ -44,7 +44,6 @@ const confirmUpdate = (key) => { // <string>
             setTimeout(() => {
                 window.location.assign(`http://localhost:${window.location.port}/css-js-master/index.html`)
             }, 1000)
-            // window.location.assign(`http://localhost:${window.location.port}/css-js-master/index.html`)
         }
     } catch(e) {
         alert(e)
