@@ -95,11 +95,11 @@ const deleteDiaryById = (event, id) => {
 
 // INFO: 필터 서치
 const selectMood = (event) => {
-  const moodId = event.target.id
+  const moodId = event.target.value ?? 'total'
   const moodLabel = getMoodLabel(moodId) ?? '전체'
 
   const titleEl = document.getElementById('dropdown-title-id')
-  titleEl.style = `--dropdown-title: "${moodLabel}"`
+  titleEl.style = `--dropdown-title: "${moodLabel}`
   titleEl.click()
 
   state.mood = moodId
@@ -169,8 +169,11 @@ const renderCards = () => {
 const renderPager = () => {
   const lastPage = getLastPage()
   const pageContainer = document.querySelector('.pages')
+  // const pageArrows = document.querySelectorAll('.arrow')
 
   const blockStart = Math.floor((state.page - 1) / MAX_PAGE_BUTTONS) * MAX_PAGE_BUTTONS + 1
+
+  // if (lastPage === 1) pageArrows.forEach((el) => (el.style.visibility = 'hidden'))
 
   const pageArr = new Array(MAX_PAGE_BUTTONS).fill(0).map((_, i) => blockStart + i)
   pageContainer.innerHTML = pageArr
