@@ -118,3 +118,28 @@ const 댓글그리기기능 = () => {
     )
     .join("");
 };
+
+const 복사하기기능 = () => {
+  // 로컬스토리지에 저장된 일기목록 불러오기
+  const 스토리지에저장된일기목록 =
+    localStorage.getItem("지윤이의일기목록") ?? "[]";
+  const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+  // 일기번호 불러오기
+  const 쿼리스트링 = window.location.search; // =>  ?number=0
+  const 잘게나누어담은통 = new URLSearchParams(쿼리스트링);
+  const 일기번호 = 잘게나누어담은통.get("number");
+
+  const 일기담는통 = 일기목록[일기번호];
+
+  navigator.clipboard.writeText(일기담는통.내용);
+  console.log(navigator.clipboard.writeText(일기담는통.내용));
+  토스트메시지띄우기기능();
+};
+
+const 토스트메시지띄우기기능 = () => {
+  document.getElementById("토스트메세지ID").style = "display:flex";
+
+  setTimeout(() => {
+    document.getElementById("토스트메세지ID").style = "display: none";
+  }, 1000);
+};
