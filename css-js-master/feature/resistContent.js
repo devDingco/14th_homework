@@ -53,6 +53,8 @@ const resistContent = (key) => { // string
                     radio.checked = false;
                 });
                 document.getElementById("diary_box_container").innerHTML = makeMainHtml(localStorageArr)
+
+                openModal('main_write_success_modal_group')
             } catch(e) {
                 console.log(e)
             }
@@ -77,6 +79,8 @@ const resistContent = (key) => { // string
                     radio.checked = false;
                 });
                 document.getElementById("diary_box_container").innerHTML = makeMainHtml(contentArray)
+
+                openModal('main_write_success_modal_group')
             } catch(e) {
                 console.log(e)
             }

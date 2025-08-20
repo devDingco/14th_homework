@@ -379,7 +379,13 @@
     resize: none;
 }
 
+/* 모달 */
 #write_diary_container {
+    
+    position: absolute;
+    top: calc(50% - 500px/2);
+    left: calc(50% - 400px/2);
+
     display: flex;
     flex-direction: column;
     width: 360px;
@@ -392,7 +398,8 @@
     opacity: 1;
     gap: 40px;
     padding: 24px;
-    border: 1px solid var(--Gray-Gray-200, rgba(212, 211, 211, 1))
+    border: 1px solid var(--Gray-Gray-200, rgba(212, 211, 211, 1));
+    background-color: white;
 }
 
 #write_diary_container > p {
@@ -412,21 +419,34 @@
     gap: 40px;
 }
 
+#writing_confirm_container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 #writing_confirm_container > button {
-    width: 312px;
+    width: 104px;
     height: 48px;
+    border-radius: 8px;
+    border-width: 1px;
     angle: 0 deg;
     opacity: 1;
-    gap: 16px;
-    width: 312;
-    border-radius: 8px;
+    gap: 10px;
     padding-top: 8px;
     padding-right: 10px;
     padding-bottom: 8px;
     padding-left: 10px;
-    border: 0px;
     cursor: pointer;
-    background-color: rgba(199, 199, 199, 1);
+}
+
+.close_modal_button {
+    background: var(--Gray-W, rgba(255, 255, 255, 1));
+    border: 1px solid var(--Gray-B, rgba(0, 0, 0, 1));
+}
+
+.confirm_modal_button {
+    background: var(--Gray-B, rgba(0, 0, 0, 1));
+    color: rgba(242, 242, 242, 1);
 }
 
 #writing_confirm_container > button > p {
@@ -437,7 +457,6 @@
     leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
-    color: rgba(242, 242, 242, 1);
 }
 
 #diary_filter_container {
@@ -534,4 +553,38 @@
     leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
+}
+
+.modal_group {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.modal_background {
+    width: 100vw;
+    height: 100vh;
+    background-color: lightgray;
+    opacity: 80%;
+}
+
+.overlap_modal {
+    width: 480px;
+    height: 200px;
+    min-width: 480px;
+    max-width: 760px;
+    border-radius: 24px;
+    angle: 0 deg;
+    opacity: 1;
+    top: 643px;
+    left: 720px;
+    gap: 40px;
+    padding: 24px;
+    background: rgba(255, 255, 255, 1);
+    /* background: aqua; */
+
+    position: absolute;
+    top: calc(50% - 150px/2);
+    left: calc(50% - 520px/2);
 }
