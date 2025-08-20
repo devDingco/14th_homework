@@ -158,3 +158,12 @@ function 일기삭제기능(event) {
   alert("삭제되었습니다.");
   location.replace("./index.html")
 }
+
+window.addEventListener("keydown",(event)=>{
+  if(event.key === "Escape") {
+    
+    
+    삭제모달닫기();
+  }
+}
+)

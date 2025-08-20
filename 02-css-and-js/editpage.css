@@ -2,95 +2,196 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-size: 10px;
 }
 
 .가장큰배경 {
-    width: 120rem;
-    height: 67.5rem;
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6.4rem;
+  margin: 0 2rem 4rem;
 }
 .큰배경 {
-    width: 120rem;
-    height: 34.75rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    gap: 6.4rem;
 }
 .헤더 {
-    width: 117.5rem;
-    height: 3.75rem;
+    width: 100%;
+    height: 6rem;
     display: flex;
     justify-content: center;
 }
 .헤더__타이틀 {
-    width: 73rem;
-    height: 3.75rem;
+    width: 100%;
     display: flex;
     align-items: center;
-}
+    /* margin-bottom: 6.4rem;    */
+    
 
+}
+.헤더__타이틀 > h3{
+    font-family: Pretendard Variable;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 16px;
+    letter-spacing: -1%;
+}
 .바디 {
-    width: 117.5rem;
-    height: 27rem;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
 .바디__메인 {
-    width: 73rem;
-    height: 27rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2.4rem;
 }
 .바디__메인__감정섹션 {
-    width: 73rem;
-    height: 4rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 1.6rem;
 }
-.바디__메인__감정섹션__감정수정 {
-    width: 37rem;
+.바디__메인__감정섹션 > h3{
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 20px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    
+}
+.바디__메인__감정섹션__감정수정 { 
     height: 1.5rem;
     display: flex;
-    gap: 1.25rem;
+    gap: 2rem;
+
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 20px;
+    letter-spacing: -1%;
+    
 }
 
 .바디__메인__제목섹션 {
-    width: 73rem;
-    height: 4.75rem;
+    width: 100%;
+    /* height: rem; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 0.8rem;
+}
+.바디__메인__제목섹션 span{
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 14px;
+    leading-trim: NONE;
+    line-height: 20px;
+    letter-spacing: -1%;
+    
 }
 .바디__메인__제목섹션__제목수정 {
-    width: 73rem;
+    width: 100%;
     height: 3rem;
+    padding: 1.2rem 1.6rem 1.2rem 1.6rem; 
+    border-color: #D4D3D3;
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    
 }
 
 .바디__메인__내용섹션 {
-    width: 73rem;
-    height: 9.75rem;
-    display: flex;
+    width: 100%;
+    display: flex; 
     flex-direction: column;
     justify-content: space-between;
+    gap: 0.8rem;
+}
+.바디__메인__내용섹션 span{
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 14px;
+    leading-trim: NONE;
+    line-height: 20px;
+    letter-spacing: -1%;
+    
 }
 .바디__메인__내용섹션__내용수정 {
-    width: 73rem;
-    height: 8rem;
+    width: 100%;
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    padding: 1.2rem 1.6rem 1.2rem 1.6rem;
+    height: 12.8rem ;
+    
 }
 
 .바디__메인__버튼섹션 {
-    width: 73rem;
-    height: 3rem;
+    width: 100%;
+    height: 4.8rem;
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.6rem;
 }
 
 .바디__메인__버튼섹션__취소버튼 {
-    border: 0 solid #000;
+    width: 10.4rem;
+    height: 4.8rem;
+    border: 0px solid #000;
+    /* border: 0.1rem solid #000;
+    border-radius: 0.8rem;
+    padding: 0.8rem 1rem 0.8rem 1rem;
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%; */
+    
+
+
 }
 .바디__메인__버튼섹션__수정버튼 {
-    border: 0 solid #000;
+    width: 10.4rem;
+    height: 4.8rem;
+    border: 0px solid #000;
+    /* border: 0.1rem solid #000;
+    border-radius: 0.8rem;
+    padding: 0.8rem 1rem 0.8rem 1rem;
+    background-color: black;
+    color: #F2F2F2;
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+     */
 }

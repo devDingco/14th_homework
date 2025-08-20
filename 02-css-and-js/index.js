@@ -22,14 +22,19 @@ function 스크롤맨위로기능() {
 const 일기입력하기 = (클릭한페이지) =>{
 const 일기리스트 = localStorage.getItem("일기목록")
   const 일기목록배열 = JSON.parse(일기리스트 === null ? "[]" : 일기리스트)
-  
-  const 필터된배열 = 일기목록배열.filter((el,index) => {
+  const 전체인덱스포함배열 = 일기목록배열.map((el, index) => ({
+    ...el,
+    전체인덱스: index
+}));
+
+
+  const 필터된배열 = 전체인덱스포함배열.filter((el,index) => {
     const 건너뛴횟수 = 클릭한페이지 -1;
     return 건너뛴횟수 * 12 <= index && index < 12 * 클릭한페이지      
   });
-  const 일기목록HTML = 필터된배열.map((el,index)=>`
+  const 일기목록HTML = 필터된배열.map((el)=>`
       <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
-        <a href="./sub.html?number=${index}">     
+        <a href="./sub.html?number=${el.전체인덱스}">     
           <img 
             src="./assets/images/${el.감정}.png" alt="">
           <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보">
@@ -61,7 +66,7 @@ const 일기리스트 = localStorage.getItem("일기목록")
             <h2 class="바디__메인섹션__아티클섹션__일기칸__일기장__제목">${el.제목}</h2>
           </div> 
         </a> 
-        <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${index})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
+        <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${el.전체인덱스})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
       </div>
   `).join("") // map 뒤에서 바로 조인하는것도 가능함 => 친구목록html.join("") 동일
   //3. html 최종 삽입하기
@@ -69,42 +74,45 @@ const 일기리스트 = localStorage.getItem("일기목록")
     document.getElementById("일기칸").innerHTML = 일기목록HTML
     
 }
+let 필터된 =[];
 
 const 필터링기능 = (event) =>{
   const 일기리스트 = localStorage.getItem("일기목록")
   const 일기목록배열 = JSON.parse(일기리스트 === null ? "[]" : 일기리스트)
-  
-  console.log(event.target) //내가 행동한 태그 => 셀렉트태그
-  console.log(event.target.value) // 태그에서 밸류 선택
-  console.log(일기들)
+  const 전체인덱스포함배열 = 일기목록배열.map((el, index) => ({
+    ...el,
+    전체인덱스: index
+}));
+
 const 내가선택한필터 = event.target.value
-console.log(event.target) 
-let 필터된 = 일기목록배열
+필터된 = 전체인덱스포함배열
 
 if(내가선택한필터 === "전체선택"){
-  필터된 = 일기목록배열
+  필터된 = 전체인덱스포함배열
   
 }
 if(내가선택한필터 === "행복선택"){
-  필터된 = 일기목록배열.filter(el => el.감정 === "행복해요")
+  필터된 = 전체인덱스포함배열.filter(el => el.감정 === "행복해요")
   
 }
 if(내가선택한필터 === "슬픔선택"){
-  필터된 = 일기목록배열.filter(el => el.감정 === "슬퍼요")
+  필터된 = 전체인덱스포함배열.filter(el => el.감정 === "슬퍼요")
 }
 if(내가선택한필터 === "놀람선택"){
-  필터된 = 일기목록배열.filter(el => el.감정 === "놀랐어요")
+  필터된 = 전체인덱스포함배열.filter(el => el.감정 === "놀랐어요")
 }
 if(내가선택한필터 === "화남선택"){
-  필터된 = 일기목록배열.filter(el => el.감정 === "화나요")
+  필터된 = 전체인덱스포함배열.filter(el => el.감정 === "화나요")
 }
 if(내가선택한필터 === "기타선택"){
-  필터된 = 일기목록배열.filter(el => el.감정 === "기타")
+  필터된 = 전체인덱스포함배열.filter(el => el.감정 === "기타")
 }
 
-const 필터된일기목록HTML = 필터된.map((el,index)=>`
+const 페이지1 = 필터된.filter((el,index)=>{ return index<=11})
+
+const 필터된일기목록HTML = 페이지1.map((el)=>`
       <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
-        <a href="./sub.html?number=${index}">     
+        <a href="./sub.html?number=${el.전체인덱스}">     
           <img 
             src="./assets/images/${el.감정}.png" alt="">
           <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보">
@@ -136,12 +144,99 @@ const 필터된일기목록HTML = 필터된.map((el,index)=>`
             <h2 class="바디__메인섹션__아티클섹션__일기칸__일기장__제목">${el.제목}</h2>
           </div> 
         </a> 
-        <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${index})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
+        <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${el.전체인덱스})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
       </div>
   `).join("") // map 뒤에서 바로 조인하는것도 가능함 => 친구목록html.join("") 동일
   //3. html 최종 삽입하기
     document.getElementById("일기칸").innerHTML = 필터된일기목록HTML
-}
+    필터에서페이지그리기기능();
+    // const 필터에서페이지그리기기능 = () =>{
+    //   const 마지막페이지 = Math.ceil(필터된.length / 12)
+    //   const 페이지박스 =  new Array(5).fill("페이지")
+    //   const 페이지html = 페이지박스.map((el,index)=> {
+    //     const 페이지번호 = 시작페이지 + index
+    //     return 페이지번호 <= 마지막페이지 ? `
+    //          <button onclick="필터된일기입력하기(${페이지번호}); 필터에서페이지그리기기능(${페이지번호});" class="${클릭한페이지 === 페이지번호 ? '클릭된' : '클릭안된'}">${페이지번호}</button> 
+    //     ` : ""
+        
+    // }).join("")
+    //   document.getElementById("페이지보여주는곳").innerHTML = 페이지html
+    //   if(마지막페이지 > 1){
+    //     document.getElementById("이전페이지").style = "display : inline"
+    //     document.getElementById("다음페이지").style = "display : inline"
+    //   }
+      
+    // }
+    
+  }
+  //필터에서 페이지그리기기능
+  const 필터에서페이지그리기기능 = () =>{
+    const 마지막페이지 = Math.ceil(필터된.length / 12)
+    const 페이지박스 =  new Array(5).fill("페이지")
+    const 페이지html = 페이지박스.map((el,index)=> {
+      const 페이지번호 = 시작페이지 + index
+      return 페이지번호 <= 마지막페이지 ? `
+           <button onclick="필터에서일기입력하기(${페이지번호}); 필터에서페이지그리기기능(${페이지번호});">${페이지번호}</button> 
+      ` : ""
+      
+  }).join("")
+    // document.querySelector(".")
+    document.getElementById("페이지보여주는곳").innerHTML = 페이지html
+    if(마지막페이지 > 1){
+      document.getElementById("이전페이지").style = "display : inline"
+      document.getElementById("다음페이지").style = "display : inline"
+    }
+    
+  }
+
+  const 필터에서일기입력하기= (클릭한페이지) =>{
+    
+      const 열두개들어있는배열 = 필터된.filter((el,index) => {
+        const 건너뛴횟수 = 클릭한페이지 -1;
+        return 건너뛴횟수 * 12 <= index && index < 12 * 클릭한페이지      
+      });
+      const 일기목록HTML = 열두개들어있는배열.map((el)=>`
+          <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
+            <a href="./sub.html?number=${el.전체인덱스}">     
+              <img 
+                src="./assets/images/${el.감정}.png" alt="">
+              <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보">
+                <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정날짜">
+                  
+                  ${el.감정 === "행복해요"
+                    ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__행복">행복해요</span>'
+                    : ""
+                  }
+                  ${el.감정 === "슬퍼요"
+                    ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__슬픔">슬퍼요</span>'
+                    : ""
+                  }
+                  ${el.감정 === "놀랐어요"
+                    ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__놀람">놀랐어요</span>'
+                    : ""
+                  }
+                  ${el.감정 === "화나요"
+                    ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__화남">화나요</span>'
+                    : ""
+                  }
+                  ${el.감정 === "기타"
+                    ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__기타">기타</span>'
+                    : ""
+                  }
+                  
+                  <span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__날짜">${el.날짜}</span>
+                </div>
+                <h2 class="바디__메인섹션__아티클섹션__일기칸__일기장__제목">${el.제목}</h2>
+              </div> 
+            </a> 
+            <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${el.전체인덱스})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
+          </div>
+      `).join("") // map 뒤에서 바로 조인하는것도 가능함 => 친구목록html.join("") 동일
+      //3. html 최종 삽입하기
+      
+        document.getElementById("일기칸").innerHTML = 일기목록HTML
+        
+    }
 
 const 일기등록기능 = () =>{
     const 감정 = document.querySelector('input[name="감정"]:checked').value;
@@ -215,18 +310,22 @@ function 일기삭제기능(event, 일기인덱스) {
   일기입력하기(시작페이지);
   페이지그리기기능(시작페이지);
 }
-
+// 키보드 기능
 window.addEventListener("keydown",(event)=>{
   if(event.key === "Escape") {
     등록모달닫기();
+    등록완료모달닫기();
+    등록취소모달닫기();
   }
-})
+}
+)
 
 const 스크롤위로기능 = () => {
   window.scrollTo({
     top: 0,
   });
 };
+
 
 
 
@@ -365,18 +464,23 @@ const 선택기능 = (event) => {
 
 
         //검색기능
+            let 검색된 = [];
             let 타이머 = "아직실행안함"
 const 검색기능 = (event) =>{
             const 일기리스트 = localStorage.getItem("일기목록")
             const 일기목록배열 = JSON.parse(일기리스트 === null ? "[]" : 일기리스트)
-            
+            const 전체인덱스포함배열 = 일기목록배열.map((el, index) => ({
+              ...el,
+              전체인덱스: index
+          }));
             clearTimeout(타이머)
             타이머 = setTimeout(() => {
                 const 내가검색한단어 = event.target.value
-                const 검색결과들 = 일기목록배열.filter( (el) => { return el.제목.includes(내가검색한단어)})
-                const 검색된일기목록HTML = 검색결과들.map((el,index)=>`
+                검색된 = 전체인덱스포함배열.filter( (el) => { return el.제목.includes(내가검색한단어)})
+                const 페이지1 = 검색된.filter((el,index)=>{ return index<=11})
+                const 검색된일기목록HTML = 페이지1.map((el)=>`
       <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
-        <a href="./sub.html?number=${index}">     
+        <a href="./sub.html?number=${el.전체인덱스}">     
           <img 
             src="./assets/images/${el.감정}.png" alt="">
           <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보">
@@ -408,15 +512,81 @@ const 검색기능 = (event) =>{
             <h2 class="바디__메인섹션__아티클섹션__일기칸__일기장__제목">${el.제목}</h2>
           </div> 
         </a> 
-        <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${index})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
+        <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${el.전체인덱스})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
       </div>
   `).join("") // map 뒤에서 바로 조인하는것도 가능함 => 친구목록html.join("") 동일
   //3. html 최종 삽입하기
     document.getElementById("일기칸").innerHTML = 검색된일기목록HTML
+    검색에서페이지그리기기능();
             }, 1000);
 
         }
-        
+  const 검색에서페이지그리기기능 = () =>{
+    const 마지막페이지 = Math.ceil(검색된.length / 12)
+    const 페이지박스 =  new Array(5).fill("페이지")
+    const 페이지html = 페이지박스.map((el,index)=> {
+      const 페이지번호 = 시작페이지 + index
+      return 페이지번호 <= 마지막페이지 ? `
+           <button onclick="검색에서일기입력하기(${페이지번호}); 검색에서페이지그리기기능(${페이지번호});">${페이지번호}</button> 
+      ` : ""
+      
+  }).join("")
+    // document.querySelector(".")
+    document.getElementById("페이지보여주는곳").innerHTML = 페이지html
+    if(마지막페이지 > 1){
+      document.getElementById("이전페이지").style = "display : inline"
+      document.getElementById("다음페이지").style = "display : inline"
+    }
+  }      
+const 검색에서일기입력하기 = (클릭한페이지) =>{
+  const 열두개들어있는배열 = 검색된.filter((el,index) => {
+    const 건너뛴횟수 = 클릭한페이지 -1;
+    return 건너뛴횟수 * 12 <= index && index < 12 * 클릭한페이지      
+  });
+  const 일기목록HTML = 열두개들어있는배열.map((el)=>`
+      <div class="바디__메인섹션__아티클섹션__일기칸__일기장">
+        <a href="./sub.html?number=${el.전체인덱스}">     
+          <img 
+            src="./assets/images/${el.감정}.png" alt="">
+          <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보">
+            <div class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정날짜">
+              
+              ${el.감정 === "행복해요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__행복">행복해요</span>'
+                : ""
+              }
+              ${el.감정 === "슬퍼요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__슬픔">슬퍼요</span>'
+                : ""
+              }
+              ${el.감정 === "놀랐어요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__놀람">놀랐어요</span>'
+                : ""
+              }
+              ${el.감정 === "화나요"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__화남">화나요</span>'
+                : ""
+              }
+              ${el.감정 === "기타"
+                ? '<span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__감정__기타">기타</span>'
+                : ""
+              }
+              
+              <span class="바디__메인섹션__아티클섹션__일기칸__일기장__일기정보__날짜">${el.날짜}</span>
+            </div>
+            <h2 class="바디__메인섹션__아티클섹션__일기칸__일기장__제목">${el.제목}</h2>
+          </div> 
+        </a> 
+        <img src="./assets/icons/삭제버튼.png" onclick="일기삭제기능(event, ${el.전체인덱스})" class="바디__메인섹션__아티클섹션__일기칸__일기장__삭제버튼">
+      </div>
+  `).join("") // map 뒤에서 바로 조인하는것도 가능함 => 친구목록html.join("") 동일
+  //3. html 최종 삽입하기
+  
+    document.getElementById("일기칸").innerHTML = 일기목록HTML
+    
+
+}
+  
         //무한 스크롤
           let 타이머2 = "아직실행안함"
         window.addEventListener("scroll",()=>{
@@ -450,8 +620,6 @@ const 검색기능 = (event) =>{
 
         
         let 시작페이지 = 1
-        
-
 
 const 페이지그리기기능 = (클릭한페이지) =>{
   일기목록배열= JSON.parse(localStorage.getItem("일기목록"))
@@ -489,4 +657,8 @@ const 이전페이지기능 = () =>{
   시작페이지 = 시작페이지 - 5
   페이지그리기기능(시작페이지);
   일기입력하기(시작페이지)
+}
+
+const 다크모드기능 =()=>{
+  document.body.classList.toggle("다크모드만들기")
 }
