@@ -3,23 +3,21 @@ const form = document.querySelector('.main__diary-form')
 
 if (form) {
   form.addEventListener('submit', (e) => {
-
     e.preventDefault()
 
-    const isHappy = e.target.happy.checked ? "happy" : ""
-    const isSad = e.target.sad.checked ? "sad" : ""
-    const isSurprise = e.target.surprise.checked ? "surprise" : ""
-    const isAngry = e.target.angry.checked ? "angry" : ""
-    const isEtc = e.target.etc.checked ? "etc" : ""
+    const isHappy = e.target.happy.checked ? 'happy' : ''
+    const isSad = e.target.sad.checked ? 'sad' : ''
+    const isSurprise = e.target.surprise.checked ? 'surprise' : ''
+    const isAngry = e.target.angry.checked ? 'angry' : ''
+    const isEtc = e.target.etc.checked ? 'etc' : ''
 
     const _title = e.target.title.value.trim()
     const _contents = e.target.contents.value.trim()
 
     if (isValid()) {
-
       let idx
       if (diaryId) {
-        idx = diaryList.findIndex(val => val.id === +diaryId)
+        idx = diaryList.findIndex((val) => val.id === +diaryId)
       } else {
         diaryId = diaryList.length > 0 ? diaryList[diaryList.length - 1].id + 1 : 0
         idx = diaryList.length
@@ -31,11 +29,11 @@ if (form) {
         title: _title,
         contents: _contents,
         date: getCurrentDate(),
-        comments: []
+        comments: [],
       }
       diaryList[idx] = newDiary
       storeDiaryList(diaryList)
-      sessionStorage.setItem(TOAST_KEY, `${idx+1}번째 일기가 제출되었습니다.`)
+      sessionStorage.setItem(TOAST_KEY, `${idx + 1}번째 일기가 제출되었습니다.`)
 
       location.replace('./index.html')
     }
@@ -53,7 +51,7 @@ const addCardsOnGallery = (diaryList) => {
 const addCardOnGallery = (obj) => {
   const { id, mood, date, title, image, color } = obj
 
-  const container = document.querySelector(".main__gallery")
+  const container = document.querySelector('.main__gallery')
   container.innerHTML += `
   <a href="./detail.html?diaryId=${id}">
     <div id=${id} class="main__gallery__card" onclick="onClick(event,${id})">
@@ -80,25 +78,25 @@ const addCardOnGallery = (obj) => {
 const confirmDelete = (event, id) => {
   const queryString = location.search
   const findQueryString = new URLSearchParams(queryString)
-  const diaryId = findQueryString.get("diaryId") ?? id
+  const diaryId = findQueryString.get('diaryId') ?? id
 
   event.stopPropagation()
-  const idx = diaryList.findIndex(el => el.id === +diaryId)
+  const idx = diaryList.findIndex((el) => el.id === +diaryId)
   diaryList = deleteDiaryById(event, diaryId)
   storeDiaryList(diaryList)
 
-  sessionStorage.setItem(TOAST_KEY, `${idx + 1}번째 일기가 삭제되었습니다.`);
+  sessionStorage.setItem(TOAST_KEY, `${idx + 1}번째 일기가 삭제되었습니다.`)
   location.replace('./index.html')
 }
 
 const deleteDiaryById = (event, id) => {
   event.preventDefault()
-  return diaryList.filter((el)=>el.id !== +id)
+  return diaryList.filter((el) => el.id !== +id)
 }
 
 const selectMood = (event) => {
   const moodId = event.target.id
-  const moodLabel = getMoodLabel(moodId) ?? "전체"
+  const moodLabel = getMoodLabel(moodId) ?? '전체'
   document.getElementById('dropdown-title-id').style = `--dropdown-title: "${moodLabel}"`
   document.getElementById('dropdown-title-id').click()
 
@@ -106,11 +104,11 @@ const selectMood = (event) => {
 }
 
 const filterByMood = (mood) => {
-  const container = document.querySelector(".main__gallery")
-  container.innerHTML = ""
+  const container = document.querySelector('.main__gallery')
+  container.innerHTML = ''
 
   switch (mood) {
-    case "total":
+    case 'total':
       return addCardsOnGallery(diaryList)
     default:
       return addCardsOnGallery(diaryList.filter((el) => el.mood === mood))
@@ -118,11 +116,11 @@ const filterByMood = (mood) => {
 }
 
 const submitComment = () => {
-  const commentContents = document.getElementById("detail-comments-input-input").value
+  const commentContents = document.getElementById('detail-comments-input-input').value
 
   let idx
   if (diaryId) {
-    idx = diaryList.findIndex(val => val.id === +diaryId)
+    idx = diaryList.findIndex((val) => val.id === +diaryId)
   } else {
     diaryId = diaryList.length > 0 ? diaryList[diaryList.length - 1].id + 1 : 0
     idx = diaryList.length
@@ -132,7 +130,7 @@ const submitComment = () => {
   const comment = {
     id: _comments.length > 0 ? _comments[_comments.length - 1].id + 1 : 0,
     contents: commentContents,
-    date: getCurrentDate()
+    date: getCurrentDate(),
   }
   _comments.push(comment)
   storeDiaryList(diaryList)
@@ -145,7 +143,7 @@ const addCommentsOnArea = (comments) => {
 
 const addCommentOnArea = (comment) => {
   const { id, contents, date } = comment
-  const container = document.querySelector(".detail-comments-area")
+  const container = document.querySelector('.detail-comments-area')
   container.innerHTML += `
   <div class="detail-comments-item">
     <h4>${contents}</h4>

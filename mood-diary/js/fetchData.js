@@ -3,10 +3,10 @@ const fetchData = async () => {
   try {
     const res = await fetch(DOG_IMAGES_10)
     if (!res.ok) throw new Error(`[${res.status}] API 호출 오류`)
-    
+
     const { message: imageUrls, status } = await res.json()
 
-    if(status !== 'success') throw new Error(`API 응답이 올바르지 않습니다. (status: ${status})`)
+    if (status !== 'success') throw new Error(`API 응답이 올바르지 않습니다. (status: ${status})`)
     return imageUrls
   } catch (err) {
     console.error(err)
@@ -15,12 +15,12 @@ const fetchData = async () => {
 
 // 1. dog-gallery 호출 후 innerHTML에 div 태그 삽입 함수
 const addSkeleton = (count = 10) => {
-  const checked = document.querySelector('input[name="dropdown"]:checked');
-  const ratio = checked.id || 'default';
+  const checked = document.querySelector('input[name="dropdown"]:checked')
+  const ratio = checked.id || 'default'
   const dogGallery = document.getElementById('dog-gallery')
-  dogGallery.innerHTML +=
-    Array.from({ length: count })
-    .map(()=> `<div class="skeleton ${ratio}"></div>`).join('')
+  dogGallery.innerHTML += Array.from({ length: count })
+    .map(() => `<div class="skeleton ${ratio}"></div>`)
+    .join('')
 }
 
 // 2
@@ -52,6 +52,7 @@ const showDogImages = async () => {
 const toggleComponent = (id) => {
   const diaryBox = document.getElementById('diary-box')
   const photoBox = document.getElementById('photo-box')
+  const paginationArea = document.querySelector('.pagination')
 
   const diaryComponent = document.getElementById('diary-component')
   const photoComponent = document.getElementById('photo-component')
@@ -65,6 +66,7 @@ const toggleComponent = (id) => {
       photoBox.classList.add('inActive')
       photoBox.classList.remove('active')
       photoComponent.style.display = 'none'
+      paginationArea.style.display = 'flex'
       break
     case 'photo-box':
       photoBox.classList.add('active')
@@ -74,7 +76,7 @@ const toggleComponent = (id) => {
       diaryBox.classList.add('inActive')
       diaryBox.classList.remove('active')
       diaryComponent.style.display = 'none'
-
+      paginationArea.style.display = 'none'
       showDogImages()
       break
   }
@@ -83,16 +85,14 @@ const toggleComponent = (id) => {
 // 4. dropdown에서 선택된 값 가져온 후, setImageRatio 함수 호출
 const selectRatio = (event) => {
   const ratioId = event.target.id
-  const ratioLabel = getRatioLabel(ratioId) ?? "기본"
+  const ratioLabel = getRatioLabel(ratioId) ?? '기본'
   document.getElementById('dropdown-ratio').style = `--dropdown-title: "${ratioLabel}"`
   document.getElementById('dropdown-ratio').click()
 
-
   const dogGallery = document.querySelectorAll('.dog-img')
 
-  dogGallery.forEach(dogImage => setImageRatio(dogImage, ratioId))
+  dogGallery.forEach((dogImage) => setImageRatio(dogImage, ratioId))
 }
-
 
 // 5. 기본형 <-> 가로형 <-> 세로형 변환 함수
 const setImageRatio = (dogImage, ratio) => {
@@ -112,13 +112,12 @@ const setImageRatio = (dogImage, ratio) => {
   }
 }
 
-
 let scrollTimer = null
 const infiniteScroll = () => {
   const photoBox = document.getElementById('photo-box')
   const isPhotoBox = photoBox.classList.contains('active')
-  
-  if(!isPhotoBox) return
+
+  if (!isPhotoBox) return
   if (scrollTimer) return
   scrollTimer = setTimeout(() => {
     scrollTimer = null
