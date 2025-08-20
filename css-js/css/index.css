@@ -44,6 +44,9 @@
     --font-size-title-md: 1.125rem; /* 헤더, 카드 제목 */
     --font-size-text-md: 1rem; /* 일반 텍스트, 입력 필드 */
     --font-size-text-sm: 0.875rem; /* 날짜, 부제, 푸터 텍스트 */
+
+    /* 이미지 비율 */
+    --image-ratio: 1 / 1;
   }
 
 
@@ -154,12 +157,11 @@ body{
     flex-direction: column;
     justify-content: baseline;
     align-items: center;
-    gap: 2.625rem;
+    gap: 2rem;
 }
 
 .frame__content__navigator {
     width: var(--width-full);
-    height: 7rem;
 
     display: flex;
     flex-direction: column;
@@ -216,7 +218,7 @@ body{
 
 .frame__content__filter{
     width: var(--width-content-main);
-    height: 2rem;
+    height: 3rem;
 
     display: flex;
     flex-direction: row;
@@ -260,6 +262,101 @@ body{
     color: #FFFFFF;
 }
 
+.dropdown__group{
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+
+    overflow: visible;
+
+    position: relative;
+    z-index: 1;
+}
+
+.dropdown__title{
+    appearance: none;
+    width: 7.5rem;
+    height: 3rem;
+    padding: 0.75rem 0.625rem;
+    border-radius: 0.5rem;
+    border: 0.06rem solid #C7C7C7;
+    margin-bottom: 0.5rem;
+
+    --filter-title: "전체";
+
+    font-size: var(--font-size-text-md);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5rem;
+    letter-spacing: -1%;
+    color: #1C1C1C;
+
+    position: relative;
+    z-index: 2;
+}
+
+.dropdown__title::after{
+    content: var(--filter-title);
+}
+
+.dropdown__title:checked + ul{
+    display: block;
+}
+
+.dropdown__img{
+    width: 1.5rem;
+    height: 1.5rem;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.625rem;
+}
+
+.dropdown__list{
+    display: none;
+    list-style-type: none;
+    background-color: #FFFFFF;
+
+    width: 7.5rem;
+    border-radius: 0.5rem;
+    border: 0.06rem solid #C7C7C7;
+
+    color: #5F5F5F;
+
+    overflow: hidden;
+
+    position: absolute;
+    top: 3.5rem;
+}
+
+.dropdown__list input{
+    display: none;
+}
+
+.dropdown__list input[type="radio"]:checked + label{
+    color: #299C00;
+    font-weight: var(--font-weight-bold);
+    background-color: rgba(58, 181, 15, 0.05); 
+}
+
+.dropdown__list input[type="radio"]:checked + label img{
+    display: block;
+}
+
+.dropdown__list label{
+    display: flex;
+    padding: 0.75rem;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dropdown__list label img{
+    display: none;
+}
+
+.dropdown__list label:hover{
+    background-color: rgba(58, 181, 15, 0.05); 
+}
+
+
 .frame__content__diary {
     width: var(--width-content-main);
     min-height: 73rem;
@@ -273,10 +370,7 @@ body{
 
     overflow: scroll;
 }
-/* 
-.frame__content__diary:has(.diary__card:hover){
-    width: 75rem;
-} */
+
 
 .content__diary__list{
     width: var(--width-content-main);
@@ -301,10 +395,6 @@ body{
 }
 
 
-/* .content__diary__list:has(.diary__card:hover){
-    width: 53.75rem;
-} */
-
 a{
     text-decoration: none;
     position: relative;
@@ -324,15 +414,6 @@ a{
     top 0.5s,
     left 0.5s;
 }
-
-/* .diary__card:hover #delete__button{
-    width: 1.688rem;
-    height: 1.688rem;
-
-    position: absolute;
-    top: 0.75rem;
-    left: 23rem;
-} */
 
 
 .diary__card{
@@ -357,24 +438,13 @@ a{
 }
 
 
-/* .diary__card:hover{
-    width: 25.75rem;
-    height: 24.75rem;
-    
-    box-shadow: 0 0.125rem 1.875rem 0 rgba(0, 0, 0, 0.16);
-} */
-
-/* .diary__card:hover .diary__card__subtitle{
-    width: 110%;
-} */
-
-
 .diary__card__image{
     width: 100%;
     height: 100%;
     border-radius: 1rem;
     /* background-image: url("./assets/images/sad_M.svg"); */
-    background-size: 100% 100%;
+    /* background-size: 100% 100%; */
+    object-fit: cover;
 
     transition: 
     width 0.5s,
@@ -468,20 +538,62 @@ a{
 }
 
 /* 사진보관함 CSS */
-.dog__list{
+#dog__list{
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: baseline;
     align-items: center;
     gap: 2.5rem;
+
 }
 
-.dog__list img{
+.dog__image{
     width: 40rem;
-    /* height: 40rem; */
-    aspect-ratio: 1 / 1 ;
     border-radius: 1.5rem;
     object-fit: cover;
+    /* --ratio-basic : 1 / 1;
+    --ratio-horizontal : 4 / 3;
+    --ratio-vertical : 3 / 4 ;  */
+    aspect-ratio: var(--image-ratio);
+}
+
+/* .ratio__basic{
+    aspect-ratio: 1 / 1 ;
+}
+
+.ratio__horizontal{
+    aspect-ratio: 4 / 3 ;
+}
+
+.ratio__vertical{
+    aspect-ratio: 3 / 4 ;
+} */
+
+.skeleton__background{
+    width: 40rem;
+    height: 40rem;
+    aspect-ratio: var(--image-ratio);
+    border-radius: 1.5rem;
+
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.00) 0%, rgba(255, 255, 255, 0.60) 48.5%, rgba(255, 255, 255, 0.00) 100%);
+
+    background-color: #E4E4E4;
+
+    background-size: 300% auto;
+
+    animation-name: skeleton;
+    animation-duration: 0.2s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+@keyframes skeleton{
+    from{
+        background-position: 100% 0%;
+    }
+    to{
+        background-position: 0% 100%;
+    }
 }
 
 
@@ -994,7 +1106,7 @@ a{
         font-size: var(--font-size-text-sm);
         line-height: 1rem;
     }
-    .dog__list img{
+    .dog__image{
         width: 17.5rem;
     }
 }

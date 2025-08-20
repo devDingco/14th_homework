@@ -18,47 +18,47 @@
                 <div class="main__frame">
                     <div class="main__frame__banner"></div>
                     <div class="main__frame__content">
-                        <div class="frame__content__navigator">
-                            <div class="frame__content__tab">
-                                <button id="click__diary__list" class="content__tab__menu" onclick="changeMenu('click__diary__list')">
-                                    일기보관함
-                                </button>
-                                <button id="click__image__list" class="tab__menu__disabled" onclick="changeMenu('click__image__list')"">
-                                    사진보관함
-                                </button>
-                            </div>
-                            <div class="frame__content__filter">
-                                <select id="filter" class="feeling__filter" onchange="viewFiltering(event)">
-                                    <option selected disabled>전체</option>
-                                    <option value="happy">행복해요</option>
-                                    <option value="sad">슬퍼요</option>
-                                    <option value="surprise">놀랐어요</option>
-                                    <option value="angry">화나요</option>
-                                    <option value="etc">기타</option>
-                                </select>
-                                <button class="add__diary__button" onclick="viewModal('write__form__modal')">
-                                    <img src="./assets/icons/plus_outline_light_m.svg" />
-                                    일기쓰기
-                                </button>
-                            </div>
+                        <div class="frame__content__tab">
+                            <button id="click__diary__list" class="content__tab__menu" onclick="changeMenu('click__diary__list')">
+                                일기보관함
+                            </button>
+                            <button id="click__image__list" class="tab__menu__disabled" onclick="changeMenu('click__image__list')">
+                                사진보관함
+                            </button>
+                        </div>
+                        <div id="filter__menu" class="frame__content__filter">
+                            <!-- <select id="feeling__filter" class="feeling__filter" onchange="viewFiltering(event)">
+                                <option selected disabled>전체</option>
+                                <option value="happy">행복해요</option>
+                                <option value="sad">슬퍼요</option>
+                                <option value="surprise">놀랐어요</option>
+                                <option value="angry">화나요</option>
+                                <option value="etc">기타</option>
+                            </select>
+                            <input type="checkbox" />
+                            <ul>
+                                <li>전체</li>
+                                <li>행복해요</li>
+                                <li>슬퍼요</li>
+                                <li>놀랐어요</li>
+                                <li>화나요</li>
+                                <li>기타</li>
+                            </ul>
+                            <input type="checkbox" />
+                            <ul>
+                                <li>기본</li>
+                                <li>가로형</li>
+                                <li>세로형</li>
+                            </ul>
+                            <button class="add__diary__button" onclick="viewModal('write__form__modal')">
+                                <img src="./assets/icons/plus_outline_light_m.svg" />
+                                일기쓰기
+                            </button> -->
                         </div>
                         <div id="frame__diary__list" class="frame__content__diary">
                             <div id="card__list" class="content__diary__list">
-                                <!-- 다이어리 상세 내용 이미지 -->
-                                <!-- <a href="./detail.html?number=${index}">
-                                    <div class="diary__card">
-                                        <img class="diary__card__image" src="./assets/images/${diaryCard[index].feeling}_M.svg" />
-                                        <div class="diary__card__text">
-                                            <div class="diary__card__subtitle">
-                                                <div class="diary__card__feeling ${diaryCard[index].feeling}">${diaryCard[index].feeling_title}</div>
-                                                <div id="diary__card__date">${diaryCard[index].date}</div>
-                                            </div>
-                                            <div class="diary__card__title">${diaryCard[index].card_title}</div>
-                                        </div>
-                                    </div>
-                                    </a> -->
-                                <!-- 여기까지 다이어리 상세 칸 리스트 -->
                             </div>
+                            <!-- <div id="dog__list"></div> -->
                             <!-- 기존 다이어리 작성 폼 -->
                             <!-- <div class="content__diary__form">
                                 <div class="diary__form__title">📍 일기 쓰기</div>

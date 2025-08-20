@@ -1,26 +1,3 @@
-/* 메뉴 이동 */
-// const changeMenu = (clicked) => {
-//     switch(clicked){
-//         case "click__diary__list":{
-//             document.getElementById("frame__diary__list").innerHTML = diary__list
-//             document.getElementById("click__diary__list").classList.remove("tab__menu__disabled")
-//             document.getElementById("click__diary__list").classList.add("content__tab__menu")
-//             document.getElementById("click__image__list").classList.remove("content__tab__menu")
-//             document.getElementById("click__image__list").classList.add("tab__menu__disabled")
-//             addDiaryCard()
-//             break;
-//         }
-//         case "click__image__list":{
-//             document.getElementById("frame__diary__list").innerHTML = `<div class=dog__list>${image__list}</div>`
-//             document.getElementById("click__image__list").classList.remove("tab__menu__disabled")
-//             document.getElementById("click__image__list").classList.add("content__tab__menu")
-//             document.getElementById("click__diary__list").classList.remove("content__tab__menu")
-//             document.getElementById("click__diary__list").classList.add("tab__menu__disabled")
-//             break;
-//         }
-//     }
-// }
-
 const changeMenu = (clicked) => {
     // 선택된 메뉴 객체
     // 비활성화할 메뉴, 불러올 변수, 불러올 함수
@@ -28,17 +5,24 @@ const changeMenu = (clicked) => {
         "click__diary__list":{
             disabledID: "click__image__list",
             content: diary__list,
+            filter: diary__filter,
+            filter_title: "전체",
             callback: addDiaryCard
         },
         "click__image__list":{
             disabledID: "click__diary__list",
             content: `<div class=dog__list>${image__list}</div>`,
+            filter: image__filter,
+            filter_title: "기본",
             callback: addImageCard
         }
     }
 
     const selected = targetMenu[clicked];
+
     if (!selected) return
+
+
 
     // 선택된 탭 활성화
     document.getElementById(clicked).classList.remove("tab__menu__disabled")
@@ -50,10 +34,13 @@ const changeMenu = (clicked) => {
 
     // HTML추가
     document.getElementById("frame__diary__list").innerHTML = selected.content;
+    document.getElementById("filter__menu").innerHTML = selected.filter;
 
     // 함수 실행
     selected.callback();
 
+    // 드롭박스 제목
+    document.getElementById("dropdown__title").style = `--filter-title: "${selected.filter_title}"`
 }
 
 
@@ -250,28 +237,26 @@ function addDiaryCard() {
 
 }
 
-// 페이지가 로드될 때 마다, 카드 추가하기 함수 실행
-window.addEventListener("load",addDiaryCard)
 
 
 // 드롭다운에서 필터링 기능 추가하기
 const viewFiltering = (event) => {
 
     // 드롭다운에서 선택한 기분이 XX일때, 배열에서 기분이 XX인 객체만 골라 배열로 만들기
-    const selectFilter = event.target.value
+    const selectFilter = event.target.id
     let select_filter;
-    if (selectFilter === "happy"){
+    if (selectFilter === "행복해요"){
         select_filter = diaryCard.filter ((el) => el.feeling === "happy")
-    } else if (selectFilter === "sad"){
+    } else if (selectFilter === "슬퍼요"){
         select_filter = diaryCard.filter ((el) => el.feeling === "sad")
-    } else if (selectFilter === "surprise"){
+    } else if (selectFilter === "놀랐어요"){
         select_filter = diaryCard.filter ((el) => el.feeling === "surprise")
-    } else if (selectFilter === "angry"){
+    } else if (selectFilter === "화나요"){
         select_filter = diaryCard.filter ((el) => el.feeling === "angry")
-    } else if (selectFilter === "etc"){
+    } else if (selectFilter === "기타"){
         select_filter = diaryCard.filter ((el) => el.feeling === "etc")
     } else {
-        console.log(diaryCard)
+        select_filter = diaryCard
     }
 
     // 필터된 배열을 기반으로 카드리스트HTML 만들어넣는 함수
@@ -309,22 +294,45 @@ const viewFiltering = (event) => {
 
 }
 
+const imageRatio = (event) => {
+
+    const root = document.documentElement;
+    if(event.target.id === "기본"){
+        root.style.setProperty('--image-ratio','1 / 1');
+    } else if(event.target.id === "가로형"){
+        root.style.setProperty('--image-ratio','4 / 3');
+    } else if(event.target.id === "세로형"){
+        root.style.setProperty('--image-ratio','3 / 4');
+    }
+}
+
 // 스크롤 내릴 시, 필터 드롭다운 배경색 반전
 window.onload = () => {
 
-    document.getElementById("frame__diary__list").addEventListener("scroll", () => {
+    // 삭제 ^ㅡ^
+    // document.getElementById("frame__diary__list").addEventListener("scroll", () => {
 
-        const scrolling = document.getElementById("frame__diary__list").scrollTop
+    //     const scrolling = document.getElementById("frame__diary__list").scrollTop
 
-        if (scrolling > 0) {
-            document.getElementById("filter").style = "background-color: #1C1C1C; color: #FFFFFF; border: none;"
-        } else {
-            document.getElementById("filter").style = "background-color: #FFFFFF; color:  #1C1C1C; border: 1px solid #C7C7C7;"
-        }
+    //     if (scrolling > 0) {
+    //         document.getElementById("feeling__filter").style = "background-color: #1C1C1C; color: #FFFFFF; border: none;"
+    //     } else {
+    //         document.getElementById("feeling__filter").style = "background-color: #FFFFFF; color:  #1C1C1C; border: 1px solid #C7C7C7;"
+    //     }
 
-    })
+    // })
 
+    document.getElementById("filter__menu").innerHTML = diary__filter;
+    addDiaryCard()
+    // addImageCard()
 }
+
+
+// 페이지가 로드될 때 마다, 카드 추가하기 함수 실행
+window.addEventListener("load",addDiaryCard)
+
+
+// 플로팅 버튼 실행
 window.addEventListener("scroll", floatingButton)
 window.addEventListener("resize", floatingButton)
 window.addEventListener("load", floatingButton)
@@ -366,4 +374,9 @@ function floatingButton(){
 
         z-index: 99;
     `
+}
+
+const selectDropDown = (event) => {
+    document.getElementById("dropdown__title").style = `--filter-title: "${event.target.id}"`
+    document.getElementById("dropdown__title").click()
 }
