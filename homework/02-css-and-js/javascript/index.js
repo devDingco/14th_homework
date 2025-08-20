@@ -3,32 +3,63 @@ window.onload = () => {
   
     // 1. 시작하면 일기 목록에 그리기
     JS_메뉴이동("일기");
-  };
+};
   
-  window.onscroll = function () {
-    const selectElement = document.querySelector(".filter");
+  // window.onscroll = function () {
+  //   const selectElement = document.querySelector(".filter");
   
-    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-      // 2. 스크롤이 조금이라도 내려갔으면? 배경색 변경하기
-      selectElement.classList.add("inverted");
-    } else {
-      selectElement.classList.remove("inverted"); // 스크롤이 맨 위로 올라가면 원래 색으으로 복귀
-    }
-  };
+  //   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+  //     // 2. 스크롤이 조금이라도 내려갔으면? 배경색 변경하기
+  //     selectElement.classList.add("inverted");
+  //   } else {
+  //     selectElement.classList.remove("inverted"); // 스크롤이 맨 위로 올라가면 원래 색으으로 복귀
+  //   }
+  // };
   
+
+window.onscroll = function () {
+  const 일기필터 = document.getElementById("HTML_일기보관함필터");
+  const 사진필터 = document.getElementById("HTML_사진보관함필터");
+
+  let 현재필터영역;
+
+  if (일기필터 && 일기필터.style.display !== 'none') {
+      현재필터영역 = 일기필터.querySelector(".filter_area");
+  } else if (사진필터 && 사진필터.style.display !== 'none') {
+      현재필터영역 = 사진필터.querySelector(".filter_area");
+  }
+
+  if (현재필터영역) { // ✅ 현재필터영역이 존재할 때만 코드를 실행합니다.
+      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+          현재필터영역.classList.add("inverted");
+      } else {
+          현재필터영역.classList.remove("inverted"); 
+      }
+  }
+};
+
 window.addEventListener("scroll", () => {  
-  const 보이는화면길이 = window.innerHeight
   const 위에서푸터까지길이 = document
     .getElementById("HTML_푸터")
     .getBoundingClientRect().top
+  const 보이는화면길이 = window.innerHeight
+  const 보이는화면너비 = window.innerWidth;
 
   // 1. 푸터가 보일 때는, 화면과 상관없이 사진에 고정시키기
   if (보이는화면길이 >= 위에서푸터까지길이) {
-    document.getElementById("HTML_플로팅버튼").style = `
+    if(보이는화면너비 >=849) {
+      document.getElementById("HTML_플로팅버튼").style = `
       position: relative;
-      bottom: 16rem;
-      left: 47%;
+      bottom: 0;
+      left: 98%;
     `;
+    } else {
+      document.getElementById("HTML_플로팅버튼").style = `
+      position: relative;
+      bottom: 0;
+      left: 85%;
+    `;
+    }   
 
     // 2. 푸터가 안보일 때는, 사진과 상관없이 화면에 고정시키기
   } else {
@@ -397,3 +428,11 @@ const JS_일기삭제확인기능 = (일기번호) =>{
     현재삭제할일기번호 = null;
   }
 }
+
+const JS_다크모드 = (event) => {
+  if (event.target.checked === true) {
+    document.documentElement.setAttribute("다크모드", "on");
+  } else {
+    document.documentElement.setAttribute("다크모드", "off");
+  }
+};
