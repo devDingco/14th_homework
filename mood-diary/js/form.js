@@ -42,6 +42,13 @@ if (form) {
 
 // 전체 카드 화면 출력하는 함수(반복문)
 const addCardsOnGallery = (diaryList) => {
+  const container = document.querySelector('.main__gallery')
+  if (diaryList.length === 0)
+    container.innerHTML = `
+      <div class="empty-container">
+        <p>등록된 일기가 없습니다.</p>
+      </div>`
+
   return diaryList.map(formattedDiary).forEach(addCardOnGallery)
 }
 
@@ -235,6 +242,12 @@ const submitComment = () => {
 }
 
 const addCommentsOnArea = (comments) => {
+  const container = document.querySelector('.detail-comments-area')
+  if (comments.length === 0)
+    container.innerHTML = `
+      <div class="empty-container">
+        <p>등록된 회고가 없습니다.</p>
+      </div>`
   return comments.forEach(addCommentOnArea)
 }
 
