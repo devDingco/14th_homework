@@ -42,32 +42,26 @@
     <div class="필터">
       <div class="필터__정렬">
         <select class="필터__정렬__선택" onchange="필터링기능(event)">
-          <option disabled selected>전체</option>
+          <option>전체</option>
           <option value="행복해요">행복해요</option>
           <option value="슬퍼요">슬퍼요</option>
           <option value="놀랐어요">놀랐어요</option>
           <option value="화나요">화나요</option>
           <option value="기타">기타</option>
         </select>
-        <button class="모달일기등록버튼" onclick="모달일기등록하기기능()">
+        <button class="모달일기등록버튼" onclick="모달열기기능('등록모달ID')">
           <img src="./images/add.svg" />일기쓰기
         </button>
       </div>
     </div>
+
     <div style="height: 42px"></div>
 
     <div class="바디">
       <div class="바디__정렬">
         <div id="일기추가보이는곳" class="바디__정렬__목록"></div>
-        </div>
       </div>
     </div>
-
-   <!-- 모달창 -->
-   <!-- 모달창 -->
-   <!-- 모달창 -->
-   <!-- 모달창 -->
-   <!-- 모달창 -->
 
     <div class="푸터">
       <div class="푸터__내용">
@@ -92,23 +86,25 @@
             font-weight: 400;
             color: #5f5f5f;
           ">
-          Copyright © 2024. {name} Co., Ltd.
+          Copyright © 2024. 양지윤 Co., Ltd.
         </div>
       </div>
     </div>
+
     <div class="플로팅버튼" onclick="스크롤올리기()">
       <img class="플로팅버튼이미지" src="./images/topscroll fab.svg" />
     </div>
 
+    <!-- 모달창  -->
+
+    <!-- 등록모달 -->
     <div id="등록모달ID" class="공동모달그룹">
-      <div class="모달배경"></div>
-      <div class="바디__정렬__일기쓰기">
+      <div class="모달배경" onclick="모달닫기기능('등록모달ID')"></div>
+      <div class="등록모달">
         <div class="바디__정렬__일기쓰기__타이틀">📍일기쓰기</div>
         <div style="max-width: 312px; width: 100%; height: 40px"></div>
 
-        <div class="바디__정렬__일기쓰기__오기어">
-          오늘 기분은 어땠나요?
-        </div>
+        <div class="바디__정렬__일기쓰기__오기어">오늘 기분은 어땠나요?</div>
         <div style="width: 312px; height: 16px"></div>
 
         <div class="바디__정렬__일기쓰기__라디오">
@@ -169,11 +165,10 @@
           <div class="바디__정렬__일기쓰기__내용__라벨">내용</div>
           <div style="max-width: 312px; width: 100%; height: 8px"></div>
           <div class="바디__정렬__일기쓰기__내용__인풋">
-            <input
+            <textarea
               id="내용"
               class="바디__정렬__일기쓰기__내용__라벨__인풋__입력창"
-              type="text"
-              placeholder="내용을 입력해 주세요." />
+              placeholder="내용을 입력해 주세요."></textarea>
           </div>
         </div>
 
@@ -182,27 +177,73 @@
         <div class="바디__정렬__일기쓰기__등록">
           <button
             class="바디__정렬__일기쓰기__닫기__버튼"
-            onclick="모달닫기기능()">
+            onclick="모달열기기능('모달등록취소ID')">
             닫기
           </button>
           <button
-            onclick="등록하기()"
+            onclick="모달열기기능('모달등록완료ID')"
             class="바디__정렬__일기쓰기__등록__버튼">
             등록하기
           </button>
         </div>
       </div>
-
-
-  <!-- <div class="일기등록완료창">
-    <div class="일기등록완료">일기 등록 완료</div>
-    <div style="height: 16px"></div>
-    <div class="일기등록이완료되었습니다">등록이 완료 되었습니다.</div>
-    <div style="height: 40px"></div>
-    <button class="등록완료확인버튼">확인</button>
-  </div> -->
-
-
-
+    </div>
+    <!-- 등록완료모달 -->
+    <div id="모달등록완료ID" class="공동모달그룹">
+      <div class="모달배경"></div>
+      <div class="일기등록완료창">
+        <div class="일기등록완료">일기 등록 완료</div>
+        <div style="height: 16px"></div>
+        <div class="일기등록이완료되었습니다">등록이 완료 되었습니다.</div>
+        <div style="height: 40px"></div>
+        <button
+          class="등록완료확인버튼"
+          onclick="등록하기();모달닫기기능('모달등록완료ID'); 모달닫기기능('등록모달ID')">
+          확인
+        </button>
+      </div>
+    </div>
+    <!-- 등록취소모달 -->
+    <div id="모달등록취소ID" class="공동모달그룹">
+      <div class="모달배경"></div>
+      <div class="일기등록취소창">
+        <div class="일기등록완료">일기 등록 취소</div>
+        <div style="height: 16px"></div>
+        <div class="일기등록이완료되었습니다">일기 등록을 취소하시겠어요?</div>
+        <div style="height: 40px"></div>
+        <div class="등록취소버튼정렬">
+          <button
+            class="계속작성버튼"
+            onclick="모달닫기기능('모달등록취소ID'); ">
+            계속 작성
+          </button>
+          <button
+            class="등록취소버튼"
+            onclick="모달닫기기능('모달등록취소ID'); 모달닫기기능('등록모달ID')">
+            등록취소
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- 삭제모달  -->
+    <div id="일기삭제모달ID" class="공동모달그룹">
+      <div class="모달배경"></div>
+      <div class="일기등록취소창">
+        <div class="일기등록완료">일기 삭제</div>
+        <div style="height: 16px"></div>
+        <div class="일기등록이완료되었습니다">일기를 삭제 하시겠어요?</div>
+        <div style="height: 40px"></div>
+        <div class="등록취소버튼정렬">
+          <button
+            class="계속작성버튼"
+            onclick="모달닫기기능('일기삭제모달ID'); ">
+            취소
+          </button>
+          <button class="등록취소버튼" onclick="모달닫기기능('일기삭제모달ID')">
+            삭제
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

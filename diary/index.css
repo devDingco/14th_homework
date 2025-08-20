@@ -73,31 +73,6 @@ a {
   width: 100%;
   height: 2rem;
 }
-.모달일기등록버튼 {
-  color: #fff;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 600;
-  width: 110px;
-  height: 48px;
-  display: flex;
-  height: 48px;
-  /* padding: 8px 10px; */
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 8px;
-  background: #000;
-}
-
-.등록모달 {
-  top: calc(50% - 560px / 2);
-  left: calc(50% - 640px / 2);
-  width: 640px;
-  height: 560px;
-  z-index: 3;
-  background-color: white;
-}
 
 .배너 {
   max-width: 120rem;
@@ -342,7 +317,7 @@ a {
 }
 
 .바디__정렬__일기쓰기__제목__라벨__인풋__입력창 {
-  max-width: 17.5rem;
+  max-width: 35rem;
   width: 100%;
   height: 1.5rem;
   border: none;
@@ -366,20 +341,19 @@ a {
 
 .바디__정렬__일기쓰기__내용__인풋 {
   padding: 0.75rem 1rem;
-  min-width: 19.5rem;
+  min-width: 37rem;
   width: 100%;
   height: 8rem;
   background-color: #fff;
   border-radius: 8px;
   border: 0.0625rem solid #d4d3d3;
-  display: flex;
-  /* justify-content: center; */
 }
 
 .바디__정렬__일기쓰기__내용__라벨__인풋__입력창 {
-  max-width: 17.5rem;
+  resize: none;
+  max-width: 37rem;
   width: 100%;
-  min-height: 1.5rem;
+  height: 6rem;
   border: none;
 }
 
@@ -834,9 +808,38 @@ a {
   background-color: gray;
   opacity: 50%;
 }
-
-.일기등록완료창 {
+.모달일기등록버튼 {
+  color: #fff;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  width: 110px;
+  height: 48px;
   display: flex;
+  height: 48px;
+  /* padding: 8px 10px; */
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: #000;
+}
+
+.등록모달 {
+  position: absolute;
+  top: calc(50% - 560px / 2);
+  left: calc(50% - 640px / 2);
+  width: 640px;
+  height: 560px;
+  z-index: 3;
+  background-color: white;
+  border-radius: 24px;
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+.일기등록완료창 {
   width: 30rem;
   min-width: 30rem;
   max-width: 47.5rem;
@@ -846,7 +849,12 @@ a {
   gap: 2.5rem;
   border-radius: 1.5rem;
   background: #fff;
+  position: absolute;
+  top: calc(50% - 200px / 2);
+  left: calc(50% - 480px / 2);
+  z-index: 4;
 }
+/* -------------일기등록완료창----------------- */
 .일기등록완료 {
   color: #000;
   text-align: center;
@@ -879,7 +887,58 @@ a {
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 1.5rem; /* 133.333% */
+  line-height: 1.5rem;
   border-radius: 0.5rem;
   background: #000;
 }
+/* ---------------------------------------- */
+/* -------------일기등록취소창----------------- */
+.일기등록취소창 {
+  display: flex;
+  width: 30rem;
+  min-width: 30rem;
+  max-width: 47.5rem;
+  padding: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1.5rem;
+  background: #fff;
+  position: absolute;
+  top: calc(50% - 200px / 2);
+  left: calc(50% - 480px / 2);
+  z-index: 4;
+}
+
+.등록취소버튼정렬 {
+  display: flex;
+  justify-content: space-between;
+  width: 229px;
+  height: 48px;
+}
+.계속작성버튼 {
+  max-width: 6.5rem;
+  height: 3rem;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 8px;
+  border: 1px solid #000;
+  background: #fff;
+  color: #1c1c1c;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+}
+.등록취소버튼 {
+  max-width: 6.5rem;
+  height: 3rem;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  background: #000;
+  color: #f2f2f2;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+}
+/* ----------------------------------------*/
