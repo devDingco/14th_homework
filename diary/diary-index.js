@@ -9,24 +9,21 @@ const 검색기능 = (event) => {
 
         const 검색어 = event.target.value.trim() // 앞뒤 공백 제거
         console.log("검색어:", 검색어)
-    
-        const 일기들 = JSON.parse(localStorage.getItem("일기들목록")) || []
 
         // 검색 결과 필터링
-        const 검색결과 = 검색어
-            ? 일기들.filter((el) =>
+        filteredDiaries = 검색어
+            ? savedDiaries.filter((el) =>
                 el.title.includes(검색어) ||
                 el.content.includes(검색어) ||
                 el.feeling.includes(검색어) ||
                 el.date.includes(검색어)
             )
-            : 일기들
+            : null // 검색어 없으면 전체 표시
 
-        console.log("검색결과:", 검색결과)
-
-        // 👉 renderDiaries() 함수 재활용 (중복 코드 제거)
-        renderDiaries(검색결과)
-    }, 1000) //
+        시작페이지 = 1
+        일기들그리기(시작페이지)
+        페이지번호그리기(시작페이지)
+    }, 300) //
 
 }
 
@@ -48,58 +45,51 @@ function 삭제하기(event, number) {
     localStorage.setItem("일기들목록", JSON.stringify(삭제후남은일기들))
 
     // 화면 갱신
-    renderDiaries()
-}
-
-// 새로운 일기 등록 함수
-
-function renderDiaries() {
-
-    const savedDiaries = filteredDiaries ?? JSON.parse(localStorage.getItem("일기들목록")) ?? []
-    const diaryContainer = document.querySelector(".일기보관함")
-
-    if (savedDiaries.length > 0) {
-        const emptyMsg = document.querySelector(".empty-message")
-        if (emptyMsg) emptyMsg.remove()
-            
-        const diaryHTML = savedDiaries.map((el) => `
-            <a href="./details/diary-detail.html?number=${el.number}" class="일기틀">
-                <div class="감정이미지__${el.feeling}"></div>
-                <img class="삭제버튼" src="./asset/icon/close_icon.png" onclick="openDeleteModal(event, ${el.number})" />
-                <div class="일기속성">
-                    <div class="일기속성1">
-                        <div class="감정__${el.feeling}">${el.feeling}</div>
-                        <div class="날짜표시">${el.date}</div>
-                    </div>
-                    <div class="일기속성2">
-                        <div class="타이틀">${el.title}</div>
-                    </div>
-                </div>
-            </a>`
-        ).join("")
-
-        diaryContainer.innerHTML = diaryHTML
-    } else {
-        diaryContainer.innerHTML = `<div class="empty-message">일기가 없습니다.</div>`
-    }
+    시작페이지 = 1
+    일기들그리기(시작페이지)
+    페이지번호그리기(시작페이지)
 }
 
 // ---------------------------------------------------------------------
 // ------------------------------- 드롭다운 -------------------------------
 
 window.addEventListener("DOMContentLoaded", () => {
-    일기들그리기(1)
-    페이지번호그리기(1)
+
+    const dropdownTitle = document.querySelector(".드롭다운제목")
+    const dropdownList = document.querySelector(".드롭다운목록")
+
+    // 초기 렌더링
+    일기들그리기(시작페이지)
+    페이지번호그리기(시작페이지)
+
+    // 드롭다운 버튼 클릭 시 목록 열기/닫기
+    dropdownTitle.addEventListener("click", () => {
+        dropdownList.style.display = dropdownList.style.display === "block" ? "none" : "block"
+    });
+
+    // 드롭다운 목록 선택 시
+    dropdownList.querySelectorAll("input[type=radio]").forEach(input => {
+        input.addEventListener("click", (event) => {
+            const selectedFeeling = event.target.id
+
+            // 버튼 텍스트 변경
+            dropdownTitle.textContent = selectedFeeling
+
+            // 목록 닫기
+            dropdownList.style.display = "none"
+
+            // 필터 적용
+            diaryDropdown(selectedFeeling)
+        });
+    });
+
+    // 외부 클릭 시 목록 닫기
+    document.addEventListener("click", (event) => {
+        if (!event.target.closest(".일기드롭다운")) {
+            dropdownList.style.display = "none"
+        }
+    })
 })
-
-// 초기 로드 시
-window.addEventListener("DOMContentLoaded", renderDiaries)
-
-// 드롭다운
-const 일기드롭다운기능 = (event) => {
-    document.querySelector(".드롭다운제목").style = `--드롭다운변수: "${event.target.id}"`
-    document.querySelector(".드롭다운제목").click()  // 선택 후에 다시 클릭
-}
 
 // 필터 함수
 function diaryDropdown(selectedFeeling) {
@@ -111,30 +101,10 @@ function diaryDropdown(selectedFeeling) {
         filteredDiaries = allDiaries.filter(el => el.feeling === selectedFeeling)
     }
 
-    // 페이지네이션 다시 그리기: 첫 페이지부터 시작
     시작페이지 = 1
     일기들그리기(시작페이지)
     페이지번호그리기(시작페이지)
 }
-
-// 드롭다운 값 변경 시 이벤트
-window.addEventListener("DOMContentLoaded", () => {
-
-    // 첫 렌더링
-    renderDiaries()
-
-    const dropdownSelect = document.querySelector(".드롭다운목록")
-
-        dropdownSelect.addEventListener("click", (event) => {
-            const selectedFeeling = event.target.id
-            diaryDropdown(selectedFeeling)
-
-            // event.target.style.backgroundColor = "black"
-            // event.target.style.color = "#E4E4E4"
-
-        })
-
-})
 
 // ---------------------------------- 드롭다운 끝 ---------------------------------
 // -----------------------------------------------------------------------------
@@ -169,3 +139,39 @@ const 메뉴이동 = (메뉴이름) => {
 window.addEventListener("DOMContentLoaded", () => {
     메뉴이동('메뉴__일기보관함')
 })
+
+
+
+
+// 새로운 일기 등록 함수
+
+// function renderDiaries() {
+
+//     const savedDiaries = filteredDiaries ?? JSON.parse(localStorage.getItem("일기들목록")) ?? []
+//     const diaryContainer = document.querySelector(".일기보관함")
+
+//     if (savedDiaries.length > 0) {
+//         const emptyMsg = document.querySelector(".empty-message")
+//         if (emptyMsg) emptyMsg.remove()
+            
+//         const diaryHTML = savedDiaries.map((el) => `
+//             <a href="./details/diary-detail.html?number=${el.number}" class="일기틀">
+//                 <div class="감정이미지__${el.feeling}"></div>
+//                 <img class="삭제버튼" src="./asset/icon/close_icon.png" onclick="openDeleteModal(event, ${el.number})" />
+//                 <div class="일기속성">
+//                     <div class="일기속성1">
+//                         <div class="감정__${el.feeling}">${el.feeling}</div>
+//                         <div class="날짜표시">${el.date}</div>
+//                     </div>
+//                     <div class="일기속성2">
+//                         <div class="타이틀">${el.title}</div>
+//                     </div>
+//                 </div>
+//             </a>`
+//         ).join("")
+
+//         diaryContainer.innerHTML = diaryHTML
+//     } else {
+//         diaryContainer.innerHTML = `<div class="empty-message">일기가 없습니다.</div>`
+//     }
+// }
