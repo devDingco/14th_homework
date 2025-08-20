@@ -90,14 +90,14 @@
 body {
     background-color: var(--white);
     color: var(--black);
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* rem 전환 기준: 1rem = 10px (62.5% of 16px)
+   px → rem 변환: 값(px) / 10 = 값(rem) */
 html {
-    background-color: var(--white);
-    color: var(--black);
+    font-size: 62.5%;
+    font-family: 'Pretendard', sans-serif;
 }
-
 
 
 /* Color Variables */
@@ -326,6 +326,13 @@ html {
     line-height: 30px;
 }
 
+.headline-bold-22 {
+    font-weight: 700; /* Bold */
+    font-size: 22px;
+    line-height: 24px;
+}
+
+
 .headline-bold-20 {
     font-weight: 700; /* Bold */
     font-size: 20px;
@@ -350,6 +357,24 @@ html {
 .title-bold-14 {
     font-weight: 700; /* Bold */
     font-size: 14px;
+    line-height: 20px;
+}
+
+.title-semibold-20 {
+    font-weight: 600; /* Semibold */
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.title-semibold-18 {
+    font-weight: 600; /* Semibold */
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.title-semibold-16 {
+    font-weight: 600; /* Semibold */
+    font-size: 16px;
     line-height: 20px;
 }
 
