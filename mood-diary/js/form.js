@@ -43,6 +43,8 @@ if (form) {
 // 전체 카드 화면 출력하는 함수(반복문)
 const addCardsOnGallery = (diaryList) => {
   const container = document.querySelector('.main__gallery')
+  if (!container) return
+
   if (diaryList.length === 0)
     container.innerHTML = `
       <div class="empty-container">
@@ -57,6 +59,8 @@ const addCardOnGallery = (obj) => {
   const { id, mood, date, title, image, color } = obj
 
   const container = document.querySelector('.main__gallery')
+  if (!container) return
+
   container.innerHTML += `
   <a href="./detail.html?diaryId=${id}">
     <div id=${id} class="main__gallery__card" onclick="onClick(event,${id})">
@@ -113,6 +117,8 @@ const getDiaryByTitle = (event) => {
   clearTimeout(timer)
 
   const container = document.querySelector('.main__gallery')
+  if (!container) return
+
   container.innerHTML = ''
 
   timer = setTimeout(() => {
@@ -161,6 +167,7 @@ const renderCards = () => {
   const pageSlice = list.slice(start, start + PAGE_SIZE)
 
   const container = document.querySelector('.main__gallery')
+  if (!container) return
   container.innerHTML = ''
 
   addCardsOnGallery(pageSlice)
@@ -169,6 +176,7 @@ const renderCards = () => {
 const renderPager = () => {
   const lastPage = getLastPage()
   const pageContainer = document.querySelector('.pages')
+  if (!pageContainer) return
   // const pageArrows = document.querySelectorAll('.arrow')
 
   const blockStart = Math.floor((state.page - 1) / MAX_PAGE_BUTTONS) * MAX_PAGE_BUTTONS + 1
@@ -246,6 +254,8 @@ const submitComment = () => {
 
 const addCommentsOnArea = (comments) => {
   const container = document.querySelector('.detail-comments-area')
+  if (!container) return
+
   if (comments.length === 0)
     container.innerHTML = `
       <div class="empty-container">
@@ -257,6 +267,8 @@ const addCommentsOnArea = (comments) => {
 const addCommentOnArea = (comment) => {
   const { contents, date } = comment
   const container = document.querySelector('.detail-comments-area')
+  if (!container) return
+
   container.innerHTML += `
   <div class="detail-comments-item">
     <h4>${contents}</h4>
