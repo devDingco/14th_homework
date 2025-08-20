@@ -23,12 +23,23 @@
             
         <!-- 네비게이션 -->
         <div class="body_tab">
-            <div class="body_tab_active">일기보관함</div>
-            <div class="body_tab_default">사진보관함</div>
+            <div
+                id="HTML_일기보관함탭"
+                class="body_tab_text"
+                onclick="JS_메뉴이동('일기')"
+            >
+                일기보관함
+            </div>
+            <div
+                id="HTML_사진보관함탭"
+                class="body_tab_text"
+                onclick="JS_메뉴이동('사진')"
+            >
+                사진보관함
+            </div>
         </div>
-        <div class="body_button_area">
-            <!--필터-->
-            
+        <div id="HTML_일기보관함필터" class="body_button_area">
+            <!--일기보관함 필터-->            
             <select class="filter" onchange="JS_필터링기능(event)">                
                 <option selected>전체</option>
                 <option value="HTML_행복선택">행복해요</option>
@@ -45,7 +56,17 @@
             </button>
         </div>
 
-        <div class="body_main">
+        <!-- 사진보관함 필터 -->
+        <div id="HTML_사진보관함필터" class="body_button_area">
+            <select class="filter" onchange="JS_사진비율필터링기능(event)">
+                <option value="HTML_기본형선택" selected>기본형</option>
+                <option value="HTML_가로형선택">가로형</option>
+                <option value="HTML_세로형선택">세로형</option>
+            </select>
+        </div>  
+
+
+        <main id="HTML_일기보관함메인" class="body_main">
             <!-- 일기 보여주는 곳 -->
             <div id="HTML_일기보여주는곳" class="CSS_일기보여주는곳"></div>
 
@@ -184,17 +205,38 @@
 
                         <button
                             class="일기삭제모달_삭제"
-                            onclick="JS_일기삭제기능(event, 일기번호);모달닫기('일기삭제모달그룹ID');" 
+                            onclick="JS_일기삭제확인기능(); 모달닫기('일기삭제모달그룹ID');" 
                         >
                             삭제
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
+
+        <!-- 사진보관함  -->
+        <main id="HTML_사진보관함메인" class=" body_main">
+            <div
+                id="HTML_강아지사진보여주는곳"
+                class="CSS_강아지사진보여주는곳"
+            ></div>
+            <div id="HTML_스켈레톤" class="CSS_스켈레톤">
+                <div class="CSS_스켈레톤박스">
+                  <div class="CSS_스켈레톤막대기"></div>
+                </div>
+                <div class="CSS_스켈레톤박스">
+                  <div class="CSS_스켈레톤막대기"></div>
+                </div>
+                <div class="CSS_스켈레톤박스">
+                  <div class="CSS_스켈레톤막대기"></div>
+                </div>
+            </div>
+        </main>
+
     </div>
             
-        
+    
+
 
     <!-- 푸터 -->
     <div id="HTML_푸터" class="footer">
