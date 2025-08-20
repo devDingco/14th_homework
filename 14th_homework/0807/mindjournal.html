@@ -8,11 +8,12 @@
 </head>
 <body>
     <header class="site-header">
-        <h1>일기보관함_메인</h1>
-        <button id="openWriteModal" class="primary">일기 등록</button>
+        <div class="site-header-container">
+            <h1 class="site-title">민지의 다이어리</h1>
+        </div>
     </header>
 
-    <main>
+    <main class="main-container">
         <section class="banner">
             <img src="./Rectangle 1.png" alt="배너 이미지" />
         </section>
@@ -22,34 +23,38 @@
             <button class="tab" data-tab="photos">사진보관함</button>
         </nav>
 
-        <div id="filterBar" class="filter-bar">
-            <button class="filter-btn active" data-emotion="all">전체</button>
-            <button class="filter-btn" data-emotion="happy">행복</button>
-            <button class="filter-btn" data-emotion="sad">슬픔</button>
-            <button class="filter-btn" data-emotion="surprised">놀람</button>
-            <button class="filter-btn" data-emotion="angry">화남</button>
-            <button class="filter-btn" data-emotion="etc">기타</button>
-        </div>
+        <div class="filter-search-container">
+            <div class="mobile-search-bar">
+                <input type="text" id="searchInput" placeholder="검색어를 입력해 주세요." autocomplete="off" aria-label="제목 검색" />
+            </div>
 
-        <div class="filter-dropdown-bar">
-            <label for="filterDropdown" class="visually-hidden">감정 드롭다운</label>
-            <div class="dropdown custom">
-                <select id="filterDropdown" class="filter-dropdown" aria-label="감정 드롭다운">
-                    <option value="all">전체</option>
-                    <option value="happy">행복해요</option>
-                    <option value="sad">슬퍼요</option>
-                    <option value="surprised">놀랐어요</option>
-                    <option value="angry">화나요</option>
-                    <option value="etc">기타</option>
-                </select>
-                <span class="dropdown__icon" aria-hidden="true">▼</span>
+            <div class="controls-wrapper">
+                <div class="controls-left">
+                    <div class="filter-dropdown-bar">
+                        <label for="filterDropdown" class="visually-hidden">감정 필터</label>
+                        <div class="dropdown custom">
+                            <select id="filterDropdown" class="filter-dropdown" aria-label="감정 필터">
+                                <option value="all">전체</option>
+                                <option value="happy">행복해요</option>
+                                <option value="sad">슬퍼요</option>
+                                <option value="surprised">놀랐어요</option>
+                                <option value="angry">화나요</option>
+                                <option value="etc">기타</option>
+                            </select>
+                            <span class="dropdown__icon" aria-hidden="true">▼</span>
+                        </div>
+                    </div>
+                    <div class="desktop-search-bar">
+                        <input type="text" id="searchInputDesktop" placeholder="검색어를 입력해 주세요." autocomplete="off" aria-label="제목 검색" />
+                    </div>
+                </div>
+                <button id="openWriteModal" class="add-diary-btn" aria-label="새 일기 쓰기">
+                    <span class="icon">+</span>
+                    <span class="text">일기쓰기</span>
+                </button>
             </div>
         </div>
-
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="제목 검색..." autocomplete="off" aria-label="제목 검색" />
-        </div>
-
+        
         <div class="photo-filters" style="display:none;">
             <button class="ratio-btn active" data-ratio="square">정사각</button>
             <button class="ratio-btn" data-ratio="landscape">가로형</button>
@@ -61,14 +66,17 @@
             <div class="card-container" id="cardContainer"></div>
         </section>
     </main>
-
+    
     <div id="pagination" class="pagination-container"></div>
-
-    <footer>
-        <p>민지의 다이어리</p>
-    </footer>
-
     <button id="scrollTopBtn" class="floating-btn" title="맨 위로">▲</button>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p><strong>민지의 다이어리</strong></p>
+            <p>대표 : {name}</p>
+            <p>Copyright © 2024.{name} Co., Ltd.</p>
+        </div>
+    </footer>
 
     <div id="writeModal" class="modal">
         <div class="modal__backdrop"></div>
@@ -144,7 +152,7 @@
             </div>
         </div>
     </div>
-
+    
     <script src="./mindjournal.js"></script>
 </body>
 </html>
