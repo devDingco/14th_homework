@@ -17,7 +17,8 @@ body {
 
 .헤더 {
     justify-content: flex-start;
-    width: 73rem;
+    max-width: 73rem;
+    width: 100%;
     height: 3.75rem;
     display: flex;
     text-align: start;
@@ -34,7 +35,8 @@ body {
 }
 
 .헤더_내용{
-    width: 73rem;
+    max-width: 73rem;
+    width: 100%;
     height: 19.4375rem;
     display: flex;
     justify-content: flex-start;
