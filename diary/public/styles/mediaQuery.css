@@ -10,6 +10,7 @@
   }
   .cardList {
     display: flex;
+    flex-wrap: wrap;
     gap: 24px;
   }
   .x-container {
@@ -20,5 +21,11 @@
   }
   .formDiary {
     gap: 40px;
+  }
+  .main {
+    padding-top: 60px;
+  }
+  .card {
+    max-width: 274px;
   }
 }

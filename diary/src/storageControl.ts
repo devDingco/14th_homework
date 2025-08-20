@@ -1,9 +1,13 @@
+import { dummyData } from './data/dummyData';
 import type { TCard } from './types';
 
 const emptyDiaryEl = document.querySelector('.empty-diary') as HTMLSpanElement;
 const cardContainerEl = document.querySelector('.cardContainer')! as HTMLSpanElement;
 
 export const initialData: TCard[] = [];
+
+// 더미데이터 설정
+localStorage.setItem('myDiary', JSON.stringify(dummyData));
 
 // 초기데이터 설정
 export const initLocalStorage = (data: TCard[]) => {
@@ -54,3 +58,7 @@ export const getLocalStorageDetail = () => {
 
   return parseString;
 };
+
+//
+//
+//

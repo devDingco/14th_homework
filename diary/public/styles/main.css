@@ -110,8 +110,8 @@ header {
 
   width: 100%;
   height: 15rem;
-  min-width: 20rem;
-  max-width: 73rem;
+  /* min-width: 20rem; */
+  /* max-width: 73rem; */
   align-self: stretch;
   border-radius: 1.5rem;
 }
@@ -213,7 +213,7 @@ textarea {
   gap: 16px;
   width: 100%;
   min-width: 100%;
-  max-width: 274px;
+  /* max-width: 274px; */
   padding-bottom: 16px;
   border-radius: 16px;
   position: relative;
@@ -245,7 +245,7 @@ textarea {
 }
 
 .cardTitle {
-  width: 150px;
+  width: 136px;
   font-weight: 700;
   font-style: Bold;
   font-size: 18px;

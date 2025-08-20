@@ -8,6 +8,7 @@ import { formatDate } from './utils/formatDate';
 import { handleCloseModal, handleOpenModal } from './modal';
 import { addDiaryDom } from './displayDiary';
 import type { TCard } from './types';
+// import './setDummyData';
 
 // const myName = prompt("이름을 입력하세요.");
 const myName = '민지';
@@ -117,3 +118,6 @@ const handleScroll = () => {
 };
 
 window.addEventListener('scroll', handleScroll);
+
+
+
