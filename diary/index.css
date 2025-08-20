@@ -53,16 +53,50 @@ a {
   left: 0;
   max-width: 120rem;
   width: 100%;
-  height: 2.625rem;
+  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.필터__정렬 {
+  max-width: 73rem;
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .필터__정렬__선택 {
+  border-radius: 8px;
   max-width: 7.5rem;
   width: 100%;
   height: 2rem;
+}
+.모달일기등록버튼 {
+  color: #fff;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  width: 110px;
+  height: 48px;
+  display: flex;
+  height: 48px;
+  /* padding: 8px 10px; */
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: #000;
+}
+
+.등록모달 {
+  top: calc(50% - 560px / 2);
+  left: calc(50% - 640px / 2);
+  width: 640px;
+  height: 560px;
+  z-index: 3;
+  background-color: white;
 }
 
 .배너 {
@@ -74,10 +108,6 @@ a {
   flex-direction: row;
   justify-content: center;
 }
-/* .배너 img {
-  max-width: 100%;
-  display: block;
-} */
 
 .내비게이션 {
   max-width: 120rem;
@@ -138,14 +168,6 @@ a {
   position: fixed;
   right: 1.875rem;
   bottom: 1.875rem;
-}
-
-.필터__정렬 {
-  max-width: 73rem;
-  width: 100%;
-  height: 2rem;
-  display: flex;
-  align-items: center;
 }
 
 /* .CSS일기보여주는곳 {
@@ -242,13 +264,13 @@ a {
   border: none;
   background-color: transparent;
   position: absolute;
-  z-index: 5;
+  z-index: 1;
 }
 
 .바디__정렬__일기쓰기 {
   min-width: 19.5rem;
   width: 100%;
-  /* max-height: 37.5rem; */
+  max-height: 37.5rem;
   padding: 1.5rem;
   border-radius: 16px;
   border: 0.0625rem solid #d4d3d3;
@@ -362,21 +384,35 @@ a {
 }
 
 .바디__정렬__일기쓰기__등록 {
-  padding: 0.5rem 1rem;
-  min-width: 19.5rem;
-  width: 100%;
-  height: 3rem;
-  border-radius: 8px;
-  background-color: #c7c7c7;
   display: flex;
   justify-content: center;
+  gap: 1rem;
 }
-
-.바디__정렬__일기쓰기__등록__버튼 {
-  max-width: 19.5rem;
+.바디__정렬__일기쓰기__닫기__버튼 {
+  max-width: 6.5rem;
+  height: 3rem;
   width: 100%;
-  border: none;
   background-color: transparent;
+  border-radius: 8px;
+  border: 1px solid #000;
+  background: #fff;
+  color: #1c1c1c;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+}
+.바디__정렬__일기쓰기__등록__버튼 {
+  max-width: 6.5rem;
+  height: 3rem;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  background: #000;
+  color: #f2f2f2;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
 }
 
 .푸터 {
@@ -501,6 +537,21 @@ a {
   width: 100%;
   height: 6.25rem;
 }
+.내용복사이동용 {
+  display: flex;
+  justify-content: end;
+}
+.내용복사 {
+  width: 5.688rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  color: #1c1c1c;
+}
+
 .디테일본문__정렬__수정 {
   max-width: 73rem;
   width: 100%;
@@ -628,6 +679,32 @@ a {
   color: #777;
 }
 
+.토스트메세지 {
+  position: fixed;
+  bottom: 4rem;
+  left: calc(50% - 47.5rem / 2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 47.5rem;
+  height: 3.5rem;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  border-radius: 0.5rem;
+  display: none;
+  animation-name: 토스트애니메이션;
+  animation-duration: 1s;
+}
+
+@keyframes 토스트애니메이션 {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
 /* edit CSS */
 
 .수정본문 {
@@ -739,5 +816,70 @@ a {
   align-items: center;
   color: #f2f2f2;
   border-radius: 8px;
+  background: #000;
+}
+
+/* 모달창 */
+.공동모달그룹 {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.모달배경 {
+  width: 100vw;
+  height: 100vh;
+  background-color: gray;
+  opacity: 50%;
+}
+
+.일기등록완료창 {
+  display: flex;
+  width: 30rem;
+  min-width: 30rem;
+  max-width: 47.5rem;
+  padding: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  border-radius: 1.5rem;
+  background: #fff;
+}
+.일기등록완료 {
+  color: #000;
+  text-align: center;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5rem; /* 100% */
+}
+
+.일기등록이완료되었습니다 {
+  color: #333;
+  text-align: center;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem; /* 120% */
+}
+
+.등록완료확인버튼 {
+  width: 27rem;
+  height: 3rem;
+  display: flex;
+  height: 3rem;
+  padding: 0.5rem 0.625rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  color: #fff;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem; /* 133.333% */
+  border-radius: 0.5rem;
   background: #000;
 }

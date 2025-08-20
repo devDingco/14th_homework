@@ -15,9 +15,9 @@ const HTML일기보여주기 = () => {
       (el, index) => `
     <a href="./detail.html?number=${index}#댓글창ID">
       <div class="바디__정렬__목록__첫번째">
-        <img src="${el.이미지}" style="width: 380px; height: 285px; border-radius: 16px;" />  
+        <img src="${el.이미지}" style="max-width: 380px; width:100% ; height: 285px; border-radius: 16px;" />  
 
-        <div style="width: 380px; height: 16px"></div>
+        <div style="max-width: 380px; width:100%; height: 16px"></div>
 
         <div class="바디__정렬__목록__첫번째__내용">
           <div class="바디__정렬__목록__첫번째__내용__감정날짜">
@@ -35,7 +35,7 @@ const HTML일기보여주기 = () => {
             ${el.제목}
           </div>
 
-          <div style="width: 380px; height: 16px"></div>
+          <div style="max-width: 380px; width:100%; height: 16px"></div>
         </div>
 
         <button class="삭제버튼" onclick="삭제하기기능(event,${index})">
@@ -265,4 +265,18 @@ const 필터링기능 = (event) => {
 `
     )
     .join("");
+};
+
+const 모달일기등록하기기능 = () => {
+  document.getElementById("등록모달ID").style = "display: block";
+  // 스크롤 맨 위로 올리기
+  scrollTo({
+    top: 0,
+  });
+  document.body.style.overflow = "hidden";
+};
+
+const 모달닫기기능 = () => {
+  document.getElementById("등록모달ID").style = "display: none";
+  document.body.style.overflow = "auto";
 };
