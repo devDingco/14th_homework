@@ -1,0 +1,346 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+h1 {
+  font-size: 18px;
+  padding-top: 46px;
+  padding-bottom: 46px;
+}
+/* 메인전체사이즈 */
+.main {
+  max-width: 1168px;
+  margin: auto;
+}
+/* 네비 */
+nav {
+  display: flex;
+  font-size: 24px;
+  gap: 24px;
+  padding-top: 24px;
+}
+/* 타이틀메인 */
+.title__main {
+  display: flex;
+  gap: 24px;
+  padding-top: 42px;
+  padding-bottom: 40px;
+}
+.title__images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2열 */
+  grid-template-rows: repeat(3, 1fr); /* 3행 */
+  height: 100%;
+  gap: 24px;
+}
+
+.title__text {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 타이틀감정 */
+.title__sad {
+  color: #28b4e1;
+}
+
+.title__happy {
+  color: #ea5757;
+}
+
+.title__surprised {
+  color: #d59029;
+}
+
+.title__angry {
+  color: #777777;
+}
+
+.title__and {
+  color: #a229ed;
+}
+
+.title__text div:last-child {
+  color: #919191;
+}
+
+.title__text__main {
+  display: flex;
+  flex-direction: column;
+  padding-top: 16px;
+  gap: 8px;
+}
+
+.title__text__main div:last-child {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 타이틀오른쪽 */
+.title__right {
+  max-width: 360px;
+  height: 604px;
+}
+.title__right__text div:first-child {
+  font-size: 24px;
+  font-weight: bold;
+  width: 100%;
+}
+.title__right__text div:last-child {
+  font-size: 20px;
+  padding: 16px 0px;
+  width: 100%;
+}
+.title__right__mood {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* 간격 조절 */
+  font-size: 18px;
+  width: 100%;
+}
+input[type='radio'] {
+  transform: scale(1.5); /* 1.5배 크게 */
+}
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 라디오와 라벨 사이 간격 */
+}
+
+/* 폼 컨테이너 */
+.form-container {
+  background: white;
+  width: 100%;
+  border-radius: 8px;
+  padding-top: ;
+}
+
+/* 각 입력 그룹 */
+.form-group {
+  margin-bottom: 24px;
+}
+
+/* 라벨 */
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* 입력 필드 */
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+  background-color: white;
+}
+
+/* 텍스트에리어 */
+.form-textarea {
+  min-height: 120px;
+  min-width: 312px;
+  resize: none;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 12px 16px;
+  font-size: 16px;
+}
+
+/* 버튼 */
+.submit-btn {
+  width: 100%;
+  height: 48px;
+  padding: 16px;
+  background-color: #c7c7c7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  background-color: #f2f2f2;
+}
+
+.main__footer {
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  width: 1168px;
+  font-size: 14px;
+  gap: 32px;
+  padding: 24px;
+}
+
+.main__footer div:first-child {
+  font-size: 20px;
+}
+.main__footer div:nth-child(2) {
+  color: #5f5f5f;
+}
+.main__footer div:nth-child(3) {
+  color: #919191;
+}
+
+/* 애니메이션 코드 */
+
+/* 일기 카드 호버 효과 */
+.title__images > div {
+  transition: transform 0.5s ease;
+  cursor: pointer;
+}
+
+.title__images > div:hover {
+  transform: scale(1.1);
+  filter: blur(2px); /* 흐릿한 효과 추가 */
+}
+
+/* 드롭다운 */
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+  margin: 20px 0;
+}
+.dropdown-btn {
+  font-size: 16px;
+  width: 120px;
+  height: 32px;
+  background-color: white;
+  border-radius: 5px;
+  text-align: start;
+  padding: 4px;
+  border: 1px solid #c7c7c7;
+  background-image: url('./assets/images/arrow.png');
+  background-repeat: no-repeat;
+  background-position: right 0px center;
+}
+/* 드롭다운 메뉴 */
+.dropdown-menu {
+  display: none; /* 처음엔 숨김 */
+  position: absolute;
+  top: 100%; /* 버튼 바로 아래 */
+  left: 0;
+  right: 0;
+  background: #e4e4e4;
+  border: 1px solid #c7c7c7;
+  border-top: none; /* 버튼과 연결되게 */
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+.dropdown-item {
+  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+  border-radius: 0 0 5px 5px;
+}
+
+/* 삭제버튼 */
+.diaryCard {
+  position: relative;
+}
+.delete-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+}
+.scrollTop {
+  position: fixed;
+  bottom: 30px;
+  right: calc(50vw - 584px + 30px);
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.banner {
+  width: 1168px;
+  height: 240px;
+}
+
+.webBanner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mobileBanner {
+  display: none;
+}
+nav {
+  order: 1;
+}
+.dropdown-container {
+  order: 2;
+}
+.title__main {
+  order: 3;
+}
+
+@media (max-width: 560px) {
+  .main {
+    max-width: 320px;
+  }
+
+  .banner {
+    width: 100%;
+    max-width: 320px;
+    height: 240px;
+    object-position: center;
+    margin: 0 auto;
+  }
+
+  .webBanner {
+    display: none;
+  }
+  .mobileBanner {
+    display: block;
+  }
+  nav {
+    order: 2;
+  } /* 네비 */
+  .title__main {
+    order: 1;
+  } /* 일기쓰기가 포함된 영역을 맨 위로 */
+  .dropdown-container {
+    order: 3;
+  } /* 필터를 네비 아래로 */
+
+  /* title__main 내부 순서도 변경 */
+  .title__main {
+    flex-direction: column;
+  }
+
+  .title__right {
+    order: 1;
+  } /* 일기쓰기 맨 위 */
+  .title__images {
+    order: 2;
+  } /* 감정일기장 사진 아래 */
+}
