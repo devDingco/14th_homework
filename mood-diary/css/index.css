@@ -334,7 +334,7 @@ textarea::placeholder {
   align-items: center;
   gap: 1.6rem;
 }
-.pagination .pages input[type='checkbox'] {
+.pagination .pages input[type='radio'] {
   appearance: none;
   border: none;
   font-size: 1.6rem;
@@ -346,10 +346,10 @@ textarea::placeholder {
   background-color: transparent;
   cursor: pointer;
 }
-.pagination .pages input[type='checkbox']::after {
+.pagination .pages input[type='radio']::after {
   content: attr(page);
 }
-.pagination .pages input[type='checkbox']:checked {
+.pagination .pages input[type='radio']:checked {
   font-weight: 500;
   background-color: var(--color-gray-50);
   color: var(--color-black);

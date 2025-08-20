@@ -266,12 +266,12 @@
 
       <!-- 페이지네이션 -->
       <nav class="pagination">
-        <img src="./assets/icons/left.png" alt="" />
+        <img src="./assets/icons/left.png" onclick="moveToPrevPage()" />
         <div class="pages">
-          <input type="checkbox" page="1" checked />
-          <input type="checkbox" page="2" />
+          <!-- <input type="radio" name="page" page="1" checked /> -->
+          <!-- <input type="radio" name="page" page="2" /> -->
         </div>
-        <img src="./assets/icons/right.png" alt="" />
+        <img src="./assets/icons/right.png" onclick="moveToNextPage()" />
       </nav>
 
       <!-- 플로팅 버튼 -->
@@ -287,8 +287,9 @@
 
     <script src="./js/constants.js"></script>
     <script src="./js/formatUtils.js"></script>
-    <script src="./js/script.js"></script>
     <script src="./js/userDiary.js"></script>
+    <script src="./js/pagination.js"></script>
+    <script src="./js/script.js"></script>
 
     <script src="./js/checkContents.js"></script>
 
