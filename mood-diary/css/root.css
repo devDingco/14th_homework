@@ -1,4 +1,4 @@
-:root{
+:root {
   /* icon size */
   --icon-size-xl: 40px;
   --icon-size-l: 32px;
@@ -7,21 +7,21 @@
   --icon-size-xs: 16px;
 
   /* color - blue */
-  --color-blue-05: #F0F7FF;
-  --color-blue-10: #DBEEFF;
-  --color-blue-20: #BDDBFF;
+  --color-blue-05: #f0f7ff;
+  --color-blue-10: #dbeeff;
+  --color-blue-20: #bddbff;
 
   --color-white: #fff;
-  --color-gray-50: #F2F2F2;
-  --color-gray-100: #E4E4E4;
-  --color-gray-200: #D4D3D3;
-  --color-gray-300: #C7C7C7;
-  --color-gray-400: #ABABAB;
+  --color-gray-50: #f2f2f2;
+  --color-gray-100: #e4e4e4;
+  --color-gray-200: #d4d3d3;
+  --color-gray-300: #c7c7c7;
+  --color-gray-400: #ababab;
   --color-gray-500: #919191;
   --color-gray-600: #777;
-  --color-gray-700: #5F5F5F;
+  --color-gray-700: #5f5f5f;
   --color-gray-800: #333333;
-  --color-gray-900: #1C1C1C;
+  --color-gray-900: #1c1c1c;
   --color-black: #000;
 
   /* light mode */
@@ -33,6 +33,8 @@
   --input-font-color: var(--color-black);
   --placeholder-color: var(--color-gray-400);
   --accent-color: var(--color-black);
+  --btn-bg-color: var(--color-black);
+  --btn-font-color: var(--color-white);
   --btn-left-border-color: var(--color-black);
   --btn-left-font-color: var(--color-gray-900);
   --btn-left-bg-color: var(--color-white);
@@ -40,9 +42,14 @@
   --btn-right-bg-color: var(--color-black);
   --btn-disabled-bg-color: var(--color-gray-300);
   --btn-disabled-font-color: var(--color-white);
+  --page-active-color: var(--color-gray-50);
+  --page-font-color: var(--color-black);
+  --card-border-color: var(--color-white);
+  --dropdown-bg-color: #3ab50f0d;
+  --dropdown-font-color: #299c00;
 }
 
-.darkmode{
+.darkmode {
   --font-color: var(--color-white);
   --sm-font-color: var(--color-gray-300);
   --bg-color: var(--color-gray-900);
@@ -51,6 +58,8 @@
   --input-font-color: var(--color-white);
   --placeholder-color: var(--color-gray-600);
   --accent-color: var(--color-white);
+  --btn-bg-color: var(--color-gray-50);
+  --btn-font-color: var(--color-black);
   --btn-left-border-color: var(--color-gray-700);
   --btn-left-font-color: var(--color-white);
   --btn-left-bg-color: var(--color-gray-900);
@@ -58,104 +67,109 @@
   --btn-right-bg-color: var(--color-gray-50);
   --btn-disabled-bg-color: var(--color-gray-800);
   --btn-disabled-font-color: var(--color-gray-600);
+  --page-active-color: var(--color-gray-500);
+  --page-font-color: var(--color-gray-50);
+  --card-border-color: var(--color-gray-700);
+  --dropdown-bg-color: var(--color-gray-900);
+  --dropdown-font-color: var(--color-white);
 }
 
 /* web headline */
-.web_headline01{
+.web_headline01 {
   font-weight: 600;
   font-size: 4.8rem;
   line-height: 60px;
 }
-.web_headline02{
+.web_headline02 {
   font-weight: 600;
   font-size: 3.6rem;
   line-height: 48px;
 }
-.web_headline03{
+.web_headline03 {
   font-weight: 600;
   font-size: 2.8rem;
   line-height: 36px;
 }
 /* headline */
-.headline01{
+.headline01 {
   font-weight: 700;
   font-size: 2.4rem;
   line-height: 32px;
 }
-.headline02{
+.headline02 {
   font-weight: 800;
   font-size: 2.2rem;
   line-height: 30px;
 }
-.headline03{
+.headline03 {
   font-weight: 700;
   font-size: 2rem;
   line-height: 28px;
 }
 /* title */
-.title01{
+.title01 {
   font-weight: 700;
   font-size: 1.8rem;
   line-height: 24px;
 }
-.title02{
+.title02 {
   font-weight: 700;
   font-size: 1.6rem;
   line-height: 22px;
 }
-.title03{
+.title03 {
   font-weight: 700;
   font-size: 1.4rem;
   line-height: 20px;
 }
-.sub-title01{
+.sub-title01 {
   font-weight: 600;
   font-size: 1.4rem;
   line-height: 22px;
 }
-.sub-title02{
+.sub-title02 {
   font-weight: 600;
   font-size: 1.2rem;
   line-height: 18px;
 }
 /* body */
-.body01{
+.body01 {
   font-weight: 500;
   font-size: 1.6rem;
   line-height: 24px;
 }
-.body02_m{
+.body02_m {
   font-weight: 500;
   font-size: 1.4rem;
   line-height: 22px;
 }
-.body02_s{
+.body02_s {
   font-weight: 400;
   font-size: 1.4rem;
   line-height: 20px;
 }
-.body03{
+.body03 {
   font-weight: 500;
   font-size: 1.2rem;
   line-height: 18px;
 }
 /* caption */
-.caption01{
+.caption01 {
   font-weight: 600;
   font-size: 1.2rem;
   line-height: 14px;
 }
-.caption02_m{
+.caption02_m {
   font-weight: 600;
   font-size: 1rem;
   line-height: 14px;
 }
-.caption02_s{
+.caption02_s {
   font-weight: 500;
   font-size: 1rem;
   line-height: 12px;
 }
-.caption03{
+.caption03 {
   font-weight: 600;
   font-size: 0.8rem;
   line-height: 10px;
