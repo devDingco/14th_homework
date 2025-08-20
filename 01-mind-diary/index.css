@@ -9,6 +9,10 @@
     /* 기본 글꼴 크기 설정 (1rem = 16px) */
 }
 
+body.no-scroll {
+    overflow: hidden;
+}
+
 .전체컨테이너 {
     width: 100%;
     background-color: #FFFFFF;
@@ -16,6 +20,8 @@
     flex-direction: column;
     align-items: center;
 }
+
+
 
 .내용컨테이너 {
     width: 100%;
@@ -81,6 +87,9 @@
     flex: 1 0 0;
 }
 
+.탭바 a {  text-decoration: none;
+    color: inherit;}
+
 .탭바항목_선택됨 {
     color: #000;
     font-family: "Pretendard Variable";
@@ -118,10 +127,12 @@
     justify-content: space-between;
     top: 0;
     padding: 1rem 0 1rem 0;
-    z-index: 1;
+    z-index: 10;
 }
 
-.기분필터드롭다운 {
+
+
+.필터드롭다운 {
     display: flex;
     min-width: 7.5rem;
     padding: 0.25rem;
@@ -142,7 +153,7 @@
     letter-spacing: -0.01rem;
 }
 
-.기분필터드롭다운.scrolled {
+.필터드롭다운.scrolled {
     background: var(--Gray-Gray-900, #1C1C1C);
     color: var(--Gray-W, #FFF);
     border: 0.0625rem solid var(--Gray-Gray-900, #1C1C1C);
@@ -622,6 +633,21 @@
     cursor: pointer;
 }
 
+.버튼_작은크기_텍스트 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--Gray-Gray-900, #1C1C1C);
+    font-family: "Pretendard Variable";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+    /* 150% */
+    letter-spacing: -0.01rem;
+    cursor: pointer;
+}
+
 .모달배경 {
     display: none;
     position: fixed;
@@ -631,8 +657,115 @@
     align-items: center;
     justify-content: center;
     z-index: 90;
-    transition: ease;
 }
+
+.gradient-blur {
+    opacity: 0;
+    position: fixed;
+    z-index: 2;
+    inset: 0 0 auto 0;
+    height: 18%;
+    pointer-events: none;
+}
+
+.gradient-blur.scrolled {
+    opacity: 1;
+}
+
+.gradient-blur>div,
+.gradient-blur::before,
+.gradient-blur::after {
+    position: absolute;
+    inset: 0;
+}
+
+.gradient-blur::before {
+    content: "";
+    z-index: 8;
+    backdrop-filter: blur(64px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 87.5%,
+            rgba(0, 0, 0, 1) 100%);
+}
+
+.gradient-blur>div:nth-of-type(1) {
+    z-index: 7;
+    backdrop-filter: blur(32px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 75%,
+            rgba(0, 0, 0, 1) 87.5%,
+            rgba(0, 0, 0, 1) 100%);
+}
+
+.gradient-blur>div:nth-of-type(2) {
+    z-index: 6;
+    backdrop-filter: blur(16px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 62.5%,
+            rgba(0, 0, 0, 1) 75%,
+            rgba(0, 0, 0, 1) 87.5%,
+            rgba(0, 0, 0, 0) 100%);
+}
+
+.gradient-blur>div:nth-of-type(3) {
+    z-index: 5;
+    backdrop-filter: blur(8px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 50%,
+            rgba(0, 0, 0, 1) 62.5%,
+            rgba(0, 0, 0, 1) 75%,
+            rgba(0, 0, 0, 0) 87.5%);
+}
+
+.gradient-blur>div:nth-of-type(4) {
+
+
+    z-index: 4;
+    backdrop-filter: blur(4px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 37.5%,
+            rgba(0, 0, 0, 1) 50%,
+            rgba(0, 0, 0, 1) 62.5%,
+            rgba(0, 0, 0, 0) 75%);
+}
+
+.gradient-blur>div:nth-of-type(5) {
+
+
+    z-index: 3;
+    backdrop-filter: blur(2px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 25%,
+            rgba(0, 0, 0, 1) 37.5%,
+            rgba(0, 0, 0, 1) 50%,
+            rgba(0, 0, 0, 0) 62.5%);
+}
+
+.gradient-blur>div:nth-of-type(6) {
+
+
+    z-index: 2;
+    backdrop-filter: blur(1px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 12.5%,
+            rgba(0, 0, 0, 1) 25%,
+            rgba(0, 0, 0, 1) 37.5%,
+            rgba(0, 0, 0, 0) 50%);
+}
+
+.gradient-blur::after {
+
+
+    content: "";
+    z-index: 1;
+    backdrop-filter: blur(0.5px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 1) 12.5%,
+            rgba(0, 0, 0, 1) 25%,
+            rgba(0, 0, 0, 0) 37.5%);
+}
+
 
 @media (max-width: 980px) {
     .카드목록컨테이너 {
