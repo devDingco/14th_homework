@@ -1,0 +1,120 @@
+
+
+.signin_page {
+    width: 192rem;
+    height: 108rem;
+    display: grid;
+    grid-template-columns: 40rem 1fr;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.signin_left_panel {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    background: var(--white);
+    align-items: center;
+    margin: 0 auto;
+    width: 32rem;
+    height: 39.6rem;
+    margin-top: 24.4rem;
+}
+
+.signin_form { 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+
+}
+
+.form_group h3 { 
+    text-align: center;
+    margin-bottom: 1.2rem;
+
+}
+
+
+.form_group label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.2rem;
+    margin-bottom: 0.8rem;
+    margin-top: 1.2rem;
+}
+
+.form_group label p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--red);
+    text-align: center;
+    height: 1.4rem;
+    padding-top: 0.4rem;
+}
+
+
+.form_input {
+    width: 32rem;
+    height: 3.6rem;
+    padding: 0.8rem 1.6rem;
+    border: 1px solid var(--gray-20);
+    border-radius: 0.8rem;
+    outline: none;
+    margin-bottom: 0.8rem;
+
+    background: var(--white);
+    color: var(--black);
+}
+
+#password_input {
+    margin-bottom: 0.8rem;
+}
+
+.form_input::placeholder {
+    color: var(--gray-40);
+}
+
+.form_input_error { 
+    border: 1px solid var(--red); 
+    outline: none;
+}
+
+.error_message { 
+    color: var(--red); 
+}
+
+.submit_btn {
+    width: 32rem;
+    background: var(--main-color);
+    padding: 1.2rem 1.6rem;
+    color: var(--white);
+    border: none;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    margin-top: 2.4rem;
+}
+
+.submit_btn:disabled { 
+    opacity: 0.4; 
+    cursor: default; 
+    background: var(--gray-90); 
+    color: var(--white);
+}
+
+.form_footer { 
+    display: flex; 
+    justify-content: flex-start; 
+    margin-top: 2.4rem;
+}
+
+.link_btn { 
+    background: none; 
+    border: none; 
+    color: var(--gray-80); 
+    cursor: pointer; 
+}
+
+

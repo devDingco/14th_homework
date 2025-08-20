@@ -1,7 +1,14 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./app/*"],
+      "@components/*": ["./app/components/*"],
+      "@common/*": ["./app/common/*"],
+      "@images/*": ["./public/images/*"],
+      "@styles/*": ["./app/styles/*"],
+      "@utils/*": ["./app/utils/*"],
+      "@pages/*": ["./app/pages/*"],
+      "@icons/*": ["./public/icons/*"]
     }
   }
 }
