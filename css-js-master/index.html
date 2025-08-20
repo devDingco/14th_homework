@@ -59,6 +59,12 @@
                                 <option value="화나요">바나나</option>
                                 <option value="기타">기타</option>
                             </select>
+                            <button id="diary_resist_button">
+                                <div id="diary_resist_button_frame">
+                                    <img src="./images/plus_outline_light_m.svg" />
+                                    <p>일기쓰기</p>
+                                </div>
+                            </button>
                         </div>
                     </div>
                     <!-- frame 16 -->
@@ -86,50 +92,6 @@
                         </div>
                         <!-- 사진보관함 -->
                         <!-- <div></div> -->
-                        <div id="write_diary_container" class="">
-                            <p class="headline01">📍 일기 쓰기</p>
-                            <div id="writing_container">
-                                <div id="feeling_choice_container" class="">
-                                    <p class="headline01">오늘 기분은 어땟나요?</p>
-                                    <form id="feeling_radio_container">
-                                        <label id="feeling_radio_content">
-                                            <input type="radio" name="feel" value="행복해요"/><p>행복해요</p>
-                                        </label>
-                                        <label id="feeling_radio_content">
-                                                <input type="radio" name="feel" value="슬퍼요"/><p>슬퍼요</p>
-                                        </label>
-                                        <label id="feeling_radio_content">
-                                                <input type="radio" name="feel" value="놀랐어요"/><p>놀랐어요</p>
-                                        </label>
-                                        <label id="feeling_radio_content">
-                                                <input type="radio" name="feel" value="화나요"/><p>화나요</p>
-                                        </label>
-                                        <label id="feeling_radio_content">
-                                                <input type="radio" name="feel" value="기타"/><p>기타</p>
-                                        </label>
-                                    </form>
-                                </div>
-                                <div id="writing_content_container" class="">
-                                    <div id="writing_title_container" class="">
-                                        <p class="body04">제목</p>
-                                        <div id="title_input_container">
-                                            <textarea id="title_input" placeholder="제목을 입력해 주세요."></textarea>
-                                        </div>
-                                    </div>
-                                    <div id="writing_detail_container" class="">
-                                        <p class="body04">내용</p>
-                                        <div id="detail_input_container">
-                                            <textarea id="detail_input" placeholder="내용을 입력해 주세요."></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="writing_confirm_container">
-                                <button type="button" id="resisterContent" onclick="resistContent('일기콘텐츠')">
-                                    <p>등록하기</p>
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -142,6 +104,50 @@
                 <!-- </div> -->
                 <p class="caption03" style="color: rgba(145, 145, 145, 1);">Copyright © 2024. {name} Co., Ltd.</p>
             </div>
+        </div>
+    </div>
+    <div id="write_diary_container" class="">
+        <p class="headline01">📍 일기 쓰기</p>
+        <div id="writing_container">
+            <div id="feeling_choice_container" class="">
+                <p class="headline01">오늘 기분은 어땟나요?</p>
+                <form id="feeling_radio_container">
+                    <label id="feeling_radio_content">
+                        <input type="radio" name="feel" value="행복해요"/><p>행복해요</p>
+                    </label>
+                    <label id="feeling_radio_content">
+                            <input type="radio" name="feel" value="슬퍼요"/><p>슬퍼요</p>
+                    </label>
+                    <label id="feeling_radio_content">
+                            <input type="radio" name="feel" value="놀랐어요"/><p>놀랐어요</p>
+                    </label>
+                    <label id="feeling_radio_content">
+                            <input type="radio" name="feel" value="화나요"/><p>화나요</p>
+                    </label>
+                    <label id="feeling_radio_content">
+                            <input type="radio" name="feel" value="기타"/><p>기타</p>
+                    </label>
+                </form>
+            </div>
+            <div id="writing_content_container" class="">
+                <div id="writing_title_container" class="">
+                    <p class="body04">제목</p>
+                    <div id="title_input_container">
+                        <textarea id="title_input" placeholder="제목을 입력해 주세요."></textarea>
+                    </div>
+                </div>
+                <div id="writing_detail_container" class="">
+                    <p class="body04">내용</p>
+                    <div id="detail_input_container">
+                        <textarea id="detail_input" placeholder="내용을 입력해 주세요."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="writing_confirm_container">
+            <button type="button" id="resisterContent" onclick="resistContent('일기콘텐츠')">
+                <p>등록하기</p>
+            </button>
         </div>
     </div>
     <img id="diary_float_btn" onclick="toScrollTop()" src="./images/up_outline_light_xl.svg"/>
