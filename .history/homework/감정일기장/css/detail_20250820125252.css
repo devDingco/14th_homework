@@ -1,0 +1,51 @@
+* {
+  margin: 0rem;
+  padding: 0rem;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+h1 {
+  font-size: 1.125rem;
+  padding-top: 2.875rem;
+  padding-bottom: 2.875rem;
+}
+/* 상세페이지 */
+.detail {
+  width: 73rem;
+  margin: 0 auto;
+}
+.detail__top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail__mood {
+  display: flex;
+  padding-bottom: 1.5rem;
+}
+hr {
+  height: 0.1875rem;
+  background-color: black;
+  margin-top: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.detail__내용 {
+  padding-bottom: 0.8125rem;
+}
+.상세페이지수정삭제버튼 {
+  display: flex;
+  justify-content: end;
+  padding-top: 1.5rem;
+  gap: 1rem;
+}
+.상세페이지수정삭제버튼 > button {
+  width: 3.1875rem;
+  height: 2.5rem;
+  border: 1px solid #d4d3d3;
+  border-radius: 0.5rem;
+  background-color: white;
+}

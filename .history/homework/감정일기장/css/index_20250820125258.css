@@ -413,8 +413,8 @@ nav {
   .main__footer {
     width: 20rem; /* main과 동일한 너비 */
   }
-
   .새로운일기추가 {
     display: flex;
+    flex-direction: row;
   }
 }
