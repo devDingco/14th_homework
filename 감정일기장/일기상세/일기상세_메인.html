@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>감정일기장_일기상세</title>
     <link rel="stylesheet" href="./일기상세_메인.css">
+    <link rel="stylesheet" href="../모달스타일.css">
     <script src="./일기상세_메인.js">   
+    </script>
+    <script src="../모달기능.js">
     </script>
 </head>
 <body>
@@ -26,10 +29,15 @@
             <p>내용</p>
             <div class="헤더_내용_내용_내용이들어갑니다" id="헤더_내용_내용_내용이들어갑니다id">
             </div>
+            <div class="헤더_내용_내용복사" onclick="일기내용복사기능()">
+                <img src="../icons/복사하기 아이콘.svg" id="복사하기아이콘">
+                <p>내용 복사</p>
+            </div>
         </div>
+        
         <div class="헤더_내용_수정삭제버튼">
           <button id="헤더_내용_수정버튼" onclick="수정페이지이동()">수정</button>
-          <button id="헤더_내용_삭제버튼" onclick="일기삭제기능()">삭제</button>       
+          <button id="헤더_내용_삭제버튼" onclick="모달열기기능('일기삭제모달_전체')">삭제</button>       
         </div>
     </div>
     <div class="바디_회고" id="바디_회고">
@@ -39,19 +47,26 @@
                 <input type="text" id="회고입력박스" placeholder="회고를 남겨보세요.">
                 <button id="입력버튼" onclick="회고추가기능()">입력</button>
             </div>
-        <!-- </div> -->
-        <!-- <div class="바디_회고_댓글프레임">
-            <div class="댓글">
-                <p id="회고댓글내용">3년이 지나고 다시 보니 이때가 그립다.</p>
-                <p id="회고댓글작성일">[2024.09.24]</p>
-            </div>
-            <hr id="댓글사이선">
-            <div class="댓글">
-                <p id="회고댓글내용">3년이 지나고 다시 보니 이때가 그립다.</p>
-                <p id="회고댓글작성일">[2024.09.24]</p>
-            </div>
-        </div> -->
     </div>
     <div id="회고목록프레임"></div>
+
+    <div class="복사완료토스트메시지" id="복사완료토스트메시지ID">복사가 완료되었습니다.</div>
+
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ일기삭제 모달ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+    <div class="공통모달그룹" id="일기삭제모달_전체">
+        <div class="공통모달배경" id="공통모달배경"></div>
+        <div class="일기삭제모달">
+            <div class="일기삭제_텍스트">
+                <p class="일기삭제_텍스트_타이틀">일기 삭제</p>
+                <p class="일기삭제_텍스트_내용">일기를 삭제 하시겠어요?</p>
+            </div>
+            <div class="일기삭제_취소삭제버튼">
+                <button id="일기삭제_취소" onclick="모달닫기기능('일기삭제모달_전체')">취소</button>
+                <button id="일기삭제_삭제" onclick="모달닫기기능('일기삭제모달_전체'); 일기삭제기능();">삭제</button>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 </html>

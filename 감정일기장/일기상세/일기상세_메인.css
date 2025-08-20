@@ -37,12 +37,12 @@ body {
 .헤더_내용{
     max-width: 73rem;
     width: 100%;
-    height: 19.4375rem;
+    /* height: 19.4375rem; */
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-
     border-bottom: 0.0625rem solid var(--Gray-B, #000);
+
 }
 
 
@@ -129,7 +129,9 @@ body {
     font-weight: 600;
     line-height: 1.25rem; /* 125% */
     letter-spacing: -0.01rem;
-    }
+
+    /* margin-bottom: 1.5rem; */
+}
 
 .헤더_내용_내용_내용이들어갑니다 {
     align-self: stretch;
@@ -142,10 +144,33 @@ body {
     letter-spacing: -0.01rem;
 }
 
+.헤더_내용_내용복사 {
+    max-width: 73rem;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#복사하기아이콘{
+    width: 1.5rem;
+    height: 1.5rem; 
+}
+
+.헤더_내용_내용복사 > p {
+    color: var(--Gray-Gray-900, #1C1C1C);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem; /* 150% */
+    letter-spacing: -0.01rem;
+}
+
 .헤더_내용_수정삭제버튼{
     width: 73rem;
     height: 2.5rem;
 
+    
     display: flex;
     justify-content: flex-end;
 
@@ -153,6 +178,7 @@ body {
     gap: 1rem;
     
     align-self: stretch;
+    margin-bottom: 1rem;
 }
 
 #헤더_내용_수정버튼 {
@@ -163,7 +189,7 @@ body {
     justify-content: center; 
     align-items: center;
 
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     color: var(--Gray-Gray-900, #1C1C1C);
     font-size: 1.125rem;
     letter-spacing: -0.01125rem;
@@ -182,7 +208,7 @@ body {
     justify-content: center; 
     align-items: center;
 
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     color: var(--Gray-Gray-900, #1C1C1C);
     font-size: 1.125rem;
     letter-spacing: -0.01125rem;
@@ -318,3 +344,43 @@ body {
     height: 0.0625rem;
     background: var(--Gray-Gray-100, #E4E4E4);  
 } */
+
+
+.복사완료토스트메시지 {
+    display: none;
+
+    position: absolute;
+
+    padding:10rem;
+
+    bottom: 2.5rem;
+    left: calc(50%-47.5/2rem);
+
+    width: 47.5rem;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    border-radius: 0.5rem;
+    background: rgba(0, 0, 0, 0.90);
+
+    color: #FFF;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem; /* 150% */
+    letter-spacing: -0.01rem;
+
+    animation-name: 토스트애니메이션;
+    animation-duration: 1s;
+}
+
+@keyframes 토스트애니메이션 {
+    from {
+        opacity: 0%;
+    }
+    to {
+        opacity: 100%;
+    }
+
+}

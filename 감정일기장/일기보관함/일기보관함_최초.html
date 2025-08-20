@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="./일기보관함_최초.css"/>
     <link rel="stylesheet" href="../모달스타일.css">
-    <link rel="stylesheet" href="./일기보관함_최초_모바일.css" media="(max-width: 75.5rem)"/> 
+    <link rel="stylesheet" href="./일기보관함_최초_모바일.css" media="(max-width: 779px)"/> 
 
     <script src="./일기보관함_최초.js">      
     </script>
@@ -62,6 +62,7 @@
                                         <input type="radio" name="기분상태" value="놀람"/>
                                         <div class="기분">놀랐어요</div>
                                     </div>
+                            
                                     <div class="라디오버튼">   
                                         <input type="radio" name="기분상태" value="화남"/>
                                         <div class="기분">화나요</div>
@@ -95,7 +96,7 @@
 <!--------------- 모달 관련 ------------------>
   <!------------ 일기쓰기 ---------------->
      <div class="공통모달그룹" id="일기쓰기모달_전체" >
-        <div class="공통모달배경"></div>
+        <div class="공통모달배경" onclick="모달닫기기능('일기쓰기모달_전체')"></div>
         <div class="일기쓰기모달" id="일기쓰기모달">
             <p class="일기쓰기">일기 쓰기</p>
             <div class="오늘기분은어떗나요">
@@ -105,7 +106,7 @@
                         <input type="radio" name="기분상태" value="행복" checked/>
                         <div class="기분">행복해요</div>
                     </div>
-                    <div class="라디오버튼">   
+                    <div class="라디오버튼">    
                         <input type="radio" name="기분상태" value="슬픔"/>
                         <div class="기분">슬퍼요</div>
                     </div> 
@@ -165,9 +166,6 @@
                 <button id="일기등록완료_확인" onclick="모달닫기기능('일기등록완료'); 모달닫기기능('일기쓰기모달_전체')">확인</button>
             </div>
         </div>
-    
-   
-
   <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ하단ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
     <div class="하단">
         <div class="하단_글씨">
