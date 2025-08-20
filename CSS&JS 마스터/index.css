@@ -80,7 +80,7 @@ a:visited{
 }
 
 .frame_19{
-    max-width: 120rem;
+    /* max-width: 120rem; */
     angle: 0 deg;
     opacity: 1;
     gap: 1.5rem;
@@ -119,9 +119,9 @@ a:visited{
     flex-direction: column;
     /* align-items: center; */
 }
-
+/* 
 .frame_17{
-    /* max-width: 120rem; */
+    max-width: 120rem;
     height: 3rem;
     angle: 0 deg;
     opacity: 1;
@@ -130,7 +130,7 @@ a:visited{
     display: flex;
     flex-direction: column;
     margin-bottom: 2.25rem;
-}
+} */
 
 .frame_7{
     /* max-width: 120rem; */
@@ -154,6 +154,7 @@ a:visited{
     padding-right: 1.25rem;
     padding-left: 1.25rem;
     display: flex;
+    justify-content: space-between;
 }
 
 .frame_13{
@@ -350,11 +351,12 @@ a:visited{
 }
 
 .frame_106{
-    /* width: 49rem; */
+    max-width: 120rem;
     gap: 1.5rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .frame_98{
@@ -394,38 +396,7 @@ a:visited{
     flex-direction: column;
 }
 
-.mood_select{
-    font-family: Pretendard Variable;
-    font-weight: 600;
-    font-style: SemiBold;
-    font-size: 1.25rem;
-    leading-trim: NONE;
-    line-height: 1.5rem;
-    letter-spacing: -1%; 
-}
-
-
-.frame_61{
-    max-width: 19.5rem;
-    height: 4.25rem;
-    angle: 0 deg;
-    opacity: 1;
-    gap: 1.25rem;  
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.radio{
-    border-radius: 0.5rem;
-    angle: 0 deg;
-    opacity: 1;
-    gap: 0.5rem;
-    white-space : nowrap;
-}
-
-.텍스트_영역{
+/* .텍스트_영역{
     max-width: 19.5rem;
     height: 16rem;
     angle: 0 deg;
@@ -434,21 +405,10 @@ a:visited{
     background-color: white;
     display: flex;
     flex-direction: column;
-}
-
-.frame_64{
-    max-width: 19.5rem;
-    height: 4.75rem;
-    angle: 0 deg;
-    opacity: 1;
-    gap: 0.5rem;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-}
+} */
 
 
-.input_63{
+/* .input_63{
     max-width: 19.5rem;
     height: 3rem;
     border-radius: 0.5rem;
@@ -482,29 +442,10 @@ a:visited{
     box-sizing: border-box;
     text-align: start;
     resize: none;
-}
+} */
 
-.frame_65{
-    max-width: 19.5rem;
-    height: 9.75rem;
-    angle: 0 deg;
-    opacity: 1;
-    gap: 0.5rem;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-}
+/* 
 
-.frame_66{
-    max-width: 19.5rem;
-    height: 25.25rem;
-    angle: 0 deg;
-    opacity: 1;
-    gap: 2.5rem;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-}
 
 .버튼영역{
     max-width: 19.5rem;
@@ -519,11 +460,11 @@ a:visited{
     cursor: pointer;
     transition: 
     filter 0.8s ease;
-}
-
+} */
+/* 
 .버튼영역:hover{
     filter: invert(100%);
-}
+} */
 
 .드롭다운{
     max-width: 19.5rem;
@@ -543,7 +484,7 @@ a:visited{
 
 
 .footer{
-    max-width: 120rem;
+    /* max-width: 120rem; */
     height: 10rem;
     angle: 0 deg;
     opacity: 1;
@@ -596,18 +537,23 @@ a:visited{
     .frame_17{
         align-items: center;
     }
-    .frame_16 {
-        flex-direction: column;
-        align-items: center;
-    }
     .frame_106{
-        order: 3;
         width: 22.5rem;
+        justify-content: center;
+    }
+    .frame_7{
+        order: 1;
+    }
+    .frame_14{
+        order:2;
+    }
+    .frame_16{
+        order: 3;
     }
     .frame_98{
         order: 1;
     }
-    .frame_14{
+    .frame_106{
         order: 2;
     }
     .frame_19{
@@ -619,4 +565,191 @@ a:visited{
     .frame_4{
         max-width: 100%;
     }
+    .frame_107{
+        align-items: center;
+    }
+    
+}
+.모달그룹{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.모달배경{
+    width: 100vw;
+    height: 100vh;
+    background-color: gray;
+    opacity: 90%;
+}
+.등록모달{
+    position: absolute;
+    top: calc(50% - 560px/2);
+    left: calc(50% - 640px/2);
+
+    width: 640px;
+    height: 560px;
+    min-width: 640px;
+    max-width: 760px;
+    border-radius: 24px;
+    padding: 24px;
+    padding-top: 0px;
+    gap: 40px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.일기_쓰기{
+    width: 592px;
+    height: 24px;
+    angle: 0 deg;
+    opacity: 1;
+    font-family: Pretendard Variable;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 24px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;    
+}
+.등록완료모달{
+    position: absolute;
+    top: calc(50% - 150px/2);
+    left: calc(50% - 600px/2);
+
+    width: 600px;
+    height: 150px;
+    background-color: yellow;
+}
+.frame_66{
+    width: 592px;
+    height: 360px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.기분_선택_영역{
+    width: 592px;
+    height: 64px;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+.mood_select{
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 20px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    width: 592px;
+    height: 24px;
+    angle: 0 deg;
+    opacity: 1;
+        
+}
+.frame_61{
+    width: 592px;
+    height: 24px;
+    max-width: 592px;
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
+}
+.radio{
+    width: 94;
+    height: 24;
+    border-radius: 8px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;
+    display: flex;    
+}
+.텍스트_영역{
+    width: 640px;
+    height: 256px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+}
+.frame_64{
+    width: 640px;
+    height: 76px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;    
+    display: flex;
+    flex-direction: column;
+}
+
+.frame_65{
+    width: 592px;
+    height: 156px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.버튼영역_group{
+    width: 640px;
+    height: 48px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.버튼영역{
+    width: 104px;
+    height: 48px;
+    border-radius: 8px;
+    gap: 10px;
+    border-width: 1px;
+    padding-top: 8px;
+    padding-right: 10px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    text-align: center;
+}
+
+.input_63{
+    width: 640px;
+    height: 48px;
+    angle: 0 deg;
+    opacity: 1;
+    border-radius: 8px;
+    gap: 10px;
+    border-width: 1px;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    box-sizing: border-box;
+}
+
+
+.input_63_2{
+    width: 640px;
+    height: 128px;
+    angle: 0 deg;
+    opacity: 1;
+    border-radius: 8px;
+    gap: 10px;
+    border-width: 1px;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    box-sizing: border-box;
+    text-align: start;
+    resize: none;
 }
