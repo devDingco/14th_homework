@@ -23,37 +23,38 @@ a:active {
 button {
   outline: none;
   border: none;
-  background-color: var(--color-black);
-  color: var(--color-gray-50);
+  background-color: var(--btn-bg-color);
+  color: var(--btn-font-color);
   cursor: pointer;
   border-radius: 0.8rem;
 }
 button:disabled {
-  background-color: var(--color-gray-300);
-  color: var(--color-gray-50);
+  background-color: var(--btn-disabled-bg-color);
+  color: var(--btn-disabled-font-color);
 }
 input,
 textarea {
   padding: 1.2rem 1.6rem;
   border-radius: 0.8rem;
   outline: none;
-  border: solid 0.1rem var(--color-gray-200);
-  color: var(--color-black);
+  border: solid 0.1rem var(--input-border-color);
+  background-color: var(--input-bg-color);
+  color: var(--input-font-color);
   resize: none;
   font-size: 1.4rem;
 }
 input::placeholder,
 textarea::placeholder {
-  color: var(--color-gray-400);
+  color: var(--placeholder-color);
 }
 .dark-button {
-  background-color: var(--color-black);
-  color: var(--color-gray-50);
+  background-color: var(--btn-right-bg-color);
+  color: var(--btn-right-font-color);
 }
 .light-button {
-  border: solid 0.1rem var(--color-black);
-  background-color: var(--color-white);
-  color: var(--color-black);
+  border: solid 0.1rem var(--btn-left-border-color);
+  background-color: var(--btn-left-bg-color);
+  color: var(--btn-left-font-color);
 }
 .active {
   color: var(--font-color);
@@ -138,6 +139,23 @@ textarea::placeholder {
   content: var(--dropdown-title);
 }
 .dropdown-title:checked + ul {
+  display: block;
+}
+
+.dropdown-photo-title {
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  padding: 1.2rem 1rem;
+  color: var(--sm-font-color);
+  background-color: var(--bg-color);
+  font-weight: 500;
+  --dropdown-photo-title: '기본';
+}
+.dropdown-photo-title::after {
+  content: var(--dropdown-photo-title);
+}
+.dropdown-photo-title:checked + ul {
   display: block;
 }
 .dropdown-list {
@@ -327,6 +345,9 @@ textarea::placeholder {
   bottom: 8%;
   right: 5%;
   border-radius: 100%;
+  fill: var(--float-fill-color);
+  stroke: var(--float-stroke-color);
+  z-index: 10;
 }
 #float-button:hover {
   cursor: pointer;
@@ -339,10 +360,11 @@ textarea::placeholder {
   gap: 0.8rem;
   margin: 0 auto;
 }
-.pagination img {
+.pagination svg {
   width: 2.4rem;
   height: 2.4rem;
   cursor: pointer;
+  fill: var(--page-arrow-color);
 }
 .pagination .pages {
   display: flex;
@@ -360,6 +382,9 @@ textarea::placeholder {
   color: var(--color-gray-600);
   background-color: transparent;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .pagination .pages input[type='radio']::after {
   content: attr(page);
@@ -373,16 +398,39 @@ textarea::placeholder {
 .footer {
   width: 100%;
   max-width: 116.8rem;
-  height: 11.2rem;
   display: flex;
   background-color: var(--color-gray-50);
   padding: 2.4rem 2rem;
   flex-direction: column;
+  gap: 3.2rem;
+}
+.footer img {
+  width: 152.17px;
+  height: 24px;
+}
+.footer .footer-middle {
+  font-size: 1.4rem;
+  color: var(--color-gray-700);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+.footer .footer-middle div {
+  display: flex;
+  gap: 1.2rem;
+}
+.footer .footer-middle div p:nth-child(2) {
+  color: var(--color-gray-200);
+}
+.footer > p {
+  color: var(--color-gray-500);
 }
 
 /* empty-container */
 .empty-container {
   display: flex;
+  width: 100%;
   justify-content: center;
   align-items: center;
 }

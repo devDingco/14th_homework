@@ -31,6 +31,8 @@
   --input-border-color: var(--color-gray-200);
   --input-bg-color: var(--color-white);
   --input-font-color: var(--color-black);
+  --input-disabled-bg-color: var(--color-gray-50);
+  --input-disabled-font-color: var(--color-gray-400);
   --placeholder-color: var(--color-gray-400);
   --accent-color: var(--color-black);
   --btn-bg-color: var(--color-black);
@@ -47,6 +49,9 @@
   --card-border-color: var(--color-white);
   --dropdown-bg-color: #3ab50f0d;
   --dropdown-font-color: #299c00;
+  --page-arrow-color: var(--color-gray-300);
+  --float-stroke-color: var(--color-gray-50);
+  --float-fill-color: rgba(255, 255, 255, 0.9);
 }
 
 .darkmode {
@@ -56,6 +61,8 @@
   --input-border-color: var(--color-gray-800);
   --input-bg-color: var(--color-black);
   --input-font-color: var(--color-white);
+  --input-disabled-bg-color: var(--color-gray-800);
+  --input-disabled-font-color: var(--color-gray-700);
   --placeholder-color: var(--color-gray-600);
   --accent-color: var(--color-white);
   --btn-bg-color: var(--color-gray-50);
@@ -72,6 +79,9 @@
   --card-border-color: var(--color-gray-700);
   --dropdown-bg-color: var(--color-gray-900);
   --dropdown-font-color: var(--color-white);
+  --page-arrow-color: var(--color-gray-800);
+  --float-stroke-color: var(--color-gray-700);
+  --float-fill-color: rgba(28, 28, 28, 0.9);
 }
 
 /* web headline */
