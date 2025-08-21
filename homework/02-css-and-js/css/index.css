@@ -104,6 +104,7 @@ a {
     border-radius: 8px;
     padding: 0.75rem 0.625rem;
 
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5rem;
@@ -223,6 +224,7 @@ a {
 .searchbar_input {
     border: none;
     outline: none;
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5rem;
@@ -246,6 +248,7 @@ a {
 
 .diary_write_button_text {
     color: #fff;
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1.125rem;
     font-weight: 600;
     line-height: 1.5rem;
@@ -440,6 +443,7 @@ button img {
 }
 
 .CSS_다크모드_라벨 {
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5rem;
