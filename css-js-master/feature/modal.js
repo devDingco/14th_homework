@@ -11,6 +11,27 @@ const openModal = (modalGroup) => { // <string>
     window.addEventListener("touchmove", preventScroll, { passive: false }); // 모바일 터치
 }
 
+// 삭제시 일기 넘버를 받아야함
+const openDeleteModal = (modalGroup,contentNumber,key) => { // <string, number>
+    console.log(modalGroup,contentNumber,key)
+    document.getElementById(modalGroup).style = "display: block;"
+
+    document.getElementById("delete_number_flag").innerHTML = `
+        <p>${contentNumber}번 일기 삭제</p>
+        <p>일기를 삭제하시겠어요?</p>
+    `
+
+    document.getElementById("delete_function_flag").innerHTML = `
+        <button class="close_modal_button" onclick="closeModal('main_delete_modal_group')"><p>취소</p></button>
+        <button class="confirm_modal_button" onclick="deleteContent(${contentNumber},'${key}'); closeModal('main_delete_modal_group');"><p>삭제</p></button>
+    `
+
+    toScrollTop()
+
+    window.addEventListener("wheel", preventScroll, { passive: false });
+    window.addEventListener("touchmove", preventScroll, { passive: false }); // 모바일 터치
+}
+
 const closeModal = (modalGroup) => {
     document.getElementById(modalGroup).style = "display: none;"
 

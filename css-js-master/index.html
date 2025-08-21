@@ -184,6 +184,20 @@
             </div>
         </div>
     </div>
+    <!-- 일기 삭제 모달 -->
+    <div id="main_delete_modal_group" class="modal_group">
+        <div class="modal_background"></div>
+        <div class="overlap_modal">          
+            <div id="delete_number_flag" class="cancel_modal_text_frame">
+                <p>일기 삭제</p>
+                <p>일기를 삭제하시겠어요?</p>
+            </div>
+            <div id="delete_function_flag"class="cancel_modal_button_frame">
+                <button class="close_modal_button" onclick="closeModal('main_delete_modal_group')"><p>취소</p></button>
+                <button class="confirm_modal_button" onclick="closeModal('main_delete_modal_group'); ;"><p>삭제</p></button>
+            </div>
+        </div>
+    </div>
     <img id="diary_float_btn" onclick="toScrollTop()" src="./images/up_outline_light_xl.svg"/>
     <script src="./js/viewDiaryFilter.js"></script>
     <script src="./js/makeHtml.js"></script>

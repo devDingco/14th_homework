@@ -56,7 +56,7 @@ const makeMainHtml = (contentArr) => {
                         </a>
                     </div>
                 </div>
-                <img src="./images/close_outline_light_m.svg" id="content_delete_button" onclick="deleteContent(${v.number},'일기콘텐츠')" />
+                <img src="./images/close_outline_light_m.svg" id="content_delete_button" onclick="openDeleteModal('main_delete_modal_group',${v.number},'일기콘텐츠')" />
             </div>
         `
     }).join("")
