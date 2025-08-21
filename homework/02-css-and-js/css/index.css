@@ -8,21 +8,22 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css");
 
 body {
-  font-family: 'Pretendard Variable', sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    font-family: 'Pretendard Variable', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* 링크 기본 스타일 제거 */
 a { 
     appearance: none;
-    text-decoration: none;  /* 밑줄 제거 */
+    text-decoration: none; 
 }
 
 .page {
    margin: 0 1.25rem 2.5rem;
+   max-width: 116.8rem;
 }
 
 .header {
@@ -65,87 +66,207 @@ a {
    padding: 1.2rem 0.8rem;
 }
 
-/* .body_tab_active {
-    width: 7.5rem;
-    height: 3rem;
+.filter_container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-    border-bottom: 0.125rem solid black;
-} */
-
-/* .body_tab_default {
-    width: 7.5rem;
-    height: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ababab;
-    font-weight: 500;
-} */
-
-.body_button_area {
-    display: flex;
-    width: 100%;
-    gap: 1.6rem;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
+    width: 100%; /* 부모 컨테이너의 너비에 맞춥니다 */    
+    margin-bottom: 3.2rem;
+}
+
+
+.filter_area_bg {
     position: sticky;
     top: 0;
     backdrop-filter: blur(1rem);
-    margin-bottom: 3.2rem;
-    z-index: 1;   
+    z-index: 1;
 }
-/* 필터 */
 
-.filter {
+.filter_area {
+    position: relative;
+    width: fit-content;
+}
+
+.드롭다운제목 {
+    appearance: none;
+    min-width: 7.5rem;
+    border: 1px solid #C7C7C7;
+    border-radius: 8px;
+    padding: 0.75rem 0.625rem;
+
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    color: #1C1C1C;
+
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+}
+
+
+.드롭다운제목::after {
+    content: var(--일기보관함필터);
+}       
+
+.드롭다운제목:checked +.드롭다운목록 {
+    display: block;
+}   
+
+.드롭다운목록 {
+    display: none;
+    position: absolute;
+    width: 7.5rem;
+    border: 1px solid #C7C7C7;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.드롭다운목록 img {
+    display: none;
+}
+
+.드롭다운목록 input {
+    display: none;
+}
+
+.드롭다운목록 label {
+    padding: 0.75rem;
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    color: #5F5F5F;            
+}
+
+.드롭다운목록 label:hover {
+    background-color: rgba(58, 181, 15, 0.05);
+    color: #299c00;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.드롭다운목록 label:hover img {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.CSS_드롭다운아이콘 {
+    width: 1.5rem;
+    height: 1.5rem;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.4rem;
+}
+
+#HTML_일기드롭다운제목 {
+    --일기보관함필터: "전체"
+}
+
+#HTML_일기드롭다운제목::after {
+    content: var(--일기보관함필터);
+}
+
+#HTML_사진드롭다운제목 {
+    --사진보관함필터: "기본형"
+}
+
+#HTML_사진드롭다운제목::after {
+    content: var(--사진보관함필터);
+}
+
+/* .filter {
     min-width: 7.5rem;
     padding: 0.75rem 0.625rem;
     border-radius: 8px;
     border: 0.0625rem solid #c7c7c7;
-    height: 3.2rem;
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5rem;    
-}
-
-.filter_drop_down {
-    width: 1.5rem;
-    height: 1.5rem;
-}
+} */
 
 .inverted {
     filter: invert(1);
     z-index: 100;
 }
 
+/* 서치바 */
+.search_area {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.searchbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 6.25rem;
+    border: 1px solid #c7c7c7;
+    min-width: 20rem;
+    max-width: 22.5rem;
+    padding: 0.75rem 1rem;
+    background-color: #fff;
+}
+.searchbar_icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.searchbar_input {
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    width: 100%;
+}
+
+/* 일기쓰기 버튼 */
 .diary_write_button {
     display: flex;
+    width: 100%;
     height: 3rem;
     padding: 0.5rem 0.625rem;
-    align-items: center;
+    align-items: center; 
+    justify-content: center;
     gap: 0.25rem;
-    color: #fff;
-    font-size: 1.125rem;
-    font-weight: 600;
-    line-height: 1.5rem;
+    
     background-color: #000;
     border-radius: 0.5rem;
     cursor: pointer;
 }
 
+.diary_write_button_text {
+    color: #fff;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    margin-right: 0.25rem;
+    white-space: nowrap;
+}
+
 /* 일기 보여주는 곳 */
 .body_main {
-    width: 100%;
     display: flex;
-    gap: 1.5rem;
+    flex-direction: column;
+    width: 100%;
 }
 
 .CSS_일기보여주는곳 {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
+    width: 100%;
 }
 
 .card_area {
@@ -260,27 +381,8 @@ a {
     overflow: hidden;
 }
 
-.diary_area {
-    width: 40rem;
-    min-width: 40rem;
-    max-width: 47.5rem;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 2.5rem;
-    border-radius: 24px;
-    border: 0.0625rem solid #D4D3D3; 
-    background:#fff;
-    text-align: left;
-    font-size: 1.5rem;
-    color: #000;
+/*  일기등록 모달 */
 
-    position: absolute;
-    top: calc(50% - 560px / 2);
-    left: calc(50% - 640px / 2);
-}
 
 button img {
     display: block;
@@ -290,6 +392,21 @@ button img {
     border: none;
     background: none;
   }
+
+.diary_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2.5rem;
+    width: 100%;
+    height: 100%;
+}
+
+.diary_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .title {
     width: 100%;
@@ -310,12 +427,58 @@ button img {
 
 .mood_title {
     width: 100%;
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     font-style: normal;
     font-weight: 600;
     line-height: 1.5rem;
     letter-spacing: -0.0125rem;
 }
+
+.CSS_다크모드 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    width: fit-content;
+}
+
+.CSS_다크모드_라벨 {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    white-space: nowrap;
+}
+
+.CSS_다크모드_토글 {
+    appearance: none;
+    content: "";
+    width: 2.5rem;
+    height: 1.5rem;
+    background-color: lightgray;
+    border: none;
+    border-radius: 20px;
+    padding: 0.125rem;
+    }
+
+.CSS_다크모드_토글::after {
+    display: block;
+    content: "";
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: white;
+    border-radius: 50%;
+
+    transition: margin-left 0.3s;
+}
+
+.CSS_다크모드_토글:checked {
+    background-color: #3ad84a;
+}
+
+.CSS_다크모드_토글:checked::after {
+    transform: translateX(calc(100% - 2px - 2px));
+}
+
 
 .mood_select {
     display: flex;    
@@ -329,15 +492,33 @@ button img {
 
 .mood_radio_button {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
 }
 
-.mood_radio_group input[type="radio"] {
-    width: 1.5rem;
-    height: 1.5rem;    
+.mood_radio_button>div {
+      color: var(--라디오글자색);
 }
+
+.mood_radio_button input {
+    appearance: none;
+
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+
+    box-shadow: 0 0 0 0.2rem #999;
+
+    cursor: pointer;
+
+    &:checked {
+        background-color: #000;
+        border: 0.3rem solid #fff;
+        box-shadow: 0 0 0 0.2rem black;
+    }
+}
+
 
 .text_area {
     width: 100%;
@@ -353,12 +534,17 @@ button img {
     align-items: flex-start;
     justify-content: center;
     align-self: stretch;
-    gap: 0.5rem;
+    gap: 1rem;
     width: 100%;
-    font-size: 0.875rem;
+    font-size: 1.4rem;
     font-weight: 500;
     line-height: 1.25rem;
     color: #333;
+}
+
+.text_input_label {
+    font-size: 1.4rem;
+    font-weight: 500;
 }
 
 #HTML_제목입력창,
@@ -384,6 +570,14 @@ button img {
     font-style: inherit;
     font-size: inherit;
 }
+
+.diary_button_group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
 
 
 /* 푸터 영역 */
@@ -431,18 +625,17 @@ button img {
     text-align: left;
 }
 
-.플로팅버튼 {
-    width: 2.5rem;
-    height: 2.5rem;
-    border: 0.0625rem solid #f2f2f2;
-    border-radius: 50%; /* 원형 모양 */
-    box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
+.CSS_플로팅버튼 {
+    background-color: transparent;
+    border: none;
     cursor: pointer;
-
     position: fixed;
-    right: 2.5rem; 
-    bottom: 2.5rem; 
-    z-index: 999; 
+    bottom: 4rem;
+    right: 2rem;
+  }
+
+.CSS_플로팅이미지 {
+    width: 2.5rem;
 }
 
 /* 사진보관함 */
@@ -500,3 +693,4 @@ button img {
       rotate(30deg);
     }
 }
+
