@@ -124,8 +124,9 @@
 }
 
 #reply_container {
+    display: flex;
+    flex-direction: column;
     width: 1168px;
-    height: 173px;
     max-width: 1168px;
     border-radius: 16px;
     angle: 0 deg;
@@ -196,5 +197,41 @@
 }
 
 #reply_content_flag {
+    width: 1168px;
+    max-width: 1168px;
+    border-radius: 16px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 12px;    
+}
 
+.reply_text_frame {
+    display: flex;
+    width: 1168px;
+    height: 24px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 12px;
+    border-bottom-width: 1px;
+}
+
+#reply_text {
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+}
+
+#reply_date {
+    font-family: Pretendard Variable;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: var(--Gray-Gray-600, rgba(119, 119, 119, 1));
 }
