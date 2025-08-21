@@ -1,31 +1,46 @@
 @import "./global.css";
 @import "./index.css";
-@import "./pagiNation.css";
 
 .darkmode-wrapper {
-    width: 121px;
-    height: 32px;
+    width: 12.1rem;
+    height: 3.2rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 78.6rem) {
+        width: 8.4rem;
+        height: 2.4rem;
+        gap: 0.5rem;
+        padding: 0.125rem;
+    }
+
 }
+
 
 .toggle-input {
     display: none;
+
 }
 
 .toggle-label {
     position: relative;
     display: block;
-    width: 58px;
-    height: 28px;
-    padding: 2px;
-    border-radius: 14px;
+    width: 5.8rem;
+    height: 2.8rem;
+    padding: 0.2rem;
+    border-radius: 1.4rem;
     border: none;
     background-color: var(--gray-10);
     cursor: pointer;
-    transition: background-color 0.3s ease;
+
+    @media (max-width: 78.6rem) {
+        width: 4.4rem;
+        height: 2.2rem;
+        padding: 0.2rem;
+        gap: 1rem;
+    }
 }
 
 
@@ -33,18 +48,25 @@
     content: "";
     position: absolute;
     top: 50%;
-    left: 2px;
-    width: 24px;
-    height: 24px;
+    left: 0.2rem;
+    width: 2.4rem;
+    height: 2.4rem;
     border-radius: 50%;
-    background-color: var(--white); /* 고정 흰색 */
+    background-color: var(--white);
     transition: transform 0.3s ease, background-color 0.3s ease;
     transform: translateY(-50%);
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.3);
+
+    @media (max-width: 78.6rem) {
+        width: 1.8rem;
+        height: 1.8rem;
+        flex-shrink: 0;
+    }
 }
 
 .dark-theme .toggle-label::before {
     background-color: var(--white);
+
 }
 
 .toggle-input:checked + .toggle-label {
@@ -52,8 +74,12 @@
 }
 
 .toggle-input:checked + .toggle-label::before {
-    transform: translate(30px, -50%);
+    transform: translate(3rem, -50%); /* 30px */
     background-color: var(--black);
+
+    @media (max-width: 78.6rem) {
+        transform: translate(1.5rem, -50%);
+    }
 
 }
 
@@ -66,17 +92,33 @@
 
 
 .darkmode-title {
-    width: 55px;
-    height: 24px;
+    width: 5.5rem; /* 55px */
+    height: 2.4rem; /* 24px */
     display: flex;
     align-items: center;
-    letter-spacing: -1.6px;
+    letter-spacing: -0.1rem; /* -1.6px */
+
+    @media (max-width: 78rem) { /* 780px */
+        width: 4.4rem; /* 44px */
+        height: 2.4rem; /* 24px */
+        gap: 0.4rem; /* 4px */
+        font-size: 1.2rem; /* 12px */
+        color: var(--gray-90);
+        letter-spacing: -0.12rem; /* -2px */
+
+    }
 }
 .darkmode-button {
-    width: 58px;
-    height: 28px;
-    border-radius: 20px;
+    width: 5.8rem; /* 58px */
+    height: 2.8rem; /* 28px */
+    border-radius: 2rem; /* 20px */
     border: none;
+
+    @media (max-width: 78rem) { /* 780px */
+        width: 4rem; /* 40px */
+        height: 2.4rem; /* 24px */
+        border-radius: 1.2rem; /* 12px */
+    }
 }
 
 .dark-theme .add-diary-button {
@@ -85,7 +127,7 @@
 }
 
 .dark-theme .body-menu-item.active {
-    border-bottom: 2px solid var(--black);
+    border-bottom: 0.2rem solid var(--black); /* 2px */
     color: var(--black);
 }
 
@@ -115,8 +157,8 @@
 
 /* 다크모드 카드 스타일 */
 .dark-theme .diary-card {
-    background-color: var(--gray-80);
-    border-color: var(--gray-70);
+    background-color: var(--white);
+    border: 0.1rem solid var(--gray-20); /* 1px */
 }
 
 .dark-theme .diary-card-title body-bold-18 {
@@ -138,4 +180,121 @@
 
 .dark-theme #footer-copyright {
     color: var(--gray-50);
+}
+
+.dark-theme .content-body-text {
+    color: #D4D3D3;
+    background-color: var(--white);
+}
+
+.dark-theme .content-body-icon-title {
+    color: var(--gray-40);
+}
+
+.dark-theme .content-header-dateTime-wrapper {
+    color: var(--gray-30);
+}
+
+.dark-theme .diary-title-input {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.dark-theme .diary-title-input::placeholder {
+    color: var(--gray-40);
+}
+
+.dark-theme .diary-content-textarea {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.dark-theme .diary-content-textarea::placeholder {
+    color: var(--gray-40);
+}
+
+.dark-theme .modal-body-input-item input:checked {
+    background-color: transparent;
+    border: 0.2rem solid var(--black); /* 2px */
+}
+
+
+.dark-theme .modal-body-input-item input:checked::before {
+    background-color: var(--black);
+}
+
+.dark-theme .modal-close-btn {
+    color: var(--black);
+    border: 0.1rem solid var(--gray-30); /* 1px */
+}
+
+.dark-theme .modal-submit-btn:disabled {
+    background-color: var(--gray-20);
+    color: var(--gray-40);
+}
+
+.dark-theme .modal-submit-btn {
+    font-weight: 700;
+}
+
+.dark-theme .header-brand-link {
+    color: var(--black);
+}
+
+
+.dark-theme .content-body-btn {
+    background-color: var(--white);
+    border: 0.1rem solid var(--gray-20); /* 1px */
+    color: var(--black);
+}
+
+.dark-theme .content-comment-textarea {
+    background-color: var(--white);
+    border: 0.1rem solid var(--gray-20); /* 1px */
+}
+
+.dark-theme .content-comment-textarea::placeholder {
+    color: var(--gray-40);
+}
+
+.dark-theme .content-comment-btn {
+    background-color: var(--white);
+    border: 0.1rem solid var(--gray-20); /* 1px */
+    color: var(--black);
+}
+
+.dark-theme .content-comment-textarea:disabled {
+    background-color: var(--gray-20);
+    color: var(--gray-30);
+}
+
+.dark-theme .content-comment-btn:disabled {
+    background-color: var(--gray-20);
+    color: var(--gray-30);
+}
+
+.dark-theme #editSubmitBtn {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.dark-theme #editCancelBtn {
+    background-color: var(--white);
+    color: var(--black);
+    border: 0.1rem solid var(--gray-20); /* 1px */
+}
+
+.dark-theme .update-content-body-input-item input:checked::before {
+    background-color: var(--black);
+}
+
+.dark-theme .update-content-body-input-item input:checked {
+    background-color: transparent;
+    border: 0.2rem solid var(--black); /* 2px */
+    
+}
+
+
+.dark-theme .footer{
+    background-color: var(--black);
 }
