@@ -1,8 +1,12 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/variable/pretendardvariable.css");
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-size: 10px;
+    font-family: Pretendard Variable;;
+    
 }
 
 .가장큰배경 {
@@ -37,6 +41,9 @@
     letter-spacing: -1%;
     
 }
+.헤더__모바일타이틀{
+    display: none;
+}
 .바디 {
     width: 100%;
     display: flex;
@@ -47,11 +54,11 @@
 }
 .바디__메인 {
     /* max-width: 116.8rem;  */
-    height: 32.1rem;
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
     border-bottom: 0.1rem solid black;
+    padding-bottom: 1.6rem;
 }
 .바디__메인__타이틀섹션 {
     width: 100%;
@@ -114,9 +121,20 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1.3rem;
 }
-#내용나타는곳{
+.바디__메인__아티클섹션__제목{
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 20px;
+    letter-spacing: -1%;
+    
+}
+
+#내용나타나는곳{
     font-family: Pretendard Variable;
     font-weight: 500;
     font-style: Medium;
@@ -173,6 +191,7 @@
     border-radius: 0.8rem;
     background-color: #fff;
     border-color: #D4D3D3;
+    border: 0.1rem solid #d4d3d3;
     
 }
 .바디__메인__수정섹션__삭제버튼{
@@ -244,6 +263,8 @@
     line-height: 24px;
     letter-spacing: -1%;
     color: white;
+    border-radius: 0.8rem;
+    
     
 }
 .바디__회고__출력섹션 {
@@ -290,9 +311,181 @@
     background-color: black;
     color: white;
     height: 5.6rem;
+    border-radius: 0.8rem;
 
     text-align: center;
     line-height: 5.6rem;
+
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 1.6rem;
+    letter-spacing: -1%;
+
+    animation-name: 토스트애니메이션;
+    animation-duration: 1s;
+    
     
     
 }
+
+
+@media (max-width : 849px) {
+.가장큰배경{
+}
+.큰배경{
+    gap: 4rem;
+}
+.헤더__타이틀{
+    display: none;
+}
+.헤더__모바일타이틀{
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    font-family: Pretendard Variable;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 16px;
+    letter-spacing: -1%;
+    
+}
+.바디{
+    padding: 0rem 2rem;
+    gap: 2.4rem;
+}
+.바디__메인{
+    gap:2.4rem;
+}
+.바디__메인__타이틀섹션
+.바디__메인__타이틀섹션__타이틀{
+    font-family: Pretendard Variable;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+}    
+.바디__메인__타이틀섹션__이모지섹션__이모지{
+    gap: 0.8rem;
+
+}
+#이모지나타나는곳{
+    width: 2.4rem;
+    height: 2.4rem;
+}
+#감정나타나는곳{
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 14px;
+    leading-trim: NONE;
+    line-height: 20px;
+    letter-spacing: -1%;
+    
+}
+
+
+.바디__메인__아티클섹션{
+}
+.바디__메인__아티클섹션__제목{
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 14px;
+    leading-trim: NONE;
+    line-height: 20px;
+    letter-spacing: -1%;
+    
+ 
+}
+.바디__메인__수정섹션__수정버튼{
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 12px;
+    leading-trim: NONE;
+    line-height: 16px;
+    letter-spacing: -1%;
+    padding: 0.8rem 1.2rem;
+    -webkit-appearance: none; /* Safari, iOS 기본 스타일 제거 */
+    appearance: none;    /* Firefox */
+    appearance: none;         /* 표준 */
+    box-shadow: none;  
+}
+.바디__메인__수정섹션__삭제버튼{
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 12px;
+    leading-trim: NONE;
+    line-height: 16px;
+    letter-spacing: -1%;
+    padding: 0.8rem 1.2rem;
+    
+}
+.바디__회고{
+}
+.바디__회고__입력섹션 > span{
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 1.4rem;
+    leading-trim: NONE;
+    line-height: 20px;
+    letter-spacing: -1%;
+    
+}
+
+.바디__회고__입력섹션__회고입력영역 > input::placeholder{
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 1.4rem;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+       
+}
+.바디__회고__입력섹션__회고입력영역 > button {
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 1.6rem;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    
+}
+
+.토스트{
+    width: 32rem;
+    height: 4.4rem;
+    border-radius: 0.8rem;
+    /* position: absolute; */
+    bottom: 4rem;
+    left: calc(50% - 32rem / 2);
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+
+    
+    padding-top: 1.2rem;
+    padding-right: 0.8rem;
+    padding-bottom: 1.2rem;
+    padding-left: 0.8rem;
+    
+}
+}
+
+@keyframes 토스트애니메이션 {
+    from {
+      opacity: 0%;
+    }
+  
+    to {
+      opacity: 100%;
+    }
+  }

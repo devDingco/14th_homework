@@ -1,8 +1,10 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/variable/pretendardvariable.css");
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-size: 10px;
+    font-family: Pretendard Variable;
 }
 
 .가장큰배경 {
@@ -105,11 +107,11 @@
     letter-spacing: -1%;
     
 }
-.바디__메인__제목섹션__제목수정 {
+.바디__메인__제목섹션__제목수정{
     width: 100%;
     height: 3rem;
     padding: 1.2rem 1.6rem 1.2rem 1.6rem; 
-    border-color: #D4D3D3;
+    
     font-family: Pretendard Variable;
     font-weight: 500;
     font-style: Medium;
@@ -117,6 +119,15 @@
     leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
+    box-shadow: none;           /* 그림자 제거 */
+  -webkit-appearance: none; /* Safari, iOS 기본 스타일 제거 */
+  -moz-appearance: none;    /* Firefox */
+  appearance: none;         /* 표준 */
+  box-shadow: none;          /* 모서리 둥근 효과 제거 (필요시) */
+  /* border: 1px solid #000; */
+  border-color: #D4D3D3;
+
+
     
 }
 
@@ -139,6 +150,21 @@
 }
 .바디__메인__내용섹션__내용수정 {
     width: 100%;
+    /* font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    border-color: #D4D3D3;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    padding: 1.2rem 1.6rem 1.2rem 1.6rem;
+    height: 12.8rem ;
+    box-shadow: none;            */
+    padding: 1.2rem 1.6rem 1.2rem 1.6rem;
+    border: 0.1rem solid #D4D3D3;
+    /* border-color: #000; */
+    /* border-color: #D4D3D3; */
     font-family: Pretendard Variable;
     font-weight: 500;
     font-style: Medium;
@@ -146,9 +172,6 @@
     leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
-    padding: 1.2rem 1.6rem 1.2rem 1.6rem;
-    height: 12.8rem ;
-    
 }
 
 .바디__메인__버튼섹션 {

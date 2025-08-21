@@ -10,10 +10,10 @@ window.onload = function() {
     
     
     document.getElementById("타이틀나타나는곳").innerText = `${일기목록[일기인덱스].제목}`
-    document.getElementById("날짜나타는곳").innerText =`${일기목록[일기인덱스].날짜}`
-    document.getElementById("이모지나타는곳").innerHTML =`<img src="./assets/images/작은${일기목록[일기인덱스].감정}.png">`
+    document.getElementById("날짜나타나는곳").innerText = `${일기목록[일기인덱스].날짜}`
+    document.getElementById("이모지나타나는곳").innerHTML =`<img src="./assets/images/작은${일기목록[일기인덱스].감정}.png">`
     document.getElementById("감정나타나는곳").innerText =`${일기목록[일기인덱스].감정}`
-    document.getElementById("내용나타는곳").innerText =`${일기목록[일기인덱스].내용}`
+    document.getElementById("내용나타나는곳").innerText =`${일기목록[일기인덱스].내용}`
 
     회고그리기기능();
     
@@ -167,3 +167,7 @@ window.addEventListener("keydown",(event)=>{
   }
 }
 )
+
+const 뒤로가기기능 = () => {
+  window.history.back();
+};
