@@ -1,0 +1,175 @@
+/* 게시물 등록 페이지 */
+.board_page {
+    max-width: 128rem;
+    margin: 0 auto;
+    padding: 4rem 0;
+  }
+  
+  .board_title {
+    margin-bottom: 2.4rem;
+  }
+  
+  .board_form {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid var(--gray-10);
+    border-radius: 0.8rem;
+    padding: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .row.two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.4rem;
+  }
+  
+  .field label {
+    background: var(--white);
+  }
+  
+  .required {
+    color: var(--red);
+  }
+
+  .error_text {
+    color: var(--red);
+    font-size: 1.2rem;
+    margin-top: 0.8rem;
+  }
+  
+  .field input,
+  .field textarea {
+    width: 100%;
+    border: 1px solid var(--gray-10);
+    border-radius: 0.8rem;
+    padding: 1.2rem 1.6rem;
+    outline: none;
+    color: var(--black);
+    background: var(--white);
+  
+  }
+  
+  .field textarea {
+    resize: vertical;
+    min-height: 24rem;
+  }
+  
+  .address_field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .postal_row {
+    display: flex;
+    gap: 0.8rem;
+  }
+  
+  .postal_input {
+    width: 12rem !important;
+    border: 1px solid var(--gray-10);
+    border-radius: 0.8rem;
+    padding: 1.2rem 1.6rem;
+    outline: none;
+    color: var(--black);
+    background: var(--white);
+  }
+
+  .postal_input::placeholder {
+    color: var(--gray-50);
+  }
+  
+  .upload_grid {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+  }
+  
+  .uploader_box {
+    width: 16rem;
+    height: 16rem;
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    color: var(--gray-60);
+    background: #f2f2f2;
+  }
+  
+  .uploader_box .plus {
+    font-size: 2rem;
+  }
+  
+  
+  
+  .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 0.8rem;
+  }
+  
+  .btn {
+    height: 4.8rem;
+    padding: 0 1.6rem;
+    border: 1px solid var(--gray-20);
+    border-radius: 0.8rem;
+    background: var(--white);
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background: var(--main-color);
+    color: var(--white);
+  }
+  
+  .btn-secondary {
+    background: var(--white);
+    color: var(--black);
+  }
+  
+  .btn-search {
+    background: var(--white);
+    color: var(--black);
+    border-color: var(--black);
+  }
+
+  /* Modal */
+  .modal_backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .modal {
+    width: 32rem;
+    background: var(--white);
+    border-radius: 0.8rem;
+    border: 1px solid var(--gray-10);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .modal_actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  

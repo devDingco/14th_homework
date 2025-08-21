@@ -12,6 +12,15 @@ export default function AppFrame({ children }) {
     return <>{children}</>;
   }
 
+  if (pathname === "/board") {
+    return (
+      <>
+        <Header />
+        {children}
+      </>
+    );
+  }
+
   return (
     <>
       <Header />

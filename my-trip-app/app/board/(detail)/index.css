@@ -1,0 +1,157 @@
+.board_detail_page {
+  max-width: 128rem;
+  margin: 0 auto;
+  padding: 4rem 0;
+}
+
+.board_detail {
+  background: var(--white);
+  border: 1px solid var(--gray-10);
+  border-radius: 0.8rem;
+  padding: 2.4rem;
+}
+
+.detail_header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.detail_title {
+  color: var(--black);
+}
+
+.detail_meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 8rem;
+
+
+}
+
+.detail_meta .author {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--gray-70);
+}
+
+.author {
+width: 100%;
+padding-bottom: 1.6rem;
+border-bottom: 1px solid var(--gray-10);
+}
+
+.date {
+  margin-left: auto;
+}
+
+.author_avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background: var(--gray-10);
+}
+
+.icon_wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.8rem;
+  margin-left: auto;
+}
+
+.detail_cover {
+  margin: 1.6rem 0 2.4rem;
+}
+
+.cover_img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.8rem;
+}
+
+.detail_content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  color: var(--black);
+  padding: 2.4rem 0;
+}
+
+.lead_section {
+  display: grid;
+  grid-template-columns: 26rem 1fr;
+  gap: 1.6rem;
+  align-items: start;
+}
+
+.lead_media img {
+  width: 26rem;
+  height: auto;
+}
+
+.text_block p + p {
+  margin-top: 0.8rem;
+}
+
+.detail_media {
+  margin-top: 2.4rem;
+}
+
+.detail_media.wide .media_wrap {
+  position: relative;
+}
+
+.detail_media.wide img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.4rem;
+}
+
+.play_badge {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+}
+
+.detail_actions {
+  margin-top: 2.4rem;
+  border: 1px solid var(--gray-10);
+}
+
+.bottom_actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+}
+
+.reactions {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.reaction {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--gray-70);
+}
+
