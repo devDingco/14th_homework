@@ -11,6 +11,9 @@ const 모달닫기기능 = (모달종류) => {
     document.body.style.overflow = "auto";
 };
 
-// const 일기등록취소기능 = () => {
+// esc클릭시 모달꺼지기
 
-// }
+window.addEventListener ("keyup", (event) => {
+    if (event.key === "Escape") {모달닫기기능('일기쓰기모달_전체');
+    }
+});

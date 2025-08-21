@@ -176,3 +176,30 @@ const 회고그리기기능 = () => {
 
  document.getElementById("회고입력박스").value = ""     /* 목록에 새로운 데이터 추가 후, 입력칸에 써있는 데이터 지우기 */
 };
+
+const 일기내용복사기능 = () => {
+    //1.일기번호불러오기
+    const 쿼리스트링 = window.location.search;
+    const 일기담는통 = new URLSearchParams(쿼리스트링);
+    const 일기번호 = 일기담는통.get("number");
+
+    //2.일기 목록 가져오기
+    const 스토리지에저장된일기목록 =
+        window.localStorage.getItem("민지의일기보관함") ?? "[]";
+    const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+
+    //3.번호에 맞는 일기정보들 가져오기
+    const 일기담는박스 = 일기목록[일기번호];
+ 
+    //4.내용 복사하기 기능
+    navigator.clipboard.writeText(일기담는박스.내용);
+
+    복사후토스트메시지기능();
+};
+
+const 복사후토스트메시지기능 = () => {
+    window.document.getElementById("복사완료토스트메시지ID").style = "display: block";
+    setTimeout(() => {
+        window.document.getElementById("복사완료토스트메시지ID").style = "display: none";
+      }, 1000);
+}

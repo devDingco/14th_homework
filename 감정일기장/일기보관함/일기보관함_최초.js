@@ -241,6 +241,10 @@ const 필터링기능 = (event) => {
         새로운일기도화지;
 };
 
+const 일기삭제_모달기능 = () => {
+    모달열기기능("일기삭제모달");
+};
+
 const 화면맨위로올리기기능 = () => {
     window.scrollTo({ top:0, behavior: "smooth"});
 };

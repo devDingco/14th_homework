@@ -39,6 +39,8 @@
 }
 
 
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ일기등록취소 모달 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+
 .일기등록취소모달 {
     position: absolute;
 
@@ -130,7 +132,10 @@
     letter-spacing: -0.01125rem;
 }
 
-.일기등록완료모달 {
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ일기등록완료 모달 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+
+/* .일기등록완료모달 {
     display: flex;
     width: 100%;
     min-width: 30rem;
@@ -138,33 +143,7 @@
     padding: 1.5rem;
     flex-direction: column;
     align-items: center;
-}
-
-.일기등록완료_텍스트_타이틀 {
-    color: #000;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1.5rem; /* 100% */
-    letter-spacing: -0.015rem;
-}
-
-.일기등록완료_텍스트_내용 {
-    color: var(--Gray-Gray-800, #333);
-    text-align: center;
-    font-size: 1.25rem;
-    font-weight: 500;
-    line-height: 1.5rem; /* 120% */
-    letter-spacing: -0.0125rem;
-}
-
-#일기등록완료_확인 {
-    display: flex;
-    height: 3rem;
-    padding: 0.5rem 0.625rem;
-    justify-content: center;
-    align-items: center;
-}
+} */
 
 .일기등록완료모달 {
     position: absolute;
@@ -186,6 +165,25 @@
     background: #FFF;
 
 }
+
+.일기등록완료_텍스트_타이틀 {
+    color: #000;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.5rem; /* 100% */
+    letter-spacing: -0.015rem;
+}
+
+.일기등록완료_텍스트_내용 {
+    color: var(--Gray-Gray-800, #333);
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.5rem; /* 120% */
+    letter-spacing: -0.0125rem;
+}
+
 
 .일기등록완료모달_텍스트 {
     display: flex;
@@ -214,4 +212,107 @@
     font-weight: 600;
     line-height: 1.5rem; /* 133.333% */
     letter-spacing: -0.01125rem;
+}
+
+/* 
+#일기등록완료_확인 {
+    display: flex;
+    height: 3rem;
+    padding: 0.5rem 0.625rem;
+    justify-content: center;
+    align-items: center;
+} *
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ일기삭제 모달 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+.일기삭제모달 {
+    position: absolute;
+
+    top: calc(50% - 12.5rem / 2);
+    left: calc(50% - 30rem / 2);
+
+    display: flex;
+    flex-direction: column;
+
+    width: 30rem;
+    height: 12.5rem;
+    padding: 1.5rem;
+
+    gap: 2.5rem;
+
+    border-radius: 1.5rem;
+    background: #FFF;
+
+}
+
+.일기삭제_텍스트 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    width: 27rem;
+}
+
+.일기삭제_텍스트_타이틀 {
+    color: #000;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.5rem; /* 100% */
+    letter-spacing: -0.015rem;
+}
+
+.일기삭제_텍스트_내용 {
+    color: var(--Gray-Gray-800, #333);
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.5rem; /* 120% */
+    letter-spacing: -0.0125rem;
+}
+
+#일기삭제_취소 {
+    width: 6.5rem;
+    height: 3rem;
+    padding: 0.5rem 0.625rem;
+    text-align: center;
+
+    border-radius: 0.5rem;
+    border: 1px solid var(--Gray-B, #000);
+    background: var(--Gray-W, #FFF);
+
+    color: var(--Gray-Gray-900, #1C1C1C);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem; /* 133.333% */
+    letter-spacing: -0.01125rem;
+}
+
+#일기삭제_삭제 {
+    
+    width: 6.5rem;
+    height: 3rem;
+    padding: 0.5rem 0.625rem;
+    text-align: center;
+
+    border-radius: 0.5rem;
+    background: var(--Gray-B, #000);
+
+    color: var(--Gray-Gray-50, #F2F2F2);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem; /* 133.333% */
+    letter-spacing: -0.01125rem;
+}
+
+.일기삭제_취소삭제버튼 {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    
+    gap: 1.5rem;
+
+    justify-content: center;
+    align-items: center;
+
 }

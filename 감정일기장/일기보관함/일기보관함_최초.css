@@ -2,7 +2,7 @@
     margin: 0rem;
     padding: 0rem;
     box-sizing: border-box;
-    font-size: 0.625rem;
+    /* font-size: 0.625rem; */
 }
 
 body {
@@ -19,8 +19,11 @@ body {
 
 a {
     text-decoration: none;
-    color: inherit
-    
+    color: inherit;
+    width: 100%;
+    max-width: 17.125rem;
+    height: 100%;
+    max-height: 18.5rem;   
 }
 
 .프레임 {
@@ -53,7 +56,7 @@ a {
 .헤더 /*민지의다이어리*/ {
     justify-content: flex-start;
     width: 100%;
-    height: 3.75rem;
+    max-height: 3.75rem;
     display: flex;
     text-align: start;
     align-items: center;
@@ -66,9 +69,10 @@ a {
 }
 
 .베개사진 {
-    height: 15rem;
+    max-height: 15rem;
+    height: 100%;
     width: 100%;
-    min-width: 20rem;
+    /* min-width: 20rem; */
     max-width: 73rem;
 
     justify-content: center;
@@ -102,23 +106,24 @@ a {
 
 }
 
-.메인_바디_필터_배경 {
-    width: 100%;
-    height: 2rem;
-
-    display: flex;
-    justify-content: flex-start;
-
-    margin-bottom: 2.625rem;
-    position: sticky;
-    top:0;
-}
 
 .메인_바디_일기장_필터일기쓰기버튼 {
     width: 100%;
+    max-height: 3rem;
+    height: 100%;
     display: flex;
-    
+
+    margin-bottom: 2.625rem;
     justify-content: space-between;
+    align-items: 100%;
+    position: sticky;
+    top:0;
+    z-index: 1;
+}
+.메인_바디_필터_배경 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .필터버튼 {
@@ -126,8 +131,10 @@ a {
     width: 100%;
     padding: 0.25rem;
     border-radius: 0.5rem;
+    align-items: center;
     border: 0.0625rem solid #c7c7c7;
     height: 2rem;   
+    
   }
 
 .일기쓰기버튼 {
@@ -187,19 +194,19 @@ a {
 }
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ메인_바디_일기장ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
-#일기장전체틀 {
+/* #일기장전체틀 {
     width: 100%; 
     max-width: 73rem; 
     height: 100%;
     
     display: flex;
-    /* gap: 1.5rem; */
-    justify-content: space-between;
+    gap: 1.5rem;
+    
     margin-bottom: 2.5rem;
    
     /* height: auto; */
-    /* border: solid 0.0625rem blue; */
-}
+    /* border: solid 0.0625rem blue; 
+} */
 
 
 
@@ -221,15 +228,15 @@ a {
 
 .메인_바디_일기장_일기저장_ {
     background-color: #fff;
-    max-width: 17.125rem; 
+    /* max-width: 17.125rem;  */
     width: 100%;
-    max-height: 18.5rem;  
+    /* max-height: 18.5rem;   */
     height: 100%;
 
     /* gap: 1rem; */
-
+/* 
     display: flex;
-    flex-direction: column;
+    flex-direction: column; */
 }  
 
 .메인_바디_일기장_일기저장프레임_ {
@@ -267,6 +274,8 @@ a {
     transition: 0.5s;
 
     position: relative;
+
+    object-fit: cover;
     /* border: solid 0.0625rem black; */
 }
 
@@ -279,7 +288,8 @@ a {
 .메인_바디_일기장_일기저장_내용_감정과날짜 {
     max-width: 17.125rem;
     width: 100%;
-    height: 1.5rem;
+    max-height: 1.5rem;
+    height: 100%;
     display: flex;
 
     padding: 0.5rem;
@@ -322,7 +332,8 @@ a {
 .메인_바디_일기장_일기저장_1_설명_타이틀 {
     max-width: 17.125rem;
     width: 100%;
-    height: 1.5rem;
+    max-height: 1.5rem;
+    height: 100%;
     padding: 0.5rem;
 
     color: #000;
@@ -346,7 +357,8 @@ a {
     width: 100%;
     /* min-width: 17.5rem; */
     max-width: 22.5rem;
-    height: fit-content;
+    
+    height: 100%;
 
     display: flex;
     flex-direction: column;
@@ -377,7 +389,6 @@ a {
 .오늘기분은어떗나요_질문 {
     color: #000;
     font-size: 1.25rem;
-    font-style: normal;
     width: 100%;
 }
 
