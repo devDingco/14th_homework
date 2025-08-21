@@ -124,21 +124,22 @@ const 카드태그생성= (index=-1) =>{
         for( i = 0 ; i < 카드내용.length; i++){
             index +=1 
             let image_url_=이미지경로[i]
-            let 단일태그 = `<a href="./detial.html?number=${index}">
+            let 단일태그 = `<a href="./detial.html?number=${index}" style="text-decoration: none;">
                             <div id="카드${index}" class="카드">
-                                <div id="카드이미지${index}" class="카드이미지" style="background-image: url(${image_url_})">
+                                <div>
+                                    <img id="카드이미지${index}" class="카드이미지" src=${image_url_} >
                                     <button id="${index}" class="삭제버튼" onclick='카드삭제기능(event)'>X</button>
                                 </div>                            
-                                    <div id="카드내용요약" class="카드내용요약">
-                                        <div class="첫줄">
-                                            <div class="기분노출">
-                                                ${카드내용[i].기분}
-                                            </div>
-                                            <div class="날짜노출">${카드내용[i].날짜}</div>
+                                <div id="카드내용요약" class="카드내용요약">
+                                    <div class="첫줄">
+                                        <div class="기분노출">
+                                            ${카드내용[i].기분}
                                         </div>
-                                        <div class="내용요약">
-                                            <div>${카드내용[i].내용}</div>
-                                        </div>                     
+                                        <div class="날짜노출">${카드내용[i].날짜}</div>
+                                    </div>
+                                    <div class="내용요약">
+                                        <div>${카드내용[i].내용}</div>
+                                    </div>                     
                                 </div>
                             </div>
                         </a>
@@ -162,21 +163,22 @@ const 카드태그생성= (index=-1) =>{
         for (i =0 ; i < index.length; i++){
             
             let image_url_=이미지경로[index[i]]
-            let 단일태그 = `<a href="./detial.html?number=${index[i]}">
+            let 단일태그 = `<a href="./detial.html?number=${index[i]}" style="text-decoration: none;">
                                 <div id="카드${index[i]}" class="카드">
-                                        <div id="카드이미지${index[i]}" class="카드이미지" style="background-image: url(${image_url_})">
-                                            <button id="${index[i]}" class="삭제버튼" onclick='카드삭제기능(event)'>X</button>
-                                        </div>                            
-                                        <div id="카드내용요약" class="카드내용요약">
-                                            <div class="첫줄">
-                                                <div class="기분노출">
-                                                    ${카드내용[index[i]].기분}
-                                                </div>
-                                                <div class="날짜노출">${카드내용[index[i]].날짜}</div>
+                                    <div>
+                                        <img id="카드이미지${index[i]}" class="카드이미지" src=${image_url_}>
+                                        <button id="${index[i]}" class="삭제버튼" onclick='카드삭제기능(event)'>X</button>
+                                    </div>                            
+                                    <div id="카드내용요약" class="카드내용요약">
+                                        <div class="첫줄">
+                                            <div class="기분노출">
+                                                ${카드내용[index[i]].기분}
                                             </div>
-                                            <div class="내용요약">
-                                                <div>${카드내용[index[i]].내용}</div>
-                                            </div>                     
+                                            <div class="날짜노출">${카드내용[index[i]].날짜}</div>
+                                        </div>
+                                        <div class="내용요약">
+                                            <div>${카드내용[index[i]].내용}</div>
+                                        </div>                     
                                     </div>
                                 </div>
                             </a>
