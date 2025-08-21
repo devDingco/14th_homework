@@ -28,6 +28,7 @@
     border: 0.0625rem solid var(--인풋보더색);
     background-color: var(--기본배경색);
     text-align: left;
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1.5rem; 
     color: var(--기본글자색);
 
@@ -60,6 +61,7 @@
     color: var(--기본글자색);
     text-align: center;
     text-align: center;
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1.5rem; /* 100% */
@@ -74,6 +76,7 @@
 .일기삭제모달_내용 {
     color:  var(--등록완료모달글자색);
     text-align: center; 
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1.25rem;
     font-weight: 500;
     line-height: 1.5rem; /* 120% */
@@ -104,6 +107,7 @@
     cursor: pointer;
     color: var(--등록하기버튼글자색);
     text-align: center;
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 600;
@@ -125,6 +129,7 @@
     background-color: var(--등록하기버튼배경색);
     cursor: pointer;
     color: var(--등록하기버튼글자색);
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 600;
@@ -150,6 +155,8 @@
     border-radius: 8px;
     border: 0.063rem solid var(--닫기버튼보더색);
     background-color: var(--닫기버튼배경색);
+
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 600;
