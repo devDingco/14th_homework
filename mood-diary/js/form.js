@@ -42,16 +42,25 @@ if (form) {
 
 // 전체 카드 화면 출력하는 함수(반복문)
 const addCardsOnGallery = (diaryList) => {
+  const container = document.querySelector('.main__gallery')
+  if (!container) return
+
+  if (diaryList.length === 0)
+    container.innerHTML = `
+      <div class="empty-container">
+        <p>등록된 일기가 없습니다.</p>
+      </div>`
+
   return diaryList.map(formattedDiary).forEach(addCardOnGallery)
 }
 
 // 카드 1개 추가 함수
-// TODO: innerHTML -> addElements로 변환
-// TODO(CSS): flex-wrap이 된 후, 공간에 의해 카드 정렬이 이상함
 const addCardOnGallery = (obj) => {
   const { id, mood, date, title, image, color } = obj
 
   const container = document.querySelector('.main__gallery')
+  if (!container) return
+
   container.innerHTML += `
   <a href="./detail.html?diaryId=${id}">
     <div id=${id} class="main__gallery__card" onclick="onClick(event,${id})">
@@ -69,12 +78,6 @@ const addCardOnGallery = (obj) => {
   `
 }
 
-// // FIX: alert에 출력되는 양식만들어서 제출
-// const onClick = (id) => {
-//   alert(JSON.stringify(formattedDiary(getDiaryById(id)[0])))
-// }
-
-// FIX: 모달(detail.html) 이중모달 띄워 삭제 체크하기...
 const confirmDelete = (event, id) => {
   const queryString = location.search
   const findQueryString = new URLSearchParams(queryString)
@@ -94,27 +97,139 @@ const deleteDiaryById = (event, id) => {
   return diaryList.filter((el) => el.id !== +id)
 }
 
+// INFO: 필터 서치
 const selectMood = (event) => {
-  const moodId = event.target.id
+  const moodId = event.target.value ?? 'total'
   const moodLabel = getMoodLabel(moodId) ?? '전체'
-  document.getElementById('dropdown-title-id').style = `--dropdown-title: "${moodLabel}"`
-  document.getElementById('dropdown-title-id').click()
 
-  return filterByMood(moodId)
+  const titleEl = document.getElementById('dropdown-title-id')
+  titleEl.style = `--dropdown-title: "${moodLabel}`
+  titleEl.click()
+
+  state.mood = moodId
+  state.page = 1
+  render()
 }
 
-const filterByMood = (mood) => {
+// INFO: 검색 서치
+let timer
+const getDiaryByTitle = (event) => {
+  clearTimeout(timer)
+
   const container = document.querySelector('.main__gallery')
+  if (!container) return
+
   container.innerHTML = ''
 
-  switch (mood) {
-    case 'total':
-      return addCardsOnGallery(diaryList)
-    default:
-      return addCardsOnGallery(diaryList.filter((el) => el.mood === mood))
-  }
+  timer = setTimeout(() => {
+    state.query = event.target.value
+    state.page = 1
+    render()
+  }, 500)
 }
 
+// INFO: 페이지네이션
+let state = {
+  mood: 'total', //mood(dropdown)
+  query: '', //검색어
+  page: 1, //현재 페이지
+}
+
+const PAGE_SIZE = 12
+const MAX_PAGE_BUTTONS = 5
+
+const getBaseList = () => getDiaryList()
+
+// 최신 저장소 기준으로, 삭제/추가 후에도 반영
+const deriveList = () => {
+  const base = getBaseList()
+  let list = state.mood === 'total' ? base : base.filter((el) => el.mood === state.mood)
+  if (state.query && state.query.trim()) {
+    const q = state.query.trim()
+    list = list.filter((el) => el.title.includes(q))
+  }
+  return list
+}
+
+const getLastPage = () => {
+  const total = deriveList().length
+  return Math.max(1, Math.ceil(total / PAGE_SIZE))
+}
+
+const renderCards = () => {
+  const list = deriveList()
+  const lastPage = getLastPage()
+
+  if (state.page > lastPage) state.page = lastPage
+  if (state.page < 1) state.page = 1
+
+  const start = (state.page - 1) * PAGE_SIZE
+  const pageSlice = list.slice(start, start + PAGE_SIZE)
+
+  const container = document.querySelector('.main__gallery')
+  if (!container) return
+  container.innerHTML = ''
+
+  addCardsOnGallery(pageSlice)
+}
+
+const renderPager = () => {
+  const lastPage = getLastPage()
+  const pageContainer = document.querySelector('.pages')
+  if (!pageContainer) return
+  // const pageArrows = document.querySelectorAll('.arrow')
+
+  const blockStart = Math.floor((state.page - 1) / MAX_PAGE_BUTTONS) * MAX_PAGE_BUTTONS + 1
+
+  // if (lastPage === 1) pageArrows.forEach((el) => (el.style.visibility = 'hidden'))
+
+  const pageArr = new Array(MAX_PAGE_BUTTONS).fill(0).map((_, i) => blockStart + i)
+  pageContainer.innerHTML = pageArr
+    .map((pageNum) => {
+      if (pageNum > lastPage) return ''
+      return `<input type="radio" name="page" page="${pageNum}" 
+        onclick="gotoPage(${pageNum});"
+        ${pageNum === state.page ? 'checked' : ''}
+        />`
+    })
+    .join('')
+}
+
+const render = () => {
+  renderCards()
+  renderPager()
+}
+
+const gotoPage = (pageNum) => {
+  state.page = pageNum
+  render()
+}
+
+const moveToPrevPage = () => {
+  const lastPage = getLastPage()
+  const blockStart = Math.floor((state.page - 1) / MAX_PAGE_BUTTONS) * MAX_PAGE_BUTTONS + 1
+  if (blockStart === 1) {
+    alert('시작페이지입니다')
+    return
+  }
+  state.page = Math.max(1, blockStart - MAX_PAGE_BUTTONS)
+  render()
+}
+
+const moveToNextPage = () => {
+  const lastPage = getLastPage()
+  const blockStart = Math.floor((state.page - 1) / MAX_PAGE_BUTTONS) * MAX_PAGE_BUTTONS + 1
+  const nextBlockStart = blockStart + MAX_PAGE_BUTTONS
+
+  if (nextBlockStart > lastPage) {
+    alert('마지막페이지입니다')
+    return
+  }
+  state.page = nextBlockStart
+  render()
+}
+
+// INFO: 댓글제출 함수
 const submitComment = () => {
   const commentContents = document.getElementById('detail-comments-input-input').value
 
@@ -138,12 +253,22 @@ const submitComment = () => {
 }
 
 const addCommentsOnArea = (comments) => {
+  const container = document.querySelector('.detail-comments-area')
+  if (!container) return
+
+  if (comments.length === 0)
+    container.innerHTML = `
+      <div class="empty-container">
+        <p>등록된 회고가 없습니다.</p>
+      </div>`
   return comments.forEach(addCommentOnArea)
 }
 
 const addCommentOnArea = (comment) => {
-  const { id, contents, date } = comment
+  const { contents, date } = comment
   const container = document.querySelector('.detail-comments-area')
+  if (!container) return
+
   container.innerHTML += `
   <div class="detail-comments-item">
     <h4>${contents}</h4>

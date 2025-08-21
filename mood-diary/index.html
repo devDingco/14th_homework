@@ -2,7 +2,7 @@
 <html lang="ko">
   <head>
     <title>감정 일기장</title>
-
+    <link rel="stylesheet" href="./css/font.css" />
     <link rel="stylesheet" href="./css/root.css" />
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/index.css" />
@@ -13,7 +13,13 @@
 
   <body>
     <div class="container">
-      <h1 class="title01 header">지호의 다이어리</h1>
+      <div class="header-title">
+        <h1 class="title01 header">지호의 다이어리</h1>
+        <div class="toggle-active">
+          <p>다크모드</p>
+          <input type="checkbox" class="toggle-btn" onclick="toggleDarkMode()" />
+        </div>
+      </div>
 
       <img src="./assets/images/rectangle.png" />
 
@@ -31,32 +37,68 @@
         <section id="diary-component">
           <div class="multiple-functions">
             <div class="dropdown">
-              <input type="checkbox" class="dropdown-title" id="dropdown-title-id" value="전체" />
+              <input type="checkbox" class="dropdown-title" id="dropdown-title-id" />
 
               <ul class="dropdown-list">
                 <li>
-                  <input type="radio" name="dropdown" id="total" onclick="selectMood(event)" />
-                  <label for="total">전체</label>
+                  <input
+                    type="radio"
+                    name="dropdown"
+                    id="dropdown-total"
+                    value="total"
+                    onclick="selectMood(event)"
+                  />
+                  <label for="dropdown-total">전체</label>
                 </li>
                 <li>
-                  <input type="radio" name="dropdown" id="happy" onclick="selectMood(event)" />
-                  <label for="happy">행복해요</label>
+                  <input
+                    type="radio"
+                    name="dropdown"
+                    id="dropdown-happy"
+                    value="happy"
+                    onclick="selectMood(event)"
+                  />
+                  <label for="dropdown-happy">행복해요</label>
                 </li>
                 <li>
-                  <input type="radio" name="dropdown" id="sad" onclick="selectMood(event)" />
-                  <label for="sad">슬퍼요</label>
+                  <input
+                    type="radio"
+                    name="dropdown"
+                    id="dropdown-sad"
+                    value="sad"
+                    onclick="selectMood(event)"
+                  />
+                  <label for="dropdown-sad">슬퍼요</label>
                 </li>
                 <li>
-                  <input type="radio" name="dropdown" id="surprise" onclick="selectMood(event)" />
-                  <label for="surprise">놀랐어요</label>
+                  <input
+                    type="radio"
+                    name="dropdown"
+                    id="dropdown-surprise"
+                    value="surprise"
+                    onclick="selectMood(event)"
+                  />
+                  <label for="dropdown-surprise">놀랐어요</label>
                 </li>
                 <li>
-                  <input type="radio" name="dropdown" id="angry" onclick="selectMood(event)" />
-                  <label for="angry">화나요</label>
+                  <input
+                    type="radio"
+                    name="dropdown"
+                    id="dropdown-angry"
+                    value="angry"
+                    onclick="selectMood(event)"
+                  />
+                  <label for="dropdown-angry">화나요</label>
                 </li>
                 <li>
-                  <input type="radio" name="dropdown" id="etc" onclick="selectMood(event)" />
-                  <label for="etc">기타</label>
+                  <input
+                    type="radio"
+                    name="dropdown"
+                    id="dropdown-etc"
+                    value="etc"
+                    onclick="selectMood(event)"
+                  />
+                  <label for="dropdown-etc">기타</label>
                 </li>
               </ul>
             </div>
@@ -82,13 +124,7 @@
           <div class="main-modal-group" id="main-diary-form">
             <div class="main-diary-form-bg" onclick="closeModal('main-diary-form')"></div>
             <form class="main__diary-form" id="myForm">
-              <div class="modal-title">
-                <h2>📍 일기 쓰기</h2>
-                <div class="toggle-active">
-                  <p>다크모드</p>
-                  <input type="checkbox" class="toggle-btn" onclick="toggleDarkMode()" />
-                </div>
-              </div>
+              <h2>📍 일기 쓰기</h2>
 
               <div class="select-box">
                 <h3>오늘 기분은 어땟나요?</h3>
@@ -142,6 +178,7 @@
                   <input
                     type="text"
                     id="title"
+                    maxlength="50"
                     oninput="checkContents()"
                     placeholder="제목을 입력해 주세요."
                   />
@@ -266,12 +303,9 @@
 
       <!-- 페이지네이션 -->
       <nav class="pagination">
-        <img src="./assets/icons/left.png" onclick="moveToPrevPage()" />
-        <div class="pages">
-          <!-- <input type="radio" name="page" page="1" checked /> -->
-          <!-- <input type="radio" name="page" page="2" /> -->
-        </div>
-        <img src="./assets/icons/right.png" onclick="moveToNextPage()" />
+        <img class="arrow" src="./assets/icons/left.png" onclick="moveToPrevPage()" />
+        <div class="pages"></div>
+        <img class="arrow" src="./assets/icons/right.png" onclick="moveToNextPage()" />
       </nav>
 
       <!-- 플로팅 버튼 -->
@@ -288,14 +322,11 @@
     <script src="./js/constants.js"></script>
     <script src="./js/formatUtils.js"></script>
     <script src="./js/userDiary.js"></script>
-    <script src="./js/pagination.js"></script>
     <script src="./js/script.js"></script>
 
     <script src="./js/checkContents.js"></script>
-
     <script src="./js/form.js"></script>
     <script src="./js/modal.js"></script>
-    <script src="./js/debounce.js"></script>
     <script src="./js/fetchData.js"></script>
   </body>
 </html>
