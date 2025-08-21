@@ -27,16 +27,17 @@
                     </div>
                 </div>
                 <div class="바디__메인__아티클섹션">
-                    <span>내용</span>
-                    <div id="내용 나타는곳"></div>
+                    <div id="내용나타는곳"></div>
                     <div class="바디__메인__아티클섹션__내용복사영역">
-                        <img src="./assets/icons/복사아이콘.png" alt="">
-                        <span onclick="복사기능()">내용복사</span>
+                        <div class="바디__메인__아티클섹션__내용복사영역__복사">
+                            <img src="./assets/icons/복사아이콘.png" alt="">
+                            <span onclick="복사기능()">내용복사</span>
+                        </div>
                     </div>
                 </div>
                 <div class="바디__메인__수정섹션">
-                    <button onclick="수정하러가기기능()">수정</button>
-                    <button onclick="삭제모달열기()">삭제</button>
+                    <button class="바디__메인__수정섹션__수정버튼" onclick="수정하러가기기능()">수정</button>
+                    <button class="바디__메인__수정섹션__삭제버튼" onclick="삭제모달열기()">삭제</button>
                 </div>
 
 
@@ -45,14 +46,14 @@
             <div class="바디__회고">
                 <div class="바디__회고__입력섹션">
                     <span>회고</span>
-                    <div class="바디__회고__입력섹션__회고입력" >
+                    <div class="바디__회고__입력섹션__회고입력영역" >
                         <input placeholder="회고를 남겨보세요" id="회고입력창" type="text">
                         <button onclick="회고추가기능()">입력</button>
                     </div>
                 </div>
                 <div id="회고그려지는곳" class="바디__회고__출력섹션">
                     
-                </div>
+                </div> 
             </div>
             <!-- 삭제모달 -->
             <div class="삭제모달그룹" id="삭제모달ID">

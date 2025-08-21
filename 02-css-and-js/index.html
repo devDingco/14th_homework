@@ -6,6 +6,7 @@
    <!-- <script src="./index.js"></script>
    <script src="./component-dogs.js"></script> -->
    <link rel="stylesheet" href="./index.css">
+   <link rel="stylesheet" href="./global.css">
    <link rel="stylesheet" href="./modal.css">
    <link rel="stylesheet" href="./mobile.css" media="(max-width: 849px)" />
    <title>민지의 다이어리</title>
@@ -98,33 +99,40 @@
                      <div class="등록모달창">
                         <div class="등록모달창__타이틀섹션">
                            <h2>📍일기 쓰기</h2>
+                           <div class="등록모달창__타이틀섹션__다크모드영역">
+                              <label for="다크모드" class="등록모달창__타이틀섹션__다크모드영역__다크모드텍스트">다크모드</label>
+                              <input class="등록모달창__타이틀섹션__다크모드영역__다크모드버튼" type="checkbox" onclick="다크모드기능()" id="다크모드">
+                           </div>
                         </div>
                         <div class="등록모달창__아티클섹션">
                            <div class="등록모달창__아티클섹션__상단">
                               <h3>오늘 기분은 어땠나요?</h3>
                               <div>
                                  <div>
-                                    <input type="radio" name="감정" value="행복해요">
-                                    행복해요
+                                    <input type="radio" id="행" name="감정" value="행복해요">
+                                    <label for="행">행복해요</label>
                                  </div>
                                  <div>
-                                    <input type="radio" name="감정" value="슬퍼요">
+                                    <input type="radio" id="슬" name="감정" value="슬퍼요">
+                                    <label for="슬">슬퍼요</label>
+                                    
+                                 </div>
+                                 <div>
+                                    <input type="radio" id="놀" name="감정" value="놀랐어요">
+                                    <label for="놀">놀랐어요</label>
+                                    
 
-                                    슬퍼요
                                  </div>
                                  <div>
-                                    <input type="radio" name="감정" value="놀랐어요">
-                                    놀랐어요
+                                    <input type="radio" id="화" name="감정" value="화나요">
+                                    <label for="화">화나요</label>
 
+                                    
                                  </div>
                                  <div>
-                                    <input type="radio" name="감정" value="화나요">
-
-                                    화나요
-                                 </div>
-                                 <div>
-                                    <input type="radio" name="감정" value="기타">
-                                    기타
+                                    <input type="radio" id="기" name="감정" value="기타">
+                                    <label for="기">기타</label>
+                                    
 
                                  </div>
                               </div>
@@ -231,6 +239,7 @@
 
 
          <script src="./index.js"></script>
+         
          <script src="./component-dogs.js"></script>
 </body>
 

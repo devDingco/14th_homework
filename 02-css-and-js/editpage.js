@@ -52,5 +52,8 @@ const 수정하기기능 = () => {
   
     location.replace(`./sub.html?number=${일기인덱스}`);
   };
-        
-        
+
+  
+  const 취소기능 = () => {
+    location.href = "./sub.html"
+  }
