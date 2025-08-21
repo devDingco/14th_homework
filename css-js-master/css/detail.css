@@ -235,3 +235,73 @@
     letter-spacing: -1%;
     color: var(--Gray-Gray-600, rgba(119, 119, 119, 1));
 }
+
+#copy_detail_container {
+    display: flex;
+    justify-content: space-between;
+    width: 91px;
+    height: 24px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;    
+}
+
+#copy_detail_container > p {
+    font-family: Pretendard Variable;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 15px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: var(--Gray-Gray-900, rgba(28, 28, 28, 1));
+}
+
+#copy_detail_container > img {
+    cursor: pointer;
+}
+
+#copy_detail_frame {
+    display: flex;
+    justify-content: flex-end;
+    width: 1168px;
+    height: 24px;
+    max-width: 1168px;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 8px;    
+}
+
+#detail_toast_flag {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.copy_toast {
+    width: 300px;
+    height: 30px;
+    background-color: black;
+    text-align: center;
+    /* 텍스트 높이를 박스의 높이와 같게 만들기 */
+    line-height: 30px;
+    border-radius: 10px;
+    
+    animation-name: 철수의애니메이션;
+    animation-duration: 2s;
+
+    align-self: center;
+}
+
+.copy_toast > p {
+    color: white;
+}
+
+@keyframes 철수의애니메이션 {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

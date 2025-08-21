@@ -39,3 +39,18 @@ window.addEventListener("keydown",(e) => {
         default:
     }
 })
+
+const successCopyDetail = () => {
+    const detailText = document.getElementById("detail_content").innerText
+    
+    try {
+        navigator.clipboard.writeText(`[민지의다이어리]: ${detailText}`)
+        document.getElementById("detail_toast_flag").innerHTML = `
+            <div class="copy_toast">
+                    <p>내용이 복사되었습니다.</p>
+                </div>
+        `
+    } catch (e) {
+        alert(e)
+    }
+}

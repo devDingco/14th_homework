@@ -116,7 +116,13 @@ const makeDetailHtml = (contentObj) => {
         </div>
         <div id="detail_content_container" class="">
             <p class="title02">내용</p>
-            <p>${contentObj.detail}</p>
+            <p id="detail_content">${contentObj.detail}</p>
+        </div>
+        <div id="copy_detail_frame">
+            <div id="copy_detail_container">
+                <img src="../images/copy_outline_light_m.svg" onclick="successCopyDetail()"/>
+                <p>내용 복사</p>
+            </div>
         </div>
         <div id="detail_bottom_container" class="">            
             <button class="body01 go_update_button" onclick="printUpdate()">수정</button>
