@@ -11,4 +11,14 @@ window.onload = () => {
     // toastMessage(message);
     sessionStorage.removeItem(TOAST_KEY)
   }
+
+  const isDarkMode = getDarkMode()
+
+  if (isDarkMode) {
+    document.body.classList.add('darkmode')
+    document.querySelector('.toggle-btn').checked = true
+  } else {
+    document.body.classList.remove('darkmode')
+    document.querySelector('.toggle-btn').checked = false
+  }
 }
