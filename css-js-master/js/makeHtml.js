@@ -218,3 +218,11 @@ const makeReplyHtml = (contentObj) => {
 const printUpdate = () => {
     makeUpdateHtml(getContentNumber())
 }
+
+const resetResistHtml = () => {
+    document.getElementById('detail_input').value = '';
+    document.getElementById('title_input').value = '';
+    document.querySelectorAll('input[name="feel"]').forEach(radio => {
+        radio.checked = false;
+    });
+}
