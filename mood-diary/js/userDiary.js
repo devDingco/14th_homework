@@ -33,3 +33,31 @@ if (targetDiary) {
   addCommentsOnArea(comments)
   scrollToComments()
 }
+
+const viewModifyContent = () => {
+  const { mood, title, contents } = formattedDiary(targetDiary)
+  const header = document.getElementById('detailHeader')
+  header.innerText = '〈 일기 수정' //TODO: 반응형에서만 되어야 함?
+  header.addEventListener('click', () => {
+    location.reload()
+  }) //반응형에서만..?
+
+  document.querySelector('.detail-main').style.display = 'none'
+  document.querySelector('#detail-modify-form').style.display = 'flex'
+
+  //TODO: 변수네이밍 변경 및 forEach, Arry.from 기능 정리
+  const temp = Array.from(document.querySelectorAll('input[name="mood"]'))
+  console.log(temp)
+  // forEach 동작하지 않는 이유?
+  for (let i = 0; i < temp.length; i++) {
+    if (getMoodLabel(temp[i].id) === mood) {
+      temp[i].checked = true
+    }
+  }
+  document.querySelector('#title').value = title
+  document.querySelector('#contents').value = contents
+  document.getElementById('detail-comments-input-input').placeholder =
+    '수정중일땐 회고를 작성할 수 없어요.'
+  document.getElementById('detail-comments-input-input').disabled = true
+  document.getElementById('detail-comments-input-button').disabled = true
+}

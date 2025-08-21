@@ -97,33 +97,12 @@ const toastMessage = (contents) => {
   }, 2000)
 }
 
+// 세션스토리지에서 다크모드 값을 가져오는 함수
+const getDarkMode = () => JSON.parse(localStorage.getItem(DARKMODE_KEY))
+
 // INFO: 다크모드 토글함수
 const toggleDarkMode = () => {
+  const isDarkMode = getDarkMode()
   document.body.classList.toggle('darkmode')
-}
-
-const viewModifyContent = () => {
-  const header = document.getElementById('detailHeader')
-  header.innerText = '〈 일기 수정' //TODO: 반응형에서만 되어야 함?
-  header.addEventListener('click', () => {
-    location.reload()
-  }) //반응형에서만..?
-
-  document.querySelector('.detail-main').style.display = 'none'
-  document.querySelector('#detail-modify-form').style.display = 'flex'
-
-  //TODO: 변수네이밍 변경 및 forEach, Arry.from 기능 정리
-  const temp = Array.from(document.querySelectorAll('input[name="mood"]'))
-  // forEach 동작하지 않는 이유?
-  for (let i = 0; i < temp.length; i++) {
-    if (getMoodLabel(temp[i].id) === mood) {
-      temp[i].checked = true
-    }
-  }
-  document.querySelector('#title').value = title
-  document.querySelector('#contents').value = contents
-  document.getElementById('detail-comments-input-input').placeholder =
-    '수정중일땐 회고를 작성할 수 없어요.'
-  document.getElementById('detail-comments-input-input').disabled = true
-  document.getElementById('detail-comments-input-button').disabled = true
+  localStorage.setItem(DARKMODE_KEY, !isDarkMode)
 }
