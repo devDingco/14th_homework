@@ -1,0 +1,432 @@
+* {
+  margin: 0rem;
+  padding: 0rem;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+h1 {
+  font-size: 1.125rem;
+  padding-top: 2.875rem;
+  padding-bottom: 2.875rem;
+}
+/* 메인전체사이즈 */
+.main {
+  max-width: 73rem;
+  margin: auto;
+}
+/* 네비 */
+nav {
+  display: flex;
+  font-size: 1.5rem;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+}
+/* 타이틀메인 */
+.title__main {
+  display: flex;
+  gap: 1.5rem;
+  padding-top: 2.625rem;
+  padding-bottom: 2.5rem;
+}
+.title__images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2열 */
+  grid-template-rows: repeat(3, 1fr); /* 3행 */
+  height: 100%;
+  gap: 1.5rem;
+}
+
+.title__text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  align-items: center;
+}
+
+/* 타이틀감정 */
+.title__sad {
+  color: #28b4e1;
+}
+
+.title__happy {
+  color: #ea5757;
+}
+
+.title__surprised {
+  color: #d59029;
+}
+
+.title__angry {
+  color: #777777;
+}
+
+.title__and {
+  color: #a229ed;
+}
+
+.title__text div:last-child {
+  color: #919191;
+}
+
+.title__text__main {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  gap: 0.5rem;
+}
+
+.title__text__main div:last-child {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+/* 타이틀오른쪽 */
+.title__right {
+  max-width: 22.5rem;
+  height: 37.75rem;
+}
+.title__right__text div:first-child {
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 100%;
+}
+.title__right__text div:last-child {
+  font-size: 1.25rem;
+  padding: 1rem 0rem;
+  width: 100%;
+}
+.title__right__mood {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem; /* 간격 조절 */
+  font-size: 1.125rem;
+  width: 100%;
+}
+input[type='radio'] {
+  transform: scale(1.5); /* 1.5배 크게 */
+}
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* 라디오와 라벨 사이 간격 */
+}
+
+/* 폼 컨테이너 */
+.form-container {
+  background: white;
+  width: 100%;
+  border-radius: 0.5rem;
+  padding-top: 2.5rem;
+}
+
+/* 각 입력 그룹 */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* 라벨 */
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+/* 입력 필드 */
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.625rem;
+  font-size: 1rem;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+  background-color: white;
+}
+
+/* 텍스트에리어 */
+.form-textarea {
+  min-height: 7.5rem;
+  min-width: 19.5rem;
+  resize: none;
+  border-radius: 0.625rem;
+  border: 1px solid #ddd;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+}
+
+/* 버튼 */
+.submit-btn {
+  width: 100%;
+  height: 3rem;
+  padding: 1rem;
+  background-color: #c7c7c7;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 1.125rem;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  background-color: #f2f2f2;
+}
+
+.main__footer {
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  width: 73rem;
+  font-size: 0.875rem;
+  gap: 2rem;
+  padding: 1.5rem;
+}
+
+.main__footer div:first-child {
+  font-size: 1.25rem;
+}
+.main__footer div:nth-child(2) {
+  color: #5f5f5f;
+}
+.main__footer div:nth-child(3) {
+  color: #919191;
+}
+
+/* 애니메이션 코드 */
+
+/* 일기 카드 호버 효과 */
+.title__images > div {
+  transition: transform 0.5s ease;
+  cursor: pointer;
+}
+
+.title__images > div:hover {
+  transform: scale(1.1);
+  filter: blur(0.125rem); /* 흐릿한 효과 추가 */
+}
+
+/* 드롭다운 */
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+  margin: 1.25rem 0rem;
+}
+.dropdown-btn {
+  font-size: 1rem;
+  width: 7.5rem;
+  height: 2rem;
+  background-color: white;
+  border-radius: 0.3125rem;
+  text-align: start;
+  padding: 0.25rem;
+  border: 1px solid #c7c7c7;
+  background-image: url('./assets/images/arrow.png');
+  background-repeat: no-repeat;
+  background-position: right 0rem center;
+}
+/* 드롭다운 메뉴 */
+.dropdown-menu {
+  display: none; /* 처음엔 숨김 */
+  position: absolute;
+  top: 100%; /* 버튼 바로 아래 */
+  left: 0;
+  right: 0;
+  background: #e4e4e4;
+  border: 1px solid #c7c7c7;
+  border-top: none; /* 버튼과 연결되게 */
+  border-radius: 0rem 0rem 0.3125rem 0.3125rem;
+  box-shadow: 0rem 0.125rem 0.3125rem rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+.dropdown-item {
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+  border-radius: 0rem 0rem 0.3125rem 0.3125rem;
+}
+
+.diaryCard {
+  position: relative;
+  width: 23.75rem;
+  height: 23.3125rem;
+}
+.delete-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+}
+.scrollTop {
+  position: fixed;
+  bottom: 1.875rem;
+  right: calc(50vw - 36.5rem + 1.875rem);
+  width: 2.5rem;
+  height: 2.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.banner {
+  width: 73rem;
+  height: 15rem;
+}
+
+.webBanner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mobileBanner {
+  display: none;
+}
+nav {
+  order: 1;
+}
+.dropdown-container {
+  position: relative;
+  display: block; /* inline-block → block으로 변경 */
+  width: 100%; /* 전체 너비 차지 */
+  margin: 1.25rem 0rem;
+
+  order: 2;
+}
+.title__main {
+  order: 3;
+}
+
+.새로운일기추가 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+#일기모달버튼 {
+  width: 110px;
+  height: 48px;
+  border-radius: 8px;
+}
+/*            반응형            */
+@media (max-width: 48.625rem) {
+  .main {
+    max-width: 20rem;
+    margin: 0 auto;
+  }
+
+  .banner {
+    width: 100%;
+    max-width: 20rem;
+    height: 15rem;
+    object-position: center;
+    margin: 0 auto;
+  }
+
+  .webBanner {
+    display: none;
+  }
+  .mobileBanner {
+    display: block;
+  }
+  nav {
+    order: 2;
+  } /* 네비 */
+  .title__main {
+    order: 1;
+  } /* 일기쓰기가 포함된 영역을 맨 위로 */
+  .dropdown-container {
+    order: 3;
+  } /* 필터를 네비 아래로 */
+
+  /* title__main 내부 순서도 변경 */
+  .title__main {
+    flex-direction: column;
+  }
+
+  .title__right {
+    order: 1;
+  } /* 일기쓰기 맨 위 */
+
+  .title__images {
+    order: 2;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto; /* 3fr 제거 */
+    gap: 1.5rem;
+
+    box-sizing: border-box;
+  }
+
+  .title__images .diaryCard {
+    position: relative;
+    width: 9.25rem;
+    height: 23.3125rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .image-container {
+    position: relative;
+    height: 17.8125rem;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 1rem;
+  }
+
+  .title__images .delete-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .title__images .delete-btn img {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .title__text__main {
+    height: 5.5rem;
+    font-size: 0.6875rem;
+    line-height: 1.2;
+    overflow: hidden;
+  }
+  .main__footer {
+    width: 22.5rem;
+    height: 7rem;
+    padding: 1.5rem 1.25rem;
+  }
+  .main__footer div:nth-child(2) {
+    display: none;
+  }
+  .main__footer {
+    width: 20rem; /* main과 동일한 너비 */
+  }
+}

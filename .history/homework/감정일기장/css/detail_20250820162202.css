@@ -1,0 +1,98 @@
+* {
+  margin: 0rem;
+  padding: 0rem;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+h1 {
+  font-size: 1.125rem;
+  padding-top: 2.875rem;
+  padding-bottom: 2.875rem;
+}
+/* 상세페이지 */
+.detail {
+  width: 73rem;
+  margin: 0 auto;
+}
+.detail__top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail__mood {
+  display: flex;
+  padding-bottom: 1.5rem;
+}
+hr {
+  height: 0.1875rem;
+  background-color: black;
+  margin-top: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.detail__내용 {
+  padding-bottom: 0.8125rem;
+}
+.상세페이지수정삭제버튼 {
+  display: flex;
+  justify-content: end;
+  padding-top: 1.5rem;
+  gap: 1rem;
+}
+.상세페이지수정삭제버튼 > button {
+  width: 3.1875rem;
+  height: 2.5rem;
+  border: 1px solid #d4d3d3;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+
+.디테일내용제목 {
+  font-size: 16px;
+  font-weight: bold;
+  padding-bottom: 13px;
+}
+h3 {
+  padding-bottom: 13px;
+}
+#회고인풋 {
+  width: 1101px;
+  height: 48px;
+  border: 1px solid #d4d3d3;
+  border-radius: 8px;
+  font-size: 16px;
+  padding: 12px 16px;
+}
+
+#회고버튼 {
+  width: 58px;
+  height: 48px;
+  border-radius: 8px;
+  color: white;
+  background-color: black;
+}
+
+#회고항목 {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e4e4e4;
+  padding: 16px 0px 12px 0px;
+  gap: 10px;
+}
+.회고날짜 {
+  font-size: 14px;
+  color: #666;
+}
+
+/* 반응형 */
+@media (max-width: 48.625rem) {
+  body {
+    width: 320px;
+  }
+  h2 {
+    display: none;
+  }
+}

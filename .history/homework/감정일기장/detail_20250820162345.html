@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상세페이지</title>
+    <script src="./js/detail.js"></script>
+    <link rel="stylesheet" href="./css/detail.css" />
+  </head>
+  <body>
+    <!-- 상세페이지 -->
+    <div class="detail">
+      <h1>민지의 다이어리</h1>
+      <h2 id="모바일일기상세">일기 상세</h2>
+      <h2 id="detail__title">이것은 타이틀입니다</h2>
+      <hr />
+
+      <div class="detail__top">
+        <div class="detail__mood">
+          <div id="detailEmotionImage">이모지</div>
+          <div id="detailEmotion">행복해요</div>
+        </div>
+        <div id="detailDate" class="detail__date">날짜입니다</div>
+      </div>
+      <div class="디테일내용제목">내용</div>
+      <div class="detail__main">
+        <div id="detailContent" class="detail__내용">내용</div>
+        <div></div>
+      </div>
+      <div class="상세페이지수정삭제버튼">
+        <button id="editBtn">수정</button>
+        <button id="delBtn">삭제</button>
+      </div>
+      <hr />
+      <h3>회고</h3>
+      <div class="회고입력영역">
+        <input id="회고인풋" type="text" placeholder="회고를 남겨보세요." />
+        <button id="회고버튼">입력</button>
+      </div>
+      <div id="회고영역"></div>
+      <!-- 여기에 회고 목록이 동적으로 생성됩니다 -->
+    </div>
+  </body>
+</html>
