@@ -126,7 +126,7 @@ const makeDetailHtml = (contentObj) => {
         </div>
         <div id="detail_bottom_container" class="">            
             <button class="body01 go_update_button" onclick="printUpdate()">수정</button>
-            <button class="body01 delete_button" onclick="deleteContent(${contentObj.number},'일기콘텐츠디테일')">삭제</button>
+            <button class="body01 delete_button" onclick="openDeleteModal('detail_delete_modal_group',${contentObj.number},'일기콘텐츠디테일')">삭제</button>
         </div>
     `
     document.getElementById("main").innerHTML = contentHTML

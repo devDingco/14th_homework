@@ -8,7 +8,6 @@ const deleteContent = (contentNumber,key) => { // <number,string>
             for (let i=0; i < diaryContentArr.length; i++) {
                 let diaryContentNumber = Number(diaryContentArr[i].id.slice(diaryContentArr[i].id.lastIndexOf("#")+1))
                 if (diaryContentNumber === contentNumber) {
-                    // openModal('main_delete_modal_group')
                     deleteStorage(contentNumber,key)
                 }
             }
@@ -20,7 +19,6 @@ const deleteContent = (contentNumber,key) => { // <number,string>
             break
         }
         case "일기콘텐츠디테일": {
-            // openModal('main_delete_modal_group')
             deleteStorage(contentNumber,"일기콘텐츠")
             break
         }

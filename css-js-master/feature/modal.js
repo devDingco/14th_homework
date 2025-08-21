@@ -5,14 +5,14 @@ function preventScroll(e) {
 const openModal = (modalGroup) => { // <string>
     document.getElementById(modalGroup).style = "display: block;"
 
-    toScrollTop()
+    toScrollTop("diary_box_container")
 
     window.addEventListener("wheel", preventScroll, { passive: false });
     window.addEventListener("touchmove", preventScroll, { passive: false }); // 모바일 터치
 }
 
 // 삭제시 일기 넘버를 받아야함
-const openDeleteModal = (modalGroup,contentNumber,key) => { // <string, number>
+const openDeleteModal = (modalGroup,contentNumber,key) => { // <string, number, string>
     console.log(modalGroup,contentNumber,key)
     document.getElementById(modalGroup).style = "display: block;"
 
@@ -21,18 +21,39 @@ const openDeleteModal = (modalGroup,contentNumber,key) => { // <string, number>
         <p>일기를 삭제하시겠어요?</p>
     `
 
-    document.getElementById("delete_function_flag").innerHTML = `
-        <button class="close_modal_button" onclick="closeModal('main_delete_modal_group')"><p>취소</p></button>
-        <button class="confirm_modal_button" onclick="deleteContent(${contentNumber},'${key}'); closeModal('main_delete_modal_group');"><p>삭제</p></button>
-    `
+    // document.getElementById("delete_function_flag").innerHTML = `
+    //     <button class="close_modal_button" onclick="closeModal('main_delete_modal_group')"><p>취소</p></button>
+    //     <button class="confirm_modal_button" onclick="deleteContent(${contentNumber},'${key}'); closeModal('main_delete_modal_group');"><p>삭제</p></button>
+    // `
 
-    toScrollTop()
+    switch (modalGroup) {
+        case "main_delete_modal_group": {
+            document.getElementById("delete_function_flag").innerHTML = `
+                <button class="close_modal_button" onclick="closeModal('${modalGroup}')"><p>취소</p></button>
+                <button class="confirm_modal_button" onclick="deleteContent(${contentNumber},'${key}'); closeModal('${modalGroup}');"><p>삭제</p></button>
+            `
+            toScrollTop("diary_box_container")
+            break
+        }
+        case "detail_delete_modal_group": {
+            document.getElementById("delete_function_flag").innerHTML = `
+                <button class="close_modal_button" onclick="closeModal('${modalGroup}')"><p>취소</p></button>
+                <button class="confirm_modal_button" onclick="deleteContent(${contentNumber},'${key}'); closeModal('${modalGroup}');"><p>삭제</p></button>
+            `
+            toScrollTop("detail_top_container")
+            break
+        }
+        default:
+    }
 
     window.addEventListener("wheel", preventScroll, { passive: false });
     window.addEventListener("touchmove", preventScroll, { passive: false }); // 모바일 터치
 }
 
 const closeModal = (modalGroup) => {
+    console.log(modalGroup)
+    const test = document.getElementById(modalGroup)
+    console.log(test)
     document.getElementById(modalGroup).style = "display: none;"
 
     window.removeEventListener("wheel", preventScroll, { passive: false });
