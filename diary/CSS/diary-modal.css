@@ -41,11 +41,11 @@
     max-width: 76.0rem;
 }
 
-.일기쓰기__상단구역 {
+/* .일기쓰기__상단구역 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+} */
 
 .일기쓰기__타이틀 {
     text-align: start;
@@ -54,113 +54,6 @@
     font-weight: 700;
     letter-spacing: -0.024rem;
 }
-
-.다크모드__토글 {
-    display: flex;
-    width: 9.0rem;
-    height: 2.4rem;
-    gap: 0.8rem;
-
-    align-items: center;
-}
-
-.다크모드__글자 {
-    color: var(--흰버튼글자색);
-    font-size: 1.2rem;
-    font-weight: 400;
-    letter-spacing: -0.012rem;
-}
-
-.토글클릭 {
-    appearance: none;
-    width: 4.0rem;
-    height: 2.4rem;
-    padding: 0.2rem;
-
-    border-radius: 10.0rem;
-    background: #E4E4E4;
-}
-
-.토글클릭::after {
-    display: block;
-    content: "";
-    width: 2.0rem;
-    height: 2.0rem;
-    background-color: white;
-    border-radius: 50%;
-
-    transition: transform 0.3s;
-}
-
-.토글클릭:checked {
-    background-color: #3AD84A;
-}
-
-.토글클릭:checked::after {
-    transform: translate(calc(100% - 0.2rem - 0.2rem)); /* 좌우 2px 제외하고 맨 오른쪽으로 이동 */
-}
-
-/* 라이트모드 */
-
-:root {
-    --기본글자색: #000;
-    --기본배경색: #FFF;
-    --추가글자색: #333;
-    --인풋배경색: #FFF;
-    --인풋플레이스홀더색: #ABABAB;
-    --인풋보더색: #D4D3D3;
-    --검정버튼글자색: #F2F2F2;
-    --검정버튼배경색: #000;
-    --비활성화배경색: #C7C7C7;
-    --비활성화글자색: #F2F2F2;
-    --흰버튼글자색: #1C1C1C;
-    --흰버튼배경색: #FFF;
-}
-
-/* 다크모드 */
-
-.다크모드 {
-    --기본글자색: #FFF;
-    --기본배경색: #1C1C1C;
-    --추가글자색: #C7C7C7;
-    --인풋배경색: #000;
-    --인풋플레이스홀더색: #777;
-    --인풋보더색: #333;
-    --검정버튼글자색: #000;
-    --검정버튼배경색: #F2F2F2;
-    --비활성화배경색: #333;
-    --비활성화글자색: #777;
-    --흰버튼글자색: #FFF;
-    --흰버튼배경색: #1C1C1C; 
-}
-
-.다크모드 {
-    color: var(--기본글자색);
-    background-color: var(--기본배경색);
-}
-
-.다크모드 input {
-    background-color: var(--인풋배경색);
-    color: var(--기본글자색);
-}
-
-.다크모드 input::placeholder {
-    color: var(--인풋플레이스홀더색);
-}
-
-.다크모드 흰버튼 {
-    color: var(--흰버튼글자색);
-    background-color: var(--흰버튼배경색);
-    border: var(--흰버튼글자색);
-}
-
-.다크모드 검정버튼 {
-    color: var(--검정버튼글자색);
-    background-color: var(--검정버튼배경색);
-    border: var(--검정버튼글자색);
-}
-
-/* 다크모드 완료 */
 
 .기분체크구역 {
     display: flex;
@@ -260,6 +153,8 @@
     font-size: 1.8rem;
     font-weight: 600;
     letter-spacing: -0.018rem;
+
+    cursor: pointer;
 }
 
 .검정버튼 {
@@ -274,6 +169,8 @@
     font-size: 1.8rem;
     font-weight: 600;
     letter-spacing: -0.018rem;
+    
+    cursor: pointer;
 }
 
 .검정버튼:disabled {

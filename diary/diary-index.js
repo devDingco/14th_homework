@@ -1,4 +1,4 @@
-// 서치바 설정
+  // 서치바 설정
 let 타이머
 
 const 검색기능 = (event) => {
@@ -115,6 +115,35 @@ function 스크롤기능() {
     window.scrollTo({ top: 0, behavior: "smooth"})
 }
 
+// 페이지 로드 시: 저장된 상태 복원 + 모든 토글 스위치 모양 맞추기
+window.addEventListener("DOMContentLoaded", () => {
+    const saved = sessionStorage.getItem("다크모드");
+    const isDark = saved === "true";
+  
+    // html에 다크모드 적용 (명시적 설정)
+    document.documentElement.classList.toggle("다크모드", isDark);
+  
+    // 페이지 안의 모든 토글 스위치 체크 상태를 저장값과 동기화
+    document.querySelectorAll(".토글클릭").forEach(el => {
+      el.checked = isDark;
+    });
+  });
+  
+  // 토글 클릭 시: 클릭한 스위치의 상태를 기준으로 전체를 동기화
+  function 토글기능(el) {
+    const isDark = el.checked; // 클릭 결과를 신뢰
+  
+    // html 다크모드 on/off를 명시적으로 설정
+    document.documentElement.classList.toggle("다크모드", isDark);
+  
+    // 상태 저장 (같은 탭에서 페이지 이동해도 유지)
+    sessionStorage.setItem("다크모드", isDark);
+  
+    // 현재 페이지에 있는 다른 토글들도 모양을 똑같이 맞춰줌
+    document.querySelectorAll(".토글클릭").forEach(t => {
+      if (t !== el) t.checked = isDark;
+    });
+  }
 
 // -----------------------------------------------------------------------------------
 // ------------------------------------- 메뉴 이동 -------------------------------------
@@ -139,8 +168,6 @@ const 메뉴이동 = (메뉴이름) => {
 window.addEventListener("DOMContentLoaded", () => {
     메뉴이동('메뉴__일기보관함')
 })
-
-
 
 
 // 새로운 일기 등록 함수

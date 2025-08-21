@@ -3,12 +3,25 @@
 <head>
     <title>유진이의 다이어리</title>
     <script src="./diary-detail.js"></script>
+    <script src="./JS/diary-modal.js"></script>
+
+    <link rel="stylesheet" href="../CSS/font.css" />
+    <link rel="stylesheet" href="../CSS/diary-darkmode.css" />
     <link rel="stylesheet" href="./diary-detail.css" />
+    <link rel="stylesheet" href="../CSS/diary-media.css" />
+    <link rel="stylesheet" href="../diary-index.css" />
+    <link rel="stylesheet" href="../CSS/diary-modal.css" />
+    <link rel="stylesheet" href="../CSS/diary-picture.css" />
+
 </head>
 <body>
     <div class="바탕">
         <div class="헤더">
             <div class="헤더__이름">유진이의 다이어리</div>
+            <div class="다크모드__토글">
+                <div class="다크모드__글자">다크모드</div>
+                <input type="checkbox" class="토글클릭" onclick="토글기능(this)" />
+            </div>
         </div>
         <div class="변경되는구역">
             <!-- <div class="타이틀">이것은 타이틀입니다.</div>
