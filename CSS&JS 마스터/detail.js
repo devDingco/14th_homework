@@ -127,6 +127,18 @@ default:
   break;
 }
 
+const copyText = () => {
+  const text = document.getElementById("내용").innerText; // 복사할 텍스트 가져오기
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      alert("텍스트가 클립보드에 복사되었습니다.");
+    })
+    .catch(err => {
+      console.error("클립보드 복사 오류: ", err);
+      alert("텍스트 복사에 실패했습니다.");
+    });
+}
+
 // document.getElementById("frame_84").innerHTML = 일기담는통.감정;
 document.getElementById("타이틀").innerHTML = 일기담는통.제목;
 document.getElementById("내용").innerHTML = 일기담는통.내용;

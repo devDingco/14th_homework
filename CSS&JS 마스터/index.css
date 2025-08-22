@@ -1,3 +1,4 @@
+
 .section_1{
     /* min-width: 75.5rem; */
     /* max-width: 132.5rem; */
@@ -473,12 +474,8 @@ a:visited{
     angle: 0 deg;
     opacity: 1;
     gap: 0.625rem;
-    padding-top: 0.5rem;
-    padding-right: 0.625rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0.625rem;
     box-sizing: border-box;
-
+    line-height: 1.5rem;
 }
 
 
@@ -580,7 +577,29 @@ a:visited{
     width: 100vw;
     height: 100vh;
     background-color: gray;
-    opacity: 90%;
+    opacity: 55%;
+
+}
+.삭제모달{
+    position: absolute;
+    top: calc(50% - 200px/2);
+    left: calc(50% - 480px/2);
+
+    width: 480px;
+    height: 200px;
+    min-width: 480px;
+    max-width: 760px;
+    border-radius: 24px;
+    angle: 0 deg;
+    opacity: 1;
+    background-color: white;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.삭제모달제목{
+    font-size: 30px;
 }
 .등록모달{
     position: absolute;
@@ -599,6 +618,27 @@ a:visited{
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+}
+.등록취소모달{
+    position: absolute;
+    top: calc(50% - 200px/2);
+    left: calc(50% - 480px/2);
+    width: 480px;
+    /* height: 200px; */
+    min-width: 480px;
+    max-width: 760px;
+    border-radius: 24px;
+    angle: 0 deg;
+    opacity: 1;
+    padding: 24px;
+    gap: 40px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 }
 .일기_쓰기{
     width: 592px;
