@@ -257,7 +257,7 @@ const makePicStorageHtml = async () => {
         <img src="./images/00-image.jpg" class="skeleton_back">
         </div>
     `
-    
+
     const dogArr = await getDogApi(10)
 
     if (document.getElementById("pic_filter")) {
@@ -285,14 +285,18 @@ const makeMainFilterHtml = (storage) => { // <string>
     switch (storage) {
         case "일기보관함": {
             document.getElementById("filter_container").innerHTML = `
-                <select id="diary_filter" class="storage_filter" onchange="viewDiaryFilter()">
-                    <option value="전체">전체</option>
-                    <option value="행복해요">행복해요</option>
-                    <option value="슬퍼요">슬퍼요</option>
-                    <option value="놀랐어요">놀랐어요</option>
-                    <option value="화나요">바나나</option>
-                    <option value="기타">기타</option>
-                </select>
+                <div id="left_filter_frame">
+                    <select id="diary_filter" class="storage_filter" onchange="viewDiaryFilter()">
+                        <option value="전체">전체</option>
+                        <option value="행복해요">행복해요</option>
+                        <option value="슬퍼요">슬퍼요</option>
+                        <option value="놀랐어요">놀랐어요</option>
+                        <option value="화나요">바나나</option>
+                        <option value="기타">기타</option>
+                    </select>
+                    <input id="search_title" type="text" placeholder="검색어를 입력해 주세요." oninput="searchTitleInput(event)" />
+                    <img src="./images/search_outline_light_m.svg"/>
+                </div>
                 <button id="diary_resist_button" onclick="openModal('main_write_modal_group')">
                     <div id="diary_resist_button_frame">
                         <img src="./images/plus_outline_light_m.svg" />
@@ -315,4 +319,24 @@ const makeMainFilterHtml = (storage) => { // <string>
         default:
     } 
     
+}
+
+let timer;
+const searchTitleInput = (event) => {
+
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+        const searchTitle = event.target.value
+
+        const localStorageArr = JSON.parse(localStorage.getItem("일기콘텐츠"))
+
+        const searchedArr = localStorageArr.filter(v => v.title === searchTitle).map(v => v)
+
+        if (searchedArr.length === 0) {
+            document.getElementById("diary_box_container").innerHTML = makeMainHtml(localStorageArr)
+        } else {
+            document.getElementById("diary_box_container").innerHTML = makeMainHtml(searchedArr)
+        }
+
+    }, 1000)
 }

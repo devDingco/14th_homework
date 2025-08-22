@@ -431,7 +431,7 @@
     align-items: center;
     justify-content: space-between;
     width: 1168px;
-    height: 32px;
+    /* height: 32px; */
     min-width: 320px;
     max-width: 1168px;
     opacity: 1;
@@ -731,4 +731,31 @@
 }
 .CSS_드롭다운메뉴 label:hover {
     background-color: yellow;
+}
+
+#left_filter_frame {
+    position: relative;
+}
+
+#search_title {
+    width: 320px;
+    height: 48px;
+    min-width: 320px;
+    max-width: 360px;
+    border-radius: 100px;
+    border-width: 1px;
+    opacity: 1;
+    gap: 8px;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 40px;
+    border: 1px solid var(--Gray-Gray-300, rgba(199, 199, 199, 1));
+}
+
+#left_filter_frame > img {
+    position: absolute;
+
+    right: 280px;
+    top: 13px;
 }
