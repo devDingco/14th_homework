@@ -257,23 +257,27 @@ const makePicStorageHtml = async () => {
         <img src="./images/00-image.jpg" class="skeleton_back">
         </div>
     `
-    const dogArr = await getDogApi(10)
-    document.getElementById("diary_container").innerHTML = ''
-
-    let dogHtml
-    dogHtml = dogArr.map(v => `
-        <div class="dog_pic_frame">
-            <img src="${v}" class="dog_pic" />
-        </div>
-    `).join("")
-
-    console.log(dogHtml)
     
-    document.getElementById("diary_container").innerHTML = `
-        <div id="pic_box_container">
-            ${dogHtml}
-        </div>  
-    `
+    const dogArr = await getDogApi(10)
+
+    if (document.getElementById("pic_filter")) {
+        document.getElementById("diary_container").innerHTML = ''
+
+        let dogHtml
+        dogHtml = dogArr.map(v => `
+            <div class="dog_pic_frame">
+                <img src="${v}" class="dog_pic" />
+            </div>
+        `).join("")
+    
+        console.log(dogHtml)
+        
+        document.getElementById("diary_container").innerHTML = `
+            <div id="pic_box_container">
+                ${dogHtml}
+            </div>  
+        `
+    }
 }
 
 // 메인페이지 필터
