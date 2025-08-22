@@ -1,12 +1,120 @@
+/* Pretendard Variable 폰트 임포트 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+/* 전역 스타일 초기화 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* 색상 변수 정의 (라이트 모드) */
 :root {
     font-size: 16px;
     /* 기본 글꼴 크기 설정 (1rem = 16px) */
+
+    /* 기본 배경 및 텍스트 색상 */
+    --배경색: #FFFFFF;
+    --배경색2: #FFFFFF;
+    --기본-텍스트-색상: #000;
+    --보조-텍스트-색상-1: #333;
+    --보조-텍스트-색상-2: #5F5F5F;
+    --보조-텍스트-색상-3: #919191;
+    --보조-텍스트-색상-4: #ABABAB;
+
+    /* 컴포넌트 색상 */
+    --카드-배경색: #FFF;
+    --모달-배경색: #FFF;
+    --푸터-배경색: #F2F2F2;
+
+    /* 모달 및 입력 필드 테두리 */
+    --테두리색-1: #D4D3D3;
+    --테두리색-2: #C7C7C7;
+
+    /* 버튼 색상 */
+    --버튼-화이트-배경: #FFF;
+    --버튼-화이트-텍스트: #1C1C1C;
+    --버튼-화이트-테두리: #000;
+    --버튼-블랙-배경: #000;
+    --버튼-블랙-텍스트: #F2F2F2;
+    --비활성화-버튼-배경: #C7C7C7;
+
+    /* 드롭다운 색상 */
+    --드롭다운-배경색: #FFF;
+    --드롭다운-테두리색: #C7C7C7;
+    --드롭다운-텍스트-색상: #1C1C1C;
+    --드롭다운-호버-배경: rgba(58, 181, 15, 0.05);
+
+    /* 드롭다운 스크롤 상태 */
+    --드롭다운-스크롤-배경: #000;
+    --드롭다운-스크롤-텍스트: #FFF;
+    --드롭다운-스크롤-테두리: #5F5F5F;
+    --드롭다운-스크롤-호버: #1C1C1C;
+
+    /* 일기쓰기 아이콘 다크모드 대응용 */
+    --plus-icon-url: url('./assets/icons/plus-icon.svg');
+    --search-icon-url: url('./assets/icons/search-icon.svg');
+
+}
+
+/* 다크 모드 색상 변수 정의 */
+body.다크모드 {
+    /* 기본 배경 및 텍스트 색상 */
+    --배경색: #1C1C1C;
+    --배경색2: #000;
+    --기본-텍스트-색상: #FFFFFF;
+    --보조-텍스트-색상-1: #CFCFCF;
+    --보조-텍스트-색상-2: #B0B0B0;
+    --보조-텍스트-색상-3: #ABABAB;
+    --보조-텍스트-색상-4: #5F5F5F;
+
+    /* 컴포넌트 색상 */
+    --카드-배경색: #1C1C1C;
+    --모달-배경색: #1C1C1C;
+    --푸터-배경색: #222222;
+
+    /* 모달 및 입력 필드 테두리 */
+    --테두리색-1: #444444;
+    --테두리색-2: #555555;
+
+    /* 버튼 색상 */
+    --버튼-화이트-배경: #333;
+    --버튼-화이트-텍스트: #F2F2F2;
+    --버튼-화이트-테두리: #F2F2F2;
+    --버튼-블랙-배경: #F2F2F2;
+    --버튼-블랙-텍스트: #121212;
+    --비활성화-버튼-배경: #505050;
+
+    /* 드롭다운 색상 */
+    --드롭다운-배경색: #2C2C2C;
+    --드롭다운-테두리색: #555555;
+    --드롭다운-텍스트-색상: #F2F2F2;
+    --드롭다운-호버-배경: #3A3A3A;
+
+    /* 드롭다운 스크롤 상태 */
+    --드롭다운-스크롤-배경: #2C2C2C;
+    --드롭다운-스크롤-텍스트: #F2F2F2;
+    --드롭다운-스크롤-테두리: #5F5F5F;
+    --드롭다운-스크롤-호버: #3A3A3A;
+
+    /* 일기쓰기 아이콘 다크모드 대응용 */
+    --plus-icon-url: url('./assets/icons/plus-icon-dark.svg');
+    --search-icon-url: url('./assets/icons/search-icon-dark.svg');
+
+    background-color: var(--배경색);
+
+    /* 폰트 스무딩 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.다크모드 .카드 {
+    border-color: var(--테두리색-1);
+}
+
+
+body.no-scroll {
+    overflow: hidden;
 }
 
 body.no-scroll {
@@ -15,7 +123,7 @@ body.no-scroll {
 
 .전체컨테이너 {
     width: 100%;
-    background-color: #FFFFFF;
+    background-color: var(--배경색);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,6 +152,8 @@ body.no-scroll {
 
 .헤더 {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     height: 3.75rem;
     min-width: 20rem;
     max-width: 73rem;
@@ -52,7 +162,7 @@ body.no-scroll {
 }
 
 .헤더 h1 {
-    color: #000;
+    color: var(--기본-텍스트-색상);
     font-family: "Pretendard Variable";
     font-size: 1.125rem;
     font-style: normal;
@@ -69,12 +179,20 @@ body.no-scroll {
 .상단배너이미지 {
     width: 100%;
     height: 15rem;
-    background-image: url(./assets/images/top_banner.jpg);
+    /* background-image: url(./assets/images/top_banner.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: center; */
     display: flex;
     border-radius: 1.5rem;
+    overflow: hidden;
+}
+
+.상단배너-비디오 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 컨테이너에 비디오가 꽉 차도록 비율을 유지하며 크기 조절 */
+    display: block;
 }
 
 .탭바 {
@@ -91,7 +209,7 @@ body.no-scroll {
     color: inherit;}
 
 .탭바항목_선택됨 {
-    color: #000;
+    color: var(--기본-텍스트-색상);
     font-family: "Pretendard Variable";
     font-size: 1.5rem;
     font-style: normal;
@@ -103,11 +221,11 @@ body.no-scroll {
     justify-content: center;
     align-items: center;
     gap: 0.625rem;
-    border-bottom: 0.125rem solid #000;
+    border-bottom: 0.125rem solid var(--기본-텍스트-색상);
 }
 
 .탭바항목_선택안됨 {
-    color: var(--Gray-Gray-400, #ABABAB);
+    color: var(--보조-텍스트-색상-4);
     font-family: "Pretendard Variable";
     font-size: 1.5rem;
     font-style: normal;
@@ -125,6 +243,7 @@ body.no-scroll {
     position: sticky;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     top: 0;
     padding: 1rem 0 1rem 0;
     z-index: 10;
@@ -134,22 +253,24 @@ body.no-scroll {
 
 .필터드롭다운 {
     display: flex;
-    min-width: 7.5rem;
-    padding: 0.25rem;
-    border-right: 1rem solid transparent;
     flex-direction: column;
-    align-items: flex-start;
-    align-self: center;
-    gap: 0.625rem;
-    border-radius: 0.5rem;
-    border: 0.0625rem solid var(--Gray-Gray-300, #C7C7C7);
-    background: var(--Gray-W, #FFF);
-    color: var(--Gray-Gray-900, #1C1C1C);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.카드목록플레이스홀더 {
+    display: flex;
+    width: 100%;
+    padding: 2.5rem 0;
+    justify-content: center;
+    align-items: center;
+    color: var(--보조-텍스트-색상-4);
     font-family: "Pretendard Variable";
     font-size: 1rem;
     font-style: normal;
     font-weight: 500;
     line-height: 1.5rem;
+    /* 150% */
     letter-spacing: -0.01rem;
 }
 
@@ -183,10 +304,13 @@ body.no-scroll {
     gap: 1rem;
     flex: 1 0 0;
     border-radius: 1rem;
-    background: #FFF;
+    background: var(--카드-배경색);
+    border: 0.0625rem solid transparent;
     overflow: hidden;
     transition: all 0.5s ease;
 }
+
+
 
 .카드:hover {
     box-shadow: 0 0.125rem 1.875rem 0 rgba(0, 0, 0, 0.16);
@@ -205,6 +329,7 @@ body.no-scroll {
     z-index: 1;
 }
 
+/* 카드 썸네일들은 다크 모드에 영향받지 않으므로 유지 */
 .슬퍼요카드썸네일 {
     background-image: url("./assets/images/sad.png");
     border-radius: 1rem;
@@ -271,6 +396,7 @@ body.no-scroll {
     align-self: stretch;
 }
 
+/* 기분 텍스트 색상들은 고정된 색상이므로 유지 */
 .슬퍼요텍스트색상 {
     color: #28B4E1;
     font-family: "Pretendard Variable";
@@ -292,7 +418,7 @@ body.no-scroll {
 }
 
 .화나요텍스트색상 {
-    color: var(--Gray-Gray-600, #777);
+    color: #777;
     font-family: "Pretendard Variable";
     font-size: 0.875rem;
     font-style: normal;
@@ -322,7 +448,7 @@ body.no-scroll {
 }
 
 .날짜 {
-    color: var(--Gray-Gray-500, #919191);
+    color: var(--보조-텍스트-색상-3);
     font-family: "Pretendard Variable";
     font-size: 0.875rem;
     font-style: normal;
@@ -336,7 +462,7 @@ body.no-scroll {
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 100%;
-    color: #000;
+    color: var(--기본-텍스트-색상);
     text-overflow: ellipsis;
     font-family: "Pretendard Variable";
     font-size: 1.125rem;
@@ -344,6 +470,17 @@ body.no-scroll {
     font-weight: 700;
     line-height: 1.5rem;
     letter-spacing: -0.01125rem;
+}
+
+.모달배경 {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 90;
 }
 
 .모달패널 {
@@ -354,8 +491,8 @@ body.no-scroll {
     align-items: start;
     gap: 2.5rem;
     border-radius: 1rem;
-    border: 0.0625rem solid var(--Gray-Gray-200, #D4D3D3);
-    background: var(--Gray-W, #FFF);
+    border: 0.0625rem solid var(--테두리색-1);
+    background: var(--모달-배경색);
 }
 
 .모달패널_작은크기 {
@@ -370,7 +507,7 @@ body.no-scroll {
 }
 
 .모달패널 h1 {
-    color: #000;
+    color: var(--기본-텍스트-색상);
     font-family: "Pretendard Variable";
     font-size: 1.5rem;
     font-style: normal;
@@ -380,7 +517,7 @@ body.no-scroll {
 }
 
 .모달패널 h2 {
-    color: #000;
+    color: var(--기본-텍스트-색상);
     font-family: "Pretendard Variable";
     font-size: 1.25rem;
     font-style: normal;
@@ -390,7 +527,7 @@ body.no-scroll {
 }
 
 .모달패널 h3 {
-    color: var(--Gray-Gray-800, #333);
+    color: var(--보조-텍스트-색상-1);
     text-align: center;
     font-family: "Pretendard Variable";
     font-size: 1.25rem;
@@ -402,7 +539,7 @@ body.no-scroll {
 }
 
 .모달패널 p {
-    color: var(--Gray-Gray-800, #333);
+    color: var(--보조-텍스트-색상-1);
     font-family: "Pretendard Variable";
     font-size: 0.875rem;
     font-style: normal;
@@ -417,6 +554,13 @@ body.no-scroll {
     align-items: center;
     justify-content: center;
     gap: 1rem;
+}
+
+.일기쓰기헤더컨테이너 {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
 }
 
 .일기오늘기분 {
@@ -460,7 +604,7 @@ body.no-scroll {
 }
 
 .라디오라벨 {
-    color: var(--Gray-Gray-800, #333);
+    color: var(--보조-텍스트-색상-1);
     font-family: "Pretendard Variable";
     font-size: 0.875rem;
     font-style: normal;
@@ -476,8 +620,8 @@ body.no-scroll {
     gap: 0.625rem;
     align-self: stretch;
     border-radius: 0.5rem;
-    border: 0.0625rem solid var(--Gray-Gray-200, #D4D3D3);
-    background: var(--Gray-W, #FFF);
+    border: 0.0625rem solid var(--테두리색-1);
+    background: var(--배경색2);
     font-family: "Pretendard Variable";
     font-size: 1rem;
     font-style: normal;
@@ -485,10 +629,43 @@ body.no-scroll {
     line-height: 1.5rem;
     letter-spacing: -0.01rem;
     flex-grow: 1;
+    color: var(--기본-텍스트-색상);
 }
 
+
 .입력창::placeholder {
-    color: var(--Gray-Gray-400, #ABABAB);
+    color: var(--보조-텍스트-색상-4);
+}
+
+.검색창 {
+    border: 0;
+    padding: 0;
+    width: 100%;
+    text-overflow: ellipsis;
+}
+
+.검색창:focus {
+    outline: none;
+}
+
+.일기검색컨테이너 {
+    background: var(--배경색2);
+    display: flex;
+    max-width: 22.5rem;
+    padding: 0.75rem 1rem;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 6.25rem;
+    border: 1px solid var(--Gray-Gray-300, #C7C7C7);
+    flex: 1 0 0;
+}
+
+.필터와검색컨테이너 {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+    flex: 1 0 0;
 }
 
 .푸터 {
@@ -499,7 +676,7 @@ body.no-scroll {
     align-items: center;
     gap: 0.625rem;
     align-self: stretch;
-    background: var(--Gray-Gray-50, #F2F2F2);
+    background: var(--푸터-배경색);
 }
 
 .푸터텍스트컨테이너 {
@@ -512,7 +689,7 @@ body.no-scroll {
 }
 
 .푸터텍스트1 {
-    color: #000;
+    color: var(--기본-텍스트-색상);
     font-family: "Pretendard Variable";
     font-size: 1.25rem;
     font-style: normal;
@@ -522,7 +699,7 @@ body.no-scroll {
 }
 
 .푸터텍스트2 {
-    color: var(--Gray-Gray-700, #5F5F5F);
+    color: var(--보조-텍스트-색상-2);
     font-family: "Pretendard Variable";
     font-size: 0.875rem;
     font-style: normal;
@@ -532,7 +709,7 @@ body.no-scroll {
 }
 
 .푸터텍스트3 {
-    color: var(--Gray-Gray-500, #919191);
+    color: var(--보조-텍스트-색상-3);
     font-family: "Pretendard Variable";
     font-size: 0.875rem;
     font-style: normal;
@@ -540,7 +717,6 @@ body.no-scroll {
     line-height: 1rem;
     letter-spacing: -0.00875rem;
 }
-
 
 .버튼_채우게 {
     width: 100%;
@@ -558,9 +734,9 @@ body.no-scroll {
     align-items: center;
     gap: 0.625rem;
     border-radius: 0.5rem;
-    border: 0.0625rem solid var(--Gray-B, #000);
-    background: var(--Gray-W, #FFF);
-    color: var(--Gray-Gray-900, #1C1C1C);
+    border: 0.0625rem solid var(--버튼-화이트-테두리);
+    background: var(--버튼-화이트-배경);
+    color: var(--버튼-화이트-텍스트);
     font-family: "Pretendard Variable";
     font-size: 1.125rem;
     font-style: normal;
@@ -568,6 +744,7 @@ body.no-scroll {
     line-height: 1.5rem;
     letter-spacing: -0.01125rem;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .버튼_중간크기_블랙 {
@@ -579,8 +756,8 @@ body.no-scroll {
     gap: 0.625rem;
     border-radius: 0.5rem;
     border: 0;
-    background: var(--Gray-B, #000);
-    color: var(--Gray-Gray-50, #F2F2F2);
+    background: var(--버튼-블랙-배경);
+    color: var(--버튼-블랙-텍스트);
     font-family: "Pretendard Variable";
     font-size: 1.125rem;
     font-style: normal;
@@ -588,10 +765,11 @@ body.no-scroll {
     line-height: 1.5rem;
     letter-spacing: -0.01125rem;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .버튼_중간크기_블랙:disabled {
-    background-color: #C7C7C7;
+    background-color: var(--비활성화-버튼-배경);
     cursor: default;
 }
 
@@ -602,9 +780,9 @@ body.no-scroll {
     align-items: center;
     gap: 0.625rem;
     border-radius: 0.5rem;
-    border: 0.0625rem solid var(--Gray-Gray-200, #D4D3D3);
-    background: var(--Gray-W, #FFF);
-    color: var(--Gray-Gray-900, #1C1C1C);
+    border: 0.0625rem solid var(--테두리색-1);
+    background: var(--버튼-화이트-배경);
+    color: var(--버튼-화이트-텍스트);
     font-family: "Pretendard Variable";
     font-size: 1.125rem;
     font-style: normal;
@@ -612,6 +790,7 @@ body.no-scroll {
     line-height: 1.5rem;
     letter-spacing: -0.01125rem;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .버튼_작은크기_블랙 {
@@ -622,8 +801,8 @@ body.no-scroll {
     align-items: center;
     gap: 0.625rem;
     border-radius: 0.5rem;
-    background: var(--Gray-B, #000);
-    color: var(--Gray-W, #FFF);
+    background: var(--버튼-블랙-배경);
+    color: var(--버튼-블랙-텍스트);
     font-family: "Pretendard Variable";
     font-size: 1.125rem;
     font-style: normal;
@@ -631,6 +810,7 @@ body.no-scroll {
     line-height: 1.5rem;
     letter-spacing: -0.01125rem;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .버튼_작은크기_텍스트 {
@@ -650,11 +830,289 @@ body.no-scroll {
 
 .모달배경 {
     display: none;
-    position: fixed;
+}
+
+/* 드롭다운 버튼 */
+.드롭다운-버튼 {
+    display: block;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.625rem 0.9375rem;
+    border-radius: 0.5rem;
+    border: 0.0625rem solid var(--드롭다운-테두리색);
+    background: var(--드롭다운-배경색);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+/* 화살표 아이콘 */
+.드롭다운-버튼::after {
+    content: '';
+    position: absolute;
+    right: 0.9375rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    background: url('./assets/icons/arrowdown-icon.svg') no-repeat center / contain;
+    transition: all 0.5s ease;
+}
+
+/* 체크박스 선택 시 화살표 뒤집기 */
+.드롭다운-토글:checked+.드롭다운-버튼::after {
+    transform: translateY(-50%) scaleY(-1);
+}
+
+/* 드롭다운 메뉴 */
+.드롭다운-메뉴 {
+    display: none;
+    position: absolute;
+    margin-top: 0.4rem;
+    left: 0;
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 0.0625rem solid var(--드롭다운-테두리색);
+    background: var(--드롭다운-배경색);
+    box-shadow: 0 0 0.625rem 0 rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    list-style: none;
+    overflow: hidden;
+}
+
+/* 체크박스 선택 시 메뉴 표시 */
+.드롭다운-토글:checked~.드롭다운-메뉴 {
+    display: block;
+}
+
+/* 메뉴 항목 */
+.메뉴-항목 {
+    display: flex;
+    padding: 0.75rem;
+    justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--드롭다운-텍스트-색상);
+}
+
+.메뉴-항목:hover {
+    background: var(--드롭다운-호버-배경);
+}
+
+/* 선택된 항목 */
+.메뉴-항목.선택됨 {
+    background: var(--드롭다운-호버-배경);
+    font-weight: 700;
+    color: rgba(41, 156, 0, 1);
+}
+
+.메뉴-항목.선택됨::after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    background: url('./assets/icons/check-icon.svg') no-repeat center / contain;
+}
+
+/* 스크롤 상태 */
+.드롭다운-컨테이너.scrolled .드롭다운-버튼 {
+    background: var(--드롭다운-스크롤-배경);
+    color: var(--드롭다운-스크롤-텍스트);
+    border: 0.0625rem solid var(--드롭다운-스크롤-테두리);
+}
+
+.드롭다운-컨테이너.scrolled .드롭다운-버튼::after {
+    background: url('./assets/icons/arrowdown-icon-white.svg') no-repeat center / contain;
+}
+
+.드롭다운-컨테이너.scrolled .드롭다운-메뉴 {
+    background: var(--드롭다운-스크롤-배경);
+    border: 0.0625rem solid var(--드롭다운-스크롤-테두리);
+}
+
+.드롭다운-컨테이너.scrolled .메뉴-항목 {
+    color: var(--드롭다운-스크롤-텍스트);
+}
+
+.드롭다운-컨테이너.scrolled .메뉴-항목:hover {
+    background: var(--드롭다운-스크롤-호버);
+}
+
+.드롭다운-컨테이너.scrolled .메뉴-항목.선택됨 {
+    background: var(--드롭다운-스크롤-호버);
+    font-weight: 700;
+}
+
+.드롭다운-컨테이너.scrolled .메뉴-항목.선택됨::after {
+    background: url('./assets/icons/check-icon-white.svg') no-repeat center / contain;
+}
+
+/* 토글 버튼 */
+.토글컨테이너 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--기본-텍스트-색상);
+    font-family: "Pretendard Variable";
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+    letter-spacing: -0.0075rem;
+}
+
+.토글 {
+    appearance: none;
+    width: 40px;
+    height: 24px;
+    background-color: var(--테두리색-2);
+    border-radius: 20px;
+    padding: 2px;
+    transition: background-color 0.3s;
+}
+
+.토글::after {
+    display: block;
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-color: var(--카드-배경색);
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.토글:checked {
+    background-color: greenyellow;
+}
+
+.토글:checked::after {
+    transform: translateX(calc(100% - 2px - 2px));
+}
+
+/* 기타 블러 효과 및 반응형 CSS는 그대로 유지 */
+.gradient-blur {
+    opacity: 0;
+    position: fixed;
+    z-index: 2;
+    inset: 0 0 auto 0;
+    height: 18%;
+    pointer-events: none;
+}
+
+.gradient-blur.scrolled {
+    opacity: 1;
+}
+
+.gradient-blur>div,
+.gradient-blur::before,
+.gradient-blur::after {
+    position: absolute;
+    inset: 0;
+}
+
+.gradient-blur::before {
+    content: "";
+    z-index: 8;
+    backdrop-filter: blur(64px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 87.5%,
+            rgba(0, 0, 0, 1) 100%);
+}
+
+.gradient-blur>div:nth-of-type(1) {
+    z-index: 7;
+    backdrop-filter: blur(32px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 75%,
+            rgba(0, 0, 0, 1) 87.5%,
+            rgba(0, 0, 0, 1) 100%);
+}
+
+.gradient-blur>div:nth-of-type(2) {
+    z-index: 6;
+    backdrop-filter: blur(16px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 62.5%,
+            rgba(0, 0, 0, 1) 75%,
+            rgba(0, 0, 0, 1) 87.5%,
+            rgba(0, 0, 0, 0) 100%);
+}
+
+.gradient-blur>div:nth-of-type(3) {
+    z-index: 5;
+    backdrop-filter: blur(8px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 50%,
+            rgba(0, 0, 0, 1) 62.5%,
+            rgba(0, 0, 0, 1) 75%,
+            rgba(0, 0, 0, 0) 87.5%);
+}
+
+.gradient-blur>div:nth-of-type(4) {
+    z-index: 4;
+    backdrop-filter: blur(4px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 37.5%,
+            rgba(0, 0, 0, 1) 50%,
+            rgba(0, 0, 0, 1) 62.5%,
+            rgba(0, 0, 0, 0) 75%);
+}
+
+.gradient-blur>div:nth-of-type(5) {
+    z-index: 3;
+    backdrop-filter: blur(2px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 25%,
+            rgba(0, 0, 0, 1) 37.5%,
+            rgba(0, 0, 0, 1) 50%,
+            rgba(0, 0, 0, 0) 62.5%);
+}
+
+.gradient-blur>div:nth-of-type(6) {
+    z-index: 2;
+    backdrop-filter: blur(1px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 12.5%,
+            rgba(0, 0, 0, 1) 25%,
+            rgba(0, 0, 0, 1) 37.5%,
+            rgba(0, 0, 0, 0) 50%);
+}
+
+.gradient-blur::after {
+    content: "";
+    z-index: 1;
+    backdrop-filter: blur(0.5px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 1) 12.5%,
+            rgba(0, 0, 0, 1) 25%,
+            rgba(0, 0, 0, 0) 37.5%);
+}
+
+
+.icon-plus {
+    width: 1.5rem;
+    /* 아이콘 크기 지정 */
+    height: 1.5rem;
+    background-image: var(--plus-icon-url);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.icon-search {
+    width: 1.5rem;
+    /* 아이콘 크기 지정 */
+    height: 1.5rem;
+    background-image: var(--search-icon-url);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+
+#페이지네이션컨테이너 {
+    display: flex;
+    width: 100%;
     justify-content: center;
     z-index: 90;
 }

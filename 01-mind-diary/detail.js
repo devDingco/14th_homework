@@ -1,5 +1,5 @@
-// 페이지가 완전히 로드된 후 스크립트 실행
-document.addEventListener("DOMContentLoaded", function () {
+// DOM이 완전히 로드된 후 스크립트 실행
+document.addEventListener("DOMContentLoaded", () => {
 
     // --- 데이터 로딩 및 초기화 ---
     // URL에서 일기 ID를 가져옵니다.
@@ -9,11 +9,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const 일기목록 = JSON.parse(localStorage.getItem("민지의일기목록") ?? "[]");
     const 현재일기 = 일기목록.find(diary => diary.고유아이디 == 일기아이디);
 
+    // DOM 요소 선택
+    const 일기상세기분과날짜 = document.querySelector(".일기상세기분과날짜 .기분");
+    const 수정버튼 = document.getElementById("일기상세수정버튼");
+    const 삭제버튼 = document.getElementById("일기상세삭제버튼");
+    const 내용복사버튼 = document.getElementById("내용복사버튼");
+    const 복사토스트 = document.querySelector(".복사토스트");
+    const 회고입력폼 = document.querySelector(".회고입력과버튼컨테이너");
+    const 회고입력창 = document.querySelector(".회고입력과버튼컨테이너 .입력창");
+    const 회고목록컨테이너 = document.querySelector(".회고개별컨테이너");
+
     if (현재일기) {
         // --- 일기 상세 내용 표시 ---
         // 일기 제목, 기분, 날짜, 내용을 화면에 표시합니다.
         document.querySelector(".일기상세타이틀").textContent = 현재일기.제목;
-        const 일기상세기분과날짜 = document.querySelector(".일기상세기분과날짜 .기분");
         일기상세기분과날짜.textContent = 현재일기.기분;
         document.querySelector(".일기상세기분과날짜 .날짜").textContent = 현재일기.날짜;
         document.querySelector(".일기상세내용").textContent = 현재일기.내용;
@@ -70,8 +79,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // 회고 목록을 화면에 렌더링하는 함수
         const 회고렌더링 = () => {
             회고목록컨테이너.innerHTML = '';
-            if (현재일기.회고목록 && 현재일기.회고목록.length > 0) {
-                현재일기.회고목록.forEach(회고 => {
+            const 회고목록 = 현재일기.회고목록 || [];
+            if (회고목록.length > 0) {
+                회고목록.forEach(회고 => {
                     const 회고Div = document.createElement('div');
                     회고Div.classList.add('회고개별');
                     // 날짜를 'YYYY. MM. DD' 형식으로 포맷합니다.
