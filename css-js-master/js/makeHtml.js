@@ -56,7 +56,7 @@ const makeMainHtml = (contentArr) => {
                         </a>
                     </div>
                 </div>
-                <img src="./images/close_outline_light_m.svg" id="content_delete_button" onclick="deleteContent(${v.number},'일기콘텐츠')" />
+                <img src="./images/close_outline_light_m.svg" id="content_delete_button" onclick="openDeleteModal('main_delete_modal_group',${v.number},'일기콘텐츠')" />
             </div>
         `
     }).join("")
@@ -116,11 +116,17 @@ const makeDetailHtml = (contentObj) => {
         </div>
         <div id="detail_content_container" class="">
             <p class="title02">내용</p>
-            <p>${contentObj.detail}</p>
+            <p id="detail_content">${contentObj.detail}</p>
+        </div>
+        <div id="copy_detail_frame">
+            <div id="copy_detail_container">
+                <img src="../images/copy_outline_light_m.svg" onclick="successCopyDetail()"/>
+                <p>내용 복사</p>
+            </div>
         </div>
         <div id="detail_bottom_container" class="">            
             <button class="body01 go_update_button" onclick="printUpdate()">수정</button>
-            <button class="body01 delete_button" onclick="deleteContent(${contentObj.number},'일기콘텐츠디테일')">삭제</button>
+            <button class="body01 delete_button" onclick="openDeleteModal('detail_delete_modal_group',${contentObj.number},'일기콘텐츠디테일')">삭제</button>
         </div>
     `
     document.getElementById("main").innerHTML = contentHTML
@@ -217,4 +223,12 @@ const makeReplyHtml = (contentObj) => {
 // 일기 번호를 받아 수정화면 생성
 const printUpdate = () => {
     makeUpdateHtml(getContentNumber())
+}
+
+const resetResistHtml = () => {
+    document.getElementById('detail_input').value = '';
+    document.getElementById('title_input').value = '';
+    document.querySelectorAll('input[name="feel"]').forEach(radio => {
+        radio.checked = false;
+    });
 }

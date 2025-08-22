@@ -108,7 +108,7 @@
     </div>
     <!-- 일기쓰기 모달 -->
     <div id="main_write_modal_group" class="modal_group">
-        <div class="modal_background" onclick=""></div>
+        <div class="modal_background" onclick="closeAllModal(['main_write_cancel_modal_group','main_write_modal_group']); resetResistHtml();"></div>
         <div id="write_diary_container" class="">
             <p class="headline01">📍 일기 쓰기</p>
             <div id="writing_container">
@@ -159,15 +159,15 @@
     </div>
     <!-- 일기 등록 취소 모달 -->
     <div id="main_write_cancel_modal_group" class="modal_group">
-        <div class="modal_background" onclick=""></div>
+        <div class="modal_background"></div>
         <div class="overlap_modal">          
-            <div id="cancel_modal_text_frame">
+            <div class="cancel_modal_text_frame">
                 <p>일기 등록 취소</p>
                 <p>일기 등록을 취소 하시겠어요?</p>
             </div>
-            <div id="cancel_modal_button_frame">
-                <button id="keep_writing_button" onclick="closeModal('main_write_cancel_modal_group')"><p>계속 작성</p></button>
-                <button id="cancel_writing_button" onclick="closeAllModal(['main_write_cancel_modal_group','main_write_modal_group'])"><p>등록 취소</p></button>
+            <div class="cancel_modal_button_frame">
+                <button id="keep_writing_button" class="close_modal_button" onclick="closeModal('main_write_cancel_modal_group')"><p>계속 작성</p></button>
+                <button id="cancel_writing_button" class="confirm_modal_button" onclick="closeAllModal(['main_write_cancel_modal_group','main_write_modal_group']); resetResistHtml();"><p>등록 취소</p></button>
             </div>
         </div>
     </div>
@@ -175,16 +175,30 @@
     <div id="main_write_success_modal_group" class="modal_group">
         <div class="modal_background" onclick=""></div>
         <div class="overlap_modal">
-            <div id="cancel_modal_text_frame">
+            <div class="cancel_modal_text_frame">
                 <p>일기 등록 완료</p>
                 <p>등록이 완료되었습니다.</p>
             </div>
-            <div id="cancel_modal_button_frame">
+            <div class="cancel_modal_button_frame">
                 <button id="confirm_success_button" onclick="closeAllModal(['main_write_success_modal_group','main_write_modal_group'])"><p>확인</p></button>
             </div>
         </div>
     </div>
-    <img id="diary_float_btn" onclick="toScrollTop()" src="./images/up_outline_light_xl.svg"/>
+    <!-- 일기 삭제 모달 -->
+    <div id="main_delete_modal_group" class="modal_group">
+        <div class="modal_background"></div>
+        <div class="overlap_modal">          
+            <div id="delete_number_flag" class="cancel_modal_text_frame">
+                <p>일기 삭제</p>
+                <p>일기를 삭제하시겠어요?</p>
+            </div>
+            <div id="delete_function_flag"class="cancel_modal_button_frame">
+                <button class="close_modal_button" onclick="closeModal('main_delete_modal_group')"><p>취소</p></button>
+                <button class="confirm_modal_button" onclick="closeModal('main_delete_modal_group')"><p>삭제</p></button>
+            </div>
+        </div>
+    </div>
+    <img id="diary_float_btn" onclick="toScrollTop('diary_box_container')" src="./images/up_outline_light_xl.svg"/>
     <script src="./js/viewDiaryFilter.js"></script>
     <script src="./js/makeHtml.js"></script>
     <script src="./feature/scroll.js"></script>
