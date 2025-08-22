@@ -1,0 +1,10 @@
+#사진목록{
+    width: 1168px;
+    height: 936px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-y:scroll ;
+    
+}

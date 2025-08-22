@@ -8,11 +8,12 @@
 }
 
 body{
+    
 
     /* padding: 100px 100px 180px 100px; */
-    /* display: flex; */
+    display: flex;
     /* flex-direction: column; */
-    /* justify-content: center; */
+    justify-content: center;
 }
 
 
@@ -28,7 +29,7 @@ body{
     height: 1454px;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    justify-content: center;
     /* align-items: center; */
 
 }
@@ -68,7 +69,7 @@ body{
 
 .일기사진선택{
     width: 1168px;
-    height: 48px;
+    height: 128px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -78,6 +79,29 @@ body{
     gap: 32px;
     margin-bottom: 42px ;
 }
+
+#일기보관함{
+    width: 119px;
+    height: 48px;
+    border: 0px;
+    background-color: white;
+    font-size: 20px;
+
+}
+
+
+
+
+#사진보관함{
+    width: 119px;
+    height: 48px;
+    border: 0px;
+    background-color: white;
+    font-size: 20px;
+}
+
+
+
 
 #기분필터{
     width: 120px;
@@ -91,6 +115,41 @@ body{
     display: flex;
     justify-content: space-between ;
 } 
+
+#기분필터{
+    width: 120px;
+    height: 48px;
+    font-size: 20px;
+}
+
+.필터서치바{
+    display: flex;
+    gap: 16px;
+ 
+}
+
+.서치바{
+    display: flex;
+    position: relative;    
+    width: 320px;
+    /* height: 48px; */
+}
+
+.서치바인풋{
+    width: 100%;
+    padding-left: 40px;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+.서치바아이콘{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    /* top: %; */
+    left:12px
+}
 
 .일기기버튼{
     width: 110px;
@@ -148,25 +207,42 @@ body{
     /* transition: width 0.5s, height 0.5s, filter 0.5s; */
 }
 
-.기분카드:hover{
+/* .기분카드:hover{
     width: 110%;
     height: 110%;
     filter: blur(5px);
 
+} */
+
+
+.일기쓰기버튼{
+    width: 110px;
+    height: 48px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    font-size: 17px;
 }
 
 .일기삭제버튼{
+    width: 24px;
+    height: 24px;
+    border-radius: 100px;
     position: relative;
-    top: -270px;
-    left: 260px;
+    top: -260px;
+    left: 240px;
     cursor: pointer;
+    border: 0px;
+    background-color: white;
 }
 
 .모달그룹{
+    width: 100vw;
+    height: 100vh;
     display: none;
     position: absolute;
     /* background-color: aquamarine; */
-    
+    /* z-index: 100; */
 }
 
 .모달배경{
@@ -175,6 +251,45 @@ body{
     background-color: gray;
     opacity: 50%;
     /* background-color: blueviolet; */
+}
+
+#모달등록완료{
+    width: 480px;
+    height: 200px;
+    position: absolute;
+    top: calc(50% - 200px/2);
+    left: calc(50% - 480px/2);
+    background-color: white;
+    display: none;
+}
+
+.일기등록취소모달그룹{
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    position: absolute;
+    /* z-index: 101; */
+
+}
+
+
+.일기등록취소모달배경{
+    width: 100vw;
+    height: 100vh;
+    background-color: gray;
+    opacity: 50%;
+    position: relative;
+}
+
+#일기등록취소모달{
+    width: 480px;
+    height: 200px;
+    position: absolute;
+    top: calc(50% - 200px/2);
+    left: calc(50% - 480px/2);
+    background-color: white;
+    /* display: none; */
+    /* z-index: 9999; */
 }
 
 
@@ -191,8 +306,8 @@ body{
     padding: 24px;
 
     position: absolute;
-    top: calc(50% - 604px/2);
-    left: calc(50% - 360px/2);
+    top: calc(50% - 560px/2);
+    left: calc(50% - 640px/2);
     background-color: rgb(255, 255, 255);
     /* opacity: 0.8; */
 }
@@ -373,7 +488,7 @@ body{
         display: flex;
         /* display: grid; */
         flex-direction: column;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr ;
     }
 
     .일기목록{
@@ -392,3 +507,77 @@ body{
         width: 100%;
     }
 }
+
+.일기삭제모달그룹{
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    position: absolute;
+}
+
+.일기삭제모달배경{
+    width: 100vw;
+    height: 100vh;
+    background-color: gray;
+    opacity: 50%;
+    position: relative;
+}
+
+
+.일기삭제모달{
+    width: 480px;
+    height: 200px;
+
+    position: absolute;
+    top: calc(50% - 200px/2);
+    left: calc(50% - 480px/2);
+    /* top: 50%;
+    left: 50%;
+    transform: 50% 50%; */
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 24px;
+    gap: 40px;
+}
+
+.일기삭제모달__내용{
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.일기삭제모달__내용__1{
+    font-weight: bold;
+}
+
+.일기삭제모달__내용__2{
+    font-size: 18px;
+}
+
+.일기삭제모달__버튼{
+    gap: 50px;
+}
+
+.일기삭제모달버튼{
+    width: 104px;
+    height: 48px;
+    border-radius: 10px;
+    font-size: 18px;
+    
+}
+
+#일기삭제모달버튼__취소{
+    background-color: white;
+}
+
+#일기삭제모달버튼__완료{
+    color: white;
+    background-color: black;
+}
+
+
+
