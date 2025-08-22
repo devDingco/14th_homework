@@ -6,7 +6,6 @@
     min-width: 1168px;
     /* 피그마 레이아웃 720 */
     /* height: 445px; */
-    angle: 0 deg;
     opacity: 1;
     /* background-color: rgba(217, 217, 217, 1); */
 }
@@ -18,7 +17,6 @@
     width: 1168px;
     height: 554px;
     max-width: 1168px;
-    angle: 0 deg;
     opacity: 1;
     gap: 24px;
     padding-bottom: 16px;
@@ -32,7 +30,6 @@
     width: 1168px;
     height: 84px;
     max-width: 1168px;
-    angle: 0 deg;
     opacity: 1;
     gap: 16px;    
 }
@@ -41,7 +38,6 @@
     width: 1168px;
     height: 36px;
     max-width: 1168px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
     padding-bottom: 12px;
@@ -55,7 +51,6 @@
     width: 1168px;
     height: 32px;
     max-width: 1168px;
-    angle: 0 deg;
     opacity: 1;    
 }
 
@@ -74,7 +69,6 @@
     width: 1168px;
     height: 133px;
     max-width: 1168px;
-    angle: 0 deg;
     opacity: 1;
     gap: 12px;
 }
@@ -85,7 +79,6 @@
     width: 1168px;
     height: 40px;
     max-width: 1168px;
-    angle: 0 deg;
     opacity: 1;
     gap: 16px;
 }
@@ -96,7 +89,6 @@
     height: 40px;
     border-radius: 8px;
     border-width: 1px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
     padding-top: 8px;
@@ -111,7 +103,6 @@
     height: 40px;
     border-radius: 8px;
     border-width: 1px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
     padding-top: 8px;
@@ -129,7 +120,6 @@
     width: 1168px;
     max-width: 1168px;
     border-radius: 16px;
-    angle: 0 deg;
     opacity: 1;
     gap: 16px;
 }
@@ -141,7 +131,6 @@
     width: 1168px;
     height: 85px;
     max-width: 1168px;
-    angle: 0 deg;
     opacity: 1;
     gap: 13px;    
 }
@@ -150,7 +139,6 @@
     display: flex;
     width: 1168px;
     height: 48px;
-    angle: 0 deg;
     opacity: 1;
     gap: 16px;    
 }
@@ -160,7 +148,6 @@
     height: 48px;
     border-radius: 8px;
     border-width: 1px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
     padding-top: 12px;
@@ -176,7 +163,6 @@
     width: 51px;
     height: 48px;
     border-radius: 8px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
     padding-top: 8px;
@@ -191,7 +177,6 @@
 #input_reply_frame {
     width: 1168px;
     height: 48px;
-    angle: 0 deg;
     opacity: 1;
     gap: 16px;    
 }
@@ -200,7 +185,6 @@
     width: 1168px;
     max-width: 1168px;
     border-radius: 16px;
-    angle: 0 deg;
     opacity: 1;
     gap: 12px;    
 }
@@ -209,7 +193,6 @@
     display: flex;
     width: 1168px;
     height: 24px;
-    angle: 0 deg;
     opacity: 1;
     gap: 12px;
     border-bottom-width: 1px;
@@ -220,7 +203,6 @@
     font-weight: 500;
     font-style: Medium;
     font-size: 16px;
-    leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
 }
@@ -230,7 +212,6 @@
     font-weight: 400;
     font-style: Regular;
     font-size: 16px;
-    leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
     color: var(--Gray-Gray-600, rgba(119, 119, 119, 1));
@@ -241,7 +222,6 @@
     justify-content: space-between;
     width: 91px;
     height: 24px;
-    angle: 0 deg;
     opacity: 1;
     gap: 8px;    
 }
@@ -251,7 +231,6 @@
     font-weight: 400;
     font-style: Regular;
     font-size: 15px;
-    leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
     color: var(--Gray-Gray-900, rgba(28, 28, 28, 1));
@@ -267,7 +246,6 @@
     width: 1168px;
     height: 24px;
     max-width: 1168px;
-    angle: 0 deg;
     opacity: 1;
     gap: 8px;    
 }

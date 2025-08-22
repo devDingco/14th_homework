@@ -1,7 +1,6 @@
 #footer {
     width: 100%;
     height: 160px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
     padding-top: 24px;
@@ -19,7 +18,6 @@
     width: 100%;
     max-width: 1168px;
     height: 112px;
-    angle: 0 deg;
     opacity: 1;
     gap: 20px;
     flex-wrap: wrap;
@@ -30,6 +28,5 @@
     width: 100%;
     max-width: 1168px;
     height: 16px;
-    angle: 0 deg;
     opacity: 1;
 }
