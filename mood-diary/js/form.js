@@ -14,6 +14,8 @@ if (form) {
     const _title = e.target.title.value.trim()
     const _contents = e.target.contents.value.trim()
 
+    const diaryList = getDiaryList()
+
     if (isValid()) {
       let idx
       if (diaryId) {
@@ -29,7 +31,7 @@ if (form) {
         title: _title,
         contents: _contents,
         date: getCurrentDate(),
-        comments: [],
+        comments: diaryList[idx] ? diaryList[idx].comments : [],
       }
       diaryList[idx] = newDiary
       storeDiaryList(diaryList)
