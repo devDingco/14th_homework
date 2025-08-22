@@ -80,12 +80,6 @@ const scrollToComments = () => {
   scrollArea.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
-// INFO: 클립보드 저장함수
-const copyContents = () => {
-  navigator.clipboard.writeText(contents)
-  toastMessage('내용이 복사되었습니다.')
-}
-
 // INFO: 토스트 메시지 컴포넌트
 const toastMessage = (contents) => {
   const body = document.body
