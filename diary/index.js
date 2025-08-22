@@ -1,5 +1,5 @@
 window.onload = () => {
-  HTML일기보여주기();
+  메뉴이동("일기");
 };
 
 const 일기목록 = [];
@@ -15,11 +15,9 @@ const HTML일기보여주기 = () => {
       (el, index) => `
     <a href="./detail.html?number=${index}#댓글창ID">
       <div class="바디__정렬__목록__첫번째">
-        <img src="${el.이미지}" style="max-width: 380px; width:100% ; height: 285px; border-radius: 16px;" />  
-
-        <div style="max-width: 380px; width:100%; height: 16px"></div>
-
-        <div class="바디__정렬__목록__첫번째__내용">
+        <img src="${el.이미지}" style="max-width: 23.375rem; width:100% ; height: 13rem; border-radius: 16px; object-fit: " />  
+        <div style="height: 16px"></div>
+        <div class="바디__정렬__목록__첫번째__내용"> 
           <div class="바디__정렬__목록__첫번째__내용__감정날짜">
             <div class="바디__정렬__목록__첫번째__내용__감정날짜__감정">
               ${el.감정}
@@ -28,16 +26,12 @@ const HTML일기보여주기 = () => {
               ${el.작성일}
             </div>
           </div>
-
-          <div style="width: 380px; height: 8px"></div>
-
+          <div style="height: 8px"></div>
           <div class="바디__정렬__목록__첫번째__내용__타이틀">
             ${el.제목}
           </div>
-
-          <div style="max-width: 380px; width:100%; height: 16px"></div>
+          <div style="height: 16px"></div>
         </div>
-
         <button class="삭제버튼" onclick="삭제하기기능(event,${index});모달열기기능('일기삭제모달ID')">
           <img class="일기사진" src="./images/closeicon.svg">
         </button>
@@ -65,7 +59,6 @@ const 등록하기 = () => {
   const 날짜담는통 = `${options.year}.${options.month}.${options.date}`;
   const 제목담는통 = document.getElementById("제목").value;
   const 내용담는통 = document.getElementById("내용").value;
-
   // 오늘의 기분 불러오기
 
   // let 행복담는통 = document.getElementById("감정")[0].checked === true;
@@ -113,30 +106,29 @@ const 등록하기 = () => {
   // 일기목록에 새로운 일기객체를 푸시하고 그 일기객체를 로컬스토리지에 JSON문자열로 변환해서 지윤이의일기목록(key)의 값으로 저장한다
   localStorage.setItem("지윤이의일기목록", JSON.stringify(일기목록));
 
-  const 일기번호 = 일기목록.length - 1;
+  // const 일기번호 = 일기목록.length - 1;
 
-  document.getElementById("일기추가보이는곳").innerHTML += `
-          <div class="바디__정렬__목록__첫번째" onclick="게시글확인기능(${일기번호})">
-            <img src= "${일기목록[일기번호].이미지}" style="width: 380px; height: 285px; border-radius: 16px;"  />
-            <div style="width: 380px; height: 16px"></div>
-            <div class="바디__정렬__목록__첫번째__내용">
-              <div class="바디__정렬__목록__첫번째__내용__감정날짜">
-                <div class="바디__정렬__목록__첫번째__내용__감정날짜__감정">
-                  ${일기목록[일기번호].감정}
-                </div>
-                <div class="바디__정렬__목록__첫번째__내용__감정날짜__날짜">
-                  ${일기목록[일기번호].작성일}
-                </div>
-              </div>
-              <div style="width: 380px; height: 8px"></div>
-
-              <div class="바디__정렬__목록__첫번째__내용__타이틀">
-                ${일기목록[일기번호].제목}
-              </div>
-              <div style="width: 380px; height: 16px"></div>
-            </div>
-          </div>
-  `;
+  // document.getElementById("일기추가보이는곳").innerHTML += `
+  //         <div class="바디__정렬__목록__첫번째" onclick="게시글확인기능(${일기번호})">
+  //           <img src= "${일기목록[일기번호].이미지}" style="max-width: 23.375rem; width:100% ; height: 13rem; border-radius: 16px;"  />
+  //           <div style="height: 16px"></div>
+  //           <div class="바디__정렬__목록__첫번째__내용">
+  //             <div class="바디__정렬__목록__첫번째__내용__감정날짜">
+  //               <div class="바디__정렬__목록__첫번째__내용__감정날짜__감정">
+  //                 ${일기목록[일기번호].감정}
+  //               </div>
+  //               <div class="바디__정렬__목록__첫번째__내용__감정날짜__날짜">
+  //                 ${일기목록[일기번호].작성일}
+  //               </div>
+  //             </div>
+  //             <div style="height: 8px"></div>
+  //             <div class="바디__정렬__목록__첫번째__내용__타이틀">
+  //               ${일기목록[일기번호].제목}
+  //             </div>
+  //             <div style="height: 16px"></div>
+  //           </div>
+  //         </div>
+  // `;
   location.reload(true);
 };
 
@@ -185,10 +177,8 @@ const 필터링기능 = (event) => {
       (el, index) => `
   <a href="./detail.html?number=${index}#댓글창ID">
     <div class="바디__정렬__목록__첫번째">
-      <img src="${el.이미지}" style="width: 380px; height: 285px; border-radius: 16px;" />  
-
-      <div style="width: 380px; height: 16px"></div>
-
+      <img src="${el.이미지}" style="max-width: 23.375rem; width:100% ; height: 13rem; border-radius: 16px;" />  
+      <div style="height: 16px"></div>
       <div class="바디__정렬__목록__첫번째__내용">
         <div class="바디__정렬__목록__첫번째__내용__감정날짜">
           <div class="바디__정렬__목록__첫번째__내용__감정날짜__감정">
@@ -205,9 +195,8 @@ const 필터링기능 = (event) => {
           ${el.제목}
         </div>
 
-        <div style="width: 380px; height: 16px"></div>
+        <div style="height: 16px"></div>
       </div>
-
       <button class="삭제버튼" onclick="모달열기기능('일기삭제모달ID')">
         <img src="./images/closeicon.svg">
       </button>
@@ -256,3 +245,47 @@ window.addEventListener("keyup", (event) => {
     }
   }
 });
+
+const 메뉴이동 = (메뉴) => {
+  switch (메뉴) {
+    case "일기": {
+      document.getElementById("일기보관함필터").style.display = "block";
+      document.getElementById("일기보관함").style.display = "block";
+      // document.getElementById("사진보관함필터").style.display = "none";
+      document.getElementById("사진보관함").style.display = "none";
+      document.getElementById("사진보관함탭").style = "color: #ababab;";
+      document.getElementById("일기보관함탭").style =
+        " border-bottom: 0.125rem solid #000";
+      HTML일기보여주기();
+      break;
+    }
+    case "사진": {
+      // document.getElementById("사진보관함필터").style.display = "block";
+      document.getElementById("사진보관함").style.display = "block";
+      document.getElementById("일기보관함필터").style.display = "none";
+      document.getElementById("일기보관함").style.display = "none";
+      document.getElementById("일기보관함탭").style = "color: #ababab;";
+      document.getElementById("사진보관함탭").style =
+        "color: ;border-bottom: 0.125rem solid #000";
+      강아지사진그리기기능();
+      break;
+    }
+  }
+};
+
+const 강아지사진그리기기능 = () => {
+  fetch("https://dog.ceo/api/breeds/image/random/10").then((response) => {
+    response.json().then((result) => {
+      const 이미지소스주소 = result.message;
+
+      const 강아지사진리스트 = 이미지소스주소
+        .map((el, index) => {
+          return `<img class="강아지사진CSS" src="${el}" alt="강아지사진${index}"/>`;
+        })
+        .join("");
+      console.log(강아지사진리스트);
+      document.getElementById("강아지사진보이는곳").innerHTML =
+        강아지사진리스트;
+    });
+  });
+};

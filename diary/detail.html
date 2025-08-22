@@ -60,7 +60,11 @@
           <button class="디테일본문__정렬__수정__버튼" onclick="수정하기기능()">
             수정
           </button>
-          <button class="디테일본문__정렬__삭제__버튼">삭제</button>
+          <button
+            class="디테일본문__정렬__삭제__버튼"
+            onclick="모달열기기능('일기삭제모달ID')">
+            삭제
+          </button>
         </div>
         <div style="height: 16px; border-bottom: 1px solid #000"></div>
       </div>
@@ -88,5 +92,27 @@
     </div>
 
     <div id="토스트메세지ID" class="토스트메세지">복사되었습니다.</div>
+
+    <div id="일기삭제모달ID" class="공동모달그룹">
+      <div class="모달배경"></div>
+      <div class="일기등록취소창">
+        <div class="일기등록완료">일기 삭제</div>
+        <div style="height: 16px"></div>
+        <div class="일기등록이완료되었습니다">일기를 삭제 하시겠어요?</div>
+        <div style="height: 40px"></div>
+        <div class="등록취소버튼정렬">
+          <button
+            class="계속작성버튼"
+            onclick="모달닫기기능('일기삭제모달ID'); ">
+            취소
+          </button>
+          <button
+            class="등록취소버튼"
+            onclick="상세페이지일기삭제기능();모달닫기기능('일기삭제모달ID')">
+            삭제
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
