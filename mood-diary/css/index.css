@@ -430,10 +430,12 @@ textarea::placeholder {
 /* empty-container */
 .empty-container {
   display: flex;
+  grid-column: 1/5;
   width: 100%;
   justify-content: center;
   align-items: center;
 }
 .empty-container p {
   margin: 4rem 0;
+  color: var(--sm-font-color);
 }
