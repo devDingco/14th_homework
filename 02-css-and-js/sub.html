@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/core-js/modules/es.array.includes.js"></script>
     <link rel="stylesheet" href="./sub.css">
     <link rel="stylesheet" href="./modal.css">
     <script src="sub.js"></script>
@@ -11,7 +13,12 @@
         <div class="큰배경">
         <div class="헤더">
             <div class="헤더__타이틀">
+               
                 민지의 다이어리
+            </div>
+            <div class="헤더__모바일타이틀">
+                <img onclick="뒤로가기기능()" src="./assets/icons/뒤로가기.png" alt="뒤로가기버튼"> 일기상세
+                
             </div>
         </div>
         <div class="바디">
@@ -20,14 +27,16 @@
                     <div class="바디__메인__타이틀섹션__타이틀" id="타이틀나타나는곳"></div>
                     <div class="바디__메인__타이틀섹션__이모지섹션">
                         <div class="바디__메인__타이틀섹션__이모지섹션__이모지">
-                            <div id="이모지나타는곳"></div>
+                            <div id="이모지나타나는곳"></div>
+                            
                             <span id="감정나타나는곳"></span>
                         </div>
-                        <div class="바디__메인__타이틀섹션__이모지섹션__날짜" id="날짜나타는곳"></div>
+                        <div class="바디__메인__타이틀섹션__이모지섹션__날짜" id="날짜나타나는곳"></div>
                     </div>
                 </div>
                 <div class="바디__메인__아티클섹션">
-                    <div id="내용나타는곳"></div>
+                    <span class="바디__메인__아티클섹션__제목">내용</span>
+                    <div id="내용나타나는곳"></div>
                     <div class="바디__메인__아티클섹션__내용복사영역">
                         <div class="바디__메인__아티클섹션__내용복사영역__복사">
                             <img src="./assets/icons/복사아이콘.png" alt="">
@@ -42,7 +51,6 @@
 
 
             </div>
-            <div class="바디__회고추가선"></div>
             <div class="바디__회고">
                 <div class="바디__회고__입력섹션">
                     <span>회고</span>

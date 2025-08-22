@@ -276,7 +276,15 @@ const 등록모달닫기 = () => {
 
 //등록완료모달
 const 등록완료모달열기 = () => {
-  document.getElementById("등록완료모달ID").style = "display : block"
+  const 감정입력여부 = document.querySelector('input[name="감정"]:checked'); // 라디오 중 선택된 것
+  const 제목입력여부 = document.getElementById("입력한제목").value
+  const 내용입력여부 = document.getElementById("입력한내용").value
+
+  if (감정입력여부 && 제목입력여부 !== "" && 내용입력여부 !== "") {
+    document.getElementById("등록완료모달ID").style.display = "block";
+  } else {
+    alert("감정, 제목, 내용을 모두 입력해주세요!");
+  }
 }
 const 등록완료모달닫기 = () => {
   document.getElementById("등록완료모달ID").style = "display : none" 
@@ -662,3 +670,4 @@ const 이전페이지기능 = () =>{
 const 다크모드기능 =()=>{
   document.body.classList.toggle("다크모드만들기")
 }
+

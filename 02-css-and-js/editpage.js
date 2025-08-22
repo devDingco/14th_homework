@@ -55,5 +55,9 @@ const 수정하기기능 = () => {
 
   
   const 취소기능 = () => {
-    location.href = "./sub.html"
+    const 쿼리스트링 = location.search;
+    const 잘게나누어담은통 = new URLSearchParams(쿼리스트링);
+    const 일기인덱스 = 잘게나누어담은통.get("number");
+
+    window.location.replace(`./sub.html?number=${일기인덱스}`);
   }
