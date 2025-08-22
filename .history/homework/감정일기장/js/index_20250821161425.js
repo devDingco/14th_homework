@@ -1,79 +1,39 @@
 // 1단계: 페이지가 다 로드되면 실행하기 (HTML, CSS 등 모든 요소가 준비된 후 JavaScript 실행)
 document.addEventListener('DOMContentLoaded', function () {
-  // 2단계: HTML 요소들 찾아서 변수에 저장 (모든 요소를 변수로 만들기)
+  // 2단계: HTML 요소들 찾아서 변수에 저장 (나중에 계속 사용할 요소들을 미리 찾아놓기)
   const titleInput = document.getElementById('titleInput'); // 제목 입력창
   const textInput = document.getElementById('textInput'); // 내용 입력창
   const submitBtn = document.getElementById('submitBtn'); // 등록 버튼
   const scrollBtn = document.getElementById('scrollTopBtn');
   const footer = document.querySelector('footer');
-
-  // 버튼들
   const 모달열기버튼 = document.getElementById('모달열기버튼');
+  const 모달배경 = document.getElementById('모달배경');
   const 모달닫기버튼 = document.getElementById('모달닫기버튼');
   const 모달확인버튼 = document.getElementById('모달확인버튼');
-  const 모달계속작성버튼 = document.getElementById('모달계속작성버튼');
-  const 모달등록취소버튼 = document.getElementById('모달등록취소버튼');
 
-  // 모달들 (⭐ 새로 추가된 부분)
-  const 일기쓰기모달 = document.getElementById('모달등록');
-  const 등록완료모달 = document.getElementById('등록완료모달');
-  const 등록취소모달 = document.getElementById('등록취소모달');
-
-  // 배경들
-  const 모달배경 = document.getElementById('모달배경');
-
-  // 모달 열기/닫기 함수 (실제 요소를 받는 방식으로 변경)
-  function 모달열기(모달요소) {
-    모달요소.style.display = 'block';
+  function 모달열기(모달ID) {
+    document.getElementById(모달ID).style.display = 'block';
   }
 
-  function 모달닫기(모달요소) {
-    모달요소.style.display = 'none';
+  function 모달닫기(모달ID) {
+    document.getElementById(모달ID).style.display = 'none';
   }
-
-  // 1. 일기쓰기 버튼 클릭 → 일기쓰기 모달 열기
+  function 확인모달닫기(모달ID) {
+    document.getElementById(모달ID).style.display = 'none';
+  }
   모달열기버튼.addEventListener('click', function () {
-    모달열기(일기쓰기모달);
+    모달열기('모달등록');
   });
 
-  // 2. 배경 클릭 → 일기쓰기 모달 닫기
   모달배경.addEventListener('click', function () {
-    모달닫기(일기쓰기모달);
+    모달닫기('모달등록');
   });
 
-  // 3. 닫기 버튼 클릭 → 등록취소 확인 모달 열기
   모달닫기버튼.addEventListener('click', function () {
-    모달닫기(일기쓰기모달); // 일기쓰기 모달 먼저 닫기
-    모달열기(등록취소모달); // 등록취소 확인 모달 열기
+    모달닫기('모달등록');
   });
-
-  // 4. 등록완료모달의 확인 버튼 - 모든 모달 닫기
   모달확인버튼.addEventListener('click', function () {
-    모달닫기(등록완료모달);
-    모달닫기(일기쓰기모달); // 뒤에 있던 일기쓰기 모달도 닫기
-    // 입력창 초기화
-    titleInput.value = '';
-    textInput.value = '';
-    // 라디오 버튼 초기화
-    const 라디오버튼들 = document.querySelectorAll('input[name="mood"]');
-    라디오버튼들.forEach((radio) => (radio.checked = false));
-  });
-
-  // 5. 등록취소모달의 "계속 작성" 버튼
-  모달계속작성버튼.addEventListener('click', function () {
-    모달닫기(등록취소모달); // 등록취소 모달 닫기
-    모달열기(일기쓰기모달); // 일기쓰기 모달 다시 열기
-  });
-
-  // 6. 등록취소모달의 "등록 취소" 버튼
-  모달등록취소버튼.addEventListener('click', function () {
-    모달닫기(등록취소모달); // 등록취소 모달 닫기
-    // 입력창 초기화
-    titleInput.value = '';
-    textInput.value = '';
-    // 라디오 버튼 초기화
-    const 라디오버튼들 = document.querySelectorAll('input[name="mood"]');
-    라디오버튼들.forEach((radio) => (radio.checked = false));
+    확인모달닫기('등록완료모달');
   });
 
   const 스크롤올리기 = () => {
@@ -101,30 +61,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
   scrollBtn.addEventListener('click', 스크롤올리기);
   window.addEventListener('scroll', 푸터체크);
-
   // 3단계: 일기들을 저장할 빈 배열 만들기 (모든 일기 데이터가 여기에 저장됨)
   let diaryList = [];
-
-  // 삭제 함수 - 제목과 날짜로 구분 (같은 제목 문제 해결)
-  function 일기삭제하기(삭제할제목, 삭제할날짜) {
-    // 제목과 날짜 둘 다 일치하는 일기만 삭제
-    diaryList = diaryList.filter(
-      (일기) => !(일기.title === 삭제할제목 && 일기.date === 삭제할날짜)
-    );
-    // localStorage에 저장
+  function 일기삭제하기(삭제할제목) {
+    // 삭제하고 저장하고 새로고침
+    diaryList = diaryList.filter((일기) => 일기.title !== 삭제할제목);
     localStorage.setItem('저장된일기', JSON.stringify(diaryList));
-
-    // 새로고침 대신 화면만 다시 그리기
-    const diaryListContainer = document.getElementById('diaryList');
-    diaryListContainer.innerHTML = ''; // 기존 카드들 모두 지우기
-
-    // 남은 일기들 다시 그리기
-    diaryList.map((일기) => {
-      일기를화면에그리기(일기);
-    });
+    location.reload();
   }
   window.일기삭제하기 = 일기삭제하기;
-
   // 공통 함수: 일기를 화면에 그리는 함수 (중복 코드를 줄이기 위해 함수로 만듦)
   function 일기를화면에그리기(일기데이터) {
     // 감정 텍스트에 따라 어떤 이미지를 보여줄지 정하는 객체
@@ -145,23 +90,19 @@ document.addEventListener('DOMContentLoaded', function () {
     // 새로운 일기 카드를 위한 div 요소 생성 (중요: 이벤트 추가 전에 먼저 생성!)
     const 새일기 = document.createElement('div');
 
-    // 일기 카드의 HTML 내용 설정 (제목과 날짜 둘 다 전달)
+    // 일기 카드의 HTML 내용 설정 (이미지, 감정, 날짜, 제목 포함)
     새일기.innerHTML = `
   <div class='diaryCard'> 
   <div class="image-container">
     <img src="./assets/images/${일기이미지}" alt="" />
-    <button class="delete-btn" onclick="event.stopPropagation();일기삭제하기('${
-      일기데이터.title
-    }', '${일기데이터.date}')">
+    <button class="delete-btn" onclick="event.stopPropagation();일기삭제하기('${일기데이터.title}')">
       <img src="./assets/images/close icon.png" alt="삭제" class="delete-icon">
     </button>
   </div>
   <div class="title__text__main">
     <div class="title__text">
       <div class="title__happy">${일기데이터.emotion}</div>    
-      <div>${
-        일기데이터.displayDate || 일기데이터.date
-      }</div>                            
+      <div>${일기데이터.date}</div>                            
     </div>
     <div>${일기데이터.title}</div>     
   </div>
@@ -212,6 +153,24 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
+    // // 각 라디오 버튼이 선택되었는지 하나씩 확인
+    // if (document.getElementById('sad').checked) {
+    //   // 슬픔 버튼이 체크되었다면
+    //   userEmotion = 'sad';
+    // }
+    // if (document.getElementById('angry').checked) {
+    //   // 화남 버튼이 체크되었다면
+    //   userEmotion = 'angry';
+    // }
+    // if (document.getElementById('surprised').checked) {
+    //   // 놀람 버튼이 체크되었다면
+    //   userEmotion = 'surprised';
+    // }
+    // if (document.getElementById('other').checked) {
+    //   // 기타 버튼이 체크되었다면
+    //   userEmotion = 'other';
+    // }
+
     // 9단계: 라디오 버튼의 영어 값을 한글 텍스트로 변환
     const 텍스트맵 = {
       happy: '행복해요', // 'happy' → '행복해요'
@@ -228,8 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const diary = {
       title: userTitle, // 사용자가 입력한 제목
       content: userContent, // 사용자가 입력한 내용
-      date: new Date().toLocaleString(), // 밀리초까지 포함한 날짜 (중복 방지)
-      displayDate: new Date().toLocaleDateString(), // 화면에 보여줄 날짜 (시간 제외)
+      date: new Date().toLocaleDateString(), // 오늘 날짜 자동 생성
       emotion: 감정텍스트, // 선택된 감정의 한글 텍스트
     };
 
@@ -241,73 +199,30 @@ document.addEventListener('DOMContentLoaded', function () {
     일기를화면에그리기(diary); // 위에서 만든 함수를 호출해서 화면에 그리기
 
     console.log('새일기 추가완료'); // 완료 확인용
-
-    // ⭐ 중요: 일기쓰기 모달은 닫지 않고, 등록완료 모달만 열기 (중첩 모달)
-    모달열기(등록완료모달); // 등록완료 모달을 일기쓰기 모달 위에 열기
+    모달열기('등록완료모달');
   });
 
-  // 드롭다운 관련 코드 - 수정된 부분
   const dropdownBtn = document.getElementById('dropdownBtn');
   const dropdownMenu = document.getElementById('dropdownMenu');
 
-  // 페이지 로드 시 "전체" 항목 숨기기 (기본 선택된 상태이므로)
-  const 전체항목 = document.querySelector('.dropdown-item[data-mood="전체"]');
-  if (전체항목) {
-    전체항목.style.display = 'none';
-  }
-
   dropdownBtn.addEventListener('click', function () {
-    const isOpen = dropdownMenu.style.display === 'block';
-
-    if (isOpen) {
-      // 닫기
+    if (dropdownMenu.style.display === 'block') {
       dropdownMenu.style.display = 'none';
-      dropdownBtn.classList.remove('open'); // 클래스 제거 - 다시 둥글게
     } else {
-      // 열기
       dropdownMenu.style.display = 'block';
-      dropdownBtn.classList.add('open'); // 클래스 추가 - 위만 둥글게
     }
   });
-
   const dropdownItems = document.querySelectorAll('.dropdown-item');
 
   dropdownItems.forEach((item) => {
     item.addEventListener('click', function () {
-      const selectedText = this.getAttribute('data-mood');
-
+      const selectedText = this.textContent;
       dropdownBtn.textContent = selectedText;
-
-      // 모든 드롭다운 아이템 다시 보이게 하기
-      dropdownItems.forEach((dropdownItem) => {
-        dropdownItem.style.display = 'block';
-      });
-
-      // 선택된 항목만 숨기기
-      this.style.display = 'none';
-
       dropdownMenu.style.display = 'none';
-      dropdownBtn.classList.remove('open');
 
+      // 필터링 기능 추가
       필터링하기(selectedText);
     });
-  });
-
-  // "전체"로 되돌아가는 기능 추가
-  dropdownBtn.addEventListener('dblclick', function () {
-    dropdownBtn.textContent = '전체';
-
-    // 모든 드롭다운 아이템 다시 보이게 하기
-    dropdownItems.forEach((dropdownItem) => {
-      dropdownItem.style.display = 'block';
-    });
-
-    // "전체" 항목은 다시 숨기기
-    if (전체항목) {
-      전체항목.style.display = 'none';
-    }
-
-    필터링하기('전체');
   });
 
   // 필터링 함수는 밖으로 빼기
@@ -325,12 +240,4 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
   }
-
-  // 드롭다운 외부 클릭 시 닫기 (추가 기능)
-  document.addEventListener('click', function (event) {
-    if (!event.target.closest('.filter-dropdown')) {
-      dropdownMenu.style.display = 'none';
-      dropdownBtn.classList.remove('open');
-    }
-  });
 });

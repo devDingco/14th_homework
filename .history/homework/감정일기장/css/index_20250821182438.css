@@ -180,7 +180,7 @@ input[type='radio'] {
   width: 104px;
   height: 48px;
   padding: 1rem;
-  background-color: black;
+  background-color: #c7c7c7;
   color: white;
   border: none;
   border-radius: 8px;
@@ -243,63 +243,44 @@ footer {
   filter: blur(0.125rem); /* 흐릿한 효과 추가 */
 }
 
-/* 드롭다운 - 수정된 부분 */
+/* 드롭다운 */
 .dropdown-container {
   position: relative;
   display: inline-block;
   margin: 1.25rem 0rem;
 }
-
-.filter-dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* 기본 상태 - 닫혀있을 때 (완전히 둥근 모서리) */
 .dropdown-btn {
   font-size: 1rem;
   width: 7.5rem;
   height: 2rem;
   background-color: white;
-  border: 1px solid #c7c7c7;
-  border-radius: 8px; /* 모든 모서리가 둥글게 */
+  border-radius: 0.3125rem;
   text-align: start;
   padding: 0.25rem;
+  border: 1px solid #c7c7c7;
   background-image: url('./assets/images/arrow.png');
   background-repeat: no-repeat;
   background-position: right 0rem center;
-  cursor: pointer;
 }
-
-/* 열렸을 때 - 위쪽 모서리만 둥글게 */
-.dropdown-btn.open {
-  border-radius: 8px 8px 0 0;
-  border-bottom: none;
-}
-
+/* 드롭다운 메뉴 */
 .dropdown-menu {
-  display: none;
+  display: none; /* 처음엔 숨김 */
   position: absolute;
-  top: 100%;
+  top: 100%; /* 버튼 바로 아래 */
   left: 0;
-  background: white;
+  right: 0;
+  background: #e4e4e4;
   border: 1px solid #c7c7c7;
-  border-top: none;
-  border-radius: 0 0 8px 8px;
+  border-top: none; /* 버튼과 연결되게 */
+  border-radius: 0rem 0rem 0.3125rem 0.3125rem;
   box-shadow: 0rem 0.125rem 0.3125rem rgba(0, 0, 0, 0.1);
   z-index: 1000;
   width: 120px;
 }
-
 .dropdown-item {
-  padding: 0.25rem;
+  padding: 0.25rem 0.75rem;
   cursor: pointer;
-  font-size: 16px;
-  background-color: white;
-}
-
-.dropdown-item:hover {
-  background-color: #f5f5f5;
+  font-size: 0.875rem;
 }
 
 .dropdown-item:last-child {
@@ -365,19 +346,11 @@ nav {
 .title__main {
   order: 3;
 }
-#모달열기버튼 {
-  width: 110px;
-  height: 48px;
-  border: none;
-  border-radius: 8px;
-  background-color: black;
-  color: white;
-  font-size: 18px;
-}
+
 .새로운일기추가 {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /* center → flex-start로 변경 */
+  align-items: center;
   width: 100%;
 }
 #일기모달버튼 {
@@ -414,7 +387,7 @@ nav {
   left: 50%; /* 가로 중앙 */
   transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */
   background: white;
-  border-radius: 24px;
+  border-radius: 10px;
   padding: 24px;
 }
 
@@ -426,20 +399,10 @@ nav {
   left: 50%; /* 가로 중앙 */
   transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */
   background: white;
-  border-radius: 24px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.등록모달 > h3 {
-  font-size: 24px;
-  padding: 24px 24px 16px 24px;
-}
-
-.등록모달 > p {
-  font-size: 20px;
-  padding-bottom: 40px;
 }
 #등록완료모달 .모달내용 {
   width: 480px;
@@ -461,44 +424,16 @@ nav {
 }
 .등록취소모달내용 {
   width: 480px;
-  height: 200px;
+  height: 100px;
   position: absolute;
   top: 50%; /* 세로 중앙 */
   left: 50%; /* 가로 중앙 */
   transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */
   background: white;
-  border-radius: 24px;
+  border-radius: 10px;
   padding: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-.등록취소모달내용 > h3 {
-  font-size: 24px;
-  padding-bottom: 16px;
-}
-.등록취소모달내용 > p {
-  padding-bottom: 40px;
-  font-size: 20px;
-}
-#모달계속작성버튼 {
-  width: 104px;
-  height: 48px;
-  border-radius: 8px;
-  background-color: white;
-}
-#모달등록취소버튼 {
-  width: 104px;
-  height: 48px;
-  border-radius: 8px;
-  background-color: black;
-  color: white;
-}
-.등록취소모달내용 > div {
-  display: flex;
-  gap: 21px;
-}
 /*---------------------------반응형------------------------------ */
 @media (max-width: 48.625rem) {
   .main {

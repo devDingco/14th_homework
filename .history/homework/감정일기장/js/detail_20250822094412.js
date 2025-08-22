@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
     navigator.clipboard.writeText(내용);
     alert('복사되었습니다');
   };
-  window.내용복사기능 = 내용복사기능;
   function 회고목록보여주기() {
     let 기존회고들 = JSON.parse(localStorage.getItem('모든회고') || '[]');
 

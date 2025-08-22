@@ -250,12 +250,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const dropdownBtn = document.getElementById('dropdownBtn');
   const dropdownMenu = document.getElementById('dropdownMenu');
 
-  // 페이지 로드 시 "전체" 항목 숨기기 (기본 선택된 상태이므로)
-  const 전체항목 = document.querySelector('.dropdown-item[data-mood="전체"]');
-  if (전체항목) {
-    전체항목.style.display = 'none';
-  }
-
   dropdownBtn.addEventListener('click', function () {
     const isOpen = dropdownMenu.style.display === 'block';
 
@@ -301,11 +295,6 @@ document.addEventListener('DOMContentLoaded', function () {
     dropdownItems.forEach((dropdownItem) => {
       dropdownItem.style.display = 'block';
     });
-
-    // "전체" 항목은 다시 숨기기
-    if (전체항목) {
-      전체항목.style.display = 'none';
-    }
 
     필터링하기('전체');
   });

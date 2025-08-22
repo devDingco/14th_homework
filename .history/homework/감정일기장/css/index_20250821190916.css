@@ -180,7 +180,7 @@ input[type='radio'] {
   width: 104px;
   height: 48px;
   padding: 1rem;
-  background-color: black;
+  background-color: #c7c7c7;
   color: white;
   border: none;
   border-radius: 8px;
@@ -414,7 +414,7 @@ nav {
   left: 50%; /* 가로 중앙 */
   transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */
   background: white;
-  border-radius: 24px;
+  border-radius: 10px;
   padding: 24px;
 }
 
@@ -426,7 +426,7 @@ nav {
   left: 50%; /* 가로 중앙 */
   transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */
   background: white;
-  border-radius: 24px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -461,44 +461,16 @@ nav {
 }
 .등록취소모달내용 {
   width: 480px;
-  height: 200px;
+  height: 100px;
   position: absolute;
   top: 50%; /* 세로 중앙 */
   left: 50%; /* 가로 중앙 */
   transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */
   background: white;
-  border-radius: 24px;
+  border-radius: 10px;
   padding: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-.등록취소모달내용 > h3 {
-  font-size: 24px;
-  padding-bottom: 16px;
-}
-.등록취소모달내용 > p {
-  padding-bottom: 40px;
-  font-size: 20px;
-}
-#모달계속작성버튼 {
-  width: 104px;
-  height: 48px;
-  border-radius: 8px;
-  background-color: white;
-}
-#모달등록취소버튼 {
-  width: 104px;
-  height: 48px;
-  border-radius: 8px;
-  background-color: black;
-  color: white;
-}
-.등록취소모달내용 > div {
-  display: flex;
-  gap: 21px;
-}
 /*---------------------------반응형------------------------------ */
 @media (max-width: 48.625rem) {
   .main {

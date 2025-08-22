@@ -246,27 +246,14 @@ document.addEventListener('DOMContentLoaded', function () {
     모달열기(등록완료모달); // 등록완료 모달을 일기쓰기 모달 위에 열기
   });
 
-  // 드롭다운 관련 코드 - 수정된 부분
   const dropdownBtn = document.getElementById('dropdownBtn');
   const dropdownMenu = document.getElementById('dropdownMenu');
 
-  // 페이지 로드 시 "전체" 항목 숨기기 (기본 선택된 상태이므로)
-  const 전체항목 = document.querySelector('.dropdown-item[data-mood="전체"]');
-  if (전체항목) {
-    전체항목.style.display = 'none';
-  }
-
   dropdownBtn.addEventListener('click', function () {
-    const isOpen = dropdownMenu.style.display === 'block';
-
-    if (isOpen) {
-      // 닫기
+    if (dropdownMenu.style.display === 'block') {
       dropdownMenu.style.display = 'none';
-      dropdownBtn.classList.remove('open'); // 클래스 제거 - 다시 둥글게
     } else {
-      // 열기
       dropdownMenu.style.display = 'block';
-      dropdownBtn.classList.add('open'); // 클래스 추가 - 위만 둥글게
     }
   });
 
@@ -274,42 +261,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
   dropdownItems.forEach((item) => {
     item.addEventListener('click', function () {
-      const selectedText = this.getAttribute('data-mood');
-
+      const selectedText = this.textContent;
       dropdownBtn.textContent = selectedText;
-
-      // 모든 드롭다운 아이템 다시 보이게 하기
-      dropdownItems.forEach((dropdownItem) => {
-        dropdownItem.style.display = 'block';
-      });
-
-      // 선택된 항목만 숨기기
-      this.style.display = 'none';
-
       dropdownMenu.style.display = 'none';
-      dropdownBtn.classList.remove('open');
 
+      // 필터링 기능 추가
       필터링하기(selectedText);
     });
   });
+  dropdownBtn.addEventListener('click', function () {
+    const isOpen = dropdownMenu.style.display === 'block';
 
-  // "전체"로 되돌아가는 기능 추가
-  dropdownBtn.addEventListener('dblclick', function () {
-    dropdownBtn.textContent = '전체';
-
-    // 모든 드롭다운 아이템 다시 보이게 하기
-    dropdownItems.forEach((dropdownItem) => {
-      dropdownItem.style.display = 'block';
-    });
-
-    // "전체" 항목은 다시 숨기기
-    if (전체항목) {
-      전체항목.style.display = 'none';
+    if (isOpen) {
+      // 닫기
+      dropdownMenu.style.display = 'none';
+      dropdownBtn.classList.remove('open'); // 클래스 제거
+    } else {
+      // 열기
+      dropdownMenu.style.display = 'block';
+      dropdownBtn.classList.add('open'); // 클래스 추가
     }
-
-    필터링하기('전체');
   });
-
   // 필터링 함수는 밖으로 빼기
   function 필터링하기(선택된감정) {
     const diaryListContainer = document.getElementById('diaryList');
@@ -325,12 +297,4 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
   }
-
-  // 드롭다운 외부 클릭 시 닫기 (추가 기능)
-  document.addEventListener('click', function (event) {
-    if (!event.target.closest('.filter-dropdown')) {
-      dropdownMenu.style.display = 'none';
-      dropdownBtn.classList.remove('open');
-    }
-  });
 });

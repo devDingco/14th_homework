@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const 모달계속작성버튼 = document.getElementById('모달계속작성버튼');
   const 모달등록취소버튼 = document.getElementById('모달등록취소버튼');
 
-  // 모달들 (⭐ 새로 추가된 부분)
+  // 모달들
   const 일기쓰기모달 = document.getElementById('모달등록');
   const 등록완료모달 = document.getElementById('등록완료모달');
   const 등록취소모달 = document.getElementById('등록취소모달');
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // 배경들
   const 모달배경 = document.getElementById('모달배경');
 
-  // 모달 열기/닫기 함수 (실제 요소를 받는 방식으로 변경)
+  // 모달 열기/닫기 함수
   function 모달열기(모달요소) {
     모달요소.style.display = 'block';
   }
@@ -150,18 +150,14 @@ document.addEventListener('DOMContentLoaded', function () {
   <div class='diaryCard'> 
   <div class="image-container">
     <img src="./assets/images/${일기이미지}" alt="" />
-    <button class="delete-btn" onclick="event.stopPropagation();일기삭제하기('${
-      일기데이터.title
-    }', '${일기데이터.date}')">
+    <button class="delete-btn" onclick="event.stopPropagation();일기삭제하기('${일기데이터.title}', '${일기데이터.date}')">
       <img src="./assets/images/close icon.png" alt="삭제" class="delete-icon">
     </button>
   </div>
   <div class="title__text__main">
     <div class="title__text">
       <div class="title__happy">${일기데이터.emotion}</div>    
-      <div>${
-        일기데이터.displayDate || 일기데이터.date
-      }</div>                            
+      <div>${일기데이터.date}</div>                            
     </div>
     <div>${일기데이터.title}</div>     
   </div>
@@ -229,7 +225,6 @@ document.addEventListener('DOMContentLoaded', function () {
       title: userTitle, // 사용자가 입력한 제목
       content: userContent, // 사용자가 입력한 내용
       date: new Date().toLocaleString(), // 밀리초까지 포함한 날짜 (중복 방지)
-      displayDate: new Date().toLocaleDateString(), // 화면에 보여줄 날짜 (시간 제외)
       emotion: 감정텍스트, // 선택된 감정의 한글 텍스트
     };
 
@@ -246,27 +241,14 @@ document.addEventListener('DOMContentLoaded', function () {
     모달열기(등록완료모달); // 등록완료 모달을 일기쓰기 모달 위에 열기
   });
 
-  // 드롭다운 관련 코드 - 수정된 부분
   const dropdownBtn = document.getElementById('dropdownBtn');
   const dropdownMenu = document.getElementById('dropdownMenu');
 
-  // 페이지 로드 시 "전체" 항목 숨기기 (기본 선택된 상태이므로)
-  const 전체항목 = document.querySelector('.dropdown-item[data-mood="전체"]');
-  if (전체항목) {
-    전체항목.style.display = 'none';
-  }
-
   dropdownBtn.addEventListener('click', function () {
-    const isOpen = dropdownMenu.style.display === 'block';
-
-    if (isOpen) {
-      // 닫기
+    if (dropdownMenu.style.display === 'block') {
       dropdownMenu.style.display = 'none';
-      dropdownBtn.classList.remove('open'); // 클래스 제거 - 다시 둥글게
     } else {
-      // 열기
       dropdownMenu.style.display = 'block';
-      dropdownBtn.classList.add('open'); // 클래스 추가 - 위만 둥글게
     }
   });
 
@@ -274,40 +256,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   dropdownItems.forEach((item) => {
     item.addEventListener('click', function () {
-      const selectedText = this.getAttribute('data-mood');
-
+      const selectedText = this.textContent;
       dropdownBtn.textContent = selectedText;
-
-      // 모든 드롭다운 아이템 다시 보이게 하기
-      dropdownItems.forEach((dropdownItem) => {
-        dropdownItem.style.display = 'block';
-      });
-
-      // 선택된 항목만 숨기기
-      this.style.display = 'none';
-
       dropdownMenu.style.display = 'none';
-      dropdownBtn.classList.remove('open');
 
+      // 필터링 기능 추가
       필터링하기(selectedText);
     });
-  });
-
-  // "전체"로 되돌아가는 기능 추가
-  dropdownBtn.addEventListener('dblclick', function () {
-    dropdownBtn.textContent = '전체';
-
-    // 모든 드롭다운 아이템 다시 보이게 하기
-    dropdownItems.forEach((dropdownItem) => {
-      dropdownItem.style.display = 'block';
-    });
-
-    // "전체" 항목은 다시 숨기기
-    if (전체항목) {
-      전체항목.style.display = 'none';
-    }
-
-    필터링하기('전체');
   });
 
   // 필터링 함수는 밖으로 빼기
@@ -325,12 +280,4 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
   }
-
-  // 드롭다운 외부 클릭 시 닫기 (추가 기능)
-  document.addEventListener('click', function (event) {
-    if (!event.target.closest('.filter-dropdown')) {
-      dropdownMenu.style.display = 'none';
-      dropdownBtn.classList.remove('open');
-    }
-  });
 });

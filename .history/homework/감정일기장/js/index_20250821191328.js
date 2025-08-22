@@ -250,12 +250,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const dropdownBtn = document.getElementById('dropdownBtn');
   const dropdownMenu = document.getElementById('dropdownMenu');
 
-  // 페이지 로드 시 "전체" 항목 숨기기 (기본 선택된 상태이므로)
-  const 전체항목 = document.querySelector('.dropdown-item[data-mood="전체"]');
-  if (전체항목) {
-    전체항목.style.display = 'none';
-  }
-
   dropdownBtn.addEventListener('click', function () {
     const isOpen = dropdownMenu.style.display === 'block';
 
@@ -274,40 +268,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
   dropdownItems.forEach((item) => {
     item.addEventListener('click', function () {
-      const selectedText = this.getAttribute('data-mood');
-
-      dropdownBtn.textContent = selectedText;
-
-      // 모든 드롭다운 아이템 다시 보이게 하기
-      dropdownItems.forEach((dropdownItem) => {
-        dropdownItem.style.display = 'block';
-      });
-
-      // 선택된 항목만 숨기기
-      this.style.display = 'none';
-
+      const selectedText = this.textContent.trim(); // 공백 제거
+      dropdownBtn.innerHTML = ''; // 기존 내용 완전 삭제
+      dropdownBtn.appendChild(document.createTextNode(selectedText)); // 새 텍스트만 추가
       dropdownMenu.style.display = 'none';
-      dropdownBtn.classList.remove('open');
+      dropdownBtn.classList.remove('open'); // 메뉴 닫을 때도 클래스 제거
 
+      // 필터링 기능 추가
       필터링하기(selectedText);
     });
-  });
-
-  // "전체"로 되돌아가는 기능 추가
-  dropdownBtn.addEventListener('dblclick', function () {
-    dropdownBtn.textContent = '전체';
-
-    // 모든 드롭다운 아이템 다시 보이게 하기
-    dropdownItems.forEach((dropdownItem) => {
-      dropdownItem.style.display = 'block';
-    });
-
-    // "전체" 항목은 다시 숨기기
-    if (전체항목) {
-      전체항목.style.display = 'none';
-    }
-
-    필터링하기('전체');
   });
 
   // 필터링 함수는 밖으로 빼기
