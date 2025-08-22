@@ -270,7 +270,7 @@ const makePicStorageHtml = async () => {
             </div>
         `).join("")
     
-        console.log(dogHtml)
+        // console.log(dogHtml)
         
         document.getElementById("diary_container").innerHTML = `
             <div id="pic_box_container">
@@ -278,6 +278,25 @@ const makePicStorageHtml = async () => {
             </div>  
         `
     }
+}
+
+const addPicStorageHtml = async (dogNumber) => { // <number>
+    const dogArr = await getDogApi(dogNumber)
+
+    let dogHtml
+    dogHtml = dogArr.map(v => `
+        <div class="dog_pic_frame">
+            <img src="${v}" class="dog_pic" />
+        </div>
+    `).join("")
+    
+    const currentDogs = document.getElementById("pic_box_container").innerHTML
+    document.getElementById("diary_container").innerHTML = `
+        <div id="pic_box_container">
+            ${currentDogs}
+            ${dogHtml}
+        </div>  
+    `
 }
 
 // 메인페이지 필터
