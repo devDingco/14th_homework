@@ -13,9 +13,9 @@ window.addEventListener("scroll", () => {
     const 스크롤내려간길이 = window.scrollY;
 
     if(스크롤내려간길이 > 0) {
-        document.getElementById("필터버튼").style = "filter: invert(100%);";
+        document.getElementById("일기보관함_필터버튼").style = "filter: invert(100%);";
     } else {
-        document.getElementById("필터버튼").style = "filter: invert(0%);";
+        document.getElementById("일기보관함_필터버튼").style = "filter: invert(0%);";
     }
 });
 
@@ -23,7 +23,7 @@ window.addEventListener("scroll", () => {
 // 1. 스토리지에 저장된 일기목록 가져오기
 const 일기그리기기능 = () => {
     const 스토리지에저장된일기목록 =
-        window.localStorage.getItem("민지의일기보관함") ?? "[]"
+        window.localStorage.getItem("민지의일기보관함") ?? "[]";
     const 일기목록 = JSON.parse(스토리지에저장된일기목록);
 
 //2.일기목록 화면에 새롭게 전체 그리기
@@ -55,7 +55,6 @@ const 일기그리기기능 = () => {
                         ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/etc.png" >'
                         : ""
                     }
-                    <img class="메인_바디_일기장_삭제버튼" src="../icons/delete.svg" onclick="일기삭제기능(event, ${index})">
                     </div>
                     <div class= "메인_바디_일기장_일기저장_내용_감정과날짜">
                             ${el.기분 === "행복"
@@ -81,9 +80,8 @@ const 일기그리기기능 = () => {
                         <div class="메인_바디_일기장_일기저장_내용_날짜"> ${el.작성일} </div>
                     </div>
                     <div class="메인_바디_일기장_일기저장_1_설명_타이틀"> ${el.제목} </div>
+                    <img class="메인_바디_일기장_삭제버튼" src="../icons/delete.svg" onclick="일기삭제기능(event, ${index})">
                 </div>
-                
-            </div>
         </a>     
     `;
     }
@@ -93,7 +91,7 @@ const 일기그리기기능 = () => {
 
 };
 
-const 일기목록 = [];
+// const 일기목록 = [];
 
 const 글쓰기기능 = () => {
     
@@ -114,12 +112,13 @@ const 글쓰기기능 = () => {
     const 날짜담는박스 = 날짜자동추가.year + ". " + 날짜자동추가.month + ". " + 날짜자동추가.date;
     
     let 기분담는박스;
+
     const 기분선택버튼목록 = document.querySelectorAll('#기분상태체크 input[name="기분상태"]');
 
     for (let i = 0; i < 기분선택버튼목록.length; i++) {
         const el = 기분선택버튼목록[i]
         if (el.checked) 기분담는박스 = el.value;
-    }
+    };
 
     
     // 2.일기목록에 일기 추가하기
@@ -142,7 +141,7 @@ const 글쓰기기능 = () => {
     window.document.getElementById("기분상태체크").value = "행복"
     window.document.getElementById("제목입력창").value = ""
     window.document.getElementById("내용입력창").value = ""                                         
-}
+};
 
 const 글보기기능 = (일기번호받기) => {
     const 일기담는박스 = 일기목록[일기번호받기];
@@ -152,7 +151,7 @@ const 글보기기능 = (일기번호받기) => {
     alert(`
         제목: ${제목담는박스}
         내용: ${내용담는박스}
-    `)
+    `);
 
     location.href = `../일기상세/일기상세_메인.html?일기번호=${일기번호받기}`;
 };
@@ -161,7 +160,7 @@ const 필터링기능 = (event) => {
  const 선택한내용 = event.target.value;
 
  const 스토리지에저장된일기목록 = 
-    window.localStorage.getItem("민지의일기보관함") ?? "[]"
+    window.localStorage.getItem("민지의일기보관함") ?? "[]";
  const 일기목록 = JSON.parse(스토리지에저장된일기목록);
  let 필터링된일기목록;
 
@@ -183,73 +182,74 @@ const 필터링기능 = (event) => {
     .map (
         (el, index) => `
             <a href="../일기상세/일기상세_메인.html?number=${index}">                
-            <div class="메인_바디_일기장_일기저장_">
-                <div class="메인_바디_일기장_일기저장_사진">
-                        ${el.기분 === "행복"
-                    ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/joy.png" >'
-                    : ""
-                    }
+                <div class="메인_바디_일기장_일기저장_">
+                    <div class="메인_바디_일기장_일기저장_사진">
+                            ${el.기분 === "행복"
+                        ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/joy.png" >'
+                        : ""
+                        }
+                            ${el.기분 === "슬픔"
+                        ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/sad.png" >'
+                        : ""
+                        }
+                            ${el.기분 === "놀람"
+                        ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/surprise.png" >'
+                        : ""
+                        }
+                            ${el.기분 === "화남"
+                        ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/angry.png" >'
+                        : ""
+                        }
+                            ${el.기분 === "기타"
+                        ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/etc.png" >'
+                        : ""
+                        }
+                    </div>
+                    <div class= "메인_바디_일기장_일기저장_내용_감정과날짜">
+                            ${el.기분 === "행복"
+                        ? `<div class="메인_바디_일기장_일기저장_내용_감정_행복해요">행복해요</div>`
+                        : ""
+                        }
                         ${el.기분 === "슬픔"
-                    ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/sad.png" >'
-                    : ""
-                    }
+                        ? `<div class="메인_바디_일기장_일기저장_내용_감정_슬퍼요">슬퍼요</div>`
+                        : ""
+                        }
                         ${el.기분 === "놀람"
-                    ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/surprise.png" >'
-                    : ""
-                    }
+                        ? `<div class="메인_바디_일기장_일기저장_내용_감정_놀랐어요">놀랐어요</div>`
+                        : ""
+                        }
                         ${el.기분 === "화남"
-                    ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/angry.png" >'
-                    : ""
-                    }
+                        ? `<div class="메인_바디_일기장_일기저장_내용_감정_화나요">화나요</div>`
+                        : ""
+                        }
                         ${el.기분 === "기타"
-                    ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/etc.png" >'
-                    : ""
-                    }
+                        ? `<div class="메인_바디_일기장_일기저장_내용_감정_기타">기타</div>`
+                        : ""
+                        } 
+                        <div class="메인_바디_일기장_일기저장_내용_날짜"> ${el.작성일} </div>
+                    </div>
+                    <div class="메인_바디_일기장_일기저장_1_설명_타이틀"> ${el.제목} </div>
+                    <img class="메인_바디_일기장_삭제버튼" src="../icons/delete.svg" onclick="일기삭제기능(event, ${index})">
                 </div>
-                <div class= "메인_바디_일기장_일기저장_내용_감정과날짜">
-                        ${el.기분 === "행복"
-                    ? `<div class="메인_바디_일기장_일기저장_내용_감정_행복해요">행복해요</div>`
-                    : ""
-                    }
-                    ${el.기분 === "슬픔"
-                    ? `<div class="메인_바디_일기장_일기저장_내용_감정_슬퍼요">슬퍼요</div>`
-                    : ""
-                    }
-                    ${el.기분 === "놀람"
-                    ? `<div class="메인_바디_일기장_일기저장_내용_감정_놀랐어요">놀랐어요</div>`
-                    : ""
-                    }
-                    ${el.기분 === "화남"
-                    ? `<div class="메인_바디_일기장_일기저장_내용_감정_화나요">화나요</div>`
-                    : ""
-                    }
-                    ${el.기분 === "기타"
-                    ? `<div class="메인_바디_일기장_일기저장_내용_감정_기타">기타</div>`
-                    : ""
-                    } 
-                    <div class="메인_바디_일기장_일기저장_내용_날짜"> ${el.작성일} </div>
-                </div>
-                <div class="메인_바디_일기장_일기저장_1_설명_타이틀"> ${el.제목} </div>
-                <img class="메인_바디_일기장_삭제버튼" src="../icons/delete.svg" onclick="일기삭제기능(event, ${index})">
-            </div>
-            
             </a>     
     `
     )
     .join("");
     document.getElementById("일기목록").innerHTML =
         새로운일기도화지;
+
+    // window.localStorage.setItem("민지의일기보관함", JSON.stringify())
 };
 
-const 일기삭제_모달기능 = () => {
-    모달열기기능("일기삭제모달");
-};
+
 
 const 화면맨위로올리기기능 = () => {
     window.scrollTo({ top:0, behavior: "smooth"});
 };
 
-
+const 일기삭제_모달기능 = () => {
+    모달열기기능("일기삭제모달");
+};
 
 const 일기삭제기능 = (event, 일기번호) => {
 // 1. 하위 태그들한테 기능 적용되는 거 막기 
@@ -269,12 +269,24 @@ const 일기삭제기능 = (event, 일기번호) => {
 
 //4.삭제후 남은 목록들 화면에 다시 띄우기
     일기그리기기능();
-}
+};
 
 
-
-
-
+// const 사진보관함내용보이기 = () =>{
+//     window.document.getElementById("일기보관함_프레임").style = 
+//         "display: none;";
+//     window.document.getElementById("일기보관함_필터버튼").style =
+//         "display: none;";
+//     window.document.getElementById("일기보관함탭").style = 
+//         "color: var(--Gray-Gray-400, #ABABAB); border: none;" 
+            
+//     window.document.getElementById("사진보관함_프레임").style = 
+//         "display: block;";
+//     window.document.getElementById("사진보관함_필터버튼").style =
+//         "display: block;";
+//     window.document.getElementById("사진보관함탭").style = 
+//         "color: #000; border-bottom: 0.25rem solid #000"
+// }
 
 
 
