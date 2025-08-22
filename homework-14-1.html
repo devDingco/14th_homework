@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>일기 수정</title>
+
+  <style>
+    /* 기본 스타일 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #000;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      padding: 20px 0;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    /* 다이어리 제목 */
+    .diary-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    /* 기분 선택 */
+    .mood-section {
+      margin-bottom: 30px;
+    }
+
+    .mood-section h2 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .mood-options label {
+      margin-right: 20px;
+      font-size: 1rem;
+    }
+
+    /* 입력 그룹 */
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    .input-group input,
+    .input-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .input-group textarea {
+      height: 120px;
+      resize: none;
+    }
+
+    /* 버튼 */
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .buttons button {
+      flex: 1;
+      padding: 12px 0;
+      border-radius: 8px;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .buttons .cancel {
+      border: 1px solid #ccc;
+      background: #fff;
+    }
+
+    .buttons .submit {
+      background: #000;
+      color: #fff;
+    }
+
+    /* 회고 영역 */
+    .review-section {
+      border-top: 2px solid #000;
+      padding-top: 20px;
+    }
+
+    .review-section h3 {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .review-input {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .review-input input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .review-item {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .review-date {
+      color: #777;
+      font-size: 0.9rem;
+      margin-left: 10px;
+    }
+
+    /* 다크모드 토글 */
+    .darkmode-toggle {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .toggle-switch {
+      width: 40px;
+      height: 20px;
+      background: #ccc;
+      border-radius: 20px;
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: left 0.3s;
+    }
+
+    /* 다크모드 스타일 */
+    body.dark {
+      background: #222;
+      color: #eee;
+    }
+
+    body.dark main {
+      background: #333;
+    }
+
+    body.dark .buttons .cancel {
+      background: #555;
+      color: #eee;
+    }
+
+    body.dark .buttons .submit {
+      background: #fff;
+      color: #000;
+    }
+
+    body.dark .toggle-switch {
+      background: #000;
+    }
+
+    body.dark .toggle-switch::after {
+      left: 22px;
+    }
+  </style>
+</head>
+<body>
+  <header>일기 수정</header>
+
+  <main>
+    <!-- 다크모드 토글 -->
+    <div class="darkmode-toggle" onclick="toggleDarkMode()">
+      <span>다크모드</span>
+      <div class="toggle-switch"></div>
+    </div>
+
+    <!-- 다이어리 제목 -->
+    <div class="diary-title">민지의 다이어리</div>
+
+    <!-- 기분 선택 -->
+    <div class="mood-section">
+      <h2>오늘 기분은 어땠나요?</h2>
+      <div class="mood-options">
+        <label><input type="radio" name="mood" checked> 행복해요</label>
+        <label><input type="radio" name="mood"> 슬퍼요</label>
+        <label><input type="radio" name="mood"> 놀랐어요</label>
+        <label><input type="radio" name="mood"> 화나요</label>
+        <label><input type="radio" name="mood"> 기타</label>
+      </div>
+    </div>
+
+    <!-- 제목 입력 -->
+    <div class="input-group">
+      <label>제목</label>
+      <input type="text" value="이것은 타이틀 입니다.">
+    </div>
+
+    <!-- 내용 입력 -->
+    <div class="input-group">
+      <label>내용</label>
+      <textarea>내용이 들어갑니다
+내용이 들어갑니다
+내용이 들어갑니다
+내용이 들어갑니다
+내용이 들어갑니다
+내용이 들어갑니다</textarea>
+    </div>
+
+    <!-- 버튼 -->
+    <div class="buttons">
+      <button class="cancel">취소</button>
+      <button class="submit">수정 하기</button>
+    </div>
+
+    <!-- 회고 -->
+    <div class="review-section">
+      <h3>회고</h3>
+      <p style="color:#777; margin-bottom:10px;">수정중일땐 회고를 작성할 수 없어요.</p>
+
+      <div class="review-input">
+        <input type="text" placeholder="입력" disabled>
+      </div>
+
+      <div class="review-item">
+        3년이 지나고 다시 보니 이때가 그립다.
+        <span class="review-date">[2024. 09. 24]</span>
+      </div>
+
+      <div class="review-item">
+        3년이 지나고 다시 보니 이때가 그립다.
+        <span class="review-date">[2024. 09. 24]</span>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
+</body>
+</html>
