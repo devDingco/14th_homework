@@ -86,7 +86,7 @@ const toggleComponent = (id) => {
 const selectRatio = (event) => {
   const ratioId = event.target.id
   const ratioLabel = getRatioLabel(ratioId) ?? '기본'
-  document.getElementById('dropdown-ratio').style = `--dropdown-title: "${ratioLabel}"`
+  document.getElementById('dropdown-ratio').style = `--dropdown-photo-title: "${ratioLabel}"`
   document.getElementById('dropdown-ratio').click()
 
   const dogGallery = document.querySelectorAll('.dog-img')

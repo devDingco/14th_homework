@@ -9,6 +9,11 @@
     flex-direction: column;
     align-items: stretch;
   }
+  /* 네비게이터 */
+  .navigator span {
+    font-size: 1.8rem;
+  }
+
   /* FIX: 임시방편 grid로... */
   .multiple-functions {
     display: grid;
@@ -40,6 +45,8 @@
   .main__gallery__card__image {
     min-height: 28.5rem;
   }
+  .main__gallery__card__info p {
+  }
   .main__diary-form {
     order: 1;
   }
@@ -59,5 +66,16 @@
   }
   .skeleton {
     width: 28rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .main__gallery__card__info p {
+    width: 100%;
+    max-width: 13.6rem;
+  }
+
+  .navigator span {
+    font-size: 1.6rem;
   }
 }

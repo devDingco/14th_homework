@@ -177,11 +177,12 @@ const renderPager = () => {
   const lastPage = getLastPage()
   const pageContainer = document.querySelector('.pages')
   if (!pageContainer) return
-  // const pageArrows = document.querySelectorAll('.arrow')
+  const pageArrows = document.querySelectorAll('.arrow')
 
   const blockStart = Math.floor((state.page - 1) / MAX_PAGE_BUTTONS) * MAX_PAGE_BUTTONS + 1
 
-  // if (lastPage === 1) pageArrows.forEach((el) => (el.style.visibility = 'hidden'))
+  if (lastPage === 1) pageArrows.forEach((el) => (el.style.display = 'none'))
+  else pageArrows.forEach((el) => (el.style.display = 'block'))
 
   const pageArr = new Array(MAX_PAGE_BUTTONS).fill(0).map((_, i) => blockStart + i)
   pageContainer.innerHTML = pageArr

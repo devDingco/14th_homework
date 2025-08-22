@@ -19,7 +19,13 @@ const targetDiary = getDiaryById(diaryId)
 if (targetDiary) {
   const { mood, title, contents, icon, color, date, comments } = formattedDiary(targetDiary)
   const header = document.getElementById('detailHeader')
-  header.innerText = '< 일기 상세' //TODO: 반응형에서만 되어야 함?
+  header.innerHTML = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path d="M9.725 11.9996L17.075 19.3496C17.325 19.5996 17.4458 19.8913 17.4375 20.2246C17.4292 20.558 17.3 20.8496 17.05 21.0996C16.8 21.3496 16.5083 21.4746 16.175 21.4746C15.8417 21.4746 15.55 21.3496 15.3 21.0996L7.6 13.4246C7.4 13.2246 7.25 12.9996 7.15 12.7496C7.05 12.4996 7 12.2496 7 11.9996C7 11.7496 7.05 11.4996 7.15 11.2496C7.25 10.9996 7.4 10.7746 7.6 10.5746L15.3 2.87462C15.55 2.62462 15.8458 2.50379 16.1875 2.51212C16.5292 2.52046 16.825 2.64962 17.075 2.89962C17.325 3.14962 17.45 3.44129 17.45 3.77462C17.45 4.10796 17.325 4.39962 17.075 4.64962L9.725 11.9996Z" fill="var(--font-color)"/>
+  </svg>
+  <p>일기 상세</p>
+  `
+  // header.innerText = '< 일기 상세' //TODO: 반응형에서만 되어야 함?
   header.addEventListener('click', () => {
     location.replace('./index.html')
   })
@@ -32,4 +38,37 @@ if (targetDiary) {
 
   addCommentsOnArea(comments)
   scrollToComments()
+}
+
+const viewModifyContent = () => {
+  const { mood, title, contents } = formattedDiary(targetDiary)
+  const header = document.getElementById('detailHeader')
+  header.innerHTML = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path d="M9.725 11.9996L17.075 19.3496C17.325 19.5996 17.4458 19.8913 17.4375 20.2246C17.4292 20.558 17.3 20.8496 17.05 21.0996C16.8 21.3496 16.5083 21.4746 16.175 21.4746C15.8417 21.4746 15.55 21.3496 15.3 21.0996L7.6 13.4246C7.4 13.2246 7.25 12.9996 7.15 12.7496C7.05 12.4996 7 12.2496 7 11.9996C7 11.7496 7.05 11.4996 7.15 11.2496C7.25 10.9996 7.4 10.7746 7.6 10.5746L15.3 2.87462C15.55 2.62462 15.8458 2.50379 16.1875 2.51212C16.5292 2.52046 16.825 2.64962 17.075 2.89962C17.325 3.14962 17.45 3.44129 17.45 3.77462C17.45 4.10796 17.325 4.39962 17.075 4.64962L9.725 11.9996Z" fill="var(--font-color)"/>
+  </svg>
+  <p>일기 수정</p>
+  `
+  header.addEventListener('click', () => {
+    location.reload()
+  }) //반응형에서만..?
+
+  document.querySelector('.detail-main').style.display = 'none'
+  document.querySelector('#detail-modify-form').style.display = 'flex'
+
+  //TODO: 변수네이밍 변경 및 forEach, Arry.from 기능 정리
+  const temp = Array.from(document.querySelectorAll('input[name="mood"]'))
+  console.log(temp)
+  // forEach 동작하지 않는 이유?
+  for (let i = 0; i < temp.length; i++) {
+    if (getMoodLabel(temp[i].id) === mood) {
+      temp[i].checked = true
+    }
+  }
+  document.querySelector('#title').value = title
+  document.querySelector('#contents').value = contents
+  document.getElementById('detail-comments-input-input').placeholder =
+    '수정중일땐 회고를 작성할 수 없어요.'
+  document.getElementById('detail-comments-input-input').disabled = true
+  document.getElementById('detail-comments-input-button').disabled = true
 }
