@@ -241,9 +241,9 @@ const resetResistHtml = () => {
 const makePicStorageHtml = async () => {
     const dogArr = await getDogApi(10)
     let dogHtml
-    dogHtml = dogArr.map(v_1 => `
-        <div>
-            <img src="${v_1}" width="100px" />
+    dogHtml = dogArr.map(v => `
+        <div class="dog_pic_frame">
+            <img src="${v}" class="dog_pic" />
         </div>
     `).join("")
 
@@ -280,7 +280,7 @@ const makeMainFilterHtml = (storage) => { // <string>
         }
         case "사진보관함":{
             document.getElementById("filter_container").innerHTML = `
-                <select id="pic_filter" class="storage_filter" onchange="">
+                <select id="pic_filter" class="storage_filter" onchange="viewPicFilter()">
                     <option value="기본형">기본형</option>
                     <option value="가로형">가로형</option>
                     <option value="세로형">세로형</option>
