@@ -1,7 +1,7 @@
 
 export const tripTalkMockData = [
   {
-    id: "post-1",
+    id: "1",
     title: "제주 섬이 한낮 찬란할 때가 생각나네요",
     coverImage: "/images/mobile/a.png",
     authorName: "웅진동",
@@ -10,7 +10,7 @@ export const tripTalkMockData = [
     createdAt: "2024.11.11",
   },
   {
-    id: "post-2",
+    id: "2",
     title: "길 걷다 잃었던 고잉한테 편지 받았어요",
     coverImage: "/images/mobile/b.png",
     authorName: "강릉동",
@@ -19,7 +19,7 @@ export const tripTalkMockData = [
     createdAt: "2024.11.11",
   },
   {
-    id: "post-3",
+    id: "3",
     title: "경춘 여름보다 보기 좋네요 사랑하고 싶어요!",
     coverImage: "/images/mobile/c.png",
     authorName: "용담동",
@@ -28,7 +28,7 @@ export const tripTalkMockData = [
     createdAt: "2024.11.11",
   },
   {
-    id: "post-4",
+    id: "4",
     title: "누가 왕알 향한다고 했어 나밖에 없는가?",
     coverImage: "/images/mobile/a.png",
     authorName: "중문동",
