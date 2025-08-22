@@ -239,8 +239,16 @@ const resetResistHtml = () => {
 
 // 메인페이지 사진보관함
 const makePicStorageHtml = async () => {
-    const dogHtml = await getDogApi()
-    console.log(dogHtml)
+    const dogArr = await getDogApi(10)
+    let dogHtml
+    dogHtml = dogArr.map(v_1 => `
+        <div>
+            <img src="${v_1}" width="100px" />
+        </div>
+    `).join("")
+
+    // console.log(dogHtml)
+    
     document.getElementById("diary_container").innerHTML = `
         <div id="pic_box_container">
             ${dogHtml}
