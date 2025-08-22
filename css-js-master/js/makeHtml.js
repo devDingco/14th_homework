@@ -1,5 +1,12 @@
 // 메인페이지 화면
 const makeMainHtml = (contentArr) => {
+    const picTab = document.getElementById("pic_tab")
+    const diaryTab = document.getElementById("diary_tab")
+    
+    diaryTab.classList.contains("tab_off") ? diaryTab.classList.toggle("tab_off") : ''
+
+    picTab.classList.contains("tab_off") ? '' : picTab.classList.toggle("tab_off") 
+
     const contentHTML = contentArr.map((v) => {
         let imgSrc
         let feelColor
@@ -239,6 +246,13 @@ const resetResistHtml = () => {
 
 // 메인페이지 사진보관함
 const makePicStorageHtml = async () => {
+    const picTab = document.getElementById("pic_tab")
+    const diaryTab = document.getElementById("diary_tab")
+
+    diaryTab.classList.contains("tab_off") ? '' : diaryTab.classList.toggle("tab_off")
+
+    picTab.classList.contains("tab_off") ? picTab.classList.toggle("tab_off")  : ''
+
     document.getElementById("diary_container").innerHTML = `
         <img src="./images/00-image.jpg" class="skeleton_back">
         </div>

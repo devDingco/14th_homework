@@ -44,10 +44,10 @@
                     <!-- 네비게이션 => 일기보관함/사진보관함  -->
                     <div id="storage_container" class="">
                         <div id="storage_tab_container" class="">
-                            <a class="storage_tab_on" onclick="makeMainHtml(localStorageArr); makeMainFilterHtml('일기보관함');">
+                            <a id="diary_tab" class="storage_tab" onclick="makeMainHtml(localStorageArr); makeMainFilterHtml('일기보관함');">
                                 <p>일기보관함</p>
                             </a>
-                            <a class="storage_tab_off" onclick="makePicStorageHtml(); makeMainFilterHtml('사진보관함');">
+                            <a id="pic_tab" class="storage_tab tab_off" onclick="makePicStorageHtml(); makeMainFilterHtml('사진보관함');">
                                 <p>사진보관함</p>
                             </a>
                             <button onclick="deleteLocalStorage()">로컬스토리지 삭제 버튼</button>
