@@ -32,11 +32,11 @@
 .헤더__타이틀 {
     width: 100%;
     display: flex;
-    align-items: center;
+    align-item s: center;
     /* margin-bottom: 6.4rem;    */
     
 
-}
+} 
 .헤더__타이틀 > h3{
     font-family: Pretendard Variable;
     font-weight: 700;
@@ -48,14 +48,19 @@
 }
 .바디 {
     width: 100%;
+    
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    gap: 2.4rem;
 }
 .바디__메인 {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
+    border-bottom: 1px solid black;
+    padding-bottom: 1.6rem;
 }
 .바디__메인__감정섹션 {
     width: 100%;
@@ -217,4 +222,105 @@
     line-height: 24px;
     letter-spacing: -1%;
      */
+}
+
+
+.바디__회고 {
+    width: 100%;
+    height: 17.3rem;
+}
+.바디__회고__입력섹션 {
+    height: 8.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.바디__회고__입력섹션 > span{
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    
+}
+.바디__회고__입력섹션__회고입력영역 {
+    height: 4.8rem;
+    display: flex;
+    justify-content: space-between;
+}
+.바디__회고__입력섹션__회고입력영역> input {
+    width: 100%;
+    padding: 1.2rem 1.6rem 1.2rem 1.6rem;
+    border: 0.1rem solid #D4D3D3;
+
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    
+    
+}
+.바디__회고__입력섹션__회고입력영역 > button {
+    width: 5.1rem;
+    height: 4.8rem;
+    background-color: #C7C7C7;
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: #F2F2F2;
+    border-radius: 0.8rem;
+    border: 1px solid #C7C7C7;
+    
+    
+}
+.바디__회고__출력섹션 {
+    height: 7.2rem;
+   /* border-bottom : 0.1rem solid #e4e4e4; */
+}
+
+.바디__회고__출력섹션__회고목록{
+    display: flex;
+    align-items: center;
+    border-bottom: 0.1rem solid #e4e4e4;
+    /* padding: 1.2rem; */
+}
+
+.바디__회고__출력섹션__회고목록__마지막 {
+    display: flex;
+    align-items: center;
+    /* padding: 1.2rem; */
+  }
+
+.바디__회고__출력섹션__회고목록__날짜영역 {
+    color: #777;
+    font-family: Pretendard Variable;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    padding-left: 1.2rem;
+    padding: 1.2rem;
+    
+}
+
+.바디__회고__출력섹션__회고목록__내용영역 {
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    padding: 1.2rem;
 }

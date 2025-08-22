@@ -99,10 +99,10 @@ const 수정하러가기기능 = () => {
     // 5. 회고목록 화면에 새롭게 전체 그리기
     let 새로운회고목록HTML = "";
     회고목록.forEach((회고, index) => {
-      const 마지막인지 = index === 회고목록.length - 1; // 마지막 요소인지 확인하여 border-bottom x
+      const isLast = index === 회고목록.length - 1 // 마지막 요소인지 확인하여 border-bottom x
   
       새로운회고목록HTML += `
-          <div class="바디__회고__출력섹션__회고목록${!마지막인지 ? "" : "__마지막"}">
+          <div class="바디__회고__출력섹션__회고목록${!isLast ? '' : '__마지막'}">
             <div class="바디__회고__출력섹션__회고목록__내용영역">${회고.회고내용}</div>
             <div class="바디__회고__출력섹션__회고목록__날짜영역">[${회고.작성일}]</div>
           </div>

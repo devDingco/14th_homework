@@ -5,10 +5,22 @@ window.onload = function() {
     const 일기들 = localStorage.getItem("일기목록")
     const 일기목록 = JSON.parse(일기들 === null ? "[]" : 일기들)
     
+
     const 일기 = 일기목록[일기인덱스];
 
     document.getElementById("일기수정제목입력창").value = 일기.제목
     document.getElementById("일기수정내용입력창").value = 일기.내용
+
+    일기.회고목록.forEach((el,index) => { 
+      const isLast = index === 일기.회고목록.length - 1;
+      document.getElementById("회고그려지는곳").innerHTML +=`
+          <div class="바디__회고__출력섹션__회고목록${!isLast ? '' : '__마지막'}">
+            <div class="바디__회고__출력섹션__회고목록__내용영역">${el.회고내용}</div>
+            <div class="바디__회고__출력섹션__회고목록__날짜영역">[${el.작성일}]</div>
+          </div>
+        `;
+    });
+       
     
     const 감정선택 = document.getElementsByName("감정");
 
