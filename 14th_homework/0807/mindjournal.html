@@ -6,17 +6,24 @@
     <title>감정일기</title>
     <link rel="stylesheet" href="./mindjournal.css" />
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header class="site-header">
         <div class="site-header-container">
             <h1 class="site-title">민지의 다이어리</h1>
+            <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="테마 변경">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
     </header>
 
     <main class="main-container">
         <section class="banner">
-            <img src="./Rectangle 1.png" alt="배너 이미지" />
+            <picture>
+                <source media="(max-width: 600px)" srcset="./banner-img2.jpg">
+                <img src="./Rectangle 1.png" alt="감정 일기 배너 이미지">
+            </picture>
         </section>
 
         <nav class="navigation">
@@ -87,27 +94,30 @@
                 <button class="icon-btn" id="closeWriteModal">×</button>
             </header>
             <div class="modal__body">
-                <div class="modal-theme-toggle">
-                    <span>모달 다크모드</span>
-                    <label class="toggle">
-                        <input type="checkbox" id="modalDarkSwitch">
-                        <span class="toggle__slider"></span>
-                    </label>
-                </div>
                 <form id="diaryForm">
                     <label class="label">오늘 기분은 어땠나요?</label>
-                    <div class="emotion-selection">
-                        <input type="radio" name="emotion" value="happy" id="emotion-happy" required />
-                        <label for="emotion-happy"><img src="./행복해요 (m).png" alt="행복한 표정" /></label>
-                        <input type="radio" name="emotion" value="sad" id="emotion-sad" required />
-                        <label for="emotion-sad"><img src="./슬퍼요 (m).png" alt="슬픈 표정" /></label>
-                        <input type="radio" name="emotion" value="surprised" id="emotion-surprised" required />
-                        <label for="emotion-surprised"><img src="./놀랐어요 (m).png" alt="놀란 표정" /></label>
-                        <input type="radio" name="emotion" value="angry" id="emotion-angry" required />
-                        <label for="emotion-angry"><img src="./화나요 (m).png" alt="화난 표정" /></label>
-                        <input type="radio" name="emotion" value="etc" id="emotion-etc" required />
-                        <label for="emotion-etc"><img src="./기타 (m).png" alt="기타 표정" /></label>
-                    </div>
+                    <ul class="emotion-selection">
+                        <li>
+                            <input type="radio" name="emotion" value="happy" id="emotion-happy" required />
+                            <label for="emotion-happy">행복해요</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="emotion" value="sad" id="emotion-sad" required />
+                            <label for="emotion-sad">슬퍼요</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="emotion" value="surprised" id="emotion-surprised" required />
+                            <label for="emotion-surprised">놀랐어요</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="emotion" value="angry" id="emotion-angry" required />
+                            <label for="emotion-angry">화나요</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="emotion" value="etc" id="emotion-etc" required />
+                            <label for="emotion-etc">기타</label>
+                        </li>
+                    </ul>
                     <label for="title" class="label">제목</label>
                     <input type="text" id="title" placeholder="제목을 입력하세요" required>
                     <label for="content" class="label">내용</label>

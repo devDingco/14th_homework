@@ -3,12 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const filterBar = document.getElementById("filterBar");
     const filterBtns = document.querySelectorAll(".filter-btn");
     const scrollTopBtn = document.getElementById("scrollTopBtn");
-
     const filterDropdown = document.getElementById("filterDropdown");
     const searchInput = document.getElementById("searchInput");
     const searchInputDesktop = document.getElementById("searchInputDesktop");
-    const modalDarkSwitch = document.getElementById("modalDarkSwitch");
-
     const writeModal = document.getElementById("writeModal");
     const successModal = document.getElementById("successModal");
     const cancelModal = document.getElementById("cancelModal");
@@ -16,15 +13,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeWriteModalBtn = document.getElementById("closeWriteModal");
     const cancelWriteBtn = document.getElementById("cancelWrite");
     const diaryForm = document.getElementById("diaryForm");
-
-    const emotionImages = {
+    const themeToggleBtn = document.getElementById("themeToggleBtn");
+    
+    // ✅ 감정 이미지 맵 재정의
+    const emotionImageMap = {
         happy: "./행복해요 (m).png",
         sad: "./슬퍼요 (m).png",
         surprised: "./놀랐어요 (m).png",
         angry: "./화나요 (m).png",
         etc: "./기타 (m).png"
     };
-
+    
     let diaries = JSON.parse(localStorage.getItem("diaries")) || [];
     let currentFilter = "all";
     let searchQuery = "";
@@ -33,23 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentPage = 1;
     const paginationContainer = document.getElementById("pagination");
     const photoFilters = document.querySelector(".photo-filters");
-
     function saveToStorage() {
         localStorage.setItem("diaries", JSON.stringify(diaries));
     }
-
     function escapeHtml(s = "") {
         return String(s)
             .replace(/&/g, "&amp;").replace(/</g, "&lt;")
             .replace(/>/g, "&gt;").replace(/"/g, "&quot;")
             .replace(/'/g, "&#39;");
     }
-
     function getSelectedEmotion() {
         const checkedInput = document.querySelector("input[name='emotion']:checked");
         return checkedInput ? checkedInput.value : null;
     }
-
     function debounce(fn, delay = 1000) {
         let t;
         return (...args) => {
@@ -75,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
     }
-    
     async function renderCards() {
         if (currentFilter !== "photos") {
             const q = searchQuery.trim().toLowerCase();
@@ -87,12 +81,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
             const endIndex = startIndex + ITEMS_PER_PAGE;
             const paginatedDiaries = filtered.slice(startIndex, endIndex);
-
+            
+            // ✅ 감정 이미지를 포함하여 카드 HTML 재구성
             const html = paginatedDiaries.map(diary => `
                 <a class="card-link" href="detail.html?id=${diary.id}">
                     <div class="card" data-id="${diary.id}">
                         <button class="delete-btn" data-id="${diary.id}" title="삭제">×</button>
-                        <img src="${emotionImages[diary.emotion] || emotionImages.etc}" alt="${diary.emotion}">
+                        <img src="${emotionImageMap[diary.emotion]}" alt="${diary.emotion}" class="emotion-card">
                         <p>${escapeHtml(diary.date)} - ${escapeHtml(diary.title)}</p>
                     </div>
                 </a>
@@ -102,18 +97,15 @@ document.addEventListener("DOMContentLoaded", () => {
             paginationContainer.style.display = "flex";
             
             renderPagination(filtered.length);
-
         } else {
             await fetchPhotos();
             paginationContainer.style.display = "none";
         }
     }
-
     function renderPagination(totalItems) {
         const totalPages = Math.max(1, Math.ceil(totalItems / ITEMS_PER_PAGE));
         paginationContainer.innerHTML = "";
         
-        // 항목이 없을 때도 1페이지는 항상 보이도록 수정
         if (totalPages === 1 && totalItems === 0) {
           const btn = document.createElement("button");
           btn.textContent = 1;
@@ -122,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
           paginationContainer.appendChild(btn);
           return;
         }
-
         const prevBtn = document.createElement("button");
         prevBtn.textContent = "<";
         prevBtn.className = "pagination-btn";
@@ -133,7 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
         paginationContainer.appendChild(prevBtn);
-
         for (let i = 1; i <= totalPages; i++) {
             const btn = document.createElement("button");
             btn.textContent = i;
@@ -148,7 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             paginationContainer.appendChild(btn);
         }
-
         const nextBtn = document.createElement("button");
         nextBtn.textContent = ">";
         nextBtn.className = "pagination-btn";
@@ -160,7 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         paginationContainer.appendChild(nextBtn);
     }
-
     cardContainer.addEventListener("click", (e) => {
         const del = e.target.closest(".delete-btn");
         if (del) {
@@ -180,7 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
             renderCards();
         }
     });
-
     if (filterDropdown) {
         filterDropdown.addEventListener("change", () => {
             currentFilter = filterDropdown.value;
@@ -188,22 +175,18 @@ document.addEventListener("DOMContentLoaded", () => {
             renderCards();
         });
     }
-
     const doSearch = debounce((val) => {
         searchQuery = (val || "").toLowerCase();
         currentPage = 1;
         if (currentFilter !== "photos") renderCards();
     }, 1000);
-    
     if (searchInput) {
         searchInput.addEventListener("input", (e) => doSearch(e.target.value));
     }
     if (searchInputDesktop) {
         searchInputDesktop.addEventListener("input", (e) => doSearch(e.target.value));
     }
-    
     scrollTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-
     function openModal(modal) {
         modal.classList.add("show");
         document.body.classList.add("no-scroll");
@@ -213,16 +196,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const anyOpen = [...document.querySelectorAll(".modal")].some(m => m.classList.contains("show"));
         if (!anyOpen) document.body.classList.remove("no-scroll");
     }
-
     openWriteModalBtn.addEventListener("click", () => {
         diaryForm.reset();
-        applyModalTheme(loadModalDarkPref());
-        if (modalDarkSwitch) modalDarkSwitch.checked = loadModalDarkPref();
         openModal(writeModal);
     });
     closeWriteModalBtn.addEventListener("click", () => openModal(cancelModal));
     cancelWriteBtn.addEventListener("click", () => openModal(cancelModal));
-
     cancelModal.addEventListener("click", (e) => {
         const keep = e.target.closest("[data-close='keep']");
         const cancelAll = e.target.closest("[data-close='cancel-all']");
@@ -234,7 +213,6 @@ document.addEventListener("DOMContentLoaded", () => {
             diaryForm.reset();
         }
     });
-
     successModal.addEventListener("click", (e) => {
         const ok = e.target.closest("[data-close='success']");
         const backdrop = e.target.closest(".modal__backdrop");
@@ -243,14 +221,12 @@ document.addEventListener("DOMContentLoaded", () => {
             closeModal(writeModal);
         }
     });
-
     window.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
             const opened = [...document.querySelectorAll(".modal.show")];
             if (opened.length) closeModal(opened[opened.length - 1]);
         }
     });
-
     [writeModal, successModal, cancelModal].forEach(modal => {
         modal.addEventListener("click", (e) => {
             const backdrop = e.target.closest(".modal__backdrop");
@@ -258,27 +234,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (modal === writeModal) closeModal(writeModal);
         });
     });
-
-    function applyModalTheme(isDark) {
-        [writeModal, successModal, cancelModal].forEach(m => m && m.classList.toggle("dark", !!isDark));
-    }
-    function loadModalDarkPref() {
-        return localStorage.getItem("modalDark") === "1";
-    }
-    function saveModalDarkPref(on) {
-        localStorage.setItem("modalDark", on ? "1" : "0");
-    }
-
-    applyModalTheme(loadModalDarkPref());
-    if (modalDarkSwitch) {
-        modalDarkSwitch.checked = loadModalDarkPref();
-        modalDarkSwitch.addEventListener("change", (e) => {
-            const on = e.target.checked;
-            saveModalDarkPref(on);
-            applyModalTheme(on);
-        });
-    }
-
     diaryForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const emotion = getSelectedEmotion();
@@ -296,20 +251,17 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         diaries.unshift(newDiary);
         saveToStorage();
-        currentPage = 1; 
+        currentPage = 1;
         renderCards();
         openModal(successModal);
     });
-
     const ratioBtns = document.querySelectorAll(".ratio-btn");
     let isLoadingPhotos = false;
     const PHOTOS_BATCH = 10;
-
     function getActiveRatio() {
         const active = document.querySelector(".ratio-btn.active");
         return active ? active.dataset.ratio : "square";
     }
-
     async function fetchPhotos(append = false) {
         photoFilters.style.display = "flex";
         if (!append) {
@@ -333,7 +285,6 @@ document.addEventListener("DOMContentLoaded", () => {
             isLoadingPhotos = false;
         }
     }
-
     ratioBtns.forEach(btn => {
         btn.addEventListener("click", () => {
             ratioBtns.forEach(b => b.classList.remove("active"));
@@ -346,14 +297,12 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     });
-
     const handleInfinite = throttle(() => {
         if (currentFilter !== "photos" || isLoadingPhotos) return;
         const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
         if (nearBottom) fetchPhotos(true);
     }, 1000);
     window.addEventListener("scroll", handleInfinite);
-
     const tabs = document.querySelectorAll(".tab");
     tabs.forEach(tab => {
         tab.addEventListener("click", () => {
@@ -364,10 +313,37 @@ document.addEventListener("DOMContentLoaded", () => {
             renderCards();
         });
     });
-
     function syncDropdownToFilter() {
         if (filterDropdown) filterDropdown.value = currentFilter;
     }
     syncDropdownToFilter();
     renderCards();
+
+    // ✅ 다크모드 로직 추가
+    function applyTheme(isDark) {
+        document.body.classList.toggle("dark-mode", isDark);
+        if (isDark) {
+            themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+    }
+
+    function loadThemePref() {
+        return localStorage.getItem("theme") === "dark";
+    }
+
+    function saveThemePref(isDark) {
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+    }
+
+    // 페이지 로드 시 테마 적용
+    applyTheme(loadThemePref());
+
+    // 버튼 클릭 이벤트
+    themeToggleBtn.addEventListener("click", () => {
+        const isDark = document.body.classList.contains("dark-mode");
+        applyTheme(!isDark);
+        saveThemePref(!isDark);
+    });
 });
