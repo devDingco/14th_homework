@@ -49,12 +49,15 @@
     --image-ratio: 1 / 1;
   }
 
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
 
+/* 
 @font-face {
-    font-family: 'Pretendard-Regular';
+    font-family: 'Pretendard Variable';
+    font-weight: 45 920;
     src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
     font-style: normal;
-}
+} */
 
 *{
 
@@ -77,7 +80,7 @@ body{
 
 .background{
     width: var(--width-full); /* 초기 너비 */
-    height: 112.8125rem; /* 초기 높이 */
+    /* height: 112.8125rem; 초기 높이 */
     /* min-height: 55.875rem; 최소 높이 */
     /* max-height: 107.875rem; 최대 높이 */
 
@@ -91,7 +94,7 @@ body{
 
 .main{
     width: var(--width-full);
-    height: 100.313rem;
+    /* height: 100.313rem; */
 
 
     display: flex;
@@ -131,7 +134,7 @@ body{
 
 .main__frame{
     width: var(--width-full);
-    height: 95.063rem;
+    /* height: 95.063rem; */
 
     display: flex;
     flex-direction: column;
@@ -151,7 +154,7 @@ body{
 
 .main__frame__content{
     width: var(--width-full);
-    height: 82.5625rem;
+    /* height: 82.5625rem; */
 
     display: flex;
     flex-direction: column;
@@ -225,6 +228,45 @@ body{
     justify-content: space-between;
 }
 
+.filter__main{
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    align-items: center;
+    gap: 1rem;
+}
+
+.searchbar__group{
+    width: 20rem;
+    height: 3rem;
+    border-radius: 6.25rem;
+    border: 0.06rem solid #C7C7C7;
+    padding: 0.75rem 1rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.searchbar__group input[type="text"]{
+    height: 100%;
+    border: none;
+    outline: none;
+
+
+    font-size: var(--font-size-text-md);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5rem;
+    letter-spacing: -1%;
+    color: #000000;
+}
+
+.searchbar__group input[type="text"]::placeholder{
+    color:  #ABABAB;
+}
+
 .feeling__filter {
     width: 7.5rem;
     height: 2rem;
@@ -242,7 +284,7 @@ body{
 }
 
 .add__diary__button {
-
+    /* width: 6.875rem; */
     height: 3rem;
     padding: 0.5rem 0.62rem;
     border-radius: 0.5rem;
@@ -260,6 +302,7 @@ body{
     line-height: 1.5rem;
     letter-spacing: -1%;
     color: #FFFFFF;
+    white-space: nowrap;
 }
 
 .dropdown__group{
@@ -271,16 +314,21 @@ body{
 
     position: relative;
     z-index: 1;
+
+    --dropdown-width:7.5rem;
+    --dropdown-height: 3rem;
+    --dropdown-padding: 0.75rem 0.625rem;
+    --dropdown-list-padding: 0.75rem;
+     
 }
 
 .dropdown__title{
     appearance: none;
-    width: 7.5rem;
-    height: 3rem;
-    padding: 0.75rem 0.625rem;
+    width: var(--dropdown-width);
+    height: var(--dropdown-height);
+    padding: var(--dropdown-padding);
     border-radius: 0.5rem;
     border: 0.06rem solid #C7C7C7;
-    margin-bottom: 0.5rem;
 
     --filter-title: "전체";
 
@@ -315,7 +363,7 @@ body{
     list-style-type: none;
     background-color: #FFFFFF;
 
-    width: 7.5rem;
+    width: var(--dropdown-width);
     border-radius: 0.5rem;
     border: 0.06rem solid #C7C7C7;
 
@@ -343,12 +391,13 @@ body{
 
 .dropdown__list label{
     display: flex;
-    padding: 0.75rem;
+    padding: var(--dropdown-list-padding);
     flex-direction: row;
     justify-content: space-between;
 }
 
 .dropdown__list label img{
+    width: 1rem;
     display: none;
 }
 
@@ -359,7 +408,7 @@ body{
 
 .frame__content__diary {
     width: var(--width-content-main);
-    min-height: 73rem;
+    /* min-height: 73rem; */
 
     display: flex;
     flex-direction: row;
@@ -368,13 +417,13 @@ body{
 
     transition: width 0.3s linear;
 
-    overflow: scroll;
+    /* overflow: scroll; */
 }
 
 
 .content__diary__list{
     width: var(--width-content-main);
-    height: 1167px;
+    /* height: 1167px; */
 
     display: flex;
     flex-direction: row;
@@ -482,7 +531,7 @@ a{
 }
 
 .diary__card__feeling{
-    width: 3.75rem;
+    /* width: 3.75rem; */
 
     font-weight: var(--font-weight-semi-bold);
     font-size: var(--font-size-text-sm);
@@ -513,7 +562,7 @@ a{
 }
 
 #diary__card__date{
-    width: 6.25rem;
+    /* width: 6.25rem; */
 
     font-weight: var(--font-weight-regular);
     font-size: var(--font-size-text-sm);
@@ -558,18 +607,6 @@ a{
     aspect-ratio: var(--image-ratio);
 }
 
-/* .ratio__basic{
-    aspect-ratio: 1 / 1 ;
-}
-
-.ratio__horizontal{
-    aspect-ratio: 4 / 3 ;
-}
-
-.ratio__vertical{
-    aspect-ratio: 3 / 4 ;
-} */
-
 .skeleton__background{
     width: 40rem;
     height: 40rem;
@@ -596,6 +633,42 @@ a{
     }
 }
 
+/* page CSS */
+.page {
+    padding: 2.5rem 0rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.page__group{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+#page__number{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+}
+    /* 페이지 번호 */
+#page__number button{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: #F2F2F2;
+
+    font-size: var(--font-size-text-md);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5rem;
+    letter-spacing: -1%;
+    text-align: center;
+}
 
 /* footer CSS */
 .footer{
@@ -608,6 +681,8 @@ a{
     display: flex;
     flex-direction: row;
     justify-content: center;
+
+    position: relative;
 }
 
 .footer__container{
@@ -815,6 +890,24 @@ a{
     white-space: nowrap;
 }
 
+#close__button{
+    background-color: #FFFFFF;
+    border: 0.0625rem solid #000000; 
+    color: #1C1C1C;
+  }
+
+  #not__delete{
+    background-color: #FFFFFF;
+    border: 0.0625rem solid #000000; 
+    color: #1C1C1C;
+  }
+  
+  #delete__card{
+    background-color: #000000;
+    color: #F2F2F2;
+  }
+
+
 #cancel__button{
     background-color: #FFFFFF;
     border: 0.0625rem solid #000000; 
@@ -920,7 +1013,36 @@ a{
 	left: calc(50% - 30rem/2);
 }
 
-.modal__close__button{
+#delete__modal{
+    display: none;
+}
+
+.modal__group__delete{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.modal__delete{
+width: 30rem;
+height: 12.5rem;
+border-radius: 1.5rem;
+padding: 1.5rem;
+background-color: #FFFFFF;
+
+
+display: flex;
+flex-direction: column;
+gap: 2.5rem;
+
+position: absolute;
+top: calc(50% - 12.5rem/2);
+left: calc(50% - 30rem/2);
+}
+
+.modal__close__button,
+.modal__delete__button{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -937,6 +1059,8 @@ a{
     background-color: #000000;
     color: #F2F2F2;
 }
+
+
 
 /* 미디어 쿼리 부분 */
 /* 1280px
@@ -987,24 +1111,30 @@ a{
         --width-diary-card: 9.25rem; /* 일기 카드 너비 */
         --width-diary-form: 20rem; /* 일기 작성 폼 너비 */ 
     }
-    .background{
-        height: 156.3125rem;
-    }
-    .main{
-        height: 146.8125rem;
-    }
+
     #floating__button{
         top: 144rem;
         left: 18.75rem;
     }
-    .main__frame{
-        height: 141.5625rem;
-    }
+
     .frame__content__diary{
         overflow: visible;
-        height: 117.4375rem;
         flex-direction: column;
     }
+    .frame__content__tab{
+        gap: 0.5rem;
+    }
+
+    .content__tab__menu,
+    .tab__menu__disabled{
+        width: 4.8125rem;
+        height: 2.75rem;
+        padding: 0.75rem 0.25rem;
+
+        font-size: var(--font-size-text-md);
+        line-height: 1.25rem;
+    }
+
     .content__diary__list{
         height: 100%;
         overflow-y: scroll;
@@ -1013,8 +1143,21 @@ a{
         place-items: center;
         order: 2;
     }
+    .diary__card{
+        height: 12rem;
+    }
     .diary__card__image{
         object-fit: cover;
+    }
+    .diary__card__text{
+        gap: 0.25rem;
+    }
+    #diary__card__date,
+    .diary__card__feeling{
+        font-size: 0.75rem;
+    }
+    .diary__card__title{
+        font-size: var(--font-size-text-sm);
     }
     #delete__button{
         left:7rem
@@ -1091,13 +1234,15 @@ a{
         height: 2.5rem;
         font-size: var(--font-size-text-md);
     }
-    .modal__close__write{
+    .modal__close__write,
+    .modal__delete{
         width: var(--width-content-main);
         height: 9.75rem;
 
         gap: 1.5rem;
         left: calc(50% - 20rem/2);
     }
+
     .modal__title{
         font-size: var(--font-size-text-md);
         line-height: 1.25rem;
@@ -1108,5 +1253,46 @@ a{
     }
     .dog__image{
         width: 17.5rem;
+    }
+
+    .frame__content__filter{
+
+        height: 6rem;
+        position: relative;
+    }
+
+    .dropdown__group{
+        --dropdown-width: 6.375rem;
+        --dropdown-height: 2.5rem;
+        --dropdown-padding: 0.5rem 0.625rem;
+        --dropdown-list-padding: 0.5rem 0.75rem;
+
+        position: absolute;
+        bottom: 0;
+    }
+    .dropdown__title,
+    .dropdown__list{
+        font-size: var(--font-size-text-sm);
+    }
+    .dropdown__img{
+        top: 0.5rem;
+    }
+
+    .searchbar__group{
+        height: 2.5rem;
+
+        position: absolute;
+        top: 0;
+    }
+
+    .add__diary__button{
+        width: 6.4375rem;
+        height: 2.5rem;
+
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        font-size: var(--font-size-text-md);
     }
 }

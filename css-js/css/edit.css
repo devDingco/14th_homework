@@ -1,3 +1,6 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+
 :root{
     /* width */
     --width-full: 120rem; /* 최상위 컨테이너 너비 */

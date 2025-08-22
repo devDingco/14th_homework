@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <meta charset="UTF-8">
     <title>일기보관함</title>
     <link rel = "stylesheet" href = "./css/index.css" />
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
     <script src="./js/index.js"></script>    
     <script src="./js/index-diary.js"></script>
     <script src="./js/index-image.js"></script>
 </head>
 <body>
     <div class="background">
+            <!-- main -->
             <div class="main">
                 <div class="main__header">
                     <div class="main__header__title">
@@ -27,81 +30,29 @@
                             </button>
                         </div>
                         <div id="filter__menu" class="frame__content__filter">
-                            <!-- <select id="feeling__filter" class="feeling__filter" onchange="viewFiltering(event)">
-                                <option selected disabled>전체</option>
-                                <option value="happy">행복해요</option>
-                                <option value="sad">슬퍼요</option>
-                                <option value="surprise">놀랐어요</option>
-                                <option value="angry">화나요</option>
-                                <option value="etc">기타</option>
-                            </select>
-                            <input type="checkbox" />
-                            <ul>
-                                <li>전체</li>
-                                <li>행복해요</li>
-                                <li>슬퍼요</li>
-                                <li>놀랐어요</li>
-                                <li>화나요</li>
-                                <li>기타</li>
-                            </ul>
-                            <input type="checkbox" />
-                            <ul>
-                                <li>기본</li>
-                                <li>가로형</li>
-                                <li>세로형</li>
-                            </ul>
-                            <button class="add__diary__button" onclick="viewModal('write__form__modal')">
-                                <img src="./assets/icons/plus_outline_light_m.svg" />
-                                일기쓰기
-                            </button> -->
                         </div>
                         <div id="frame__diary__list" class="frame__content__diary">
-                            <div id="card__list" class="content__diary__list">
-                            </div>
-                            <!-- <div id="dog__list"></div> -->
-                            <!-- 기존 다이어리 작성 폼 -->
-                            <!-- <div class="content__diary__form">
-                                <div class="diary__form__title">📍 일기 쓰기</div>
-                                <div class="diary__form__input">
-                                    <div class="form__input__feeling">
-                                        오늘 기분은 어땟나요?
-                                        <div class="input__feeling__radio">
-                                            <div class="feeling" >
-                                                <input id="happy" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />행복해요
-                                            </div>
-                                            <div class="feeling" >
-                                                <input id="sad" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />슬퍼요
-                                            </div>
-                                            <div class="feeling" >
-                                                <input id="surprise" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />놀랐어요
-                                            </div>
-                                            <div class="feeling" >
-                                                <input id="angry" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />화나요
-                                            </div>
-                                            <div class="feeling" >
-                                                <input id="etc" type="radio" name="radio__feeling" oninput="isDiaryWritten()" />기타
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form__input__text">
-                                        <div class="input__text__title">
-                                            제목
-                                            <input type="text" placeholder="제목을 입력해 주세요." id="title__feeling" oninput="isDiaryWritten()" />
-                                        </div>
-                                        <div class="input__text__context">
-                                            내용
-                                            <textarea placeholder="내용을 입력해 주세요." id="context__feeling" oninput="isDiaryWritten()"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button id="diary__write__button" class="diary__form__button" disabled onclick="getDiaryCard()">등록하기</button>
-                            </div> -->
+                            <div id="card__list" class="content__diary__list"></div>
                         </div>
                     </div>
                 </div>
                 <img src="./assets/icons/up_outline_light_xl.svg" id="floating__button" onclick="scrollpage()"/>
             </div>
-            
+            <!-- page -->
+            <div class="page">
+                <div class="page__group">
+                    <img src="./assets/icons/leftenable_outline_light_m.svg" id="prevpage__button" />
+                    <div id="page__number">
+                        <!-- <button>1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>4</button>
+                        <button>5</button> -->
+                    </div>
+                    <img src="./assets/icons/rightenable_outline_light_m.svg" id="nextpage__button"/>
+                </div>
+            </div>
+            <!-- footer -->
             <div class="footer">
                  <div class="footer__container">
                     <div id="footer__title">민지의 다이어리</div>
@@ -176,11 +127,25 @@
                                 일기 등록을 취소 하시겠어요?
                             </div>
                             <div class="modal__close__button">
-                                <button id="keep__button" class="modal__form__button" type="button" onclick="keepWrite()">계속 작성</button>
+                                <button id="keep__button" class="modal__form__button" type="button" onclick="keepWrite('write__close__modal')">계속 작성</button>
                             <button id="close__button" class="modal__form__button" type="submit" onclick="closeModal('write__close__modal')">등록 취소</button>
                             </div>
                         </form>
                     </div>
+                </div>
+                <!-- 일기 삭제 모달 -->
+                <div id="delete__modal" class="modal__group__delete">
+                    <div class="modal__background"></div>
+                    <form class="modal__delete">
+                        <div class="modal__text">
+                            <div class="modal__title">일기 삭제</div>
+                            일기를 삭제 하시겠어요?
+                        </div>
+                        <div class="modal__delete__button">
+                            <button id="not__delete" class="modal__form__button" type="button" onclick="keepWrite('delete__modal')">취소</button>
+                            <button id="delete__card" class="modal__form__button" type="submit" onclick="deleteDiaryCard()">삭제</button>
+                        </div>
+                    </form>
                 </div>
             </div>
     </div>

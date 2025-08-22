@@ -130,3 +130,9 @@ function floatingButton(){
         z-index: 99;
     `
 }
+
+function diaryDetail() {
+
+    location.href = `./detail.html?number=${cardIndex}`;
+
+}
