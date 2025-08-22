@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>일기상세페이지</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body class="레이아웃">
+  <div class="헤더">
+    <a href="index.html" style="text-decoration:none;color:inherit;">← 돌아가기</a>
+  </div>
+
+  <main style="max-width:800px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:20px;">
+    <h1>일기 상세</h1>
+    <div id="상세_이미지영역" class="일기사진" style="height:280px;overflow:hidden;border-radius:12px;">
+      <!-- 이미지 -->
+    </div>
+
+    <label style="display:block;">제목
+      <input id="상세_제목" type="text" style="width:100%;padding:12px;border:1px solid #d4d3d3;border-radius:8px;"/>
+    </label>
+
+    <label style="display:block;">내용
+      <textarea id="상세_내용" rows="8" style="width:100%;padding:12px;border:1px solid #d4d3d3;border-radius:8px;"></textarea>
+    </label>
+
+    <label style="display:block;">기분
+      <select id="상세_기분" style="width:100%;padding:12px;border:1px solid #d4d3d3;border-radius:8px;">
+        <option value="행복">행복해요</option>
+        <option value="슬픔">슬퍼요</option>
+        <option value="놀람">놀랐어요</option>
+        <option value="화남">화나요</option>
+        <option value="기타">기타</option>
+      </select>
+    </label>
+
+    <div style="display:flex;gap:12px;align-items:center;">
+      <button id="수정완료버튼" class="일기쓰기_등록버튼" style="max-width:200px;">수정 완료</button>
+      <a href="index.html">목록으로</a>
+    </div>
+  </main>
+
+  <script>
+    const LS_KEY = 'diaries';
+    const loadDiaries = () => {
+      try {
+        const raw = localStorage.getItem(LS_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch {
+        return [];
+      }
+    };
+    const saveDiaries = (arr) => localStorage.setItem(LS_KEY, JSON.stringify(arr));
+
+    const normalizeMood = (mood) => {
+      switch (mood) {
+        case '행복':
+        case '행복해요': return '행복';
+        case '슬픔':
+        case '슬퍼요': return '슬픔';
+        case '놀람':
+        case '놀랐어요': return '놀람';
+        case '화남':
+        case '화나요': return '화남';
+        case '기타': return '기타';
+        default: return '기타';
+      }
+    };
+    // 기분별 텍스트 매핑
+    const moodText = (mood) => {
+    switch (mood) {
+      case '행복': return '행복해요';
+      case '슬픔': return '슬퍼요';
+      case '놀람': return '놀랐어요';
+      case '화남': return '화나요';
+      case '기타': return '기타';
+      default: return mood;
+     }
+   };
+  // 이미지 매핑
+  const moodImage = (mood) => {
+    switch (normalizeMood(mood)) {
+      case '행복': return './assets/images/joy.png';
+      case '슬픔': return './assets/images/sadness.png';
+      case '놀람': return './assets/images/surprised.png';
+      case '화남': return './assets/images/anger.png';
+      case '기타': return './assets/images/idontknownothing.png';
+      default: return './assets/images/joy.png';
+    }
+  };
+
+    const params = new URLSearchParams(location.search);
+    const id = Number(params.get('id'));
+    let 목록 = loadDiaries();
+    let 대상 = 목록.find(d => d.id === id);
+
+    const 이미지영역 = document.getElementById('상세_이미지영역');
+    const 제목입력 = document.getElementById('상세_제목');
+    const 내용입력 = document.getElementById('상세_내용');
+    const 기분선택 = document.getElementById('상세_기분');
+    const 수정완료버튼 = document.getElementById('수정완료버튼');
+
+    if (!대상) {
+      document.body.innerHTML = '<div style="padding:40px;">존재하지 않는 일기입니다. <a href="index.html">목록으로</a></div>';
+    } else {
+      const before = 대상.기분;
+      대상.기분 = normalizeMood(대상.기분);
+      if (before !== 대상.기분) {
+        목록 = 목록.map(d => d.id === 대상.id ? { ...d, 기분: 대상.기분 } : d);
+        saveDiaries(목록);
+      }
+
+      const renderImage = (mood) => {
+        이미지영역.innerHTML = `
+          <div style="position:relative;width:100%;height:100%;">
+            <img class="기분이미지" style="width:100%;height:100%;object-fit:cover;" src="${moodImage(mood)}" alt="${normalizeMood(mood)}" />
+            <div style="position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,0.5);color:#fff;padding:6px 10px;border-radius:6px;">
+              ${moodText(mood)}
+            </div>
+          </div>
+        `;
+      };
+
+      renderImage(대상.기분);
+      제목입력.value = 대상.제목 || '';
+      내용입력.value = 대상.내용 || '';
+      기분선택.value = 대상.기분;
+      
+      기분선택.addEventListener('change', () => {
+        renderImage(기분선택.value);     
+        });
+
+      수정완료버튼.addEventListener('click', () => {
+        수정완료버튼.classList.add('버튼_기울임');
+
+        // 값 저장
+        대상.제목 = 제목입력.value.trim();
+        대상.내용 = 내용입력.value.trim();
+        대상.기분 = normalizeMood(기분선택.value);
+
+        목록 = 목록.map(d => d.id === 대상.id ? 대상 : d);
+        saveDiaries(목록);
+
+        // 약간 딜레이 후 원상 복귀 + 안내
+        setTimeout(() => {
+          수정완료버튼.classList.remove('수정완료버튼');
+          alert('수정이 완료되었습니다.');
+        }, 600);
+      });
+    }
+  </script>
+</body>
+</html>

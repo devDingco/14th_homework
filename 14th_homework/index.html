@@ -3,7 +3,7 @@
   <head>
     <title>민지의 다이어리 - 일기보관함</title>
     <link rel="stylesheet" href="index.css" />
-    <script src="index.js"></script>
+    <script src="index.js" defer></script>
   </head>
   <body>
     <div class="레이아웃">
@@ -18,6 +18,17 @@
         <div class="클릭되지않은탭">사진보관함</div>
       </div>
 
+      <!-- 기분선택 버튼 -->
+      <select name="기분선택하기" onchange="기분필터링(event)">
+        <option value="전체" selected>전체</option>
+        <option value="행복">행복해요</option>
+        <option value="슬픔">슬퍼요</option>
+        <option value="놀람">놀랐어요</option>
+        <option value="화남">화나요</option>
+        <option value="기타">기타</option>
+      </select>      
+
+
       <div class="메인">
         <!--일기 보여주는 곳-->
         <div id="일기보여주는곳" class="일기보여주는곳">
@@ -31,24 +42,19 @@
             <div class="등록_내용">오늘 기분은 어땠나요?</div>
             <div class="라디오그룹">
               <div class="라디오버튼">
-                <input
-                  type="radio"
-                  name="기분선택버튼"
-                  value="행복"
-                  checked
-                />
+                <input type="radio" name="기분선택버튼" value="행복해요" checked />
                 <div>행복해요</div>
               </div>
               <div class="라디오버튼">
-                <input type="radio" name="기분선택버튼" value="슬픔" />
+                <input type="radio" name="기분선택버튼" value="슬퍼요" />
                 <div>슬퍼요</div>
               </div>
               <div class="라디오버튼">
-                <input type="radio" name="기분선택버튼" value="놀람" />
+                <input type="radio" name="기분선택버튼" value="놀랐어요" />
                 <div>놀랐어요</div>
               </div>
               <div class="라디오버튼">
-                <input type="radio" name="기분선택버튼" value="화남" />
+                <input type="radio" name="기분선택버튼" value="화나요" />
                 <div>화나요</div>
               </div>
               <div class="라디오버튼">
@@ -60,19 +66,11 @@
           <div class="일기입력상자">
             <div class="일기쓰기">
               <div>제목</div>
-              <input
-                type="text"
-                id="제목입력창"
-                placeholder="제목을 입력해 주세요."
-              />
+              <input type="text"id="제목입력창" placeholder="제목을 입력해 주세요." />
             </div>
             <div class="일기쓰기">
               <div>내용</div>
-              <textarea
-                id="내용입력창"
-                rows="5"
-                placeholder="내용을 입력해 주세요."
-              ></textarea>
+              <textarea id="내용입력창" rows="5" placeholder="내용을 입력해 주세요."></textarea>
             </div>
           </div>
           <div>

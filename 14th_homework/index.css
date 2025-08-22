@@ -90,15 +90,18 @@
     align-items: flex-start;
     gap: 16px;
     flex: 1 0 0;
+    animation: fadeIn 0.5 ease;
+    transition: transform 0.5 ease, filter 0.5 easy, box-shadow 0.5 easy;
+    will-change: transform filter;
   }
   
   .일기:hover {
-    transform: translateY(-4px);
+    transform: scale(1.1) translateY(-2px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     filter: blur(3px);
-    transition: transform 0.5s;
-    width: 110%;
-    height: 110%;
+    /* transition: transform 0.5s; */
+    /* width: 110%;
+    height: 110%; */
   }
   
   .일기사진 {
@@ -133,6 +136,11 @@
     /* flex-direction: column; */
     /* justify-content: space-between; */
   }
+
+  .수정완료버튼 {
+    transform: rotate(-8deg) scale(0.98);
+    transition: transform 0.5s easy;
+  }
   
   .기분 {
     width: 100%;
@@ -142,19 +150,19 @@
     line-height: 20px;
   }
   
-  .행복 {
+  .행복해요 {
     color: #ea5757;
   }
   
-  .슬픔 {
+  .슬퍼요 {
     color: #28b4e1;
   }
   
-  .놀람 {
+  .놀랐어요 {
     color: #d59029;
   }
   
-  .화남 {
+  .화나요 {
     color: #777;
   }
   
