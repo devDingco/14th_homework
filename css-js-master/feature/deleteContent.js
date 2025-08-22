@@ -9,6 +9,7 @@ const deleteContent = (contentNumber,key) => { // <number,string>
                 let diaryContentNumber = Number(diaryContentArr[i].id.slice(diaryContentArr[i].id.lastIndexOf("#")+1))
                 if (diaryContentNumber === contentNumber) {
                     deleteStorage(contentNumber,key)
+                    location.href="./index.html"
                 }
             }
             if (JSON.parse(localStorage.getItem(key))) {
@@ -19,7 +20,8 @@ const deleteContent = (contentNumber,key) => { // <number,string>
             break
         }
         case "일기콘텐츠디테일": {
-            deleteStorage(contentNumber,"일기콘텐츠")
+            deleteStorage(contentNumber,"일기콘텐츠")    
+            location.href="../index.html"
             break
         }
         default:
@@ -31,5 +33,5 @@ const deleteStorage = (contentNumber,key) => {
     const updateArr = JSON.parse(localStorage.getItem(key)).filter(v => Number(v.number) !== contentNumber)
     updateArr.length === 0 ? localStorage.removeItem(key) : toLocalStorage(updateArr,key)
     alert(`${contentNumber+1}` + " 번 일기가 삭제 되었습니다!")
-    window.location.assign(`http://localhost:${window.location.port}/css-js-master/index.html`)
+    // window.location.assign(`http://localhost:${window.location.port}/css-js-master/index.html`)
 }
