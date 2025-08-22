@@ -1,0 +1,30 @@
+@media (max-width: 36.0rem) {
+    body {
+        width: 100vw;
+      }
+    .바탕 {
+        flex-direction: column;
+        margin: 0 1.6rem 4.0rem 1.6rem; /* 좌우 마진을 작게 */
+        width: auto; /* 필요하면 조절 */ 
+    }
+    .일기드롭다운 {
+        order: 2;
+    }
+    .서치바구역 {
+        order: 1;
+        width: 100%;
+    }
+    .일기보관함 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+        width: 100%;
+        max-width: 360px;
+    }
+    .footer__main {
+        width: 100%;
+    }
+
+        /* 사진보관함 */
+
+}

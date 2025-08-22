@@ -127,13 +127,5 @@ function handleDelete(event, number) {
     modalClose('전체닫기')        // 모달 닫기
 }
 
-// 토글기능
-const 토글기능 = () => {
-    const modals = document.querySelectorAll(".모달") // 여러 개 선택됨
-    modals.forEach(modal => {
-        modal.classList.toggle("다크모드")
-    })
-}
-
 // ------------------------------------- 모달 영역 끝 ----------------------------------
 // ----------------------------------------------------------------------------------
