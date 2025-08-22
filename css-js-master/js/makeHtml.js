@@ -61,7 +61,11 @@ const makeMainHtml = (contentArr) => {
         `
     }).join("")
 
-    document.getElementById("diary_box_container").innerHTML = contentHTML
+    document.getElementById("diary_container").innerHTML = `
+        <div id="diary_box_container" class="">
+            ${contentHTML}
+        </div>
+    `
 
     return contentHTML
 }
@@ -231,4 +235,52 @@ const resetResistHtml = () => {
     document.querySelectorAll('input[name="feel"]').forEach(radio => {
         radio.checked = false;
     });
+}
+
+// 메인페이지 사진보관함
+const makePicStorageHtml = async () => {
+    const dogHtml = await getDogApi()
+    console.log(dogHtml)
+    document.getElementById("diary_container").innerHTML = `
+        <div id="pic_box_container">
+            ${dogHtml}
+        </div>
+    `
+}
+
+// 메인페이지 필터
+const makeMainFilterHtml = (storage) => { // <string>
+    switch (storage) {
+        case "일기보관함": {
+            document.getElementById("filter_container").innerHTML = `
+                <select id="diary_filter" class="storage_filter" onchange="viewDiaryFilter()">
+                    <option value="전체">전체</option>
+                    <option value="행복해요">행복해요</option>
+                    <option value="슬퍼요">슬퍼요</option>
+                    <option value="놀랐어요">놀랐어요</option>
+                    <option value="화나요">바나나</option>
+                    <option value="기타">기타</option>
+                </select>
+                <button id="diary_resist_button" onclick="openModal('main_write_modal_group')">
+                    <div id="diary_resist_button_frame">
+                        <img src="./images/plus_outline_light_m.svg" />
+                        <p>일기쓰기</p>
+                    </div>
+                </button>
+            `
+            break
+        }
+        case "사진보관함":{
+            document.getElementById("filter_container").innerHTML = `
+                <select id="pic_filter" class="storage_filter" onchange="">
+                    <option value="기본형">기본형</option>
+                    <option value="가로형">가로형</option>
+                    <option value="세로형">세로형</option>
+                </select>
+            `
+            break
+        }
+        default:
+    } 
+    
 }
