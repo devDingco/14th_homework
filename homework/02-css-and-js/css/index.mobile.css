@@ -11,17 +11,17 @@
     border-radius: 1.5rem;
 }
 
-.body_main {
+/* .body_main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center; 
-}
+} */
 
 .CSS_일기보여주는곳 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5 rem;
+    gap: 1.5rem;
     width: 100%;
     order: 2;
 }
@@ -170,6 +170,4 @@ search_area {
     font-weight: 600;
     line-height: 1.5rem;
 }
-
-
 

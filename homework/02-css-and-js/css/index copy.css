@@ -113,13 +113,11 @@ a {
     display: flex;
     align-items: center;
     background-color: #fff;
-
-   --드롭다운CSS변수: "전체";
 }
 
 
 .드롭다운제목::after {
-    content: var(--드롭다운CSS변수);
+    content: var(--일기보관함필터);
 }       
 
 .드롭다운제목:checked +.드롭다운목록 {
@@ -184,7 +182,7 @@ a {
 }
 
 #HTML_일기드롭다운제목::after {
-    content: var(--드롭다운CSS변수);
+    content: var(--일기보관함필터);
 }
 
 #HTML_사진드롭다운제목 {
@@ -192,7 +190,7 @@ a {
 }
 
 #HTML_사진드롭다운제목::after {
-    content: var(--드롭다운CSS변수);
+    content: var(--사진보관함필터);
 }
 
 .inverted {
@@ -698,62 +696,3 @@ button img {
     }
 }
 
-/* 페이지네이션 */
-.CSS_페이지네이션보여주는곳 {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 4rem;
-}
-
-.CSS_페이지버튼 {
-    width: 100%;
-    border: 0px;
-    border-radius: 8px;
-    background-color: #fff;
-    height: 2rem;
-    width: 2rem;
-    padding: 8px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 400;
-    color: #777;
-    cursor: pointer;
-}
-
-.CSS_페이지이동버튼 {
-    position: relative;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    background-color: transparent;
-    border: 0px;
-    height: 2rem;
-    width: 2rem;
-}
-
-.CSS_페이지눌린버튼 {
-    width: 100%;
-    border: 0px;
-    border-radius: 8px;
-    background-color: #f2f2f2;
-    height: 2rem;
-    width: 2rem;
-    padding: 8px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-    color: #000;
-    }
-
-.CSS_페이지이동버튼사진 {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
