@@ -143,3 +143,42 @@ const 토스트메시지띄우기기능 = () => {
     document.getElementById("토스트메세지ID").style = "display: none";
   }, 1000);
 };
+
+const 상세페이지일기삭제기능 = () => {
+  const 쿼리스트링 = window.location.search;
+  const 잘게나누어담은통 = new URLSearchParams(쿼리스트링);
+  const 일기번호 = 잘게나누어담은통.get("number");
+  const 삭제할일기번호 = 일기번호;
+  console.log(typeof 삭제할일기번호);
+
+  const 로컬스토리지에저장된일기목록 =
+    localStorage.getItem("지윤이의일기목록") ?? "[]";
+  const 일기목록 = JSON.parse(로컬스토리지에저장된일기목록);
+  const 삭제하고남은일기목록 = 일기목록.filter((_, index) => {
+    return index !== +삭제할일기번호; // + <= 숫자열로 바꾸는 방법
+  });
+  localStorage.setItem(
+    "지윤이의일기목록",
+    JSON.stringify(삭제하고남은일기목록)
+  );
+
+  location.href = "./index.html";
+};
+
+const 모달열기기능 = (모달종류) => {
+  event.preventDefault();
+  document.getElementById(모달종류).style = "display: block";
+  // 스크롤 맨 위로 올리기
+  scrollTo({
+    top: 0,
+  });
+  document.body.style.overflow = "hidden";
+};
+
+const 모달닫기기능 = (모달종류) => {
+  document.getElementById(모달종류).style = "display: none";
+  scrollTo({
+    top: 0,
+  });
+  document.body.style.overflow = "auto";
+};
