@@ -239,7 +239,14 @@ const resetResistHtml = () => {
 
 // 메인페이지 사진보관함
 const makePicStorageHtml = async () => {
+    document.getElementById("diary_container").innerHTML = `
+        <div class="skeleton_back">
+            <div class="skeleton_stick"></div>
+        </div>
+    `
     const dogArr = await getDogApi(10)
+    document.getElementById("diary_container").innerHTML = ''
+
     let dogHtml
     dogHtml = dogArr.map(v => `
         <div class="dog_pic_frame">
@@ -247,12 +254,12 @@ const makePicStorageHtml = async () => {
         </div>
     `).join("")
 
-    // console.log(dogHtml)
+    console.log(dogHtml)
     
     document.getElementById("diary_container").innerHTML = `
         <div id="pic_box_container">
             ${dogHtml}
-        </div>
+        </div>  
     `
 }
 
