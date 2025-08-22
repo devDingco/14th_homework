@@ -319,6 +319,12 @@ const JS_메뉴이동 = (메뉴) => {
       "border-bottom: 0.2rem solid #000;";
       window.document.getElementById("HTML_사진보관함탭").style = 
       "color: #ababab;";
+      
+      window.document.getElementById("HTML_서치바영역").style =
+      "display: flex"
+      window.document.getElementById("HTML_일기쓰기버튼").style = 
+      "display: flex"
+
       JS_일기그리기기능();
       break;
     }
@@ -335,6 +341,12 @@ const JS_메뉴이동 = (메뉴) => {
       "border-bottom: 0.2rem solid #000;";
       window.document.getElementById("HTML_일기보관함탭").style = 
       "color: #ababab;";
+
+      window.document.getElementById("HTML_서치바영역").style =
+      "display: none"
+      window.document.getElementById("HTML_일기쓰기버튼").style = 
+      "display: none"
+
       JS_강아지사진그리기기능();
       break;
     }
@@ -368,28 +380,55 @@ const JS_사진비율필터링기능 = (event) => {
 
 const JS_강아지사진그리기기능 = () => {
   
-  fetch("https://dog.ceo/api/breeds/image/random/10").then((받아온결과)=>{
-    받아온결과.json().then((객체만뽑힌결과) => {
+  const 강아지사진들 = () => {
+    fetch("https://dog.ceo/api/breeds/image/random/10").then((받아온결과)=>{
+      받아온결과.json().then((객체만뽑힌결과) => {
 
-      const 이미지주소 = 객체만뽑힌결과.message;
+        const 이미지주소 = 객체만뽑힌결과.message;
 
-      const HTML_강아지사진리스트 = 이미지주소
-        .map(
-          (el, index) => `
-            <img class="CSS_강아지사진" src="${el}" alt="강아지사진${index}" />
-          `
-        ).join("");  
+        const HTML_강아지사진리스트 = 이미지주소
+          .map(
+            (el, index) => `
+              <img class="CSS_강아지사진" src="${el}" alt="강아지사진${index}" />
+            `
+          ).join("");  
 
-      // console.log(`이미지다운로드주소들: ${이미지다운로드주소들}`)
-      // console.log(`상태: ${상태}`)
-      
-      document.getElementById("HTML_강아지사진보여주는곳").innerHTML =
-        HTML_강아지사진리스트;
-      
-      document.getElementById("HTML_스켈레톤").style = "display: none";                 
+        // console.log(`이미지다운로드주소들: ${이미지다운로드주소들}`)
+        // console.log(`상태: ${상태}`)
+        
+        document.getElementById("HTML_강아지사진보여주는곳").innerHTML =
+          HTML_강아지사진리스트;
+        
+        document.getElementById("HTML_스켈레톤").style = "display: none";                 
+      })
     })
-  })
-}
+  };
+
+  강아지사진들();
+
+  let 타이머;
+  window.addEventListener("scroll", () => {
+    const 스크롤퍼센트=
+      document.documentElement.scrollTop/
+      (document.documentElement.scrollHeight-
+        document.documentElement.clientHeight);
+    if(스크롤퍼센트 < 0.9) return;
+    if(타이머) return;
+
+    강아지사진들();
+
+    타이머 = setTimeout(() => {
+      clearTimeout(타이머);
+      타이머 = null;
+
+      const 마지막스크롤퍼센트 = 
+        document.documentElement.scrollTop /
+        (document.documentElement.scrollHeight -
+          document.documentElement.clientHeight);
+      if (마지막스크롤퍼센트 === 1) 강아지사진들();
+    }, 1000);
+  });
+};
 
 const 스크롤기능 = () => { 
   window.scrollTo({top:0, behavior:"smooth"}) 
@@ -435,4 +474,90 @@ const JS_다크모드 = (event) => {
   } else {
     document.documentElement.setAttribute("다크모드", "off");
   }
+};
+
+const JS_검색기능 = (event) => {
+  let 타이머;
+  clearTimeout(타이머);
+  타이머 = setTimeout(() => {
+    const 내가검색한단어 = event.target.value;
+
+    const 스토리지에저장된일기목록 = 
+      window.localStorage.getItem("민지의일기목록") ?? "[]";
+    const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+
+    const 검색결과들 = 일기목록.filter((el) => 
+      el.제목.includes(내가검색한단어)
+    );
+
+    const HTML_새로운일기도화지 = 검색결과들
+      .map(
+        (el, index) => `
+          <a href="./detail.html?number=${index}">
+            <div class="card_area">
+              <div class="diary_image">
+                ${
+                  el.기분 === "행복"
+                    ? '<img class="CSS_mood_image" src="./assets/images/mood_happy.png" alt="행복" />'
+                    : ""
+                }
+                ${
+                  el.기분 === "슬픔"
+                    ? '<img class="CSS_mood_image" src="./assets/images/mood_sad.png" alt="슬픔" />'
+                    : ""
+                }
+                ${
+                  el.기분 === "놀람"
+                    ? '<img class="CSS_mood_image" src="./assets/images/mood_surprise.png" alt="놀람" />'
+                    : ""
+                }
+                ${
+                  el.기분 === "화남"
+                    ? '<img class="CSS_mood_image" src="./assets/images/mood_mad.png" alt="화남" />'
+                    : ""
+                }
+                ${
+                  el.기분 === "기타"
+                    ? '<img class="CSS_mood_image" src="./assets/images/mood_think.png" alt="기타" />'
+                    : ""
+                }
+              </div>
+              <div class="diary_info"> <div class="diary_content">
+                  ${
+                    el.기분 === "행복"
+                      ? `<div class="diary_mood CSS_행복">행복해요</div>`
+                      : ""
+                  }
+                  ${
+                    el.기분 === "슬픔"
+                      ? `<div class="diary_mood CSS_슬픔">슬퍼요</div>`
+                      : ""
+                  }
+                  ${
+                    el.기분 === "놀람"
+                      ? `<div class="diary_mood CSS_놀람">놀랐어요</div>`
+                      : ""
+                  }
+                  ${
+                    el.기분 === "화남"
+                      ? `<div class="diary_mood CSS_화남">화나요</div>`
+                      : ""
+                  }
+                  ${
+                    el.기분 === "기타"
+                      ? `<div class="diary_mood CSS_기타">기타</div>`
+                      : ""
+                  }
+                  <div class="diary_date">${el.작성일}</div>
+                </div>
+                <div class="diary_title"> ${el.제목}</div>
+              </div> <img class="delete_button" src="./assets/images/close_icon.png" onclick="JS_일기삭제기능(event, ${index})" />
+            </div>
+          </a>
+        `
+      )
+      .join("");
+    window.document.getElementById("HTML_일기보여주는곳").innerHTML =
+      HTML_새로운일기도화지;
+  },1000);
 };

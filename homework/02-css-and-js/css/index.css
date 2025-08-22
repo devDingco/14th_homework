@@ -39,6 +39,13 @@ a {
 
 .body_banner {
     width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.main_header_area {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* 원하는 여백 크기로 조절 */
 }
 
 /* 내비게이션 */
@@ -48,8 +55,8 @@ a {
     justify-content: flex-start;
     align-items: center;
     gap: 1rem;
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
+    /* margin-top: 1.5rem;
+    margin-bottom: 2rem; */
 }
 
 .body_tab_text {
@@ -73,9 +80,8 @@ a {
     align-items: center;
     gap: 1rem;
     width: 100%; /* 부모 컨테이너의 너비에 맞춥니다 */    
-    margin-bottom: 3.2rem;
+    /* margin-bottom: 3.2rem; */
 }
-
 
 .filter_area_bg {
     position: sticky;
@@ -89,6 +95,8 @@ a {
     width: fit-content;
 }
 
+
+
 .드롭다운제목 {
     appearance: none;
     min-width: 7.5rem;
@@ -96,6 +104,7 @@ a {
     border-radius: 8px;
     padding: 0.75rem 0.625rem;
 
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5rem;
@@ -184,16 +193,6 @@ a {
     content: var(--사진보관함필터);
 }
 
-/* .filter {
-    min-width: 7.5rem;
-    padding: 0.75rem 0.625rem;
-    border-radius: 8px;
-    border: 0.0625rem solid #c7c7c7;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.5rem;    
-} */
-
 .inverted {
     filter: invert(1);
     z-index: 100;
@@ -225,6 +224,7 @@ a {
 .searchbar_input {
     border: none;
     outline: none;
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5rem;
@@ -248,6 +248,7 @@ a {
 
 .diary_write_button_text {
     color: #fff;
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1.125rem;
     font-weight: 600;
     line-height: 1.5rem;
@@ -267,6 +268,7 @@ a {
     flex-wrap: wrap;
     gap: 1.5rem;
     width: 100%;
+    margin-top: 2.62rem; 
 }
 
 .card_area {
@@ -382,8 +384,6 @@ a {
 }
 
 /*  일기등록 모달 */
-
-
 button img {
     display: block;
   }
@@ -443,6 +443,7 @@ button img {
 }
 
 .CSS_다크모드_라벨 {
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5rem;
@@ -487,7 +488,7 @@ button img {
     font-size: 1.125rem;
     font-weight: 500;
     line-height: 1.25rem;
-    color: #333;
+    color: var(--라디오글자색);
 }
 
 .mood_radio_button {
@@ -513,9 +514,9 @@ button img {
     cursor: pointer;
 
     &:checked {
-        background-color: #000;
-        border: 0.3rem solid #fff;
-        box-shadow: 0 0 0 0.2rem black;
+        background-color: var(--닫기버튼보더색);
+        border: 0.3rem solid var(--닫기버튼배경색);
+        box-shadow: 0 0 0 0.2rem var(--닫기버튼보더색);
     }
 }
 
@@ -539,7 +540,7 @@ button img {
     font-size: 1.4rem;
     font-weight: 500;
     line-height: 1.25rem;
-    color: #333;
+    color: var(--라디오글자색);
 }
 
 .text_input_label {
@@ -552,20 +553,20 @@ button img {
     appearance: none;
     width: 100%;
     border-radius: 8px;
-    background-color: #fff;
-    border: 0.0625rem solid #D4D3D3;
+    background-color: var(--인풋배경색);
+    border: 0.0625rem solid var(--인풋보더색);
     padding: 0.75rem 1rem;
     text-align: left;
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5rem;
     font-family: 'Pretendard Variable', sans-serif;
-    color: #333;
+    color: var(--라디오글자색);
 }
 
 #HTML_제목입력창::placeholder,
 #HTML_내용입력창::placeholder {
-    color: #ababab;
+    color: var(--인풋플레이스홀더색);
     font-family: inherit;
     font-style: inherit;
     font-size: inherit;
@@ -649,7 +650,8 @@ button img {
     flex-direction: column;
     gap: 4rem;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
+    margin-top: 2.62rem;    
 }
 
 .CSS_강아지사진 {

@@ -25,11 +25,12 @@
     align-items: center;
     gap: 2.5rem;
     border-radius: 24px;
-    border: 0.0625rem solid #D4D3D3; 
-    background:#fff;
+    border: 0.0625rem solid var(--인풋보더색);
+    background-color: var(--기본배경색);
     text-align: left;
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1.5rem; 
-    color: #000;
+    color: var(--기본글자색);
 
     position: absolute;
     top: calc(50% - 560px / 2);
@@ -47,7 +48,7 @@
     flex-direction: column;
     align-items: center;
     gap: 2.5rem;
-    background-color: #fff;
+    background-color: var(--기본배경색);
     border-radius: 24px;
 
     position: absolute;
@@ -57,8 +58,10 @@
 
 .등록완료모달_타이틀,
 .일기삭제모달_타이틀 {
-    color: #000;
+    color: var(--기본글자색);
     text-align: center;
+    text-align: center;
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1.5rem; /* 100% */
@@ -71,8 +74,9 @@
 
 .등록완료모달_내용,
 .일기삭제모달_내용 {
-    color:  #333;
+    color:  var(--등록완료모달글자색);
     text-align: center; 
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1.25rem;
     font-weight: 500;
     line-height: 1.5rem; /* 120% */
@@ -99,10 +103,11 @@
     align-items: center;
     gap: 0.625rem;
     border-radius: 8px;
-    background-color: #000;
+    background-color: var(--등록하기버튼배경색);
     cursor: pointer;
-    color: #fff;
+    color: var(--등록하기버튼글자색);
     text-align: center;
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 600;
@@ -121,9 +126,10 @@
     align-items: center;
     gap: 0.625rem;
     border-radius: 8px;
-    background-color: #000;
+    background-color: var(--등록하기버튼배경색);
     cursor: pointer;
-    color: #fff;
+    color: var(--등록하기버튼글자색);
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 600;
@@ -131,7 +137,8 @@
 }
 
 .save_button:disabled {
-    background-color: #c7c7c7;
+    background-color: var(--등록하기버튼비활성);
+    color: var(--등록하기버튼비활성글자색);
 }
 
 .등록완료모달_계속작성,
@@ -146,13 +153,16 @@
     align-items: center;
     gap: 0.625rem;
     border-radius: 8px;
-    border: 0.063rem solid #000;
-    background-color: #fff;
+    border: 0.063rem solid var(--닫기버튼보더색);
+    background-color: var(--닫기버튼배경색);
+
+    font-family: 'Pretendard Variable', sans-serif;
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 600;
     line-height: 1.5rem;
     cursor: pointer;
+    color: var(--기본글자색);
 }
 
 .diary_button_group{

@@ -104,9 +104,9 @@ search_area {
     cursor: pointer;
   
     &:checked {
-      background-color: black;
-      border: 0.3rem solid #fff;
-      box-shadow: 0 0 0 0.1rem black;
+      background-color: var(--닫기버튼보더색);
+      border: 0.3rem solid var(--닫기버튼배경색);
+      box-shadow: 0 0 0 0.1rem var(--닫기버튼보더색);
     }
 }
 
