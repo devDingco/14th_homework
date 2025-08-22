@@ -171,7 +171,7 @@ const 회고그리기기능 = () => {
             <div class="새로운회고_작성일"> [${회고.작성일}] </div>
         </div>
     `;
- });
+  });
  document.getElementById("회고목록프레임").innerHTML = 새로운회고목록;
 
  document.getElementById("회고입력박스").value = ""     /* 목록에 새로운 데이터 추가 후, 입력칸에 써있는 데이터 지우기 */

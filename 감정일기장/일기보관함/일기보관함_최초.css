@@ -13,7 +13,7 @@ body {
     flex-direction: column;
     justify-items: center;
     align-items: center;
-    padding: 1.25rem;
+    /* padding: 1.25rem; */
     
 }
 
@@ -24,6 +24,10 @@ a {
     max-width: 17.125rem;
     height: 100%;
     max-height: 18.5rem;   
+}
+
+a:hover {
+    transform: scale(1.1);
 }
 
 .프레임 {
@@ -61,7 +65,7 @@ a {
     text-align: start;
     align-items: center;
 
-    margin-bottom: 1.5rem;
+    margin: 1.5rem 0rem;
 
     color: #000;
     font-size: 1.125rem;
@@ -90,8 +94,9 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     width: 100%;
+    max-width: 73rem;
 }
 
 .메인_바디_상단글씨 {
@@ -127,15 +132,14 @@ a {
 }
 
 .필터버튼 {
-    max-width: 7.5rem;
-    width: 100%;
+    width: 7.5rem;
+    /* width: 100%; */
     padding: 0.25rem;
     border-radius: 0.5rem;
     align-items: center;
     border: 0.0625rem solid #c7c7c7;
     height: 2rem;   
-    
-  }
+}
 
 .일기쓰기버튼 {
     max-width: 6.875rem;
@@ -143,8 +147,7 @@ a {
     height: 3rem;
     padding: 0.5rem 0.625rem;
 
-    display: flex;
-    flex-direction: column;
+    
     text-align: center;
     gap: 0.625rem;
 
@@ -232,7 +235,7 @@ a {
     width: 100%;
     /* max-height: 18.5rem;   */
     height: 100%;
-
+    position: relative;
     /* gap: 1rem; */
 /* 
     display: flex;
@@ -247,6 +250,8 @@ a {
     display: flex;
     flex-direction: row;
     justify-content: center;
+
+    margin-bottom: 2.5rem;
 }
 
 .메인_바디_일기장_일기저장_내용 {
@@ -273,17 +278,14 @@ a {
 
     transition: 0.5s;
 
-    position: relative;
+    /* position: relative; */
 
     object-fit: cover;
     /* border: solid 0.0625rem black; */
 }
-
 .메인_바디_일기장_일기저장_사진:hover {
     filter: blur(0.25rem);
-    transform: scale(1.1);
 }
-
 
 .메인_바디_일기장_일기저장_내용_감정과날짜 {
     max-width: 17.125rem;
@@ -342,7 +344,7 @@ a {
 }
 
 .메인_바디_일기장_삭제버튼 {
-    width: 100%;
+    /* width: 100%; */
     width: 2.5rem;
     height: 2.5rem;
 
@@ -543,6 +545,23 @@ a {
     right: 10%;
 
     cursor: pointer;
+}
+
+
+.메인_바디_사진보관함_필터 {
+    max-width: 73rem;
+    width: 100%;
+    max-height: 3rem;
+    height: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+
+    margin-bottom: 2.625rem;
+    align-items: 100%;
+    position: sticky;
+    top:0;
+    z-index: 1;
 }
 
 /* #플로팅버튼사진 {
