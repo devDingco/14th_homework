@@ -240,8 +240,7 @@ const resetResistHtml = () => {
 // 메인페이지 사진보관함
 const makePicStorageHtml = async () => {
     document.getElementById("diary_container").innerHTML = `
-        <div class="skeleton_back">
-            <div class="skeleton_stick"></div>
+        <img src="./images/00-image.jpg" class="skeleton_back">
         </div>
     `
     const dogArr = await getDogApi(10)
