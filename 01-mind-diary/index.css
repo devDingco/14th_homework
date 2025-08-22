@@ -117,6 +117,9 @@ body.no-scroll {
     overflow: hidden;
 }
 
+body.no-scroll {
+    overflow: hidden;
+}
 
 .전체컨테이너 {
     width: 100%;
@@ -125,6 +128,8 @@ body.no-scroll {
     flex-direction: column;
     align-items: center;
 }
+
+
 
 .내용컨테이너 {
     width: 100%;
@@ -200,10 +205,8 @@ body.no-scroll {
     flex: 1 0 0;
 }
 
-.탭바 a {
-    text-decoration: none;
-    color: inherit;
-}
+.탭바 a {  text-decoration: none;
+    color: inherit;}
 
 .탭바항목_선택됨 {
     color: var(--기본-텍스트-색상);
@@ -243,12 +246,12 @@ body.no-scroll {
     align-items: center;
     top: 0;
     padding: 1rem 0 1rem 0;
-    gap: 1rem;
     z-index: 10;
 }
 
-.카드목록컨테이너 {
-    width: 100%;
+
+
+.필터드롭다운 {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -269,6 +272,19 @@ body.no-scroll {
     line-height: 1.5rem;
     /* 150% */
     letter-spacing: -0.01rem;
+}
+
+.필터드롭다운.scrolled {
+    background: var(--Gray-Gray-900, #1C1C1C);
+    color: var(--Gray-W, #FFF);
+    border: 0.0625rem solid var(--Gray-Gray-900, #1C1C1C);
+}
+
+.카드목록컨테이너 {
+    width: 100%;
+    display: flex;
+    gap: 1.5rem;
+    align-items: start;
 }
 
 .카드목록 {
@@ -801,7 +817,7 @@ body.no-scroll {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--버튼-화이트-텍스트);
+    color: var(--Gray-Gray-900, #1C1C1C);
     font-family: "Pretendard Variable";
     font-size: 1rem;
     font-style: normal;
@@ -810,25 +826,9 @@ body.no-scroll {
     /* 150% */
     letter-spacing: -0.01rem;
     cursor: pointer;
-    flex-shrink: 0;
 }
 
-/* 드롭다운 이미지들은 다크 모드용 이미지가 별도로 필요하므로, 기존 CSS를 유지하고 필요에 따라 다크 모드 클래스 내에서 변경하는 것이 좋습니다. */
-/* 드롭다운 컨테이너 */
-.드롭다운-컨테이너 {
-    position: relative;
-    width: 7.5rem;
-    font-family: "Pretendard Variable", sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.5rem;
-    letter-spacing: -0.01rem;
-    color: var(--드롭다운-텍스트-색상);
-    user-select: none;
-}
-
-/* 체크박스 숨기기 */
-.드롭다운-토글 {
+.모달배경 {
     display: none;
 }
 
@@ -1114,50 +1114,117 @@ body.no-scroll {
     display: flex;
     width: 100%;
     justify-content: center;
-    align-items: center;
-    margin-top: 2.5rem;
-    gap: 1rem;
-    /* 버튼 사이의 간격 */
+    z-index: 90;
 }
 
-.페이지네이션버튼 {
-    text-align: center;
-    font-family: "Pretendard Variable";
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.5rem;
-    /* 150% */
-    letter-spacing: -0.01rem;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 0.5rem;
-    border: 0;
-    background-color: var(--배경색);
-    color: var(--보조-텍스트-색상-3);
-    cursor: pointer;
-    transition: background-color 0.2s;
+.gradient-blur {
+    opacity: 0;
+    position: fixed;
+    z-index: 2;
+    inset: 0 0 auto 0;
+    height: 18%;
+    pointer-events: none;
 }
 
-.페이지네이션버튼:hover {
-    background-color: var(--푸터-배경색);
+.gradient-blur.scrolled {
+    opacity: 1;
 }
 
-.페이지네이션버튼[disabled] {
-    opacity: 0.2;
-    cursor: not-allowed;
+.gradient-blur>div,
+.gradient-blur::before,
+.gradient-blur::after {
+    position: absolute;
+    inset: 0;
 }
 
-.페이지네이션버튼.활성페이지 {
-    background-color: var(--푸터-배경색);
-    color: var(--기본-텍스트-색상);
-    font-weight: 500;
+.gradient-blur::before {
+    content: "";
+    z-index: 8;
+    backdrop-filter: blur(64px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 87.5%,
+            rgba(0, 0, 0, 1) 100%);
+}
+
+.gradient-blur>div:nth-of-type(1) {
+    z-index: 7;
+    backdrop-filter: blur(32px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 75%,
+            rgba(0, 0, 0, 1) 87.5%,
+            rgba(0, 0, 0, 1) 100%);
+}
+
+.gradient-blur>div:nth-of-type(2) {
+    z-index: 6;
+    backdrop-filter: blur(16px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 62.5%,
+            rgba(0, 0, 0, 1) 75%,
+            rgba(0, 0, 0, 1) 87.5%,
+            rgba(0, 0, 0, 0) 100%);
+}
+
+.gradient-blur>div:nth-of-type(3) {
+    z-index: 5;
+    backdrop-filter: blur(8px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 50%,
+            rgba(0, 0, 0, 1) 62.5%,
+            rgba(0, 0, 0, 1) 75%,
+            rgba(0, 0, 0, 0) 87.5%);
+}
+
+.gradient-blur>div:nth-of-type(4) {
+
+
+    z-index: 4;
+    backdrop-filter: blur(4px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 37.5%,
+            rgba(0, 0, 0, 1) 50%,
+            rgba(0, 0, 0, 1) 62.5%,
+            rgba(0, 0, 0, 0) 75%);
+}
+
+.gradient-blur>div:nth-of-type(5) {
+
+
+    z-index: 3;
+    backdrop-filter: blur(2px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 25%,
+            rgba(0, 0, 0, 1) 37.5%,
+            rgba(0, 0, 0, 1) 50%,
+            rgba(0, 0, 0, 0) 62.5%);
+}
+
+.gradient-blur>div:nth-of-type(6) {
+
+
+    z-index: 2;
+    backdrop-filter: blur(1px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 12.5%,
+            rgba(0, 0, 0, 1) 25%,
+            rgba(0, 0, 0, 1) 37.5%,
+            rgba(0, 0, 0, 0) 50%);
+}
+
+.gradient-blur::after {
+
+
+    content: "";
+    z-index: 1;
+    backdrop-filter: blur(0.5px);
+    mask: linear-gradient(to top,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 1) 12.5%,
+            rgba(0, 0, 0, 1) 25%,
+            rgba(0, 0, 0, 0) 37.5%);
 }
 
 
-
-
-/* 모바일 반응형 대응 */
 @media (max-width: 980px) {
     .카드목록컨테이너 {
         flex-direction: column;

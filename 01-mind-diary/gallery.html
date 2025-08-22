@@ -2,12 +2,10 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
     <title>감정기록 일기장</title>
     <link rel="stylesheet" href="./index.css" />
     <link rel="stylesheet" href="./gallery.css" />
     <script src="./gallery.js"></script>
-    <script src="./darkMode.js"></script>
 </head>
 
 <body>
@@ -27,13 +25,8 @@
                 <a href="./index.html">
                     <h1>민지의 다이어리</h1>
                 </a>
-                <div class="토글컨테이너">다크모드<input type="checkbox" class="토글" id="다크모드전환토글"></div>
             </div>
-            <div class="상단배너이미지">
-                <video class="상단배너-비디오" muted autoplay loop playsinline poster="assets/images/top_banner.jpg">
-                    <source src="./assets/images/banner.mp4" type="video/mp4">
-                </video>
-            </div>
+            <div class="상단배너이미지"></div>
             <div class="탭바">
                 <a href="./index.html">
                     <div class="탭바항목_선택안됨">
@@ -47,23 +40,27 @@
                 </a>
             </div>
             <div class="컨트롤바" id="컨트롤바">
-                <div class="드롭다운-컨테이너" id="신규사진필터">
-                    <input type="checkbox" id="드롭다운-토글" class="드롭다운-토글">
-                    <label for="드롭다운-토글" class="드롭다운-버튼">
-                        기본형
-                    </label>
-                    <ul class="드롭다운-메뉴">
-                        <li class="메뉴-항목" data-값="기본형">기본형</li>
-                        <li class="메뉴-항목" data-값="가로형">가로형</li>
-                        <li class="메뉴-항목" data-값="세로형">세로형</li>
-                    </ul>
-                </div>
+                <select class="필터드롭다운" id="사진필터">
+                    <option value="기본형" selected>기본형</option>
+                    <option value="가로형">가로형</option>
+                    <option value="세로형">세로형</option>
+                </select>
             </div>
+
             <div class="사진목록" id="강아지보여주는곳">
-               <!-- 여기에 강아지들 보여집니다 -->
-               <!-- 여기에 강아지들 보여집니다 -->
-               <!-- 여기에 강아지들 보여집니다 -->
-            </div>
+                <div class="스켈레톤컨테이너" id="스켈레톤로딩">
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                    <div class="스켈레톤아이템"></div>
+                </div>
+                </div>
 
         </div>
         <div class="푸터">

@@ -76,8 +76,8 @@
     align-items: center;
     gap: 0.625rem;
     border-radius: 0.5rem;
-    background: var(--기본-텍스트-색상);
-    color: var(--푸터-배경색);
+    background: rgba(0, 0, 0, 0.90);
+    color: #FFF;
     font-family: "Pretendard Variable";
     font-size: 1rem;
     font-style: normal;
@@ -86,6 +86,7 @@
     /* 150% */
     letter-spacing: -0.01rem;
     z-index: 10;
+
     opacity: 0;
     transition: opacity ease 0.6s;
 }
@@ -93,6 +94,7 @@
 .복사토스트.활성화됨 {
     opacity: 1;
 }
+
 
 .일기상세버튼컨테이너 {
     display: flex;

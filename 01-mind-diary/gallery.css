@@ -40,10 +40,9 @@
     width: 100%;
     max-width: 40rem;
     aspect-ratio: 1/1; /* 기본형: 1:1 비율 */
-    background-color: var(--테두리색-1);
+    background-color: #e0e0e0;
     border-radius: 1.5rem;
     position: relative;
-    overflow: hidden;
 }
 
 .스켈레톤아이템::after {
