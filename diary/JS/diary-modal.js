@@ -80,11 +80,12 @@ window.addEventListener("DOMContentLoaded", () => {
         일기들.push(새로운일기)
         localStorage.setItem("일기들목록", JSON.stringify(일기들))
 
+        savedDiaries = 일기들
+
         입력초기화()
 
-        // 화면 갱신
-        renderDiaries()
-
+        // 최신 localStorage 데이터 기준으로 다시 그리기
+        시작페이지 = 1
         일기들그리기(시작페이지)
         페이지번호그리기(시작페이지)
     });
@@ -102,7 +103,10 @@ const 입력초기화 = () => {
     feelRadios.forEach(radio => radio.checked = false)
     submitBtn.disabled = true  // 직접 비활성화
 
-    renderDiaries()
+    // 최신 localStorage 데이터 기준으로 다시 그리기
+    시작페이지 = 1
+    일기들그리기(시작페이지)
+    페이지번호그리기(시작페이지)
 }
 
 // deleteModalGroup 모달 열면서, delFinishModalGroup 삭제 버튼에 number 연결
