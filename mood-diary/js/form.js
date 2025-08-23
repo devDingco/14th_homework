@@ -14,30 +14,33 @@ if (form) {
     const _title = e.target.title.value.trim()
     const _contents = e.target.contents.value.trim()
 
+    if (!isValid()) return
+
     const diaryList = getDiaryList()
 
-    if (isValid()) {
-      let idx
-      if (diaryId) {
-        idx = diaryList.findIndex((val) => val.id === +diaryId)
-      } else {
-        diaryId = diaryList.length > 0 ? diaryList[diaryList.length - 1].id + 1 : 0
-        idx = diaryList.length
-      }
+    const hasValidId =
+      diaryId !== undefined && diaryId !== null && diaryId !== '' && !Number.isNaN(+diaryId)
+    const idx = hasValidId ? diaryList.findIndex((val) => val.id === +diaryId) : -1
 
-      const newDiary = {
-        id: +diaryId,
-        mood: isHappy + isSad + isSurprise + isAngry + isEtc,
-        title: _title,
-        contents: _contents,
-        date: getCurrentDate(),
-        comments: diaryList[idx] ? diaryList[idx].comments : [],
-      }
+    const newDiary = {
+      id: hasValidId && idx !== -1 ? +diaryId : getNextId(diaryList),
+      mood: isHappy + isSad + isSurprise + isAngry + isEtc,
+      title: _title,
+      contents: _contents,
+      date: getCurrentDate(),
+      comments: idx !== -1 ? diaryList[idx].comments ?? [] : [],
+    }
+
+    // INFO: 수정과 신규제출의 분기점을 확실하게 나눔
+    if (idx !== -1) {
       diaryList[idx] = newDiary
       storeDiaryList(diaryList)
-      sessionStorage.setItem(TOAST_KEY, `${idx + 1}번째 일기가 제출되었습니다.`)
-
-      location.replace('./index.html')
+      alert(`${idx + 1}번째 일기가 수정되었습니다.`)
+      location.reload()
+    } else {
+      diaryList.push(newDiary)
+      storeDiaryList(diaryList)
+      render()
     }
   })
 }
@@ -104,9 +107,8 @@ const selectMood = (event) => {
   const moodId = event.target.value ?? 'total'
   const moodLabel = getMoodLabel(moodId) ?? '전체'
 
-  const titleEl = document.getElementById('dropdown-title-id')
-  titleEl.style = `--dropdown-title: "${moodLabel}`
-  titleEl.click()
+  document.getElementById('dropdown-title-id').style = `--dropdown-title: "${moodLabel}"`
+  document.getElementById('dropdown-title-id').click()
 
   state.mood = moodId
   state.page = 1

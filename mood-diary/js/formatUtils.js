@@ -100,3 +100,7 @@ const toggleDarkMode = () => {
   document.body.classList.toggle('darkmode')
   localStorage.setItem(DARKMODE_KEY, !isDarkMode)
 }
+
+const getNextId = (list) => {
+  return list.length ? Math.max(...list.map((d) => d.id ?? -1)) + 1 : 0
+}
