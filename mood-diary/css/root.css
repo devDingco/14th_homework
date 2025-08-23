@@ -52,6 +52,7 @@
   --page-arrow-color: var(--color-gray-300);
   --float-stroke-color: var(--color-gray-50);
   --float-fill-color: rgba(255, 255, 255, 0.9);
+  --float-shadow-color: rgba(0, 0, 0, 0.16);
 }
 
 .darkmode {
@@ -82,6 +83,7 @@
   --page-arrow-color: var(--color-gray-800);
   --float-stroke-color: var(--color-gray-700);
   --float-fill-color: rgba(28, 28, 28, 0.9);
+  --float-shadow-color: rgba(242, 242, 242, 0.603);
 }
 
 /* web headline */
