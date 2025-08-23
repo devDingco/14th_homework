@@ -1,4 +1,3 @@
-//ERROR: 삭제 후, 폼 등록 1회가 안됨.
 const form = document.querySelector('.main__diary-form')
 
 if (form) {
@@ -40,7 +39,14 @@ if (form) {
     } else {
       diaryList.push(newDiary)
       storeDiaryList(diaryList)
-      render()
+
+      state.mood = 'total'
+      state.query = ''
+
+      const total = getDiaryList().length
+      const lastPage = Math.max(1, Math.ceil(total / PAGE_SIZE))
+
+      gotoPage(lastPage)
     }
   })
 }
