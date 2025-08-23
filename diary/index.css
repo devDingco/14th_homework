@@ -184,12 +184,12 @@ a {
   gap: 1.5rem;
 }
 
+.스켈레톤,
 .바디__정렬__목록2 {
   min-width: 49rem;
   width: 100%;
   /* height: 72.9375rem; */
   display: flex;
-  flex-direction: column;
   justify-content: center;
   flex-wrap: wrap;
   gap: 1.5rem;
@@ -959,8 +959,9 @@ a {
 /* ----------------------------------------*/
 
 .강아지사진CSS {
-  max-width: 640px;
+  max-width: 40rem;
   width: 100%;
+  aspect-ratio: 1/1;
   border-radius: 24px;
   object-fit: cover;
 }
@@ -969,4 +970,33 @@ a {
   display: flex;
   width: 100%;
   gap: 2.4rem;
+}
+
+.스켈레톤박스 {
+  max-width: 40rem;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 24px;
+  object-fit: cover;
+  background-color: lightgray;
+  overflow: hidden;
+}
+
+.스켈레톤막대기 {
+  width: 100px;
+  height: 2000px;
+  background-color: white;
+  filter: blur(70px);
+  rotate: 40deg;
+  animation-name: 스켈레톤애니메이션;
+  animation-duration: 2s;
+}
+
+@keyframes 스켈레톤애니메이션 {
+  from {
+    transform: translate(-600px, -400px);
+  }
+  to {
+    transform: translate(700px, 200px);
+  }
 }
