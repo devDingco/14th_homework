@@ -26,15 +26,6 @@ h1 {
   text-align: right;
   border: none;
   font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 4px;
-}
-
-#내용복사 img {
-  width: 24px;
-  height: 24px;
 }
 /* 모달 스타일 */
 .모달그룹 {

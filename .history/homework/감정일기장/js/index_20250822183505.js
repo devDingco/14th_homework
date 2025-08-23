@@ -10,6 +10,20 @@ document.addEventListener('DOMContentLoaded', function () {
   // 버튼들
   const 일기보관함버튼 = document.getElementById('일기보관함버튼');
   const 사진보관함버튼 = document.getElementById('사진보관함버튼');
+
+  // 일기보관함 버튼 클릭하면 일기카드 보이기
+  일기보관함버튼.addEventListener('click', function () {
+    const diaryListContainer = document.getElementById('diaryList');
+    diaryListContainer.innerHTML = '';
+    diaryList.map((일기) => 일기를화면에그리기(일기));
+  });
+
+  // 사진보관함 버튼 클릭하면 사진보관함 보이기
+  사진보관함버튼.addEventListener('click', function () {
+    const diaryListContainer = document.getElementById('diaryList');
+    diaryListContainer.innerHTML =
+      '<p style="text-align: center; font-size: 18px; color: #999; margin-top: 50px;">사진보관함은 준비중입니다.</p>';
+  });
   const 모달열기버튼 = document.getElementById('모달열기버튼');
   const 모달닫기버튼 = document.getElementById('모달닫기버튼');
   const 모달확인버튼 = document.getElementById('모달확인버튼');
@@ -29,22 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const 모달배경 = document.getElementById('모달배경');
 
   // 강아지불러오기
-  const 강아지불러오는기능 = () => {
-    fetch('https://dog.ceo/api/breeds/image/random/10').then((받아온결과) => {
-      받아온결과.json().then((객체만뽑힌결과) => {
-        console.log(객체만뽑힌결과);
-
-        const 이미지다운로드주소들 = 객체만뽑힌결과.message;
-        const 상태 = 객체만뽑힌결과.status;
-        console.log(`메세지: ${이미지다운로드주소들}`);
-        console.log(`상태: ${상태}`);
-        document.getElementById('강아지보여주는곳').innerHTML =
-          이미지다운로드주소들
-            .map((el) => ` <img src="${el}" width='300px' />`)
-            .join('');
-      });
-    });
-  };
 
   // 모달 열기/닫기 함수 (실제 요소를 받는 방식으로 변경)
   function 모달열기(모달요소) {

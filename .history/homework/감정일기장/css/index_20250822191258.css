@@ -25,8 +25,8 @@ nav {
   padding-top: 1.5rem;
 }
 nav > button {
-  background-color: transparent;
-  border: transparent;
+  width: 119px;
+  height: 48px;
 }
 /* 타이틀메인 */
 .title__main {

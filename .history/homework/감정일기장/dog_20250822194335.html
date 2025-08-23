@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>사진보관함</title>
+    <link rel="stylesheet" href="./css/dog.css" />
+    <script src="./js/dog.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <!-- 헤더 -->
+      <h1>민지의 다이어리</h1>
+      <!-- 사진배너 -->
+      <div class="banner">
+        <img src="./assets/images/banner1.png" alt="banner" class="webBanner" />
+        <img src="./assets/images/banner2.png" alt="" class="mobileBanner" />
+      </div>
+      <!-- 네비게이션 -->
+      <nav>
+        <button id="일기보관함버튼">
+          <a href="./index.html">일기보관함</a>
+        </button>
+        <button id="사진보관함버튼" onclick="강아지불러오는기능()">
+          사진보관함
+        </button>
+      </nav>
+      <input type="checkbox" class="드롭다운제목" id="드롭다운제목ID" />
+      <ul class="드롭다운목록">
+        <li>
+          <input
+            type="radio"
+            name="선택그룹"
+            id="기본형"
+            onclick="선택기능(event)"
+          />
+        </li>
+        <li>
+          <input
+            type="radio"
+            name="선택그룹"
+            id="가로형"
+            onclick="선택기능(event)"
+          />
+        </li>
+        <li>
+          <input
+            type="radio"
+            name="선택그룹"
+            id="세로형"
+            onclick="선택기능(event)"
+          />
+        </li>
+      </ul>
+
+      <div id="강아지보여주는곳"></div>
+    </div>
+  </body>
+</html>
