@@ -4,6 +4,8 @@ window.onload = () => {
     // 0.시작하면 일기 목록에 그리기 
  일기그리기기능();
 
+ window.document.getElementById("사진보관함_프레임").style = 
+        "display: none;";
 
 
 };
@@ -271,22 +273,111 @@ const 일기삭제기능 = (event, 일기번호) => {
     일기그리기기능();
 };
 
+const 서치바검색기능 = (event) => {
+    let 타이머;
+    clearTimeout(타이머);
+    타이머 = setTimeout(() => {
+     const 내가검색한단어 = event.target.value;
 
-// const 사진보관함내용보이기 = () =>{
-//     window.document.getElementById("일기보관함_프레임").style = 
-//         "display: none;";
-//     window.document.getElementById("일기보관함_필터버튼").style =
-//         "display: none;";
-//     window.document.getElementById("일기보관함탭").style = 
-//         "color: var(--Gray-Gray-400, #ABABAB); border: none;" 
-            
-//     window.document.getElementById("사진보관함_프레임").style = 
-//         "display: block;";
-//     window.document.getElementById("사진보관함_필터버튼").style =
-//         "display: block;";
-//     window.document.getElementById("사진보관함탭").style = 
-//         "color: #000; border-bottom: 0.25rem solid #000"
-// }
+     const 스토리지에저장된일기목록 =
+        window.localStorage.getItem("민지의일기보관함") ?? "[]";
+     const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+    
+     const 검색결과 = 일기목록.filter((el) =>
+        el.제목.includes(내가검색한단어)
+    );
+    const 새로운일기도화지 = 검색결과
+     .map (
+        (el, index) => `
+            <a href="../일기상세/일기상세_메인.html?number=${index}">                
+                <div class="메인_바디_일기장_일기저장_">
+                    <div class="메인_바디_일기장_일기저장_사진">
+                            ${el.기분 === "행복"
+                        ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/joy.png" >'
+                        : ""
+                        }
+                            ${el.기분 === "슬픔"
+                        ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/sad.png" >'
+                        : ""
+                        }
+                            ${el.기분 === "놀람"
+                        ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/surprise.png" >'
+                        : ""
+                        }
+                            ${el.기분 === "화남"
+                        ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/angry.png" >'
+                        : ""
+                        }
+                            ${el.기분 === "기타"
+                        ? '<img class="메인_바디_일기장_일기저장_사진" src="../images/etc.png" >'
+                        : ""
+                        }
+                    </div>
+                    <div class= "메인_바디_일기장_일기저장_내용_감정과날짜">
+                            ${el.기분 === "행복"
+                        ? `<div class="메인_바디_일기장_일기저장_내용_감정_행복해요">행복해요</div>`
+                        : ""
+                        }
+                        ${el.기분 === "슬픔"
+                        ? `<div class="메인_바디_일기장_일기저장_내용_감정_슬퍼요">슬퍼요</div>`
+                        : ""
+                        }
+                        ${el.기분 === "놀람"
+                        ? `<div class="메인_바디_일기장_일기저장_내용_감정_놀랐어요">놀랐어요</div>`
+                        : ""
+                        }
+                        ${el.기분 === "화남"
+                        ? `<div class="메인_바디_일기장_일기저장_내용_감정_화나요">화나요</div>`
+                        : ""
+                        }
+                        ${el.기분 === "기타"
+                        ? `<div class="메인_바디_일기장_일기저장_내용_감정_기타">기타</div>`
+                        : ""
+                        } 
+                        <div class="메인_바디_일기장_일기저장_내용_날짜"> ${el.작성일} </div>
+                    </div>
+                    <div class="메인_바디_일기장_일기저장_1_설명_타이틀"> ${el.제목} </div>
+                    <img class="메인_바디_일기장_삭제버튼" src="../icons/delete.svg" onclick="일기삭제기능(event, ${index})">
+                </div>
+            </a>     
+        `
+        )
+          .join("");
+        window.document.getElementById("일기목록").innerHTML = 새로운일기도화지;}, 
+    1000);
+};
+
+const 페이지네이션만들기 = () => {
+    const 스토리지에저장된일기목록 =
+        window.localStorage.getItem("민지의일기보관함") ?? "[]";
+    const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+
+    const 페이지당일기수 = 12;
+    const 페이지그룹당개수= 5;
+    const 마지막페이지 = Math.ceil( 일기목록.length / 페이지당일기수 );         // Math.ceil () => 올림함수
+
+    const 현재페이지그룹 = Math.ceil(클릭된페이지 / 페이지그룹크기);
+    const 그룹시작페이지 = (현재페이지그룹 - 1) * 페이지그룹크기 + 1;              // 현재 페이지네이션 그룹에서 가장 ㅊ첫번째 숫자
+    const 그룹마지막페이지 = Math.min (그룹시작페이지 + 페이지그룹크기 -1, 마지막페이지);
+
+    const 버튼들 = new Array(페이지그룹크기).fill(1)
+    .map((el, index) => {
+        const 페이지번호 = index + 그룹시작페이지;
+
+        return 페이지번호 <= 마지막페이지
+            ? `<button onclick="카드그리기기능(${페이지번호}); 페이지네이션만들기(${페이지번호})" 
+                        class=${클릭된페이지 === 페이지번호 ? "페이지눌린버튼" : "페이지버튼"}>${페이지번호}
+               </button>`
+               : ``;
+    })
+     .join(" ");
+    
+     
+
+
+}
+
+
 
 
 
