@@ -73,3 +73,11 @@ const 수정하기기능 = () => {
 
     window.location.replace(`./sub.html?number=${일기인덱스}`);
   }
+
+  const 뒤로가기기능 = () => {
+    window.history.back();
+  };
+
+  const 다크모드기능 =()=>{
+    document.body.classList.toggle("다크모드만들기")
+  }

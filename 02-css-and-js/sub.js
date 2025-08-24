@@ -171,3 +171,7 @@ window.addEventListener("keydown",(event)=>{
 const 뒤로가기기능 = () => {
   window.history.back();
 };
+
+const 다크모드기능 =()=>{
+  document.body.classList.toggle("다크모드만들기")
+}

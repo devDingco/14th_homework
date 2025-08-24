@@ -3,29 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./editpage.css">
+    <link rel="stylesheet" href="./global.css">
     <script src="./editpage.js"></script>
     <title>민지의 다이어리_수정페이지</title>
 </head>
 <body>
     <div class="가장큰배경"> 
         <div class="큰배경">
-        <div class="헤더">
-            <div class="헤더__타이틀">
-                <h3>
+            <div class="헤더">
+                <div class="헤더__타이틀">
+                   
                     민지의 다이어리
-                </h3>
+                </div>
+                <div class="헤더__모바일타이틀">
+                    <img onclick="뒤로가기기능()" src="./assets/icons/뒤로가기.png" alt="뒤로가기버튼"> 일기상세
+                    
+                </div>
+                <div class="등록모달창__타이틀섹션__다크모드영역">
+                    <label for="다크모드" class="등록모달창__타이틀섹션__다크모드영역__다크모드텍스트">다크모드</label>
+                    <input class="등록모달창__타이틀섹션__다크모드영역__다크모드버튼" type="checkbox" onclick="다크모드기능()" id="다크모드">
+                 </div>
             </div>
-        </div>
         <div class="바디">
             <div class="바디__메인">
                 <div class="바디__메인__감정섹션">
                     <h3>오늘 기분은 어땠나요?</h3>
                     <div class="바디__메인__감정섹션__감정수정">
-                        <input type="radio" name="감정" value="행복해요">행복해요
-                        <input type="radio" name="감정" value="슬퍼요">슬퍼요
+                        <div>
+                            <input type="radio" name="감정" value="행복해요" id="행">
+                            <label for="행">행복해요</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="감정" value="슬퍼요" id="슬">
+                            <label for="슬">슬퍼요</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="감정" value="놀랐어요" id="놀">
+                            <label for="놀">놀랐어요</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="감정" value="화나요" id="화">
+                            <label for="화">화나요</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="감정" value="기타" id="기">
+                            <label for="기">기타</label>
+                        </div>
+                        <!-- <input type="radio" name="감정" value="슬퍼요">슬퍼요
                         <input type="radio" name="감정" value="놀랐어요">놀랐어요
                         <input type="radio" name="감정" value="화나요">화나요
-                        <input type="radio" name="감정" value="기타">기타
+                        <input type="radio" name="감정" value="기타">기타 -->
                     </div>
                 </div>
                 <div class="바디__메인__제목섹션">
@@ -43,8 +70,8 @@
 
                 </div>
                 <div class="바디__메인__버튼섹션">
-                    <button onclick="취소기능()" class="바디__메인__버튼섹션__취소버튼"><img src="./assets/images/취소버튼.png" alt=""></button>
-                    <button onclick="수정하기기능()" class="바디__메인__버튼섹션__수정버튼"><img src="./assets/images/수정하기버튼.png" alt=""></button>
+                    <button onclick="취소기능()" class="바디__메인__버튼섹션__취소버튼">취소</button>
+                    <button onclick="수정하기기능()" class="바디__메인__버튼섹션__수정버튼">수정 하기</button>
 
                 </div>
                 

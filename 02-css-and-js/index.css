@@ -7,6 +7,7 @@
     font-size: 10px;
     box-sizing: border-box;
     font-family:Pretendard Variable;
+    color: var(--기본글자색);
 }
 
 li,ul{
@@ -20,6 +21,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: var(--기본배경색);
   }
 
 a{
@@ -31,11 +33,11 @@ a{
 
     /* max-width: 116.8rem; */
     max-width: 116.8rem;
+    
   }
 
 .가장큰배경 {
     width: 100%;
-    
 }
 
 
@@ -43,6 +45,7 @@ a{
     /* width: 120rem; */
     width: 100%;
     /* height: 3.75rem; */
+    
 }
 .헤더__제목 {
     /* width: 120rem; */
@@ -87,6 +90,7 @@ a{
     width: 100%;
     display: flex;
     justify-content: center;
+    color: gray;
     
 }
 
@@ -96,9 +100,12 @@ a{
     gap: 2.4rem;
     margin-top: 2.4rem;
     margin-bottom: 4.2rem;
-    color: #ababab;
+    /* color: var(--인풋플레이스홀더색); */
+    /* color: red; */
+    color: gray;
 }
-.바디__메인섹션__메뉴섹션__메뉴 > div {
+
+.바디__메인섹션__메뉴섹션__메뉴 div {
     font-size: 2.4rem;
     font-weight: 700;
     line-height: 2.4rem;
@@ -107,14 +114,31 @@ a{
     justify-content: center;
     padding: 1.2rem 0.8rem;
     cursor: pointer;
+    /* color: var(--기본글자색); */
+    /* color: gr */
+    /* color: gray; */
 }
-
+.바디__메인섹션__메뉴섹션__메뉴__일기메뉴{
+    color: gray;
+}
+.바디__메인섹션__메뉴섹션__메뉴__강아지메뉴{
+    color: gray;
+}
+#일기메뉴{
+    color: gray;
+}
 .선택된메뉴{
-    border-bottom: 0.2rem solid #000;
+    border-bottom: 0.2rem solid var(--기본글자색);
     display: flex;
-    color: #000;
+    /* color: var(--기본글자색); */
+    /* color: black; */
+    color: var(--기본글자색);
+    
 }
-
+#일기메뉴.선택된메뉴 {
+    color: var(--기본글자색);
+  }
+  
 .바디__메인섹션__필터섹션 {
     /* width: 12s0rem; */
     width: 100%;
@@ -146,7 +170,8 @@ a{
     /* position: absolute;
     left: 13.6rem; */
     border-radius: 10rem;
-    border: 1px solid #C7C7C7;
+    border: 1px solid var(--인풋보더색);
+    background: var(--인풋배경색);
     padding: 1.2rem 1.6rem 1.2rem 1.6rem;
     
 }
@@ -156,6 +181,7 @@ a{
     line-height: 2.4rem;
     appearance: none;
     border: 0px;
+    background: var(--인풋배경색);
     /* position: relative;
     top: 0;
     left: 0; */
@@ -169,12 +195,12 @@ a{
     height: 4.8rem;
     padding: 0.4rem;
     border-radius: 0.8rem;
-    border: 0.1rem solid #c7c7c7;
+    border: 0.1rem solid var(--인풋보더색);
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 2.4rem;
     padding: 1.2rem 8rem 1.2rem 1.2rem;
-
+    background: var(--인풋배경색);
     /* position: absolute;
     top: 0;
     left: 0; */
@@ -197,7 +223,7 @@ a{
     display: none;
     min-width: 12rem;
     border-radius: 0.8rem;
-    border: 0.1rem solid #c7c7c7;
+    border: 0.1rem solid var(--인풋보더색);
     line-height: 2.4rem;
     overflow: hidden;
 
@@ -210,6 +236,7 @@ a{
 .바디__메인섹션__필터섹션__필터__드랍다운목록 input{
     appearance: none;
     display: none;
+    background: var(--인풋배경색);
 
 }
 .바디__메인섹션__필터섹션__필터__드랍다운목록 label {
@@ -222,7 +249,7 @@ a{
     font-size: 1rem;
     font-weight: 400;
     line-height: 2.4rem;
-    background-color: white;
+    background: var(--인풋배경색);
 }
 .바디__메인섹션__필터섹션__필터__드랍다운목록 label:hover{
     
@@ -230,13 +257,43 @@ a{
    } 
 
 .바디__메인섹션__필터섹션__필터영역__일기쓰기버튼{
+    width: 11rem;
+    height: 4.8rem;
     border: 0px;
     position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: end;
-    background-color: white;
+    justify-content: center;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    /* flex-direction: column; */
+    /* justify-content: end; */
+    
+
+    border-radius: 8px;
+    padding-top: 8px;
+    padding-right: 10px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    background-color: var(--일기쓰기버튼색);
+    
+    
+    
+
+    /* background-color: var(--기본배경색); */
     border: 0px solid #000;
+}
+.바디__메인섹션__필터섹션__필터영역__일기쓰기버튼 div{
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    text-align: center;
+    font-size: 1.8rem;
+    line-height: 4.8rem;
+    leading-trim: NONE;
+    letter-spacing: -1%;
+    width: 11rem;
+    height: 4.8rem;
+    color: var(--일기쓰기글자색);
 }
 
 
@@ -389,20 +446,25 @@ a{
     align-items: center;
     width: 100%;
     backdrop-filter: blur(1rem);
+    /* color: red; */
 }
+
 #이미지형태선택{
     min-width: 12rem;
     padding: 0.4rem;
     border-radius: 0.8rem;
-    border: 0.1rem solid #c7c7c7;
+    border: 0.1rem solid var(--인풋보더색);
     height: 3.2rem;
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 2.4rem;
+    color: var(--기본글자색);
+    background-color: var(--인풋배경색);
+    
 }
 #이미지나오는곳{
     width: 100%;
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     display: flex;
     flex-direction: column;
     align-items: center;
