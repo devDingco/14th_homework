@@ -1,0 +1,242 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.게시물등록_frame {
+    display: flex;
+    max-width: 120rem;
+    width: 100%;
+    padding: 0 20rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.게시물등록_container {
+    display: flex;
+    max-width: 80rem;
+    width: 100%;
+    padding: 2.5rem 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+    flex-shrink: 0;
+}
+
+hr {
+    max-width: 80rem;
+    width: 100%;
+
+    border: none;
+    height: 0.125rem;
+    background: var(--gray-100, #E4E4E4);
+}
+
+.게시물등록_사용자인풋 {
+    max-width: 80rem;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex: 1 0 0;
+}
+
+.게시물등록_라벨 {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.25rem;
+    align-self: stretch;
+
+    color: var(--gray-800, #333);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem; /* 150% */
+}
+
+.게시물등록_플레이스홀더 {
+    align-self: stretch;
+    max-width: 80rem;
+    width: 100%;
+    height: 3rem;
+
+    display: flex;
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+
+    color: var(--Gray-Gray-400, #ABABAB);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem; /* 150% */
+
+    border-radius: 0.5rem;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+}
+
+.게시물등록_작성자-비밀번호 {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.5rem;
+    align-self: stretch;
+}
+
+.게시물등록_주소인풋 {
+    max-width: 80rem;
+    width: 100%;
+    height: 12rem;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    align-self: stretch;
+}
+
+.게시물등록_주소_상단 {
+    display: flex;
+    max-width: 13.75rem;
+    width: 100%;
+
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.게시물등록_주소인풋_라벨 {
+    color: var(--gray-800, #333);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem; /* 150% */
+}
+
+.게시물등록_주소인풋_우편번호 {
+    max-width: 13.75rem;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.게시물등록_주소인풋_플레이스홀더 {
+    display: flex;
+
+    max-width: 5.125rem;
+    width: 100%;
+    height: 3rem;
+
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+
+    text-align: center;
+    color: var(--Gray-Gray-400, #ABABAB);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem; /* 150% */
+
+    border-radius: 0.5rem;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+}
+
+.게시물등록_주소인풋_우편번호버튼 {
+    display: flex;
+
+    padding: 0.75rem 1rem;
+    align-items: center;
+    gap: 0.5rem;
+
+    border-radius: 0.5rem;
+    border: 1px solid var(--gray-B, #000);
+    background: var(--gray-w, #FFF);
+
+    color: var(--gray-B, #000);
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem; /* 133.333% */
+}
+
+.사진첨부인풋 {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.5rem;
+}
+
+.게시물등록_사진첨부 {
+    display: flex;
+    max-width: 80rem;
+    width: 100%;
+
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.게시물등록_사진첨부_박스 {
+    display: flex;
+    width: 10rem;
+    height: 10rem;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    border-radius: 0.5rem;
+    background: var(--gray-50, #F2F2F2);
+}
+
+.게시물등록_사진첨부_박스 p {
+    width: 8.3125rem;
+    height: 1.5rem;
+
+    color: var(--gray-600, #777);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem; /* 150% */
+}
+
+.게시물등록_사진첨부_박스 input {
+    display: none;
+}
+
+.게시물등록_취소-등록하기버튼 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    align-self: stretch;
+}
+
+.게시물등록_버튼 {
+    display: flex;
+    height: 3rem;
+    padding: 0.75rem 1rem;
+    align-items: center;
+    gap: 0.5rem;
+    
+    border-radius: 0.5rem;
+
+    color: var(--gray-B, #000);
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem; /* 133.333% */
+} 
+
+/* .게시물등록_취소버튼 {
+    border: 1px solid var(--gray-B, #000);
+    background: var(--gray-w, #FFF);
+}
+
+.게시물등록_등록하기버튼 {
+    background: #2974E5;
+} */
