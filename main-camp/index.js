@@ -1,0 +1,5 @@
+const ResistPostPage = () => {
+    return (
+        
+    )
+}
