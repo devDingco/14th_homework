@@ -1,86 +1,83 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>일기 상세</title>
-  <link rel="stylesheet" href="./mindjournal.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>일기 상세</title>
+    <link rel="stylesheet" href="./mindjournal.css" />
 </head>
 <body>
-  <header class="site-header">
-    <h1>일기 상세</h1>
-    <a href="mindjournal.html" class="primary" style="text-decoration:none;display:inline-block;">목록</a>
-  </header>
+    <header class="site-header">
+        <h1>일기 상세</h1>
+        <a href="mindjournal.html" class="primary" style="text-decoration:none;display:inline-block;">목록</a>
+    </header>
 
-  <main style="padding: 1.5rem; max-width: 800px; margin: 0 auto;">
-    <div id="notFound" style="display:none;">일기를 찾을 수 없습니다.</div>
+    <main style="padding: 1.5rem; max-width: 800px; margin: 0 auto;">
+        <div id="notFound" style="display:none;">일기를 찾을 수 없습니다.</div>
 
-    <div id="detailArea">
-      <div id="currentImageWrap" style="text-align:center; margin-bottom:1rem;">
-        <img id="currentImage" src="" alt="" style="max-width:300px; width:100%; border-radius:12px;" />
-      </div>
+        <div id="detailArea">
+            <div id="currentImageWrap" style="text-align:center; margin-bottom:1rem;">
+                <img id="currentImage" src="" alt="" style="max-width:300px; width:100%; border-radius:12px;" />
+            </div>
 
-      <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin:.5rem 0;">
-        <button id="copyContent" class="ghost">내용 복사</button>
-        <button id="askDelete" class="danger">삭제</button>
-      </div>
+            <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin:.5rem 0;">
+                <button id="copyContent" class="ghost">내용 복사</button>
+                <button id="askDelete" class="danger">삭제</button>
+            </div>
 
-      <form id="editForm" style="margin-top: .5rem;">
-        <div class="emotion-select" style="margin:.5rem 0 1rem;">
-          <label><input type="radio" name="emotion" value="happy" /> 행복해요</label>
-          <label><input type="radio" name="emotion" value="sad" /> 슬퍼요</label>
-          <label><input type="radio" name="emotion" value="surprised" /> 놀랐어요</label>
-          <label><input type="radio" name="emotion" value="angry" /> 화나요</label>
-          <label><input type="radio" name="emotion" value="etc" /> 기타</label>
+            <form id="editForm" style="margin-top: .5rem;">
+                <div class="emotion-select" style="margin:.5rem 0 1rem;">
+                    <label><input type="radio" name="emotion" value="happy" /> 행복해요</label>
+                    <label><input type="radio" name="emotion" value="sad" /> 슬퍼요</label>
+                    <label><input type="radio" name="emotion" value="surprised" /> 놀랐어요</label>
+                    <label><input type="radio" name="emotion" value="angry" /> 화나요</label>
+                    <label><input type="radio" name="emotion" value="etc" /> 기타</label>
+                </div>
+
+                <label>제목</label>
+                <input type="text" id="editTitle" style="width:100%; padding:8px; margin:8px 0;">
+
+                <label>내용</label>
+                <textarea id="editContent" rows="6" style="width:100%; padding:8px; margin:8px 0;"></textarea>
+
+                <button id="saveBtn" type="submit" class="primary">수정완료</button>
+            </form>
+
+            <section id="commentsSection" style="margin-top:24px;">
+                <h3>댓글</h3>
+                <div id="commentsList"></div>
+
+                <form id="commentForm" style="margin-top:12px;">
+                    <textarea id="commentInput" rows="3" style="width:100%; padding:8px;" placeholder="댓글을 입력하세요"></textarea>
+                    <button type="submit" id="commentSubmit" style="margin-top:8px;" class="primary">댓글 등록</button>
+                </form>
+            </section>
         </div>
+    </main>
 
-        <label>제목</label>
-        <input type="text" id="editTitle" style="width:100%; padding:8px; margin:8px 0;">
-
-        <label>내용</label>
-        <textarea id="editContent" rows="6" style="width:100%; padding:8px; margin:8px 0;"></textarea>
-
-        <button id="saveBtn" type="submit" class="primary">수정완료</button>
-      </form>
-
-      <!-- 댓글 섹션 -->
-      <section id="commentsSection" style="margin-top:24px;">
-        <h3>댓글</h3>
-        <div id="commentsList"></div>
-
-        <form id="commentForm" style="margin-top:12px;">
-          <textarea id="commentInput" rows="3" style="width:100%; padding:8px;" placeholder="댓글을 입력하세요"></textarea>
-          <button type="submit" id="commentSubmit" style="margin-top:8px;" class="primary">댓글 등록</button>
-        </form>
-      </section>
+    <div id="confirmDeleteModal" class="modal" aria-hidden="true">
+        <div class="modal__backdrop" data-close="backdrop"></div>
+        <div class="modal__panel small" role="dialog" aria-modal="true" aria-labelledby="delTitle">
+            <header class="modal__header">
+                <h3 id="delTitle">일기를 삭제할까요?</h3>
+                <button class="icon-btn" data-close="cancel">×</button>
+            </header>
+            <div class="modal__body">
+                <p>삭제하면 복구할 수 없습니다.</p>
+            </div>
+            <div class="modal__actions">
+                <button class="ghost" data-close="cancel">취소</button>
+                <button class="danger" id="confirmDeleteBtn">삭제</button>
+            </div>
+        </div>
     </div>
-  </main>
 
-  <!-- 삭제 확인 모달 -->
-  <div id="confirmDeleteModal" class="modal" aria-hidden="true">
-    <div class="modal__backdrop" data-close="backdrop"></div>
-    <div class="modal__panel small" role="dialog" aria-modal="true" aria-labelledby="delTitle">
-      <header class="modal__header">
-        <h3 id="delTitle">일기를 삭제할까요?</h3>
-        <button class="icon-btn" data-close="cancel">×</button>
-      </header>
-      <div class="modal__body">
-        <p>삭제하면 복구할 수 없습니다.</p>
-      </div>
-      <div class="modal__actions">
-        <button class="ghost" data-close="cancel">취소</button>
-        <button class="danger" id="confirmDeleteBtn">삭제</button>
-      </div>
-    </div>
-  </div>
+    <div id="toast" style="
+        position: fixed; left: 50%; transform: translateX(-50%) translateY(120%);
+        bottom: 1rem; background:#111; color:#fff; padding:.7rem 1rem; border-radius:.75rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,.18); z-index: 300; transition: transform .35s ease;
+    ">복사되었습니다!</div>
 
-  <!-- 토스트 -->
-  <div id="toast" style="
-    position: fixed; left: 50%; transform: translateX(-50%) translateY(120%);
-    bottom: 1rem; background:#111; color:#fff; padding:.7rem 1rem; border-radius:.75rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,.18); z-index: 300; transition: transform .35s ease;
-  ">복사되었습니다!</div>
-
-  <script src="./detail.js"></script>
+    <script src="./detail.js"></script>
 </body>
 </html>
