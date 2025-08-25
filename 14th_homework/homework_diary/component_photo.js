@@ -1,6 +1,6 @@
 
 const 사진보관함렌더링 =()=>{
-    document.getElementById("필터일기쓰기버튼").innerHTML=`
+    document.getElementById("필터검색일기쓰기버튼").innerHTML=`
     <select onchange="강아지사진형태생성(event)">
         <option id="기본" value="기본형">기본형</option>
         <option id="가로" value="가로형">가로형</option>
@@ -21,7 +21,7 @@ const 사진불러오는기능 = () => {
                 const 상태 = 객체만뽑힌결과.status;
                 document.getElementById("카드영역").innerHTML = 이미지다운로드주소들
                     .map((ele) =>
-                         `<img class="강아지사진" src="${ele}" width='300px'>`)
+                         `<img class="강아지사진" src="${ele}">`)
                     .join("");
             });
         });
@@ -35,16 +35,16 @@ const 강아지사진형태생성= (event)=>{
     강아지사진들.forEach((ele)=>{
         switch(값){
             case "기본형" : {
-                ele.style.cssText = "aspect-ratio : 1/1; object-fit: cover"
+                ele.style.cssText = " aspect-ratio : 1/1; object-fit: cover;"
                 break
             }
             case "가로형" :{
-                ele.style.cssText = "aspect-ratio : 4/3; object-fit: cover"
+                ele.style.cssText = "aspect-ratio : 4/3; object-fit: cover;"
     
                 break
             }
             case "세로형"  : {
-                ele.style.cssText = "aspect-ratio : 3/4; object-fit: cover"
+                ele.style.cssText = "aspect-ratio : 3/4; object-fit: cover; "
     
                 break
             }

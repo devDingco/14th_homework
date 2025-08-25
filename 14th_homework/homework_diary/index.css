@@ -1,9 +1,29 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* width: 1920px; */
+    width: 100vw;
+    height: 100vh;
+
+
+}
+/* .왼쪽여백{
+    width: 274px;
+} */
 .전체{
     /* background-color: beige; */
-    width : 1920px;
-    height : 1654px;
+    width : 1168px;
+    /* height : 1654px; */
     position: absolute;
-    z-index: 1;
+    z-index: 0;
+    /* margin-left: 276px; */
+    
 
 }
 :root{
@@ -33,9 +53,9 @@
 }
 .일기쓰기모달배경{
     display: none;
-    background-color: lightgray;
-    width : 1920px;
-    height : 1654px;
+    background-color: gray;
+    width : 100vw;
+    height : 100vh;
     opacity: 0.7;
     position: absolute;
     z-index: 2;
@@ -46,8 +66,8 @@
     height: 560px;
     background-color:var(--배경색);
     color:var(--글자색);
-    top:calc(50% - 640px/2);
-    left:calc(50% - 560px/2);
+    top:calc(50% - 560px/2);
+    left:calc(50% - 640px/2);
     display: none;
     flex-direction: column;
     gap:40px;
@@ -136,9 +156,9 @@
 .모달배경_2{
     display: none;
     background-color: black;
-    width : 1920px;
-    height : 1654px;
-    opacity: 0.4;
+    width : 100vw;
+    height : 100vh;
+    opacity: 0.2;
     position: absolute;
     z-index: 4;
 
@@ -154,8 +174,8 @@
     height: 200px;
     position: absolute;
     z-index: 5;
-    top:calc(50% - 480px/2);
-    left:calc(50% - 200px/2);
+    top:calc(50% - 200px/2);
+    left:calc(50% - 480px/2);
     border-radius: 24px;
 
 }
@@ -177,9 +197,11 @@
     width: 480px;
     height: 200px;
     position: absolute;
+    border-radius: 24px;
+    background: #FFF;
     z-index: 5;
-    top:calc(50% - 480px/2);
-    left:calc(50% - 200px/2);
+    top:calc(50% - 200px/2);
+    left:calc(50% - 480px/2);
 
 }
 .등록취소모달버튼{
@@ -188,15 +210,35 @@
     justify-content: center;
     gap:21px;
 }
+#계속작성{
+    border-radius: 8px;
+    border: 1px solid var(--Gray-B, #000);
+    background: var(--Gray-W, #FFF);
+    width: 104px;
+    height: 48px;
+}
+#등록취소{
+    border-radius: 8px;
+    background: var(--Gray-B, #000);
+    width: 104px;
+    height: 48px;
+    color: var(--Gray-Gray-50, #F2F2F2);
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.18px;
+}
 .헤더{
-    width : 1920px;
+    width : 1168px;
     height: 60px;
     /* background-color: aqua; */
 }
 
 
 .바디{
-    width : 1920px;
+    width : 1168px;
     /* height: 1521px; */
     /* background-color: aquamarine; */
     display: flex;
@@ -205,7 +247,7 @@
     align-items: center;
 }
 .배너영역{
-    width: 1920px;
+    width: 1168px;
     height: 240px;
     display: flex;
     flex-direction: column;
@@ -220,11 +262,11 @@
 }
 
 .네비게이션영역{
-    width:1920px;
-    height: 128px;
-    background-color: skyblue;
+    width:1168px;
+    height: 194px;
+    /* background-color: skyblue; */
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
 
 }
 .네비필터일기쓰기{
@@ -238,49 +280,156 @@
 }
 .네비게이션{
     width : 1168px;
-    /* height: 48px; */
+    /* height: 194px; */
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
-
+    /* align-items: center; */
+    margin-top: 24px;
 }
-.필터일기쓰기버튼{
+#일기{
+    width: 119px;
+    height: 48px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid;
+    background-color: white;
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 100% */
+    letter-spacing: -0.24px;
+}
+#사진{
+    width: 119px;
+    height: 48px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    background-color: white;
+    color:#ABABAB;
+    font-family: "Pretendard Variable";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 100% */
+    letter-spacing: -0.24px;
+}
+
+
+.필터검색일기쓰기버튼{
     display: flex;
     /* height: 48px; */
     flex-direction: row;
     justify-content: space-between ;
-    align-items: center;
+    /* align-items: center; */
 }
 .필터검색기능{
     display: flex;
     height: 48px;
     flex-direction: row;
-    /* justify-content: space-between ; */
-    align-items: center;
+    /* align-items: center; */
+    gap:16px;
+   
 }
-.필터검색기능 input[type="text"] {
-    width: 200px;
-    height: 40px;
+.필터전체{
+    /* display: flex;
+    flex-direction: column;
+    justify-content: flex-start; */
+    width: 120px;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+}
+.필터제목{
+    appearance: none;
+    width: 120px;
+    height: 48px;
     border-radius: 8px;
-    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
-    background: var(--인풋배경색);
-    color: var(--글자색);
-    padding: 0 8px;
+    border: 1px solid var(--Gray-Gray-300, #C7C7C7);
+    background: var(--Gray-W, #FFF); 
+    padding: 10px;
+    --필터제목 : "전체"   
+}
+.필터제목::after{
+    content:var(--필터제목);
+}
+.필터제목:checked{
+    background-color:#3AB50F0D ;
+}
+.필터제목:checked + .필터목록{
+    display: block;
+}
+.필터목록{
+    width: 120px;
+    list-style: none;
+    display: none;
+    /* flex-direction: column; */
+    /* align-items: flex-start; */
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-300, #C7C7C7);
+    background: var(--Gray-W, #FFF);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.10);
+    /* align-items: flex-start; */
+    position: absolute;
+    
+}
+.필터목록 input{
+    display: none;
+}
+.필터목록 label{
+    display: block;
+    padding: 10px;
+    
+}
+.필터목록 label:hover{
+    background-color: #3AB50F0D;
+   
+}
+
+
+.검색인풋 {
+    width: 288px;
+    height: 48px;
+    height: 48px;
+    padding: 12px 16px;
+    border-radius: 100px;
+    border: 1px solid var(--Gray-Gray-300, #C7C7C7);    
     font-size: 16px;
 }
 
-.필터검색기능 input[type="text"]::placeholder {
+.검색인풋::placeholder {
     color: var(--인풋플레이스홀더색);
 }
+/* #검색기능{
+    width: 1050px;
+    height: 48px;
+    padding: 12px 16px;
+    border-radius: 100px;
+    border: 1px solid var(--Gray-Gray-300, #C7C7C7);
+    
+}
+#검색기능::placeholder{
 
+    color: var(--Gray-Gray-400, #ABABAB);
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+    /* letter-spacing: -0.16px;
+} */ 
 .일기쓰기버튼{
     width: 110px;
     height: 48px;
 }
 .내용영역{
-    width: 1920px;
-    height: 1209px;
+    width: 1168px;
+    /* height: 1209px; */
     /* background-color: yellow; */
     display: flex;
     flex-direction: row;
@@ -290,15 +439,12 @@
    
 }
 .카드영역{
-    width: 1168px;
-
     /* background-color: blue; */
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     gap:24px;
     flex-wrap: wrap;
-    /* align-items: flex-start; */
 
 }
 
@@ -328,6 +474,8 @@
     width: 274px;
     height: 208px;
     object-fit: contain;
+    position: relative;
+    z-index: 0;
     
 }
 .카드내용요약{
@@ -362,18 +510,50 @@
     display: flex;
     justify-content: flex-start;
 }
-/* .삭제버튼{
+.카드와삭제{
     position: relative;
-    top:5px;
-    left: 365px;
+}
+.삭제버튼{
+    position: absolute;
+    top: 12px;
+    right: 12px;
     cursor:pointer
-} */
+    
+}
 .강아지사진{
+    width: 640px;
     aspect-ratio: 1/1;
     object-fit: cover;
+    border-radius: 24px;
+    background-color: #e0e0e0;
 }
-.푸터{
+
+.강아지사진스켈레톤{
+    width: 150px;
+    height: 2500px;
+    background-color: rgba(255, 255, 255, 0.6);
+    filter:blur(35px);
+    animation-name: 민정애니메이션;
+    animation-duration: 0.3s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes 민정애니메이션{
+    from{
+        transform : translate(-300px, -500px) rotateZ(30deg);
+    }
+
+    to{
+        transform : translate(1000px, 1000px) rotateZ(30deg);
+    }
+
+}
+/* .푸터{
     width : 1920px;
     height: 160px;
     background-image: url("./assets/Footer.png");
-}
+    position: relative;
+    position: absolute;
+    z-index: 0;
+    bottom: 0vh;
+} */
