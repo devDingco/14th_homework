@@ -5,10 +5,7 @@ const ResistPostPage = () => {
             <div id="main_container">
                 <section id="write_form_container">
                     <form class="write_form_80h flex_row">
-                        <div class="input_frame_620w_80h flex_column">
-                            <label class="label_620w_24h me_16_24">작성자</label>
-                            <input class="input_620w_48h input_border_gray r_16_24" placeholder="작성자 명을 입력해 주세요."></input>
-                        </div>
+                        <WriteInput label={"작성자"} placeholder={"작성자 명을 입력해 주세요."}/>
                         <div class="input_frame_620w_80h flex_column">
                             <label class="label_620w_24h me_16_24">비밀번호</label>
                             <input class="input_620w_48h input_border_gray r_16_24" placeholder="비밀번호를 입력해 주세요."></input>
