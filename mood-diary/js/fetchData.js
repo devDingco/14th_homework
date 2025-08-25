@@ -112,23 +112,45 @@ const setImageRatio = (dogImage, ratio) => {
   }
 }
 
-let scrollTimer = null
-const infiniteScroll = () => {
+// 쓰로틀링을 통한 무한스크롤
+// let scrollTimer = null
+// const infiniteScroll = () => {
+//   const photoBox = document.getElementById('photo-box')
+//   const isPhotoBox = photoBox?.classList.contains('active')
+
+//   if (!isPhotoBox) return
+//   if (scrollTimer) return
+//   scrollTimer = setTimeout(() => {
+//     scrollTimer = null
+//   }, 1000)
+
+//   const scrollTop = document.documentElement.scrollTop
+//   const scrollHeight = document.documentElement.scrollHeight
+//   const clientHeight = document.documentElement.clientHeight
+
+//   const scrollPercent = scrollTop / (scrollHeight - clientHeight)
+//   console.log(scrollPercent)
+//   // if (scrollPercent < 1) return
+//   if (scrollPercent < 0.9) return
+//   showDogImages()
+// }
+// window.addEventListener('scroll', infiniteScroll)
+
+// "이벤트 놓침 방지"를 위한 코드 리팩토링
+let isLoading = false
+
+const infiniteScroll = async () => {
   const photoBox = document.getElementById('photo-box')
-  const isPhotoBox = photoBox.classList.contains('active')
+  if (!photoBox?.classList.contains('active')) return
+  if (isLoading) return
 
-  if (!isPhotoBox) return
-  if (scrollTimer) return
-  scrollTimer = setTimeout(() => {
-    scrollTimer = null
-  }, 1000)
+  const el = document.documentElement
+  const nearBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 5
+  if (!nearBottom) return
 
-  const scrollTop = document.documentElement.scrollTop
-  const scrollHeight = document.documentElement.scrollHeight
-  const clientHeight = document.documentElement.clientHeight
-
-  const scrollPercent = scrollTop / (scrollHeight - clientHeight)
-  if (scrollPercent <= 0.99) return
-  showDogImages()
+  isLoading = true
+  await showDogImages()
+  isLoading = false
 }
-window.addEventListener('scroll', infiniteScroll)
+
+window.addEventListener('scroll', infiniteScroll, { passive: true })

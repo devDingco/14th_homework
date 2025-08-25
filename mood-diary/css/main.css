@@ -173,7 +173,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 6;
+  z-index: 99;
 }
 .main-modal-group .main__diary-form {
   min-width: 36rem;

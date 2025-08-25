@@ -22,14 +22,17 @@ const openDeleteModal = (event, modalId, id) => {
   const deleteBtn = document.querySelector('#diary-delete-button')
   const onClick = (event) => {
     confirmDelete(event, id)
-    btn.removeEventListener('click', onClick)
+    deleteBtn.removeEventListener('click', onClick)
   }
   deleteBtn.addEventListener('click', onClick, { once: true })
 }
 
 const closeModal = (id) => {
-  document.getElementById(id).style = 'display: none'
+  const el = document.getElementById(id)
+  if (!el) return // INFO: 해당하는 id가 있을 경우만 closeModal 동작
+  el.style.display = 'none'
   window.onscroll = null
+  resetForm()
   // location.reload()
 }
 
@@ -38,6 +41,15 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
     closeModal('main-diary-form')
     closeModal('nested-modal-cancel')
+    closeModal('nested-modal-complete')
+    closeModal('nested-modal-delete')
+    closeModal('modal-delete')
     location.reload()
   }
 })
+
+// ERROR: 해당 resetForm 사용시, form 리셋 + reload되는 상황 발생
+const resetForm = () => {
+  const form = document.getElementById('myForm')
+  form.reset()
+}

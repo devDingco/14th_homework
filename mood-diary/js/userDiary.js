@@ -72,3 +72,10 @@ const viewModifyContent = () => {
   document.getElementById('detail-comments-input-input').disabled = true
   document.getElementById('detail-comments-input-button').disabled = true
 }
+
+// INFO: 클립보드 저장함수
+const copyContents = () => {
+  const { contents } = formattedDiary(targetDiary)
+  navigator.clipboard.writeText(contents)
+  toastMessage('내용이 복사되었습니다.')
+}
