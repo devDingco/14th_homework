@@ -2,7 +2,7 @@ window.onload = () => {
   메뉴이동("일기");
 };
 
-const 일기목록 = [];
+let 일기목록 = [];
 
 const HTML일기보여주기 = () => {
   //스토리지에 있는 일기목록 가져오기
@@ -15,7 +15,7 @@ const HTML일기보여주기 = () => {
       (el, index) => `
     <a href="./detail.html?number=${index}#댓글창ID">
       <div class="바디__정렬__목록__첫번째">
-        <img src="${el.이미지}" style="max-width: 23.375rem; width:100% ; height: 13rem; border-radius: 16px; object-fit: " />  
+        <img src="${el.이미지}" style="max-width: 23.375rem; width:100% ; height: 13rem; border-radius: 16px; object-fit: cover " />  
         <div style="height: 16px"></div>
         <div class="바디__정렬__목록__첫번째__내용"> 
           <div class="바디__정렬__목록__첫번째__내용__감정날짜">
@@ -32,7 +32,7 @@ const HTML일기보여주기 = () => {
           </div>
           <div style="height: 16px"></div>
         </div>
-        <button class="삭제버튼" onclick="삭제하기기능(event,${index});모달열기기능('일기삭제모달ID')">
+        <button class="삭제버튼" onclick="모달열기기능('일기삭제모달ID', ${index})">
           <img class="일기사진" src="./images/closeicon.svg">
         </button>
       </div>
@@ -136,6 +136,34 @@ const 스크롤올리기 = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
+const 사진필터링기능 = (event) => {
+  const 필터링된사진유형 = event.target.value;
+  const 사진목록 = document.querySelectorAll(".강아지사진CSS");
+
+  사진목록.forEach((el) => {
+    switch (필터링된사진유형) {
+      case "가로형": {
+        el.style.maxWidth = "40rem";
+        el.style.aspectRatio = "4 / 3";
+        el.style.width = "100%";
+        break;
+      }
+      case "세로형": {
+        el.style.maxWidth = "40rem";
+        el.style.aspectRatio = "3 / 4";
+        el.style.width = "100%";
+        break;
+      }
+      default: {
+        el.style.maxWidth = "40rem";
+        el.style.aspectRatio = "1 / 1";
+        el.style.width = "100%";
+        break;
+      }
+    }
+  });
+};
+
 const 필터링기능 = (event) => {
   const 필터링된감정 = event.target.value;
   console.log(필터링된감정);
@@ -197,7 +225,7 @@ const 필터링기능 = (event) => {
 
         <div style="height: 16px"></div>
       </div>
-      <button class="삭제버튼" onclick="모달열기기능('일기삭제모달ID')">
+      <button class="삭제버튼" onclick="모달열기기능('일기삭제모달ID',${index})">
         <img src="./images/closeicon.svg">
       </button>
     </div>
@@ -207,7 +235,9 @@ const 필터링기능 = (event) => {
     .join("");
 };
 
-const 모달열기기능 = (모달종류) => {
+let 삭제대상번호 = null;
+
+const 모달열기기능 = (모달종류, 일기번호 = null) => {
   event.preventDefault();
   document.getElementById(모달종류).style = "display: block";
   // 스크롤 맨 위로 올리기
@@ -215,6 +245,10 @@ const 모달열기기능 = (모달종류) => {
     top: 0,
   });
   document.body.style.overflow = "hidden";
+
+  if (일기번호 !== null) {
+    삭제대상번호 = 일기번호;
+  }
 };
 
 const 모달닫기기능 = (모달종류) => {
@@ -251,7 +285,7 @@ const 메뉴이동 = (메뉴) => {
     case "일기": {
       document.getElementById("일기보관함필터").style.display = "block";
       document.getElementById("일기보관함").style.display = "block";
-      // document.getElementById("사진보관함필터").style.display = "none";
+      document.getElementById("사진보관함필터").style.display = "none";
       document.getElementById("사진보관함").style.display = "none";
       document.getElementById("사진보관함탭").style = "color: #ababab;";
       document.getElementById("일기보관함탭").style =
@@ -260,7 +294,7 @@ const 메뉴이동 = (메뉴) => {
       break;
     }
     case "사진": {
-      // document.getElementById("사진보관함필터").style.display = "block";
+      document.getElementById("사진보관함필터").style.display = "block";
       document.getElementById("사진보관함").style.display = "block";
       document.getElementById("일기보관함필터").style.display = "none";
       document.getElementById("일기보관함").style.display = "none";
@@ -274,18 +308,127 @@ const 메뉴이동 = (메뉴) => {
 };
 
 const 강아지사진그리기기능 = () => {
-  fetch("https://dog.ceo/api/breeds/image/random/10").then((response) => {
-    response.json().then((result) => {
-      const 이미지소스주소 = result.message;
+  const 강아지사진들 = () => {
+    fetch("https://dog.ceo/api/breeds/image/random/10").then((response) => {
+      response.json().then((result) => {
+        const 이미지소스주소 = result.message;
 
-      const 강아지사진리스트 = 이미지소스주소
-        .map((el, index) => {
-          return `<img class="강아지사진CSS" src="${el}" alt="강아지사진${index}"/>`;
-        })
-        .join("");
-      console.log(강아지사진리스트);
-      document.getElementById("강아지사진보이는곳").innerHTML =
-        강아지사진리스트;
+        const 강아지사진리스트 = 이미지소스주소
+          .map((el, index) => {
+            return `<img class="강아지사진CSS" src="${el}" alt="강아지사진${index}"/>`;
+          })
+          .join("");
+        const 기존강아지사진들 =
+          document.getElementById("강아지사진보이는곳").innerHTML;
+
+        document.getElementById("강아지사진보이는곳").innerHTML =
+          기존강아지사진들 + 강아지사진리스트;
+        document.getElementById("스켈레톤ID").style.display = "none";
+      });
     });
+  };
+  강아지사진들();
+
+  let 타이머;
+
+  window.addEventListener("scroll", () => {
+    const 스크롤퍼센트 =
+      document.documentElement.scrollTop /
+      (document.documentElement.scrollHeight -
+        document.documentElement.clientHeight);
+    if (스크롤퍼센트 < 0.7) return;
+    if (타이머) return;
+
+    강아지사진들();
+
+    타이머 = setTimeout(() => {
+      clearTimeout(타이머);
+      타이머 = null;
+
+      const 마지막스크롤퍼센트 =
+        document.documentElement.scrollTop /
+        (document.documentElement.scrollHeight -
+          document.documentElement.clientHeight);
+      if (마지막스크롤퍼센트 === 1) 강아지사진들();
+    }, 1000);
   });
+};
+
+let 타이머;
+
+const 검색기능 = (event) => {
+  clearTimeout(타이머);
+
+  타이머 = setTimeout(() => {
+    const 내가검색한단어 = event.target.value;
+    const 스토리지에저장된일기목록 =
+      localStorage.getItem("지윤이의일기목록") ?? "[]";
+    const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+
+    const 검색결과들 = 일기목록.filter((el) => {
+      return el.제목.includes(내가검색한단어);
+    });
+
+    const 검색한일기보여주기 = 검색결과들
+      .map(
+        (el, index) => `
+  <a href="./detail.html?number=${index}#댓글창ID">
+    <div class="바디__정렬__목록__첫번째">
+      <img src="${el.이미지}" style="max-width: 23.375rem; width:100% ; height: 13rem; border-radius: 16px; object-fit: cover " />  
+      <div style="height: 16px"></div>
+      <div class="바디__정렬__목록__첫번째__내용"> 
+        <div class="바디__정렬__목록__첫번째__내용__감정날짜">
+          <div class="바디__정렬__목록__첫번째__내용__감정날짜__감정">
+            ${el.감정}
+          </div>
+          <div class="바디__정렬__목록__첫번째__내용__감정날짜__날짜">
+            ${el.작성일}
+          </div>
+        </div>
+        <div style="height: 8px"></div>
+        <div class="바디__정렬__목록__첫번째__내용__타이틀">
+          ${el.제목}
+        </div>
+        <div style="height: 16px"></div>
+      </div>
+      <button class="삭제버튼" onclick="모달열기기능('일기삭제모달ID', ${index})">
+        <img class="일기사진" src="./images/closeicon.svg">
+      </button>
+    </div>
+  </a>
+  `
+      )
+      .join("");
+
+    document.getElementById("일기추가보이는곳").innerHTML = 검색한일기보여주기;
+  }, 300);
+};
+
+// const 토글기능 = (evnet) => {};
+
+const 페이지네이션만들기 = (클릭된페이지) => {
+  const 스토리지에저장된일기목록 =
+    localStorage.getItem("지윤이의일기목록") ?? "[]";
+  const 일기목록 = JSON.parse(스토리지에저장된일기목록);
+
+  const 페이지당일기갯수 = 12;
+  const 페이지그룹크기 = 5;
+  const 마지막페이지 = Math.ceil(일기목록.length / 페이지당일기갯수);
+
+  const 현재페이지그룹 = Math.ceil(클릭된페이지 / 페이지그룹크기);
+  const 그룹시작페이지 = (현재페이지그룹 - 1) * 페이지그룹크기 + 1;
+  const 그룹마지막페이지 = Math.min(
+    그룹시작페이지 + 페이지그룹크기 - 1,
+    마지막페이지
+  );
+  const 버튼들 = new Array(페이지그룹크기)
+    .fill(1)
+    .map((_, index) => {
+      const 페이지번호 = index + 그룹시작페이지;
+
+      return 페이지번호 <= 마지막페이지
+        ? `<button onclick="카드그리기기능(${페이지번호});페이지네이션만들기기능(${페이지번호})"></button>`
+        : ``;
+    })
+    .join("");
 };

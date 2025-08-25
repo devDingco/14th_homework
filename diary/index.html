@@ -50,22 +50,47 @@
         </div>
       </div>
 
+      <div style="height: 32px"></div>
+
       <div id="일기보관함필터" class="CSS필터">
         <div class="필터">
           <div class="필터__정렬">
-            <select class="필터__정렬__선택" onchange="필터링기능(event)">
-              <option>전체</option>
-              <option value="행복해요">행복해요</option>
-              <option value="슬퍼요">슬퍼요</option>
-              <option value="놀랐어요">놀랐어요</option>
-              <option value="화나요">화나요</option>
-              <option value="기타">기타</option>
-            </select>
+            <div class="필터검색창정렬">
+              <select class="필터__정렬__선택" onchange="필터링기능(event)">
+                <option>전체</option>
+                <option value="행복해요">행복해요</option>
+                <option value="슬퍼요">슬퍼요</option>
+                <option value="놀랐어요">놀랐어요</option>
+                <option value="화나요">화나요</option>
+                <option value="기타">기타</option>
+              </select>
+              <div class="검색창">
+                <img
+                  src="./images/search_24dp_5F6368_FILL1_wght400_GRAD0_opsz24 1.svg"
+                  alt="" />
+                <input
+                  type="text"
+                  placeholder="검색어를 입력해 주세요."
+                  oninput="검색기능(event)" />
+              </div>
+            </div>
             <button
               class="모달일기등록버튼"
               onclick="모달열기기능('등록모달ID')">
               <img src="./images/add.svg" />일기쓰기
             </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="사진보관함필터" class="CSS필터">
+        <div class="필터">
+          <div class="필터__정렬">
+            <select class="필터__정렬__선택" onchange="사진필터링기능(event)">
+              <option value="기본">기본</option>
+              <option value="가로형">가로형</option>
+              <option value="세로형">세로형</option>
+            </select>
           </div>
         </div>
       </div>
@@ -83,7 +108,25 @@
       <div id="사진보관함" class="메인CSS">
         <div class="바디">
           <div class="바디__정렬">
-            <div id="강아지사진보이는곳" class="바디__정렬__목록2"></div>
+            <div id="강아지사진보이는곳" class="바디__정렬__목록2">
+              <div id="스켈레톤ID">
+                <div class="스켈레톤">
+                  <div class="스켈레톤박스">
+                    <div class="스켈레톤막대기"></div>
+                  </div>
+                </div>
+                <div class="스켈레톤">
+                  <div class="스켈레톤박스">
+                    <div class="스켈레톤막대기"></div>
+                  </div>
+                </div>
+                <div class="스켈레톤">
+                  <div class="스켈레톤박스">
+                    <div class="스켈레톤막대기"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -128,7 +171,13 @@
     <div id="등록모달ID" class="공동모달그룹">
       <div class="모달배경" onclick="모달닫기기능('등록모달ID')"></div>
       <div class="등록모달">
-        <div class="바디__정렬__일기쓰기__타이틀">📍일기쓰기</div>
+        <div class="바디__정렬__일기쓰기__타이틀">
+          <span>📍일기쓰기</span>
+          <div class="다크모드">
+            다크모드
+            <input class="토글" type="checkbox" onclick="토글기능(event)" />
+          </div>
+        </div>
         <div style="max-width: 312px; width: 100%; height: 40px"></div>
 
         <div class="바디__정렬__일기쓰기__오기어">오늘 기분은 어땠나요?</div>
@@ -266,7 +315,9 @@
             onclick="모달닫기기능('일기삭제모달ID'); ">
             취소
           </button>
-          <button class="등록취소버튼" onclick="모달닫기기능('일기삭제모달ID')">
+          <button
+            class="등록취소버튼"
+            onclick="삭제하기기능(event, 삭제대상번호);모달닫기기능('일기삭제모달ID')">
             삭제
           </button>
         </div>
