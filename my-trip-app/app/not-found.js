@@ -1,5 +1,5 @@
 import "./global.css";
-import "./components/header/header.css";
+import "@components/header/header.css";
 
 export default function NotFound() {
   return (

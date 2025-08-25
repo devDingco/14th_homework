@@ -1,8 +1,8 @@
 import "./global.css";
-import "../app/components/header/header";
-import "../app/components/banner/banner";
-import CardList from "../app/components/cardList/cardList";
-import BoardList from "../app/components/boardList/index";
+import "@components/header/header";
+import "@components/banner/banner";
+import CardList from "@components/cardList/cardList";
+import BoardList from "@components/boardList";
 export default function Home() {
   return (
     <div>

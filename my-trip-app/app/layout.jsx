@@ -1,5 +1,5 @@
 import "./global.css";
-import AppFrame from "./components/layout/AppFrame";
+import AppFrame from "@components/layout/AppFrame";
 
 export const metadata = {
   title: "My Trip App",

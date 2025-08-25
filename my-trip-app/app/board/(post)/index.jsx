@@ -2,7 +2,7 @@
 import "./index.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
+import Icon from "@utils/iconColor";
 export default function PostBoard() {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
@@ -140,7 +140,7 @@ export default function PostBoard() {
               <input type="file" accept="image/*" hidden />
               <div className="uploader_box">
                 <span className="plus">
-                    <Image src="/icons/outline/add.png" alt="plus" width={24} height={24} />
+                    <Icon outline name="add" className="plus_icon" color="var(--gray-60)"/>
                 </span>
                 <span className="r_16_24">클릭해서 사진 업로드</span>
               </div>
@@ -149,7 +149,7 @@ export default function PostBoard() {
               <input type="file" accept="image/*" hidden />
               <div className="uploader_box">
                 <span className="plus">
-                    <Image src="/icons/outline/add.png" alt="plus" width={24} height={24} />
+                    <Icon outline name="add" className="plus_icon" color="var(--gray-60)"/>
                 </span>
                 <span className="r_16_24">클릭해서 사진 업로드</span>
               </div>
@@ -158,7 +158,7 @@ export default function PostBoard() {
               <input type="file" accept="image/*" hidden />
               <div className="uploader_box">
                 <span className="plus">
-                    <Image src="/icons/outline/add.png" alt="plus" width={24} height={24} />
+                    <Icon outline name="add" className="plus_icon" color="var(--gray-60)"/>
                 </span>
                 <span className="r_16_24">클릭해서 사진 업로드</span>
               </div>
@@ -167,10 +167,10 @@ export default function PostBoard() {
         </div>
 
         <div className="row actions">
-          <button type="button" className="btn btn-secondary">취소</button>
+          <button type="button" className="btn-secondary">취소</button>
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn-primary"
             onClick={() => {
               const nextErrors = {};
               if (!writer.trim()) nextErrors.writer = "필수입력 사항 입니다.";

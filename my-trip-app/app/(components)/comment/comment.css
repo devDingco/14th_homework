@@ -1,0 +1,132 @@
+.comment_section {
+  margin-top: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.comment_composer_container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  border: 1px dashed var(--gray-20);
+  padding: 1.2rem;
+}
+
+.comment_title { color: var(--black); }
+
+.comment_rating_row { display: flex; gap: 0.4rem; }
+.comment_star_button { background: transparent; border: none; padding: 0; cursor: pointer; }
+
+.comment_textarea_wrap { position: relative; }
+.comment_textarea {
+  width: 100%;
+  min-height: 8.8rem;
+  padding: 1.2rem;
+  outline: none;
+  resize: none;
+  background-color: white;
+  color: var(--gray-90);
+}
+.comment_counter { 
+  position: absolute; 
+  right: 0.8rem; 
+  bottom: 0.6rem; 
+  color: var(--gray-50); 
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+}
+
+.comment_actions { 
+  display: flex; 
+  justify-content: flex-end; 
+  margin-top: 1.2rem;
+}
+.comment_submit_button {
+  background: var(--black);
+  color: var(--white);
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.4rem;
+  border: none;
+  cursor: pointer;
+}
+.comment_submit_button:disabled { 
+  opacity: 0.4;
+   cursor: not-allowed; 
+  }
+
+.comment_list {
+   display: flex;
+   flex-direction: column;
+   gap: 1.2rem;
+   margin-top: 1.2rem;
+}
+
+.comment_item {
+   border: 1px solid var(--gray-10);
+   padding: 1.2rem;
+}
+.comment_item_header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 0.8rem;
+}
+.comment_header_left { 
+  display: flex; 
+  align-items: center; 
+  gap: 0.8rem; 
+  margin-bottom: 0.8rem;
+}
+.comment_author { 
+  display: flex; 
+  align-items: center; 
+  gap: 0.8rem; 
+  margin-bottom: 0.8rem;
+}
+.comment_avatar { 
+  width: 2.4rem; 
+  height: 2.4rem; 
+  border-radius: 50%; 
+  object-fit: cover; 
+  margin-right: 0.8rem;
+}
+.comment_actions_inline { 
+  display: flex; 
+  gap: 0.4rem; 
+  margin-bottom: 0.8rem;
+}
+.comment_icon_btn {
+   background: transparent;   
+   border: none; 
+   padding: 0.2rem; 
+   cursor: pointer; 
+   margin-bottom: 0.8rem;
+}
+.comment_item_rating { 
+  display: flex; 
+  align-items: center;
+  gap: 0.4rem; 
+  margin: 0; 
+  margin-bottom: 0.8rem;
+  margin-left: 0.4rem;
+}
+.star_glyph { 
+  font-size: 1.6rem; 
+  line-height: 1; 
+  display: inline-block; 
+  vertical-align: middle;
+}
+.review_count { color: var(--gray-60); }
+.rating_count { color: var(--gray-60); margin-left: 0.4rem; }
+.comment_item_content { 
+  color: var(--black); 
+  white-space: pre-wrap; 
+  margin-bottom: 0.8rem;
+}
+.comment_item_date { 
+  color: var(--gray-60); 
+  margin-bottom: 0.8rem;
+}
+
+

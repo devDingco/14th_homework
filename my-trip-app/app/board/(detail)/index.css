@@ -6,8 +6,7 @@
 
 .board_detail {
   background: var(--white);
-  border: 1px solid var(--gray-10);
-  border-radius: 0.8rem;
+
   padding: 2.4rem;
 }
 
@@ -73,7 +72,6 @@ border-bottom: 1px solid var(--gray-10);
 .cover_img {
   width: 100%;
   height: auto;
-  border-radius: 0.8rem;
 }
 
 .detail_content {
@@ -82,11 +80,11 @@ border-bottom: 1px solid var(--gray-10);
   gap: 1.6rem;
   color: var(--black);
   padding: 2.4rem 0;
+
 }
 
 .lead_section {
   display: grid;
-  grid-template-columns: 26rem 1fr;
   gap: 1.6rem;
   align-items: start;
 }
@@ -94,14 +92,22 @@ border-bottom: 1px solid var(--gray-10);
 .lead_media img {
   width: 26rem;
   height: auto;
+  border: 1px solid var(--gray-10);
 }
 
-.text_block p + p {
-  margin-top: 0.8rem;
+.content {
+  color: var(--black);
+  white-space: pre-wrap;
+
 }
+
+.text_block p + p { margin-top: 0.8rem; }
 
 .detail_media {
   margin-top: 2.4rem;
+  width: 100%;
+  height: 100%;
+  background: var(--gray-10);
 }
 
 .detail_media.wide .media_wrap {
@@ -109,9 +115,11 @@ border-bottom: 1px solid var(--gray-10);
 }
 
 .detail_media.wide img {
-  width: 100%;
-  height: auto;
-  border-radius: 0.4rem;
+  width: 82.2rem;
+  height: 46.4rem;
+  padding: 2.4rem 0;
+  display: flex;
+  margin: 0 auto;
 }
 
 .play_badge {
@@ -119,20 +127,30 @@ border-bottom: 1px solid var(--gray-10);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 3.6rem;
-  height: 3.6rem;
+  width: 4.4rem;
+  height: 4.4rem;
   border-radius: 50%;
-  background: rgba(0,0,0,0.55);
-  color: #fff;
+  background: rgba(255,255,255,255.255);
+  opacity: 0.6;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.6rem;
 }
 
+.triangle_icon {
+  width: 0;
+  height: 0;
+  border-left: 2rem solid var(--black);
+  border-top: 1.2rem solid transparent;
+  border-bottom: 1.2rem solid transparent;
+  margin-left: 0.4rem; /* 시각 중심 보정 */
+}
+
 .detail_actions {
   margin-top: 2.4rem;
-  border: 1px solid var(--gray-10);
+  border-bottom: 1px solid var(--gray-10);
+  padding-bottom: 2.4rem;
 }
 
 .bottom_actions {
@@ -155,3 +173,16 @@ border-bottom: 1px solid var(--gray-10);
   color: var(--gray-70);
 }
 
+.like_section {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+  justify-content: center;
+}
+
+.like_wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}

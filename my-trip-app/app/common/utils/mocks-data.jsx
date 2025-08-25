@@ -3,10 +3,11 @@ export const tripTalkMockData = [
   {
     id: "1",
     title: "제주 섬이 한낮 찬란할 때가 생각나네요",
-    coverImage: "/images/mobile/a.png",
+    coverImage: "/images/desktop/detail-page-1.png",
     authorName: "웅진동",
     authorProfileImage: "/images/mobile/profile/img-1.png",
     likeCount: 24,
+    badCount: 24,
     createdAt: "2024.11.11",
   },
   {
@@ -16,6 +17,7 @@ export const tripTalkMockData = [
     authorName: "강릉동",
     authorProfileImage: "/images/mobile/profile/img-2.png",
     likeCount: 24,
+    badCount: 24,
     createdAt: "2024.11.11",
   },
   {
@@ -25,6 +27,7 @@ export const tripTalkMockData = [
     authorName: "용담동",
     authorProfileImage: "/images/mobile/profile/img-3.png",
     likeCount: 24,
+    badCount: 24,
     createdAt: "2024.11.11",
   },
   {
@@ -34,6 +37,7 @@ export const tripTalkMockData = [
     authorName: "중문동",
     authorProfileImage: "/images/mobile/profile/img-4.png",
     likeCount: 24,
+    badCount: 24,
     createdAt: "2024.11.11",
   },
 ];
