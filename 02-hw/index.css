@@ -1,0 +1,166 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.radiobtn {
+    width: 20px;
+    height: 20px;
+  }
+.가장큰배경 {
+    width: 1920px;
+    height: 1208px;
+    background-image: url(./assets/image/BG1.png);
+}
+.헤더 {
+    width: 1920px;
+    height: 80px;
+    display: flex;
+}
+.헤더__왼쪽영역 {
+    width: 480px;
+    height: 80px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    padding-right: 16px;
+}
+.헤더__오른쪽영역 {
+    width: 1440px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 80px;
+}
+.헤더__오른쪽영역__프로필설정 {
+    width: 163px;
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.바디 {
+    width: 1920px;
+    height: 1048px;
+    display: flex;
+}
+.푸터 {
+    width: 1920px;
+    height: 80px;
+}
+.바디__사이드바왼쪽 {
+    width: 80px;
+    height: 1048px;
+}
+.바디__메인 {
+    width: 1760px;
+    height: 1048px;
+    background-image: url(./assets/image/Rectangle\ 42.png);
+    display: flex;
+}
+.바디__메인__메뉴 {
+    width: 400px;
+    height: 1048px;
+}
+.바디__메인__회원가입 {
+    width: 680px;
+    height: 1048px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.상자 {
+    width: 560px;
+    height: 548px;
+    padding: 0 56px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.상자 .안쪽상자 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.상자 input {
+    width: 320px;
+    height: 40px;
+    border-radius: 8px;
+}
+.상자 .인증요청상자 {
+    display: flex;
+    gap: 12px;
+    justify-content: end;
+    align-items: center;
+    color: #955c98;
+    font-size: 18px;
+}
+.상자 .인증요청상자 #버튼 {
+    width: 136px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 20px;
+}
+.상자 .인증요청상자2 {
+    display: flex;
+    gap: 12px;
+    justify-content: end;
+    align-items: center;
+    color: red;
+}
+.상자 .인증요청상자2 .인증버튼 {
+    width: 136px;
+    height: 40px;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: #fff;
+    border-radius: 8px;
+}
+.자기소개상자 .안쪽상자 {
+    align-items: start;
+}
+.자기소개상자 .안쪽상자 .제목 {
+    margin-top: 10px;
+}
+.자기소개상자 .안쪽상자 .자소서 {
+    width: 320px;
+    height: 116px;
+}
+.성별상자 {
+    /* display: flex; */
+    background-color: #ccc;
+}
+.성별상자 .여성 {
+    display: flex;
+    background-color: #fff;
+    width: 64px;
+    height: 24px;
+}
+.성별상자 .남성 {
+    display: flex;
+}
+.바디__메인__회원가입 h1 {
+    justify-content: center;
+    align-items: center;
+    color: #491449;
+}
+.첫번째 {
+    margin-top: 40px;
+}
+.바디__메인__사진 {
+    width: 680px;
+    height: 1048px;
+    background-color: orange;
+    background-image: url(./assets/image/일러스트\ 이미지\ 마스크.png);
+}
+.바디__사이드바오른쪽 {
+    width: 80px;
+    height: 1048px;
+}

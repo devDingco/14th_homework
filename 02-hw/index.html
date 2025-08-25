@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>슬랙 클론 코딩</title>
+    <link rel="stylesheet" href="index.css">
+    <script>
+            function 인증번호요청기능() {
+                const 나의인증번호 = String(Math.floor(Math.random() * 1000000)).padStart(6, "0")
+                document.getElementById("인증번호보여주는곳").innerText = 나의인증번호
+
+            let 시간 = 180
+            setInterval(function () {
+                const 분 = Math.floor(시간 / 60)
+                const 초 = 시간 % 60
+                document.getElementById("남은시간보여주는곳").innerText = 분 + ":" + 초
+
+                시간 = 시간 - 1
+            }, 1000)
+
+            document.getElementById("버튼").disabled 
+        }
+    </script>
+</head>
+<body>
+    <div class="가장큰배경">
+        <div class="헤더">
+            <div class="헤더__왼쪽영역">
+                <img src="./assets/icon/Vector.png" width="32px" height="32px">
+                <img src="./assets/icon/Vector-1.png" width="32px" height="32px">
+                <img src="./assets/icon/Vector-2.png" width="32px" height="32px">
+            </div>
+          <div class="헤더__오른쪽영역">
+                <img src="./assets/image/searchbar.png" width="920px" height="48px"/>
+                <div class="헤더__오른쪽영역__프로필설정">
+                    <img src="./assets/icon/badge.png" width="111px" height="48px"/>
+                    <img src="./assets/icon/help.png" width="32px", height="32px"/>
+                </div>
+            </div>
+        </div>
+        <div class="바디">
+            <div class="바디__사이드바왼쪽"></div>
+            <div class="바디__메인">
+                <div class="바디__메인__메뉴">
+                    <img src="./assets/image/Rectangle 43.png" alt="">
+                </div>
+                <div class="바디__메인__회원가입">
+                    <h1 class="첫번째">코드캠프에 가입하고</h1>
+                    <h1>개발자로 커리어 점프 하세요</h1>
+                    <div class="상자">
+                        <div class="안쪽상자"><label>이름</label><input for="이름" type="text" placeholder=" 이름을 입력해 주세요." /></div>
+                        <div class="안쪽상자"><label>이메일</label><input type="text" placeholder=" 네이버,구글,한메일,카카오 계정만 입력." /></div>
+                        <div class="안쪽상자"><label>비밀번호</label><input type="password" placeholder=" 비밀번호를 입력해 주세요." /></div>
+                        <div class="안쪽상자"><label>전화번호</label><input type="text" placeholder=" 010으로 시작, '-'를 꼭 입력해 주세요." /></div>
+                        <div class="인증요청상자">
+                            <div id="인증번호보여주는곳">000000</div>
+                            <button id="버튼" onclick="인증번호요청기능()">인증번호 요청</button>
+                        </div>
+                        <div class="인증요청상자2">
+                            <div id="남은시간보여주는곳">3:00</div>
+                            <div class="인증버튼">인증하기</div>
+                        </div>
+                        <div class="자기소개상자">
+                            <div class="안쪽상자">
+                                <label class="제목">자기소개</label>
+                                <input class="자소서" type="text" placeholder=" 자기소개를 입력해 주세요.">
+                            </div>
+                        </div>
+                        <div class="성별상자">
+                            <div class="여성">
+                                <input type="radio" name="내가만든그룹" class="radiobtn" /><label for="">여성</label>
+                            </div>
+                            <div class="남성">
+                                <input type="radio" name="내가만든그룹" class="radiobtn" /><label for="">남성</label>
+                            </div>
+                        </div>
+                        <input type="checkbox" />이용약관 개인정보 수집 및 이용, ...
+                    </div>
+                </div>
+                <div class="바디__메인__사진"></div>
+            </div>
+            <div class="바디__사이드바오른쪽"></div>
+        </div>
+        <div class="푸터"></div>
+    </div>
+</body>
+</html>

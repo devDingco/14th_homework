@@ -1,0 +1,90 @@
+* {
+    margin: 0;padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ccc;
+}
+
+.wrap {
+    margin: 0 auto;
+    width: 2120px;
+    height: 2369px;
+    background-color: #fff;
+    padding: 100px;
+}
+
+.header {
+    width: 1920px;
+    height: 164px;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px;
+    margin-bottom: 120px;
+}
+.header h1 {
+    font-size: 80px;
+    color: #fff;
+}
+
+.main {
+    /* width: 1920px; */
+    height: 1805px;
+    background-color: skyblue;
+    padding: 22px 376px;
+}
+.main .name {
+    height: 60px;
+    font-size: 18px;
+}
+.main .ch {
+    height: 48px;
+    margin-top: 24px;
+}
+
+.article {
+    height: 1167px;
+    background-color: #fff;
+    margin-top: 42px;
+    display: flex;
+    gap: 24px;
+}
+.article .section {
+    width: 784px;
+    height: 1167px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.article .section .sec {
+    width: 380px;
+    height: 373px;
+}
+
+.article .nav {
+    width: 360px;
+    height: 604px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    padding: 24px;
+}
+.article .nav h2 {
+    width: 312px;
+    height: 24px;
+    font-size: 24px;
+}
+.article .nav p {
+    width: 312px;
+    height: 24px;
+    margin-top: 40px;
+}
+.article .nav .input {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.article .nav .input .inp {
+
+}
