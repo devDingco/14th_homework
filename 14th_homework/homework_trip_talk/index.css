@@ -1,0 +1,175 @@
+.게시물등록영역{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    color: var(--gray-800, #333);
+
+    /* me_16_24 */
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    margin-left: 30px; /*내가 임의로 줌*/
+}
+
+.게시물_등록{
+    color: #000;
+
+    /* b_20_28 */
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; /* 140% */
+}
+
+
+.작성자_비밀번호_영역{
+    display: flex;
+    gap: 40px;
+    border-bottom: solid var(--gray-100, #E4E4E4) 1px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: 1280px;
+
+}
+.작성자{
+    width: 588px;
+    height: 24px;
+
+}
+.비밀번호{
+    width: 588px;
+    height: 24px;
+
+}
+.제목등록영역{
+    border-bottom: solid var(--gray-100, #E4E4E4) 1px; 
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: 1280px;
+}
+
+
+.내용영역{
+    
+    padding-top: 40px;
+    width: 1280px;
+    
+}
+.주소영역{
+    border-bottom: solid var(--gray-100, #E4E4E4) 1px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    /* width: 1280px; */
+
+}
+.우편번호{
+    display: flex;
+    flex-direction: row;
+    gap:8px; 
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.우편번호노출영역{
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+    width: 82px;
+    height: 48px;
+}
+.우편번호검색버튼{
+    border-radius: 8px;
+    border: 1px solid var(--gray-B, #000);
+    background: var(--gray-w, #FFF);
+    color: var(--gray-B, #000);
+    text-align: center;
+
+    /* sb_18_24 */
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 133.333% */
+    cursor: pointer;
+}
+
+.주소노출영역{
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+    width: 1280px;
+    height: 48px;
+}
+
+.유튜브링크_첨부영역{
+    border-bottom: solid var(--gray-100, #E4E4E4) 1px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: 1280px;
+
+    
+}
+
+.사진첨부영역{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: 1280px;
+    
+}
+.사진첨부버튼{
+    display: flex;
+    flex-direction: row;
+    gap:16px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+input {
+    margin-top: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 12px;  
+    padding-bottom: 12px;
+    width: 1248px;
+    height: 24px;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+}
+
+input::placeholder{
+    color: var(--Gray-Gray-400, #ABABAB);
+
+/* r_16_24 */
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+}
+textarea {
+    margin-top: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 1248px;
+    height: 336px;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);    
+}
+textarea::placeholder{
+    color: var(--Gray-Gray-400, #ABABAB);
+
+    /* r_16_24 */
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+}
