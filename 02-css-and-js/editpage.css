@@ -1,10 +1,21 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/variable/pretendardvariable.css");
+ @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/variable/pretendardvariable.css");
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-size: 10px;
     font-family: Pretendard Variable;
+}
+
+body{
+    background-color: var(--기본배경색);
+    color: var(--기본글자색);
+
+}
+
+input{
+    background-color: var(--인풋배경색);
+    border: 1px solid var(--인풋보더색);
 }
 
 .가장큰배경 {
@@ -22,22 +33,20 @@
     justify-content: space-between;
     align-items: center;
     gap: 6.4rem;
+    /* border: 1px solid #000; */
 }
 .헤더 {
     width: 100%;
     height: 6rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    /* justify-content: center; */
 }
 .헤더__타이틀 {
     width: 100%;
     display: flex;
     align-items: center;
     /* margin-bottom: 6.4rem;    */
-    
-
-}
-.헤더__타이틀 > h3{
     font-family: Pretendard Variable;
     font-weight: 700;
     font-style: Bold;
@@ -45,24 +54,91 @@
     leading-trim: NONE;
     line-height: 16px;
     letter-spacing: -1%;
+    
+
+} 
+
+.헤더__모바일타이틀{
+    display: none;
+}
+.헤더__타이틀 > h3{
+    /* font-family: Pretendard Variable;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 16px;
+    letter-spacing: -1%; */
+}
+
+
+.등록모달창__타이틀섹션__다크모드영역{
+    width: 12.1rem;
+    height: 3.2rem;
+    display: flex;
+    gap: 0.8rem;
+}
+.등록모달창__타이틀섹션__다크모드영역__다크모드텍스트{
+
+font-family: Pretendard Variable;
+font-weight: 400;
+font-style: Regular;
+font-size: 1.5rem;
+leading-trim: NONE;
+
+letter-spacing: -1%;
+
+
+}
+.등록모달창__타이틀섹션__다크모드영역__다크모드버튼{
+appearance: none;
+content: '';
+width: 5.8rem;
+height: 3.2rem;
+background-color: lightgray;
+border-radius: 2rem;
+}
+.등록모달창__타이틀섹션__다크모드영역__다크모드버튼::after{
+display: block;
+content: "";
+width: 2.4rem;
+height: 2.4rem;
+background-color: #fff;
+border-radius: 50%;
+margin: 0.4rem;
+
+transition: margin-left 0.3s;
+
+}
+.등록모달창__타이틀섹션__다크모드영역__다크모드버튼:checked{
+background-color: #3ad84a;
+}
+.등록모달창__타이틀섹션__다크모드영역__다크모드버튼:checked::after{
+margin-left: 2.8rem;
 }
 .바디 {
     width: 100%;
+    
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    gap: 2.4rem;
 }
 .바디__메인 {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
+    border-bottom: 1px solid var(--기본글자색);
+    padding-bottom: 1.6rem;
 }
 .바디__메인__감정섹션 {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     gap: 1.6rem;
+    
 }
 .바디__메인__감정섹션 > h3{
     font-family: Pretendard Variable;
@@ -74,11 +150,20 @@
     letter-spacing: -1%;
     
 }
-.바디__메인__감정섹션__감정수정 { 
-    height: 1.5rem;
+
+.바디__메인__감정섹션__감정수정 {
     display: flex;
     gap: 2rem;
-
+}
+.바디__메인__감정섹션__감정수정 > div{ 
+    display: flex;
+    gap: 0.8rem;
+    
+    flex-direction: row;
+    
+    
+}
+.바디__메인__감정섹션__감정수정 label{
     font-family: Pretendard Variable;
     font-weight: 500;
     font-style: Medium;
@@ -86,9 +171,8 @@
     leading-trim: NONE;
     line-height: 20px;
     letter-spacing: -1%;
-    
+    color: var(--라디오글자색);
 }
-
 .바디__메인__제목섹션 {
     width: 100%;
     /* height: rem; */
@@ -118,15 +202,8 @@
     font-size: 16px;
     leading-trim: NONE;
     line-height: 24px;
-    letter-spacing: -1%;
-    box-shadow: none;           /* 그림자 제거 */
-  -webkit-appearance: none; /* Safari, iOS 기본 스타일 제거 */
-  -moz-appearance: none;    /* Firefox */
-  appearance: none;         /* 표준 */
-  box-shadow: none;          /* 모서리 둥근 효과 제거 (필요시) */
-  /* border: 1px solid #000; */
-  border-color: #D4D3D3;
-
+    letter-spacing: -1%;       
+    color: var(--기본글자색);
 
     
 }
@@ -162,9 +239,6 @@
     height: 12.8rem ;
     box-shadow: none;            */
     padding: 1.2rem 1.6rem 1.2rem 1.6rem;
-    border: 0.1rem solid #D4D3D3;
-    /* border-color: #000; */
-    /* border-color: #D4D3D3; */
     font-family: Pretendard Variable;
     font-weight: 500;
     font-style: Medium;
@@ -172,6 +246,7 @@
     leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
+    color: var(--기본글자색);
 }
 
 .바디__메인__버튼섹션 {
@@ -185,30 +260,11 @@
 .바디__메인__버튼섹션__취소버튼 {
     width: 10.4rem;
     height: 4.8rem;
-    border: 0px solid #000;
-    /* border: 0.1rem solid #000;
     border-radius: 0.8rem;
-    padding: 0.8rem 1rem 0.8rem 1rem;
-    font-family: Pretendard Variable;
-    font-weight: 600;
-    font-style: SemiBold;
-    font-size: 18px;
-    leading-trim: NONE;
-    line-height: 24px;
-    letter-spacing: -1%; */
-    
+    background-color: var(--인풋배경색);
+    border: 1px solid var(--인풋보더색);
+    color: var(--닫기버튼보더색);
 
-
-}
-.바디__메인__버튼섹션__수정버튼 {
-    width: 10.4rem;
-    height: 4.8rem;
-    border: 0px solid #000;
-    /* border: 0.1rem solid #000;
-    border-radius: 0.8rem;
-    padding: 0.8rem 1rem 0.8rem 1rem;
-    background-color: black;
-    color: #F2F2F2;
     font-family: Pretendard Variable;
     font-weight: 600;
     font-style: SemiBold;
@@ -216,5 +272,201 @@
     leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
-     */
+    
+    
+
+
 }
+.바디__메인__버튼섹션__수정버튼 {
+    width: 10.4rem;
+    height: 4.8rem;
+    border-radius: 0.8rem;
+    background-color: var(--기본글자색);
+    /* border-color: #D4D3D3; */
+    color: var(--기본배경색);
+    border: 1px solid var(--인풋보더색);
+    
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    
+}
+
+
+.바디__회고 {
+    width: 100%;
+    height: 17.3rem;
+}
+.바디__회고__입력섹션 {
+    height: 8.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.바디__회고__입력섹션 > span{
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    
+}
+.바디__회고__입력섹션__회고입력영역 {
+    height: 4.8rem;
+    display: flex;
+    justify-content: space-between;
+}
+.바디__회고__입력섹션__회고입력영역> input {
+    width: 100%;
+    padding: 1.2rem 1.6rem 1.2rem 1.6rem;
+    background-color: var(--회고입렵창색);
+    border: 0.1rem solid var(--회고입렵창색);
+    border-radius: 0.8rem;
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    
+    
+}
+.바디__회고__입력섹션__회고입력영역 > button {
+    width: 5.1rem;
+    height: 4.8rem;
+    /* background-color: #C7C7C7; */
+    background-color: var(--회고입력버튼색);
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    color: var(--회고입력창버튼색);
+    border-radius: 0.8rem;
+    border: 1px solid var(--회고입력버튼색);
+    
+    
+}
+.바디__회고__출력섹션 {
+    height: 7.2rem;
+   /* border-bottom : 0.1rem solid #e4e4e4; */
+}
+
+.바디__회고__출력섹션__회고목록{
+    display: flex;
+    align-items: center;
+    border-bottom: 0.1rem solid #e4e4e4;
+    /* padding: 1.2rem; */
+}
+
+.바디__회고__출력섹션__회고목록__마지막 {
+    display: flex;
+    align-items: center;
+    /* padding: 1.2rem; */
+  }
+
+.바디__회고__출력섹션__회고목록__날짜영역 {
+    color: #777;
+    font-family: Pretendard Variable;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    padding-left: 1.2rem;
+    padding: 1.2rem;
+    
+}
+
+.바디__회고__출력섹션__회고목록__내용영역 {
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: -1%;
+    padding: 1.2rem;
+}
+
+
+@media (max-width: 849px) {
+   
+    .헤더__타이틀{
+        display: none;
+    }
+    .헤더__모바일타이틀{
+        display: flex;
+        gap: 0.8rem;
+        align-items: center;
+        font-family: Pretendard Variable;
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 18px;
+        leading-trim: NONE;
+        line-height: 16px;
+        letter-spacing: -1%;
+        
+    }
+  
+    .바디__메인__감정섹션 > h3 {
+      font-size: 1.6rem;
+      line-height: 2rem;
+    }
+  
+    .바디__메인__감정섹션__감정수정  {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      /* font-size: 1.6rem; */
+      gap: 1.2rem;
+    }
+  
+    .바디__메인__감정섹션__감정수정 >div {
+        gap: 0.8rem;
+    }
+    .바디__메인__감정섹션__감정수정 label {
+      font-size: 1.6rem;
+    }
+  
+  
+    #일기수정제목입력창,
+    #일기수정내용입력창{
+      font-size: 1.4rem;
+    }
+  
+    .바디__메인__버튼섹션__취소버튼,
+    .바디__메인__버튼섹션__수정버튼 {
+      font-size: 1.6rem;
+    }
+  
+    #회고입력창 {
+      width: 80%;
+    }
+  
+    #회고입력창 + button {
+      width: 20%;
+    }
+  
+    .바디__회고__출력섹션__회고목록__내용영역 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      line-height: 1.6rem;
+    }
+  
+    .바디__회고__출력섹션__회고목록__날짜영역 {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+    }
+  }
+  

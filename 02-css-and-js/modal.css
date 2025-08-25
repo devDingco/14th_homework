@@ -156,12 +156,14 @@
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
+    
 }
 .등록모달창__아티클섹션__하단__제목영역{
     display: flex;
     flex-direction: column;
     height: 76px;
     gap: 0.8rem;
+    
 }
 .등록모달창__아티클섹션__하단__제목영역 > span{
     font-family: Pretendard Variable;
@@ -171,11 +173,14 @@
     leading-trim: NONE;
     line-height: 20px;
     letter-spacing: -1%;
+    /* color: red; */
     
 }
 .등록모달창__아티클섹션__하단__제목영역 > input{
     height: 48px;
     border-radius: 0.8rem;
+    border: 0.1rem solid #D4D3D3;
+    /* color: red; */
 }
 
 .등록모달창__아티클섹션__하단__내용영역{
@@ -197,6 +202,7 @@
 .등록모달창__아티클섹션__하단__내용영역 > input{
     height: 128px;
     border-radius: 0.8rem;
+    border: 0.1rem solid #D4D3D3;
 }
 .등록모달창__등록섹션{
     width: 224px;
@@ -214,6 +220,7 @@
     leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
+    border: 1px solid #000;
     
 }
 .등록모달창__등록섹션__등록버튼{
@@ -227,6 +234,7 @@
     leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
+    border: 1px solid #C7C7C7;
     
 }
 
@@ -254,7 +262,7 @@
     left: calc(50% - 48rem/2);
     width: 48rem;
     height: 20rem;
-    background-color: white;
+    background-color: var(--기본배경색);
     position: absolute;
     border-radius: 1.6rem;
     display: flex;
@@ -313,17 +321,22 @@
     font-size: 1.8rem;
     height: 4.8rem;
     padding: 1.2rem 1.9rem 1.2rem 1.9rem;
+    border: 1px solid var(--닫기버튼보더색);
+    background-color: var(--닫기버튼배경색);
+    color: var(--닫기버튼보더색);
 }    
 .등록취소모달창__버튼영역__등록취소버튼,
 .삭제모달창__버튼영역__삭제버튼{
     
     border-radius: 0.8rem;
-    background-color: black;
+    /* background-color: black; */
+    background-color: var(--기본글자색);
 
-    color: white;
+    color: var(--기본배경색);
     font-size: 1.8rem;
     height: 4.8rem;
     padding: 1.2rem 1.9rem 1.2rem 1.9rem;
+    border: 1px solid var(--기본배경색);
 }
 
 
@@ -343,7 +356,7 @@
 .등록모달창__아티클섹션__하단 input{
     background-color: var(--인풋배경색);
     border-color: var(--인풋보더색);  
-    color: var(--기본글자색); 
+    /* color: var(--기본배경색);  */
 }
 
 .등록모달창__등록섹션__닫기버튼{
@@ -369,4 +382,10 @@
 .등록완료모달창__메시지섹션__하단,
 .등록취소모달창__메시지섹션__하단{
     color: var(--등록완료모달글자색);
+}
+.등록취소모달창__버튼영역__등록취소버튼{
+    border-color: var(--닫기버튼보더색);
+}
+.등록취소모달창__버튼영역__계속작성버튼{
+    color: var(--기본글자색);
 }
