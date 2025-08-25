@@ -42,7 +42,8 @@ const confirmUpdate = (key) => { // <string>
             alert(`${indexToChange}번 일기가 수정되었습니다`)
             // todo - 메인페이지로 이동
             setTimeout(() => {
-                window.location.assign(`http://localhost:${window.location.port}/css-js-master/index.html`)
+                // window.location.assign(`http://localhost:${window.location.port}/css-js-master/index.html`)
+                location.href="../index.html"
             }, 1000)
         }
     } catch(e) {

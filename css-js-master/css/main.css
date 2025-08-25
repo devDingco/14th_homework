@@ -5,8 +5,7 @@
     width: 1168px;
     min-width: 1168px;
     /* 피그마 레이아웃 720 */
-    /* height: 720px; */ 
-    angle: 0 deg;
+    /* height: 720px; */
     opacity: 1;
     /* background-color: rgba(217, 217, 217, 1); */
 }
@@ -14,9 +13,8 @@
 #main {
     width: 100%;
     height: 100%;
-    angle: 0 deg;
     opacity: 1;
-    gap: 24px;    
+    gap: 24px;
 }
 
 #main_container {
@@ -24,29 +22,26 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-    angle: 0 deg;
     opacity: 1;
-    gap: 24px;    
+    gap: 24px;
 }
 
 #top_container {
     display: flex;
     width: 100%;
     height: 240px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
     padding-right: 20px;
-    padding-left: 20px;    
+    padding-left: 20px;
 }
 
-#top_container > img {
+#top_container>img {
     width: 1168px;
     height: 240px;
     min-width: 320px;
     max-width: 1168px;
     border-radius: 24px;
-    angle: 0 deg; 
     opacity: 1;
 }
 
@@ -55,7 +50,6 @@
     flex-direction: column;
     width: 100%;
     /* height: 1257px; */
-    angle: 0 deg;
     opacity: 1;
     gap: 42px;
 }
@@ -65,7 +59,6 @@
     flex-direction: column;
     width: 100%;
     height: 112px;
-    angle: 0 deg;
     opacity: 1;
     gap: 32px;
 }
@@ -75,45 +68,44 @@
     align-items: center;
     width: 100%;
     height: 48px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
     padding-right: 20px;
     padding-left: 20px;
 }
 
-#storage_tab_on {
+.storage_tab {
     width: 119px;
     height: 48px;
-    angle: 0 deg;
+    padding-top: 12px;
+    padding-right: 8px;
+    padding-bottom: 12px;
+    padding-left: 8px;
+    gap: 10px;
+
     opacity: 1;
-    gap: 10px;
-    padding-top: 12px;
-    padding-right: 8px;
-    padding-bottom: 12px;
-    padding-left: 8px;
-    border-bottom-width: 2px; 
-    border-bottom: 3px solid rgba(0, 0, 0, 1)
+    border-bottom-width: 2px;
+    border-bottom: 3px solid rgba(0, 0, 0, 1);
+
+    cursor: pointer;
 }
 
-#storage_tab_off {
-    width: 119px;
-    height: 48px;
-    angle: 0 deg;
+/* .tab_on {
+    opacity: 1;
+    border-bottom-width: 2px;
+    border-bottom: 3px solid rgba(0, 0, 0, 1);
+} */
+
+.tab_off {
     opacity: 0.3;
-    gap: 10px;
-    padding-top: 12px;
-    padding-right: 8px;
-    padding-bottom: 12px;
-    padding-left: 8px;
+    border-bottom-width: 0px;
 }
 
-#storage_tab_on, #storage_tab_off > p {
+.storage_tab > p {
     font-family: Pretendard Variable;
     font-weight: 700;
     font-style: Bold;
     font-size: 23px;
-    leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
 }
@@ -123,17 +115,17 @@
     /* width: 100%;
     height: 100%;
     max-width: 1168px;
-    angle: 0 deg;
     opacity: 1;
     gap: 24px; */
 
     width: 100%;
-    height: 936px;
-    angle: 0 deg;
+    min-height: 936px;
     opacity: 1;
     gap: 24px;
     padding-right: 20px;
     padding-left: 20px;
+
+    /* overflow: scroll; */
 }
 
 #diary_box_container {
@@ -141,7 +133,6 @@
     flex-wrap: wrap;
     width: 100%;
     height: 100%;
-    angle: 0 deg;
     opacity: 1;
     gap: 24px;
     overflow-y: scroll;
@@ -149,7 +140,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
-    
+
     /* place-items: center center;
     place-content: end center; */
     /* position:absolute; */
@@ -163,7 +154,6 @@
     height: 286px;
     min-width: 152px;
     border-radius: 16px;
-    angle: 0 deg;
     opacity: 1;
     gap: 16px;
     padding-bottom: 16px;
@@ -177,7 +167,6 @@
     justify-content: space-between;
     width: 100%;
     height: 56px;
-    angle: 0 deg;
     opacity: 1;
     gap: 8px;
     padding-right: 8px;
@@ -192,7 +181,6 @@
     width: 100%;
     height: 24px;
     justify-content: space-between;
-    angle: 0 deg;
     opacity: 1;
 }
 
@@ -202,17 +190,16 @@
     text-overflow: ellipsis;
     width: 100%;
     height: 24px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
 }
 
-#top_view_content_detail > p {
+#top_view_content_detail>p {
     cursor: default;
 }
 
 
-#bottom_view_content_detail > a {
+#bottom_view_content_detail>a {
     color: black;
     text-decoration: none;
 }
@@ -224,21 +211,20 @@
     width: 100%;
     height: 208px;
     border-radius: 16px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
 }
 
-.diary_content > a > img {
+.diary_content > a >img {
     width: 100%;
     height: 100%;
     border-radius: 16px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
+    object-fit: cover;
 }
 
-.diary_content > a > img:hover {
+.diary_content > a >img:hover {
     filter: blur(5px);
     width: 110%;
     height: 110%;
@@ -250,7 +236,6 @@
     flex-direction: column;
     width: 312px;
     height: 108px;
-    angle: 0 deg;
     opacity: 1;
     gap: 16px;
 }
@@ -262,7 +247,6 @@
     width: 312px;
     height: 68px;
     max-width: 592px;
-    angle: 0 deg;
     opacity: 1;
     gap: 20px;
 }
@@ -275,25 +259,22 @@
     /* width: 94px; */
     height: 24px;
     border-radius: 8px;
-    angle: 0 deg;
     opacity: 1;
-    gap: 8px;    
+    gap: 8px;
 }
 
-#feeling_radio_content > input {
+#feeling_radio_content>input {
     width: 24px;
     height: 24px;
-    angle: 0 deg;
     opacity: 1;
 }
 
-#feeling_radio_content > p {
+#feeling_radio_content>p {
     text-align: center;
     font-family: Pretendard Variable;
     font-weight: 500px;
     font-style: Medium;
     font-size: 17px;
-    leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
 }
@@ -304,9 +285,8 @@
     justify-content: space-between;
     width: 312px;
     height: 256px;
-    angle: 0 deg;
     opacity: 1;
-    gap: 24px;    
+    gap: 24px;
 }
 
 #writing_title_container {
@@ -315,9 +295,8 @@
     justify-content: space-between;
     width: 312px;
     height: 76px;
-    angle: 0 deg;
     opacity: 1;
-    gap: 8px;    
+    gap: 8px;
 }
 
 #title_input_container {
@@ -325,7 +304,6 @@
     height: 48px;
     border-radius: 8px;
     border-width: 1px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
     padding-top: 12px;
@@ -338,7 +316,6 @@
 #title_input {
     width: 280px;
     height: 24px;
-    angle: 0 deg;
     opacity: 1;
     border: 0px;
     resize: none;
@@ -350,9 +327,8 @@
     justify-content: space-between;
     width: 312px;
     height: 156px;
-    angle: 0 deg;
     opacity: 1;
-    gap: 8px;    
+    gap: 8px;
 }
 
 #detail_input_container {
@@ -360,7 +336,6 @@
     height: 128px;
     border-radius: 8px;
     border-width: 1px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
     padding-top: 12px;
@@ -373,7 +348,6 @@
 #detail_input {
     width: 280px;
     height: 100px;
-    angle: 0 deg;
     opacity: 1;
     border: 0px;
     resize: none;
@@ -381,7 +355,7 @@
 
 /* 모달 */
 #write_diary_container {
-    
+
     position: absolute;
     top: calc(50% - 500px/2);
     left: calc(50% - 400px/2);
@@ -394,7 +368,6 @@
     max-width: 760px;
     border-radius: 16px;
     border-width: 1px;
-    angle: 0 deg;
     opacity: 1;
     gap: 40px;
     padding: 24px;
@@ -402,10 +375,9 @@
     background-color: white;
 }
 
-#write_diary_container > p {
+#write_diary_container>p {
     width: 312px;
     height: 24px;
-    angle: 0 deg;
     opacity: 1;
 }
 
@@ -414,7 +386,6 @@
     flex-direction: column;
     width: 312px;
     height: 404px;
-    angle: 0 deg;
     opacity: 1;
     gap: 40px;
 }
@@ -424,12 +395,11 @@
     justify-content: space-evenly;
 }
 
-#writing_confirm_container > button {
+#writing_confirm_container>button {
     width: 104px;
     height: 48px;
     border-radius: 8px;
     border-width: 1px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
     padding-top: 8px;
@@ -449,54 +419,50 @@
     color: rgba(242, 242, 242, 1);
 }
 
-#writing_confirm_container > button > p {
+#writing_confirm_container>button>p {
     font-family: Pretendard Variable;
     font-weight: 600px;
     font-style: SemiBold;
     font-size: 18px;
-    leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
 }
 
-#diary_filter_container {
+#filter_container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 1168px;
-    height: 32px;
+    /* height: 32px; */
     min-width: 320px;
     max-width: 1168px;
-    angle: 0 deg;
     opacity: 1;
-    gap: 8px;       
+    gap: 8px;
 }
 
-#diary_filter {
+/* .storage_filter {
     width: 120px;
     height: 32px;
     min-width: 120px;
     border-radius: 8px;
     border-width: 1px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
     padding: 4px;
     border: 1px solid var(--Gray-Gray-300, rgba(199, 199, 199, 1));
     background: var(--Gray-W, rgba(255, 255, 255, 1));
-}
+} */
 
 #diary_float_btn {
     width: 40px;
     height: 40px;
     border-radius: 100px;
     border-width: 1px;
-    angle: 0 deg;
     opacity: 1;
     border: 1px solid var(--Gray-Gray-50, rgba(242, 242, 242, 1));
     background: rgba(255, 255, 255, 0.9);
     cursor: pointer;
-    
+
     position: fixed;
     bottom: 100px;
     left: 78%;
@@ -507,7 +473,6 @@
     width: 24px;
     height: 24px;
     border-radius: 100px;
-    angle: 0 deg;
     opacity: 1;
 
     top: 3%;
@@ -524,7 +489,6 @@
     width: 110px;
     height: 48px;
     border-radius: 8px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
     padding-top: 8px;
@@ -539,18 +503,16 @@
     display: flex;
     width: 90px;
     height: 24px;
-    angle: 0 deg;
     opacity: 1;
     gap: 4px;
 }
 
-#diary_resist_button_frame > p {
+#diary_resist_button_frame>p {
     color: white;
     font-family: Pretendard Variable;
     font-weight: 600;
     font-style: SemiBold;
     font-size: 16px;
-    leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
 }
@@ -575,7 +537,6 @@
     min-width: 480px;
     max-width: 760px;
     border-radius: 24px;
-    angle: 0 deg;
     opacity: 1;
     top: 643px;
     left: 720px;
@@ -600,7 +561,6 @@
 
     width: 432px;
     height: 64px;
-    angle: 0 deg;
     opacity: 1;
     gap: 16px;
 }
@@ -610,17 +570,15 @@
     justify-content: space-evenly;
     width: 229px;
     height: 48px;
-    angle: 0 deg;
     opacity: 1;
     gap: 21px;
 }
 
-.cancel_modal_button_frame > button {
+.cancel_modal_button_frame>button {
     width: 104px;
     height: 48px;
     border-radius: 8px;
     border-width: 1px;
-    angle: 0 deg;
     opacity: 1;
     gap: 10px;
     padding-top: 8px;
@@ -630,12 +588,11 @@
     cursor: pointer;
 }
 
-.cancel_modal_button_frame > button > p {
+.cancel_modal_button_frame>button>p {
     font-family: Pretendard Variable;
     font-weight: 600px;
     font-style: SemiBold;
     font-size: 18px;
-    leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
 }
@@ -645,7 +602,6 @@
     font-weight: 700;
     font-style: Bold;
     font-size: 24px;
-    leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
     text-align: center;
@@ -656,7 +612,6 @@
     font-weight: 500;
     font-style: Medium;
     font-size: 20px;
-    leading-trim: NONE;
     line-height: 24px;
     letter-spacing: -1%;
     text-align: center;
@@ -666,9 +621,143 @@
 #confirm_success_button {
     width: 432px;
     height: 48px;
-    angle: 0 deg;
     opacity: 1;
     gap: 21px;
     background: var(--Gray-B, rgba(0, 0, 0, 1));
     color: white;
+}
+
+#pic_box_container {
+    width: 100%;
+    opacity: 1;
+    gap: 40px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+}
+
+.dog_pic {
+    display: flex;
+    justify-content: center;
+
+    width: 640px;
+    height: 640px;
+    opacity: 1;
+}
+
+.dog_pic_frame > img {
+    width: 100%;
+    border-radius: 24px;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+
+.skeleton_back {
+    width: 100%;
+    height: 100%;
+    /* background-color: lightgray; */
+    filter: blur(20px);
+}
+
+.skeleton_stick {
+    width: 100px;
+    height: 1000px;
+    background-color: white;
+    filter: blur(40px);
+    
+    animation: skeletonAnimation;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes skeletonAnimation {
+    from {
+        transform: translate(-400px, -400px) rotateZ(30deg);
+    }
+    to {
+        transform: translate(1000px, 500px) rotateZ(30deg);
+    }
+}
+
+.storage_filter {
+    width: 120px;
+    height: 32px;
+    min-width: 120px;
+    border-radius: 8px;
+    border-width: 1px;
+    opacity: 1;
+    gap: 10px;
+    padding: 4px;
+    border: 1px solid var(--Gray-Gray-300, rgba(199, 199, 199, 1));
+    background: var(--Gray-W, rgba(255, 255, 255, 1));
+}
+
+/* 1. 드롭다운 껍데기 만들기 */
+.CSS_드롭다운제목 {
+    appearance: none;
+    width: 150px;
+    height: 40px;
+    padding: 10px;
+    border: 2px solid green;
+    border-radius: 10px;
+    margin-bottom: 10px;
+
+    --철수의CSS변수: "선택하세요.";
+}
+.CSS_드롭다운제목::after {
+    content: var(--철수의CSS변수);
+}
+.CSS_드롭다운제목:checked {
+    background-color: yellow;
+}
+.CSS_드롭다운제목:checked + .CSS_드롭다운메뉴 {
+    display: block;
+}
+
+/* 2. 드롭다운 알맹이 만들기 */
+.CSS_드롭다운메뉴 {
+    display: none;
+    width: 150px;
+    border: 2px solid green;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.CSS_드롭다운메뉴 input {
+    display: none;
+}
+.CSS_드롭다운메뉴 label {
+    display: block;
+    height: 40px;
+    padding: 10px;
+}
+.CSS_드롭다운메뉴 label:hover {
+    background-color: yellow;
+}
+
+#left_filter_frame {
+    position: relative;
+}
+
+#search_title {
+    width: 320px;
+    height: 48px;
+    min-width: 320px;
+    max-width: 360px;
+    border-radius: 100px;
+    border-width: 1px;
+    opacity: 1;
+    gap: 8px;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 40px;
+    border: 1px solid var(--Gray-Gray-300, rgba(199, 199, 199, 1));
+}
+
+#left_filter_frame > img {
+    position: absolute;
+
+    right: 280px;
+    top: 13px;
 }

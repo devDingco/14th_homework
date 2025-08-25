@@ -42,3 +42,26 @@ const toScrollTop = (tagId) => {
     // document.getElementById("diary_box_container").scrollTo({ top: 0, behavior: "smooth" })
     document.getElementById(tagId).scrollTo({ top: 0, behavior: "smooth" })
 }
+
+// 사진보관함 맨밑까지 스크롤시 작동
+let picTimer = null;
+window.addEventListener("scroll", () => {
+    if (document.getElementById("pic_box_container")) {
+        const 스크롤퍼센트 = document.documentElement.scrollTop / (document.documentElement.scrollHeight)
+        if(스크롤퍼센트 < 0.8) return;
+        if(picTimer !== null) return;
+        
+        console.log("상자를 그려줍니다.")
+        addPicStorageHtml(10)
+    
+        picTimer = setTimeout(() => {
+            picTimer = null
+    
+            const 마지막스크롤퍼센트 = document.documentElement.scrollTop / (document.documentElement.scrollHeight)
+            console.log(마지막스크롤퍼센트)
+            if(마지막스크롤퍼센트 === 1) addPicStorageHtml(10)
+        }, 2000) 
+    }
+
+})
+

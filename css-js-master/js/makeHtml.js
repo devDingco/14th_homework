@@ -1,5 +1,12 @@
 // 메인페이지 화면
 const makeMainHtml = (contentArr) => {
+    const picTab = document.getElementById("pic_tab")
+    const diaryTab = document.getElementById("diary_tab")
+    
+    diaryTab.classList.contains("tab_off") ? diaryTab.classList.toggle("tab_off") : ''
+
+    picTab.classList.contains("tab_off") ? '' : picTab.classList.toggle("tab_off") 
+
     const contentHTML = contentArr.map((v) => {
         let imgSrc
         let feelColor
@@ -61,7 +68,11 @@ const makeMainHtml = (contentArr) => {
         `
     }).join("")
 
-    document.getElementById("diary_box_container").innerHTML = contentHTML
+    document.getElementById("diary_container").innerHTML = `
+        <div id="diary_box_container" class="">
+            ${contentHTML}
+        </div>
+    `
 
     return contentHTML
 }
@@ -231,4 +242,120 @@ const resetResistHtml = () => {
     document.querySelectorAll('input[name="feel"]').forEach(radio => {
         radio.checked = false;
     });
+}
+
+// 메인페이지 사진보관함
+const makePicStorageHtml = async () => {
+    const picTab = document.getElementById("pic_tab")
+    const diaryTab = document.getElementById("diary_tab")
+
+    diaryTab.classList.contains("tab_off") ? '' : diaryTab.classList.toggle("tab_off")
+
+    picTab.classList.contains("tab_off") ? picTab.classList.toggle("tab_off")  : ''
+
+    document.getElementById("diary_container").innerHTML = `
+        <img src="./images/00-image.jpg" class="skeleton_back">
+        </div>
+    `
+
+    const dogArr = await getDogApi(10)
+
+    if (document.getElementById("pic_filter")) {
+        document.getElementById("diary_container").innerHTML = ''
+
+        let dogHtml
+        dogHtml = dogArr.map(v => `
+            <div class="dog_pic_frame">
+                <img src="${v}" class="dog_pic" />
+            </div>
+        `).join("")
+    
+        // console.log(dogHtml)
+        
+        document.getElementById("diary_container").innerHTML = `
+            <div id="pic_box_container">
+                ${dogHtml}
+            </div>  
+        `
+    }
+}
+
+const addPicStorageHtml = async (dogNumber) => { // <number>
+    const dogArr = await getDogApi(dogNumber)
+
+    let dogHtml
+    dogHtml = dogArr.map(v => `
+        <div class="dog_pic_frame">
+            <img src="${v}" class="dog_pic" />
+        </div>
+    `).join("")
+    
+    const currentDogs = document.getElementById("pic_box_container").innerHTML
+    document.getElementById("diary_container").innerHTML = `
+        <div id="pic_box_container">
+            ${currentDogs}
+            ${dogHtml}
+        </div>  
+    `
+}
+
+// 메인페이지 필터
+const makeMainFilterHtml = (storage) => { // <string>
+    switch (storage) {
+        case "일기보관함": {
+            document.getElementById("filter_container").innerHTML = `
+                <div id="left_filter_frame">
+                    <select id="diary_filter" class="storage_filter" onchange="viewDiaryFilter()">
+                        <option value="전체">전체</option>
+                        <option value="행복해요">행복해요</option>
+                        <option value="슬퍼요">슬퍼요</option>
+                        <option value="놀랐어요">놀랐어요</option>
+                        <option value="화나요">바나나</option>
+                        <option value="기타">기타</option>
+                    </select>
+                    <input id="search_title" type="text" placeholder="검색어를 입력해 주세요." oninput="searchTitleInput(event)" />
+                    <img src="./images/search_outline_light_m.svg"/>
+                </div>
+                <button id="diary_resist_button" onclick="openModal('main_write_modal_group')">
+                    <div id="diary_resist_button_frame">
+                        <img src="./images/plus_outline_light_m.svg" />
+                        <p>일기쓰기</p>
+                    </div>
+                </button>
+            `
+            break
+        }
+        case "사진보관함":{
+            document.getElementById("filter_container").innerHTML = `
+                <select id="pic_filter" class="storage_filter" onchange="viewPicFilter()">
+                    <option value="기본형">기본형</option>
+                    <option value="가로형">가로형</option>
+                    <option value="세로형">세로형</option>
+                </select>
+            `
+            break
+        }
+        default:
+    } 
+    
+}
+
+let timer;
+const searchTitleInput = (event) => {
+
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+        const searchTitle = event.target.value
+
+        const localStorageArr = JSON.parse(localStorage.getItem("일기콘텐츠"))
+
+        const searchedArr = localStorageArr.filter(v => v.title === searchTitle).map(v => v)
+
+        if (searchedArr.length === 0) {
+            document.getElementById("diary_box_container").innerHTML = makeMainHtml(localStorageArr)
+        } else {
+            document.getElementById("diary_box_container").innerHTML = makeMainHtml(searchedArr)
+        }
+
+    }, 1000)
 }
