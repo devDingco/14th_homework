@@ -78,8 +78,8 @@ const 메인페이지 = () => {
         </div>
       </div>
       <div className="취소등록버튼">
-        <button className="취소버튼">취소</button>
-        <button className="등록하기버튼">등록하기</button>
+        <button>취소</button>
+        <button>등록하기</button>
       </div>
     </>
   );

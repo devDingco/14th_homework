@@ -154,23 +154,7 @@ hr {
 }
 .취소등록버튼 {
   padding: 40px 0px;
-  display: flex;
-  gap: 16px;
-  justify-content: end;
 }
-.취소버튼 {
+.취소등록버튼 button {
   width: 64px;
-  height: 48px;
-  border-radius: 8px;
-  background-color: white;
-  font-size: 18px;
-}
-.등록하기버튼 {
-  background-color: #c7c7c7;
-  width: 95px;
-  height: 48px;
-  border-radius: 8px;
-  color: #e4e4e4;
-  border: none;
-  font-size: 18px;
 }
