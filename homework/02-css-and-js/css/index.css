@@ -21,9 +21,9 @@ a {
     text-decoration: none; 
 }
 
-.page {
+.page {  
    margin: 0 1.25rem 2.5rem;
-   max-width: 116.8rem;
+   max-width: 100rem;
 }
 
 .header {
@@ -273,16 +273,7 @@ a {
     margin-top: 2.62rem; 
 }
 
-.card_area {
-    max-width: 23.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    position: relative;
 
-    transition: 
-    transform 0.5s;   
-}
 .card_area:hover {
     transform: scale(1.1);
     box-shadow: 0 0.125rem 1.875rem 0 rgba(0, 0, 0, 0.16);
@@ -309,7 +300,7 @@ a {
 
 .diary_image {
     height: 17.8125rem;
-    width: auto;
+    width: 100%;
 }
 
 .mood_image {
@@ -756,4 +747,16 @@ button img {
     top: 0;
     left: 0;
     width: 100%;
+}
+
+.CSS_일기보여주는곳 .card_area {
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    flex: 1 1 calc(50% - 0.75rem);
+    
+    transition: 
+    transform 0.5s;  
 }
