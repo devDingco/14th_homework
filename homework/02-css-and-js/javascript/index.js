@@ -104,27 +104,27 @@ const JS_일기그리기기능 = () => {
             <div class="diary_image">
               ${
                 el.기분 === "행복"
-                  ? '<img class="CSS_mood_image" src="./assets/images/mood_happy.png" alt="행복" />'
+                  ? '<img class="mood_image" src="./assets/images/mood_happy.png" alt="행복" />'
                   : ""
               }
               ${
                 el.기분 === "슬픔"
-                  ? '<img class="CSS_mood_image" src="./assets/images/mood_sad.png" alt="슬픔" />'
+                  ? '<img class="mood_image" src="./assets/images/mood_sad.png" alt="슬픔" />'
                   : ""
               }
               ${
                 el.기분 === "놀람"
-                  ? '<img class="CSS_mood_image" src="./assets/images/mood_surprise.png" alt="놀람" />'
+                  ? '<img class="mood_image" src="./assets/images/mood_surprise.png" alt="놀람" />'
                   : ""
               }
               ${
                 el.기분 === "화남"
-                  ? '<img class="CSS_mood_image" src="./assets/images/mood_mad.png" alt="화남" />'
+                  ? '<img class="mood_image" src="./assets/images/mood_mad.png" alt="화남" />'
                   : ""
               }
               ${
                 el.기분 === "기타"
-                  ? '<img class="CSS_mood_image" src="./assets/images/mood_think.png" alt="기타" />'
+                  ? '<img class="mood_image" src="./assets/images/mood_think.png" alt="기타" />'
                   : ""
               }
             </div>
@@ -311,27 +311,27 @@ const 기분드롭다운기능 = (event) => {
             <div class="diary_image">
               ${
                 el.기분 === "행복"
-                  ? '<img class="CSS_mood_image" src="./assets/images/mood_happy.png" alt="행복" />'
+                  ? '<img class="mood_image" src="./assets/images/mood_happy.png" alt="행복" />'
                   : ""
               }
               ${
                 el.기분 === "슬픔"
-                  ? '<img class="CSS_mood_image" src="./assets/images/mood_sad.png" alt="슬픔" />'
+                  ? '<img class="mood_image" src="./assets/images/mood_sad.png" alt="슬픔" />'
                   : ""
               }
               ${
                 el.기분 === "놀람"
-                  ? '<img class="CSS_mood_image" src="./assets/images/mood_surprise.png" alt="놀람" />'
+                  ? '<img class="mood_image" src="./assets/images/mood_surprise.png" alt="놀람" />'
                   : ""
               }
               ${
                 el.기분 === "화남"
-                  ? '<img class="CSS_mood_image" src="./assets/images/mood_mad.png" alt="화남" />'
+                  ? '<img class="mood_image" src="./assets/images/mood_mad.png" alt="화남" />'
                   : ""
               }
               ${
                 el.기분 === "기타"
-                  ? '<img class="CSS_mood_image" src="./assets/images/mood_think.png" alt="기타" />'
+                  ? '<img class="mood_image" src="./assets/images/mood_think.png" alt="기타" />'
                   : ""
               }
             </div>
@@ -584,27 +584,27 @@ const JS_검색기능 = (event) => {
               <div class="diary_image">
                 ${
                   el.기분 === "행복"
-                    ? '<img class="CSS_mood_image" src="./assets/images/mood_happy.png" alt="행복" />'
+                    ? '<img class="mood_image" src="./assets/images/mood_happy.png" alt="행복" />'
                     : ""
                 }
                 ${
                   el.기분 === "슬픔"
-                    ? '<img class="CSS_mood_image" src="./assets/images/mood_sad.png" alt="슬픔" />'
+                    ? '<img class="mood_image" src="./assets/images/mood_sad.png" alt="슬픔" />'
                     : ""
                 }
                 ${
                   el.기분 === "놀람"
-                    ? '<img class="CSS_mood_image" src="./assets/images/mood_surprise.png" alt="놀람" />'
+                    ? '<img class="mood_image" src="./assets/images/mood_surprise.png" alt="놀람" />'
                     : ""
                 }
                 ${
                   el.기분 === "화남"
-                    ? '<img class="CSS_mood_image" src="./assets/images/mood_mad.png" alt="화남" />'
+                    ? '<img class="mood_image" src="./assets/images/mood_mad.png" alt="화남" />'
                     : ""
                 }
                 ${
                   el.기분 === "기타"
-                    ? '<img class="CSS_mood_image" src="./assets/images/mood_think.png" alt="기타" />'
+                    ? '<img class="mood_image" src="./assets/images/mood_think.png" alt="기타" />'
                     : ""
                 }
               </div>
@@ -735,27 +735,27 @@ const JS_카드그리기기능 = (페이지) => {
           <div class="diary_image">
             ${
               el.기분 === "행복"
-                ? '<img class="CSS_mood_image" src="./assets/images/mood_happy.png" alt="행복" />'
+                ? '<img class="mood_image" src="./assets/images/mood_happy.png" alt="행복" />'
                 : ""
             }
             ${
               el.기분 === "슬픔"
-                ? '<img class="CSS_mood_image" src="./assets/images/mood_sad.png" alt="슬픔" />'
+                ? '<img class="mood_image" src="./assets/images/mood_sad.png" alt="슬픔" />'
                 : ""
             }
             ${
               el.기분 === "놀람"
-                ? '<img class="CSS_mood_image" src="./assets/images/mood_surprise.png" alt="놀람" />'
+                ? '<img class="mood_image" src="./assets/images/mood_surprise.png" alt="놀람" />'
                 : ""
             }
             ${
               el.기분 === "화남"
-                ? '<img class="CSS_mood_image" src="./assets/images/mood_mad.png" alt="화남" />'
+                ? '<img class="mood_image" src="./assets/images/mood_mad.png" alt="화남" />'
                 : ""
             }
             ${
               el.기분 === "기타"
-                ? '<img class="CSS_mood_image" src="./assets/images/mood_think.png" alt="기타" />'
+                ? '<img class="mood_image" src="./assets/images/mood_think.png" alt="기타" />'
                 : ""
             }
           </div>
