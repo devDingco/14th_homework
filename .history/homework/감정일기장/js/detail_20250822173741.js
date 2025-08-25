@@ -65,46 +65,18 @@ document.addEventListener('DOMContentLoaded', function () {
     회고인풋.value = '';
   });
 
-  function 일기삭제하기(삭제할제목, 삭제할날짜) {
+  function 일기삭제하기(삭제할제목) {
     let diaryList = JSON.parse(localStorage.getItem('저장된일기')) || [];
-    // 제목과 날짜 둘 다 일치하는 일기만 삭제 (같은 제목 문제 해결)
-    diaryList = diaryList.filter(
-      (일기) => !(일기.title === 삭제할제목 && 일기.date === 삭제할날짜)
-    );
+    diaryList = diaryList.filter((일기) => 일기.title !== 삭제할제목);
     localStorage.setItem('저장된일기', JSON.stringify(diaryList));
     location.href = './index.html';
   }
-  // 삭제버튼 클릭 → 모달만 열기 (삭제는 아직 실행하지 않음)
   삭제버튼.addEventListener('click', function () {
-    console.log('삭제 버튼 클릭됨'); // 디버깅용
     모달열기(삭제확인모달);
+
+    const 현재일기 = JSON.parse(localStorage.getItem('선택된일기'));
+    일기삭제하기(현재일기.title);
   });
-
-  // 모달의 "삭제" 버튼과 "취소" 버튼 찾기
-  const 모달삭제버튼 = document.getElementById('모달삭제버튼');
-  const 모달삭제취소버튼 = document.getElementById('모달삭제취소버튼');
-
-  // 버튼이 존재하는지 확인하고 이벤트 추가
-  if (모달삭제버튼) {
-    // 모달의 "삭제" 버튼 클릭 → 실제 삭제 실행
-    모달삭제버튼.addEventListener('click', function () {
-      console.log('모달 삭제 버튼 클릭됨'); // 디버깅용
-      const 현재일기 = JSON.parse(localStorage.getItem('선택된일기'));
-      일기삭제하기(현재일기.title, 현재일기.date);
-    });
-  } else {
-    console.error('모달삭제버튼을 찾을 수 없습니다');
-  }
-
-  if (모달삭제취소버튼) {
-    // 모달의 "취소" 버튼 클릭 → 모달만 닫기
-    모달삭제취소버튼.addEventListener('click', function () {
-      console.log('모달 취소 버튼 클릭됨'); // 디버깅용
-      모달닫기(삭제확인모달);
-    });
-  } else {
-    console.error('모달삭제취소버튼을 찾을 수 없습니다');
-  }
   window.일기삭제하기 = 일기삭제하기;
   제목요소.textContent = 일기객체.title;
   감정텍스트요소.textContent = 일기객체.emotion;
@@ -128,12 +100,5 @@ document.addEventListener('DOMContentLoaded', function () {
   const 수정버튼 = document.getElementById('editBtn');
   수정버튼.addEventListener('click', function () {
     location.href = './edit.html';
-  });
-
-  // ESC 키를 누르면 모달 닫기
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-      모달닫기(삭제확인모달);
-    }
   });
 });

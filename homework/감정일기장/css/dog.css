@@ -1,0 +1,159 @@
+* {
+  margin: 0rem;
+  padding: 0rem;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+h1 {
+  font-size: 1.125rem;
+  padding-top: 2.875rem;
+  padding-bottom: 2.875rem;
+}
+
+/* 드롭다운 - index 스타일로 변경 */
+.드롭다운제목 {
+  appearance: none;
+  width: 7.5rem;
+  height: 2rem;
+  background-color: white;
+  border: 1px solid #c7c7c7;
+  border-radius: 8px;
+  text-align: start;
+  padding: 0.25rem;
+  background-image: url('./assets/images/arrow.png');
+  background-repeat: no-repeat;
+  background-position: right 0rem center;
+  cursor: pointer;
+  font-size: 1rem;
+  --철수의css변수: '기본';
+}
+
+.드롭다운제목::after {
+  content: var(--철수의css변수);
+}
+
+/* 열렸을 때 - 위쪽 모서리만 둥글게 */
+.드롭다운제목:checked {
+  border-radius: 8px 8px 0 0;
+  border-bottom: none;
+}
+
+.드롭다운제목:checked + ul {
+  display: block;
+}
+
+.드롭다운목록 {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #c7c7c7;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0rem 0.125rem 0.3125rem rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 7.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.드롭다운목록 input {
+  display: none;
+}
+
+/* 기본 항목 숨기기 */
+#기본 + label {
+  display: none;
+}
+
+.드롭다운목록 label {
+  display: block;
+  padding: 0.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+  background-color: white;
+}
+
+.드롭다운목록 label:hover {
+  background-color: #f5f5f5;
+}
+
+.드롭다운목록 li:last-child label {
+  border-radius: 0rem 0rem 0.3125rem 0.3125rem;
+}
+
+/* 드롭다운 컨테이너 positioning */
+.드롭다운제목 {
+  position: relative;
+}
+.banner {
+  width: 73rem;
+  height: 15rem;
+}
+
+.webBanner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mobileBanner {
+  display: none;
+}
+/* 네비 */
+nav {
+  display: flex;
+  font-size: 1.5rem;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+}
+nav > button {
+  background-color: transparent;
+  border: transparent;
+}
+
+#강아지보여주는곳 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+/* 반응형-------------------------------------------------------- */
+/* 메인전체사이즈 */
+.main {
+  max-width: 73rem;
+  margin: auto;
+}
+/* 네비 */
+nav {
+  display: flex;
+  font-size: 1.5rem;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+}
+@media (max-width: 48.625rem) {
+  .main {
+    max-width: 20rem;
+    margin: 0 auto;
+  }
+
+  .banner {
+    width: 100%;
+    max-width: 20rem;
+    height: 15rem;
+    object-position: center;
+    margin: 0 auto;
+  }
+
+  .webBanner {
+    display: none;
+  }
+  .mobileBanner {
+    display: block;
+  }
+}

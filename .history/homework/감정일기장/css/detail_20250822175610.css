@@ -19,22 +19,6 @@ h1 {
 }
 #내용복사 {
   background-color: white;
-  width: 91px;
-  height: 24px;
-  padding: 0;
-  margin: 0;
-  text-align: right;
-  border: none;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 4px;
-}
-
-#내용복사 img {
-  width: 24px;
-  height: 24px;
 }
 /* 모달 스타일 */
 .모달그룹 {

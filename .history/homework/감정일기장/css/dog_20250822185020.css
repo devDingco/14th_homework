@@ -1,0 +1,47 @@
+* {
+  margin: 0rem;
+  padding: 0rem;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+h1 {
+  font-size: 1.125rem;
+  padding-top: 2.875rem;
+  padding-bottom: 2.875rem;
+}
+/* 메인전체사이즈 */
+.main {
+  max-width: 73rem;
+  margin: auto;
+}
+/* 네비 */
+nav {
+  display: flex;
+  font-size: 1.5rem;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+}
+@media (max-width: 48.625rem) {
+  .main {
+    max-width: 20rem;
+    margin: 0 auto;
+  }
+
+  .banner {
+    width: 100%;
+    max-width: 20rem;
+    height: 15rem;
+    object-position: center;
+    margin: 0 auto;
+  }
+
+  .webBanner {
+    display: none;
+  }
+  .mobileBanner {
+    display: block;
+  }
+}

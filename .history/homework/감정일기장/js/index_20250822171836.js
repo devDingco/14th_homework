@@ -8,43 +8,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const footer = document.querySelector('footer');
 
   // 버튼들
-  const 일기보관함버튼 = document.getElementById('일기보관함버튼');
-  const 사진보관함버튼 = document.getElementById('사진보관함버튼');
   const 모달열기버튼 = document.getElementById('모달열기버튼');
   const 모달닫기버튼 = document.getElementById('모달닫기버튼');
   const 모달확인버튼 = document.getElementById('모달확인버튼');
   const 모달계속작성버튼 = document.getElementById('모달계속작성버튼');
   const 모달등록취소버튼 = document.getElementById('모달등록취소버튼');
-  const 인덱스모달삭제버튼 = document.getElementById('인덱스모달삭제버튼');
-  const 인덱스모달삭제취소버튼 =
-    document.getElementById('인덱스모달삭제취소버튼');
 
   // 모달들
   const 일기쓰기모달 = document.getElementById('모달등록');
   const 등록완료모달 = document.getElementById('등록완료모달');
   const 등록취소모달 = document.getElementById('등록취소모달');
-  const 일기삭제확인모달 = document.getElementById('일기삭제확인모달');
 
   // 배경들
   const 모달배경 = document.getElementById('모달배경');
-
-  // 강아지불러오기
-  const 강아지불러오는기능 = () => {
-    fetch('https://dog.ceo/api/breeds/image/random/10').then((받아온결과) => {
-      받아온결과.json().then((객체만뽑힌결과) => {
-        console.log(객체만뽑힌결과);
-
-        const 이미지다운로드주소들 = 객체만뽑힌결과.message;
-        const 상태 = 객체만뽑힌결과.status;
-        console.log(`메세지: ${이미지다운로드주소들}`);
-        console.log(`상태: ${상태}`);
-        document.getElementById('강아지보여주는곳').innerHTML =
-          이미지다운로드주소들
-            .map((el) => ` <img src="${el}" width='300px' />`)
-            .join('');
-      });
-    });
-  };
 
   // 모달 열기/닫기 함수 (실제 요소를 받는 방식으로 변경)
   function 모달열기(모달요소) {
@@ -100,22 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
     라디오버튼들.forEach((radio) => (radio.checked = false));
   });
 
-  // 7. 일기삭제확인모달의 "삭제" 버튼
-  인덱스모달삭제버튼.addEventListener('click', function () {
-    // 임시 저장된 일기 정보로 삭제 실행
-    if (삭제할일기정보) {
-      일기삭제하기(삭제할일기정보.title, 삭제할일기정보.date);
-      삭제할일기정보 = null; // 임시 정보 초기화
-    }
-    모달닫기(일기삭제확인모달); // 모달 닫기
-  });
-
-  // 8. 일기삭제확인모달의 "취소" 버튼
-  인덱스모달삭제취소버튼.addEventListener('click', function () {
-    삭제할일기정보 = null; // 임시 정보 초기화
-    모달닫기(일기삭제확인모달); // 모달만 닫기
-  });
-
   const 스크롤올리기 = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -145,9 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // 3단계: 일기들을 저장할 빈 배열 만들기 (모든 일기 데이터가 여기에 저장됨)
   let diaryList = [];
 
-  // 삭제할 일기 정보를 임시로 저장하는 변수
-  let 삭제할일기정보 = null;
-
   // 삭제 함수 - 제목과 날짜로 구분 (같은 제목 문제 해결)
   function 일기삭제하기(삭제할제목, 삭제할날짜) {
     // 제목과 날짜 둘 다 일치하는 일기만 삭제
@@ -166,15 +123,6 @@ document.addEventListener('DOMContentLoaded', function () {
       일기를화면에그리기(일기);
     });
   }
-
-  // 삭제 모달을 여는 함수 (X 버튼 클릭시 호출)
-  function 삭제모달열기(삭제할제목, 삭제할날짜) {
-    // 삭제할 일기 정보를 임시 저장
-    삭제할일기정보 = { title: 삭제할제목, date: 삭제할날짜 };
-    // 삭제 확인 모달 열기
-    모달열기(일기삭제확인모달);
-  }
-  window.삭제모달열기 = 삭제모달열기;
   window.일기삭제하기 = 일기삭제하기;
 
   // 공통 함수: 일기를 화면에 그리는 함수 (중복 코드를 줄이기 위해 함수로 만듦)
@@ -202,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
   <div class='diaryCard'> 
   <div class="image-container">
     <img src="./assets/images/${일기이미지}" alt="" />
-    <button class="delete-btn" onclick="event.stopPropagation();삭제모달열기('${
+    <button class="delete-btn" onclick="event.stopPropagation();일기삭제하기('${
       일기데이터.title
     }', '${일기데이터.date}')">
       <img src="./assets/images/close icon.png" alt="삭제" class="delete-icon">
@@ -383,19 +331,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!event.target.closest('.filter-dropdown')) {
       dropdownMenu.style.display = 'none';
       dropdownBtn.classList.remove('open');
-    }
-  });
-
-  // ESC 키를 누르면 모든 모달 닫기
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-      // 열린 모달들 모두 닫기
-      모달닫기(일기쓰기모달);
-      모달닫기(등록완료모달);
-      모달닫기(등록취소모달);
-      모달닫기(일기삭제확인모달);
-      // 삭제할 일기 정보도 초기화
-      삭제할일기정보 = null;
     }
   });
 });
