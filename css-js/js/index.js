@@ -190,7 +190,7 @@ function getDiaryCard() {
     // 등록하기 버튼 비활성화 하기
     document.getElementById("diary__write__button").disabled = true
 
-    addDiaryCard()
+    filterDiaryCard(diaryCard)
 
 }
 
@@ -215,74 +215,152 @@ function clearDiaryForm() {
 
 // 시작페이지 설정
 let firstPage = 1
+let lastPage
+const cardsPerPage = 12
+const numPerPagegroup = 5
 const prevPageElement = document.getElementById("prevpage__button")
 const nextPageElement = document.getElementById("nextpage__button")
 
 // 배열 개수에 따른 마지막페이지 계산 후 HTML로 반환
-const diaryPage = (Arr) => {
+const diaryPage = (Arr,clickedpage) => {
 
 
     // 마지막페이지 설정
-    // 다이어리가 총 12개 보여져야하므로 배열의 길이에서 12를 나눔
-    const lastPage = Math.ceil(Arr.length / 12)
-    const pages = Arr.map((el, index) => {
+    // 다이어리카드가 페이지 당 총 12개 보여져야하므로 배열의 길이에서 12를 나눔
+    lastPage = Math.ceil(Arr.length / cardsPerPage)
+
+
+    // 피그마 상 페이지가 5개 씩 보여짐
+    // 
+    const pagegroups = new Array (numPerPagegroup).fill(1)
+    const pages = pagegroups.map((el, index) => {
         const pageNum = firstPage + index
 
-        return pageNum <= lastPage ? `<button>${pageNum}</button>` : ``
+        return pageNum <= lastPage ? `<button onclick="loaddiaryPage(indexOfFilteredNum, ${pageNum})" class=${clickedpage === pageNum ? "pageclickbtn" : "pagebtn"}>${pageNum}</button>` : ``
     }).join("")
+
+    // 이전페이지 버튼
+    const prevbutton = firstPage === 1 ? 
+    `<img src="./assets/icons/leftdisabled_outline_light_m.svg" id="prevpage__button" onclick="prevPage(indexOfFilteredNum)" />` : `<img src="./assets/icons/leftenable_outline_light_m.svg" id="prevpage__button" onclick="prevPage(indexOfFilteredNum)" />`
     
-    document.getElementById("page__number").innerHTML = pages
+    // 다음페이지 버튼
+    const nextbutton = lastPage < firstPage + 5 ?
+    `<img src="./assets/icons/rightdisabled_outline_light_m.svg" id="nextpage__button" onclick="nextPage(indexOfFilteredNum)"/>`:`<img src="./assets/icons/rightenable_outline_light_m.svg" id="nextpage__button" onclick="nextPage(indexOfFilteredNum)"/>`
+
+
+    document.getElementById("page__group").innerHTML = prevbutton + `<div class="page__number">${pages}</div>` + nextbutton
 
 
 }
 
+// 페이지 별 카드 그리기
+// Arr: 배열, 화면에 표시되어야하는(검색, 드롭다운 등등) 다이어리카드의 인덱스 번호를 모아둔 배열
+
+const loaddiaryPage = (Arr,clickedpage) => {
+
+    // firstIndexOfPage: 클릭된 페이지에서 보여줘야하는 가장 첫 번째 카드의 순서
+    const firstIndexOfPage = (clickedpage - 1) * cardsPerPage
+
+    // lastIndexOfPage: 클릭된 페이지에서 보여줘야하는 마지막 카드의 순서
+    const lastIndexOfPage = firstIndexOfPage - 1
+
+    // 표시되어야할 카드의 길이 중 클릭한 페이지에 해당되는 카드 새로 배열 만들기
+    const list = Arr.filter((el, index) => {
+        return lastIndexOfPage < index && index <= lastIndexOfPage + cardsPerPage
+    })
+
+    // 클릭한 페이지에 해당되는 카드 HTML로 집어넣기
+    document.getElementById("card__list").innerHTML = list.map(el => `
+            <a href="./detail.html?number=${el}">
+            <div class="diary__card">
+                <div>
+                    <img class="diary__card__image" src="./assets/images/${diaryCard[el].feeling}_M.svg" />
+                    <img id="delete__button" src="./assets/icons/close_outline_light_m.svg" onclick="deleteDiaryCard(event, ${el})" />
+                </div>
+                <div class="diary__card__text">
+                    <div class="diary__card__subtitle">
+                        <div class="diary__card__feeling ${diaryCard[el].feeling}">${diaryCard[el].feeling_title}</div>
+                        <div id="diary__card__date">${diaryCard[el].date}</div>
+                    </div>
+                    <div class="diary__card__title">${diaryCard[el].card_title}</div>
+                </div>
+            </div>
+            </a>    
+        `).join("")
+
+    // 배열에 해당되는 페이지 번호 그리기
+    diaryPage(Arr,clickedpage)
+}
+
 // 이전페이지기능
 const prevPage = (Arr) => {
-    if(firstPage === 1) return
+    if(firstPage !== 1) {
+        // 페이지 번호가 1이 아니면 페이지 그룹의 개수만큼 빼주기
+        firstPage -= numPerPagegroup
 
-    firstPage = firstPage - 5
-    diaryPage(Arr)
+        // 이전페이지 버튼을 누르면, 이전 페이지 그룹의 가장 마지막 번호가 표시되게끔 하기?(6 or 7페이지에서 이전페이지를 누르면, 1페이지가 아닌 5페이지로 넘어가게끔... ?)
+        loaddiaryPage(Arr,firstPage+(numPerPagegroup-1))
+        diaryPage(Arr,firstPage+(numPerPagegroup-1))
+
+    } else (
+        // 첫 페이지가 1일 때 이전 페이지 버튼을 누르면, 알럿 발생
+        alert("현재 표시된 페이지들보다 더 앞으로 갈 수 없어요")
+    )
+
 
 }
 
 // 다음페이지기능
 const nextPage = (Arr) => {
-    if(lastPage < firstPage + 5) return
-
-    firstPage = firstPage + 5
-    diaryPage(Arr)
-
-}
-
-
-/* 다이어리 카드 리스트가 1개 이상일 때, 카드 추가하기 */
-function addDiaryCard() {
-
-    if (diaryCard.length >= 1){
-        const diaryCard_HTML = diaryCard.map((el,index)=>`
-        <a href="./detail.html?number=${index}">
-            <div class="diary__card">
-                <img class="diary__card__image" src="./assets/images/${diaryCard[index].feeling}_M.svg" />
-                <img id="delete__button" src="./assets/icons/close_outline_light_m.svg" onclick="deleteDiaryCard(event, ${index})" />
-                <div class="diary__card__text">
-                    <div class="diary__card__subtitle">
-                        <div class="diary__card__feeling ${diaryCard[index].feeling}">${diaryCard[index].feeling_title}</div>
-                        <div id="diary__card__date">${diaryCard[index].date}</div>
-                    </div>
-                    <div class="diary__card__title">${diaryCard[index].card_title}</div>
-                </div>
-            </div>
-            </a>
-            
-        `).join("")
-    
-        document.getElementById("card__list").innerHTML = diaryCard_HTML
+    if(lastPage < firstPage + numPerPagegroup) {
+        // 마지막 페이지보다 그룹의 첫 페이지 + 페이지 그룹수(5)가 클 때, 알럿 발생
+        alert("현재 표시된 페이지들보다 더 뒤로 갈 수 없어요")
     } else {
-        document.getElementById("card__list").innerText = "등록된 일기가 없습니다."
+
+        // 페이지 목록이 1~5까지 보여지므로, 이후페이지 클릭 시 5만큼 늘어남
+        firstPage += numPerPagegroup
+
+        // 다음페이지 버튼을 누르면, 다음 페이지 그룹의 첫 페이지로 넘어가게끔 하기
+        diaryPage(Arr,firstPage)
+        loaddiaryPage(Arr,firstPage)
     }
 
 
+
 }
+
+
+// function addDiaryCard() {
+
+    // if (diaryCard.length >= 1){
+    //     const diaryCard_HTML = diaryCard.map((el,index)=>`
+    //     <a href="./detail.html?number=${index}">
+    //         <div class="diary__card">
+    //             <img class="diary__card__image" src="./assets/images/${diaryCard[index].feeling}_M.svg" />
+    //             <img id="delete__button" src="./assets/icons/close_outline_light_m.svg" onclick="deleteDiaryCard(event, ${index})" />
+    //             <div class="diary__card__text">
+    //                 <div class="diary__card__subtitle">
+    //                     <div class="diary__card__feeling ${diaryCard[index].feeling}">${diaryCard[index].feeling_title}</div>
+    //                     <div id="diary__card__date">${diaryCard[index].date}</div>
+    //                 </div>
+    //                 <div class="diary__card__title">${diaryCard[index].card_title}</div>
+    //             </div>
+    //         </div>
+    //         </a>
+            
+    //     `).join("")
+    
+    //     document.getElementById("card__list").innerHTML = diaryCard_HTML
+    // } else {
+    //     document.getElementById("card__list").innerText = "등록된 일기가 없습니다."
+    // }
+
+    
+//     filterDiaryCard(diaryCard)
+
+// }
+
+
 
 // 드롭다운 선택 함수
 const selectDropDown = (event) => {
@@ -340,51 +418,53 @@ const dropdownEvent = (event) => {
     filterDiaryCard(result)
 }
 
-// 공통으로 포함된 배열 찾기
+// 4. 공통으로 포함된 배열 찾기
 function findCommonCard(arr1, arr2){
     const commonCard = arr1.filter( el => arr2.includes(el));
 
     return commonCard
 }
 
-// select_filter가 1개 이상일 때 다이어리 카드로 변환
+// 필터된 카드의 인덱스를 모아둔 배열 로컬스토리지에서 뽑아오기(굳이 필요없나..?)
+let getFilteredNum = localStorage.getItem("filteredCardNum")
+let indexOfFilteredNum = JSON.parse(getFilteredNum)
+
+
+// 필터된 다이어리 카드의 길이에 따라 카드 이미지 생성
 function filterDiaryCard(result) {
     
-
-    if (result.length >= 1){
-        // 로컬스토리지에서 불러온 다이어리 카드 값의 인덱스를 뽑기 위한 빈 배열 생성
-        const resultOfCard = [];
-
-        // 필터링(검색, 드롭다운)된 다이어리 카드의 인덱스를 뽑아오기
-        result.map(el => {
-            const indexResult = diaryCard.indexOf(el)
-            resultOfCard.push(indexResult)
-        })
-        const result_HTML = resultOfCard.map((el)=>`
-            <a href="./detail.html?number=${el}">
-            <div class="diary__card">
-                <div>
-                    <img class="diary__card__image" src="./assets/images/${diaryCard[el].feeling}_M.svg" />
-                    <img id="delete__button" src="./assets/icons/close_outline_light_m.svg" onclick="deleteDiaryCard(event, ${el})" />
-                </div>
-                <div class="diary__card__text">
-                    <div class="diary__card__subtitle">
-                        <div class="diary__card__feeling ${diaryCard[el].feeling}">${diaryCard[el].feeling_title}</div>
-                        <div id="diary__card__date">${diaryCard[el].date}</div>
-                    </div>
-                    <div class="diary__card__title">${diaryCard[el].card_title}</div>
-                </div>
-            </div>
-            </a>    
-        `).join("")
-    
-        document.getElementById("card__list").innerHTML = result_HTML
-    } else {
-        // 기존 배열 중 드롭다운에서 선택하지 않은 기분을 골랐을 때는 배열이 0이므로, 안내 문구 노출
+    // 필터된 다이어리 카드의 길이가 1보다 작으면(검색된 내용이 없으면) 작성된 일기 없음 안내
+    if (result.length < 1){
         document.getElementById("card__list").innerText = "검색한 내용으로 작성된 일기가 없습니다."
+        return
     }
 
+    // localstorage에 저장된 다이어리 카드의 인덱스 번호를 빼올 빈 배열 생성
+    const resultOfCard = [];
+
+    // 필터링(검색, 드롭다운)된 다이어리 카드의 인덱스를 뽑아오기(indexOf)
+    result.map(el => {
+        const indexResult = diaryCard.indexOf(el)
+        resultOfCard.push(indexResult)
+    })
+
+    // 로컬스토리지에 배열 저장
+    localStorage.setItem("filteredCardNum", JSON.stringify(resultOfCard))
+
+    getFilteredNum = localStorage.getItem("filteredCardNum")
+    indexOfFilteredNum = JSON.parse(getFilteredNum)
+
+    // 페이지그리기 기능
+    diaryPage(indexOfFilteredNum,1)
+
+    // 페이지에 해당하는 카드 불러오기
+    loaddiaryPage(indexOfFilteredNum,1)
+
 }
+
+// addDiaryCard: 전체 다이어리 리스트 불러오는 기능
+// 새롭게 카드 작성하였을 때, 페이지 로드했을 때 등등
+const addDiaryCard = () => {filterDiaryCard(diaryCard)}
 
 
 const imageRatio = (event) => {
@@ -399,24 +479,7 @@ const imageRatio = (event) => {
     }
 }
 
-// 스크롤 내릴 시, 필터 드롭다운 배경색 반전
-window.onload = () => {
-
-    document.getElementById("filter__menu").innerHTML = diary__filter;
-    addDiaryCard()
-}
-
-
-// 페이지가 로드될 때 마다, 카드 추가하기 함수 실행
-window.addEventListener("load",addDiaryCard)
-
-
-// 플로팅 버튼 실행
-window.addEventListener("scroll", floatingButton)
-window.addEventListener("resize", floatingButton)
-window.addEventListener("load", floatingButton)
-
-// 플로팅 버튼 선택 시, 요소 맨 위로 이동
+// 플로팅 버튼 선택 시, 화면 맨 위로 이동
 function scrollpage () {
 
     window.scrollTo({ top: 0, behavior: "smooth" })
@@ -448,6 +511,8 @@ function deleteDiaryCard (event, index) {
 
 }
 
+// 플로팅 버튼
+// 플로팅 버튼 클릭 시 현재 화면 제일 위로 이동
 function floatingButton(){
     const innerHeight = window.innerHeight
     const innerWidth = window.innerWidth
@@ -460,3 +525,22 @@ function floatingButton(){
         z-index: 99;
     `
 }
+
+// 페이지 로드가 될 때 첫 화면 세팅
+// 필터메뉴(일기보관함, 사진보관함), 전체 다이어리 카드 불러오기
+window.onload = () => {
+
+    document.getElementById("filter__menu").innerHTML = diary__filter;
+    addDiaryCard()
+
+}
+
+
+// 페이지가 로드될 때 마다, 카드 추가하기 함수 실행
+window.addEventListener("load",addDiaryCard)
+
+
+// 플로팅 버튼 실행
+window.addEventListener("scroll", floatingButton)
+window.addEventListener("resize", floatingButton)
+window.addEventListener("load", floatingButton)
