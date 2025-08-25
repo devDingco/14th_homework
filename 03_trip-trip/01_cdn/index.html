@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>TRIP TRIP</title>
+
+    <!-- REACT CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- styles -->
+    <link rel="stylesheet" href="./styles/root.css" />
+    <link rel="stylesheet" href="./styles/reset.css" />
+    <link rel="stylesheet" href="./styles/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="post"></div>
+    </div>
+
+    <!-- script -->
+    <script type="text/babel" src="./index.js"></script>
+
+    <script type="text/babel">
+      const post = ReactDOM.createRoot(document.getElementById('post'))
+      post.render(<PostRegistrationPage />)
+    </script>
+  </body>
+</html>
