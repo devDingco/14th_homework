@@ -1,8 +1,11 @@
 // Input 컴포넌트
-const RegisterInput = ({ inputTitle, myPlaceholder, width, height }) => {
+const RegisterInput = ({ inputTitle, opacity, myPlaceholder, width, height }) => {
     return (
       <div className="input-wrapper">
-        <div className="input-title">{inputTitle}</div>
+        <div className="input-title-box">
+            <div className="input-title">{inputTitle}</div>
+            <div className="star" style={{ opacity: opacity }}>*</div>
+        </div>
         <textarea
           className="input-box"
           placeholder={myPlaceholder} 
@@ -36,27 +39,27 @@ const 등록페이지 = () => {
             <div className="타이틀">게시물 등록</div>
 
             <div className="Section">
-                <RegisterInput inputTitle="작성자" myPlaceholder="작성자 명을 입력해 주세요." width="62.0rem" height="4.8rem"/>
-                <RegisterInput inputTitle="비밀번호" myPlaceholder="비밀번호를 입력해 주세요." width="62.0rem" height="4.8rem"/>
+                <RegisterInput inputTitle="작성자" opacity="1" myPlaceholder="작성자 명을 입력해 주세요." width="62.0rem" height="4.8rem"/>
+                <RegisterInput inputTitle="비밀번호" opacity="1" myPlaceholder="비밀번호를 입력해 주세요." width="62.0rem" height="4.8rem"/>
             </div>
 
             <div className="Section">
-                <RegisterInput inputTitle="제목" myPlaceholder="제목을 입력해 주세요." width="128.0rem" height="4.8rem"/>
+                <RegisterInput inputTitle="제목" opacity="1" myPlaceholder="제목을 입력해 주세요." width="128.0rem" height="4.8rem"/>
             </div>
 
             <div className="SectionNoLine">
-                <RegisterInput inputTitle="내용" myPlaceholder="내용을 입력해 주세요." width="128.0rem" height="33.6rem"/>
+                <RegisterInput inputTitle="내용" opacity="1" myPlaceholder="내용을 입력해 주세요." width="128.0rem" height="33.6rem"/>
             </div>
             
             <div className="SectionColumn">
-                <RegisterInput inputTitle="주소" myPlaceholder="01234" width="8.2rem" height="4.8rem"/>
+                <RegisterInput inputTitle="주소" opacity="0" myPlaceholder="01234" width="8.2rem" height="4.8rem"/>
                 <button className="검색버튼">우편번호 검색</button>
                 <textarea className="input-box" placeholder="주소를 입력해 주세요." style={{ width: "128.0rem", height: "4.8rem" }}></textarea>
                 <textarea className="input-box" placeholder="상세주소" style={{ width: "128.0rem", height: "4.8rem" }}></textarea>
             </div>
 
             <div className="Section">
-                <RegisterInput inputTitle="유튜브 링크" myPlaceholder="링크를 입력해 주세요." width="128.0rem" height="4.8rem"/>
+                <RegisterInput inputTitle="유튜브 링크" opacity="0" myPlaceholder="링크를 입력해 주세요." width="128.0rem" height="4.8rem"/>
             </div>
 
             <div className="SectionColumnNoLine">
