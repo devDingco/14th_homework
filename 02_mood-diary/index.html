@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>감정 일기장</title>
+    <link rel="stylesheet" href="./css/font.css" />
+    <link rel="stylesheet" href="./css/root.css" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/responsive.css" />
+    <link rel="stylesheet" href="./css/detail.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header-title">
+        <h1 class="title01 header">지호의 다이어리</h1>
+        <div class="toggle-active">
+          <p>다크모드</p>
+          <input type="checkbox" class="toggle-btn" onclick="toggleDarkMode()" />
+        </div>
+      </div>
+
+      <img src="./assets/images/rectangle.png" />
+
+      <nav class="navigator">
+        <span class="headline01 active" id="diary-box" onclick="toggleComponent('diary-box')"
+          >일기보관함</span
+        >
+        <span class="headline01 inActive" id="photo-box" onclick="toggleComponent('photo-box')"
+          >사진보관함</span
+        >
+      </nav>
+
+      <!-- 일기보관함 -->
+      <main class="main">
+        <section id="diary-component">
+          <div class="multiple-functions">
+            <div class="dropdown">
+              <input type="checkbox" class="dropdown-title" id="dropdown-title-id" />
+
+              <ul class="dropdown-list">
+                <li>
+                  <input
+                    type="radio"
+                    name="dropdown"
+                    id="dropdown-total"
+                    value="total"
+                    onclick="selectMood(event)"
+                    checked
+                  />
+                  <label for="dropdown-total">전체</label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="dropdown"
+                    id="dropdown-happy"
+                    value="happy"
+                    onclick="selectMood(event)"
+                  />
+                  <label for="dropdown-happy">행복해요</label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="dropdown"
+                    id="dropdown-sad"
+                    value="sad"
+                    onclick="selectMood(event)"
+                  />
+                  <label for="dropdown-sad">슬퍼요</label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="dropdown"
+                    id="dropdown-surprise"
+                    value="surprise"
+                    onclick="selectMood(event)"
+                  />
+                  <label for="dropdown-surprise">놀랐어요</label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="dropdown"
+                    id="dropdown-angry"
+                    value="angry"
+                    onclick="selectMood(event)"
+                  />
+                  <label for="dropdown-angry">화나요</label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="dropdown"
+                    id="dropdown-etc"
+                    value="etc"
+                    onclick="selectMood(event)"
+                  />
+                  <label for="dropdown-etc">기타</label>
+                </li>
+              </ul>
+            </div>
+
+            <div class="searchbar">
+              <label class="icon" for="search-input">
+                <img src="./assets/icons/search.png" alt="" />
+              </label>
+              <input
+                type="text"
+                placeholder="검색어를 입력해 주세요."
+                id="search-input"
+                oninput="getDiaryByTitle(event)"
+              />
+            </div>
+
+            <button onclick="openModal('main-diary-form')">+ 일기쓰기</button>
+          </div>
+
+          <div class="main__gallery"></div>
+
+          <!-- modal : 일기 등록 -->
+          <div class="main-modal-group" id="main-diary-form">
+            <div class="main-diary-form-bg" onclick="closeModal('main-diary-form')"></div>
+            <form class="main__diary-form" id="myForm">
+              <h2>📍 일기 쓰기</h2>
+
+              <div class="select-box">
+                <h3>오늘 기분은 어땟나요?</h3>
+                <div class="mood-select-box">
+                  <label for="happy"
+                    ><input
+                      id="happy"
+                      name="mood"
+                      type="radio"
+                      onchange="checkContents()"
+                    />행복해요</label
+                  >
+                  <label for="sad"
+                    ><input
+                      id="sad"
+                      name="mood"
+                      type="radio"
+                      onchange="checkContents()"
+                    />슬퍼요</label
+                  >
+                  <label for="surprise"
+                    ><input
+                      id="surprise"
+                      name="mood"
+                      type="radio"
+                      onchange="checkContents()"
+                    />놀랐어요</label
+                  >
+                  <label for="angry"
+                    ><input
+                      id="angry"
+                      name="mood"
+                      type="radio"
+                      onchange="checkContents()"
+                    />화나요</label
+                  >
+                  <label for="etc"
+                    ><input
+                      id="etc"
+                      name="mood"
+                      type="radio"
+                      onchange="checkContents()"
+                    />기타</label
+                  >
+                </div>
+              </div>
+
+              <div class="main-diary-input-form">
+                <div class="main-diary-input">
+                  <label for="title" class="body02_s">제목</label>
+                  <input
+                    type="text"
+                    id="title"
+                    maxlength="50"
+                    oninput="checkContents()"
+                    placeholder="제목을 입력해 주세요."
+                  />
+                </div>
+                <div class="main-diary-input">
+                  <label for="contents" class="body02_s">내용</label>
+                  <textarea
+                    name=""
+                    id="contents"
+                    oninput="checkContents()"
+                    placeholder="내용을 입력해 주세요."
+                    style="height: 128px"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="main-diary-active">
+                <button
+                  type="button"
+                  class="light-button"
+                  onclick="openModal('nested-modal-cancel')"
+                >
+                  닫기
+                </button>
+                <button
+                  id="submit-button"
+                  type="submit"
+                  disabled
+                  onclick="openModal('nested-modal-complete')"
+                >
+                  등록하기
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- modal(중첩) : 일기 등록 완료-->
+          <div class="main-modal-group" id="nested-modal-complete">
+            <div class="main-diary-form-bg"></div>
+            <div class="nested-modal-area">
+              <div>
+                <h3>일기 등록 완료</h3>
+                <p>등록이 완료 되었습니다.</p>
+              </div>
+              <button onclick="closeModal('main-diary-form');closeModal('nested-modal-complete')">
+                확인
+              </button>
+            </div>
+          </div>
+
+          <!-- modal(중첩) : 일기 등록 취소 -->
+          <div class="main-modal-group" id="nested-modal-cancel">
+            <div class="main-diary-form-bg" onclick="closeModal('nested-modal-cancel')"></div>
+            <div class="nested-modal-area">
+              <div>
+                <h3>일기 등록 취소</h3>
+                <p>일기 등록을 취소 하시겠습니까?</p>
+              </div>
+              <div class="main-diary-active">
+                <button class="light-button" onclick="closeModal('nested-modal-cancel')">
+                  계속 작성
+                </button>
+                <button onclick="closeModal('nested-modal-cancel');closeModal('main-diary-form')">
+                  등록 취소
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- modal : 일기 삭제 -->
+          <div class="main-modal-group" id="nested-modal-delete">
+            <div class="main-diary-form-bg" onclick="closeModal('nested-modal-delete')"></div>
+            <div class="nested-modal-area">
+              <div>
+                <h3>일기 삭제</h3>
+                <p>일기를 삭제 하시겠어요?</p>
+              </div>
+              <div class="main-diary-active">
+                <button class="light-button" onclick="closeModal('nested-modal-delete')">
+                  취소
+                </button>
+                <button id="diary-delete-button">삭제</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 사진보관함 -->
+        <section id="photo-component" style="display: none">
+          <div class="multiple-functions">
+            <div class="dropdown">
+              <input type="checkbox" class="dropdown-photo-title" id="dropdown-ratio" />
+
+              <ul class="dropdown-list">
+                <li>
+                  <input
+                    type="radio"
+                    name="dropdown"
+                    id="default"
+                    onclick="selectRatio(event)"
+                    checked
+                  />
+                  <label for="default">기본</label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="dropdown"
+                    id="horizontal"
+                    onclick="selectRatio(event)"
+                  />
+                  <label for="horizontal">가로형</label>
+                </li>
+                <li>
+                  <input type="radio" name="dropdown" id="vertical" onclick="selectRatio(event)" />
+                  <label for="vertical">세로형</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="photo-dog" id="dog-gallery"></div>
+        </section>
+      </main>
+
+      <!-- 페이지네이션 -->
+      <nav class="pagination">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          onclick="moveToPrevPage()"
+          class="arrow"
+        >
+          <path
+            d="M9.725 11.9996L17.075 19.3496C17.325 19.5996 17.4458 19.8913 17.4375 20.2246C17.4292 20.558 17.3 20.8496 17.05 21.0996C16.8 21.3496 16.5083 21.4746 16.175 21.4746C15.8417 21.4746 15.55 21.3496 15.3 21.0996L7.6 13.4246C7.4 13.2246 7.25 12.9996 7.15 12.7496C7.05 12.4996 7 12.2496 7 11.9996C7 11.7496 7.05 11.4996 7.15 11.2496C7.25 10.9996 7.4 10.7746 7.6 10.5746L15.3 2.87462C15.55 2.62462 15.8458 2.50379 16.1875 2.51212C16.5292 2.52046 16.825 2.64962 17.075 2.89962C17.325 3.14962 17.45 3.44129 17.45 3.77462C17.45 4.10796 17.325 4.39962 17.075 4.64962L9.725 11.9996Z"
+            fill="#333333"
+          />
+        </svg>
+        <div class="pages"></div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          onclick="moveToNextPage()"
+          class="arrow"
+        >
+          <path
+            d="M14.275 11.9996L6.925 19.3496C6.675 19.5996 6.55417 19.8913 6.5625 20.2246C6.57083 20.558 6.7 20.8496 6.95 21.0996C7.2 21.3496 7.49167 21.4746 7.825 21.4746C8.15833 21.4746 8.45 21.3496 8.7 21.0996L16.4 13.4246C16.6 13.2246 16.75 12.9996 16.85 12.7496C16.95 12.4996 17 12.2496 17 11.9996C17 11.7496 16.95 11.4996 16.85 11.2496C16.75 10.9996 16.6 10.7746 16.4 10.5746L8.7 2.87462C8.45 2.62462 8.15417 2.50379 7.8125 2.51212C7.47083 2.52046 7.175 2.64962 6.925 2.89962C6.675 3.14962 6.55 3.44129 6.55 3.77462C6.55 4.10796 6.675 4.39962 6.925 4.64962L14.275 11.9996Z"
+            fill="#333333"
+          />
+        </svg>
+      </nav>
+
+      <!-- 플로팅 버튼 -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="40"
+        viewBox="0 0 40 40"
+        fill="none"
+        onclick="scrollToTop()"
+        id="float-button"
+      >
+        <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" fill="white" fill-opacity="0.9" />
+        <rect x="0.5" y="0.5" width="39" height="39" rx="19.5" stroke="#F2F2F2" />
+        <path
+          d="M20.1014 17.6107L13.0598 24.6523C12.8203 24.8918 12.5369 25.0076 12.2095 24.9996C11.8822 24.9916 11.5988 24.8679 11.3593 24.6284C11.1198 24.3889 11 24.1054 11 23.7781C11 23.4508 11.1198 23.1673 11.3593 22.9278L18.7362 15.5748C18.9278 15.3832 19.1434 15.2395 19.3829 15.1437C19.6224 15.0479 19.8619 15 20.1014 15C20.341 15 20.5805 15.0479 20.82 15.1437C21.0595 15.2395 21.2751 15.3832 21.4667 15.5748L28.8436 22.9518C29.0831 23.1913 29.1989 23.4707 29.1909 23.7901C29.1829 24.1094 29.0592 24.3889 28.8197 24.6284C28.5802 24.8679 28.2967 24.9876 27.9694 24.9876C27.6421 24.9876 27.3587 24.8679 27.1191 24.6284L20.1014 17.6107Z"
+          fill="#5F6368"
+        />
+      </svg>
+    </div>
+
+    <!-- footer -->
+    <footer class="footer">
+      <img src="./assets/icons/code_camp_logo.svg" />
+      <div class="footer-middle">
+        <div>
+          <p>법인 명 : 딩코</p>
+          <p>|</p>
+          <p>사업자등록번호 : 123-45-67890</p>
+        </div>
+        <div>정보통신판매업 : 제 2024-서울강남-12345 호</div>
+        <div>
+          <p>주소 : 서울특별시 강남구 테헤란로 123-1 (논현동)</p>
+          <p>|</p>
+          <p>대표 : 민지</p>
+        </div>
+        <div>고객센터 : 070 - 1234 -5678</div>
+      </div>
+      <p>Copyright © 2022. Dingco Co., Ltd.</p>
+    </footer>
+
+    <script src="./js/constants.js"></script>
+    <script src="./js/formatUtils.js"></script>
+    <script src="./js/userDiary.js"></script>
+    <script src="./js/script.js"></script>
+
+    <script src="./js/checkContents.js"></script>
+    <script src="./js/form.js"></script>
+    <script src="./js/modal.js"></script>
+    <script src="./js/fetchData.js"></script>
+  </body>
+</html>
