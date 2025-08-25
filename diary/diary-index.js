@@ -44,6 +44,9 @@ function 삭제하기(event, number) {
     // 로컬스토리지 저장
     localStorage.setItem("일기들목록", JSON.stringify(삭제후남은일기들))
 
+    // 전역 변수도 업데이트
+    savedDiaries = 삭제후남은일기들
+
     // 화면 갱신
     시작페이지 = 1
     일기들그리기(시작페이지)
