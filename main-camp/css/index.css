@@ -1,0 +1,55 @@
+#root {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.test_aqua {
+    background-color: aqua;
+} 
+
+.test_orange {
+    background-color: orange;
+}
+
+.test_red {
+    background-color: red;
+}
+
+.test_beige {
+    background-color: rgba(217, 217, 217, 1);;
+}
+
+.test_border {
+    border-width: 1px;
+    border: 1px solid brown;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* flex */
+
+.flex_row {
+    display: flex;
+}
+
+.flex_column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex_justi_end {
+    justify-content: end;
+}
+
+/* border */
+
+.input_border_gray {
+    border-radius: 8px;
+    border-width: 1px;
+    border: 1px solid var(--Gray-Gray-200, rgba(212, 211, 211, 1));
+    background: var(--Gray-W, rgba(255, 255, 255, 1));
+}

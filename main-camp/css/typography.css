@@ -1,0 +1,37 @@
+.b_20_28 {
+    font-family: Pretendard;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0%;
+}
+
+.r_16_24 {
+    font-family: Pretendard Variable;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    color: var(--Gray-Gray-400, rgba(171, 171, 171, 1));
+}
+
+.me_16_24 {
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+}
+
+.sb_18_24 {
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+}
