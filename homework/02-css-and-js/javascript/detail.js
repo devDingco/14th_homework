@@ -120,16 +120,24 @@ const JS_댓글달기기능 = () => {
   const 원래있던댓글목록 = 일기목록[일기번호].댓글목록;
 
   const date = new Date();
+  // const options = {
+  //   year: "numeric",
+  //   month: "2-digit",
+  //   day: "2-digit",
+  //   timeZone: "Asia/Seoul",
+  // };
+
+  // const 날짜담는통 = date
+  //   .toLocaleDateString("ko-KR", options)
+  //   .slice(0, -1);
+
   const options = {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    timeZone: "Asia/Seoul",
+    year: date.getFullYear(),
+    month: (date.getMonth() + 1).toString().padStart(2, "0"),
+    date: date.getDate().toString().padStart(2, "0"),
   };
 
-  const 날짜담는통 = date
-    .toLocaleDateString("ko-KR", options)
-    .slice(0, -1);
+  const 날짜담는통 = options.year + ". " + options.month + ". " + options.date;
 
   if (원래있던댓글목록 === undefined) {
     일기목록[일기번호].댓글목록 = [

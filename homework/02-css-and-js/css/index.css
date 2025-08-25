@@ -21,9 +21,9 @@ a {
     text-decoration: none; 
 }
 
-.page {
+.page {  
    margin: 0 1.25rem 2.5rem;
-   max-width: 116.8rem;
+   max-width: 100rem;
 }
 
 .header {
@@ -113,11 +113,13 @@ a {
     display: flex;
     align-items: center;
     background-color: #fff;
+
+   --드롭다운CSS변수: "전체";
 }
 
 
 .드롭다운제목::after {
-    content: var(--일기보관함필터);
+    content: var(--드롭다운CSS변수);
 }       
 
 .드롭다운제목:checked +.드롭다운목록 {
@@ -182,7 +184,7 @@ a {
 }
 
 #HTML_일기드롭다운제목::after {
-    content: var(--일기보관함필터);
+    content: var(--드롭다운CSS변수);
 }
 
 #HTML_사진드롭다운제목 {
@@ -190,7 +192,7 @@ a {
 }
 
 #HTML_사진드롭다운제목::after {
-    content: var(--사진보관함필터);
+    content: var(--드롭다운CSS변수);
 }
 
 .inverted {
@@ -271,16 +273,7 @@ a {
     margin-top: 2.62rem; 
 }
 
-.card_area {
-    max-width: 23.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    position: relative;
 
-    transition: 
-    transform 0.5s;   
-}
 .card_area:hover {
     transform: scale(1.1);
     box-shadow: 0 0.125rem 1.875rem 0 rgba(0, 0, 0, 0.16);
@@ -307,7 +300,7 @@ a {
 
 .diary_image {
     height: 17.8125rem;
-    width: auto;
+    width: 100%;
 }
 
 .mood_image {
@@ -696,3 +689,74 @@ button img {
     }
 }
 
+/* 페이지네이션 */
+.CSS_페이지네이션보여주는곳 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 4rem;
+}
+
+.CSS_페이지버튼 {
+    width: 100%;
+    border: 0px;
+    border-radius: 8px;
+    background-color: #fff;
+    height: 2rem;
+    width: 2rem;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: #777;
+    cursor: pointer;
+}
+
+.CSS_페이지이동버튼 {
+    position: relative;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    border: 0px;
+    height: 2rem;
+    width: 2rem;
+}
+
+.CSS_페이지눌린버튼 {
+    width: 100%;
+    border: 0px;
+    border-radius: 8px;
+    background-color: #f2f2f2;
+    height: 2rem;
+    width: 2rem;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    }
+
+.CSS_페이지이동버튼사진 {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.CSS_일기보여주는곳 .card_area {
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    flex: 1 1 calc(50% - 0.75rem);
+    
+    transition: 
+    transform 0.5s;  
+}

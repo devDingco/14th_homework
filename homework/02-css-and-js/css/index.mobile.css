@@ -11,20 +11,26 @@
     border-radius: 1.5rem;
 }
 
+.page {
+    width: 100%;
+    padding: 0 1.25rem;
+}
+
 .body_main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center; 
-}
+} 
 
-.CSS_일기보여주는곳 {
+#HTML_일기보여주는곳 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5 rem;
+    gap: 1.5rem; 
     width: 100%;
     order: 2;
 }
+
 
 .diary_image {
     width: 100%;
@@ -37,8 +43,7 @@
 }
 
 .card_area {
-    max-width: none;
-    gap: 1rem;    
+    width: 100%; 
 }
 
 .filter_container {
@@ -56,8 +61,6 @@ search_area {
 .diary_write_button_area {
     order: 3;
 }
-
-
 
 .diary_area {
     display: flex;
@@ -170,6 +173,3 @@ search_area {
     font-weight: 600;
     line-height: 1.5rem;
 }
-
-
-
