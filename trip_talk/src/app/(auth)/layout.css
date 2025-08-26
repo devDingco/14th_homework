@@ -1,0 +1,19 @@
+.login_container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+.login_form_wrapper {
+    width: 25rem;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.login_banner_wrapper {
+    width: 95rem;
+    background-image: url('/images/loginBanner.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}

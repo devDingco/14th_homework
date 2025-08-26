@@ -1,0 +1,392 @@
+/* 전체 레이아웃 */
+.booking_wrapper {
+  display: grid;
+  grid-template-columns: 1fr 6rem;
+  gap: 30px;
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+
+/* 상단 프로모션 배너 섹션 */
+.booking_promotion {
+  grid-column: 1 / -1;
+  margin-bottom: 40px;
+}
+
+.booking_title {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.booking_featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.booking_card {
+  width: 39.25rem;
+  height: 39.25rem;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  position: relative;
+}
+
+.booking_card_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 29.14%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+.booking_card_image.pohang {
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 29.14%, rgba(0, 0, 0, 0.9) 100%),
+    url('/images/booking/pohang.png');
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+}
+
+.booking_card_image.gangneung {
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 29.14%, rgba(0, 0, 0, 0.9) 100%),
+    url('/images/booking/gangneung.png');
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+}
+
+.booking_card_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.booking_float {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0.5rem;
+}
+
+.booking_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  color: var(--white);
+}
+
+.booking_arrow {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.booking_card_content {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+}
+
+.booking_card_title {
+  color: var(--white);
+}
+
+.booking_card_description {
+  color: var(--white);
+}
+
+.booking_price {
+  color: var(--white);
+  text-align: right;
+}
+
+/* 특별 오퍼 배너 */
+.booking_special {
+  grid-column: 1 / -1;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  background-image: url('/images/booking/banner.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 15rem;
+}
+
+/* 여기에서만 예약할 수 있는 숙소 섹션 */
+.booking_exclusive {
+  grid-column: 1 / -1;
+}
+
+/* 탭 */
+.booking_tabs {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.booking_tab {
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.booking_tab.active {
+  color: var(--white);
+  background-color: var(--black);
+  border-radius: 0.5rem;
+}
+
+.booking_tab:hover {
+  opacity: 0.8;
+}
+
+/* 검색 및 필터 */
+.booking_search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 20px;
+}
+
+.booking_search_inputs {
+  width: 64.1rem;
+  display: flex;
+  gap: 12px;
+  flex: 1;
+}
+
+.booking_date_input {
+  width: 18.0625rem;
+  height: 3rem;
+}
+
+.booking_text_input {
+  width: 40rem;
+  height: 3rem;
+}
+
+.booking_date_input,
+.booking_text_input {
+  position: relative;
+}
+
+.booking_date_input img,
+.booking_text_input img {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+}
+
+.booking_date_input input,
+.booking_text_input input {
+  width: 100%;
+  padding: 0.75rem 0.75rem 0.75rem 2.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: var(--gray-600);
+  background-color: var(--gray-50);
+}
+
+.booking_search_btn {
+  padding: 0.75rem 1rem;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.booking_search_btn:hover {
+  background: #555;
+}
+
+.booking_sell_btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.75rem 1rem;
+  background: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.booking_sell_btn:hover {
+  background: #0056b3;
+}
+
+/* 카테고리 아이콘 */
+.booking_categories {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.booking_category {
+  width: 6.25rem;
+  height: 4.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border-radius: 8px;
+}
+
+.booking_category:hover {
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.booking_category:hover {
+  transform: translateY(-2px);
+}
+.booking_category_text {
+  color: var(--gray-800);
+}
+
+/* .booking_category img,
+.booking_icon_placeholder {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+} */
+
+/* .booking_category span {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+} */
+
+/* 숙소 리스트 그리드 */
+.booking_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.booking_item {
+  width: 18.5rem;
+  height: 26rem;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.booking_item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.booking_item_image {
+  width: 100%;
+  height: 18.5rem;
+  position: relative;
+  overflow: hidden;
+  background-image: url('/images/booking/pohang.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.booking_description {
+  color: var(--gray-700);
+  margin-top: 0.25rem;
+}
+
+.booking_tags {
+  color: var(--primary-color);
+  margin-top: 0.25rem;
+}
+
+.booking_item_price {
+  color: var(--black);
+}
+
+.booking_provider_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+}
+
+.booking_provider_info {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.booking_provider {
+  color: var(--gray-700);
+}
+
+/* 우측 사이드바 - 최근 본 상품 */
+.booking_recent {
+  width: 6rem;
+  grid-row: 1 / span 3;
+  background: var(--white);
+  border-radius: 0.5rem;
+  border: 1px solid var(--gray-300);
+  padding: 0.75rem;
+  height: fit-content;
+  position: fixed;
+  top: 40%;
+  right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.booking_recent_items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.booking_recent_item {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

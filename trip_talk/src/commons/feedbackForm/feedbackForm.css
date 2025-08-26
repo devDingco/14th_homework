@@ -1,0 +1,133 @@
+.feedback_form_wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 2.5rem 0;
+}
+
+.feedback_form_header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.feedback_form_star_section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.feedback_form_input_section {
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.feedback_form_input_wrapper {
+  width: 100%;
+  min-height: 9rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.feedback_form_input {
+  width: 100%;
+  min-height: 6rem;
+  border: none;
+  outline: none;
+  resize: none;
+}
+.feedback_form_input_count {
+  color: var(--gray-400);
+}
+
+.feedback_form_button {
+  width: 6.3rem;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--black);
+  border-radius: 0.5rem;
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  border: none;
+}
+
+.feedback_form_empty_section {
+  margin-top: 2.5rem;
+  text-align: center;
+  width: 100%;
+  color: var(--gray-600);
+}
+
+/* 댓글 리스트 섹션 */
+
+.feedback_list_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.feedback_list_item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--gray-200);
+  position: relative;
+}
+.feedback_list_item:last-child {
+  border-bottom: none;
+}
+
+.feedback_list_item_header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.feedback_list_item_profile {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--gray-700);
+}
+
+.feedback_list_item_star {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.feedback_list_item_content {
+  width: 100%;
+  color: var(--gray-800);
+}
+
+.feedback_list_item_date {
+  color: #818181;
+}
+
+.feedback_list_tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: absolute;
+  right: 0;
+  top: 2.5rem;
+}
+
+.feedback_list_tool {
+  cursor: pointer;
+}
