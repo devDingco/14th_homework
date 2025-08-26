@@ -6,7 +6,8 @@ const WriteInput = (props) => {
             inputComponent = 
             <div className="input_frame_620w_80h flex_column">
                 <label className="label_620w_24h me_16_24">{props.label}</label>
-                <input className="input_620w_48h input_border_gray r_16_24" placeholder={props.placeholder}></input>
+                <input className="input_620w_48h input_border_gray r_16_24" onChange={props.setState} placeholder={props.placeholder}></input>
+                <p className="me_16_24" style={{ color: "rgba(246, 106, 106, 1)" }}>{props.errMsg}</p>
             </div>
             break
         }
@@ -14,7 +15,8 @@ const WriteInput = (props) => {
             inputComponent = 
             <div className="input_frame_620w_80h flex_column">
                 <label className="label_620w_24h me_16_24">{props.label}</label>
-                <input className="input_620w_48h input_border_gray r_16_24" placeholder={props.placeholder}></input>
+                <input className="input_620w_48h input_border_gray r_16_24" type="password" onChange={props.setState} laceholder={props.placeholder}></input>
+                <p className="me_16_24" style={{ color: "rgba(246, 106, 106, 1)" }}>{props.errMsg}</p>
             </div>
             break
         }
@@ -22,7 +24,8 @@ const WriteInput = (props) => {
             inputComponent =
             <div className="input_frame_1280w_80h flex_column">
                 <label className="label_1280w_24h me_16_24">{props.label}</label>
-                <input className="input_1280w_48h input_border_gray r_16_24" placeholder={props.placeholder}></input>
+                <input className="input_1280w_48h input_border_gray r_16_24" onChange={props.setState} placeholder={props.placeholder}></input>
+                <p className="me_16_24" style={{ color: "rgba(246, 106, 106, 1)" }}>{props.errMsg}</p>
             </div>
             break
         }
@@ -30,7 +33,8 @@ const WriteInput = (props) => {
             inputComponent =
             <div className="input_frame_1280w_336h flex_column">
                 <label className="label_1280w_24h me_16_24">{props.label}</label>
-                <textarea className="textarea_1280w_336h input_border_gray r_16_24" placeholder={props.placeholder}></textarea>
+                <textarea className="textarea_1280w_336h input_border_gray r_16_24" onChange={props.setState} placeholder={props.placeholder}></textarea>
+                <p className="me_16_24" style={{ color: "rgba(246, 106, 106, 1)" }}>{props.errMsg}</p>
             </div>
             break
         }

@@ -8,7 +8,7 @@ const WriteButton = (props) => {
         }
         case "등록하기": {
             btnComponent =
-            <button className="write_confirm_btn sb_18_24">{props.p}</button>
+            <button className="write_confirm_btn sb_18_24" onClick={props.setState}>{props.p}</button>
             break
         }
         default:
