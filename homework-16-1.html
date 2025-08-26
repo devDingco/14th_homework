@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>필수 사항 미입력 상태</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 30px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .form-label {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .required::after {
+            content: " *";
+            color: red;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.875rem;
+            margin-top: 5px;
+        }
+        .photo-upload {
+            border: 2px dashed #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+        }
+        .photo-box {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin: 5px;
+            padding: 10px;
+            text-align: center;
+            background-color: white;
+            vertical-align: top;
+        }
+        .address-search {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .address-search input {
+            flex: 1;
+            margin-right: 10px;
+        }
+        .btn-primary {
+            background-color: #0d6efd;
+            border: none;
+            padding: 10px 20px;
+        }
+        .header-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .guide-text {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1 class="header-title">게시물 등록</h1>
+            <p class="guide-text">미입력 후 '등록하기'클릭시 에러</p>
+            
+            <form>
+                <!-- 작성자 입력 -->
+                <div class="mb-3">
+                    <label for="author" class="form-label required">작성자</label>
+                    <input type="text" class="form-control is-invalid" id="author" placeholder="작성자 명을 입력해 주세요.">
+                    <div class="error-message">필수입력 사항 입니다.</div>
+                </div>
+
+                <!-- 제목 입력 -->
+                <div class="mb-3">
+                    <label for="title" class="form-label required">제목</label>
+                    <input type="text" class="form-control is-invalid" id="title" placeholder="제목을 입력해 주세요.">
+                    <div class="error-message">필수입력 사항 입니다.</div>
+                </div>
+
+                <!-- 내용 입력 -->
+                <div class="mb-3">
+                    <label for="content" class="form-label required">내용</label>
+                    <textarea class="form-control is-invalid" id="content" rows="5" placeholder="내용을 입력해 주세요."></textarea>
+                    <div class="error-message">필수입력 사항 입니다.</div>
+                </div>
+
+                <!-- 주소 입력 -->
+                <div class="mb-3">
+                    <label for="address" class="form-label">주소</label>
+                    <div class="address-search">
+                        <input type="text" class="form-control" id="postcode" placeholder="우편번호 검색">
+                        <button type="button" class="btn btn-primary">검색</button>
+                    </div>
+                    <input type="text" class="form-control mb-2" placeholder="주소를 입력해 주세요.">
+                    <input type="text" class="form-control" placeholder="상세주소">
+                </div>
+
+                <!-- 유효보 헌고 입력 (의미 불명확, 원본 이미지대로 구현) -->
+                <div class="mb-3">
+                    <label for="link" class="form-label">유튜브 링크</label>
+                    <input type="text" class="form-control" id="link" placeholder="링크를 입력해 주세요.">
+                </div>
+
+                <!-- 사진 업로드 -->
+                <div class="mb-4">
+                    <label class="form-label">사진 첨부</label>
+                    <div class="photo-upload">
+                        <div class="photo-box">
+                            +<br>
+                            <small>클릭해서 사진 첨부</small>
+                        </div>
+                        <div class="photo-box">
+                            +<br>
+                            <small>클릭해서 사진 첨부</small>
+                        </div>
+                        <div class="photo-box">
+                            +<br>
+                            <small>클릭해서 사진 첨부</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 제출 버튼 -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">등록하기</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
