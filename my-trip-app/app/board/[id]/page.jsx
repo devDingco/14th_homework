@@ -1,5 +1,6 @@
 import BoardDetail from "../(detail)/index";
 
-export default function BoardDetailPage({ params }) {
-  return <BoardDetail id={params.id} />;
+export default async function BoardDetailPage({ params }) {
+  const { id } = await params;
+  return <BoardDetail id={id} />;
 }
