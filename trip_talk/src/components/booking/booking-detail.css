@@ -1,0 +1,195 @@
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.booking_detail_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2.5rem auto;
+}
+
+.booking_detail_header_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.booking_detail_title_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.booking_detail_button_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.booking_float_wrapper {
+  width: 3.3125rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25);
+  padding: 0.25rem 0.5rem;
+}
+.booking_detail_button_wrapper span:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+.booking_icon {
+  color: var(--white);
+}
+
+.booking_detail_subtitle {
+  color: var(--gray-600);
+}
+.booking_detail_tags {
+  color: var(--primary-color);
+}
+
+.booking_detail_content_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking_detail_content_container {
+  width: 52.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.booking_detail_image_wrapper {
+  display: flex;
+  width: 52.75rem;
+  height: 30rem;
+  border-radius: 0.5rem;
+  gap: 1.5rem;
+}
+
+.booking_detail_main_image {
+  width: 40rem;
+  height: 30rem;
+  background: linear-gradient(-45deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1s infinite;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.booking_detail_vertical_image_wrapper {
+  display: flex;
+  width: 11.25rem;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, black 0%, black 85%, transparent 100%);
+}
+
+.booking_detail_vertical_image {
+  width: 100%;
+  height: 8.5rem;
+  background: linear-gradient(-45deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1s infinite;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.booking_detail_divider {
+  border: 1px solid var(--gray-200);
+}
+
+.booking_detail_description_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.booking_detail_title {
+  color: var(--gray-800);
+}
+
+.booking_detail_description_content {
+  color: var(--gray-800);
+  white-space: pre-line;
+}
+
+.booking_detail_map {
+  width: 100%;
+  height: 280px;
+  border-radius: 0.5rem;
+  background: linear-gradient(-45deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1s infinite;
+}
+
+/* 우측 섹션 */
+.booking_detail_purchase_wrapper {
+  position: sticky;
+  top: 2rem;
+  width: 25.8rem;
+  height: 22.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.booking_detail_purchase_button_wrapper {
+  width: 100%;
+  height: 12.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 0.5rem;
+  background-color: var(--white);
+}
+
+.booking_detail_purchase_info {
+  color: var(--gray-700);
+  margin-left: 1rem;
+}
+
+.booking_detail_purchase_button {
+  width: 100%;
+  height: 3.25rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 0.75rem 1rem;
+  border: none;
+  margin-top: 0.75rem;
+}
+
+.booking_detail_seller_wrapper {
+  width: 100%;
+  height: 8rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background-color: var(--gray-50);
+  border-radius: 0.5rem;
+  color: var(--gray-800);
+}
+
+.booking_detail_seller_info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

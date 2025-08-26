@@ -31,7 +31,13 @@ export default function Header() {
           {menuList.map((menu) => (
             <span
               key={menu.link}
-              className={`header_menu_item ${pathname === menu.link ? 'active b_16_24' : 'me_16_24'}`}
+              className={`header_menu_item ${
+                pathname === menu.link ||
+                (menu.link !== '/' && pathname.startsWith(menu.link)) ||
+                (menu.link === '/' && (pathname === '/' || pathname.startsWith('/board')))
+                  ? 'active b_16_24'
+                  : 'me_16_24'
+              }`}
             >
               <a href={menu.link}>{menu.name}</a>
             </span>

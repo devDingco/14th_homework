@@ -3,8 +3,11 @@
 import { useState } from 'react';
 import './booking.css';
 import Image from 'next/image';
+import { bookingMock } from './mocks';
+import { useRouter } from 'next/navigation';
 
 export default function Booking() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState('available');
   const [searchDate, setSearchDate] = useState('');
   const [searchText, setSearchText] = useState('');
@@ -25,8 +28,8 @@ export default function Booking() {
     console.log('카테고리 선택:', category);
   };
 
-  const handleAccommodationClick = (index) => {
-    console.log('숙소 클릭:', index);
+  const handleAccommodationClick = (id) => {
+    router.push(`/booking/${id}`);
   };
   return (
     <>
@@ -166,8 +169,8 @@ export default function Booking() {
 
           {/* 숙소 리스트 그리드 */}
           <div className="booking_grid">
-            {Array.from({ length: 8 }, (_, index) => (
-              <div key={index} className="booking_item" onClick={() => handleAccommodationClick(index)}>
+            {bookingMock.map((item, index) => (
+              <div key={index} className="booking_item" onClick={() => handleAccommodationClick(item.id)}>
                 <div className="booking_item_image">
                   <div className="booking_float">
                     <Image src="/icons/booking/bookmark.png" width={24} height={24} />
@@ -175,15 +178,15 @@ export default function Booking() {
                   </div>
                 </div>
                 <div className="booking_item_content">
-                  <p className="booking_item_title me_16_24">살어리 살어리랏다 청산(靑山)에 살어리랏다...</p>
-                  <p className="booking_description r_14_20">살어리 살어리랏다 청산(靑山)에 살어리랏다멀위랑...</p>
+                  <p className="booking_item_title me_16_24">{item.title}</p>
+                  <p className="booking_description r_14_20">{item.subtitle}</p>
                   <p className="booking_tags r_14_20">#6년 이하 #건식 사우나 #애견동반가능</p>
                   <div className="booking_provider_wrapper">
                     <div className="booking_provider_info">
                       <Image src="/images/profile/profile04.png" width={24} height={24} />
-                      <p className="booking_provider l_14_20">빈안트리</p>
+                      <p className="booking_provider l_14_20">{item.seller}</p>
                     </div>
-                    <span className="booking_item_price b_16_24">32,900원</span>
+                    <span className="booking_item_price b_16_24">{item.price}</span>
                   </div>
                 </div>
               </div>

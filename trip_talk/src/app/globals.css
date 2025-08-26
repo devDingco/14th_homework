@@ -10,31 +10,29 @@
   --icon-size-xs: 1rem;
 
   /* 컬러 */
-  --primary-color: #2974E5;
-  --warning-color: #F66A6A;
+  --primary-color: #2974e5;
+  --warning-color: #f66a6a;
 
   /* 그레이 */
-  --gray-50: #F2F2F2;
-  --gray-100: #F2F2F2;
-  --gray-200: #D4D3D3;
-  --gray-300: #C7C7C7;
-  --gray-400: #ABABAB;
+  --gray-50: #f2f2f2;
+  --gray-100: #f2f2f2;
+  --gray-200: #d4d3d3;
+  --gray-300: #c7c7c7;
+  --gray-400: #ababab;
   --gray-500: #919191;
   --gray-600: #777777;
-  --gray-700: #5F5F5F;
+  --gray-700: #5f5f5f;
   --gray-800: #333333;
-  --gray-900: #1C1C1C;
+  --gray-900: #1c1c1c;
 
   /* 기본 */
-  --white: #FFFFFF;
+  --white: #ffffff;
   --black: #000000;
-
 
   /* 텍스트 그레이 */
   --text-gray-50: #919191;
   --text-gray-80: #333333;
   --text-gray-90: #1c1c1c;
-
 }
 
 @media (prefers-color-scheme: dark) {
@@ -85,10 +83,6 @@ a {
   margin: 0 auto;
 }
 
-
-
-
-
 /* 폰트사이즈 */
 
 /* bold */
@@ -119,6 +113,11 @@ a {
 }
 
 /* semi-bold */
+.sb_20_24 {
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+}
 .sb_18_24 {
   font-weight: 600;
   font-size: 1.125rem;
@@ -134,7 +133,6 @@ a {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
-
 
 /* medium */
 .me_20_24 {

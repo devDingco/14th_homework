@@ -3,7 +3,7 @@ import './modal.css';
 import { useRouter } from 'next/navigation';
 
 // type success, purchase, fail, passwordChange
-export default function Modal({ isOpen, onClose, type }) {
+export default function Modal({ isOpen, onClose, type, handleOpenFailModal }) {
   const router = useRouter();
   if (!isOpen) return null;
 
@@ -12,15 +12,11 @@ export default function Modal({ isOpen, onClose, type }) {
     onClose();
   };
 
-  const handlePurchase = () => {
-    onClose();
-  };
-
   const handlePasswordChange = () => {
     onClose();
   };
 
-  const handlePointFail = () => {
+  const handlePointCharge = () => {
     onClose();
   };
 
@@ -42,11 +38,14 @@ export default function Modal({ isOpen, onClose, type }) {
           {type === 'success' ? (
             <Image src={'/images/logo.png'} alt="success" width={77.28} height={48} />
           ) : type === 'purchase' ? (
-            <div className="modal_body_text">해당 숙박권을 구매 하시겠어요?</div>
+            <div className="modal_body_text me_14_20">해당 숙박권은 포인트로만 구매 가능합니다.</div>
           ) : type === 'fail' ? (
-            <div className="modal_body_text">포인트 부족</div>
+            <div className="modal_body_text me_14_20">
+              포인트가 부족합니다. <br />
+              포인트를 충전하고 구매해주세요.
+            </div>
           ) : type === 'passwordChange' ? (
-            <div className="modal_body_text">비밀번호 변경을 축하 드려요.</div>
+            <div className="modal_body_text me_14_20">비밀번호 변경을 축하 드려요.</div>
           ) : null}
         </div>
         {type === 'success' ? (
@@ -54,15 +53,23 @@ export default function Modal({ isOpen, onClose, type }) {
             로그인하기
           </div>
         ) : type === 'purchase' ? (
-          <>
-            <div className="modal_secondary_button sb_14_20">취소</div>
-            <div className="modal_primary_button sb_14_20">구매</div>
-          </>
+          <div className="modal_button_wrapper">
+            <div className="modal_secondary_button sb_14_20" onClick={onClose}>
+              취소
+            </div>
+            <div className="modal_primary_button sb_14_20" onClick={handleOpenFailModal}>
+              구매
+            </div>
+          </div>
         ) : type === 'fail' ? (
-          <>
-            <div className="modal_secondary_button sb_14_20">취소</div>
-            <div className="modal_primary_button sb_14_20">충전</div>
-          </>
+          <div className="modal_button_wrapper">
+            <div className="modal_secondary_button sb_14_20" onClick={onClose}>
+              취소
+            </div>
+            <div className="modal_primary_button sb_14_20" onClick={handlePointCharge}>
+              충전
+            </div>
+          </div>
         ) : type === 'passwordChange' ? (
           <div className="modal_primary_button sb_14_20">확인</div>
         ) : null}
