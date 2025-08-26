@@ -29,6 +29,9 @@ async function addImageCard() {
 
     dogImageAPI()
 
+    document.getElementById("page").style = "display: none"
+    document.getElementById("footer").style = "display: none"
+
 }
 
 

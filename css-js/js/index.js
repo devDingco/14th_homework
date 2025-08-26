@@ -172,7 +172,7 @@ function getDiaryCard() {
         comment: [] // 상세 화면에서 코멘트를 위한 빈 배열
     }
 
-    diaryCard.push(submitcard)
+    diaryCard.unshift(submitcard)
     localStorage.setItem("diaryCardList",JSON.stringify(diaryCard))
 
     
@@ -464,7 +464,12 @@ function filterDiaryCard(result) {
 
 // addDiaryCard: 전체 다이어리 리스트 불러오는 기능
 // 새롭게 카드 작성하였을 때, 페이지 로드했을 때 등등
-const addDiaryCard = () => {filterDiaryCard(diaryCard)}
+const addDiaryCard = () => {
+
+    filterDiaryCard(diaryCard)
+    document.getElementById("page").style = "display: block"
+    document.getElementById("footer").style = "display: block"
+}
 
 
 const imageRatio = (event) => {
