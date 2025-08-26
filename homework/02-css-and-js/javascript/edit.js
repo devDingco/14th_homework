@@ -23,13 +23,6 @@ window.onload = () => {
     });
     const 기분선택버튼목록 = window.document.getElementsByName("HTML_기분선택버튼");
   
-    // 위 코드와 동일한 기능 //
-    // for (let i = 0; i < 기분선택버튼목록.length; i++) {
-    //   const el = 기분선택버튼목록[i];
-    //   if (el.value === 일기담는통.기분) {
-    //     el.checked = true;
-    //   }
-    // }
     
     const 댓글목록 = 일기담는통.댓글목록 ?? [];
 
@@ -76,6 +69,7 @@ const JS_수정완료하기기능 = () => {
     내용: 수정된내용담는통,
     기분: 수정된기분담는통,
     작성일: 일기목록[일기번호].작성일,
+    댓글목록: 일기목록[일기번호].댓글목록,
   };
   window.localStorage.setItem("민지의일기목록", JSON.stringify(일기목록));
 
