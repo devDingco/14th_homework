@@ -75,3 +75,5 @@ const WriteInput = (props) => {
         inputComponent
     )
 }
+
+export default WriteInput

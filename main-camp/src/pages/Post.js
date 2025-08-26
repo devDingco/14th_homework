@@ -1,3 +1,6 @@
+import WriteButton from "../components/WriteButton"
+import WriteInput from "../components/WriteInput"
+
 const Post = () => {
     return (
         <div id="main">
@@ -36,3 +39,5 @@ const Post = () => {
         </div>
     )
 }
+
+export default Post

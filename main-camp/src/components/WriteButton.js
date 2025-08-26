@@ -1,4 +1,3 @@
-
 const WriteButton = (props) => {
     let btnComponent
     switch (props.p) {
@@ -18,3 +17,5 @@ const WriteButton = (props) => {
         btnComponent
     )
 }
+
+export default WriteButton
