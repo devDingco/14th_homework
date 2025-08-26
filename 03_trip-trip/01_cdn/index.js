@@ -10,7 +10,7 @@ const Header = (props) => {
 const InputWithLabel = (props) => {
   const { label, required = false, placeholder } = props
   return (
-    <div class="post-form-input">
+    <div className="post-form-input">
       <div>
         <label>{label}</label>
         <span>{required ? '*' : ''}</span>
@@ -24,7 +24,7 @@ const InputWithLabel = (props) => {
 const TextAreaWithLabel = (props) => {
   const { label, required = false, placeholder } = props
   return (
-    <div class="post-form-input">
+    <div className="post-form-input">
       <div>
         <label>{label}</label>
         <span>{required ? '*' : ''}</span>
@@ -38,13 +38,13 @@ const TextAreaWithLabel = (props) => {
 const AddrWithLabel = (props) => {
   const { label, required = false, placeholder } = props
   return (
-    <div class="post-form-addr">
+    <div className="post-form-addr">
       <div>
         <label>{label}</label>
         <span>{required ? '*' : ''}</span>
       </div>
-      <div class="post-form-addr-active">
-        <input class="post-form-addr-zipcode" placeholder={placeholder.zipcode} />
+      <div className="post-form-addr-active">
+        <input className="post-form-addr-zipcode" placeholder={placeholder.zipcode} />
         <CustomButton type={'button'} content={'우편번호 검색'} color={'default'} />
       </div>
       <input placeholder={placeholder.addr1} />
@@ -55,8 +55,8 @@ const AddrWithLabel = (props) => {
 
 const UploadImage = () => {
   return (
-    <div class="post-form-upload-img">
-      <label for="file">
+    <div className="post-form-upload-img">
+      <label htmlFor="file">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="40"
@@ -69,7 +69,7 @@ const UploadImage = () => {
             fill="#777777"
           />
         </svg>
-        <div class="btn-upload">클릭해서 사진 업로드</div>
+        <div>클릭해서 사진 업로드</div>
       </label>
       <input type="file" id="file" />
     </div>
@@ -78,9 +78,9 @@ const UploadImage = () => {
 
 const UploadImagesWithLabel = () => {
   return (
-    <div class="post-form-upload-imgs">
+    <div className="post-form-upload-imgs">
       <label>사진 첨부</label>
-      <div class="post-form-img-col">
+      <div className="post-form-img-col">
         <UploadImage />
         <UploadImage />
         <UploadImage />
@@ -119,7 +119,7 @@ const CustomButton = (props) => {
 
 const PostActions = () => {
   return (
-    <div class="post-actions">
+    <div className="post-actions">
       <CustomButton type={'button'} content={'취소'} color={'default'} />
       <CustomButton type={'submit'} content={'등록하기'} color={'blue'} disabled={false} />
     </div>
@@ -130,8 +130,8 @@ const PostRegistrationPage = () => {
   return (
     <main>
       <Header title={'게시물 등록'} />
-      <form class="post-form">
-        <div class="post-form-col">
+      <form className="post-form">
+        <div className="post-form-col">
           <InputWithLabel
             label={'작성자'}
             required={true}
