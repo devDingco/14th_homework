@@ -1,0 +1,177 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+    font-family: "Pretendard";
+}
+
+html {
+    font-size: 62.5%;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+
+    margin: 4.0rem 32.0rem;
+    font-size: 1.6rem;
+
+    width: 100vw;
+    height: 100vh; /* 화면 높이 최소 확보 */
+}
+
+:root {
+    --gray-W: #FFF;
+    --gray-B: #000;
+
+    --gray-100: #E4E4E4;
+    --Gray-Gray-200: #D4D3D3;
+    --Gray-Gray-400: #ABABAB;
+
+    --gray-800: #333;
+}
+
+.등록페이지 {
+    display: flex;
+    flex-direction: column;
+    gap: 4.0rem;
+}
+
+.타이틀 {
+    align-self: stretch;
+    color: var(--gray-B);
+
+    /* b_20_28 */
+    font-size: 2.0rem;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    /* margin-bottom: 4.0rem; */
+  }
+
+.input-title-box {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.4rem;
+}
+
+.input-title {
+  font-size: 1.4rem;
+  color: var(--gray-800);
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+
+.star {
+    color: #F66A6A;
+}
+
+.input-box {
+  padding: 1.2rem 1.6rem;
+  /* font-size: 1.6rem; */
+  border-radius: 0.8rem;
+  border: 0.1rem solid var(--Gray-Gray-200);
+  background: var(--Gray-W);
+}
+
+.input-box::placeholder {
+    color: var(--Gray-Gray-400);
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.Section{
+    display: flex;
+    justify-content: flex-start;
+    width: 128.0rem;
+    gap: 4.0rem;
+
+    padding-bottom: 4.0rem;
+    border-bottom: 0.1rem solid var(--gray-100);
+}
+
+.SectionNoLine {
+    display: flex;
+    justify-content: flex-start;
+    width: 128.0rem;
+    gap: 4.0rem;
+}
+
+.SectionColumn {
+    display: flex;
+    flex-direction: column;
+    width: 128.0rem;
+    gap: 0.8rem;
+
+    padding-bottom: 4.0rem;
+    border-bottom: 0.1rem solid var(--gray-100);
+
+    position: relative;
+}
+
+.검색버튼 {
+    height: 4.8rem;
+    padding: 1.2rem 1.6rem;
+
+    border-radius: 0.8rem;
+    border: 0.1rem solid var(--gray-B);
+    background: var(--gray-W);
+
+    font-size: 1.8rem;
+    font-weight: 600;
+
+    position: absolute;
+    top: 2.5rem;
+    left: 9.0rem;
+}
+
+.SectionColumnNoLine {
+    display: flex;
+    flex-direction: column;
+    width: 128.0rem;
+    gap: 0.8rem;
+}
+
+.pictureUpload {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1.6rem;
+}
+
+.OnePicture {
+    background-image: url(./asset/image/add_image.png);
+    width: 16.0rem;
+    height: 16.0rem;
+    border-radius: 0.8rem;
+
+    background-size: cover;      /* 배경 이미지가 요소를 꽉 채우도록 */
+    background-position: center; /* 중앙에 위치하도록 */
+    background-repeat: no-repeat; /* 반복 방지 */
+}
+
+.SectionButton {
+    display: flex;
+    justify-content: flex-end;
+    width: 128.0rem;
+    gap: 1.6rem;
+}
+
+.버튼 {
+    padding: 1.2rem 1.6rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid;
+
+    font-size: 1.8rem;
+    font-weight: 600;
+}
