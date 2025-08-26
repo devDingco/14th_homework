@@ -1,0 +1,121 @@
+/* container(전역 컨테이너) */
+.container {
+  max-width: 128rem;
+  width: 100%;
+  padding: 4rem 0;
+  display: flex;
+}
+
+/* post render */
+#post {
+  display: flex;
+  width: 100%;
+}
+#post > main {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/* header */
+#post > main > header > h1 {
+  color: var(--color-black);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 2.8rem;
+}
+
+/* form */
+.post-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 4rem;
+}
+.post-form-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  gap: 4rem;
+}
+.post-form hr {
+  border: solid 0.1rem var(--color-gray-100);
+  border-bottom: none;
+}
+
+/* InputWithLabel */
+.post-form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.post-form-input div {
+  display: flex;
+  gap: 0.4rem;
+  font-weight: 500;
+}
+.post-form-input div span {
+  color: red;
+}
+
+/* TextAreaWithLabel */
+.post-form-input textarea {
+  min-height: 31.2rem;
+}
+
+/* AddrWithLabel */
+.post-form-addr {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.post-form-addr-active {
+  display: flex;
+  gap: 0.8rem;
+}
+.post-form-addr-zipcode {
+  width: 8.2rem;
+}
+
+/* UploadImage */
+.post-form-upload-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 0.8rem;
+  gap: 0.8rem;
+  background-color: var(--color-gray-50);
+}
+.post-form-upload-img label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+.post-form-upload-img input {
+  display: none;
+}
+
+/* UploadImagesWithLabel */
+.post-form-upload-imgs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.post-form-img-col {
+  display: flex;
+  gap: 1.6rem;
+}
+
+/* PostActions */
+.post-actions {
+  display: flex;
+  width: 100%;
+  gap: 1.6rem;
+  justify-content: flex-end;
+}
