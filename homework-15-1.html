@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 등록 - 최초</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 30px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-label {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .required::after {
+            content: " *";
+            color: red;
+        }
+        .photo-upload {
+            border: 2px dashed #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+        }
+        .photo-box {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin: 5px;
+            padding: 10px;
+            text-align: center;
+            background-color: white;
+        }
+        .address-search {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .address-search input {
+            flex: 1;
+            margin-right: 10px;
+        }
+        .btn-primary {
+            background-color: #0d6efd;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="form-container">
+                    <h2 class="text-center mb-4">게시물 등록</h2>
+                    <form>
+                        <!-- 제조사 입력 -->
+                        <div class="mb-3">
+                            <label for="manufacturer" class="form-label required">작성자</label>
+                            <input type="text" class="form-control" id="manufacturer" placeholder="작성자 명을 입력해 주세요.">
+                        </div>
+
+                        <!-- 제품명 입력 -->
+                        <div class="mb-3">
+                            <label for="productName" class="form-label required">제목</label>
+                            <input type="text" class="form-control" id="productName" placeholder="제목을 입력해 주세요.">
+                        </div>
+
+                        <!-- 내용 입력 -->
+                        <div class="mb-3">
+                            <label for="content" class="form-label required">내용</label>
+                            <textarea class="form-control" id="content" rows="5" placeholder="내용을 입력해 주세요."></textarea>
+                        </div>
+
+                        <!-- 주소 입력 -->
+                        <div class="mb-3">
+                            <label for="address" class="form-label">주소</label>
+                            <div class="address-search">
+                                <input type="text" class="form-control" id="postcode" placeholder="01234">
+                                <button type="button" class="btn btn-primary">우편번호 검색</button>
+                            </div>
+                            <input type="text" class="form-control mb-2" placeholder="주소를 입력해 주세요.">
+                            <input type="text" class="form-control" placeholder="상세주소">
+                        </div>
+
+                        <!-- 경고사항 입력 -->
+                        <div class="mb-3">
+                            <label for="warning" class="form-label">유튜브 링크</label>
+                            <input type="text" class="form-control" id="warning" placeholder="링크를 입력해 주세요.">
+                        </div>
+
+                        <!-- 사진 업로드 -->
+                        <div class="mb-3">
+                            <label class="form-label">사진 등록</label>
+                            <div class="photo-upload">
+                                <div class="photo-box">
+                                    +<br>
+                                    <small>클릭해서 사진 업로드</small>
+                                </div>
+                                <div class="photo-box">
+                                    +<br>
+                                    <small>클릭해서 사진 업로드</small>
+                                </div>
+                                <div class="photo-box">
+                                    +<br>
+                                    <small>클릭해서 사진 업로드</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 제출 버튼 -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">등록하기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
