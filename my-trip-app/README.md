@@ -29,7 +29,7 @@
 
 ## 📂 파일 구조 및 코딩 컨벤션
 📌 **Coding Convention**
-- 변수/함수명: `snake_case`  
+- class명: `snake_case`  
 - 파일명: `camelCase`  
 - 아이콘 & 이미지: `public` 디렉토리 관리  
 - 폴더 구조: 기능별로 분리  

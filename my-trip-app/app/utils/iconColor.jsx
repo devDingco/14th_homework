@@ -21,6 +21,15 @@ export const colorTokens = {
   primary: "var(--main-color)",
 };
 
+// 파일명 alias: export명 ↔ 실제 파일명(공백/하이픈 등)
+const iconFileAlias = {
+  house_on_the_sea: "house on the sea",
+  room_service: "room service",
+  radio_enabled: "radio-enabled",
+  radio_selected: "radio-selected",
+  single_person_accommodation: "Single person accommodation",
+};
+
 // 6) 중앙 Icon 컴포넌트: 축약 토글/명시형 props를 모두 지원
 export default function Icon(props) {
   const {
@@ -58,18 +67,20 @@ export default function Icon(props) {
       : red
       ? colorTokens.red
       : undefined);
-  const src = `/icons/${resolvedType}/${resolvedName}.svg`;
+  const fileName = iconFileAlias[resolvedName] || resolvedName;
+  const src = `/icons/${resolvedType}/${fileName}.svg`;
+  const encodedSrc = encodeURI(src);
   const baseSize = 20;
   const mergedStyle = {
     display: "inline-block",
     width: width ?? (style && style.width) ?? baseSize,
     height: height ?? (style && style.height) ?? baseSize,
     backgroundColor: resolvedColor || "currentColor",
-    WebkitMaskImage: `url(${src})`,
+    WebkitMaskImage: `url("${encodedSrc}")`,
     WebkitMaskRepeat: "no-repeat",
     WebkitMaskPosition: "center",
     WebkitMaskSize: "contain",
-    maskImage: `url(${src})`,
+    maskImage: `url("${encodedSrc}")`,
     maskRepeat: "no-repeat",
     maskPosition: "center",
     maskSize: "contain",
@@ -116,6 +127,18 @@ export const RightArrowOutline = (p) => <Icon outline name="right_arrow" {...p} 
 export const RoomServiceOutline = (p) => <Icon outline name="room_service" {...p} />;
 export const SearchOutline = (p) => <Icon outline name="search" {...p} />;
 export const WriteOutline = (p) => <Icon outline name="write" {...p} />;
+
+// - 추가된 Outline 컴포넌트들
+export const PersonOutline = (p) => <Icon outline name="person" {...p} />;
+export const PlanteriorOutline = (p) => <Icon outline name="planterior" {...p} />;
+export const PointOutline = (p) => <Icon outline name="point" {...p} />;
+export const RadioEnabledOutline = (p) => <Icon outline name="radio_enabled" {...p} />;
+export const RadioSelectedOutline = (p) => <Icon outline name="radio_selected" {...p} />;
+export const ReplyOutline = (p) => <Icon outline name="reply" {...p} />;
+export const ReturnOutline = (p) => <Icon outline name="return" {...p} />;
+export const SinglePersonAccommodationOutline = (p) => (
+  <Icon outline name="single_person_accommodation" {...p} />
+);
 
 // 8) 사용 예시
 // - 중앙 Icon 컴포넌트

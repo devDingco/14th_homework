@@ -24,7 +24,7 @@ export default function AppFrame({ children }) {
   return (
     <>
       <Header />
-      <Banner />
+      <Banner width={1280} height={516} />
       {children}
     </>
   );
