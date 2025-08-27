@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { isEmptyObj } from '../utils/objectUtils'
+import { useNavigate } from 'react-router'
+
 const useForm = ({ initialValues, validate }) => {
   const [values, setValues] = useState(initialValues)
   const [errors, setErrors] = useState({})
   const [isActive, setIsActive] = useState(false)
-
+  const navigate = useNavigate()
   const handleChange = (event) => {
     const { name, value } = event.target
 
@@ -20,9 +22,7 @@ const useForm = ({ initialValues, validate }) => {
     e.preventDefault()
     alert('제출버튼이 눌렸습니다.')
     console.log('제출버튼이 눌렸습니다.')
-    // console.log('🚀 ~ handleSubmit ~ validate(values):', validate(values))
-    // console.log('🚀 ~ handleSubmit ~ values:', values)
-    // console.log('🚀 ~ handleSubmit ~ errors:', errors)
+    navigate('/boards/detail/1')
   }
 
   return {

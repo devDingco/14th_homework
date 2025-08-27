@@ -9,6 +9,7 @@ import {
 import useForm from '../../../hooks/useForm'
 import validate from '../../../utils/validate'
 import '../../../styles/BoardsNew.css'
+
 const initialPostValue = {
   writer: '',
   password: '',
@@ -34,7 +35,6 @@ const BoardsNew = () => {
     initialValues: initialPostValue,
     validate,
   })
-  console.log('🚀 ~ BoardsNew ~ isActive:', isActive)
 
   return (
     <div className="container">
