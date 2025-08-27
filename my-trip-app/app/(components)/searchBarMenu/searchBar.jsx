@@ -1,11 +1,12 @@
 "use client";
-import "./headComponent.css";
-import "../../../global.css";
+import "./searchBar.css";
+import "../../global.css";
 import { useRef, useState } from "react";
 import Icon from "@utils/iconColor";
-export default function HeadComponent() {
+export default function SearchBarMenu({ title, filtersEnabled = false, defaultFilter = "available", postButtonLabel = "트립토크 등록" }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [activeFilter, setActiveFilter] = useState(defaultFilter);
   const startInputRef = useRef(null);
   const endInputRef = useRef(null);
 
@@ -35,11 +36,32 @@ export default function HeadComponent() {
   };
   return (
     <div className="head_component_container">
-      <div className="searchbar-with-calender-container">
-        <div className="searchbar-container">
-        <Icon outline search default className="search_icon"/>
-          <input className="r_16_24" type="text" placeholder="검색어를 입력해주세요." />
+      {title && (
+        <div className="searchbar-header">
+          <h1 className="b_28_36">{title}</h1>
+          {filtersEnabled && (
+            <div className="filter_pills">
+              <button
+                type="button"
+                className={`filter_pill sb_14_20 ${activeFilter === "available" ? "active" : ""}`}
+                onClick={() => setActiveFilter("available")}
+              >
+                예약 가능 숙소
+              </button>
+              <button
+                type="button"
+                className={`filter_pill sb_14_20 ${activeFilter === "soldout" ? "active" : ""}`}
+                onClick={() => setActiveFilter("soldout")}
+              >
+                예약 마감 숙소
+              </button>
+            </div>
+          )}
         </div>
+      )}
+
+      <div className="searchbar-with-calender-container">
+   
         <div className="calender-container">
           <Icon outline calendar default className="calendar_icon" />
           <button type="button" className={`date-range-display r_16_24 ${startDate && endDate ? "has-value" : ""}`} onClick={openPicker}>
@@ -62,15 +84,18 @@ export default function HeadComponent() {
             min={startDate || undefined}
           />
         </div>
-        
-          <button type="button" className="search-button sb_18_24">검색</button>
-      </div>
-        
 
-          <button type="button" className="post-button sb_18_24">
+        <div className="searchbar-container">
+        <Icon outline search default className="search_icon"/>
+          <input className="r_16_24" type="text" placeholder="검색어를 입력해주세요." />
+        </div>
+          <button type="button" className="search-button sb_18_24">검색</button>
+        <button type="button" className="post-button sb_18_24">
             <Icon outline write white className="write_icon" />
-            트립토크 등록
+            {postButtonLabel}
           </button>
+      </div>
+
     </div>
   );
 }

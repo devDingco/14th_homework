@@ -1,4 +1,4 @@
-import HeadComponent from "./headCompoents/headComponent";
+import SearchBarMenu from "./searchBarMenu/searchBar.jsx";
 import BoardTable from "./boadList/boardList";
 
 const styles = {
@@ -16,7 +16,7 @@ export default function BoardList() {
   return (
     <div style={styles.boardList_container}>
         <h1 className="b_28_36">트립토그 게시판</h1>
-      <HeadComponent/>
+      <SearchBarMenu/>
       <BoardTable/>
     </div>
   );

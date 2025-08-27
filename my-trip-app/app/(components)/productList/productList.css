@@ -1,0 +1,151 @@
+.product_list_section {
+    width: 128rem;
+    margin: 0 auto;
+}
+
+.product_list_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product_grid {
+    margin-top: 3.2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.4rem;
+
+    margin-bottom: 10rem;
+}
+
+.product_card {
+    background: #fff;
+}
+
+.product_thumbnail_wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.product_thumbnail {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.product_info {
+    padding: 0rem;
+}
+
+.product_title {
+    color: var(--gray-90);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.product_price {
+    margin-top: 0.4rem;
+    color: var(--gray-90);
+}
+
+.product_subtitle {
+    margin-top: 0.4rem;
+    color: var(--gray-60);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.product_tags {
+    margin-top: 0.4rem;
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.product_tag {
+    color: var(--main-color);
+}
+
+.product_footer {
+    margin-top: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.host_info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.host_avatar {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+.nav_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 128rem;
+
+}
+
+.nav_item {
+    width: 10rem;
+    height: 7.2rem;
+    border-radius: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.nav_item_text {
+    color: var(--gray-90);
+}
+
+.head_badge {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0rem;
+    background: rgba(0, 0, 0, 0.4);
+    color: var(--white);
+    border-radius: 0.8rem;
+    padding: 0.4rem 0.8rem;
+}
+
+.badge_text {
+    color: var(--white);
+}
+
+.product_body {
+    padding: 0rem;
+}
+
+
+@media (max-width: 1024px) {
+    .product_grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+    .product_grid { grid-template-columns: 1fr; }
+}
+
+
