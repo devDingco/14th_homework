@@ -1,0 +1,209 @@
+.boards{
+    display: flex;
+    justify-content: center;
+}
+
+.boards_detail{
+    width: 1920px;
+    height: 2251px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    gap: 40px;
+    display: flex;
+    /* background-color: orange */
+}
+
+.제목_font{
+    font-family: Pretendard;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 28px;
+    leading-trim: NONE;
+    line-height: 36px;
+    letter-spacing: 0%;    
+}
+
+.글쓴이_font{
+    font-family: Pretendard Variable;
+    font-weight: 300;
+    font-style: Light;
+    font-size: 14px;
+    leading-trim: NONE;
+    line-height: 20px;
+    letter-spacing: 0%;    
+}
+
+.button_font{
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 14px;
+    leading-trim: NONE;
+    line-height: 25px;
+    letter-spacing: 0%;
+    text-align: center;    
+}
+
+.글쓴이_날짜{
+    width: 1280px;
+    height: 80px;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.글쓴이_날짜_좁은거{
+    width: 1280px;
+    height: 24px;
+    gap: 54px;
+    display: flex;    
+    /* background-color: bisque; */
+}
+
+.글쓴이{
+    width: 65px;
+    height: 24px;
+    gap: 4px;
+    display: flex;    
+    /* background-color: orange; */
+    /* line-height: 24px; */
+}
+
+.글쓴이_name{
+    /* padding-top: 4px; */
+    line-height: 24px;
+}
+.날짜{
+    width: 1161px;
+    height: 24px;
+    gap: 8px;    
+    display: flex;
+    /* background-color: blue; */
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.날짜_font{
+    font-family: Pretendard Variable;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    leading-trim: NONE;
+    letter-spacing: 0%;    
+}
+
+.line{
+    width: 1280px;
+    height: 0px;
+    border: 1px solid gray;
+}
+.복붙_위치_위치조정{
+    display: flex;
+    justify-content: end;
+}
+
+.복붙_위치{
+    width: 56px;
+    height: 24px;
+    gap: 8px;
+    display: flex;
+
+}
+
+.boards_body{
+    width: 1920px;
+    height: 2171px;
+    padding-right: 320px;
+    padding-left: 320px;
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+    /* background-color: aqua; */
+}
+
+.boards_body_main{
+    width: 1280px;
+    height: 2171px;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    /* background-color: brown; */
+}
+
+.content{
+    font-family: Pretendard Variable;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 24px;
+    letter-spacing: 0%;    
+}
+
+.video_div{
+    width: 1280px;
+    height: 512px;
+    gap: 10px;
+    padding-top: 24px;
+    padding-bottom: 24px;    
+    display: flex;
+    background-color: #F2f2f2;
+    justify-content: center;
+
+}
+
+.buttons{
+    width: 1280px;
+    height: 40px;
+    gap: 24px;
+    display: flex;    
+    justify-content: center;
+}
+
+.button{
+    width: 105px;
+    height: 40px;
+    border-radius: 8px;
+    gap: 8px;
+    border-width: 1px;
+    padding-top: 8px;
+    padding-right: 12px;
+    padding-bottom: 8px;
+    padding-left: 12px;
+    display: flex;
+    justify-content: center;
+}
+
+.bad_good{
+    width: 1280;
+    height: 48;
+    angle: 0 deg;
+    opacity: 1;
+    gap: 24px;
+    display: flex;    
+    justify-content: center;
+}
+
+.bad{
+    display: flex;
+    flex-direction: column;
+    color:  #5F5F5F;
+}
+
+.good{
+    display: flex;
+    flex-direction: column;
+    color: #F66A6A;
+
+}
+
+.good_bad_font{
+    font-family: Pretendard Variable;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    leading-trim: NONE;
+    line-height: 20px;
+    letter-spacing: 0%;    
+    align-items: center;
+}
