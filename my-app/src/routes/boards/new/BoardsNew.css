@@ -6,7 +6,7 @@
 
 .게시물등록_frame {
     display: flex;
-    max-width: 120rem;
+    /* max-width: 120rem; */
     width: 100%;
     padding: 0 20rem;
     justify-content: center;
@@ -173,6 +173,7 @@ hr {
 
 .게시물등록_사진첨부 {
     display: flex;
+    
     max-width: 80rem;
     width: 100%;
 
@@ -216,7 +217,7 @@ hr {
     align-self: stretch;
 }
 
-.게시물등록_버튼 {
+.버튼인풋 {
     display: flex;
     height: 3rem;
     padding: 0.75rem 1rem;
@@ -232,6 +233,13 @@ hr {
     line-height: 1.5rem; /* 133.333% */
 } 
 
+.에러메세지_스타일 {
+    color: var(--red, #F66A6A);
+
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem; /* 150% */
+}
 /* .게시물등록_취소버튼 {
     border: 1px solid var(--gray-B, #000);
     background: var(--gray-w, #FFF);

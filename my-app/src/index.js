@@ -3,9 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {createBrowserRouter, RouterProvider} from 'react-router'
+import BoardsNew from './routes/boards/new/BoardsNew';
+import BoardsDetail from './routes/boards/new/BoardsDetail';
+
+const 페이지목록 = createBrowserRouter([
+    { path: "/", element: <App />},
+    { path: "/BoardsNew", element: <BoardsNew />},
+    { path: "/BoardsDetail", element: <BoardsDetail />}
+])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render( <App />
+root.render( <RouterProvider router={페이지목록} />
 );
 
 // If you want to start measuring performance in your app, pass a function
