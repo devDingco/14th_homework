@@ -71,7 +71,6 @@
             display: flex;
             justify-content: space-between; /* 양 끝 정렬 */
             align-items: center;
-            /* 헤더의 패딩을 컨테이너와 동일하게 수정 */
             padding: 10px 0px 45px 0px;
             background-color: #ffffff;
             /* 헤더 아래 줄 제거 */
@@ -138,6 +137,19 @@
             border-bottom: none;
             padding-bottom: 0;
         }
+        
+        /* 작성자/비밀번호 입력 그룹에만 상단 패딩 추가 */
+        .form-group.first-group {
+            padding-top: 24px;
+        }
+
+        /* 재사용 가능한 클래스 추가: 플렉스박스 레이아웃을 위한 클래스 */
+        .form-row-group {
+            display: flex;
+            flex-direction: row;
+            gap: 24px;
+        }
+
 
         /* 필수 입력 필드에 별표 표시 */
         .label-required::after {
@@ -294,8 +306,8 @@
                 <div className="content-container">
                     <h1 className="post-title">게시글 등록</h1>
                     
-                    {/* 작성자, 비밀번호 입력 필드 그룹 */}
-                    <div className="form-group" style={{ display: 'flex', flexDirection: 'row', gap: '24px' }}>
+                    {/* 작성자, 비밀번호 입력 필드 그룹 - 인라인 스타일을 클래스로 교체 */}
+                    <div className="form-group first-group form-row-group">
                         <div style={{ flex: 1 }}>
                             <label className="label-required">작성자</label>
                             <input type="text" className="input-field" placeholder="작성자를 입력해 주세요." />
@@ -306,8 +318,8 @@
                         </div>
                     </div>
 
-                    {/* 나머지 폼 그룹들 */}
-                    <div style={{ display: 'flex', gap: '24px', flexDirection: 'column' }}>
+                    {/* 나머지 폼 그룹들 - 인라인 스타일을 클래스로 교체 */}
+                    <div className="form-column-container">
                         {/* 제목 폼 그룹 */}
                         <div className="form-group">
                             <label className="label-required">제목</label>
