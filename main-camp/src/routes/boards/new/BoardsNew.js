@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import WriteButton from "../components/WriteButton"
-import WriteInput from "../components/WriteInput"
+import WriteButton from "../../../components/WriteButton"
+import WriteInput from "../../../components/WriteInput"
 
 // 게시글 등록 페이지
-const Post = () => {
+const BoardsNew = () => {
     const [writer, setWriter] = useState("")
     const [password, setPassword] = useState("")
     const [title, setTitle] = useState("")
@@ -108,4 +108,4 @@ const Post = () => {
     )
 }
 
-export default Post
+export default BoardsNew

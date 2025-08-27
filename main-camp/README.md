@@ -1,70 +1,12 @@
-# Getting Started with Create React App
+### Day 17 기본 요구사항
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. 공통
+    - [ ]  완성된 day16 폴더를 copy 하여 day17을 시작 해주세요.
+    - [ ]  React-Router를 사용하여, path: "/boards/new" 경로에 src/routes/boards/new/BoardsNew.js 컴포넌트를 연결합니다.
+    - [ ]  React-Router를 사용하여, path: "/boards/detail" 경로에 src/routes/boards/new/BoardsDetail.js 컴포넌트를 연결합니다.
+2. 게시글등록
+    - [ ]  BoardsNew.js 에는 day02 폴더의 게시글등록을 마이그레이션하여 최초화면(피그마 첫번째 화면)과 같이 만들어 줍니다.
+    - [ ]  게시글등록 작성자, 비밀번호,  제목, 내용 4개의 인풋에 입력이 완료되는 경우, 등록하기 버튼을 활성화합니다. 입력값이 하나라도 없는경우 등록하기 버튼은 비활성화 되어야 합니다.
+3. 게시글상세
+    - [ ]  BoardsDetail.js 에는 피그마 “게시물 상세화면”을 참고하여 게시글 상세 페이지를 완성합니다. 퍼블리싱만 진행 해주세요!
+    - [ ]  게시글에 동영상 미리보기는 사진 첨부로 구현해주세요.(클릭시 기능 없음)
