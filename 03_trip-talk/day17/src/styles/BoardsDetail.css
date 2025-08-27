@@ -10,6 +10,10 @@
   gap: 1.6rem;
   flex-direction: column;
 }
+.detail-post-details hr {
+  border: solid 0.1rem var(--color-gray-100);
+  border-bottom: none;
+}
 .detail-post-info {
   display: flex;
   justify-content: space-between;
