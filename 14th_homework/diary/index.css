@@ -62,27 +62,83 @@
     color: #ababab;
   }
   
-  /* 일기 보여주는 곳 - 그리드 레이아웃으로 변경 */
-  .일기보여주는곳 {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    width: 100%;
-    max-width: 1200px;
-  }
   
-  .일기 {
-    /* max-width: 380px; */
-    /* 
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    background-color: #fff;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; */
+  .필터바 {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 12px 16px;
+    background: #f6f6f6;
+    transition: backround 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  }
 
+  .필터바.scrolled {
+    background: #0a0a0a;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+  }
+
+  .필터바 select {
+    width: 220px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid #9d9d9d;
+    background: #fff;
+    color: #111;
+  }
+
+  .필터바.scrolled select {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+  }
+
+  .일기 { position: relative; }
+  .카드삭제 {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .카드삭제:hover { transform: scale(1.1); background:#fff; }
+
+/* 플로팅버튼 */
+  .toTopBtn {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px dashed #c7c7ff;
+    background: #ffffffcc;
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+    cursor: pointer;
+  }
+
+  .toTopBtn.show { display:flex; }
+  .toTopIcon { font-size:28px; line-height: 1;}
+
+  /* 체크리스트 */
+  .체크리스트 { list-style:none; padding-left:0; }
+  .체크리스트 li { display:flex; align-items:center; gap:10px; padding:6px 0; border-bottom:1px dashed #eee; }
+  
+
+  .일기 {
     display: flex;
     min-width: 152px;
     padding-bottom: 16px;
@@ -99,7 +155,6 @@
     transform: scale(1.1) translateY(-2px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     filter: blur(3px);
-    /* transition: transform 0.5s; */
     /* width: 110%;
     height: 110%; */
   }
@@ -116,10 +171,13 @@
     width: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+
   }
+  
   
   .일기:hover .기분이미지 {
     transform: scale(1.05);
+    
   }
   
   .일기내용 {
@@ -210,7 +268,7 @@
   }
   
   .등록상자_제목 {
-    width: 100%;
+    width: 100%;  
     font-size: 24px;
     font-weight: 700;
   }
@@ -366,8 +424,9 @@
     }
     
     .일기보여주는곳 {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
     }
     
     .일기 {

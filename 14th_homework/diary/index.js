@@ -1,4 +1,3 @@
-
 // ---- 로컬스토리지 성정  ----
 const LS_KEY = 'diaries';
 
@@ -15,42 +14,26 @@ const saveDiaries = (arr) => {
   localStorage.setItem(LS_KEY, JSON.stringify(arr));
 };
 
-const normalizeMood = (mood) => {
-  switch (mood) {
-    case '행복':
-    case '행복해요': return '행복';
-    case '슬픔':
-    case '슬퍼요': return '슬픔';
-    case '놀람':
-    case '놀랐어요': return '놀람';
-    case '화남':
-    case '화나요': return '화남';
+const normalizeMood = (m) => {
+  switch (m) {
+    case '행복': case '행복해요': return '행복';
+    case '슬픔': case '슬퍼요': return '슬픔';
+    case '놀람': case '놀랐어요': return '놀람';
+    case '화남': case '화나요': return '화남';
     case '기타': return '기타';
     default: return '기타';
   }
 };
 
-const moodText = (mood) => {
-  switch (normalizeMood(mood)) {
-    case '행복': return '행복해요';
-    case '슬픔': return '슬퍼요';
-    case '놀람': return '놀랐어요';
-    case '화남': return '화나요';
-    case '기타': return '기타';
-    default: return '기타';
-  }
-};
+const moodText = (m) => ({행복:'행복해요',슬픔:'슬퍼요',놀람:'놀랐어요',화남:'화나요',기타:'기타'}[normalizeMood(m)]);
 
-const moodImage = (mood) => {
-  switch (normalizeMood(mood)) {
-    case '행복': return './assets/images/joy.png';
-    case '슬픔': return './assets/images/sadness.png';
-    case '놀람': return './assets/images/surprised.png';
-    case '화남': return './assets/images/anger.png';
-    case '기타': return './assets/images/idontknownothing.png';
-    default: return './assets/images/joy.png';
-  }
-};
+const moodImage = (m) => ({
+    행복: './assets/images/joy.png',
+    슬픔: './assets/images/sadness.png',
+    놀람: './assets/images/surprised.png',
+    화남: './assets/images/anger.png',
+    기타: './assets/images/idontknownothing.png'
+  }[normalizeMood(m)]);
 
 // ---- 상태 ----
 let 일기목록 = loadDiaries();
@@ -69,12 +52,12 @@ if (migrated) saveDiaries(일기목록);
 const createDiaryCard = (d) => {
   const 카드 = document.createElement('div');
   카드.className = '일기';
-
+  // console.log(1)
   const 링크 = document.createElement('a');
   링크.href = `detail.html?id=${encodeURIComponent(d.id)}`;
   링크.style.textDecoration = 'none';
   링크.style.color = 'inherit';
-
+  // console.log(2)
   링크.innerHTML = `
     <div class="일기사진">
       <img class="기분이미지" src="${moodImage(d.기분)}" alt="${normalizeMood(d.기분)}" />
@@ -85,6 +68,7 @@ const createDiaryCard = (d) => {
     </div>
     <div class="일기제목">${d.제목 || ''}</div>
   `;
+  // console.log(3)
   카드.appendChild(링크);
   return 카드;
 };
@@ -108,35 +92,18 @@ const 빈카드생성 = () => {
 };
 
 // ----  ----
-const renderList = (filterMood = '전체') => {
-  const 영역 = document.getElementById('일기보여주는곳');
-  if (!영역) return;
-  영역.innerHTML = '';
-
-  const data = (Array.isArray(일기목록) && 일기목록.length > 0) ? 일기목록 : [];
-
-  const toRender = data
-    .filter(d => filterMood === '전체' ? true : normalizeMood(d.기분) === normalizeMood(filterMood))
-    .sort((a, b) => (b.id || 0) - (a.id || 0));
-
-  if (toRender.length === 0 && data.length === 0) {
-    const 샘플 = [
-      { id: 1, 기분:'행복', 제목:'좋은 하루였다', 작성일:'2024. 03. 12' },
-      { id: 2, 기분:'슬픔', 제목:'조금 우울한 날이었다', 작성일:'2024. 03. 12' },
-      { id: 3, 기분:'놀람', 제목:'깜짝 사건이 있었다', 작성일:'2024. 03. 12' },
-      { id: 4, 기분:'화남', 제목:'화가 난다', 작성일:'2024. 03. 12' },
-      { id: 5, 기분:'기타', 제목:'특별한 감정을 느꼈다', 작성일:'2024. 03. 12' },
-    ];
-    샘플.forEach(s => 영역.appendChild(createDiaryCard({
-      ...s,
-      내용:'이것은 샘플 일기입니다.'
-    })));
-    for (let i=0;i<2;i++) 영역.appendChild(빈카드생성());
-    return;
-  }
-
-  toRender.forEach(d => 영역.appendChild(createDiaryCard(d)));
+const renderList=(filter='전체')=>{
+  const wrap=document.getElementById('일기보여주는곳'); wrap.innerHTML='';
+  일기목록.filter(d=>filter==='전체'||normalizeMood(d.기분)===normalizeMood(filter))
+    .forEach(d=>wrap.appendChild(createDiaryCard(d)));
 };
+  //   const LS_일기목록 = 일기목록.map( => createDiaryCard()).join('')
+  //   영역.innerHTML = LS_일기목록
+  //   return 영역.appendChild()
+  // }
+
+  // toRender.forEach(d => 영역.appendChild(createDiaryCard(d)));
+
 
 // ---- 일기쓰기 ----
 const 글쓰기기능 = () => {
@@ -210,6 +177,29 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   renderList('전체');
+});
+// === 스크롤 시 필터 바 반전 & to-top 버튼 노출 ===
+const onScroll = () => {
+  const bar = document.getElementById('필터바');
+  const topBtn = document.getElementById('toTopBtn');
+  if (bar) bar.classList.toggle('scrolled', window.scrollY > 10);
+  if (topBtn) topBtn.classList.toggle('show', window.scrollY > 240);
+};
+
+window.addEventListener('scroll', onScroll);
+
+window.addEventListener('DOMContentLoaded', () => {
+  // 기존 초기 렌더/탭 로직은 그대로 둡니다. (이미 파일에 존재)
+  // 최초 상태도 반영되도록 한 번 호출
+  onScroll();
+
+  // to-top 버튼 클릭 → 맨 위로 부드럽게
+  const topBtn = document.getElementById('toTopBtn');
+  if (topBtn) {
+    topBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 });
 
 window.글쓰기기능 = 글쓰기기능;

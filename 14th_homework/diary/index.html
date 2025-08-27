@@ -2,8 +2,8 @@
 <html lang="ko">
   <head>
     <title>민지의 다이어리 - 일기보관함</title>
-    <link rel="stylesheet" href="index.css" />
-    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./index.js" defer></script>
   </head>
   <body>
     <div class="레이아웃">
@@ -17,18 +17,17 @@
         <div class="클릭된탭">일기보관함</div>
         <div class="클릭되지않은탭">사진보관함</div>
       </div>
-
-      <!-- 기분선택 버튼 -->
-      <select name="기분선택하기" onchange="기분필터링(event)">
-        <option value="전체" selected>전체</option>
-        <option value="행복">행복해요</option>
-        <option value="슬픔">슬퍼요</option>
-        <option value="놀람">놀랐어요</option>
-        <option value="화남">화나요</option>
-        <option value="기타">기타</option>
-      </select>      
-
-
+        <div id="필터바" class="필터바">
+        <!-- 기분선택 버튼 -->
+          <select name="기분선택하기" onchange="기분필터링(event)">
+            <option value="전체" selected>전체</option>
+            <option value="행복">행복해요</option>
+            <option value="슬픔">슬퍼요</option>
+            <option value="놀람">놀랐어요</option>
+            <option value="화남">화나요</option>
+            <option value="기타">기타</option>
+          </select>      
+        </div>
       <div class="메인">
         <!--일기 보여주는 곳-->
         <div id="일기보여주는곳" class="일기보여주는곳">
@@ -81,6 +80,11 @@
         </div>
       </div>
     </div>
+
+    <!-- 플로팅버튼 추가 -->
+    <button id="toTopBtn" class="toTopBtn" title:"클릭 시 위로 스크롤">
+      <span class="toTopIcon">^</span>
+    </button>
 
     <!--푸터-->
     <div class="푸터_영역">
