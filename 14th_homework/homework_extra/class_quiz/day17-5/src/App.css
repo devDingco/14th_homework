@@ -1,0 +1,95 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.전체영역{
+  background-image: url("../public/images/img-bg.png");
+  width: 640px; 
+  height: 1138px;
+  position: relative;
+
+}
+
+.중앙제목{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.아이콘1{
+  position: absolute;
+  top:calc(21% - 80.08px/2);
+  left:calc(50% - 66.24px/2)
+}
+.아이콘2{
+  position: absolute;
+  top:calc(25% - 24px/2);
+  left:calc(50% - 72px/2)
+}
+.제목{
+  color: #FFF;
+  font-family: "Noto Sans KR";
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  position: absolute;
+  top:calc(35% - 72px/2);
+  left:calc(50% - 208px/2)
+}
+.이메일영역{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+.비밀번호영역{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+.유효성메시지{
+  color: #FF1B6D;
+  font-family: "Noto Sans KR";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
