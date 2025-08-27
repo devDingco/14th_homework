@@ -1,4 +1,3 @@
-import BoardsNew from './routes/boards/new/BoardsNew'
 import { Link } from 'react-router'
 
 const App = () => {
