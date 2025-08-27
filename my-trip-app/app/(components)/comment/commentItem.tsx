@@ -3,7 +3,17 @@
 import "./comment.css";
 import Icon from "@utils/iconColor";
 
-export default function CommentItem({ avatar, author, date, rating, content, onEdit, onDelete }) {
+export interface CommentItemProps {
+  avatar: string;
+  author: string;
+  date: string;
+  rating: number;
+  content: string;
+  onEdit?: () => void;
+  onDelete?: () => void;
+}
+
+export default function CommentItem({ avatar, author, date, rating, content, onEdit, onDelete }: CommentItemProps) {
   return (
     <article className="comment_item">
       <header className="comment_item_header">

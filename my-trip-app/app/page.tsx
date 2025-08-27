@@ -9,7 +9,7 @@ export default function Home() {
     <div>
       <CardList/>
       <SearchBarMenu title="트립토크 게시판" postButtonLabel="트립토크 등록" />
-      <BoardList totalPages={5} initialPage={1} onChange={() => {}} />
+      <BoardList totalPages={5} initialPage={1} />
     </div>
   );
 }

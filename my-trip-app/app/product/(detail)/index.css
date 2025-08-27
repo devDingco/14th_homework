@@ -1,5 +1,6 @@
 .product_detail_section {
-  padding: 2.4rem 3.2rem 8rem;
+  width: 128rem;
+  margin: 0 auto;
 }
 
 .detail_header {
@@ -15,7 +16,7 @@
 
 .detail_grid {
   display: grid;
-  grid-template-columns: 1fr 36rem;
+  grid-template-columns: calc(100% - 36rem - 2.4rem) 36rem;
   gap: 2.4rem;
 }
 
@@ -25,15 +26,16 @@
   gap: 3.2rem;
 }
 
-.gallery_grid {
+.gallery {
   display: grid;
-  grid-template-columns: 1fr 20rem;
+  grid-template-columns: 1fr 18rem;
   gap: 1.2rem;
   align-items: start;
 }
 
 .main_image_wrap {
   width: 100%;
+  height: 48rem;
   border-radius: 1.2rem;
   overflow: hidden;
 }
@@ -44,10 +46,34 @@
   display: block;
 }
 
+.thumbs_aside {
+  width: 18rem;
+  height: 48rem; /* 메인 이미지 비율(640x480)에 맞춘 고정 높이 */
+  overflow: hidden; /* 부모 영역 초과 방지 */
+  position: relative;
+  /* 아래에서 위로 진해지는(투명 -> 불투명) 마스크 */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.9) 35%,
+    rgba(0, 0, 0, 0.6) 70%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.9) 35%,
+    rgba(0, 0, 0, 0.6) 70%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+
 .thumb_list {
-  list-style: none;
   display: grid;
   gap: 1.2rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .thumb_list_vertical {
@@ -56,21 +82,18 @@
 
 .thumb_button {
   padding: 0;
-  border: none;
   background: transparent;
   cursor: pointer;
   border-radius: 0.8rem;
   overflow: hidden;
   outline-offset: 2px;
+  flex-shrink: 0; /* 썸네일 축소 방지 */
 }
 
-.thumb_button.active {
-  outline: 0.2rem solid var(--black);
-}
 
 .thumb_image {
-  width: 100%;
-  height: auto;
+  width: 18rem;
+  height: 13.6rem;
   display: block;
 }
 
@@ -170,25 +193,8 @@
 }
 
 @media (max-width: 102.4rem) {
-  .detail_grid {
-    grid-template-columns: 1fr;
-  }
 
-  .sticky_card {
-    position: static;
-  }
 
-  .gallery_grid {
-    display: flex;
-    flex-direction: column;
-  }
 
-  .thumbs_aside {
-    order: 2;
-  }
-
-  .thumb_list_vertical {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 

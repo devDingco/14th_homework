@@ -6,18 +6,18 @@ import { useState } from 'react';
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
 
-export default function SignUp({ onClickSignin }) {
+export default function SignUp({ onClickSignin }: { onClickSignin?: () => void }) {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [errors, setErrors] = useState({ email: '', name: '', password: '', confirm: '' });
+    const [errors, setErrors] = useState<{ email: string; name: string; password: string; confirm: string }>({ email: '', name: '', password: '', confirm: '' });
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const passwordRegex = /^(?=.*[!@#$%^&*]).{10,}$/;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const nextErrors = { email: '', name: '', password: '', confirm: '' };
       if (!email) nextErrors.email = '이메일을 입력해 주세요.';

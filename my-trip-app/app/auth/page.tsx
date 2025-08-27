@@ -4,18 +4,19 @@ import { useState } from "react";
 import SignIn from "./(signin)/index";
 import SignUp from "./(signup)/index";
 import Image from "next/image";
+import type { FlexColumnCenter } from "@/types/auth";
 
 
 export default function Auth() {
   const [mode, setMode] = useState("signin");
 
   return (
-    <div style={styles.layout}>
-      <div style={styles.left_panel}>
+    <div style={styles.layout as React.CSSProperties}>
+      <div style={styles.left_panel as React.CSSProperties}>
         {mode === "signup" ? (
-          <SignUp embedded onClickSignin={() => setMode("signin")} />
+          <SignUp onClickSignin={() => setMode("signin")} />
         ) : (
-          <SignIn embedded onClickSignup={() => setMode("signup")} />
+          <SignIn onClickSignup={() => setMode("signup")} />
         )}
       </div>
       <Image
@@ -31,7 +32,7 @@ export default function Auth() {
 
 
 
-const styles = {
+const styles: { layout: FlexColumnCenter; left_panel: FlexColumnCenter } = {
   layout: {
     width: "192rem",
     height: "108rem",

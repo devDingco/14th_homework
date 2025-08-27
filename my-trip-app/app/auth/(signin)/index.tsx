@@ -6,7 +6,7 @@ import { useState } from 'react';
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
 
-export default function SignIn({ onClickSignup }) {
+export default function SignIn({ onClickSignup }: { onClickSignup?: () => void }) {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,17 +16,17 @@ export default function SignIn({ onClickSignup }) {
   const storedEmail = "user@example.com";
   const storedPassword = "P@ssword123!";
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     if (loginError) setLoginError('');
   };
 
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
     if (loginError) setLoginError('');
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const isMatched = email === storedEmail && password === storedPassword;
     if (!isMatched) {

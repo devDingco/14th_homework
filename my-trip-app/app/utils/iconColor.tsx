@@ -31,23 +31,7 @@ const iconFileAlias = {
 };
 
 // 6) 중앙 Icon 컴포넌트: 축약 토글/명시형 props를 모두 지원
-type IconProps = {
-  type?: "outline" | "filled";
-  name?: string;
-  color?: string;
-  outline?: boolean;
-  filled?: boolean;
-  write?: boolean;
-  search?: boolean;
-  calendar?: boolean;
-  white?: boolean;
-  black?: boolean;
-  red?: boolean;
-  primary?: boolean;
-  style?: React.CSSProperties;
-  width?: number;
-  height?: number;
-} & React.HTMLAttributes<HTMLSpanElement>;
+import type { IconProps } from "@/types/icon";
 
 export default function Icon(props: IconProps) {
   const {

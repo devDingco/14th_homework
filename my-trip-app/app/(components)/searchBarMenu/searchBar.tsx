@@ -3,15 +3,22 @@ import "./searchBar.css";
 import "../../global.css";
 import { useRef, useState } from "react";
 import Icon from "@utils/iconColor";
-export default function SearchBarMenu({ title, filtersEnabled = false, defaultFilter = "available", postButtonLabel = "트립토크 등록" }) {
+
+export interface SearchBarMenuProps {
+  title?: string;
+  filtersEnabled?: boolean;
+  defaultFilter?: "available" | "soldout";
+  postButtonLabel?: string;
+}
+
+export default function SearchBarMenu({ title, filtersEnabled = false, defaultFilter = "available", postButtonLabel = "트립토크 등록" }: SearchBarMenuProps) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [activeFilter, setActiveFilter] = useState(defaultFilter);
-  const startInputRef = useRef(null);
-  const endInputRef = useRef(null);
+  const startInputRef = useRef<HTMLInputElement | null>(null);
+  const endInputRef = useRef<HTMLInputElement | null>(null);
 
-
-  const formatDate = (value) => {
+  const formatDate = (value: string) => {
     if (!value) return "";
     const date = new Date(value);
     const yyyy = String(date.getFullYear());
@@ -22,17 +29,17 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
 
   const openPicker = () => {
     if (!startDate) {
-      startInputRef.current?.showPicker?.();
+      (startInputRef.current as any)?.showPicker?.();
       return;
     }
-    endInputRef.current?.showPicker?.();
+    (endInputRef.current as any)?.showPicker?.();
   };
 
-  const handleStartChange = (e) => {
+  const handleStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setStartDate(value);
     setEndDate("");
-    setTimeout(() => endInputRef.current?.showPicker?.(), 0);
+    setTimeout(() => (endInputRef.current as any)?.showPicker?.(), 0);
   };
   return (
     <div className="head_component_container">
@@ -61,7 +68,7 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
       )}
 
       <div className="searchbar-with-calender-container">
-   
+     
         <div className="calender-container">
           <Icon outline calendar default className="calendar_icon" />
           <button type="button" className={`date-range-display r_16_24 ${startDate && endDate ? "has-value" : ""}`} onClick={openPicker}>

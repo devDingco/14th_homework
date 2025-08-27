@@ -1,18 +1,19 @@
 "use client";
 
 import "./pagination.css";
-import "../../../global.css";
+import "../../global.css";
 import { useState } from "react";
 import Image from "next/image";
 import Icon from "@utils/iconColor";
+import type { PaginationProps } from "@/types/pagination";
 
-export default function Pagination({ totalPages = 5, initialPage = 1, onChange }: { totalPages: number, initialPage: number, onChange: (page: number) => void }) {
+export default function Pagination({ totalPages = 5, initialPage = 1, onChange }: PaginationProps) {
   const [currentPage, setCurrentPage] = useState(initialPage);
 
   const goTo = (page: number) => {
     if (page < 1 || page > totalPages) return;
     setCurrentPage(page);
-    onChange && onChange(page);
+    onChange?.(page);
   };
 
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);

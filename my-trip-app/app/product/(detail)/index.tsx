@@ -25,14 +25,14 @@ export default function ProductDetail({ id }: { id: string }) {
 
       <div className="detail_grid">
         <div className="detail_left">
-          <div className="gallery_grid">
+          <div className="gallery">
             <div className="main_image_wrap">
               <Image
                 className="main_image"
                 src={galleryImages[selectedIndex]}
                 alt="product main"
-                width={936}
-                height={702}
+                width={640}
+                height={480}
                 priority
               />
             </div>
@@ -46,7 +46,7 @@ export default function ProductDetail({ id }: { id: string }) {
                       onClick={() => setSelectedIndex(index)}
                       aria-label={`썸네일 ${index + 1}`}
                     >
-                      <Image className="thumb_image" src={src} alt="thumbnail" width={184} height={160} />
+                      <Image className="thumb_image" src={src} alt="thumbnail" width={180} height={136} />
                     </button>
                   </li>
                 ))}
