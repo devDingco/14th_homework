@@ -54,6 +54,10 @@
     flex-direction: column;
 }
 
+.flex_justi_sb {
+    justify-content: space-between;
+}
+
 .flex_justi_end {
     justify-content: end;
 }
@@ -64,6 +68,10 @@
 
 .flex_align_items_center {
     align-items: center;
+}
+
+.flex_align_self_flexend {
+    align-self: flex-end;
 }
 
 /* border */
