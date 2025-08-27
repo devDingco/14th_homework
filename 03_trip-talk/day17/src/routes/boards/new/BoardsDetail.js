@@ -35,7 +35,10 @@ const BoardsDetail = () => {
   return (
     <div className="container">
       <div className="detail-post">
-        <Header title={post.title} />
+        {/* details title */}
+        <header>
+          <h1 className="detail-post-title">{post.title}</h1>
+        </header>
 
         {/* details option */}
         <div className="detail-post-details">
