@@ -1,26 +1,11 @@
+import { getButtonStyleByColor } from '../utils/objectUtils'
+
 export const CustomButton = (props) => {
   const { type = 'button', content, disabled = false, color } = props
-
-  const getButtonStyleByColor = (color) => {
-    switch (color) {
-      case 'default':
-        return
-      case 'blue':
-        return {
-          backgroundColor: '#2974E5',
-          color: 'var(--color-white)',
-          border: 'none',
-        }
-      case 'black':
-        return {
-          backgroundColor: 'var(--color-black)',
-          color: 'var(--color-black)',
-          border: 'none',
-        }
-    }
-  }
+  const myBtnColor = getButtonStyleByColor(color)
   return (
-    <button type={type} style={getButtonStyleByColor(color)} disabled={disabled}>
+    <button type={type} style={myBtnColor} disabled={disabled}>
+      <img />
       {content}
     </button>
   )
