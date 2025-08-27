@@ -62,6 +62,10 @@ const Post = () => {
                 }
             }
         } else {
+            setWriterErr("")
+            setPasswordErr("")
+            setTitleErr("")
+            setContentErr("")
             alert('게시글 등록이 가능한 상태입니다!')
         }
     }
