@@ -11,6 +11,7 @@ import BoardsDetail from './routes/boards/new/BoardsDetail'
 const router = createBrowserRouter([
   { path: '/', element: <App /> },
   { path: '/boards/new', element: <BoardsNew /> },
+  { path: '/boards/detail', element: <BoardsDetail /> },
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
