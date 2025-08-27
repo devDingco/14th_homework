@@ -176,6 +176,8 @@ body{
     display: flex;
     flex-direction: row;
     gap: 24px;
+    max-height: calc(100vh - 320px); /* 헤더/사이드/여백 빼고 높이 잡기 */
+  /* overflow: auto; */
     /* background-color: blueviolet; */
     justify-content: center;
     /* align-items: center; */
@@ -190,7 +192,7 @@ body{
     flex-direction: row;
     flex-wrap: wrap;
     gap:24px;
-    overflow-y:scroll ;
+    /* overflow-y:scroll ; */
     
 }
 
@@ -253,6 +255,16 @@ body{
     /* background-color: blueviolet; */
 }
 
+#모달등록완료배경{
+    width: 100vw;
+    height: 100vh;
+    background-color: gray;
+    opacity: 50%;
+    position: relative;
+    display: none;
+    /* z-index: 100; */
+}
+
 #모달등록완료{
     width: 480px;
     height: 200px;
@@ -261,6 +273,7 @@ body{
     left: calc(50% - 480px/2);
     background-color: white;
     display: none;
+    /* z-index: 101; */
 }
 
 .일기등록취소모달그룹{
@@ -278,7 +291,7 @@ body{
     height: 100vh;
     background-color: gray;
     opacity: 50%;
-    position: relative;
+    /* position: relative; */
 }
 
 #일기등록취소모달{

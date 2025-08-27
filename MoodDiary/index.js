@@ -1,5 +1,8 @@
 
 let 일기 = [];
+const 저장된일기_페이지 = localStorage.getItem("일기목록");
+const 일기목록_페이지 = JSON.parse(저장된일기_페이지 === null ? "[]" : 저장된일기_페이지);
+const 마지막페이지 = Math.max(1, Math.ceil(일기목록_페이지.length / 12));
 
 const 입력확인 = () => {
     const 제목 = document.getElementById("제목입력").value.trim();
@@ -69,7 +72,9 @@ const 일기작성__등록 = () => {
 
 window.onload = () => {
     일기사이드바()
-    일기목록불러오기()
+    페이지그리기(1)
+    일기목록그리기(1)
+
 
     document.getElementById("일기보관함").style.textDecoration = "underline red"
     // document.getElementById("일기보관함").style.fontWeight = "700"
@@ -312,11 +317,11 @@ let 타이머 = ""
 
         `).join("")}
         </div>`
-        
+
         document.getElementById("일기메인").innerHTML = HTML
 
-    },1000)
-    
+    }, 1000)
+
 }
 
 let 삭제할일기 = ""
@@ -331,16 +336,97 @@ const 일기삭제버튼 = () => {
     const 일기목록 = JSON.parse(저장된일기)
     console.log(일기목록)
 
-    const 삭제후일기목록 = 일기목록.splice(삭제할일기,1)
+    const 삭제후일기목록 = 일기목록.splice(삭제할일기, 1)
     console.log(삭제후일기목록)
     console.log(일기목록)
-    
+
     localStorage.setItem("일기목록", JSON.stringify(일기목록))
 
     일기목록불러오기()
 }
 
+let 시작페이지 = 1
+// const 저장된일기 = localStorage.getItem("일기목록")
+// const 일기목록 = JSON.parse(저장된일기 === null ? "[]" : 저장된일기)
+// const 마지막페이지 = Math.ceil(일기목록.length / 10)
 
+const 이전페이지 = () => {
+    if (시작페이지 === 1) {
+        alert("시작페이지입니다.")
+    } else {
+        시작페이지 = 시작페이지 - 12
+
+        페이지그리기(시작페이지)
+        일기목록그리기(시작페이지)
+    }
+}
+
+const 다음페이지 = () => {
+    const 저장된일기 = localStorage.getItem("일기목록")
+    const 일기목록 = JSON.parse(저장된일기 === null ? "[]" : 저장된일기)
+    const 마지막페이지 = Math.ceil(일기목록.length / 12)
+    console.log(일기목록)
+    console.log("마지막페이지 = " + 마지막페이지)
+    if (시작페이지 + 12 <= 마지막페이지) {
+        시작페이지 = 시작페이지 + 12
+    } else {
+        alert("마지막페이지입니다.")
+    }
+}
+
+const 페이지그리기 = (클릭한페이지) => {
+    const 페이지 = new Array(12).fill("라떼")
+
+    const 페이지들 = 페이지.map((el, index) => {
+        const 페이지번호 = 시작페이지 + index
+
+        return 페이지번호 <= 마지막페이지 ? `
+            <button onclick="일기목록그리기(${페이지번호}); 페이지그리기(${페이지번호});"
+            class=${클릭한페이지 === 페이지번호 ? "빨강색" : ""}
+            >
+            ${페이지번호}
+            </button>
+        `
+            : ``
+    }).join("")
+
+    document.getElementById("페이지네이션").innerHTML = 페이지들
+
+}
+
+const 일기목록그리기 = (클릭한페이지) => {
+    const 저장된일기 = localStorage.getItem("일기목록")
+    const 저장된일기목록 = JSON.parse(저장된일기 === null ? "[]" : 저장된일기)
+    const 일기목록 = 저장된일기목록
+    const 시작인덱스 = (클릭한페이지 - 1) * 12;
+    const 끝인덱스 = 시작인덱스 + 12;
+
+    // 현재 페이지에 표시할 데이터
+    const 페이지목록 = 일기목록.slice(시작인덱스, 끝인덱스);
+
+    // })
+    // 목록 HTML
+    const 일기목록HTML = `
+  <div class="일기목록" id="일기목록">
+    ${페이지목록.map((el, idx) => `
+      <div class="일기">
+        <a href="./index-detailPage.html?number=${시작인덱스 + idx}">
+          <div><img src="./assets/images/${el.기분}.png" alt="" class="기분카드"></div>
+          <div>
+            <div>${el.기분}</div>
+            <div>${el.날짜}</div>
+          </div>
+          <div>${el.제목}</div>
+        </a>
+        <button class="일기삭제버튼" onclick="일기삭제(event, ${시작인덱스 + idx})">X</button>
+      </div>
+    `).join("")}
+  </div>
+
+`;
+
+    document.getElementById("일기메인").innerHTML = 일기목록HTML;
+};
 
 
 
