@@ -100,8 +100,8 @@ const BoardsNew = () => {
                     </form>
                 </section>
                 <div id="write_confirm_container" className="flex_row flex_justi_end">
-                    <WriteButton p="취소"/>
-                    <WriteButton setState={onClickResist} p="등록하기"/>
+                    <WriteButton state={{ writer, password, title, content }} p="취소"/>
+                    <WriteButton state={{ writer, password, title, content }} setState={onClickResist} p="등록하기"/>
                 </div>
             </div>
         </div>
