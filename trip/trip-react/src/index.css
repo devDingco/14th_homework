@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+  font-family: "Pretendard";
+}
+
+html {
+  font-size: 62.5%;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+
+  margin: 4.0rem 32.0rem;
+  font-size: 1.6rem;
+
+  width: 100vw;
+  height: 100vh; /* 화면 높이 최소 확보 */
+}
+
+:root {
+  --gray-W: #FFF;
+  --gray-B: #000;
+
+  --gray-100: #E4E4E4;
+  --Gray-Gray-200: #D4D3D3;
+  --Gray-Gray-400: #ABABAB;
+
+  --gray-800: #333;
+}

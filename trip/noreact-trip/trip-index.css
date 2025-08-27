@@ -91,6 +91,14 @@ body {
     font-weight: 400;
 }
 
+.Error {
+    color: #F66A6A;
+    font-size: 1.6rem;
+    font-weight: 500;
+
+    margin-top: 0.8rem;
+}
+
 .Section{
     display: flex;
     justify-content: flex-start;
