@@ -14,33 +14,32 @@ const Post = () => {
     const [titleErr, setTitleErr] = useState("")
     const [contentErr, setContentErr] = useState("")
 
-    const onChangeWriter = (event) => {
-        
-        setWriter(event.target.value)
+    const onChangePosting = (category) => (event) => {
+        switch (category) {
+            case "작성자": {
+                setWriter(event.target.value)
+                break
+            }
+            case "비밀번호": {
+                setPassword(event.target.value)
+                break
+            }
+            case "제목": {
+                setTitle(event.target.value)
+                break
+            }
+            case "내용": {
+                setContent(event.target.value)
+                break
+            }
+            default:
+        }
     }
-    const onChangePassword = (event) => {
-        
-        setPassword(event.target.value)
-    }
-    const onChangeTitle = (event) => {
-        
-        setTitle(event.target.value)
-    }
-    const onChangeContent = (event) => {
-        
-        setContent(event.target.value)
-    }
-    
+
     const onClickResist = () => {
         const forValArr = [writer, password, title, content]
         
         if (forValArr.includes("")) {
-   
-            // const forErr = []
-            // forValArr.forEach((v, i) => {
-            //     if (v === "") forErr.push(i)
-            // })
-
             for (let i=0; i < forValArr.length; i++) {
                 switch(i) {
                     case 0: {
@@ -73,16 +72,16 @@ const Post = () => {
             <div id="main_container">
                 <section id="write_form_container">
                     <form className="write_form_80h flex_row">
-                        <WriteInput setState={onChangeWriter} label={"작성자"} placeholder={"작성자 명을 입력해 주세요."} errMsg={writerErr}/>
-                        <WriteInput setState={onChangePassword} label={"비밀번호"} placeholder={"비밀번호를 입력해 주세요."} errMsg={passwordErr}/>
+                        <WriteInput setState={onChangePosting("작성자")} label={"작성자"} placeholder={"작성자 명을 입력해 주세요."} errMsg={writerErr}/>
+                        <WriteInput setState={onChangePosting("비밀번호")} label={"비밀번호"} placeholder={"비밀번호를 입력해 주세요."} errMsg={passwordErr}/>
                     </form>
                     <hr />
                     <form className="write_form_80h flex_row">
-                        <WriteInput setState={onChangeTitle} label={"제목"} placeholder={"제목을 입력해 주세요."} errMsg={titleErr}/>
+                        <WriteInput setState={onChangePosting("제목")} label={"제목"} placeholder={"제목을 입력해 주세요."} errMsg={titleErr}/>
                     </form>
                     <hr />
                     <form className="write_form_368h flex_row">
-                        <WriteInput setState={onChangeContent} label={"내용"} placeholder={"내용을 입력해 주세요."} errMsg={contentErr}/>
+                        <WriteInput setState={onChangePosting("내용")} label={"내용"} placeholder={"내용을 입력해 주세요."} errMsg={contentErr}/>
                     </form>
                     <form className="write_form_192h flex_column">
                         <WriteInput label={"주소"} placeholder={"주소를 입력해 주세요."}/>
