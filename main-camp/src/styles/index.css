@@ -1,4 +1,6 @@
 #root {
+    display: flex;
+    justify-content: center;
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -43,6 +45,14 @@
 
 .flex_justi_end {
     justify-content: end;
+}
+
+.flex_justi_center {
+    justify-content: center;
+}
+
+.flex_align_items_center {
+    align-items: center;
 }
 
 /* border */
