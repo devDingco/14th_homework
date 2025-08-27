@@ -11,7 +11,11 @@ import BoardsDetail from './routes/boards/new/BoardsDetail'
 const router = createBrowserRouter([
   { path: '/', element: <App /> },
   { path: '/boards/new', element: <BoardsNew /> },
-  { path: '/boards/detail', element: <BoardsDetail /> },
+  { path: '/boards/detail/:id', element: <BoardsDetail /> },
+  {
+    path: '*',
+    element: <div>404 Not Found</div>,
+  },
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
