@@ -21,7 +21,7 @@ export default function Booking() {
   };
 
   const handleSellVoucher = () => {
-    console.log('숙박권 판매하기 클릭');
+    router.push('/booking/new');
   };
 
   const handleCategoryClick = (category) => {
