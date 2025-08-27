@@ -1,3 +1,5 @@
+import '../styles/Header.css'
+
 export const Header = (props) => {
   const { title } = props
   return (
