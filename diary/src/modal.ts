@@ -1,8 +1,10 @@
-const modalBackdropEl = document.querySelector('#modal-new-diary-backdrop') as HTMLSpanElement;
-const modalContainerEl = document.querySelector('#modal-new-diary-container') as HTMLSpanElement;
+const modalBackdropEl = document.querySelector('#modal-new-diary-backdrop') as HTMLDivElement;
+const modalContainerEl = document.querySelector('#modal-new-diary-container') as HTMLDivElement;
 const modalCloseBtnEl = document.querySelector('.modalCloseBtn') as HTMLSpanElement;
 const formDiaryEl = document.querySelector('.formDiary') as HTMLSpanElement;
 
+const modalBackdropAddEl = document.querySelector('#modal-backdrop-add') as HTMLDivElement;
+const modalContainerAddEl = document.querySelector('#modal-container-add') as HTMLDivElement;
 /**
  * 이벤트 전파 차단
  */
@@ -46,3 +48,11 @@ const mvTop = () => {
 if (topScrollEl) {
   topScrollEl.addEventListener('click', mvTop);
 }
+
+console.log(modalBackdropAddEl);
+
+// modalBackdropAddEl.style.display = 'flex';
+// modalContainerAddEl.style.display = 'flex';
+
+modalBackdropAddEl.addEventListener('click', handleCloseModal);
+modalContainerAddEl.addEventListener('click', handleCloseModal);

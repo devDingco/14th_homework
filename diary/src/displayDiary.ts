@@ -1,29 +1,13 @@
-const selectedItemEL = document.querySelector('.selected-item') as HTMLSpanElement;
+// const selectedItemEL = document.querySelector('.selected-item') as HTMLSpanElement;
 const cardListEl = document.querySelector('.cardList')! as HTMLSpanElement;
 const pageBtnEl = document.querySelector('#pageBtnContainer')! as HTMLSpanElement;
 const prevBtnEl = document.querySelector('#prevBtn')! as HTMLSpanElement;
 const nextBtnEl = document.querySelector('#nextBtn')! as HTMLSpanElement;
 
-import { dummyData } from './data/dummyData';
 import { displayDiary } from './searchDiary';
-import { getLocalStorage, initLocalStorage } from './storageControl';
+import { getData, getParams, handleDeleteDiary, setParams } from './dataStorage';
 import type { TCard } from './types';
-import { switchTextColor } from './utils/switchTextColor';
-
-const handleDeleteDiary = (e: MouseEvent) => {
-  e.preventDefault();
-  //
-  const parentId = (e.target as HTMLElement).closest('.card')?.id;
-  const prevData = getLocalStorage();
-
-  if (parentId) {
-    const filteredData = prevData.filter((data: TCard) => data.id !== parseInt(parentId));
-    initLocalStorage(filteredData);
-    window.location.reload();
-  }
-
-  alert('삭제되었습니다.');
-};
+import { switchTextColor } from './utils/utils';
 
 export const addDiaryDom = (props: TCard) => {
   const link = document.createElement('a');
@@ -34,17 +18,17 @@ export const addDiaryDom = (props: TCard) => {
   container.setAttribute('id', `${props.id}`);
   //
   const img = document.createElement('img');
-  img.setAttribute('src', `/images/${props.state} (m).png`);
+  img.setAttribute('src', `/images/${props.category} (m).png`);
   img.style = 'position: relative;';
   //
   const inner = document.createElement('div');
   inner.setAttribute('class', 'cardInfo');
 
-  const state = document.createElement('span');
-  state.innerText = props.state;
-  state.style.color = switchTextColor(props.state);
+  const category = document.createElement('span');
+  category.innerText = props.category;
+  category.style.color = switchTextColor(props.category);
   const date = document.createElement('span');
-  inner.appendChild(state);
+  inner.appendChild(category);
   date.innerText = props.date;
   date.style.color = `#919191`;
   inner.appendChild(date);
@@ -76,45 +60,37 @@ export const addDiaryDom = (props: TCard) => {
 // =============================================================
 // =============================================================
 
-export const getParams = (query: string, defaultValue: string) => {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const pageNum = urlParams.get(query) || defaultValue;
-  return pageNum;
-};
-
-const dataSlice = (page: number) => {
-  const allData = getLocalStorage();
-  const startNum = 12 * (page - 1);
-  const endNum = 12 * page;
-
-  const sliceData = allData.slice(startNum, endNum);
-
-  return sliceData;
-};
+// export const getParams = (query: string, defaultValue: string) => {
+//   const queryString = window.location.search;
+//   const urlParams = new URLSearchParams(queryString);
+//   const pageNum = urlParams.get(query) || defaultValue;
+//   return pageNum;
+// };
 
 export const displayDiaryDom = () => {
-  const pageNum = getParams('page', '1');
-  const selectedValue = getParams('select', '전체');
-  console.log(pageNum, selectedValue);
-  // const urlParams = new URLSearchParams(window.location.search);
-  // const selectedValue = urlParams.get('select');
-  // const diaryList = getLocalStorage();
-  const slicedData = dataSlice(parseInt(pageNum));
-  console.log(slicedData);
+  const data = getData();
+  // const pageNum = getParams('page', '1');
+  // const selectedValue = getParams('category', '');
+  // console.log(pageNum, selectedValue);
+  // // const urlParams = new URLSearchParams(window.location.search);
+  // // const selectedValue = urlParams.get('select');
+  // // const diaryList = getLocalStorage();
+  // // const slicedData = dataSlice(parseInt(pageNum));
+  // const slicedData = getData();
+  // console.log(slicedData);
 
-  let filteredData;
-  if (selectedValue === '전체') {
-    filteredData = slicedData;
-  } else {
-    filteredData = slicedData?.filter((diary: TCard) => {
-      selectedItemEL.innerText = selectedValue || '전체';
+  // let filteredData;
+  // if (selectedValue === '') {
+  //   filteredData = slicedData;
+  // } else {
+  //   filteredData = slicedData?.filter((diary: TCard) => {
+  //     selectedItemEL.innerText = selectedValue || '';
 
-      return selectedValue ? diary.state === selectedValue : true;
-    });
-  }
+  //     return selectedValue ? diary.category === selectedValue : true;
+  //   });
+  // }
 
-  displayDiary(filteredData);
+  displayDiary(data.data);
 };
 
 displayDiaryDom();
@@ -123,10 +99,8 @@ displayDiaryDom();
 // =============================================================
 // =============================================================
 
-let startPage = 1;
-let maxData = Math.max(getLocalStorage().length, dummyData.length);
-console.log(`maxData: ${maxData}`);
-let endPage = Math.ceil(maxData / 12);
+// let maxData = getData().maxPage;
+let endPage = getData().maxPage;
 
 const navPage = (pageNum: number) => {
   const url = new URL(window.location.href);
@@ -135,24 +109,25 @@ const navPage = (pageNum: number) => {
 };
 (window as any).navPage = navPage;
 
+let startPage = 1;
 const displayPageBtn = (startPage: number) => {
-  const currPage = parseInt(getParams('page', '1'));
-  console.log(`run ${startPage}`);
+  // 현재페이지
+  let { currentPage, maxPage } = getData();
 
   pageBtnEl.innerHTML = '';
 
-  const maxBtn = Math.min(startPage + 4, endPage);
-  console.log(`maxBtn: ${maxBtn}`);
+  const maxBtn = Math.min(startPage + 4, maxPage);
 
   for (let i = startPage; i <= maxBtn; i++) {
     const pageBtn = document.createElement('span');
     pageBtn.setAttribute('class', 'pageBtn');
-    if (currPage === i) {
+    if (currentPage === i) {
       pageBtn.classList.add('navActive');
     }
     pageBtn.innerText = `${i}`;
     pageBtn.addEventListener('click', () => {
       navPage(i);
+      // setParams('page', i.toString());
     });
     pageBtnEl.insertAdjacentElement('beforeend', pageBtn);
   }
@@ -175,13 +150,16 @@ const prevPage = () => {
   navPage(startPage);
   displayPageBtn(startPage);
 };
+
 const nextPage = () => {
-  startPage += 5;
   console.log(startPage, endPage);
-  if (startPage > endPage) {
+  if ((startPage += 5) > endPage) {
+    console.log(startPage, endPage);
     return;
   }
-  navPage(startPage);
+  startPage += 5;
+  // navPage(startPage);
+  setParams('page', startPage.toString());
   displayPageBtn(startPage);
 };
 

@@ -1,4 +1,4 @@
-import { fetchDogData } from './storageControl';
+import { fetchDogData } from './dataStorage';
 
 const tabDiaryEl = document.querySelector('.tab_diary') as HTMLDivElement;
 const tabimageEl = document.querySelector('.tab_image') as HTMLDivElement;

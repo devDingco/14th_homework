@@ -1,9 +1,9 @@
 import './filterMenu';
-import './storageControl';
+import './dataStorage';
 import './tabs';
-import { setLocalStorage } from './storageControl';
+import { setLocalStorage } from './dataStorage';
 
-import { formatDate } from './utils/formatDate';
+import { formatDate } from './utils/utils';
 
 import { handleCloseModal, handleOpenModal } from './modal';
 import { addDiaryDom } from './displayDiary';
@@ -65,16 +65,16 @@ const submitForm = (e: SubmitEvent) => {
   const selectedRadio = document.querySelector('input[name="group"]:checked') as HTMLInputElement;
 
   const newData: TCard = {
+    // TODO: formEl.elements 찍어보기
     id: Math.floor(Math.random() * 10000),
     imgUrl: titleInputEl.value,
-    state: selectedRadio.value,
+    category: selectedRadio.value,
     date: formatDate(),
     title: titleInputEl.value,
     content: contentInputEl.value,
     comments: [],
   };
 
-  // initialData.push(newData);
   setLocalStorage(newData);
   addDiaryDom(newData);
   initForm();
@@ -118,6 +118,3 @@ const handleScroll = () => {
 };
 
 window.addEventListener('scroll', handleScroll);
-
-
-

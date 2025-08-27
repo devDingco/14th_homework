@@ -157,7 +157,7 @@ textarea {
   background-color: #ffffff;
   border-radius: 8px;
   border: 1px solid black;
-  color: black;
+  color: var(--text-color);
   opacity: 1;
 }
 
@@ -173,7 +173,8 @@ textarea {
   opacity: 1;
 }
 
-.modal-backdrop {
+.modal-backdrop,
+.modal-backdrop-add {
   display: none;
   position: absolute;
   top: 0;
@@ -186,6 +187,16 @@ textarea {
   z-index: 2;
 }
 
+.modal-container-add {
+  display: flex;
+  min-width: 280px;
+  max-width: 760px;
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  align-self: stretch;
+}
 .modal-container {
   display: none;
   position: absolute;
@@ -282,7 +293,7 @@ textarea {
   top: 6px;
   /* z-index: 1; */
   /* background-color: white; */
-  color: black;
+  color: var(--text-color);
 }
 
 /* MAIN - storageList */
@@ -401,7 +412,7 @@ textarea {
   list-style: none;
   padding: 8px 12px;
 
-  color: black;
+  color: var(--text-color);
   cursor: pointer;
 }
 
@@ -411,15 +422,6 @@ textarea {
 
 .dropdown.open .dropdown-menu {
   display: block;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  scroll-behavior: smooth;
 }
 
 body {
@@ -476,7 +478,7 @@ footer > div {
   letter-spacing: -1%;
 }
 
-.filterState {
+.filtercategory {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -484,7 +486,7 @@ footer > div {
   height: fit-content;
 }
 
-.filterState-select {
+.filtercategory-select {
   /* display: flex;
   max-width: 120px;
   padding: 4px;
@@ -507,7 +509,7 @@ footer > div {
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 
-/* .filterState-select > option {
+/* .filtercategory-select > option {
 } */
 
 /* header > div { */
@@ -525,8 +527,7 @@ footer > div {
   font-style: Bold;
   line-height: 16px;
   letter-spacing: -1%;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: var(--font-family);
   justify-content: center;
   text-decoration: none;
   color: #000000;
@@ -539,8 +540,8 @@ footer > div {
 }
 
 .logo-text {
-  color: #000;
-  font-family: 'Pretendard Variable';
+  color: var(--text-color);
+  font-family: var(--font-family);
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;

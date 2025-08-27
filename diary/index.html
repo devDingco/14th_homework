@@ -16,13 +16,13 @@
     <script type="module" src="/src/darkmode.ts"></script>
   </head>
   <body>
+    <!-- modal_add -->
+    <dia id="modal-backdrop-add" class="modal-backdrop">
+      <div id="modal-container-add" class="modal-container">등록완료</div>
+    </dia>
     <div id="app">
-      <!-- modal_add -->
-      <div class="modal-backdrop">
-        <div class="modal-container">등록완료</div>
-      </div>
       <!-- modal -->
-      <div id="modal-new-diary-backdrop" class="modal-backdrop">
+      <dialog id="modal-new-diary-backdrop" class="modal-backdrop">
         <div id="modal-new-diary-container" class="modal-container">
           <form class="formDiary" action="#">
             <!-- 1 -->
@@ -81,7 +81,7 @@
             </div>
           </form>
         </div>
-      </div>
+      </dialog>
 
       <!-- HEADER -->
       <header class="header">

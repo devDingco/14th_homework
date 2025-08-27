@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diary</title>
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/newDiary.css" />
+    <link rel="stylesheet" href="/styles/mediaQuery.css" />
+    <link rel="stylesheet" href="/styles/skeleton.css" />
+    <link rel="stylesheet" href="/styles/sub.css" />
+
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/searchDiary.ts"></script>
+    <script type="module" src="/src/darkmode.ts"></script>
+    <script type="module" src="/src/test.ts"></script>
+  </head>
+  <body>
+    <!-- modal_add -->
+    <!-- <dialog id="modal-backdrop-add" class="modal-backdrop">
+      <div id="modal-container-add" class="modal-container">등록완료</div>
+    </dialog> -->
+    <div id="app">
+      <!-- modal -->
+      <dialog id="modal-new-diary-backdrop" class="modal-backdrop">
+        <div id="modal-new-diary-container" class="modal-container">
+          <form class="formDiary" action="#">
+            <div class="formDiary__title">📍 일기 쓰기</div>
+
+            <div class="formDiary__content">
+              <p>오늘 기분은 어땟나요?</p>
+              <div class="selectCard" id="selectGroup">
+                <div class="ratio__list">
+                  <input type="radio" id="행복해요" value="행복해요" name="group" checked />
+                  <label for="행복해요">행복해요</label>
+                </div>
+                <div class="ratio__list">
+                  <input type="radio" id="슬퍼요" value="슬퍼요" name="group" />
+                  <label for="슬퍼요">슬퍼요</label>
+                </div>
+                <div class="ratio__list">
+                  <input type="radio" id="놀랐어요" value="놀랐어요" name="group" />
+                  <label for="놀랐어요">놀랐어요</label>
+                </div>
+                <div class="ratio__list">
+                  <input type="radio" id="화나요" value="화나요" name="group" />
+                  <label for="화나요">화나요</label>
+                </div>
+                <div class="ratio__list">
+                  <input type="radio" id="기타" value="기타" name="group" />
+                  <label for="기타">기타</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex-col--16px">
+              <div class="flex-col--8px">
+                <label class="text-ms" for="title">제목</label>
+                <input id="title" class="input-layout" type="text" placeholder="제목을 입력해 주세요." />
+              </div>
+
+              <div class="flex-col--8px">
+                <label class="text-ms" for="context">내용</label>
+                <textarea
+                  id="content"
+                  class="input-layout"
+                  name=""
+                  id=""
+                  placeholder="내용을 입력해 주세요."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="formDiary__btn">
+              <button class="modalCloseBtn">닫기</button>
+              <button id="submitDiaryBtn" class="submitDiaryBtn" disabled>등록하기</button>
+            </div>
+          </form>
+        </div>
+      </dialog>
+
+      <!-- HEADER -->
+      <header class="header">
+        <a id="logo" href="/">
+          <span class="logo-text">민지의 다이어리</span>
+        </a>
+        <div class="darkModeBtn">
+          <span class="darkModeText">다크모드</span>
+          <input id="darkmodeBtn" type="checkbox" class="toggle" />
+        </div>
+      </header>
+      <!-- MAIN -->
+      <main class="main x-container">
+        <div class="banner">
+          <img src="/images/0da87750d72d05561bfdb209c688de2957f78ef1.jpg" alt="" />
+        </div>
+        <!-- 일기보관함 / 사진보관함 -->
+        <nav class="storageList">
+          <ul class="tabList">
+            <li class="tab_diary activeMenu">일기보관함</li>
+            <li class="tab_image">사진보관함</li>
+          </ul>
+        </nav>
+
+        <div class="section-main">
+          <div class="search-filter-new">
+            <!-- 검색 -->
+            <div class="search-diary">
+              <img width="24px" src="/icons/search.svg" alt="searchIcon" />
+              <input id="search-input" class="search-input" type="text" placeholder="검색어를 입력해 주세요." />
+            </div>
+
+            <!-- 필터버튼, 새 일기 작성 -->
+            <div class="filter-new">
+              <div class="dropdown-diary">
+                <button class="dropdown-button">
+                  <span class="selected-item">전체</span>
+                  <img src="/icons/arrow_drop_down_24dp_5F6368_FILL1_wght400_GRAD0_opsz24 1.svg" alt="" />
+                </button>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-menu-item">전체</li>
+                  <li class="dropdown-menu-item">행복해요</li>
+                  <li class="dropdown-menu-item">슬퍼요</li>
+                  <li class="dropdown-menu-item">놀랐어요</li>
+                  <li class="dropdown-menu-item">화나요</li>
+                  <li class="dropdown-menu-item">기타</li>
+                </ul>
+              </div>
+              <button class="addDiaryBtn">
+                <img src="/icons/addDiary.svg" alt="" />
+                <span>일기쓰기</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 일기보관함 -->
+          <div class="cardContainer">
+            <div class="cardList"></div>
+          </div>
+          <div class="empty-diary">
+            <p>등록된 일기가 없습니다.</p>
+          </div>
+
+          <!-- 페이지네이션 -->
+          <div id="pagination">
+            <span id="prevBtn"><img src="/icons/prev.svg" alt="prev" /></span>
+            <div id="pageBtnContainer"></div>
+            <span id="nextBtn"><img src="/icons/next.svg" alt="next" /></span>
+          </div>
+        </div>
+
+        <div class="section-sub">
+          <div class="dropdown-img" style="display: none">
+            <button class="img-dropdown-button">
+              <span class="img-selected-item">기본</span>
+              <img src="/icons/arrow_drop_down_24dp_5F6368_FILL1_wght400_GRAD0_opsz24 1.svg" alt="" />
+            </button>
+            <ul class="img-dropdown-menu">
+              <li id="basic" class="img-dropdown-menu-item">기본</li>
+              <li id="horizontal" class="img-dropdown-menu-item">가로형</li>
+              <li id="vertical" class="img-dropdown-menu-item">세로형</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 사진보관함 -->
+        <div class="section-image" style="display: none">
+          <div class="skeleton-list">
+            <div class="basic-ratio-1-1 skeleton">
+              <hr />
+              <hr />
+            </div>
+            <div class="basic-ratio-1-1 skeleton">
+              <hr />
+              <hr />
+            </div>
+            <div class="basic-ratio-1-1 skeleton">
+              <hr />
+              <hr />
+            </div>
+          </div>
+        </div>
+      </main>
+      <div class="topscroll">
+        <img src="./icons/topscroll fab.svg" alt="" />
+      </div>
+      <footer class="footer x-container">
+        <div class="footer__inner">
+          <span class="a">민지의 다이어리</span>
+          <span class="ceo"></span>
+          <span class="c">Copyright © 2024. {name} Co., Ltd.</span>
+        </div>
+      </footer>
+      <div id="testModal">dwq</div>
+    </div>
+  </body>
+</html>
