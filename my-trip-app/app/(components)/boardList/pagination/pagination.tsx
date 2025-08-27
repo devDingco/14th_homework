@@ -6,10 +6,10 @@ import { useState } from "react";
 import Image from "next/image";
 import Icon from "@utils/iconColor";
 
-export default function Pagination({ totalPages = 5, initialPage = 1, onChange }) {
+export default function Pagination({ totalPages = 5, initialPage = 1, onChange }: { totalPages: number, initialPage: number, onChange: (page: number) => void }) {
   const [currentPage, setCurrentPage] = useState(initialPage);
 
-  const goTo = (page) => {
+  const goTo = (page: number) => {
     if (page < 1 || page > totalPages) return;
     setCurrentPage(page);
     onChange && onChange(page);

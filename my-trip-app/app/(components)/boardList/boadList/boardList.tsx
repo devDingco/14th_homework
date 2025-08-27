@@ -5,7 +5,7 @@ import "../../../global.css";
 import { mocksData } from "../../../common/utils/mocks-data";
 import Pagination from "../pagination/pagination";
 
-export default function BoardTable() {
+export default function BoardTable( { totalPages = 5, initialPage = 1, onChange }: { totalPages: number, initialPage: number, onChange: (page: number) => void }) {
   return (
     <div className="boardlist_container">
       <div className="board_table">
@@ -28,7 +28,7 @@ export default function BoardTable() {
           ))}
         </div>
       </div>
-      <Pagination totalPages={5} />
+      <Pagination totalPages={totalPages} initialPage={initialPage} onChange={onChange} />
     </div>
   );
 }

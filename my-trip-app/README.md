@@ -21,7 +21,7 @@
 ---
 
 ## ⚙️ 기술 스택
-- **Frontend**: React, Next.js  
+- **Frontend**: React, Next.js, TypeScript
 - **Responsive UI**: Desktop, Tablet, Mobile 대응  
 - **Core Languages**: JavaScript, HTML, CSS  
 

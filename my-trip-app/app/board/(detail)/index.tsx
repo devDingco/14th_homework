@@ -6,8 +6,15 @@ import Link from "next/link";
 import { tripTalkMockData } from "@common/utils/mocks-data";
 import CommentSection from "@components/comment/commentSection";
 
-export default function BoardDetail({ id }) {
-  const post = tripTalkMockData.find((p) => p.id === id) || {
+export default function BoardDetail({ id }: { id: string }) {
+  const post = tripTalkMockData.find((p: any) => p.id === id) || {
+    title: "",
+    authorProfileImage: "",
+    authorName: "",
+    createdAt: "",
+    coverImage: "",
+    badCount: 0,
+    likeCount: 0,
   };
 
   return (

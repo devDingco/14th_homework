@@ -4,7 +4,9 @@ import Header from "../header/header";
 import Banner from "../banner/banner";
 import { usePathname } from "next/navigation";
 
-export default function AppFrame({ children }) {
+type AppFrameProps = { children: React.ReactNode };
+
+export default function AppFrame({ children }: AppFrameProps) {
   const pathname = usePathname();
   const isAuthRoute = pathname.startsWith("/auth");
 
