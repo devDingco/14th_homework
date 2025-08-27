@@ -1,7 +1,8 @@
 const BoardsDetail = () => {
     return (
-        <>
-        </>
+        <div id="main">
+            
+        </div>
     )
 }
 

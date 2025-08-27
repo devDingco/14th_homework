@@ -9,7 +9,7 @@ import BoardsDetail from './routes/boards/new/BoardsDetail';
 
 import './styles/index.css'
 import './styles/typography.css'
-import './styles/post.css'
+import './styles/board.css'
 
 const pages = createBrowserRouter([
     {

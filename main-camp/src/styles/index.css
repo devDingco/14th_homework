@@ -32,6 +32,17 @@
     padding: 0;
 }
 
+/* main */
+
+#main {
+    max-width: 1280px;
+    min-width: 781px;
+    margin-left: 320px;
+    margin-right: 320px;
+
+    /* height: 100vh; */
+}
+
 /* flex */
 
 .flex_row {

@@ -73,7 +73,7 @@ const BoardsNew = () => {
     return (
         <div id="main">
             <h1 className="b_20_28">게시물 등록</h1>
-            <div id="main_container">
+            <div id="board_container">
                 <section id="write_form_container">
                     <form className="write_form_80h flex_row">
                         <WriteInput setState={onChangePosting("작성자")} label={"작성자"} placeholder={"작성자 명을 입력해 주세요."} errMsg={writerErr}/>
