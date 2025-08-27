@@ -1,0 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1.6rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+input,
+textarea {
+  padding: 1.2rem 1.6rem;
+  border-radius: 0.8rem;
+  outline: none;
+  border: solid 0.1rem var(--color-gray-200);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  resize: none;
+  font-size: 1.6rem;
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-gray-400);
+}
+
+/* button default style */
+button {
+  border-radius: 0.8rem;
+  border: solid 0.1rem var(--color-black);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 2.4rem;
+  text-align: center;
+  padding: 1.2rem 1.6rem;
+  cursor: pointer;
+}
+/* button default disabled style*/
+/* !important 대안 방안 생각해보기 */
+button:disabled {
+  background-color: var(--color-gray-300) !important;
+  color: var(--color-gray-100) !important;
+  cursor: default;
+}
