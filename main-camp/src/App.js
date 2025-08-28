@@ -1,8 +1,12 @@
-import Post from './pages/Post.js'
+import { Link } from 'react-router'
 
-function App() {
+const App = () => {
   return (
-    <Post />
+    <div className="flex_column flex_justi_center flex_align_items_center" style={{ height: "100vh" }}>
+      <h1>초기페이지!</h1>
+      <div><Link to='/boards/new'>게시글 등록</Link></div>
+      <div><Link to='/boards/detail'>게시물 상세화면</Link></div>
+    </div>
   );
 }
 

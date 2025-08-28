@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import WriteButton from "../components/WriteButton"
-import WriteInput from "../components/WriteInput"
+import WriteButton from "../../../components/WriteButton"
+import WriteInput from "../../../components/WriteInput"
 
 // 게시글 등록 페이지
-const Post = () => {
+const BoardsNew = () => {
     const [writer, setWriter] = useState("")
     const [password, setPassword] = useState("")
     const [title, setTitle] = useState("")
@@ -73,7 +73,7 @@ const Post = () => {
     return (
         <div id="main">
             <h1 className="b_20_28">게시물 등록</h1>
-            <div id="main_container">
+            <div id="board_container">
                 <section id="write_form_container">
                     <form className="write_form_80h flex_row">
                         <WriteInput setState={onChangePosting("작성자")} label={"작성자"} placeholder={"작성자 명을 입력해 주세요."} errMsg={writerErr}/>
@@ -100,12 +100,12 @@ const Post = () => {
                     </form>
                 </section>
                 <div id="write_confirm_container" className="flex_row flex_justi_end">
-                    <WriteButton p="취소"/>
-                    <WriteButton setState={onClickResist} p="등록하기"/>
+                    <WriteButton state={{ writer, password, title, content }} p="취소"/>
+                    <WriteButton state={{ writer, password, title, content }} setState={onClickResist} p="등록하기"/>
                 </div>
             </div>
         </div>
     )
 }
 
-export default Post
+export default BoardsNew

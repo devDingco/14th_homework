@@ -1,11 +1,10 @@
-// props => label, placeholder
 const WriteInput = (props) => {
     let inputComponent
     switch (props.label) {
         case "작성자": {
             inputComponent = 
             <div className="input_frame_620w_80h flex_column">
-                <label className="label_620w_24h me_16_24">{props.label}</label>
+                <label className="label_620w_24h me_16_24 flex_row" style={{ whiteSpace: "nowrap" }}>{props.label}<p className="me_16_24" style={{ color:"rgba(246, 106, 106, 1)" }}>*</p></label>
                 <input className="input_620w_48h input_border_gray r_16_24" onChange={props.setState} placeholder={props.placeholder}></input>
                 <p className="me_16_24" style={{ color: "rgba(246, 106, 106, 1)" }}>{props.errMsg}</p>
             </div>
@@ -14,7 +13,7 @@ const WriteInput = (props) => {
         case "비밀번호": {
             inputComponent = 
             <div className="input_frame_620w_80h flex_column">
-                <label className="label_620w_24h me_16_24">{props.label}</label>
+                <label className="label_620w_24h me_16_24 flex_row" style={{ whiteSpace: "nowrap" }}>{props.label}<p className="me_16_24" style={{ color:"rgba(246, 106, 106, 1)" }}>*</p></label>
                 <input className="input_620w_48h input_border_gray r_16_24" type="password" onChange={props.setState} laceholder={props.placeholder}></input>
                 <p className="me_16_24" style={{ color: "rgba(246, 106, 106, 1)" }}>{props.errMsg}</p>
             </div>
@@ -23,7 +22,7 @@ const WriteInput = (props) => {
         case "제목": {
             inputComponent =
             <div className="input_frame_1280w_80h flex_column">
-                <label className="label_1280w_24h me_16_24">{props.label}</label>
+                <label className="label_1280w_24h me_16_24 flex_row" style={{ whiteSpace: "nowrap" }}>{props.label}<p className="me_16_24" style={{ color:"rgba(246, 106, 106, 1)" }}>*</p></label>
                 <input className="input_1280w_48h input_border_gray r_16_24" onChange={props.setState} placeholder={props.placeholder}></input>
                 <p className="me_16_24" style={{ color: "rgba(246, 106, 106, 1)" }}>{props.errMsg}</p>
             </div>
@@ -32,7 +31,7 @@ const WriteInput = (props) => {
         case "내용": {
             inputComponent =
             <div className="input_frame_1280w_336h flex_column">
-                <label className="label_1280w_24h me_16_24">{props.label}</label>
+                <label className="label_1280w_24h me_16_24 flex_row" style={{ whiteSpace: "nowrap" }}>{props.label}<p className="me_16_24" style={{ color:"rgba(246, 106, 106, 1)" }}>*</p></label>
                 <textarea className="textarea_1280w_336h input_border_gray r_16_24" onChange={props.setState} placeholder={props.placeholder}></textarea>
                 <p className="me_16_24" style={{ color: "rgba(246, 106, 106, 1)" }}>{props.errMsg}</p>
             </div>
