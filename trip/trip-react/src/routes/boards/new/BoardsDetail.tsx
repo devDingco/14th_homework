@@ -54,11 +54,11 @@ const BoardsDetail = () => {
                 <div className="exampleVideo"></div>
             </div>
             <div className="heartP">
-                <div classname="heart">
+                <div className="heart">
                     <div className="icon brokenHeart"></div>
                     <div className="badNumber">24</div>
                 </div>
-                <div classname="heart">
+                <div className="heart">
                     <div className="icon redHeart"></div>
                     <div className="goodNumber">12</div>
                 </div>

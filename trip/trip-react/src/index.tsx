@@ -7,8 +7,8 @@ import reportWebVitals from './reportWebVitals';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import BoardsNew from './routes/boards/new/BoardsNew.js'
-import BoardsDetail from './routes/boards/new/BoardsDetail.js'
+import BoardsNew from './routes/boards/new/BoardsNew'
+import BoardsDetail from './routes/boards/new/BoardsDetail'
 
 const 트립토크페이지 =  createBrowserRouter([
     { path: "/", element: <App /> },
@@ -16,7 +16,7 @@ const 트립토크페이지 =  createBrowserRouter([
     { path: "/boards/detail", element: <BoardsDetail /> }
 ])
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(<RouterProvider router={트립토크페이지} />);
 
 // If you want to start measuring performance in your app, pass a function
