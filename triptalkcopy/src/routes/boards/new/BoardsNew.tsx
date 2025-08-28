@@ -1,9 +1,9 @@
-import "./App.css";
-import { useState } from "react";
+import "../../../App.css";
+import { ChangeEvent, useState } from "react";
 
-import AddIcon from "./assets/icon/outline/add.svg";
+import AddIcon from "../../../assets/icon/outline/add.svg";
 
-function PostForm() {
+function BoardsNew() {
   const [author, setAuthor] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
@@ -13,21 +13,54 @@ function PostForm() {
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
   const [contentError, setContentError] = useState("");
+  const [isActive, setIsActive] = useState(false);
 
-  const onChangeAuthor = (event) => {
+  const onChangeAuthor = (event: ChangeEvent<HTMLInputElement>) => {
     setAuthor(event.target.value);
+    if (
+      event.target.value !== "" &&
+      password !== "" &&
+      title !== "" &&
+      content !== ""
+    ) {
+      setIsActive(true);
+    }
   };
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
+    if (
+      author !== "" &&
+      event.target.value !== "" &&
+      title !== "" &&
+      content !== ""
+    ) {
+      setIsActive(true);
+    }
   };
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
+    if (
+      author !== "" &&
+      password !== "" &&
+      event.target.value !== "" &&
+      content !== ""
+    ) {
+      setIsActive(true);
+    }
   };
-  const onChangeContent = (event) => {
+  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
+    if (
+      author !== "" &&
+      password !== "" &&
+      title !== "" &&
+      event.target.value !== ""
+    ) {
+      setIsActive(true);
+    }
   };
 
-  const onClickSignup = (event) => {
+  const onClickSignup = () => {
     if (author === "") {
       setAuthorError("필수입력 사항 입니다.");
     } else {
@@ -194,7 +227,10 @@ function PostForm() {
           <button className="input-area__button-cancel">취소</button>
           <button
             className="input-area__button-register"
-            onClick={onClickSignup}>
+            onClick={onClickSignup}
+            style={{
+              backgroundColor: isActive === true ? "#2974E5" : "#C7C7C7",
+            }}>
             등록하기
           </button>
         </div>
@@ -203,4 +239,4 @@ function PostForm() {
   );
 }
 
-export default PostForm;
+export default BoardsNew;
