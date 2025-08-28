@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이 페이지</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #7c4dff, #7b1fa2);
+            color: white;
+            padding: 25px 20px;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-emoji {
+            font-size: 40px;
+            margin-right: 15px;
+        }
+        
+        .user-name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .notice-section {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .notice-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .notice-list {
+            list-style: none;
+        }
+        
+        .notice-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .notice-item:last-child {
+            border-bottom: none;
+        }
+        
+        .notice-item i {
+            margin-right: 10px;
+            color: #7c4dff;
+        }
+        
+        .divider {
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 10px 0;
+        }
+        
+        .faq-section {
+            padding: 20px;
+        }
+        
+        .faq-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .faq-list {
+            list-style: none;
+        }
+        
+        .faq-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #f5f5f5;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-number {
+            font-weight: 600;
+            margin-right: 10px;
+            color: #7c4dff;
+        }
+        
+        .faq-content {
+            flex: 1;
+        }
+        
+        .faq-question {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .faq-answer {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .bottom-menu {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            background-color: #f9f9f9;
+            border-top: 1px solid #eee;
+        }
+        
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .menu-item.active {
+            color: #7c4dff;
+        }
+        
+        .menu-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>마이</h1>
+            <div class="user-info">
+                <div class="user-emoji">👩‍💼</div>
+                <div class="user-name">임정아</div>
+            </div>
+        </header>
+        
+        <div class="notice-section">
+            <h2 class="notice-title">공지사항</h2>
+            <ul class="notice-list">
+                <li class="notice-item">
+                    <i class="fas fa-gift"></i>
+                    <span>이벤트</span>
+                </li>
+                <li class="notice-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>FAQ</span>
+                </li>
+                <li class="notice-item">
+                    <i class="fas fa-user"></i>
+                    <span>Q&A</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="faq-section">
+            <h2 class="faq-title">자주 묻는 질문</h2>
+            <ul class="faq-list">
+                <li class="faq-item">
+                    <span class="faq-number">Q. 01</span>
+                    <div class="faq-content">
+                        <div class="faq-question">리뷰 작성은 어떻게 하나요?</div>
+                    </div>
+                </li>
+                <li class="faq-item">
+                    <span class="faq-number">Q. 02</span>
+                    <div class="faq-content">
+                        <div class="faq-question">리뷰 수정/삭제는 어떻게 하나요?</div>
+                    </div>
+                </li>
+                <li class="faq-item">
+                    <span class="faq-number">Q. 03</span>
+                    <div class="faq-content">
+                        <div class="faq-question">아이디/비밀번호를 잊어버렸어요</div>
+                    </div>
+                </li>
+                <li class="faq-item">
+                    <span class="faq-number">Q. 04</span>
+                    <div class="faq-content">
+                        <div class="faq-question">회원탈퇴를 하고싶어요.</div>
+                    </div>
+                </li>
+                <li class="faq-item">
+                    <span class="faq-number">Q. 05</span>
+                    <div class="faq-content">
+                        <div class="faq-question">출발지 설정은 어떻게 하나요?</div>
+                    </div>
+                </li>
+                <li class="faq-item">
+                    <span class="faq-number">Q. 06</span>
+                    <div class="faq-content">
+                        <div class="faq-question">비밀번호를 변경하고 싶어요</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="bottom-menu">
+            <div class="menu-item">
+                <div class="menu-icon">📝</div>
+                <span>홈</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-icon">📊</div>
+                <span>잇츠로드</span>
+            </div>
+            <div class="menu-item active">
+                <div class="menu-icon">🏪</div>
+                <span>마이찜</span>
+            </div>
+            <div class="menu-item active">
+                <div class="menu-icon">👤</div>
+                <span>마이</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
