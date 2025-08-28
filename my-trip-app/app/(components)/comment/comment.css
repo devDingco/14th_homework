@@ -62,6 +62,15 @@
    margin-top: 1.2rem;
 }
 
+.comment_divider {
+  height: 1px;
+  background-color: var(--gray-30);
+  margin: 1.6rem 0;
+  width: 100%;
+  border-radius: 1px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
 .comment_item {
    border: 1px solid var(--gray-10);
    padding: 1.2rem;
@@ -127,6 +136,303 @@
 .comment_item_date { 
   color: var(--gray-60); 
   margin-bottom: 0.8rem;
+}
+
+/* 문의하기 댓글 컴포넌트 스타일 */
+.inquiry_section {
+  margin-top: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  width: 128rem;
+  margin: 0 auto;
+}
+
+.inquiry_composer_container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 128rem;
+  margin: 0 auto;
+  margin-top: 4rem;
+
+
+}
+
+.inquiry_composer_header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.inquiry_composer_header_icon {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.inquiry_title { 
+  color: var(--black); 
+}
+
+.inquiry_textarea_wrap {
+  position: relative;
+
+}
+.inquiry_textarea {
+  width: 100%;
+  min-height: 11.4rem;
+  padding: 1.2rem;
+  outline: none;
+  resize: none;
+  background-color: white;
+  color: var(--gray-90);
+  border: 1px solid var(--gray-20);
+  border-radius: 0.8rem;
+}
+
+.inquiry_textarea::placeholder {
+  color: var(--gray-40);
+}
+
+.inquiry_counter { 
+  position: absolute; 
+  right: 0.8rem; 
+  bottom: 0.6rem; 
+  color: var(--gray-50); 
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+}
+
+.inquiry_actions { 
+  display: flex; 
+  justify-content: flex-end; 
+  margin-top: 1.2rem;
+}
+.inquiry_submit_button {
+  background: var(--black);
+  color: var(--white);
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.4rem;
+  border: none;
+  cursor: pointer;
+}
+#inquiry_reply_button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  margin-top: 1.2rem;
+}
+
+.inquiry_submit_button:disabled { 
+  opacity: 0.4;
+  cursor: not-allowed; 
+}
+
+.inquiry_list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+
+}
+
+.inquiry_empty_message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--gray-50);
+}
+
+.inquiry_item {
+  padding: 1.2rem;
+  border-radius: 0.4rem;
+}
+
+.inquiry_item_header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 0.8rem;
+}
+
+.inquiry_header_left { 
+  display: flex; 
+  align-items: center; 
+  gap: 0.8rem; 
+}
+
+.inquiry_author { 
+  display: flex; 
+  align-items: center; 
+  gap: 0.4rem; 
+}
+
+.inquiry_avatar { 
+  width: 2.4rem; 
+  height: 2.4rem; 
+  border-radius: 50%; 
+  object-fit: cover; 
+}
+
+.inquiry_actions_inline { 
+  display: flex; 
+  gap: 0.4rem; 
+}
+
+.inquiry_icon_btn {
+  background: transparent;   
+  border: none; 
+  padding: 0.2rem; 
+  cursor: pointer; 
+}
+
+.inquiry_item_content { 
+  color: var(--black); 
+  white-space: pre-wrap; 
+  margin-bottom: 0.8rem;
+}
+
+.inquiry_item_date { 
+  color: var(--gray-60); 
+  margin-bottom: 1.2rem;
+}
+
+.inquiry_reply_action {
+  margin-bottom: 1rem;
+}
+
+.inquiry_reply_button {
+  background: transparent;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--gray-50);
+  border-radius: 0.4rem;
+  transition: background-color 0.2s;
+}
+
+.inquiry_reply_button:hover {
+  background-color: var(--gray-10);
+}
+
+.inquiry_reply_input {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: var(--white);
+  border-radius: 0.4rem;
+}
+
+.inquiry_reply_textarea_wrap { 
+  position: relative; 
+  margin-bottom: 1.2rem;
+}
+
+.inquiry_reply_textarea {
+  width: 100%;
+  min-height: 6rem;
+  padding: 1rem;
+  outline: none;
+  resize: none;
+  background-color: white;
+  color: var(--gray-90);
+  border: 1px solid var(--gray-20);
+  border-radius: 0.4rem;
+}
+
+.inquiry_reply_counter { 
+  position: absolute; 
+  right: 0.8rem; 
+  bottom: 0.6rem; 
+  color: var(--gray-50); 
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+}
+
+.inquiry_reply_actions { 
+  display: flex; 
+  gap: 0.8rem; 
+  justify-content: flex-end;
+}
+
+.inquiry_reply_action_wrap {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.inquiry_reply_cancel_button {
+  background: var(--white);
+  color: var(--gray-70);
+  padding: 0.6rem 1rem;
+  border-radius: 0.4rem;
+  border: 1px solid var(--gray-20);
+  cursor: pointer;
+}
+
+.inquiry_reply_submit_button {
+  background: var(--black);
+  color: var(--white);
+  padding: 0.6rem 1rem;
+  border-radius: 0.4rem;
+  border: none;
+  cursor: pointer;
+}
+
+.inquiry_reply_submit_button:disabled { 
+  opacity: 0.4;
+  cursor: not-allowed; 
+}
+
+.inquiry_replies {
+  margin-top: 1rem;
+  padding-left: 5.6rem;
+}
+
+.inquiry_reply_item {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: var(--white);
+  border-radius: 0.4rem;
+}
+
+.inquiry_reply_header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 0.6rem;
+}
+
+.inquiry_reply_author { 
+  display: flex; 
+  align-items: center; 
+  gap: 0.6rem; 
+}
+
+.inquiry_reply_avatar { 
+  width: 2rem; 
+  height: 2rem; 
+  border-radius: 50%; 
+  object-fit: cover; 
+}
+
+.inquiry_reply_content { 
+  color: var(--black); 
+  white-space: pre-wrap; 
+  margin-bottom: 0.6rem;
+  background-color: var(--white);
+}
+
+.inquiry_reply_date { 
+  color: var(--gray-60); 
+}
+
+.inquiry_divider {
+  border-bottom: 0.1rem solid var(--gray-10);
+  margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 
 

@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import CommentComposer from "./commentComposer";
 import CommentItem from "./commentItem";
 import type { AppComment, NewComment } from "@/types/comment";
+import React from "react";
 
 export default function CommentSection({ initialComments = [] as AppComment[] }) {
   const [comments, setComments] = useState<AppComment[]>(initialComments);
@@ -36,16 +37,21 @@ export default function CommentSection({ initialComments = [] as AppComment[] })
       <CommentComposer onSubmit={addComment} />
 
       <div className="comment_list">
-        {comments.map((c) => (
-          <CommentItem
-            key={c.id}
-            avatar={c.avatar}
-            author={c.author}
-            date={c.date}
-            rating={c.rating}
-            content={c.content}
-            onDelete={() => deleteComment(c.id)}
-          />
+        {comments.map((c, index) => (
+          <React.Fragment key={c.id}>
+            <CommentItem
+              avatar={c.avatar}
+              author={c.author}
+              date={c.date}
+              rating={c.rating}
+              content={c.content}
+              onDelete={() => deleteComment(c.id)}
+            />
+            {/* 댓글이 2개 이상이고 마지막 댓글이 아닐 때만 구분선 표시 */}
+            {comments.length > 1 && index < comments.length - 1 && (
+              <div className="comment_divider" />
+            )}
+          </React.Fragment>
         ))}
       </div>
     </section>
