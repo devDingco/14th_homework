@@ -1,20 +1,20 @@
-import { useState } from 'react'
+import { ChangeEvent, MouseEvent, useState } from 'react'
 import WriteButton from "../../../components/WriteButton"
 import WriteInput from "../../../components/WriteInput"
 
 // 게시글 등록 페이지
 const BoardsNew = () => {
-    const [writer, setWriter] = useState("")
-    const [password, setPassword] = useState("")
-    const [title, setTitle] = useState("")
-    const [content, setContent] = useState("")
+    const [writer, setWriter] = useState<string>("")
+    const [password, setPassword] = useState<string | number>("")
+    const [title, setTitle] = useState<string>("")
+    const [content, setContent] = useState<string>("")
     
-    const [writerErr, setWriterErr] = useState("")
-    const [passwordErr, setPasswordErr] = useState("")
-    const [titleErr, setTitleErr] = useState("")
-    const [contentErr, setContentErr] = useState("")
+    const [writerErr, setWriterErr] = useState<string>("")
+    const [passwordErr, setPasswordErr] = useState<string>("")
+    const [titleErr, setTitleErr] = useState<string>("")
+    const [contentErr, setContentErr] = useState<string>("")
 
-    const onChangePosting = (category) => (event) => {
+    const onChangePosting = (category: string) => (event: ChangeEvent<HTMLInputElement>) => {
         switch (category) {
             case "작성자": {
                 setWriter(event.target.value)
