@@ -3,6 +3,47 @@
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
+}
+
+.nav_btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--gray-20);
+  background: white;
+}
+
+.page_list {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.page_btn {
+  min-width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--gray-20);
+  background: white;
+}
+
+.page_btn.is-active {
+  border-color: var(--main-color);
+  color: var(--main-color);
+}
+
+.left_arrow_icon, .right_arrow_icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.pagination_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
   margin: 1.6rem ;
 }
 

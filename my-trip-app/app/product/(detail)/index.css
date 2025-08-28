@@ -1,0 +1,200 @@
+.product_detail_section {
+  width: 128rem;
+  margin: 0 auto;
+}
+
+.detail_header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 2.4rem;
+}
+
+.detail_subtext {
+  color: var(--gray-60);
+}
+
+.detail_grid {
+  display: grid;
+  grid-template-columns: calc(100% - 36rem - 2.4rem) 36rem;
+  gap: 2.4rem;
+}
+
+.detail_left {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 18rem;
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.main_image_wrap {
+  width: 100%;
+  height: 48rem;
+  border-radius: 1.2rem;
+  overflow: hidden;
+}
+
+.main_image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.thumbs_aside {
+  width: 18rem;
+  height: 48rem; /* 메인 이미지 비율(640x480)에 맞춘 고정 높이 */
+  overflow: hidden; /* 부모 영역 초과 방지 */
+  position: relative;
+  /* 아래에서 위로 진해지는(투명 -> 불투명) 마스크 */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.9) 35%,
+    rgba(0, 0, 0, 0.6) 70%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.9) 35%,
+    rgba(0, 0, 0, 0.6) 70%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+
+.thumb_list {
+  display: grid;
+  gap: 1.2rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.thumb_list_vertical {
+  grid-template-columns: 1fr;
+}
+
+.thumb_button {
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  outline-offset: 2px;
+  flex-shrink: 0; /* 썸네일 축소 방지 */
+}
+
+
+.thumb_image {
+  width: 18rem;
+  height: 13.6rem;
+  display: block;
+}
+
+.detail_section .section_title {
+  margin-bottom: 0.8rem;
+}
+
+.section_body {
+  color: var(--gray-80);
+}
+
+.bullet_list {
+  list-style: disc;
+  padding-left: 1.6rem;
+}
+
+.map_wrap {
+  width: 100%;
+  height: 40rem;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  border: 0.1rem solid var(--gray-10);
+}
+
+.map_iframe {
+  border: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.detail_right {
+  position: relative;
+}
+
+.sticky_card {
+  position: sticky;
+  top: 2.4rem;
+  border: 0.1rem solid var(--black);
+  border-radius: 1.2rem;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.card_head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.action_buttons {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.icon_btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.price_row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.price_note {
+  color: var(--gray-60);
+}
+
+.buy_btn {
+  width: 100%;
+}
+
+.divider {
+  height: 0.1rem;
+  background: var(--gray-10);
+  width: 100%;
+}
+
+.seller_box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.seller_info {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.seller_avatar {
+  border-radius: 50%;
+}
+
+@media (max-width: 102.4rem) {
+
+
+
+}
+

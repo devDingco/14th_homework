@@ -11,12 +11,12 @@ export default function PostBoard() {
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     // 사전 로드(선택). 이미 있으면 중복 로드하지 않음
-    if (typeof window !== "undefined" && !(window).daum?.Postcode) {
+    if (typeof window !== "undefined" && !(window as any).daum?.Postcode) {
       const script = document.createElement("script");
       script.src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
       script.async = true;
@@ -27,15 +27,15 @@ export default function PostBoard() {
   const openPostcode = async () => {
     // 스크립트가 아직 로드되지 않았으면 대기
     const waitForDaum = () =>
-      new Promise((resolve) => {
+      new Promise<void>((resolve) => {
         const check = () => {
-          if ((window).daum?.Postcode) resolve();
+          if ((window as any).daum?.Postcode) resolve();
           else setTimeout(check, 50);
         };
         check();
       });
 
-    if (!(window).daum?.Postcode) {
+    if (!(window as any).daum?.Postcode) {
       const script = document.createElement("script");
       script.src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
       script.async = true;
@@ -44,9 +44,9 @@ export default function PostBoard() {
     }
 
     // 열기
-    const { daum } = window;
+    const { daum } = window as any;
     new daum.Postcode({
-      oncomplete: (data) => {
+      oncomplete: (data: any) => {
         const zonecode = data.zonecode;
         const roadAddress = data.roadAddress || data.address || "";
         setZipcode(zonecode);
@@ -70,7 +70,7 @@ export default function PostBoard() {
               value={writer}
               onChange={(e) => setWriter(e.target.value)}
             />
-            {errors.writer && <p className="error_text">{errors.writer}</p>}
+            {errors.writer  && <p className="error_text">{errors.writer}</p>}
           </div>
           <div className="field">
             <label className="sb_16_24">
@@ -172,7 +172,7 @@ export default function PostBoard() {
             type="button"
             className="btn-primary"
             onClick={() => {
-              const nextErrors = {};
+              const nextErrors: Record<string, string> = {};
               if (!writer.trim()) nextErrors.writer = "필수입력 사항 입니다.";
               if (!password.trim()) nextErrors.password = "필수입력 사항 입니다.";
               if (!title.trim()) nextErrors.title = "필수입력 사항 입니다.";

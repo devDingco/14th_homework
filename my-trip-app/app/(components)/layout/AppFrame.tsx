@@ -4,9 +4,12 @@ import Header from "../header/header";
 import Banner from "../banner/banner";
 import { usePathname } from "next/navigation";
 
-export default function AppFrame({ children }) {
+type AppFrameProps = { children: React.ReactNode };
+
+export default function AppFrame({ children }: AppFrameProps) {
   const pathname = usePathname();
   const isAuthRoute = pathname.startsWith("/auth");
+  const isProductDetailRoute = pathname.startsWith("/product/");
 
   if (isAuthRoute) {
     return <>{children}</>;
@@ -21,10 +24,20 @@ export default function AppFrame({ children }) {
     );
   }
 
+  // 제품 상세 페이지(`/product/[id]`)에서는 배너를 노출하지 않습니다.
+  if (isProductDetailRoute) {
+    return (
+      <>
+        <Header />
+        {children}
+      </>
+    );
+  }
+
   return (
     <>
       <Header />
-      <Banner width={1280} height={516} />
+      <Banner />
       {children}
     </>
   );

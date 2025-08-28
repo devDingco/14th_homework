@@ -12,8 +12,8 @@ export default function Header() {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const profileRef = useRef(null);
-  const handleActive = (menuKey) => {
+  const profileRef = useRef<HTMLDivElement | null>(null);
+  const handleActive = (menuKey: string) => {
     setActiveMenu(menuKey);
   };
 
@@ -26,9 +26,11 @@ export default function Header() {
       setIsLoggedIn(!!token);
     }
 
-    const handleClickOutside = (event) => {
-      if (!profileRef.current) return;
-      if (!profileRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      const node = profileRef.current;
+      if (!node) return;
+      const target = event.target as Node | null;
+      if (target && !node.contains(target)) {
         setIsProfileOpen(false);
       }
     };

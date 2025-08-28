@@ -3,8 +3,9 @@
 import "./comment.css";
 import Icon from "@utils/iconColor";
 import { useMemo, useState } from "react";
+import type { NewComment } from "@/types/comment";
 
-export default function CommentComposer({ onSubmit }) {
+export default function CommentComposer({ onSubmit }: { onSubmit?: (c: NewComment) => void }) {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [content, setContent] = useState("");
@@ -12,7 +13,7 @@ export default function CommentComposer({ onSubmit }) {
 
   const isValid = useMemo(() => content.trim().length > 0 && rating > 0, [content, rating]);
 
-  const handleStarClick = (value) => {
+  const handleStarClick = (value: number) => {
     setRating(value);
   };
 

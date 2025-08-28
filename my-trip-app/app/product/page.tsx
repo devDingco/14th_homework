@@ -1,6 +1,6 @@
-import PlaceSliderSection from "@components/placeSliderSection/placeSliderSection.jsx";
-import ProductList from "@components/productList/productList.css.jsx";
-import SearchBarMenu from "@components/searchBarMenu/searchBar.jsx";
+import PlaceSliderSection from "@components/placeSliderSection/placeSliderSection";
+import ProductList from "@components/productList/productList";
+import SearchBarMenu from "@components/searchBarMenu/searchBar";
 import ProductBanner from "@components/banner/productBanner";
 import "../global.css";
 
