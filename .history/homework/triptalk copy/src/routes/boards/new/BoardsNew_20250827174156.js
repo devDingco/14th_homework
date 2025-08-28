@@ -1,14 +1,16 @@
-import './App.css';
-import logo from './assets/icons/logoArea.png';
-import add from './assets/icons/add.png';
+import './BoardsNew.css';
+import logo from '../../../assets/icons/logoArea.png';
+import add from '../../../assets/icons/add.png';
 import { useState } from 'react';
 
-function App() {
+function BoardsNew() {
   //입력값을 저장하는 state
   const [name, setName] = useState(''); //사용자가 입력한 이름
   const [password, setPassword] = useState(''); //사용자가 입력한 비밀번호
   const [title, setTitle] = useState(''); //사용자가 입력한 제목
   const [content, setContent] = useState(''); //사용자가 입력한 내용
+
+  const [isActive, setIsActive] = useState(false); //등록하기 버튼 활성화 여부 state(활성화:true, 비활성화:false) is붙이는 이유: boolean값이라서 관례같은것
 
   // 입력값에 문제가 있을 경우 보여줄 에러메시지 state
   const [nameError, setNameError] = useState(''); //이름 에러메시지
@@ -19,15 +21,35 @@ function App() {
   //변경값 확인하여 state에 저장
   const onChangeName = (event) => {
     setName(event.target.value);
+    if (event.target.value && title && content) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
   };
   const onChangePassword = (event) => {
     setPassword(event.target.value);
+    if (event.target.value && title && content) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
   };
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
+    if (event.target.value && title && content) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
   };
   const onChangeContent = (event) => {
     setContent(event.target.value);
+    if (event.target.value && title && content) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
   };
 
   //등록하기 버튼 클릭시 실행되는 함수
@@ -166,7 +188,7 @@ function App() {
       </div>
       <div className="취소등록버튼">
         <button className="취소버튼">취소</button>
-        <button className="등록하기버튼" onClick={onClicksignUp}>
+        <button className="등록하기버튼" style={{backgroundColor: isActive === true ? }}>
           등록하기
         </button>
       </div>
@@ -174,4 +196,4 @@ function App() {
   );
 }
 
-export default App;
+export default BoardsNew;

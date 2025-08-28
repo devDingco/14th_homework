@@ -3,7 +3,7 @@ import logo from './assets/icons/logoArea.png';
 import add from './assets/icons/add.png';
 import { useState } from 'react';
 
-function App() {
+function BoardsNew() {
   //입력값을 저장하는 state
   const [name, setName] = useState(''); //사용자가 입력한 이름
   const [password, setPassword] = useState(''); //사용자가 입력한 비밀번호
@@ -174,4 +174,4 @@ function App() {
   );
 }
 
-export default App;
+export default BoardsNew;
