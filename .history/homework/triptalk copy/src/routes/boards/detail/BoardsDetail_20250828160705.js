@@ -3,7 +3,11 @@ import profile from '../../../assets/icons/profile.png';
 import myVideo from '../../../assets/image/video.png';
 import link1 from '../../../assets/icons/link1.png';
 import location from '../../../assets/icons/location.png';
-import sunbad from '../../../assets/image/sunbad.png';
+import sea from '../../../assets/image/sea.png';
+import bad from '../../../assets/icons/bad.png';
+import good from '../../../assets/icons/good.png';
+import list from '../../../assets/icons/list.png';
+import pen from '../../../assets/icons/pen.png';
 
 function BoardsDetail() {
   // 그려주는곳
@@ -27,7 +31,7 @@ function BoardsDetail() {
           <img src={location} alt="" />
         </div>
       </div>
-      <img src={sunbad} alt="" />
+      <img src={sea} alt="" />
       <div>
         살겠노라 살겠노라. 청산에 살겠노라. 머루랑 다래를 먹고 청산에 살겠노라.
         얄리얄리 얄랑셩 얄라리 얄라 우는구나 우는구나 새야. 자고 일어나 우는구나
@@ -49,18 +53,28 @@ function BoardsDetail() {
       </div>
       <div>
         <div>
-          <div>하트이미지</div>
+          <div>
+            <img src={bad} alt="" />
+          </div>
           <div>좋아요수</div>
         </div>
 
         <div>
-          <div>하트이미지</div>
+          <div>
+            <img src={good} alt="" />
+          </div>
           <div>좋아요수</div>
         </div>
       </div>
       <div>
-        <button>목록으로</button>
-        <button>수정하기</button>
+        <button>
+          <img src={list} alt="" />
+          목록으로
+        </button>
+        <button>
+          <img src={pen} alt="" />
+          수정하기
+        </button>
       </div>
     </>
   );

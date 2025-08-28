@@ -73,10 +73,7 @@ hr {
 
 .목록수정 {
   display: flex;
-  gap: 24px;
-  justify-content: center;
-  padding-top: 24px;
-  padding-bottom: 40px;
+  gap: ;
 }
 .목록버튼,
 .수정버튼 {

@@ -53,38 +53,5 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 24px 0px;
-}
-.싫어요좋아요 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-}
-.싫어요,
-.좋아요 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
-}
-
-.목록수정 {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  padding-top: 24px;
-  padding-bottom: 40px;
-}
-.목록버튼,
-.수정버튼 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #000000;
-  background-color: white;
+  padding: 24px 0px;
 }

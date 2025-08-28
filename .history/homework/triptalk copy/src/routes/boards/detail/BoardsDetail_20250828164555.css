@@ -70,21 +70,6 @@ hr {
   gap: 4px;
   font-size: 14px;
 }
-
-.목록수정 {
+.목록버튼 {
   display: flex;
-  gap: 24px;
-  justify-content: center;
-  padding-top: 24px;
-  padding-bottom: 40px;
-}
-.목록버튼,
-.수정버튼 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #000000;
-  background-color: white;
 }
