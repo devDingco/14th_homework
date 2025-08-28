@@ -30,6 +30,7 @@
 .board_form_label span {
   padding-top: 0.4rem;
   color: var(--warning-color);
+  font-size: 1.5rem;
 }
 .board_form_textarea {
   resize: none;
