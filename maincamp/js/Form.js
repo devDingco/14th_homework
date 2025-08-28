@@ -5,13 +5,24 @@ const FormBtn = (props) => {
     )
 }
 
+const FormInputText = (props) =>{
+
+    return(
+
+    )
+}
+
+
 /* Form에서 쓰는 Input 형식 컴포넌트 */
 const FormInput = (props) => {
+
+
     switch(props.type){
         case ("textarea"):{return(        
             <div>
-                <div><label>{props.label}</label>{props.required == "true" ? <span>*</span> : ""}</div>
-                <textarea placeholder={InputPlaceholder[props.placeholder__name]}></textarea>
+                <div><label>{props.label}</label>{props.required && <span>*</span>}</div>
+                <textarea placeholder={InputPlaceholder[props.placeholder__name]} onChange={props.onChange}></textarea>
+                {props.error && {props.error}}
             </div>
             )}
         case ("address"):{return(        
@@ -39,7 +50,7 @@ const FormInput = (props) => {
         default:{return(
                 <div>
                     <div><label>{props.label}</label>{props.required == "true" ? <span>*</span> : ""}</div>
-                    <input type={props.type} placeholder={InputPlaceholder[props.placeholder__name]} />
+                    <input type={props.type} placeholder={InputPlaceholder[props.placeholder__name]} onChange={props.onChange} />
                 </div>
                 )}
     }}
@@ -56,24 +67,54 @@ const InputPlaceholder = {
     youtubeUrl: "링크를 입력해 주세요." 
 }
 
+
+
+
+
+
 /* PostForm: 게시글 등록 폼 */
 const PostForm = () => {
+
+
+
+    const [postWriterError, setpostWriterError] = React.useState("")
+    const [postPasswordError, setpostPasswordError] = React.useState(<span></span>)
+    const [postTitleError, setpostTitleError] = React.useState(<span></span>)
+    const [postContentError, setpostContentError] = React.useState(<span></span>)
+
+
+
+
+
+
+
+
+    const onChangeWriter = (event) => {
+        console.log(event.target.value)
+        
+    }
+
+    const onClickPost = () => {
+
+
+
+    }
 
     return(
         <form>
             <div className="postForm__title">게시물 등록</div>
             <div className="postForm__writer__group">
-                <FormInput label="작성자" type="text" required="true" placeholder__name="postWriter" />
-                <FormInput label="비밀번호" type="password" required="true" placeholder__name="postPassword" />
+                <FormInput label="작성자" type="text" required="true" error={postWriterError} placeholder__name="postWriter" onChange={onChangeWriter}/>
+                <FormInput label="비밀번호" type="password" required="true" error="postWriterError" placeholder__name="postPassword" />
             </div> 
             <hr />
-            <FormInput label="제목" type="text" required="true" placeholder__name="postTitle" />
+            <FormInput label="제목" type="text" required="true" error="postWriterError" placeholder__name="postTitle" />
             <hr />
-            <FormInput label="내용" type="textarea" required="true" placeholder__name="postContent" />
+            <FormInput label="내용" type="textarea" required error="postContentError" placeholder__name="postContent" />
             <hr />
             <FormInput type="address" />
             <hr />
-            <FormInput type="text" required="false" label="유튜브 링크" placeholder__name="youtubeUrl" />
+            <FormInput type="text" label="유튜브 링크" placeholder__name="youtubeUrl" />
             <hr />
             <div className="postForm__attachments__group">
                 <label>사진 첨부</label>
@@ -85,7 +126,7 @@ const PostForm = () => {
             </div>
             <div className="postForm__button__group">
                 <FormBtn type="button" text="취소" />
-                <FormBtn type="submit" text="등록하기" disabled/>
+                <FormBtn type="submit" text="등록하기" onClick={onClickPost}/>
             </div>
         </form>
     )

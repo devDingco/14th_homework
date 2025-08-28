@@ -1,5 +1,6 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
 
+
 *{
     margin: 0;
     padding: 0;
@@ -14,7 +15,8 @@
     /* color */
     --color-gray-black: #000000;
     --color-gray-800: #333333;
-    --color-gary-600: #777777;
+    --color-gray-700: #5F5F5F;
+    --color-gray-600: #777777;
     --color-gray-400: #ABABAB;
     --color-gray-300: #C7C7C7;
     --color-gray-200: #D4D3D3;
@@ -29,6 +31,7 @@
     --font-size-sm: 0.875rem
     --font-size-md: 1rem;
     --font-size-lg: 1.25rem;
+    --font-size-xl: 1.75rem;
 
     /* font-size-버튼용 */
     --font-size-btn: 1.125rem;
@@ -38,4 +41,9 @@
     --font-weight-semibold: 600;
     --font-weight-medium: 500;
     --font-weight-regular: 400;
+    --font-weight-light: 300;
+}
+
+a{
+    text-decoration: none;
 }

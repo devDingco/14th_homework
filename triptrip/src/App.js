@@ -1,7 +1,7 @@
 import { useState } from "react"
 import './App.css';
 
-const App = () => {
+const BoardsNewForm = () => {
 
   const [writer, setWriter] = useState("")
   const [password, setPassword] = useState("")
@@ -72,7 +72,7 @@ const App = () => {
 }
 
 /* Custom Button 컴포넌트 */
-const CustomButton = (props) => {
+export const CustomButton = (props) => {
   return(
     <button type={props.type} disabled={props.disabled && true} onClick={props.onClick}>{props.label}</button>
   )
@@ -80,7 +80,7 @@ const CustomButton = (props) => {
 
 /* Custom Input 컴포넌트 */
 
-const CustomInputText = ({label, type, required, placeholder, onChange, error}) => {
+export const CustomInputText = ({label, type, required, placeholder, onChange, error}) => {
   return(
     <div>
       <div><label>{label}</label>{required && <span>*</span>}</div>
@@ -91,7 +91,7 @@ const CustomInputText = ({label, type, required, placeholder, onChange, error}) 
 }
 
 /* Custom Zipcode 컴포넌트 */
-const CustomZipCode = () => {
+export const CustomZipCode = () => {
   return(
     <div className="postForm__address__group">
       <div>
@@ -108,7 +108,7 @@ const CustomZipCode = () => {
 }
 
 /* Custom Textarea 컴포넌트 */
-const CustomTextarea = ({label, required, placeholder, onChange, error}) => {
+export const CustomTextarea = ({label, required, placeholder, onChange, error}) => {
   return(
     <div>
       <div><label>{label}</label>{required && <span>*</span>}</div>
@@ -119,7 +119,7 @@ const CustomTextarea = ({label, required, placeholder, onChange, error}) => {
 }
 
 /* Custom Add Image 컴포넌트 */
-const CustomAddImage = () => {
+export const CustomAddImage = () => {
   return(
     <div className="add__image">
       <label htmlFor="upload__image">
@@ -132,4 +132,4 @@ const CustomAddImage = () => {
 }
 
 
-export default App
+export default BoardsNewForm
