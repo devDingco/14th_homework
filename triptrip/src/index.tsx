@@ -14,7 +14,9 @@ const BoardPageList = createBrowserRouter([
     {path: "/boards/detail", element:<BoardsDetail />}
 ])
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(
+    document.getElementById("root") as ReactDOM.Container
+);
 root.render(
     <RouterProvider router={BoardPageList} />
 );

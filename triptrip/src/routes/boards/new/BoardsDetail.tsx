@@ -4,12 +4,12 @@ import './BoardsNew.css';
 import { Link } from "react-router";
 
 
-export const BoardsDetailTitle = ({text}) => {
+export const BoardsDetailTitle = ({text}: {text: string}) => {
     return(
           <div className="boardsDetail__title">{text}</div>
     )
 }
-const BoardsDetailContent = ({content}) => {
+const BoardsDetailContent = ({content}: {content: string}) => {
 
     return(
         <div>
@@ -18,7 +18,8 @@ const BoardsDetailContent = ({content}) => {
     )
 }
 
-const BoardsDetailWriter = (props) =>{
+
+const BoardsDetailWriter = (props:{writer: string; date: string;}) =>{
     return(
         <div className="boardsDetail__writer__group">
             <div className="writer__group__detail">
@@ -40,7 +41,7 @@ const BoardsDetailWriter = (props) =>{
     )
 }
 
-const BoardsDetailLike = ({bad, good}) => {
+const BoardsDetailLike = ({bad, good}:{bad: number; good: number}) => {
     return(
         <div className="boardsDetail__like__group">
             <div className="bad">
@@ -104,7 +105,7 @@ const BoardsDetail = () => {
                 <img src="/icons/play.svg" className="youtube__icon"/>
                 <img src="/images/boardsdetail_image_2.png" className="youtube__thumbnail" />
             </div>
-            <BoardsDetailLike bad="24" good="12"/>
+            <BoardsDetailLike bad={24} good={12}/>
             <div className="boardsDetail__button__group">
                 <Link to='/'>
                     <CustomButton type="button" label="목록으로" icon="menu" />

@@ -1,5 +1,5 @@
 {
-  "name": "my-prj",
+  "name": "day16-17",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -30,15 +30,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/react": "^19.1.12",
-    "@types/react-dom": "^19.1.8",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
-    "eslint": "^7.32.0",
-    "globals": "^16.3.0",
-    "jiti": "^2.5.1",
-    "typescript": "^5.9.2"
   }
 }

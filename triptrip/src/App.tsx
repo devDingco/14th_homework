@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
 import './App.css';
 
 const BoardsNewForm = () => {
@@ -17,7 +17,7 @@ const BoardsNewForm = () => {
   const [contentError, setContentError] = useState("")
 
 
-  const onClickBtn = (event) => {
+  const onClickBtn = (event: React.MouseEvent<HTMLButtonElement>) => {
     // form 기본 동작 막기
     event.preventDefault(); 
 
@@ -42,17 +42,17 @@ const BoardsNewForm = () => {
     <form>
         <div className="postForm__title">게시물 등록</div>
         <div className="postForm__writer__group">
-          <CustomInputText type="text" label="작성자" required placeholder="작성자 명을 입력해 주세요." error={writerError} onChange={(val) => setWriter(val)} />
-          <CustomInputText type="password" label="비밀번호" required placeholder="비밀번호를 입력해 주세요." error={passwordError} onChange={(val) => setPassword(val)} />
+          <CustomInputText type="text" label="작성자" required placeholder="작성자 명을 입력해 주세요." error={writerError} onChange={(val: string) => setWriter(val)} />
+          <CustomInputText type="password" label="비밀번호" required placeholder="비밀번호를 입력해 주세요." error={passwordError} onChange={(val: string) => setPassword(val)} />
         </div>
         <hr />
-        <CustomInputText type="text" label="제목" required placeholder="제목을 입력해 주세요." error={titleError} onChange={(val) => setTitle(val)} />
+        <CustomInputText type="text" label="제목" required placeholder="제목을 입력해 주세요." error={titleError} onChange={(val: string) => setTitle(val)} />
         <hr />
-        <CustomTextarea label="내용" required placeholder="내용을 입력해 주세요." error={contentError} onChange={(val) => setContent(val)} />
+        <CustomTextarea label="내용" required placeholder="내용을 입력해 주세요." error={contentError} onChange={(val:string) => setContent(val)} />
         <hr />
         <CustomZipCode />
         <hr />
-        <CustomInputText type="text" label="유튜브 링크" placeholder="링크를 입력해 주세요." onChange={(val) => setYoutubeUrl(val)} />
+        <CustomInputText type="text" label="유튜브 링크" placeholder="링크를 입력해 주세요." />
         <hr />
         <div className="postForm__attachments__group">
           <label>사진 첨부</label>
@@ -72,19 +72,34 @@ const BoardsNewForm = () => {
 }
 
 /* Custom Button 컴포넌트 */
-export const CustomButton = (props) => {
+type ButtonType = 'submit' | 'reset' | 'button';
+type Btnprops = {
+  type: ButtonType;
+  disabled?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  label: string;
+}
+export const CustomButton = (props: Btnprops) => {
   return(
     <button type={props.type} disabled={props.disabled && true} onClick={props.onClick}>{props.label}</button>
   )
 }
 
 /* Custom Input 컴포넌트 */
+type Iprops = {
+  label: string,
+  type?: string,
+  required?: boolean,
+  placeholder: string,
+  onChange?: (value: string) => void,
+  error?: string
+}
 
-export const CustomInputText = ({label, type, required, placeholder, onChange, error}) => {
+export const CustomInputText: React.FC<Iprops> = ({label, type, required, placeholder, onChange, error}) => {
   return(
     <div>
       <div><label>{label}</label>{required && <span>*</span>}</div>
-      <input type={type} placeholder={placeholder} onChange={(el) => onChange(el.target.value)} />
+      <input type={type} placeholder={placeholder} onChange={(el) => onChange?.(el.target.value)} />
       {error && <span className="errorMessage">{error}</span>}
     </div>
   )
@@ -108,11 +123,11 @@ export const CustomZipCode = () => {
 }
 
 /* Custom Textarea 컴포넌트 */
-export const CustomTextarea = ({label, required, placeholder, onChange, error}) => {
+export const CustomTextarea: React.FC<Iprops> = ({label, required, placeholder, onChange, error}) => {
   return(
     <div>
       <div><label>{label}</label>{required && <span>*</span>}</div>
-      <textarea placeholder={placeholder} onChange={(el) => onChange(el.target.value)}></textarea>
+      <textarea placeholder={placeholder} onChange={(el) => onChange?.(el.target.value)}></textarea>
       {error && <span className="errorMessage">{error}</span>}
     </div>
   )

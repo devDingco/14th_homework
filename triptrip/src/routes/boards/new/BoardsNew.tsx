@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
 import './BoardsNew.css';
 import { Link } from "react-router";
 
@@ -12,7 +12,7 @@ const BoardsNewForm = () => {
 
   const [isValid, setIsValid] = useState(true)
 
-  const onChangeWriter = (event) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value)
 
     if(event.target.value && password && title && content){
@@ -21,7 +21,7 @@ const BoardsNewForm = () => {
       setIsValid(true)
     }
   }
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value)
 
     if(writer && event.target.value && title && content){
@@ -30,7 +30,7 @@ const BoardsNewForm = () => {
       setIsValid(true)
     }
   }
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value)
 
     if(writer && password && event.target.value && content){
@@ -39,7 +39,7 @@ const BoardsNewForm = () => {
       setIsValid(true)
     }
   }
-  const onChangeContent = (event) => {
+  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value)
 
     if(writer && password && title && event.target.value){
@@ -51,7 +51,7 @@ const BoardsNewForm = () => {
 
 
 
-  const onClickBtn = (event) => {
+  const onClickBtn = (event: React.MouseEvent<HTMLButtonElement>) => {
 
     alert("게시물 등록이 완료되었습니다.")
 
@@ -93,7 +93,15 @@ const BoardsNewForm = () => {
 }
 
 /* Custom Button 컴포넌트 */
-export const CustomButton = (props) => {
+type ButtonType = 'submit' | 'reset' | 'button';
+type Btnprops = {
+  icon?: string;
+  type: ButtonType;
+  disabled?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  label: string;
+}
+export const CustomButton = (props: Btnprops) => {
 
   const iconPath = `/icons/${props.icon}.svg`
 
@@ -103,8 +111,14 @@ export const CustomButton = (props) => {
 }
 
 /* Custom Input 컴포넌트 */
-
-export const CustomInputText = (props) => {
+type Inputprops = {
+  label: string;
+  required?: boolean;
+  type: string;
+  placeholder: string;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+export const CustomInputText = (props: Inputprops) => {
   return(
     <div>
       <div><label>{props.label}</label>{props.required && <span>*</span>}</div>
@@ -131,7 +145,13 @@ export const CustomZipCode = () => {
 }
 
 /* Custom Textarea 컴포넌트 */
-export const CustomTextarea = (props) => {
+type Textareaprops = {
+  label: string;
+  required?: boolean;
+  placeholder: string;
+  onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+}
+export const CustomTextarea = (props: Textareaprops) => {
   return(
     <div>
       <div><label>{props.label}</label>{props.required && <span>*</span>}</div>

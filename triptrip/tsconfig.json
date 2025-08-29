@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "target": "es2015",
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "jsx": "react-jsx", 
+        "noEmit": true,
+        "noFallthroughCasesInSwitch": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": true 
+    },
+    "include": [
+        "src/**/*.ts", // 모든 `.ts` 파일을 포함합니다.
+        "src/**/*.tsx" // React를 사용한다면 `.tsx` 파일도 추가합니다.
+    ]
+}
