@@ -1,14 +1,16 @@
-import './App.css';
-import logo from './assets/icons/logoArea.png';
-import add from './assets/icons/add.png';
-import { useState } from 'react';
+import './BoardsNew.css';
+import logo from '../../../assets/icons/logoArea.png';
+import add from '../../../assets/icons/add.png';
+import { ChangeEvent, useState } from 'react';
 
-function App() {
+function BoardsNew() {
   //입력값을 저장하는 state
   const [name, setName] = useState(''); //사용자가 입력한 이름
   const [password, setPassword] = useState(''); //사용자가 입력한 비밀번호
   const [title, setTitle] = useState(''); //사용자가 입력한 제목
   const [content, setContent] = useState(''); //사용자가 입력한 내용
+
+  const [isActive, setIsActive] = useState(false); //등록하기 버튼 활성화 여부 state(활성화:true, 비활성화:false) is붙이는 이유: boolean값이라서 관례같은것
 
   // 입력값에 문제가 있을 경우 보여줄 에러메시지 state
   const [nameError, setNameError] = useState(''); //이름 에러메시지
@@ -17,17 +19,37 @@ function App() {
   const [contentError, setContentError] = useState(''); //내용 에러메시지
 
   //변경값 확인하여 state에 저장
-  const onChangeName = (event) => {
+  const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
+    if (event.target.value && title && content) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
   };
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
+    if (event.target.value && title && content) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
   };
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
+    if (event.target.value && title && content) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
   };
-  const onChangeContent = (event) => {
+  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
+    if (event.target.value && title && content) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
   };
 
   //등록하기 버튼 클릭시 실행되는 함수
@@ -166,7 +188,10 @@ function App() {
       </div>
       <div className="취소등록버튼">
         <button className="취소버튼">취소</button>
-        <button className="등록하기버튼" onClick={onClicksignUp}>
+        <button
+          className="등록하기버튼"
+          style={{ backgroundColor: isActive === true ? '#2974E5' : '#C7C7C7' }}
+        >
           등록하기
         </button>
       </div>
@@ -174,4 +199,4 @@ function App() {
   );
 }
 
-export default App;
+export default BoardsNew;

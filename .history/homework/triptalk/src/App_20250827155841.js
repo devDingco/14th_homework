@@ -91,7 +91,6 @@ function App() {
             placeholder="작성자 명을 입력해주세요."
             onChange={onChangeName}
           ></input>
-          <div className="에러메시지">{nameError}</div>
         </div>
         <div className="비밀번호컨테이너">
           <div>비밀번호</div>
@@ -100,7 +99,6 @@ function App() {
             placeholder="비밀번호를 입력해 주세요."
             onChange={onChangePassword}
           ></input>
-          <div className="에러메시지">{passwordError}</div>
         </div>
       </div>
       <hr />
@@ -111,7 +109,6 @@ function App() {
           placeholder="제목을 입력해 주세요."
           onChange={onChangeTitle}
         ></input>
-        <div className="에러메시지">{titleError}</div>
       </div>
       <hr />
       <div className="내용컨테이너">
@@ -120,7 +117,6 @@ function App() {
           placeholder="내용을 입력해 주세요."
           onChange={onChangeContent}
         ></textarea>
-        <div className="에러메시지">{contentError}</div>
       </div>
       <div>
         <div className="주소컨테이너">

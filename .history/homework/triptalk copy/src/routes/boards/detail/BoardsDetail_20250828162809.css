@@ -1,0 +1,60 @@
+* {
+  margin: 0rem;
+  padding: 0rem;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+#root {
+  max-width: 1280px;
+  width: 100%;
+}
+h1 {
+  font-size: 28px;
+  padding-top: 40px;
+  padding-bottom: 24px;
+}
+.작성자날짜 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.작성자 {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 14px;
+  color: #5f5f5f;
+}
+.날짜 {
+  color: #818181;
+  font-size: 14px;
+}
+hr {
+  margin: 16px 0px;
+}
+.링크위치 {
+  display: flex;
+  justify-content: end;
+  gap: 8px;
+}
+.바다사진 {
+  padding: 24px 0px;
+}
+.동영상배경 {
+  background-color: #f2f2f2;
+  width: 1280px;
+  height: 512px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 24px 0px;
+}
+.싫어요좋아요 {
+  display: flex;
+}
