@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent } from "react";
 
 // Input 컴포넌트
-export const RegisterInput = ({ inputTitle, display, myPlaceholder, width, height, type, value, onChange }) => {
-    const [Value, setValue] = useState("")
-    const [Error, setError] = useState("")
+
+// Input 컴포넌트
+interface RegisterInputProps {
+  inputTitle: string
+  display?: string
+  myPlaceholder?: string
+  width?: string
+  height?: string
+  type?: string
+  value?: string          // optional
+  onChange?: (value: string) => void   // optional
+}
+
+export const RegisterInput: React.FC<RegisterInputProps> = ({ inputTitle, display, myPlaceholder, width, height, type = "text", value = "", onChange }) => {
+    const [Value, setValue] = React.useState<string>("")
+    const [Error, setError] = React.useState<string>("")
     
-    const onChangeValue = (event) => {
-        console.log(event.target)
+    const onChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
 
         const newValue = event.target.value   // 임시 변수에 담음
         setValue(newValue)   // 상태 업데이트
-        onChange(newValue)   // 부모로 값 전달
+        onChange?.(newValue) 
 
         if(newValue === ""){
             setError("필수입력 사항 입니다.")
@@ -38,16 +50,26 @@ export const RegisterInput = ({ inputTitle, display, myPlaceholder, width, heigh
   }
 
 // Textarea 컴포넌트
-export const RegisterText = ({ inputTitle, display, myPlaceholder, width, height, value, onChange}) => {
-    const [Value, setValue] = useState("")
-    const [Error, setError] = useState("")
+
+type RegisterTextProps = {
+  inputTitle: string;
+  display?: string;
+  myPlaceholder: string;
+  width: string;
+  height: string;
+  value?: string;
+  onChange?: (value: string) => void;
+}
+
+export const RegisterText: React.FC<RegisterTextProps> = ({ inputTitle, display, myPlaceholder, width, height, value = "", onChange}) => {
+    const [Value, setValue] = React.useState<string>("")
+    const [Error, setError] = React.useState<string>("")
     
-    const onChangeValue = (event) => {
-        console.log(event.target)
+    const onChangeValue = (event: ChangeEvent<HTMLTextAreaElement>) => {
 
         const newValue = event.target.value   // 임시 변수에 담음
         setValue(newValue)   // 상태 업데이트
-        onChange(newValue)   // 부모로 값 전달
+        onChange?.(newValue)
 
         if(newValue === ""){
             setError("필수입력 사항 입니다.")
@@ -74,24 +96,27 @@ export const RegisterText = ({ inputTitle, display, myPlaceholder, width, height
   }
 
 // Picture 컴포넌트
-export const Picture = () => {
+export const Picture: React.FC = () => {
     return (
         <div className="OnePicture"></div>
     )
 }
 
 // Button 컴포넌트
-export const Button = ({backgroundColor, color, btnTitle, borderColor, onClick, disabled,
-                        disabledBackgroundColor = "#C7C7C7", // 비활성일 때 공통 색상
-                        disabledColor = "#E4E4E4"            // 비활성 글씨 색상               
-}) => {
+
+type ButtonProps = {
+  backgroundColor: string;
+  color: string;
+  btnTitle: string;
+  borderColor?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export const Button: React.FC<ButtonProps> = ({backgroundColor, color, btnTitle, borderColor, onClick}) => {
     return (
         <button className="버튼"
-        style={{borderColor: borderColor,
-                backgroundColor: disabled ? disabledBackgroundColor : backgroundColor,
-                color: disabled ? disabledColor : color,
-                cursor: disabled ? 'not-allowed' : 'pointer'}}
-        onClick={onClick}
+        style={{backgroundColor: backgroundColor, color: color, borderColor: borderColor}}
+        onClick={onClick} // 부모에서 받은 함수 실행
         >{btnTitle}</button>
     )
 }

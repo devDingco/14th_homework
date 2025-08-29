@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "lib": ["dom", "dom.iterable","esnext"],
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "target": "es2015",  // 실행할 때에는 es6 문법으로 바꿔줘
+
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "isolatedModules": true, // 파일 간의 타입공유 못하게
+        "jsx": "react-jsx",
+        "noEmit": true,
+        "noFallthroughCasesInSwitch": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": true // 엄격하게 검증하겠다
+    }
+}
