@@ -28,6 +28,22 @@ const iconFileAlias = {
   radio_enabled: "radio-enabled",
   radio_selected: "radio-selected",
   single_person_accommodation: "Single person accommodation",
+  arrows_right: "Arrows",
+  arrows_right_1: "Arrows-1",
+  paragraph: "Paragraph",
+  paragraph_1: "Paragraph-1",
+  paragraph_2: "Paragraph-2",
+  paragraph_3: "Paragraph-3",
+  generic: "Generic",
+  formatting: "Formatting",
+  formatting_1: "Formatting-1",
+  formatting_2: "Formatting-2",
+  formatting_3: "Formatting-3",
+  content: "Content",
+  content_1: "Content-1",
+  content_2: "Content-2",
+  content_3: "Content-3",
+  spa: "_spa",
 };
 
 // 6) 중앙 Icon 컴포넌트: 축약 토글/명시형 props를 모두 지원
@@ -105,7 +121,7 @@ export const UpArrowFilled = (p: IconProps) => <Icon filled name="up_arrow" {...
 export const VisibilityFilled = (p: IconProps) => <Icon filled name="visibility" {...p} />;
 
 // - Outline 계열
-export const SpaOutline = (p: IconProps) => <Icon outline name="_spa" {...p} />;
+export const SpaOutline = (p: IconProps) => <Icon outline name="spa" {...p} />;
 export const AddOutline = (p: IconProps) => <Icon outline name="add" {...p} />;
 export const ApartmentOutline = (p: IconProps) => <Icon outline name="apartment" {...p} />;
 export const BadOutline = (p: IconProps) => <Icon outline name="bad" {...p} />;
@@ -129,18 +145,35 @@ export const RightArrowOutline = (p: IconProps) => <Icon outline name="right_arr
 export const RoomServiceOutline = (p: IconProps) => <Icon outline name="room_service" {...p} />;
 export const SearchOutline = (p: IconProps) => <Icon outline name="search" {...p} />;
 export const WriteOutline = (p: IconProps) => <Icon outline name="write" {...p} />;
-
-// - 추가된 Outline 컴포넌트들
-export const PersonOutline = (p: any) => <Icon outline name="person" {...p} />;
-export const PlanteriorOutline = (p: any) => <Icon outline name="planterior" {...p} />;
-export const PointOutline = (p: any) => <Icon outline name="point" {...p} />;
-export const RadioEnabledOutline = (p: any) => <Icon outline name="radio_enabled" {...p} />;
-export const RadioSelectedOutline = (p: any) => <Icon outline name="radio_selected" {...p} />;
-export const ReplyOutline = (p: any) => <Icon outline name="reply" {...p} />;
-export const ReturnOutline = (p: any) => <Icon outline name="return" {...p} />;
-export const SinglePersonAccommodationOutline = (p: any) => (
+export const DeleteOutline = (p: IconProps) => <Icon outline name="delete" {...p} />;
+export const UncheckOutline = (p: IconProps) => <Icon outline name="uncheck" {...p} />;
+export const ReplyOutline = (p: IconProps) => <Icon outline name="reply" {...p} />;
+export const ReturnOutline = (p: IconProps) => <Icon outline name="return" {...p} />;
+export const PointOutline = (p: IconProps) => <Icon outline name="point" {...p} />;
+export const PlanteriorOutline = (p: IconProps) => <Icon outline name="planterior" {...p} />;
+export const PersonOutline = (p: IconProps) => <Icon outline name="person" {...p} />;
+export const RadioEnabledOutline = (p: IconProps) => <Icon outline name="radio_enabled" {...p} />;
+export const RadioSelectedOutline = (p: IconProps) => <Icon outline name="radio_selected" {...p} />;
+export const SinglePersonAccommodationOutline = (p: IconProps) => (
   <Icon outline name="single_person_accommodation" {...p} />
 );
+
+// - 새로 추가된 Outline 아이콘들
+export const ArrowsOutline = (p: IconProps) => <Icon outline name="arrows_right" {...p} />;
+export const Arrows1Outline = (p: IconProps) => <Icon outline name="arrows_right_1" {...p} />;
+export const ParagraphOutline = (p: IconProps) => <Icon outline name="paragraph" {...p} />;
+export const Paragraph1Outline = (p: IconProps) => <Icon outline name="paragraph_1" {...p} />;
+export const Paragraph2Outline = (p: IconProps) => <Icon outline name="paragraph_2" {...p} />;
+export const Paragraph3Outline = (p: IconProps) => <Icon outline name="paragraph_3" {...p} />;
+export const GenericOutline = (p: IconProps) => <Icon outline name="generic" {...p} />;
+export const FormattingOutline = (p: IconProps) => <Icon outline name="formatting" {...p} />;
+export const Formatting1Outline = (p: IconProps) => <Icon outline name="formatting_1" {...p} />;
+export const Formatting2Outline = (p: IconProps) => <Icon outline name="formatting_2" {...p} />;
+export const Formatting3Outline = (p: IconProps) => <Icon outline name="formatting_3" {...p} />;
+export const ContentOutline = (p: IconProps) => <Icon outline name="content" {...p} />;
+export const Content1Outline = (p: IconProps) => <Icon outline name="content_1" {...p} />;
+export const Content2Outline = (p: IconProps) => <Icon outline name="content_2" {...p} />;
+export const Content3Outline = (p: IconProps) => <Icon outline name="content_3" {...p} />;
 
 // 8) 사용 예시
 // - 중앙 Icon 컴포넌트

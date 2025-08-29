@@ -19,8 +19,25 @@ export default function ProductDetail({ id }: { id: string }) {
   return (
     <section className="product_detail_section">
       <header className="detail_header">
+        <div className="title_section">  
         <h1 className="b_24_32">포항 : 숙박권 명이 여기에 들어갑니다</h1>
         <p className="r_14_20 detail_subtext">예약 전 반드시 숙소 규정을 확인하세요</p>
+        </div>
+           <div className="action_buttons">
+                <button className="icons icon_btn " type="button">
+                  <Icon outline black name="delete" width={24} height={24} />
+                </button>
+                <button className="icons icon_btn " type="button">
+                  <Icon outline black name="link" width={24} height={24} />
+                </button>
+                <button className="icons icon_btn " type="button">
+                  <Icon outline black name="location" width={24} height={24} />
+                </button>
+                <button  id="bookmark_btn" className="icon_btn" type="button" aria-label="북마크">
+                  <Icon outline default name="bookmark" width={24} height={24} />
+                  <span className="me_14_20">24</span>
+                </button>
+              </div>
       </header>
 
       <div className="detail_grid">
@@ -53,7 +70,7 @@ export default function ProductDetail({ id }: { id: string }) {
               </ul>
             </aside>
           </div>
-
+          <div className="divider"/>
           <section className="detail_section">
             <h2 className="b_18_24 section_title">상세 설명</h2>
             <div className="section_body r_14_20">
@@ -75,7 +92,7 @@ export default function ProductDetail({ id }: { id: string }) {
               </ul>
             </div>
           </section>
-
+          <div className="divider"/>
           <section className="detail_section">
             <h2 className="b_18_24 section_title">상세 위치</h2>
             <div className="map_wrap">
@@ -87,38 +104,32 @@ export default function ProductDetail({ id }: { id: string }) {
               />
             </div>
           </section>
+        
         </div>
 
         <aside className="detail_right">
           <div className="sticky_card">
             <div className="card_head">
-              <div className="action_buttons">
-                <button className="btn-outline icon_btn" type="button">
-                  <Icon outline default name="link" width={20} height={20} />
-                  <span className="me_14_20">공유</span>
-                </button>
-                <button className="btn-outline icon_btn" type="button" aria-label="북마크">
-                  <Icon outline default name="bookmark" width={20} height={20} />
-                </button>
-              </div>
+           
             </div>
 
             <div className="price_row">
               <p className="sb_18_24">32,500원</p>
-              <span className="me_14_20 price_note">부가세 포함</span>
+                <ul className="price_note">
+                  <li>부가세 포함</li>
+                  <li>예약 전 반드시 숙소 규정을 확인하세요</li>
+                </ul>
             </div>
 
             <button className="btn btn-primary buy_btn" type="button">구매하기</button>
 
-            <div className="divider" />
-
+            </div>
             <div className="seller_box">
-              <p className="b_16_24 seller_title">판매자</p>
+              <p className="b_20_28 seller_title">판매자</p>
               <div className="seller_info">
                 <Image className="seller_avatar" src="/images/mobile/profile/img.png" alt="host" width={32} height={32} />
                 <span className="me_16_24">홍길동</span>
               </div>
-            </div>
           </div>
         </aside>
       </div>

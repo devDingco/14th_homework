@@ -1,0 +1,321 @@
+.post_page {
+    width: 128rem;
+    min-height: 100vh;
+    background-color:var(--white);
+    margin: 0 auto;
+    margin-top: 4rem;
+}
+
+.post_container {
+    width: 128rem;
+    margin: 0 auto;
+    background-color: var(--white);
+}
+
+.post_title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #333;
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+.post_form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form_group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.form_label {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.form_label.required::after {
+  content: " *";
+  color: #ff4757;
+}
+
+.form_input {
+  padding: 1.2rem;
+  border: 0.1rem solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  background-color: var(--white);
+}
+
+.form_input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.form_input::placeholder {
+  color: #999;
+}
+
+/* 리치 텍스트 에디터 */
+.rich_text_editor {
+  border: 0.1rem solid #ddd;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.editor_toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 1.6rem;
+  background-color: #f8f9fa;
+  border-bottom: 0.1rem solid #ddd;
+  flex-wrap: wrap;
+}
+
+.toolbar_btn {
+  width: 3.2rem;
+  height: 3.2rem;
+  border: none;
+  background-color: transparent;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.toolbar_btn:hover {
+  background-color: #e9ecef;
+}
+
+.toolbar_separator {
+  width: 0.1rem;
+  height: 2rem;
+  background-color: #ddd;
+  margin: 0 0.5rem;
+}
+
+.editor_content {
+  width: 100%;
+  min-height: 20rem;
+  padding: 1.5rem;
+  border: none;
+  resize: vertical;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  background-color: var(--white);
+}
+
+.editor_content:focus {
+  outline: none;
+}
+
+/* 판매기간 입력 */
+.period_input_wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.period_input {
+  flex: 1;
+}
+
+.period_btn {
+  width: 4rem;
+  height: 4.8rem;
+  border: 0.1rem solid #ddd;
+  background-color: white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.period_btn:hover {
+  background-color: #f8f9fa;
+}
+
+.plus_icon {
+  font-size: 1.8rem;
+  color: #ff6b9d;
+  font-weight: bold;
+}
+
+/* 주소 입력 */
+.address_inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.zip_code_wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.zip_code_input {
+  width: 15rem;
+}
+
+.search_zip_btn {
+  padding: 1.2rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search_zip_btn:hover {
+  background-color: #0056b3;
+}
+
+/* 사진 첨부 */
+.photo_upload_section {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.photo_upload_box {
+  width: 12rem;
+  height: 12rem;
+  border: 0.2rem dashed #ddd;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.photo_upload_box:hover {
+  border-color: #007bff;
+  background-color: #f8f9fa;
+}
+
+.upload_icon {
+  font-size: 3rem;
+  color: #999;
+  margin-bottom: 0.5rem;
+}
+
+.upload_text {
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.photo_preview_area {
+  flex: 1;
+  height: 12rem;
+  border: 0.1rem solid #ddd;
+  border-radius: 0.5rem;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview_text {
+  font-size: 1.4rem;
+  color: #999;
+}
+
+/* 폼 액션 */
+.form_actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 0.1rem solid #eee;
+}
+
+.version_info {
+  font-size: 1.2rem;
+  color: #999;
+}
+
+.action_buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn_cancel,
+.btn_save {
+  padding: 1.2rem 2.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn_cancel {
+  background-color: #f8f9fa;
+  color: #666;
+  border: 0.1rem solid #ddd;
+}
+
+.btn_cancel:hover {
+  background-color: #e9ecef;
+}
+
+.btn_save {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn_save:hover {
+  background-color: #5a6268;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .post_container {
+    margin: 0 1rem;
+    padding: 2rem;
+  }
+  
+  .post_title {
+    font-size: 2rem;
+  }
+  
+  .photo_upload_section {
+    flex-direction: column;
+  }
+  
+  .photo_upload_box,
+  .photo_preview_area {
+    width: 100%;
+  }
+  
+  .zip_code_wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .zip_code_input {
+    width: 100%;
+  }
+  
+  .search_zip_btn {
+    width: 100%;
+  }
+}
