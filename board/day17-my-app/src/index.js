@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import BoardNew from './routes/boards/new/boardsNew';
-import BoardsDetail from './routes/boards/new/BoardsDetail';
+import BoardsDetail from './routes/boards/details/BoardsDetail';
 
 const PageList = createBrowserRouter([
     { path: "/", element: <BoardNew/>},

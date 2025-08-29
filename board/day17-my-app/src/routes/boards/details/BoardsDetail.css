@@ -2,6 +2,7 @@
     box-sizing: border-box;
 }
 
+
 .main{
     display: flex;
     flex-direction: column;
@@ -10,7 +11,7 @@
 
 
 
-#section1{
+.header{
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -18,18 +19,18 @@
     
 }
 
-#section1__1 {
+.header-row {
     display: flex;
     justify-content: space-between;
 }
 
-#section1__1__1{
+.header-user{
     display: flex;
     align-items: center;
     gap: 4px;
 }
 
-#section1__1__1__1{
+.header-avatar{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,12 +40,12 @@
     border-radius: 100%;
 }
 
-#icon1{
+.icon.icon--profile{
     width: 15px;
     height: 15px;
 }
 
-#section1__3{
+.header-icons{
     display: flex;
     align-items: center;
     justify-content: end;
@@ -52,7 +53,7 @@
     
 }
 
-#img2__back{
+.image-wrapper{
     width: 1280px;
     height: 512px;
     display: flex;
@@ -61,39 +62,39 @@
     background-color: #F2F2F2;
 }
 
-#img1{
+.image-main{
     width: 400px;
     height: 531px;
 }
 
-#img{
+.image-frame{
     width: 822px;
     height: 464px;
 }
 
-#text{
+.text{
     line-height: 1.6;
 }
 
-#section2{
+.reactions{
     display: flex;
     gap: 24px;
     justify-content: center;
 }
 
-.section2__1{
+.reactions-item{
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.section3{
+.actions{
     display: flex;
     justify-content: center;
     gap: 24px;
 }
 
-.section3__1{
+.actions-item{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,24 +105,23 @@
     height: 40px;
 }
 
-#icon2{
+.icon.icon--link{
     width: 24px;
     height: 24px;
     
 }
 
-#icon3{
+.icon.icon--map{
     width: 15.1px;
     height: 18.44px;
 }
 
-#icon4{
-    width: 17;
+.icon.icon--list{
+    width: 17px;
     height: 11.27px;
 }
 
-#icon5{
+.icon.icon--edit{
     width: 17px;
     height: 17px;
 }
-

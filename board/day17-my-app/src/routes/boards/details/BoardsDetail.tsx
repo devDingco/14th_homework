@@ -7,28 +7,28 @@ const BoardsDetail = () => {
 
         <div className="main">
             <h1>살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라</h1>
-            <div id="section1">
-                <div id="section1__1">
-                    <div id="section1__1__1">
-                        <div id="section1__1__1__1">
-                            <img id="icon1" src="./assets/icons/profile.png"></img>
+            <div className="header">
+                <div className="header-row">
+                    <div className="header-user">
+                        <div className="header-avatar">
+                            <img className="icon icon--profile" src="./assets/icons/profile.png"></img>
                         </div>
-                        <spna>홍길동</spna>
+                        <div>홍길동</div>
                     </div>
                     <div>
                         <span>2024.11.11</span>
                     </div>
                 </div>
                 <hr />
-                <div id="section1__3">
-                    <img id="icon2" src="./assets/icons/link.png" />
-                    <img id="icon3" src="./assets/icons/jido.png" />
+                <div className="header-icons">
+                    <img className="icon icon--link" src="./assets/icons/link.png" />
+                    <img className="icon icon--map" src="./assets/icons/jido.png" />
                 </div>
             </div>
 
-            <img id="img1" src="./assets/images/BeachsideSerenity 1.png" />
+            <img className="image-main" src="./assets/images/BeachsideSerenity 1.png" />
 
-            <div id="text">
+            <div className="text">
                 살겠노라 살겠노라. 청산에 살겠노라. <br />
                 머루랑 다래를 먹고 청산에 살겠노라.<br />
                 얄리얄리 얄랑셩 얄라리 얄라<br />
@@ -62,28 +62,28 @@ const BoardsDetail = () => {
                 얄리얄리 얄라셩 얄라리 얄라
             </div>
 
-            <div id="img2__back">
-                <img id="img2" src="./assets/images/Frame4.png"></img>
+            <div className="image-wrapper">
+                <img className="image-frame" src="./assets/images/Frame4.png"></img>
             </div>
 
-            <div id="section2">
-                <div className="section2__1">
+            <div className="reactions">
+                <div className="reactions-item">
                     <img src="./assets/icons/bad.png"></img>
                     <div>24</div>
                 </div>
-                <div className="section2__1">
+                <div className="reactions-item">
                     <img src="./assets/icons/good.png"></img>
                     <div>12</div>
                 </div>
             </div>
 
-            <div className="section3">
-                <div className="section3__1">
-                    <img id="icon4" src="./assets/icons/vector.png"></img>
+            <div className="actions">
+                <div className="actions-item">
+                    <img className="icon icon--list" src="./assets/icons/vector.png"></img>
                     <div>목록으로</div>
                 </div>
-                <div className="section3__1">
-                    <img id="icon5" src="./assets/icons/left_icon.png"></img>
+                <div className="actions-item">
+                    <img className="icon icon--edit" src="./assets/icons/left_icon.png"></img>
                     <div>수정하기</div>
                 </div>
 
