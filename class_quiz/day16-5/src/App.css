@@ -1,0 +1,106 @@
+.App {
+  width: 64rem;
+  height: 113.8rem;
+  background-image: url('./assets/img-bg.png');
+  background-size: cover; /* 비율 유지 + 영역 꽉 채움 */
+  background-position: center; /* 가운데 정렬 */
+  background-repeat: no-repeat; /* 반복 방지 */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-icons {
+  margin-top: 22.4rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  background-image: url('./assets/location-icon.svg');
+  width: 7.2rem;
+  height: 8rem;
+  background-size: cover; /* 비율 유지 + 영역 꽉 채움 */
+  background-position: center; /* 가운데 정렬 */
+  background-repeat: no-repeat; /* 반복 방지 */
+  z-index: 1;
+}
+
+.main-icons img {
+  position: absolute;
+  bottom: -0.5rem;
+  width: 7.2rem;
+  height: 2.4rem;
+}
+
+h1 {
+  margin-top: 4.2rem;
+  font-size: 6rem;
+  font-weight: 700;
+}
+
+form {
+  /* background-color: hotpink; */
+  margin-top: 14.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+.signIn-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.signIn-input {
+  width: 54rem;
+  border-bottom: solid 0.1rem #7d7d7d;
+  /* background-color: hotpink; */
+  position: relative;
+}
+.signIn-input input {
+  width: 100%;
+}
+.signIn-input img {
+  position: absolute;
+  right: 0;
+  bottom: 50%;
+  transform: translateY(50%);
+}
+
+.error-message {
+  color: #ff1b6d;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+form button {
+  width: 100%;
+  border-radius: 3.8rem;
+  background-color: rgba(255, 27, 109, 0.6);
+  font-size: 2.6rem;
+  color: #fff;
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+.pink-btn {
+  margin-top: -1rem;
+}
+.extra-actions {
+  display: flex;
+  gap: 3rem;
+  font-weight: 700;
+  font-size: 2rem;
+  justify-content: center;
+  /* padding: 4rem 0; */
+}
+.extra-actions p {
+  cursor: pointer;
+}
+.yellow-btn {
+  margin-top: 2rem;
+  background-color: transparent;
+  border: solid 0.2rem #fae100;
+  color: #fae100;
+}
