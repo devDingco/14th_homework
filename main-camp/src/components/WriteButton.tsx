@@ -1,7 +1,18 @@
-import { useState } from 'react'
+import { FunctionComponent, MouseEventHandler, useState } from 'react'
 
-const WriteButton = (props) => {
-    const [isActive, setIsActive] = useState(false)
+type Props = {
+    state: {
+        writer: string,
+        password: string | number,
+        title: string,
+        content: string
+    },
+    p?: string,
+    setState?: MouseEventHandler | undefined
+}
+
+const WriteButton:FunctionComponent<Props> = (props) => {
+    const [isActive, setIsActive] = useState<boolean>(false)
 
     const valObj = props.state
 
