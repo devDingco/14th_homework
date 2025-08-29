@@ -1,0 +1,117 @@
+/* BoardDetail.js */
+.page {
+  width: 100%;
+  padding: 0 320px;
+  gap: 40px;
+}
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  width: 100%;
+  padding: 40px 0;
+  gap: 24px;
+}
+.detailTitle {
+  color: #000;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px;
+}
+.detailAuthor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.detailAuthor__name {
+  display: flex;
+  align-items: center;
+  color: var(--gray-700, #5f5f5f);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  gap: 4px;
+}
+.detailAuthor__date {
+  color: #818181;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+.detailLinkLocation {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.detailLinkLocation__enroll {
+  max-width: 56px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.detailPhoto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.detailContent {
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+}
+.detailVideo {
+  display: flex;
+  padding: 24px 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  background: var(--gray-50, #f2f2f2);
+}
+.detailHeart {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+.detailHeart__bad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detailHeart__good {
+  color: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.detailButtonEnroll {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+.detailButtonList {
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+  display: flex;
+  height: 40px;
+  padding: 8px 12px;
+  align-items: center;
+  gap: 8px;
+}
+.detailButtonEdit {
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+  display: flex;
+  height: 40px;
+  padding: 8px 12px;
+  align-items: center;
+  gap: 8px;
+}
