@@ -1,8 +1,11 @@
-import "./BoardsNew.css";
+"use client";
+
+import styles from "./BoardsNew.module.css";
 import React, { useState } from "react";
+import Image from "next/image";
 import addIcon from "./assets/add.svg";
 
-function BoardsNew() {
+export default function BoardsNew() {
   // - 변경되는 입력값 새로 저장하는 상태 설정
   const [작성자, set작성자] = useState("");
   const [비밀번호, set비밀번호] = useState("");
@@ -71,134 +74,149 @@ function BoardsNew() {
     }
   };
 
-  // 내부 컴포넌트 제거하고 단일 JSX로 구성
+  // // 내부 컴포넌트 제거하고 단일 JSX로 구성
+  // import styles from "./게시물등록.module.css";
+
   return (
-    <div className="게시물등록_frame">
-      <div className="게시물등록_container">
+    <div className={styles.게시물등록_frame}>
+      <div className={styles.게시물등록_container}>
         <h1>게시물 등록</h1>
-        <div className="게시물등록_작성자-비밀번호">
-          <div className="게시물등록_사용자인풋">
-            <label htmlFor="작성자" className="게시물등록_라벨">
+
+        <div className={styles.게시물등록_작성자and비밀번호}>
+          <div className={styles.게시물등록_사용자인풋}>
+            <label htmlFor="작성자" className={styles.게시물등록_라벨}>
               작성자
             </label>
             <input
               id="작성자"
-              className="게시물등록_플레이스홀더"
+              className={styles.게시물등록_플레이스홀더}
               type="text"
               placeholder="작성자 명을 입력해 주세요."
               onChange={onChange작성자}
             />
-            <div className="에러메세지_스타일">{작성자에러}</div>
+            <div className={styles.에러메세지_스타일}>{작성자에러}</div>
           </div>
-          <div className="게시물등록_사용자인풋">
-            <label htmlFor="비밀번호" className="게시물등록_라벨">
+
+          <div className={styles.게시물등록_사용자인풋}>
+            <label htmlFor="비밀번호" className={styles.게시물등록_라벨}>
               비밀번호
             </label>
             <input
               id="비밀번호"
-              className="게시물등록_플레이스홀더"
+              className={styles.게시물등록_플레이스홀더}
               type="text"
               placeholder="비밀번호를 입력해 주세요."
               onChange={onChange비밀번호}
             />
-            <div className="에러메세지_스타일">{비밀번호에러}</div>
+            <div className={styles.에러메세지_스타일}>{비밀번호에러}</div>
           </div>
         </div>
+
         <hr />
-        <div className="게시물등록_사용자인풋">
-          <label htmlFor="제목" className="게시물등록_라벨">
+
+        <div className={styles.게시물등록_사용자인풋}>
+          <label htmlFor="제목" className={styles.게시물등록_라벨}>
             제목
           </label>
           <input
             id="제목"
-            className="게시물등록_플레이스홀더"
+            className={styles.게시물등록_플레이스홀더}
             type="text"
             placeholder="제목을 입력해 주세요."
             onChange={onChange제목}
           />
-          <div className="에러메세지_스타일">{제목에러}</div>
+          <div className={styles.에러메세지_스타일}>{제목에러}</div>
         </div>
-        <div className="게시물등록_사용자인풋">
-          <label htmlFor="내용" className="게시물등록_라벨">
+
+        <div className={styles.게시물등록_사용자인풋}>
+          <label htmlFor="내용" className={styles.게시물등록_라벨}>
             내용
           </label>
           <textarea
             id="내용"
-            className="게시물등록_플레이스홀더"
+            className={styles.게시물등록_플레이스홀더_내용}
             placeholder="내용을 입력해 주세요."
             onChange={onChange내용}
           />
-          <div className="에러메세지_스타일">{내용에러}</div>
+          <div className={styles.에러메세지_스타일}>{내용에러}</div>
         </div>
+
         <hr />
-        <div className="게시물등록_주소인풋">
-          <div className="게시물등록_주소_상단">
-            <label className="게시물등록_주소인풋_라벨">주소</label>
-            <div className="게시물등록_주소인풋_우편번호">
+
+        <div className={styles.게시물등록_주소인풋}>
+          <div className={styles.게시물등록_주소_상단}>
+            <label className={styles.게시물등록_주소인풋_라벨}>주소</label>
+            <div className={styles.게시물등록_주소인풋_우편번호}>
               <input
-                className="게시물등록_주소인풋_플레이스홀더"
+                className={styles.게시물등록_주소인풋_플레이스홀더}
                 type="text"
                 placeholder="01234"
               />
-              <button className="게시물등록_주소인풋_우편번호버튼">
+              <button className={styles.게시물등록_주소인풋_우편번호버튼}>
                 우편번호 검색
               </button>
             </div>
           </div>
+
           <input
-            className="게시물등록_플레이스홀더"
+            className={styles.게시물등록_플레이스홀더}
             type="text"
             placeholder="주소를 입력해 주세요."
           />
           <input
-            className="게시물등록_플레이스홀더"
+            className={styles.게시물등록_플레이스홀더}
             type="text"
             placeholder="상세주소"
           />
         </div>
+
         <hr />
-        <div className="게시물등록_사용자인풋">
-          <label htmlFor="유튜브링크" className="게시물등록_라벨">
+
+        <div className={styles.게시물등록_사용자인풋}>
+          <label htmlFor="유튜브링크" className={styles.게시물등록_라벨}>
             유튜브 링크
           </label>
           <input
             id="유튜브링크"
-            className="게시물등록_플레이스홀더"
+            className={styles.게시물등록_플레이스홀더}
             type="text"
             placeholder="링크를 입력해 주세요"
           />
         </div>
+
         <hr />
-        <div className="사진첨부인풋">
+
+        <div className={styles.사진첨부인풋}>
           <label>사진첨부</label>
-          <div className="게시물등록_사진첨부">
+          <div className={styles.게시물등록_사진첨부}>
             <label>
-              <div className="게시물등록_사진첨부_박스">
-                <img src={addIcon} />
+              <div className={styles.게시물등록_사진첨부_박스}>
+                <Image src={addIcon} alt={addIcon} />
                 <p>클릭해서 사진 업로드</p>
                 <input type="file" />
               </div>
             </label>
             <label>
-              <div className="게시물등록_사진첨부_박스">
-                <img src={addIcon} />
+              <div className={styles.게시물등록_사진첨부_박스}>
+                <Image src={addIcon} alt={addIcon} />
                 <p>클릭해서 사진 업로드</p>
                 <input type="file" />
               </div>
             </label>
             <label>
-              <div className="게시물등록_사진첨부_박스">
-                <img src={addIcon} />
+              <div className={styles.게시물등록_사진첨부_박스}>
+                <Image src={addIcon} alt={addIcon} />
                 <p>클릭해서 사진 업로드</p>
                 <input type="file" />
               </div>
             </label>
           </div>
         </div>
-        <div className="게시물등록_취소-등록하기버튼">
-          <button className="취소버튼">취소</button>
+
+        <div className={styles.게시물등록_취소and등록하기버튼}>
+          <button className={styles.취소버튼}>취소</button>
           <button
-            className="등록하기버튼"
+            className={styles.등록하기버튼}
             onClick={onClick등록하기}
             disabled={버튼비활성화}
           >
@@ -210,4 +228,4 @@ function BoardsNew() {
   );
 }
 
-export default BoardsNew;
+// export default BoardsNew;
