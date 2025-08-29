@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
 
 import { createBrowserRouter, RouterProvider } from "react-router";
-import PostForm from "./App";
+import App from "./App";
 import BoardsNew from "./routes/boards/new/BoardsNew";
-import BoardsDetail from "./routes/boards/new/BoardsDetail";
+import BoardsDetail from "./routes/boards/detail/BoardsDetail";
 
 const pageList = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -14,5 +13,7 @@ const pageList = createBrowserRouter([
   { path: "/boards/detail", element: <BoardsDetail /> },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 root.render(<RouterProvider router={pageList} />);
