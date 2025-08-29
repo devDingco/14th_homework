@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포항 숙박권</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            padding: 20px;
+            background-color: #3a7bd5;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .accommodation-info {
+            padding: 20px;
+        }
+        
+        .accommodation-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .accommodation-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .accommodation-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .accommodation-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            background-color: #f2f2f2;
+            color: #666;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .price {
+            font-size: 22px;
+            font-weight: 700;
+            color: #3a7bd5;
+            margin-bottom: 20px;
+        }
+        
+        .notice {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .buy-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #3a7bd5;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 25px;
+        }
+        
+        .seller-info {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .seller-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .seller-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .seller-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .description {
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .location {
+            padding: 20px 0;
+        }
+        
+        .location-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .location-address {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .location-map {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .location-map img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .nearby {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .contact-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #fff;
+            color: #3a7bd5;
+            border: 2px solid #3a7bd5;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>포항: 숙박권 명이 여기에 들어갑니다</h1>
+        </div>
+        
+        <div class="accommodation-info">
+            <div class="accommodation-image">
+                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="모던한 분위기의 결도들은 숙소">
+            </div>
+            
+            <h2 class="accommodation-title"></h2>
+            
+            <div class="accommodation-tags">
+                <span class="tag">#6인 이하</span>
+                <span class="tag">#건식 사우나</span>
+                <span class="tag">#예견동반 가능</span>
+            </div>
+            
+            <div class="price">32,500원</div>
+            
+            <div class="notice">
+                - 숙박권은 트립트립에서 포인트 충전 후 구매하실 수 있습니다.<br>
+                - 상세 설명에 숙박권 사용기한을 꼭 확인해 주세요.
+            </div>
+            
+            <button class="buy-button">구매하기</button>
+            
+            <div class="seller-info">
+                <div class="seller-image">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="김상훈">
+                </div>
+                <div class="seller-name">김상훈</div>
+            </div>
+            
+            <div class="description">
+                <h3>상세 설명</h3>
+                <p>살어리 살어리랏다 쳥산(淸算)애 살어리랏다 멀위랑 도래랑 먹고 쳥산(淸算)애 살어리랏다 얄리얄리 얄랑셩 얄라리 얄라 우러라 우러라
+                새여 자고 니러 우러라 새여 널라 시름 한 나도 자고 니러 우니로라 리얄리 얄라셩 얄라리 얄라 가던 새 가던 새 본다 믈 아래 가던 믈 아래 가던 새 본
+                다 잉무든 장글란 가지고 믈 아래 가던 새 본다 얄리얄리 얄라셩 얄라리 얄라</p>
+
+                <p>이링공 뎌링공 호야 나즈란 디내와손뎌
+                오리도 가리도 업슨 바므란 쓰또 엇디 호리라
+                알리얄리 얄랴셩 얄라리 얄라</p>
+
+                <p>어듸라 더디던 돌코 누리라 마치던 돌코
+                믜리도 괴리도 업시 마자셔 우니노라
+                얄리얄리 얄라셩 얄라리 얄라</p>
+
+                <p>살어리 살어리랏다 바루래 살어리랏다
+                노모자기 구조개랑 먹고 바로래 살어리랏다
+                얄리얄리 얄라셩 얄라리 얄라</p>
+
+                <p>가다가 가다가 드로라 에졍지 가다가 드로라
+                사소미 짐스대예 올아셔 희금(稀琴)을 혀거를 드로라
+                얄리얄리 얄라셩 얄라리 얄라</p>
+
+                <p>가다니 뵈브른 도긔 설진 강수를 비조라
+                조롱곳 누로기 뫼와 잡소와니 내 엇디 호리잇고
+                얄리얄리 얄라셩 얄라리 얄라</p>
+            </div>
+            
+            <div class="location">
+                <h3 class="location-title">상세 위치</h3>
+                <div class="location-address">
+                    Nangye-ro 4-gill<br>
+                    Nangye-ro
+                </div>
+                <div class="location-map">
+                    <img src="https://maps.googleapis.com/maps/api/staticmap?center=36.0190,129.3434&zoom=15&size=400x200&maptype=roadmap&markers=color:red%7C36.0190,129.3434&key=YOUR_API_KEY" alt="지도">
+                </div>
+                <div class="nearby">
+                    LOTTE Mart<br>
+                    Haengdang Station
+                </div>
+            </div>
+            
+            <a href="#" class="contact-button">문의 하기</a>
+        </div>
+    </div>
+</body>
+</html>
