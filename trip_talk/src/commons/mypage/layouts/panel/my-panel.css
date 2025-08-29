@@ -57,3 +57,7 @@
 .my_panel_item:hover {
   background: var(--gray-50);
 }
+
+.my_panel_item.active {
+  background: var(--gray-50);
+}

@@ -1,4 +1,4 @@
-import MyPanel from '../../commons/mypage/panel/my-panel';
+import MyPanel from '../../commons/mypage/layouts/panel/my-panel';
 import { ReactNode } from 'react';
 
 interface MypageLayoutProps {

@@ -1,3 +1,4 @@
+import HistoryBookmarkLayout from '@/commons/mypage/layouts/history-bookmark/history-bookmark-layout';
 import { ReactNode } from 'react';
 
 interface MyPageLayoutProps {
@@ -5,5 +6,10 @@ interface MyPageLayoutProps {
 }
 
 export default function MyPageLayout({ children }: MyPageLayoutProps) {
-  return <div>{children}</div>;
+  return (
+    <div>
+      <HistoryBookmarkLayout />
+      {children}
+    </div>
+  );
 }
