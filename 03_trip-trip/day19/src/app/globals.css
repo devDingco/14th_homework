@@ -18,9 +18,6 @@
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
 }
 
 @layer base {
@@ -77,13 +74,12 @@
     color: var(--color-gray-100) !important;
     cursor: default;
   }
-
-  .container {
-    width: 128rem;
-    /* min-width: 100%; */
-    /* width: 100%; */
-    padding: 4rem 0;
-    display: flex;
-    background-color: hotpink;
-  }
+}
+.container {
+  width: 100%;
+  max-width: 128rem;
+  /* max-width: 100%; */
+  /* width: 100%; */
+  padding: 4rem 0;
+  display: flex;
 }

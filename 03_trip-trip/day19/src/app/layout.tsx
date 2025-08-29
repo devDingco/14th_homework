@@ -24,8 +24,8 @@ interface RootProps {
 export default function RootLayout(props: RootProps) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} container antialiased`}>
-        {props.children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <div className="container">{props.children}</div>
       </body>
     </html>
   )
