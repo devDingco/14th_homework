@@ -24,7 +24,7 @@ export default function Header() {
     },
     {
       name: '마이 페이지',
-      link: '/mypage/products',
+      link: '/mypage',
     },
   ];
 

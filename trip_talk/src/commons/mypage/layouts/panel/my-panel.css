@@ -1,0 +1,63 @@
+.my_panel {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  margin-bottom: 2.5rem;
+}
+
+.my_panel_title {
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+.my_panel_profile {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.my_panel_divider {
+  border: none;
+  border-top: 1px solid var(--gray-200);
+  margin: 0.75rem 0;
+}
+
+.my_panel_points {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.my_panel_list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.my_panel_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--gray-800);
+  transition: background-color 0.15s ease, transform 0.05s ease;
+}
+
+.my_panel_item::after {
+  content: '';
+  width: 1.25rem;
+  height: 1.25rem;
+  background: url('/icons/right_icon_black.png') center/1.25rem 1.25rem no-repeat;
+}
+
+.my_panel_item:hover {
+  background: var(--gray-50);
+}
+
+.my_panel_item.active {
+  background: var(--gray-50);
+}

@@ -1,0 +1,145 @@
+.product_table_container {
+  width: 100%;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
+  background-color: var(--white);
+  border-radius: 1rem;
+  padding: 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 2.5rem;
+}
+
+.product_table {
+  width: 100%;
+}
+
+/* 테이블 전체 스타일 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* 테이블 헤더 스타일 */
+thead {
+  width: 100%;
+}
+
+thead tr {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+thead th {
+  width: 100%;
+  font-weight: 600;
+  color: #495057;
+  text-align: left;
+  padding: 0;
+}
+
+/* 테이블 바디 스타일 */
+tbody {
+  display: grid;
+  gap: 0.75rem;
+}
+tbody tr {
+  display: grid;
+  grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  gap: 0.5rem;
+  border: 1px solid var(--gray-50);
+  border-radius: 1rem;
+  position: relative;
+}
+
+tbody .delete_button {
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+  top: 0.6rem;
+  right: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+tbody tr:hover .delete_button {
+  opacity: 1;
+}
+
+tbody td {
+}
+
+/* 컬럼별 스타일 */
+.col_number {
+  text-align: center;
+  color: #6c757d;
+}
+
+.col_name {
+  color: var(--gray-800);
+}
+.col_name_sold {
+  color: var(--gray-400);
+}
+
+.col_price {
+  color: var(--gray-800);
+}
+
+.col_date {
+  text-align: center;
+  color: #6c757d;
+}
+
+/* 상태 배지 스타일 */
+.status_badge {
+  margin-left: 0.5rem;
+}
+
+.status_badge.sold {
+  color: var(--primary-color);
+}
+/* 페이지네이션 스타일 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.pagination_btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #dee2e6;
+  background-color: white;
+  color: #495057;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination_btn:hover:not(:disabled) {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.pagination_btn.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination_btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

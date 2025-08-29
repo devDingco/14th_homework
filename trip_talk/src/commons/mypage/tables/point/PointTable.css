@@ -1,0 +1,105 @@
+.point-table-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.point-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.point-table th {
+  background-color: #f8f9fa;
+  padding: 16px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.point-table td {
+  padding: 16px 12px;
+  border-bottom: 1px solid #f1f3f4;
+  color: #333;
+}
+
+.point-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* 컬럼별 너비 */
+.col-date {
+  width: 100px;
+}
+
+.col-type {
+  width: 120px;
+  font-weight: 500;
+}
+
+.col-amount {
+  width: 150px;
+  text-align: right;
+  font-weight: 500;
+}
+
+.col-balance {
+  width: 120px;
+  text-align: right;
+}
+
+/* 타입별 색상 */
+.col-type.positive,
+.col-amount.positive {
+  color: #1976d2;
+}
+
+.col-type.negative,
+.col-amount.negative {
+  color: #d32f2f;
+}
+
+.col-type.neutral,
+.col-amount.neutral {
+  color: #666;
+}
+
+/* 페이지네이션 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+.pagination-btn {
+  padding: 8px 12px;
+  border: 1px solid #dee2e6;
+  background: white;
+  color: #495057;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.pagination-btn.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
