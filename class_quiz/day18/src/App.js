@@ -5,11 +5,8 @@ export default function PrevstatePage() {
 
   function sumAll() {
     setState((state) => state + 1)
-    setState((state) => state + ' + ')
     setState((state) => state + 2)
-    setState((state) => state + ' + ')
     setState((state) => state + 3)
-    setState((state) => state + ' + ')
     setState((state) => state + 4)
   }
 
