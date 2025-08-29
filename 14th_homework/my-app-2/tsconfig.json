@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "module": "esnext", //최신 버전이라는 뜻! "commonjs" 
+        // import react from 'react' // const react = require('react')
+        "moduleResolution": "bundler",
+        "target": "es2015", //es6 2015년에 발표된 문법. 
+        //타입스크립트를 자바스크립트로 바꾸는 걸 컴파일이라고 함. 
+        "allowJs": true, //자바스크립트로 불러올 수 있게 허락해줘. 
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "isolatedModules": true, //모듈을 고립하게끔 해줘. 공유되지 못하게. 
+        "jsx": "react-jsx", 
+        "noEmit": true, //변환 후 파일을 방출하지 말아줘.
+        "noFallthroughCasesInSwitch": true, //브레이크 안 건 거 깜박했다면 브레이크 걸어. 
+        "resolveJsonModule": true,
+        "skipLibCheck": true, //라이브러리 체크를 할지 말지. 
+        "strict": true //엄격하게 검증하는 방식 
+    }
+}
