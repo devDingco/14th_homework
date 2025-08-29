@@ -1,0 +1,155 @@
+/* 
+* {
+  box-sizing: border-box; => resetCss 작성하지 않아도 됨. (@tailwind base; => 내장되어 있음)
+}
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 나만의 테일윈드 작성하기 (내가 만드는 부트스트랩의 css) */
+@layer utilities {
+  .root_body {
+    display: flex;
+    justify-content: center;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  /* global border */
+
+  .input_g_border_gray {
+    border-radius: 8px;
+    border-width: 1px;
+    border: 1px solid var(--Gray-Gray-200, rgba(212, 211, 211, 1));
+    background: var(--Gray-W, rgba(255, 255, 255, 1));
+  }
+
+  /* test color */
+
+  .test_aqua {
+    background-color: aqua;
+  } 
+  
+  .test_orange {
+    background-color: orange;
+  }
+  
+  .test_red {
+    background-color: red;
+  }
+  
+  .test_beige {
+    background-color: rgba(217, 217, 217, 1);;
+  }
+  
+  .test_border {
+    border-width: 1px;
+    border: 1px solid brown;
+  }
+  
+  /* flex */
+  
+  .flex_row {
+    display: flex;
+  }
+  
+  .flex_column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .flex_justi_sb {
+    justify-content: space-between;
+  }
+  
+  .flex_justi_end {
+    justify-content: end;
+  }
+  
+  .flex_justi_center {
+    justify-content: center;
+  }
+  
+  .flex_align_items_center {
+    align-items: center;
+  }
+  
+  .flex_align_self_flexend {
+    align-self: flex-end;
+  }
+  
+  /* typography */
+  
+  .b_20_28 {
+    font-family: Pretendard;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0%;
+  }
+  
+  .b_28_36 {
+    font-family: Pretendard;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: 0%;
+  }
+  
+  .r_14_20 {
+    font-family: Pretendard Variable;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0%;
+  }
+  
+  .r_16_24 {
+    font-family: Pretendard Variable;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+  }
+  
+  .me_16_24 {
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+  }
+  
+  .sb_14_20 {
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    text-align: center;
+  }
+  
+  .sb_18_24 {
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
