@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles - 커스텀 스타일을 Tailwind 이후에 배치 */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+}
+
+/* 페이지 컨테이너 스타일 */
+.container {
+  max-width: 1280px !important;
+  width: 100% !important;
+  padding: 0 20px !important;
+}
