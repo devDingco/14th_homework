@@ -1,0 +1,251 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css");
+
+body {
+  font-family: 'Pretendard Variable', sans-serif;
+  background-color: #fff;
+}
+
+.layout {
+  width: 100%;
+  padding: 0 1.25rem;
+} 
+
+.container {
+  width: 100%;
+  max-width: 80rem;  
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem;
+  display: flex;  
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.5rem;
+}
+
+.enroll-subject-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.75rem;
+}
+
+.enroll-border {
+  width: 100%;
+  height: 1px;
+  background: var(--gray-100, #e4e4e4);}
+
+.enroll-row-flex {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
+}
+
+.flex-half {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.enroll-form-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.25rem;
+  align-self: stretch;
+
+  color: #333;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.enroll-required-indicator {
+  color: #f66a6a;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.enroll-input {
+  width: 100%;
+  display: flex;
+  padding: 0.75rem 1rem;
+  
+  appearance: none;
+  border-radius: 0.5rem;
+  border: 1px solid #d4d3d3;
+  background-color: #fff;
+  
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+
+  font-family: 'Pretendard Variable', sans-serif;
+}
+
+.input-error-message {
+  color: var(--red, #F66A6A);
+
+  font-family: "Pretendard Variable";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.enroll-textarea {
+  height: 21rem;
+}
+
+.enroll-row-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.zipcode-input {
+  width: 13.75rem;
+  display: flex;
+  padding: 0.75rem 1rem;
+  
+  appearance: none;
+  border-radius: 0.5rem;
+  border: 1px solid #d4d3d3;
+  background-color: #fff;
+
+  color: #ababab;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.enroll-address-firstrow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.zipcode-search-button {
+  display: flex;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+
+  border-radius: 0.5rem;
+  border: 1px solid #000;
+  background: #fff;
+
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  white-space: nowrap;
+}
+
+.picture-enroll-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.picture-enroll-button {
+  display: flex;
+  width: 10rem;
+  height: 10rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  
+  cursor: pointer;
+
+  border-radius: 0.5rem;
+  background: #F2F2F2;
+}
+
+.icon_image {
+  width: 2.5rem;
+  width: 2.5rem;
+  flex-shrink: 0;
+}
+
+.picture-enroll-button_text {
+  color: #777;
+
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+/* 버튼영역 */
+.enroll-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  align-self: stretch;
+  padding-top: 40px;
+}
+
+.enroll-cancel-button {
+  appearance: none;
+  display: flex;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  gap: 0.5rem;
+  
+  cursor: pointer;
+
+  border: 1px solid #000;
+  border-radius: 0.5rem;
+  background-color: #fff;
+
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  color: #000;
+}
+
+.enroll-submit-button {
+  display: flex;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  gap: 0.5rem;
+  
+  cursor: pointer;
+
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #2974e5;
+
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  color: #fff;
+}

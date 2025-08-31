@@ -1,0 +1,172 @@
+
+.모달그룹 {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.모달배경 {
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    opacity: 60%;
+}
+
+.diary_area {
+    width: 40rem;
+    /* min-width: 40rem;
+    max-width: 47.5rem; */
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2.5rem;
+    border-radius: 24px;
+    border: 0.0625rem solid var(--인풋보더색);
+    background-color: var(--기본배경색);
+    text-align: left;
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 1.5rem; 
+    color: var(--기본글자색);
+
+    position: absolute;
+    top: calc(50% - 560px / 2);
+    left: calc(50% - 640px / 2);
+}
+
+
+.등록완료모달,
+.등록삭제모달,
+.일기삭제모달 {
+    display: flex;
+    width: 30rem;
+    height: 12.5rem;
+    padding: 1.5rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    background-color: var(--기본배경색);
+    border-radius: 24px;
+
+    position: absolute;
+    top: calc(50% - 12.5rem/2);
+    left: calc(50% - 30rem/2);
+}
+
+.등록완료모달_타이틀,
+.일기삭제모달_타이틀 {
+    color: var(--기본글자색);
+    text-align: center;
+    text-align: center;
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.5rem; /* 100% */
+    letter-spacing: -0.015rem;
+    display: inline-block;    
+    position: relative;    
+    text-align: center;
+    
+}
+
+.등록완료모달_내용,
+.일기삭제모달_내용 {
+    color:  var(--등록완료모달글자색);
+    text-align: center; 
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.5rem; /* 120% */
+    letter-spacing: -0.0125rem;
+    display: inline-block;
+    position: relative;
+}
+
+.등록완료모달_텍스트,
+.일기삭제모달_텍스트 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.등록완료모달_확인 {
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    padding: 0.5rem 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 8px;
+    background-color: var(--등록하기버튼배경색);
+    cursor: pointer;
+    color: var(--등록하기버튼글자색);
+    text-align: center;
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem
+}
+
+.등록완료모달_등록취소,
+.일기삭제모달_삭제,
+.save_button {
+    display: flex;
+    width: 6.5rem;
+    height: 3rem;
+    padding: 0.5rem 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 8px;
+    background-color: var(--등록하기버튼배경색);
+    cursor: pointer;
+    color: var(--등록하기버튼글자색);
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem
+}
+
+.save_button:disabled {
+    background-color: var(--등록하기버튼비활성);
+    color: var(--등록하기버튼비활성글자색);
+}
+
+.등록완료모달_계속작성,
+.일기삭제모달_취소,
+.close_button {
+    display: flex;
+    width: 6.5rem;
+    height: 3rem;
+    padding: 0.5rem 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 8px;
+    border: 0.063rem solid var(--닫기버튼보더색);
+    background-color: var(--닫기버튼배경색);
+
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem;
+    cursor: pointer;
+    color: var(--기본글자색);
+}
+
+.diary_button_group{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
