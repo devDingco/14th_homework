@@ -1,8 +1,8 @@
-* {
+/* * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-}
+} */
 
 .게시글상세화면_프레임 {
   display: flex;
@@ -23,15 +23,6 @@
   flex-shrink: 0;
 }
 
-h1 {
-  color: #000;
-
-  /* b_28_36 */
-  font-size: 1.75rem;
-  font-weight: 700;
-  line-height: 2.25rem; /* 128.571% */
-}
-
 .바디_정보 {
   max-width: 80rem;
   width: 100%;
@@ -43,7 +34,7 @@ h1 {
   align-self: stretch;
 }
 
-.프로필-작성일자 {
+.프로필and작성일자 {
   display: flex;
   align-items: center;
   gap: 3.375rem;
@@ -80,7 +71,7 @@ h1 {
   line-height: 1.25rem; /* 142.857% */
 }
 
-.링크-위치 {
+.링크and위치 {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -181,7 +172,7 @@ h1 {
   line-height: 1.25rem; /* 142.857% */
 }
 
-.하단_목록-수정 {
+.하단_목록and수정 {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,9 +1,3 @@
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
 .게시물등록_frame {
   display: flex;
   /* max-width: 120rem; */
@@ -24,36 +18,39 @@
   flex-shrink: 0;
 }
 
-hr {
-  max-width: 80rem;
-  width: 100%;
-
-  border: none;
-  height: 0.125rem;
-  background: var(--gray-100, #e4e4e4);
-}
-
 .게시물등록_사용자인풋 {
   max-width: 80rem;
   width: 100%;
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   gap: 0.5rem;
-  flex: 1 0 0;
+  /* flex: 1 0 0; */
 }
 
 .게시물등록_라벨 {
   display: flex;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   gap: 0.25rem;
-  align-self: stretch;
+  /* align-self: stretch; */
 
   color: var(--gray-800, #333);
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5rem; /* 150% */
+}
+
+.게시물등록_플레이스홀더_내용 {
+  resize: none;
+  color: var(--Gray-Gray-400, #ababab);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem; /* 150% */
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
 }
 
 .게시물등록_플레이스홀더 {
@@ -78,15 +75,11 @@ hr {
   background: var(--Gray-W, #fff);
 }
 
-.게시물등록_작성자-비밀번호 {
+.게시물등록_작성자and비밀번호 {
   display: flex;
   align-items: flex-start;
   gap: 2.5rem;
   align-self: stretch;
-}
-
-#내용 {
-  height: 21rem;
 }
 
 .게시물등록_주소인풋 {
@@ -204,7 +197,7 @@ hr {
   height: 1.5rem;
 
   color: var(--gray-600, #777);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 400;
   line-height: 1.5rem; /* 150% */
 }
@@ -213,7 +206,7 @@ hr {
   display: none;
 }
 
-.게시물등록_취소-등록하기버튼 {
+.게시물등록_취소and등록하기버튼 {
   display: flex;
   justify-content: flex-end;
   align-items: center;
