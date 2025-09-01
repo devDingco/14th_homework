@@ -15,6 +15,7 @@ const 입력확인 = () => {
 };
 
 const 일기작성__등록 = () => {
+    
     const 제목 = document.getElementById("제목입력").value;
     console.log("제목: " + 제목)
 

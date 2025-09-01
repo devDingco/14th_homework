@@ -1,0 +1,341 @@
+ # 1)
+# query{
+#   fetchProfile(name:"철수"){
+#     name, age
+#   }
+# }
+
+# 2)
+# query{
+#   fetchProfile(name:"영희"){
+# school
+#   }
+# }
+
+# 3)
+# query{
+#   fetchBoard(number:3){
+#     contents, createdAt
+#   }
+  	
+# }
+
+# 4)
+# mutation{
+#   createProfile(
+#     name:"성준",
+#     age:25,
+#     school:"라떼초등학교"
+#   ){
+#     number, message
+#   }
+# }
+
+# 5)
+# mutation{
+#   createBoard(
+#     writer:"성준",
+#     title: "숙제숙제",
+#     contents:"집가고싶다"
+#   ){
+#     _id,number,message
+#   }
+# }
+
+# 6)
+# query{
+#   fetchProfile(name:"성준"){
+#     number, name, age, school
+#   }
+# }
+
+
+# 7)
+# query{
+#   fetchBoard(number:376){
+#     number, writer, title, contents, like, createdAt
+#   }
+# }
+
+# 8)
+# mutation{
+#   updateProfile(
+#     name:"성준"
+#     age:25
+#     school:"시골초교"){
+#     number, message
+#   }
+# }
+
+# 9)
+# mutation{
+#   updateBoard(
+#     number:376,
+#     title:"제목변경",
+#     contents:"제목변경한내용"
+#   ){
+#     number, message
+#   }
+# }
+
+# 10)
+# mutation{
+#   createProfile(
+#     name:"청명",
+#     age:184,
+#     school:"화산"
+#   ){
+#     number, message
+#   }
+# }
+
+# 11)
+# mutation{
+#   deleteProfile(name:"청명"){
+#     number, message
+#   }
+# }
+
+# 12)
+# mutation{
+#   createProduct(
+#     seller:"라떼",
+#   	createProductInput:{
+#       name:"라떼무선키보드",
+#       detail:"라떼네무선키보드입니다.",
+#       price:70000
+#     }
+#   ) {
+#     _id
+#     number
+#     message
+#   }
+# }
+# id) 61a18579-3fa8-4c43-9e94-c02d445f1cbf
+
+# 13)
+# mutation{
+#   updateProduct(
+#     productId:"61a18579-3fa8-4c43-9e94-c02d445f1cbf"
+#     updateProductInput:{
+#       price:70500
+#     }
+#   ){
+#     number, message
+#   }
+# }
+
+# 14)
+# query{
+#   fetchProduct(productId:"61a18579-3fa8-4c43-9e94-c02d445f1cbf"){
+#     price
+#   }
+# }
+
+# 15)
+# mutation{
+#   deleteProduct(productId:"61a18579-3fa8-4c43-9e94-c02d445f1cbf"){
+#     number, message
+#   }
+# }
+
+# 16)
+# query{
+#   fetchProduct(productId:"61a18579-3fa8-4c43-9e94-c02d445f1cbf"){
+#     seller, name, name, detail, price, createdAt
+#   }
+# }
+
+# 17)
+# query{
+#   fetchBoards(page:2){
+#     number, writer, title, contents, like, createdAt
+#   }
+# }
+
+# 18)
+# query{
+#   fetchBoards{
+#     number, writer, title, contents, like, createdAt
+#   }
+# }
+# page 입력안할시 1페이지 출력
+
+# 19)
+# query{
+#   fetchProfilesCount
+# }
+
+# 20)
+# query{
+#   fetchBoardsCount
+# }
+
+# 레벨2 ###################################################################################
+
+# 1)
+# mutation{
+#   createBoard(createBoardInput:{
+#     writer:"라뗴",
+#     password:"라떼123",
+#     title:"라뗴의게시글",
+#     contents:"라떼의게시그 ㄹ내ㅛㅇㅇ내용내ㅛㅇㅇ",
+#     images:"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.utoimage.com%2F%3Fm%3Dgoods.free%26mode%3Dview%26idx%3D22250682&psig=AOvVaw3sDsE4a1VLWcaz9uRHXW00&ust=1756793441056000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCJDCr9rzto8DFQAAAAAdAAAAABAE"
+#   }){
+#     _id,writer,title
+#   }
+# }
+#id: 68b538f1db6659002999862e
+
+# 2)
+# query{
+#   fetchBoard(boardId:"68b538f1db6659002999862e"){
+#     writer, title, images
+#   }
+# }
+
+# 3)
+# mutation{
+#   likeBoard(boardId:"68b538f1db6659002999862e")
+# }
+
+# 4)
+# mutation{
+#   dislikeBoard(boardId:"68b538f1db6659002999862e")
+# }
+
+# 5)
+# query{
+#   fetchBoard(boardId:"68b538f1db6659002999862e"){
+#     likeCount,dislikeCount
+#   }
+# }
+
+# 6)
+# query{
+#   fetchBoardsCount
+# }
+
+# 7)
+# mutation{
+#   updateBoard(
+#     boardId:"68b538f1db6659002999862e",
+#     password:"라떼123",
+#     updateBoardInput:{
+#       title:"라뗴의게시판수정된제목"
+#     }
+#   ){
+#     title
+#   }
+# }
+
+# 8)
+# query{
+#   fetchBoards(search:"라뗴의게시판"){
+#     _id, writer, title, contents, likeCount, dislikeCount
+#   }
+# }
+
+# 9)
+# mutation{
+#   createBoardComment(
+#     boardId:"68b538f1db6659002999862e",
+#     createBoardCommentInput:{
+#       writer:"댓글1",
+#       password:"123",
+#       contents:"게시판에댓글달기1",
+#       rating:5
+#     }
+#   ){
+#     _id
+#   }
+# }
+
+# mutation{
+#   createBoardComment(
+#     boardId:"68b538f1db6659002999862e",
+#     createBoardCommentInput:{
+#       writer:"댓글2",
+#       password:"123",
+#       contents:"게시판에댓글달기2",
+#       rating:3
+#     }
+#   ){
+#     _id
+#   }
+# }
+
+# mutation{
+#   createBoardComment(
+#     boardId:"68b538f1db6659002999862e",
+#     createBoardCommentInput:{
+#       writer:"댓글3",
+#       password:"123",
+#       contents:"게시판에댓글달기3",
+#       rating:1
+#     }
+#   ){
+#     _id
+#   }
+# }
+
+# query{
+#   fetchBoardComments(boardId:"68b538f1db6659002999862e"
+#   page:1
+#   ){
+#     writer, contents,rating,_id, createdAt
+#   }
+# }
+
+# 10)
+# mutation{
+#   updateBoardComment(
+#     boardCommentId:"68b53946db66590029998630",
+#   	password:"123",
+#     updateBoardCommentInput:{
+#       contents:"내용수정하기수정하기"
+#     }
+#   ){
+#      _id, contents
+#   }
+# }
+
+# 11)
+# mutation{
+#   deleteBoardComment(
+#     boardCommentId:"68b5394ddb66590029998631",
+#     password:"123"
+#   )
+# }
+
+    
+# 12)
+# query{
+#   fetchBoardComments(boardId:"68b53090db66590029998620"
+#   page:1
+#   ){
+#     writer, contents,rating,_id, createdAt
+#   }
+# }
+
+# 13)
+# query{
+#   fetchBoardsOfTheBest{
+#     _id, writer, title,contents,likeCount,dislikeCount, images,createdAt,updatedAt
+#   }
+# }
+
+
+# 14)
+# mutation{
+#   createUser(createUserInput:{
+#     email:"latte123@gmail.com",
+#     password:"라떼123",
+#     name:"라떼"
+#   }){
+#     _id, email,name,createdAt
+#   }
+# }
+
+
+    

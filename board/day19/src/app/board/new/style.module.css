@@ -1,67 +1,55 @@
+.전체바탕 {
 
+  padding: 40px 0px 40px 0px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px; 
+}
 
-body{
-    padding: 0;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
+.input {
+  width: 1280px;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid rgb(184, 171, 171);
+}
+
+.input::placeholder{
+  padding-left: 8px;
+}
+
+.textarea{
+  width: 1280px;
+  height: 336px;
+  border-radius: 10px;
+  border: 1px solid rgb(184, 171, 171);
+}
+
+.textarea::placeholder{
+  padding-top: 8px;
+  padding-left: 8px;
+}
   
+
+  
+  .main{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
   }
   
-  
-  #root{
-    padding: 40px 0px 40px 0px;
+  .head{
     width: 1280px;
-    height: 1588px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-  }
-  
-  #main{
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-  
-  #head{
     text-align: left;
-    width: 100%;
+    /* width: 100%; */
     font-size: 24px;
     font-weight: bold;
+
   }
   
-  input {
-    width: 1280px;
-    height: 48px;
-    border-radius: 10px;
-    border: 1px solid rgb(184, 171, 171);
-  }
-  
-  input::placeholder{
-    padding-left: 8px;
-  }
-  
-  textarea{
-    width: 1280px;
-    height: 336px;
-    border-radius: 10px;
-    border: 1px solid rgb(184, 171, 171);
-  }
-  
-  textarea::placeholder{
-    padding-top: 8px;
-    padding-left: 8px;
-  }
-  
-  hr{
-    margin: 0;
-    height: 1px;
-    border: none;
-    background-color: rgb(173, 168, 168) ;
-    width: 100%;
-  }
+
   
   .필수{
     color: red;
@@ -85,26 +73,27 @@ body{
     height: 48px;
   }
   
-  #메인__주소__주소검색{
+  .메인__주소__주소검색{
     display: flex;
     gap: 8px;
   }
   
-  #주소검색인풋{
+  .주소검색인풋{
     width: 82px;
     height: 48px;
   }
   
-  #주소검색버튼{
+  .주소검색버튼{
     width: 130px;
     height: 48px;
     font-size: 17px;
     border-radius: 10px;
     background-color: white;
     font-weight: bold;
+    border: 1px solid;
   }
   
-  #사진첨부목록{
+  .사진첨부목록{
     display: flex;
     gap: 16px;
   }
@@ -122,7 +111,7 @@ body{
     
   }
   
-  #footer{
+  .footer{
     width: 1280px;
     height: 48px;
     display: flex;
@@ -130,18 +119,19 @@ body{
     gap: 16px;
   }
   
-  #푸터취소버튼{
+  .푸터취소버튼{
     width: 64px;
     height: 48px;
     border-radius: 10px;
     background-color: white;
     font-size: 18px;
+    border: 1px solid;
   }
   
-  #푸터등록버튼{
+  .푸터등록버튼{
     width: 95px;
     height: 48px;
-    background-color: #2974E5;
+    background-color: .2974E5;
     color: white;
     border-radius: 10px;
     font-size: 18px;
