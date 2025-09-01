@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>별점 라이브러리 직접 만들기</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .star {
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .star:hover {
+            transform: scale(1.2);
+        }
+        
+        .rating-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 20px;
+            height: 40px;
+        }
+        
+        .rating-value {
+            color: #e74c3c;
+            font-size: 32px;
+        }
+        
+        .description {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: left;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .description h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        footer {
+            margin-top: 30px;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⭐ 별점 라이브러리 직접 만들기</h1>
+        
+        <div class="star-rating" id="starRating">
+            <!-- 별점 이미지들이 여기에 동적으로 추가됩니다 -->
+        </div>
+        
+        <div class="rating-text">
+            현재 선택: <span class="rating-value" id="ratingValue">0점</span>
+        </div>
+        
+        <div class="description">
+            <h3>사용 방법</h3>
+            <p>처음에는 <span class="highlight">회색 별 5개</span>가 보여집니다.</p>
+            <p>별을 클릭하면 <span class="highlight">클릭한 별과 그 왼쪽의 모든 별이 노란색으로 변합니다</span>.</p>
+            <p>예를 들어, 3번째 별을 클릭하면 1, 2, 3번 별이 노란색으로 변합니다.</p>
+            <p>별점 아래에는 <span class="highlight">선택한 점수가 표시됩니다</span>.</p>
+        </div>
+    </div>
+    
+    <footer>
+        Day 19 퀴즈
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const starRating = document.getElementById('starRating');
+            const ratingValue = document.getElementById('ratingValue');
+            
+            // Base64로 인코딩된 별 이미지들
+            const yellowStar = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZkNzNjIiBkPSJNNDk2IDIwMGMtMTAtMTItMjYtMTYtNDAtMTBsLTExMiAyNGwtNDgtMTEyYy02LTE0LTIwLTI0LTM2LTI0cy0zMCAxMC0zNiAyNGwtNDggMTEyTDU2IDE5MGMtMTQtNi0zMC0yLTQwIDEwcy0xMiAyOC0yIDQwbDg4IDgwbC0yNCAxMTJjLTIgMTQgNCAyOCAxNiAzNmwxMDQgNjRsMTA0LTY0YzEyLTggMTgtMjIgMTYtMzZsLTI0LTExMmw4OC04MGMxMC0xMiAxMC0yOC0yLTQweiIvPjwvc3ZnPg==";
+            const grayStar = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjY2NjY2NjIiBkPSJNNDk2IDIwMGMtMTAtMTItMjYtMTYtNDAtMTBsLTExMiAyNGwtNDgtMTEyYy02LTE0LTIwLTI0LTM2LTI0cy0zMCAxMC0zNiAyNGwtNDggMTEyTDU2IDE5MGMtMTQtNi0zMC0yLTQwIDEwcy0xMiAyOC0yIDQwbDg4IDgwbC0yNCAxMTJjLTIgMTQgNCAyOCAxNiAzNmwxMDQgNjRsMTA0LTY0YzEyLTggMTgtMjIgMTYtMzZsLTI0LTExMmw4OC04MGMxMC0xMiAxMC0yOC0yLTQweiIvPjwvc3ZnPg==";
+            
+            let currentRating = 0;
+            const totalStars = 5;
+            
+            // 별점 생성
+            for (let i = 1; i <= totalStars; i++) {
+                const star = document.createElement('img');
+                star.className = 'star';
+                star.src = grayStar;
+                star.dataset.rating = i;
+                
+                star.addEventListener('click', function() {
+                    currentRating = parseInt(this.dataset.rating);
+                    updateStars(currentRating);
+                    ratingValue.textContent = `${currentRating}점`;
+                });
+                
+                starRating.appendChild(star);
+            }
+            
+            // 별점 업데이트 함수
+            function updateStars(rating) {
+                const stars = starRating.querySelectorAll('.star');
+                stars.forEach((star, index) => {
+                    if (index < rating) {
+                        star.src = yellowStar;
+                    } else {
+                        star.src = grayStar;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

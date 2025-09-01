@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>트립토크 게시판</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 30px 25px;
+            position: relative;
+        }
+        
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .post-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .author {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ff9f43;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 20px;
+            color: white;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .post-meta {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+        
+        .post-meta div {
+            margin-right: 20px;
+        }
+        
+        hr {
+            border: none;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 20px 0;
+        }
+        
+        .board-info {
+            padding: 20px 25px;
+            background: #f1f8ff;
+        }
+        
+        .board-info h2 {
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .date-range {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        
+        .search-box {
+            background: white;
+            border: 2px solid #3498db;
+            border-radius: 30px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            padding: 5px;
+        }
+        
+        .search-box i {
+            color: #3498db;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .pagination a {
+            color: #3498db;
+            padding: 10px 15px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .pagination a:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        .beach-scene {
+            position: absolute;
+            right: 25px;
+            top: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .parasol {
+            font-size: 40px;
+            color: #ff9f43;
+            margin-right: 10px;
+        }
+        
+        .beach-chair {
+            font-size: 30px;
+            color: #3498db;
+        }
+        
+        .beach-chair-icon {
+            font-size: 24px;
+            color: #ff9f43;
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>오늘 핫한 트립토크</h1>
+            <p>트립토크 게시글 제목이 들어갑니다.</p>
+            
+            <div class="post-info">
+                <div class="author">
+                    <div class="author-avatar">👩</div>
+                    <div class="author-name">홍길동</div>
+                </div>
+                <div class="post-meta">
+                    <div>❤️ 24</div>
+                    <div>2024.11.11</div>
+                </div>
+            </div>
+            
+            <div class="beach-scene">
+                <div class="parasol"><i class="fas fa-umbrella-beach"></i></div>
+                <div class="beach-chair"><i class="fas fa-chair"></i></div>
+                <div class="beach-chair-icon"><i class="fas fa-chair"></i></div>
+            </div>
+            
+            <hr>
+        </header>
+        
+        <div class="board-info">
+            <h2>트립토크 게시판</h2>
+            <div class="date-range">YYYY .MM .DD - YYYY .MM .DD</div>
+            <p>필요한 내용을 검색해 주세요.</p>
+            
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="검색">
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>상품 명</th>
+                        <th>작성자</th>
+                        <th>날짜</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>243</td>
+                        <td>제주 살이 1일차제...</td>
+                        <td>홍길동</td>
+                        <td>2024.12.16</td>
+                    </tr>
+                    <tr>
+                        <td>243</td>
+                        <td>제주 살이 1일차제...</td>
+                        <td>홍길동</td>
+                        <td>2024.12.16</td>
+                    </tr>
+                    <tr>
+                        <td>243</td>
+                        <td>제주 살이 1일차제...</td>
+                        <td>홍길동</td>
+                        <td>2024.12.16</td>
+                    </tr>
+                    <tr>
+                        <td>243</td>
+                        <td>제주 살이 1일차제...</td>
+                        <td>홍길동</td>
+                        <td>2024.12.16</td>
+                    </tr>
+                    <tr>
+                        <td>243</td>
+                        <td>제주 살이 1일차제...</td>
+                        <td>홍길동</td>
+                        <td>2024.12.16</td>
+                    </tr>
+                    <tr>
+                        <td>243</td>
+                        <td>제주 살이 1일차제...</td>
+                        <td>홍길동</td>
+                        <td>2024.12.16</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="pagination">
+                <a href="#">&lt;</a>
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">&gt;</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
