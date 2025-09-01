@@ -4,33 +4,48 @@ import rectangleIcon from './assets/Rectangle 1.svg'
 import closeIcon from './assets/close-icon.svg'
 import kakaoIcon from './assets/kakao-icon.svg'
 function App() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('000000')
+  const [password, setPassword] = useState('000000')
 
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
 
-  const handleChange = () => {}
+  const handleChangeEmail = (event) => {
+    setEmail(event.target.value)
+  }
+  const handleChangePassword = (event) => {
+    setPassword(event.target.value)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    if (!email.includes('@')) setEmailError('이메일에 @가 없습니다.')
+    else setEmailError('')
+
+    if (password.length < 8) setPasswordError('8-16자의 영문, 숫자, 특수 문자만 사용 가능합니다.')
+    else setPasswordError('')
+  }
+
   return (
     <div className="App">
       <div className="main-icons">
         <img src={rectangleIcon} />
       </div>
       <h1>잇츠로드</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="signIn-input-group">
           <div className="signIn-input">
-            <input value="simplelife@gmail.com" type="text" />
+            <input placeholder="simplelife@gmail.com" type="text" onChange={handleChangeEmail} />
             <img src={closeIcon} />
           </div>
-          <span className="error-message">이메일 주소를 다시 확인해주세요.</span>
+          <span className="error-message">{emailError}</span>
         </div>
         <div className="signIn-input-group">
           <div className="signIn-input">
-            <input value="●●●●●●●●" type="password" />
+            <input placeholder="●●●●●●●●" type="password" onChange={handleChangePassword} />
             <img src={closeIcon} />
           </div>
-          <span className="error-message">8~16자의 영문, 숫자, 특수 문자만 사용 가능합니다.</span>
+          <span className="error-message">{passwordError}</span>
         </div>
         <button className="pink-btn" type="submit">
           로그인
