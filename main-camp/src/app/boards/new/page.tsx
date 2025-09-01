@@ -1,6 +1,8 @@
-import { ChangeEvent, MouseEvent, useState } from 'react'
-import WriteButton from "../../../components/WriteButton"
-import WriteInput from "../../../components/WriteInput"
+"use client"
+import { ChangeEvent, useState } from 'react'
+import styles from './style.module.css'
+import WriteButton from "../../components/boards/WriteButton"
+import WriteInput from "../../components/boards/WriteInput"
 
 // 게시글 등록 페이지
 const BoardsNew = () => {
@@ -43,19 +45,39 @@ const BoardsNew = () => {
             for (let i=0; i < forValArr.length; i++) {
                 switch(i) {
                     case 0: {
-                        forValArr[i] === "" ? setWriterErr("필수입력 사항 입니다.") : setWriterErr("")
+                        if (forValArr[i] === "") {
+                            setWriterErr("필수입력 사항 입니다.")
+                        } else {
+                            setWriterErr("")
+                        }
+                        // forValArr[i] === "" ? setWriterErr("필수입력 사항 입니다.") : setWriterErr("")
                         break
                     }
                     case 1: {
-                        forValArr[i] === "" ? setPasswordErr("필수입력 사항 입니다.") : setPasswordErr("")
+                        if (forValArr[i] === "") {
+                            setPasswordErr("필수입력 사항 입니다.")
+                        } else {
+                            setPasswordErr("")
+                        }
+                        // forValArr[i] === "" ? setPasswordErr("필수입력 사항 입니다.") : setPasswordErr("")
                         break
                     }
                     case 2: {
-                        forValArr[i] === "" ? setTitleErr("필수입력 사항 입니다.") : setTitleErr("")
+                        if (forValArr[i] === "") {
+                            setTitleErr("필수입력 사항 입니다.")
+                        } else {
+                            setTitleErr("")
+                        }
+                        // forValArr[i] === "" ? setTitleErr("필수입력 사항 입니다.") : setTitleErr("")
                         break
                     }
                     case 3: {
-                        forValArr[i] === "" ? setContentErr("필수입력 사항 입니다.") : setContentErr("")
+                        if (forValArr[i] === "") {
+                            setContentErr("필수입력 사항 입니다.")
+                        } else {
+                            setContentErr("")
+                        }
+                        // forValArr[i] === "" ? setContentErr("필수입력 사항 입니다.") : setContentErr("")
                         break
                     }
                     default:
@@ -71,35 +93,35 @@ const BoardsNew = () => {
     }
 
     return (
-        <div id="main">
-            <h1 className="b_20_28">게시물 등록</h1>
-            <div id="board_container">
-                <section id="write_form_container">
-                    <form className="write_form_80h flex_row">
+        <div id="main" className={`${styles.new_main}`}>
+            <h1 className={`b_20_28`}>게시물 등록</h1>
+            <div id="" className={`${styles.board_container}`}>
+                <section id="" className={`${styles.write_form_container}`}>
+                    <form className={`${styles.write_form_80h} flex_row`}>
                         <WriteInput setState={onChangePosting("작성자")} label={"작성자"} placeholder={"작성자 명을 입력해 주세요."} errMsg={writerErr}/>
                         <WriteInput setState={onChangePosting("비밀번호")} label={"비밀번호"} placeholder={"비밀번호를 입력해 주세요."} errMsg={passwordErr}/>
                     </form>
                     <hr />
-                    <form className="write_form_80h flex_row">
+                    <form className={`${styles.write_form_80h} flex_row`}>
                         <WriteInput setState={onChangePosting("제목")} label={"제목"} placeholder={"제목을 입력해 주세요."} errMsg={titleErr}/>
                     </form>
                     <hr />
-                    <form className="write_form_368h flex_row">
+                    <form className={`${styles.write_form_368h} flex_row`}>
                         <WriteInput setState={onChangePosting("내용")} label={"내용"} placeholder={"내용을 입력해 주세요."} errMsg={contentErr}/>
                     </form>
-                    <form className="write_form_192h flex_column">
+                    <form className={`${styles.write_form_192h} flex_column`}>
                         <WriteInput label={"주소"} placeholder={"주소를 입력해 주세요."}/>
                     </form>
                     <hr />
-                    <form className="write_form_80h flex_row">
+                    <form className={`${styles.write_form_80h} flex_row`}>
                         <WriteInput label={"유튜브 링크"} placeholder={"링크를 입력해 주세요."}/>
                     </form>
                     <hr />
-                    <form className="write_form_192h flex_row">
+                    <form className={`${styles.write_form_192h} flex_row`}>
                         <WriteInput label={"사진 첨부"}/>
                     </form>
                 </section>
-                <div id="write_confirm_container" className="flex_row flex_justi_end">
+                <div id="" className={`${styles.write_confirm_container} flex_row flex_justi_end`}>
                     <WriteButton state={{ writer, password, title, content }} p="취소"/>
                     <WriteButton state={{ writer, password, title, content }} setState={onClickResist} p="등록하기"/>
                 </div>

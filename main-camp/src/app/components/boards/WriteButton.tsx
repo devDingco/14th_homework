@@ -1,4 +1,6 @@
+"use client"
 import { FunctionComponent, MouseEventHandler, useState } from 'react'
+import styles from './style.module.css'
 
 type Props = {
     state: {
@@ -30,12 +32,12 @@ const WriteButton:FunctionComponent<Props> = (props) => {
     switch (props.p) {
         case "취소": {
             btnComponent =
-            <button className="write_cancel_btn sb_18_24" style={{ whiteSpace: "nowrap" }}>{props.p}</button>
+            <button className={`${styles.write_cancel_btn} sb_18_24`} style={{ whiteSpace: "nowrap" }}>{props.p}</button>
             break
         }
         case "등록하기": {
             btnComponent =
-            <button className="write_confirm_btn sb_18_24" onClick={props.setState} style={{ background: isActive === true ? "rgba(41, 116, 229, 1)" : "rgba(199, 199, 199, 1)" }}>{props.p}</button>
+            <button className={`${styles.write_confirm_btn} sb_18_24`} onClick={props.setState} style={{ background: isActive === true ? "rgba(41, 116, 229, 1)" : "rgba(199, 199, 199, 1)" }}>{props.p}</button>
             break
         }
         default:
