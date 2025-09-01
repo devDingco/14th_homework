@@ -1,0 +1,459 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+input[type='ratio'] {
+  fill: #491449;
+}
+
+.container {
+  width: 1920px;
+  height: 1208px;
+  background-image: url('./assets/images/bg1.png');
+}
+
+.header {
+  width: 1920px;
+  height: 80px;
+  display: flex;
+}
+
+.header__left {
+  width: 480px;
+  height: 80px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 16px;
+  padding-right: 16px;
+}
+
+.header__right {
+  width: 1440px;
+  height: 80px;
+  /* background-color: blue; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 80px;
+}
+
+.header__right__test {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.main {
+  width: 1920px;
+  height: 1048px;
+  display: flex;
+  /* background-color: green; */
+}
+
+.main__sidebar_left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 1048px;
+  /* padding: 40px; */
+  /* background-color: pink; */
+}
+
+.main__sidebar_left_inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-right: 20px;
+  padding-left: 20px;
+  /* background-color: orange; */
+  justify-content: space-between;
+}
+
+.main__sidebar_left_inner__navbar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  color: #e4e4e4;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  font-weight: 600;
+}
+
+.main__sidebar_left_inner__more {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nav_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.main__center {
+  width: 1760px;
+  height: 1048px;
+  display: flex;
+  background-image: url('./assets/images/bg2.png');
+}
+
+.main_center__inner {
+  width: 400px;
+  height: 1048px;
+  padding: 20px;
+}
+
+.main__center__inner__header {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.main__center__inner__header_a {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main__center__inner__header_a > span {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: #fff;
+}
+
+.main__center__inner__header_b {
+  display: flex;
+  gap: 8px;
+  color: #491449;
+  background-color: white;
+  font-size: 24px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+.main__center__inner__body {
+  color: white;
+}
+
+.main_center__register {
+  width: 680px;
+  height: 1048px;
+  /* background-color: green; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.main_center__register__title {
+  /* background-color: green; */
+  white-space: pre-line;
+  font-size: 40px;
+}
+
+.main_center__register__title > p {
+  width: 560px;
+  height: 112px;
+  color: #491449;
+  font-weight: bold;
+}
+
+.main_center__register__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.main_center__register__content__input,
+.main_center__register__content__input_radio {
+  display: flex;
+  width: 448px;
+  height: 44px;
+  gap: 8px;
+}
+
+.main_center__register__content__input > label,
+.main_center__register__content__input_radio > label,
+.main_center__register__content__input_textarea > label {
+  display: flex;
+  align-items: center;
+  color: #333;
+  font-size: 20px;
+  text-align: left;
+  width: 120px;
+  height: 44px;
+}
+
+.main_center__register__content__input_radio > .ratio {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.main_center__register__content__input > div {
+  display: flex;
+  width: 448px;
+  height: 44px;
+  gap: 8px;
+}
+
+.main_center__register__content__input__code {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.main_center__register__content__input__code div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  align-items: center;
+}
+
+.main_center__register__content__input__code span {
+  font-weight: 500;
+  font-size: 18px;
+  color: #955c98;
+}
+
+.main_center__register__content__input__code button {
+  border: 1px #491449;
+  display: flex;
+  width: 136px;
+  height: 40px;
+  border-radius: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 8px;
+}
+.main_center__register__content__input__code button span {
+  width: 112px;
+  height: 24px;
+  padding-bottom: 8px;
+  color: #491449;
+  font-weight: 600;
+  /* font-size: 20px; */
+  line-height: 24px;
+  letter-spacing: 0%;
+}
+
+.main_center__register__content__input__code > label {
+  display: flex;
+  align-items: center;
+  color: #333;
+  font-size: 20px;
+  text-align: left;
+  width: 120px;
+  height: 44px;
+}
+
+.main_center__register__content__input > input,
+textarea {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  width: 320px;
+  height: 44px;
+  border-radius: 8px;
+  border: 1px #c7c7c7;
+  color: #ababab;
+  padding: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.main_center__register__content__input_textarea {
+  display: flex;
+  width: 448px;
+  gap: 8px;
+  font-weight: 400;
+  height: 116px;
+}
+
+.main_center__register__content__input_checkbox {
+  font-size: 24px;
+}
+
+.main_center__register__content__input_textarea > textarea {
+  font-weight: 400;
+  height: 116px;
+}
+.main_center__picture {
+  width: 680px;
+  height: 1048px;
+  background-image: url('./assets/images/picture.png');
+}
+
+.main__sidebar_right {
+  width: 80px;
+  height: 1048px;
+  /* background-color: skyblue; */
+}
+
+.footer {
+  width: 1920px;
+  height: 80px;
+  /* background-color: blue; */
+}
+
+.joinBtn {
+  width: 100%;
+  min-width: 120px;
+  max-width: 448px;
+  height: 48px;
+  border-radius: 8px;
+  border: none;
+  background-color: #471747;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.joinBtn:disabled {
+  background-color: #c7c7c7;
+  color: white;
+}
+.joinBtn span {
+  font-size: 24px;
+  font-weight: 600;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+.authInput,
+.authInput:focus {
+  width: 67px;
+  height: 44px;
+  border-radius: 8px;
+  border: none;
+  padding: 2px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #d5bce4;
+  /* opacity: 0; */
+  color: #925e95;
+  text-align: right;
+  font-size: 18px;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  font-weight: 500;
+}
+
+.invalidInput {
+  border: 2px solid #e84f4f !important;
+}
+
+.codecampText {
+  display: flex;
+  padding: 4px 0;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.codecampText__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stateBadge {
+  display: flex;
+  padding: 4px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+}
+
+.userTitle {
+  display: flex;
+  padding: 4px 0;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.test {
+  display: flex;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  color: var(--Primary-P-L300, #c9aac9);
+  text-align: center;
+  font-family: 'Pretendard Variable';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+
+.test2 {
+  display: flex;
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--Primary-P-main, #491449);
+}
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+}
+
+.userListHeader {
+  display: flex;
+  padding: 4px 0;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.channelList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 4px 16px;
+  gap: 8px;
+  align-self: stretch;
+  list-style: none;
+  color: #d4d3d3;
+}
