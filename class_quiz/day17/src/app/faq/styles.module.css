@@ -1,0 +1,129 @@
+.myPage {
+  width: 100%;
+  border: solid 1px #525252;
+  padding: 4rem 5rem 0 5rem;
+}
+
+.myPage svg {
+  margin-left: auto;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 3rem;
+}
+.header img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background-color: hotpink;
+}
+.header > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+.title {
+  color: #000;
+  text-align: center;
+  font-family: 'Noto Sans KR';
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.name {
+  color: #000;
+  text-align: center;
+  font-family: 'Noto Sans KR';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem 0 6rem 0;
+}
+.nav p {
+  color: #cacaca;
+  text-align: center;
+  font-family: 'Noto Sans KR';
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-bottom: solid 0.4rem transparent;
+}
+.active {
+  color: var(--color-pink) !important;
+  border-bottom: solid 0.4rem var(--color-pink) !important;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 0 5rem 0;
+  gap: 4.5rem;
+}
+.question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.num {
+  color: var(--color-gray-400);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-bottom: 1rem;
+}
+.questionTitle {
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.question svg {
+  color: #adadad;
+  stroke-width: 2px;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  color: var(--color-gray-400);
+}
+
+.footer > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 6rem;
+}
+
+.footer > div svg {
+  display: block;
+  margin: 0 auto;
+  padding-bottom: 0.5rem;
+}
+.iconActive {
+  color: var(--color-pink) !important;
+}
