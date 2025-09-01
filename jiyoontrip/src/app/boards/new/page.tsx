@@ -17,45 +17,25 @@ export default function NewPage() {
 
   const onChangeAuthor = (event: ChangeEvent<HTMLInputElement>) => {
     setAuthor(event.target.value);
-    if (
-      event.target.value !== "" &&
-      password !== "" &&
-      title !== "" &&
-      content !== ""
-    ) {
+    if (event.target.value !== "" && password !== "" && title !== "" && content !== "") {
       setIsActive(true);
     }
   };
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-    if (
-      author !== "" &&
-      event.target.value !== "" &&
-      title !== "" &&
-      content !== ""
-    ) {
+    if (author !== "" && event.target.value !== "" && title !== "" && content !== "") {
       setIsActive(true);
     }
   };
   const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
-    if (
-      author !== "" &&
-      password !== "" &&
-      event.target.value !== "" &&
-      content !== ""
-    ) {
+    if (author !== "" && password !== "" && event.target.value !== "" && content !== "") {
       setIsActive(true);
     }
   };
   const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
-    if (
-      author !== "" &&
-      password !== "" &&
-      title !== "" &&
-      event.target.value !== ""
-    ) {
+    if (author !== "" && password !== "" && title !== "" && event.target.value !== "") {
       setIsActive(true);
     }
   };
@@ -95,7 +75,8 @@ export default function NewPage() {
               <div className={styles.inputArea__enrollLabel}>
                 <label
                   htmlFor="author-input-1"
-                  className={styles.inputArea__enrollLabel__label}>
+                  className={styles.inputArea__enrollLabel__label}
+                >
                   작성자
                 </label>
                 <span className={styles.inputArea__enrollLabel__star}>*</span>
@@ -113,7 +94,8 @@ export default function NewPage() {
               <div className={styles.inputArea__enrollLabel}>
                 <label
                   htmlFor="author-input-2"
-                  className={styles.inputArea__enrollLabel__label}>
+                  className={styles.inputArea__enrollLabel__label}
+                >
                   비밀번호
                 </label>
                 <span className={styles.inputArea__enrollLabel__star}>*</span>
@@ -133,7 +115,8 @@ export default function NewPage() {
             <div className={styles.inputArea__enrollLabel}>
               <label
                 htmlFor="author-input-3"
-                className={styles.inputArea__enrollLabel__label}>
+                className={styles.inputArea__enrollLabel__label}
+              >
                 제목
               </label>
               <span className={styles.inputArea__enrollLabel__star}>*</span>
@@ -152,12 +135,14 @@ export default function NewPage() {
             <div className={styles.inputArea__enrollLabel}>
               <label
                 htmlFor="author-input-4"
-                className={styles.inputArea__enrollLabel__label}>
+                className={styles.inputArea__enrollLabel__label}
+              >
                 내용
               </label>
               <span className={styles.inputArea__enrollLabel__star}>*</span>
             </div>
             <textarea
+              id="author-input-4"
               className={styles.inputArea__textarea}
               placeholder="내용을 입력해 주세요."
               onChange={onChangeContent}
@@ -166,18 +151,20 @@ export default function NewPage() {
           </div>
           <div className={styles.addressArea}>
             <div className={styles.addressArea__search}>
-              <label className={styles.inputArea__enrollLabel__label}>
+              <label
+                htmlFor="author-input-5"
+                className={styles.inputArea__enrollLabel__label}
+              >
                 주소
               </label>
               <div className={styles.addressArea__enrollInputButton}>
                 <input
+                  id="author-input-5"
                   className={styles.inputArea__addressInput}
                   type="text"
                   placeholder="01234"
                 />
-                <button className={styles.inputArea__button}>
-                  우편번호 검색
-                </button>
+                <button className={styles.inputArea__button}>우편번호 검색</button>
               </div>
             </div>
             <input
@@ -195,13 +182,14 @@ export default function NewPage() {
           <div className={styles.inputArea}>
             <div className={styles.inputArea__enrollLabel}>
               <label
-                htmlFor="author-input-5"
-                className={styles.inputArea__enrollLabel__label}>
+                htmlFor="author-input-6"
+                className={styles.inputArea__enrollLabel__label}
+              >
                 유튜브 링크
               </label>
             </div>
             <input
-              id="author-input-5"
+              id="author-input-6"
               className={styles.inputArea__input}
               type="text"
               placeholder="링크를 입력해 주세요."
@@ -212,9 +200,7 @@ export default function NewPage() {
 
           {/* ImageUpload: 사진 첨부 */}
           <div className={styles.imageUploadArea}>
-            <label className={styles.inputArea__enrollLabel__label}>
-              사진 첨부
-            </label>
+            <label className={styles.inputArea__enrollLabel__label}>사진 첨부</label>
             <div className={styles.imageUploadInput}>
               <label htmlFor="file-upload-1">
                 <div className={styles.imageUploadInput__drop}>
@@ -266,7 +252,8 @@ export default function NewPage() {
               onClick={onClickSignup}
               style={{
                 backgroundColor: isActive === true ? "#2974E5" : "#C7C7C7",
-              }}>
+              }}
+            >
               등록하기
             </button>
           </div>
