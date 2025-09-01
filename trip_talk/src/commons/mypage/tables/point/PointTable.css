@@ -1,90 +1,147 @@
-.point-table-container {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+.point_table_container {
+  width: 100%;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
+  background-color: var(--white);
+  border-radius: 1rem;
+  padding: 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 2.5rem;
 }
 
-.point-table {
+.point_table {
+  width: 100%;
+}
+
+/* 테이블 전체 스타일 */
+table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
 }
 
-.point-table th {
-  background-color: #f8f9fa;
-  padding: 16px 12px;
-  text-align: left;
+/* 테이블 헤더 스타일 */
+thead {
+  width: 100%;
+}
+
+thead tr {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* 충전 테이블 그리드 (4컬럼) */
+thead tr.charge-grid {
+  grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem;
+}
+
+/* 구매 테이블 그리드 (5컬럼 - 상태 포함) */
+thead tr.purchase-grid {
+  grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem 6rem;
+}
+
+/* 판매 테이블 그리드 (4컬럼) */
+thead tr.sales-grid {
+  grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem;
+}
+
+thead th {
+  width: 100%;
   font-weight: 600;
-  color: #333;
-  border-bottom: 1px solid #e9ecef;
+  color: #495057;
+  text-align: left;
+  padding: 0;
 }
 
-.point-table td {
-  padding: 16px 12px;
-  border-bottom: 1px solid #f1f3f4;
-  color: #333;
+/* 테이블 바디 스타일 */
+tbody {
+  display: grid;
+  gap: 0.75rem;
 }
 
-.point-table tbody tr:hover {
-  background-color: #f8f9fa;
+tbody tr {
+  display: grid;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  gap: 0.5rem;
+  border: 1px solid var(--gray-50);
+  border-radius: 1rem;
+  position: relative;
 }
 
-/* 컬럼별 너비 */
+/* 충전 테이블 그리드 (4컬럼) */
+tbody tr.charge-grid {
+  grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem;
+}
+
+/* 구매 테이블 그리드 (5컬럼 - 상태 포함) */
+tbody tr.purchase-grid {
+  grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem 6rem;
+}
+
+/* 판매 테이블 그리드 (4컬럼) */
+tbody tr.sales-grid {
+  grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem;
+}
+
+tbody td {
+  color: var(--gray-800);
+}
+
+/* 컬럼별 스타일 */
 .col-date {
-  width: 100px;
+  text-align: center;
+  color: #6c757d;
 }
 
-.col-type {
-  width: 120px;
-  font-weight: 500;
+.col-content {
+  color: var(--gray-800);
 }
 
 .col-amount {
-  width: 150px;
+  color: var(--gray-800);
   text-align: right;
-  font-weight: 500;
 }
 
 .col-balance {
-  width: 120px;
   text-align: right;
+  color: #6c757d;
 }
 
-/* 타입별 색상 */
-.col-type.positive,
+.col-status {
+  text-align: center;
+  color: var(--gray-800);
+}
+
+/* 금액 색상 */
 .col-amount.positive {
   color: #1976d2;
 }
 
-.col-type.negative,
 .col-amount.negative {
   color: #d32f2f;
 }
 
-.col-type.neutral,
-.col-amount.neutral {
-  color: #666;
-}
-
-/* 페이지네이션 */
+/* 페이지네이션 스타일 */
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 20px;
-  border-top: 1px solid #e9ecef;
+  gap: 0.5rem;
+  margin-top: 2rem;
 }
 
 .pagination-btn {
-  padding: 8px 12px;
+  padding: 0.5rem 1rem;
   border: 1px solid #dee2e6;
-  background: white;
+  background-color: white;
   color: #495057;
-  border-radius: 6px;
+  border-radius: 0.25rem;
   cursor: pointer;
-  font-size: 14px;
   transition: all 0.2s;
 }
 
