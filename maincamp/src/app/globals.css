@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  font-family: var(--font-pretendard-variable);
+  font-style: normal;
+  line-height: 1.5rem;
+}
+
+:root{
+  /* color */
+  --color-gray-black: #000000;
+  --color-gray-800: #333333;
+  --color-gray-700: #5F5F5F;
+  --color-gray-600: #777777;
+  --color-gray-400: #ABABAB;
+  --color-gray-300: #C7C7C7;
+  --color-gray-200: #D4D3D3;
+  --color-gray-100: #E4E4E4;
+  --color-gray-50: #F2F2F2;
+  --color-gray-white: #FFFFFF;
+  --color-red: #F66A6A;
+  --color-blue: #2974E5;
+
+
+  /* font-size */
+  --font-size-sm: 0.875rem
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.75rem;
+
+  /* font-size-버튼용 */
+  --font-size-btn: 1.125rem;
+
+  /* font-weight */
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-regular: 400;
+  --font-weight-light: 300;
+}
+
+a{
+  text-decoration: none;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}

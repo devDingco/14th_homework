@@ -1,0 +1,25 @@
+.add__image label{
+    width: 10rem;
+    height: 10rem;
+    border-radius:  0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    background-color: var(--color-gray-50);
+
+    color: var(--color-gray-600);
+}
+
+.add__image img{
+    fill: var(--color-gray-600);
+    width: 1.35rem;
+    height: 1.35rem;
+}
+
+.add__image span{
+    color: var(--color-gray-600);
+}
