@@ -5,13 +5,15 @@ import './booking.css';
 import Image from 'next/image';
 import { bookingMock, BookingItem } from './mocks';
 import { useRouter } from 'next/navigation';
+import DateRangeInput from '../../commons/date-input/DateRangeInput';
 
 type TabType = 'available' | 'soldout';
 
 export default function Booking() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabType>('available');
-  const [searchDate, setSearchDate] = useState('');
+  const [searchStartDate, setSearchStartDate] = useState('');
+  const [searchEndDate, setSearchEndDate] = useState('');
   const [searchText, setSearchText] = useState('');
 
   const handleTabClick = (tab: TabType) => {
@@ -19,7 +21,16 @@ export default function Booking() {
   };
 
   const handleSearch = () => {
-    console.log('검색:', { date: searchDate, text: searchText });
+    console.log('검색:', {
+      startDate: searchStartDate,
+      endDate: searchEndDate,
+      text: searchText,
+    });
+  };
+
+  const handleDateRangeChange = (startDate: string, endDate: string) => {
+    setSearchStartDate(startDate);
+    setSearchEndDate(endDate);
   };
 
   const handleSellVoucher = () => {
@@ -32,10 +43,6 @@ export default function Booking() {
 
   const handleAccommodationClick = (id: number) => {
     router.push(`/booking/${id}`);
-  };
-
-  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchDate(e.target.value);
   };
 
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -108,16 +115,13 @@ export default function Booking() {
           {/* 검색 및 필터 */}
           <div className="booking_search">
             <div className="booking_search_inputs">
-              <div className="booking_date_input">
-                <Image src="/icons/calendar_icon.png" width={24} height={24} alt="calendar" />
-                <input
-                  className="r_16_24"
-                  type="text"
-                  placeholder="YYYY.MM.DD - YYYY.MM.DD"
-                  value={searchDate}
-                  onChange={handleDateChange}
-                />
-              </div>
+              <DateRangeInput
+                startDate={searchStartDate}
+                endDate={searchEndDate}
+                onDateRangeChange={handleDateRangeChange}
+                placeholder="YYYY.MM.DD - YYYY.MM.DD"
+                className="booking_date_range"
+              />
               <div className="booking_text_input">
                 <Image src="/icons/search_icon.png" width={24} height={24} alt="search" />
                 <input

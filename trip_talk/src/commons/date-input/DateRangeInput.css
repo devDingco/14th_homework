@@ -1,0 +1,88 @@
+.date_range_selector {
+  position: relative;
+  width: 289px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.date_range_input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.date_range_display {
+  width: 100%;
+  height: 100%;
+  background-color: var(--gray-50);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 12px 12px 44px;
+  font-size: 16px;
+  color: var(--gray-600);
+  display: flex;
+  align-items: center;
+  background-image: url('/icons/calendar_icon.png');
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-position: 12px center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.date_range_reset {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: var(--gray-400);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.date_range_reset:hover {
+  background: var(--gray-600);
+}
+
+/* 다양한 크기 지원을 위한 추가 클래스들 */
+.date_range_selector.small {
+  width: 200px;
+}
+
+.date_range_selector.medium {
+  width: 289px;
+}
+
+.date_range_selector.large {
+  width: 350px;
+}
+
+.date_range_selector.full-width {
+  width: 100%;
+}
+
+/* booking 페이지용 커스텀 스타일 */
+.date_range_selector.booking_date_range {
+  width: 18.0625rem;
+  height: 3rem;
+}
+
+.date_range_selector.booking_date_range .date_range_display {
+  height: 3rem;
+  font-size: 16px;
+  padding: 0.75rem 0.75rem 0.75rem 2.75rem;
+}

@@ -5,13 +5,41 @@ import './main-board.css';
 import { mainBoardMock, BoardItem } from './mock';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import DateRangeInput from '../../commons/date-input/DateRangeInput';
 
 export default function MainBoard() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchStartAt, setSearchStartAt] = useState('');
+  const [searchEndAt, setSearchEndAt] = useState('');
+  const [searchKeyword, setSearchKeyword] = useState('');
   const router = useRouter();
 
   const handleDelete = (id: number) => {
     alert(`${id}번 트립토크를 삭제하시겠습니까?`);
+  };
+
+  const handleDateRangeChange = (startDate: string, endDate: string) => {
+    setSearchStartAt(startDate);
+    setSearchEndAt(endDate);
+  };
+
+  const handleSearch = () => {
+    if (searchStartAt && !searchEndAt) {
+      alert('종료일을 선택해주세요.');
+      return;
+    }
+
+    console.log('검색 조건:', {
+      startDate: searchStartAt,
+      endDate: searchEndAt,
+      keyword: searchKeyword,
+    });
+
+    alert(
+      `검색 조건: ${searchStartAt ? `${searchStartAt} ~ ${searchEndAt}` : '전체 기간'}, 키워드: ${
+        searchKeyword || '없음'
+      }`
+    );
   };
 
   return (
@@ -19,9 +47,22 @@ export default function MainBoard() {
       <div className="b_28_36">트립토크 게시판</div>
       <div className="main_board_search_wrapper">
         <div className="main_board_search_input_wrapper">
-          <input type="text" placeholder="검색어를 입력해주세요." className="main_board_search_input" />
-          <input type="date" className="main_board_search_date" placeholder="YYYY.MM.DD - YYYY.MM.DD" />
-          <button className="main_board_search_button sb_18_24">검색</button>
+          <DateRangeInput
+            startDate={searchStartAt}
+            endDate={searchEndAt}
+            onDateRangeChange={handleDateRangeChange}
+            placeholder="YYYY.MM.DD - YYYY.MM.DD"
+          />
+          <input
+            type="text"
+            placeholder="검색어를 입력해주세요."
+            className="main_board_search_input"
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)}
+          />
+          <button className="main_board_search_button sb_18_24" onClick={handleSearch}>
+            검색
+          </button>
         </div>
         <div className="main_board_write_button" onClick={() => router.push('/board/new')}>
           <Image src={'/icons/write_icon.png'} alt="write" width={24} height={24} />
