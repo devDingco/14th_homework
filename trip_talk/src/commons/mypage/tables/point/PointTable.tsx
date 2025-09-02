@@ -94,20 +94,20 @@ export default function PointTable({ data, tableType, className = '' }: PointTab
         <thead className="point_table_header">
           <tr className={getGridClass()}>
             <th className="col-date" style={{ color: 'var(--gray-900)' }}>
-              날짜
+              {tableType === 'charge' ? '충전일' : '거래일'}
             </th>
             <th className="col-content" style={{ color: 'var(--gray-900)' }}>
-              {headers.col2}
+              {tableType === 'charge' ? '결제ID' : '상품 명'}
             </th>
             <th className="col-amount" style={{ color: 'var(--gray-900)' }}>
-              {headers.col3}
+              {tableType === 'charge' ? '충전내역' : '거래내역'}
             </th>
             <th className="col-balance" style={{ color: 'var(--gray-900)' }}>
-              {headers.col4}
+              거래 후 잔액
             </th>
             {tableType === 'purchase' && (
               <th className="col-status" style={{ color: 'var(--gray-900)' }}>
-                상태
+                판매자
               </th>
             )}
           </tr>
