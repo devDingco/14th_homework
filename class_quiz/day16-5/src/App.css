@@ -59,6 +59,9 @@ form {
 .signIn-input input {
   width: 100%;
 }
+.signIn-input input::placeholder {
+  color: #676767;
+}
 .signIn-input img {
   position: absolute;
   right: 0;
