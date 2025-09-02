@@ -1,0 +1,67 @@
+/* form */
+.post-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 4rem;
+}
+.post-form-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  gap: 4rem;
+}
+.post-form hr {
+  border: solid 0.1rem var(--color-gray-100);
+  border-bottom: none;
+}
+
+/* InputWithLabel */
+.post-form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.post-form-input div {
+  display: flex;
+  gap: 0.4rem;
+  font-weight: 500;
+}
+.post-form-input div span {
+  color: red;
+}
+
+/* TextAreaWithLabel */
+.post-form-input textarea {
+  min-height: 31.2rem;
+}
+
+/* AddrWithLabel */
+.post-form-addr {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.post-form-addr-active {
+  display: flex;
+  gap: 0.8rem;
+}
+.post-form-addr-zipcode {
+  width: 8.2rem;
+}
+
+/* PostActions */
+.post-actions {
+  display: flex;
+  width: 100%;
+  gap: 1.6rem;
+  justify-content: flex-end;
+}
+
+/* error-message */
+.error-message {
+  font-size: 1.6rem;
+  color: #f66a6a;
+  font-weight: 500;
+  line-height: 2.4rem;
+}
