@@ -1,0 +1,17 @@
+.p_t_wrapper {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.p_t_item {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  color: #525252;
+}
+
+.p_t_item.active {
+  background-color: var(--black);
+  color: var(--white);
+  border-radius: 0.5rem;
+}

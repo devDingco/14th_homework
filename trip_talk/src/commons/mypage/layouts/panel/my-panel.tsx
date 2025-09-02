@@ -19,8 +19,8 @@ export default function MyPanel() {
     {
       id: 'point',
       label: '포인트 사용 내역',
-      defaultPath: '/mypage/point',
-      paths: ['/mypage/point'],
+      defaultPath: '/mypage/point/all',
+      paths: ['/mypage/point/all', '/mypage/point/charge', '/mypage/point/purchase', '/mypage/point/sales'],
     },
     {
       id: 'password',
