@@ -22,7 +22,7 @@ export default function BoardForm() {
           <div>
             <label>작성자</label>
             <span>*</span>
-          </div>
+          </div> 
 
           <input
             type="text"
@@ -92,11 +92,16 @@ export default function BoardForm() {
           <label>주소</label>
         </div>
         <div className={styles['post-form-addr-active']}>
-          <input className={styles['post-form-addr-zipcode']} placeholder="01234" />
+          <input
+            className={styles['post-form-addr-zipcode']}
+            placeholder="01234"
+            name="addr.zipcode"
+            onChange={handleChange}
+          />
           <CustomButton type={'button'} content={'우편번호 검색'} color={'default'} />
         </div>
-        <input placeholder="주소를 입력해 주세요." />
-        <input placeholder="상세주소" />
+        <input placeholder="주소를 입력해 주세요." name="addr.addr1" onChange={handleChange}/>
+        <input placeholder="상세주소" name="addr.addr2" onChange={handleChange}/>
       </div>
       <hr />
       {/* 유튜브 링크 */}

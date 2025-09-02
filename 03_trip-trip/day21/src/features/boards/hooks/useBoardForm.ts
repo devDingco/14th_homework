@@ -20,7 +20,7 @@ export interface UseFormProps {
 }
 
 const useForm = ({ initialValues, validate }: UseFormProps): UseFormReturn => {
-  const [values, setValues] = useState(initialValues)
+  const [values, setValues] = useState<PostForm>(initialValues)
   const [errors, setErrors] = useState({})
   const [isActive, setIsActive] = useState(false)
   const router = useRouter()
@@ -28,16 +28,36 @@ const useForm = ({ initialValues, validate }: UseFormProps): UseFormReturn => {
   const [createBoard] = useMutation(CREATE_BOARD)
 
   const handleChange = (
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target
+  
+    if (name.startsWith("addr.")) {
+      const key = name.split(".")[1] as keyof PostForm["addr"]
 
-    const nextValue = { ...values, [name]: value }
-    setValues(nextValue)
+      const nextValue: PostForm = {
+        ...values,
+        addr: {
+          ...values.addr,
+          [key]: value,
+        },
+      }
+  
+      setValues(nextValue)
+  
+      const myErrors = validate(nextValue)
+      setErrors(myErrors)
+      setIsActive(isEmptyObj(myErrors))
+    } else {
 
-    const myErrors = validate(nextValue)
-    setErrors(myErrors)
-    setIsActive(isEmptyObj(myErrors))
+      const nextValue: PostForm = { ...values, [name]: value } as PostForm
+  
+      setValues(nextValue)
+  
+      const myErrors = validate(nextValue)
+      setErrors(myErrors)
+      setIsActive(isEmptyObj(myErrors))
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
