@@ -8,34 +8,13 @@ import Image from 'next/image';
 import { gql, useMutation } from '@apollo/client';
 
 const CREATE_BOARD = gql`
-  mutation createBoard($createBoardInput: CreateBoardInput!) {
-    createBoard(createBoardInput: $createBoardInput) {
-      _id
-      writer
-      title
-      contents
-      youtubeUrl
-      likeCount
-      dislikeCount
-      images
-      # boardAddress {
-      #   zipcode
-      #   address
-      #   addressDetail
-      # }
-      # user {
-      #   _id
-      #   email
-      #   name
-      # }
-      # createdAt
-      # updatedAt
-      # deletedAt
-    }
-  }
-`;
+  mutation createBoard(
+$writer: String
+$title: String
+$contents: String
+)`;
 
-export default function BoardsNew() {
+function BoardsNew() {
   //입력값을 저장하는 state
   const [name, setName] = useState(''); //사용자가 입력한 이름
   const [password, setPassword] = useState(''); //사용자가 입력한 비밀번호
@@ -49,22 +28,6 @@ export default function BoardsNew() {
   const [passwordError, setPasswordError] = useState(''); //비밀번호 에러메시지
   const [titleError, setTitleError] = useState(''); //제목 에러메시지
   const [contentError, setContentError] = useState(''); //내용 에러메시지
-
-  //게시글 등록 api등록요청 함수
-  const [createProduct] = useMutation(CREATE_BOARD);
-  const onClickSubmit = async () => {
-    const result = await createProduct({
-      variables: {
-        createBoardInput: {
-          writer: name,
-          title: title,
-          contents: content,
-          password: password,
-        },
-      },
-    });
-    console.log(result);
-  };
 
   //변경값 확인하여 state에 저장
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
@@ -101,10 +64,7 @@ export default function BoardsNew() {
   };
 
   //등록하기 버튼 클릭시 실행되는 함수
-  // 모든 입력값 검증 후 에러메시지 보여주기 + 게시글 등록 api요청
-  //async await를 사용하는 이유: api요청이 끝날때까지 기다렸다가 alert를 띄우기 위해서
-
-  const onClickSignUp = async () => {
+  const onClickSignUp = () => {
     // 0. 모든 에러메시지 초기화
     let hasError = false;
     // 1. 작성자 이름 검증하기
@@ -139,8 +99,6 @@ export default function BoardsNew() {
     }
     //5. 성공알람 보여주는곳
     if (hasError === false) {
-      await onClickSubmit(); // 게시글 등록 api요청,
-      //await를 사용하는 이유: api요청이 끝날때까지 기다렸다가 alert를 띄우기 위해서 안쓰면 바로 alert가 뜸
       alert('게시물이 등록되었습니다!');
     }
   };
@@ -253,3 +211,5 @@ export default function BoardsNew() {
     </div>
   );
 }
+
+export default BoardsNew;

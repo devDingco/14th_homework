@@ -30,7 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ApolloSetting 모든페이지={children}></ApolloSetting>
+        <ApolloSetting children={children}></ApolloSetting>
       </body>
     </html>
   );
