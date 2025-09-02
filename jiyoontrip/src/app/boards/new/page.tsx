@@ -1,9 +1,24 @@
 "use client";
 import { ChangeEvent, useState } from "react";
+import { gql, useMutation } from "@apollo/client";
 import Image from "next/image";
 import styles from "./styles.module.css";
 
+const CREAT_BOARD = gql`
+  # ↓↓↓↓↓↓↓↓↓↓변수 타입 정하는 곳 ↓↓↓↓↓↓↓↓↓↓↓↓
+  mutation createBoard($author: String, $title: String, $content: String) {
+    # ↓↓↓↓↓↓↓↓↓↓ 실제로 내가 입력하는 곳 ↓↓↓↓↓↓↓↓↓↓↓↓
+    createBoard(writer: $author, title: $title, contents: $content) {
+      _id
+      number
+      message
+    }
+  }
+`;
+
 export default function NewPage() {
+  const [createBoard] = useMutation(CREAT_BOARD);
+
   const [author, setAuthor] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
@@ -40,7 +55,7 @@ export default function NewPage() {
     }
   };
 
-  const onClickSignup = () => {
+  const onClickSignup = async () => {
     if (author === "") {
       setAuthorError("필수입력 사항 입니다.");
     } else {
@@ -64,6 +79,15 @@ export default function NewPage() {
 
     if (author !== "" && password !== "" && title !== "" && content !== "")
       alert("게시글 등록이 가능한 상태입니다!");
+
+    const result = await createBoard({
+      variables: {
+        author: author,
+        title: title,
+        content: content,
+      },
+    });
+    console.log(result);
   };
   return (
     <>
