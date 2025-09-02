@@ -1,23 +1,62 @@
 "use client";
 
+import { gql, useMutation } from "@apollo/client";
 import React, { useState } from 'react';
 import styles from "./styles.module.css"; // 스타일 다 바꿔주기 - 형식 맞게
 
 // Register 관련 컴포넌트들 불러오기
 import { RegisterInput, RegisterText, Picture, Button } from './Register';
 
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+    }
+  }
+`;
+
 const BoardsNew: React.FC = () => {
   const [writer, setWriter] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [title, setTitle] = React.useState<string>("");
-  const [content, setContent] = React.useState<string>("");
+  const [contents, setContents] = React.useState<string>("");
 
-  const handleSubmit = () => {
-    if (writer && password && title && content) {
-      alert("게시글 등록이 완료되었습니다!");
-    } else {
+  const [loading, setLoading] = useState(false); // API 호출 중에는 버튼을 비활성화
+
+  const [RegisterFunction] = useMutation(CREATE_BOARD);
+
+  const handleSubmit = async () => {
+    // 1. 입력값 체크
+    if (!writer || !password || !title || !contents) {
       alert("모든 필수 입력값을 채워주세요.");
+      return;
+    }
 
+    if (loading) return; // 이미 요청 중이면 함수 종료(API 호출 중에는 버튼을 비활성화)
+
+    setLoading(true); // API 호출 시작
+
+    // 2. API 호출
+    try {
+      // password는 서버로 보내지 않음
+      const result = await RegisterFunction({
+        variables: {
+          createBoardInput: { writer, password, title, contents },
+        },
+      });
+  
+      // 3. API 호출 성공 시 alert
+      alert("게시글 등록이 완료되었습니다!");
+      console.log("등록 결과:", result.data);
+  
+    } catch (error) {
+      console.error("등록 중 오류 발생:", error);
+      alert("게시글 등록 중 오류가 발생했습니다.");
+    } finally {
+      setLoading(false); // API 호출 끝 -> loading이 true이면 이미 API 호출 중이므로 함수가 바로 종료
     }
   };
 
@@ -41,7 +80,7 @@ const BoardsNew: React.FC = () => {
 
           <div className={styles.SectionNoLine}>
               <RegisterText inputTitle="내용" myPlaceholder="내용을 입력해 주세요." width="128.0rem" height="33.6rem"
-                              value={content} onChange={(val: string) => setContent(val)}/>
+                              value={contents} onChange={(val: string) => setContents(val)}/>
           </div>
           
           <div className={styles.SectionColumn}>
@@ -65,7 +104,8 @@ const BoardsNew: React.FC = () => {
           <div className={styles.SectionButton}>
               <Button backgroundColor="var(--gray-W)" color="var(--gray-B)" btnTitle="취소" borderColor="var(--gray-B)"/>
               <Button backgroundColor="#2974E5" color="#FFF" btnTitle="등록하기" borderColor="none" onClick={handleSubmit}
-                    disabled={!(writer && password && title && content)}/>
+                    disabled={loading || !(writer && password && title && contents)}/>
+                    {/* 로딩중에도 버튼 비활성화 */}
           </div>
 
 

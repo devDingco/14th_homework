@@ -92,10 +92,6 @@
   --gray-800: #333;
 }
 
-* {
-  font-family: "Pretendard";
-}
-
 html {
   font-size: 62.5%;
 }
@@ -115,6 +111,8 @@ body {
 
   width: 100vw;
   height: 100vh; /* 화면 높이 최소 확보 */
+
+  font-family: "Pretendard";
 }
 
 
