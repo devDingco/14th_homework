@@ -48,16 +48,17 @@ export const chargeData = [
 
 // 상품 구매 내역
 export const purchaseData = [
-  { id: 1, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '예약중' },
-  { id: 2, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '예약중' },
-  { id: 3, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '예약중' },
-  { id: 4, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '예약중' },
-  { id: 5, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '예약중' },
-  { id: 6, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '예약중' },
-  { id: 7, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '예약중' },
-  { id: 8, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '예약중' },
-  { id: 9, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '예약중' },
-  { id: 10, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '예약중' },
+  { id: 1, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '홍길동' },
+  { id: 2, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '홍길동' },
+  { id: 3, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '홍길동' },
+  { id: 4, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '홍길동' },
+  { id: 5, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '홍길동' },
+  { id: 6, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '홍길동' },
+  { id: 7, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '홍길동' },
+  { id: 8, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '홍길동' },
+  { id: 9, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '홍길동' },
+  { id: 10, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '홍길동' },
+  { id: 11, date: '2024.12.16', content: '파르나스 호텔 제주', amount: -1000000, balance: 1323000, status: '홍길동' },
 ];
 
 // 상품 판매 내역
@@ -72,6 +73,7 @@ export const saleData = [
   { id: 8, date: '2024.12.16', content: '파르나스 호텔 제주', amount: 1000000, balance: 1323000 },
   { id: 9, date: '2024.12.16', content: '파르나스 호텔 제주', amount: 1000000, balance: 1323000 },
   { id: 10, date: '2024.12.16', content: '파르나스 호텔 제주', amount: 1000000, balance: 1323000 },
+  { id: 11, date: '2024.12.16', content: '파르나스 호텔 제주', amount: 1000000, balance: 1323000 },
 ];
 
 // 전체 거래내역 (통합) - 충전, 구매, 판매를 모두 합쳐서 시간순으로 정렬
