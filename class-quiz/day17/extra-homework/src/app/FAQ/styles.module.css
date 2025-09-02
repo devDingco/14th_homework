@@ -1,0 +1,125 @@
+.FAQfield{
+    width: 640px;
+
+    border: 1px solid #CACACA;
+    padding: 80px 50px 0px 50px;
+
+}
+
+.search{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.headerCSS{
+    margin: 43px 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.profile{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 19px;
+
+}
+
+.profile img{
+    width: 60px;
+    height: 60px;
+}
+
+.name{
+
+    width: 88.5px;
+
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+
+
+    font-size: 24px;
+}
+
+.name img{
+    width: 17px;
+    height: 17px;
+}
+
+.questionfieldCSS{
+
+    width: 526.5px;
+    margin-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 44px;
+}
+
+.navigationMenu{
+    padding: 5px 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 50px;
+
+    font-size: 30px;
+    font-weight: 700;
+    color: #CACACA;
+}
+
+#selected{
+    border-bottom: 2px solid #FF1B6D;
+    color: #FF1B6D;
+}
+
+.FAQfield hr{
+    margin: 50px -50px 0px -50px;
+    border: none;
+    border-bottom: 1px solid #CACACA;
+}
+
+.tabMenu{
+    height: 96px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    color: #ADADAD;
+}
+
+.tabMenu div{
+
+    height: 70px;
+    margin-bottom: 14px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+}
+
+.tabMenu img{
+    width: 41px;
+    height: 44px;
+}
+
+#tabSelected{
+    color: #FF1B6D;
+}

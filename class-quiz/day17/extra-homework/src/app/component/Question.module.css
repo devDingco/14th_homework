@@ -1,0 +1,33 @@
+.questionCSS{
+    height: 66px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.questionCSS div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    gap: 5px;
+}
+
+.questionCSS p{
+    height: 26px;
+
+    font-size: 18px;
+    color: #ADADAD;
+}
+
+.questionCSS span{
+    font-size: 24px;
+}
+
+.questionCSS img{
+    width: 16px;
+    height: 16px;
+}
+
