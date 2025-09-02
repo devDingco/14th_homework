@@ -1,4 +1,4 @@
-.point_table_container {
+.p_table_container {
   width: 100%;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
   background-color: var(--white);
@@ -9,22 +9,22 @@
   margin-bottom: 2.5rem;
 }
 
-.point_table {
+.p_table_point_table {
   width: 100%;
 }
 
 /* 테이블 전체 스타일 */
-table {
+.p_table_point_table table {
   width: 100%;
   border-collapse: collapse;
 }
 
 /* 테이블 헤더 스타일 */
-thead {
+.p_table_point_table thead {
   width: 100%;
 }
 
-thead tr {
+.p_table_point_table thead tr {
   width: 100%;
   display: grid;
   align-items: center;
@@ -34,35 +34,35 @@ thead tr {
 }
 
 /* 충전 테이블 그리드 (4컬럼) */
-thead tr.charge-grid {
+.p_table_point_table thead tr.p_table_charge-grid {
   grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem;
 }
 
 /* 구매 테이블 그리드 (5컬럼 - 상태 포함) */
-thead tr.purchase-grid {
+.p_table_point_table thead tr.p_table_purchase-grid {
   grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem 6rem;
 }
 
 /* 판매 테이블 그리드 (4컬럼) */
-thead tr.sales-grid {
+.p_table_point_table thead tr.p_table_sales-grid {
   grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem;
 }
 
-thead th {
+.p_table_point_table thead th {
   width: 100%;
   font-weight: 600;
-  color: #495057;
-  text-align: left;
+  color: var(--gray-900);
+  text-align: center;
   padding: 0;
 }
 
 /* 테이블 바디 스타일 */
-tbody {
+.p_table_point_table tbody {
   display: grid;
   gap: 0.75rem;
 }
 
-tbody tr {
+.p_table_point_table tbody tr {
   display: grid;
   align-items: center;
   padding: 0.75rem 1.5rem;
@@ -73,54 +73,50 @@ tbody tr {
 }
 
 /* 충전 테이블 그리드 (4컬럼) */
-tbody tr.charge-grid {
+.p_table_point_table tbody tr.p_table_charge-grid {
   grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem;
 }
 
 /* 구매 테이블 그리드 (5컬럼 - 상태 포함) */
-tbody tr.purchase-grid {
+.p_table_point_table tbody tr.p_table_purchase-grid {
   grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem 6rem;
 }
 
 /* 판매 테이블 그리드 (4컬럼) */
-tbody tr.sales-grid {
+.p_table_point_table tbody tr.p_table_sales-grid {
   grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem;
 }
 
-tbody td {
-  color: var(--gray-800);
-}
-
 /* 컬럼별 스타일 */
-.col-date {
+.p_table_col-date {
   text-align: center;
-  color: #6c757d;
+  color: var(--gray-500);
 }
 
-.col-content {
+.p_table_col-content {
   color: var(--gray-800);
+  text-align: left;
 }
 
-.col-amount {
-  color: var(--gray-800);
-  text-align: right;
+.p_table_col-amount {
+  text-align: center;
 }
 
-.col-balance {
-  text-align: right;
-  color: #6c757d;
+.p_table_col-balance {
+  text-align: center;
+  color: var(--black);
 }
 
-.col-status {
+.p_table_col-status {
   text-align: center;
   color: var(--gray-800);
 }
 
 /* 금액 색상 */
-.col-amount.positive {
-  color: #1976d2;
+.p_table_col-amount.positive {
+  color: var(--primary-color);
 }
 
-.col-amount.negative {
-  color: #d32f2f;
+.p_table_col-amount.negative {
+  color: var(--warning-color);
 }

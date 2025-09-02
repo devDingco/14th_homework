@@ -60,20 +60,20 @@ export default function TransactionTable({ data, showSeller = false, className =
   };
 
   return (
-    <div className={`transaction_table_container ${className}`}>
-      <table className="transaction_table">
-        <thead className="transaction_table_header">
-          <tr className={showSeller ? 'with-seller' : ''}>
-            <th className="col-date me_16_20" style={{ color: 'var(--gray-900)' }}>
+    <div className={`t_table_container ${className}`}>
+      <table className="t_table">
+        <thead className="t_table_header">
+          <tr>
+            <th className="t_table_col-date me_16_20" style={{ color: 'var(--gray-900)' }}>
               날짜
             </th>
-            <th className="col-product me_16_20" style={{ color: 'var(--gray-900)' }}>
+            <th className="t_table_col-product me_16_20" style={{ color: 'var(--gray-900)' }}>
               내용
             </th>
-            <th className="col-amount me_16_20" style={{ color: 'var(--gray-900)' }}>
+            <th className="t_table_col-amount me_16_20" style={{ color: 'var(--gray-900)' }}>
               거래 및 충전 내역
             </th>
-            <th className="col-balance me_16_20" style={{ color: 'var(--gray-900)' }}>
+            <th className="t_table_col-balance me_16_20" style={{ color: 'var(--gray-900)' }}>
               잔액
             </th>
           </tr>
@@ -81,10 +81,12 @@ export default function TransactionTable({ data, showSeller = false, className =
         <tbody>
           {currentData.map((item, index) => (
             <tr key={item.id || index} className={showSeller ? 'with-seller' : ''}>
-              <td className="col-date l_14_20">{item.date}</td>
-              <td className={`col-product me_14_20 ${getProductColor(item.productName)}`}>{item.productName}</td>
-              <td className={`col-amount me_14_20 ${getAmountColor(item.amount)}`}>{formatAmount(item.amount)}</td>
-              <td className="col-balance me_14_20">{formatBalance(item.balance)}</td>
+              <td className="t_table_col-date l_14_20">{item.date}</td>
+              <td className={`t_table_col-product b_14_20 ${getProductColor(item.productName)}`}>{item.productName}</td>
+              <td className={`t_table_col-amount me_14_20 ${getAmountColor(item.amount)}`}>
+                {formatAmount(item.amount)}
+              </td>
+              <td className="t_table_col-balance me_14_20">{formatBalance(item.balance)}</td>
             </tr>
           ))}
         </tbody>

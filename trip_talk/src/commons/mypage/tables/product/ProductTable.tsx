@@ -18,7 +18,7 @@ interface ProductTableProps {
   className?: string;
 }
 
-export default function ProductTable({ data, className = '' }: ProductTableProps) {
+export default function ProductTable({ data }: ProductTableProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const totalPages = Array.isArray(data) ? Math.ceil(data.length / itemsPerPage) : 0;
@@ -50,20 +50,20 @@ export default function ProductTable({ data, className = '' }: ProductTableProps
   };
 
   return (
-    <div className="product_table_container">
-      <table className="product_table">
-        <thead className="product_table_header">
+    <div className="product_table_product_table_container">
+      <table className="product_table_product_table">
+        <thead className="product_table_product_table_header">
           <tr>
-            <th className="col_number" style={{ color: 'var(--gray-900)' }}>
+            <th className="product_table_col_number me_16_20" style={{ color: 'var(--gray-900)' }}>
               번호
             </th>
-            <th className="col_name" style={{ color: 'var(--gray-900)' }}>
+            <th className="product_table_col_name me_16_20" style={{ color: 'var(--gray-900)', textAlign: 'left' }}>
               상품명
             </th>
-            <th className="col_price" style={{ color: 'var(--gray-900)' }}>
+            <th className="product_table_col_price me_16_20" style={{ color: 'var(--gray-900)' }}>
               판매가격
             </th>
-            <th className="col_date" style={{ color: 'var(--gray-900)' }}>
+            <th className="product_table_col_date me_16_20" style={{ color: 'var(--gray-900)' }}>
               날짜
             </th>
           </tr>
@@ -71,23 +71,23 @@ export default function ProductTable({ data, className = '' }: ProductTableProps
         <tbody>
           {currentData.map((item) => (
             <tr key={item.id}>
-              <td className="col_number l_14_20">{item.id}</td>
+              <td className="product_table_col_number l_14_20">{item.id}</td>
               {item.status ? (
                 item.status === '판매완료' ? (
-                  <td className="col_name_sold me_14_20">
+                  <td className="product_table_col_name_sold sb_14_20">
                     {item.name}
-                    <span className="status_badge sold b_14_20">{item.status}</span>
+                    <span className="product_table_status_badge sold b_14_20">{item.status}</span>
                   </td>
                 ) : (
-                  <td className="col_name me_14_20">{item.name}</td>
+                  <td className="product_table_col_name sb_14_20">{item.name}</td>
                 )
               ) : (
-                <td className="col_name me_14_20">{item.name}</td>
+                <td className="product_table_col_name sb_14_20">{item.name}</td>
               )}
-              <td className="col_price l_14_20">{formatPrice(item.price)}</td>
-              <td className="col_date l_14_20">
+              <td className="product_table_col_price l_14_20">{formatPrice(item.price)}</td>
+              <td className="product_table_col_date l_14_20">
                 {formatDate(item.date)}
-                <span className="delete_button">
+                <span className="product_table_delete_button">
                   <Image src="/icons/delete_icon.svg" alt="delete" width={24} height={24} />
                 </span>
               </td>
