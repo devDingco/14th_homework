@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import './PointTable.css';
+import Pagination from '../../../pagination/Pagination';
 
 export type PointData = {
   id: number;
@@ -124,33 +125,7 @@ export default function PointTable({ data, tableType, className = '' }: PointTab
         </tbody>
       </table>
 
-      {totalPages > 1 && (
-        <div className="pagination">
-          <button
-            className="pagination_btn"
-            disabled={currentPage === 1}
-            onClick={() => handlePageChange(currentPage - 1)}
-          >
-            &lt;
-          </button>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <button
-              key={page}
-              className={`pagination_btn ${currentPage === page ? 'active' : ''}`}
-              onClick={() => handlePageChange(page)}
-            >
-              {page}
-            </button>
-          ))}
-          <button
-            className="pagination_btn"
-            disabled={currentPage === totalPages}
-            onClick={() => handlePageChange(currentPage + 1)}
-          >
-            &gt;
-          </button>
-        </div>
-      )}
+      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </div>
   );
 }

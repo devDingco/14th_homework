@@ -6,7 +6,6 @@
   padding: 1.5rem 3rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   margin-bottom: 2.5rem;
 }
 
@@ -108,38 +107,4 @@ tbody td {
 
 .status_badge.sold {
   color: var(--primary-color);
-}
-/* 페이지네이션 스타일 */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 2rem;
-}
-
-.pagination_btn {
-  padding: 0.5rem 1rem;
-  border: 1px solid #dee2e6;
-  background-color: white;
-  color: #495057;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.pagination_btn:hover:not(:disabled) {
-  background-color: #e9ecef;
-  border-color: #adb5bd;
-}
-
-.pagination_btn.active {
-  background-color: #007bff;
-  color: white;
-  border-color: #007bff;
-}
-
-.pagination_btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }

@@ -13,6 +13,8 @@ export const productData = [
   { id: 247, name: '파르나스 호텔 제주', price: 326000, date: '2024-12-16', status: '판매중' },
   { id: 248, name: '파르나스 호텔 제주', price: 326000, date: '2024-12-16', status: '판매중' },
   { id: 249, name: '파르나스 호텔 제주', price: 326000, date: '2024-12-16', status: '판매중' },
+  { id: 250, name: '파르나스 호텔 제주', price: 326000, date: '2024-12-16', status: '판매중' },
+  { id: 251, name: '파르나스 호텔 제주', price: 326000, date: '2024-12-16', status: '판매중' },
 ];
 
 export const bookMarkData = [
@@ -26,6 +28,8 @@ export const bookMarkData = [
   { id: 237, name: '파르나스 호텔 제주', price: 326000, date: '2024-12-16', status: null },
   { id: 238, name: '파르나스 호텔 제주', price: 326000, date: '2024-12-16', status: null },
   { id: 239, name: '파르나스 호텔 제주', price: 326000, date: '2024-12-16', status: null },
+  { id: 240, name: '파르나스 호텔 제주', price: 326000, date: '2024-12-16', status: null },
+  { id: 241, name: '파르나스 호텔 제주', price: 326000, date: '2024-12-16', status: null },
 ];
 
 // 포인트 충전 내역

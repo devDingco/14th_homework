@@ -1,0 +1,44 @@
+/* 페이지네이션 스타일 */
+.pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.pagination_btn_wrapper {
+  display: flex;
+  gap: 1rem;
+}
+
+.pagination_btn {
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+}
+
+.pagination_btn:hover:not(:disabled) {
+  color: var(--gray-800);
+}
+
+.pagination_btn.active {
+  color: var(--black);
+  border-radius: 0.5rem;
+  background-color: var(--gray-50);
+}
+
+.pagination_btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  color: var(--gray-400);
+}
