@@ -1,0 +1,21 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+}
+.starGroup {
+    display: flex;
+    align-items: flex-start;
+}
+
+.star {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.ratingText {
+    margin-top: 20px;
+    font-size: 2rem;
+}
