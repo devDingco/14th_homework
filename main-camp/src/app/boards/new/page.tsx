@@ -4,6 +4,7 @@ import styles from './style.module.css'
 import WriteButton from "../../components/boards/WriteButton"
 import WriteInput from "../../components/boards/WriteInput"
 import { gql, useMutation } from '@apollo/client'
+import { useRouter } from 'next/navigation'
 
 const CREATE_BOARD = gql`
     mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -17,6 +18,8 @@ const CREATE_BOARD = gql`
 
 // 게시글 등록 페이지
 const BoardsNew = () => {
+    const router = useRouter()
+
     const [writer, setWriter] = useState<string>("")
     const [password, setPassword] = useState<string | number>("")
     const [title, setTitle] = useState<string>("")
@@ -114,9 +117,10 @@ const BoardsNew = () => {
                         }
                     }
                 })
-                console.log(result)
+                console.log(result.data.createBoard._id)
+                router.push(`/boards/${result.data.createBoard._id}`)
             } catch(e) {
-                console.log(e)
+                alert('에러가 발생하였습니다. 다시 시도해 주세요.')
             }
         }
     }
