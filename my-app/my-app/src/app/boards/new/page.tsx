@@ -4,78 +4,104 @@ import styles from "./BoardsNew.module.css";
 import React, { useState } from "react";
 import Image from "next/image";
 import addIcon from "./assets/add.svg";
+import { useMutation, gql } from "@apollo/client";
+// import { error } from "console";
+
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      # password
+      title
+      contents
+    }
+  }
+`;
 
 export default function BoardsNew() {
   // - 변경되는 입력값 새로 저장하는 상태 설정
-  const [작성자, set작성자] = useState("");
-  const [비밀번호, set비밀번호] = useState("");
-  const [제목, set제목] = useState("");
-  const [내용, set내용] = useState("");
+  const [writer, setWriter] = useState("");
+  const [password, setPassword] = useState("");
+  const [title, setTitle] = useState("");
+  const [contents, setContents] = useState("");
+
+  const 버튼비활성화 = !writer || !password || !title || !contents;
+  // - 변경되는 입력값 확인후 상태에 저장하기
+  const onChangeWriter: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setWriter(e.target.value);
+  };
+
+  const onChangePassword: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const onChangeTitle: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const onChangeContents: React.ChangeEventHandler<HTMLTextAreaElement> = (
+    e
+  ) => {
+    setContents(e.target.value);
+  };
+
+  const [게시글등록API요청함수] = useMutation(CREATE_BOARD);
+
+  const onClickSignup = async () => {
+    await 게시글등록API요청함수({
+      variables: {
+        createBoardInput: { writer, password, title, contents },
+      },
+    });
+  };
 
   //입력값에 문제가 있을 때 보여주는 에러메세지 저장하는 상태 설정
-  const [작성자에러, set작성자에러] = useState("");
-  const [비밀번호에러, set비밀번호에러] = useState("");
-  const [제목에러, set제목에러] = useState("");
-  const [내용에러, set내용에러] = useState("");
-
-  const 버튼비활성화 = !작성자 || !비밀번호 || !제목 || !내용;
-  // - 변경되는 입력값 확인후 상태에 저장하기
-  const onChange작성자: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    set작성자(e.target.value);
-  };
-
-  const onChange비밀번호: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    set비밀번호(e.target.value);
-  };
-
-  const onChange제목: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    set제목(e.target.value);
-  };
-
-  const onChange내용: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-    set내용(e.target.value);
-  };
+  // const [writererror, setWriterError] = useState("");
+  // const [passworderror, setPasswordError] = useState("");
+  // const [titleerror, setTitleError] = useState("");
+  // const [contenterror, setContentError] = useState("");
 
   // - 등록하기 버튼 눌렀을때 실행되는 함수
-  const onClick등록하기 = () => {
-    let 에러 = false; // -> 처음에는 경고 메세지 안떠있는 상태이기 때문에 에러상태가 아님을 지정
+  // const onClickSignup = () => {
+  //   let error = false; // -> 처음에는 경고 메세지 안떠있는 상태이기 때문에 에러상태가 아님을 지정
 
-    if (작성자.trim() === "") {
-      set작성자에러("필수입력 사항입니다");
-      에러 = true;
-    } else {
-      set작성자에러("");
-    }
+  //   if (writer.trim() === "") {
+  //     setWriterError("필수입력 사항입니다");
+  //     error = true;
+  //   } else {
+  //     setWriterError("");
+  //   }
 
-    if (비밀번호.trim() === "") {
-      set비밀번호에러("필수입력 사항입니다");
-      에러 = true;
-    } else {
-      set비밀번호에러("");
-    }
+  //   if (password.trim() === "") {
+  //     setPassword("필수입력 사항입니다");
+  //     error = true;
+  //   } else {
+  //     setPasswordError("");
+  //   }
 
-    if (제목.trim() === "") {
-      set제목에러("필수입력 사항입니다");
-      에러 = true;
-    } else {
-      set제목에러("");
-    }
+  //   if (title.trim() === "") {
+  //     setTitle("필수입력 사항입니다");
+  //     error = true;
+  //   } else {
+  //     setTitleError("");
+  //   }
 
-    if (내용.trim() === "") {
-      set내용에러("필수입력 사항입니다");
-      에러 = true;
-    } else {
-      set내용에러("");
-    }
+  //   if (content.trim() === "") {
+  //     setContentError("필수입력 사항입니다");
+  //     error = true;
+  //   } else {
+  //     setContentError("");
+  //   }
 
-    // 에러가 아니라면 "게시글 등록가능" 창 뜨기
-    if (에러 === false) {
-      alert("게시글 등록이 가능한 상태입니다!");
-    }
-  };
+  //   // 에러가 아니라면 "게시글 등록가능" 창 뜨기
+  //   if (error === false) {
+  //     alert("게시글 등록이 가능한 상태입니다!");
+  //   }
+  // };
 
-  // // 내부 컴포넌트 제거하고 단일 JSX로 구성
-  // import styles from "./게시물등록.module.css";
+  // // // 내부 컴포넌트 제거하고 단일 JSX로 구성
+  // // import styles from "./게시물등록.module.css";
 
   return (
     <div className={styles.게시물등록_frame}>
@@ -92,9 +118,9 @@ export default function BoardsNew() {
               className={styles.게시물등록_플레이스홀더}
               type="text"
               placeholder="작성자 명을 입력해 주세요."
-              onChange={onChange작성자}
+              onChange={onChangeWriter}
             />
-            <div className={styles.에러메세지_스타일}>{작성자에러}</div>
+            {/* <div className={styles.에러메세지_스타일}>{writererror}</div> */}
           </div>
 
           <div className={styles.게시물등록_사용자인풋}>
@@ -106,9 +132,9 @@ export default function BoardsNew() {
               className={styles.게시물등록_플레이스홀더}
               type="text"
               placeholder="비밀번호를 입력해 주세요."
-              onChange={onChange비밀번호}
+              onChange={onChangePassword}
             />
-            <div className={styles.에러메세지_스타일}>{비밀번호에러}</div>
+            {/* <div className={styles.에러메세지_스타일}>{passworderror}</div> */}
           </div>
         </div>
 
@@ -123,9 +149,9 @@ export default function BoardsNew() {
             className={styles.게시물등록_플레이스홀더}
             type="text"
             placeholder="제목을 입력해 주세요."
-            onChange={onChange제목}
+            onChange={onChangeTitle}
           />
-          <div className={styles.에러메세지_스타일}>{제목에러}</div>
+          {/* <div className={styles.에러메세지_스타일}>{titleerror}</div> */}
         </div>
 
         <div className={styles.게시물등록_사용자인풋}>
@@ -136,9 +162,9 @@ export default function BoardsNew() {
             id="내용"
             className={styles.게시물등록_플레이스홀더_내용}
             placeholder="내용을 입력해 주세요."
-            onChange={onChange내용}
+            onChange={onChangeContents}
           />
-          <div className={styles.에러메세지_스타일}>{내용에러}</div>
+          {/* <div className={styles.에러메세지_스타일}>{contenterror}</div> */}
         </div>
 
         <hr />
@@ -217,7 +243,7 @@ export default function BoardsNew() {
           <button className={styles.취소버튼}>취소</button>
           <button
             className={styles.등록하기버튼}
-            onClick={onClick등록하기}
+            onClick={onClickSignup}
             disabled={버튼비활성화}
           >
             등록하기
