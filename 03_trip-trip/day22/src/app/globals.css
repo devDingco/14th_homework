@@ -55,6 +55,12 @@
     color: var(--color-gray-400);
   }
 
+  input:read-only,
+  textarea:read-only {
+    background-color: var(--color-gray-50);
+    color: var(--color-black);
+  }
+
   /* button default style */
   button {
     border-radius: 0.8rem;

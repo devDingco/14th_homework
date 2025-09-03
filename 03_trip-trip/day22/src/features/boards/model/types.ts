@@ -1,3 +1,5 @@
+import { PostAddr } from '@/shared/ui/AddressForm/types'
+
 export interface PostForm {
   writer?: string
   password?: string
@@ -6,12 +8,6 @@ export interface PostForm {
   addr?: PostAddr
   link?: string
   img_src?: string[]
-}
-
-export interface PostAddr {
-  zipcode?: string
-  addr1?: string
-  addr2?: string
 }
 
 export const initialPostValue: PostForm = {

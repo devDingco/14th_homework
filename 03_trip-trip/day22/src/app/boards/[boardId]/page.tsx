@@ -1,5 +1,5 @@
 'use client'
-import { IconButton } from '@/shared/ui/custom-button/IconButton'
+import { IconButton } from '@/shared/ui/CustomButton/IconButton'
 import styles from './styles.module.css'
 import {
   LinkIcon,
@@ -40,7 +40,6 @@ export default function BoardsDetail() {
     createdAt,
     updatedAt,
     deletedAt } = data.fetchBoard
-  
   
   const formattedDate = formatUtcToKstYmd(createdAt)
   const firstImg = images?.[0]
@@ -84,7 +83,6 @@ export default function BoardsDetail() {
           <iframe src={`https://www.youtube.com/embed/${youtubeId}`}></iframe>
         </div>
       }
-
 
       {/* dis-like button */}
       <div className={styles['detail-post-likes']}>

@@ -36,20 +36,6 @@
   min-height: 31.2rem;
 }
 
-/* AddrWithLabel */
-.post-form-addr {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-.post-form-addr-active {
-  display: flex;
-  gap: 0.8rem;
-}
-.post-form-addr-zipcode {
-  width: 8.2rem;
-}
-
 /* PostActions */
 .post-actions {
   display: flex;
