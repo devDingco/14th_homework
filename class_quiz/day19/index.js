@@ -2,18 +2,9 @@
 const App = () => {
   const TARGET_LEN = 5
 
-  // const stars = [0, 0, 0, 0, 0]
   const noStar = './assets/images/outlineStar.png'
   const fillStar = './assets/images/fillStar.png'
 
-  // const changeStars = (idx) => {
-  //   const len1 = idx + 1
-  //   const len2 = TARGET_LEN - len1
-  //   const arr1 = Array(len1).fill(1)
-  //   const arr2 = Array(len2).fill(0)
-  //   arr1.concat(arr2)
-  //   console.log(arr1)
-  // }
   const [stars, setStars] = React.useState(Array(TARGET_LEN).fill(0))
 
   const changeStars = (clickedIdx) => {
