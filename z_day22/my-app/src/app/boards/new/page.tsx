@@ -8,7 +8,6 @@ import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const 나의그래프큐엘셋팅 = gql`
-  # 변수의 타입 적는 곳
   mutation createBoard($createBoardInput: CreateBoardInput!) {
     createBoard(createBoardInput: $createBoardInput) {
       _id
@@ -95,7 +94,6 @@ export default function BoardsNew() {
   const onClickSubmit = async () => {
     let hasError = false;
 
-    // 1. 입력 유효성 검사 (이 부분은 에러가 아닌 로직적 판단이므로 try...catch 밖에 둡니다.)
     if (!writer.trim()) {
       setWriterError("필수입력 사항입니다.");
       hasError = true;
@@ -113,11 +111,10 @@ export default function BoardsNew() {
       hasError = true;
     }
 
-    if (hasError) return; // 유효성 검사 실패 시 함수 종료
+    if (hasError) return;
 
-    // 2. API 호출 및 페이지 이동 로직을 try 블록 안에 넣습니다.
     try {
-      alert("게시글 등록을 시도합니다!"); // 등록 시도 알림
+      alert("게시글 등록을 시도합니다!");
 
       const result = await 게시글등록API요청함수({
         variables: {
@@ -132,17 +129,14 @@ export default function BoardsNew() {
 
       console.log(result.data.createBoard);
 
-      // 성공적으로 API 호출이 완료되고 데이터를 받은 후에 페이지를 이동합니다.
       router.push(`/boards/${result.data.createBoard._id}`);
-      alert("게시글이 성공적으로 등록되었습니다!"); // 성공 알림
+      alert("게시글이 성공적으로 등록되었습니다!");
     } catch (error) {
-      // 3. 에러 발생 시 catch 블록에서 처리합니다.
       console.error("게시글 등록 중 오류 발생:", error);
-      // 사용자에게 오류 메시지를 보여줍니다.
+
       if (error instanceof Error) {
         alert(`게시글 등록에 실패했습니다: ${error.message}`);
       } else {
-        // Error 객체가 아닐 경우 (예: 문자열, 숫자 등)
         alert(`게시글 등록에 실패했습니다: 알 수 없는 오류 (${String(error)})`);
       }
     }
