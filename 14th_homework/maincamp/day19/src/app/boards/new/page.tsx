@@ -2,7 +2,20 @@
 // import "./styles.module.css";
 import styles from "./styles.module.css";
 import { ChangeEvent, useState } from "react";
+import { gql, useMutation } from "@apollo/client";
 import Link  from 'next/link';
+
+const myGraphqlSetting = gql`
+  mutation createBoard(
+    $createBoardInput: CreateBoardInput!
+  ) { 
+    createBoard(createBoardInput: $createBoardInput) {
+      writer
+      title
+      contents
+    }
+  }
+`;
 
 type Errors = {
   writer? : string;
@@ -16,6 +29,23 @@ const App: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
+
+  const [apiRequire] = useMutation(myGraphqlSetting);
+
+  const onClickSubmit = async () => {
+    const result = await apiRequire({
+      variables: {
+        createBoardInput: {
+          writer: writer,
+          password: password,
+          title: title,
+          contents: content,
+      },
+    }
+    });
+    // console.log();
+  };
+
 
   const [error, setErrors] = useState<Errors>({});
 
@@ -57,6 +87,11 @@ const App: React.FC = () => {
   const canSubmit = [writer, password, title, content].every(
     (v) => v.trim().length > 0
   );
+
+  const handleClick = () => {
+    validate();
+    onClickSubmit();
+  };
 
   return (
     <div className={styles.layout}>
@@ -171,18 +206,19 @@ const App: React.FC = () => {
       </div>
       <div className={styles["enroll-button-container"]}>
         <button className={styles["enroll-cancel-button"]}>취소</button>
-        <Link href="/boards/detail">
+        {/* <Link href="/boards/detail"> */}
           <button
             className={styles["enroll-submit-button"]}
-            onClick={validate}
+            onClick={handleClick}
             disabled={!canSubmit}
             aria-disabled={!canSubmit}
           >
             등록하기
           </button>
-        </Link>
+        {/* </Link> */}
       </div>
     </div>
+    
   );
 };
 

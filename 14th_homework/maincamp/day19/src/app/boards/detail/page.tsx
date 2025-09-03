@@ -34,10 +34,15 @@ const publishText =
                 조롱박꽃 모양 누룩이 매워 (나를) 붙잡으니 내 어찌 하리이까.[1]
                 얄리얄리 얄라셩 얄라리 얄라`;
 
+// function Mybutton() {
+
+//   return(
+    
+//   );
+// }
 
 const Detail = () => {
   
-
   return (
     <div className={styles["D_layout"]}>
       <div className={styles["D_enroll-row-container"]}>
