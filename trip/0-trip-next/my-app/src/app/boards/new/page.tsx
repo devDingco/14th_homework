@@ -6,6 +6,7 @@ import styles from "./styles.module.css"; // 스타일 다 바꿔주기 - 형식
 
 // Register 관련 컴포넌트들 불러오기
 import { RegisterInput, RegisterText, Picture, Button } from './Register';
+import { useRouter } from "next/navigation";
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -19,14 +20,16 @@ const CREATE_BOARD = gql`
 `;
 
 const BoardsNew: React.FC = () => {
+  const router = useRouter();
+
+  const [RegisterFunction] = useMutation(CREATE_BOARD);
+
   const [writer, setWriter] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [title, setTitle] = React.useState<string>("");
   const [contents, setContents] = React.useState<string>("");
 
   const [loading, setLoading] = useState(false); // API 호출 중에는 버튼을 비활성화
-
-  const [RegisterFunction] = useMutation(CREATE_BOARD);
 
   const handleSubmit = async () => {
     // 1. 입력값 체크
@@ -43,6 +46,7 @@ const BoardsNew: React.FC = () => {
     try {
       // password는 서버로 보내지 않음
       const result = await RegisterFunction({
+        
         variables: {
           createBoardInput: { writer, password, title, contents },
         },
@@ -50,7 +54,12 @@ const BoardsNew: React.FC = () => {
   
       // 3. API 호출 성공 시 alert
       alert("게시글 등록이 완료되었습니다!");
-      console.log("등록 결과:", result.data);
+
+      console.log(result.data.createBoard._id);
+
+      router.push(
+        `/boards/${result.data.createBoard._id}`
+      );
   
     } catch (error) {
       console.error("등록 중 오류 발생:", error);
