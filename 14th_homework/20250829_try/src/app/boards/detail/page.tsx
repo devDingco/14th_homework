@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from "react";
 import Image from "next/image";
@@ -37,7 +37,7 @@ export default function BoardsDetail() {
 얄리얄리 얄라셩 얄라리 얄라`;
 
   const renderContentWithBreaks = (text: string) => {
-    return text.split("\n").map((line, index) => (
+    return text.split('\n').map((line, index) => (
       <React.Fragment key={index}>
         {line}
         <br />
@@ -50,8 +50,7 @@ export default function BoardsDetail() {
       {/* ✅ 헤더 */}
       <div className="mb-6">
         <h1 className="text-2xl font-bold mb-2 leading-snug">
-          살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고
-          쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라
+          살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라
         </h1>
         <div className="flex items-center text-gray-500 text-sm">
           <Image
