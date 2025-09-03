@@ -20,10 +20,6 @@ export default function Modal({ isOpen, onClose, type, handleOpenFailModal }: Mo
     onClose();
   };
 
-  const handlePasswordChange = () => {
-    onClose();
-  };
-
   const handlePointCharge = () => {
     onClose();
   };
@@ -39,7 +35,7 @@ export default function Modal({ isOpen, onClose, type, handleOpenFailModal }: Mo
           ) : type === 'fail' ? (
             <div className="modal_header sb_18_24">포인트 부족</div>
           ) : type === 'passwordChange' ? (
-            <div className="modal_header sb_18_24">비밀번호 변경을 축하 드려요.</div>
+            <div className="modal_header sb_18_24">비밀번호 변경 완료</div>
           ) : null}
         </div>
         <div className="modal_body">
@@ -53,7 +49,7 @@ export default function Modal({ isOpen, onClose, type, handleOpenFailModal }: Mo
               포인트를 충전하고 구매해주세요.
             </div>
           ) : type === 'passwordChange' ? (
-            <div className="modal_body_text me_14_20">비밀번호 변경을 축하 드려요.</div>
+            <div className="modal_body_text me_14_20">비밀번호가 변경 되었습니다.</div>
           ) : null}
         </div>
         {type === 'success' ? (
@@ -79,7 +75,9 @@ export default function Modal({ isOpen, onClose, type, handleOpenFailModal }: Mo
             </div>
           </div>
         ) : type === 'passwordChange' ? (
-          <div className="modal_primary_button sb_14_20">확인</div>
+          <div className="modal_primary_button sb_14_20" onClick={onClose}>
+            확인
+          </div>
         ) : null}
       </div>
     </div>

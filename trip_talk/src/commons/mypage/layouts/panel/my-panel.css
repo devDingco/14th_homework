@@ -45,6 +45,7 @@
   background: transparent;
   color: var(--gray-800);
   transition: background-color 0.15s ease, transform 0.05s ease;
+  cursor: pointer;
 }
 
 .my_panel_item::after {
@@ -60,4 +61,5 @@
 
 .my_panel_item.active {
   background: var(--gray-50);
+  color: var(--black);
 }

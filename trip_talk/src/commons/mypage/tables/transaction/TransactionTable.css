@@ -1,4 +1,4 @@
-.transaction_table_container {
+.t_table_container {
   width: 100%;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
   background-color: var(--white);
@@ -9,22 +9,22 @@
   margin-bottom: 2.5rem;
 }
 
-.transaction_table {
+.t_table {
   width: 100%;
 }
 
 /* 테이블 전체 스타일 */
-table {
+.t_table table {
   width: 100%;
   border-collapse: collapse;
 }
 
 /* 테이블 헤더 스타일 */
-thead {
+.t_table thead {
   width: 100%;
 }
 
-thead tr {
+.t_table thead tr {
   width: 100%;
   display: grid;
   grid-template-columns: 6.4rem 6.25rem 1fr 6.25rem;
@@ -34,21 +34,21 @@ thead tr {
   margin-bottom: 0.5rem;
 }
 
-thead th {
+.t_table thead th {
   width: 100%;
   font-weight: 600;
   color: var(--gray-900);
-  text-align: left;
+  text-align: center;
   padding: 0;
 }
 
 /* 테이블 바디 스타일 */
-tbody {
+.t_table tbody {
   display: grid;
   gap: 0.75rem;
 }
 
-tbody tr {
+.t_table tbody tr {
   display: grid;
   grid-template-columns: 6.4rem 6.25rem 1fr 6.25rem;
   align-items: center;
@@ -59,94 +59,42 @@ tbody tr {
   position: relative;
 }
 
-/* 판매자 컬럼이 있는 경우 */
-tbody tr.with-seller {
-  grid-template-columns: 6.4rem 1fr 6.25rem 6.25rem 6rem;
-}
-
-tbody td {
+.t_table tbody td {
   color: var(--gray-800);
 }
 
 /* 컬럼별 스타일 */
-.col-date {
+.t_table_col-date {
   text-align: center;
-  color: #6c757d;
+  color: var(--gray-500);
 }
 
-.col-product {
+.t_table_col-product {
   color: var(--gray-800);
   text-align: center;
 }
-.col-product.positive {
+.t_table_col-product.positive {
   color: var(--primary-color);
 }
-.col-product.negative {
+.t_table_col-product.negative {
   color: var(--warning-color);
 }
 
-.col-amount {
+.t_table_col-amount {
   color: var(--gray-800);
   text-align: center;
 }
 
-.col-balance {
-  text-align: right;
+.t_table_col-balance {
+  text-align: center;
   color: var(--black);
 }
 
 /* 금액 색상 */
-.col-amount.positive {
+.t_table_col-amount.positive {
   color: var(--primary-color);
 }
 
-.col-amount.negative {
+.t_table_col-amount.negative {
   color: var(--warning-color);
-}
-
-/* 페이지네이션 스타일 */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.25rem;
-  margin-top: 2rem;
-  width: 100%;
-}
-
-.pagination_btn {
-  min-width: 2.5rem;
-  height: 2.5rem;
-  padding: 0;
-  border: 1px solid var(--gray-200);
-  background-color: var(--white);
-  color: var(--gray-700);
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.pagination_btn:hover:not(:disabled) {
-  background-color: var(--gray-50);
-  border-color: var(--gray-300);
-  color: var(--gray-900);
-}
-
-.pagination_btn.active {
-  background-color: var(--primary-500, #3b82f6);
-  color: var(--white);
-  border-color: var(--primary-500, #3b82f6);
-  font-weight: 600;
-}
-
-.pagination_btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  background-color: var(--gray-100);
-  color: var(--gray-400);
 }
