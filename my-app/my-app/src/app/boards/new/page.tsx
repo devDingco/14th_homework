@@ -5,7 +5,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import addIcon from "./assets/add.svg";
 import { useMutation, gql } from "@apollo/client";
-// import { error } from "console";
+import { error } from "console";
+import { useRouter } from "next/navigation";
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -15,6 +16,7 @@ const CREATE_BOARD = gql`
       # password
       title
       contents
+      createdAt
     }
   }
 `;
@@ -46,14 +48,23 @@ export default function BoardsNew() {
     setContents(e.target.value);
   };
 
+  const router = useRouter();
+
   const [게시글등록API요청함수] = useMutation(CREATE_BOARD);
 
   const onClickSignup = async () => {
-    await 게시글등록API요청함수({
-      variables: {
-        createBoardInput: { writer, password, title, contents },
-      },
-    });
+    try {
+      const result = await 게시글등록API요청함수({
+        variables: {
+          createBoardInput: { writer, password, title, contents },
+        },
+      });
+
+      router.push(`/boards/${result.data.createBoard._id}`);
+    } catch (error) {
+      alert("에러가 발생하였습니다. 다시 시도해 주세요.");
+    } // finally {
+    // }
   };
 
   //입력값에 문제가 있을 때 보여주는 에러메세지 저장하는 상태 설정
@@ -111,7 +122,7 @@ export default function BoardsNew() {
         <div className={styles.게시물등록_작성자and비밀번호}>
           <div className={styles.게시물등록_사용자인풋}>
             <label htmlFor="작성자" className={styles.게시물등록_라벨}>
-              작성자
+              작성자 <span style={{ color: "red" }}>*</span>
             </label>
             <input
               id="작성자"
@@ -125,7 +136,7 @@ export default function BoardsNew() {
 
           <div className={styles.게시물등록_사용자인풋}>
             <label htmlFor="비밀번호" className={styles.게시물등록_라벨}>
-              비밀번호
+              비밀번호 <span style={{ color: "red" }}>*</span>
             </label>
             <input
               id="비밀번호"
@@ -142,7 +153,7 @@ export default function BoardsNew() {
 
         <div className={styles.게시물등록_사용자인풋}>
           <label htmlFor="제목" className={styles.게시물등록_라벨}>
-            제목
+            제목 <span style={{ color: "red" }}>*</span>
           </label>
           <input
             id="제목"
@@ -156,7 +167,7 @@ export default function BoardsNew() {
 
         <div className={styles.게시물등록_사용자인풋}>
           <label htmlFor="내용" className={styles.게시물등록_라벨}>
-            내용
+            내용 <span style={{ color: "red" }}>*</span>
           </label>
           <textarea
             id="내용"

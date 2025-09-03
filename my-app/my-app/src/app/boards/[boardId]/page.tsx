@@ -1,6 +1,12 @@
 "use client";
 
 import styles from "./BoardsDetail.module.css";
+import { useRouter } from "next/router";
+import { useParams } from "next/navigation";
+import { gql, useQuery } from "@apollo/client";
+import { error } from "console";
+
+//--------------------------------------------
 // import React, { useState } from "react";
 import Image from "next/image";
 import 프로필이미지 from "./assets/img.svg";
@@ -12,16 +18,35 @@ import 검정하트 from "./assets/bad.svg";
 import 빨강하트 from "./assets/good.svg";
 import 목록 from "./assets/list.svg";
 import 수정 from "./assets/pencil.svg";
+//-------------------------------
+
+const FETCH_BOARD = gql`
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      _id
+      writer
+      title
+      contents
+      createdAt
+    }
+  }
+`;
 
 export default function BoardsDetail() {
+  const params = useParams();
+  // const boardId = params?.boardId;
+
+  const { data } = useQuery(FETCH_BOARD, {
+    variables: {
+      boardId: params.boardId,
+    },
+  });
+
   return (
     <>
       <div className={styles.게시글상세화면_프레임}>
         <div className={styles.게시글상세화면_컨테이너}>
-          <h1>
-            살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고
-            쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라
-          </h1>
+          <h1>{data?.fetchBoard?.title}</h1>
           <div className={styles.바디_정보}>
             <div className={styles.프로필and작성일자}>
               <div className={styles.프로필}>
@@ -30,9 +55,13 @@ export default function BoardsDetail() {
                   src={프로필이미지}
                   alt="프로필이미지"
                 />
-                <div className={styles.프로필_이름}>홍길동</div>
+                <div className={styles.프로필_이름}>
+                  {data?.fetchBoard?.writer}
+                </div>
               </div>
-              <div className={styles.작성일자}>2024.11.11</div>
+              <div className={styles.작성일자}>
+                {data?.fetchBoard?.createdAt.split("T")[0]}
+              </div>
             </div>
             <div className={styles.링크and위치}>
               <Image className={styles.링크} src={링크} alt="링크" />
@@ -43,7 +72,10 @@ export default function BoardsDetail() {
               src={해변사진}
               alt="해변사진"
             />
-            <textarea className={styles.바디_내용} placeholder="야호!" />
+            <div className={styles.바디_내용}>
+              {" "}
+              {data?.fetchBoard?.contents}{" "}
+            </div>
             <div>
               <Image
                 className={styles.바디_동영상}
