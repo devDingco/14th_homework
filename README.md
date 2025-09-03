@@ -2,10 +2,10 @@
 
 1. 공통
     - [x]  완성된 day19 폴더를 활용하여 day21을 완성해 주세요.(day20 없음)
-    - [ ]  GRAPHQL 통신이 가능하도록 layout.tsx 파일에 과제자료(apollo-setting.tsx)를 설치해 주세요.
-        - [ ]  설치경로: src/commons/settings/apollo-setting.tsx
-        - [ ]  적용방법: src/app/layout.tsx 파일을 열어, 수업에서 배운대로 적용해 주세요.
-        - [ ]  GraphQL 서버 주소: http://main-practice.codebootcamp.co.kr/graphql
+    - [x]  GRAPHQL 통신이 가능하도록 layout.tsx 파일에 과제자료(apollo-setting.tsx)를 설치해 주세요.
+        - [x]  설치경로: src/commons/settings/apollo-setting.tsx
+        - [x]  적용방법: src/app/layout.tsx 파일을 열어, 수업에서 배운대로 적용해 주세요.
+        - [x]  GraphQL 서버 주소: http://main-practice.codebootcamp.co.kr/graphql
 2. 게시글등록
     - [ ]  src/app/boards/new/page.tsx 파일에 아래의 기능이 작동하도록 수정해 주세요.
         - [ ]  GRAPHQL-API(createBoard)를 사용하여 작성자, 비밀번호, 제목, 내용을 입력한 후, 등록하기 버튼을 클릭하면 게시글이 등록 되도록 기능을 완성해 주세요.
