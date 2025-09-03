@@ -1,0 +1,270 @@
+"use client";
+
+import styles from "./styles.module.css";
+import { SmallInput, LongInput, SuperLongInput } from "./form-input";
+import Divider from "./line";
+import { gql, useMutation } from "@apollo/client";
+import { ChangeEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+
+const 나의그래프큐엘셋팅 = gql`
+  # 변수의 타입 적는 곳
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+    }
+  }
+`;
+
+export default function BoardsNew() {
+  const router = useRouter();
+
+  const 작성자_타이틀 = "작성자";
+  const 작성자 = "작성자 명을 입력해주세요.";
+  const 비밀번호_타이틀 = "비밀번호";
+  const 비밀번호 = "비밀번호를 입력해주세요.";
+  const 제목_타이틀 = "제목";
+  const 제목 = "제목을 입력해 주세요.";
+  const 내용_타이틀 = "내용";
+  const 내용 = "내용을 입력해 주세요.";
+  const 주소 = "주소를 입력해 주세요.";
+  const 상세주소 = "상세주소";
+  const 유튜브링크_타이틀 = "유튜브링크";
+  const 링크 = "링크를 입력해주세요.";
+  const 별 = "*";
+
+  const [writer, setWriter] = useState("");
+  const [password, setPassword] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  // const [address, setAddress] = useState("")
+
+  const [writerError, setWriterError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [titleError, setTitleError] = useState("");
+  const [contentError, setContentError] = useState("");
+
+  const [isActive, setIsActive] = useState(false);
+
+  const [게시글등록API요청함수] = useMutation(나의그래프큐엘셋팅);
+
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value); // 작동된 태그에 입력된 값
+    setWriter(event.target.value);
+    if (writerError) setWriterError("");
+    if (event.target.value && password && title && content) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  };
+
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value); // 작동된 태그에 입력된 값
+    setPassword(event.target.value);
+    if (writer && event.target.value && title && content) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  };
+
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value); // 작동된 태그에 입력된 값
+    setTitle(event.target.value);
+    if (writer && password && event.target.value && content) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  };
+
+  const onChangeContent = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value); // 작동된 태그에 입력된 값
+    setContent(event.target.value);
+    if (writer && password && title && event.target.value) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  };
+
+  const onClickSubmit = async () => {
+    let hasError = false;
+
+    // 1. 입력 유효성 검사 (이 부분은 에러가 아닌 로직적 판단이므로 try...catch 밖에 둡니다.)
+    if (!writer.trim()) {
+      setWriterError("필수입력 사항입니다.");
+      hasError = true;
+    }
+    if (!password.trim()) {
+      setPasswordError("필수입력 사항입니다.");
+      hasError = true;
+    }
+    if (!title.trim()) {
+      setTitleError("필수입력 사항입니다.");
+      hasError = true;
+    }
+    if (!content.trim()) {
+      setContentError("필수입력 사항입니다.");
+      hasError = true;
+    }
+
+    if (hasError) return; // 유효성 검사 실패 시 함수 종료
+
+    // 2. API 호출 및 페이지 이동 로직을 try 블록 안에 넣습니다.
+    try {
+      alert("게시글 등록을 시도합니다!"); // 등록 시도 알림
+
+      const result = await 게시글등록API요청함수({
+        variables: {
+          createBoardInput: {
+            writer: writer,
+            password: password,
+            title: title,
+            contents: content,
+          },
+        },
+      });
+
+      console.log(result.data.createBoard);
+
+      // 성공적으로 API 호출이 완료되고 데이터를 받은 후에 페이지를 이동합니다.
+      router.push(`/boards/${result.data.createBoard._id}`);
+      alert("게시글이 성공적으로 등록되었습니다!"); // 성공 알림
+    } catch (error) {
+      // 3. 에러 발생 시 catch 블록에서 처리합니다.
+      console.error("게시글 등록 중 오류 발생:", error);
+      // 사용자에게 오류 메시지를 보여줍니다.
+      if (error instanceof Error) {
+        alert(`게시글 등록에 실패했습니다: ${error.message}`);
+      } else {
+        // Error 객체가 아닐 경우 (예: 문자열, 숫자 등)
+        alert(`게시글 등록에 실패했습니다: 알 수 없는 오류 (${String(error)})`);
+      }
+    }
+  };
+
+  return (
+    <>
+      <div className={styles.App}>
+        <header className="">
+          <div className={styles.전체}>
+            <div className={styles.헤더}></div>
+            <div className={styles.바디}>
+              <div className={styles.게시글_폼_제목}>게시글 등록</div>
+              <div className={styles.게시글_폼}>
+                <div className={styles.게시글_폼_상세}>
+                  <div className={styles.게시글_인풋블록}>
+                    <SmallInput
+                      Input_Title={작성자_타이틀}
+                      Input_Placeholder={작성자}
+                      Input_Star={별}
+                      onChange={onChangeWriter}
+                      errorMessage={writerError}
+                    />
+                    <SmallInput
+                      Input_Title={비밀번호_타이틀}
+                      Input_Placeholder={비밀번호}
+                      Input_Star={별}
+                      onChange={onChangePassword}
+                      errorMessage={passwordError}
+                    />
+                  </div>
+                  <Divider />
+                  <div className={styles.게시글_인풋블록}>
+                    <LongInput
+                      Input_Title={제목_타이틀}
+                      Input_Placeholder={제목}
+                      Input_Star={별}
+                      onChange={onChangeTitle}
+                      errorMessage={titleError}
+                    />
+                  </div>
+                  <Divider />
+                  <div className={styles.게시글_인풋블록}>
+                    <SuperLongInput
+                      Input_Title={내용_타이틀}
+                      Input_Placeholder={내용}
+                      Input_Star={별}
+                      onChange={onChangeContent}
+                      errorMessage={contentError}
+                    />
+                  </div>
+                  <div className={styles.게시글_인풋블록쌓기}>
+                    <div className={styles.주소인풋이랑버튼}>
+                      주소
+                      <div className={styles.인풋이랑버튼}>
+                        <input
+                          className={styles.우편번호인풋}
+                          placeholder="01234"
+                        ></input>
+                        <button className={styles.우편번호검색}>
+                          우편번호 검색
+                        </button>
+                      </div>
+                    </div>
+                    <LongInput Input_Placeholder={주소} />
+                    <LongInput Input_Placeholder={상세주소} />
+                  </div>
+                  <Divider />
+                  <div className={styles.게시글_인풋블록}>
+                    <LongInput
+                      Input_Title={유튜브링크_타이틀}
+                      Input_Placeholder={링크}
+                    />
+                  </div>
+                  <Divider />
+                  <div className={styles.게시글_인풋블록쌓기}>
+                    <span>사진첨부</span>
+                    <div className={styles.사진첨부_그룹}>
+                      <div className={styles.사진첨부}>
+                        <img
+                          src="/images/add.png"
+                          className={styles.더하기이미지}
+                          alt=""
+                        ></img>
+                        클릭해서 사진 업로드
+                      </div>
+                      <div className={styles.사진첨부}>
+                        <img
+                          src="/images/add.png"
+                          className={styles.더하기이미지}
+                          alt=""
+                        ></img>
+                        클릭해서 사진 업로드
+                      </div>
+                      <div className={styles.사진첨부}>
+                        <img
+                          src="/images/add.png"
+                          className={styles.더하기이미지}
+                          alt=""
+                        ></img>
+                        클릭해서 사진 업로드
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.게시글_폼_버튼}>
+                  <button className="취소">취소</button>
+                  <button
+                    style={{
+                      backgroundColor: isActive === true ? "#2974E5" : "gray",
+                    }}
+                    className={styles.등록}
+                    onClick={onClickSubmit}
+                  >
+                    등록하기
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
+    </>
+  );
+}
