@@ -5,6 +5,8 @@ export interface BookingItem {
   seller: string;
   content: string;
   price: string;
+  latitude?: number;
+  longitude?: number;
 }
 
 export const bookingMock: BookingItem[] = [
@@ -21,6 +23,8 @@ export const bookingMock: BookingItem[] = [
 가다니 ᄇᆡ브른 도긔 설진 강수를 비조라\n조롱곳 누로기 ᄆᆡ와 잡ᄉᆞ와니 내 엇디 ᄒᆞ리잇고\n얄리얄리 얄라셩 얄라리 얄라
 `,
     price: '32,500원',
+    latitude: 36.032,
+    longitude: 129.3654,
   },
   {
     id: 2,
@@ -35,6 +39,8 @@ export const bookingMock: BookingItem[] = [
 가다니 ᄇᆡ브른 도긔 설진 강수를 비조라\n조롱곳 누로기 ᄆᆡ와 잡ᄉᆞ와니 내 엇디 ᄒᆞ리잇고\n얄리얄리 얄라셩 얄라리 얄라
 `,
     price: '32,500원',
+    latitude: 36.032,
+    longitude: 129.3654,
   },
   {
     id: 3,
@@ -49,6 +55,8 @@ export const bookingMock: BookingItem[] = [
 가다니 ᄇᆡ브른 도긔 설진 강수를 비조라\n조롱곳 누로기 ᄆᆡ와 잡ᄉᆞ와니 내 엇디 ᄒᆞ리잇고\n얄리얄리 얄라셩 얄라리 얄라
 `,
     price: '32,500원',
+    latitude: 36.032,
+    longitude: 129.3654,
   },
   {
     id: 4,
@@ -63,6 +71,8 @@ export const bookingMock: BookingItem[] = [
 가다니 ᄇᆡ브른 도긔 설진 강수를 비조라\n조롱곳 누로기 ᄆᆡ와 잡ᄉᆞ와니 내 엇디 ᄒᆞ리잇고\n얄리얄리 얄라셩 얄라리 얄라
 `,
     price: '32,500원',
+    latitude: 36.032,
+    longitude: 129.3654,
   },
   {
     id: 5,
@@ -77,6 +87,8 @@ export const bookingMock: BookingItem[] = [
 가다니 ᄇᆡ브른 도긔 설진 강수를 비조라\n조롱곳 누로기 ᄆᆡ와 잡ᄉᆞ와니 내 엇디 ᄒᆞ리잇고\n얄리얄리 얄라셩 얄라리 얄라
 `,
     price: '32,500원',
+    latitude: 36.032,
+    longitude: 129.3654,
   },
   {
     id: 6,
@@ -91,6 +103,8 @@ export const bookingMock: BookingItem[] = [
 가다니 ᄇᆡ브른 도긔 설진 강수를 비조라\n조롱곳 누로기 ᄆᆡ와 잡ᄉᆞ와니 내 엇디 ᄒᆞ리잇고\n얄리얄리 얄라셩 얄라리 얄라
 `,
     price: '32,500원',
+    latitude: 36.032,
+    longitude: 129.3654,
   },
   {
     id: 7,
@@ -105,6 +119,8 @@ export const bookingMock: BookingItem[] = [
 가다니 ᄇᆡ브른 도긔 설진 강수를 비조라\n조롱곳 누로기 ᄆᆡ와 잡ᄉᆞ와니 내 엇디 ᄒᆞ리잇고\n얄리얄리 얄라셩 얄라리 얄라
 `,
     price: '32,500원',
+    latitude: 36.032,
+    longitude: 129.3654,
   },
   {
     id: 8,
@@ -119,5 +135,7 @@ export const bookingMock: BookingItem[] = [
 가다니 ᄇᆡ브른 도긔 설진 강수를 비조라\n조롱곳 누로기 ᄆᆡ와 잡ᄉᆞ와니 내 엇디 ᄒᆞ리잇고\n얄리얄리 얄라셩 얄라리 얄라
 `,
     price: '32,500원',
+    latitude: 36.032,
+    longitude: 129.3654,
   },
 ];
