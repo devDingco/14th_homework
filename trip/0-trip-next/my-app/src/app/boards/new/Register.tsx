@@ -21,7 +21,6 @@ export const RegisterInput: React.FC<RegisterInputProps> = ({ inputTitle, displa
     const [Error, setError] = useState("")
     
     const onChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target)
 
         const newValue = event.target.value   // 임시 변수에 담음
         setValue(newValue)   // 상태 업데이트
@@ -69,7 +68,6 @@ export const RegisterText: React.FC<RegisterTextProps> = ({ inputTitle, display 
     const [Error, setError] = useState("")
     
     const onChangeValue = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        console.log(event.target)
 
         const newValue = event.target.value   // 임시 변수에 담음
         setValue(newValue)   // 상태 업데이트
