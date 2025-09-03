@@ -95,10 +95,11 @@ hr {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
-  width: 280px;
-
 }
 .css_우편번호입력창{
+  /* 인풋 */
+
+box-sizing: border-box;
 
 /* 오토레이아웃 */
 display: flex;
@@ -106,12 +107,18 @@ flex-direction: column;
 align-items: flex-start;
 padding: 12px 16px;
 
-width: 80px;
+width: 30%;
 height: 48px;
 
 background: #FFFFFF;
 border: 1px solid #D4D3D3;
 border-radius: 8px;
+
+/* 내부 오토레이아웃 */
+flex: auto;
+order: 0;
+flex-grow: 0;
+
 }
 
 #우편번호검색 {

@@ -52,7 +52,7 @@ const 게시글등록페이지 = () => {
           <div className="css_주소영역">
             <label>주소</label>
             <div className="css_우편번호검색영역">
-              <input type="text" className="css_우편번호입력창"  placeholder ="01234"   />
+              <input type="text" className="css_우편번호입력창"  placeholder="01234"  />
               <button type="button" id="우편번호검색">
                 우편번호 검색
               </button>
