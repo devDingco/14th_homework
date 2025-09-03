@@ -1,18 +1,9 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
+
 import './globals.css';
 import Header from '@/components/Header';
-
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-});
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
-});
+import Providers from '@/config/Providers';
+import { Pretendard } from '@/assets/fonts/fonts';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -25,13 +16,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} flex h-full w-full flex-col items-center justify-center gap-10 antialiased`}
-      >
-        <Header />
-        {children}
-      </body>
+    <html lang='ko' className={`${Pretendard.variable}`}>
+      <Providers>
+        <body
+          className={`font-Pretendard flex h-full w-full flex-col items-center justify-center gap-10 antialiased`}
+        >
+          <Header />
+          <main>{children}</main>
+        </body>
+      </Providers>
     </html>
   );
 }

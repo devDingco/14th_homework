@@ -1,7 +1,7 @@
 const navList = [
-  { name: '트립토크', link: 'trip-talk' },
-  { name: '숙박권 구매', link: 'purchase' },
-  { name: '마이 페이지', link: 'my-page' },
+  { name: '트립토크', link: '/trip-talk' },
+  { name: '숙박권 구매', link: '/purchase' },
+  { name: '마이 페이지', link: '/my-page' },
 ];
 
 import Image from 'next/image';
@@ -22,9 +22,9 @@ export default function Header() {
             <ul className='flex gap-4'>
               {navList.map((item) => (
                 <li key={item.name}>
-                  <a className='p-2 text-xl font-bold' href={item.link}>
+                  <Link className='p-2 text-xl font-bold' href={item.link}>
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
