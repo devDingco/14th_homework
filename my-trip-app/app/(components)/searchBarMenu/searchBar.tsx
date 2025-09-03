@@ -2,6 +2,7 @@
 import "./searchBar.css";
 import "../../global.css";
 import { useRef, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import Icon from "@utils/iconColor";
 
 export interface SearchBarMenuProps {
@@ -17,6 +18,8 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
   const [activeFilter, setActiveFilter] = useState(defaultFilter);
   const startInputRef = useRef<HTMLInputElement | null>(null);
   const endInputRef = useRef<HTMLInputElement | null>(null);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const formatDate = (value: string) => {
     if (!value) return "";
@@ -40,6 +43,14 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
     setStartDate(value);
     setEndDate("");
     setTimeout(() => (endInputRef.current as any)?.showPicker?.(), 0);
+  };
+
+  const handlePostButtonClick = () => {
+    if (pathname === "/") {
+      router.push("/board/post");
+    } else if (pathname.startsWith("/product")) {
+      router.push("/product/post");
+    }
   };
   return (
     <div className="head_component_container">
@@ -97,12 +108,11 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
           <input className="r_16_24" type="text" placeholder="검색어를 입력해주세요." />
         </div>
           <button type="button" className="search-button sb_18_24">검색</button>
-        <button type="button" className="post-button sb_18_24">
+        <button type="button" className="post-button sb_18_24" onClick={handlePostButtonClick}>
             <Icon outline write white className="write_icon" />
             {postButtonLabel}
           </button>
       </div>
-
     </div>
   );
 }

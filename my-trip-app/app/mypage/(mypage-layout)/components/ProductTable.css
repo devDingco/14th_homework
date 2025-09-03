@@ -1,0 +1,186 @@
+.product_table_container {
+  width: 128rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 2.4rem;
+
+}
+
+.product_table {
+  width: 100%;
+  margin: 0 auto;
+  font-size: 14px;
+
+}
+
+
+/* 테이블 전체 스타일 */
+table {
+  width: 118.4rem;
+  border-radius: 1.6rem;
+  padding: 2.4rem 4.8rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
+
+}
+
+/* 테이블 헤더 스타일 */
+thead {
+  width: 118.4rem;
+}
+
+thead tr {
+  width: 118.4rem;
+  display: grid;
+  grid-template-columns: 10rem 1fr 10rem 10rem;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+
+}
+
+/* 북마크 탭에서 판매자 컬럼 추가 시 5개 컬럼 레이아웃 */
+thead tr:has(.col_seller) {
+  grid-template-columns: 10rem 1fr 10rem 10rem 10rem;
+}
+
+thead th {
+  width: 100%;
+  font-weight: 600;
+  color: #495057;
+  text-align: left;
+  padding: 0;
+}
+
+/* 테이블 바디 스타일 */
+tbody {
+  display: grid;
+  gap: 0.75rem;
+
+}
+tbody tr {
+  display: grid;
+  grid-template-columns: 10rem 1fr 10rem 10rem;
+  align-items: center;
+  padding: 1.2rem 2.4rem;
+  gap: 0.5rem;
+  border: 1px solid #f2f2f2;
+  border-radius: 1rem;
+  position: relative;
+}
+
+/* 북마크 탭에서 판매자 컬럼 추가 시 5개 컬럼 레이아웃 */
+tbody tr:has(.col_seller) {
+  grid-template-columns: 10rem 1fr 10rem 10rem 10rem;
+}
+
+tbody .delete_button {
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+  top: 0.6rem;
+  right: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+tbody tr:hover .delete_button {
+  opacity: 1;
+}
+
+
+/* 컬럼별 스타일 */
+.col_number {
+  text-align: center;
+  color: var(--gray-80);
+}
+
+.col_name {
+  color: var(--gray-80);
+}
+.col_name_sold {
+  color: var(--gray-40);
+}
+
+
+/* 판매완료 아이템: 행 전체 텍스트 흐리게 (판매가격, 날짜 제외) */
+tbody tr.row_sold .col_number,
+tbody tr.row_sold .col_name {
+  color: var(--gray-40);
+}
+
+.col_price {
+  color: var(--gray-80);
+}
+
+.col_seller {
+  color: var(--gray-80);
+  text-align: center;
+}
+
+/* 헤더의 날짜 컬럼 */
+thead .col_date {
+  text-align: center;
+  color: #495057;
+}
+
+tbody .col_number {
+  text-align: center;
+  color: var(--gray-40);
+}
+
+/* 바디의 날짜 컬럼 - 항상 흐린색 */
+tbody .col_date {
+  text-align: center;
+  color: var(--gray-40);
+}
+
+/* 상태 배지 스타일 */
+.status_badge {
+  color: var(--red-30);
+  margin-left: 0.8rem;
+}
+
+.status_badge.sold {
+  color: var(--main-color);
+  margin-left: 0.8rem;
+}
+/* 페이지네이션 스타일 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.pagination_btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #dee2e6;
+  background-color: white;
+  color: #495057;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination_btn:hover:not(:disabled) {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.pagination_btn.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination_btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

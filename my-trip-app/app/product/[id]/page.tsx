@@ -1,12 +1,14 @@
 import ProductDetail from "../(detail)/index"
 import InquirySection from "@components/comment/inquirySection";
 
-type PageProps = { params: { id: string } };
+type PageProps = { params: Promise<{ id: string }> };
 
-export default function ProductDetailPage({ params }: PageProps) {
+export default async function ProductDetailPage({ params }: PageProps) {
+  const { id } = await params;
+  
   return (
     <>
-      <ProductDetail id={params.id} />
+      <ProductDetail id={id} />
       <InquirySection />
     </>
   );

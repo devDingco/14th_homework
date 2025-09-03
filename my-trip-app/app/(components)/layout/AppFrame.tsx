@@ -10,12 +10,22 @@ export default function AppFrame({ children }: AppFrameProps) {
   const pathname = usePathname();
   const isAuthRoute = pathname.startsWith("/auth");
   const isProductDetailRoute = pathname.startsWith("/product/");
+  const isMypageRoute = pathname.startsWith("/mypage");
 
   if (isAuthRoute) {
     return <>{children}</>;
   }
 
   if (pathname === "/board") {
+    return (
+      <>
+        <Header />
+        {children}
+      </>
+    );
+  }
+
+  if (isMypageRoute) {
     return (
       <>
         <Header />

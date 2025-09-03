@@ -20,6 +20,9 @@
       "@/*": [
         "./app/*"
       ],
+      "@/types/*": [
+        "./app/_types/*"
+      ],
       "@components/*": [
         "./app/(components)/*"
       ],
@@ -32,6 +35,9 @@
       "@styles/*": [
         "./app/styles/*"
       ],
+      "@layouts/*": [
+        "./app/mypage/layouts/*"
+      ],
       "@utils/*": [
         "./app/utils/*"
       ],
@@ -40,6 +46,9 @@
       ],
       "@icons/*": [
         "./public/icons/*"
+      ],
+      "@lib/*": [
+        "./lib/*"
       ]
     },
     "types": [

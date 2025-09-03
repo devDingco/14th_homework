@@ -206,7 +206,7 @@
 .seller_info {
   display: flex;
   align-items: center;
-  gap: 0.rem;
+  gap: 0.8rem;
 }
 
 .seller_avatar {

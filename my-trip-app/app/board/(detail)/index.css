@@ -6,7 +6,6 @@
 
 .board_detail {
   background: var(--white);
-
   padding: 2.4rem;
 }
 
@@ -14,6 +13,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .detail_title {
@@ -22,12 +23,10 @@
 
 .detail_meta {
   display: flex;
-  flex-direction: column;
+
   justify-content: space-between;
-  align-items: flex-start;
   height: 8rem;
-
-
+  width: 100%;
 }
 
 .detail_meta .author {
@@ -35,6 +34,7 @@
   align-items: center;
   gap: 0.8rem;
   color: var(--gray-70);
+  width: 100%;
 }
 
 .author {
