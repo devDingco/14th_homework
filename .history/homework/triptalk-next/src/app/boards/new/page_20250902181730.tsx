@@ -18,19 +18,19 @@ const CREATE_BOARD = gql`
       likeCount
       dislikeCount
       images
-      # boardAddress {
-      #   zipcode
-      #   address
-      #   addressDetail
-      # }
-      # user {
-      #   _id
-      #   email
-      #   name
-      # }
-      # createdAt
-      # updatedAt
-      # deletedAt
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
+      user {
+        _id
+        email
+        name
+      }
+      createdAt
+      updatedAt
+      deletedAt
     }
   }
 `;

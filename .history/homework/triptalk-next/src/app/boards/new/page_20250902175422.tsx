@@ -8,8 +8,14 @@ import Image from 'next/image';
 import { gql, useMutation } from '@apollo/client';
 
 const CREATE_BOARD = gql`
-  mutation createBoard($createBoardInput: CreateBoardInput!) {
-    createBoard(createBoardInput: $createBoardInput) {
+  mutation createBoard(
+    # 타입작성
+    $writer: String
+    $password: String
+    $title: String
+    $contents: String #실제 우리가 전달할 변수 적는곳
+  ) {
+    createBoard(writer: $writer, title: $title, contents: $contents) {
       _id
       writer
       title
@@ -18,19 +24,11 @@ const CREATE_BOARD = gql`
       likeCount
       dislikeCount
       images
-      # boardAddress {
-      #   zipcode
-      #   address
-      #   addressDetail
-      # }
-      # user {
-      #   _id
-      #   email
-      #   name
-      # }
-      # createdAt
-      # updatedAt
-      # deletedAt
+      boardAddress
+      user
+      createdAt
+      updatedAt
+      deletedAt
     }
   }
 `;
@@ -55,12 +53,10 @@ export default function BoardsNew() {
   const onClickSubmit = async () => {
     const result = await createProduct({
       variables: {
-        createBoardInput: {
-          writer: name,
-          title: title,
-          contents: content,
-          password: password,
-        },
+        //variables이게 $역할을 함
+        writer: name,
+        title: title,
+        contents: content,
       },
     });
     console.log(result);
