@@ -2,21 +2,46 @@
 
 import React from 'react';
 import styles from "./styles.module.css";
+import { gql, useQuery } from "@apollo/client"
+import { useParams } from 'next/navigation';
+
+const FETCH_BOARD = gql `
+    query fetchBoard($boardId: ID!){
+        fetchBoard(boardId: $boardId) {
+            _id
+            writer
+            title
+            contents
+        }
+    
+    }
+`
 
 const BoardsDetail = () => { 
+    const { boardID } = useParams()
+    const { data } = useQuery(FETCH_BOARD, {
+        variables: {
+            boardId: boardID,
+        },
+    })
+
+
     return(
         <div className={styles.layout}>
             <div className={styles.container}>
+                {/* 제목 자리 */}
                 <div className={styles.detailSubjectText}>
-                    살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고
-                    쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라
+                    {/* 살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고
+                    쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라 */}
+                    {data?.fetchBoard?.title ?? "제목을 불러오는 중..."}
                 </div>
 
                 <div className={styles.detailMetadataContainer}>
                     <div className={styles.detailRowFlex}>
                         <div className={styles.detailMetadataProfile}>
                             <img src="/images/userprofile_default.png" alt="프로필"/>
-                            <div>홍길동</div>
+                            {/* 작성자 자리 */}
+                            <div>{data?.fetchBoard?.writer ?? "작성자 불러오는 중..."}</div>
                         </div>
                         <div>2024.11.11</div>
                     </div>
@@ -29,8 +54,10 @@ const BoardsDetail = () => {
 
                 <img className={styles.detailContentContainer} src="/images/post_image.png" alt="청산사진"/>
 
+                {/* 내용 자리 */}        
                 <div className={styles.detailContentText}>
-                    살겠노라 살겠노라. 청산에 살겠노라. <br />
+                    {data?.fetchBoard?.contents ?? "내용을 불러오는 중..."}
+                    {/* 살겠노라 살겠노라. 청산에 살겠노라. <br />
                     머루랑 다래를 먹고 청산에 살겠노라. <br />
                     얄리얄리 얄랑셩 얄라리 얄라 <br />
                     <br />
@@ -60,7 +87,7 @@ const BoardsDetail = () => {
                     <br />
                     가다 보니 배불룩한 술독에 독한 술을 빚는구나.<br />
                     조롱박꽃 모양 누룩이 매워 (나를) 붙잡으니 내 어찌 하리이까.[1] <br />
-                    얄리얄리 얄라셩 얄라리 얄라 <br />
+                    얄리얄리 얄라셩 얄라리 얄라 <br /> */}
                 </div>
 
                 <img className={styles.detailVideoPreview} src="/images/video.png" alt="비디오프리뷰"/>
