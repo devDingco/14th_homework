@@ -66,7 +66,7 @@ export default function BoardsNew() {
           },
         },
       });
-      router.push(`/boards/detail/${result.data.createBoard._id}`);
+      router.push(`/boards/${result.data.createBoard._id}`);
       console.log(result);
     } catch (error) {
       alert('에러가 발생하였습니다. 다시 시도해 주세요.');
