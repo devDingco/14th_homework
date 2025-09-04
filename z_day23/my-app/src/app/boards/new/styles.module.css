@@ -1,0 +1,305 @@
+/* .App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+} */
+
+/* @media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+} */
+
+.전체 {
+  /* width: 1920px; */
+  height: 1668px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex_row_gap4 {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.color_red {
+  color: red;
+}
+
+.divider {
+  width: 1280px;
+  height: 0px;
+  border: 1px solid var(--gray-100, #e4e4e4);
+}
+
+.헤더 {
+  width: 1920px;
+  height: 80px;
+  padding-right: 20px;
+  padding-left: 20px;
+  gap: 10px;
+  display: flex;
+  /* background-color: orange; */
+}
+
+.바디 {
+  width: 1280px;
+  height: 1508px;
+  top: 120px;
+  left: 320px;
+  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  /* background-color: aqua; */
+}
+
+.게시글_폼_제목 {
+  width: 1280px;
+  height: 28px;
+  font-family: Pretendard;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  leading-trim: NONE;
+  line-height: 28px;
+  letter-spacing: 0%;
+  /* background-color: beige; */
+}
+
+.게시글_폼 {
+  width: 1280px;
+  height: 1440px;
+  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  /* background-color: brown; */
+}
+
+.게시글_폼_상세 {
+  width: 1280px;
+  /* height: 1352px; */
+  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  /* background-color: orange; */
+}
+
+.게시글_인풋블록 {
+  width: 1280px;
+  /* height: 80px; */
+  gap: 40px;
+  display: flex;
+  flex-direction: row;
+  /* background-color: aquamarine; */
+}
+
+.게시글_인풋블록쌓기 {
+  width: 1280px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  /* background-color: aquamarine; */
+}
+
+.게시글_인풋_작은거 {
+  width: 620px;
+  height: 80px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  /* background-color: pink; */
+}
+
+.게시글_인풋_긴거 {
+  width: 1280px;
+  /* height: 80px; */
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.게시글_인풋_큰거 {
+  width: 1280px;
+  height: 368px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.게시글_폼_버튼 {
+  width: 1280px;
+  height: 48px;
+  gap: 16px;
+  display: flex;
+  justify-content: flex-end;
+  /* background-color: red; */
+}
+
+.작은인풋 {
+  width: 620px;
+  height: 48px;
+  gap: 8px;
+  display: flex;
+  box-sizing: border-box;
+  padding-top: 12px;
+  padding-right: 16px;
+  padding-bottom: 12px;
+  padding-left: 16px;
+  border-radius: 8px;
+  border-width: 1px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+}
+
+.긴인풋 {
+  width: 1280px;
+  height: 48px;
+  gap: 8px;
+  display: flex;
+  box-sizing: border-box;
+  padding-top: 12px;
+  padding-right: 16px;
+  padding-bottom: 12px;
+  padding-left: 16px;
+  border-radius: 8px;
+  border-width: 1px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+}
+
+.큰인풋 {
+  width: 1280px;
+  height: 336px;
+  padding-top: 12px;
+  padding-right: 16px;
+  padding-bottom: 12px;
+  padding-left: 16px;
+  border-radius: 8px;
+  border-width: 1px;
+  box-sizing: border-box;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  resize: none;
+}
+
+.주소인풋이랑버튼 {
+  width: 220px;
+  height: 80px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.인풋이랑버튼 {
+  width: 220px;
+  height: 48px;
+  gap: 8px;
+  display: flex;
+}
+
+.우편번호인풋 {
+  width: 82px;
+  height: 48px;
+  /* /* padding-top: 12px;
+  padding-right: 16px;
+  padding-bottom: 12px; */
+  padding-left: 16px;
+  border-radius: 8px;
+  border-width: 1px;
+  box-sizing: border-box;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+}
+
+.우편번호검색 {
+  width: 130px;
+  height: 48px;
+  /* padding-top: 12px;
+  padding-right: 16px;
+  padding-bottom: 12px;
+  padding-left: 16px; */
+  gap: 8px;
+  border-radius: 8px;
+  border-width: 1px;
+  background: var(--gray-w, #ffffff);
+  border: 1px solid var(--gray-B, #000000);
+}
+
+.사진첨부_그룹 {
+  width: 512px;
+  height: 160px;
+  gap: 16px;
+  display: flex;
+}
+
+.사진첨부 {
+  width: 160px;
+  height: 160px;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--gray-50, #f2f2f2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Pretendard Variable;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  leading-trim: NONE;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: var(--gray-600, #777777);
+}
+
+.더하기이미지 {
+  width: 40px;
+  height: 40px;
+}
+
+.취소 {
+  width: 64px;
+  height: 48px;
+  border-radius: 8px;
+  border-width: 1px;
+  background: var(--gray-w, #ffffff);
+  border: 1px solid var(--gray-B, #000000);
+}
+
+.등록 {
+  width: 95px;
+  height: 48px;
+  border-radius: 8px;
+  border: 0px;
+  color: white;
+}
+
+.text_red {
+  color: red;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
