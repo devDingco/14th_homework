@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/Header';
 import Providers from '@/config/Providers';
 import { Pretendard } from '@/assets/fonts/fonts';
+import BottomNavBar from '@/components/BottomNav/BottomNavBar';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,10 +20,11 @@ export default function RootLayout({
     <html lang='ko' className={`${Pretendard.variable}`}>
       <Providers>
         <body
-          className={`font-Pretendard flex h-full w-full flex-col items-center justify-center gap-10 antialiased`}
+          className={`flex h-full w-full flex-col items-center justify-center font-Pretendard antialiased`}
         >
           <Header />
-          <main>{children}</main>
+          <main className='flex-1 py-16'>{children}</main>
+          <BottomNavBar />
         </body>
       </Providers>
     </html>

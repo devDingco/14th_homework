@@ -1,11 +1,15 @@
-import Link from 'next/link';
+import HotBoardList from '@/components/HotBoard/HotBoardList';
+import Carousel from '@/components/Carousel';
+import BoardList from '@/components/Board/BoardList';
+import BoardFilter from '@/components/BoardFilter/BoardFilter';
 
 export default function HomePage() {
   return (
-    <div className='flex'>
-      <h1>Nextjs 첫 페이지 입니다.</h1>
-      <Link href='/boards/new'>New Board</Link>
-      <Link href='/boards/detail'>Board Detail</Link>
+    <div className='flex flex-col'>
+      <Carousel />
+      <HotBoardList />
+      <BoardFilter />
+      <BoardList />
     </div>
   );
 }

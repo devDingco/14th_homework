@@ -6,20 +6,22 @@ import InputBox from '@/components/InputBox';
 import TextAreaBox from '@/components/TextAreaBox';
 import { CREATE_BOARD } from '@/apis/graphql/board';
 import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/navigation';
 
 export default function BoardsNewPage() {
-  const [userName, setUserName] = useState<string>('');
+  const router = useRouter();
+  const [writer, setWriter] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [title, setTitle] = useState<string>('');
-  const [content, setContent] = useState<string>('');
-  const [youtubeLink, setYoutubeLink] = useState<string>('');
+  const [contents, setContents] = useState<string>('');
+  const [youtubeUrl, setYoutubeUrl] = useState<string>('');
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
 
   const [createBoard] = useMutation(CREATE_BOARD);
 
   const isSubmitCheck = () => {
-    // console.log(userName.trim(), password.trim(), title.trim(), content.trim());
-    if (userName.trim() && password.trim() && title.trim() && content.trim()) {
+    //
+    if (writer.trim() && password.trim() && title.trim() && contents.trim()) {
       // alert(`게시글 등록이 가능한 상태입니다!`);
       setIsSubmit(true);
     } else {
@@ -27,8 +29,8 @@ export default function BoardsNewPage() {
     }
   };
 
-  const onChangeUsername = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserName(e.target.value);
+  const onChangeWriter = (e: ChangeEvent<HTMLInputElement>) => {
+    setWriter(e.target.value);
   };
 
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,48 +39,57 @@ export default function BoardsNewPage() {
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
-  const onChangeContent = (
+  const onChangeContents = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setContent(e.target.value);
+    setContents(e.target.value);
   };
-  const onChangeYoutubeLink = (
+  const onChangeYoutubeUrl = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setYoutubeLink(e.target.value);
+    setYoutubeUrl(e.target.value);
   };
 
   const onSubmitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const data = new FormData(e.target as HTMLFormElement).get('username');
+    // const data = new FormData(e.target as HTMLFormElement).get('writer');
     // const newPost = {
-    //   userName,
+    //   writer,
     //   password,
     //   title,
-    //   content,
-    //   youtubeLink,
+    //   contents,
+    //   youtubeUrl,
     // };
 
-    const result = await createBoard({
-      variables: {
-        createBoardInput: {
-          // ...newPost,
-          title,
-          contents: content,
-          password,
-          writer: userName,
-          youtubeUrl: youtubeLink,
-          images: ['', ''],
+    try {
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            // ...newPost,
+            title,
+            contents,
+            password,
+            writer,
+            youtubeUrl,
+            images: [
+              'codecamp-file-storage/2024/1/10/IMG_9472.jpeg',
+              'codecamp-file-storage/2024/10/25/donggle1.jpeg',
+            ],
+          },
         },
-      },
-    });
+      });
 
-    setUserName('');
-    setPassword('');
-    setTitle('');
-    setContent('');
-    setYoutubeLink('');
-    console.log(result);
+      router.push(`/boards/${result.data?.createBoard?._id}`);
+    } catch (error) {
+      console.log(error);
+      alert('에러가 발생하였습니다. 다시 시도해 주세요.');
+    } finally {
+      setWriter('');
+      setPassword('');
+      setTitle('');
+      setContents('');
+      setYoutubeUrl('');
+    }
   };
 
   return (
@@ -90,12 +101,12 @@ export default function BoardsNewPage() {
           <div className='flex gap-10'>
             <InputBox
               lable='작성자'
-              name='username'
+              name='writer'
               type='text'
               placeholder='작성자 명을 입력해주세요.'
-              onChange={onChangeUsername}
+              onChange={onChangeWriter}
               required
-              isInput={userName}
+              isInput={writer}
               isSubmitCheck={isSubmitCheck}
             />
             <InputBox
@@ -128,11 +139,11 @@ export default function BoardsNewPage() {
           <div className='h-10'></div>
           <TextAreaBox
             lable='내용'
-            name='content'
+            name='contents'
             placeholder='내용을 입력해 주세요.'
-            onChange={onChangeContent}
+            onChange={onChangeContents}
             required
-            isInput={content}
+            isInput={contents}
             isSubmitCheck={isSubmitCheck}
           />
           <div className='h-10'></div>
@@ -179,10 +190,10 @@ export default function BoardsNewPage() {
           <div className='h-10'></div>
           <InputBox
             lable='유튜브 링크'
-            name='youtubeLink'
+            name='youtubeUrl'
             type='text'
             placeholder='링크를 입력해 주세요.'
-            onChange={onChangeYoutubeLink}
+            onChange={onChangeYoutubeUrl}
           />
           <div className='h-10'></div>
           <hr className='h-[.5px] w-[1280px] bg-[##E4E4E4]' />
