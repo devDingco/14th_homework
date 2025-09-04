@@ -8,7 +8,7 @@ interface IApolloSetting {
   }
 
 const clinet = new ApolloClient({
-  uri: "http://localhost:3001/graphql",
+  uri: "http://main-practice.codebootcamp.co.kr/graphql",
   cache: new InMemoryCache(),
 })
 

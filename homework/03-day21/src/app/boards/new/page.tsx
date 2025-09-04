@@ -3,6 +3,7 @@
 import { gql, useMutation } from "@apollo/client"
 import React, { ChangeEvent, MouseEvent, useState } from "react";
 import styles from "./styles.module.css";
+import { useRouter } from "next/navigation";
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!){
@@ -18,6 +19,10 @@ const CREATE_BOARD = gql`
         addressDetail
       }
       images
+      likeCount
+      createdAt
+      updatedAt
+      deletedAt
     }
   }
 
@@ -49,30 +54,43 @@ export default function BoardsNew() {
     setIsActive(writer && password && title && event.target.value ? true : false);
   };
 
+  const router = useRouter()
+
   const [createBoard] = useMutation(CREATE_BOARD) 
 
   const onClickSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
-    const result = await createBoard({
-      variables: {
-        createBoardInput: {
-          writer: writer,
-          password: password,
-          title: title,
-          contents: contents,
-          youtubeUrl: "",
-          images: []
-        } ,
-      },
-    })
+    try {
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer: writer,
+            password: password,
+            title: title,
+            contents: contents,
+            youtubeUrl: "",
+            images: []
+          } ,
+        },
+      })
+  
+      console.log(result.data.createBoard);
 
-    console.log(result.data.createBoard);
-    if (result?.data?.createBoard) {
-      setInputError("");
-      alert("게시글 등록이 가능한 상태입니다!");
-    } else {
-      setInputError("필수입력 사항입니다.");
+      if (result?.data?.createBoard) {
+        setInputError("");
+        alert("게시글 등록이 가능한 상태입니다!");
+      } else {
+        setInputError("필수입력 사항입니다.");
+      }
+    
+      router.push(
+        `/boards/${result.data.createBoard._id}`
+      )
+    } catch(error){
+      alert("에러가 발생하였습니다. 다시 시도해 주세요.")
+    } finally {
+
     }
-  };
+  }    
 
   return (
     <div className={styles.layout}>
@@ -193,4 +211,5 @@ export default function BoardsNew() {
       </div>
     </div>
   );
+  
 }
