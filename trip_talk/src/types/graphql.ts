@@ -1,4 +1,21 @@
 // 게시판 관련 타입
+export interface BoardAddress {
+  zipcode: string;
+  address: string;
+  addressDetail: string;
+}
+
+export interface BoardUser {
+  _id: string;
+  email: string;
+  name: string;
+  picture: string;
+  userPoint: {
+    _id: string;
+    amount: number;
+  };
+}
+
 export interface Board {
   _id: string;
   title: string;
@@ -6,7 +23,24 @@ export interface Board {
   writer: string;
   createdAt: string;
   updatedAt: string;
-  images?: string[]; // 이미지 URL 배열 추가
+  deletedAt?: string | null;
+  likeCount: number;
+  dislikeCount: number;
+  images: string[] | null;
+  youtubeUrl?: string | null;
+  boardAddress?: BoardAddress | null;
+  user?: BoardUser | null;
+}
+
+// 인기 게시판 타입 (핫한 트립토크)
+export interface BoardOfTheBest {
+  _id: string;
+  title: string;
+  contents: string;
+  writer: string;
+  createdAt: string;
+  likeCount: number;
+  images?: string[];
 }
 
 export interface CreateBoardInput {

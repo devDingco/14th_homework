@@ -1,5 +1,13 @@
 import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
-import { GET_BOARDS, GET_BOARD, GET_BOOKINGS, GET_BOOKING, GET_USER, GET_USER_LOGGED_IN } from '../graphql/queries';
+import {
+  GET_BOARDS,
+  GET_BOARD,
+  GET_BOOKINGS,
+  GET_BOOKING,
+  GET_USER,
+  GET_USER_LOGGED_IN,
+  GET_BOARDS_OF_THE_BEST,
+} from '../graphql/queries';
 import {
   CREATE_BOARD,
   UPDATE_BOARD,
@@ -28,8 +36,19 @@ import {
 } from '../types/graphql';
 
 // 게시판 관련 훅
-export const useGetBoards = (variables?: any) => {
-  return useQuery(GET_BOARDS, { variables });
+interface GetBoardsVariables {
+  page?: number;
+  search?: string;
+  startDate?: string; // DateTime 형식 (ISO string)
+  endDate?: string; // DateTime 형식 (ISO string)
+}
+
+export const useGetBoards = (variables?: GetBoardsVariables) => {
+  return useQuery(GET_BOARDS, {
+    variables,
+    fetchPolicy: 'cache-and-network', // 캐시와 네트워크 모두 확인
+    notifyOnNetworkStatusChange: true, // 네트워크 상태 변화 알림
+  });
 };
 
 export const useGetBoard = (boardId: string) => {
@@ -109,4 +128,9 @@ export const useGetUser = (userId: string) => {
 
 export const useGetUserLoggedIn = (options?: any) => {
   return useQuery(GET_USER_LOGGED_IN, options);
+};
+
+// 인기 게시판 관련 훅
+export const useGetBoardsOfTheBest = () => {
+  return useQuery(GET_BOARDS_OF_THE_BEST);
 };

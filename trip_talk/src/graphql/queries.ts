@@ -2,14 +2,34 @@ import { gql } from '@apollo/client';
 
 // 게시판 목록 조회
 export const GET_BOARDS = gql`
-  query GetBoards($page: Int, $searchStartAt: String, $searchEndAt: String, $searchKeyword: String) {
-    fetchBoards(page: $page, searchStartAt: $searchStartAt, searchEndAt: $searchEndAt, searchKeyword: $searchKeyword) {
+  query GetBoards($page: Int, $search: String, $startDate: DateTime, $endDate: DateTime) {
+    fetchBoards(page: $page, search: $search, startDate: $startDate, endDate: $endDate) {
       _id
       title
       contents
       writer
       createdAt
       updatedAt
+      deletedAt
+      likeCount
+      dislikeCount
+      images
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
+      user {
+        _id
+        email
+        name
+        picture
+        userPoint {
+          _id
+          amount
+        }
+      }
     }
   }
 `;
@@ -97,6 +117,21 @@ export const GET_USER_LOGGED_IN = gql`
         amount
       }
       createdAt
+    }
+  }
+`;
+
+// 인기 게시판 조회 (핫한 트립토크)
+export const GET_BOARDS_OF_THE_BEST = gql`
+  query GetBoardsOfTheBest {
+    fetchBoardsOfTheBest {
+      _id
+      title
+      contents
+      writer
+      createdAt
+      likeCount
+      images
     }
   }
 `;
