@@ -3,11 +3,13 @@ import "../../global.css";
 import Image from "next/image";
 import Icon from "@utils/iconColor";
 import Link from "next/link";
-import { tripTalkMockData } from "@common/utils/mocks-data";
+import { tripTalkMockData, mockRows } from "@common/utils/mocks-data";
 import CommentSection from "@components/comment/commentSection";
 
 export default function BoardDetail({ id }: { id: string }) {
-  const post = tripTalkMockData.find((p: any) => p.id === id) || {
+  // tripTalkMockData와 mockRows에서 모두 검색
+  const post = tripTalkMockData.find((p: any) => p.id === id) || 
+               mockRows.find((p: any) => p.id.toString() === id) || {
     title: "",
     authorProfileImage: "",
     authorName: "",
@@ -24,13 +26,15 @@ export default function BoardDetail({ id }: { id: string }) {
           <h1 className="b_28_36 detail_title">{post.title}</h1>
           <div className="detail_meta">
             <div className="author">
-              <Image
-                src={post.authorProfileImage}
-                alt={post.authorName}
-                width={32}
-                height={32}
-                className="author_avatar"
-              />
+              {post.authorProfileImage && (
+                <Image
+                  src={post.authorProfileImage}
+                  alt={post.authorName}
+                  width={32}
+                  height={32}
+                  className="author_avatar"
+                />
+              )}
               <span className="sb_16_24 author_name">{post.authorName}</span>
               <span className="r_14_20 date">{post.createdAt}</span>
             </div>
@@ -44,7 +48,9 @@ export default function BoardDetail({ id }: { id: string }) {
         <section className="detail_content r_16_24">
           <div className="lead_section">
             <figure className="lead_media">
-              <Image src={post.coverImage} alt="lead" width={260} height={200} />
+              {post.coverImage && (
+                <Image src={post.coverImage} alt="lead" width={260} height={200} />
+              )}
             </figure>
             <div className="text_block r_16_24 content">
               <p>
@@ -98,10 +104,12 @@ export default function BoardDetail({ id }: { id: string }) {
 
         <footer className="detail_actions">
           <div className="bottom_actions">
+              <Link href="/" className="r_16_24">
             <button type="button" className="btn-outline">
               <Icon outline name="menu" default width={24} height={24}/>
               목록으로
             </button>
+              </Link>
             <div className="reactions">
               <button type="button" className="btn-outline">
                 <Icon outline name="edit" default width={24} height={24}/>

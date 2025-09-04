@@ -1,12 +1,16 @@
 "use client";
 
-import "./boardList.css";
-import "../../../global.css";
-import { mocksData } from "../../../common/utils/mocks-data";
+import "./listComponent.css";
+import "../../global.css";
 import Pagination from "@components/pagination/pagination";
-import type { PaginationProps } from "@/types/pagination";
+import type { PaginationProps, BoardItem } from "@/types/pagination";
+import Link from "next/link";
 
-export default function BoardTable({ totalPages = 5, initialPage = 1, onChange }: PaginationProps) {
+interface ListComponentProps extends PaginationProps {
+  data: BoardItem[];
+}
+
+export default function ListComponent({ data, totalPages = 5, initialPage = 1, onChange }: ListComponentProps) {
   return (
     <div className="boardlist_container">
       <div className="board_table">
@@ -17,11 +21,11 @@ export default function BoardTable({ totalPages = 5, initialPage = 1, onChange }
           <div className="th th-date">날짜</div>
         </div>
         <div className="board_tbody">
-          {mocksData.mockRows.map((row) => (
+          {data.map((row) => (
             <div className="tr" key={row.id}>
               <div className="td td-num me_14_20">{row.id}</div>
               <div className="td td-title">
-                <a href="#" className="title_link r_16_24">{row.title}</a>
+                <Link href={`/board/${row.id}`} className="title_link r_16_24">{row.title}</Link>
               </div>
               <div className="td td-author me_14_20">{row.author}</div>
               <div className="td td-date me_14_20">{row.date}</div>
@@ -33,5 +37,3 @@ export default function BoardTable({ totalPages = 5, initialPage = 1, onChange }
     </div>
   );
 }
-
-

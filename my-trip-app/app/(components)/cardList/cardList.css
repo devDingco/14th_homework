@@ -14,6 +14,17 @@
   gap: 3.2rem;
 }   
 
+.cardList_item_link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.cardList_item_link:hover {
+  transform: translateY(-2px);
+}
+
 .cardList_item {
   width: 29.6rem;
   height: 15.2rem;

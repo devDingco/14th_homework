@@ -50,10 +50,10 @@ export default function Header() {
         <Link href="/" onClick={() => handleActive("trip-talk")}>
           <h1 className={`header_menu_item me_16_24 ${activeMenu === "trip-talk" ? "is-active" : ""}`}>트립토크</h1>
         </Link>
-        <Link href="/" onClick={() => handleActive("voucher")}>
+        <Link href="/product" onClick={() => handleActive("voucher")}>
           <h1 className={`header_menu_item me_16_24 ${activeMenu === "voucher" ? "is-active" : ""}`}>숙박권 구매</h1>
         </Link>
-        <Link href="/" onClick={() => handleActive("mypage")}>
+        <Link href="/mypage" onClick={() => handleActive("mypage")}>
           <h1 className={`header_menu_item me_16_24 ${activeMenu === "mypage" ? "is-active" : ""}`}>마이 페이지</h1>
         </Link>
       </div>

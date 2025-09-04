@@ -5,6 +5,7 @@
       "@components/*": ["./app/(components)/*"],
       "@common/*": ["./app/common/*"],
       "@images/*": ["./public/images/*"],
+      "@layouts/*": ["./app/mypage/layouts/*"],
       "@styles/*": ["./app/styles/*"],
       "@utils/*": ["./app/utils/*"],
       "@pages/*": ["./app/pages/*"],

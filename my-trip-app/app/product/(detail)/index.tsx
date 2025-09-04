@@ -127,7 +127,7 @@ export default function ProductDetail({ id }: { id: string }) {
             <div className="seller_box">
               <p className="b_20_28 seller_title">판매자</p>
               <div className="seller_info">
-                <Image className="seller_avatar" src="/images/mobile/profile/img.png" alt="host" width={32} height={32} />
+                <Image className="seller_avatar" src="/images/mobile/profile/img.png" alt="host" width={40} height={40} />
                 <span className="me_16_24">홍길동</span>
               </div>
           </div>

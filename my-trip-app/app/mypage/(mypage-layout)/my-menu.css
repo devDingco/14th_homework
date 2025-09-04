@@ -1,0 +1,61 @@
+.my_menu {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  margin-bottom: 2.5rem;
+  width: 128rem;
+  margin: 0 auto;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.my_menu_title {
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+.my_menu_profile {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.my_menu_divider {
+  border: none;
+  border-top: 1px solid #e4e4e4;
+  margin: 1.2rem 0;
+}
+
+.my_menu_points {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.my_menu_list {
+  display:  flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.my_menu_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--gray-800);
+  transition: background-color 0.15s ease, transform 0.05s ease;
+}
+
+
+.my_menu_item:hover {
+  background:  #f2f2f2;
+}
+
+.my_menu_item.active {
+  background: #f2f2f2;
+}

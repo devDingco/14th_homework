@@ -1,5 +1,4 @@
 
-
 .boardlist_container {
     width: 128rem; 
     height: auto;
@@ -71,15 +70,15 @@
 }
 
 .title_link { 
-    color: var(--gray-90); 
+    color: var(--gray-90);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
     }
     
-    .title_link:hover { 
-        text-decoration: underline; 
-        }
-
 .title_link:hover { 
-    text-decoration: underline; 
+    text-decoration: underline;
+    color: var(--blue);
     }
 
 /* 반응형 최소 */
@@ -89,5 +88,4 @@
     border-radius: 0.8rem;
     }
 }
-
 
