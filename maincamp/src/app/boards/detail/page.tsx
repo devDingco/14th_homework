@@ -46,7 +46,13 @@ export default function BoardsDetailPage () {
 얄리얄리 얄라셩 얄라리 얄라`}/>
             <div className={styles.boardsDetail__youtube__group}>
                 <img src="/icons/play.svg" className={styles.youtube__icon}/>
-                <img src="/images/boardsdetail_image_2.png" className={styles.youtube__thumbnail} />
+                {/* <img src="/images/boardsdetail_image_2.png" className={styles.youtube__thumbnail} /> */}
+                <iframe 
+                id="ytplayer" 
+                type="text/html"
+                src="https://www.youtube.com/embed/9kzE8isXlQY"
+                frameborder="0" allowfullscreen 
+                className={styles.youtube__thumbnail}></iframe>
             </div>
             <Like bad={24} good={12}/>
             <div className={styles.boardsDetail__button__group}>

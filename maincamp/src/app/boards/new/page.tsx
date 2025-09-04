@@ -2,15 +2,18 @@
 
 import Button from '@/components/ui/button/Button'
 import { Inputfield, Textareafield } from '@/components/ui/input/Inputfield'
-import InputZipcode from '@/components/ui/input/InputZipcode'
+import InputBoardAddress from '@/components/ui/input/InputBoardAddress'
 import InputImage from '@/components/ui/input/InputImage'
 import styles from './styles.module.css'
 import Link from 'next/link'
 import { useState } from 'react'
 import { ChangeEvent } from 'react'
 import { gql, useMutation } from '@apollo/client'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
+import { CREATE_BOARD } from '@/graphql/mutations/board'
+import { UPLOAD_FILE } from '@/graphql/queries/file'
 
+type ImageUrlArray = (string | null | undefined)[]
 
 export default function BoardsNewPage (){
 
@@ -21,21 +24,20 @@ export default function BoardsNewPage (){
     const [title, setTitle] = useState("")
     const [contents, setContents] = useState("")
     const [youtubeUrl, setYoutubeUrl] = useState("")
+    const [zipcode, setZipcode] = useState("")
+    const [address, setAddress] = useState("")
+    const [addressDetail, setAddressDetail] = useState("")
+    const [images, setImages] = useState<ImageUrlArray>([undefined,undefined,undefined])
 
-    // 1-1. graphql코드: 작성자, 제목, 내용
-    const CREATE_BOARD = gql`
-      mutation createBoard($createBoardInput: CreateBoardInput!){
-        createBoard(createBoardInput: $createBoardInput) {
-          _id
-          writer
-          title
-          contents
-        }
-      }
-    `
+    // 1-2. 페이지 이동을 위한 useRouter
+    const router = useRouter();
 
     // 1-3. 게시글 생성 API 요청 함수
     const [createBoard] = useMutation(CREATE_BOARD)
+
+    // 1-4. 이미지 업로드 API 요청 함수
+    const [uploadFile] = useMutation(UPLOAD_FILE);
+
 
     // 2. 필수 작성 요소 작성 여부에 따른 버튼 활성화
     const [isValid, setIsValid] = useState(true)
@@ -43,7 +45,6 @@ export default function BoardsNewPage (){
     // 3. Change Event에 따른 유효성 검증
     const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value
-        console.log("🚀 ~ onChangeWriter ~ value:", value)
         
         setWriter(value)
     
@@ -55,7 +56,6 @@ export default function BoardsNewPage (){
       }
       const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value
-        console.log("🚀 ~ onChangePassword ~ value:", value)
 
         setPassword(value)
     
@@ -67,7 +67,6 @@ export default function BoardsNewPage (){
       }
       const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value
-        console.log("🚀 ~ onChangeTitle ~ value:", value)
         setTitle(value)
     
         if(writer && password && value && contents){
@@ -78,7 +77,6 @@ export default function BoardsNewPage (){
       }
       const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
         const value = event.target.value
-        console.log("🚀 ~ onChangeContents ~ value:", value)
         setContents(value)
     
         if(writer && password && title && value){
@@ -91,28 +89,82 @@ export default function BoardsNewPage (){
       // 3-1. 필수 요소 아닌 ChangeEvent 추가
       const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value
-        console.log("🚀 ~ onChangeYoutubeUrl ~ value:", value)
         setYoutubeUrl(value)
+      }
+
+      const onChangeBoardAddress = (event: ChangeEvent<HTMLInputElement>) => {
+        const {id, value} = event.target;
+        switch(id){
+          case "zipcode": {setZipcode(value);break;}
+          case "address": {setAddress(value);break;}
+          case "addressDetail": {setAddressDetail(value);break;}
+        }
+      }
+
+      const onChangeFile = async(event: ChangeEvent<HTMLInputElement>) => {
+        const {id, files} = event.target;
+        const file = files?.[0];
+
+        const handleSetImageUrl = (index: number, url: string) => {
+          setImages(
+            prevUrls => {
+              const NewUrls = [...prevUrls]
+              NewUrls[index] = url
+              return NewUrls
+            }
+          )
+        }
+        
+        const result = await uploadFile({
+          variables:{
+            file
+          }
+        });
+
+        const fileUrl = result.data?.uploadFile.url
+
+        switch(id){
+          case "0":{handleSetImageUrl(Number(id), fileUrl)}
+          case "1":{handleSetImageUrl(Number(id), fileUrl)}
+          case "2":{handleSetImageUrl(Number(id), fileUrl)}
+        }
+        
       }
 
       // 4. 버튼 활성화 후 등록 버튼 클릭 시 알럿 발생
       const onClickBtn = async () => {
+        try{
 
-        const result = await createBoard({
-          variables:{
-            createBoardInput:{
-              writer: writer,
-              password: password,
-              title: title,
-              contents: contents,
-              youtubeUrl: youtubeUrl,
+
+          const result = await createBoard({
+            variables:{
+              createBoardInput:{
+                writer: writer,
+                password: password,
+                title: title,
+                contents: contents,
+                youtubeUrl: youtubeUrl,
+                boardAddress: {
+                  zipcode: zipcode,
+                  address: address,
+                  addressDetail: addressDetail,
+                },
+                images: images.filter(Boolean),
+              }
             }
-          }
-        })
-        console.log("🚀 ~ onClickBtn ~ result:", result)
+          })
+          console.log("🚀 ~ onClickBtn ~ result:", result)
+          const boardId = result.data.createBoard._id
+          router.push(
+            `/boards/${boardId}`
+          )
 
-        await alert(`게시글 등록이 완료되었습니다
-id: ${boardID}`)
+        } catch (error) {
+          alert("에러가 발생하였습니다. 다시 시도해 주세요.");
+        } 
+
+
+
       }
 
     return(
@@ -129,16 +181,16 @@ id: ${boardID}`)
             <hr/>
             <Textareafield label='내용' required placeholder='내용을 입력해 주세요.' onChange={onChangeContents} ></Textareafield>
             <hr />
-            <InputZipcode placeholder='주소를 입력해 주세요.' placeholder_2='상세주소'></InputZipcode>
+            <InputBoardAddress placeholder='주소를 입력해 주세요.' placeholder_2='상세주소' onChange={onChangeBoardAddress}></InputBoardAddress>
             <hr />
             <Inputfield type='string' label='유튜브 링크' placeholder='링크를 입력해 주세요.' onChange={onChangeYoutubeUrl}></Inputfield>
             <hr />
             <div className={styles.postForm__attachments__group}>
                 <label>사진 첨부</label>
                 <div className={styles.image__upload__group}>
-                    <InputImage />
-                    <InputImage />
-                    <InputImage />
+                    {images[0] ? <img src={`https://storage.googleapis.com/${images[0]}`} className={styles.upload__image}/>:<InputImage id="0" onChange={onChangeFile} />}
+                    {images[1] ? <img src={`https://storage.googleapis.com/${images[1]}`} className={styles.upload__image}/>:<InputImage id="1" onChange={onChangeFile} />}
+                    {images[2] ? <img src={`https://storage.googleapis.com/${images[2]}`} className={styles.upload__image}/>:<InputImage id="2" onChange={onChangeFile} />}
                 </div>
             </div>
             <div className={styles.postForm__button__group}>

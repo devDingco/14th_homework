@@ -37,4 +37,5 @@ export type ZipcodeProps = {
     required?: boolean;
     placeholder: string;
     placeholder_2?: string;
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }

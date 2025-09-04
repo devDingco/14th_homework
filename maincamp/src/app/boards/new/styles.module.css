@@ -41,6 +41,14 @@
     margin-top: 0.5rem;
 }
 
+.upload__image{
+    width: 10rem;
+    height: 10rem;
+    border-radius:  0.5rem;
+
+    object-fit: cover;
+}
+
 .postForm__button__group{
     display: flex;
     flex-direction: row;

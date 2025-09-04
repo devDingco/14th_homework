@@ -1,6 +1,6 @@
 import styles from './Writer.module.css'
 
-export default function Writer (props:{writer: string; date: string;}){
+export default function Writer (props:{writer: string; date: string|undefined;}){
 
     return(
         <div className={styles.writer__group}>

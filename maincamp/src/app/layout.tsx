@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import ApolloSetting from "@/commons/settings/apollo-setting";
+import ApolloUploadSetting from "@/commons/settings/apollo-upload-setting";
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -33,7 +33,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
         className={`${pretendard.variable} ${geistMono.variable} antialiased`}
       >
         <div> ***** 트립토그 ****** 숙박권구매 ****** 마이페이지 ***** </div>
-        <ApolloSetting pages={children} />
+        <ApolloUploadSetting pages={children} />
       </body>
     </html>
   );
