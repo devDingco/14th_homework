@@ -4,6 +4,8 @@ import Image from 'next/image';
 import './header.css';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
+import UserLoggedButton from './user-logged-button';
 
 interface MenuItem {
   name: string;
@@ -13,6 +15,8 @@ interface MenuItem {
 export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
+  const { isAuthenticated, isHydrated } = useAuth();
+
   const menuList: MenuItem[] = [
     {
       name: '트립토크',
@@ -49,12 +53,20 @@ export default function Header() {
           ))}
         </div>
       </div>
-      <div className="header_login">
-        <span className="sb_14_20" onClick={() => router.push('/signin')} style={{ cursor: 'pointer' }}>
-          로그인
-        </span>
-        <Image src={'/icons/right_icon.png'} alt="login" width={20} height={20} />
-      </div>
+
+      {isHydrated && isAuthenticated ? (
+        <UserLoggedButton />
+      ) : isHydrated ? (
+        <div className="header_login">
+          <div
+            onClick={() => router.push('/signin')}
+            style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+          >
+            <span className="sb_14_20">로그인</span>
+            <Image src={'/icons/right_icon.png'} alt="login" width={20} height={20} style={{ marginLeft: '4px' }} />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

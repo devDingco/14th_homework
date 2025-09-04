@@ -1,10 +1,13 @@
 'use client';
 
 import { useState, FormEvent, ChangeEvent } from 'react';
+import { useRouter } from 'next/navigation';
 import './signup.css';
 import Modal from '@/components/modal/modal';
+import { useCreateUser } from '@/hooks/useGraphQL';
 
 export default function Signup() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -14,6 +17,10 @@ export default function Signup() {
   const [passwordError, setPasswordError] = useState('');
   const [passwordCheckError, setPasswordCheckError] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // GraphQL 회원가입 뮤테이션
+  const [createUser] = useCreateUser();
 
   const clearEmailError = () => setEmailError('');
   const clearNameError = () => setNameError('');
@@ -41,7 +48,7 @@ export default function Signup() {
     return true;
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (email === '' || name === '' || password === '' || passwordCheck === '') {
@@ -61,12 +68,51 @@ export default function Signup() {
       return;
     }
 
-    clearEmailError();
-    clearNameError();
-    clearPasswordError();
-    clearPasswordCheckError();
+    setIsLoading(true);
 
-    setModalOpen(true);
+    try {
+      const result = await createUser({
+        variables: {
+          createUserInput: {
+            email,
+            password,
+            name,
+          },
+        },
+      });
+
+      if (result.data?.createUser) {
+        clearEmailError();
+        clearNameError();
+        clearPasswordError();
+        clearPasswordCheckError();
+        setModalOpen(true);
+
+        // 성공 후 로그인 페이지로 이동
+        setTimeout(() => {
+          router.push('/signin');
+        }, 2000);
+      }
+    } catch (error: any) {
+      console.error('회원가입 에러:', error);
+
+      // GraphQL 에러 메시지 처리
+      if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+        const errorMessage = error.graphQLErrors[0].message;
+
+        if (errorMessage.includes('이메일')) {
+          setEmailError(errorMessage);
+        } else {
+          setEmailError(errorMessage);
+        }
+      } else if (error.message) {
+        setEmailError(error.message);
+      } else {
+        setEmailError('회원가입 중 오류가 발생했습니다.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -168,8 +214,8 @@ export default function Signup() {
             {passwordCheckError ? <div className="signup_form_error r_12_20">{passwordCheckError}</div> : null}
           </div>
         </div>
-        <button type="submit" className="signup_form_button sb_18_24">
-          회원가입
+        <button type="submit" className="signup_form_button sb_18_24" disabled={isLoading}>
+          {isLoading ? '회원가입 중...' : '회원가입'}
         </button>
       </form>
 
