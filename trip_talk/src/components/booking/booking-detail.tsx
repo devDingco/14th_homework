@@ -6,6 +6,8 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import FeedbackForm from '@/commons/feedbackForm/feedbackForm';
 import Modal from '@/components/modal/modal';
+import GoogleMap from '@/commons/googleMap/GoogleMap';
+import { GoogleMapsProvider } from '@/commons/googleMap/GoogleMapsProvider';
 import { useState } from 'react';
 
 type ModalType = 'purchase' | 'fail' | null;
@@ -79,7 +81,15 @@ export default function BookingDetail() {
           <hr className="booking_detail_divider" />
           <div className="booking_detail_description_wrapper">
             <div className="booking_detail_title b_20_28">상세 위치</div>
-            <div className="booking_detail_map"></div>
+            <GoogleMapsProvider>
+              <GoogleMap
+                latitude={booking.latitude || 0}
+                longitude={booking.longitude || 0}
+                title={booking.title}
+                className="booking-detail-map"
+                readOnly={true}
+              />
+            </GoogleMapsProvider>
           </div>
         </div>
 
