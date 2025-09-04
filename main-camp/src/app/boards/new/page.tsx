@@ -3,9 +3,23 @@ import { ChangeEvent, useState } from 'react'
 import styles from './style.module.css'
 import WriteButton from "../../components/boards/WriteButton"
 import WriteInput from "../../components/boards/WriteInput"
+import { gql, useMutation } from '@apollo/client'
+import { useRouter } from 'next/navigation'
+
+const CREATE_BOARD = gql`
+    mutation createBoard($createBoardInput: CreateBoardInput!) {
+        createBoard(createBoardInput: $createBoardInput) {
+            _id
+            writer
+            title
+        }
+    }
+`
 
 // 게시글 등록 페이지
 const BoardsNew = () => {
+    const router = useRouter()
+
     const [writer, setWriter] = useState<string>("")
     const [password, setPassword] = useState<string | number>("")
     const [title, setTitle] = useState<string>("")
@@ -15,6 +29,8 @@ const BoardsNew = () => {
     const [passwordErr, setPasswordErr] = useState<string>("")
     const [titleErr, setTitleErr] = useState<string>("")
     const [contentErr, setContentErr] = useState<string>("")
+
+    const [createBoard] = useMutation(CREATE_BOARD)
 
     const onChangePosting = (category: string) => (event: ChangeEvent<HTMLInputElement>) => {
         switch (category) {
@@ -38,7 +54,7 @@ const BoardsNew = () => {
         }
     }
 
-    const onClickResist = () => {
+    const onClickResist = async () => {
         const forValArr = [writer, password, title, content]
         
         if (forValArr.includes("")) {
@@ -88,7 +104,24 @@ const BoardsNew = () => {
             setPasswordErr("")
             setTitleErr("")
             setContentErr("")
-            alert('게시글 등록이 가능한 상태입니다!')
+            
+            try {
+                // createBoard 게시글 등록
+                const result = await createBoard({
+                    variables: {
+                        createBoardInput: {
+                            writer: writer,
+                            password: password,
+                            title: title,
+                            contents: content
+                        }
+                    }
+                })
+                console.log(result.data.createBoard._id)
+                router.push(`/boards/${result.data.createBoard._id}`)
+            } catch(e) {
+                alert('에러가 발생하였습니다. 다시 시도해 주세요.')
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ApolloSetting from "./commons/settings/apollo-setting";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`root_body`}>
-        {children}
+        <ApolloSetting>
+          {children}
+        </ApolloSetting>
       </body>
     </html>
   );

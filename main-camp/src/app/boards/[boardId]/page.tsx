@@ -1,5 +1,17 @@
 "use client"
+import { useParams } from 'next/navigation'
 import styles from './style.module.css'
+import { gql, useQuery } from '@apollo/client'
+
+const FETCH_BOARD = gql`
+    query fetchBoard($boardId: ID!) {
+        fetchBoard(boardId: $boardId) {
+            writer
+            title
+            contents
+        }
+    }
+`
 
 const BoardsDetail = () => {
 
@@ -41,14 +53,29 @@ const BoardsDetail = () => {
         good: 24,
         bad: 12
     }
+
+    const params = useParams()
+    console.log(params.boardId)
+
+    const { data } = useQuery(FETCH_BOARD, {
+        variables: {
+            boardId: params.boardId
+        }
+    })
+    console.log(data)
+    
     return (
         <div id="main" className={`${styles.detail_main}`}>
-            <h1 className={`b_28_36`}>살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라</h1>
+            <h1 className={`b_28_36`}>
+            {data?.fetchBoard.title}
+            </h1>
             <header id="detail_header" className={`${styles.header_1280w_80h} flex_column`}>
                 <div id="detail_header_top" className={`${styles.header_top}`}>
                     <div id="" className={`${styles.detail_profile} flex_align_items_center flex_row flex_justi_sb`}>
-                        <img className={`${styles.profile_img}`} src="/svg/person.png" alt="profile"/>
-                        {/* <div className="profile_img"><img src="/svg/person.png" alt="profile"/></div> */}
+                        <div className={`flex_row`}>
+                            <img className={`${styles.profile_img}`} src="/svg/person.png" alt="profile"/>
+                            {data?.fetchBoard.writer}
+                        </div>
                         <p className={`r_14_20`} style={{ color: "rgba(129, 129, 129, 1)" }}>2024.11.11</p>
                     </div>
                 </div>
@@ -59,12 +86,7 @@ const BoardsDetail = () => {
                 </div>
             </header>
             <img src="/image/Tranquil Beachside Serenity 1.png" alt="publish1"/>
-            {publishText.split("\n").map((line, i) => (
-                <span key={i}>
-                {line}
-                <br />
-                </span>
-            ))}
+            {data?.fetchBoard.contents}
             <div className={`${styles.detail_video} flex_row flex_justi_center`}>
                 <img src="/image/Frame 427323252.png" alt="publish2"/>
             </div>
