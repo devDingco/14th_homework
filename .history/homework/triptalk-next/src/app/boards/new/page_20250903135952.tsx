@@ -6,7 +6,6 @@ import add from '../../../assets/icons/add.png';
 import { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
 import { gql, useMutation } from '@apollo/client';
-import { useRouter } from 'next/navigation';
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -53,25 +52,19 @@ export default function BoardsNew() {
 
   const router = useRouter();
   //게시글 등록 api등록요청 함수
-  const [createBoard] = useMutation(CREATE_BOARD);
+  const [createProduct] = useMutation(CREATE_BOARD);
   const onClickSubmit = async () => {
-    try {
-      const result = await createBoard({
-        variables: {
-          createBoardInput: {
-            writer: name,
-            title: title,
-            contents: content,
-            password: password,
-          },
+    const result = await createProduct({
+      variables: {
+        createBoardInput: {
+          writer: name,
+          title: title,
+          contents: content,
+          password: password,
         },
-      });
-      router.push(`/boards/detail/${result.data.createBoard._id}`);
-      console.log(result);
-    } catch (error) {
-      alert('에러가 발생하였습니다. 다시 시도해 주세요.');
-    } finally {
-    }
+      },
+    });
+    console.log(result);
   };
 
   //변경값 확인하여 state에 저장

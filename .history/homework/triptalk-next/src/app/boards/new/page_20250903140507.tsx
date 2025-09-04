@@ -53,10 +53,10 @@ export default function BoardsNew() {
 
   const router = useRouter();
   //게시글 등록 api등록요청 함수
-  const [createBoard] = useMutation(CREATE_BOARD);
+  const [createProduct] = useMutation(CREATE_BOARD);
   const onClickSubmit = async () => {
     try {
-      const result = await createBoard({
+      const result = await createProduct({
         variables: {
           createBoardInput: {
             writer: name,
@@ -66,11 +66,10 @@ export default function BoardsNew() {
           },
         },
       });
-      router.push(`/boards/detail/${result.data.createBoard._id}`);
+      router.push(`/boards/${result.data.createBoard._id}`);
       console.log(result);
     } catch (error) {
-      alert('에러가 발생하였습니다. 다시 시도해 주세요.');
-    } finally {
+      alert(error);
     }
   };
 
