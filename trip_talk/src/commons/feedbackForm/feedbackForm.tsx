@@ -4,6 +4,7 @@ import { useState, ChangeEvent } from 'react';
 import './feedbackForm.css';
 import Image from 'next/image';
 import FeedbackList from './feedbackList';
+import { BoardComment } from '@/types/graphql';
 
 interface Comment {
   id: number;
@@ -15,9 +16,13 @@ interface Comment {
 
 interface FeedbackFormProps {
   type: '댓글' | '문의하기';
+  boardId?: string;
+  comments?: BoardComment[];
+  commentsLoading?: boolean;
+  commentsError?: any;
 }
 
-export default function FeedbackForm({ type }: FeedbackFormProps) {
+export default function FeedbackForm({ type, boardId, comments, commentsLoading, commentsError }: FeedbackFormProps) {
   const [star, setStar] = useState(0);
   const [comment, setComment] = useState('');
   const [commentList, setCommentList] = useState<Comment[]>([]);
@@ -88,8 +93,16 @@ export default function FeedbackForm({ type }: FeedbackFormProps) {
         >
           {type === '문의하기' ? '문의하기' : '댓글 등록'}
         </button>
-        {commentList.length === 0 && <div className="feedback_form_empty_section r_14_20">등록된 댓글이 없습니다.</div>}
-        {commentList.length > 0 && <FeedbackList commentList={commentList} setCommentList={setCommentList} />}
+        {(!comments || comments.length === 0) && commentList.length === 0 && (
+          <div className="feedback_form_empty_section r_14_20">등록된 댓글이 없습니다.</div>
+        )}
+        <FeedbackList
+          commentList={commentList}
+          setCommentList={setCommentList}
+          comments={comments}
+          commentsLoading={commentsLoading}
+          commentsError={commentsError}
+        />
       </div>
     </div>
   );

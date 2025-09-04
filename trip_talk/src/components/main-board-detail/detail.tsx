@@ -3,74 +3,135 @@
 import './detail.css';
 import Image from 'next/image';
 import FeedbackForm from '@/commons/feedbackForm/feedbackForm';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
+import { useGetBoard, useGetBoardComments, useLikeBoard, useDislikeBoard } from '@/hooks/useGraphQL';
+import { useState } from 'react';
 
 export default function Detail() {
   const router = useRouter();
+  const params = useParams();
+  const boardId = params.detail as string;
+
+  const { data, loading, error, refetch } = useGetBoard(boardId);
+  const { data: commentsData, loading: commentsLoading, error: commentsError } = useGetBoardComments(boardId);
+  const [likeBoard] = useLikeBoard();
+  const [dislikeBoard] = useDislikeBoard();
+
+  const [isLiking, setIsLiking] = useState(false);
+  const [isDisliking, setIsDisliking] = useState(false);
+
+  if (loading) return <div className="container">로딩 중...</div>;
+  if (error) return <div className="container">에러가 발생했습니다: {error.message}</div>;
+  if (!data?.fetchBoard) return <div className="container">게시글을 찾을 수 없습니다.</div>;
+
+  const board = data.fetchBoard;
+  const comments = commentsData?.fetchBoardComments || [];
+
+  const handleLike = async () => {
+    if (isLiking) return;
+    setIsLiking(true);
+
+    try {
+      await likeBoard({ variables: { boardId } });
+      // 게시글 데이터 다시 가져와서 좋아요 수 업데이트
+      refetch();
+    } catch (error) {
+      console.error('좋아요 실패:', error);
+      alert('좋아요에 실패했습니다.');
+    } finally {
+      setIsLiking(false);
+    }
+  };
+
+  const handleDislike = async () => {
+    if (isDisliking) return;
+    setIsDisliking(true);
+
+    try {
+      await dislikeBoard({ variables: { boardId } });
+      // 게시글 데이터 다시 가져와서 싫어요 수 업데이트
+      refetch();
+    } catch (error) {
+      console.error('싫어요 실패:', error);
+      alert('싫어요에 실패했습니다.');
+    } finally {
+      setIsDisliking(false);
+    }
+  };
+
   return (
     <div className="container">
       <div className="detail_header">
-        <div className="b_28_36">
-          살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리
-          얄라
-        </div>
+        <div className="b_28_36">{board.title}</div>
         <div className="detail_header_info">
           <div className="detail_header_info_profile">
-            <Image src="/images/profile/profile06.png" alt="profile" width={24} height={24} />
-            <span className="detail_header_info_name l_14_20">홍길동</span>
+            <Image src={board.user?.picture || '/images/profile/profile06.png'} alt="profile" width={24} height={24} />
+            <span className="detail_header_info_name l_14_20">{board.user?.name || board.writer}</span>
           </div>
-          <div className="detail_header_info_date l_14_20">24.11.11</div>
+          <div className="detail_header_info_date l_14_20">{new Date(board.createdAt).toLocaleDateString('ko-KR')}</div>
         </div>
       </div>
       <div className="detail_content_wrapper">
-        <div className="detail_address me_14_20">서울 특별시 강남구 신논현로 111-6</div>
+        {board.boardAddress && (
+          <div className="detail_address me_14_20">
+            {board.boardAddress.address} {board.boardAddress.addressDetail}
+          </div>
+        )}
         <div className="detail_content r_16_24">
-          <Image src="/images/detail/detail_mock.png" alt="detail" width={400} height={531} />
-          <br />
-          살겠노라 살겠노라. 청산에 살겠노라.
-          <br /> 머루랑 다래를 먹고 청산에 살겠노라.
-          <br /> 얄리얄리 얄랑셩 얄라리 얄라
-          <br />
-          <br /> 우는구나 우는구나 새야. 자고 일어나 우는구나 새야.
-          <br /> 너보다 시름 많은 나도 자고 일어나 우노라.
-          <br /> 얄리얄리 얄라셩 얄라리 얄라
-          <br />
-          <br /> 갈던 밭(사래) 갈던 밭 보았느냐. 물 아래(근처) 갈던 밭 보았느냐
-          <br /> 이끼 묻은 쟁기를 가지고 물 아래 갈던 밭 보았느냐.
-          <br /> 얄리얄리 얄라셩 얄라리 얄라
-          <br />
-          <br /> 이럭저럭 하여 낮일랑 지내 왔건만
-          <br /> 올 이도 갈 이도 없는 밤일랑 또 어찌 할 것인가.
-          <br /> 얄리얄리 얄라셩 얄라리 얄라
-          <br />
-          <br /> 어디다 던지는 돌인가 누구를 맞히려던 돌인가.
-          <br /> 미워할 이도 사랑할 이도 없이 맞아서 우노라.
-          <br /> 얄리얄리 얄라셩 얄라리 얄라
-          <br />
-          <br /> 살겠노라 살겠노라. 바다에 살겠노라.
-          <br /> 나문재, 굴, 조개를 먹고 바다에 살겠노라.
-          <br /> 얄리얄리 얄라셩 얄라리 얄라
-          <br />
-          <br /> 가다가 가다가 듣노라. 에정지(미상) 가다가 듣노라.
-          <br /> 사슴(탈 쓴 광대)이 솟대에 올라서 해금을 켜는 것을 듣노라.
-          <br /> 얄리얄리 얄라셩 얄라리 얄라
-          <br />
-          <br /> 가다 보니 배불룩한 술독에 독한 술을 빚는구나.
-          <br /> 조롱박꽃 모양 누룩이 매워 (나를) 붙잡으니 내 어찌 하리이까.[1]
-          <br /> 얄리얄리 얄라셩 얄라리 얄라 얄라
+          {board.images && board.images.length > 0 && (
+            <>
+              <Image
+                src={`https://storage.googleapis.com/${board.images[0]}`}
+                alt="게시글 이미지"
+                width={400}
+                height={531}
+              />
+              <br />
+            </>
+          )}
+          {board.contents.split('\n').map((line, index) => (
+            <span key={index}>
+              {line}
+              <br />
+            </span>
+          ))}
         </div>
-        <div className="detail_content_video_section">
-          <Image src="/images/detail/detail_bottom_mock.png" alt="detail" width={822} height={464} priority />
-        </div>
+        {board.youtubeUrl && (
+          <div className="detail_content_video_section">
+            <iframe
+              width="822"
+              height="464"
+              src={board.youtubeUrl.replace('watch?v=', 'embed/')}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        )}
 
         <div className="detail_content_like_section">
-          <div className="detail_like_wrapper">
+          <div
+            className="detail_like_wrapper"
+            onClick={handleDislike}
+            style={{
+              cursor: isDisliking ? 'not-allowed' : 'pointer',
+              opacity: isDisliking ? 0.6 : 1,
+            }}
+          >
             <Image src="/icons/bad.png" alt="detail" width={24} height={24} />
-            <span className="detail_like_count dislike r_14_20">24</span>
+            <span className="detail_like_count dislike r_14_20">{board.dislikeCount}</span>
           </div>
-          <div className="detail_like_wrapper">
+          <div
+            className="detail_like_wrapper"
+            onClick={handleLike}
+            style={{
+              cursor: isLiking ? 'not-allowed' : 'pointer',
+              opacity: isLiking ? 0.6 : 1,
+            }}
+          >
             <Image src="/icons/good.png" alt="detail" width={24} height={24} />
-            <span className="detail_like_count r_14_20">12</span>
+            <span className="detail_like_count r_14_20">{board.likeCount}</span>
           </div>
         </div>
         <div className="detail_content_button_section">
@@ -86,7 +147,13 @@ export default function Detail() {
           </div>
         </div>
       </div>
-      <FeedbackForm type="댓글" />
+      <FeedbackForm
+        type="댓글"
+        boardId={boardId}
+        comments={comments}
+        commentsLoading={commentsLoading}
+        commentsError={commentsError}
+      />
     </div>
   );
 }

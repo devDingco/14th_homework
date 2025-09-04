@@ -7,6 +7,7 @@ import {
   GET_USER,
   GET_USER_LOGGED_IN,
   GET_BOARDS_OF_THE_BEST,
+  GET_BOARD_COMMENTS,
 } from '../graphql/queries';
 import {
   CREATE_BOARD,
@@ -23,6 +24,8 @@ import {
   UPDATE_USER,
   UPLOAD_FILE,
   UPLOAD_FILES,
+  LIKE_BOARD,
+  DISLIKE_BOARD,
 } from '../graphql/mutations';
 import {
   Board,
@@ -55,6 +58,10 @@ export const useGetBoards = (variables?: GetBoardsVariables) => {
 
 export const useGetBoard = (boardId: string) => {
   return useQuery(GET_BOARD, { variables: { boardId } });
+};
+
+export const useGetBoardComments = (boardId: string) => {
+  return useQuery(GET_BOARD_COMMENTS, { variables: { boardId } });
 };
 
 export const useLazyGetBoards = () => {
@@ -144,4 +151,13 @@ export const useUploadFile = () => {
 
 export const useUploadFiles = () => {
   return useMutation(UPLOAD_FILES);
+};
+
+// 좋아요/싫어요 관련 훅
+export const useLikeBoard = () => {
+  return useMutation(LIKE_BOARD);
+};
+
+export const useDislikeBoard = () => {
+  return useMutation(DISLIKE_BOARD);
 };

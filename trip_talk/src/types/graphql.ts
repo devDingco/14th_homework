@@ -43,6 +43,20 @@ export interface BoardOfTheBest {
   images?: string[];
 }
 
+export interface BoardComment {
+  _id: string;
+  writer: string;
+  contents: string;
+  rating: number;
+  createdAt: string;
+  updatedAt: string;
+  user?: {
+    _id: string;
+    name: string;
+    picture: string;
+  } | null;
+}
+
 export interface CreateBoardInput {
   title: string;
   contents: string;

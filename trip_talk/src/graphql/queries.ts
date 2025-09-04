@@ -44,6 +44,20 @@ export const GET_BOARD = gql`
       writer
       createdAt
       updatedAt
+      likeCount
+      dislikeCount
+      images
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
+      user {
+        _id
+        name
+        picture
+      }
     }
   }
 `;
@@ -117,6 +131,25 @@ export const GET_USER_LOGGED_IN = gql`
         amount
       }
       createdAt
+    }
+  }
+`;
+
+// 게시판 댓글 조회
+export const GET_BOARD_COMMENTS = gql`
+  query GetBoardComments($boardId: ID!) {
+    fetchBoardComments(boardId: $boardId) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+      updatedAt
+      user {
+        _id
+        name
+        picture
+      }
     }
   }
 `;

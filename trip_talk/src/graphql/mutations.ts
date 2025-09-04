@@ -155,3 +155,17 @@ export const UPLOAD_FILES = gql`
     }
   }
 `;
+
+// 게시글 좋아요
+export const LIKE_BOARD = gql`
+  mutation LikeBoard($boardId: ID!) {
+    likeBoard(boardId: $boardId)
+  }
+`;
+
+// 게시글 싫어요
+export const DISLIKE_BOARD = gql`
+  mutation DislikeBoard($boardId: ID!) {
+    dislikeBoard(boardId: $boardId)
+  }
+`;
