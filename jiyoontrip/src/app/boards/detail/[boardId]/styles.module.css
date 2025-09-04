@@ -1,24 +1,24 @@
 /* BoardDetail.js */
 .page {
   width: 100%;
-  /* padding: 0 320px; */
-  gap: 40px;
+  /* padding: 0 20rem; */
+  gap: 2.5rem;
 }
 .detailContainer {
   display: flex;
   flex-direction: column;
-  max-width: 1280px;
+  max-width: 80rem;
   width: 100%;
   margin: 0 auto;
-  padding: 40px 0;
-  gap: 24px;
+  padding: 2.5rem 0;
+  gap: 1.5rem;
 }
 .detailTitle {
   color: #000;
-  font-size: 28px;
+  font-size: 1.75rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 36px;
+  line-height: 2.25rem;
 }
 .detailAuthor {
   display: flex;
@@ -29,17 +29,17 @@
   display: flex;
   align-items: center;
   color: var(--gray-700, #5f5f5f);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 300;
-  gap: 4px;
+  gap: 0.25rem;
 }
 .detailAuthor__date {
   color: #818181;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 1.25rem;
 }
 .detailLinkLocation {
   display: flex;
@@ -47,7 +47,7 @@
   align-items: center;
 }
 .detailLinkLocation__enroll {
-  max-width: 56px;
+  max-width: 3.5rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -60,24 +60,24 @@
 }
 .detailContent {
   color: #000;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 24px; /* 150% */
+  line-height: 1.5rem; /* 150% */
 }
 .detailVideo {
   display: flex;
-  padding: 24px 0;
+  padding: 1.5rem 0;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   align-self: stretch;
   background: var(--gray-50, #f2f2f2);
 }
 .detailHeart {
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: 1.5rem;
 }
 .detailHeart__bad {
   display: flex;
@@ -94,25 +94,25 @@
 .detailButtonEnroll {
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: 1.5rem;
 }
 .detailButtonList {
-  border-radius: 8px;
-  border: 1px solid var(--gray-B, #000);
+  border-radius: 0.5rem;
+  border: 0.0625rem solid var(--gray-B, #000);
   background: var(--gray-w, #fff);
   display: flex;
-  height: 40px;
-  padding: 8px 12px;
+  height: 2.5rem;
+  padding: 0.5rem 0.75rem;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
 }
 .detailButtonEdit {
-  border-radius: 8px;
-  border: 1px solid var(--gray-B, #000);
+  border-radius: 0.5rem;
+  border: 0.0625rem solid var(--gray-B, #000);
   background: var(--gray-w, #fff);
   display: flex;
-  height: 40px;
-  padding: 8px 12px;
+  height: 2.5rem;
+  padding: 0.5rem 0.75rem;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
 }
