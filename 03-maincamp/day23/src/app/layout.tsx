@@ -5,7 +5,7 @@ import ApolloSetting from "@/commons/setttings/apollo-setting";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",1
+  variable: "--font-geist-sans",
   weight: "100 900",
 });
 const geistMono = localFont({
@@ -29,8 +29,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-       
-      </body> <ApolloSetting>{children}</ApolloSetting>
+       <ApolloSetting>{children}</ApolloSetting>
+      </body> 
     </html>
   );
 }
