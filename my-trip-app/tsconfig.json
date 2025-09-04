@@ -20,6 +20,9 @@
       "@/*": [
         "./app/*"
       ],
+      "@_types/*": [
+        "./app/_types/*"
+      ],
       "@/types/*": [
         "./app/_types/*"
       ],
@@ -47,9 +50,10 @@
       "@icons/*": [
         "./public/icons/*"
       ],
-      "@lib/*": [
-        "./lib/*"
-      ]
+      "@hooks/*": [
+        "./app/commons/hooks/*"
+      ],
+      
     },
     "types": [
       "node",

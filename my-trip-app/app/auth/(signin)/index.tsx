@@ -1,20 +1,17 @@
 "use client";
 
-import "../../../app/global.css";
+import "../../global.css";
 import "./index.css";
 import { useState } from 'react';
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
+import { login } from '../../commons/services/auth.services';
 
 export default function SignIn({ onClickSignup }: { onClickSignup?: () => void }) {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
-
-  // 저장된 계정 값 (예시)
-  const storedEmail = "user@example.com";
-  const storedPassword = "P@ssword123!";
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -26,20 +23,19 @@ export default function SignIn({ onClickSignup }: { onClickSignup?: () => void }
     if (loginError) setLoginError('');
   };
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const isMatched = email === storedEmail && password === storedPassword;
-    if (!isMatched) {
-      setLoginError("아이디 또는 비밀번호를 확인해 주세요.");
-      return;
-    }
+    setLoginError('');
     try {
-      localStorage.setItem('auth_token', 'fake-token-123');
-      localStorage.setItem('auth_user_email', email);
-    } catch (err) {
-      // noop
+      const token = await login(email, password);
+      if (!token) {
+        setLoginError('아이디 또는 비밀번호를 확인해 주세요.');
+        return;
+      }
+      router.push('/');
+    } catch (err: any) {
+      setLoginError(err?.message ?? '로그인에 실패했습니다.');
     }
-    router.push('/');
   };
 
 

@@ -45,6 +45,7 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
     setTimeout(() => (endInputRef.current as any)?.showPicker?.(), 0);
   };
 
+
   const handlePostButtonClick = () => {
     if (pathname === "/") {
       router.push("/board/post");

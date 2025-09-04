@@ -7,6 +7,8 @@ import Link from "next/link";
 import Icon from "@utils/iconColor";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { tokenStorage } from "../../commons/utils/token";
+
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState("");
   const router = useRouter();
@@ -17,14 +19,28 @@ export default function Header() {
     setActiveMenu(menuKey);
   };
 
-
-
   useEffect(() => {
-    // 토큰 기반 로그인 상태 동기화
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('auth_token');
-      setIsLoggedIn(!!token);
-    }
+    // 초기 상태 동기화
+    setIsLoggedIn(!!tokenStorage.get());
+
+    // 같은 탭: 커스텀 이벤트로 동기화
+    const handleAuthChanged = (e: Event) => {
+      const detail = (e as CustomEvent).detail as { isLoggedIn: boolean } | undefined;
+      if (detail && typeof detail.isLoggedIn === "boolean") {
+        setIsLoggedIn(detail.isLoggedIn);
+      } else {
+        setIsLoggedIn(!!tokenStorage.get());
+      }
+    };
+    window.addEventListener("auth:changed", handleAuthChanged as EventListener);
+
+    // 다른 탭: storage 이벤트로 동기화
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === "accessToken") {
+        setIsLoggedIn(!!e.newValue);
+      }
+    };
+    window.addEventListener("storage", handleStorage);
 
     const handleClickOutside = (event: MouseEvent) => {
       const node = profileRef.current;
@@ -35,9 +51,13 @@ export default function Header() {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
+    return () => {
+      window.removeEventListener("auth:changed", handleAuthChanged as EventListener);
+      window.removeEventListener("storage", handleStorage);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return <header className="header">
     <div className="header_left_container">
@@ -87,7 +107,7 @@ export default function Header() {
             <Icon filled name="charge" default className="charge_icon"/>
             <span className="r_16_24">포인트 충전</span>
           </button>
-          <button className="profile_action" onClick={() => { localStorage.removeItem('auth_token'); setIsLoggedIn(false); }}>
+          <button className="profile_action" onClick={() => { tokenStorage.clear(); }}>
             <Icon outline name="logout" default className="logout_icon"/>
             <span className="r_16_24">로그아웃</span>
           </button>

@@ -55,6 +55,7 @@ export default function ProductList() {
                   alt="product"
                   width={384}
                   height={384}
+                  priority={false}
                 />
                 <span className="head_badge">
                   <Icon outline default name="bookmark" width={20} height={20} />
@@ -72,7 +73,14 @@ export default function ProductList() {
                   </div>
                   <div className="product_footer">
                     <div className="host_info">
-                      <Image className="host_avatar" src={product.hostAvatar} alt="host" width={24} height={24} />
+                      <Image 
+                      className="host_avatar"
+                      src={product.hostAvatar}
+                      alt="host"
+                      width={24}
+                      height={24}
+                      priority={false}
+                      />
                       <span className="r_14_20">{product.host}</span>
                     </div>
                     <p className="product_price sb_16_24">{product.price}</p>

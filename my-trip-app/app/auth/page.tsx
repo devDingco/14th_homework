@@ -25,6 +25,7 @@ export default function Auth() {
         width={1520}
         height={1080}
         style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        priority={false}
       />
     </div>
   );

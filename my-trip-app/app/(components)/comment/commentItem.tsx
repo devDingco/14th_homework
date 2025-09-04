@@ -1,6 +1,7 @@
 "use client";
 
 import "./comment.css";
+import Image from "next/image";
 import Icon from "@utils/iconColor";
 
 export interface CommentItemProps {
@@ -19,7 +20,7 @@ export default function CommentItem({ avatar, author, date, rating, content, onE
       <header className="comment_item_header">
         <div className="comment_header_left">
           <div className="comment_author">
-            <img src={avatar} alt={author} width={24} height={24} className="comment_avatar" />
+            <Image src={avatar} alt={author} width={24} height={24} className="comment_avatar" />
             <span className="sb_14_20">{author}</span>
           </div>
           <div className="comment_item_rating">

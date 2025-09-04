@@ -1,22 +1,24 @@
+ 
 import "./index.css";
 import "../../global.css";
 import Image from "next/image";
 import Icon from "@utils/iconColor";
 import Link from "next/link";
-import { tripTalkMockData, mockRows } from "@common/utils/mocks-data";
 import CommentSection from "@components/comment/commentSection";
+import { formatDate } from "@hooks/formatDate";
+import { toYouTubeEmbedUrl } from "@hooks/youtube";
 
-export default function BoardDetail({ id }: { id: string }) {
-  // tripTalkMockData와 mockRows에서 모두 검색
-  const post = tripTalkMockData.find((p: any) => p.id === id) || 
-               mockRows.find((p: any) => p.id.toString() === id) || {
-    title: "",
+export default function BoardDetail({ id, initialData }: { id: string; initialData: any }) {
+  const post = {
+    title: initialData.title,
     authorProfileImage: "",
-    authorName: "",
-    createdAt: "",
-    coverImage: "",
-    badCount: 0,
-    likeCount: 0,
+    authorName: initialData.authorName,
+    createdAt: initialData.createdAt,
+    coverImage: initialData.coverImage,
+    contents: initialData.contents,
+    badCount: initialData.badCount,
+    likeCount: initialData.likeCount,
+    youtubeUrl: initialData.youtubeUrl,
   };
 
   return (
@@ -33,10 +35,11 @@ export default function BoardDetail({ id }: { id: string }) {
                   width={32}
                   height={32}
                   className="author_avatar"
+                  priority={false}
                 />
               )}
               <span className="sb_16_24 author_name">{post.authorName}</span>
-              <span className="r_14_20 date">{post.createdAt}</span>
+              <span className="r_14_20 date">{formatDate(post.createdAt)}</span>
             </div>
             <div className="icon_wrap">
               <Icon outline name="link" default className="link_icon"/>
@@ -46,39 +49,31 @@ export default function BoardDetail({ id }: { id: string }) {
         </header>
 
         <section className="detail_content r_16_24">
-          <div className="lead_section">
-            <figure className="lead_media">
-              {post.coverImage && (
-                <Image src={post.coverImage} alt="lead" width={260} height={200} />
-              )}
-            </figure>
-            <div className="text_block r_16_24 content">
-              <p>
-                햇살이 쏟아지는 바다와 함께했던 오늘의 기록입니다. <br />
-                모래 위를 걷다 보면 시간이 천천히 흐르는 것 같아요. <br />
-                바람이 적당히 불고 파도 소리가 귓가를 간질이면, <br />
-                그 순간만큼은 모든 게 편안해집니다.
-              </p>
-              <p>
-                작은 카페에 들러 따뜻한 커피를 한 잔 마시고,<br />
-                길을 따라 걷다가 우연히 찾은 포토 스팟에서 사진도 몇 장 남겼습니다. <br />
-                다음엔 더 많은 곳을 둘러보고 싶네요.
-              </p>
-              <p>
-                오늘의 소소한 순간들을 기록으로 남기며, 다음 여행을 또 계획해 봅니다. <br />
-                이 페이지는 그중 일부를 보여주는 작은 앨범이에요.
-              </p>
-            </div>
-          </div>
-
-          <div className="detail_media wide">
-            <div className="media_wrap">
-              <Image src="/images/desktop/detail-page-1.png" alt="detail-1" width={709} height={576} />
-              <div className="play_badge">
-                <span className="triangle_icon" aria-hidden="true" />
+          {post.coverImage && (
+            <div className="lead_section">
+              <figure className="lead_media">
+                <Image src={post.coverImage} alt="lead" width={260} height={200} priority={false} />
+              </figure>
+              <div className="text_block r_16_24 content">
+                <p>{post.contents}</p>
               </div>
             </div>
-          </div>
+          )}
+
+          {post.youtubeUrl && toYouTubeEmbedUrl(post.youtubeUrl) && (
+            <div className="detail_media wide">
+              <div className="media_wrap">
+                <iframe
+                  src={toYouTubeEmbedUrl(post.youtubeUrl)}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  style={{ width: "82.2rem", height: "46.4rem", margin: "0 auto", display: "block" }}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          )}
         </section>
 
           <article className="like_section">

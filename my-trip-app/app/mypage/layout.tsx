@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import MyMenu from "./(mypage-layout)/my-menu";
-import { MenuId } from '@lib/types/mypage';
+import { MenuId } from '@_types/mypage';
 import HistoryBookmarkComponent from "./(mypage-layout)/components/HistoryBookmarkComponent";
 import PointComponent from "./(mypage-layout)/components/PointComponent";
 import PasswordComponent from "./(mypage-layout)/components/PasswordComponent";

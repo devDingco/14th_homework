@@ -1,59 +1,126 @@
 "use client";
+
 import "./index.css";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Icon from "@utils/iconColor";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { createBoardApi, uploadFileApi } from "../../commons/apis/board.api";
+import type { CreateBoardInput } from "../../commons/graphql/__generated__/graphql";
+import { useDaumPostcodePopup } from "react-daum-postcode";
 export default function PostBoard() {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(() => {
-    // 사전 로드(선택). 이미 있으면 중복 로드하지 않음
-    if (typeof window !== "undefined" && !(window as any).daum?.Postcode) {
-      const script = document.createElement("script");
-      script.src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
-      script.async = true;
-      document.body.appendChild(script);
-    }
-  }, []);
-
-  const openPostcode = async () => {
-    // 스크립트가 아직 로드되지 않았으면 대기
-    const waitForDaum = () =>
-      new Promise<void>((resolve) => {
-        const check = () => {
-          if ((window as any).daum?.Postcode) resolve();
-          else setTimeout(check, 50);
-        };
-        check();
-      });
-
-    if (!(window as any).daum?.Postcode) {
-      const script = document.createElement("script");
-      script.src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
-      script.async = true;
-      document.body.appendChild(script);
-      await waitForDaum();
-    }
-
-    // 열기
-    const { daum } = window as any;
-    new daum.Postcode({
-      oncomplete: (data: any) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [apiError, setApiError] = useState("");
+  const [createdBoardId, setCreatedBoardId] = useState<string | null>(null);
+  const [imageUrls, setImageUrls] = useState<(string | null)[]>([null, null, null]);
+  const router = useRouter();
+  const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
+  const openPostcode = () => {
+    open({
+      onComplete: (data: any) => {
         const zonecode = data.zonecode;
         const roadAddress = data.roadAddress || data.address || "";
         setZipcode(zonecode);
         setAddress(roadAddress);
       },
-    }).open();
+    });
   };
+
+  const validateForm = (): Record<string, string> => {
+    const nextErrors: Record<string, string> = {};
+    if (!writer.trim()) nextErrors.writer = "필수입력 사항 입니다.";
+    if (!password.trim()) nextErrors.password = "필수입력 사항 입니다.";
+    if (!title.trim()) nextErrors.title = "필수입력 사항 입니다.";
+    if (!content.trim()) nextErrors.content = "필수입력 사항 입니다.";
+    return nextErrors;
+  };
+
+  const buildCreateBoardInput = (): CreateBoardInput => {
+    const hasAddress = !!(zipcode || address || detailAddress);
+    return {
+      writer,
+      password,
+      title,
+      contents: content,
+      youtubeUrl: youtubeUrl || undefined,
+      images: imageUrls.filter((v): v is string => !!v),
+      ...(hasAddress
+        ? {
+            boardAddress: {
+              zipcode: zipcode || undefined,
+              address: address || undefined,
+              addressDetail: detailAddress || undefined,
+            },
+          }
+        : {}),
+    };
+  };
+
+  const handleSubmit = async (): Promise<void> => {
+    const nextErrors = validateForm();
+    setErrors(nextErrors);
+    setApiError("");
+    if (Object.keys(nextErrors).length !== 0) return;
+
+    const input = buildCreateBoardInput();
+
+    try {
+      setIsSubmitting(true);
+      const created = await createBoardApi(input);
+      if (!created || !created._id) {
+        setApiError("등록에 실패했어요. 잠시 후 다시 시도해 주세요.");
+        return;
+      }
+      setCreatedBoardId(created._id);
+      setIsModalOpen(true);
+    } catch (error) {
+      setApiError("에러가 발생했어요. 네트워크 상태를 확인해 주세요.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  
+  const onChangeFile = (index: number) => async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputEl = e.currentTarget;
+    const file = inputEl.files?.[0];
+    if (!file) return;
+    try {
+      setApiError("");
+      const uploaded = await uploadFileApi(file);
+      const url = uploaded?.url ?? null;
+      if (url) {
+        setImageUrls((prev) => {
+          const next = [...prev];
+          next[index] = url;
+          return next;
+        });
+      }
+    } catch {
+      setApiError("이미지 업로드에 실패했어요. 잠시 후 다시 시도해 주세요.");
+    } finally {
+      inputEl.value = "";
+    }
+  };
+
+  const removeImage = (index: number) => {
+    setImageUrls((prev) => {
+      const next = [...prev];
+      next[index] = null;
+      return next;
+    });
+  };
+
+
   return (
     <div className="board_page">
       <h1 className="b_28_36 board_title">게시물 등록</h1>
@@ -119,7 +186,7 @@ export default function PostBoard() {
             <label className="sb_16_24">주소</label>
             <div className="postal_row">
               <input className="postal_input" type="text" value={zipcode} readOnly placeholder="우편번호" />
-              <button type="button" className="btn btn-search sb_18_24" onClick={openPostcode}>우편번호 검색</button>
+              <button type="button" className="btn-search sb_18_24" onClick={openPostcode}>우편번호 검색</button>
             </div>
             <input type="text" placeholder="주소를 입력해 주세요." value={address} readOnly />
             <input type="text" placeholder="상세주소" value={detailAddress} onChange={(e) => setDetailAddress(e.target.value)} />
@@ -129,40 +196,45 @@ export default function PostBoard() {
         <div className="row">
           <div className="field">
             <label className="sb_16_24">유튜브 링크</label>
-            <input type="url" placeholder="링크를 입력해 주세요." />
+            <input type="url" placeholder="링크를 입력해 주세요." value={youtubeUrl} onChange={(e) => setYoutubeUrl(e.target.value)} />
           </div>
         </div>
 
         <div className="row">
           <label className="sb_16_24">사진 첨부</label>
           <div className="upload_grid">
-            <label className="uploader">
-              <input type="file" accept="image/*" hidden />
-              <div className="uploader_box">
-                <span className="plus">
-                    <Icon outline name="add" className="plus_icon" color="var(--gray-60)"/>
-                </span>
-                <span className="r_16_24">클릭해서 사진 업로드</span>
-              </div>
-            </label>
-            <label className="uploader">
-              <input type="file" accept="image/*" hidden />
-              <div className="uploader_box">
-                <span className="plus">
-                    <Icon outline name="add" className="plus_icon" color="var(--gray-60)"/>
-                </span>
-                <span className="r_16_24">클릭해서 사진 업로드</span>
-              </div>
-            </label>
-            <label className="uploader">
-              <input type="file" accept="image/*" hidden />
-              <div className="uploader_box">
-                <span className="plus">
-                    <Icon outline name="add" className="plus_icon" color="var(--gray-60)"/>
-                </span>
-                <span className="r_16_24">클릭해서 사진 업로드</span>
-              </div>
-            </label>
+            {Array.from({ length: 3 }).map((_, index) => (
+              <label className="uploader" key={index}>
+                <input type="file" accept="image/*" hidden onChange={onChangeFile(index)} />
+                <div className="uploader_box">
+                  {imageUrls[index] ? (
+                    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+                      <Image
+                        src={imageUrls[index]?.startsWith("http") ? imageUrls[index]! : `https://storage.googleapis.com/${imageUrls[index]}`}
+                        alt={`preview-${index}`}
+                        width={160}
+                        height={160}
+                        priority={false}
+                        sizes="160px"
+                      />
+                      <button 
+                      type="button"
+                      className="btn" 
+                      onClick={(e) => { e.preventDefault(); removeImage(index); }}
+                      style={{ position: "absolute", top: 8, right: 8 }}
+                      >삭제</button>
+                    </div>
+                  ) : (
+                    <>
+                      <span className="plus">
+                        <Icon outline name="add" className="plus_icon" color="var(--gray-60)"/>
+                      </span>
+                      <span className="r_16_24">클릭해서 사진 업로드</span>
+                    </>
+                  )}
+                </div>
+              </label>
+            ))}
           </div>
         </div>
 
@@ -171,21 +243,13 @@ export default function PostBoard() {
           <button
             type="button"
             className="btn-primary"
-            onClick={() => {
-              const nextErrors: Record<string, string> = {};
-              if (!writer.trim()) nextErrors.writer = "필수입력 사항 입니다.";
-              if (!password.trim()) nextErrors.password = "필수입력 사항 입니다.";
-              if (!title.trim()) nextErrors.title = "필수입력 사항 입니다.";
-              if (!content.trim()) nextErrors.content = "필수입력 사항 입니다.";
-              setErrors(nextErrors);
-              if (Object.keys(nextErrors).length === 0) {
-                setIsModalOpen(true);
-              }
-            }}
+            disabled={isSubmitting}
+            onClick={handleSubmit}
           >
-            등록하기
+            {isSubmitting ? "등록 중..." : "등록하기"}
           </button>
         </div>
+        {apiError && <p className="error_text" style={{ marginTop: 8 }}>{apiError}</p>}
       </form>
 
       {isModalOpen && (
@@ -194,7 +258,17 @@ export default function PostBoard() {
             <h2 className="b_20_28">등록 완료</h2>
             <p className="r_14_20">게시글이 등록되었습니다.</p>
             <div className="modal_actions">
-              <button className="btn btn-primary" onClick={() => setIsModalOpen(false)}>확인</button>
+              <button
+                className="btn"
+                onClick={() => {
+                  setIsModalOpen(false);
+                  if (createdBoardId) {
+                    router.push(`/board/${createdBoardId}`);
+                  }
+                }}
+              >
+                확인
+              </button>
             </div>
           </div>
         </div>

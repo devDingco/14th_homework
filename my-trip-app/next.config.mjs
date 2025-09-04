@@ -5,6 +5,10 @@ const nextConfig = {
   // ... 다른 설정들
   pageExtensions: ["js", "jsx", "ts", "tsx"],
   // types 폴더를 라우팅에서 제외
+  images: {
+    domains: ["storage.googleapis.com"],
+    // remotePatterns: [{ protocol: "https", hostname: "storage.googleapis.com" }],
+  },
   webpack: (config) => {
     // SVG를 React 컴포넌트로 임포트할 수 있게 설정
     config.module.rules.push({
