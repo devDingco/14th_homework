@@ -4,6 +4,7 @@
 import { gql, useMutation } from "@apollo/client";
 import { ChangeEvent, useState } from 'react'
 import style from './style.module.css'
+import { useRouter } from "next/navigation";
 
 interface IBoard {
     email: string,
@@ -27,6 +28,8 @@ mutation createBoard($writer: String!, $password: String!, $title: String!, $con
 `;
 
 const BoardNew = () => {
+
+    const router = useRouter()
 
 
     const [email, setEmail] = useState<string>("")
@@ -115,6 +118,8 @@ const BoardNew = () => {
     }
 
     const onClickSignUp = async () => {
+
+        try{
         if (email && password && title && content) {
             const result = await boardCreate({
                 variables: {
@@ -122,12 +127,23 @@ const BoardNew = () => {
                     password: password,
                     title: title,
                     contents: content
+                    
                 }
             })
             console.log(result)
+            const myId=result?.data.createBoard._id;
+            router.push(`/board/detail/${myId}`);
             alert("게시글 등록이 완료되었습니다.")
         }
+    }catch(error){
+        console.error(error);
+        alert("에러가 발생하였습니다. 다시 시도해주세요.")
     }
+    }
+
+
+
+
 
     return (
         <div className={style.전체바탕}>
