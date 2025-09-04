@@ -87,7 +87,7 @@ export default function BoardsDetail() {
         </div>
       </div>
       <div className={styles.목록수정}>
-        <button onClick={onClickList} className={styles.목록버튼}>
+        <button onClick={} className={styles.목록버튼}>
           <Image src={list} alt="" />
           목록으로
         </button>

@@ -1,0 +1,44 @@
+.boardsContainer {
+  max-width: 1280px;
+  width: 100%;
+  border: 1px solid #e1e1e1;
+}
+.container {
+  max-width: 1184px;
+  width: 100%;
+  border: 1px solid #e1e1e1;
+  padding: auto;
+  margin: auto;
+}
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 24px;
+}
+.rightGroup,
+.leftGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+.leftGroup span {
+  width: 64px;
+  height: 20px;
+}
+.leftGroup span:last-child {
+  width: 848px;
+  text-align: left;
+}
+
+.rightGroup span {
+  width: 100px;
+  height: 20px;
+}
+.postItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 24px;
+}

@@ -13,7 +13,6 @@ import pen from '../../../../assets/icons/pen.png';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { gql, useQuery } from '@apollo/client';
-import { useRouter } from 'next/navigation';
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -35,10 +34,6 @@ const FETCH_BOARD = gql`
 `;
 
 export default function BoardsDetail() {
-  const router = useRouter();
-  const onClickList = () => {
-    router.push('/boards');
-  };
   const 내주소변수 = useParams();
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
@@ -54,10 +49,7 @@ export default function BoardsDetail() {
           <Image src={profile} alt="" width={0} height={0} />
           <div>{data?.fetchBoard.writer}</div>
         </div>
-        <div className={styles.날짜}>
-          {data?.fetchBoard.createdAt &&
-            new Date(data.fetchBoard.createdAt).toLocaleDateString('ko-KR')}
-        </div>
+        <div className={styles.날짜}>{data?.fetchBoard.createdAt}</div>
       </div>
       <hr className={styles.hr} />
       <div>
@@ -87,7 +79,7 @@ export default function BoardsDetail() {
         </div>
       </div>
       <div className={styles.목록수정}>
-        <button onClick={onClickList} className={styles.목록버튼}>
+        <button className={styles.목록버튼}>
           <Image src={list} alt="" />
           목록으로
         </button>

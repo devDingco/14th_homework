@@ -1,0 +1,10 @@
+.번호제목작성자날짜 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.번호제목 {
+  display: flex;
+  flex-direction: row;
+  gap: 26px;
+}

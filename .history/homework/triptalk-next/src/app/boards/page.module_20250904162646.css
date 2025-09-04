@@ -1,0 +1,26 @@
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 24px;
+}
+.rightGroup,
+.leftGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.leftGroup span:nth-child(1) {
+  width: 64px;
+  height: 20px;
+}
+
+.rightGroup span:nth-child(1) {
+  color: blue;
+}
+.postItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 24px;
+}

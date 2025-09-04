@@ -15,6 +15,8 @@ import { useParams } from 'next/navigation';
 import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 
+const router = useRouter();
+
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
@@ -35,10 +37,6 @@ const FETCH_BOARD = gql`
 `;
 
 export default function BoardsDetail() {
-  const router = useRouter();
-  const onClickList = () => {
-    router.push('/boards');
-  };
   const 내주소변수 = useParams();
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
@@ -87,7 +85,7 @@ export default function BoardsDetail() {
         </div>
       </div>
       <div className={styles.목록수정}>
-        <button onClick={onClickList} className={styles.목록버튼}>
+        <button className={styles.목록버튼}>
           <Image src={list} alt="" />
           목록으로
         </button>
