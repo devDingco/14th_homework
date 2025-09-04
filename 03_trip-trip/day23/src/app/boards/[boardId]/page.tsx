@@ -17,18 +17,19 @@ import { formatUtcToKstYmd } from '@/shared/lib/date/formatUtcToKstYmd'
 import { FETCH_BOARD } from '@/features/boards/api/query'
 
 export default function BoardsDetail() {
-  const params = useParams<{ boardId?: string }>() 
-  const {data, loading, error} = useQuery(FETCH_BOARD, {
+  const params = useParams<{ boardId?: string }>()
+  const { data, loading, error } = useQuery(FETCH_BOARD, {
     variables: {
-      boardId: params.boardId
-    }
+      boardId: params.boardId,
+    },
   })
 
-  if (!params.boardId) return<div>잘못된 접근 입니다.</div>
-  if(loading) return <div>로딩 중</div>
+  if (!params.boardId) return <div>잘못된 접근 입니다.</div>
+  if (loading) return <div>로딩 중</div>
   if (error || !data?.fetchBoard) return <div>게시글을 찾을 수 없습니다.</div>
 
-  const {_id,
+  const {
+    _id,
     writer,
     title,
     contents,
@@ -39,8 +40,9 @@ export default function BoardsDetail() {
     boardAddress,
     createdAt,
     updatedAt,
-    deletedAt } = data.fetchBoard
-  
+    deletedAt,
+  } = data.fetchBoard
+
   const formattedDate = formatUtcToKstYmd(createdAt)
   const firstImg = images?.[0]
   const imgSrc = firstImg && firstImg.trim() !== '' ? firstImg : '/images/postImg1.png'
@@ -71,18 +73,18 @@ export default function BoardsDetail() {
 
       {/* images */}
       {/* {firstImg && */}
-        <img src={imgSrc} className={styles['detail-post-image']} />
+      <img src={imgSrc} className={styles['detail-post-image']} />
       {/* } */}
-      
+
       {/* contents */}
       <div className={styles['detail-post-contents']}>{contents}</div>
 
       {/* youtube link */}
-      {youtubeId &&
+      {youtubeId && (
         <div className={styles['detail-post-youtube']}>
           <iframe src={`https://www.youtube.com/embed/${youtubeId}`}></iframe>
         </div>
-      }
+      )}
 
       {/* dis-like button */}
       <div className={styles['detail-post-likes']}>
