@@ -122,7 +122,7 @@ export default function BoardsNew() {
         <div className={styles.게시물등록_작성자and비밀번호}>
           <div className={styles.게시물등록_사용자인풋}>
             <label htmlFor="작성자" className={styles.게시물등록_라벨}>
-              작성자 <span style={{ color: "red" }}>*</span>
+              작성자 <span className={styles.required}>*</span>
             </label>
             <input
               id="작성자"

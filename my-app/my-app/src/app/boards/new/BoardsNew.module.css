@@ -41,6 +41,15 @@
   line-height: 1.5rem; /* 150% */
 }
 
+.required {
+  color: red;
+
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
 .게시물등록_플레이스홀더_내용 {
   resize: none;
   color: var(--Gray-Gray-400, #ababab);
