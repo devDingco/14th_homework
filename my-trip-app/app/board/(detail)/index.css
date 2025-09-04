@@ -181,3 +181,9 @@ border-bottom: 1px solid var(--gray-10);
   align-items: center;
   gap: 0.4rem;
 }
+
+
+.like_icon {
+  background: transparent;
+  border: none;
+}

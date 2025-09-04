@@ -10,7 +10,6 @@ export default function Banner() {
     fill
     className="banner_image" 
     priority={false}
-
     />
   </div>;
 }

@@ -29,4 +29,16 @@ export const UPLOAD_FILE_MUTATION = gql`
   }
 `;
 
+export const LIKE_BOARD_MUTATION = gql`
+  mutation LikeBoard($boardId: ID!) {
+    likeBoard(boardId: $boardId)
+  }
+`;
+
+export const DISLIKE_BOARD_MUTATION = gql`
+  mutation DislikeBoard($boardId: ID!) {
+    dislikeBoard(boardId: $boardId)
+  }
+`;
+
 

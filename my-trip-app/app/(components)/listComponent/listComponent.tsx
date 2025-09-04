@@ -23,7 +23,7 @@ export default function ListComponent({ data, totalPages = 5, initialPage = 1, o
         <div className="board_tbody">
           {data.map((row) => (
             <div className="tr" key={row.id}>
-              <div className="td td-num me_14_20">{row.id}</div>
+              <div className="td td-num me_14_20">{row.no ?? row.id}</div>
               <div className="td td-title">
                 <Link href={`/board/${row.id}`} className="title_link r_16_24">{row.title}</Link>
               </div>

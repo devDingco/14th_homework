@@ -1,4 +1,4 @@
- 
+"use client";
 import "./index.css";
 import "../../global.css";
 import Image from "next/image";
@@ -7,8 +7,14 @@ import Link from "next/link";
 import CommentSection from "@components/comment/commentSection";
 import { formatDate } from "@hooks/formatDate";
 import { toYouTubeEmbedUrl } from "@hooks/youtube";
+import { useState } from "react";
+import { likeBoardApi, dislikeBoardApi } from "@/commons/apis/board.api";
 
 export default function BoardDetail({ id, initialData }: { id: string; initialData: any }) {
+  const [likeCount, setLikeCount] = useState<number>(initialData.likeCount ?? 0);
+  const [badCount, setBadCount] = useState<number>(initialData.badCount ?? 0);
+  const [pending, setPending] = useState<boolean>(false);
+
   const post = {
     title: initialData.title,
     authorProfileImage: "",
@@ -16,9 +22,31 @@ export default function BoardDetail({ id, initialData }: { id: string; initialDa
     createdAt: initialData.createdAt,
     coverImage: initialData.coverImage,
     contents: initialData.contents,
-    badCount: initialData.badCount,
-    likeCount: initialData.likeCount,
+    badCount,
+    likeCount,
     youtubeUrl: initialData.youtubeUrl,
+  };
+
+  const handleLike = async () => {
+    if (pending) return;
+    try {
+      setPending(true);
+      const next = await likeBoardApi(id);
+      setLikeCount(typeof next === "number" ? next : likeCount + 1);
+    } finally {
+      setPending(false);
+    }
+  };
+
+  const handleDislike = async () => {
+    if (pending) return;
+    try {
+      setPending(true);
+      const next = await dislikeBoardApi(id);
+      setBadCount(typeof next === "number" ? next : badCount + 1);
+    } finally {
+      setPending(false);
+    }
   };
 
   return (
@@ -78,17 +106,17 @@ export default function BoardDetail({ id, initialData }: { id: string; initialDa
 
           <article className="like_section">
             <div className="like_wrap">
-              <div className="like_icon">
+              <button type="button" className="like_icon" onClick={handleDislike} disabled={pending}>
                 <Icon outline name="bad" color="var(--gray-70)"/>
-              </div>
+              </button>
               <div className="unlike_count">
                 <span className="r_16_24" style={{ color: "var(--gray-70)" }}>{post.badCount}</span>
               </div>
             </div>
             <div className="like_wrap">
-              <div className="like_icon">
+              <button type="button" className="like_icon" onClick={handleLike} disabled={pending}>
                 <Icon outline name="good" red className="like_icon"/>
-              </div>
+              </button>
               <div className="like_count">
                 <span className="r_16_24" style={{ color: "var(--red)" }}>{post.likeCount}</span>
               </div>

@@ -1,3 +1,4 @@
+"use client";
 import SearchBarMenu from "@components/searchBarMenu/searchBar";
 import BoardTable from "./listComponent";
 import type { BoardListProps } from "@/types/pagination";
