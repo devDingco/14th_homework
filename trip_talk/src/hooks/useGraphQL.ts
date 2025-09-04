@@ -21,6 +21,8 @@ import {
   LOGOUT_USER,
   RESET_USER_PASSWORD,
   UPDATE_USER,
+  UPLOAD_FILE,
+  UPLOAD_FILES,
 } from '../graphql/mutations';
 import {
   Board,
@@ -133,4 +135,13 @@ export const useGetUserLoggedIn = (options?: any) => {
 // 인기 게시판 관련 훅
 export const useGetBoardsOfTheBest = () => {
   return useQuery(GET_BOARDS_OF_THE_BEST);
+};
+
+// 파일 업로드 관련 훅
+export const useUploadFile = () => {
+  return useMutation(UPLOAD_FILE);
+};
+
+export const useUploadFiles = () => {
+  return useMutation(UPLOAD_FILES);
 };

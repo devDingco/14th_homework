@@ -9,6 +9,13 @@ export const CREATE_BOARD = gql`
       contents
       writer
       createdAt
+      images
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
@@ -136,7 +143,6 @@ export const UPLOAD_FILE = gql`
   mutation UploadFile($file: Upload!) {
     uploadFile(file: $file) {
       url
-      filename
     }
   }
 `;
@@ -146,7 +152,6 @@ export const UPLOAD_FILES = gql`
   mutation UploadFiles($files: [Upload!]!) {
     uploadFiles(files: $files) {
       url
-      filename
     }
   }
 `;

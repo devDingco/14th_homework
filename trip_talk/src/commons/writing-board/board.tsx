@@ -6,6 +6,7 @@ import TextInput from '@/commons/text-input/text-input';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import DaumPostcode, { useDaumPostcodePopup } from 'react-daum-postcode';
+import { useCreateBoard, useUploadFile } from '@/hooks/useGraphQL';
 
 const scriptUrl = `https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js`;
 
@@ -18,6 +19,7 @@ export default function Board() {
   const router = useRouter();
   const [author, setAuthor] = useState('');
   const [password, setPassword] = useState('');
+  const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [postCode, setPostCode] = useState('');
   const [address, setAddress] = useState('');
@@ -26,15 +28,18 @@ export default function Board() {
   const [image1, setImage1] = useState<File | null>(null);
   const [image2, setImage2] = useState<File | null>(null);
   const [image3, setImage3] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const open = useDaumPostcodePopup(scriptUrl);
+  const [createBoard] = useCreateBoard();
+  const [uploadFile] = useUploadFile();
 
   const fileInputRef1 = useRef<HTMLInputElement>(null);
   const fileInputRef2 = useRef<HTMLInputElement>(null);
   const fileInputRef3 = useRef<HTMLInputElement>(null);
 
   // 필수 필드가 모두 채워졌는지 확인
-  const isFormValid = author.trim() !== '' && password.trim() !== '' && content.trim() !== '';
+  const isFormValid = author.trim() !== '' && password.trim() !== '' && title.trim() !== '' && content.trim() !== '';
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>, setImage: (file: File | null) => void) => {
     const file = e.target.files?.[0];
@@ -60,12 +65,104 @@ export default function Board() {
     });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!author || !password || !content) return;
-    console.log('필수정보:', author, password, content);
-    console.log('선택정보:', postCode, address, addressDetail, videoUrl);
-    console.log('사진:', image1, image2, image3);
+    if (!author || !password || !content || !title) return;
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
+    try {
+      // 이미지 업로드
+      const imageUrls: string[] = [];
+
+      if (image1) {
+        try {
+          const result = await uploadFile({
+            variables: { file: image1 },
+            context: {
+              headers: {
+                'Apollo-Require-Preflight': 'true',
+              },
+            },
+          });
+          if (result.data?.uploadFile?.url) {
+            imageUrls.push(result.data.uploadFile.url);
+          }
+        } catch (error) {
+          console.error('이미지1 업로드 실패:', error);
+          alert('이미지1 업로드에 실패했습니다. 이미지 없이 등록하시겠습니까?');
+        }
+      }
+      if (image2) {
+        try {
+          const result = await uploadFile({
+            variables: { file: image2 },
+            context: {
+              headers: {
+                'Apollo-Require-Preflight': 'true',
+              },
+            },
+          });
+          if (result.data?.uploadFile?.url) {
+            imageUrls.push(result.data.uploadFile.url);
+          }
+        } catch (error) {
+          console.error('이미지2 업로드 실패:', error);
+          alert('이미지2 업로드에 실패했습니다. 이미지 없이 등록하시겠습니까?');
+        }
+      }
+      if (image3) {
+        try {
+          const result = await uploadFile({
+            variables: { file: image3 },
+            context: {
+              headers: {
+                'Apollo-Require-Preflight': 'true',
+              },
+            },
+          });
+          if (result.data?.uploadFile?.url) {
+            imageUrls.push(result.data.uploadFile.url);
+          }
+        } catch (error) {
+          console.error('이미지3 업로드 실패:', error);
+          alert('이미지3 업로드에 실패했습니다. 이미지 없이 등록하시겠습니까?');
+        }
+      }
+
+      // 게시글 생성
+      const createBoardInput = {
+        writer: author,
+        password: password,
+        title: title,
+        contents: content,
+        images: imageUrls.length > 0 ? imageUrls : undefined,
+        youtubeUrl: videoUrl || undefined,
+        boardAddress:
+          postCode || address || addressDetail
+            ? {
+                zipcode: postCode || undefined,
+                address: address || undefined,
+                addressDetail: addressDetail || undefined,
+              }
+            : undefined,
+      };
+
+      const result = await createBoard({
+        variables: { createBoardInput },
+      });
+
+      if (result.data?.createBoard) {
+        alert('게시글이 성공적으로 등록되었습니다.');
+        router.push('/'); // 메인 페이지로 이동
+      }
+    } catch (error) {
+      console.error('게시글 등록 실패:', error);
+      alert('게시글 등록에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleAuthorChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -74,6 +171,10 @@ export default function Board() {
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
+  };
+
+  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
   };
 
   const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -116,6 +217,16 @@ export default function Board() {
               </label>
             </div>
             <TextInput placeholder="비밀번호를 입력해 주세요." value={password} onChange={handlePasswordChange} />
+          </div>
+        </div>
+        <div className="board_form_input_wrapper">
+          <div className="board_form_input_item">
+            <div className="board_form_input_item_title">
+              <label className="board_form_label me_16_24">
+                제목<span>*</span>
+              </label>
+            </div>
+            <TextInput placeholder="제목을 입력해 주세요." value={title} onChange={handleTitleChange} />
           </div>
         </div>
         <div className="board_form_input_wrapper">
@@ -286,8 +397,8 @@ export default function Board() {
           <div className="board_form_button cancel sb_18_24" onClick={() => router.back()}>
             취소
           </div>
-          <button type="submit" className="board_form_button sb_18_24" disabled={!isFormValid}>
-            등록하기
+          <button type="submit" className="board_form_button sb_18_24" disabled={!isFormValid || isSubmitting}>
+            {isSubmitting ? '등록 중...' : '등록하기'}
           </button>
         </div>
       </form>

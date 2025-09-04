@@ -47,7 +47,14 @@ export interface CreateBoardInput {
   title: string;
   contents: string;
   writer: string;
-  images?: string[]; // 이미지 URL 배열 추가
+  password: string;
+  images?: string[];
+  youtubeUrl?: string;
+  boardAddress?: {
+    zipcode?: string;
+    address?: string;
+    addressDetail?: string;
+  };
 }
 
 export interface UpdateBoardInput {
@@ -129,7 +136,6 @@ export interface LoginResponse {
 // 파일 업로드 관련 타입
 export interface UploadedFile {
   url: string;
-  filename: string;
 }
 
 export interface FileUploadResponse {
