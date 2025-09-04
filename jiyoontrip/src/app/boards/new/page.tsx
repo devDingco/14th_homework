@@ -3,20 +3,36 @@ import { ChangeEvent, useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 import Image from "next/image";
 import styles from "./styles.module.css";
+import { useRouter } from "next/navigation";
 
 const CREAT_BOARD = gql`
   # ↓↓↓↓↓↓↓↓↓↓변수 타입 정하는 곳 ↓↓↓↓↓↓↓↓↓↓↓↓
-  mutation createBoard($author: String, $title: String, $content: String) {
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
     # ↓↓↓↓↓↓↓↓↓↓ 실제로 내가 입력하는 곳 ↓↓↓↓↓↓↓↓↓↓↓↓
-    createBoard(writer: $author, title: $title, contents: $content) {
+    createBoard(createBoardInput: $createBoardInput) {
       _id
-      number
-      message
+      writer
+      title
+      contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
+      createdAt
+      updatedAt
+      deletedAt
     }
   }
 `;
+// $author: String, $title: String, $content: String
 
 export default function NewPage() {
+  const router = useRouter();
   const [createBoard] = useMutation(CREAT_BOARD);
 
   const [author, setAuthor] = useState("");
@@ -56,38 +72,56 @@ export default function NewPage() {
   };
 
   const onClickSignup = async () => {
-    if (author === "") {
-      setAuthorError("필수입력 사항 입니다.");
-    } else {
-      setAuthorError("");
-    }
-    if (password === "") {
-      setPasswordError("필수입력 사항 입니다.");
-    } else {
-      setPasswordError("");
-    }
-    if (title === "") {
-      setTitleError("필수입력 사항 입니다.");
-    } else {
-      setTitleError("");
-    }
-    if (content === "") {
-      setContentError("필수입력 사항 입니다.");
-    } else {
-      setContentError("");
-    }
+    try {
+      if (author === "") {
+        setAuthorError("필수입력 사항 입니다.");
+      } else {
+        setAuthorError("");
+      }
+      if (password === "") {
+        setPasswordError("필수입력 사항 입니다.");
+      } else {
+        setPasswordError("");
+      }
+      if (title === "") {
+        setTitleError("필수입력 사항 입니다.");
+      } else {
+        setTitleError("");
+      }
+      if (content === "") {
+        setContentError("필수입력 사항 입니다.");
+      } else {
+        setContentError("");
+      }
 
-    if (author !== "" && password !== "" && title !== "" && content !== "")
-      alert("게시글 등록이 가능한 상태입니다!");
+      if (author !== "" && password !== "" && title !== "" && content !== "") {
+        alert("게시글을 등록하였습니다!");
 
-    const result = await createBoard({
-      variables: {
-        author: author,
-        title: title,
-        content: content,
-      },
-    });
-    console.log(result);
+        const result = await createBoard({
+          variables: {
+            createBoardInput: {
+              writer: author,
+              password: password,
+              title: title,
+              contents: content,
+              youtubeUrl: "",
+              images: [""],
+              boardAddress: {
+                zipcode: "",
+                address: "",
+                addressDetail: "",
+              },
+            },
+          },
+        });
+        console.log(result);
+        console.log(result.data.createBoard._id);
+        router.push(`/boards/detail/${result.data.createBoard._id}`);
+      }
+    } catch (error) {
+      alert(error);
+    } finally {
+    }
   };
   return (
     <>

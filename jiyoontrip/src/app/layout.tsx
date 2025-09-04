@@ -25,8 +25,10 @@ interface IProps {
 
 export default function RootLayout(props: IProps) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="ko">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable}  font-sans antialiased`}
+      >
         <ApolloSetting>{props.children}</ApolloSetting>
       </body>
     </html>
