@@ -72,8 +72,8 @@ export default function BoardsDetail() {
         <Image
           src="/icons/video.png"
           alt="동영상이미지"
-          width={822}
-          height={464}
+          width={300}
+          height={200}
         />
       </div>
       <div className={styles.싫어요좋아요}>

@@ -64,16 +64,16 @@ export default function BoardsDetail() {
         src="/icons/sea.png"
         alt=""
         className={styles.바다사진}
-        width={400}
-        height={531}
+        width={300}
+        height={200}
       />
       <div>{data?.fetchBoard.contents}</div>
       <div className={styles.동영상배경}>
         <Image
           src="/icons/video.png"
           alt="동영상이미지"
-          width={822}
-          height={464}
+          width={300}
+          height={200}
         />
       </div>
       <div className={styles.싫어요좋아요}>

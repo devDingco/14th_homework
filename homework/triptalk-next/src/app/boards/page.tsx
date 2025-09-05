@@ -5,7 +5,6 @@ import React, { MouseEvent } from 'react';
 import styles from './page.module.css';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';
-import deleteIcon from '../../assets/icons/delete.png';
 
 // 게시글 데이터의 타입을 정의
 interface Board {
@@ -153,7 +152,7 @@ export default function BoardsPage() {
                 onClick={onClickDelete} // 클릭 시 삭제 함수 실행
                 className={styles.deleteBtn} // 삭제 버튼 스타일
               >
-                <Image src={deleteIcon} alt="delete" width={24} height={24} />
+                <Image src="/icons/delete.png" alt="delete" width={24} height={24} />
               </button>
             </div>
           );

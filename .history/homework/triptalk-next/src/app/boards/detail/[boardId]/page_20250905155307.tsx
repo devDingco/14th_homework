@@ -27,16 +27,16 @@ const FETCH_BOARD = gql`
 
 export default function BoardsDetail() {
   const router = useRouter();
-  const onClickEdit = () => {
-    router.push(`/boards/detail/${params.boardId}/edit`);
-  };
+  const onClickEdit = () ={
+    router.push()
+  }
   const onClickList = () => {
     router.push('/boards');
   };
-  const params = useParams();
+  const 내주소변수 = useParams();
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
-      boardId: params.boardId,
+      boardId: 내주소변수.boardId,
     },
   });
   // 그려주는곳
@@ -45,7 +45,7 @@ export default function BoardsDetail() {
       <h1 className={styles.h1}>{data?.fetchBoard.title}</h1>
       <div className={styles.작성자날짜}>
         <div className={styles.작성자}>
-          <Image src="/icons/profile.png" alt="" width={24} height={24} />
+          <Image src="/icons/profile.png" alt="" width={40} height={40} />
           <div>{data?.fetchBoard.writer}</div>
         </div>
         <div className={styles.날짜}>
@@ -60,21 +60,10 @@ export default function BoardsDetail() {
           <Image src="/icons/location.png" alt="" width={24} height={24} />
         </div>
       </div>
-      <Image
-        src="/icons/sea.png"
-        alt=""
-        className={styles.바다사진}
-        width={400}
-        height={531}
-      />
+      <Image src="/icons/sea.png" alt="" className={styles.바다사진} width={300} height={200} />
       <div>{data?.fetchBoard.contents}</div>
       <div className={styles.동영상배경}>
-        <Image
-          src="/icons/video.png"
-          alt="동영상이미지"
-          width={822}
-          height={464}
-        />
+        <Image src="/icons/video.png" alt="동영상이미지" width={300} height={200} />
       </div>
       <div className={styles.싫어요좋아요}>
         <div className={styles.싫어요}>
