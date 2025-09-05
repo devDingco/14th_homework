@@ -51,13 +51,15 @@ export default function DateRangeInput({
       }, 100);
     } else {
       // 종료일 선택 (시작일이 있고 종료일이 없는 상태)
-      if (selectedDate >= currentStartDate) {
+      const startDateObj = new Date(currentStartDate);
+      const selectedDateObj = new Date(selectedDate);
+
+      if (selectedDateObj >= startDateObj) {
         const newEndDate = selectedDate;
         setInternalEndDate(newEndDate);
         onDateRangeChange?.(currentStartDate, newEndDate);
       } else {
-        alert('종료일은 시작일보다 이후여야 합니다.');
-        // 잘못된 날짜를 시작일로 설정하고 다시 시작
+        // 종료일이 시작일보다 이전이면, 새로운 시작일로 설정
         const newStartDate = selectedDate;
         const newEndDate = '';
 
@@ -65,6 +67,7 @@ export default function DateRangeInput({
         setInternalEndDate(newEndDate);
         onDateRangeChange?.(newStartDate, newEndDate);
 
+        // 다음 날짜 선택을 위해 달력 다시 열기
         setTimeout(() => {
           const input = e.target;
           input.value = '';

@@ -1,6 +1,8 @@
 import './globals.css';
 import ConditionalHeader from '../commons/header/conditional-header';
 import { ReactNode } from 'react';
+import ApolloSetting from '../providers/apollo-setting';
+import { AuthProvider } from '../contexts/AuthContext';
 
 export const metadata = {
   title: 'Create Next App',
@@ -15,8 +17,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body>
-        <ConditionalHeader />
-        {children}
+        <ApolloSetting>
+          <AuthProvider>
+            <ConditionalHeader />
+            {children}
+          </AuthProvider>
+        </ApolloSetting>
       </body>
     </html>
   );

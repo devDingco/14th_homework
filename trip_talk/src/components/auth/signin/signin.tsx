@@ -4,38 +4,80 @@ import Image from 'next/image';
 import './signin.css';
 import { useRouter } from 'next/navigation';
 import { useState, FormEvent, ChangeEvent } from 'react';
+import { useLoginUser } from '@/hooks/useGraphQL';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function Signin() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  // GraphQL 로그인 뮤테이션
+  const [loginUser] = useLoginUser();
+
+  // Auth Context 사용
+  const { login } = useAuth();
 
   const handleSignup = () => {
     router.push('/signup');
   };
 
-  const handleLogin = (e: FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (email === '' || password === '') {
       setError('이메일과 비밀번호를 입력해주세요.');
       return;
     }
-    if (email !== 'test@test.com' || password !== '1234') {
-      setError('이메일 또는 비밀번호가 일치하지 않습니다.');
-      return;
-    }
+
+    setIsLoading(true);
     setError('');
-    // router.push("/");
+
+    try {
+      const result = await loginUser({
+        variables: {
+          email,
+          password,
+        },
+      });
+
+      console.log(result);
+
+      if (result.data?.loginUser?.accessToken) {
+        // AuthContext의 login 함수 사용 (토큰 저장 + 사용자 정보 가져오기)
+        await login(result.data.loginUser.accessToken);
+
+        // 로그인 성공 시 홈으로 이동
+        router.push('/');
+      } else {
+        setError('로그인에 실패했습니다.');
+      }
+    } catch (error: any) {
+      console.error('로그인 에러:', error);
+
+      // GraphQL 에러 메시지 처리
+      if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+        setError(error.graphQLErrors[0].message);
+      } else if (error.message) {
+        setError(error.message);
+      } else {
+        setError('로그인 중 오류가 발생했습니다.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
+    if (error) setError(''); // 에러 메시지 초기화
   };
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
+    if (error) setError(''); // 에러 메시지 초기화
   };
 
   return (
@@ -72,8 +114,8 @@ export default function Signin() {
         </div>
       </div>
       <div className="login_form_button_wrapper">
-        <button type="submit" className="login_form_button sb_18_24">
-          로그인
+        <button type="submit" className="login_form_button sb_18_24" disabled={isLoading}>
+          {isLoading ? '로그인 중...' : '로그인'}
         </button>
         <div className="login_form_signup_button r_14_20" onClick={handleSignup}>
           회원가입
