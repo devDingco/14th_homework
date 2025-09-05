@@ -1,0 +1,99 @@
+.main {
+    display: flex;
+    flex-direction: column;
+
+    width: 128.0rem;
+    padding: 2.4rem 4.8rem;
+
+    align-items: flex-start;
+    gap: 0.8rem;
+    /* align-self: stretch; */
+
+    border-radius: 0.8rem;
+    border: 0.1rem solid #F2F2F2;
+}
+
+.table {
+    display: flex;
+    padding: 1.6rem 2.4rem;
+    align-items: center;
+    gap: 0.8rem;
+    align-self: stretch;
+}
+
+.table_text {
+    color: #1C1C1C;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.textNumber {
+    text-align: center;
+    width: 6.4rem;
+}
+
+.text_center {
+    text-align: center;
+    width: 10.0rem;
+}
+
+.text_start {
+    text-align: start;
+    width: 84.8rem;
+}
+
+.listP {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 118.4rem;
+}
+
+.contents {
+    border-radius: 0.8rem;
+    border: 0.1rem solid #F2F2F2;
+    background: #FFF;
+
+    position: relative;
+    cursor: pointer;
+}
+
+.contentNumber {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--Gray-50);
+}
+
+.contentTitle {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--Gray-90);
+}
+
+.contentWriter {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--Gray-80);
+}
+
+
+.delete {
+    width: 2.0rem;
+    height: 2.0rem;
+
+    background-image: url(/icon/delete.png);
+
+    background-size: cover;      /* 배경 이미지가 요소를 꽉 채우도록 */
+    background-position: center; /* 중앙에 위치하도록 */
+    background-repeat: no-repeat; /* 반복 방지 */
+
+    position: absolute;
+    right: 1.0rem;
+    top: 1.5rem;
+
+    display: none;
+}
+
+.contents:hover .delete {
+    display: block;
+  }

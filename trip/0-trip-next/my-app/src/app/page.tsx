@@ -8,7 +8,7 @@ export default function Home() {
       <div>시작페이지입니다.</div><br /><br />
 
       <Link href={"/boards/new"}>등록 페이지로 이동하기</Link><br />
-      <Link href={"/boards/detail"}>디테일 페이지로 이동하기</Link>
+      <Link href={"/boards"}>게시글 목록으로 이동하기</Link>
     </>
 
   );
