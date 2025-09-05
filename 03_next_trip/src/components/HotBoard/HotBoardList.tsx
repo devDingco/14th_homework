@@ -7,7 +7,7 @@ export default function HotBoardList() {
         <p className='text-lg font-semibold leading-tight text-gray-900'>
           오늘 핫한 트립토크
         </p>
-        <div className='scrollbar-hide w-90 flex max-w-80 flex-row gap-4 overflow-x-scroll'>
+        <div className='scrollbar-hide flex w-80 flex-row gap-4 overflow-x-scroll'>
           <HotBoard />
           <HotBoard />
           <HotBoard />

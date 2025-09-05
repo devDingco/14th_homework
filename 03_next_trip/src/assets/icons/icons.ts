@@ -42,6 +42,7 @@ export { default as Ioutline_rwite } from './outline/rwite.svg';
 export { default as Ioutline_search } from './outline/search.svg';
 export { default as Ioutline_Single_person_accommodation } from './outline/Single person accommodation.svg';
 export { default as Ioutline_uncheck } from './outline/uncheck.svg';
+export { default as Ioutline_delete } from './outline/delete.svg';
 
 export { default as profile_a } from './profile/a.svg';
 export { default as profile_b } from './profile/b.svg';

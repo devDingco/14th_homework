@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  // Image Optimization 설정
   images: {
     remotePatterns: [
       {
@@ -14,6 +15,5 @@ const nextConfig = {
 };
 
 export default nextConfig;
-
 
 // http://storage.googleapis.com/codecamp-file-storage/2024/1/10/IMG_9472.jpeg
