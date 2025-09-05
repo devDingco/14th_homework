@@ -1,8 +1,8 @@
 "use client"
 
-import { FETCH_BOARD } from "@/graphql/queries/board";
+import { FETCH_BOARD, FETCH_BOARDS, FETCH_BOARDS_AND_COUNT } from "@/graphql/queries/board";
 import { useQuery } from "@apollo/client";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Sectiontitle from "@/components/ui/section/Sectiontitle"; 
 import Sectioncontent from "@/components/ui/section/Sectioncontent";
 import Writer from "@/components/features/boards/detail/Writer";
@@ -12,8 +12,11 @@ import Button from "@/components/ui/button/Button";
 import styles from './styles.module.css'
 import YoutubeUrl from "@/components/features/boards/detail/YoutubeUrl";
 import { formatInTimeZone } from "date-fns-tz";
+import GetVideoFromUrl from "@/components/features/boards/detail/getVideoIdFromUrl";
 
 export default function BoardsBoardIdPage() {
+    const router = useRouter();
+    
     const params = useParams();
     const boardId = params.boardId
 
@@ -21,7 +24,7 @@ export default function BoardsBoardIdPage() {
         variables: {
             boardId: boardId
         }
-    })
+    });
 
     const { writer, title, contents, youtubeUrl, images, createdAt, likeCount, dislikeCount } = data?.fetchBoard || {} ;
 
@@ -32,10 +35,11 @@ export default function BoardsBoardIdPage() {
     if(createdAt){
         KSTdate = formatInTimeZone(new Date(createdAt&&createdAt),'Asia/Seoul','yyyy-MM-dd')
     }
+    const onClickBoardsList = () => {
+        router.push('/boards')
+    }
 
-
-    const imagesUrl = images?.map((el: string) => `https://storage.googleapis.com/${el}`)
-    console.log("🚀 ~ BoardsBoardIdPage ~ imagesUrl:", imagesUrl)
+    const imagesUrl = images?.filter(Boolean).map((el: string) => `https://storage.googleapis.com/${el}`)
 
 
     return(
@@ -46,12 +50,10 @@ export default function BoardsBoardIdPage() {
                 {imagesUrl && imagesUrl.map((url: string) => <img key={url} src={url} className={styles.addimage1}/>)}
             </div>
             <Sectioncontent content={contents}/>
-            {youtubeUrl !== "" ? <YoutubeUrl youtubeUrl={youtubeUrl}></YoutubeUrl> : ""}
+            {GetVideoFromUrl(youtubeUrl) ? <YoutubeUrl youtubeUrl={youtubeUrl}></YoutubeUrl> : ""}
             <Like bad={dislikeCount} good={likeCount}/>
             <div className={styles.boardsDetail__button__group}>
-                <Link href='/'>
-                    <Button type="button" variant='FormBtn'><img src="/icons/menu.svg"/>목록으로</Button>
-                </Link>
+                <Button type="button" variant='FormBtn' onClick={onClickBoardsList}><img src="/icons/menu.svg"/>목록으로</Button>
                 <Button type="button" variant='FormBtn'><img src="/icons/edit.svg"/>수정하기</Button>
             </div>
         </div>

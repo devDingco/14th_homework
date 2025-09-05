@@ -11,14 +11,16 @@
 :root{
   /* color */
   --color-gray-black: #000000;
+  --color-gray-900: #1C1C1C;
   --color-gray-800: #333333;
   --color-gray-700: #5F5F5F;
   --color-gray-600: #777777;
+  --color-gray-500: #919191;
   --color-gray-400: #ABABAB;
   --color-gray-300: #C7C7C7;
   --color-gray-200: #D4D3D3;
   --color-gray-100: #E4E4E4;
-  --color-gray-50: #F2F2F2;
+  --color-gray-50: #F2F2F2;    
   --color-gray-white: #FFFFFF;
   --color-red: #F66A6A;
   --color-blue: #2974E5;

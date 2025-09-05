@@ -1,6 +1,6 @@
 export default function GetVideoFromUrl(url: string){
 
-    if(!url || url.length === 0){
+    if(!url || url.length === 0 || !url.includes("youtu") ){
         return null
     }
 
