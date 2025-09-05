@@ -19,6 +19,7 @@ export interface UseFormProps {
   validate: (values: ValidateValues) => ValidateErrors
 }
 
+// ERROR: 공사중...⚒️
 // CONSIDER: 추후 수정하기 로직에서 재사용 가능하게 생각해보기
 const useForm = ({ initialValues, validate }: UseFormProps): UseFormReturn => {
   const [values, setValues] = useState<PostForm>(initialValues)
@@ -32,9 +33,9 @@ const useForm = ({ initialValues, validate }: UseFormProps): UseFormReturn => {
     event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target
-  
-    if (name.startsWith("addr.")) {
-      const key = name.split(".")[1] as keyof PostForm["addr"]
+
+    if (name.startsWith('addr.')) {
+      const key = name.split('.')[1] as keyof PostForm['addr']
 
       const nextValue: PostForm = {
         ...values,
@@ -43,18 +44,17 @@ const useForm = ({ initialValues, validate }: UseFormProps): UseFormReturn => {
           [key]: value,
         },
       }
-  
+
       setValues(nextValue)
-  
+
       const myErrors = validate(nextValue)
       setErrors(myErrors)
       setIsActive(isEmptyObj(myErrors))
     } else {
-
       const nextValue: PostForm = { ...values, [name]: value } as PostForm
-  
+
       setValues(nextValue)
-  
+
       const myErrors = validate(nextValue)
       setErrors(myErrors)
       setIsActive(isEmptyObj(myErrors))
@@ -91,7 +91,7 @@ const useForm = ({ initialValues, validate }: UseFormProps): UseFormReturn => {
       router.push(`/boards/${boardId}`)
     } catch (error) {
       alert(error ?? '에러가 발생하였습니다. 다시 시도해 주세요.')
-    } 
+    }
   }
 
   return {
