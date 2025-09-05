@@ -1,0 +1,136 @@
+.page {
+  width: 100%;
+  /* padding: 0 320px; */
+  gap: 40px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+
+  max-width: 1280px;
+  width: 100%;
+  padding: 24px 48px;
+  gap: 8px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 0 1.25rem 0 rgba(0, 0, 0, 0.08);
+}
+.boardHeader {
+  display: flex;
+  padding: 16px 24px;
+  gap: 8px;
+  align-items: center;
+}
+
+.boardHeader__number {
+  display: flex;
+  justify-content: center;
+  width: 64px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  color: #1c1c1c;
+}
+.boardHeader__title {
+  display: flex;
+  justify-content: flex-start;
+  color: #1c1c1c;
+  width: 848px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+}
+.boardHeader__writer {
+  display: flex;
+  justify-content: center;
+  color: #1c1c1c;
+  width: 100px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+}
+.boardHeader__date {
+  display: flex;
+  justify-content: center;
+  color: #1c1c1c;
+  width: 100px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+}
+.boardHeader__delete {
+  width: 1.5rem;
+}
+.boardList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.boardList__item {
+  display: flex;
+  align-items: center;
+  max-width: 1184px;
+  width: 100%;
+  padding: 12px 24px;
+  gap: 8px;
+  border-radius: 8px;
+  border: 0.0625rem solid #f2f2f2;
+}
+.boardList__item__number {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--Gray-50, #919191);
+  align-items: center;
+  width: 64px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+}
+.boardList__item__title {
+  width: 848px;
+  display: flex;
+  justify-content: flex-start;
+  overflow: hidden;
+  color: var(--Gray-90, #1c1c1c);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  text-overflow: ellipsis;
+}
+.boardList__item__writer {
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  overflow: hidden;
+  color: var(--Gray-80, #333);
+  text-align: center;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+}
+.boardList__item__date {
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  overflow: hidden;
+  color: var(--Gray-80, #333);
+  text-align: center;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+}
+.boardList__item__delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+
+.boardList__item:hover .boardList__item__delete {
+  visibility: visible;
+}
