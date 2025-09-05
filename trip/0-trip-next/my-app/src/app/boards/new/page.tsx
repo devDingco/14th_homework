@@ -44,7 +44,6 @@ const BoardsNew: React.FC = () => {
 
     // 2. API 호출
     try {
-      // password는 서버로 보내지 않음
       const result = await RegisterFunction({
         
         variables: {
