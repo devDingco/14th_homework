@@ -3,7 +3,7 @@
 import React from 'react';
 import styles from "./styles.module.css";
 import { gql, useQuery } from "@apollo/client"
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 const FETCH_BOARD = gql `
     query fetchBoard($boardId: ID!){
@@ -31,13 +31,21 @@ const FETCH_BOARD = gql `
 `
 
 const BoardsDetail = () => { 
-    const { boardID } = useParams()
+    const router = useRouter()
+    const { boardId } = useParams()
     const { data } = useQuery(FETCH_BOARD, {
         variables: {
-            boardId: boardID,
+            boardId: boardId,
         },
     })
 
+const onClickMove = () => {
+    router.push(`/boards/${boardId}/edit`)
+}
+
+const onCickMoveList = () => {
+    router.push('/boards')
+}
 
     return(
         <div className={styles.layout}>
@@ -54,7 +62,7 @@ const BoardsDetail = () => {
                             {/* 작성자 자리 */}
                             <div>{data?.fetchBoard?.writer ?? "작성자 불러오는 중..."}</div>
                         </div>
-                        <div>{new Date(data?.fetchBoard?.createdAt).toLocaleDateString("ko-KR")}</div>
+                        <div className={styles.detailMetadataDate}>{new Date(data?.fetchBoard?.createdAt).toLocaleDateString("ko-KR")}</div>
                     </div>
                     <hr className={styles.detailBorder}/>
                     <div className={styles.detailMetadataIconContainer}>
@@ -87,11 +95,11 @@ const BoardsDetail = () => {
                 <div className={styles.detailButtonContainer}>
                     <button className={styles.detailButton}>
                         <img src="/images/list_icon.png" alt="목록아이콘"/>
-                        <div>목록으로</div>
+                        <div onClick={onCickMoveList}>목록으로</div>
                     </button>
                     <button className={styles.detailButton}>
                         <img src="/images/edit_icon.png" alt="수정아이콘"/>
-                        <div>수정하기</div>
+                        <div onClick={onClickMove}>수정하기</div>
                     </button>
                 </div>                 
             </div>
