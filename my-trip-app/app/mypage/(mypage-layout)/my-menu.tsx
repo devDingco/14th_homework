@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import './my-menu.css';
 import Icon from '@utils/iconColor';
-import { MenuId, MyMenuProps, MenuConfig } from '@lib/types/mypage';
+import { MenuId, MyMenuProps, MenuConfig } from '@_types/mypage';
 
 export default function MyMenu({ activeMenu, onMenuChange }: MyMenuProps) {
   const menuConfig: MenuConfig[] = [

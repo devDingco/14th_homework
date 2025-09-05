@@ -3,7 +3,7 @@
 import "./comment.css";
 import Icon from "@utils/iconColor";
 import { useMemo, useState } from "react";
-import type { NewComment } from "@/types/comment";
+import type { NewComment } from "@_types/comment";
 
 export default function CommentComposer({ onSubmit }: { onSubmit?: (c: NewComment) => void }) {
   const [rating, setRating] = useState(0);

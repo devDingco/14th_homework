@@ -9,7 +9,8 @@
       "@styles/*": ["./app/styles/*"],
       "@utils/*": ["./app/utils/*"],
       "@pages/*": ["./app/pages/*"],
-      "@icons/*": ["./public/icons/*"]
+      "@icons/*": ["./public/icons/*"],
+      "@hooks/*": ["./app/commons/hooks/*"]
     }
   }
 }

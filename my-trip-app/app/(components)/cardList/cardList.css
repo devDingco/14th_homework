@@ -43,6 +43,7 @@
 
 .cardList_item_content_container {
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -61,7 +62,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 0.8rem;
 }
 
 
@@ -79,4 +79,9 @@
 
 .author_name {
   color: var(--gray-70);
+}
+
+.date {
+  color: var(--gray-50);
+
 }

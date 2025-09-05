@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { allTransactionData } from "./mock";
 import { formatDate, formatAmountSigned, formatNumber, calculatePagination, getPointColorClass } from './tableUtils';
-import { PointData, PointTabType, PointTransactionType } from '@lib/types/mypage';
+import { PointData, PointTabType, PointTransactionType } from '@_types/mypage';
 import '../../../global.css';
 import './PointTable.css';
 import './ActiveButtonGroup.css';

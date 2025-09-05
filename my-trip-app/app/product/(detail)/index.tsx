@@ -50,7 +50,7 @@ export default function ProductDetail({ id }: { id: string }) {
                 alt="product main"
                 width={640}
                 height={480}
-                priority
+                priority={false}
               />
             </div>
             <aside className="thumbs_aside">
@@ -63,7 +63,7 @@ export default function ProductDetail({ id }: { id: string }) {
                       onClick={() => setSelectedIndex(index)}
                       aria-label={`썸네일 ${index + 1}`}
                     >
-                      <Image className="thumb_image" src={src} alt="thumbnail" width={180} height={136} />
+                      <Image className="thumb_image" src={src} alt="thumbnail" width={180} height={136} priority={false} />
                     </button>
                   </li>
                 ))}
@@ -127,7 +127,7 @@ export default function ProductDetail({ id }: { id: string }) {
             <div className="seller_box">
               <p className="b_20_28 seller_title">판매자</p>
               <div className="seller_info">
-                <Image className="seller_avatar" src="/images/mobile/profile/img.png" alt="host" width={40} height={40} />
+                <Image className="seller_avatar" src="/images/mobile/profile/img.png" alt="host" width={40} height={40} priority={false} />
                 <span className="me_16_24">홍길동</span>
               </div>
           </div>

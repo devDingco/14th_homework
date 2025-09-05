@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { productData, bookMarkData } from "./mock";
 import Icon from '@utils/iconColor';
 import { formatDate, formatNumber, calculatePagination } from './tableUtils';
-import { ProductData, ProductTabType } from '@lib/types/mypage';
+import { ProductData, ProductTabType } from '@_types/mypage';
 import './ProductTable.css';
 import './ActiveButtonGroup.css';
 

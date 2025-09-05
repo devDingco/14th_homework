@@ -1,8 +1,8 @@
+"use client";
 import SearchBarMenu from "@components/searchBarMenu/searchBar";
 import BoardTable from "./listComponent";
 import type { BoardListProps } from "@/types/pagination";
 import type { LooseStyle } from "@/types/style";
-import { mockRows } from "@/common/utils/mocks-data";
 
 const styles = {
   boardList_container: {
@@ -16,7 +16,7 @@ const styles = {
   },
 };
 
-export default function BoardList({ data = mockRows, title, filtersEnabled, postButtonLabel = "트립토그 등록", totalPages = 5, initialPage = 1, onChange }: BoardListProps) {
+export default function BoardList({ data = [], title, filtersEnabled, postButtonLabel = "트립토그 등록", totalPages = 5, initialPage = 1, onChange }: BoardListProps) {
   return (
     <div style={styles.boardList_container as LooseStyle}>
       <SearchBarMenu title={title} filtersEnabled={filtersEnabled} postButtonLabel={postButtonLabel}/>

@@ -23,7 +23,7 @@
 
 .detail_meta {
   display: flex;
-
+  flex-direction: column;
   justify-content: space-between;
   height: 8rem;
   width: 100%;
@@ -31,7 +31,7 @@
 
 .detail_meta .author {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.8rem;
   color: var(--gray-70);
   width: 100%;
@@ -105,21 +105,17 @@ border-bottom: 1px solid var(--gray-10);
 
 .detail_media {
   margin-top: 2.4rem;
-  width: 100%;
-  height: 100%;
+  width: 128rem;
+  height: 51.2rem;
   background: var(--gray-10);
+  padding: 2.4rem 0;
 }
 
 .detail_media.wide .media_wrap {
   position: relative;
-}
-
-.detail_media.wide img {
-  width: 82.2rem;
-  height: 46.4rem;
-  padding: 2.4rem 0;
-  display: flex;
   margin: 0 auto;
+  width: 100%;
+  height: 100%;
 }
 
 .play_badge {
@@ -149,7 +145,6 @@ border-bottom: 1px solid var(--gray-10);
 
 .detail_actions {
   margin-top: 2.4rem;
-  border-bottom: 1px solid var(--gray-10);
   padding-bottom: 2.4rem;
 }
 
@@ -185,4 +180,10 @@ border-bottom: 1px solid var(--gray-10);
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
+}
+
+
+.like_icon {
+  background: transparent;
+  border: none;
 }

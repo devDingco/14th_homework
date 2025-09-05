@@ -3,7 +3,8 @@
 import "./comment.css";
 import Icon from "@utils/iconColor";
 import { useState } from "react";
-import type { InquiryComment, InquiryReply, NewInquiryReply } from "@/types/comment";
+import Image from "next/image";
+import type { InquiryComment, InquiryReply, NewInquiryReply } from "@_types/comment";
 
 export interface InquiryItemProps {
   comment: InquiryComment;
@@ -45,7 +46,7 @@ export default function InquiryItem({
       <header className="inquiry_item_header">
         <div className="inquiry_header_left">
           <div className="inquiry_author">
-            <img src={comment.avatar} alt={comment.author} width={24} height={24} className="inquiry_avatar" />
+            <Image src={comment.avatar} alt={comment.author} width={24} height={24} className="inquiry_avatar" />
             <span className="l_14_20" style={{ color: "var(--gray-70)" }}>{comment.author}</span>
           </div>
         </div>
@@ -110,7 +111,7 @@ export default function InquiryItem({
             <div key={reply.id} className="inquiry_reply_item">
               <header className="inquiry_reply_header">
                 <div className="inquiry_reply_author">
-                  <img src={reply.avatar} alt={reply.author} width={20} height={20} className="inquiry_reply_avatar" />
+                  <Image src={reply.avatar} alt={reply.author} width={20} height={20} className="inquiry_reply_avatar" />
                   <span className="sb_12_16">{reply.author}</span>
                 </div>
                 <div className="inquiry_reply_actions_inline">

@@ -1,4 +1,5 @@
 import AppFrame from "@components/layout/AppFrame";
+import ApolloProviders from "./commons/graphql/ApolloProviders";
 
 export const metadata = {
   title: 'Next.js',
@@ -13,9 +14,11 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <AppFrame>
-          {children}
-        </AppFrame>
+        <ApolloProviders>
+          <AppFrame>
+            {children}
+          </AppFrame>
+        </ApolloProviders>
       </body>
     </html>
   )

@@ -1,11 +1,11 @@
 "use client";
 
-import "../../../app/global.css";
+import "../../global.css";
 import "./index.css";
 import { useState } from 'react';
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
-
+import { signUpApi } from '../../commons/apis/auth.api';
 export default function SignUp({ onClickSignin }: { onClickSignin?: () => void }) {
     const router = useRouter();
     const [email, setEmail] = useState('');
@@ -13,11 +13,12 @@ export default function SignUp({ onClickSignin }: { onClickSignin?: () => void }
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState<{ email: string; name: string; password: string; confirm: string }>({ email: '', name: '', password: '', confirm: '' });
-
+    const [submitting, setSubmitting] = useState(false);
+    const [apiError, setApiError] = useState('');
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const passwordRegex = /^(?=.*[!@#$%^&*]).{10,}$/;
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const nextErrors = { email: '', name: '', password: '', confirm: '' };
       if (!email) nextErrors.email = '이메일을 입력해 주세요.';
@@ -35,15 +36,24 @@ export default function SignUp({ onClickSignin }: { onClickSignin?: () => void }
       const hasError = Object.values(nextErrors).some(Boolean);
       if (hasError) return;
 
-      alert('회원가입이 완료되었습니다.');
-      onClickSignin ? onClickSignin() : router.push('/auth');
+      try {
+        setSubmitting(true);
+        setApiError('');
+        await signUpApi({ email, name, password });
+        alert('회원가입이 완료되었습니다.');
+        router.push('/auth');
+      } catch (err: any) {
+        setApiError(err?.message ?? '회원가입에 실패했습니다.');
+      } finally {
+        setSubmitting(false);
+      }
     };
 
 
   return (
     <div className="signin_page">
         <div className="signin_left_panel">
-            <Image className="logo_mark" src="/logo/text-logo.png" alt="logo" width={120} height={80} />
+            <Image className="logo_mark" src="/logo/text-logo.png" alt="logo" width={120} height={80} priority={false}/>
             <h2 className="sb_18_24">회원가입</h2>
             <p className="me_13_20">회원가입을 위해 아래 정보를 모두 채워 주세요.</p>
             <form className="signin_form" onSubmit={handleSubmit} noValidate>
@@ -92,7 +102,8 @@ export default function SignUp({ onClickSignin }: { onClickSignin?: () => void }
                 />
                 {errors.confirm && <p className="error_message me_12_20">{errors.confirm}</p>}
               </div>
-              <button className="submit_btn sb_18_24" type="submit">회원가입</button>
+              <button className="submit_btn sb_18_24" type="submit" disabled={submitting}>{submitting ? '가입 중...' : '회원가입'}</button>
+            {apiError && <p className="error_message me_12_20" role="alert">{apiError}</p>}
             <div className="form_footer">
               <button type="button" className="link_btn r_14_20" onClick={onClickSignin}>로그인으로</button>
             </div>
