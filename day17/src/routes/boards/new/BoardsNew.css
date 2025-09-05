@@ -1,0 +1,152 @@
+
+/* 기본 스타일 초기화 */
+* {
+    margin : 0px;
+    padding : 0px;
+    box-sizing: border-box; /* 모든 요소에 box-sizing 적용 */
+}
+
+
+.board-new {
+  width: 1280px;
+  margin: 0 auto; /* 중앙 정렬 */
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* 섹션 간의 간격 */
+}
+
+
+
+.board-new__title {
+  color: #000;
+  font-family: Pretendard, sans-serif;
+  font-size: 24px; /* 제목이므로 조금 더 크게 조정 */
+  font-weight: 700;
+  padding-bottom: 20px; /* 제목 아래 여백 */
+}
+
+.board-new__section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* 라벨과 입력창 사이 간격 */
+  border-top: 1px solid #e4e4e4; /* hr 대신 border 미관이 좋은거 같은 (개인생각) 사용 */
+  padding-top: 40px; /* 섹션 위 여백 */
+}
+.board-new__section:first-of-type {
+  border-top: none; /* 첫번째 섹션에는 상단 선 제거 */
+  padding-top: 0;
+}
+
+/* .enroll-form-title -> .board-new__label */
+.board-new__label {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* .enroll-required-indicator -> .board-new__label span */
+.board-new__label span {
+  color: #f66a6a;
+}
+
+/* .enroll-input -> .board-new__input */
+.board-new__input {
+  width: 100%;
+  height: 48px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  background: #fff;
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+}
+
+/* .flex-half -> .board-new__input-group */
+.board-new__input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* .error-msg -> .board-new__error-message */
+.board-new__error-message {
+  color: #f66a6a;
+  font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+}
+
+/* .enroll-button-container -> .board-new__footer */
+.board-new__footer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  padding-top: 40px;
+}
+
+/* 기본 버튼 스타일 */
+.board-new__button {
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid #000;
+  background: #fff;
+}
+
+
+
+.board-new__section--row {
+  flex-direction: row;
+  gap: 40px;
+}
+
+
+.board-new__input--textarea {
+  height: 336px;
+  resize: vertical; /* 사용자가 세로 크기만 조절 가능 */
+}
+
+
+.board-new__input--zipcode {
+  width: 82px;
+}
+
+.board-new__button--cancel {
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
+}
+
+
+.board-new__button--submit {
+  border: none;
+  background: #2974e5;
+  color: #fff;
+}
+
+
+.board-new__button--disabled {
+  border: none;
+  background-color: #c7c7c7;
+  color: #e4e4e4;
+  cursor: not-allowed;
+}
+
+.board-new__button--zip-search {
+  /* cancel 버튼과 스타일이 동일하므로 추가 스타일 불필요 */
+}

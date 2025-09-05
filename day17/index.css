@@ -1,3 +1,4 @@
+
 /* 전체 페이지 배경 및 기본 폰트 설정 */
 body {
   background-color: #f8f9fa;
@@ -85,10 +86,96 @@ label {
 
 /* 구분선 */
 hr {
+
   border: none;
   border-top: 1px solid #E4E4E4;
   margin: 30px 0;
 }
+
+
+
+
+/* =================================== */
+/* B. 폼 요소 (Form Elements) */
+/* =================================== */
+
+/* 라벨(label) 공통 스타일 */
+.form-label {
+  display: block;
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.form-label .required {
+  color: red;
+  margin-left: 2px;
+}
+
+/* 모든 입력창(input, textarea)의 기본 스타일 */
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid #D4D3D3;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* 여러 줄 입력창(textarea)의 높이만 별도 지정 */
+.form-textarea {
+  height: 160px;
+  resize: vertical; /* 사용자가 세로 크기만 조절 가능 */
+}
+
+/* 우편번호 찾기처럼 입력창과 버튼이 함께 있는 그룹 */
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* =================================== */
+/* C. 버튼 (Buttons) */
+/* =================================== */
+
+/* 모든 버튼의 기본 스타일 (뼈대) */
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid transparent; /* 테두리 공간 미리 확보 */
+}
+
+/* 주요 버튼 (파란색 배경) */
+.btn-primary {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* 보조 버튼 (흰색 배경, 회색 테두리) */
+.btn-secondary {
+  background: white;
+  color: #333;
+  border-color: #d1d1d1;
+}
+
+/* 회색 버튼 (우편번호 검색 등) */
+.btn-light {
+    background-color: #f0f0f0;
+    border-color: #ced4da;
+    color: #333;
+}
+
+
+/* =================================== */
+/* D. 특정 컴포넌트 (Components) */
+/* =================================== */
+
+
 
 /* 주소 검색 영역 */
 .css_우편번호검색영역 {
@@ -129,6 +216,7 @@ flex-grow: 0;
   border-radius: 4px;
 }
 
+
 /* 사진 업로드 영역 */
 .css_이미지업로드영역 {
   display: flex;
@@ -137,6 +225,7 @@ flex-grow: 0;
 
 .css_이미지업로드상자 {
   width: 80px;
+
   height: 80px;
   background: #F2F2F2;
   border-radius: 8px;
@@ -147,6 +236,7 @@ flex-grow: 0;
   gap: 8px;
   cursor: pointer;
 }
+
 .css_사진첨부더하기 {
   font-size: 24px;
   color: #888;
@@ -171,11 +261,6 @@ flex-grow: 0;
 /* 취소 버튼 */
 .css_취소 {
   padding: 12px 24px;
-  background: white;
-  border: 1px solid #d1d1d1;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
   font-weight: 500;
 
 }
@@ -189,5 +274,4 @@ flex-grow: 0;
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
-  font-weight: 500;
-}
+  font-weight: 500;}
