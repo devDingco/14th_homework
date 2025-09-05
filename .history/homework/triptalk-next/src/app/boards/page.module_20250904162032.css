@@ -1,0 +1,10 @@
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.postItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -1,0 +1,17 @@
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 24px;
+}
+.rightGroup .leftGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.postItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 24px;
+}
