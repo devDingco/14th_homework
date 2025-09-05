@@ -74,7 +74,10 @@
     border-radius: 0.5rem;
     border: 1px solid #d4d3d3;
     background-color: #fff;
+
+    color: #000;
   
+    clear: var(--Gray-Gray-400, #ABABAB);
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
