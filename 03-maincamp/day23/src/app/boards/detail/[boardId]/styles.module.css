@@ -1,0 +1,139 @@
+
+.바디{
+  width: 192rem;
+  /* padding: 4rem 32rem; */
+} 
+.컨테이너{
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+.메인-타이틀{
+  font-family: Pretendard;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 28px;
+  leading-trim: NONE;
+  line-height: 36px;
+  letter-spacing: 0%;
+  
+}
+
+.메인{
+
+}
+.메인-작성자섹션{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 8rem;
+}
+.메인-작성자섹션-이름날짜디브{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.메인-작성자섹션-이름날짜디브-이름디브{
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+.메인-작성자섹션-아이콘디브{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  gap: 0.8rem;
+}
+.수평선{
+  border-color: #E4E4E4;
+}
+.메인-사진섹션{
+  width: 40rem;
+  height: 53.1rem;
+}
+.메인-내용섹션{
+  width: 100%;
+}
+.메인-내용섹션 > div{
+  white-space: pre;
+
+  font-family: Pretendard Variable;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  leading-trim: NONE;
+  line-height: 24px;
+  letter-spacing: 0%;
+  
+}
+.메인-동영상섹션{
+  width: 100%;
+  height: 51.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F2F2F2;
+}
+.메인-좋아요섹션{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2.4rem;
+
+  font-family: Pretendard Variable;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  leading-trim: NONE;
+  line-height: 20px;
+  letter-spacing: 0%;
+  
+}
+.메인-좋아요섹션-굿디브{
+  width: 2.4rem; 
+  height: 4.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  
+  color: #F66A6A;
+}
+.메인-좋아요섹션-배드디브{
+  width: 2.4rem; 
+  height: 4.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  
+  color: #5F5F5F; 
+}
+.메인-수정하기섹션{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2.4rem;
+}
+.메인-수정하기섹션 button {
+  width: 10.5rem;
+  height: 4rem;
+  padding: 0.8rem 1.2rem 0.8rem 1.2rem;
+
+  font-family: Pretendard Variable;
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 14px;
+  leading-trim: NONE;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: center;
+
+  display: flex;
+  gap: 0.8rem;
+  
+}
