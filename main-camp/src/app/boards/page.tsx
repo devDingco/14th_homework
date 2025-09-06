@@ -2,6 +2,7 @@
 
 import { gql, useQuery } from '@apollo/client'
 import styles from './style.module.css'
+import { useRouter } from 'next/navigation'
 
 const FETCH_BOARDS = gql`
     query fetchBoards($page: Int!) {
@@ -15,11 +16,12 @@ const FETCH_BOARDS = gql`
     }
 `
 
-const FETCH_BOARDS_COUNT = gql`
-    query {
-        fetchBoardsCount(startDate: "2019-12-03T09:54:33Z", endDate: "2025-12-03T09:54:33Z")
-    }
-`
+// 게시글 전체 번호 조회
+// const FETCH_BOARDS_COUNT = gql`
+//     query {
+//         fetchBoardsCount(startDate: "2019-12-03T09:54:33Z", endDate: "2025-12-03T09:54:33Z")
+//     }
+// `
 
 interface IFetchBoardsData {
     fetchBoards: {
@@ -31,13 +33,15 @@ interface IFetchBoardsData {
     }[]
 }
 
-interface IFetchBoardsCount {
-    fetchBoardsCount: number
-}
+// interface IFetchBoardsCount {
+//     fetchBoardsCount: number
+// }
 
 const Boards = () => {
+    const router = useRouter()
+
     let boardsData: IFetchBoardsData
-    let boardsCount: IFetchBoardsCount
+    // let boardsCount: IFetchBoardsCount
 
     boardsData = useQuery(FETCH_BOARDS, {
         variables: {
@@ -46,27 +50,48 @@ const Boards = () => {
         }
     }).data
 
-    boardsCount = useQuery(FETCH_BOARDS_COUNT).data
+    // boardsCount = useQuery(FETCH_BOARDS_COUNT).data
     
     console.log(boardsData?.fetchBoards)
-    console.log(boardsCount?.fetchBoardsCount)
+    // console.log(boardsCount?.fetchBoardsCount)
+
+    const onClickHandler = (event: any) => {
+
+
+        router.push(`/boards/${event.currentTarget.dataset.key}`)
+    }
 
     return (
         <div id="main" className={`${styles.list_main}`}>
-            <div className={`${styles.board_list_frame}`}>
+            <div className={`${styles.board_list_frame} flex_column flex_align_items_center`}>
                 <div className={`${styles.board_list_container}`}>
-                    <div className={`${styles.board_list_top}`}>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                    <div className={`${styles.board_list_top} flex_row`}>
+                        <div className='flex_row flex_justi_center'>
+                            <p className='me_16_20' style={{ color: "rgba(28, 28, 28, 1)" }}>번호</p>
+                        </div>
+                        <div>
+                            <p className='me_16_20' style={{ color: "rgba(28, 28, 28, 1)" }}>제목</p>
+                        </div>
+                        <div className='flex_row flex_justi_center'>
+                            <p className='me_16_20' style={{ color: "rgba(28, 28, 28, 1)" }}>작성자</p>
+                        </div>
+                        <div className='flex_row flex_justi_center'>
+                            <p className='me_16_20' style={{ color: "rgba(28, 28, 28, 1)" }}>날짜</p>
+                        </div>
                     </div>
-                    <div className={`${styles.board_list_bottom}`}>
+                    <ul className={`${styles.board_list_bottom} flex_column`}>
                         {/* map */}
                         {boardsData?.fetchBoards.map((v,i)=>{
-                            return  <div key={i}>{boardsCount?.fetchBoardsCount-i} {v.title} {v.writer} {v.createdAt.split("T")[0]}</div>
+                            // return  <div key={i}>{boardsCount?.fetchBoardsCount-i} {v.title} {v.writer} {v.createdAt.split("T")[0]}</div>
+                            return  <li key={i} className='flex_row'>
+                                        <div className='flex_row flex_justi_center'><p className='l_14_20' style={{ color: "rgba(145, 145, 145, 1)" }}>{i+1}</p></div> 
+                                        <div data-key={v._id} onClick={onClickHandler} style={{ cursor: "pointer" }}><p className='me_14_20' style={{ color: "rgba(28, 28, 28, 1)" }}>{v.title}</p></div> 
+                                        <div className='flex_row flex_justi_center l_14_20'><p style={{ color: "rgba(51, 51, 51, 1)" }}>{v.writer}</p></div> 
+                                        <div className='flex_row flex_justi_center l_14_20'><p style={{ color: "rgba(145, 145, 145, 1)" }}>{v.createdAt.split("T")[0]}</p></div>
+                                        <img className={`${styles.board_list_del_btn}`} src="/svg/delete.png" alt="delete"/>
+                                    </li>
                         })}
-                    </div>
+                    </ul>
                 </div>
             </div>
         </div>

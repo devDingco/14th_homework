@@ -1,8 +1,8 @@
 "use client"
 import { ChangeEvent, useState } from 'react'
 import styles from './style.module.css'
-import WriteButton from "../../components/boards/WriteButton"
-import WriteInput from "../../components/boards/WriteInput"
+import WriteButton from "../../../components/boards/writeButton"
+import WriteInput from "../../../components/boards/writeInput"
 import { gql, useMutation } from '@apollo/client'
 import { useRouter } from 'next/navigation'
 

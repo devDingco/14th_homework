@@ -39,9 +39,94 @@
     opacity: 1;
 }
 
+.wrap > p:nth-of-type(2) {
+    color: blue; /* 두번째 p 선택됨 */
+  }
+
+.board_list_top > div:nth-of-type(1) {
+    width: 64px;
+    height: 20px;
+    gap: 10px;
+    opacity: 1;
+}
+
+.board_list_top > div:nth-of-type(2) {
+    width: 848px;
+    height: 20px;
+    gap: 10px;
+    opacity: 1;    
+}
+
+.board_list_top > div:nth-of-type(3) {
+    width: 100px;
+    height: 20px;
+    gap: 10px;
+    opacity: 1;
+}
+
+.board_list_top > div:nth-of-type(4) {
+    width: 100px;
+    height: 20px;
+    gap: 10px;
+    opacity: 1;
+}
+
 .board_list_bottom {
     width: 1184px;
     height: 548px;
     gap: 12px;
+    opacity: 1;
+}
+
+.board_list_bottom > li {
+    width: 1184px;
+    height: 44px;
+    padding-top: 12px;
+    padding-right: 24px;
+    padding-bottom: 12px;
+    padding-left: 24px;
+    gap: 8px;
+    opacity: 1;
+    border-radius: 8px;
+    border-width: 1px;
+    position: relative;
+}
+
+.board_list_del_btn {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 0.6%;
+    top: 25%;
+
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.board_list_bottom > li > div:nth-of-type(1) {
+    width: 64px;
+    height: 20px;
+    gap: 10px;
+    opacity: 1;
+}
+
+.board_list_bottom > li > div:nth-of-type(2) {
+    width: 848px;
+    height: 20px;
+    gap: 10px;
+    opacity: 1;    
+}
+
+.board_list_bottom > li > div:nth-of-type(3) {
+    width: 100px;
+    height: 20px;
+    gap: 10px;
+    opacity: 1;
+}
+
+.board_list_bottom > li > div:nth-of-type(4) {
+    width: 100px;
+    height: 20px;
+    gap: 10px;
     opacity: 1;
 }

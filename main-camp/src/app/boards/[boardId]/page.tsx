@@ -6,9 +6,11 @@ import { gql, useQuery } from '@apollo/client'
 const FETCH_BOARD = gql`
     query fetchBoard($boardId: ID!) {
         fetchBoard(boardId: $boardId) {
+            _id
             writer
             title
             contents
+            createdAt
         }
     }
 `
@@ -76,7 +78,7 @@ const BoardsDetail = () => {
                             <img className={`${styles.profile_img}`} src="/svg/person.png" alt="profile"/>
                             {data?.fetchBoard.writer}
                         </div>
-                        <p className={`r_14_20`} style={{ color: "rgba(129, 129, 129, 1)" }}>2024.11.11</p>
+                        <p className={`r_14_20`} style={{ color: "rgba(129, 129, 129, 1)" }}>{data?.fetchBoard.createdAt.split("T")[0]}</p>
                     </div>
                 </div>
                 <hr />

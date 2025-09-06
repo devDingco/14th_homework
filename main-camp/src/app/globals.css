@@ -118,6 +118,15 @@
     letter-spacing: 0%;
   }
   
+  .me_14_20 {
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0%;
+  }
+
   .me_16_24 {
     font-family: Pretendard Variable;
     font-weight: 500;
@@ -127,6 +136,15 @@
     letter-spacing: 0%;
   }
   
+  .me_16_20 {
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0%;
+  }
+
   .sb_14_20 {
     font-family: Pretendard Variable;
     font-weight: 600;
@@ -143,6 +161,16 @@
     font-style: SemiBold;
     font-size: 18px;
     line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+  }
+
+  .l_14_20 {
+    font-family: Pretendard Variable;
+    font-weight: 300;
+    font-style: Light;
+    font-size: 14px;
+    line-height: 20px;
     letter-spacing: 0%;
     text-align: center;
   }
