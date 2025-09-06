@@ -43,7 +43,7 @@ interface IFetchBoardsData {
 //     fetchBoardsCount: number
 // }
 
-const Boards = () => {
+const BoardsListPage = () => {
     const router = useRouter()
 
     const [deleteBoard] = useMutation(DELETE_BOARD)
@@ -125,4 +125,4 @@ const Boards = () => {
     )
 }
 
-export default Boards
+export default BoardsListPage
