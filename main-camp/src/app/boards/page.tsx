@@ -1,6 +1,6 @@
 "use client"
 
-import { gql, useQuery } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import styles from './style.module.css'
 import { useRouter } from 'next/navigation'
 
@@ -13,6 +13,12 @@ const FETCH_BOARDS = gql`
                 contents
                 createdAt
         }
+    }
+`
+
+const DELETE_BOARD = gql`
+    mutation deleteBoard($boardId: ID!) {
+        deleteBoard(boardId: $boardId)
     }
 `
 
@@ -40,6 +46,8 @@ interface IFetchBoardsData {
 const Boards = () => {
     const router = useRouter()
 
+    const [deleteBoard] = useMutation(DELETE_BOARD)
+
     let boardsData: IFetchBoardsData
     // let boardsCount: IFetchBoardsCount
 
@@ -55,10 +63,29 @@ const Boards = () => {
     console.log(boardsData?.fetchBoards)
     // console.log(boardsCount?.fetchBoardsCount)
 
-    const onClickHandler = (event: any) => {
+    const goDetailHandler = (event: any) => {
 
 
         router.push(`/boards/${event.currentTarget.dataset.key}`)
+    }
+
+    const onDeleteHanlder = async (event: any) => {
+        console.log(event.currentTarget.dataset.key)
+        
+        try {
+            const result = await deleteBoard({
+                variables: {
+                    boardId : event.currentTarget.dataset.key
+                },
+                refetchQueries: [
+                    { query: FETCH_BOARDS, variables: { page: 1 } }
+                ]
+            })
+            console.log("삭제한 게시글 ID: ",result.data.deleteBoard)
+            alert("게시글이 삭제되었습니다!")
+        } catch(e) {
+            console.log(e)
+        }
     }
 
     return (
@@ -85,10 +112,10 @@ const Boards = () => {
                             // return  <div key={i}>{boardsCount?.fetchBoardsCount-i} {v.title} {v.writer} {v.createdAt.split("T")[0]}</div>
                             return  <li key={i} className='flex_row'>
                                         <div className='flex_row flex_justi_center'><p className='l_14_20' style={{ color: "rgba(145, 145, 145, 1)" }}>{i+1}</p></div> 
-                                        <div data-key={v._id} onClick={onClickHandler} style={{ cursor: "pointer" }}><p className='me_14_20' style={{ color: "rgba(28, 28, 28, 1)" }}>{v.title}</p></div> 
+                                        <div data-key={v._id} onClick={goDetailHandler} style={{ cursor: "pointer" }}><p className='me_14_20' style={{ color: "rgba(28, 28, 28, 1)" }}>{v.title}</p></div> 
                                         <div className='flex_row flex_justi_center l_14_20'><p style={{ color: "rgba(51, 51, 51, 1)" }}>{v.writer}</p></div> 
                                         <div className='flex_row flex_justi_center l_14_20'><p style={{ color: "rgba(145, 145, 145, 1)" }}>{v.createdAt.split("T")[0]}</p></div>
-                                        <img className={`${styles.board_list_del_btn}`} src="/svg/delete.png" alt="delete"/>
+                                        <img data-key={v._id} className={`${styles.board_list_del_btn}`} onClick={onDeleteHanlder} src="/svg/delete.png" alt="delete"/>
                                     </li>
                         })}
                     </ul>
