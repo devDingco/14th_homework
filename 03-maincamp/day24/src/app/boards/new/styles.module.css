@@ -1,0 +1,93 @@
+
+.Font-h2{
+  font-family: Pretendard Variable;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 1.6rem;
+  line-height: 24px;
+  letter-spacing: 0%;
+  
+}
+.color-red {
+  color: red;
+}
+.container{
+  width: 128rem;
+  /* background-color: orange; */
+}
+
+.메인__작성자비밀번호섹션{
+  display: flex;
+  flex-direction: row;
+  gap: 4rem ;
+}
+.메인__작성자비밀번호섹션__작성자섹션{
+  width: 50%;
+}
+.메인__작성자비밀번호섹션__비밀번호섹션{
+  width: 50%;
+}
+.메인__제목섹션{
+  
+}
+.메인__내용섹션 > input{
+  height: 33.6rem;
+}
+
+.메인__주소섹션__상단아티클{
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.메인__주소섹션__상단아티클__내용{
+  display: flex;
+  gap: 0.8rem;
+}
+.메인__주소섹션__상단아티클__내용 > input{
+  width: 8.2rem;
+  height: 4.8rem;
+  color: #ABABAB;
+}
+.메인__주소섹션__상단아티클__내용 > button {
+  width: 13rem;
+  height: 4.8rem;
+}
+.메인__유튜브링크섹션{
+  
+}
+.메인__사진첨부섹션{
+  
+}
+.메인__사진첨부섹션__아티클{
+  display: flex;
+  gap: 1.6rem;
+}
+.메인__사진첨부섹션__아티클 > button{
+  padding: 0;
+  border: 0px solid #000;    
+}
+.메인__등록하기섹션{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.메인__등록하기섹션__취소버튼{
+  width: 6.4rem;
+  height: 4.8rem;
+  border: 1px solid #000;
+}
+
+.메인__등록하기섹션__등록하기버튼__낫액티브{
+  width: 9.5rem;
+  height: 4.8rem;
+  background-color: #C7C7C7 ;
+  color: #E4E4E4;
+  border: 0px solid #000; 
+}
+.메인__등록하기섹션__등록하기버튼__액티브{
+  width: 9.5rem;
+  height: 4.8rem;
+  background-color: #2974E5;
+  color: white;
+  border: 0px solid #000;
+}
