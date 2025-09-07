@@ -5,7 +5,10 @@ import { gql, useQuery, useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import deleteIcon from "./assets/delete.svg";
+import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
+// import BoardsComponentWrite from "@/components/boards-write/index";
+
 // import React, { useState } from "react";
 
 const FETCH_BOARDS = gql`
@@ -42,6 +45,7 @@ const DELETE_BOARD = gql`
 
 export default function BoardList() {
   const params = useParams();
+
   const [deleteBoard] = useMutation(DELETE_BOARD);
   const { data } = useQuery(FETCH_BOARDS, {
     variables: {
@@ -59,6 +63,16 @@ export default function BoardList() {
       refetchQueries: [{ query: FETCH_BOARDS }],
     });
     alert("삭제되었습니다!!");
+  };
+
+  const router = useRouter();
+  const onClickMoveDetail = async (
+    event: MouseEvent<HTMLElement>,
+    id: String
+  ) => {
+    event.stopPropagation();
+
+    router.push(`/boards/${id}`);
   };
 
   return (
@@ -99,7 +113,12 @@ export default function BoardList() {
                   },
                   index: number
                 ) => (
-                  <div key={el._id} id={el._id}>
+                  <div
+                    key={el._id}
+                    id={el._id}
+                    className={styles.FetchBoard_list}
+                    onClick={(event) => onClickMoveDetail(event, el?._id)}
+                  >
                     <div className={styles.FetchBoard_number}>{index + 1}</div>
                     <div className={styles.FetchBoard_title}>{el.title}</div>
                     <div className={styles.FetchBoard_writer}>{el.writer}</div>
