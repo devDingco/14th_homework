@@ -1,8 +1,10 @@
 "use client";
-import { gql, useQuery } from "@apollo/client";
-import { useParams } from "next/navigation";
+import { gql, useQuery, useMutation } from "@apollo/client";
+import { useParams, useRouter } from "next/navigation";
 import styles from "./styles.module.css";
+import { useState } from "react";
 
+// 게시글 조회 쿼리
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
@@ -14,19 +16,51 @@ const FETCH_BOARD = gql`
     }
   }
 `;
+
+// 게시글 수정 뮤테이션
+const UPDATE_BOARD = gql`
+  mutation updateBoard(
+    $boardId: ID!
+    $password: String
+    $updateBoardInput: UpdateBoardInput!
+  ) {
+    updateBoard(
+      boardId: $boardId
+      password: $password
+      updateBoardInput: $updateBoardInput
+    ) {
+      _id
+      title
+      contents
+      writer
+      createdAt
+    }
+  }
+`;
+
 export default function BoardsDetail() {
+  const router = useRouter();
   const params = useParams();
   const boardId = params.boardId;
+
+  const [mytitleInput, setMytitleInput] = useState("");
+  const [mycontentInput, setMycontentInput] = useState("");
+
+  const [게시글수정API요청함수] = useMutation(UPDATE_BOARD);
+
   const { loading, data, error } = useQuery(FETCH_BOARD, {
     variables: {
       boardId: String(boardId),
     },
   });
+
   if (loading) return <div>게시글을 불러오는 중입니다...</div>;
-  // 에러 발생 시 처리
   if (error) return <div>오류가 발생했습니다: {error.message}</div>;
-  // 데이터가 없거나 쿼리가 스킵되어 data가 아직 없을 때 처리
   if (!data) return <div>게시글을 찾을 수 없습니다.</div>;
+
+  const onClickUpdateMove = () => {
+    router.push(`/boards/${boardId}/edit`);
+  };
 
   return (
     <>
@@ -77,10 +111,18 @@ export default function BoardsDetail() {
                 </div>
               </div>
               <div className={styles.buttons}>
-                <button className={(styles.button, styles.button_font)}>
+                <button
+                  className={(styles.button, styles.button_font)}
+                  onClick={() => {
+                    router.push(`/boards/`);
+                  }}
+                >
                   <img src="/images/list.png" alt=""></img>목록으로
                 </button>
-                <button className={(styles.button, styles.button_font)}>
+                <button
+                  className={(styles.button, styles.button_font)}
+                  onClick={onClickUpdateMove}
+                >
                   <img src="/images/fix.png" alt=""></img>수정하기
                 </button>
               </div>

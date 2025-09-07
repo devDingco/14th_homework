@@ -148,6 +148,7 @@
   leading-trim: NONE;
   line-height: 20px;
   letter-spacing: 0%;
+  overflow: hidden;
 }
 
 .createdat {
