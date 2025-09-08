@@ -1,9 +1,10 @@
 "use client"
 
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 // import { Link } from "react-router"
 import style from './style.module.css'
 import { gql, useQuery } from '@apollo/client'
+import { Router } from 'next/router';
 
 const FETCH_BOARD = gql`
     query fetchBoard($boardId: ID!) {
@@ -22,12 +23,18 @@ const FETCH_BOARD = gql`
 
 const BoardsDetail = () => {
     const PageNumber = useParams()
+    const router = useRouter()
 
     const { data } = useQuery(FETCH_BOARD, {
         variables: {
             boardId: PageNumber.id
         }
     })
+
+
+    const onClickMove = () => {
+        router.push(`/boards/${PageNumber.id}/edit`)
+    }
 
     return (
         <div className={style.바탕}>
@@ -74,14 +81,14 @@ const BoardsDetail = () => {
                 </div>
 
                 <div className={style.actions}>
-                    <div className={style.actions__item}>
+                    <button className={style.actions__item} >
                         <img className={style.icon__list} src="/assets/icons/vector.png"></img>
                         <div>목록으로</div>
-                    </div>
-                    <div className={style.actions__item}>
+                    </button>
+                    <button className={style.actions__item} onClick={onClickMove}>
                         <img className={style.icon__edit} src="/assets/icons/left_icon.png"></img>
                         <div>수정하기</div>
-                    </div>
+                    </button>
                 </div>
 
 
