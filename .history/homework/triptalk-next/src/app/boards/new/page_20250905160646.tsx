@@ -5,7 +5,7 @@ import BoardsWrite from '@/components/boards-write';
 export default function BoardsEdit() {
   return (
     <div>
-      <BoardsWrite isEdit={false} />
+      <BoardsWrite isEdit{false}/>
     </div>
   );
 }
