@@ -8,7 +8,7 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'storage.googleapis.com',
         port: '',
-        pathname: '/**',
+        pathname: '/codecamp-file-storage/**',
       },
     ],
   },

@@ -8,6 +8,7 @@ type TextAreaBoxProps = {
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   isInput?: string;
   isSubmitCheck: () => void;
+  defaultValue?: string;
 };
 
 export default function TextAreaBox({
@@ -18,6 +19,7 @@ export default function TextAreaBox({
   onChange,
   isInput,
   isSubmitCheck,
+  defaultValue,
 }: TextAreaBoxProps) {
   const [touched, setTouched] = useState(false);
 
@@ -30,7 +32,7 @@ export default function TextAreaBox({
   console.log(warning);
 
   return (
-    <div className='flex flex-col gap-2 w-full justify-start items-start'>
+    <div className='flex w-full flex-col items-start justify-start gap-2'>
       <div className='flex gap-1'>
         <label className='font-base font-semibold' htmlFor={lable}>
           {lable}
@@ -40,11 +42,12 @@ export default function TextAreaBox({
       <textarea
         id={name}
         name={name}
-        className='flex-1 min-h-[336px] py-3 px-4 rounded-lg outline outline-1 outline-gray-200 w-full'
+        className='min-h-[336px] w-full flex-1 rounded-lg px-4 py-3 outline outline-1 outline-gray-200'
         placeholder={placeholder}
         required={required}
         onChange={onChange}
         onBlur={handleBlur}
+        defaultValue={defaultValue}
       ></textarea>
       <div className='h-10'>
         <span className='text-[#f66a6a]'>

@@ -3,8 +3,8 @@
 import { IProps } from '@/types';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
+// const BaseUrl = 'http://main-example.codebootcamp.co.kr/graphql';
 const BaseUrl = 'http://main-practice.codebootcamp.co.kr/graphql';
-// const BaseUrl = 'http://main-practice.codebootcamp.co.dwqdwqdkr/graphql';
 
 const client = new ApolloClient({
   uri: BaseUrl,

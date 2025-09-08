@@ -15,6 +15,7 @@ import { useQuery } from '@apollo/client';
 import { FETCH_BOARD } from '@/apis/graphql/board';
 import { useParams } from 'next/navigation';
 import { formatDate } from '@/utils/utils';
+import Link from 'next/link';
 // import { Suspense } from 'react';
 
 export default function BoardsDetailPage() {
@@ -28,6 +29,8 @@ export default function BoardsDetailPage() {
 
   if (loading) return <p className='text-7xl'>로딩중...</p>;
   if (error) return <p>Error: {error.message}</p>;
+
+  console.log(data);
 
   return (
     <section className='flex h-full w-full flex-col items-center justify-center gap-10 py-10'>
@@ -45,7 +48,7 @@ export default function BoardsDetailPage() {
               {data?.fetchBoard.updatedAt
                 ? formatDate(data?.fetchBoard.updatedAt)
                 : '-'}
-            </span> 
+            </span>
           </div>
 
           <hr className='my-4 inline-block h-1' />
@@ -115,7 +118,8 @@ export default function BoardsDetailPage() {
             </button>
             <button className='flex h-10 w-[105px] items-center gap-2 rounded-lg border px-2 py-3'>
               <Image src={Ioutline_edit} alt='outline_edit' />
-              <span>수정하기</span>
+              {/* <button>수정하기</button> */}
+              <Link href={`/boards/${boardId}/edit`}>수정하기</Link>
             </button>
           </div>
         </div>

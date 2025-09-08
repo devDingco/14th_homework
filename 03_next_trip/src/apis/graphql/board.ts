@@ -59,3 +59,22 @@ export const DELETE_BOARD = gql`
     deleteBoard(boardId: $boardId)
   }
 `;
+
+export const UPDATE_BOARD = gql`
+  mutation UpdateBoard(
+    $boardId: ID!
+    $updateBoardInput: UpdateBoardInput!
+    $password: String!
+  ) {
+    updateBoard(
+      boardId: $boardId
+      updateBoardInput: $updateBoardInput
+      password: $password
+    ) {
+      _id
+      writer
+      title
+      contents
+    }
+  }
+`;
