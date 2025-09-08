@@ -3,6 +3,7 @@
 ![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![TypeScript](https://img.shields.io/badge/with%20a%20logo-grey?style=for-the-badge&logo=typescript)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![CursorAI](https://img.shields.io/badge/Tools-CursorAI-purple)
@@ -11,14 +12,13 @@
 ---
 
 ## 📌 레포지토리 개요
-이 레포지토리는 **코드캠프(seSac) 부트캠프**에서 학습한 내용을 기록한 저장소입니다.  
-React, Next.js, JavaScript, HTML, CSS를 활용한 다양한 실습을 통해  
+React, Next.js, TypeScript,JavaScript, HTML, CSS를 활용한 다양한 언어 실습을 통해  
 **프론트엔드 및 풀스택 개발 역량 강화**를 목표로 합니다.  
 
 ---
 
 ## ⚙️ 기술 스택
-- **Languages**: JavaScript, HTML, CSS  
+- **Languages**: JavaScript, HTML, CSS, TypeScript
 - **Frameworks & Libraries**: React, Next.js  
 - **Tools**: Cursor AI  
 
@@ -39,9 +39,6 @@ React, Next.js, JavaScript, HTML, CSS를 활용한 다양한 실습을 통해
 
 - **💬 slack clone**  
   Slack UI/UX를 참고한 실시간 채팅 클론 프로젝트  
-
-- **📄 example.html**  
-  HTML/CSS/JS 기본 예제 코드  
 
 ---
 
