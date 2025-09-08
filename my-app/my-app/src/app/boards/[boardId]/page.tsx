@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./BoardsDetail.module.css";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import { gql, useQuery } from "@apollo/client";
 import { error } from "console";
@@ -34,13 +34,19 @@ const FETCH_BOARD = gql`
 
 export default function BoardsDetail() {
   const params = useParams();
-  // const boardId = params?.boardId;
+  //localhost:3000/boards/68bbd349e43aaf002915263b
+  // const boardId = params?.boardId;x
+  const router = useRouter();
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
       boardId: params.boardId,
     },
   });
+
+  const onClickEdit = () => {
+    router.push(`/boards/${data?.fetchBoard._id}/edit`);
+  };
 
   return (
     <>
@@ -106,7 +112,7 @@ export default function BoardsDetail() {
                 <Image src={목록} alt="목록" />
                 목록으로
               </button>
-              <button className={styles.하단_수정하기}>
+              <button className={styles.하단_수정하기} onClick={onClickEdit}>
                 <Image src={수정} alt="수정" />
                 수정하기
               </button>
