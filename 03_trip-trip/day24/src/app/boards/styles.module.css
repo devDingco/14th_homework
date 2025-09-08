@@ -1,0 +1,83 @@
+.board-list-container {
+  width: 100%;
+  padding: 2.4rem 4.8rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.6rem;
+  background-color: var(--color-white);
+  box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.08);
+  gap: 0.8rem;
+}
+
+.board-title {
+  color: var(--color-gray-900);
+  font-weight: 500;
+  line-height: 2rem;
+  padding: 1.6rem 2.4rem;
+}
+
+/* board-list */
+.board-list {
+  display: grid;
+  column-gap: 0.8rem;
+  grid-template-columns: 4fr 53fr 6fr 6fr;
+}
+.board-list p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.board-list p:nth-child(2) {
+  justify-content: flex-start;
+}
+
+.board-list-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.board-list-item {
+  padding: 1.2rem 2.4rem;
+  border: solid 0.1rem var(--color-gray-50);
+  border-radius: 0.8rem;
+  position: relative;
+}
+.board-list-item p {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+.board-list-item p:nth-child(1) {
+  color: var(--color-gray-500);
+  font-weight: 300;
+}
+.board-list-item p:nth-child(2) {
+  color: var(--color-gray-900);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+.board-list-item p:nth-child(3) {
+  overflow: hidden;
+  color: var(--color-gray-800);
+  text-overflow: ellipsis;
+  font-weight: 300;
+}
+.board-list-item p:nth-child(4) {
+  overflow: hidden;
+  color: var(--color-gray-500);
+  text-overflow: ellipsis;
+  font-weight: 300;
+}
+.board-list-item svg {
+  width: 2.4rem;
+  height: 2.4rem;
+  position: absolute;
+  top: 50%;
+  right: 0.8rem;
+  transform: translateY(-50%);
+  display: none;
+}
+.board-list-item:has(:hover) svg {
+  display: block;
+  cursor: pointer;
+}
