@@ -1,4 +1,7 @@
+// components/boards-write/form-input.tsx
+
 import styles from "./styles.module.css";
+import React from "react";
 
 interface InputProps {
   Input_Title?: React.ReactNode;
@@ -6,6 +9,8 @@ interface InputProps {
   Input_Placeholder?: string;
   onChange?: React.ChangeEventHandler;
   errorMessage?: string;
+  value?: string;
+  disabled?: boolean;
 }
 
 export const SmallInput = (props: InputProps) => {
@@ -21,7 +26,9 @@ export const SmallInput = (props: InputProps) => {
           placeholder={props.Input_Placeholder}
           className={styles.작은인풋}
           onChange={props.onChange}
-        ></input>
+          value={props.value}
+          disabled={props.disabled}
+        />
         <div className={styles.text_red}>{props.errorMessage}</div>
       </div>
     </>
@@ -41,7 +48,9 @@ export const LongInput = (props: InputProps) => {
           placeholder={props.Input_Placeholder}
           className={styles.긴인풋}
           onChange={props.onChange}
-        ></input>
+          value={props.value}
+          disabled={props.disabled}
+        />
         <div className={styles.text_red}>{props.errorMessage}</div>
       </div>
     </>
@@ -60,7 +69,9 @@ export const SuperLongInput = (props: InputProps) => {
           placeholder={props.Input_Placeholder}
           className={styles.큰인풋}
           onChange={props.onChange}
-        ></textarea>
+          value={props.value}
+          disabled={props.disabled}
+        />
         <div className={styles.text_red}>{props.errorMessage}</div>
       </div>
     </>
