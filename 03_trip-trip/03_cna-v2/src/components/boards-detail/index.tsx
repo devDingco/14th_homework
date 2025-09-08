@@ -15,7 +15,7 @@ import badImage from '@assets/bad.svg'
 import goodImage from '@assets/good.png'
 import hamberger from '@assets/hamberger.png'
 import pencil from '@assets/pencil.png'
-import { FETCH_BOARD } from './queries'
+import { FETCH_BOARD } from 'commons/boards/queries'
 
 const IMAGE_SRC = {
   profileImage: {

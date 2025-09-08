@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@apollo/client'
-import { DELETE_BOARD, FETCH_BOARDS } from 'components/queries'
+import { DELETE_BOARD, FETCH_BOARDS } from 'commons/boards/queries'
 import { useRouter } from 'next/navigation'
 import { MouseEvent } from 'react'
 import { BoardListProps } from './types'

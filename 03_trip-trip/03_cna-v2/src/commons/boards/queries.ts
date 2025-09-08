@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
-export const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
-    fetchBoard(boardId: $boardId) {
+export const FETCH_BOARDS = gql`
+  query fetchBoards($page: Int) {
+    fetchBoards(page: $page) {
       _id
       writer
       title
@@ -11,16 +11,21 @@ export const FETCH_BOARD = gql`
       likeCount
       dislikeCount
       images
-      user {
-        _id
-        email
-        name
-        picture
+      boardAddress {
+        zipcode
+        address
+        addressDetail
       }
       createdAt
       updatedAt
       deletedAt
     }
+  }
+`
+
+export const DELETE_BOARD = gql`
+  mutation deleteBoard($boardId: ID!) {
+    deleteBoard(boardId: $boardId)
   }
 `
 
@@ -57,6 +62,30 @@ export const UPDATE_BOARD = gql`
       likeCount
       dislikeCount
       images
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`
+
+export const FETCH_BOARD = gql`
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      _id
+      writer
+      title
+      contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      user {
+        _id
+        email
+        name
+        picture
+      }
       createdAt
       updatedAt
       deletedAt

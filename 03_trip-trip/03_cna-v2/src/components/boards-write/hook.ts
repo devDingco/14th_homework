@@ -1,30 +1,44 @@
 import { ApolloError, useMutation, useQuery } from '@apollo/client'
-
 import { useParams, useRouter } from 'next/navigation'
 import { ChangeEvent, useState } from 'react'
 import { BoardFormProps } from './types'
-import { CREATE_BOARD, FETCH_BOARD, UPDATE_BOARD } from './queries'
+import {
+  CreateBoardDocument,
+  CreateBoardMutation,
+  CreateBoardMutationVariables,
+  FetchBoardDocument,
+  FetchBoardQuery,
+  FetchBoardQueryVariables,
+  UpdateBoardDocument,
+  UpdateBoardMutation,
+  UpdateBoardMutationVariables,
+} from 'commons/graphql/graphql'
 
 export default function useBoardForm(props: BoardFormProps) {
   const router = useRouter()
   const params = useParams()
 
-  const editId = props.isEdit ? params.boardId : null
+  const editId = props.isEdit && typeof params.boardId === 'string' ? params.boardId : ''
   // 수정하는 경우, 수정을 위한 초기값 보여주기
-  const { data } = useQuery(FETCH_BOARD, {
+  const { data } = useQuery<FetchBoardQuery, FetchBoardQueryVariables>(FetchBoardDocument, {
     variables: { boardId: editId },
     skip: !props.isEdit,
   })
+
   //그래프큐엘 셋팅
-  const [createBoard] = useMutation(CREATE_BOARD)
-  const [updateBoard] = useMutation(UPDATE_BOARD)
+  const [createBoard] = useMutation<CreateBoardMutation, CreateBoardMutationVariables>(
+    CreateBoardDocument
+  )
+  const [updateBoard] = useMutation<UpdateBoardMutation, UpdateBoardMutationVariables>(
+    UpdateBoardDocument
+  )
 
   // 작성자 변경 불가
   const [name, setName] = useState('')
   // 비밀번호 수정 불가
   const [password, setPassword] = useState('')
-  const [title, setTitle] = useState(props.isEdit ? data?.fetchBoard?.title : '')
-  const [content, setContent] = useState(props.isEdit ? data?.fetchBoard?.contents : '')
+  const [title, setTitle] = useState(props.isEdit ? data?.fetchBoard?.title ?? '' : '')
+  const [content, setContent] = useState(props.isEdit ? data?.fetchBoard?.contents ?? '' : '')
 
   const [nameError, setNameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
@@ -70,14 +84,14 @@ export default function useBoardForm(props: BoardFormProps) {
         setPasswordError('')
       }
 
-      if (title.trim() === '') {
+      if (title?.trim() === '') {
         setTitleError('필수입력 사항입니다.')
         hasError = true
       } else {
         setTitleError('')
       }
 
-      if (content.trim() === '') {
+      if (content?.trim() === '') {
         setContentError('필수입력 사항입니다.')
         hasError = true
       } else {
@@ -106,23 +120,23 @@ export default function useBoardForm(props: BoardFormProps) {
         console.log('data', data)
         alert('게시글이 등록되었습니다!')
         // 해당글의 상세페이지로 이동하기
-        router.push(`/boards/${data.createBoard._id}`)
+        router.push(`/boards/${data?.createBoard._id}`)
       }
     }
 
     // 기존의 글을 수정하는 경우
     else if (props.isEdit === true) {
       // 입력값이 비어있는 경우 수정 진행 불가
-      if (content.trim() === '' && title.trim() === '') {
+      if (content?.trim() === '' && title?.trim() === '') {
         setContentError('필수입력 사항입니다.')
         setTitleError('필수입력 사항입니다.')
         return
       }
-      if (content.trim() === '') {
+      if (content?.trim() === '') {
         setContentError('필수입력 사항입니다.')
         return
       }
-      if (title.trim() === '') {
+      if (title?.trim() === '') {
         setTitleError('필수입력 사항입니다.')
         return
       }
@@ -131,11 +145,11 @@ export default function useBoardForm(props: BoardFormProps) {
 
       const 입력받은비밀번호 = prompt('글을 작성할때 입력하셨던 비밀번호를 입력해주세요')
       const updateInput: any = {}
-      if (title.trim() && title !== data?.fetchBoard?.title) {
+      if (title?.trim() && title !== data?.fetchBoard?.title) {
         updateInput.title = title
       }
 
-      if (content.trim() && content !== data?.fetchBoard?.contents) {
+      if (content?.trim() && content !== data?.fetchBoard?.contents) {
         updateInput.contents = content
       }
 

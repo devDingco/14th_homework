@@ -6,7 +6,7 @@ import useBoardsList from './hook'
 import { useQuery } from '@apollo/client'
 
 import { useState } from 'react'
-import { FETCH_BOARDS } from './queries'
+import { FETCH_BOARDS } from 'commons/boards/queries'
 
 const IMAGE_SRC = {
   deleteImage: {
