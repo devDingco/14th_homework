@@ -1,51 +1,16 @@
 "use client"
 
 import styles from './styles.module.css'
-import { gql, useMutation, useQuery } from "@apollo/client";
-// import { on } from 'events';
-import { useRouter } from 'next/navigation';
+import useBoardsList from './hook'
+import { FetchBoardQuery } from '@/gql/graphql'
 
-const FETCH_BOARDS = gql`
-  query{
-  fetchBoards(
-    page:1
-  ){
-    writer
-    title
-    contents
-    createdAt
-    _id
-  }
-}
-`;
-const DELETE_BOARD = gql`
-  mutation deleteBoard($boardId: ID!){
-  deleteBoard(boardId:$boardId)
-  }
+export default function BoardsList() {
 
-`;
-
-export default function BoardsPage() {
-  const router = useRouter();
-
-    const onClickDelete = async (event) => {
-    alert("삭제가 완료되었습니다.")
-    await deleteBoard({
-      variables: {
-        boardId: String(event.currentTarget.id),
-        // html -> 화면에 그려짐 -> 이때는이미 "텍스트화되어잇음"-> 삭제클릭
-      },
-      refetchQueries: [{ query: FETCH_BOARDS }],
-    });
-  };
-
-  const { data } = useQuery(FETCH_BOARDS);
-  const [deleteBoard] = useMutation(DELETE_BOARD);
-
-  const onClickMove = (boardId) => {
-    router.push(`/boards/detail/${boardId}`);
-  }
-
+  const {
+    data,
+    onClickDelete,
+    onClickMove,
+  } = useBoardsList()
   return (
 
     <div className={styles.box}>
@@ -60,7 +25,7 @@ export default function BoardsPage() {
                             <div className={styles.board__main__titlebox__date}>날짜</div>
                         </div>
                         <div className={styles.board__main__articlebox}>
-                            {data?.fetchBoards.map((el, index) => (
+                            {data?.fetchBoards.map((el: FetchBoardQuery["fetchBoard"], index:number) => (
                                 <div key={el._id} className={styles.board__main__articlebox__item} >
                                     <div className={styles.board__main__articlebox__item__number}>{index + 1}</div>
                                     <div className={styles.board__main__articlebox__item__title} onClick={() => onClickMove(el._id)}>{el.title}</div>
