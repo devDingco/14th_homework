@@ -1,11 +1,7 @@
-"use client";
+'use client'
 
-import BoardWritePage from "components/boards-write";
+import BoardWritePage from 'components/boards-write'
 
 export default function BoardEditPage() {
-  return (
-    <>
-      <BoardWritePage isEdit={true} />
-    </>
-  );
+  return <BoardWritePage isEdit={true} />
 }

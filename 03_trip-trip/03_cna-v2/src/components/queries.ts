@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client"
+import { gql } from '@apollo/client'
 
 export const FETCH_BOARDS = gql`
   query {
@@ -16,16 +16,15 @@ export const FETCH_BOARDS = gql`
       deletedAt
     }
   }
-`;
+`
 
 export const DELETE_BOARD = gql`
   mutation deleteBoard($boardId: ID!) {
     deleteBoard(boardId: $boardId)
   }
-`;
+`
 
-
-export const 나의그래프큐엘셋팅 = gql`
+export const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
     createBoard(createBoardInput: $createBoardInput) {
       _id
@@ -45,19 +44,11 @@ export const 나의그래프큐엘셋팅 = gql`
       deletedAt
     }
   }
-`;
+`
 
 export const UPDATE_BOARD = gql`
-  mutation updateBoard(
-    $updateBoardInput: UpdateBoardInput!
-    $password: String
-    $boardId: ID!
-  ) {
-    updateBoard(
-      updateBoardInput: $updateBoardInput
-      password: $password
-      boardId: $boardId
-    ) {
+  mutation updateBoard($updateBoardInput: UpdateBoardInput!, $password: String, $boardId: ID!) {
+    updateBoard(updateBoardInput: $updateBoardInput, password: $password, boardId: $boardId) {
       _id
       writer
       title
@@ -71,8 +62,7 @@ export const UPDATE_BOARD = gql`
       deletedAt
     }
   }
-`;
-
+`
 
 export const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -96,4 +86,4 @@ export const FETCH_BOARD = gql`
       deletedAt
     }
   }
-`;
+`

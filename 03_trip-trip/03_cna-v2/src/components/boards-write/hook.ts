@@ -1,8 +1,9 @@
 import { ApolloError, useMutation, useQuery } from '@apollo/client'
-import { FETCH_BOARD, UPDATE_BOARD, 나의그래프큐엘셋팅 } from 'components/queries'
+
 import { useParams, useRouter } from 'next/navigation'
 import { ChangeEvent, useState } from 'react'
 import { BoardFormProps } from './types'
+import { CREATE_BOARD, FETCH_BOARD, UPDATE_BOARD } from './queries'
 
 export default function useBoardForm(props: BoardFormProps) {
   const router = useRouter()
@@ -15,7 +16,7 @@ export default function useBoardForm(props: BoardFormProps) {
     skip: !props.isEdit,
   })
   //그래프큐엘 셋팅
-  const [createBoard] = useMutation(나의그래프큐엘셋팅)
+  const [createBoard] = useMutation(CREATE_BOARD)
   const [updateBoard] = useMutation(UPDATE_BOARD)
 
   // 작성자 변경 불가
@@ -172,6 +173,7 @@ export default function useBoardForm(props: BoardFormProps) {
       }
     }
   }
+
   return {
     onChangeName,
     onChangePassword,
