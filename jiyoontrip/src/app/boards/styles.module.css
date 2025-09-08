@@ -99,6 +99,7 @@
   font-style: normal;
   font-weight: 500;
   text-overflow: ellipsis;
+  cursor: pointer;
 }
 .boardList__item__writer {
   display: flex;

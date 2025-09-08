@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { gql, useQuery } from "@apollo/client";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -15,6 +15,14 @@ const FETCH_BOARD = gql`
       likeCount
       dislikeCount
       images
+      boardAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -23,12 +31,16 @@ const FETCH_BOARD = gql`
 
 export default function DetailPage() {
   const params = useParams(); // 문자열로 나옴
-
+  const router = useRouter();
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
       boardId: params.boardId,
     },
   });
+
+  const onClickMove = () => {
+    router.push(`${data?.fetchBoard._id}/edit`);
+  };
   return (
     <>
       <div className={styles.page}>
@@ -45,7 +57,9 @@ export default function DetailPage() {
               />
               {data?.fetchBoard.writer}
             </div>
-            <div className={styles.detailAuthor__date}>{data?.fetchBoard.createdAt}</div>
+            <div className={styles.detailAuthor__date}>
+              {data?.fetchBoard.createdAt.split("T")[0]}
+            </div>
           </div>
           <hr className={styles.line} />
           <div className={styles.detailLinkLocation}>
@@ -118,7 +132,7 @@ export default function DetailPage() {
               />
               목록으로
             </button>
-            <button className={styles.detailButtonEdit}>
+            <button className={styles.detailButtonEdit} onClick={onClickMove}>
               <Image
                 src="/icons/outline/edit.svg"
                 alt="EditIcon"
