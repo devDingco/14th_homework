@@ -49,8 +49,18 @@
     font-style: normal;
     font-weight: 300;
     line-height: 1.25rem;
+    
   }
   
+  .detailMetadataDate{
+    white-space: nowrap;
+    color: #818181;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem; 
+
+  }
   .detailMetadataContainer {
     flex: 1;
     width: 100%;
