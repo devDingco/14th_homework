@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'; // React와 useState hook을 가져옵니다.
 
-// SimpleLoginForm 컴포넌트를 정의합니다.
+// SimpleLoginForm 컴포넌트를 정의합니다.ㄹ
 export default function SimpleLoginForm() {
   // 1. 아이디와 비밀번호를 저장할 '상태(state)'를 각각 만듭니다.
   //    초기값은 빈 문자열 "" 입니다.

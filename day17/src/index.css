@@ -1,0 +1,56 @@
+/* 이 파일은 우리 웹사이트 전체에 적용되는 가장 기본적인 스타일 규칙을 정의하는 역할 */
+
+
+/* 1. box-sizing 모델을 border-box로 설정합니다. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. 기본 마진을 제거하여 예측 가능한 간격 설정을 돕습니다. */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* 3. body의 최소 높이를 화면 전체 높이로 설정합니다. */
+body {
+  min-height: 100vh;
+  line-height: 1.5; /* 줄 간격을 설정하여 가독성을 높입니다. */
+  text-rendering: optimizeSpeed; /* 텍스트 렌더링 속도를 최적화합니다. */
+  font-family: sans-serif; /* 가장 기본적인 sans-serif 글꼴을 사용합니다. */
+}
+
+/* 4. 이미지를 반응형으로 만듭니다. */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 5. 버튼, 입력창 등의 글꼴을 부모 요소로부터 상속받게 합니다. */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 6. 스크롤 동작을 부드럽게 만듭니다. */
+@media (prefers-reduced-motion: no-preference) {
+  html:focus-within {
+    scroll-behavior: smooth;
+  }
+}
