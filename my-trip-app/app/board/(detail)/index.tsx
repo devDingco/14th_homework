@@ -77,16 +77,16 @@ export default function BoardDetail({ id, initialData }: { id: string; initialDa
         </header>
 
         <section className="detail_content r_16_24">
-          {post.coverImage && (
-            <div className="lead_section">
+          <div className="lead_section">
+            {post.coverImage && (
               <figure className="lead_media">
                 <Image src={post.coverImage} alt="lead" width={260} height={200} priority={false} />
               </figure>
-              <div className="text_block r_16_24 content">
-                <p>{post.contents}</p>
-              </div>
+            )}
+            <div className="text_block r_16_24 content">
+              <p>{post.contents || "내용이 없습니다."}</p>
             </div>
-          )}
+          </div>
 
           {post.youtubeUrl && toYouTubeEmbedUrl(post.youtubeUrl) && (
             <div className="detail_media wide">
@@ -134,10 +134,12 @@ export default function BoardDetail({ id, initialData }: { id: string; initialDa
             </button>
               </Link>
             <div className="reactions">
-              <button type="button" className="btn-outline">
-                <Icon outline name="edit" default width={24} height={24}/>
-                수정하기
-              </button>
+              <Link href={`/board/edit/${id}`} className="r_16_24">
+                <button type="button" className="btn-outline">
+                  <Icon outline name="edit" default width={24} height={24}/>
+                  수정하기
+                </button>
+              </Link>
             </div>
           </div>
         </footer>

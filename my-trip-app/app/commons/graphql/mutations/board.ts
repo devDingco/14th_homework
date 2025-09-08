@@ -41,4 +41,23 @@ export const DISLIKE_BOARD_MUTATION = gql`
   }
 `;
 
+export const UPDATE_BOARD_MUTATION = gql`
+  mutation UpdateBoard($boardId: ID!, $password: String, $updateBoardInput: UpdateBoardInput!) {
+    updateBoard(boardId: $boardId, password: $password, updateBoardInput: $updateBoardInput) {
+      _id
+      title
+      contents
+      writer
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
+      images
+      youtubeUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
 
