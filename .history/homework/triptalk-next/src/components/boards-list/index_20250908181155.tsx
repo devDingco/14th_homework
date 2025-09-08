@@ -1,0 +1,107 @@
+'use client';
+//게시글 목록 페이지
+import Image from 'next/image';
+import React, { MouseEvent } from 'react';
+import styles from './page.module.css';
+import { gql, useQuery, useMutation } from '@apollo/client';
+import { useRouter } from 'next/navigation';
+
+// 게시글 데이터의 타입을 정의
+
+// 게시글 목록을 가져오는 GraphQL 쿼리
+const FETCH_BOARDS = gql`
+  query fetchBoards(
+    $endDate: DateTime # 쿼리 변수 정의
+    $startDate: DateTime
+    $search: String
+    $page: Int
+  ) {
+    fetchBoards( # 서버의 fetchBoards 함수 호출
+      endDate: $endDate # 위에서 정의한 변수들을
+      startDate: $startDate # 함수의 매개변수로 전달
+      search: $search
+      page: $page
+    ) {
+      # 서버에서 받아올 데이터 필드들 지정
+      _id
+      writer
+      title
+      contents
+      createdAt
+    }
+  }
+`;
+
+// 게시글을 삭제하는 GraphQL 뮤테이션
+const DELETE_BOARD = gql`
+  mutation deleteBoard($boardId: ID!) {
+    deleteBoard(boardId: $boardId)
+  }
+`;
+
+
+  return (
+    <div className={styles.container}>
+      {' '}
+      {/* 전체 컨테이너 */}
+      <div className={styles.boardsContainer}>
+        {' '}
+        {/* 게시글 목록 컨테이너 */}
+        {/* 테이블 헤더 부분 */}
+        <div className={styles.postHeader}>
+          <div className={styles.leftGroup}>
+            {' '}
+            {/* 왼쪽 그룹 (번호, 제목) */}
+            <span>번호</span>
+            <span>제목</span>
+          </div>
+          <div className={styles.rightGroup}>
+            {' '}
+            {/* 오른쪽 그룹 (작성자, 날짜) */}
+            <span>작성자</span>
+            <span>날짜</span>
+          </div>
+        </div>
+        {/* 게시물 목록을 반복해서 표시 */}
+        {data?.fetchBoards?.map((el: Board, index: number) => {
+          return (
+            <div key={el._id} className={styles.postItem}>
+              {' '}
+              {/* 각 게시글 항목 */}
+              {/* 왼쪽 부분: 번호와 제목 */}
+              <div className={styles.leftGroup}>
+                <span>{index + 1}</span> {/* 게시글 번호 (배열 인덱스 + 1) */}
+                <span
+                  onClick={() => onClickTitle(el._id)} // 제목 클릭 시 상세 페이지로 이동
+                >
+                  {el.title} {/* 게시글 제목 */}
+                </span>
+              </div>
+              {/* 오른쪽 부분: 작성자와 날짜 */}
+              <div className={styles.rightGroup}>
+                <span>{el.writer}</span> {/* 작성자 이름 */}
+                <span>
+                  {/* 작성일을 한국 날짜 형식으로 변환 */}
+                  {new Date(el.createdAt).toLocaleDateString('ko-KR')}
+                </span>
+              </div>
+              {/* 삭제 버튼 (호버 시에만 보임, 절대 위치로 배치) */}
+              <button
+                id={el._id} // 버튼의 id를 게시글 ID로 설정
+                onClick={onClickDelete} // 클릭 시 삭제 함수 실행
+                className={styles.deleteBtn} // 삭제 버튼 스타일
+              >
+                <Image
+                  src="/icons/delete.png"
+                  alt="delete"
+                  width={24}
+                  height={24}
+                />
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
