@@ -1,6 +1,6 @@
 "use client"
 
-import { FETCH_BOARD, FETCH_BOARDS, FETCH_BOARDS_AND_COUNT } from "@/graphql/queries/board";
+import { FETCH_BOARD } from "@/graphql/queries/board";
 import { useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import Sectiontitle from "@/components/ui/section/Sectiontitle"; 
@@ -33,10 +33,14 @@ export default function BoardsBoardIdPage() {
     // 한국 시간대로 변경 필요: 외부 라이브러리 date-fns-tz 설치 후 서울 시간대로 변경
     let KSTdate;
     if(createdAt){
-        KSTdate = formatInTimeZone(new Date(createdAt&&createdAt),'Asia/Seoul','yyyy-MM-dd')
+        KSTdate = formatInTimeZone(new Date(createdAt),'Asia/Seoul','yyyy-MM-dd')
     }
     const onClickBoardsList = () => {
         router.push('/boards')
+    }
+
+    const onClickBoardsEdit = () => {
+        router.push(`/boards/${boardId}/edit`)
     }
 
     const imagesUrl = images?.filter(Boolean).map((el: string) => `https://storage.googleapis.com/${el}`)
@@ -53,8 +57,8 @@ export default function BoardsBoardIdPage() {
             {GetVideoFromUrl(youtubeUrl) ? <YoutubeUrl youtubeUrl={youtubeUrl}></YoutubeUrl> : ""}
             <Like bad={dislikeCount} good={likeCount}/>
             <div className={styles.boardsDetail__button__group}>
-                <Button type="button" variant='FormBtn' onClick={onClickBoardsList}><img src="/icons/menu.svg"/>목록으로</Button>
-                <Button type="button" variant='FormBtn'><img src="/icons/edit.svg"/>수정하기</Button>
+                <Button type="button" variant='FormBtn' onClick={onClickBoardsList} page={1}><img src="/icons/menu.svg"/>목록으로</Button>
+                <Button type="button" variant='FormBtn' onClick={onClickBoardsEdit}><img src="/icons/edit.svg"/>수정하기</Button>
             </div>
         </div>
     )

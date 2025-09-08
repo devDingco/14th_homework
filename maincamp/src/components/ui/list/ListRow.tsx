@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import styles from './ListRow.module.css'
 import { Fragment, MouseEvent, useState } from 'react';
 import { formatInTimeZone } from 'date-fns-tz';
-import { FETCH_BOARDS, FETCH_BOARDS_AND_COUNT } from '@/graphql/queries/board';
+import { FETCH_BOARDS_AND_COUNT } from '@/graphql/queries/board';
 import { useMutation, useQuery } from '@apollo/client';
 import { DELETE_BOARD } from '@/graphql/mutations/board';
 

@@ -1,7 +1,7 @@
 "use client"
 
 import DataList from "@/components/ui/list/DataList"
-import { FETCH_BOARDS, FETCH_BOARDS_AND_COUNT } from "@/graphql/queries/board"
+import { FETCH_BOARDS_AND_COUNT } from "@/graphql/queries/board"
 import { useMutation, useQuery } from "@apollo/client"
 import styles from './styles.module.css'
 import ListRow from "@/components/ui/list/ListRow"
@@ -24,7 +24,8 @@ export default function BoardsPage () {
     const { data } = useQuery(FETCH_BOARDS_AND_COUNT, {
         variables:{
             page: currentPage,
-        }
+        },
+        fetchPolicy: 'cache-and-network' // 새로고침 ..! 
     })
 
     if(!data) return;

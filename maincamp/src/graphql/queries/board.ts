@@ -11,6 +11,7 @@ export const FETCH_BOARD = gql`
             createdAt
             likeCount
             dislikeCount
+            boardAddress{zipcode, address, addressDetail}
         }
     }
 `
