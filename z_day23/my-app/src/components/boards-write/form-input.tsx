@@ -1,5 +1,3 @@
-// components/boards-write/form-input.tsx
-
 import styles from "./styles.module.css";
 import React from "react";
 
@@ -10,6 +8,7 @@ interface InputProps {
   onChange?: React.ChangeEventHandler;
   errorMessage?: string;
   value?: string;
+  defaultValue?: string;
   disabled?: boolean;
 }
 
@@ -27,6 +26,7 @@ export const SmallInput = (props: InputProps) => {
           className={styles.작은인풋}
           onChange={props.onChange}
           value={props.value}
+          defaultValue={props.defaultValue}
           disabled={props.disabled}
         />
         <div className={styles.text_red}>{props.errorMessage}</div>
@@ -49,6 +49,7 @@ export const LongInput = (props: InputProps) => {
           className={styles.긴인풋}
           onChange={props.onChange}
           value={props.value}
+          defaultValue={props.defaultValue}
           disabled={props.disabled}
         />
         <div className={styles.text_red}>{props.errorMessage}</div>
@@ -70,6 +71,7 @@ export const SuperLongInput = (props: InputProps) => {
           className={styles.큰인풋}
           onChange={props.onChange}
           value={props.value}
+          defaultValue={props.defaultValue}
           disabled={props.disabled}
         />
         <div className={styles.text_red}>{props.errorMessage}</div>
