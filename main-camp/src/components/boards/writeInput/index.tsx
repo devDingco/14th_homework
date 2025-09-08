@@ -31,7 +31,7 @@ const WriteInput:FunctionComponent<Props> = (props) => {
             <div className={`${styles.input_frame_620w_80h} flex_column`}>
                 <label className={`${styles.label_620w_24h} me_16_24 flex_row`} style={{ whiteSpace: "nowrap" }}>{props.label}<p className={`me_16_24`} style={{ color:"rgba(246, 106, 106, 1)" }}>*</p></label>
                 {props.isEdit
-                    ? <input className={`${styles.input_620w_48h} input_g_border_gray r_16_24`} type="password" onChange={props.setState} placeholder={props.placeholder} disabled style={{ background: "rgba(242, 242, 242, 1)"}} defaultValue={props.data?.fetchBoard.password}></input>
+                    ? <input className={`${styles.input_620w_48h} input_g_border_gray r_16_24`} type="password" onChange={props.setState} placeholder='**********' disabled style={{ background: "rgba(242, 242, 242, 1)"}} defaultValue={props.data?.fetchBoard.password}></input>
                     : <input className={`${styles.input_620w_48h} input_g_border_gray r_16_24`} type="password" onChange={props.setState} placeholder={props.placeholder}></input>
                 }
                 <p className={`me_16_24`} style={{ color: "rgba(246, 106, 106, 1)" }}>{props.errMsg}</p>

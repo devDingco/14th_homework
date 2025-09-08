@@ -18,14 +18,12 @@ const FETCH_BOARD = gql`
 
 const BoardsEditPage = () => {
     const param = useParams()
-
     const { data } = useQuery(FETCH_BOARD, {
         variables: {
             boardId: param.boardId
         }
     })
 
-    console.log("!!!!!",data)
     return (
         <BoardsWrite isEdit={true} data={data}/>
     )

@@ -1,10 +1,10 @@
 "use client"
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import styles from './style.module.css'
 import WriteButton from '../boards/writeButton'
 import WriteInput from '../boards/writeInput'
 import { gql, useMutation, useQuery } from '@apollo/client'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 
 const CREATE_BOARD = gql`
     mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -16,6 +16,13 @@ const CREATE_BOARD = gql`
     }
 `
 
+const UPDATE_BOARD = gql`
+    mutation updateBoard($updateBoardInput: UpdateBoardInput!) {
+        updateBoard(updateBoardInput: $updateBoardInput) {
+            _id
+        }
+    }
+`
 interface IProps {
     isEdit: boolean
     data?: any
@@ -24,6 +31,7 @@ interface IProps {
 // 게시글 등록/수정 페이지
 const BoardsWrite = (props: IProps) => {
     const router = useRouter()
+    const param = useParams()
 
     const [writer, setWriter] = useState<string>("")
     const [password, setPassword] = useState<string | number>("")
@@ -36,6 +44,7 @@ const BoardsWrite = (props: IProps) => {
     const [contentErr, setContentErr] = useState<string>("")
 
     const [createBoard] = useMutation(CREATE_BOARD)
+    const [updateBoard] = useMutation(UPDATE_BOARD)
 
     const onChangePosting = (category: string) => (event: ChangeEvent<HTMLInputElement>) => {
         switch (category) {
@@ -130,30 +139,41 @@ const BoardsWrite = (props: IProps) => {
         }
     }
 
-    const onUpdateHandler = () => {
+    const boardUpdateSetting = () => {
+        const inputBoardPw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
+        interface updateBoardInput {
+            title?: string,
+            contents?: string,
+            password: string | null,
+            boardId: string | string[]
+        }
+        const updateBoardInput: updateBoardInput = {
+            password: inputBoardPw,
+            boardId: param.boardId
+        }
+
+        if((title !== props.data?.fetchBoard.title) && title) {
+            updateBoardInput.title = title
+        } else {
+            console.log('title 이 조건으로는 업데이트 안함')
+        }
+        if((content !== props.data?.fetchBoard.contents) && content) {
+            updateBoardInput.contents = content
+        } else {
+            console.log('content 이 조건으로는 업데이트 안함')
+        }
+
+        console.log(updateBoardInput)
+        return updateBoardInput
+    }
+
+    const onUpdateHandler = async () => {
+        const updateBoardInput = boardUpdateSetting()
         const forValArr = [writer, password, title, content]
 
         if (forValArr.includes("")) {
             for (let i=0; i < forValArr.length; i++) {
                 switch(i) {
-                    case 0: {
-                        if (forValArr[i] === "") {
-                            setWriterErr("필수입력 사항 입니다.")
-                        } else {
-                            setWriterErr("")
-                        }
-                        // forValArr[i] === "" ? setWriterErr("필수입력 사항 입니다.") : setWriterErr("")
-                        break
-                    }
-                    case 1: {
-                        if (forValArr[i] === "") {
-                            setPasswordErr("필수입력 사항 입니다.")
-                        } else {
-                            setPasswordErr("")
-                        }
-                        // forValArr[i] === "" ? setPasswordErr("필수입력 사항 입니다.") : setPasswordErr("")
-                        break
-                    }
                     case 2: {
                         if (forValArr[i] === "") {
                             setTitleErr("필수입력 사항 입니다.")
@@ -175,16 +195,21 @@ const BoardsWrite = (props: IProps) => {
                     default:
                 }
             }
+            return
         } else {
-            setWriterErr("")
-            setPasswordErr("")
             setTitleErr("")
             setContentErr("")
-
+            
             try {
-
-            } catch(e) {
-                console.log(e)
+                const result = await updateBoard({
+                    variables: {
+                        updateBoardInput
+                    }
+                })
+                console.log(result.data.createBoard._id)
+                router.push(`/boards/${result.data.createBoard._id}`)
+            } catch(e: any) {
+                alert(`${e.graphQLErrors} 비밀번호가 틀렸습니다.`)
             }
         }
     }

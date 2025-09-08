@@ -40,6 +40,11 @@ const WriteButton:FunctionComponent<Props> = (props) => {
             <button className={`${styles.write_confirm_btn} sb_18_24`} onClick={props.setState} style={{ background: isActive === true ? "rgba(41, 116, 229, 1)" : "rgba(199, 199, 199, 1)" }}>{props.p}</button>
             break
         }
+        case "수정하기": {
+            btnComponent =
+            <button className={`${styles.write_confirm_btn} sb_18_24`} onClick={props.setState} style={{ background: "rgba(41, 116, 229, 1)" }}>{props.p}</button>
+            break
+        }
         default:
     }
     return (
