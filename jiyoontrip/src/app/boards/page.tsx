@@ -74,7 +74,7 @@ export default function BoardsPage() {
     alert("삭제ㅋ");
   };
   const onClickDetail = (event: MouseEvent<HTMLElement>) => {
-    router.push(`/boards/detail/${event.currentTarget.id}`);
+    router.push(`/boards/${event.currentTarget.id}`);
   };
 
   return (
@@ -90,14 +90,15 @@ export default function BoardsPage() {
         <div className={styles.boardList}>
           {data?.fetchBoards.map((el: IFetchBoard, index: number) => {
             return (
-              <div
-                id={el._id}
-                onClick={onClickDetail}
-                key={el._id}
-                className={styles.boardList__item}
-              >
+              <div key={el._id} className={styles.boardList__item}>
                 <span className={styles.boardList__item__number}>{index + 1}</span>
-                <span className={styles.boardList__item__title}>{el.title}</span>
+                <span
+                  className={styles.boardList__item__title}
+                  id={el._id}
+                  onClick={onClickDetail}
+                >
+                  {el.title}
+                </span>
                 <span className={styles.boardList__item__writer}>{el.writer}</span>
                 <span className={styles.boardList__item__date}>
                   {el.createdAt.split("T")[0]}
