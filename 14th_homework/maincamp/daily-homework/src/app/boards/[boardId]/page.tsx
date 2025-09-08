@@ -1,41 +1,9 @@
 'use client';
 
 import { gql, useQuery } from '@apollo/client';
-import { useParams } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import styles from './styles.module.css';
 import dayjs from 'dayjs';
-
-const publishText = `살겠노라 살겠노라. 청산에 살겠노라.
-                머루랑 다래를 먹고 청산에 살겠노라.
-                얄리얄리 얄랑셩 얄라리 얄라
-
-                우는구나 우는구나 새야. 자고 일어나 우는구나 새야.
-                너보다 시름 많은 나도 자고 일어나 우노라.
-                얄리얄리 얄라셩 얄라리 얄라
-
-                갈던 밭(사래) 갈던 밭 보았느냐. 물 아래(근처) 갈던 밭 보았느냐
-                이끼 묻은 쟁기를 가지고 물 아래 갈던 밭 보았느냐.
-                얄리얄리 얄라셩 얄라리 얄라
-
-                이럭저럭 하여 낮일랑 지내 왔건만
-                올 이도 갈 이도 없는 밤일랑 또 어찌 할 것인가.
-                얄리얄리 얄라셩 얄라리 얄라
-
-                어디다 던지는 돌인가 누구를 맞히려던 돌인가.
-                미워할 이도 사랑할 이도 없이 맞아서 우노라.
-                얄리얄리 얄라셩 얄라리 얄라
-
-                살겠노라 살겠노라. 바다에 살겠노라.
-                나문재, 굴, 조개를 먹고 바다에 살겠노라.
-                얄리얄리 얄라셩 얄라리 얄라
-
-                가다가 가다가 듣노라. 에정지(미상) 가다가 듣노라.
-                사슴(탈 쓴 광대)이 솟대에 올라서 해금을 켜는 것을 듣노라.
-                얄리얄리 얄라셩 얄라리 얄라
-
-                가다 보니 배불룩한 술독에 독한 술을 빚는구나.
-                조롱박꽃 모양 누룩이 매워 (나를) 붙잡으니 내 어찌 하리이까.[1]
-                얄리얄리 얄라셩 얄라리 얄라`;
 
 const FETCH_BOARD = gql`
   query fetchBoard($ID: ID!) {
@@ -51,6 +19,8 @@ const FETCH_BOARD = gql`
 
 const Detail = () => {
   const myUrl = useParams();
+  const router = useRouter();
+
   // console.log(myUrl.boardId);
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
@@ -107,15 +77,7 @@ const Detail = () => {
           </div>
         </div>
         <img src="/image1.jpg" width="400" height="531" />
-        <div className={styles['D_content']}>
-          {/* {publishText.split('\n').map((line, i) => (
-            <span key={i}>
-              {line}
-              <br />
-            </span>
-          ))} */}
-          {data?.fetchBoard.contents}
-        </div>
+        <div className={styles['D_content']}>{data?.fetchBoard.contents}</div>
         <div className={styles['D_preview']}>
           <img src="/Frame.png" />
         </div>
@@ -136,7 +98,10 @@ const Detail = () => {
             <img src="/menu.png" width="24" height="24" />
             <p>목록으로</p>
           </button>
-          <button className={styles.button}>
+          <button
+            className={styles.button}
+            onClick={() => router.push(`/boards/${myUrl.boardId}/edit`)}
+          >
             <img src="/edit.png" />
             수정하기
           </button>

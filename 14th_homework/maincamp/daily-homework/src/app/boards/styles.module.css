@@ -116,5 +116,8 @@
   padding: 12px 24px;
   gap: 8px;
   display: grid;
+
   grid-template-columns: 64px 848px 100px 100px;
+  border-radius: 8px;
+  border: 1px solid #f2f2f2;
 }
