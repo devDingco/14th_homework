@@ -254,159 +254,148 @@ export default function BoardsWrite(props: BoardsWriteProps) {
   }
 
   return (
-    <div className="flex flex-col items-center p-8 bg-gray-100 min-h-screen">
-      <div className="w-full max-w-2xl bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-3xl font-bold mb-6 text-center">
-          {props.isEdit ? "게시글 수정" : "게시글 작성"}
-        </h1>
-        <div className="mb-4">
-          <label htmlFor="writer" className="block text-gray-700 font-bold mb-2">
-            작성자
-          </label>
+    <div className="content-container">
+      <h1 className="post-title">{props.isEdit ? "게시글 수정" : "게시글 작성"}</h1>
+
+      <div className="form-group first-group form-row-group">
+        <div className="flex-1">
+          <label className="label-required">작성자</label>
           <input
             type="text"
-            id="writer"
+            className="input-field"
+            placeholder="작성자를 입력해 주세요."
             value={writer}
             onChange={onChangeWriter}
             disabled={props.isEdit}
-            placeholder="작성자를 입력해주세요."
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 disabled:bg-gray-200 disabled:cursor-not-allowed"
           />
-          {errors.writer && <div className="text-red-500 text-sm mt-1">{errors.writer}</div>}
+          {errors.writer && <div className="error-message">{errors.writer}</div>}
         </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-700 font-bold mb-2">
-            비밀번호
-          </label>
+        <div className="flex-1">
+          <label className="label-required">비밀번호</label>
           <input
             type="password"
-            id="password"
+            className="input-field"
+            placeholder="비밀번호를 입력해 주세요."
             value={password}
             onChange={onChangePassword}
             disabled={props.isEdit}
-            placeholder="비밀번호를 입력해주세요."
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 disabled:bg-gray-200 disabled:cursor-not-allowed"
           />
-          {errors.password && <div className="text-red-500 text-sm mt-1">{errors.password}</div>}
+          {errors.password && <div className="error-message">{errors.password}</div>}
         </div>
-        <div className="mb-4">
-          <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
-            제목
-          </label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={onChangeTitle}
-            placeholder="제목을 입력해주세요."
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-          />
-          {errors.title && <div className="text-red-500 text-sm mt-1">{errors.title}</div>}
-        </div>
-        <div className="mb-6">
-          <label htmlFor="contents" className="block text-gray-700 font-bold mb-2">
-            내용
-          </label>
-          <textarea
-            id="contents"
-            value={contents}
-            onChange={onChangeContents}
-            placeholder="내용을 입력해주세요."
-            rows={10}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-          ></textarea>
-          {errors.contents && <div className="text-red-500 text-sm mt-1">{errors.contents}</div>}
-        </div>
-        {/* 주소, 유튜브, 사진 첨부 관련 필드 추가 */}
-        <div className="mb-4">
-            <label htmlFor="youtubeUrl" className="block text-gray-700 font-bold mb-2">
-              유튜브 링크
-            </label>
-            <input
-              type="text"
-              id="youtubeUrl"
-              value={youtubeUrl}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setYoutubeUrl(e.target.value)}
-              placeholder="링크를 입력해주세요."
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-            />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">주소</label>
-          <div className="flex items-center space-x-2 mb-2">
-            <input
-              type="text"
-              value={boardAddress.zipcode}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBoardAddress({ ...boardAddress, zipcode: e.target.value })}
-              placeholder="우편번호"
-              className="w-24 px-3 py-2 border border-gray-300 rounded-lg"
-            />
-            <button
-              className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
-            >
-              우편번호 검색
-            </button>
-          </div>
-          <input
-            type="text"
-            value={boardAddress.address}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBoardAddress({ ...boardAddress, address: e.target.value })}
-            placeholder="주소를 입력해 주세요."
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg mb-2"
-          />
-          <input
-            type="text"
-            value={boardAddress.addressDetail}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBoardAddress({ ...boardAddress, addressDetail: e.target.value })}
-            placeholder="상세주소"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-          />
-        </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 font-bold mb-2">사진 첨부</label>
-          <div className="flex items-center space-x-4">
-            {Array(3)
-              .fill(null)
-              .map((_, index) => (
-                <div key={index} className="w-24 h-24 bg-gray-200 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-gray-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M12 5v14M5 12h14" />
-                  </svg>
-                  <span className="text-xs mt-1">클릭해서 업로드</span>
-                </div>
-              ))}
-          </div>
-        </div>
+      </div>
 
-        <div className="flex justify-center space-x-4 mt-8">
-            <button
-                className="px-6 py-3 rounded-lg font-bold text-white bg-gray-400 hover:bg-gray-500 transition-colors"
-                onClick={onClickCancel}
-            >
-                취소
-            </button>
-            <button
-                className={`px-6 py-3 rounded-lg font-bold transition-colors ${
-                    !props.isEdit && !isFormValid
-                        ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                        : "bg-orange-500 hover:bg-orange-600 text-white"
-                }`}
-                onClick={props.isEdit ? onClickUpdate : onClickSubmit}
-                disabled={!props.isEdit && !isFormValid}
-            >
-                {props.isEdit ? "수정하기" : "등록하기"}
-            </button>
+      <div className="form-group">
+        <label className="label-required">제목</label>
+        <input
+          type="text"
+          className="input-field"
+          placeholder="제목을 입력해 주세요."
+          value={title}
+          onChange={onChangeTitle}
+        />
+        {errors.title && <div className="error-message">{errors.title}</div>}
+      </div>
+
+      <div className="form-group no-border">
+        <label className="label-required">내용</label>
+        <textarea
+          className="textarea-field"
+          placeholder="내용을 입력해 주세요."
+          value={contents}
+          onChange={onChangeContents}
+        ></textarea>
+        {errors.contents && <div className="error-message">{errors.contents}</div>}
+      </div>
+
+      <div className="form-group">
+        <label>주소</label>
+        <div className="flex-gap-8 mb-8">
+          <input
+            type="text"
+            className="input-field w-120"
+            placeholder="01234"
+            value={boardAddress.zipcode}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setBoardAddress({ ...boardAddress, zipcode: e.target.value })
+            }
+          />
+          <button className="button secondary">우편번호 검색</button>
         </div>
+        <input
+          type="text"
+          className="input-field mb-8"
+          placeholder="주소를 입력해 주세요."
+          value={boardAddress.address}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setBoardAddress({ ...boardAddress, address: e.target.value })
+          }
+        />
+        <input
+          type="text"
+          className="input-field"
+          placeholder="상세주소"
+          value={boardAddress.addressDetail}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setBoardAddress({ ...boardAddress, addressDetail: e.target.value })
+          }
+        />
+      </div>
+
+      <div className="form-group">
+        <label>유튜브 링크</label>
+        <input
+          type="text"
+          className="input-field"
+          placeholder="링크를 입력해 주세요."
+          value={youtubeUrl}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setYoutubeUrl(e.target.value)}
+        />
+      </div>
+
+      <div className="form-group">
+        <label>사진 첨부</label>
+        <div className="file-upload-grid">
+          {Array(3)
+            .fill(null)
+            .map((_, index) => (
+              <div key={index} className="file-upload-box">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
+                <span>클릭해서 사진 업로드</span>
+              </div>
+            ))}
+        </div>
+      </div>
+
+      <div className="button-container">
+        <button className="button secondary" onClick={onClickCancel}>취소</button>
+        <button
+          className="button primary"
+          onClick={props.isEdit ? onClickUpdate : onClickSubmit}
+          disabled={!props.isEdit && !isFormValid}
+          style={
+            props.isEdit
+              ? { backgroundColor: "#F26D21", color: "#fff", cursor: "pointer" }
+              : {
+                  backgroundColor: isFormValid ? "#F26D21" : "#4B5563",
+                  color: isFormValid ? "#fff" : "#BDBDBD",
+                  cursor: isFormValid ? "pointer" : "not-allowed",
+                }
+          }
+        >
+          {props.isEdit ? "수정하기" : "등록하기"}
+        </button>
       </div>
     </div>
   );
