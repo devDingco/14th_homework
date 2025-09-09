@@ -1,0 +1,9 @@
+'use client';
+// 상세페이지
+import BoardsDetail from '@/components/boards-detail'; // 분리한 컴포넌트 import
+
+// 게시글 상세보기 페이지 컴포넌트
+export default function BoardsDetailPage() {
+  return(
+  <BoardsDetail />;)
+}
