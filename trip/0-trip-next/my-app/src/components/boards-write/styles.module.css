@@ -45,12 +45,21 @@ padding: 1.2rem 1.6rem;
 border-radius: 0.8rem;
 border: 0.1rem solid var(--Gray-Gray-200);
 background: var(--Gray-W);
+
+height: 4.8rem;
 }
 
 .input__box::placeholder {
   color: var(--Gray-Gray-400);
   font-size: 1.6rem;
   font-weight: 400;
+}
+
+/* readOnly일 때 */
+.readOnly {
+  border-radius: 0.8rem;
+  background: var(--gray-50);
+  cursor: not-allowed;
 }
 
 .Error {

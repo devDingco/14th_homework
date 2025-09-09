@@ -13,17 +13,17 @@ interface RegisterInputProps {
   type?: string
   value?: string          // optional
   onChange?: (value: string) => void   // optional
+  readOnly?: boolean
 }
 
 // Input 컴포넌트
-export const RegisterInput: React.FC<RegisterInputProps> = ({ inputTitle, display = "block", myPlaceholder, width, height, type = "text", value, onChange }) => {
+export const RegisterInput: React.FC<RegisterInputProps> = ({ inputTitle, display = "block", myPlaceholder, width, height, type = "text", value, onChange, readOnly = false}) => {
     const [Value, setValue] = useState("")
     const [Error, setError] = useState("")
     
     const onChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
 
         const newValue = event.target.value   // 임시 변수에 담음
-        setValue(newValue)   // 상태 업데이트
         onChange?.(newValue)
 
         if(newValue === ""){
@@ -41,11 +41,12 @@ export const RegisterInput: React.FC<RegisterInputProps> = ({ inputTitle, displa
         </div>
         <input
           type={type}
-          className={styles.input__box}
+          className={`${styles.input__box} ${readOnly ? styles.readOnly : ""}`}
           placeholder={myPlaceholder} 
           style={{ width: width, height: height }}
           value={value}
-          onChange={onChangeValue} />
+          onChange={onChangeValue}
+          readOnly={readOnly} />
           <div className={styles.Error} style={{ display: display }}>{Error}</div>
       </div>
     )
@@ -70,7 +71,6 @@ export const RegisterText: React.FC<RegisterTextProps> = ({ inputTitle, display 
     const onChangeValue = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 
         const newValue = event.target.value   // 임시 변수에 담음
-        setValue(newValue)   // 상태 업데이트
         onChange?.(newValue)
 
         if(newValue === ""){
