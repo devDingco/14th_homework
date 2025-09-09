@@ -16,6 +16,7 @@ import goodImage from '@assets/good.png'
 import hamberger from '@assets/hamberger.png'
 import pencil from '@assets/pencil.png'
 import { FETCH_BOARD } from 'commons/boards/queries'
+import CommentWriteComponent from '../comment-write'
 
 const IMAGE_SRC = {
   profileImage: {
@@ -118,6 +119,7 @@ export default function BoardDetailPage() {
             </div>
           </div>
         </div>
+        <CommentWriteComponent />
       </div>
     </div>
   )

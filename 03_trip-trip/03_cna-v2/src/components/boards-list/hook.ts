@@ -9,6 +9,8 @@ export default function useBoardsList(props: BoardListProps) {
 
   const router = useRouter()
   const onClickDelete = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation()
+
     try {
       const response = await deleteBoard({
         variables: { boardId: props.hoveredId },
@@ -21,8 +23,6 @@ export default function useBoardsList(props: BoardListProps) {
   }
 
   const onClickDetail = async (event: MouseEvent<HTMLButtonElement>, id: String) => {
-    event.stopPropagation()
-
     router.push(`/boards/${id}`)
   }
 
