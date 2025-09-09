@@ -65,8 +65,8 @@ export default function CommentSection({
     }
   }, [boardId, initialComments.length, refreshComments]);
 
-  const addComment = async ({ rating, content }: NewComment) => {
-    if (!boardId) return;
+  const addComment = async ({ rating, content, author }: NewComment) => {
+    if (!boardId || !author) return; // 로그인하지 않은 경우 처리하지 않음
     
     try {
       setLoading(true);

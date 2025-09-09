@@ -51,14 +51,5 @@ yarn dev
 
 
 **로그인 테스트 계정**
-
-user@example.com
-
-
-P@ssword123!
-
-
 user1@example.com
-
-
-Asdfg1234!
+P@ssword123!

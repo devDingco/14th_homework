@@ -4,17 +4,19 @@ import "./comment.css";
 import { useState } from "react";
 import InquiryComposer from "./inquiryComposer";
 import InquiryItem from "./inquiryItem";
-import type { InquiryComment, NewInquiryComment, NewInquiryReply } from "@/types/comment";
+import type { InquiryComment, NewInquiryComment, NewInquiryReply } from "@/_types/comment";
 import React from "react";
 
 export default function InquirySection({ initialComments = [] as InquiryComment[] }) {
   const [comments, setComments] = useState<InquiryComment[]>(initialComments);
 
-  const addComment = ({ content }: NewInquiryComment) => {
+  const addComment = ({ content, author }: NewInquiryComment) => {
+    if (!author) return; // 로그인하지 않은 경우 처리하지 않음
+    
     const newComment: InquiryComment = {
       id: String(Date.now()),
       avatar: "/images/mobile/profile/img-1.png",
-      author: "익명",
+      author,
       date: new Date().toISOString().slice(0, 10).replaceAll("-", "."),
       content,
       replies: [],
