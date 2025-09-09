@@ -2,14 +2,9 @@
 import Image from 'next/image'
 import styles from './styles.module.css'
 import chatImage from '@assets/chat.png'
-import { ChangeEvent, useState } from 'react'
-import { useMutation } from '@apollo/client'
-import {
-  CreateBoardCommentDocument,
-  CreateBoardCommentMutation,
-  CreateBoardCommentMutationVariables,
-  FetchBoardCommentsDocument,
-} from 'commons/graphql/graphql'
+
+import { CommentWriteProps } from './types'
+import useCommentWrite from './hook'
 
 const IMAGE_SRC = {
   chatImage: {
@@ -18,69 +13,25 @@ const IMAGE_SRC = {
   },
 }
 
-interface CommentWriteProps {
-  boardId: string
-}
-
 export default function CommentWriteComponent(props: CommentWriteProps) {
-  const [createBoardComment] = useMutation<
-    CreateBoardCommentMutation,
-    CreateBoardCommentMutationVariables
-  >(CreateBoardCommentDocument)
-
-  const [writer, setWriter] = useState('')
-  const [password, setPassword] = useState('')
-  const [contents, setContents] = useState('')
-  const [rating, setRating] = useState(0)
-
-  const handleChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-    setWriter(event.target.value)
-  }
-  const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value)
-  }
-  const handleChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setContents(event.target.value)
-  }
-  const handleChangeRating = (event) => {
-    setRating(event.target.value)
-  }
-
-  const handleSubmit = async () => {
-    try {
-      const { data } = await createBoardComment({
-        variables: {
-          createBoardCommentInput: {
-            writer,
-            password,
-            contents,
-            rating,
-          },
-          boardId: props.boardId,
-        },
-        refetchQueries: [
-          {
-            query: FetchBoardCommentsDocument,
-            variables: { boardId: props.boardId },
-          },
-        ],
-      })
-      setWriter('')
-      setPassword('')
-      setContents('')
-      setRating(0)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
+  const {
+    handleChangeWriter,
+    handleChangePassword,
+    handleChangeContents,
+    handleChangeRating,
+    handleSubmit,
+    writer,
+    password,
+    contents,
+    rating,
+  } = useCommentWrite({ boardId: props.boardId })
   return (
     <div className={styles.comment_layout}>
       <div className={styles.comment_title}>
         <Image src={IMAGE_SRC.chatImage.src} alt={IMAGE_SRC.chatImage.alt} />
         <p>댓글</p>
       </div>
-      <div>대충 별점 들어가는 곳</div>
+      <div>대충 별점 들어가는 곳 {rating}</div>
       {/* 인풋3개 들어가는 곳 */}
       <div className={styles.comment_inputs}>
         {/* 위에 인풋 2개 */}

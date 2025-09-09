@@ -9,6 +9,7 @@ import {
   FetchBoardCommentsQuery,
   FetchBoardCommentsQueryVariables,
 } from 'commons/graphql/graphql'
+import { CommentListProps } from './types'
 
 const IMAGE_SRC = {
   profileImage: {
@@ -25,9 +26,6 @@ const IMAGE_SRC = {
   },
 }
 
-interface CommentListProps {
-  boardId: string
-}
 export default function CommentListComponent(props: CommentListProps) {
   const { data, loading } = useQuery<FetchBoardCommentsQuery, FetchBoardCommentsQueryVariables>(
     FetchBoardCommentsDocument,
