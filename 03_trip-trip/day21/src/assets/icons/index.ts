@@ -1,7 +1,0 @@
-export { default as LinkIcon } from './link.svg'
-export { default as LocationIcon } from './location.svg'
-export { default as ProfileIcon } from './profile.svg'
-export { default as BadIcon } from './bad.svg'
-export { default as GoodIcon } from './good.svg'
-export { default as EditIcon } from './edit.svg'
-export { default as ListIcon } from './menu.svg'

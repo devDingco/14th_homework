@@ -1,7 +1,0 @@
-export { ReactComponent as LinkIcon } from './link.svg'
-export { ReactComponent as LocationIcon } from './location.svg'
-export { ReactComponent as ProfileIcon } from './profile.svg'
-export { ReactComponent as BadIcon } from './bad.svg'
-export { ReactComponent as GoodIcon } from './good.svg'
-export { ReactComponent as EditIcon } from './edit.svg'
-export { ReactComponent as ListIcon } from './menu.svg'
