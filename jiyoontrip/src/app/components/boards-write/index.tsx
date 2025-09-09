@@ -1,243 +1,22 @@
 "use client";
-import { ChangeEvent, useState } from "react";
-import { gql, useMutation, useQuery } from "@apollo/client";
-import Image from "next/image";
+import useBoardWrite from "./hook";
 import styles from "./styles.module.css";
-import { useParams, useRouter } from "next/navigation";
-
-const CREAT_BOARD = gql`
-  # ↓↓↓↓↓↓↓↓↓↓변수 타입 정하는 곳 ↓↓↓↓↓↓↓↓↓↓↓↓
-  mutation createBoard($createBoardInput: CreateBoardInput!) {
-    # ↓↓↓↓↓↓↓↓↓↓ 실제로 내가 입력하는 곳 ↓↓↓↓↓↓↓↓↓↓↓↓
-    createBoard(createBoardInput: $createBoardInput) {
-      _id
-      writer
-      title
-      contents
-      youtubeUrl
-      likeCount
-      dislikeCount
-      images
-      boardAddress {
-        zipcode
-        address
-        addressDetail
-      }
-      createdAt
-      updatedAt
-      deletedAt
-    }
-  }
-`;
-
-const UPDATE_BOARD = gql`
-  mutation updateBoard(
-    $updateBoardInput: UpdateBoardInput!
-    $password: String
-    $boardId: ID!
-  ) {
-    updateBoard(
-      updateBoardInput: $updateBoardInput
-      password: $password
-      boardId: $boardId
-    ) {
-      _id
-      writer
-      title
-      contents
-      youtubeUrl
-      likeCount
-      dislikeCount
-      images
-      boardAddress {
-        _id
-        zipcode
-        address
-        addressDetail
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
-    fetchBoard(boardId: $boardId) {
-      _id
-      writer
-      title
-      contents
-      likeCount
-      dislikeCount
-      images
-      boardAddress {
-        _id
-        zipcode
-        address
-        addressDetail
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
+import Image from "next/image";
 
 export default function BoardWrite(props) {
-  const router = useRouter();
-  const params = useParams();
-  const [createBoard] = useMutation(CREAT_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: {
-      boardId: params.boardId,
-    },
-  });
-  const [author, setAuthor] = useState("");
-  const [password, setPassword] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-
-  const [authorError, setAuthorError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [titleError, setTitleError] = useState("");
-  const [contentError, setContentError] = useState("");
-  const [isActive, setIsActive] = useState(false);
-
-  const onChangeAuthor = (event: ChangeEvent<HTMLInputElement>) => {
-    setAuthor(event.target.value);
-    if (event.target.value !== "" && password !== "" && title !== "" && content !== "") {
-      setIsActive(true);
-      if (props.isEdit === true) {
-        setAuthor(data?.fetchBoard.writer);
-      }
-    }
-  };
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-    if (author !== "" && event.target.value !== "" && title !== "" && content !== "") {
-      setIsActive(true);
-    }
-  };
-  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-    if (author !== "" && password !== "" && event.target.value !== "" && content !== "") {
-      setIsActive(true);
-    }
-  };
-  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(event.target.value);
-    if (author !== "" && password !== "" && title !== "" && event.target.value !== "") {
-      setIsActive(true);
-    }
-  };
-
-  const onClickSignup = async () => {
-    try {
-      if (author === "") {
-        setAuthorError("필수입력 사항 입니다.");
-      } else {
-        setAuthorError("");
-      }
-      if (password === "") {
-        setPasswordError("필수입력 사항 입니다.");
-      } else {
-        setPasswordError("");
-      }
-      if (title === "") {
-        setTitleError("필수입력 사항 입니다.");
-      } else {
-        setTitleError("");
-      }
-      if (content === "") {
-        setContentError("필수입력 사항 입니다.");
-      } else {
-        setContentError("");
-      }
-
-      if (author !== "" && password !== "" && title !== "" && content !== "") {
-        const result = await createBoard({
-          variables: {
-            createBoardInput: {
-              writer: author,
-              password: password,
-              title: title,
-              contents: content,
-              youtubeUrl: "",
-              images: [""],
-              boardAddress: {
-                zipcode: "",
-                address: "",
-                addressDetail: "",
-              },
-            },
-          },
-        });
-        console.log(result);
-        console.log(result.data.createBoard._id);
-        alert("게시글을 등록하였습니다!");
-        router.push(`/boards/${result.data.createBoard._id}`);
-      }
-    } catch (error) {
-      alert(error);
-    } finally {
-    }
-  };
-
-  const onClickUpdate = async () => {
-    try {
-      if (author === "") {
-        setAuthorError("필수입력 사항 입니다.");
-      } else {
-        setAuthorError("");
-      }
-      if (password === "") {
-        setPasswordError("필수입력 사항 입니다.");
-      } else {
-        setPasswordError("");
-      }
-      if (title === "") {
-        setTitleError("필수입력 사항 입니다.");
-      } else {
-        setTitleError("");
-      }
-      if (content === "") {
-        setContentError("필수입력 사항 입니다.");
-      } else {
-        setContentError("");
-      }
-
-      if (author !== "" && password !== "" && title !== "" && content !== "") {
-        // alert("게시글을 수정하였습니다!");
-
-        const updateTite = title !== "" ? title : data?.fetchBoard.title;
-        const updateContent = content !== "" ? content : data?.fetchBoard.contents;
-        const result = await updateBoard({
-          variables: {
-            updateBoardInput: {
-              title: updateTite,
-              contents: updateContent,
-              youtubeUrl: "",
-              images: [""],
-            },
-            password: password,
-            boardId: String(params.boardId),
-          },
-          refetchQueries: [
-            { query: FETCH_BOARD, variables: { boardId: String(params.boardId) } },
-          ],
-        });
-
-        router.push(`/boards/${result.data.updateBoard._id}`);
-      }
-    } catch (error) {
-      alert(error);
-    } finally {
-    }
-  };
+  const {
+    onChangeAuthor,
+    onChangePassword,
+    onChangeTitle,
+    onChangeContent,
+    onClickSignup,
+    onClickUpdate,
+    authorError,
+    passwordError,
+    titleError,
+    contentError,
+    isActive,
+  } = useBoardWrite();
 
   return (
     <>
@@ -261,8 +40,11 @@ export default function BoardWrite(props) {
                 type="text"
                 placeholder="작성자 명을 입력해 주세요."
                 onChange={onChangeAuthor}
-                defaultValue={data?.fetchBoard.writer}
-                // disabled={props.isEdit === true ? true : false}
+                defaultValue={props.data?.fetchBoard.writer}
+                disabled={props.isEdit === true ? true : false}
+                style={{
+                  backgroundColor: props.isEdit === true ? "#f2f2f2" : "#fff",
+                }}
               />
               <div className={styles.inputError}>{authorError}</div>
             </div>
@@ -281,8 +63,12 @@ export default function BoardWrite(props) {
                 className={styles.inputArea__input}
                 type="password"
                 placeholder="비밀번호를 입력해 주세요."
+                defaultValue={props.isEdit === true ? "********" : ""}
                 onChange={onChangePassword}
-                // disabled={props.isEdit === true ? true : false}
+                disabled={props.isEdit === true ? true : false}
+                style={{
+                  backgroundColor: props.isEdit === true ? "#f2f2f2" : "#fff",
+                }}
               />
               <div className={styles.inputError}>{passwordError}</div>
             </div>
@@ -304,7 +90,7 @@ export default function BoardWrite(props) {
               type="text"
               placeholder="제목을 입력해 주세요."
               onChange={onChangeTitle}
-              defaultValue={data?.fetchBoard.title}
+              defaultValue={props.data?.fetchBoard.title}
             />
             <div className={styles.inputError}>{titleError}</div>
           </div>
@@ -324,7 +110,7 @@ export default function BoardWrite(props) {
               className={styles.inputArea__textarea}
               placeholder="내용을 입력해 주세요."
               onChange={onChangeContent}
-              defaultValue={data?.fetchBoard.contents}
+              defaultValue={props.data?.fetchBoard.contents}
             />
             <div className={styles.inputError}>{contentError}</div>
           </div>
@@ -434,7 +220,12 @@ export default function BoardWrite(props) {
               className={styles.inputArea__registerButton}
               onClick={props.isEdit === false ? onClickSignup : onClickUpdate}
               style={{
-                backgroundColor: isActive === true ? "#2974E5" : "#C7C7C7",
+                backgroundColor:
+                  props.isEdit === true
+                    ? "#2974E5" // 수정 페이지에서는 무조건 파란색
+                    : isActive === true
+                    ? "#2974E5" // 등록 페이지에서 활성화 시 파란색
+                    : "#C7C7C7",
               }}
             >
               {props.isEdit === true ? "수정" : "등록"}하기
