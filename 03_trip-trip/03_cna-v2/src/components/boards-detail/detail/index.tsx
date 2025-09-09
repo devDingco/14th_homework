@@ -17,6 +17,7 @@ import hamberger from '@assets/hamberger.png'
 import pencil from '@assets/pencil.png'
 import { FETCH_BOARD } from 'commons/boards/queries'
 import CommentWriteComponent from '../comment-write'
+import CommentListComponent from '../comment-list'
 
 const IMAGE_SRC = {
   profileImage: {
@@ -73,53 +74,48 @@ export default function BoardDetailPage() {
   }
 
   return (
-    <div className={styles.detailLayout}>
-      <div className={styles.detailBody}>
-        <div className={styles.detailFrame}>
-          <div className={styles.detailSubject}>{data?.fetchBoard?.title}</div>
-          <div className={styles.detailMetadataContainer}>
-            <div className={styles.detailMetadataProfile}>
-              <Image src={IMAGE_SRC.profileImage.src} alt={IMAGE_SRC.profileImage.alt} />
-              <div> {data?.fetchBoard?.writer}</div>
-            </div>
-            <div className={styles.detailMetadataDate}>{data?.fetchBoard?.createdAt}</div>
+    <div className={styles.detailFrame}>
+      <div className={styles.detailSubject}>{data?.fetchBoard?.title}</div>
+      <div className={styles.detailMetadataContainer}>
+        <div className={styles.detailMetadataProfile}>
+          <Image src={IMAGE_SRC.profileImage.src} alt={IMAGE_SRC.profileImage.alt} />
+          <div> {data?.fetchBoard?.writer}</div>
+        </div>
+        <div className={styles.detailMetadataDate}>{data?.fetchBoard?.createdAt}</div>
+      </div>
+      <div className={styles.enrollBorder}></div>
+      <div className={styles.detailMetadataIconContainer}>
+        <Image src={IMAGE_SRC.linkImage.src} alt={IMAGE_SRC.linkImage.alt} />
+        <Image src={IMAGE_SRC.locationImage.src} alt={IMAGE_SRC.locationImage.alt} />
+      </div>
+      <div className={styles.detailContentContainer}>
+        <Image
+          src={IMAGE_SRC.cheongsanImage.src}
+          alt={IMAGE_SRC.cheongsanImage.alt}
+          className={styles.detailContentImage}
+        />
+        <div className={styles.detailContentText}>{data?.fetchBoard?.contents}</div>
+        <Image src={IMAGE_SRC.neotubeImage.src} alt={IMAGE_SRC.neotubeImage.alt} />
+        <div className={styles.detailContentGoodOrBad}>
+          <div className={styles.detailGoodContainer}>
+            <Image src={IMAGE_SRC.badImage.src} alt={IMAGE_SRC.badImage.alt} />
+            <div className={styles.detailBadText}>24</div>
           </div>
-          <div className={styles.enrollBorder}></div>
-          <div className={styles.detailMetadataIconContainer}>
-            <Image src={IMAGE_SRC.linkImage.src} alt={IMAGE_SRC.linkImage.alt} />
-            <Image src={IMAGE_SRC.locationImage.src} alt={IMAGE_SRC.locationImage.alt} />
-          </div>
-          <div className={styles.detailContentContainer}>
-            <Image
-              src={IMAGE_SRC.cheongsanImage.src}
-              alt={IMAGE_SRC.cheongsanImage.alt}
-              className={styles.detailContentImage}
-            />
-            <div className={styles.detailContentText}>{data?.fetchBoard?.contents}</div>
-            <Image src={IMAGE_SRC.neotubeImage.src} alt={IMAGE_SRC.neotubeImage.alt} />
-            <div className={styles.detailContentGoodOrBad}>
-              <div className={styles.detailGoodContainer}>
-                <Image src={IMAGE_SRC.badImage.src} alt={IMAGE_SRC.badImage.alt} />
-                <div className={styles.detailBadText}>24</div>
-              </div>
-              <div className={styles.detailGoodContainer}>
-                <Image src={IMAGE_SRC.goodImage.src} alt={IMAGE_SRC.goodImage.alt} />
-                <div className={styles.detailGoodText}>12</div>
-              </div>
-            </div>
-            <div className={styles.detailButtonsContainer}>
-              <button className={styles.detailButton}>
-                <Image src={IMAGE_SRC.hamberger.src} alt={IMAGE_SRC.hamberger.alt} />
-                <div>목록으로</div>
-              </button>
-              <button className={styles.detailButton} onClick={goToEditPage}>
-                <Image src={IMAGE_SRC.pencil.src} alt={IMAGE_SRC.pencil.alt} />
-                <div>수정하기</div>
-              </button>
-            </div>
+          <div className={styles.detailGoodContainer}>
+            <Image src={IMAGE_SRC.goodImage.src} alt={IMAGE_SRC.goodImage.alt} />
+            <div className={styles.detailGoodText}>12</div>
           </div>
         </div>
-        <CommentWriteComponent />
+        <div className={styles.detailButtonsContainer}>
+          <button className={styles.detailButton}>
+            <Image src={IMAGE_SRC.hamberger.src} alt={IMAGE_SRC.hamberger.alt} />
+            <div>목록으로</div>
+          </button>
+          <button className={styles.detailButton} onClick={goToEditPage}>
+            <Image src={IMAGE_SRC.pencil.src} alt={IMAGE_SRC.pencil.alt} />
+            <div>수정하기</div>
+          </button>
+        </div>
       </div>
     </div>
   )
