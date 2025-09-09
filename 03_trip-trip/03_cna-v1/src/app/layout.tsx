@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
-import ApolloSetting from '@/commons/settings/apollo-setting'
+import ApolloSetting from '@/shared/api/apollo/provider'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
