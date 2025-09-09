@@ -32,6 +32,7 @@ export default function BoardsPage (props:IBoardsPageProps ) {
                                 return(
                                     <div 
                                         key={el._id} 
+                                        id={el._id}
                                         className={styles.boardsListRow} 
                                         onClick={() => onClickBoard(el._id)}
                                     >
@@ -43,9 +44,8 @@ export default function BoardsPage (props:IBoardsPageProps ) {
                                         <div
                                             className={styles.deleteButton} 
                                             onClick={(event) => {
-                                            event?.stopPropagation()
-                                            onClickDelete(el._id)
-                                            }}
+                                                onClickDelete(event, el._id)
+                                            }} 
                                         >
                                             <img className={styles.iconImage} src="/images/delete.png" alt="삭제아이콘"/>
                                         </div>

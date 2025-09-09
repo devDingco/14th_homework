@@ -20,10 +20,13 @@ export default function useBoardsPage () {
     const onClickBoard = async (boardId: string) => {
         await router.push(`/boards/${boardId}`)
     } 
+
     
     const [deleteBoard] = useMutation(DELETE_BOARD)
 
-    const onClickDelete =  async (boardId: string) => {        
+    const onClickDelete =  async (event: React.MouseEvent<HTMLDivElement>, boardId: string) => {        
+        event.stopPropagation(); 
+
         try{
             const result = await deleteBoard({
                 variables: {
@@ -42,7 +45,10 @@ export default function useBoardsPage () {
         }
         
     } 
-
+    
+ 
+    
+    
     return {
         data,
         onClickBoard,
