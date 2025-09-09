@@ -5,8 +5,9 @@ import { gql, useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
 
 const FETCH_BOARD = gql`
-  query fetchBoard($ID: ID!) {
-    fetchBoard(boardId: $ID) {
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      _id
       writer
       title
       contents
@@ -15,13 +16,14 @@ const FETCH_BOARD = gql`
     }
   }
 `;
+
 export default function BoardComponentEditPage() {
   const myUrl = useParams();
   // console.log(myUrl.boardId);
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
-      ID: String(myUrl.boardId),
+      boardId: String(myUrl.boardId),
     },
   });
   // console.log(data);

@@ -4,46 +4,17 @@ import { gql, useQuery } from '@apollo/client';
 import { useRouter, useParams } from 'next/navigation';
 import styles from './styles.module.css';
 import dayjs from 'dayjs';
+import useDetail from './hook';
+import { D_Variables } from './types';
 
-const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
-    fetchBoard(boardId: $boardId) {
-      _id
-      writer
-      title
-      contents
-      createdAt
-      updatedAt
-    }
-  }
-`;
-
-const Detail = () => {
-  const myUrl = useParams();
-  const router = useRouter();
-
-  // console.log(myUrl.boardId);
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: {
-      boardId: String(myUrl.boardId),
-    },
-  });
-
-  // console.log(data?.fetchBoard.createdAt);
-
-  const dt = data?.fetchBoard.createdAt;
-  const koreaTime = dayjs(dt).format('YYYY-MM-DD HH:mm:ss');
-  // console.log(koreaTime);
+export default function Detail(props: D_Variables) {
+  const { url, router, d_variables, data, dt, koreaTime } = useDetail();
 
   return (
     <div className={styles['D_layout']}>
       <div className={styles['D_enroll-row-container']}>
         <div className={styles['D_title']}>
-          <div className={styles['D_title-text']}>
-            {/* 살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애
-            살어리랏다얄리얄리 얄랑셩 얄라리 얄라 */}
-            {data?.fetchBoard.title}
-          </div>
+          <div className={styles['D_title-text']}>{data?.fetchBoard.title}</div>
           <div className={styles['D_info']}>
             <div className={styles['D_info-1']}>
               <div className={styles['D_info-1-profile']}>
@@ -101,7 +72,7 @@ const Detail = () => {
           </button>
           <button
             className={styles.button}
-            onClick={() => router.push(`/boards/${myUrl.boardId}/edit`)}
+            onClick={() => router.push(`/boards/${url.boardId}/edit`)}
           >
             <img src="/edit.png" />
             수정하기
@@ -110,6 +81,4 @@ const Detail = () => {
       </div>
     </div>
   );
-};
-
-export default Detail;
+}
