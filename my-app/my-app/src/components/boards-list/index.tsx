@@ -1,7 +1,5 @@
 "use client";
 
-import useBoardsComponentWrite from "./hook";
-
 import styles from "./style.module.css";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -9,7 +7,50 @@ import addIcon from "../../app/boards/new/assets/add.svg";
 import { useMutation, gql } from "@apollo/client";
 import { error } from "console";
 import { useParams, useRouter } from "next/navigation";
-import { CREATE_BOARD, UPDATE_BOARD } from "./queries";
+
+const FETCH_BOARD = gql`
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      _id
+      writer
+      title
+      contents
+      createdAt
+    }
+  }
+`;
+
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      # password
+      title
+      contents
+      createdAt
+    }
+  }
+`;
+const UPDATE_BOARD = gql`
+  mutation updateBoard(
+    $boardId: ID!
+    $password: String
+    $updateBoardInput: UpdateBoardInput!
+  ) {
+    updateBoard(
+      boardId: $boardId
+      password: $password
+      updateBoardInput: $updateBoardInput
+    ) {
+      _id
+      writer
+      title
+      contents
+      createdAt
+    }
+  }
+`;
 
 export default function BoardsComponentWrite(props) {
   // - 변경되는 입력값 새로 저장하는 상태 설정
