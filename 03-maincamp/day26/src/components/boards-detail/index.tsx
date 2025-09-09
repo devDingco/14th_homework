@@ -1,58 +1,13 @@
 "use client"
 
 import Image from 'next/image';
-// import {useState } from 'react';
 import styles from './styles.module.css';
-import {useRouter, useParams } from 'next/navigation';
-import {gql, useQuery, useMutation} from '@apollo/client';
-// import router from 'next/dist/client/router';
-
-const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
-    fetchBoard(boardId: $boardId) {
-      _id
-      writer
-      title
-      contents
-      createdAt
-    }
-  }
-`;
-
-// const UPDATE_BOARD = gql`
-//   mutation updateBoard($boardId: ID!, $password: String, $updateBoardInput: UpdateBoardInput!) {
-//     updateBoard(boardId: $boardId, password: $password, updateBoardInput: $updateBoardInput) {
-//       _id
-//       title
-//       contents
-//     }
-//   }
-// `;
+import useBoardsDetail from './hook';
+import { use } from 'react';
 
 
-// const CHECK_BOARD_PASSWORD = gql`
-//   mutation checkBoardPassword($boardId: ID!, $password: String!) {
-//     checkBoardPassword(boardId: $boardId, password: $password)
-//   }
-// `;
-
-export default function BoardsDetailPage() {
-  // const [checkBoardPassword] = useMutation(CHECK_BOARD_PASSWORD);
-  const params = useParams()
-  console.log(useParams())
-  console.log(params)
-  const { data } = useQuery(FETCH_BOARD,{
-    variables:{
-     boardId: String(params.boardId)
-    }
-  })
-  console.log(data)
-  const router = useRouter()
-  
-const onClickMove = () => {
-  router.push(`/boards/${params.boardId}/edit`);
-  }
-
+export default function BoardsDetail() {
+  const {onClickMove,onclickMoveList,data} = useBoardsDetail()
     
   return (
     <div className={styles.바디}>
@@ -130,7 +85,7 @@ const onClickMove = () => {
             </div>
           </section>
           <section className={styles['메인-수정하기섹션']}>
-            <button><Image src={"/images/목록으로아이콘.png"} alt="목록으로아이콘" width={24} height={24} />목록으로</button>
+            <button onClick={onclickMoveList}><Image src={"/images/목록으로아이콘.png"} alt="목록으로아이콘" width={24} height={24} />목록으로</button>
             <button onClick={onClickMove}><Image src={"/images/수정하기아이콘.png"} alt="수정하기아이콘" width={24} height={24} />수정하기</button>
           </section>
         </main>

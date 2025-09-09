@@ -38,6 +38,7 @@
     height: 5.2rem;
     display: flex;
     gap: 0.8rem;
+    padding: 1.2rem 2.4rem;
 }
 .board__main__titlebox__number{
     width: 6.4rem;
