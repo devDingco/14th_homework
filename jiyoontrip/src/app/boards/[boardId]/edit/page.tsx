@@ -1,6 +1,6 @@
 "use client";
 
-import BoardWrite from "@/app/commons/components/boards-write";
+import BoardWrite from "@/app/components/boards-write";
 import { gql, useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 const FETCH_BOARD = gql`

@@ -1,6 +1,6 @@
 "use client";
 
-import BoardWrite from "@/app/commons/components/boards-write";
+import BoardWrite from "@/app/components/boards-write";
 
 // $author: String, $title: String, $content: String
 export default function NewPage() {
