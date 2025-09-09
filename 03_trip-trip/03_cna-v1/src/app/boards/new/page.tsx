@@ -2,14 +2,22 @@
 import BoardForm from '@/features/boards/ui/BoardForm'
 import styles from './styles.module.css'
 import { useMutation } from '@apollo/client'
-import { CREATE_BOARD } from '@/features/boards/api/mutation'
+
 import { useRouter } from 'next/navigation'
+import {
+  CreateBoardDocument,
+  CreateBoardMutation,
+  CreateBoardMutationVariables,
+} from '@/shared/api/graphql/graphql'
+import { PostForm } from '@/features/boards/model/types'
 
 export default function BoardsNew() {
   const router = useRouter()
-  const [createBoard] = useMutation(CREATE_BOARD)
+  const [createBoard] = useMutation<CreateBoardMutation, CreateBoardMutationVariables>(
+    CreateBoardDocument
+  )
 
-  const handleCreateSubmit = async (data) => {
+  const handleCreateSubmit = async (data: PostForm) => {
     const { writer, password, title, contents, link, addr, img_src } = data
     try {
       const result = await createBoard({

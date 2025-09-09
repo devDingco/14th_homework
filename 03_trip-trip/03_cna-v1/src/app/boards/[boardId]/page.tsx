@@ -14,36 +14,32 @@ import { useParams, useRouter } from 'next/navigation'
 import { useQuery } from '@apollo/client'
 import { getYouTubeId } from '@/shared/lib/getYoutubeId'
 import { formatUtcToKstYmd } from '@/shared/lib/date/formatUtcToKstYmd'
-import { FETCH_BOARD } from '@/features/boards/api/query'
+
 import Image from 'next/image'
+import {
+  FetchBoardDocument,
+  FetchBoardQuery,
+  FetchBoardQueryVariables,
+} from '@/shared/api/graphql/graphql'
 
 export default function BoardsDetail() {
   const router = useRouter()
-  const params = useParams<{ boardId?: string }>()
-  const { data, loading, error } = useQuery(FETCH_BOARD, {
-    variables: {
-      boardId: params.boardId,
-    },
-  })
+  const params = useParams<{ boardId: string }>()
+  const { data, loading, error } = useQuery<FetchBoardQuery, FetchBoardQueryVariables>(
+    FetchBoardDocument,
+    {
+      variables: {
+        boardId: params.boardId,
+      },
+    }
+  )
 
   if (!params.boardId) return <div>잘못된 접근 입니다.</div>
   if (loading) return <div>로딩 중</div>
   if (error || !data?.fetchBoard) return <div>게시글을 찾을 수 없습니다.</div>
 
-  const {
-    _id,
-    writer,
-    title,
-    contents,
-    youtubeUrl,
-    likeCount,
-    dislikeCount,
-    images,
-    boardAddress,
-    createdAt,
-    updatedAt,
-    deletedAt,
-  } = data.fetchBoard
+  const { writer, title, contents, youtubeUrl, likeCount, dislikeCount, images, createdAt } =
+    data.fetchBoard
 
   const formattedDate = formatUtcToKstYmd(createdAt)
   const firstImg = images?.[0]

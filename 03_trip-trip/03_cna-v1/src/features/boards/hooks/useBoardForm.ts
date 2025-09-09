@@ -2,7 +2,6 @@
 import { ChangeEvent, useState } from 'react'
 import { isEmptyObj } from '../model/utils'
 import { PostForm, ValidateErrors, ValidateValues } from '../model/types'
-import { useParams, useRouter } from 'next/navigation'
 
 export interface UseFormReturn {
   values: PostForm
@@ -29,9 +28,6 @@ const useForm = ({ initialValues, validate, onSubmit, isEdit }: UseFormProps): U
     const initialErrors = validate(initialValues, isEdit)
     return isEmptyObj(initialErrors)
   })
-
-  // const router = useRouter()
-  // const params = useParams()
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
@@ -64,7 +60,6 @@ const useForm = ({ initialValues, validate, onSubmit, isEdit }: UseFormProps): U
     e.preventDefault()
 
     if (isActive) onSubmit(values)
-    // router.push(`/boards/${params.boardId}`)
   }
 
   return {

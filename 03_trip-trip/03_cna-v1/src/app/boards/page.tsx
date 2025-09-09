@@ -2,11 +2,20 @@
 import { useMutation, useQuery } from '@apollo/client'
 import styles from './styles.module.css'
 import { DeleteIcon } from '@/assets/icons'
-import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from '@/features/boards/api/query'
 import { formatUtcToKstYmd } from '@/shared/lib/date/formatUtcToKstYmd'
 import { useRouter } from 'next/navigation'
-import { DELETE_BOARD } from '@/features/boards/api/mutation'
 import { MouseEvent } from 'react'
+import {
+  DeleteBoardDocument,
+  DeleteBoardMutation,
+  DeleteBoardMutationVariables,
+  FetchBoardsCountDocument,
+  FetchBoardsCountQuery,
+  FetchBoardsCountQueryVariables,
+  FetchBoardsDocument,
+  FetchBoardsQuery,
+  FetchBoardsQueryVariables,
+} from '@/shared/api/graphql/graphql'
 
 interface boardListItem {
   _id: string
@@ -16,14 +25,20 @@ interface boardListItem {
 }
 export default function BoardsPage() {
   const router = useRouter()
-  const { data, loading, error } = useQuery(FETCH_BOARDS)
-  const { data: board_num } = useQuery(FETCH_BOARDS_COUNT)
-  const [deleteBoard] = useMutation(DELETE_BOARD)
+  const { data, loading, error } = useQuery<FetchBoardsQuery, FetchBoardsQueryVariables>(
+    FetchBoardsDocument
+  )
+  const { data: board_num } = useQuery<FetchBoardsCountQuery, FetchBoardsCountQueryVariables>(
+    FetchBoardsCountDocument
+  )
+  const [deleteBoard] = useMutation<DeleteBoardMutation, DeleteBoardMutationVariables>(
+    DeleteBoardDocument
+  )
 
   if (loading) return <div>로딩중입니다</div>
-  if (error || !data.fetchBoards) return <div>게시글을 찾을 수 없습니다.</div>
+  if (error || !data?.fetchBoards) return <div>게시글을 찾을 수 없습니다.</div>
 
-  const boardNumber = board_num?.fetchBoardsCount
+  const boardNumber = board_num ? board_num.fetchBoardsCount : ''
 
   const handleNavigate = (id: string) => {
     router.push(`/boards/${id}`)
@@ -35,7 +50,7 @@ export default function BoardsPage() {
       variables: {
         boardId: id,
       },
-      refetchQueries: [{ query: FETCH_BOARDS }, { query: FETCH_BOARDS_COUNT }],
+      refetchQueries: [{ query: FetchBoardsDocument }, { query: FetchBoardsCountDocument }],
     })
   }
 
