@@ -3,6 +3,12 @@ import editImage from '@assets/edit.png'
 import closeImage from '@assets/close.png'
 import Image from 'next/image'
 import styles from './styles.module.css'
+import { useQuery } from '@apollo/client'
+import {
+  FetchBoardCommentsDocument,
+  FetchBoardCommentsQuery,
+  FetchBoardCommentsQueryVariables,
+} from 'commons/graphql/graphql'
 
 const IMAGE_SRC = {
   profileImage: {
@@ -19,21 +25,40 @@ const IMAGE_SRC = {
   },
 }
 
-export default function CommentListComponent() {
-  return (
-    <div className={styles.comment_list_layout}>
-      <div className={styles.comment_list_title}>
-        <Image src={IMAGE_SRC.profileImage.src} alt={IMAGE_SRC.profileImage.alt} />
-        <p className={styles.comment_writer}>홍길동</p>
-        <p>대충 별점 이미지 들어가는 곳</p>
-      </div>
-      <p className={styles.comment_contents}>대충 댓글 내용</p>
-      <p className={styles.comment_date}>2024.11.11</p>
+interface CommentListProps {
+  boardId: string
+}
+export default function CommentListComponent(props: CommentListProps) {
+  const { data, loading } = useQuery<FetchBoardCommentsQuery, FetchBoardCommentsQueryVariables>(
+    FetchBoardCommentsDocument,
+    {
+      variables: { boardId: props.boardId },
+    }
+  )
 
-      <div className={styles.active_images}>
-        <Image src={IMAGE_SRC.editImage.src} alt={IMAGE_SRC.editImage.alt} />
-        <Image src={IMAGE_SRC.closeImage.src} alt={IMAGE_SRC.closeImage.alt} />
-      </div>
-    </div>
+  if (loading) return <div>로딩 중 입니다</div>
+
+  return (
+    <>
+      {data?.fetchBoardComments.map((el) => {
+        const { _id, writer, contents, rating, createdAt } = el
+        return (
+          <div className={styles.comment_list_layout} key={_id}>
+            <div className={styles.comment_list_title}>
+              <Image src={IMAGE_SRC.profileImage.src} alt={IMAGE_SRC.profileImage.alt} />
+              <p className={styles.comment_writer}>{writer}</p>
+              <p>대충 별점 이미지 들어가는 곳 : {rating}점</p>
+            </div>
+            <p className={styles.comment_contents}>{contents}</p>
+            <p className={styles.comment_date}>{createdAt}</p>
+
+            <div className={styles.active_images}>
+              <Image src={IMAGE_SRC.editImage.src} alt={IMAGE_SRC.editImage.alt} />
+              <Image src={IMAGE_SRC.closeImage.src} alt={IMAGE_SRC.closeImage.alt} />
+            </div>
+          </div>
+        )
+      })}
+    </>
   )
 }

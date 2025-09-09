@@ -15,9 +15,11 @@ import badImage from '@assets/bad.svg'
 import goodImage from '@assets/good.png'
 import hamberger from '@assets/hamberger.png'
 import pencil from '@assets/pencil.png'
-import { FETCH_BOARD } from 'commons/boards/queries'
-import CommentWriteComponent from '../comment-write'
-import CommentListComponent from '../comment-list'
+import {
+  FetchBoardDocument,
+  FetchBoardQuery,
+  FetchBoardQueryVariables,
+} from 'commons/graphql/graphql'
 
 const IMAGE_SRC = {
   profileImage: {
@@ -61,10 +63,10 @@ const IMAGE_SRC = {
 export default function BoardDetailPage() {
   const router = useRouter()
   const params = useParams()
-  const id = params.boardId
+  const id = typeof params.boardId === 'string' ? params.boardId : ''
 
   // 보여줄 board 정보 받아오기
-  const { data } = useQuery(FETCH_BOARD, {
+  const { data } = useQuery<FetchBoardQuery, FetchBoardQueryVariables>(FetchBoardDocument, {
     variables: { boardId: id },
   })
 
