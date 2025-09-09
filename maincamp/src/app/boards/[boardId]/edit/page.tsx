@@ -14,6 +14,7 @@ export default function BoardsEditPage (){
       }
   })
 
+
     return(
       <BoardsWrite isEdit={true} data={data}/>
     );

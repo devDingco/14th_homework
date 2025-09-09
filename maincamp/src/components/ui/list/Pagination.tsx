@@ -3,7 +3,7 @@
 import { MouseEvent, useState } from "react"
 import styles from './Pagination.module.css'
 
-export default function Pagination ({BoardsCount, currentPage, changeCurrentPage}:{BoardsCount: number, currentPage: number, changeCurrentPage:void}) {
+export default function Pagination ({BoardsCount, currentPage, changeCurrentPage}:{BoardsCount: number, currentPage: number, changeCurrentPage:(newNum: number) => void}) {
 
     const rowsPerPage = 10
     const numPerPageGroup = 5
@@ -33,7 +33,7 @@ export default function Pagination ({BoardsCount, currentPage, changeCurrentPage
             <div>
                 {pageGroups.map((el, index) => {
                     const pageNum = firstPage + index // 첫 페이지 + index => 1, 2, 3, ...
-                    return( pageNum <= lastPage && <button onClick={onClickPage} id={pageNum} key={pageNum} className={currentPage===pageNum ? styles.clickedPageBtn : styles.pageBtn}>{pageNum}</button> )
+                    return( pageNum <= lastPage && <button onClick={onClickPage} id={String(pageNum)} key={pageNum} className={currentPage===pageNum ? styles.clickedPageBtn : styles.pageBtn}>{pageNum}</button> )
                 })}
             </div>
             <div className={styles.pageMoveBtn}>
