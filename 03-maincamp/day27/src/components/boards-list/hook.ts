@@ -15,6 +15,7 @@ export default function useBoardsList() {
   const router = useRouter();
 
     const onClickDelete = async (event:MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation()
     alert("삭제가 완료되었습니다.")
     await deleteBoard({
       variables: {
@@ -29,6 +30,7 @@ export default function useBoardsList() {
   const [deleteBoard] = useMutation(DELETE_BOARD);
 
   const onClickMove = (boardId: string) => {
+    
     router.push(`/boards/${boardId}`);
   }
 
