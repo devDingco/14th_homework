@@ -1,10 +1,11 @@
 "use client";
 
-import styles from "./BoardsDetail.module.css";
+import styles from "../../../components/boards-detail/style.module.css";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { error } from "console";
+import { FETCH_BOARD } from "../../../components/boards-detail/queries";
 
 //--------------------------------------------
 // import React, { useState } from "react";
@@ -19,18 +20,6 @@ import 빨강하트 from "./assets/good.svg";
 import 목록 from "./assets/list.svg";
 import 수정 from "./assets/pencil.svg";
 //-------------------------------
-
-const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
-    fetchBoard(boardId: $boardId) {
-      _id
-      writer
-      title
-      contents
-      createdAt
-    }
-  }
-`;
 
 export default function BoardsDetail() {
   const params = useParams();
