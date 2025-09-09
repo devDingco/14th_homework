@@ -1,0 +1,65 @@
+'use client';
+//댓글 목록
+
+import { useMutation, useQuery } from '@apollo/client';
+import Image from 'next/image';
+import styles from './CommentList.module.css';
+
+export default function CommentList({ boardId }) {
+  return (
+    <div className="container">
+      <div>
+        {data?.fetchBoardComments?.map((el, index: number) => {
+          return (
+            <div key={el._id}>
+              <div className={styles.comment}>
+                <div className={styles.commentWriter}>
+                  <Image
+                    src="/icons/profile.png"
+                    alt="사람아이콘"
+                    width={24}
+                    height={24}
+                  />
+                  <div>
+                    <span>{el.writer}</span>
+                  </div>
+                  <div>별점</div>
+                </div>
+                <div>
+                  <button>
+                    <Image
+                      src="/icons/edit.png"
+                      alt="수정"
+                      width={20}
+                      height={20}
+                    />
+                  </button>
+                  <button
+                    id={el._id} // 버튼의 id를 게시글 ID로 설정 */}
+                    onClick={onClickDeleteComment}
+                  >
+                    <Image
+                      src="/icons/close.png"
+                      alt="삭제"
+                      width={20}
+                      height={20}
+                    />
+                  </button>
+                </div>
+              </div>
+
+              <div className={styles.commentContents}>
+                <span>{el.contents}</span>
+              </div>
+              <span>
+                {/* 작성일을 한국 날짜 형식으로 변환 */}
+                {new Date(el.createdAt).toLocaleDateString('ko-KR')}
+              </span>
+              <hr className={styles.hr} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

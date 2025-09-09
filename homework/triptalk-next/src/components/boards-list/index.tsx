@@ -9,21 +9,17 @@ export default function BoardsList() {
 
   return (
     <div className={styles.container}>
-      {' '}
       {/* 전체 컨테이너 */}
       <div className={styles.boardsContainer}>
-        {' '}
         {/* 게시글 목록 컨테이너 */}
         {/* 테이블 헤더 부분 */}
         <div className={styles.postHeader}>
           <div className={styles.leftGroup}>
-            {' '}
             {/* 왼쪽 그룹 (번호, 제목) */}
             <span>번호</span>
             <span>제목</span>
           </div>
           <div className={styles.rightGroup}>
-            {' '}
             {/* 오른쪽 그룹 (작성자, 날짜) */}
             <span>작성자</span>
             <span>날짜</span>
@@ -32,15 +28,16 @@ export default function BoardsList() {
         {/* 게시물 목록을 반복해서 표시 */}
         {data?.fetchBoards?.map((el, index: number) => {
           return (
-            <div key={el._id} className={styles.postItem}>
-              {' '}
+            <div 
+              key={el._id} 
+              className={styles.postItem}
+              onClick={() => onClickTitle(el._id)} // div 전체 클릭 시 상세 페이지로 이동
+            >
               {/* 각 게시글 항목 */}
               {/* 왼쪽 부분: 번호와 제목 */}
               <div className={styles.leftGroup}>
                 <span>{index + 1}</span> {/* 게시글 번호 (배열 인덱스 + 1) */}
-                <span
-                  onClick={() => onClickTitle(el._id)} // 제목 클릭 시 상세 페이지로 이동
-                >
+                <span>
                   {el.title} {/* 게시글 제목 */}
                 </span>
               </div>
