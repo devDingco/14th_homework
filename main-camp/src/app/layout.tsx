@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ApolloSetting from "./commons/settings/apollo-setting";
+import ApolloSetting from "../commons/settings/apollo-setting";
 
 export const metadata: Metadata = {
   title: "Create Next App",
