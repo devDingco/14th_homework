@@ -3,8 +3,9 @@
 import { apolloClient } from '../graphql/apollo-client';
 import { LOGIN_MUTATION, CREATE_USER_MUTATION } from '../graphql/mutations/auth';
 import { ME_QUERY } from '../graphql/queries/auth';
+import { User, LoginInput, SignUpInput } from '../../_types/auth';
 
-export async function loginApi(email: string, password: string) {
+export async function loginApi(email: string, password: string): Promise<string | null> {
   try {
     const { data } = await apolloClient.mutate({
       mutation: LOGIN_MUTATION,
@@ -17,7 +18,7 @@ export async function loginApi(email: string, password: string) {
   }
 }
 
-export async function signUpApi(input: { email: string; name: string; password: string }) {
+export async function signUpApi(input: SignUpInput): Promise<User | null> {
   try {
     const { data } = await apolloClient.mutate({
       mutation: CREATE_USER_MUTATION,
@@ -30,7 +31,7 @@ export async function signUpApi(input: { email: string; name: string; password: 
   }
 }
 
-export async function meApi() {
+export async function meApi(): Promise<User | null> {
   try {
     const { data } = await apolloClient.query({
       query: ME_QUERY,
