@@ -1,8 +1,6 @@
-/* /boards/new */
-
 /* main */
 
-.new_main {
+.list_main {
     max-width: 1280px;
     min-width: 781px;
     margin-left: 320px;
@@ -11,49 +9,124 @@
     /* height: 100vh; */
 }
 
-.board_container {
-    width: 1280;
-    gap: 40px;
+/* list container */
+
+.board_list_frame {
+    width: 1280px;
+    height: 656px;
+    max-width: 1280px;
+    gap: 24px;
     opacity: 1;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
 }
 
-.write_form_container {
-    display: flex;
-    flex-direction: column;
-
-    width: 100%;
-    height: 1352px;
-    gap: 40px;
-    opacity: 1;
+.board_list_container {
+    width: 1184px;
+    height: 608px;
+    gap: 8px;
+    opacity: 1;    
 }
 
-.write_confirm_container {
-    width: 100%;
-    height: 48px;
-    gap: 16px;
-    opacity: 1;
-}
-
-/* write_form */
-
-.write_form_80h {
-    width: 100%;
-    height: 80px;
-    gap: 40px;
-    opacity: 1;
-}
-
-.write_form_192h {
-    width: 100%;
-    height: 192px;
+.board_list_top {
+    width: 1184px;
+    height: 52px;
+    padding-top: 16px;
+    padding-right: 24px;
+    padding-bottom: 16px;
+    padding-left: 24px;
     gap: 8px;
     opacity: 1;
 }
 
-.write_form_368h {
-    width: 100%;
-    height: 368px;
-    gap: 8px;
+.wrap > p:nth-of-type(2) {
+    color: blue; /* 두번째 p 선택됨 */
+  }
+
+.board_list_top > div:nth-of-type(1) {
+    width: 64px;
+    height: 20px;
+    gap: 10px;
     opacity: 1;
 }
 
+.board_list_top > div:nth-of-type(2) {
+    width: 848px;
+    height: 20px;
+    gap: 10px;
+    opacity: 1;    
+}
+
+.board_list_top > div:nth-of-type(3) {
+    width: 100px;
+    height: 20px;
+    gap: 10px;
+    opacity: 1;
+}
+
+.board_list_top > div:nth-of-type(4) {
+    width: 100px;
+    height: 20px;
+    gap: 10px;
+    opacity: 1;
+}
+
+.board_list_bottom {
+    width: 1184px;
+    height: 548px;
+    gap: 12px;
+    opacity: 1;
+}
+
+.board_list_bottom > li {
+    width: 1184px;
+    height: 44px;
+    padding-top: 12px;
+    padding-right: 24px;
+    padding-bottom: 12px;
+    padding-left: 24px;
+    gap: 8px;
+    opacity: 1;
+    border-radius: 8px;
+    border-width: 1px;
+    position: relative;
+}
+
+.board_list_del_btn {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 0.6%;
+    top: 25%;
+
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.board_list_bottom > li > div:nth-of-type(1) {
+    width: 64px;
+    height: 20px;
+    gap: 10px;
+    opacity: 1;
+}
+
+.board_list_bottom > li > div:nth-of-type(2) {
+    width: 848px;
+    height: 20px;
+    gap: 10px;
+    opacity: 1;    
+}
+
+.board_list_bottom > li > div:nth-of-type(3) {
+    width: 100px;
+    height: 20px;
+    gap: 10px;
+    opacity: 1;
+}
+
+.board_list_bottom > li > div:nth-of-type(4) {
+    width: 100px;
+    height: 20px;
+    gap: 10px;
+    opacity: 1;
+}

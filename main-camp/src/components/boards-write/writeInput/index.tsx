@@ -1,24 +1,20 @@
 "use client"
-import { ChangeEventHandler, FunctionComponent } from "react"
+
+import { useIsEdit } from '@/commons/isEditProvider'
 import styles from './style.module.css'
+import { IWriteInputProps } from "./type"
 
-type Props = {
-    isEdit: boolean,
-    data?: any,
-    label: string,
-    placeholder?: string,
-    errMsg?: string
-    setState?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined,
-}
+const WriteInput = (props: IWriteInputProps) => {
+    
+    const {isEdit} = useIsEdit()
 
-const WriteInput:FunctionComponent<Props> = (props) => {
     let inputComponent
     switch (props.label) {
         case "작성자": {
             inputComponent = 
             <div className={`${styles.input_frame_620w_80h} flex_column`}>
                 <label className={`${styles.label_620w_24h} me_16_24 flex_row`} style={{ whiteSpace: "nowrap" }}>{props.label}<p className={`me_16_24`} style={{ color:"rgba(246, 106, 106, 1)" }}>*</p></label>
-                {props.isEdit 
+                {isEdit 
                     ? <input className={`${styles.input_620w_48h} input_g_border_gray r_16_24`} onChange={props.setState} placeholder={props.placeholder} disabled style={{ background: "rgba(242, 242, 242, 1)" }} defaultValue={props.data?.fetchBoard.writer}></input>
                     : <input className={`${styles.input_620w_48h} input_g_border_gray r_16_24`} onChange={props.setState} placeholder={props.placeholder}></input>
                 }
@@ -30,8 +26,8 @@ const WriteInput:FunctionComponent<Props> = (props) => {
             inputComponent = 
             <div className={`${styles.input_frame_620w_80h} flex_column`}>
                 <label className={`${styles.label_620w_24h} me_16_24 flex_row`} style={{ whiteSpace: "nowrap" }}>{props.label}<p className={`me_16_24`} style={{ color:"rgba(246, 106, 106, 1)" }}>*</p></label>
-                {props.isEdit
-                    ? <input className={`${styles.input_620w_48h} input_g_border_gray r_16_24`} type="password" onChange={props.setState} placeholder='**********' disabled style={{ background: "rgba(242, 242, 242, 1)"}} defaultValue={props.data?.fetchBoard.password}></input>
+                {isEdit
+                    ? <input className={`${styles.input_620w_48h} input_g_border_gray r_16_24`} type="password" onChange={props.setState} placeholder='**********' disabled style={{ background: "rgba(242, 242, 242, 1)"}}></input>
                     : <input className={`${styles.input_620w_48h} input_g_border_gray r_16_24`} type="password" onChange={props.setState} placeholder={props.placeholder}></input>
                 }
                 <p className={`me_16_24`} style={{ color: "rgba(246, 106, 106, 1)" }}>{props.errMsg}</p>
@@ -42,7 +38,7 @@ const WriteInput:FunctionComponent<Props> = (props) => {
             inputComponent =
             <div className={`${styles.input_frame_12800w_80h} flex_column`}>
                 <label className={`${styles.label_1280w_24h} me_16_24 flex_row`} style={{ whiteSpace: "nowrap" }}>{props.label}<p className={`me_16_24`} style={{ color:"rgba(246, 106, 106, 1)" }}>*</p></label>
-                {props.isEdit
+                {isEdit
                     ? <input className={`${styles.input_1280w_48h} input_g_border_gray r_16_24`} onChange={props.setState} placeholder={props.placeholder} defaultValue={props.data?.fetchBoard.title}></input>
                     : <input className={`${styles.input_1280w_48h} input_g_border_gray r_16_24`} onChange={props.setState} placeholder={props.placeholder}></input>
                 }
@@ -54,7 +50,7 @@ const WriteInput:FunctionComponent<Props> = (props) => {
             inputComponent =
             <div className={`${styles.input_frame_1280w_336h} flex_column`}>
                 <label className={`${styles.label_620w_24h} me_16_24 flex_row`} style={{ whiteSpace: "nowrap" }}>{props.label}<p className={`me_16_24`} style={{ color:"rgba(246, 106, 106, 1)" }}>*</p></label>
-                {props.isEdit
+                {isEdit
                     ? <textarea className={`${styles.textarea_1280w_336h} input_g_border_gray r_16_24`} onChange={props.setState} placeholder={props.placeholder} defaultValue={props.data?.fetchBoard.contents}></textarea>
                     : <textarea className={`${styles.textarea_1280w_336h} input_g_border_gray r_16_24`} onChange={props.setState} placeholder={props.placeholder}></textarea>
                 }
