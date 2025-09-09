@@ -1,0 +1,8 @@
+/* Using global classes from globals.css for layout and inputs.
+   Keep this file for component-specific overrides if needed. */
+
+/* 버튼 상태별 클래스 */
+.buttonEnabled { background-color: var(--color-primary); color: #fff; cursor: pointer; }
+
+.buttonDisabled { background-color: var(--color-disabled-bg); color: var(--color-disabled-text); cursor: not-allowed; }
+

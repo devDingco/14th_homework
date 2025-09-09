@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("../styles/tokens.css");
+
 /* 기본 스타일 */
 body {
   margin: 0;
@@ -9,6 +11,16 @@ body {
     Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* 게시글 작성/수정 공통 컨테이너 (0903 스타일 호환) */
+.content-container {
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 32px;
 }
 
 /* 메인 컨테이너 */
