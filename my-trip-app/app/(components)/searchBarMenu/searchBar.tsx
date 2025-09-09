@@ -4,6 +4,8 @@ import "../../global.css";
 import { useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Icon from "@utils/iconColor";
+import { useLoginRequired } from "@hooks/useLoginRequired";
+import LoginRequiredModal from "@components/modal/LoginRequiredModal";
 
 export interface SearchBarMenuProps {
   title?: string;
@@ -20,6 +22,7 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
   const endInputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
   const pathname = usePathname();
+  const { showLoginRequiredModal, handleLoginRequiredAction, closeLoginRequiredModal } = useLoginRequired();
 
   const formatDate = (value: string) => {
     if (!value) return "";
@@ -47,11 +50,13 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
 
 
   const handlePostButtonClick = () => {
-    if (pathname === "/") {
-      router.push("/board/post");
-    } else if (pathname.startsWith("/product")) {
-      router.push("/product/post");
-    }
+    handleLoginRequiredAction(() => {
+      if (pathname === "/") {
+        router.push("/board/post");
+      } else if (pathname.startsWith("/product")) {
+        router.push("/product/post");
+      }
+    });
   };
   return (
     <div className="head_component_container">
@@ -114,6 +119,11 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
             {postButtonLabel}
           </button>
       </div>
+
+      <LoginRequiredModal 
+        isOpen={showLoginRequiredModal}
+        onClose={closeLoginRequiredModal}
+      />
     </div>
   );
 }
