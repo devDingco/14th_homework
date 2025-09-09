@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
+// import Link from "next/link";
 import Image from "next/image";
 import { useBoardsList } from "./hook";
+import type { FetchBoardsQuery } from "@/commons/graphql/graphql";
 import styles from "./styles.module.css";
 
 export default function BoardsList() {
-  const { data, loading, error, onClickDelete, onClickNew } = useBoardsList();
+  const { data, loading, error, onClickDelete, onClickNew, onClickRow } = useBoardsList();
 
   if (loading) {
     return (
@@ -31,6 +32,8 @@ export default function BoardsList() {
     );
   }
 
+  const boards = (data as FetchBoardsQuery | undefined)?.fetchBoards ?? [];
+
   return (
     <div className={styles.container}>
       <div className={styles.inner}>
@@ -51,17 +54,17 @@ export default function BoardsList() {
               </tr>
             </thead>
             <tbody className={styles.tbody}>
-              {data?.fetchBoards && data.fetchBoards.length > 0 ? (
-                data.fetchBoards.map((board, index) => (
-                  <tr key={board._id} className={styles.tr}>
-                    <td className={styles.td}>{(data?.fetchBoards?.length || 0) - index}</td>
+              {boards.length > 0 ? (
+                boards.map((board, index) => (
+                  <tr key={board._id} className={styles.tr} onClick={() => onClickRow(board._id)}>
+                    <td className={styles.td}>{boards.length - index}</td>
                     <td className={styles.td}>
-                      <Link href={`/boards/${board._id}`} className={styles.link}>{board.title}</Link>
+                      {board.title}
                     </td>
                     <td className={`${styles.td} ${styles.tdMuted}`}>{board.writer}</td>
                     <td className={`${styles.td} ${styles.tdMuted}`}>{new Date(board.createdAt).toLocaleDateString("ko-KR")}</td>
                     <td className={`${styles.td} ${styles.deleteCell}`}>
-                      <button onClick={() => onClickDelete(board._id)} className={styles.deleteButton}>
+                      <button onClick={(e) => { e.stopPropagation(); onClickDelete(board._id); }} className={styles.deleteButton}>
                         <Image src="/images/delete.png" alt="삭제" width={20} height={20} className={styles.deleteIcon} />
                       </button>
                     </td>

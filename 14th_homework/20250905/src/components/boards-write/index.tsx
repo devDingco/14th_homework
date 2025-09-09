@@ -160,7 +160,7 @@ export default function BoardsWrite(props: BoardsWriteProps) {
       <div className="button-container">
         <button className="button secondary" onClick={onClickCancel}>취소</button>
         <button
-          className={`${(!props.isEdit && !isFormValid) ? styles.buttonDisabled : styles.buttonEnabled} button primary`}
+          className={`${(!props.isEdit && !isFormValid) ? styles.buttonDisabled : styles.buttonEnabled} button`}
           onClick={props.isEdit ? onClickUpdate : onClickSubmit}
           disabled={!props.isEdit && !isFormValid}
         >
