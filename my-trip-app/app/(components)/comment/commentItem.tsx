@@ -12,9 +12,10 @@ export interface CommentItemProps {
   content: string;
   onEdit?: () => void;
   onDelete?: () => void;
+  disabled?: boolean;
 }
 
-export default function CommentItem({ avatar, author, date, rating, content, onEdit, onDelete }: CommentItemProps) {
+export default function CommentItem({ avatar, author, date, rating, content, onEdit, onDelete, disabled = false }: CommentItemProps) {
   return (
     <article className="comment_item">
       <header className="comment_item_header">
@@ -38,10 +39,10 @@ export default function CommentItem({ avatar, author, date, rating, content, onE
           </div>
         </div>
         <div className="comment_actions_inline">
-          <button type="button" className="comment_icon_btn" onClick={onEdit} aria-label="수정">
+          <button type="button" className="comment_icon_btn" onClick={onEdit} aria-label="수정" disabled={disabled}>
             <Icon outline name="edit" color="var(--gray-50)" width={16} height={16} />
           </button>
-          <button type="button" className="comment_icon_btn" onClick={onDelete} aria-label="삭제">
+          <button type="button" className="comment_icon_btn" onClick={onDelete} aria-label="삭제" disabled={disabled}>
             <Icon outline name="close" color="var(--gray-50)" width={16} height={16} />
           </button>
         </div>

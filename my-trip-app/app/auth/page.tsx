@@ -4,7 +4,7 @@ import { useState } from "react";
 import SignIn from "./(signin)/index";
 import SignUp from "./(signup)/index";
 import Image from "next/image";
-import type { FlexColumnCenter } from "@/types/auth";
+import type { FlexColumnCenter } from "../_types/auth";
 
 
 export default function Auth() {

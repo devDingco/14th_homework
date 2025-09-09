@@ -2,13 +2,40 @@
 
 import { useEffect, useState } from 'react';
 import { login, logout, me, signUp } from '../services/auth.services';
+import { tokenStorage } from '../utils/token';
 
 export function useAuth() {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    me().then(setUser).finally(() => setLoading(false));
+    // 초기 사용자 정보 로드
+    const loadUser = async () => {
+      const token = tokenStorage.get();
+      if (token) {
+        const userData = await me();
+        setUser(userData);
+      }
+      setLoading(false);
+    };
+
+    loadUser();
+
+    // 토큰 변경 이벤트 리스너
+    const handleAuthChange = (event: CustomEvent) => {
+      if (event.detail.isLoggedIn) {
+        me().then(setUser);
+      } else {
+        setUser(null);
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('auth:changed', handleAuthChange as EventListener);
+      return () => {
+        window.removeEventListener('auth:changed', handleAuthChange as EventListener);
+      };
+    }
   }, []);
 
   return {

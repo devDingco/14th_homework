@@ -5,13 +5,19 @@ import Icon from "@utils/iconColor";
 import { useMemo, useState } from "react";
 import type { NewComment } from "@_types/comment";
 
-export default function CommentComposer({ onSubmit }: { onSubmit?: (c: NewComment) => void }) {
+export default function CommentComposer({ 
+  onSubmit, 
+  disabled = false 
+}: { 
+  onSubmit?: (c: NewComment) => void;
+  disabled?: boolean;
+}) {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [content, setContent] = useState("");
   const maxLength = 100;
 
-  const isValid = useMemo(() => content.trim().length > 0 && rating > 0, [content, rating]);
+  const isValid = useMemo(() => content.trim().length > 0 && rating > 0 && !disabled, [content, rating, disabled]);
 
   const handleStarClick = (value: number) => {
     setRating(value);
@@ -61,6 +67,7 @@ export default function CommentComposer({ onSubmit }: { onSubmit?: (c: NewCommen
           maxLength={maxLength}
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          disabled={disabled}
         />
         <span className="comment_counter r_12_16">{currentCount}/{maxLength}</span>
       </div>

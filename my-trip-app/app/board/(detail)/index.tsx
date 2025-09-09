@@ -104,7 +104,7 @@ export default function BoardDetail({ id, initialData }: { id: string; initialDa
           )}
         </section>
 
-          <article className="like_section">
+          <section className="like_section">
             <div className="like_wrap">
               <button type="button" className="like_icon" onClick={handleDislike} disabled={pending}>
                 <Icon outline name="bad" color="var(--gray-70)"/>
@@ -121,9 +121,9 @@ export default function BoardDetail({ id, initialData }: { id: string; initialDa
                 <span className="r_16_24" style={{ color: "var(--red)" }}>{post.likeCount}</span>
               </div>
             </div>
-          </article>
+          </section>
 
-          <CommentSection initialComments={[]} />
+          <CommentSection boardId={id} initialComments={[]} />
 
         <footer className="detail_actions">
           <div className="bottom_actions">
