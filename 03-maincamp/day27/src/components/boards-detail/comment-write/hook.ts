@@ -2,14 +2,14 @@ import { gql, useMutation } from '@apollo/client'
 import { on } from 'events'
 import { useParams } from 'next/navigation'
 import { ChangeEvent, useState } from 'react'
-import { FETCH_COMMENTS, CREATE_COMMENT } from '../comment-list/queries'
+import { FETCH_COMMENTS, CREATE_COMMENT } from './queries'
 
 export default function useCommentWrite() {
   const { boardId } = useParams()
   const [writer, setWriter] = useState('')
   const [password, setPassword] = useState('')
   const [contents, setContents] = useState('')
-  const [rating, setRating] = useState(0)
+  const [rating, setRating] = useState(3)
   const [isComments,setIsComments ] = useState(false)
 
   const onChangeWriter = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +47,7 @@ export default function useCommentWrite() {
       setWriter('')
       setPassword('')
       setContents('')
-      setRating(0)
+      setRating(3)
       setIsComments(true)
       alert('댓글이 등록되었습니다')
     } catch (error) {

@@ -1,0 +1,13 @@
+/* styles.module.css */
+.slider__container {
+  width: 192rem;
+  margin: 0 auto;
+}
+
+.slider__container img {
+  width: 192rem;
+  height: 51.6rem;
+  object-fit: cover;
+  
+}
+

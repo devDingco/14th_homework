@@ -27,11 +27,13 @@ const onClickMove = () => {
 const onclickMoveList = () => {
   router.push(`/boards`);
   }
+  const videoId = (data?.fetchBoard?.youtubeUrl?.match(/v=([a-zA-Z0-9_-]+)/)?.[1]);
 
     
   return{
     onclickMoveList,
     onClickMove,
-    data
+    data,
+    videoId
   }
 }

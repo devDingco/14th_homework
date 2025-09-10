@@ -1,7 +1,7 @@
 import styles from './styles.module.css'
 import useCommentWrite from './hook'
-
-
+import React, { useState } from "react";
+import { Rate } from "antd";
 
 
 export default function CommentWrite() {
@@ -21,7 +21,6 @@ export default function CommentWrite() {
 
 
 
-
   return (
     <div className={styles.container}>
       <div className={styles.comment__write}>
@@ -30,11 +29,7 @@ export default function CommentWrite() {
         </h2>
 
         <div className={styles.comment__write__rate}>
-        <img src="/images/star.png" alt="" />
-        <img src="/images/star.png" alt="" />
-        <img src="/images/star.png" alt="" />
-        <img src="/images/star.png" alt="" />
-        <img src="/images/star.png" alt="" />
+            <Rate onChange={setRating} value={rating} />
         </div>
 
         <div className={styles.comment__write__form}>

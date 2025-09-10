@@ -1,5 +1,9 @@
 "use client";
 
+import React, { useState } from "react";
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
+
 import styles from './styles.module.css'
 import Image from 'next/image';
 import {ChangeEvent} from 'react';
@@ -23,7 +27,16 @@ export default function BoardsWrite(props:IBoardWriteProps) {
     errorPassword,
     errorTitle,
     errorWriter,
+    zipcode,
+    address,
+    isModalOpen,
+    onToggleModal,
+    handleComplete,
+    onChangeAddressDetail,
+    onChangeYoutubeUrl,
   } = useBoardWrite()
+
+  
   
   return (  <div className={styles.container}>
       <header>
@@ -74,17 +87,28 @@ export default function BoardsWrite(props:IBoardWriteProps) {
               <article className={styles.메인__주소섹션__상단아티클}>
                   <h2>주소</h2>
                   <div className={styles.메인__주소섹션__상단아티클__내용}>
-                      <input value="01234" type="text" disabled/>
-                      <button>우편번호 검색</button>
+                      <input readOnly value={zipcode || props.data?.fetchBoard?.boardAddress?.zipcode || ""} type="text" disabled/>
+                       <button onClick={onToggleModal} >우편번호 검색</button>
+    
+      {isModalOpen === true && (
+        <Modal
+          title="우편번호 & 주소찾기"
+          open={true}
+          onOk={onToggleModal}
+          onCancel={onToggleModal}
+        >
+          <DaumPostcodeEmbed onComplete={handleComplete}/>
+        </Modal>
+      )}
                   </div>
               </article>
-              <input type="text" placeholder="주소를 입력해주세요"/>
-              <input type="text" placeholder="상세주소"/>
+              <input readOnly type="text" placeholder="주소를 입력해주세요" value={address || props.data?.fetchBoard?.boardAddress?.address || ""} />
+              <input onChange={onChangeAddressDetail} type="text" placeholder="상세주소를 입력해주세요" defaultValue={props.data?.fetchBoard?.boardAddress?.addressDetail ?? ""}/>
           </section>
           <hr/>
           <section className={styles.메인__유튜브링크섹션}>
               <h2>유튜브링크</h2>
-              <input type="text" placeholder="링크를 입력해주세요"/>
+              <input onChange={onChangeYoutubeUrl} type="text" placeholder="링크를 입력해주세요" defaultValue={props.data?.fetchBoard?.youtubeUrl ?? ""}/>
           </section>
           <hr/>
           <section className={styles.메인__사진첨부섹션}>

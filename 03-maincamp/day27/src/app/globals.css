@@ -104,3 +104,15 @@ section{
   gap: 0.8rem;
 }
 
+.slick-dots {
+  bottom: 20px !important;
+}
+
+.slick-dots li button:before {
+  font-size: 8px !important;
+  color: white !important;
+}
+
+.slick-dots li.slick-active button:before {
+  color: white !important;
+}

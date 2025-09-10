@@ -7,10 +7,21 @@ import { useState } from "react";
 import {ChangeEvent} from 'react';
 import { CREATE_BOARD, UPDATE_BOARD } from "./queres";
 import { IMyvariables } from "./types";
+import { on } from "events";
 
 
 
 export default function useBoardsWrite() {
+
+  const [zipcode, setZonecode] = useState("");
+  const [address, setAddress] = useState("");
+  const [detailAddress, setDetailAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+
+  
+
+      const [isModalOpen, setIsModalOpen] = useState(false);
       const [writer, setWriter] = useState<string>("")
       const [password, setPassword] = useState<string>("")
       const [title, setTitle] = useState<string>("")
@@ -32,6 +43,22 @@ export default function useBoardsWrite() {
         router.push("/boards")
       }
 
+
+      const handleComplete = (data) => {
+    setZonecode(data.zonecode); // 우편번호
+    setAddress(data.address);   // 도로명 주소 or 지번 주소
+    setIsModalOpen((prev) => !prev);      
+  };
+      const onToggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
+     const onChangeYoutubeUrl = (e) =>{
+       setYoutubeUrl(e.target.value)
+  }
+
+      const onChangeAddressDetail = (e) =>{
+       setAddressDetail(e.target.value)
+  }
       const onChangeWriter = (event:ChangeEvent<HTMLInputElement>) => {
           setWriter(event.target.value)
           if(event.target.value && password && title && contents){
@@ -82,6 +109,12 @@ export default function useBoardsWrite() {
       password,
       title,
       contents,
+      youtubeUrl,
+      boardAddress:{
+        zipcode,
+        address,
+        addressDetail,
+      }
     },
   },
 });
@@ -109,6 +142,17 @@ if (title !== "") {
 if (contents !== "") {
   myvariables.updateBoardInput.contents = contents;
 }
+if (youtubeUrl !== "") {
+  myvariables.updateBoardInput.youtubeUrl = youtubeUrl;
+}
+if (address !== "") {
+  myvariables.updateBoardInput.boardAddress = {
+    zipcode,
+    address,
+    addressDetail,
+  };
+}
+
 
 
 try {
@@ -148,5 +192,18 @@ try {
     title,
     contents,
     onClickMoveList,
+    onToggleModal,
+    handleComplete,
+    isModalOpen,
+    address,
+    detailAddress,
+    zipcode,
+    setZonecode,
+    setAddress,
+    setDetailAddress,
+    onChangeAddressDetail,
+    addressDetail,
+    onChangeYoutubeUrl
+  
   }
 }
