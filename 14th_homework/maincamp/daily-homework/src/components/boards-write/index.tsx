@@ -1,6 +1,5 @@
 'use client';
 import styles from './styles.module.css';
-// import styles from '.';
 import useBoardsWriteAdvanced from './hook';
 import { BoardVariables } from './types';
 

@@ -1,4 +1,6 @@
 // import "./styles.module.css";
+// 예시 디테일 페이지
+
 import styles from './styles.module.css';
 
 const publishText = `살겠노라 살겠노라. 청산에 살겠노라.

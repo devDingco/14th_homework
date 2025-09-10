@@ -1,21 +1,10 @@
-.D_layout {
-  display: flex;
-  width: 1280px;
-  /* height: 2170px; */
-  padding: 40px 320px;
-  justify-content: center;
-  flex-direction: column;
-  align-items: stretch;
-  /* gap: 40px; */
-  /* background-color: lightblue; */
-}
-
 .D_enroll-row-container {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   gap: 24px;
   width: 100%;
+  /* border: solid 1px red; */
   /* background-color: lightblue; */
 }
 

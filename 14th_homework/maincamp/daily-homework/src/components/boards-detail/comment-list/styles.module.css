@@ -1,0 +1,22 @@
+.commentLayout {
+  display: flex;
+  width: 1280px;
+  height: 460px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  border: solid 1px blue;
+  /* background-color: lightblue; */
+}
+
+.commentBody {
+  display: flex;
+  width: 1280px;
+  height: 400px;
+  flex-direction: column;
+  gap: 24px;
+  align-items: stretch;
+  border: solid 1px red;
+
+  background-color: yellow;
+}

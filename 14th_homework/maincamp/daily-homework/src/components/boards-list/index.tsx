@@ -1,5 +1,6 @@
 'use client';
 
+import useMapBoardsDeletePage from './hooks';
 import styles from './styles.module.css';
 
 export default function MapBoardsDeletePage() {
@@ -22,14 +23,12 @@ export default function MapBoardsDeletePage() {
                   {data?.fetchBoards.map((el: Board, index: number) => {
                     return (
                       <div key={index}>
-                        <div className={styles.post_info}>
+                        <div
+                          className={styles.post_info}
+                          onClick={() => router.push(`/boards/${el._id}`)}
+                        >
                           <span style={{ color: '#919191' }}>{number - index}</span>
-                          <span
-                            style={{ color: '#1C1C1C' }}
-                            onClick={() => router.push(`/boards/${el._id}`)}
-                          >
-                            {el.title}
-                          </span>
+                          <span style={{ color: '#1C1C1C' }}>{el.title}</span>
                           <span style={{ color: '#333' }}>{el.writer}</span>
                           <span style={{ color: '#919191' }}></span>
                           <span>
