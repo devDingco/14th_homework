@@ -4,6 +4,8 @@ import Image from 'next/image'
 import addImage from '@assets/add_image.png'
 import { IBoardWriteProps } from './types'
 import useBoardForm from './hook'
+import { Modal } from 'antd'
+import DaumPostcodeEmbed from 'react-daum-postcode'
 
 const IMAGE_SRC = {
   addImage: {
@@ -18,6 +20,8 @@ export default function BoardWritePage(props: IBoardWriteProps) {
     onChangePassword,
     onChangeTitle,
     onChangeContent,
+    onChangeAddress,
+    onChangeLink,
     onClickSignup,
     isButtonDisabled,
     data,
@@ -25,14 +29,21 @@ export default function BoardWritePage(props: IBoardWriteProps) {
     password,
     title,
     content,
+    address,
+    link,
     nameError,
     passwordError,
     titleError,
     contentError,
+    linkError,
+    isModalOpen,
+    onToggleModal,
+    handleComplete,
   } = useBoardForm({ isEdit: props.isEdit })
 
   return (
     <div className={styles.layout}>
+      {/* title */}
       <div className={styles.enroll_subject}>
         <div className={styles.enroll_subject_text}>
           {props.isEdit ? '게시물 수정' : '게시물 등록'}
@@ -41,6 +52,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
       <div className={styles.enroll_row_container}>
         <div className={styles.enroll_row_section}>
           <div className={styles.enroll_row_flex}>
+            {/* 작성자 */}
             <div className={styles.flex_half}>
               <div className={styles.enroll_form_title}>
                 <div>작성자 </div>
@@ -56,6 +68,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
               />
               <div className={styles.error_msg}>{nameError}</div>
             </div>
+            {/* 비밀번호 */}
             <div className={styles.flex_half}>
               <div className={styles.enroll_form_title}>
                 <div>비밀번호</div>
@@ -76,6 +89,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
 
         <div className={styles.enroll_border}></div>
 
+        {/* 제목 */}
         <div className={styles.enroll_row_section}>
           <div className={styles.enroll_form_title}>
             <div>제목</div>
@@ -92,6 +106,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
         </div>
         <div className={styles.enroll_border}></div>
         <div className={styles.enroll_row_section}>
+          {/* 내용 */}
           <div className={styles.enroll_form_title}>
             <div>내용</div>
             <div className={styles.enroll_required_indicator}> *</div>
@@ -104,24 +119,67 @@ export default function BoardWritePage(props: IBoardWriteProps) {
           ></textarea>
           <div className={styles.error_msg}>{contentError}</div>
         </div>
+
+        {/* 주소 */}
         <div className={styles.enroll_row_section}>
           <div className={styles.enroll_form_title}>
             <div>주소</div>
           </div>
           <div className={styles.enroll_address_firstrow}>
-            <input type="number" className={styles.zipcode_input} placeholder="12345" />
-            <button className={styles.zipcode_search_button}>우편번호 검색</button>
+            <input
+              type="number"
+              className={styles.zipcode_input}
+              placeholder="12345"
+              name="zipcode"
+              readOnly
+              onChange={onChangeAddress}
+              value={
+                props.isEdit
+                  ? (address.zipcode || data?.fetchBoard?.boardAddress?.zipcode) ?? ''
+                  : ''
+              }
+            />
+            <button className={styles.zipcode_search_button} onClick={onToggleModal}>
+              우편번호 검색
+            </button>
           </div>
 
-          <input placeholder="주소를 입력해주세요." className={styles.enroll_input} type="text" />
-          <input placeholder="상세주소" className={styles.enroll_input} type="text" />
+          <input
+            placeholder="주소를 입력해주세요."
+            className={styles.enroll_input}
+            type="text"
+            name="base"
+            readOnly
+            onChange={onChangeAddress}
+            value={
+              props.isEdit ? (address.base || data?.fetchBoard?.boardAddress?.address) ?? '' : ''
+            }
+          />
+          <input
+            placeholder="상세주소"
+            className={styles.enroll_input}
+            type="text"
+            name="detail"
+            onChange={onChangeAddress}
+            value={
+              props.isEdit
+                ? (address.detail || data?.fetchBoard?.boardAddress?.addressDetail) ?? ''
+                : ''
+            }
+          />
         </div>
         <div className={styles.enroll_border}></div>
         <div className={styles.enroll_row_section}>
           <div className={styles.enroll_form_title}>
             <div>유튜브 링크</div>
           </div>
-          <input className={styles.enroll_input} placeholder="링크를 입력해 주세요." />
+          <input
+            className={styles.enroll_input}
+            placeholder="링크를 입력해 주세요."
+            onChange={onChangeLink}
+            defaultValue={link}
+          />
+          <div className={styles.error_msg}>{linkError}</div>
         </div>
 
         <div className={styles.enroll_border}></div>
@@ -149,6 +207,11 @@ export default function BoardWritePage(props: IBoardWriteProps) {
           {props.isEdit ? '수정' : '등록'}하기
         </button>
       </div>
+      {isModalOpen && (
+        <Modal title="모달 제목" open={true} onOk={onToggleModal} onCancel={onToggleModal}>
+          <DaumPostcodeEmbed onComplete={handleComplete} />
+        </Modal>
+      )}
     </div>
   )
 }

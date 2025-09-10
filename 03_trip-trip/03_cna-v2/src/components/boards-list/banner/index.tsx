@@ -1,8 +1,8 @@
 'use client'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import bannerImage1 from '@assets/banner1.png'
-import bannerImage2 from '@assets/banner2.png'
-import bannerImage3 from '@assets/banner3.png'
+import bannerImage1 from '@assets/banner_1.png'
+import bannerImage2 from '@assets/banner_2.png'
+import bannerImage3 from '@assets/banner_3.png'
 import Image from 'next/image'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import 'swiper/css'
@@ -36,8 +36,8 @@ export default function BannerComponent() {
       >
         {IMAGE_SRC.map((slide, idx) => {
           return (
-            <SwiperSlide key={idx}>
-              <Image src={slide.src} alt={slide.alt} className={styles.image_swiper} />
+            <SwiperSlide>
+              <Image key={idx} src={slide.src} alt={slide.alt} className={styles.image_swiper} />
             </SwiperSlide>
           )
         })}

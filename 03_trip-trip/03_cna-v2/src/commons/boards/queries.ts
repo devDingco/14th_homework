@@ -62,6 +62,11 @@ export const UPDATE_BOARD = gql`
       likeCount
       dislikeCount
       images
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
       createdAt
       updatedAt
       deletedAt
@@ -80,6 +85,11 @@ export const FETCH_BOARD = gql`
       likeCount
       dislikeCount
       images
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
       user {
         _id
         email

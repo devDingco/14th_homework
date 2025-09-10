@@ -2,7 +2,7 @@
 .wrapper {
   display: flex;
   width: 100%;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 
 .image_swiper {
@@ -12,5 +12,6 @@
   height: 515px;
   /* background-color: aliceblue; */
   object-fit: cover;
+  object-position: bottom;
   overflow: visible;
 }
