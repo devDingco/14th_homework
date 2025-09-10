@@ -1,12 +1,15 @@
 import styles from './styles.module.css'
 import deleteImage from '@assets/delete.png'
 import Image from 'next/image'
-import { IBoardList } from './types'
 import useBoardsList from './hook'
 import { useQuery } from '@apollo/client'
 
 import { useState } from 'react'
-import { FETCH_BOARDS } from 'commons/boards/queries'
+import {
+  FetchBoardsDocument,
+  FetchBoardsQuery,
+  FetchBoardsQueryVariables,
+} from 'commons/graphql/graphql'
 
 const IMAGE_SRC = {
   deleteImage: {
@@ -17,7 +20,7 @@ const IMAGE_SRC = {
 
 export default function BoardsListPage() {
   const [hoveredId, setHoveredId] = useState('')
-  const { data } = useQuery(FETCH_BOARDS)
+  const { data } = useQuery<FetchBoardsQuery, FetchBoardsQueryVariables>(FetchBoardsDocument)
   console.log('boards 페이지에서 data.fetchBoards::::', data?.fetchBoards)
 
   const { onClickDelete, onClickDetail } = useBoardsList({ hoveredId })
@@ -36,7 +39,7 @@ export default function BoardsListPage() {
             </button>
           </div>
           <div className={styles.contentBody}>
-            {data?.fetchBoards.map((el: IBoardList, index: number) => (
+            {data?.fetchBoards?.map((el, index) => (
               <button
                 onClick={(event) => onClickDetail(event, el?._id)}
                 key={el._id}

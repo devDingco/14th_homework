@@ -1,5 +1,20 @@
-import BoardDetailPage from 'components/boards-detail'
+'use client'
+import BoardDetailPage from 'components/boards-detail/detail'
+import styles from './styles.module.css'
+import CommentWriteComponent from 'components/boards-detail/comment-write'
+import CommentListComponent from 'components/boards-detail/comment-list'
+import { useParams } from 'next/navigation'
 
 export default function BoardsDetailPage() {
-  return <BoardDetailPage />
+  const params = useParams()
+
+  return (
+    <div className={styles.detailLayout}>
+      <div className={styles.detailBody}>
+        <BoardDetailPage />
+        <CommentWriteComponent boardId={params.boardId} />
+        <CommentListComponent boardId={params.boardId} />
+      </div>
+    </div>
+  )
 }

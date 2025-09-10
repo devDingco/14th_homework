@@ -48,7 +48,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
               </div>
               <input
                 disabled={props.isEdit}
-                defaultValue={props.isEdit ? data?.fetchBoard?.writer : name}
+                defaultValue={props.isEdit ? data?.fetchBoard?.writer ?? '' : name}
                 type="text"
                 placeholder="작성자 명을 입력해 주세요."
                 className={props.isEdit ? styles.disabled_input : styles.enroll_input}

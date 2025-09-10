@@ -1,0 +1,62 @@
+.comment-form-layout {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+.comment-form-title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.comment-form-layout form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+.post-form-col {
+  display: flex;
+  width: 50%;
+  gap: 1.6rem;
+}
+/* InputWithLabel */
+.post-form-input {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.post-form-input div {
+  display: flex;
+  gap: 0.4rem;
+  font-weight: 500;
+}
+.post-form-input div span {
+  color: red;
+}
+/* TextAreaWithLabel */
+.post-form-input textarea {
+  min-height: 14.4rem;
+}
+.comment-contents {
+  position: relative;
+}
+.comment-contents-len {
+  position: absolute;
+  bottom: 1.2rem;
+  right: 1.6rem;
+  color: var(--Gray-Gray-400, #ababab);
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2.4rem;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
+}
+/* PostActions */
+.comment-form-layout form button {
+  margin-left: auto;
+}
