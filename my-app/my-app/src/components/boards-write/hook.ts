@@ -1,20 +1,31 @@
-"use client";
-
 import { ChangeEvent, useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { CREATE_BOARD, UPDATE_BOARD } from "./queries";
+import {
+  CreateBoardDocument,
+  FetchBoardDocument,
+  UpdateBoardDocument,
+} from "../../commons/gql/graphql";
+import { getNamedMiddlewareRegex } from "next/dist/shared/lib/router/utils/route-regex";
 
-export default function useBoardsComponentWrite(props) {
+export const useBoardsComponentWrite = (isEdit: boolean) => {
   // - 변경되는 입력값 새로 저장하는 상태 설정
   const router = useRouter();
   const params = useParams();
-  const editId = props.isEdit ? params.boardId : null; //-> 현재가 '수정 모드'라면, editId에 게시글 ID(params.boardId)를 넣고, 아니라면 null을 넣는다
+  const editId = isEdit ? params.boardId.toString() : ""; //-> 현재가 '수정 모드'라면, editId에 게시글 ID(params.boardId)를 넣고, 아니라면 빈칸을 넣는다
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+
+  const [게시글등록API요청함수] = useMutation(CreateBoardDocument);
+  const [게시글업데이트요청함수] = useMutation(UpdateBoardDocument);
+
+  const { data } = useQuery(FetchBoardDocument, {
+    variables: { boardId: editId.toString() },
+    skip: !isEdit,
+  });
 
   const 등록버튼비활성화 = !writer || !password || !title || !contents;
   // const 수정버튼비활성화 = !title || !contents;
@@ -31,11 +42,9 @@ export default function useBoardsComponentWrite(props) {
     setTitle(event.target.value);
   };
 
-  const onChangeContents = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
   };
-
-  const [게시글등록API요청함수] = useMutation(CREATE_BOARD);
 
   const onClickSignup = async () => {
     try {
@@ -51,8 +60,6 @@ export default function useBoardsComponentWrite(props) {
     } // finally {
     // }
   };
-
-  const [게시글업데이트요청함수] = useMutation(UPDATE_BOARD);
 
   const onClickEdit = async () => {
     const passwordInput = prompt(
@@ -92,12 +99,17 @@ export default function useBoardsComponentWrite(props) {
   };
 
   return {
-    작성자: onChangeWriter,
-    제목변경하는기능: onChangeTitle,
+    data,
+    writer,
+    password,
+    title,
+    contents,
+    onChangeWriter,
+    onChangeTitle,
     onChangePassword,
     onChangeContents, // shorthand-property
     onClickSignup,
     onClickEdit,
     등록버튼비활성화,
   };
-}
+};
