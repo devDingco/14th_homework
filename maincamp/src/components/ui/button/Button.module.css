@@ -1,4 +1,5 @@
-.FormBtn{
+.FormBtn,
+.CommentBtn{
     width: fit-content;
     height: 3rem;
     padding: 0.75rem 1rem;
@@ -30,7 +31,13 @@
     color: var(--color-gray-white);
 }
 
-.FormBtn[type="submit"]:disabled{
+.FormBtn[type="submit"]:disabled,
+.CommentBtn[type="submit"]:disabled{
     background-color: var(--color-gray-300);
     color: var(--color-gray-100);
+}
+
+.CommentBtn[type="submit"]{
+    background-color: var(--color-gray-black);
+    color: var(--color-gray-white);
 }

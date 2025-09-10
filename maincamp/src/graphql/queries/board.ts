@@ -49,3 +49,15 @@ export const FETCH_BOARDS_AND_COUNT = gql`
         fetchBoardsCount(endDate: $endDate, startDate: $startDate, search: $search)
 }
 `
+
+export const FETCH_BOARD_COMMENTS = gql`
+    query fetchBoardComments($boardId: ID!) {
+        fetchBoardComments(boardId: $boardId) {
+            _id
+            writer
+            contents
+            rating
+            createdAt
+        }
+    }
+`

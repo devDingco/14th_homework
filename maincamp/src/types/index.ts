@@ -14,7 +14,7 @@ export type ButtonProps = {
 /* input types */
 export type InputProps = {
     variant?: string;
-    label: string;
+    label?: string;
     required?: boolean;
     type: string;
     placeholder: string;
@@ -27,11 +27,13 @@ export type InputProps = {
 /* textarea types */
 export type TextareaProps = {
     variant?: string;
-    label: string;
+    label?: string;
     required?: boolean;
     placeholder: string;
     defaultValue?:any;
     onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+    isCommentField?: boolean;
+    maxLength?: number;
 }
 
 /* zipcode types */

@@ -1,5 +1,4 @@
 import { FetchBoardDocument } from "@/commons/graphql/graphql";
-import { FETCH_BOARD } from "@/graphql/queries/board";
 import { useQuery } from "@apollo/client";
 import { formatInTimeZone } from "date-fns-tz";
 import { useParams, useRouter } from "next/navigation";

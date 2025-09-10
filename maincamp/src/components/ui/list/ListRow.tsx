@@ -8,7 +8,19 @@ import { FETCH_BOARDS_AND_COUNT } from '@/graphql/queries/board';
 import { useMutation, useQuery } from '@apollo/client';
 import { DELETE_BOARD } from '@/graphql/mutations/board';
 
-export default function ListRow(props){
+interface IListRow{
+    _id: string,
+    flex: number[],
+    currentPage: number,
+    createdAt: string,
+    textAlign: CanvasTextAlign[],
+    num: number,
+    title: string,
+    writer: string,
+    children: React.ReactNode
+}
+
+export default function ListRow(props: IListRow){
 
     const router = useRouter();
     const onClickBoard = (event: MouseEvent<HTMLDivElement>) => {

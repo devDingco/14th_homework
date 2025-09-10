@@ -18,9 +18,9 @@ export function Inputfield (props: InputProps) {
 export function Textareafield (props: TextareaProps){
 
     return(
-        <div className={styles.Formfield}>
-            <div><label>{props.label}</label>{props.required && <span>*</span>}</div>
-            <textarea placeholder={props.placeholder} defaultValue={props.defaultValue} onChange={props.onChange}></textarea>
+        <div className={props.isCommentField? styles.Commentfield :styles.Formfield}>
+            {props.isCommentField? "" : <div><label>{props.label}</label>{props.required && <span>*</span>}</div>}
+            <textarea placeholder={props.placeholder} defaultValue={props.defaultValue} onChange={props.onChange} maxLength={props.maxLength}></textarea>
         </div>
     );
 }

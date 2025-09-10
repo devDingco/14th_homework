@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { IUseBoardsList } from "./types";
-import { FetchBoardsAndCountDocument, FetchBoardsAndCountQueryVariables } from "@/commons/graphql/graphql";
+import { FetchBoardsAndCountDocument, FetchBoardsAndCountQuery, FetchBoardsAndCountQueryVariables, FetchBoardsDocument } from "@/commons/graphql/graphql";
 
 export default function useBoardsList (): IUseBoardsList {
     
@@ -44,7 +44,8 @@ export default function useBoardsList (): IUseBoardsList {
         }
 
     }
-    const {fetchBoards, fetchBoardsCount} = data
+    
+    const {fetchBoards, fetchBoardsCount}= data as FetchBoardsAndCountQuery
     
 
     const flex = ["4", "53", "6.25", "6.25"]
