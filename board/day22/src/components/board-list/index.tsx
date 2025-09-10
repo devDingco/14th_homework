@@ -2,7 +2,6 @@
 
 
 import style from './style.module.css'
-import Link from "next/link"
 import useBoardsPage from "./hooks";
 
 
@@ -23,13 +22,13 @@ export default function BoardsPage() {
                 </div>
                 {data?.fetchBoards.map((el, index) => {
                     return (
-                        <div key={el._id} className={style.data}>
+                        <a key={el._id} className={style.data} href={`/board/detail/${el._id}`}>
                             <div className={style.data__number}>{index + 1}</div>
-                            <Link href={`/board/detail/${el._id}`}><div className={style.data__title}>{el.title}</div></Link>
+                            <div className={style.data__title}>{el.title}</div>
                             <div className={style.data__writer}>{el?.writer}</div>
                             <div className={style.data__date}>{el?.createdAt.slice(0, 10).replaceAll("-", ".")}</div>
                             <div className={style.data__delete}><img src="/assets/icons/delete.png" alt="" id={el?._id} onClick={onclickDelete} /></div>
-                        </div>
+                        </a>
                     )
                 })}
             </div>

@@ -5,6 +5,7 @@ import { ChangeEvent, useState } from "react"
 
 import { useMutation } from "@apollo/client"
 import { CreateBoardDocument, CreateBoardMutation, CreateBoardMutationVariables, UpdateBoardDocument, UpdateBoardMutation, UpdateBoardMutationVariables } from "@/commons/graphql/graphql"
+import { IMyvariables } from "./types"
 
 
 
@@ -138,8 +139,7 @@ export default function useBoardsWrite(){
         const myvariables: IMyvariables = {
             boardId: String(boardId.boardId)  ,
             password: inputPassword ?? "",
-            updateBoardInput: {
-            }
+            updateBoardInput: { }
         } 
         // if(inputPassword) {myvariables.password = inputPassword}
         if(title !== "") myvariables.updateBoardInput.title = title;

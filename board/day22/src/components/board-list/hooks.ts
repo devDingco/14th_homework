@@ -16,6 +16,7 @@ export default function useBoardsPage() {
     console.log(data);
 
     const onclickDelete = async (event:React.MouseEvent<HTMLImageElement> ) => {
+        event.preventDefault();
         await deleteBoard({
             variables: {
                 boardId: event.currentTarget.id
@@ -24,6 +25,7 @@ export default function useBoardsPage() {
                 { query: FETCH_BOARDS }
             ]
         })
+        alert(`삭제 완료`)
     }
 
     return {

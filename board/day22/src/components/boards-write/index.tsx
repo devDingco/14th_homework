@@ -1,20 +1,9 @@
 "use client"
 
-
-import { FetchBoardQuery, FetchBoardQueryVariables } from "@/commons/graphql/graphql";
 import useBoardsWrite from "./hooks";
 import style from "./style.module.css"
 
-import { gql } from "@apollo/client"
 import { IBoardsWriteProps } from "./types";
-
-
-
-
-
-
-
-
 
 export default function BoardsWrite(props:IBoardsWriteProps ) {
     const { 
@@ -30,11 +19,6 @@ export default function BoardsWrite(props:IBoardsWriteProps ) {
         contentError,
         isActive
     } = useBoardsWrite()
-
-
-
-
-
 
     return (
         <div className={style.전체바탕}>
