@@ -25,7 +25,10 @@ export default function BoardsDetail() {
       />
                     <h2>{data?.fetchBoard?.writer || "로딩중..."}</h2>
                 </div>
-                <h2>{data?.fetchBoard?.createdAt || "로딩중..."}</h2>
+          
+                <h2>{data?.fetchBoard?.createdAt 
+    ? new Date(data.fetchBoard.createdAt).toISOString().split("T")[0]
+    : "로딩중..."}</h2>
             </div>
             <hr className={styles.수평선}/>
             <div className={styles['메인-작성자섹션-아이콘디브']}>

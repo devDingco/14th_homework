@@ -26,9 +26,9 @@ export default function BoardsList() {
                         </div>
                         <div className={styles.board__main__articlebox}>
                             {data?.fetchBoards.map((el: FetchBoardQuery["fetchBoard"], index:number) => (
-                                <div key={el._id} className={styles.board__main__articlebox__item} >
+                                <div key={el._id} className={styles.board__main__articlebox__item} onClick={() => onClickMove(el._id)}>
                                     <div className={styles.board__main__articlebox__item__number}>{index + 1}</div>
-                                    <div className={styles.board__main__articlebox__item__title} onClick={() => onClickMove(el._id)}>{el.title}</div>
+                                    <div className={styles.board__main__articlebox__item__title} >{el.title}</div>
                                     <div className={styles.board__main__articlebox__item__writer}>{el.writer}</div>
                                     <div className={styles.board__main__articlebox__item__date}>{new Date(el.createdAt).toISOString().split("T")[0]}</div>
                                     <button className={styles.board__main__articlebox__item__delete} id={el._id} onClick={onClickDelete}>

@@ -1,0 +1,50 @@
+.comment{
+    width: 128rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding-top: 4rem;
+    border-top: 1px solid #E4E4E4;
+    margin-top: 2rem;
+}
+.writer{
+display: flex;
+align-items: center;
+gap: 0.4rem;
+font-family: Pretendard Variable;
+font-weight: 300;
+font-style: Light;
+font-size: 14px;
+line-height: 20px;
+letter-spacing: 0%;
+
+color: #5F5F5F;
+}
+.writer__rating{
+display: flex;
+gap: 0.8rem;
+}
+.rating{
+    display: flex;
+
+}
+.contents{
+font-family: Pretendard Variable;
+font-weight: 400;
+font-style: Regular;
+font-size: 16px;
+line-height: 24px;
+letter-spacing: 0%;
+color: #333333;
+
+}
+.creatAt{
+font-family: Pretendard Variable;
+font-weight: 400;
+font-style: Regular;
+font-size: 14px;
+leading-trim: NONE;
+line-height: 20px;
+letter-spacing: 0%;
+color: #818181;
+}

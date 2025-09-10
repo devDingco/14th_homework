@@ -27,6 +27,7 @@ h2{
 body{
   padding: 4rem 32rem;
   display: flex;
+  flex-direction: column;
   
 }
 h2{
