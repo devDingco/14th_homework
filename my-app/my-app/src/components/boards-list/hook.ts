@@ -1,0 +1,51 @@
+"use client";
+import { useParams, useRouter } from "next/navigation";
+import {
+  DeleteBoardDocument,
+  FetchBoardDocument,
+} from "../../commons/gql/graphql";
+import { useMutation, useQuery } from "@apollo/client";
+import { MouseEvent } from "react";
+
+export const useBoardList = () => {
+  const router = useRouter();
+  const params = useParams<{ boardId: string }>();
+  const { data } = useQuery(FetchBoardDocument, {
+    variables: { boardId: params.boardId },
+  });
+  // ??다시 보기! 잘 모르겠다!
+
+  const [deleteBoard] = useMutation(DeleteBoardDocument);
+
+  // , {
+  // variables: {
+  //   page: params?.page ? parseInt(String(params.page), 10) : 1,
+  // useParams()가 반환하는 값은 문자열인데, $page는 Int임.
+  // -> 문자열을 정수로 변환해야 함!
+  // + 라우트가 /boards/[page] 형태가 아니라면 params.page 자체가 없을 수도 있기때문에 기본값(예: 1)을 두는 게 안전함
+  // params.page가 있다면 params.page를 숫자로 변환해서 쓰고, 없다면 자동으로 page=1
+
+  const onClickDelete = async (event: MouseEvent<HTMLImageElement>) => {
+    await deleteBoard({
+      variables: { boardId: event.currentTarget.id },
+      refetchQueries: [{ query: FetchBoardDocument }],
+    });
+    alert("삭제되었습니다!!");
+  };
+
+  const onClickMoveDetail = async (
+    event: MouseEvent<HTMLElement>,
+    id: String
+  ) => {
+    event.stopPropagation();
+
+    router.push(`/boards/${id}`);
+  };
+
+  return {
+    data,
+
+    onClickMoveDetail,
+    onClickDelete,
+  };
+};

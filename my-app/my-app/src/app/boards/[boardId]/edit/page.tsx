@@ -25,5 +25,5 @@ export default function BoardsEdit() {
     },
   });
 
-  return <BoardsComponentWrite isEdit={true} data={data} />;
+  return <BoardsComponentWrite isEdit={true} />;
 }
