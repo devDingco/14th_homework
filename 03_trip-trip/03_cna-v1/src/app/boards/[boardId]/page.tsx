@@ -21,6 +21,8 @@ import {
   FetchBoardQuery,
   FetchBoardQueryVariables,
 } from '@/shared/api/graphql/graphql'
+import CommentForm from '@/features/comments/ui/CommentForm'
+import CommentList from '@/features/comments/ui/CommentList'
 
 export default function BoardsDetail() {
   const router = useRouter()
@@ -53,6 +55,7 @@ export default function BoardsDetail() {
 
   return (
     <div className={styles['detail-post']}>
+      {/* 추후 분리 예정 */}
       {/* details title */}
       <header>
         <h1 className={styles['detail-post-title']}>{title}</h1>
@@ -116,6 +119,11 @@ export default function BoardsDetail() {
           <EditIcon />
         </IconButton>
       </div>
+
+      {/* CommentForm */}
+      <CommentForm boardId={params.boardId} />
+      {/* CommentList */}
+      <CommentList boardId={params.boardId} />
     </div>
   )
 }

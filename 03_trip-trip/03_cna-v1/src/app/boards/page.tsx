@@ -17,12 +17,6 @@ import {
   FetchBoardsQueryVariables,
 } from '@/shared/api/graphql/graphql'
 
-interface boardListItem {
-  _id: string
-  writer: string
-  title: string
-  createdAt: string
-}
 export default function BoardsPage() {
   const router = useRouter()
   const { data, loading, error } = useQuery<FetchBoardsQuery, FetchBoardsQueryVariables>(
@@ -38,7 +32,8 @@ export default function BoardsPage() {
   if (loading) return <div>로딩중입니다</div>
   if (error || !data?.fetchBoards) return <div>게시글을 찾을 수 없습니다.</div>
 
-  const boardNumber = board_num ? board_num.fetchBoardsCount : ''
+  const boardNumber =
+    typeof board_num?.fetchBoardsCount === 'number' ? board_num?.fetchBoardsCount : 0
 
   const handleNavigate = (id: string) => {
     router.push(`/boards/${id}`)
@@ -64,7 +59,7 @@ export default function BoardsPage() {
       </div>
 
       <div className={styles['board-list-items']}>
-        {data?.fetchBoards.map((boardListItem: boardListItem, idx: number) => {
+        {data?.fetchBoards.map((boardListItem, idx) => {
           const { _id, writer, title, createdAt } = boardListItem
           const formattedDate = formatUtcToKstYmd(createdAt)
 

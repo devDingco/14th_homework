@@ -1,0 +1,36 @@
+.comment-list-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: relative;
+}
+.comment-list-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.comment-list-header p {
+  margin-right: 0.4rem;
+  font-size: 1.4rem;
+  color: var(--color-gray-500);
+}
+.comment-list-contents {
+  white-space: wrap;
+  color: var(--color-gray-800);
+}
+.comment-list-date {
+  font-size: 1.4rem;
+  color: #818181;
+}
+.comment-list-actives {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: 0.8rem;
+}
+.comment-list-actives svg {
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+}
