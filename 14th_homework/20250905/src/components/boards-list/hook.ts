@@ -3,7 +3,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { DeleteBoardDocument, FetchBoardsDocument } from "@/commons/graphql/graphql";
-import type { FetchBoardsData } from "./types";
+// generated document nodes already carry types; local type not needed here
 
 export function useBoardsList() {
   const router = useRouter();
@@ -21,8 +21,9 @@ export function useBoardsList() {
   };
 
   const onClickNew = () => router.push("/boards/new");
+  const onClickRow = (boardId: string) => router.push(`/boards/${boardId}`);
 
-  return { data, loading, error, onClickDelete, onClickNew };
+  return { data, loading, error, onClickDelete, onClickNew, onClickRow };
 }
 
 

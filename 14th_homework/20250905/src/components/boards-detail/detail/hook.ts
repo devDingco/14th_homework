@@ -3,7 +3,7 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { FetchBoardDetailDocument } from "@/commons/graphql/graphql";
-import type { BoardsDetailProps, FetchBoardData } from "./types";
+import type { BoardsDetailProps } from "./types";
 
 export function useBoardsDetail(props: BoardsDetailProps) {
   const router = useRouter();
