@@ -8,20 +8,8 @@ import {
   CreateBoardCommentMutationVariables,
   FetchBoardCommentsDocument,
 } from '@/shared/api/graphql/graphql'
-import { ChangeEvent, FormEvent, useState } from 'react'
-
-export interface CommentFormProps {
-  boardId: string
-}
-
-export interface CommentForm {
-  writer: string
-  password: string
-  contents: string
-  rating: number
-}
-
-export type HandleSubmit = (event: FormEvent<HTMLFormElement>) => void
+import { ChangeEvent, useState } from 'react'
+import { CommentFormProps, HandleSubmit } from '../model/types'
 
 export default function CommentForm(props: CommentFormProps) {
   const initialCommentValues = {
@@ -71,12 +59,14 @@ export default function CommentForm(props: CommentFormProps) {
     } catch (error) {
       if (error instanceof ApolloError) {
         alert(error.message)
+      } else {
+        alert(`에러에러`)
       }
     }
   }
 
+  // TODO: comment.rating도 추가 예정
   const isDisabled = !comment.writer || !comment.password || !comment.contents
-  console.log('🚀 ~ CommentForm ~ isDisabled:', isDisabled)
 
   return (
     <div className={styles['comment-form-layout']}>

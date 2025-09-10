@@ -7,10 +7,7 @@ import {
   FetchBoardCommentsQueryVariables,
 } from '@/shared/api/graphql/graphql'
 import { formatUtcToKstYmd } from '@/shared/lib/date/formatUtcToKstYmd'
-
-export interface CommentListProps {
-  boardId: string
-}
+import { CommentListProps } from '../model/types'
 
 export default function CommentList(props: CommentListProps) {
   const { data, loading } = useQuery<FetchBoardCommentsQuery, FetchBoardCommentsQueryVariables>(
