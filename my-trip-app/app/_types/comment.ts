@@ -10,6 +10,7 @@ export interface AppComment {
 export interface NewComment {
   rating: number;
   content: string;
+  author?: string;
 }
 
 // 문의하기 댓글을 위한 타입
@@ -32,6 +33,7 @@ export interface InquiryReply {
 
 export interface NewInquiryComment {
   content: string;
+  author?: string;
 }
 
 export interface NewInquiryReply {

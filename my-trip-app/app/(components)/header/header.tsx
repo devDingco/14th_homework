@@ -8,40 +8,25 @@ import Icon from "@utils/iconColor";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { tokenStorage } from "../../commons/utils/token";
+import { useAuth } from "../../commons/hooks/useAuth";
 
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState("");
   const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement | null>(null);
+  const { user, isLoggedIn, logout } = useAuth();
+  
   const handleActive = (menuKey: string) => {
     setActiveMenu(menuKey);
   };
 
+  const handleLogout = () => {
+    logout();
+    setIsProfileOpen(false);
+  };
+
   useEffect(() => {
-    // 초기 상태 동기화
-    setIsLoggedIn(!!tokenStorage.get());
-
-    // 같은 탭: 커스텀 이벤트로 동기화
-    const handleAuthChanged = (e: Event) => {
-      const detail = (e as CustomEvent).detail as { isLoggedIn: boolean } | undefined;
-      if (detail && typeof detail.isLoggedIn === "boolean") {
-        setIsLoggedIn(detail.isLoggedIn);
-      } else {
-        setIsLoggedIn(!!tokenStorage.get());
-      }
-    };
-    window.addEventListener("auth:changed", handleAuthChanged as EventListener);
-
-    // 다른 탭: storage 이벤트로 동기화
-    const handleStorage = (e: StorageEvent) => {
-      if (e.key === "accessToken") {
-        setIsLoggedIn(!!e.newValue);
-      }
-    };
-    window.addEventListener("storage", handleStorage);
-
     const handleClickOutside = (event: MouseEvent) => {
       const node = profileRef.current;
       if (!node) return;
@@ -53,8 +38,6 @@ export default function Header() {
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      window.removeEventListener("auth:changed", handleAuthChanged as EventListener);
-      window.removeEventListener("storage", handleStorage);
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
@@ -85,29 +68,42 @@ export default function Header() {
         </button>
     </div>
 
-    {isLoggedIn && (
+    {isLoggedIn && user && (
       <div className="header_right_profile_container" ref={profileRef}>
         <div className="user_profile_container" onClick={() => setIsProfileOpen((v) => !v)}>
-          <Image src="/images/mobile/profile/img-8.png" alt="user_profile" width={40} height={40} className="user_profile_image"/>
+          <Image 
+            src={user.picture || "/images/mobile/profile/img-8.png"} 
+            alt="user_profile" 
+            width={40} 
+            height={40} 
+            className="user_profile_image"
+          />
           <Icon filled name="down_arrow" black className="arrow_down_icon"/>
         </div>
         <div className={`profile_dropdown ${isProfileOpen ? "open" : ""}`}>
           <div className="profile_header">
-            <Image src="/images/mobile/profile/null.png" alt="user" width={40} height={40} />
-            <h2 className="b_18_24">김상훈</h2>
+            <Image 
+              src={user.picture || "/images/mobile/profile/null.png"} 
+              alt="user" 
+              width={40} 
+              height={40} 
+            />
+            <h2 className="b_18_24">{user?.name}</h2>
             <Icon filled name="up_arrow" black className="up_arrow_icon" onClick={() => setIsProfileOpen((v) => !v)} />
           </div>
           <div className="profile_divider"/>
           <div className="profile_row">
             <Icon outline name="point" default className="point_icon"/>
-            <p className="me_16_24">23,000 P</p>
+            <p className="me_16_24">
+              {user.userPoint?.amount ? `${user.userPoint.amount.toLocaleString()} P` : '0 P'}
+            </p>
           </div>
           <div className="profile_divider"/>
           <button className="profile_action">
             <Icon filled name="charge" default className="charge_icon"/>
             <span className="r_16_24">포인트 충전</span>
           </button>
-          <button className="profile_action" onClick={() => { tokenStorage.clear(); }}>
+          <button className="profile_action" onClick={handleLogout}>
             <Icon outline name="logout" default className="logout_icon"/>
             <span className="r_16_24">로그아웃</span>
           </button>

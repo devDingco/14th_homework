@@ -1,8 +1,10 @@
 'use client';
 
 import { ApolloClient, InMemoryCache, ApolloLink, from } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import { NEXT_PUBLIC_GRAPHQL_ENDPOINT as ENDPOINT } from '../env';
+import { tokenStorage } from '../utils/token';
 
 if (!ENDPOINT) {
   throw new Error('NEXT_PUBLIC_GRAPHQL_ENDPOINT가 설정되지 않았습니다.');
@@ -15,7 +17,7 @@ const uploadLink = createUploadLink({
 
 const authLink = new ApolloLink((operation, forward) => {
   if (typeof window !== 'undefined') {
-    const token = localStorage.getItem('accessToken');
+    const token = tokenStorage.get();
     if (token) {
       operation.setContext(({ headers = {} }) => ({
         headers: { ...headers, Authorization: `Bearer ${token}` },
@@ -25,7 +27,27 @@ const authLink = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
+const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
+  if (graphQLErrors) {
+    graphQLErrors.forEach(({ message, locations, path }) => {
+      console.error(`GraphQL error: Message: ${message}, Location: ${locations}, Path: ${path}`);
+    });
+  }
+
+  if (networkError) {
+    console.error(`Network error: ${networkError}`);
+    
+    // 401 Unauthorized 에러 시 토큰 제거 및 로그인 페이지로 리다이렉트
+    if ('statusCode' in networkError && networkError.statusCode === 401) {
+      tokenStorage.clear();
+      if (typeof window !== 'undefined') {
+        window.location.href = '/auth';
+      }
+    }
+  }
+});
+
 export const apolloClient = new ApolloClient({
-  link: from([authLink, uploadLink as unknown as ApolloLink]),
+  link: from([errorLink, authLink, uploadLink as unknown as ApolloLink]),
   cache: new InMemoryCache(),
 });

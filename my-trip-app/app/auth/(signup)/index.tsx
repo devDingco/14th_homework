@@ -5,7 +5,7 @@ import "./index.css";
 import { useState } from 'react';
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
-import { signUpApi } from '../../commons/apis/auth.api';
+import { signUp } from '../../commons/services/auth.services';
 export default function SignUp({ onClickSignin }: { onClickSignin?: () => void }) {
     const router = useRouter();
     const [email, setEmail] = useState('');
@@ -39,7 +39,7 @@ export default function SignUp({ onClickSignin }: { onClickSignin?: () => void }
       try {
         setSubmitting(true);
         setApiError('');
-        await signUpApi({ email, name, password });
+        await signUp({ email, name, password });
         alert('회원가입이 완료되었습니다.');
         router.push('/auth');
       } catch (err: any) {

@@ -7,13 +7,20 @@ import Link from "next/link";
 import CommentSection from "@components/comment/commentSection";
 import { formatDate } from "@hooks/formatDate";
 import { toYouTubeEmbedUrl } from "@hooks/youtube";
+import { usePostAuth } from "@hooks/usePostAuth";
 import { useState } from "react";
 import { likeBoardApi, dislikeBoardApi } from "@/commons/apis/board.api";
+import UnauthorizedModal from "@components/modal/UnauthorizedModal";
+import { useRouter } from "next/navigation";
 
 export default function BoardDetail({ id, initialData }: { id: string; initialData: any }) {
   const [likeCount, setLikeCount] = useState<number>(initialData.likeCount ?? 0);
   const [badCount, setBadCount] = useState<number>(initialData.badCount ?? 0);
   const [pending, setPending] = useState<boolean>(false);
+  const [showInfoModal, setShowInfoModal] = useState<boolean>(false);
+  const [modalContent, setModalContent] = useState<{ type: 'link' | 'address'; content: string }>({ type: 'link', content: '' });
+  const { showUnauthorizedModal, checkPostAuthor, closeUnauthorizedModal } = usePostAuth();
+  const router = useRouter();
 
   const post = {
     title: initialData.title,
@@ -25,6 +32,9 @@ export default function BoardDetail({ id, initialData }: { id: string; initialDa
     badCount,
     likeCount,
     youtubeUrl: initialData.youtubeUrl,
+    address: initialData.address,
+    detailAddress: initialData.detailAddress,
+    zipcode: initialData.zipcode,
   };
 
   const handleLike = async () => {
@@ -49,6 +59,38 @@ export default function BoardDetail({ id, initialData }: { id: string; initialDa
     }
   };
 
+  const handleEditClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (checkPostAuthor(post.authorName)) {
+      router.push(`/board/edit/${id}`);
+    }
+  };
+
+  const handleLinkClick = () => {
+    if (post.youtubeUrl) {
+      setModalContent({ type: 'link', content: post.youtubeUrl });
+      setShowInfoModal(true);
+    } else {
+      setModalContent({ type: 'link', content: '링크가 없습니다.' });
+      setShowInfoModal(true);
+    }
+  };
+
+  const handleLocationClick = () => {
+    const fullAddress = [post.address, post.detailAddress].filter(Boolean).join(' ');
+    if (fullAddress) {
+      setModalContent({ type: 'address', content: fullAddress });
+      setShowInfoModal(true);
+    } else {
+      setModalContent({ type: 'address', content: '등록된 주소가 없습니다.' });
+      setShowInfoModal(true);
+    }
+  };
+
+  const closeInfoModal = () => {
+    setShowInfoModal(false);
+  };
+
   return (
     <div className="board_detail_page">
       <article className="board_detail">
@@ -70,8 +112,12 @@ export default function BoardDetail({ id, initialData }: { id: string; initialDa
               <span className="r_14_20 date">{formatDate(post.createdAt)}</span>
             </div>
             <div className="icon_wrap">
-              <Icon outline name="link" default className="link_icon"/>
-              <Icon outline name="location" default className="location_icon"/>
+              <button type="button" onClick={handleLinkClick} className="icon_button">
+                <Icon outline name="link" color="var(--gray-70)" className="icon_link"/>
+              </button>
+              <button type="button" onClick={handleLocationClick} className="icon_button">
+                <Icon outline name="location" color="var(--gray-70)" className="icon_location"/>
+              </button>
             </div>
           </div>
         </header>
@@ -104,7 +150,7 @@ export default function BoardDetail({ id, initialData }: { id: string; initialDa
           )}
         </section>
 
-          <article className="like_section">
+          <section className="like_section">
             <div className="like_wrap">
               <button type="button" className="like_icon" onClick={handleDislike} disabled={pending}>
                 <Icon outline name="bad" color="var(--gray-70)"/>
@@ -121,29 +167,68 @@ export default function BoardDetail({ id, initialData }: { id: string; initialDa
                 <span className="r_16_24" style={{ color: "var(--red)" }}>{post.likeCount}</span>
               </div>
             </div>
-          </article>
+          </section>
 
-          <CommentSection initialComments={[]} />
+          <CommentSection boardId={id} initialComments={[]} />
 
         <footer className="detail_actions">
           <div className="bottom_actions">
-              <Link href="/" className="r_16_24">
-            <button type="button" className="btn-outline">
+              <Link href="/" className="r_16_24 btn-outline">
               <Icon outline name="menu" default width={24} height={24}/>
               목록으로
-            </button>
               </Link>
             <div className="reactions">
-              <Link href={`/board/edit/${id}`} className="r_16_24">
-                <button type="button" className="btn-outline">
-                  <Icon outline name="edit" default width={24} height={24}/>
-                  수정하기
-                </button>
-              </Link>
+              <button 
+                type="button" 
+                className="r_16_24 btn-outline"
+                onClick={handleEditClick}
+                style={{ 
+                  display: "flex", 
+                  alignItems: "center", 
+                  gap: "8px",
+                  background: "transparent",
+                  cursor: "pointer"
+                }}
+              >
+                <Icon outline name="edit" default width={24} height={24}/>
+                수정하기
+              </button>
             </div>
           </div>
         </footer>
       </article>
+      
+      <UnauthorizedModal 
+        isOpen={showUnauthorizedModal}
+        onClose={closeUnauthorizedModal}
+      />
+      
+      {showInfoModal && (
+        <div className="info_modal_overlay" onClick={closeInfoModal}>
+          <div className="info_modal" onClick={(e) => e.stopPropagation()}>
+            <div className="info_modal_header">
+              <h3 className="sb_18_24">
+                {modalContent.type === 'link' ? '유튜브 링크' : '주소 정보'}
+              </h3>
+              <button type="button" onClick={closeInfoModal} className="close_button">
+                <Icon outline name="close" default width={24} height={24}/>
+              </button>
+            </div>
+            <div className="info_modal_content">
+              <p className="r_16_24">{modalContent.content}</p>
+              {modalContent.type === 'link' && post.youtubeUrl && (
+                <button 
+                  type="button" 
+                  className="link_button sb_16_24"
+                  onClick={() => window.open(post.youtubeUrl, '_blank')}
+                >
+                  링크 열기
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

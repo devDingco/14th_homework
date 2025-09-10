@@ -1,7 +1,7 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
-  schema: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT!,
+  schema: 'https://main-practice.codebootcamp.co.kr/graphql',
   documents: ['app/**/*.{ts,tsx,graphql,gql}'],
   generates: {
     './app/commons/graphql/__generated__/': {

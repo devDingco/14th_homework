@@ -1,14 +1,16 @@
 "use client";
 
 import "./index.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Icon from "@utils/iconColor";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { createBoardApi, uploadFileApi } from "../../commons/apis/board.api";
 import type { CreateBoardInput } from "../../commons/graphql/__generated__/graphql";
 import { useDaumPostcodePopup } from "react-daum-postcode";
+import { useAuth } from "../../commons/hooks/useAuth";
 export default function PostBoard() {
+  const { user, isLoggedIn, loading } = useAuth();
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
@@ -24,6 +26,13 @@ export default function PostBoard() {
   const [createdBoardId, setCreatedBoardId] = useState<string | null>(null);
   const [imageUrls, setImageUrls] = useState<(string | null)[]>([null, null, null]);
   const router = useRouter();
+
+  // 로그인된 사용자의 이름을 작성자로 설정
+  useEffect(() => {
+    if (user?.name) {
+      setWriter(user.name);
+    }
+  }, [user]);
   const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
   const openPostcode = () => {
     open({
@@ -38,6 +47,10 @@ export default function PostBoard() {
 
   const validateForm = (): Record<string, string> => {
     const nextErrors: Record<string, string> = {};
+    if (!isLoggedIn) {
+      nextErrors.writer = "로그인이 필요합니다.";
+      return nextErrors;
+    }
     if (!writer.trim()) nextErrors.writer = "필수입력 사항 입니다.";
     if (!password.trim()) nextErrors.password = "필수입력 사항 입니다.";
     if (!title.trim()) nextErrors.title = "필수입력 사항 입니다.";
@@ -121,9 +134,33 @@ export default function PostBoard() {
   };
 
 
+  // 로딩 중일 때 표시
+  if (loading) {
+    return (
+      <div className="board_page">
+        <h1 className="b_28_36 board_title">게시물 등록</h1>
+        <div style={{ textAlign: 'center', padding: '2rem' }}>
+          <p>로딩 중...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="board_page">
       <h1 className="b_28_36 board_title">게시물 등록</h1>
+      {!isLoggedIn && (
+        <div style={{ 
+          backgroundColor: '#fff3cd', 
+          border: '1px solid #ffeaa7', 
+          borderRadius: '4px', 
+          padding: '12px', 
+          marginBottom: '20px',
+          color: '#856404'
+        }}>
+          게시글을 작성하려면 로그인이 필요합니다.
+        </div>
+      )}
 
       <form className="board_form" onSubmit={(e) => e.preventDefault()}>
         <div className="row two">
@@ -133,9 +170,15 @@ export default function PostBoard() {
             </label>
             <input
               type="text"
-              placeholder="작성자 명을 입력해 주세요."
+              placeholder={isLoggedIn ? user?.name || "로그인된 사용자" : "로그인이 필요합니다"}
               value={writer}
               onChange={(e) => setWriter(e.target.value)}
+              disabled={true}
+              style={{ 
+                backgroundColor: '#f5f5f5', 
+                cursor: 'not-allowed',
+                color: '#666'
+              }}
             />
             {errors.writer  && <p className="error_text">{errors.writer}</p>}
           </div>
@@ -243,10 +286,11 @@ export default function PostBoard() {
           <button
             type="button"
             className="btn-primary"
-            disabled={isSubmitting}
+            disabled={isSubmitting || !isLoggedIn}
             onClick={handleSubmit}
+            title={!isLoggedIn ? "로그인이 필요합니다" : ""}
           >
-            {isSubmitting ? "등록 중..." : "등록하기"}
+            {isSubmitting ? "등록 중..." : !isLoggedIn ? "로그인 필요" : "등록하기"}
           </button>
         </div>
         {apiError && <p className="error_text" style={{ marginTop: 8 }}>{apiError}</p>}

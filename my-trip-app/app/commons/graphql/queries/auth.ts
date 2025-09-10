@@ -6,6 +6,10 @@ export const ME_QUERY = gql`
       _id
       email
       name
+      userPoint {
+        amount
+      }
+      picture
     }
   }
 `;
