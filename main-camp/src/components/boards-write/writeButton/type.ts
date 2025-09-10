@@ -1,15 +1,8 @@
+import { IFunctionUpdateBoard } from "../type"
+
 export interface IWriteButtonProps {
-    postUpdateData?: {
-        writer: string,
-        title: string,
-        contents: string
-    },
-    postResistData?: {
-        writer: string,
-        password: string | number,
-        title: string,
-        contents: string
-    },
+    onClickHandler?: (data?: IFunctionUpdateBoard) => void | Promise<void>,
+    postData?: IFunctionUpdateBoard,
     p?: string
 }
 

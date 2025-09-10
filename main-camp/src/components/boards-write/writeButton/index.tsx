@@ -3,7 +3,6 @@
 import styles from './style.module.css'
 import { IWriteButtonProps } from './type'
 import useWriteButton from './hook'
-import useBoardWrite from '../hook'
 import { useEffect } from 'react'
 import { useIsEdit } from '@/commons/isEditProvider'
 
@@ -13,18 +12,17 @@ const WriteButton = (props: IWriteButtonProps) => {
         activeButton,
     } = useWriteButton()
 
-    const {
-        onUpdateHandler,
-        onClickResist
-    } = useBoardWrite()
-
-    const {writer, password, title, contents} = useIsEdit()
-
-    console.log(props.postUpdateData)
+    const {isEdit, writer, password, title, contents} = useIsEdit()
 
     useEffect(() => {
         activeButton({ writer, password, title, contents})
     },[writer, password, title, contents])
+
+    useEffect(()=>{
+        console.log(isEdit)
+        console.log(props)
+    },[isEdit])
+
     let btnComponent
     switch (props.p) {
         case "취소": {
@@ -34,13 +32,27 @@ const WriteButton = (props: IWriteButtonProps) => {
         }
         case "등록하기": {
             btnComponent =
-            <button className={`${styles.write_confirm_btn} sb_18_24`} onClick={onClickResist} style={{ background: isActive === true ? "rgba(41, 116, 229, 1)" : "rgba(199, 199, 199, 1)" }}>{props.p}</button>
+            // <button className={`${styles.write_confirm_btn} sb_18_24`} onClick={props.onClickHandler ? () => props.onClickHandler : undefined} style={{ background: isActive === true ? "rgba(41, 116, 229, 1)" : "rgba(199, 199, 199, 1)" }}>{props.p}</button>
+            <button className={`${styles.write_confirm_btn} sb_18_24`} 
+                onClick={async () => {
+                    if (props.onClickHandler && props.postData) {
+                        await props.onClickHandler(props.postData)
+                    }
+                }}  
+                style={{ background: isActive === true ? "rgba(41, 116, 229, 1)" : "rgba(199, 199, 199, 1)" }}>{props.p}
+            </button>
             break
         }
         case "수정하기": {
             btnComponent =
-            <button className={`${styles.write_confirm_btn} sb_18_24`} onClick={(()=>{onUpdateHandler(props.postUpdateData)})} style={{ background: "rgba(41, 116, 229, 1)" }}>{props.p}</button>
-            // <button className={`${styles.write_confirm_btn} sb_18_24`} style={{ background: "rgba(41, 116, 229, 1)" }}>{props.p}</button>
+            <button className={`${styles.write_confirm_btn} sb_18_24`}  
+                onClick={async () => {
+                    if (props.onClickHandler && props.postData) {
+                        await props.onClickHandler(props.postData)
+                    }
+                }} 
+                style={{ background: "rgba(41, 116, 229, 1)" }}>{props.p}
+            </button>
             break
         }
         default:

@@ -6,10 +6,14 @@ const IsEditContext = createContext<any>(null)
 
 export const IsEditProvider = ( {children}: { children:ReactNode } ) => {
     const [isEdit, setIsEdit] = useState<boolean>(false)
+
     const [writer, setWriter] = useState<string | undefined>("")
     const [password, setPassword] = useState<string | number>("")
     const [title, setTitle] = useState<string | undefined>("")
     const [contents, setContents] = useState<string | undefined>("")
+
+    const [updatingTitle, setUpdatingTitle] = useState<string | undefined>("")
+    const [updatingContents, setUpdatingContents] = useState<string | undefined>("")
 
     return (
         <IsEditContext.Provider value={{ 
@@ -17,7 +21,9 @@ export const IsEditProvider = ( {children}: { children:ReactNode } ) => {
             writer, setWriter,
             password, setPassword,
             title, setTitle,
-            contents, setContents
+            contents, setContents,
+            updatingTitle, setUpdatingTitle,
+            updatingContents, setUpdatingContents
         }}>
             {children}
         </IsEditContext.Provider>

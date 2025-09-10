@@ -23,11 +23,11 @@ const useBoardsListPage = () => {
     console.log(boardsData?.fetchBoards)
     // console.log(boardsCount?.fetchBoardsCount)
 
-    const goDetailHandler = (event: any) => {
+    const goDetailHandler = (event: React.MouseEvent<HTMLDivElement>) => {
         router.push(`/boards/${event.currentTarget.dataset.key}`)
     }
 
-    const onDeleteHanlder = async (event: any) => {
+    const onDeleteHanlder = async (event: React.MouseEvent<HTMLImageElement>) => {
         console.log(event.currentTarget.dataset.key)
         
         try {

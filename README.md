@@ -1,51 +1,114 @@
 ### Day 23 기본 요구사항
 
+## 과제 요구 사항
+
+### 공통
+
+- [x] 완성된 `day25` 폴더를 활용하여 `day26` 을 완성해 주세요.
+  - 폴더를 다시 생성할 필요는 없습니다 !
+  - 해당 폴더에서 계속 작업해서 과제 제출해 주시면 됩니다.
+
+### 게시글 등록/수정
+
+- [ ] 게시글 등록/수정 페이지에서 렌더링 되는 게시글작성 컴포넌트를 리팩토링해요.
+  - 주어진 폴더 경로에 파일을 만들고 코드를 적절히 이동합니다.
+  - 폴더 경로: `src/components/boards-write`
+  - 파일 목록:
+    - hook.ts
+    - index.tsx
+    - queires.ts
+    - styles.module.css
+    - types.ts
+
+### 게시글 상세
+
+- [ ] 게시글 상세 페이지에서 게시글 상세 컴포넌트를 불러오도록 리팩토링해요.
+  - 주어진 폴더 경로에 파일을 만들고 코드를 적절히 이동합니다.
+  - 폴더 경로: `src/component/boards-detail`
+  - 파일 목록:
+    - hook.ts
+    - index.tsx
+    - queires.ts
+    - styles.module.css
+    - types.ts
+- [ ] 게시글 상세 페이지는 새롭게 만든 컴포넌트가 렌더링 될 수 있도록 변경합니다.
+  - 게시글 상세 페이지 경로: `app/boards/[boardId]/page.tsx`
+
+### 게시글 목록
+
+- [ ] 게시글 목록 페이지에서 게시글 목록 컴포넌트를 불러오도록 리팩토링해요.
+  - 주어진 폴더 경로에 파일을 만들고 코드를 적절히 이동합니다.
+  - 폴더 경로: `src/component/boards-list`
+  - 파일 목록:
+    - hook.ts
+    - index.tsx
+    - queires.ts
+    - styles.module.css
+    - types.ts
+
+### 타입 스크립트
+
+- [ ] GraphQL API와 관련된 데이터의 타입을 모두 보완해요.
+- [x] graphql-codegen 을 설치해요.
+  - 명령어: `pnpm add --dev @graphql-codegen/cli`
+- [x] `codegen.ts` 파일을 복사 후 아래 내용을 변경하세요.
+  - schema: `"http://main-practice.codebootcamp.co.kr/graphql"`
+- [x] `package.json` 의 script에 실행 명령을 추가해 주세요.
+  - `"codegen"`: `"graphql-codegen --config codegen.ts"`
+- [ ] codegen 을 통해 생성한 타입이 적용된 Document 를 통해 모든 `useQuery`, `useMutation` 을 변경해요.
+  - `any` 타입으로 정의된 API 관련 데이터 타입은 없어야 합니다.
+  - 예시:
+    - 게시글등록 => useMutation(CreateBoardDocument)
+    - 게시글수정 => useMutation(UpdateBoardDocument)
+
+
+## 과제 요구 사항
+
 1. 공통
-    - [x]  완성된 day22 폴더를 활용하여 day23을 완성해 주세요.
-2. 게시글등록
-    - [x]  `src/app/boards/page.tsx` 경로에 파일을 생성하고 게시글목록 페이지를 완성합니다.
-        - [x]  피그마 첫번째 화면과 같이 결과물이 나오도록 만들어 주세요.
-        - [x]  해당 페이지에 접속하였을 때 GRAPHQL-API(fetchBoards)를 사용하여 목록데이터를 조회해 보세요.
-        - [x]  게시글 번호는 index값을 활용하여 완성해 보세요.
-        - [x]  게시글 내용을 클릭하면, 해당 게시글의 상세페이지로 이동하도록 완성해 보세요.
-3. 게시글조회
-    - [x]  `src/app/boards/detail/page.tsx` 파일의 경로를 다이나믹하게 변경하기 위해 `src/app/boards/[boardId]/page.tsx` 경로로 변경해 주세요.
-        - [x]  해당 페이지에 접속하였을 때 주소 부분의 boardId 값을 꺼내오고, 꺼낸 id의 게시물을 GRAPHQL-API(fetchBoard)로 조회해 보세요.
-        - [x]  조회된 게시물의 작성자, 제목, 내용을 알맞은 위치에 보여주세요.
-        - [x]  데이터를 받아오는데 시간이 걸리는 이유로, 받아오기 전의 존재하지 않는 데이터를 그리는 과정에서 에러가 발생하게 됩니다. 이 문제를 해결해 주세요.
-        - [x]  GRAPHQL-API(deleteBoard)에 id값을 variables로 포함시켜 삭제를 요청해 주세요.
-        - [x]  서버에서 삭제된 게시글이 내 브라우저에서도 삭제되어야 합니다. 따라서, GRAPHQL-API(fetchBoards)를 다시 요청하여 게시물 목록을 갱신해 주세요.
-
-
-### Day 24 기본 요구사항
-
-1. 공통
-    - [x]  완성된 day23 폴더를 활용하여 day24를 완성해 주세요.
-2. 게시글수정
-    - [ ]  아래 경로에 수정페이지를 만들고 수정 기능을 완성해 주세요.
-        - [x]  수정페이지 경로: `src/app/boards/[boardId]/edit/page.tsx`
-        - [x]  기존에 만들었던 등록페이지경로의 내용을 수정페이지와 재사용 가능하도록 아래 컴포넌트 구현 경로에 코드를 복사해요.
-            - [x]  기존 등록 페이지 경로: `src/app/boards/new/page.tsx`
-            - [x]  컴포넌트 구현 경로: `src/components/boards-write/index.tsx`
-        - [x]  등록하기와 수정하기를 1개의 컴포넌트로 재사용 하기 위해 아래 경로에 컴포넌트를 구현해요.
-            - [x]  경로: `src/components/boards-write/index.tsx`
-            - [x]  등록하기 화면에 구현한 컴포넌트를 렌더링 해주세요.
-            - [x]  수정하기 화면도 구현한 컴포넌트를 렌더링 해주세요.
-            - [x]  해당 컴포넌트가 등록하기, 수정하기 페이지에서 의도한대로 동작하는지 각각 테스트 해주세요.
-        - [x]  상세 페이지에서 `[수정하기]` 버튼을 눌렀을때, 해당 게시글을 수정하는 화면으로 이동하는 기능을 구현 해주세요.
-        - [x]  수정페이지에 접속하는 경우, 수정을 위한 초기값을 보여주기 위해 GRAPHQL-API(fetchBoard)를 사용하여 기존에 입력했던 값들을 불러와 주세요.
-            - [x]  수정 페이지 경로:  `src/app/boards/[boardId]/edit/page.tsx`
-            - [ ]  제목, 내용만 수정할 수 있으며, 수정되지 않은 값은 제외하고, 수정된 값만 API 요청에 포함시켜 주세요.
-            - [x]  작성자와 비밀번호는 수정할 수 없습니다. 수정하기 페이지일 경우 input 태그 disabled 처리해주세요.
-        - [ ]  게시글작성 컴포넌트에서 수정하기 버튼을 눌렀을 때 GRAPHQL-API(updateBoard)를 사용하여 데이터를 수정해 보세요.
-            - [x]  게시글 작성 페이지 경로:  `src/components/boards-write/index.tsx`
-            - [x]  수정을 하기 위해서는 글을 입력할때 설정하였던 비밀번호를 입력받아야 합니다.
-            - [x]  prompt 창으로 입력받아주세요. 비밀번호가 틀릴경우 수정이 되지 않습니다. `try ~ catch` 문으로 예외처리 해주세요.
+    - [ ]  완성된 `day26` 폴더를 활용하여 `day27` 을 완성해 주세요.
+        - 폴더를 다시 생성할 필요는 없습니다 !
+        - 해당 폴더에서 계속 작업해서 과제 제출해 주시면 됩니다.
+        
+2. 게시글 목록
+    - [ ]  게시글 목록 관련 페이지 및 컴포넌트에 이벤트 버블링을 처리해 주세요.
+        - 게시글 내용 뿐 아니라, 삭제 버튼을 제외한 게시글 목록 영역을 클릭해도 클릭한 게시글의 상세 페이지로 이동시켜 주세요.
+        - 페이지 경로: `src/app/boards/page.tsx`
+    
+3. 게시글 상세
+    - [ ]  게시글 상세 페이지에 사용될 댓글 영역 구현에 필요한 컴포넌트 2개를 추가로 만들어 주세요.
+        - 아래 경로의 폴더는 생성해 주세요.
+        - 댓글 목록 컴포넌트 경로: `src/components/boards-detail/comment-list`
+        - 댓글 등록 컴포넌트 경로: `src/components/boards-detail/comment-write`
+    - [ ]  기존에 구현한 게시글 상세 컴포넌트 관련 파일들을 아래 폴더 경로로 이동시켜 주세요.
+        - 아래 경로의 폴더는 생성해 주세요.
+        - 이동할 폴더 경로: `src/components/boards-detail/detail`
+        - 파일 목록:
+            - hook.ts
+            - index.tsx
+            - queries.ts
+            - styles.module.css
+            - types.ts
             
-            ```jsx
-            // 아래 코드가 실행될 경우 비밀번호를 입력받는 prompt 창이 실행 됩니다.
-            const 입력받은 비밀번호 = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
-            // 입력받은 비밀번호를 updateBoard 할때 variables에 넣어서 전송해주세요.
-            ```
-            
-            - [x]  catch 문 안에서 `error.graphQLErrors` 를 확인하여 비밀번호가 틀린경우, 비밀번호가 틀렸다는 alert 창이 뜰 수 있도록 해주세요.
+4. 게시글 상세[댓글 등록]
+    
+    ![스크린샷 2024-10-04 오전 11.45.53.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9c9b02bc-6cb6-4924-bf38-dad25e0fe77b/a93821e5-22a6-4544-b794-a55d95d8d191/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-10-04_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_11.45.53.png)
+    
+    - src/components/boards-detail/comment-write/index.tsx 경로에 위 이미지의 댓글 등록 부분을 완성해 주세요.
+    => 댓글 입력 후, 댓글등록 버튼을 누르면 GRAPHQL-API(createBoardComment)를 사용하여 댓글을 등록해 주세요.
+    => 댓글이 등록된 후, 댓글을 목록에서 조회하기 위해 GRAPHQL-API(fetchBoardComments)를 리페치해 주세요.
+    => 댓글이 등록된 후, 댓글입력창을 모두 초기화 합니다.
+    => 별점, 아바타사진, 수정/삭제 아이콘은 아직 기능을 추가하진 않습니다.(따라서, 별점은 0점으로 등록합니다.)
+5. 게시글 상세[댓글 목록 조회]
+    
+    ![스크린샷 2024-10-04 오전 11.46.28.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9c9b02bc-6cb6-4924-bf38-dad25e0fe77b/3bfd811e-0bf2-44d0-9b93-b49746cdd2f5/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-10-04_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_11.46.28.png)
+    
+    - src/components/boards-detail/comment-list/index.tsx 경로에 위 이미지의 댓글목록 부분을 완성해 주세요.
+    => GRAPHQL-API(fetchBoardComments)를 사용하여 댓글목록을 완성합니다.
+    => 별점, 아바타사진, 수정/삭제 아이콘은 아직 기능을 추가하진 않습니다.(따라서, 별점은 0점으로 보여줍니다.)
+6. 게시글상세[최종조립]
+    - 게시글상세페이지 src/app/boards/[boardId]/page.tsx 경로의 파일을 수정합니다.
+    => 해당 페이지에 위에서 만든 3개의 컴포넌트(게시글상세, 댓글등록, 댓글목록)를 불러와서 조립합니다.
+7. 컴포넌트[리팩토링]
+    - 게시글상세, 댓글등록, 댓글목록조회 컴포넌트의 파일을 보완해 주세요.
+    => 타입에러가 감지되어 빨간 밑줄이 그어지는 부분에 타입스크립트를 적용하여 문제를 해결해 주세요.
+    => 유지보수가 쉽도록 파일을 hook.ts, index.tsx, queries.ts, styles.ts, types.ts 로 분리해 주세요.
