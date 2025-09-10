@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Rating } from "@mui/material";
 import { useCommentWrite } from "./hook";
 import type { CommentWriteProps } from "./types";
 
@@ -9,9 +10,11 @@ export default function CommentWrite(props: CommentWriteProps) {
     writer,
     password,
     contents,
+    rating,
     setWriter,
     setPassword,
     setContents,
+    setRating,
     isValid,
     onClickSubmit,
     loading,
@@ -23,8 +26,12 @@ export default function CommentWrite(props: CommentWriteProps) {
     <div className="content-container">
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
         <h3 className="post-title" style={{ margin: 0 }}>댓글</h3>
-        {/* 비활성 별점(나중에 기능 추가 예정) */}
-        <div style={{ color: "#D1D5DB", fontSize: 18 }}>☆☆☆☆☆</div>
+        <Rating
+          value={rating}
+          onChange={(event, newValue) => setRating(newValue || 0)}
+          size="medium"
+          sx={{ color: '#f26d21' }}
+        />
       </div>
 
       <div className="form-group first-group">

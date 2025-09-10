@@ -4,6 +4,13 @@
 
 @import url("../styles/tokens.css");
 
+/* CSS Reset - 모든 HTML 태그에 기본 스타일 적용 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* 기본 스타일 */
 body {
   margin: 0;

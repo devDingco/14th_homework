@@ -2,6 +2,7 @@
 
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
+import { Rating } from "@mui/material";
 
 const FETCH_BOARD_COMMENTS = gql`
   query fetchBoardComments($boardId: ID!, $page: Int) {
@@ -9,6 +10,7 @@ const FETCH_BOARD_COMMENTS = gql`
       _id
       writer
       contents
+      rating
       createdAt
     }
   }
@@ -22,6 +24,7 @@ interface BoardCommentItem {
   _id: string;
   writer?: string | null;
   contents: string;
+  rating: number;
   createdAt: string;
 }
 
@@ -55,8 +58,12 @@ export default function CommentList(props: CommentListProps) {
               <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
                 <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#e5e7eb" }} />
                 <div style={{ fontWeight: 600 }}>{comment.writer || "익명"}</div>
-                {/* 별점(0점 고정) */}
-                <div style={{ color: "#D1D5DB", marginLeft: "auto" }}>☆☆☆☆☆</div>
+                <Rating
+                  value={comment.rating}
+                  readOnly
+                  size="small"
+                  sx={{ color: '#f26d21', marginLeft: 'auto' }}
+                />
               </div>
               <div style={{ color: "#374151", lineHeight: 1.6 }}>{comment.contents}</div>
               <div style={{ marginTop: 6, fontSize: 12, color: "#9CA3AF" }}>{date}</div>
