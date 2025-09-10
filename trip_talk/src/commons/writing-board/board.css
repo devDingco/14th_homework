@@ -6,6 +6,11 @@
   margin-top: 2.5rem;
 }
 
+.text_input.disabled {
+  background-color: var(--gray-100);
+  cursor: not-allowed;
+}
+
 .board_form_input_wrapper {
   width: 100%;
   display: flex;

@@ -57,7 +57,15 @@ export const useGetBoards = (variables?: GetBoardsVariables) => {
 };
 
 export const useGetBoard = (boardId: string) => {
-  return useQuery(GET_BOARD, { variables: { boardId } });
+  return useQuery(GET_BOARD, {
+    variables: { boardId },
+    skip: !boardId || boardId === 'undefined' || boardId === 'null',
+    errorPolicy: 'all',
+    onError: (error) => {
+      console.error('useGetBoard 에러:', error);
+      console.error('boardId:', boardId);
+    },
+  });
 };
 
 export const useGetBoardComments = (boardId: string) => {

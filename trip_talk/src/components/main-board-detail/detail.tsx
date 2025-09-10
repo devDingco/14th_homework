@@ -4,7 +4,13 @@ import './detail.css';
 import Image from 'next/image';
 import FeedbackForm from '@/commons/feedbackForm/feedbackForm';
 import { useRouter, useParams } from 'next/navigation';
-import { useGetBoard, useGetBoardComments, useLikeBoard, useDislikeBoard } from '@/hooks/useGraphQL';
+import {
+  useGetBoard,
+  useGetBoardComments,
+  useLikeBoard,
+  useDislikeBoard,
+  useGetUserLoggedIn,
+} from '@/hooks/useGraphQL';
 import { useState } from 'react';
 
 export default function Detail() {
@@ -12,16 +18,31 @@ export default function Detail() {
   const params = useParams();
   const boardId = params.detail as string;
 
+  // Hook들을 최상단에 배치
   const { data, loading, error, refetch } = useGetBoard(boardId);
   const { data: commentsData, loading: commentsLoading, error: commentsError } = useGetBoardComments(boardId);
+  const { data: userData } = useGetUserLoggedIn();
   const [likeBoard] = useLikeBoard();
   const [dislikeBoard] = useDislikeBoard();
 
   const [isLiking, setIsLiking] = useState(false);
   const [isDisliking, setIsDisliking] = useState(false);
 
+  console.log('Detail 컴포넌트 - boardId:', boardId);
+  console.log('Detail 컴포넌트 - params:', params);
+
+  // boardId 유효성 검사
+  if (!boardId || boardId === 'undefined' || boardId === 'null') {
+    return <div className="container">잘못된 게시글 ID입니다.</div>;
+  }
+
+  console.log('Detail 컴포넌트 - GraphQL 응답:', { data, loading, error });
+
   if (loading) return <div className="container">로딩 중...</div>;
-  if (error) return <div className="container">에러가 발생했습니다: {error.message}</div>;
+  if (error) {
+    console.error('GraphQL 에러:', error);
+    return <div className="container">에러가 발생했습니다: {error.message}</div>;
+  }
   if (!data?.fetchBoard) return <div className="container">게시글을 찾을 수 없습니다.</div>;
 
   const board = data.fetchBoard;
@@ -59,6 +80,24 @@ export default function Detail() {
     }
   };
 
+  const handleEditClick = () => {
+    // 게시글 데이터를 수정 페이지로 전달
+    const editData = {
+      title: board.title,
+      contents: board.contents,
+      writer: board.writer,
+      images: board.images,
+      youtubeUrl: board.youtubeUrl,
+      boardAddress: board.boardAddress,
+    };
+
+    // URL 파라미터로 데이터 전달 (큰 데이터는 sessionStorage 사용)
+    sessionStorage.setItem('editBoardData', JSON.stringify(editData));
+    router.push(`/board/edit/${boardId}`);
+  };
+
+  console.log(board);
+
   return (
     <div className="container">
       <div className="detail_header">
@@ -80,35 +119,96 @@ export default function Detail() {
         <div className="detail_content r_16_24">
           {board.images && board.images.length > 0 && (
             <>
-              <Image
-                src={`https://storage.googleapis.com/${board.images[0]}`}
-                alt="게시글 이미지"
-                width={400}
-                height={531}
-              />
+              {board.images.map((image: string, index: number) => (
+                <Image
+                  key={index}
+                  src={`https://storage.googleapis.com/${image}`}
+                  alt="게시글 이미지"
+                  width={400}
+                  height={531}
+                />
+              ))}
               <br />
             </>
           )}
-          {board.contents.split('\n').map((line, index) => (
+          {board.contents.split('\n').map((line: string, index: number) => (
             <span key={index}>
               {line}
               <br />
             </span>
           ))}
         </div>
-        {board.youtubeUrl && (
-          <div className="detail_content_video_section">
-            <iframe
-              width="822"
-              height="464"
-              src={board.youtubeUrl.replace('watch?v=', 'embed/')}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-        )}
+        {board.youtubeUrl &&
+          (() => {
+            // YouTube URL을 embed URL로 변환하는 함수
+            const getYouTubeEmbedUrl = (url: string) => {
+              try {
+                // 다양한 YouTube URL 형식 처리
+                let videoId = '';
+
+                if (url.includes('youtube.com/watch?v=')) {
+                  videoId = url.split('watch?v=')[1].split('&')[0];
+                } else if (url.includes('youtu.be/')) {
+                  videoId = url.split('youtu.be/')[1].split('?')[0];
+                } else if (url.includes('youtube.com/embed/')) {
+                  videoId = url.split('embed/')[1].split('?')[0];
+                } else {
+                  return null;
+                }
+
+                return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&fs=1&cc_load_policy=0&iv_load_policy=3&autohide=0`;
+              } catch (error) {
+                console.error('YouTube URL 파싱 실패:', error);
+                return null;
+              }
+            };
+
+            const embedUrl = getYouTubeEmbedUrl(board.youtubeUrl);
+
+            if (!embedUrl) {
+              return (
+                <div className="detail_content_video_section">
+                  <div
+                    style={{
+                      padding: '20px',
+                      textAlign: 'center',
+                      color: '#666',
+                      background: '#f5f5f5',
+                      borderRadius: '8px',
+                    }}
+                  >
+                    올바르지 않은 YouTube URL입니다.
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <div className="detail_content_video_section">
+                <iframe
+                  width="822"
+                  height="464"
+                  src={embedUrl}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  onError={(e) => {
+                    console.error('유튜브 영상 로드 실패:', e);
+                    const iframe = e.target as HTMLIFrameElement;
+                    iframe.style.display = 'none';
+                    const errorDiv = document.createElement('div');
+                    errorDiv.textContent = '유튜브 영상을 불러올 수 없습니다.';
+                    errorDiv.style.cssText =
+                      'padding: 20px; text-align: center; color: #666; background: #f5f5f5; border-radius: 8px;';
+                    iframe.parentNode?.insertBefore(errorDiv, iframe);
+                  }}
+                />
+              </div>
+            );
+          })()}
 
         <div className="detail_content_like_section">
           <div
@@ -141,9 +241,11 @@ export default function Detail() {
               목록으로
             </span>
           </div>
-          <div className="detail_content_button_item">
+          <div className="detail_content_button_item" onClick={handleEditClick}>
             <Image src="/icons/pencil.png" alt="detail" width={24} height={24} />
-            <span className="sb_14_20">수정하기</span>
+            <span className="sb_14_20" style={{ cursor: 'pointer' }}>
+              수정하기
+            </span>
           </div>
         </div>
       </div>
