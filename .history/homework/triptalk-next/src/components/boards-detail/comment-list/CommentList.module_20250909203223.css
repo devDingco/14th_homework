@@ -1,0 +1,7 @@
+.comment {
+  display: flex;
+}
+.commentWriter {
+  display: flex;
+  gap: 8px;
+}

@@ -1,0 +1,80 @@
+'use client';
+//댓글 목록
+import { gql, useMutation, useQuery } from '@apollo/client';
+import Image from 'next/image';
+
+const FETCH_BOARD_COMMENTS = gql`
+  query fetchBoardComments($page: Int, $boardId: ID!) {
+    fetchBoardComments(page: $page, boardId: $boardId) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;
+const DELETE_BOARD_COMMENT = gql`
+  mutation deleteBoardComment($password: String, $boardCommentId: ID!) {
+    deleteBoardComment(password: $password, boardCommentId: $boardCommentId)
+  }
+`;
+
+export default function CommentList({ boardId }) {
+  const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
+  const { data, error } = useQuery(FETCH_BOARD_COMMENTS, {
+    variables: { boardId: boardId, page: 1 },
+  });
+  console.log('boardId:', boardId);
+  console.log('data:', data); // ← 이거 추가
+  console.log('error:', error); // ← 이거 추가
+  return (
+    <div className="container">
+      <div>
+        <Image
+          src="/icons/profile.png"
+          alt="사람아이콘"
+          width={24}
+          height={24}
+        />
+        {data?.fetchBoardComments?.map((el, index: number) => {
+          return (
+            <div key={el._id}>
+              <div>
+                <span>{el.writer}</span>
+              </div>
+
+              <div>
+                <span>{el.contents}</span> {/* 작성자 이름 */}
+                <span>
+                  {/* 작성일을 한국 날짜 형식으로 변환 */}
+                  {new Date(el.createdAt).toLocaleDateString('ko-KR')}
+                </span>
+              </div>
+
+              <button
+                id={el._id} // 버튼의 id를 게시글 ID로 설정 */}
+                onClick={onClickDelete} // 클릭 시 삭제 함수 실행
+                // 삭제 버튼 스타일
+              >
+                <Image
+                  src="/icons/delete.png"
+                  alt="delete"
+                  width={24}
+                  height={24}
+                />
+              </button>
+            </div>
+          );
+        })}
+
+        <div>홍길동</div>
+        <div>별이5개</div>
+      </div>
+      <div>내용입니다</div>
+      <div>날짜입니다</div>
+    </div>
+  );
+}

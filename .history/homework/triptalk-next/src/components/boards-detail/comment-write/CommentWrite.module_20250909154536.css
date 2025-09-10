@@ -1,0 +1,18 @@
+.comment {
+  display: flex;
+  gap: 8px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  padding-top: 40px;
+}
+.star {
+  padding: 24px 0px;
+}
+
+.writer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

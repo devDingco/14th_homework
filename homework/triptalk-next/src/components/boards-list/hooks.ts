@@ -25,17 +25,26 @@ export default function useBoardsList() {
 
   // 삭제 버튼을 클릭했을 때 실행되는 함수
   const onClickDelete = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation(); //이벤트 전파막기
     // event.currentTarget을 사용해서 실제 button 요소 가져오기
     // (event.target은 Image 컴포넌트를 가리킬 수 있음)
     const button = event.currentTarget as HTMLButtonElement;
     const boardId = button.id; // 버튼의 id 속성에서 게시글 ID 가져옴
 
     console.log('삭제할 게시글 ID:', boardId); // 디버그용 로그
-    alert('게시글이 삭제 되었습니다.');
 
     // boardId가 비어있으면 삭제 중단
     if (!boardId) {
       alert('게시글 ID를 찾을 수 없습니다.');
+      return;
+    }
+
+    // 비밀번호 입력 받기
+    const password = prompt('게시글을 삭제하려면 비밀번호를 입력하세요:');
+    
+    // 비밀번호가 입력되지 않으면 삭제 중단
+    if (!password) {
+      alert('비밀번호를 입력해야 삭제할 수 있습니다.');
       return;
     }
 
@@ -44,6 +53,7 @@ export default function useBoardsList() {
       await deleteBoard({
         variables: {
           boardId: boardId,
+          password: password,
         },
         refetchQueries: [{ query: FETCH_BOARDS }], // 삭제 후 목록 다시 불러오기
       });
