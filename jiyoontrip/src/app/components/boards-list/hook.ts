@@ -19,6 +19,7 @@ export default function useBoardPage() {
       },
       refetchQueries: [{ query: FetchBoardsDocument }],
     });
+    console.log("11");
     alert("삭제ㅋ");
   };
   const onClickDetail = (event: MouseEvent<HTMLElement>) => {

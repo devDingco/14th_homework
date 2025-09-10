@@ -176,5 +176,6 @@ export default function useBoardWrite() {
     titleError,
     contentError,
     isActive,
+    data,
   };
 }

@@ -3,27 +3,7 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import useBoardPage from "./hook";
-
-interface IFetchBoard {
-  _id: string;
-  writer: string;
-  title: string;
-  contents: string;
-  youtubeUrl: string;
-  likeCount: number;
-  dislikeCount: number;
-  images: string[];
-  boardAddress: {
-    _id: string;
-    zipcode: string;
-    address: string;
-    addressDetail: string;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-}
+// import { IFetchBoard } from "./types";
 
 export default function BoardsPageComponent() {
   const { onClickDelete, onClickDetail, data } = useBoardPage();
@@ -38,17 +18,16 @@ export default function BoardsPageComponent() {
           <span className={styles.boardHeader__delete}></span>
         </div>
         <div className={styles.boardList}>
-          {data?.fetchBoards.map((el: IFetchBoard, index: number) => {
+          {data?.fetchBoards.map((el, index: number) => {
             return (
-              <div key={el._id} className={styles.boardList__item}>
+              <div
+                id={el._id}
+                key={el._id}
+                className={styles.boardList__item}
+                onClick={onClickDetail}
+              >
                 <span className={styles.boardList__item__number}>{index + 1}</span>
-                <span
-                  className={styles.boardList__item__title}
-                  id={el._id}
-                  onClick={onClickDetail}
-                >
-                  {el.title}
-                </span>
+                <span className={styles.boardList__item__title}>{el.title}</span>
                 <span className={styles.boardList__item__writer}>{el.writer}</span>
                 <span className={styles.boardList__item__date}>
                   {el.createdAt.split("T")[0]}
