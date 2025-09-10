@@ -1,0 +1,16 @@
+/* styles.module.css */
+.wrapper {
+  display: flex;
+  width: 100%;
+  background-color: aqua;
+}
+
+.image_swiper {
+  /* 👇 [수정] fill 속성과 함께 사용하기 위해 position 추가 */
+  /* position: relative; */
+  width: 100%;
+  height: 515px;
+  /* background-color: aliceblue; */
+  object-fit: cover;
+  overflow: visible;
+}
