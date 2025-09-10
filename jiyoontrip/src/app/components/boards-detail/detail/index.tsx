@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import useDetailPage from "./hook";
 
-export default function DetailPageComponent(props) {
+export default function DetailPageComponent() {
   const { onClickMove, data } = useDetailPage();
 
   return (

@@ -2,8 +2,9 @@
 import useBoardWrite from "./hook";
 import styles from "./styles.module.css";
 import Image from "next/image";
-
-export default function BoardWrite(props) {
+import { IBoardWriteProps } from "./types";
+export default function BoardWrite(props: IBoardWriteProps) {
+  const { isEdit } = props;
   const {
     onChangeAuthor,
     onChangePassword,
@@ -16,6 +17,7 @@ export default function BoardWrite(props) {
     titleError,
     contentError,
     isActive,
+    data,
   } = useBoardWrite();
 
   return (
@@ -40,10 +42,10 @@ export default function BoardWrite(props) {
                 type="text"
                 placeholder="작성자 명을 입력해 주세요."
                 onChange={onChangeAuthor}
-                defaultValue={props.data?.fetchBoard.writer}
-                disabled={props.isEdit === true ? true : false}
+                defaultValue={data?.fetchBoard.writer ?? ""}
+                disabled={isEdit === true ? true : false}
                 style={{
-                  backgroundColor: props.isEdit === true ? "#f2f2f2" : "#fff",
+                  backgroundColor: isEdit === true ? "#f2f2f2" : "#fff",
                 }}
               />
               <div className={styles.inputError}>{authorError}</div>
@@ -63,11 +65,11 @@ export default function BoardWrite(props) {
                 className={styles.inputArea__input}
                 type="password"
                 placeholder="비밀번호를 입력해 주세요."
-                defaultValue={props.isEdit === true ? "********" : ""}
+                defaultValue={isEdit === true ? "********" : ""}
                 onChange={onChangePassword}
-                disabled={props.isEdit === true ? true : false}
+                disabled={isEdit === true ? true : false}
                 style={{
-                  backgroundColor: props.isEdit === true ? "#f2f2f2" : "#fff",
+                  backgroundColor: isEdit === true ? "#f2f2f2" : "#fff",
                 }}
               />
               <div className={styles.inputError}>{passwordError}</div>
@@ -90,7 +92,7 @@ export default function BoardWrite(props) {
               type="text"
               placeholder="제목을 입력해 주세요."
               onChange={onChangeTitle}
-              defaultValue={props.data?.fetchBoard.title}
+              defaultValue={data?.fetchBoard.title}
             />
             <div className={styles.inputError}>{titleError}</div>
           </div>
@@ -110,7 +112,7 @@ export default function BoardWrite(props) {
               className={styles.inputArea__textarea}
               placeholder="내용을 입력해 주세요."
               onChange={onChangeContent}
-              defaultValue={props.data?.fetchBoard.contents}
+              defaultValue={data?.fetchBoard.contents}
             />
             <div className={styles.inputError}>{contentError}</div>
           </div>
@@ -218,17 +220,17 @@ export default function BoardWrite(props) {
             <button className={styles.inputArea__cancelButton}>취소</button>
             <button
               className={styles.inputArea__registerButton}
-              onClick={props.isEdit === false ? onClickSignup : onClickUpdate}
+              onClick={isEdit === false ? onClickSignup : onClickUpdate}
               style={{
                 backgroundColor:
-                  props.isEdit === true
+                  isEdit === true
                     ? "#2974E5" // 수정 페이지에서는 무조건 파란색
                     : isActive === true
                     ? "#2974E5" // 등록 페이지에서 활성화 시 파란색
                     : "#C7C7C7",
               }}
             >
-              {props.isEdit === true ? "수정" : "등록"}하기
+              {isEdit === true ? "수정" : "등록"}하기
             </button>
           </div>
         </div>

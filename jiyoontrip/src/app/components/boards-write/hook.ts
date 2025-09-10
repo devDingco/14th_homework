@@ -3,18 +3,26 @@
 import { ChangeEvent, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { CREAT_BOARD, FETCH_BOARD, UPDATE_BOARD } from "./queires";
+
+// import { CREAT_BOARD, FETCH_BOARD, UPDATE_BOARD } from "./queires";
+import {
+  CreateBoardDocument,
+  FetchBoardDocument,
+  UpdateBoardDocument,
+} from "@/commons/graphql/graphql";
 
 export default function useBoardWrite() {
   const router = useRouter();
   const params = useParams();
-  const [createBoard] = useMutation(CREAT_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
-  const { data } = useQuery(FETCH_BOARD, {
+  // const [createBoard] = useMutation(CREAT_BOARD);
+  // const [updateBoard] = useMutation(UPDATE_BOARD);
+  const { data } = useQuery(FetchBoardDocument, {
     variables: {
       boardId: String(params.boardId),
     },
   });
+  const [createBoard] = useMutation(CreateBoardDocument);
+  const [updateBoard] = useMutation(UpdateBoardDocument);
   const [author, setAuthor] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
@@ -93,9 +101,9 @@ export default function useBoardWrite() {
           },
         });
         console.log(result);
-        console.log(result.data.createBoard._id);
+        console.log(result.data?.createBoard._id);
         alert("게시글을 등록하였습니다!");
-        router.push(`/boards/${result.data.createBoard._id}`);
+        router.push(`/boards/${result.data?.createBoard._id}`);
       }
     } catch (error) {
       alert(error);
@@ -127,8 +135,12 @@ export default function useBoardWrite() {
       // }
 
       const passwordPrmpt = prompt("글을 작성할때 입력하셨던 비밀번호를 입력해주세요");
-      const updateTite = title !== "" ? title : data?.fetchBoard.title;
-      const updateContent = content !== "" ? content : data?.fetchBoard.contents;
+      // || (OR) 연산자는 첫 번째 값이 'falsy' (거짓 같은 값, 예: "", 0, null, undefined)일 때 뒤의 값을 반환하는 특징을 가지고 있어요.
+      // title이 빈 문자열("")이면 falsy로 간주되므로, data?.fetchBoard.title이 updateTitle에 할당됩니다.
+      // 반면, title에 값이 있다면 첫 번째 값인 title이 바로 반환됩니다.
+
+      const updateTite = title || data?.fetchBoard.title;
+      const updateContent = content || data?.fetchBoard.contents;
       const result = await updateBoard({
         variables: {
           updateBoardInput: {
@@ -141,11 +153,11 @@ export default function useBoardWrite() {
           boardId: String(params.boardId),
         },
         refetchQueries: [
-          { query: FETCH_BOARD, variables: { boardId: String(params.boardId) } },
+          { query: FetchBoardDocument, variables: { boardId: String(params.boardId) } },
         ],
       });
       alert("게시글을 수정하였습니다!");
-      router.push(`/boards/${result.data.updateBoard._id}`);
+      router.push(`/boards/${result.data?.updateBoard._id}`);
     } catch (error) {
       alert(error);
     } finally {
@@ -164,5 +176,6 @@ export default function useBoardWrite() {
     titleError,
     contentError,
     isActive,
+    data,
   };
 }
