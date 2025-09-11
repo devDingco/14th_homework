@@ -25,7 +25,7 @@ export const FETCH_BOARDS = gql`
 
 // 게시글을 삭제하는 GraphQL 뮤테이션
 export const DELETE_BOARD = gql`
-  mutation deleteBoard($boardId: ID!, $password: String!) {
-    deleteBoard(boardId: $boardId, password: $password)
+  mutation deleteBoard($boardId: ID!) {
+    deleteBoard(boardId: $boardId)
   }
 `;

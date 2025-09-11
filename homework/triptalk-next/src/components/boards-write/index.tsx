@@ -6,17 +6,25 @@ import Image from 'next/image'; // Next.js 최적화된 이미지 컴포넌트
 
 import useBoardsWrite from './hooks';
 import { IBoardsWriteProps } from './types';
+import AddressModal from '../address-modal';
 
 // 게시글 작성/수정 컴포넌트 (props를 통해 수정 모드인지 판단)
 export default function BoardsWrite(props: IBoardsWriteProps) {
   const {
     data,
+    zipcode,
+    address,
+    addressDetail,
+    setZipcode,
+    setAddress,
+    setAddressDetail,
     onClickSignUp,
     onClickUpdate,
     onChangeName,
     onChangePassword,
     onChangeTitle,
     onChangeContent,
+    onChangeYoutubeUrl,
     nameError,
     passwordError,
     titleError,
@@ -92,25 +100,45 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
           onChange={onChangeContent} // 내용 입력값 변경 시 실행
           defaultValue={data?.fetchBoard.contents} // 수정 모드일 때 기존 내용 표시
         ></textarea>
-        <div className={styles.에러메시지}>{contentError}</div>{' '}
+        <div className={styles.에러메시지}>{contentError}</div>
         {/* 내용 에러메시지 */}
       </div>
-      {/* 주소 입력 섹션 (현재 기능 미구현) */}
       <div>
         <div className={styles.주소컨테이너}>
           <div>주소</div>
 
           {/* 우편번호 검색 */}
           <div className={styles.우편번호}>
-            <input type="text" placeholder="01234"></input>
-            <button>우편번호 검색</button> {/* 우편번호 검색 기능 (미구현) */}
+            <input
+              type="text"
+              placeholder="01234"
+              value={zipcode || data?.fetchBoard.boardAddress?.zipcode || ''}
+              readOnly
+            ></input>
+            <AddressModal
+              onAddressSelected={(zipcodeValue, addressValue) => {
+                setZipcode(zipcodeValue);
+                setAddress(addressValue);
+              }}
+            />
           </div>
 
           {/* 주소 입력 필드들 */}
           <div className={styles.상세주소컨테이너}>
-            <input type="text" placeholder="주소를 입력해 주세요."></input>{' '}
+            <input
+              type="text"
+              placeholder="주소를 입력해 주세요."
+              value={address || data?.fetchBoard.boardAddress?.address || ''}
+              readOnly
+            ></input>{' '}
             {/* 기본 주소 */}
-            <input type="text" placeholder="상세주소"></input> {/* 상세 주소 */}
+            <input
+              type="text"
+              placeholder="상세주소"
+              defaultValue={data?.fetchBoard.boardAddress?.addressDetail || ''}
+              onChange={(e) => setAddressDetail(e.target.value)}
+            ></input>{' '}
+            {/* 상세 주소 */}
           </div>
         </div>
       </div>
@@ -119,7 +147,12 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
       <div>
         <div className={styles.유튜브컨테이너}>
           <div>유튜브 링크</div>
-          <input type="text" placeholder="링크를 입력해 주세요"></input>{' '}
+          <input
+            type="text"
+            placeholder="링크를 입력해 주세요"
+            onChange={onChangeYoutubeUrl} // 유튜브 URL 입력값
+            defaultValue={data?.fetchBoard.youtubeUrl} // 수정 모드일 때 기존 내용 표시
+          ></input>{' '}
           {/* 유튜브 URL 입력 */}
         </div>
       </div>

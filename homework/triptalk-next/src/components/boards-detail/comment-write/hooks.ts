@@ -13,6 +13,20 @@ export default function useCommentWrite() {
 
   const [createBoardComment] = useMutation(FETCH_CREATE_COMMENT);
   const onClickCommentSubmit = async () => {
+    // 입력값 검증
+    if (!name.trim()) {
+      alert('작성자를 입력해주세요.');
+      return;
+    }
+    if (!password.trim()) {
+      alert('비밀번호를 입력해주세요.');
+      return;
+    }
+    if (!contents.trim()) {
+      alert('댓글 내용을 입력해주세요.');
+      return;
+    }
+
     try {
       await createBoardComment({
         variables: {

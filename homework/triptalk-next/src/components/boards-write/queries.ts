@@ -12,11 +12,11 @@ export const CREATE_BOARD = gql`
       likeCount
       dislikeCount
       images
-      # boardAddress {
-      #   zipcode
-      #   address
-      #   addressDetail
-      # }
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
       # user {
       #   _id
       #   email
@@ -48,6 +48,11 @@ export const UPDATE_BOARD = gql`
       likeCount
       dislikeCount
       images
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
       createdAt
       updatedAt
       deletedAt
@@ -56,7 +61,7 @@ export const UPDATE_BOARD = gql`
 `;
 // 수정할 게시글 정보를 가져오기 위한 GraphQL 쿼리
 export const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
+  query fetchBoardForEdit($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
       _id # 게시글 고유 ID
       writer # 작성자명
@@ -66,6 +71,11 @@ export const FETCH_BOARD = gql`
       likeCount # 좋아요 수
       dislikeCount # 싫어요 수
       images # 첨부 이미지들
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
       createdAt # 생성일
       updatedAt # 수정일
       deletedAt # 삭제일

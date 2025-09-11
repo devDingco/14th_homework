@@ -3,6 +3,31 @@
 import styles from './BoardsDetail.module.css'; // CSS 모듈 스타일 import
 import Image from 'next/image'; // Next.js 최적화된 이미지 컴포넌트
 import useBoardsDetail from './hooks';
+import TooltipLocation from '../tooltip';
+
+// 유튜브 URL을 embed URL로 변환하는 함수
+const getYouTubeEmbedUrl = (url: string): string => {
+  if (!url) return '';
+  
+  // https://www.youtube.com/watch?v=VIDEO_ID 형태
+  if (url.includes('v=')) {
+    const videoId = url.split('v=')[1].split('&')[0];
+    return `https://www.youtube.com/embed/${videoId}`;
+  }
+  
+  // https://youtu.be/VIDEO_ID 형태
+  if (url.includes('youtu.be/')) {
+    const videoId = url.split('youtu.be/')[1].split('?')[0];
+    return `https://www.youtube.com/embed/${videoId}`;
+  }
+  
+  // 이미 embed URL인 경우
+  if (url.includes('embed/')) {
+    return url;
+  }
+  
+  return '';
+};
 
 // 게시글 상세보기 페이지 컴포넌트
 export default function BoardsDetail() {
@@ -35,7 +60,9 @@ export default function BoardsDetail() {
       <div>
         <div className={styles.링크위치}>
           <Image src="/icons/link1.png" alt="링크" width={24} height={24} />
-          <Image src="/icons/location.png" alt="위치" width={24} height={24} />
+          <TooltipLocation address={data?.fetchBoard.boardAddress?.address}>
+            <Image src="/icons/location.png" alt="위치" width={24} height={24} />
+          </TooltipLocation>
         </div>
       </div>
       {/* 대표 이미지 */}
@@ -48,15 +75,29 @@ export default function BoardsDetail() {
       />
       {/* 게시글 본문 내용 */}
       <div>{data?.fetchBoard.contents}</div>
-      {/* 동영상 섹션 (현재는 정적 이미지) */}
-      <div className={styles.동영상배경}>
-        <Image
-          src="/icons/video.png"
-          alt="동영상 플레이어"
-          width={822}
-          height={464}
-        />
-      </div>
+      {/* 동영상 섹션 */}
+      {data?.fetchBoard.youtubeUrl ? (
+        <div className={styles.동영상배경}>
+          <iframe
+            width="822"
+            height="464"
+            src={getYouTubeEmbedUrl(data.fetchBoard.youtubeUrl)}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      ) : (
+        <div className={styles.동영상배경}>
+          <Image
+            src="/icons/video.png"
+            alt="동영상 플레이어"
+            width={822}
+            height={464}
+          />
+        </div>
+      )}
       {/* 좋아요/싫어요 버튼 섹션 */}
       <div className={styles.싫어요좋아요}>
         {/* 싫어요 버튼과 카운트 */}

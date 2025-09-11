@@ -1,11 +1,11 @@
 import { useMutation, useQuery } from '@apollo/client';
-import { MouseEvent } from 'react';
 import { FETCH_BOARD_COMMENTS, DELETE_BOARD_COMMENT } from './queries';
+import { UseCommentListParams, UseCommentListReturn, FetchBoardCommentsData } from './types';
+import { MouseEvent } from 'react';
 
-
-export default function useCommentList({ boardId }) {
+export default function useCommentList({ boardId }: UseCommentListParams): UseCommentListReturn {
   const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
-  const { data, error } = useQuery(FETCH_BOARD_COMMENTS, {
+  const { data, error } = useQuery<FetchBoardCommentsData>(FETCH_BOARD_COMMENTS, {
     variables: { boardId: boardId, page: 1 },
   });
   console.log('boardId:', boardId);
