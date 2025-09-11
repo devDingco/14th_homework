@@ -1,7 +1,6 @@
 "use client"
 
 import { useMutation, useQuery } from "@apollo/client";
-// import { on } from 'events';
 import { useRouter } from 'next/navigation';
 
 import { DELETE_BOARD, FETCH_BOARDS } from "./queries";

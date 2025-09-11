@@ -7,6 +7,9 @@ import { use } from 'react';
 import YouTube from "react-youtube";
 import { useState } from "react";
 
+import { Tooltip } from 'antd';
+import { DislikeOutlined } from '@ant-design/icons'; 
+import { LikeOutlined } from '@ant-design/icons';
 
 
 export default function BoardsDetail() {
@@ -42,12 +45,15 @@ export default function BoardsDetail() {
         width={24}
         height={24}
       />
-                <Image
+                
+        <Tooltip title={data?.fetchBoard?.boardAddress?.address || ""}>
+          <span><Image
         src={"/images/로케이션아이콘.png"}
         alt="로케이션아이콘"
         width={24}
         height={24}
-      />{data?.fetchBoard?.boardAddress?.address || ""}
+      /></span>
+        </Tooltip>
             </div>
           </section>
           <section className={styles['메인-사진섹션']}>
@@ -66,24 +72,16 @@ export default function BoardsDetail() {
           <section className={styles['메인-동영상섹션']}>
       <YouTube videoId={videoId} opts={{ width: "822", height: "464" }} />
           </section>
-          <section className={styles['메인-좋아요섹션']}>
-            <div className={styles['메인-좋아요섹션-배드디브']}>
-                <Image
-        src={"/images/배드아이콘.png"}
-        alt="배드아이콘"
-        width={24}
-        height={24}
-      />
-                <span>24</span>
+          <section className={styles['메인-좋아요섹션']} >
+            <div className={styles['메인-좋아요섹션-배드디브'] } >
+              <DislikeOutlined />
+                <span>32</span>
             </div>
             <div className={styles['메인-좋아요섹션-굿디브']}>
-                <Image
-        src={"/images/굿아이콘.png"}
-        alt="굿아이콘"
-        width={24}
-        height={24}
-      />
+              <LikeOutlined  />
+
                 <span>24</span>
+                
             </div>
           </section>
           <section className={styles['메인-수정하기섹션']}>

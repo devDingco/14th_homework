@@ -1,14 +1,15 @@
 "use client";
 
 
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import {ChangeEvent} from 'react';
-import { CREATE_BOARD, UPDATE_BOARD } from "./queres";
-import { IMyvariables } from "./types";
+import { CREATE_BOARD, FETCH_BOARD, UPDATE_BOARD } from "./queres";
+import { IMyvariables,Idata } from "./types";
 import { on } from "events";
-
+import { FetchBoardQuery } from "@/gql/graphql";
+import { ApolloError } from "@apollo/client";
 
 
 export default function useBoardsWrite() {
@@ -17,7 +18,7 @@ export default function useBoardsWrite() {
   const [address, setAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
-  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState<string>("");
 
   
 
@@ -35,28 +36,28 @@ export default function useBoardsWrite() {
       const [isActive, setIsActive] = useState<boolean>(false)
       
       const router = useRouter();
-        const [createBoard] = useMutation(CREATE_BOARD);
-        const [updateBoard] = useMutation(UPDATE_BOARD);
-        const { boardId } = useParams()
+      const [createBoard] = useMutation(CREATE_BOARD);
+      const [updateBoard] = useMutation(UPDATE_BOARD);
+      const { boardId } = useParams()
 
       const onClickMoveList = () =>{
         router.push("/boards")
       }
 
-
-      const handleComplete = (data) => {
-    setZonecode(data.zonecode); // 우편번호
-    setAddress(data.address);   // 도로명 주소 or 지번 주소
+    
+      const handleComplete = (data : Idata) => {
+    setZonecode(data.zonecode); 
+    setAddress(data.address);   
     setIsModalOpen((prev) => !prev);      
   };
       const onToggleModal = () => {
     setIsModalOpen((prev) => !prev);
   };
-     const onChangeYoutubeUrl = (e) =>{
+     const onChangeYoutubeUrl = (e:ChangeEvent<HTMLInputElement>) =>{
        setYoutubeUrl(e.target.value)
   }
 
-      const onChangeAddressDetail = (e) =>{
+      const onChangeAddressDetail = (e:ChangeEvent<HTMLInputElement>) =>{
        setAddressDetail(e.target.value)
   }
       const onChangeWriter = (event:ChangeEvent<HTMLInputElement>) => {
@@ -146,7 +147,7 @@ if (youtubeUrl !== "") {
   myvariables.updateBoardInput.youtubeUrl = youtubeUrl;
 }
 if (address !== "") {
-  myvariables.updateBoardInput.boardAddress = {
+  myvariables.updateBoardInput.boardAddress= {
     zipcode,
     address,
     addressDetail,
@@ -154,18 +155,19 @@ if (address !== "") {
 }
 
 
-
 try {
   const result = await updateBoard({
     variables: myvariables
   });
   alert("게시글이 수정되었습니다");
-  router.push(
-      `/boards/${result.data.updateBoard._id}`
-    );
-} catch (error: any) {
-  if (error.graphQLErrors?.[0]) {
-    alert(error.graphQLErrors[0].message); // 보통 "비밀번호가 틀렸습니다" 메시지
+  router.push(`/boards/${result.data.updateBoard._id}`);
+} catch (error: unknown) {
+  if (error instanceof ApolloError) {
+    if (error.graphQLErrors?.[0]) {
+      alert(error.graphQLErrors[0].message);
+    } else {
+      alert("알 수 없는 에러가 발생했습니다.");
+    }
   } else {
     alert("알 수 없는 에러가 발생했습니다.");
   }
