@@ -61,7 +61,7 @@ export default function CommentForm(props: CommentFormProps) {
           />
           <p className={styles['comment-contents-len']}>{0}/100</p>
         </div>
-        <CustomButton type={'submit'} content={'댓글 등록'} color={'blue'} disabled={isDisabled} />
+        <CustomButton type={'submit'} content={'댓글 등록'} color={'black'} disabled={isDisabled} />
       </form>
     </div>
   )

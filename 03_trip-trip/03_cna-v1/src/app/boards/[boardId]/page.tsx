@@ -23,6 +23,7 @@ import {
 } from '@/shared/api/graphql/graphql'
 import CommentForm from '@/features/comments/ui/CommentForm'
 import CommentList from '@/features/comments/ui/CommentList'
+import { Tooltip } from 'antd'
 
 export default function BoardsDetail() {
   const router = useRouter()
@@ -40,8 +41,17 @@ export default function BoardsDetail() {
   if (loading) return <div>로딩 중</div>
   if (error || !data?.fetchBoard) return <div>게시글을 찾을 수 없습니다.</div>
 
-  const { writer, title, contents, youtubeUrl, likeCount, dislikeCount, images, createdAt } =
-    data.fetchBoard
+  const {
+    writer,
+    title,
+    contents,
+    boardAddress,
+    youtubeUrl,
+    likeCount,
+    dislikeCount,
+    images,
+    createdAt,
+  } = data.fetchBoard
 
   const formattedDate = formatUtcToKstYmd(createdAt)
   const firstImg = images?.[0] ?? ''
@@ -73,7 +83,15 @@ export default function BoardsDetail() {
         <hr />
         <div className={styles['detail-post-func']}>
           <LinkIcon />
-          <LocationIcon />
+          <Tooltip
+            placement="bottomRight"
+            title={boardAddress?.address}
+            arrow={false}
+            color="white"
+            overlayInnerStyle={{ color: 'black' }}
+          >
+            <LocationIcon />
+          </Tooltip>
         </div>
       </div>
 
