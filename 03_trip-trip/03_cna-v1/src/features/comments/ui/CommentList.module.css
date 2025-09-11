@@ -34,3 +34,11 @@
   width: 2rem;
   height: 2rem;
 }
+.comment-list-br {
+  width: 100%;
+  height: 0.1rem;
+  background-color: var(--color-gray-100);
+}
+.comment-list-br:last-child {
+  display: none;
+}

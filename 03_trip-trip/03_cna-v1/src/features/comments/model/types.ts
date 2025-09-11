@@ -16,3 +16,10 @@ export interface CommentForm {
 }
 
 export type HandleSubmit = (event: FormEvent<HTMLFormElement>) => void
+
+export const initialCommentValues: CommentForm = {
+  writer: '',
+  password: '',
+  contents: '',
+  rating: 0,
+}
