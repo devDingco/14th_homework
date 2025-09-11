@@ -1,19 +1,13 @@
 'use client'
-import Image from 'next/image'
-import styles from './styles.module.css'
-import chatImage from '@assets/chat.png'
 
+import styles from './styles.module.css'
+import { ChatBubbleOutlineOutlined } from '@mui/icons-material'
 import { CommentWriteProps } from './types'
 import useCommentWrite from './hook'
-
-const IMAGE_SRC = {
-  chatImage: {
-    src: chatImage,
-    alt: '사진추가이미지',
-  },
-}
+import { Rate } from 'antd'
 
 export default function CommentWriteComponent(props: CommentWriteProps) {
+  // const boardId = typeof props.boardId === 'string' ? props.boardId : ''
   const {
     handleChangeWriter,
     handleChangePassword,
@@ -25,13 +19,14 @@ export default function CommentWriteComponent(props: CommentWriteProps) {
     contents,
     rating,
   } = useCommentWrite({ boardId: props.boardId })
+
   return (
     <div className={styles.comment_layout}>
       <div className={styles.comment_title}>
-        <Image src={IMAGE_SRC.chatImage.src} alt={IMAGE_SRC.chatImage.alt} />
+        <ChatBubbleOutlineOutlined />
         <p>댓글</p>
       </div>
-      <div>대충 별점 들어가는 곳 {rating}</div>
+      <Rate onChange={handleChangeRating} value={rating} />
       {/* 인풋3개 들어가는 곳 */}
       <div className={styles.comment_inputs}>
         {/* 위에 인풋 2개 */}

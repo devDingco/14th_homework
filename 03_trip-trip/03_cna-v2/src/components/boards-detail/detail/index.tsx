@@ -24,8 +24,11 @@ import {
   FavoriteBorderOutlined,
   LinkOutlined,
   PlaceOutlined,
+  MenuOutlined,
+  EditOutlined,
 } from '@mui/icons-material'
 import { Tooltip } from 'antd'
+import { formatDate } from 'commons/utils/formatDate'
 
 const IMAGE_SRC = {
   profileImage: {
@@ -90,7 +93,7 @@ export default function BoardDetailPage() {
           <Image src={IMAGE_SRC.profileImage.src} alt={IMAGE_SRC.profileImage.alt} />
           <div> {data?.fetchBoard?.writer}</div>
         </div>
-        <div className={styles.detailMetadataDate}>{data?.fetchBoard?.createdAt}</div>
+        <div className={styles.detailMetadataDate}>{formatDate(data?.fetchBoard?.createdAt)}</div>
       </div>
       <div className={styles.enrollBorder}></div>
       <div className={styles.detailMetadataIconContainer}>
@@ -131,11 +134,11 @@ export default function BoardDetailPage() {
         </div>
         <div className={styles.detailButtonsContainer}>
           <button className={styles.detailButton}>
-            <Image src={IMAGE_SRC.hamberger.src} alt={IMAGE_SRC.hamberger.alt} />
+            <MenuOutlined />
             <div>목록으로</div>
           </button>
           <button className={styles.detailButton} onClick={goToEditPage}>
-            <Image src={IMAGE_SRC.pencil.src} alt={IMAGE_SRC.pencil.alt} />
+            <EditOutlined />
             <div>수정하기</div>
           </button>
         </div>

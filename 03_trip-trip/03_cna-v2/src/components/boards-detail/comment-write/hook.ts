@@ -29,8 +29,8 @@ export default function useCommentWrite(props: CommentWriteProps) {
     setContents(event.target.value)
   }
   // TODO: 별점 구현후 추가 예정
-  const handleChangeRating = (event: any) => {
-    setRating(event.target.value)
+  const handleChangeRating = (value: number) => {
+    setRating(value)
   }
 
   const handleSubmit = async () => {
