@@ -1,9 +1,8 @@
 'use client'
 import { useQuery } from '@apollo/client'
 import { useParams } from 'next/navigation'
-
+import ReactPlayer from 'react-player'
 import Image from 'next/image'
-
 import { useRouter } from 'next/navigation'
 import styles from './styles.module.css'
 import profileImage from '@assets/profile_image.png'
@@ -20,6 +19,13 @@ import {
   FetchBoardQuery,
   FetchBoardQueryVariables,
 } from 'commons/graphql/graphql'
+import {
+  HeartBrokenOutlined,
+  FavoriteBorderOutlined,
+  LinkOutlined,
+  PlaceOutlined,
+} from '@mui/icons-material'
+import { Tooltip } from 'antd'
 
 const IMAGE_SRC = {
   profileImage: {
@@ -69,6 +75,7 @@ export default function BoardDetailPage() {
   const { data } = useQuery<FetchBoardQuery, FetchBoardQueryVariables>(FetchBoardDocument, {
     variables: { boardId: id },
   })
+  console.log('🚀 ~ BoardDetailPage ~ data:', data)
 
   //수정하기 페이지로 이동
   const goToEditPage = () => {
@@ -87,8 +94,17 @@ export default function BoardDetailPage() {
       </div>
       <div className={styles.enrollBorder}></div>
       <div className={styles.detailMetadataIconContainer}>
-        <Image src={IMAGE_SRC.linkImage.src} alt={IMAGE_SRC.linkImage.alt} />
-        <Image src={IMAGE_SRC.locationImage.src} alt={IMAGE_SRC.locationImage.alt} />
+        <LinkOutlined />
+
+        <Tooltip
+          placement="bottomRight"
+          title={data?.fetchBoard?.boardAddress?.address}
+          arrow={false}
+          color="white"
+          overlayInnerStyle={{ color: 'black' }}
+        >
+          <PlaceOutlined />
+        </Tooltip>
       </div>
       <div className={styles.detailContentContainer}>
         <Image
@@ -97,14 +113,19 @@ export default function BoardDetailPage() {
           className={styles.detailContentImage}
         />
         <div className={styles.detailContentText}>{data?.fetchBoard?.contents}</div>
-        <Image src={IMAGE_SRC.neotubeImage.src} alt={IMAGE_SRC.neotubeImage.alt} />
+        {data?.fetchBoard?.youtubeUrl && (
+          <div className={styles.youtube}>
+            <ReactPlayer src={data?.fetchBoard?.youtubeUrl} controls width={822} height={464} />
+          </div>
+        )}
+
         <div className={styles.detailContentGoodOrBad}>
           <div className={styles.detailGoodContainer}>
-            <Image src={IMAGE_SRC.badImage.src} alt={IMAGE_SRC.badImage.alt} />
+            <HeartBrokenOutlined style={{ color: '#5F5F5F' }} />
             <div className={styles.detailBadText}>24</div>
           </div>
           <div className={styles.detailGoodContainer}>
-            <Image src={IMAGE_SRC.goodImage.src} alt={IMAGE_SRC.goodImage.alt} />
+            <FavoriteBorderOutlined style={{ color: '#F66A6A' }} />
             <div className={styles.detailGoodText}>12</div>
           </div>
         </div>

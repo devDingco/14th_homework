@@ -35,15 +35,6 @@ export default function useBoardForm(props: BoardFormProps) {
     UpdateBoardDocument
   )
 
-  // const handleComplete = (data) => {
-  //   setAddress({
-  //     zipcode: data.zonecode,
-  //     base: data.address ?? data.roadAddress ?? data.jibunAddress,
-  //     detail: '',
-  //   })
-  //   onToggleModal()
-  // }
-
   console.log(data?.fetchBoard?.boardAddress)
   // 작성자 변경 불가
   const [name, setName] = useState('')
