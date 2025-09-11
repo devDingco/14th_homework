@@ -74,15 +74,17 @@ export default function BoardDetailPage() {
   const params = useParams()
   const id = typeof params.boardId === 'string' ? params.boardId : ''
 
-  // 보여줄 board 정보 받아오기
   const { data } = useQuery<FetchBoardQuery, FetchBoardQueryVariables>(FetchBoardDocument, {
     variables: { boardId: id },
   })
   console.log('🚀 ~ BoardDetailPage ~ data:', data)
 
-  //수정하기 페이지로 이동
   const goToEditPage = () => {
     router.push(`${id}/edit`)
+  }
+
+  const goToBoardsPage = () => {
+    router.push(`/boards`)
   }
 
   return (
@@ -133,7 +135,7 @@ export default function BoardDetailPage() {
           </div>
         </div>
         <div className={styles.detailButtonsContainer}>
-          <button className={styles.detailButton}>
+          <button className={styles.detailButton} onClick={goToBoardsPage}>
             <MenuOutlined />
             <div>목록으로</div>
           </button>
