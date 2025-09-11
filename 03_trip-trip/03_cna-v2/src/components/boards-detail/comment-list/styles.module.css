@@ -40,9 +40,6 @@
 
 .comment_writer {
   color: var(--gray-700, #5f5f5f);
-
-  /* l_14_20 */
-  font-family: 'Pretendard Variable';
   font-size: 14px;
   font-style: normal;
   font-weight: 300;
@@ -50,8 +47,6 @@
 }
 .comment_contents {
   color: var(--gray-800, #333);
-  /* r_16_24 */
-  font-family: 'Pretendard Variable';
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -60,9 +55,6 @@
 }
 .comment_date {
   color: #818181;
-
-  /* r_14_20 */
-  font-family: 'Pretendard Variable';
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

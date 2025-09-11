@@ -34,7 +34,6 @@
 }
 .enroll_required_indicator {
   color: var(--red, #f66a6a);
-  font-family: 'Pretendard Variable';
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -66,7 +65,6 @@
   bottom: 1rem;
   right: 1rem;
   color: var(--Gray-Gray-400, #ababab);
-  font-family: 'Pretendard Variable';
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
