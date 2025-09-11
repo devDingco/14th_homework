@@ -25,7 +25,7 @@ export default function CommentList(props: CommentListProps) {
     return <div style={{ margin: '0 auto' }}>등록된 댓글이 없습니다.</div>
 
   return (
-    <>
+    <div className={styles['comment-list-container']}>
       {data?.fetchBoardComments?.map((el) => {
         const { _id, writer, contents, rating, createdAt } = el
         const formattedDate = formatUtcToKstYmd(createdAt)
@@ -49,6 +49,6 @@ export default function CommentList(props: CommentListProps) {
           </>
         )
       })}
-    </>
+    </div>
   )
 }
