@@ -42,7 +42,6 @@ export default function BoardDetailPage() {
   const { data } = useQuery<FetchBoardQuery, FetchBoardQueryVariables>(FetchBoardDocument, {
     variables: { boardId: id },
   })
-  console.log('🚀 ~ BoardDetailPage ~ data:', data)
 
   const goToEditPage = () => {
     router.push(`${id}/edit`)
@@ -92,11 +91,11 @@ export default function BoardDetailPage() {
         <div className={styles.detailContentGoodOrBad}>
           <div className={styles.detailGoodContainer}>
             <HeartBrokenOutlined style={{ color: '#5F5F5F' }} />
-            <div className={styles.detailBadText}>24</div>
+            <div className={styles.detailBadText}>{data?.fetchBoard?.likeCount}</div>
           </div>
           <div className={styles.detailGoodContainer}>
             <FavoriteBorderOutlined style={{ color: '#F66A6A' }} />
-            <div className={styles.detailGoodText}>12</div>
+            <div className={styles.detailGoodText}>{data?.fetchBoard?.dislikeCount}</div>
           </div>
         </div>
         <div className={styles.detailButtonsContainer}>
