@@ -44,9 +44,9 @@ export default function BoardsDetail() {
     data.fetchBoard
 
   const formattedDate = formatUtcToKstYmd(createdAt)
-  const firstImg = images?.[0]
-  const imgSrc = firstImg && firstImg.trim() !== '' ? firstImg : '/images/postImg1.png'
-  const youtubeId = getYouTubeId(youtubeUrl)
+  const firstImg = images?.[0] ?? ''
+  const imgSrc = firstImg.trim() ? firstImg : '/images/postImg1.png'
+  const youtubeId = getYouTubeId(youtubeUrl ?? '')
 
   const handleNavigate = (str: string) => {
     if (str === '목록') router.push('/boards')
@@ -78,7 +78,7 @@ export default function BoardsDetail() {
       </div>
 
       {/* images */}
-      {/* {firstImg && */}
+      {/* {firstImg && ( */}
       <Image
         src={imgSrc}
         className={styles['detail-post-image']}
@@ -86,7 +86,7 @@ export default function BoardsDetail() {
         height={0}
         alt="detail image"
       />
-      {/* } */}
+      {/* )} */}
 
       {/* contents */}
       <div className={styles['detail-post-contents']}>{contents}</div>

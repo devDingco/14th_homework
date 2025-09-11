@@ -57,6 +57,7 @@ export default function CommentForm(props: CommentFormProps) {
             name="contents"
             onChange={handleChange}
             value={comment.contents}
+            maxLength={100}
           />
           <p className={styles['comment-contents-len']}>{0}/100</p>
         </div>
