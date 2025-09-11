@@ -7,13 +7,13 @@ import useCommentWrite from './hook'
 import { Rate } from 'antd'
 
 export default function CommentWriteComponent(props: CommentWriteProps) {
-  // const boardId = typeof props.boardId === 'string' ? props.boardId : ''
   const {
     handleChangeWriter,
     handleChangePassword,
     handleChangeContents,
     handleChangeRating,
     handleSubmit,
+    isDisabled,
     writer,
     password,
     contents,
@@ -69,7 +69,11 @@ export default function CommentWriteComponent(props: CommentWriteProps) {
           ></textarea>
           <p className={styles.comment_len}>{0}/100</p>
         </div>
-        <button className={styles.enroll_submit_button} disabled={false} onClick={handleSubmit}>
+        <button
+          className={styles.enroll_submit_button}
+          disabled={isDisabled}
+          onClick={handleSubmit}
+        >
           댓글 등록
         </button>
       </div>
