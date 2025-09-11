@@ -6,14 +6,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import styles from './styles.module.css'
 import profileImage from '@assets/profile_image.png'
-import linkImage from '@assets/link.png'
-import locationImage from '@assets/location.png'
 import cheongsanImage from '@assets/cheongsan.png'
-import neotubeImage from '@assets/neotube.png'
-import badImage from '@assets/bad.svg'
-import goodImage from '@assets/good.png'
-import hamberger from '@assets/hamberger.png'
-import pencil from '@assets/pencil.png'
 import {
   FetchBoardDocument,
   FetchBoardQuery,
@@ -35,37 +28,9 @@ const IMAGE_SRC = {
     src: profileImage,
     alt: '프로필이미지',
   },
-  linkImage: {
-    src: linkImage,
-    alt: '링크아이콘',
-  },
-  locationImage: {
-    src: locationImage,
-    alt: '위치아이콘',
-  },
   cheongsanImage: {
     src: cheongsanImage,
     alt: '청산사진',
-  },
-  neotubeImage: {
-    src: neotubeImage,
-    alt: '너튜브사진',
-  },
-  badImage: {
-    src: badImage,
-    alt: '싫어요',
-  },
-  goodImage: {
-    src: goodImage,
-    alt: '좋아요',
-  },
-  hamberger: {
-    src: hamberger,
-    alt: '목록아이콘',
-  },
-  pencil: {
-    src: pencil,
-    alt: '수정아이콘',
   },
 } as const
 
