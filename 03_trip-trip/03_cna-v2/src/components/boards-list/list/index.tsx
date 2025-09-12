@@ -21,7 +21,6 @@ const IMAGE_SRC = {
 export default function BoardsListComponent() {
   const [hoveredId, setHoveredId] = useState('')
   const { data } = useQuery<FetchBoardsQuery, FetchBoardsQueryVariables>(FetchBoardsDocument)
-  console.log('boards 페이지에서 data.fetchBoards::::', data?.fetchBoards)
 
   const { onClickDelete, onClickDetail } = useBoardsList({ hoveredId })
 

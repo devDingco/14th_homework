@@ -37,7 +37,6 @@ export default function useBoardForm(props: BoardFormProps) {
     UpdateBoardDocument
   )
 
-  console.log(data?.fetchBoard?.boardAddress)
   // 작성자 변경 불가
   const [name, setName] = useState('')
   // 비밀번호 수정 불가
@@ -68,9 +67,7 @@ export default function useBoardForm(props: BoardFormProps) {
   }
 
   const handleComplete = (data: Address) => {
-    console.log('🚀 ~ handleComplete ~ data:', data)
     const base = data.address || data.roadAddress || data.jibunAddress || ''
-    console.log('🚀 ~ handleComplete ~ base:', base)
 
     setAddress({
       ...address,
@@ -80,8 +77,6 @@ export default function useBoardForm(props: BoardFormProps) {
     })
     onToggleModal()
   }
-
-  console.log('🚀 ~ useBoardForm ~ address:', address)
 
   // 변경값 상태관리
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
@@ -104,8 +99,6 @@ export default function useBoardForm(props: BoardFormProps) {
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) => {
     const { value, name } = event.target
-    console.log('🚀 ~ onChangeAddress ~ name:', name)
-    console.log('🚀 ~ onChangeAddress ~ value:', value)
 
     setAddress({
       ...address,
@@ -176,7 +169,6 @@ export default function useBoardForm(props: BoardFormProps) {
           },
         })
 
-        console.log('data', data)
         Modal.success({
           content: '게시글이 등록되었습니다!',
         })
@@ -240,7 +232,6 @@ export default function useBoardForm(props: BoardFormProps) {
 
       // 수정된 값이 있는 항목만 API 요청
       if (Object.keys(updateInput).length > 0) {
-        console.log('수정된 항목만 날아가고있나? ::: updateInput', updateInput)
         try {
           const result = await updateBoard({
             variables: {
@@ -251,10 +242,13 @@ export default function useBoardForm(props: BoardFormProps) {
           })
 
           if (result.data) {
-            console.log('기존의 글을 수정하는 경우:::', result)
-            alert('게시글이 성공적으로 수정되었습니다!')
+            Modal.success({
+              content: '게시글이 성공적으로 수정되었습니다!',
+            })
           } else {
-            alert('수정에 실패했습니다.')
+            Modal.error({
+              content: '수정에 실패했습니다.',
+            })
           }
           // 수정이 완료되면 상세 화면으로 이동하기
           router.push(`/boards/${editId}`)
@@ -262,13 +256,19 @@ export default function useBoardForm(props: BoardFormProps) {
           // 에러 발생 시 처리
           if (error instanceof ApolloError) {
             const errorMessages = error.graphQLErrors.map((err) => err.message)
-            alert(errorMessages.join(', '))
+            Modal.error({
+              content: errorMessages.join(', '),
+            })
           } else {
-            console.error('네트워크에러 발생')
+            Modal.error({
+              content: '네트워크에러 발생',
+            })
           }
         }
       } else {
-        alert('수정된 내용이 없습니다.')
+        Modal.warning({
+          content: '수정된 내용이 없습니다.',
+        })
       }
     }
   }
