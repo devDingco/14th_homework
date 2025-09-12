@@ -17,7 +17,7 @@ const BoardsWrite = () => {
 
     const {
         onChangePosting,
-        fetchingBoard,
+        creatingBoard,
         updatingBoard,
         boardUpdateSetting
     } = useBoardWrite()
@@ -54,7 +54,7 @@ const BoardsWrite = () => {
             setPasswordErr("")
             setTitleErr("")
             setContentsErr("")
-            fetchingBoard()
+            creatingBoard()
         }
     }
 

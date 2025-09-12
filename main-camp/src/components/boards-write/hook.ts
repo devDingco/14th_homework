@@ -6,14 +6,21 @@ import { ChangeEvent } from "react"
 import { IOnChangePosting, IOnUpdateHandler, IUpdateBoardInput } from "./type"
 import { CREATE_BOARD, UPDATE_BOARD } from "./queries"
 import { useIsEdit } from "@/commons/isEditProvider"
+import { CreateBoardDocument, CreateBoardMutation, CreateBoardMutationVariables, UpdateBoardDocument, UpdateBoardMutation, UpdateBoardMutationVariables } from "@/commons/gql/graphql"
 
 const useBoardWrite = () => {
     const router = useRouter()
     const param = useParams()
     const { writer, setWriter, title, setTitle, password, setPassword, contents, setContents } = useIsEdit()
+    
+    const [createBoardAPI] = useMutation<
+        CreateBoardMutation,
+        CreateBoardMutationVariables
+    >(CreateBoardDocument)
 
-    const [createBoard] = useMutation(CREATE_BOARD)
-    const [updateBoard] = useMutation(UPDATE_BOARD)
+    const [updateBaordAPI] = useMutation<
+        UpdateBoardMutation, UpdateBoardMutationVariables
+    >(UpdateBoardDocument)
 
     const onChangePosting = (props: IOnChangePosting) => (event: ChangeEvent<HTMLInputElement>) => {
         switch (props.category) {
@@ -37,20 +44,20 @@ const useBoardWrite = () => {
         }
     }
 
-    const fetchingBoard = async () => {
+    const creatingBoard = async () => {
         try {
             // createBoard 게시글 등록
-            const result = await createBoard({
+            const result = await createBoardAPI({
                 variables: {
                     createBoardInput: {
                         writer: writer,
-                        password: password,
+                        password: String(password),
                         title: title,
                         contents: contents
                     }
                 }
             })
-            router.push(`/boards/${result.data.createBoard._id}`)
+            router.push(`/boards/${result.data?.createBoard._id}`)
         } catch(e: unknown) {
             if (e instanceof ApolloError) {
                 e.graphQLErrors.forEach((e) => {
@@ -62,15 +69,15 @@ const useBoardWrite = () => {
 
     const updatingBoard = async (data: IUpdateBoardInput) => {
         try {
-            const result = await updateBoard({
+            const result = await updateBaordAPI({
                 variables: {
                     updateBoardInput: data.updateBoardInput,
                     password: data.password,
-                    boardId: data.boardId
+                    boardId: String(data.boardId)
                 }
             })
-            console.log('업데이트 결과: ',result.data.updateBoard._id)
-            router.push(`/boards/${result.data.updateBoard._id}`)
+            console.log('업데이트 결과: ',result.data?.updateBoard._id)
+            router.push(`/boards/${result.data?.updateBoard._id}`)
         } catch(e: unknown) {
             if (e instanceof ApolloError) {
                 e.graphQLErrors.forEach((e) => {
@@ -97,7 +104,7 @@ const useBoardWrite = () => {
     return {
         onChangePosting,
         boardUpdateSetting,
-        fetchingBoard,
+        creatingBoard,
         updatingBoard
     }
 }
