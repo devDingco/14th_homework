@@ -1,10 +1,11 @@
-import { ApolloClient, InMemoryCache, createHttpLink, from } from '@apollo/client';
+import { ApolloClient, InMemoryCache, from } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
+import { createUploadLink } from 'apollo-upload-client';
 
-// HTTP 링크 생성
-const httpLink = createHttpLink({
+// HTTP 링크 생성 (파일 업로드 지원)
+const httpLink = createUploadLink({
   uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT || 'http://main-practice.codebootcamp.co.kr/graphql',
   credentials: 'include', // 쿠키 포함
 });

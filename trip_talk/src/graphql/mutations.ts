@@ -22,8 +22,8 @@ export const CREATE_BOARD = gql`
 
 // 게시판 수정
 export const UPDATE_BOARD = gql`
-  mutation UpdateBoard($boardId: ID!, $updateBoardInput: UpdateBoardInput!) {
-    updateBoard(boardId: $boardId, updateBoardInput: $updateBoardInput) {
+  mutation UpdateBoard($boardId: ID!, $password: String!, $updateBoardInput: UpdateBoardInput!) {
+    updateBoard(boardId: $boardId, password: $password, updateBoardInput: $updateBoardInput) {
       _id
       title
       contents
