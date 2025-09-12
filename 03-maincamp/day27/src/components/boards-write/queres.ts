@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 
 export const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
+  query fetchBoardWrite($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
       _id
       writer
@@ -23,6 +23,12 @@ export const CREATE_BOARD = gql`
       title
       contents
       createdAt
+      youtubeUrl
+      boardAddress{
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
@@ -40,6 +46,12 @@ export const UPDATE_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
+      boardAddress{
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
