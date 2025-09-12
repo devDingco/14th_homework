@@ -28,6 +28,7 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     addressDetail: "",
   });
   const [images, setImages] = useState<string[]>([]);
+  const [isPostcodeModalOpen, setIsPostcodeModalOpen] = useState(false);
   const [errors, setErrors] = useState<ErrorsState>({
     writer: "",
     password: "",
@@ -64,6 +65,23 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     setBoardAddress({ ...boardAddress, address: event.target.value });
   const onChangeBoardAddressAddressDetail = (event: React.ChangeEvent<HTMLInputElement>) =>
     setBoardAddress({ ...boardAddress, addressDetail: event.target.value });
+
+  const onClickPostcodeSearch = () => {
+    setIsPostcodeModalOpen(true);
+  };
+
+  const onCompletePostcode = (data: any) => {
+    setBoardAddress({
+      ...boardAddress,
+      zipcode: data.zonecode,
+      address: data.address,
+    });
+    setIsPostcodeModalOpen(false);
+  };
+
+  const onClosePostcodeModal = () => {
+    setIsPostcodeModalOpen(false);
+  };
 
   const onClickSubmit = async () => {
     let hasError = false;
@@ -194,6 +212,10 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     onChangeBoardAddressZipcode,
     onChangeBoardAddressAddress,
     onChangeBoardAddressAddressDetail,
+    onClickPostcodeSearch,
+    onCompletePostcode,
+    onClosePostcodeModal,
+    isPostcodeModalOpen,
     onClickSubmit,
     onClickUpdate,
     onClickCancel,

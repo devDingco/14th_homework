@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import DaumPostcode from "react-daum-postcode";
 import type { BoardsWriteProps } from "./types";
 import { useBoardsWrite } from "./hook";
 import styles from "./styles.module.css";
@@ -24,6 +25,10 @@ export default function BoardsWrite(props: BoardsWriteProps) {
     onChangeBoardAddressZipcode,
     onChangeBoardAddressAddress,
     onChangeBoardAddressAddressDetail,
+    onClickPostcodeSearch,
+    onCompletePostcode,
+    onClosePostcodeModal,
+    isPostcodeModalOpen,
     onClickSubmit,
     onClickUpdate,
     onClickCancel,
@@ -102,7 +107,7 @@ export default function BoardsWrite(props: BoardsWriteProps) {
             value={boardAddress.zipcode}
             onChange={onChangeBoardAddressZipcode}
           />
-          <button className="button secondary">우편번호 검색</button>
+          <button type="button" className="button secondary" onClick={onClickPostcodeSearch}>우편번호 검색</button>
         </div>
         <input
           type="text"
@@ -167,6 +172,24 @@ export default function BoardsWrite(props: BoardsWriteProps) {
           {props.isEdit ? "수정하기" : "등록하기"}
         </button>
       </div>
+
+      {/* 우편번호 검색 모달 */}
+      {isPostcodeModalOpen && (
+        <div className={styles.modalOverlay} onClick={onClosePostcodeModal}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h3>우편번호 검색</h3>
+              <button type="button" className={styles.closeButton} onClick={onClosePostcodeModal}>
+                ×
+              </button>
+            </div>
+            <DaumPostcode
+              onComplete={onCompletePostcode}
+              style={{ width: "100%", height: "400px" }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

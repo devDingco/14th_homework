@@ -9,6 +9,7 @@ export function useCommentWrite(props: CommentWriteProps) {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
+  const [rating, setRating] = useState(0);
 
   const [createBoardComment, { loading }] = useMutation(CREATE_BOARD_COMMENT, {
     refetchQueries: [
@@ -23,21 +24,24 @@ export function useCommentWrite(props: CommentWriteProps) {
     await createBoardComment({
       variables: {
         boardId: props.boardId,
-        createBoardCommentInput: { writer, password, contents, rating: 0 },
+        createBoardCommentInput: { writer, password, contents, rating },
       },
     });
     setWriter("");
     setPassword("");
     setContents("");
+    setRating(0);
   };
 
   return {
     writer,
     password,
     contents,
+    rating,
     setWriter,
     setPassword,
     setContents,
+    setRating,
     isValid,
     onClickSubmit,
     loading,
