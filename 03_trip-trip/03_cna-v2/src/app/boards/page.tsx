@@ -1,5 +1,5 @@
 'use client'
-import BannerComponent from 'components/boards-list/banner'
+import BannerComponent from 'commons/layout/banner'
 import BoardsListComponent from 'components/boards-list/list'
 import styles from './styles.module.css'
 
