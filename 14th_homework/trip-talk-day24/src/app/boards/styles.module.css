@@ -1,0 +1,11 @@
+.board {
+  display: block;
+  position: relative;
+}
+.delete_icon {
+  display: none;
+  position: absolute;
+}
+.board:hover .delete_icon {
+  display: inline;
+}
