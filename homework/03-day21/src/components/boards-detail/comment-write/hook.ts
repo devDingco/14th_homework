@@ -33,12 +33,12 @@ export default function useBoardCommentWrite() {
         ICreateBoardCommentVariables
     >(CREATE_BOARD_COMMENT);
 
-    const StarActive = '/images/star-active.png'
-    const StarDisabled = '/images/star-disabled.png'
+    // const StarActive = '/images/star-active.png'
+    // const StarDisabled = '/images/star-disabled.png'
 
-    const onClickStar = (starRating: number) => {
-        setRating(starRating)
-    }
+    // const onClickStar = (starRating: number) => {
+    //     setRating(starRating)
+    // }
 
     const onChangeWriter = (e: ChangeEvent<HTMLInputElement>) => {
         setWriter(e.target.value);
@@ -54,6 +54,10 @@ export default function useBoardCommentWrite() {
         setContents(e.target.value);
         setIsActive(!!(writer && password && e.target.value));
     };
+
+    const onChangeRating = (value: number) => {
+      setRating(value);
+    };  
 
     const onClickSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
         try {
@@ -205,14 +209,12 @@ export default function useBoardCommentWrite() {
         password,
         contents,
         rating,
-        StarActive,
-        StarDisabled,
         inputError,
         isActive,
         onChangeWriter,
         onChangePassword,
         onChangeContent,
         onClickSubmit,
-        onClickStar,
+        onChangeRating
       };
 }

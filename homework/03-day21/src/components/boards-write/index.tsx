@@ -4,19 +4,38 @@ import React from "react";
 import styles from "./styles.module.css";
 import useBoardsWrite from "./hook";
 import { IBoardWriteProps } from "./types";
-
+import DaumPostcodeEmbed from 'react-daum-postcode'
+import { Modal } from 'antd';
+import YoutubeUrl from "./youtubeUrl";
 
 export default function BoardsWrite(props: IBoardWriteProps) {
+    
+    if (props.isEdit && !props.data) return null;
+
     const {
+        writerValue,
+        password,
+        titleValue,
+        contentsValue,
+        zipcodeValue,
+        addressValue,
+        addressDetailValue,
+        youtubeUrlValue,
+        inputError,
+        isActive,
+        isModalOpen,
+        onToggleModal,
+        handleComplete,
         onChangeWriter,
         onChangePassword,
         onChangeTitle,
         onChangeContent,
+        onChangeZipcode,
+        onChangeAddress,
+        onChangeAddressDetail,
+        onChangeYoutubeUrl,
         onClickSubmit,
         onClickUpdate,
-        inputError,
-        isActive,
-        password,
      } = useBoardsWrite({ isEdit: props.isEdit, data: props.data })
 
     return (
@@ -34,7 +53,7 @@ export default function BoardsWrite(props: IBoardWriteProps) {
                 className={styles.enrollInput}
                 type="text"
                 placeholder="작성자 명을 입력해 주세요."
-                defaultValue={props.data?.fetchBoard?.writer ?? ""} 
+                value={writerValue}
                 onChange={onChangeWriter}
                 disabled={props.isEdit} // 수정페이지면 입력불가
             />
@@ -67,7 +86,7 @@ export default function BoardsWrite(props: IBoardWriteProps) {
             <input
             className={styles.enrollInput}
             placeholder="제목을 입력해 주세요."
-            defaultValue={props.data?.fetchBoard.title}
+            value={titleValue} 
             onChange={onChangeTitle}
             />
             <div className={styles.inputErrorMessage}>{inputError}</div>
@@ -83,7 +102,7 @@ export default function BoardsWrite(props: IBoardWriteProps) {
             <textarea
             className={`${styles.enrollInput} ${styles.enrollTextarea}`}
             placeholder="내용을 입력해 주세요."
-            defaultValue={props.data?.fetchBoard.contents}
+            value={contentsValue}
             onChange={onChangeContent}
             />
             <div className={styles.inputErrorMessage}>{inputError}</div>
@@ -91,16 +110,53 @@ export default function BoardsWrite(props: IBoardWriteProps) {
 
         <hr className={styles.enrollBorder} />
 
+        {/* 우편번호 검색 */}
         <div className={styles.enrollRowSection}>
             <div className={styles.enrollFormTitle}>
             <div>주소</div>
             </div>
             <div className={styles.enrollAddressFirstrow}>
-            <input className={styles.zipcodeInput} type="number" placeholder="01234" />
-            <button className={styles.zipcodeSearchButton}>우편번호 검색</button>
+            <input 
+                onChange={onChangeZipcode} 
+                className={styles.zipcodeInput} 
+                type="text" 
+                placeholder="01234" 
+                value={zipcodeValue}
+            />
+            <button 
+                onClick={onToggleModal} 
+                className={styles.zipcodeSearchButton}
+            >
+                우편번호 검색
+            </button>
+
+            {isModalOpen && (
+                <Modal
+                title="모달 제목"        
+                open={isModalOpen}
+                onOk={onToggleModal}
+                onCancel={onToggleModal}
+                >
+                <DaumPostcodeEmbed onComplete={handleComplete} />
+                </Modal>
+        
+            )}     
+
             </div>
-            <input className={styles.enrollInput} type="text" placeholder="주소를 입력해 주세요." />
-            <input className={styles.enrollInput} type="text" placeholder="상세주소" />
+            <input 
+                onChange={onChangeAddress} 
+                className={styles.enrollInput} 
+                type="text" 
+                placeholder="주소를 입력해 주세요." 
+                value={addressValue}
+            />
+            <input 
+                onChange={onChangeAddressDetail} 
+                className={styles.enrollInput} 
+                type="text"
+                placeholder="상세주소"
+                value={addressDetailValue}
+            />
         </div>
 
         <hr className={styles.enrollBorder} />
@@ -109,7 +165,11 @@ export default function BoardsWrite(props: IBoardWriteProps) {
             <div className={styles.enrollFormTitle}>
             <div>유튜브 링크</div>
             </div>
-            <input className={styles.enrollInput} type="text" placeholder="링크를 입력해 주세요." />
+            <YoutubeUrl 
+            value={youtubeUrlValue} 
+            onChange={onChangeYoutubeUrl} 
+            className={styles.enrollInput} 
+            />
         </div>
 
         <hr className={styles.enrollBorder} />

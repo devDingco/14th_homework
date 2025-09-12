@@ -3,6 +3,7 @@
 import styles from "./style.module.css"
 import useBoardCommentWrite from "./hook";
 import Image from "next/image";
+import { Rate } from "antd";
 
 export default function BoardCommentWrite() {
     const {
@@ -10,15 +11,13 @@ export default function BoardCommentWrite() {
         password,
         contents,
         rating,
-        StarActive,
-        StarDisabled,
         inputError,
         isActive,
         onChangeWriter,
         onChangePassword,
         onChangeContent,
         onClickSubmit,
-        onClickStar,
+        onChangeRating,
     } = useBoardCommentWrite()
 
     return (
@@ -33,6 +32,10 @@ export default function BoardCommentWrite() {
 
             {/* 별점 */}
             <div className={styles.starGroup}>
+                <Rate onChange={onChangeRating} value={rating} />
+            </div>
+
+            {/* <div className={styles.starGroup}>
                 {[1, 2, 3, 4, 5].map((star)=>
                 <img
                 key={star}
@@ -42,7 +45,7 @@ export default function BoardCommentWrite() {
                 className={styles.starImage}
                 />      
                 )}                    
-            </div>
+            </div> */}
 
             {/* 댓글입력창 */}
             <div className={styles.enrollContainer}>

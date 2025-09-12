@@ -4,8 +4,9 @@ import {  useMutation, useQuery } from "@apollo/client"
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { FETCH_BOARD,  } from "./queries";
-import { IMyvariables, IUseBoardsWriteProps } from "./types";
+import { IDaumPostcodeData, IMyvariables, IUseBoardsWriteProps } from "./types";
 import { CreateBoardDocument, CreateBoardMutation, CreateBoardMutationVariables, FetchBoardDocument, UpdateBoardDocument, UpdateBoardMutation, UpdateBoardMutationVariables } from "@/commons/graphql/graphql";
+
 
 export default function useBoardsWrite(props: IUseBoardsWriteProps) {
     const router = useRouter()
@@ -16,32 +17,132 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
         skip: !boardId || !props.isEdit
     })
   
-    const [writer, setWriter] = useState(props.isEdit ? data?.fetchBoard.writer : "");
-    const [password, setPassword] = useState("");
-    const [title, setTitle] = useState(props.isEdit ? data?.fetchBoard.title : "");
-    const [contents, setContents] = useState(props.isEdit ? data?.fetchBoard.contents : "");
+    // const [writer, setWriter] = useState(props.isEdit ? data?.fetchBoard.writer : "");
+    // const [password, setPassword] = useState("");
+    // const [title, setTitle] = useState(props.isEdit ? data?.fetchBoard.title : "");
+    // const [contents, setContents] = useState(props.isEdit ? data?.fetchBoard.contents : "");
+
+
+    // const boardAddress = props.isEdit && data?.fetchBoard?.boardAddress 
+    //     ? data.fetchBoard.boardAddress 
+    //     : { zipcode: "", address: "", addressDetail: "" };
+
+    // const [zipcode, setZipcode] = useState(boardAddress.zipcode);
+    // const [address, setAddress] = useState(boardAddress.address);
+    // const [addressDetail, setAddressDetail] = useState(boardAddress.addressDetail);
+
+    // ✅ 항상 빈 문자열로 state 초기화
+    const [writer, setWriter] = useState("");
+    const [password, setPassword] = useState(""); // 항상 선언
+    const [title, setTitle] = useState("");
+    const [contents, setContents] = useState("");
+    const [zipcode, setZipcode] = useState("");
+    const [address, setAddress] = useState("");
+    const [addressDetail, setAddressDetail] = useState("");
+    const [youtubeUrl, setYoutubeUrl] = useState("");
+
+
+
+    // 인풋에 표시될 값 (useEffect 없이 안전하게)
+    // const writerValue = props.isEdit && data?.fetchBoard?.writer ? data.fetchBoard.writer : writer;
+    // const titleValue = props.isEdit && data?.fetchBoard?.title ? (title || data.fetchBoard.title) : title;
+    // const contentsValue = props.isEdit && data?.fetchBoard?.contents ? (contents || data.fetchBoard.contents) : contents;
+
+    const writerValue = props.isEdit
+        ? (writer !== "" ? writer : data?.fetchBoard?.writer ?? "")
+        : writer;
+
+    const titleValue = props.isEdit
+        ? (title !== "" ? title : data?.fetchBoard?.title ?? "")
+        : title;
+
+    const contentsValue = props.isEdit
+        ? (contents !== "" ? contents : data?.fetchBoard?.contents ?? "")
+        : contents;
+
+    const zipcodeValue = props.isEdit
+        ? (zipcode !== "" ? zipcode : data?.fetchBoard?.boardAddress?.zipcode ?? "")
+        : zipcode;
+
+    const addressValue = props.isEdit
+        ? (address !== "" ? address : data?.fetchBoard?.boardAddress?.address ?? "")
+        : address;
+
+    const addressDetailValue = props.isEdit
+        ? (addressDetail !== "" ? addressDetail : data?.fetchBoard?.boardAddress?.addressDetail ?? "")
+        : addressDetail;
+
+    // 수정 모드일 때 값 세팅
+    const youtubeUrlValue = props.isEdit
+        ? (youtubeUrl !== "" ? youtubeUrl : data?.fetchBoard?.youtubeUrl ?? "")
+        : youtubeUrl;
+
+     
+    // && 연산자 사용 시:
+    // props.isEdit && data?.fetchBoard.boardAddress.address
+    // 두 조건이 모두 true일 때만 값이 나옴 → 즉, 수정 모드이고 데이터가 존재할 때만 기존 주소 보여주기
+    // 조건이 하나라도 false면 아무 값도 안 나오거나 false가 됨
+
+    // ? : 삼항 연산자 사용 시:
+    // props.isEdit ? data?.fetchBoard.boardAddress.address : ""
+    // isEdit만 확인
+    // true면 데이터, false면 빈 문자열
+    // 데이터가 없으면 undefined가 나올 수 있음 → 이 부분에서 ?.를 같이 써서 안전하게 접근
+
+    // 수정 페이지에서 데이터가 있어야 기존 데이터 보여주기 → &&
+
+    // 단순 조건 분기 (true면 값, false면 빈 문자열) → ? :
 
     const [inputError, setInputError] = useState("");
     // //useState의 초기값을 props.isEdit에 따라 조건부로 설정
     const [isActive, setIsActive] =  useState(props.isEdit ? true : false);
 
+    const [isModalOpen, setIsModalOpen ] = useState()
+
+    const onToggleModal = () => {
+        setIsModalOpen((prev) => !prev);
+    };
+    
+      const handleComplete = (data: IDaumPostcodeData) => {
+        console.log(data)
+        setZipcode(data.zonecode);
+        setAddress(data.address);
+        onToggleModal();
+    };
+
     // // 등록 페이지와 수정 페이지의 isActive 조건 분리
     const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
-    setIsActive(props.isEdit ? (title && contents) : (event.target.value && password && title && contents));
+    setIsActive(props.isEdit ? (titleValue && contentsValue) : (event.target.value && password && titleValue && contentsValue));
     };
     const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-    setIsActive(props.isEdit ? (title && contents) : (writer && event.target.value && title && contents));
+    setIsActive(props.isEdit ? (titleValue && contentsValue) : (writer && event.target.value && titleValue && contentsValue));
     };
     const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
-    setIsActive(props.isEdit ? (event.target.value && contents) : (writer && password && event.target.value && contents));
+    setIsActive(props.isEdit ? (event.target.value && contentsValue) : (writer && password && event.target.value && contentsValue));
     };
     const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
-    setIsActive(props.isEdit ? (title && event.target.value) : (writer && password && title && event.target.value));
+    setIsActive(props.isEdit ? (titleValue && event.target.value) : (writer && password && titleValue && event.target.value));
     };
+
+    const onChangeZipcode = (event: ChangeEvent<HTMLInputElement>) => {
+        setZipcode(event.target.value);
+    };
+    const onChangeAddress = (event: ChangeEvent<HTMLInputElement>) => {
+        setAddress(event.target.value);
+    };
+    const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+        setAddressDetail(event.target.value);
+    };
+
+
+
+    const onChangeYoutubeUrl = (value: string) => {
+        setYoutubeUrl(value);
+      };
 
     const [createBoard] = useMutation<CreateBoardMutation, CreateBoardMutationVariables>(CreateBoardDocument) 
     const [updateBoard] = useMutation<UpdateBoardMutation, UpdateBoardMutationVariables>(UpdateBoardDocument)
@@ -55,7 +156,12 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
                     password: password,
                     title: title,
                     contents: contents,
-                    youtubeUrl: "",
+                    boardAddress: {
+                        zipcode: zipcode,
+                        address: address,
+                        addressDetail: addressDetail,
+                    },         
+                    youtubeUrl, 
                     images: []
                     } ,
                 },
@@ -64,7 +170,7 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
 
             if (result?.data?.createBoard) {
             setInputError("");
-            alert("게시글 등록이 가능한 상태입니다!");
+            alert("게시글 등록이 완료되었습니다!");
             } else {
             setInputError("필수입력 사항입니다.");
             }
@@ -88,13 +194,30 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
             
             
             const myvariables: IMyvariables = {
-                updateBoardInput: {} ,
+                updateBoardInput: {
+                    boardAddress: {
+                        zipcode: zipcode,
+                        address: address,
+                        addressDetail: addressDetail,
+                    }
+                } ,
                 boardId: boardId,
                 password: enteredPassword, 
             }
 
             if(title !== "") myvariables.updateBoardInput.title = title
             if(contents !=="") myvariables.updateBoardInput.contents = contents
+          
+            if(data?.fetchBoard.boardAddress) {
+                myvariables.updateBoardInput.boardAddress = {
+                    zipcode: data.fetchBoard.boardAddress.zipcode,
+                    address: data.fetchBoard.boardAddress.address,
+                    addressDetail:
+                        addressDetail || data.fetchBoard.boardAddress.addressDetail,
+                }
+            }
+
+            if (youtubeUrl !== "") myvariables.updateBoardInput.youtubeUrl = youtubeUrl;
 
             const result = await updateBoard({
                 variables: {
@@ -152,15 +275,29 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
     // if (props.isEdit && !data) return null;
 
     return {
+        writerValue,
+        password,
+        titleValue,
+        contentsValue,
+        zipcodeValue,
+        addressValue,
+        addressDetailValue,
+        youtubeUrlValue,
+        inputError,
+        isActive,
+        isModalOpen,
+        onToggleModal,
+        handleComplete,
         onChangeWriter,
-        onChangeTitle,
         onChangePassword,
+        onChangeTitle,
         onChangeContent,
+        onChangeZipcode,
+        onChangeAddress,
+        onChangeAddressDetail,
+        onChangeYoutubeUrl,
         onClickSubmit,
         onClickUpdate,
-        inputError, 
-        isActive,
-        password,      
     };
   
 }
