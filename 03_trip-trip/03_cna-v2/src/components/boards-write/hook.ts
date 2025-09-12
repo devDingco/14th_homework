@@ -1,3 +1,4 @@
+'use client'
 import { ApolloError, useMutation, useQuery } from '@apollo/client'
 import { useParams, useRouter } from 'next/navigation'
 import { ChangeEvent, useState } from 'react'
@@ -13,6 +14,7 @@ import {
   UpdateBoardMutation,
   UpdateBoardMutationVariables,
 } from 'commons/graphql/graphql'
+import { isYouTubeUrl } from 'commons/utils/url'
 
 export default function useBoardForm(props: BoardFormProps) {
   const router = useRouter()
@@ -33,20 +35,45 @@ export default function useBoardForm(props: BoardFormProps) {
     UpdateBoardDocument
   )
 
+  console.log(data?.fetchBoard?.boardAddress)
   // 작성자 변경 불가
   const [name, setName] = useState('')
   // 비밀번호 수정 불가
   const [password, setPassword] = useState('')
   const [title, setTitle] = useState(props.isEdit ? data?.fetchBoard?.title ?? '' : '')
   const [content, setContent] = useState(props.isEdit ? data?.fetchBoard?.contents ?? '' : '')
+  // 주소 input
+  const [address, setAddress] = useState({
+    zipcode: props.isEdit ? data?.fetchBoard?.boardAddress?.zipcode ?? '' : '',
+    base: props.isEdit ? data?.fetchBoard?.boardAddress?.address ?? '' : '',
+    detail: props.isEdit ? data?.fetchBoard?.boardAddress?.addressDetail ?? '' : '',
+  })
+  const [link, setLink] = useState(props.isEdit ? data?.fetchBoard?.youtubeUrl ?? '' : '')
 
   const [nameError, setNameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [titleError, setTitleError] = useState('')
   const [contentError, setContentError] = useState('')
-
+  const [linkError, setLinkError] = useState('')
   // 값이 없는 경우, 버튼 비활성화
   const isButtonDisabled = !name || !password || !title || !content
+
+  // 모달 + 우편번호
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const onToggleModal = () => {
+    setIsModalOpen((prev) => !prev)
+  }
+
+  const handleComplete = (data: any) => {
+    const base = data.address || data.roadAddress || data.jibunAddress || ''
+    setAddress({
+      zipcode: data.zonecode || '',
+      base,
+      detail: '',
+    })
+    onToggleModal()
+  }
 
   // 변경값 상태관리
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
@@ -63,6 +90,23 @@ export default function useBoardForm(props: BoardFormProps) {
 
   const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value)
+  }
+
+  const onChangeAddress = (
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { value, name } = event.target
+    console.log('🚀 ~ onChangeAddress ~ name:', name)
+    console.log('🚀 ~ onChangeAddress ~ value:', value)
+
+    setAddress({
+      ...address,
+      [name]: value,
+    })
+  }
+
+  const onChangeLink = (event: ChangeEvent<HTMLInputElement>) => {
+    setLink(event.target.value)
   }
 
   const onClickSignup = async () => {
@@ -98,19 +142,26 @@ export default function useBoardForm(props: BoardFormProps) {
         setContentError('')
       }
 
+      if (link && !isYouTubeUrl(link)) {
+        setLinkError('유튜브 주소 형식에 알맞지 않습니다.')
+        hasError = true
+      } else {
+        setLinkError('')
+      }
+
       if (!hasError) {
         const { data } = await createBoard({
           variables: {
             createBoardInput: {
               writer: name,
-              password: password,
-              title: title,
+              password,
+              title,
               contents: content,
-              youtubeUrl: '',
+              youtubeUrl: link,
               boardAddress: {
-                zipcode: '',
-                address: '',
-                addressDetail: '',
+                zipcode: address.zipcode,
+                address: address.base,
+                addressDetail: address.detail,
               },
               images: ['', ''],
             },
@@ -140,6 +191,10 @@ export default function useBoardForm(props: BoardFormProps) {
         setTitleError('필수입력 사항입니다.')
         return
       }
+      if (link && !isYouTubeUrl(link)) {
+        setLinkError('유튜브 주소 형식에 알맞지 않습니다.')
+        return
+      }
 
       // 비밀번호 확인하기
 
@@ -151,6 +206,26 @@ export default function useBoardForm(props: BoardFormProps) {
 
       if (content?.trim() && content !== data?.fetchBoard?.contents) {
         updateInput.contents = content
+      }
+
+      if (link !== data?.fetchBoard?.youtubeUrl) {
+        updateInput.youtubeUrl = link
+      }
+
+      const boardAddress: any = {}
+      if (address.zipcode !== data?.fetchBoard?.boardAddress?.zipcode) {
+        boardAddress.zipcode = address.zipcode
+      }
+
+      if (address.base !== data?.fetchBoard?.boardAddress?.address) {
+        boardAddress.address = address.base
+      }
+
+      if (address.detail !== data?.fetchBoard?.boardAddress?.addressDetail) {
+        boardAddress.addressDetail = address.detail
+      }
+      if (Object.keys(boardAddress).length > 0) {
+        updateInput.boardAddress = boardAddress
       }
 
       // 수정된 값이 있는 항목만 API 요청
@@ -193,6 +268,8 @@ export default function useBoardForm(props: BoardFormProps) {
     onChangePassword,
     onChangeTitle,
     onChangeContent,
+    onChangeAddress,
+    onChangeLink,
     onClickSignup,
     isButtonDisabled,
     data,
@@ -200,9 +277,15 @@ export default function useBoardForm(props: BoardFormProps) {
     password,
     title,
     content,
+    address,
+    link,
     nameError,
     passwordError,
     titleError,
     contentError,
+    linkError,
+    isModalOpen,
+    onToggleModal,
+    handleComplete,
   }
 }

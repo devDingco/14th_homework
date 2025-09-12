@@ -16,6 +16,7 @@ import {
   FetchBoardsQuery,
   FetchBoardsQueryVariables,
 } from '@/shared/api/graphql/graphql'
+import HomeBanner from '../(sections)/HomeBanner/HomeBanner'
 
 export default function BoardsPage() {
   const router = useRouter()
@@ -50,38 +51,41 @@ export default function BoardsPage() {
   }
 
   return (
-    <div className={styles['board-list-container']}>
-      <div className={`${styles['board-list']} ${styles['board-title']}`}>
-        <p>번호</p>
-        <p>제목</p>
-        <p>작성자</p>
-        <p>날짜</p>
-      </div>
+    <div className={styles['board-list-layout']}>
+      <HomeBanner />
+      <div className={styles['board-list-container']}>
+        <div className={`${styles['board-list']} ${styles['board-title']}`}>
+          <p>번호</p>
+          <p>제목</p>
+          <p>작성자</p>
+          <p>날짜</p>
+        </div>
 
-      <div className={styles['board-list-items']}>
-        {data?.fetchBoards.map((boardListItem, idx) => {
-          const { _id, writer, title, createdAt } = boardListItem
-          const formattedDate = formatUtcToKstYmd(createdAt)
+        <div className={styles['board-list-items']}>
+          {data?.fetchBoards.map((boardListItem, idx) => {
+            const { _id, writer, title, createdAt } = boardListItem
+            const formattedDate = formatUtcToKstYmd(createdAt)
 
-          return (
-            <div
-              className={`${styles['board-list']} ${styles['board-list-item']}`}
-              key={_id}
-              onClick={() => handleNavigate(_id)}
-            >
-              <p>{boardNumber - idx}</p>
-              <p>{title}</p>
-              <p>{writer}</p>
-              <p>{formattedDate}</p>
-              <DeleteIcon
-                onClick={(event: MouseEvent<SVGSVGElement>) => {
-                  handleDelete(event, _id)
-                  alert(`${boardNumber - idx}번째 게시글이 삭제되었습니다.`)
-                }}
-              />
-            </div>
-          )
-        })}
+            return (
+              <div
+                className={`${styles['board-list']} ${styles['board-list-item']}`}
+                key={_id}
+                onClick={() => handleNavigate(_id)}
+              >
+                <p>{boardNumber - idx}</p>
+                <p>{title}</p>
+                <p>{writer}</p>
+                <p>{formattedDate}</p>
+                <DeleteIcon
+                  onClick={(event: MouseEvent<SVGSVGElement>) => {
+                    handleDelete(event, _id)
+                    alert(`${boardNumber - idx}번째 게시글이 삭제되었습니다.`)
+                  }}
+                />
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

@@ -7,10 +7,8 @@ import {
   FetchBoardCommentsQueryVariables,
 } from '@/shared/api/graphql/graphql'
 import { formatUtcToKstYmd } from '@/shared/lib/date/formatUtcToKstYmd'
-
-export interface CommentListProps {
-  boardId: string
-}
+import { CommentListProps } from '../model/types'
+import { Rate } from 'antd'
 
 export default function CommentList(props: CommentListProps) {
   const { data, loading } = useQuery<FetchBoardCommentsQuery, FetchBoardCommentsQueryVariables>(
@@ -27,27 +25,30 @@ export default function CommentList(props: CommentListProps) {
     return <div style={{ margin: '0 auto' }}>등록된 댓글이 없습니다.</div>
 
   return (
-    <>
+    <div className={styles['comment-list-container']}>
       {data?.fetchBoardComments?.map((el) => {
         const { _id, writer, contents, rating, createdAt } = el
         const formattedDate = formatUtcToKstYmd(createdAt)
         return (
-          <div className={styles['comment-list-layout']} key={_id}>
-            <div className={styles['comment-list-header']}>
-              <ProfileIcon />
-              <p>{writer}</p>
-              <div>대충 별점 들어가는 곳 {rating}</div>
-            </div>
-            <p className={styles['comment-list-contents']}>{contents}</p>
-            <p className={styles['comment-list-date']}>{formattedDate}</p>
+          <>
+            <div className={styles['comment-list-layout']} key={_id}>
+              <div className={styles['comment-list-header']}>
+                <ProfileIcon />
+                <p>{writer}</p>
+                <Rate value={rating} disabled />
+              </div>
+              <p className={styles['comment-list-contents']}>{contents}</p>
+              <p className={styles['comment-list-date']}>{formattedDate}</p>
 
-            <div className={styles['comment-list-actives']}>
-              <EditIcon />
-              <CloseIcon />
+              <div className={styles['comment-list-actives']}>
+                <EditIcon />
+                <CloseIcon />
+              </div>
             </div>
-          </div>
+            <div className={styles['comment-list-br']}></div>
+          </>
         )
       })}
-    </>
+    </div>
   )
 }

@@ -7,13 +7,14 @@ import { useParams } from 'next/navigation'
 
 export default function BoardsDetailPage() {
   const params = useParams()
+  const boardId = typeof params.boardId === 'string' ? params.boardId : ''
 
   return (
     <div className={styles.detailLayout}>
       <div className={styles.detailBody}>
         <BoardDetailPage />
-        <CommentWriteComponent boardId={params.boardId} />
-        <CommentListComponent boardId={params.boardId} />
+        <CommentWriteComponent boardId={boardId} />
+        <CommentListComponent boardId={boardId} />
       </div>
     </div>
   )

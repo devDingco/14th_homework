@@ -41,6 +41,7 @@ export default function BoardForm(props: BoardFormProps) {
     isActive,
     handleChange,
     handleSubmit,
+    setAddress,
   } = useForm({ initialValues: formInitialValues, validate, onSubmit, isEdit })
 
   return (
@@ -118,7 +119,7 @@ export default function BoardForm(props: BoardFormProps) {
       </div>
 
       {/* 주소 */}
-      <AddressForm onChange={handleChange} value={post.addr} />
+      <AddressForm onChange={handleChange} value={post.addr} onCompleteAddress={setAddress} />
       <hr />
       {/* 유튜브 링크 */}
       <div className={styles['post-form-input']}>

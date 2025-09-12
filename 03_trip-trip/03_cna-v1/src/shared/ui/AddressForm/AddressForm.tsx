@@ -5,31 +5,25 @@ import styles from './AddressForm.module.css'
 import { PostAddr } from './types'
 import DaumPostcodeEmbed from 'react-daum-postcode'
 import { ChangeEvent } from 'react'
+import { Modal } from 'antd'
 
 interface AddressFormProps {
   value: PostAddr | undefined
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+  onCompleteAddress: (addr: { zipcode: string; addr1: string }) => void
 }
 
 // ERROR: 공사중...⚒️
-export default function AddressForm({ value, onChange }: AddressFormProps) {
+export default function AddressForm({ value, onChange, onCompleteAddress }: AddressFormProps) {
   const { isOpen, handleToggle } = useToggle()
 
   const handleComplete = (data: any) => {
-    console.log(data)
-    onChange({
-      target: {
-        name: 'addr.zipcode',
-        value: data.zonecode,
-      },
+    onCompleteAddress({
+      zipcode: data.zonecode,
+      addr1: data.address,
     })
 
-    onChange({
-      target: {
-        name: 'addr.addr1',
-        value: data.address,
-      },
-    })
+    handleToggle()
   }
 
   return (
@@ -63,9 +57,23 @@ export default function AddressForm({ value, onChange }: AddressFormProps) {
       <input placeholder="상세주소" name="addr.addr2" value={value?.addr2} onChange={onChange} />
 
       {isOpen && (
-        // <div>
-        <DaumPostcodeEmbed onComplete={handleComplete} />
-        // </div>
+        <Modal
+          title="우편번호 검색"
+          centered
+          open={isOpen}
+          onOk={handleToggle}
+          onCancel={handleToggle}
+          width={{
+            xs: '90%',
+            sm: '80%',
+            md: '70%',
+            lg: '60%',
+            xl: '50%',
+            xxl: '40%',
+          }}
+        >
+          <DaumPostcodeEmbed onComplete={handleComplete} />
+        </Modal>
       )}
     </div>
   )

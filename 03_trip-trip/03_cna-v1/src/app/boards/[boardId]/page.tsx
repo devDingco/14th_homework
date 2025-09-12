@@ -23,6 +23,7 @@ import {
 } from '@/shared/api/graphql/graphql'
 import CommentForm from '@/features/comments/ui/CommentForm'
 import CommentList from '@/features/comments/ui/CommentList'
+import { Tooltip } from 'antd'
 
 export default function BoardsDetail() {
   const router = useRouter()
@@ -40,13 +41,22 @@ export default function BoardsDetail() {
   if (loading) return <div>로딩 중</div>
   if (error || !data?.fetchBoard) return <div>게시글을 찾을 수 없습니다.</div>
 
-  const { writer, title, contents, youtubeUrl, likeCount, dislikeCount, images, createdAt } =
-    data.fetchBoard
+  const {
+    writer,
+    title,
+    contents,
+    boardAddress,
+    youtubeUrl,
+    likeCount,
+    dislikeCount,
+    images,
+    createdAt,
+  } = data.fetchBoard
 
   const formattedDate = formatUtcToKstYmd(createdAt)
-  const firstImg = images?.[0]
-  const imgSrc = firstImg && firstImg.trim() !== '' ? firstImg : '/images/postImg1.png'
-  const youtubeId = getYouTubeId(youtubeUrl)
+  const firstImg = images?.[0] ?? ''
+  const imgSrc = firstImg.trim() ? firstImg : '/images/postImg1.png'
+  const youtubeId = getYouTubeId(youtubeUrl ?? '')
 
   const handleNavigate = (str: string) => {
     if (str === '목록') router.push('/boards')
@@ -73,12 +83,20 @@ export default function BoardsDetail() {
         <hr />
         <div className={styles['detail-post-func']}>
           <LinkIcon />
-          <LocationIcon />
+          <Tooltip
+            placement="bottomRight"
+            title={boardAddress?.address}
+            arrow={false}
+            color="white"
+            overlayInnerStyle={{ color: 'black' }}
+          >
+            <LocationIcon />
+          </Tooltip>
         </div>
       </div>
 
       {/* images */}
-      {/* {firstImg && */}
+      {/* {firstImg && ( */}
       <Image
         src={imgSrc}
         className={styles['detail-post-image']}
@@ -86,7 +104,7 @@ export default function BoardsDetail() {
         height={0}
         alt="detail image"
       />
-      {/* } */}
+      {/* )} */}
 
       {/* contents */}
       <div className={styles['detail-post-contents']}>{contents}</div>

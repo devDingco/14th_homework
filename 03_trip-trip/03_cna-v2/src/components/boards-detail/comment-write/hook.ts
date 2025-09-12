@@ -1,3 +1,4 @@
+'use client'
 import { ChangeEvent, useState } from 'react'
 import { useMutation } from '@apollo/client'
 import {
@@ -28,9 +29,8 @@ export default function useCommentWrite(props: CommentWriteProps) {
   const handleChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value)
   }
-  // TODO: 별점 구현후 추가 예정
-  const handleChangeRating = (event: any) => {
-    setRating(event.target.value)
+  const handleChangeRating = (value: number) => {
+    setRating(value)
   }
 
   const handleSubmit = async () => {
@@ -60,12 +60,16 @@ export default function useCommentWrite(props: CommentWriteProps) {
       console.error(error)
     }
   }
+
+  const isDisabled = !writer || !password || !contents || !rating
+
   return {
     handleChangeWriter,
     handleChangePassword,
     handleChangeContents,
     handleChangeRating,
     handleSubmit,
+    isDisabled,
     writer,
     password,
     contents,

@@ -9,6 +9,7 @@ export interface UseFormReturn {
   isActive: boolean
   handleChange: (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => void
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+  setAddress: (addr: { zipcode: string; addr1: string }) => void
 }
 
 export interface UseFormProps {
@@ -30,9 +31,10 @@ const useForm = ({ initialValues, validate, onSubmit, isEdit }: UseFormProps): U
   })
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target
+
     let nextValue: PostForm
 
     if (name.startsWith('addr.')) {
@@ -51,9 +53,21 @@ const useForm = ({ initialValues, validate, onSubmit, isEdit }: UseFormProps): U
 
     setValues(nextValue)
 
-    const myErrors = validate(nextValue, isEdit)
-    setErrors(myErrors)
-    setIsActive(isEmptyObj(myErrors))
+    const nextErrors = validate(nextValue, isEdit)
+    setErrors(nextErrors)
+    setIsActive(isEmptyObj(nextErrors))
+  }
+
+  const setAddress = (addr: { zipcode: string; addr1: string }) => {
+    const nextValue = {
+      ...values,
+      addr: {
+        ...values.addr,
+        zipcode: addr.zipcode,
+        addr1: addr.addr1,
+      },
+    }
+    setValues(nextValue)
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -68,6 +82,7 @@ const useForm = ({ initialValues, validate, onSubmit, isEdit }: UseFormProps): U
     isActive,
     handleChange,
     handleSubmit,
+    setAddress,
   }
 }
 

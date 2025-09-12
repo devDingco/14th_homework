@@ -1,3 +1,8 @@
+.comment-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
 .comment-list-layout {
   display: flex;
   flex-direction: column;
@@ -33,4 +38,12 @@
   cursor: pointer;
   width: 2rem;
   height: 2rem;
+}
+.comment-list-br {
+  width: 100%;
+  height: 0.1rem;
+  background-color: var(--color-gray-100);
+}
+.comment-list-br:last-child {
+  display: none;
 }
