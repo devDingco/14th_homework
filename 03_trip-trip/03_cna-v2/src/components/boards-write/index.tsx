@@ -133,11 +133,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
               name="zipcode"
               readOnly
               onChange={onChangeAddress}
-              value={
-                props.isEdit
-                  ? (address.zipcode || data?.fetchBoard?.boardAddress?.zipcode) ?? ''
-                  : ''
-              }
+              value={address.zipcode}
             />
             <button className={styles.zipcode_search_button} onClick={onToggleModal}>
               우편번호 검색
@@ -151,9 +147,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
             name="base"
             readOnly
             onChange={onChangeAddress}
-            value={
-              props.isEdit ? (address.base || data?.fetchBoard?.boardAddress?.address) ?? '' : ''
-            }
+            value={address.base}
           />
           <input
             placeholder="상세주소"
@@ -161,11 +155,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
             type="text"
             name="detail"
             onChange={onChangeAddress}
-            value={
-              props.isEdit
-                ? (address.detail || data?.fetchBoard?.boardAddress?.addressDetail) ?? ''
-                : ''
-            }
+            value={address.detail}
           />
         </div>
         <div className={styles.enroll_border}></div>

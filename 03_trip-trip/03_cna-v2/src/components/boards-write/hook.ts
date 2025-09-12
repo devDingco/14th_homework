@@ -15,6 +15,8 @@ import {
   UpdateBoardMutationVariables,
 } from 'commons/graphql/graphql'
 import { isYouTubeUrl } from 'commons/utils/url'
+import { Modal } from 'antd'
+import { Address } from 'react-daum-postcode'
 
 export default function useBoardForm(props: BoardFormProps) {
   const router = useRouter()
@@ -65,15 +67,21 @@ export default function useBoardForm(props: BoardFormProps) {
     setIsModalOpen((prev) => !prev)
   }
 
-  const handleComplete = (data: any) => {
+  const handleComplete = (data: Address) => {
+    console.log('🚀 ~ handleComplete ~ data:', data)
     const base = data.address || data.roadAddress || data.jibunAddress || ''
+    console.log('🚀 ~ handleComplete ~ base:', base)
+
     setAddress({
+      ...address,
       zipcode: data.zonecode || '',
       base,
       detail: '',
     })
     onToggleModal()
   }
+
+  console.log('🚀 ~ useBoardForm ~ address:', address)
 
   // 변경값 상태관리
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
@@ -169,7 +177,9 @@ export default function useBoardForm(props: BoardFormProps) {
         })
 
         console.log('data', data)
-        alert('게시글이 등록되었습니다!')
+        Modal.success({
+          content: '게시글이 등록되었습니다!',
+        })
         // 해당글의 상세페이지로 이동하기
         router.push(`/boards/${data?.createBoard._id}`)
       }
