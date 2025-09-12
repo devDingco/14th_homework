@@ -1,0 +1,38 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  max-width: 1280px;
+  width: 100%;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.active_btns {
+  display: flex;
+  gap: 24px;
+}
+.menu {
+  display: flex;
+  list-style: none;
+  gap: 16px;
+}
+.menu li {
+  padding: 8px;
+  line-height: 24px;
+}
+.active {
+  font-weight: 700;
+  border-bottom: solid 4px #000;
+}
+
+.login_btn {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 8px;
+  background-color: #000;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 100px;
+}
