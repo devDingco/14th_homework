@@ -1,5 +1,6 @@
 "use client";
 
+import CommentListComponent from "@/app/components/boards-detail/comment-list";
 import CommentWriteComponent from "@/app/components/boards-detail/conmment-write";
 import DetailPageComponent from "@/app/components/boards-detail/detail";
 
@@ -10,6 +11,7 @@ export default function DetailPage() {
     <>
       <DetailPageComponent />
       <CommentWriteComponent />
+      <CommentListComponent />
     </>
   );
 }

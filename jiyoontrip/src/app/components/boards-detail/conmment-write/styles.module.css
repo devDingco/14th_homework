@@ -1,0 +1,215 @@
+.page {
+  width: 100%;
+  /* padding: 0 20rem; */
+  gap: 2.5rem;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 80rem;
+  width: 100%;
+  margin: 0 auto;
+  gap: 1rem;
+}
+.line {
+  border: none;
+  border-top: 0.0625rem solid #e4e4e4;
+}
+.starRating {
+  display: flex;
+  width: 3.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  color: #000;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+}
+.enrollAuthorPassword {
+  max-width: 40rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.inputArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  flex: 1 0 0;
+}
+.inputArea__enrollLabel {
+  display: flex;
+  align-items: center;
+}
+
+.inputArea__enrollLabel__label {
+  color: var(--gray-800, #333);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem;
+  margin-right: 0.25rem;
+}
+.inputArea__enrollLabel__star {
+  color: var(--red, #f66a6a);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+.inputArea__input {
+  width: 100%;
+  display: flex;
+  padding: 0.75rem 1rem;
+  align-items: flex-start;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+.inputError {
+  color: var(--red, #f66a6a);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+.inputArea__textarea {
+  display: flex;
+  padding: 0.75rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  resize: none;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+  max-width: 80rem;
+  height: 9rem;
+}
+
+.addressArea {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.addressArea__search {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.addressArea__enrollInputButton {
+  max-width: 13.75rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.inputArea__addressInput {
+  max-width: 5.125rem;
+  width: 100%;
+  display: flex;
+  padding: 0.75rem 1rem;
+  align-items: flex-start;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.inputArea__button {
+  border-radius: 0.5rem;
+  border: 0.0625rem solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+  display: flex;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  color: var(--gray-B, #000);
+  text-align: center;
+}
+.enrollButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.inputArea__cancelButton {
+  display: flex;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  color: var(--gray-B, #000);
+  text-align: center;
+}
+
+.inputArea__registerButton {
+  border-radius: 0.5rem;
+  display: flex;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  color: #fff;
+  background: var(--gray-B, #000);
+  text-align: center;
+  border: none;
+}
+
+/* ImageUpload */
+.imageUploadArea {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.imageUploadInput {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.imageUploadInput__drop {
+  color: var(--gray-600, #777);
+  display: flex;
+  width: 10rem;
+  height: 10rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  background: var(--gray-50, #f2f2f2);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+.imageUploadInput__drop input {
+  display: none;
+}

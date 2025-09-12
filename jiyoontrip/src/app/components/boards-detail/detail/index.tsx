@@ -109,6 +109,7 @@ export default function DetailPageComponent() {
               수정하기
             </button>
           </div>
+          <hr className={styles.line} />
         </div>
       </div>
     </>
