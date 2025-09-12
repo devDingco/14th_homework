@@ -38,13 +38,13 @@ const useBoardsListPage = () => {
     // boardsCount = useQuery(FETCH_BOARDS_COUNT).data
     // console.log(boardsCount?.fetchBoardsCount)
 
-    const goDetailHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    const goDetailHandler = (event: React.MouseEvent<HTMLLIElement>) => {
         router.push(`/boards/${event.currentTarget.dataset.key}`)
     }
 
     const onDeleteHanlder = async (event: React.MouseEvent<HTMLImageElement>) => {
         console.log(event.currentTarget.dataset.key)
-        
+        event.stopPropagation()
         try {
             const result = await deleteBoardAPI({
                 variables: {
