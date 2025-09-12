@@ -1,0 +1,10 @@
+.mySwiper {
+  width: 100%;
+  height: 567px;
+}
+
+.mySwiper img {
+  width: 100%;
+  height: 567px;
+  object-fit: cover;
+}

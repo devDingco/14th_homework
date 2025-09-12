@@ -12,6 +12,11 @@ export const FETCH_BOARD = gql`
       likeCount # 좋아요 수
       dislikeCount # 싫어요 수
       images # 첨부 이미지들
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
       createdAt # 생성일
       updatedAt # 수정일
       deletedAt # 삭제일
