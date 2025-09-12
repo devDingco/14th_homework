@@ -6,7 +6,7 @@ import { ChangeEvent, useState } from "react"
 import { useMutation } from "@apollo/client"
 import { CreateBoardDocument, CreateBoardMutation, CreateBoardMutationVariables, UpdateBoardDocument, UpdateBoardMutation, UpdateBoardMutationVariables } from "@/commons/graphql/graphql"
 import { IMyvariables } from "./types"
-
+import { FETCH_BOARD } from "../boards-detail/detail/queries"
 
 
 
@@ -24,8 +24,15 @@ export default function useBoardsWrite(){
     const [password, setPassword] = useState<string>("")
     const [title, setTitle] = useState<string>("")
     const [content, setContent] = useState<string>("")
-    const [isModalOpen, setIsModalOpen] = useState(false);
     // const [board, setBoard] = useState<IBoard[]>([])
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [zonecode, setZonecode] = useState("")
+    const [address, setAddress] = useState("")
+    const [detailAddress, setDetailAddress] = useState("")
+    const [youtube, setYoutube] = useState<string>("")
+
+
+
 
 
     const [emailError, setEmailError] = useState("필수입력사항")
@@ -107,6 +114,23 @@ export default function useBoardsWrite(){
         }
     }
 
+    const onToggleModal = (data) => {
+        setIsModalOpen((prev) => !prev);
+        console.log(data);
+        console.log(data.zonecode)
+        setAddress(data.address)
+        setZonecode(data.zonecode)
+    }
+
+    const onChangeDetailaddress = (event) => {
+        setDetailAddress(event.target.value)
+    }
+
+    const onChangeYoutube = (event: ChangeEvent<HTMLInputElement>) => {
+        setYoutube(event.target.value)
+        console.log(event.target.value)
+    }
+
     const onClickSignUp = async () => {
 
         try{
@@ -116,7 +140,13 @@ export default function useBoardsWrite(){
                     writer: email,
                     password: password,
                     title: title,
-                    contents: content
+                    contents: content,
+                    youtubeUrl:youtube,
+                    boardAddress: {
+                        zipcode: zonecode,
+                        address: address,
+                        addressDetail: detailAddress
+                    }
                     
                 }
             })
@@ -141,16 +171,31 @@ export default function useBoardsWrite(){
         const myvariables: IMyvariables = {
             boardId: String(boardId.boardId)  ,
             password: inputPassword ?? "",
-            updateBoardInput: { }
+            updateBoardInput: {}
+           
         } 
         // if(inputPassword) {myvariables.password = inputPassword}
         if(title !== "") myvariables.updateBoardInput.title = title;
         if(content !== "") myvariables.updateBoardInput.contents = content;
+        if(youtube !== "") myvariables.updateBoardInput.youtubeUrl = youtube;
+        if (zonecode || address || detailAddress) {
+            myvariables.updateBoardInput.boardAddress = {
+              zipcode: zonecode,
+              address: address,
+              addressDetail: detailAddress,
+            };
+          }
 
         try{
       
             const result = await boardUpdate({
-                variables: myvariables
+                variables: myvariables, 
+                refetchQueries: [
+                    {query: FETCH_BOARD, 
+                        variables: {boardId: String(boardId.boardId)}
+                    }
+                ]
+
             })
             console.log(result)
             const myId=result?.data?.updateBoard._id
@@ -165,6 +210,8 @@ export default function useBoardsWrite(){
 
 
 
+
+
     return {
         onChangeEmail: onChangeEmail,
         onChangePassword: onChangePassword,
@@ -176,8 +223,14 @@ export default function useBoardsWrite(){
         passwordError: passwordError,
         titleError: titleError,
         contentError: contentError,
-        isActive: isActive
- 
-
+        isActive: isActive,
+        onToggleModal,
+        isModalOpen,
+        zonecode,
+        address,
+        detailAddress,
+        onChangeDetailaddress,
+        onChangeYoutube,
+        youtube
     }
 }

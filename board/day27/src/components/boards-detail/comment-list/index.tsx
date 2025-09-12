@@ -2,6 +2,7 @@
 
 import style from "./style.module.css"
 import useCommentListPage from "./hooks";
+import { Rate } from "antd";
 
 
 
@@ -23,7 +24,8 @@ export default function CommentListPage() {
                                     </div>
                                     <div>{el.writer}</div>
                                 </div>
-                                <div>별 별 별 별 별</div>
+                                <Rate allowHalf disabled defaultValue={el.rating} />
+                                
                             </div>
                             <div className={style.commentlist__info__right}>
                                 <img className={style.commentlist__info__right__edit} src="/assets/icons/left_icon.png" alt="" />
