@@ -3,7 +3,7 @@
 import styles from './style.module.css'
 import WriteButton from './writeButton'
 import WriteInput from './writeInput'
-import { IBoardsWriteProps, IFunctionUpdateBoard } from './type'
+import { IBoardsWriteProps, IFunctionUpdateBoard, IOnUpdateHandler } from './type'
 import useBoardWrite from './hook'
 import { useEffect, useState } from 'react'
 import { useIsEdit } from '@/commons/isEditProvider'
@@ -22,7 +22,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
         boardUpdateSetting
     } = useBoardWrite()
 
-    const { isEdit, writer, title, password, contents } = useIsEdit()
+    const { isEdit, writer, title, password, contents, updatingContents, updatingTitle } = useIsEdit()
 
     const onClickResist = async () => {
         const forValArr = [writer, password, title, contents]
@@ -58,23 +58,18 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
         }
     }
 
-    const onUpdateHandler = async (data?: IFunctionUpdateBoard) => {
-    
-        const updateBoardInput = boardUpdateSetting(data)
+    const onUpdateHandler = async (data?: IOnUpdateHandler) => {
+        const makingData = data
+        
         const forValArr = [title, contents]
-
-        console.log('updateBoardInput', updateBoardInput)
-        console.log('forValArr', forValArr)
 
         if (forValArr.includes("")) {
             for (let i=0; i < forValArr.length; i++) {
                 switch(i) {
                     case 0: {
                         if (forValArr[i] === "") {
-                            console.log("타이틀 안적었네?")
                             setTitleErr("필수입력 사항 입니다.")
                         } else {
-                            console.log("타이틀 있다")
                             setTitleErr("")
                         }
                         // forValArr[i] === "" ? setTitleErr("필수입력 사항 입니다.") : setTitleErr("")
@@ -93,18 +88,21 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
                 }
             }
             return
-        } else if (updateBoardInput.contents === forValArr[1] || updateBoardInput.title === forValArr[0]) {
-            console.log('수정할 내용이 없습니다.')
+        } else if (updatingContents === contents) {
+            alert('내용이 같으면 수정이 불가능 합니다.')
+            return
         } else {
+            if (updatingTitle === title) {
+                delete makingData?.title
+            } else if (updatingContents === contents ) {
+                delete makingData?.contents
+            }
             setTitleErr("")
             setContentsErr("")
-            updatingBoard()
+            
+            updatingBoard(boardUpdateSetting(makingData!))
         }
     }
-
-    useEffect(()=> {
-        console.log('에러메세지 업데이트됐나? : ', titleErr)
-    },[titleErr])
 
     return (
         <div id="main" className={`${styles.new_main}`}>
@@ -112,16 +110,16 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
             <div id="" className={`${styles.board_container}`}>
                 <section id="" className={`${styles.write_form_container}`}>
                     <form className={`${styles.write_form_80h} flex_row`}>
-                        <WriteInput setState={onChangePosting({category: "작성자"})} label={"작성자"} placeholder={"작성자 명을 입력해 주세요."} errMsg={writerErr} data={props.data}/>
+                        <WriteInput setState={onChangePosting({category: "작성자"})} label={"작성자"} placeholder={"작성자 명을 입력해 주세요."} errMsg={writerErr} />
                         <WriteInput setState={onChangePosting({category: "비밀번호"})} label={"비밀번호"} placeholder={"비밀번호를 입력해 주세요."} errMsg={passwordErr} />
                     </form>
                     <hr />
                     <form className={`${styles.write_form_80h} flex_row`}>
-                        <WriteInput setState={onChangePosting({category: "제목"})} label={"제목"} placeholder={"제목을 입력해 주세요."} errMsg={titleErr} data={props.data}/>
+                        <WriteInput setState={onChangePosting({category: "제목"})} label={"제목"} placeholder={"제목을 입력해 주세요."} errMsg={titleErr} />
                     </form>
                     <hr />
                     <form className={`${styles.write_form_368h} flex_row`}>
-                        <WriteInput setState={onChangePosting({category: "내용"})} label={"내용"} placeholder={"내용을 입력해 주세요."} errMsg={contentErr} data={props.data}/>
+                        <WriteInput setState={onChangePosting({category: "내용"})} label={"내용"} placeholder={"내용을 입력해 주세요."} errMsg={contentErr} />
                     </form>
                     <form className={`${styles.write_form_192h} flex_column`}>
                         <WriteInput label={"주소"} placeholder={"주소를 입력해 주세요."}/>
@@ -137,7 +135,7 @@ const BoardsWrite = (props: IBoardsWriteProps) => {
                 </section>
                 <div id="" className={`${styles.write_confirm_container} flex_row flex_justi_end`}>
                     <WriteButton p="취소"/>
-                    <WriteButton onClickHandler={isEdit ? onUpdateHandler : onClickResist} postData={isEdit ? { writer, password, title, contents } : { writer, title, contents }} p={isEdit ? "수정하기" : "등록하기"}/>
+                    <WriteButton onClickHandler={isEdit ? onUpdateHandler : onClickResist} postData={isEdit ? { title, contents } : { writer, title, contents }} p={isEdit ? "수정하기" : "등록하기"}/>
                 </div>
             </div>
         </div>

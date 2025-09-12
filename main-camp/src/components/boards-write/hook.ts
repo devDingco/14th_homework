@@ -3,7 +3,7 @@
 import { gql, useMutation, useQuery } from "@apollo/client"
 import { useParams, useRouter } from "next/navigation"
 import { ChangeEvent, MouseEventHandler, useState } from "react"
-import { IErrSetState, IFunctionUpdateBoard, IOnChangePosting, IPostUpdateData, IUpdateBoardInput } from "./type"
+import { IErrSetState, IFunctionUpdateBoard, IOnChangePosting, IOnUpdateHandler, IPostUpdateData, IUpdateBoardInput } from "./type"
 import { CREATE_BOARD, UPDATE_BOARD } from "./queries"
 import { useIsEdit } from "@/commons/isEditProvider"
 
@@ -56,31 +56,33 @@ const useBoardWrite = () => {
         }
     }
 
-    const updatingBoard = async () => {
-        console.log('업데이트 실행!')
-        // try {
-        //     const result = await updateBoard({
-        //         variables: {
-        //             updateBoardInput
-        //         }
-        //     })
-        //     console.log(result.data.createBoard._id)
-        //     router.push(`/boards/${result.data.createBoard._id}`)
-        // } catch(e: any) {
-        //     alert(`${e.graphQLErrors} 비밀번호가 틀렸습니다.`)
-        // }
+    const updatingBoard = async (data: IUpdateBoardInput) => {
+        try {
+            const result = await updateBoard({
+                variables: {
+                    updateBoardInput: data.updateBoardInput,
+                    password: data.password,
+                    boardId: data.boardId
+                }
+            })
+            console.log('업데이트 결과: ',result.data.updateBoard._id)
+            router.push(`/boards/${result.data.updateBoard._id}`)
+        } catch(e: any) {
+            alert(`${e} 비밀번호가 틀렸습니다.`)
+        }
     }
 
-    const boardUpdateSetting = (data: IFunctionUpdateBoard | undefined) => {
+    const boardUpdateSetting = (data: IOnUpdateHandler) => {
         const inputBoardPw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
 
+        // 업데이트 시도할 인풋 데이터들
         const updateBoardInput: IUpdateBoardInput = {
+            updateBoardInput: data,
             password: inputBoardPw,
             boardId: param.boardId,
-            title: data?.title,
-            contents: data?.contents
         }
 
+        console.log('업데이트된 객체 확인: ', updateBoardInput)
         return updateBoardInput
     }
 

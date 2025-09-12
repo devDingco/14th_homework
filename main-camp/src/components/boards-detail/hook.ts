@@ -5,13 +5,17 @@ import { FETCH_BOARD } from "./queries"
 const useBoardsDetailPage = () => {
     const router = useRouter()
     const params = useParams()
-
-    const { data } = useQuery(FETCH_BOARD, {
-        variables: {
-            boardId: params.boardId
-        }
-    })
-    console.log(data)
+    
+    let fetchBoard
+    try {
+        fetchBoard = useQuery(FETCH_BOARD, {
+            variables: {
+                boardId: params.boardId
+            }
+        }).data
+    } catch(e) {
+        console.log(e)
+    }
     
     const goListHandler = () => {
         router.push('/boards')
@@ -24,7 +28,7 @@ const useBoardsDetailPage = () => {
     return {
         goListHandler,
         goUpdateHandler,
-        data
+        fetchBoard
     }
 }
 

@@ -2,15 +2,32 @@
 
 import { createContext, ReactNode, useContext, useState } from "react"
 
-const IsEditContext = createContext<any>(null)
+interface IIsEditContext {
+    isEdit: boolean,
+    setIsEdit: (t: boolean) => void,
+    writer: string,
+    setWriter: (t: string) => void,
+    password: string | number,
+    setPassword: (t: string | number) => void,
+    title: string,
+    setTitle: (t: string) => void,
+    contents: string,
+    setContents: (t: string) => void,
+    updatingTitle: string | undefined,
+    setUpdatingTitle: (t: string | undefined) => void,
+    updatingContents: string | undefined,
+    setUpdatingContents: (t: string | undefined) => void,
+}
+
+const IsEditContext = createContext<IIsEditContext | undefined>(undefined)
 
 export const IsEditProvider = ( {children}: { children:ReactNode } ) => {
     const [isEdit, setIsEdit] = useState<boolean>(false)
 
-    const [writer, setWriter] = useState<string | undefined>("")
+    const [writer, setWriter] = useState<string>("")
     const [password, setPassword] = useState<string | number>("")
-    const [title, setTitle] = useState<string | undefined>("")
-    const [contents, setContents] = useState<string | undefined>("")
+    const [title, setTitle] = useState<string>("")
+    const [contents, setContents] = useState<string>("")
 
     const [updatingTitle, setUpdatingTitle] = useState<string | undefined>("")
     const [updatingContents, setUpdatingContents] = useState<string | undefined>("")

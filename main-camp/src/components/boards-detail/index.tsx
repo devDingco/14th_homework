@@ -7,7 +7,7 @@ const BoardsDetail = () => {
     const {
         goListHandler,
         goUpdateHandler,
-        data
+        fetchBoard
     } = useBoardsDetailPage()
 
     // 하드코딩
@@ -19,16 +19,16 @@ const BoardsDetail = () => {
     return (
         <div id="main" className={`${styles.detail_main}`}>
             <h1 className={`b_28_36`}>
-            {data?.fetchBoard.title}
+            {fetchBoard?.fetchBoard.title}
             </h1>
             <header id="detail_header" className={`${styles.header_1280w_80h} flex_column`}>
                 <div id="detail_header_top" className={`${styles.header_top}`}>
                     <div id="" className={`${styles.detail_profile} flex_align_items_center flex_row flex_justi_sb`}>
                         <div className={`flex_row`}>
                             <img className={`${styles.profile_img}`} src="/svg/person.png" alt="profile"/>
-                            {data?.fetchBoard.writer}
+                            {fetchBoard?.fetchBoard.writer}
                         </div>
-                        <p className={`r_14_20`} style={{ color: "rgba(129, 129, 129, 1)" }}>{data?.fetchBoard.createdAt.split("T")[0]}</p>
+                        <p className={`r_14_20`} style={{ color: "rgba(129, 129, 129, 1)" }}>{fetchBoard?.fetchBoard.createdAt.split("T")[0]}</p>
                     </div>
                 </div>
                 <hr />
@@ -38,7 +38,7 @@ const BoardsDetail = () => {
                 </div>
             </header>
             <img src="/image/Tranquil Beachside Serenity 1.png" alt="publish1"/>
-            {data?.fetchBoard.contents}
+            {fetchBoard?.fetchBoard.contents}
             <div className={`${styles.detail_video} flex_row flex_justi_center`}>
                 <img src="/image/Frame 427323252.png" alt="publish2"/>
             </div>

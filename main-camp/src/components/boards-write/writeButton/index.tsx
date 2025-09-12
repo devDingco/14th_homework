@@ -18,11 +18,6 @@ const WriteButton = (props: IWriteButtonProps) => {
         activeButton({ writer, password, title, contents})
     },[writer, password, title, contents])
 
-    useEffect(()=>{
-        console.log(isEdit)
-        console.log(props)
-    },[isEdit])
-
     let btnComponent
     switch (props.p) {
         case "취소": {

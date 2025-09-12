@@ -9,7 +9,6 @@ type fetchBoard = {
 }
 
 export interface IWriteInputProps {
-    data?: fetchBoard,
     label: string,
     placeholder?: string,
     errMsg?: string
