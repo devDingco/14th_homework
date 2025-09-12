@@ -1,15 +1,20 @@
 'use client'
 
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client'
 
 interface IApolloSetting {
   children: React.ReactNode
 }
-export default function ApolloSetting(props: IApolloSetting) {
+
+const httpLink = new HttpLink({
+  uri: 'http://main-practice.codebootcamp.co.kr/graphql',
+})
+
+export default function ApiProvider({ children }: { children: React.ReactNode }) {
   const client = new ApolloClient({
-    uri: 'http://main-practice.codebootcamp.co.kr/graphql',
+    link: httpLink,
     cache: new InMemoryCache(),
   })
 
-  return <ApolloProvider client={client}>{props.children}</ApolloProvider>
+  return <ApolloProvider client={client}>{children}</ApolloProvider>
 }
