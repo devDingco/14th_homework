@@ -6,6 +6,9 @@
   font-family: var(--font-pretendard-variable);
   font-style: normal;
   line-height: 1.5rem;
+  box-sizing: border-box; 
+  margin: 0;
+  padding: 0;
 }
 
 :root{

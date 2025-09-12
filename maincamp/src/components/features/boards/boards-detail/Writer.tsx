@@ -1,6 +1,7 @@
+import { Tooltip } from 'antd';
 import styles from './Writer.module.css'
 
-export default function Writer (props:{writer: string; date: string|undefined;}){
+export default function Writer (props:{writer: string; date: string|undefined; address:string|undefined|null}){
 
     return(
         <div className={styles.writer__group}>
@@ -17,7 +18,22 @@ export default function Writer (props:{writer: string; date: string|undefined;})
         <hr />
         <div className={styles.writer__group__icons}>
             <img src="/icons/link.svg"/>
-            <img src="/icons/location.svg"/>
+            <Tooltip 
+                placement="bottomRight" 
+                arrow={false} 
+                title={props.address}
+                color="#FFFFFF" 
+                styles={
+                    {body:{
+                        border:"1px solid #E4E4E4", 
+                        boxShadow: " 0 1px 2px 0 rgba(0, 0, 0, 0.30), 0 2px 6px 2px rgba(0, 0, 0, 0.15)",
+                        fontSize: "0.875rem",
+                        fontWeight: "500",
+                        lineHeight: "1.25rem",
+                        color: "#000000"
+                        }}}>
+                <img src="/icons/location.svg"/>
+            </Tooltip>
         </div>
     </div>
     );

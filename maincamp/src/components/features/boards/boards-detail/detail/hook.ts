@@ -1,7 +1,8 @@
-import { FetchBoardDocument } from "@/commons/graphql/graphql";
-import { useQuery } from "@apollo/client";
+import { DislikeBoardDocument, FetchBoardDocument, LikeBoardDocument } from "@/commons/graphql/graphql";
+import { useMutation, useQuery } from "@apollo/client";
 import { formatInTimeZone } from "date-fns-tz";
 import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function useBoardsDetail () {
     
@@ -10,13 +11,67 @@ export default function useBoardsDetail () {
     const params = useParams();
     const boardId = params.boardId
 
-    const { data } = useQuery(FetchBoardDocument, {
+    const { data, loading } = useQuery(FetchBoardDocument, {
         variables: {
             boardId: boardId as string
         }
     });
 
-    const { writer, title, contents, youtubeUrl, images, createdAt, likeCount, dislikeCount } = data?.fetchBoard || {} ;
+
+
+    const { writer, title, contents, youtubeUrl, images, createdAt, boardAddress } = data?.fetchBoard || {} ;
+
+    const [likeCount, setLikeCount] = useState<number | null>(null)
+    const [dislikeCount, setDislikeCount] = useState<number | null>(null)
+
+    const likeValue = likeCount ?? data?.fetchBoard.likeCount;
+    const dislikeValue = dislikeCount ?? data?.fetchBoard.dislikeCount;
+
+    const [likeBoard] = useMutation(LikeBoardDocument)
+    const [dislikeBoard] = useMutation(DislikeBoardDocument)
+
+
+    const onClickLikeBoard = async () => {
+        try{
+            const result = await likeBoard({
+                variables:{
+                    boardId: boardId as string,
+                },
+                refetchQueries: [
+                    {
+                        query: FetchBoardDocument,
+                        variables: { boardId: boardId}
+                    }
+                ],
+            })
+            console.log("🚀 ~ onClickLikeBoard ~ result.likeBoard:", result?.data?.likeBoard)
+            const count = result?.data?.likeBoard as number
+            setLikeCount(count)
+        } catch(error){
+            alert("에러발생")
+        }
+    }
+
+    const onClickdislikeBoard = async () => {
+        try{
+            const result = await dislikeBoard({
+                variables:{
+                    boardId: boardId as string,
+                },
+                refetchQueries: [
+                    {
+                        query: FetchBoardDocument,
+                        variables: { boardId: boardId}
+                    }
+                ],
+            })
+            console.log("🚀 ~ onClickdislikeBoard ~ result.dislikeBoard:", result?.data?.dislikeBoard)
+            const count = result?.data?.dislikeBoard as number
+            setDislikeCount(count)
+        } catch(error){
+            alert("에러발생")
+        }
+    }
 
     // const date = createdAt?.slice(0,10)
     // 현재 createdAt에 저장된 시간은 UTC로 기존 코드 그대로 사용 시, 새벽시간대 작성하거나 UTC날짜가 바뀌는 시간대에 작성 시 날짜가 이상하게 나옴
@@ -46,5 +101,10 @@ export default function useBoardsDetail () {
         dislikeCount: dislikeCount,
         onClickBoardsList,
         onClickBoardsEdit,
+        boardAddress,
+        onClickLikeBoard,
+        likeValue,
+        onClickdislikeBoard,
+        dislikeValue
     }
 }

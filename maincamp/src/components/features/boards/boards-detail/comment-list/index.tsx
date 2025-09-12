@@ -15,9 +15,11 @@ export default function CommentList(){
             </div>
         )
 
+
     return(
         <>
-            {fetchBoardComments?.map((el) =>
+            {/* 최신 댓글이 밑에 가게 순서 변경 ^*^ */}
+            {fetchBoardComments?.slice().reverse().map((el) =>
                 <Fragment key={el._id}>
                 <div className={styles.CommentRow}>
                     <div className={styles.CommentHeader}>

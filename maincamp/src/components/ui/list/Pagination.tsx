@@ -8,8 +8,8 @@ export default function Pagination ({BoardsCount, currentPage, changeCurrentPage
     const rowsPerPage = 10
     const numPerPageGroup = 5
 
-    const [firstPage, setFirstPage] = useState(1) // 첫 페이지 
-    const [lastPage, setLastPage] = useState(Math.ceil(BoardsCount / rowsPerPage)) // 마지막 페이지
+    const [firstPage, setFirstPage] = useState(1) // 첫 페이지
+    const lastPage = Math.ceil(BoardsCount / rowsPerPage) // 마지막 페이지
 
     // 페이지 그룹
     const pageGroups = new Array (numPerPageGroup).fill(1)
@@ -18,7 +18,6 @@ export default function Pagination ({BoardsCount, currentPage, changeCurrentPage
         const num = Number(id)
         changeCurrentPage(num)
     }
-
 
     return(
         <div className={styles.pagination}>

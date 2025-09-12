@@ -25,9 +25,7 @@ export default function YoutubeUrl (props:{youtubeUrl: string}){
             {ImageSrc && <img src={ImageSrc} className={`${styles.youtube__thumbnail__image} ${isPlaying ? styles.hidden : "" }`} onClick={onClickThumbnail}/>}
             {isPlaying && <iframe 
                 id="ytplayer" 
-                type="text/html"
                 src={IframeSrc}
-                frameBorder="0" 
                 allowFullScreen
                 allow="autoplay; encrypted-media"
                 className={`${styles.youtube__iframe}`}></iframe>}

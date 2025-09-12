@@ -42,3 +42,7 @@
     gap: 0.5rem;
 
 }
+
+.tooltip{
+    color: var(--color-gray-100);
+}

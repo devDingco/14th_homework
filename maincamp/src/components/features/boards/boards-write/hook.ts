@@ -2,7 +2,7 @@
 
 import { useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { ImageUrlArray, IUpdateBoardInput } from "./types";
 import { GraphQLError } from "graphql";
 import { CreateBoardDocument, FetchBoardDocument, UpdateBoardDocument, UploadFileDocument } from "@/commons/graphql/graphql";
@@ -20,9 +20,9 @@ export default function useBoardsWrite({data}:{data?: any}){
         const [title, setTitle] = useState(!data? "" : data.fetchBoard.title)
         const [contents, setContents] = useState(!data? "" : data.fetchBoard.contents)
         const [youtubeUrl, setYoutubeUrl] = useState(!data? "" : data.fetchBoard.youtubeUrl)
-        const [zipcode, setZipcode] = useState(!data? "" : data.fetchBoard.zipcode)
-        const [address, setAddress] = useState(!data? "" : data.fetchBoard.address)
-        const [addressDetail, setAddressDetail] = useState(!data? "" : data.fetchBoard.addressDetail)
+        const [zipcode, setZipcode] = useState(!data? "" : data.fetchBoard.boardAddress?.zipcode)
+        const [address, setAddress] = useState(!data? "" : data.fetchBoard.boardAddress?.address)
+        const [addressDetail, setAddressDetail] = useState(!data? "" : data.fetchBoard.boardAddress?.addressDetail)
         const [images, setImages] = useState<ImageUrlArray>(!data?[undefined, undefined, undefined]:data?.fetchBoard.images )
         
         // 1-2. 게시글 생성 API 요청 함수
@@ -83,11 +83,20 @@ export default function useBoardsWrite({data}:{data?: any}){
         }
     
           // 3-1. 필수 요소 아닌 ChangeEvent 추가
+          // (1) YoutubeUrl
           const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
             const value = event.target.value
             setYoutubeUrl(value)
           }
-    
+
+          // (2) 주소 입력 API 추가
+          const [isModalOpen, setIsModalOpen] = useState(false);
+
+          const onToggleModal = () => {
+            // console.log(isModalOpen)
+            setIsModalOpen((prev) => !prev)
+          }
+
           const onChangeBoardAddress = (event: ChangeEvent<HTMLInputElement>) => {
             const {id, value} = event.target;
             switch(id){
@@ -96,7 +105,18 @@ export default function useBoardsWrite({data}:{data?: any}){
               case "addressDetail": {setAddressDetail(value);break;}
             }
           }
-    
+
+          const boardAddress = {zipcode: zipcode, address: address, addressDetail: addressDetail}
+
+          const handleComplete = (data) => {
+            console.log(data); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+            setZipcode(data.zonecode)
+            setAddress(data.address)
+            setAddressDetail(data.buildingName)
+            onToggleModal();
+          };
+          
+          // (3) 파일 업로드 추가
           const onChangeFile = async(event: ChangeEvent<HTMLInputElement>) => {
             const {id, files} = event.target;
             const file = files?.[0];
@@ -166,10 +186,10 @@ export default function useBoardsWrite({data}:{data?: any}){
           const onClickUpdate = async() => {
                   // 5-1. 수정된 사항만 업데이트 될 수 있도록 variables 설정
           const updateBoardInput: IUpdateBoardInput ={}
-          if (title.length>0) updateBoardInput.title = title;
-          if (contents.length>0) updateBoardInput.contents = contents;
-          if (youtubeUrl!=="") updateBoardInput.youtubeUrl = youtubeUrl;
-          if (zipcode || address || addressDetail){
+          if (title!==data.fetchBoard.title && title.length>0) updateBoardInput.title = title;
+          if (contents!==data.fetchBoard.contents && title.length>0) updateBoardInput.contents = contents;
+          if (youtubeUrl!==data.fetchBoard.youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
+          if (boardAddress!==data.fetchBoard.boardAddress){
             updateBoardInput.boardAddress = {
                 zipcode: zipcode,
                 address: address,
@@ -230,6 +250,14 @@ export default function useBoardsWrite({data}:{data?: any}){
         isValid,
         onClickUpdate,
         onClickSubmit,
-        images: images
+        images: images,
+        isModalOpen,
+        onToggleModal,
+        handleComplete,
+        setZipcode,
+        setAddress,
+        setAddressDetail,
+        boardAddress,
+
     }
 }

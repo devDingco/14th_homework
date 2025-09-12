@@ -43,5 +43,8 @@ export type ZipcodeProps = {
     placeholder: string;
     placeholder_2?: string;
     defaultValue?:any;
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+    onChange?: any;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    value?: any;
+    isEdit?: boolean;
 }

@@ -15,7 +15,7 @@ export default function useCommentWrite(){
     const [password, setPassword] = useState("")
     const [contents, setContents] = useState("")
     const [isValid, setIsValid] = useState(true)
-    const [rating, setRating] = useState(0)
+    const [rating, setRating] = useState(3)
 
     // 게시글 댓글 생성 API
     const [createBoardComment] = useMutation(CreateBoardCommentDocument)
