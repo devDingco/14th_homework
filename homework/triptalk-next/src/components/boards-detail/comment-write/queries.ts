@@ -25,6 +25,7 @@ export const FETCH_CREATE_COMMENT = gql`
       _id
       writer
       contents
+      rating
     }
   }
 `;

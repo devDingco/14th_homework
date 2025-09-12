@@ -4,6 +4,8 @@
 import styles from './CommentWrite.module.css';
 import Image from 'next/image';
 import useCommentWrite from './hooks';
+import Star from './star';
+import AllModal from '../../all-modal';
 
 export default function CommentWrite() {
   const {
@@ -15,7 +17,10 @@ export default function CommentWrite() {
     setPassword,
     setContents,
     setrating,
-    onClickCommentSubmit
+    onClickCommentSubmit,
+    modalOpen,
+    setModalOpen,
+    modalMessage,
   } = useCommentWrite();
   return (
     <div className="container">
@@ -24,7 +29,9 @@ export default function CommentWrite() {
         <Image src="/icons/chat.png" alt="아이콘" width={24} height={24} />
         <div>댓글</div>
       </div>
-      <div className={styles.star}>별점</div>
+      <div className={styles.star}>
+        <Star rating={rating} onChange={setrating} />
+      </div>
       <div className={styles.commentContainer}>
         <div className={styles.commentInput}>
           <div>작성자</div>
@@ -54,6 +61,12 @@ export default function CommentWrite() {
       <div className={styles.commentbutton}>
         <button onClick={onClickCommentSubmit}>댓글 등록</button>
       </div>
+      
+      <AllModal 
+        open={modalOpen} 
+        message={modalMessage}
+        onClose={() => setModalOpen(false)}
+      />
     </div>
   );
 }

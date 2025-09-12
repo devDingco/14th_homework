@@ -5,6 +5,8 @@
 /* Global styles - 커스텀 스타일을 Tailwind 이후에 배치 */
 @layer base {
   * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
   }
 

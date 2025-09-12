@@ -4,6 +4,7 @@
 import Image from 'next/image';
 import styles from './CommentList.module.css';
 import useCommentList from './hooks';
+import Star from '../comment-write/star';
 
 export default function CommentList({ boardId }) {
   const { data, onClickDeleteComment } = useCommentList({ boardId });
@@ -24,7 +25,9 @@ export default function CommentList({ boardId }) {
                   <div>
                     <span>{el.writer}</span>
                   </div>
-                  <div>별점</div>
+                  <div>
+                    <Star rating={el.rating} disabled={true} />
+                  </div>
                 </div>
                 <div>
                   <button>
