@@ -1,5 +1,6 @@
 "use client"
 
+import { Rate } from "antd"
 import useBoardCommentList from "./hook"
 import styles from "./style.module.css"
 import { IFetchBoardComments } from "./types"
@@ -7,11 +8,7 @@ import { IFetchBoardComments } from "./types"
 export default function BoardCommentList() {
 
     const {
-        data,
-        rating,
-        StarActive,
-        StarDisabled,
-        onClickStar,           
+        data,   
     } = useBoardCommentList()
 
     return (
@@ -31,15 +28,15 @@ export default function BoardCommentList() {
                             </div>
 
                             <div className={styles.starGroup}>
-                                {[1, 2, 3, 4, 5].map((star)=>
+                                <Rate value={el.rating} disabled />
+                                {/* {[1, 2, 3, 4, 5].map((star)=>
                                 <img
                                 key={star}
-                                src={star <= rating ? StarActive : StarDisabled}
+                                src={star <= el.rating ? StarActive : StarDisabled}
                                 alt={`${star}점 별`}
-                                onClick={() => onClickStar(star)}
                                 className={styles.starImage}
                                 />      
-                                )}                    
+                                )}  */}
                             </div>
 
                             </div>
