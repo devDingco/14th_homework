@@ -1,5 +1,5 @@
-import ProductPage from "./(post)/index"
+import ProductPost from "../../(components)/productPost";
 
-export default function PostPage() {
-  return <ProductPage />;
+export default function ProductPostPage() {
+  return <ProductPost />;
 }

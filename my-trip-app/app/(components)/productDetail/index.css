@@ -1,0 +1,306 @@
+.product_detail_section {
+  width: 128rem;
+  margin: 0 auto;
+}
+
+.detail_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;  
+  gap: 0.8rem;
+  margin-bottom: 2.4rem;
+}
+
+.detail_subtext {
+  color: var(--gray-60);
+}
+
+.detail_grid {
+  display: grid;
+  grid-template-columns: calc(100% - 36rem - 2.4rem) 36rem;
+  gap: 2.4rem;
+}
+
+.detail_left {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 18rem;
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.main_image_wrap {
+  width: 100%;
+  height: 48rem;
+  border-radius: 1.2rem;
+  overflow: hidden;
+}
+
+.main_image {
+  width: 100%;
+  min-height: 48rem;
+  height: auto;
+  display: block;
+}
+
+.thumbs_aside {
+  display: flex;
+  flex-direction: column;
+  max-height: 48rem;
+  overflow: hidden;
+  z-index: 1;
+  mask: linear-gradient(black, black, transparent);
+  backdrop-filter: blur(20rem);
+}
+
+.thumb_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.thumb_item {
+  width: 100%;;
+
+}
+
+
+.thumb_button {
+  width: 100%;
+  height: 13.6rem;
+  border: 2px solid transparent;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  background: none;
+  padding: 0;
+}
+
+.thumb_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--gray-10);
+  margin: 2.4rem 0;
+}
+
+.detail_section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.section_title {
+  color: var(--black);
+}
+
+.section_body {
+  line-height: 1.6;
+  color: var(--gray-70);
+}
+
+.bullet_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bullet_list li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.bullet_list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.map_wrap {
+  width: 100%;
+  height: 40rem;
+  border-radius: 1.2rem;
+  overflow: hidden;
+}
+
+.map_iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.detail_right {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.sticky_card {
+  position: sticky;
+  background: var(--white);
+  border: 1px solid var(--gray-10);
+  border-radius: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  padding: 2.4rem;
+}
+
+.price_row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.price_note {
+  list-style: none;
+  font-size: 1.2rem;
+  color: var(--gray-60);
+  padding: 0;
+  margin: 0
+}
+
+.price_note li.two_cols {
+  margin-bottom: 2rem;
+}
+
+.seller_box {
+  background: var(--white);
+  border: 1px solid var(--gray-10);
+  border-radius: 1.2rem;
+  padding: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.seller_title {
+  color: var(--black);
+}
+
+.seller_info {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.seller_avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.action_buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.icon_btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  transition: background-color 0.2s;
+}
+
+.icon_btn:hover {
+  background-color: var(--gray-05);
+}
+
+/* 타이틀 섹션 */
+.title_section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* 메인 이미지 스타일 개선 */
+.main_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1280px) {
+  .product_detail_section {
+    width: 100%;
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .detail_header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.6rem;
+  }
+
+  .action_buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .detail_grid {
+    grid-template-columns: 1fr;
+    gap: 3.2rem;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+
+  .thumbs_aside {
+    order: 2;
+  }
+
+  .thumb_list {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+
+  .thumb_item {
+    flex-shrink: 0;
+    width: 12rem;
+  }
+
+  .thumb_button {
+    height: 9rem;
+  }
+
+  .main_image_wrap {
+    height: 30rem;
+  }
+
+  .map_wrap {
+    height: 25rem;
+  }
+
+  .sticky_card {
+    position: static;
+  }
+}

@@ -1,5 +1,5 @@
-import PostBoard from "./index";
+import BoardPost from "../../(components)/boardPost";
 
-export default function Board() {
-  return <PostBoard />;
+export default function BoardPostPage() {
+  return <BoardPost />;
 }

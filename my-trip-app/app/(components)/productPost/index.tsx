@@ -1,44 +1,24 @@
 "use client"
 
-import "../../../global.css"
 import "./index.css"
-import { useState } from "react"
+import "../../global.css"
+import Image from "next/image"
 import Icon from "@utils/iconColor"
+import { useProductPost } from "../../commons/hooks/useProductPost"
+import type { ProductPostProps } from "../../_types/product"
 
-export default function ProductPage() {
-  const [formData, setFormData] = useState({
-    productName: "",
-    sellingPrice: "",
-    productDescription: "",
-    sellingPeriod: "",
-    tags: "",
-    zipCode: "",
-    address: "",
-    detailedAddress: "",
-    referenceItem: "",
-    latitude: "",
-    longitude: "",
-    photos: []
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    // 여기에 폼 제출 로직을 추가할 수 있습니다
-  };
-
-  const handleCancel = () => {
-    // 취소 로직
-    console.log("Form cancelled");
-  };
+export default function ProductPost() {
+  const {
+    formData,
+    errors,
+    handleInputChange,
+    handleSubmit,
+    handleCancel,
+    handlePostcodeSearch,
+    handlePhotoUpload,
+    removePhoto,
+    uploadedPhotos
+  } = useProductPost();
 
   return (
     <div className="post_page">
@@ -58,6 +38,7 @@ export default function ProductPage() {
               className="form_input"
               required
             />
+            {errors.productName && <span className="error_message">{errors.productName}</span>}
           </div>
           <div className="divider_line"></div>
 
@@ -73,9 +54,9 @@ export default function ProductPage() {
               className="form_input"
               required
             />
+            {errors.sellingPrice && <span className="error_message">{errors.sellingPrice}</span>}
           </div>
           <div className="divider_line"></div>
-
 
           {/* 상품설명 */}
           <div className="form_group">
@@ -109,6 +90,7 @@ export default function ProductPage() {
                 className="editor_content"
                 required
               />
+              {errors.productDescription && <span className="error_message">{errors.productDescription}</span>}
             </div>
           </div>
           <div className="divider_line"></div>
@@ -126,6 +108,7 @@ export default function ProductPage() {
                 className="form_input"
                 required
               />
+              {errors.sellingPeriod && <span className="error_message">{errors.sellingPeriod}</span>}
             </div>
           </div>
           <div className="divider_line"></div>
@@ -144,8 +127,7 @@ export default function ProductPage() {
           </div>
           <div className="divider_line"></div>
 
-
-                    {/* 주소 */}
+          {/* 주소 */}
           <div className="form_group address_form_group">
             <div className="address_map_row">
               <div className="address_column">
@@ -159,8 +141,9 @@ export default function ProductPage() {
                     placeholder="우편번호"
                     className="form_input zip_code_input"
                     required
+                    readOnly
                   />
-                  <button type="button" className="btn btn-outline">우편번호 검색</button>
+                  <button type="button" className="btn btn-outline" onClick={handlePostcodeSearch}>우편번호 검색</button>
                 </div>
                 <input
                   type="text"
@@ -170,6 +153,15 @@ export default function ProductPage() {
                   placeholder="상세주소를 입력해주세요."
                   className="form_input address_detail_input"
                   required
+                  readOnly
+                />
+                <input
+                  type="text"
+                  name="detailedAddress"
+                  value={formData.detailedAddress}
+                  onChange={handleInputChange}
+                  placeholder="상세주소를 입력해주세요."
+                  className="form_input"
                 />
                 <div className="coordinate_inputs">
                   <div className="coordinate_group">
@@ -181,6 +173,7 @@ export default function ProductPage() {
                       onChange={handleInputChange}
                       placeholder="주소를 먼저 입력해주세요."
                       className="form_input coordinate_input"
+                      readOnly
                     />
                   </div>
                   <div className="coordinate_group">
@@ -192,9 +185,11 @@ export default function ProductPage() {
                       onChange={handleInputChange}
                       placeholder="주소를 먼저 입력해주세요."
                       className="form_input coordinate_input"
+                      readOnly
                     />
                   </div>
                 </div>
+                {errors.address && <span className="error_message">{errors.address}</span>}
               </div>
               
               <div className="map_column">
@@ -215,14 +210,38 @@ export default function ProductPage() {
           </div>
           <div className="divider_line"></div>
 
-
           {/* 사진 첨부 */}
           <div className="form_group">
             <label className="me_16_24">사진 첨부</label>
             <div className="photo_upload_section">
-              <div className="photo_upload_box">
-                <div className="upload_icon">+</div>
-                <p className="upload_text">클릭해서 사진 업로드</p>
+              <div className="photo_upload_grid">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <div key={index} className="photo_upload_box">
+                    {uploadedPhotos[index] ? (
+                      <div className="uploaded_photo">
+                        <Image src={uploadedPhotos[index]!} alt={`업로드된 사진 ${index + 1}`} width={200} height={200} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <button 
+                          type="button" 
+                          className="remove_photo_btn"
+                          onClick={() => removePhoto(index)}
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ) : (
+                      <label className="upload_label">
+                        <input 
+                          type="file" 
+                          accept="image/*" 
+                          onChange={(e) => handlePhotoUpload(e, index)}
+                          hidden
+                        />
+                        <div className="upload_icon">+</div>
+                        <p className="upload_text">클릭해서 사진 업로드</p>
+                      </label>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -233,7 +252,7 @@ export default function ProductPage() {
               <button type="button" className="btn btn-outline" onClick={handleCancel}>
                 취소
               </button>
-              <button type="submit" className="btn btn-disabled">
+              <button type="submit" className="btn btn-primary">
                 등록하기
               </button>
             </div>

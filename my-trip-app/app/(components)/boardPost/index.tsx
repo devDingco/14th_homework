@@ -5,134 +5,35 @@ import { useState, useEffect } from "react";
 import Icon from "@utils/iconColor";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { createBoardApi, uploadFileApi } from "../../commons/apis/board.api";
-import type { CreateBoardInput } from "../../commons/graphql/__generated__/graphql";
-import { useDaumPostcodePopup } from "react-daum-postcode";
+import { useBoardPost } from "../../commons/hooks/useBoardPost";
 import { useAuth } from "../../commons/hooks/useAuth";
-export default function PostBoard() {
+
+export default function BoardPost() {
   const { user, isLoggedIn, loading } = useAuth();
-  const [writer, setWriter] = useState("");
-  const [password, setPassword] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [zipcode, setZipcode] = useState("");
-  const [address, setAddress] = useState("");
-  const [detailAddress, setDetailAddress] = useState("");
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [apiError, setApiError] = useState("");
-  const [createdBoardId, setCreatedBoardId] = useState<string | null>(null);
-  const [imageUrls, setImageUrls] = useState<(string | null)[]>([null, null, null]);
+  const {
+    formData,
+    errors,
+    isModalOpen,
+    isSubmitting,
+    apiError,
+    createdBoardId,
+    imageUrls,
+    updateFormData,
+    handleSubmit,
+    onChangeFile,
+    removeImage,
+    openPostcode,
+    setIsModalOpen
+  } = useBoardPost();
+  
   const router = useRouter();
 
   // 로그인된 사용자의 이름을 작성자로 설정
   useEffect(() => {
     if (user?.name) {
-      setWriter(user.name);
+      updateFormData('writer', user.name);
     }
-  }, [user]);
-  const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
-  const openPostcode = () => {
-    open({
-      onComplete: (data: any) => {
-        const zonecode = data.zonecode;
-        const roadAddress = data.roadAddress || data.address || "";
-        setZipcode(zonecode);
-        setAddress(roadAddress);
-      },
-    });
-  };
-
-  const validateForm = (): Record<string, string> => {
-    const nextErrors: Record<string, string> = {};
-    if (!isLoggedIn) {
-      nextErrors.writer = "로그인이 필요합니다.";
-      return nextErrors;
-    }
-    if (!writer.trim()) nextErrors.writer = "필수입력 사항 입니다.";
-    if (!password.trim()) nextErrors.password = "필수입력 사항 입니다.";
-    if (!title.trim()) nextErrors.title = "필수입력 사항 입니다.";
-    if (!content.trim()) nextErrors.content = "필수입력 사항 입니다.";
-    return nextErrors;
-  };
-
-  const buildCreateBoardInput = (): CreateBoardInput => {
-    const hasAddress = !!(zipcode || address || detailAddress);
-    return {
-      writer,
-      password,
-      title,
-      contents: content,
-      youtubeUrl: youtubeUrl || undefined,
-      images: imageUrls.filter((v): v is string => !!v),
-      ...(hasAddress
-        ? {
-            boardAddress: {
-              zipcode: zipcode || undefined,
-              address: address || undefined,
-              addressDetail: detailAddress || undefined,
-            },
-          }
-        : {}),
-    };
-  };
-
-  const handleSubmit = async (): Promise<void> => {
-    const nextErrors = validateForm();
-    setErrors(nextErrors);
-    setApiError("");
-    if (Object.keys(nextErrors).length !== 0) return;
-
-    const input = buildCreateBoardInput();
-
-    try {
-      setIsSubmitting(true);
-      const created = await createBoardApi(input);
-      if (!created || !created._id) {
-        setApiError("등록에 실패했어요. 잠시 후 다시 시도해 주세요.");
-        return;
-      }
-      setCreatedBoardId(created._id);
-      setIsModalOpen(true);
-    } catch (error) {
-      setApiError("에러가 발생했어요. 네트워크 상태를 확인해 주세요.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-  
-  const onChangeFile = (index: number) => async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputEl = e.currentTarget;
-    const file = inputEl.files?.[0];
-    if (!file) return;
-    try {
-      setApiError("");
-      const uploaded = await uploadFileApi(file);
-      const url = uploaded?.url ?? null;
-      if (url) {
-        setImageUrls((prev) => {
-          const next = [...prev];
-          next[index] = url;
-          return next;
-        });
-      }
-    } catch {
-      setApiError("이미지 업로드에 실패했어요. 잠시 후 다시 시도해 주세요.");
-    } finally {
-      inputEl.value = "";
-    }
-  };
-
-  const removeImage = (index: number) => {
-    setImageUrls((prev) => {
-      const next = [...prev];
-      next[index] = null;
-      return next;
-    });
-  };
-
+  }, [user, updateFormData]);
 
   // 로딩 중일 때 표시
   if (loading) {
@@ -171,8 +72,8 @@ export default function PostBoard() {
             <input
               type="text"
               placeholder={isLoggedIn ? user?.name || "로그인된 사용자" : "로그인이 필요합니다"}
-              value={writer}
-              onChange={(e) => setWriter(e.target.value)}
+              value={formData.writer}
+              onChange={(e) => updateFormData('writer', e.target.value)}
               disabled={true}
               style={{ 
                 backgroundColor: '#f5f5f5', 
@@ -180,7 +81,7 @@ export default function PostBoard() {
                 color: '#666'
               }}
             />
-            {errors.writer  && <p className="error_text">{errors.writer}</p>}
+            {errors.writer && <p className="error_text">{errors.writer}</p>}
           </div>
           <div className="field">
             <label className="sb_16_24">
@@ -189,8 +90,8 @@ export default function PostBoard() {
             <input
               type="password"
               placeholder="비밀번호를 입력해 주세요."
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={formData.password}
+              onChange={(e) => updateFormData('password', e.target.value)}
             />
             {errors.password && <p className="error_text">{errors.password}</p>}
           </div>
@@ -203,8 +104,8 @@ export default function PostBoard() {
             <input
               type="text"
               placeholder="제목을 입력해 주세요."
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={formData.title}
+              onChange={(e) => updateFormData('title', e.target.value)}
             />
             {errors.title && <p className="error_text">{errors.title}</p>}
           </div>
@@ -217,8 +118,8 @@ export default function PostBoard() {
             <textarea
               rows={12}
               placeholder="내용을 입력해 주세요."
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
+              value={formData.content}
+              onChange={(e) => updateFormData('content', e.target.value)}
             />
             {errors.content && <p className="error_text">{errors.content}</p>}
           </div>
@@ -228,18 +129,18 @@ export default function PostBoard() {
           <div className="field address_field">
             <label className="sb_16_24">주소</label>
             <div className="postal_row">
-              <input className="postal_input" type="text" value={zipcode} readOnly placeholder="우편번호" />
+              <input className="postal_input" type="text" value={formData.zipcode} readOnly placeholder="우편번호" />
               <button type="button" className="btn-search sb_18_24" onClick={openPostcode}>우편번호 검색</button>
             </div>
-            <input type="text" placeholder="주소를 입력해 주세요." value={address} readOnly />
-            <input type="text" placeholder="상세주소" value={detailAddress} onChange={(e) => setDetailAddress(e.target.value)} />
+            <input type="text" placeholder="주소를 입력해 주세요." value={formData.address} readOnly />
+            <input type="text" placeholder="상세주소" value={formData.detailAddress} onChange={(e) => updateFormData('detailAddress', e.target.value)} />
           </div>
         </div>
 
         <div className="row">
           <div className="field">
             <label className="sb_16_24">유튜브 링크</label>
-            <input type="url" placeholder="링크를 입력해 주세요." value={youtubeUrl} onChange={(e) => setYoutubeUrl(e.target.value)} />
+            <input type="url" placeholder="링크를 입력해 주세요." value={formData.youtubeUrl} onChange={(e) => updateFormData('youtubeUrl', e.target.value)} />
           </div>
         </div>
 

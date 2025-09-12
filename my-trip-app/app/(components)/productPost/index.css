@@ -1,0 +1,399 @@
+.divider_line {
+  width: 100%;
+  height: 0.1rem;
+  background-color: var(--gray-10);
+  margin-bottom: 4rem;
+  margin-top: 4rem;
+}
+
+.post_page {
+    width: 128rem;
+    min-height: 100vh;
+    background-color:var(--white);
+    margin: 0 auto;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.post_container {
+    width: 128rem;
+    margin: 0 auto;
+    background-color: var(--white);
+}
+
+.post_title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #333;
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+.post_form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form_group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.form_label {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.form_label.required::after {
+  content: " *";
+  color: var(--red);
+}
+
+.me_16_24.required::after {
+  content: " *";
+  color: var(--red);
+}
+
+.form_input {
+  width: 100%;
+  padding: 1.2rem 1.6rem;
+  border: 1px solid var(--gray-20);
+  border-radius: 0.8rem;
+  font-size: 1.4rem;
+  transition: border-color 0.2s;
+}
+
+.form_input:focus {
+  outline: none;
+  border-color: var(--red);
+}
+
+.error_message {
+  color: var(--red);
+  font-size: 1.2rem;
+  margin-top: 0.4rem;
+}
+
+/* Rich Text Editor */
+.rich_text_editor {
+  border: 1px solid var(--gray-20);
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+
+.editor_toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.2rem 1.6rem;
+  background-color: var(--gray-05);
+  border-bottom: 1px solid var(--gray-20);
+}
+
+.toolbar_separator {
+  width: 1px;
+  height: 2.4rem;
+  background-color: var(--gray-20);
+  margin: 0 0.4rem;
+}
+
+.editor_content {
+  width: 100%;
+  min-height: 20rem;
+  padding: 1.6rem;
+  border: none;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+.editor_content:focus {
+  outline: none;
+}
+
+/* Address Form */
+.address_form_group {
+  gap: 1.6rem;
+}
+
+.address_map_row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4rem;
+}
+
+.address_column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.zip_code_wrapper {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.zip_code_input {
+  flex: 1;
+  max-width: 20rem;
+}
+
+.address_detail_input {
+  margin-top: 0.8rem;
+}
+
+.coordinate_inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+.coordinate_group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.coordinate_input {
+  background-color: var(--gray-05);
+}
+
+.map_column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.map_title {
+  font-weight: 600;
+}
+
+.map_container {
+  width: 100%;
+  height: 30rem;
+  border: 1px solid var(--gray-20);
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+
+.map_placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: var(--gray-05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map_content {
+  text-align: center;
+  color: var(--gray-60);
+}
+
+.map_marker {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--red);
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+}
+
+.map_info p {
+  margin: 0.4rem 0;
+  font-size: 1.2rem;
+}
+
+/* Photo Upload */
+.photo_upload_section {
+  width: 100%;
+}
+
+.photo_upload_grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.6rem;
+}
+
+.photo_upload_box {
+  aspect-ratio: 1;
+  border: 2px dashed var(--gray-20);
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.photo_upload_box:hover {
+  border-color: var(--gray-40);
+}
+
+.upload_label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  gap: 0.8rem;
+}
+
+.upload_icon {
+  font-size: 2.4rem;
+  color: var(--gray-60);
+  font-weight: 300;
+}
+
+.upload_text {
+  font-size: 1.2rem;
+  color: var(--gray-60);
+  text-align: center;
+  margin: 0;
+}
+
+.uploaded_photo {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.uploaded_photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove_photo_btn {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.remove_photo_btn:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Form Actions */
+.form_actions {
+  margin-top: 4rem;
+  padding-top: 2.4rem;
+  border-top: 1px solid var(--gray-10);
+}
+
+.action_buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.6rem;
+}
+
+.btn {
+  padding: 1.6rem 3.2rem;
+  border-radius: 0.8rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--red);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--red-dark);
+}
+
+.btn-outline {
+  background-color: var(--white);
+  color: var(--gray-70);
+  border: 1px solid var(--gray-20);
+}
+
+.btn-outline:hover {
+  background-color: var(--gray-05);
+}
+
+.btn-disabled {
+  background-color: var(--gray-30);
+  color: var(--gray-60);
+  cursor: not-allowed;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1280px) {
+  .post_page,
+  .post_container {
+    width: 100%;
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .post_page {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .address_map_row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .zip_code_wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .zip_code_input {
+    max-width: none;
+  }
+
+  .coordinate_inputs {
+    grid-template-columns: 1fr;
+  }
+
+  .photo_upload_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+
+  .action_buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .editor_toolbar {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .toolbar_separator {
+    display: none;
+  }
+}
