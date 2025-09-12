@@ -2,14 +2,23 @@
 
 import styles from './style.module.css'
 import useBoardsListPage from './hook'
+import { useEffect, useState } from 'react'
 
 const BoardsList = () => {
     
     const {
         goDetailHandler,
         onDeleteHanlder,
-        boardsData
+        getBoardsList
     } = useBoardsListPage()
+
+    const [boardsData, setBoardsData] = useState<any>(undefined)
+
+    useEffect(()=>{
+        (async () => {
+            setBoardsData(await getBoardsList())
+        })()
+    },[])
 
     return (
         <div id="main" className={`${styles.list_main}`}>
@@ -31,7 +40,7 @@ const BoardsList = () => {
                     </div>
                     <ul className={`${styles.board_list_bottom} flex_column`}>
                         {/* map */}
-                        {boardsData?.fetchBoards.map((v,i)=>{
+                        {boardsData?.fetchBoards.map((v:any,i:any)=>{
                             // return  <div key={i}>{boardsCount?.fetchBoardsCount-i} {v.title} {v.writer} {v.createdAt.split("T")[0]}</div>
                             return  <li key={i} className='flex_row'>
                                         <div className='flex_row flex_justi_center'><p className='l_14_20' style={{ color: "rgba(145, 145, 145, 1)" }}>{i+1}</p></div> 

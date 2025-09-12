@@ -1,9 +1,9 @@
 "use client"
 
-import { gql, useMutation, useQuery } from "@apollo/client"
+import { ApolloError, useMutation } from "@apollo/client"
 import { useParams, useRouter } from "next/navigation"
-import { ChangeEvent, MouseEventHandler, useState } from "react"
-import { IErrSetState, IFunctionUpdateBoard, IOnChangePosting, IOnUpdateHandler, IPostUpdateData, IUpdateBoardInput } from "./type"
+import { ChangeEvent } from "react"
+import { IOnChangePosting, IOnUpdateHandler, IUpdateBoardInput } from "./type"
 import { CREATE_BOARD, UPDATE_BOARD } from "./queries"
 import { useIsEdit } from "@/commons/isEditProvider"
 
@@ -51,8 +51,12 @@ const useBoardWrite = () => {
                 }
             })
             router.push(`/boards/${result.data.createBoard._id}`)
-        } catch(e) {
-            alert(`에러가 발생하였습니다. 다시 시도해 주세요. ${e}`)
+        } catch(e: unknown) {
+            if (e instanceof ApolloError) {
+                e.graphQLErrors.forEach((e) => {
+                    alert(`${e.message}`)
+                });
+            }
         }
     }
 
@@ -67,8 +71,12 @@ const useBoardWrite = () => {
             })
             console.log('업데이트 결과: ',result.data.updateBoard._id)
             router.push(`/boards/${result.data.updateBoard._id}`)
-        } catch(e: any) {
-            alert(`${e} 비밀번호가 틀렸습니다.`)
+        } catch(e: unknown) {
+            if (e instanceof ApolloError) {
+                e.graphQLErrors.forEach((e) => {
+                    alert(`${e.message}`)
+                });
+            }
         }
     }
 
@@ -85,8 +93,6 @@ const useBoardWrite = () => {
         console.log('업데이트된 객체 확인: ', updateBoardInput)
         return updateBoardInput
     }
-
-    
 
     return {
         onChangePosting,

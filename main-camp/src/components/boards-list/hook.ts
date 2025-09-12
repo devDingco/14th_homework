@@ -1,9 +1,10 @@
-import { useMutation, useQuery } from "@apollo/client"
+import { ApolloError, useApolloClient, useMutation } from "@apollo/client"
 import { useRouter } from "next/navigation"
 import { IFetchBoardsData } from "./type"
 import { DELETE_BOARD, FETCH_BOARDS } from "./queries"
 
 const useBoardsListPage = () => {
+    const client = useApolloClient();
     const router = useRouter()
 
     const [deleteBoard] = useMutation(DELETE_BOARD)
@@ -11,16 +12,26 @@ const useBoardsListPage = () => {
     // const boardsData: IFetchBoardsData
     // let boardsCount: IFetchBoardsCount
 
-    const boardsData: IFetchBoardsData = useQuery(FETCH_BOARDS, {
-        variables: {
-            // 하드코딩
-            page: 1
+    const getBoardsList = async () => {
+        try {
+            const { data } = await client.query({
+                query: FETCH_BOARDS,
+                variables: {
+                    // 하드코딩
+                    page: 1
+                }
+            })
+            return data
+        } catch(e: unknown) {
+            if (e instanceof ApolloError) {
+                e.graphQLErrors.forEach((e) => {
+                    alert(`${e.message}`)
+                });
+            }
         }
-    }).data
-
-    // boardsCount = useQuery(FETCH_BOARDS_COUNT).data
+    }
     
-    console.log(boardsData?.fetchBoards)
+    // boardsCount = useQuery(FETCH_BOARDS_COUNT).data
     // console.log(boardsCount?.fetchBoardsCount)
 
     const goDetailHandler = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -41,15 +52,19 @@ const useBoardsListPage = () => {
             })
             console.log("삭제한 게시글 ID: ",result.data.deleteBoard)
             alert("게시글이 삭제되었습니다!")
-        } catch(e) {
-            console.log(e)
+        } catch(e: unknown) {
+            if (e instanceof ApolloError) {
+                e.graphQLErrors.forEach((e) => {
+                    alert(`${e.message}`)
+                });
+            }
         }
     }
 
     return {
         goDetailHandler,
         onDeleteHanlder,
-        boardsData
+        getBoardsList
     }
 }
 

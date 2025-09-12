@@ -3,12 +3,12 @@
 import styles from './style.module.css'
 import WriteButton from './writeButton'
 import WriteInput from './writeInput'
-import { IBoardsWriteProps, IFunctionUpdateBoard, IOnUpdateHandler } from './type'
+import { IOnUpdateHandler } from './type'
 import useBoardWrite from './hook'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useIsEdit } from '@/commons/isEditProvider'
 // 게시글 등록/수정 페이지
-const BoardsWrite = (props: IBoardsWriteProps) => {
+const BoardsWrite = () => {
 
     const [writerErr, setWriterErr] = useState<string>("")
     const [passwordErr, setPasswordErr] = useState<string>("")

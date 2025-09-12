@@ -1,22 +1,28 @@
 "use client"
 
-import { IsEditProvider, useIsEdit } from "@/commons/isEditProvider"
+import { useIsEdit } from "@/commons/isEditProvider"
 import BoardsWrite from "@/components/boards-write"
-import useBoardWrite from "@/components/boards-write/hook"
-import { gql, useQuery } from "@apollo/client"
-import { useParams } from "next/navigation"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import useBoardsEditPage from "./hook"
 
 const BoardsEditPage = () => {
-    const { setIsEdit, writer, setWriter, title, setTitle, password, setPassword, contents, setContents, updatingTitle, setUpdatingTitle, updatingContents, setUpdatingContents} = useIsEdit()
-    const { fetchBoard } = useBoardsEditPage()
+    const { setIsEdit, isEdit, setWriter, setTitle, setContents, setUpdatingTitle, setUpdatingContents} = useIsEdit()
+    const { getBoardDetail } = useBoardsEditPage()
+
+    const [fetchBoard, setFetchBoard] = useState<any>()
 
     useEffect(()=>{
         setIsEdit(true)
     },[])
 
     useEffect(()=>{
+        (async ()=>{
+            setFetchBoard(await getBoardDetail())
+        })()
+    },[isEdit])
+
+    useEffect(()=>{
+        console.log(fetchBoard)
         // updating... state 에 input 데이터 비교를 위해 저장
         if (fetchBoard) {
             setWriter(fetchBoard?.fetchBoard.writer)
@@ -28,7 +34,7 @@ const BoardsEditPage = () => {
     },[fetchBoard])
 
     return (
-        <BoardsWrite data={fetchBoard}/>
+        <BoardsWrite />
     )
 }
 

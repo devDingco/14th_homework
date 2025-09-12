@@ -2,26 +2,36 @@
 
 import { useIsEdit } from "@/commons/isEditProvider"
 import { FETCH_BOARD } from "@/components/boards-detail/queries"
-import { useQuery } from "@apollo/client"
+import { ApolloError, useApolloClient } from "@apollo/client"
 import { useParams } from "next/navigation"
 
 const useBoardsEditPage = () => {
+    const client = useApolloClient();
     const param = useParams()
     const { isEdit } = useIsEdit()
-    let fetchBoard
-    try {
-        fetchBoard = useQuery(FETCH_BOARD, {
-            variables: {
-                boardId: param.boardId,
-            },
-            skip: !isEdit
-        }).data
-    } catch(e) {
-        console.log(e)
+
+    const getBoardDetail = async () => {
+        try {
+            if (isEdit) {
+                const { data } = await client.query({
+                    query: FETCH_BOARD, 
+                    variables: {
+                        boardId: param.boardId,
+                    },
+                })
+                return data
+            }            
+        } catch(e: unknown) {
+            if (e instanceof ApolloError) {
+                e.graphQLErrors.forEach((e) => {
+                    alert(`${e.message}`)
+                });
+            }
+        }
     }
     
     return {
-        fetchBoard
+        getBoardDetail
     }
 }
 

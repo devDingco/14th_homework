@@ -1,20 +1,28 @@
-import { useQuery } from "@apollo/client"
+import { ApolloError, useApolloClient } from "@apollo/client"
 import { useParams, useRouter } from "next/navigation"
 import { FETCH_BOARD } from "./queries"
 
 const useBoardsDetailPage = () => {
+    const client = useApolloClient();
     const router = useRouter()
-    const params = useParams()
+    const param = useParams()
     
-    let fetchBoard
-    try {
-        fetchBoard = useQuery(FETCH_BOARD, {
-            variables: {
-                boardId: params.boardId
+    const getBoardDetail = async () => {
+        try {
+            const { data } = await client.query({
+                query: FETCH_BOARD,
+                variables: {
+                    boardId: param.boardId,
+                }                
+            })
+            return data
+        } catch(e: unknown) {
+            if (e instanceof ApolloError) {
+                e.graphQLErrors.forEach((e) => {
+                    alert(`${e.message}`)
+                });
             }
-        }).data
-    } catch(e) {
-        console.log(e)
+        }
     }
     
     const goListHandler = () => {
@@ -22,13 +30,13 @@ const useBoardsDetailPage = () => {
     }
 
     const goUpdateHandler = () => {
-        router.push(`/boards/${params.boardId}/edit`)
+        router.push(`/boards/${param.boardId}/edit`)
     }
 
     return {
         goListHandler,
         goUpdateHandler,
-        fetchBoard
+        getBoardDetail
     }
 }
 

@@ -12,7 +12,7 @@ const WriteButton = (props: IWriteButtonProps) => {
         activeButton,
     } = useWriteButton()
 
-    const {isEdit, writer, password, title, contents} = useIsEdit()
+    const { writer, password, title, contents} = useIsEdit()
 
     useEffect(() => {
         activeButton({ writer, password, title, contents})

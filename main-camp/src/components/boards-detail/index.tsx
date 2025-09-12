@@ -2,19 +2,28 @@
 
 import styles from './style.module.css'
 import useBoardsDetailPage from './hook'
+import { useEffect, useState } from 'react'
 
 const BoardsDetail = () => {
     const {
         goListHandler,
         goUpdateHandler,
-        fetchBoard
+        getBoardDetail
     } = useBoardsDetailPage()
+
+    const [fetchBoard, setFetchBoard] = useState<any>(undefined)
 
     // 하드코딩
     const goodBad = {
         good: 24,
         bad: 12
     }
+
+    useEffect(()=>{
+        (async ()=>{
+            setFetchBoard(await getBoardDetail())
+        })()
+    },[])
 
     return (
         <div id="main" className={`${styles.detail_main}`}>
