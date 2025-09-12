@@ -1,8 +1,19 @@
 'use client';
 
+import useCreateBoardComment from './hook';
 import styles from './styles.module.css';
+import { CommentVariables } from './types';
 
-export default function CommentWrite() {
+export default function CommentWrite(props: CommentVariables) {
+  const {
+    onChangeWriter,
+    onChangePassword,
+    onChangeContent,
+    onClickCommentSubmit,
+    isFormValid,
+    error,
+  } = useCreateBoardComment(props);
+
   return (
     <div className={styles['commentLayout']}>
       <div className={styles['commentBody']}>
@@ -86,12 +97,59 @@ export default function CommentWrite() {
         <div className={styles.commentMiddle}>
           <div className={styles.commentInfo}>
             <div className={styles['enroll-row']}>
-              <div className={styles['enroll-input']}></div>
-              <div className={styles['enroll-input']}></div>
+              <div className={styles['enroll-form']}>
+                <div className={styles['enroll-form-writer']}>
+                  <div>작성자 </div>
+                  <div className={styles['enroll-required-indicator']}>*</div>
+                </div>
+                <div>
+                  <input
+                    className={styles['enroll-input']}
+                    type="text"
+                    placeholder="작성자 명을 입력해 주세요."
+                    onChange={onChangeWriter}
+                  />
+                  {error.writer && <p className={styles.error}>{error.writer}</p>}
+                </div>
+              </div>
+              <div className={styles['enroll-form']}>
+                <div className={styles['enroll-form-writer']}>
+                  <div>비밀번호 </div>
+                  <div className={styles['enroll-required-indicator']}>*</div>
+                </div>
+                <div>
+                  <input
+                    className={styles['enroll-input']}
+                    type="password"
+                    placeholder="비밀번호를 입력해 주세요."
+                    onChange={onChangePassword}
+                  />
+                  {error.password && <p className={styles.error}>{error.password}</p>}
+                </div>
+              </div>
+            </div>
+            <div className={styles.commentInput}>
+              {/* <div style={{ width: '100%' }}> */}
+              <textarea
+                className={styles.textarea}
+                placeholder="댓글을 입력해 주세요."
+                onChange={onChangeContent}
+              />
+              {error.contents && <p className={styles.error}>{error.contents}</p>}
+              <div className={styles.textCount}>0/100</div>
             </div>
           </div>
         </div>
+        <button
+          className={styles.commentButton}
+          disabled={!isFormValid}
+          onClick={onClickCommentSubmit}
+          // aria-disabled={!isFormValid}
+        >
+          <span className={styles.buttonText}>댓글 등록</span>
+        </button>
       </div>
+      <span className={styles.noCommentMs}>등록된 댓글이 없습니다.</span>
     </div>
   );
 }

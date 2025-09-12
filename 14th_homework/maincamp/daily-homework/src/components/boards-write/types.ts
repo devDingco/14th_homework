@@ -22,5 +22,5 @@ export type Errors = {
   writer?: string;
   password?: string;
   title?: string;
-  content?: string;
+  contents?: string;
 };

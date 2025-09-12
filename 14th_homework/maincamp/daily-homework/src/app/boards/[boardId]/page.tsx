@@ -5,6 +5,7 @@ import CommentWrite from '@/components/boards-detail/comment-write';
 import styles from './styles.module.css';
 import Detail from '@/components/boards-detail/detail';
 import { useParams } from 'next/navigation';
+import CommentList from '@/components/boards-detail/comment-list';
 
 export default function BoardComponentDetailPage() {
   const params = useParams();
@@ -13,7 +14,8 @@ export default function BoardComponentDetailPage() {
   return (
     <div className={styles.D_layout}>
       <Detail isEdit={true} ID={boardId} />
-      <CommentWrite />
+      <CommentWrite data={{ boardId }} />
+      <CommentList />
     </div>
   );
 }

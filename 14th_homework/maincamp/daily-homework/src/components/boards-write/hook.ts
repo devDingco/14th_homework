@@ -17,7 +17,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
   const [writer, setWriter] = useState<string>(props.data?.fetchBoard?.writer || '');
   const [password, setPassword] = useState<string>('');
   const [title, setTitle] = useState<string>(props.data?.fetchBoard?.title || '');
-  const [content, setContent] = useState<string>(props.data?.fetchBoard?.contents || '');
+  const [contents, setContents] = useState<string>(props.data?.fetchBoard?.contents || '');
 
   const [apiRequire] = useMutation<CreateBoardMutation, CreateBoardMutationVariables>(
     CreateBoardDocument
@@ -33,7 +33,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
           writer,
           password,
           title,
-          contents: content,
+          contents,
         },
       },
     });
@@ -64,7 +64,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
 
     // 현재 값 또는 기존 값 사용 (변경되지 않았어도 전송)
     updateBoardInput.title = title.trim() || props.data?.fetchBoard?.title || '';
-    updateBoardInput.contents = content.trim() || props.data?.fetchBoard?.contents || '';
+    updateBoardInput.contents = contents.trim() || props.data?.fetchBoard?.contents || '';
 
     try {
       const result = await reviseApiRequire({
@@ -102,8 +102,8 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
   };
 
   const onChangeContent = (event: ChangeEvent<HTMLInputElement>) => {
-    setContent(event.target.value);
-    if (error.content) setErrors((prev) => ({ ...prev, content: '' }));
+    setContents(event.target.value);
+    if (error.contents) setErrors((prev) => ({ ...prev, contents: '' }));
   };
 
   const checkRegister = (): boolean => {
@@ -114,15 +114,15 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
       if (!password.trim()) e.password = '필수입력 사항 입니다.';
       // 등록 모드에서는 제목과 내용도 필수
       if (!title.trim()) e.title = '필수입력 사항 입니다.';
-      if (!content.trim()) e.content = '필수입력 사항 입니다.';
+      if (!contents.trim()) e.contents = '필수입력 사항 입니다.';
     } else {
       // 수정 모드에서는 기존 데이터가 있으므로 빈 값이어도 허용
       // 하지만 사용자가 입력한 값이 공백만 있다면 검증
       const currentTitle = title.trim() || props.data?.fetchBoard?.title || '';
-      const currentContent = content.trim() || props.data?.fetchBoard?.contents || '';
+      const currentContent = contents.trim() || props.data?.fetchBoard?.contents || '';
 
       if (!currentTitle) e.title = '필수입력 사항 입니다.';
-      if (!currentContent) e.content = '필수입력 사항 입니다.';
+      if (!currentContent) e.contents = '필수입력 사항 입니다.';
     }
 
     setErrors(e);

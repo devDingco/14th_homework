@@ -186,6 +186,12 @@
   color: #ffffff;
 }
 
+.enroll-submit-button {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: gray;
+}
+
 .enroll-submit-button[disabled] {
   opacity: 0.5;
   cursor: not-allowed;

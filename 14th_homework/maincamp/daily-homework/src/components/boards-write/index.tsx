@@ -90,7 +90,7 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
             defaultValue={props.data?.fetchBoard?.contents || ''}
             // value={content}
           />
-          {error.content && <p className={styles.error}>{error.content}</p>}
+          {error.contents && <p className={styles.error}>{error.contents}</p>}
         </div>
         <div className={styles['enroll-row-section']}>
           <div className={styles['enroll-form-title']}>

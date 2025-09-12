@@ -16,7 +16,7 @@ export default function useDetail() {
     boardId: String(url.boardId),
   };
 
-  console.log('boardId:', url.boardId);
+  // console.log('boardId:', url.boardId);
   const { data, loading, error } = useQuery(FETCH_BOARD, { variables: d_variables });
   console.log('GraphQL data:', data, 'loading:', loading, 'error:', error);
 
