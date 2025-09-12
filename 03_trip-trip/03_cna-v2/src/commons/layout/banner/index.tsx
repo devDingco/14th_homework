@@ -35,8 +35,8 @@ export default function BannerComponent() {
       >
         {IMAGE_SRC.map((slide, idx) => {
           return (
-            <SwiperSlide>
-              <Image key={idx} src={slide.src} alt={slide.alt} className={styles.image_swiper} />
+            <SwiperSlide key={idx}>
+              <Image src={slide.src} alt={slide.alt} className={styles.image_swiper} />
             </SwiperSlide>
           )
         })}

@@ -91,11 +91,11 @@ export default function BoardDetailPage() {
         <div className={styles.detailContentGoodOrBad}>
           <div className={styles.detailGoodContainer}>
             <HeartBrokenOutlined style={{ color: '#5F5F5F' }} />
-            <div className={styles.detailBadText}>{data?.fetchBoard?.likeCount}</div>
+            <div className={styles.detailBadText}>{data?.fetchBoard?.dislikeCount}</div>
           </div>
           <div className={styles.detailGoodContainer}>
             <FavoriteBorderOutlined style={{ color: '#F66A6A' }} />
-            <div className={styles.detailGoodText}>{data?.fetchBoard?.dislikeCount}</div>
+            <div className={styles.detailGoodText}>{data?.fetchBoard?.likeCount}</div>
           </div>
         </div>
         <div className={styles.detailButtonsContainer}>

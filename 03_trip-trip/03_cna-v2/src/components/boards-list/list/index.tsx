@@ -56,7 +56,12 @@ export default function BoardsListComponent() {
                   onClick={onClickDelete}
                   className={hoveredId === el._id ? styles.showButton : styles.hidden}
                 >
-                  <Image src={IMAGE_SRC.deleteImage.src} alt={IMAGE_SRC.deleteImage.alt} />
+                  <Image
+                    src={IMAGE_SRC.deleteImage.src}
+                    alt={IMAGE_SRC.deleteImage.alt}
+                    width={0}
+                    height={0}
+                  />
                 </span>
               </div>
             </button>

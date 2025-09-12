@@ -1,12 +1,12 @@
 .wrapper {
   display: flex;
-  width: 100%;
+  width: 100vw;
 }
 
 .image_swiper {
   width: 100%;
+  /* max-width: 1920px; */
   height: 515px;
   object-fit: cover;
   object-position: bottom;
-  overflow: visible;
 }
