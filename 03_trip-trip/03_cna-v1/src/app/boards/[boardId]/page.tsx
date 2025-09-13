@@ -14,7 +14,6 @@ import { useParams, useRouter } from 'next/navigation'
 import { useQuery } from '@apollo/client'
 import { getYouTubeId } from '@/shared/lib/getYoutubeId'
 import { formatUtcToKstYmd } from '@/shared/lib/date/formatUtcToKstYmd'
-
 import Image from 'next/image'
 import {
   FetchBoardDocument,

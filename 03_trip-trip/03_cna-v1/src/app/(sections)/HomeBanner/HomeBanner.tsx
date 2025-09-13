@@ -5,6 +5,7 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
+
 const IMAGE_SRC = [
   { src: '/images/banner1.webp', alt: '배너이미지1' },
   { src: '/images/banner2.webp', alt: '배너이미지2' },
@@ -37,10 +38,7 @@ export default function HomeBanner() {
                 alt={slide.alt}
                 width={1920}
                 height={515}
-                // className={styles.imageStatic}
-                // width={100}
-                // height={50}
-                className={styles.image_swiper} // object-fit 등 스타일
+                className={styles.image_swiper}
               />
             </SwiperSlide>
           )
