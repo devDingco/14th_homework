@@ -22,9 +22,7 @@ export interface UseFormProps {
 // ERROR: 공사중...⚒️
 const useForm = ({ initialValues, validate, onSubmit, isEdit }: UseFormProps): UseFormReturn => {
   const [values, setValues] = useState<PostForm>(initialValues)
-  const [errors, setErrors] = useState(() => {
-    return validate(initialValues, isEdit)
-  })
+  const [errors, setErrors] = useState(isEdit && validate(initialValues, isEdit))
   const [isActive, setIsActive] = useState(() => {
     const initialErrors = validate(initialValues, isEdit)
     return isEmptyObj(initialErrors)
