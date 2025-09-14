@@ -55,7 +55,8 @@ export default function ProductList() {
                   alt="product"
                   width={384}
                   height={384}
-                  priority={false}
+                  priority={product.id <= 4}
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                 />
                 <span className="head_badge">
                   <Icon outline default name="bookmark" width={20} height={20} />
@@ -80,6 +81,7 @@ export default function ProductList() {
                       width={24}
                       height={24}
                       priority={false}
+                      loading="lazy"
                       />
                       <span className="r_14_20">{product.host}</span>
                     </div>

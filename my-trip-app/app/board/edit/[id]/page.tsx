@@ -1,5 +1,5 @@
 import { fetchBoardSSR } from "@/commons/apis/board.ssr";
-import EditBoard from "../../edit/index";
+import BoardEdit from "../../../(components)/boardEdit";
 
 export default async function EditBoardPage({ params }: { params: { id: string } }) {
   const boardData = await fetchBoardSSR(params.id);
@@ -8,5 +8,5 @@ export default async function EditBoardPage({ params }: { params: { id: string }
     return <div>게시글을 찾을 수 없습니다.</div>;
   }
 
-  return <EditBoard id={params.id} initialData={boardData} />;
+  return <BoardEdit id={params.id} initialData={boardData} />;
 }

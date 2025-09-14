@@ -1,10 +1,13 @@
 .product_banner_container {
     width: 128rem;
     height: 24rem;
-    margin-top: 4rem;
     margin: 0 auto;
     margin-top: 6.4rem;
     margin-bottom: 6.4rem;
+    will-change: transform;
+    contain: layout style paint;
+    content-visibility: auto;
+    contain-intrinsic-size: 1280px 240px;
 }
 
 .product_banner_container .banner_image {
@@ -12,4 +15,7 @@
     height: 100%;
     object-fit: cover;
     filter: contrast(1.2);
+    transform: translateZ(0);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }

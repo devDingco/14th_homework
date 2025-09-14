@@ -1,0 +1,298 @@
+/* 게시물 수정 페이지 - boardPost와 동일한 스타일 사용 */
+.board_page {
+    max-width: 128rem;
+    margin: 0 auto;
+    padding: 4rem 0;
+  }
+  
+  .board_title {
+    margin-bottom: 2.4rem;
+  }
+  
+  .board_form {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid var(--gray-10);
+    border-radius: 0.8rem;
+    padding: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .row.two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.4rem;
+  }
+  
+  .field label {
+    background: var(--white);
+  }
+  
+  .required {
+    color: var(--red);
+  }
+
+  .error_text {
+    color: var(--red);
+    font-size: 1.2rem;
+    margin-top: 0.8rem;
+  }
+  
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 1.2rem 1.6rem;
+    border: 1px solid var(--gray-20);
+    border-radius: 0.8rem;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    transition: border-color 0.2s;
+  }
+  
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--red);
+  }
+  
+  .field textarea {
+    resize: vertical;
+    min-height: 12rem;
+    font-family: inherit;
+  }
+  
+  .address_field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .postal_row {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+  }
+  
+  .postal_input {
+    flex: 1;
+    max-width: 20rem;
+  }
+  
+  .btn-search {
+    padding: 1.2rem 2rem;
+    background-color: var(--gray-10);
+    border: 1px solid var(--gray-20);
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+  }
+  
+  .btn-search:hover {
+    background-color: var(--gray-20);
+  }
+  
+  .upload_grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+  }
+  
+  .uploader {
+    cursor: pointer;
+  }
+  
+  .uploader_box {
+    width: 16rem;
+    height: 16rem;
+    border: 2px dashed var(--gray-20);
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    transition: border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .uploader_box:hover {
+    border-color: var(--gray-40);
+  }
+  
+  .uploader_box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.6rem;
+  }
+  
+  .plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: var(--gray-05);
+  }
+  
+  .plus_icon {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.6rem;
+    margin-top: 2rem;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    padding: 1.6rem 3.2rem;
+    border-radius: 0.8rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+  
+  .btn-primary {
+    background-color: var(--red);
+    color: var(--white);
+  }
+  
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--red-dark);
+  }
+  
+  .btn-primary:disabled {
+    background-color: var(--gray-30);
+    cursor: not-allowed;
+  }
+  
+  .btn-secondary {
+    background-color: var(--white);
+    color: var(--gray-70);
+    border: 1px solid var(--gray-20);
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--gray-05);
+  }
+  
+  /* 모달 스타일 */
+  .modal_backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    background: var(--white);
+    border-radius: 1.2rem;
+    padding: 2.4rem;
+    max-width: 40rem;
+    width: 90%;
+    text-align: center;
+  }
+  
+  .modal h2 {
+    margin-bottom: 1.2rem;
+    color: var(--black);
+  }
+  
+  .modal p {
+    margin-bottom: 2.4rem;
+    color: var(--gray-70);
+  }
+  
+  .modal_actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .modal .btn {
+    padding: 1.2rem 2.4rem;
+    background-color: var(--red);
+    color: var(--white);
+    border: none;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    font-size: 1.6rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+  }
+  
+  .modal .btn:hover {
+    background-color: var(--red-dark);
+  }
+  
+  /* 반응형 디자인 */
+  @media (max-width: 768px) {
+    .board_page {
+      padding: 2rem 1.6rem;
+    }
+  
+    .board_form {
+      padding: 1.6rem;
+    }
+  
+    .row.two {
+      grid-template-columns: 1fr;
+      gap: 1.6rem;
+    }
+  
+    .upload_grid {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+  
+    .uploader_box {
+      width: 100%;
+      height: 20rem;
+    }
+  
+    .postal_row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .postal_input {
+      max-width: none;
+    }
+  
+    .actions {
+      flex-direction: column;
+    }
+  
+    .btn-primary,
+    .btn-secondary {
+      width: 100%;
+    }
+  
+    .modal {
+      margin: 1.6rem;
+      width: calc(100% - 3.2rem);
+    }
+  }

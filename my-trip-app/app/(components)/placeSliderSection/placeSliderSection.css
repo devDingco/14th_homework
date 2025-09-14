@@ -24,8 +24,7 @@
     height: 62.8rem;
     border-radius: 1.6rem;
     overflow: hidden;
-    background-size: cover;
-    background-position: center;
+    will-change: transform;
 }
 
 .head_badge {

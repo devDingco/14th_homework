@@ -1,6 +1,7 @@
 import "./placeSliderSection.css";
 import "../../global.css";
 import Icon from "@utils/iconColor";
+import Image from "next/image";
 
 export default function PlaceSliderSection() {
   return (
@@ -9,7 +10,18 @@ export default function PlaceSliderSection() {
                 <h2 className="place_slider_title b_28_36">2025 끝여름 낭만있게 마무리 하고 싶다면?</h2>
             </div>
             <div className="place_slider_content">
-                <article className="place_card" style={{ backgroundImage: "url(/images/desktop/a.png)" }}>
+                <article className="place_card place_card_1">
+                    <Image
+                      src="/images/desktop/a.png"
+                      alt="포항 숙소"
+                      fill
+                      priority={true}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      quality={90}
+                      placeholder="blur"
+                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                      style={{ objectFit: 'cover' }}
+                    />
                     <span className="head_badge">
                     <Icon outline default name="bookmark" width={24} height={24} />
                     <p className="badge_text me_14_20">24</p>
@@ -23,7 +35,18 @@ export default function PlaceSliderSection() {
                     <p className="place_price b_16_24">32,900 원</p>
                 </article>
 
-                <article className="place_card" style={{ backgroundImage: "url(/images/desktop/b.png)" }}>
+                <article className="place_card place_card_2">
+                    <Image
+                      src="/images/desktop/b.png"
+                      alt="경주 숙소"
+                      fill
+                      priority={true}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      quality={90}
+                      placeholder="blur"
+                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                      style={{ objectFit: 'cover' }}
+                    />
                       <span className="head_badge">
                       <Icon outline default name="bookmark" width={24} height={24} />
                       <p className="badge_text me_14_20">24</p>

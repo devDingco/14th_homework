@@ -1,4 +1,4 @@
-import BoardDetail from "../(detail)/index";
+import BoardDetail from "../../(components)/boardDetail";
 import { fetchBoardSSR } from "../../commons/apis/board.ssr";
 import ErrorModal from "../../(components)/modal/ErrorModal";
 
@@ -19,6 +19,9 @@ export default async function BoardDetailPage({ params }: { params: { id: string
       badCount: data.dislikeCount ?? 0,
       likeCount: data.likeCount ?? 0,
       youtubeUrl: data.youtubeUrl ?? "",
+      address: data.boardAddress?.address ?? "",
+      detailAddress: data.boardAddress?.addressDetail ?? "",
+      zipcode: data.boardAddress?.zipcode ?? "",
     }}
   />;
 }

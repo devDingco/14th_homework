@@ -5,7 +5,7 @@ import "../../global.css";
 import Image from "next/image";
 import Link from "next/link";
 import Icon from "@utils/iconColor";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { tokenStorage } from "../../commons/utils/token";
 import { useAuth } from "../../commons/hooks/useAuth";
@@ -17,14 +17,18 @@ export default function Header() {
   const profileRef = useRef<HTMLDivElement | null>(null);
   const { user, isLoggedIn, logout } = useAuth();
   
-  const handleActive = (menuKey: string) => {
+  const handleActive = useCallback((menuKey: string) => {
     setActiveMenu(menuKey);
-  };
+  }, []);
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     logout();
     setIsProfileOpen(false);
-  };
+  }, [logout]);
+
+  const toggleProfile = useCallback(() => {
+    setIsProfileOpen((v) => !v);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -70,13 +74,15 @@ export default function Header() {
 
     {isLoggedIn && user && (
       <div className="header_right_profile_container" ref={profileRef}>
-        <div className="user_profile_container" onClick={() => setIsProfileOpen((v) => !v)}>
+        <div className="user_profile_container" onClick={toggleProfile}>
           <Image 
             src={user.picture || "/images/mobile/profile/img-8.png"} 
             alt="user_profile" 
             width={40} 
             height={40} 
             className="user_profile_image"
+            priority={false}
+            loading="lazy"
           />
           <Icon filled name="down_arrow" black className="arrow_down_icon"/>
         </div>
@@ -89,7 +95,7 @@ export default function Header() {
               height={40} 
             />
             <h2 className="b_18_24">{user?.name}</h2>
-            <Icon filled name="up_arrow" black className="up_arrow_icon" onClick={() => setIsProfileOpen((v) => !v)} />
+            <Icon filled name="up_arrow" black className="up_arrow_icon" onClick={toggleProfile} />
           </div>
           <div className="profile_divider"/>
           <div className="profile_row">

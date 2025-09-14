@@ -9,7 +9,11 @@ export default function Banner() {
     alt="banner" 
     fill
     className="banner_image" 
-    priority={false}
+    priority={true}
+    sizes="100vw"
+    style={{
+        objectFit: 'cover',
+    }}
     />
   </div>;
 }

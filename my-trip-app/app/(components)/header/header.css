@@ -36,11 +36,15 @@
   gap: 1rem;
   justify-content: center;
   align-items: center;
+  will-change: transform;
+  contain: layout style;
 }
 
 .header_menu h1  {
   color: var(--black);
   padding: 0.8rem;
+  transition: border-bottom 0.2s ease;
+  transform: translateZ(0);
 }
 
 .header_menu h1.is-active {
@@ -92,6 +96,8 @@
   justify-content: center;
   gap: 0.8rem;
   cursor: pointer;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .user_profile_image {
@@ -120,13 +126,19 @@
   border-radius: 0.8rem;
   border: 1px solid var(--gray-10);
   padding: 2rem;
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) translateZ(0);
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
   z-index: 1000;
-
+  will-change: transform, opacity;
+  contain: layout style paint;
 }
 
 .profile_dropdown.open { 
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) translateZ(0);
 }
 
 .profile_header { 

@@ -8,6 +8,11 @@ const nextConfig = {
   images: {
     domains: ["storage.googleapis.com"],
     // remotePatterns: [{ protocol: "https", hostname: "storage.googleapis.com" }],
+    formats: ["image/webp", "image/avif"],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   webpack: (config) => {
     // SVG를 React 컴포넌트로 임포트할 수 있게 설정

@@ -1,4 +1,4 @@
-import ProductDetail from "../(detail)/index"
+import ProductDetail from "../../(components)/productDetail";
 import InquirySection from "@components/comment/inquirySection";
 
 type PageProps = { params: Promise<{ id: string }> };
