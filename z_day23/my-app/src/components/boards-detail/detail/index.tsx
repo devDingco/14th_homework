@@ -2,10 +2,32 @@
 
 import styles from "./styles.module.css";
 import { useBoardDetail } from "./hook";
+import React, { useState, useEffect } from "react";
+import { Rate } from "antd";
+import { useParams } from "next/navigation";
+import CommentWrite from "../comment-write";
 
 export default function BoardsDetail() {
   const { loading, data, error, onClickUpdateMove, onClickMoveToList } =
     useBoardDetail();
+
+  const params = useParams();
+  const boardId = params.boardId;
+
+  const [isClient, setIsClient] = useState(false);
+  const [rating, setRating] = useState(0);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
+
+  if (!boardId) {
+    return <div>유효하지 않은 게시글 ID입니다.</div>;
+  }
 
   if (loading) return <div>게시글을 불러오는 중입니다...</div>;
   if (error) return <div>오류가 발생했습니다: {error.message}</div>;
@@ -73,6 +95,7 @@ export default function BoardsDetail() {
                   <img src="/images/fix.png" alt=""></img>수정하기
                 </button>
               </div>
+              {boardId && <CommentWrite boardId={boardId} />}
             </div>
           </div>
         </div>
