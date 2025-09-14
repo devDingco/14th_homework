@@ -4,28 +4,29 @@ import styles from './BoardsDetail.module.css'; // CSS 모듈 스타일 import
 import Image from 'next/image'; // Next.js 최적화된 이미지 컴포넌트
 import useBoardsDetail from './hooks';
 import TooltipLocation from '../tooltip';
+import { DislikeOutlined, LikeOutlined } from '@ant-design/icons';
 
 // 유튜브 URL을 embed URL로 변환하는 함수
 const getYouTubeEmbedUrl = (url: string): string => {
   if (!url) return '';
-  
+
   // https://www.youtube.com/watch?v=VIDEO_ID 형태
   if (url.includes('v=')) {
     const videoId = url.split('v=')[1].split('&')[0];
     return `https://www.youtube.com/embed/${videoId}`;
   }
-  
+
   // https://youtu.be/VIDEO_ID 형태
   if (url.includes('youtu.be/')) {
     const videoId = url.split('youtu.be/')[1].split('?')[0];
     return `https://www.youtube.com/embed/${videoId}`;
   }
-  
+
   // 이미 embed URL인 경우
   if (url.includes('embed/')) {
     return url;
   }
-  
+
   return '';
 };
 
@@ -61,7 +62,12 @@ export default function BoardsDetail() {
         <div className={styles.링크위치}>
           <Image src="/icons/link1.png" alt="링크" width={24} height={24} />
           <TooltipLocation address={data?.fetchBoard.boardAddress?.address}>
-            <Image src="/icons/location.png" alt="위치" width={24} height={24} />
+            <Image
+              src="/icons/location.png"
+              alt="위치"
+              width={24}
+              height={24}
+            />
           </TooltipLocation>
         </div>
       </div>
@@ -103,7 +109,7 @@ export default function BoardsDetail() {
         {/* 싫어요 버튼과 카운트 */}
         <div className={styles.싫어요}>
           <div>
-            <Image src="/icons/bad.png" alt="싫어요" width={24} height={24} />
+            <DislikeOutlined style={{ fontSize: '24px' }} />
           </div>
           <div>24</div>{' '}
           {/* 하드코딩된 값 - 실제로는 data?.fetchBoard.dislikeCount 사용 권장 */}
@@ -112,7 +118,7 @@ export default function BoardsDetail() {
         {/* 좋아요 버튼과 카운트 */}
         <div className={styles.좋아요}>
           <div>
-            <Image src="/icons/good.png" alt="좋아요" width={24} height={24} />
+            <LikeOutlined style={{ fontSize: '24px' }} />
           </div>
           <div>12</div>{' '}
           {/* 하드코딩된 값 - 실제로는 data?.fetchBoard.likeCount 사용 권장 */}

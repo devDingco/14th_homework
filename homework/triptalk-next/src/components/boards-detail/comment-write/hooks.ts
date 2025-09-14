@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import { FETCH_CREATE_COMMENT, FETCH_BOARD_COMMENTS } from './queries';
+import AllModal from '@/components/all-modal';
 
 export default function useCommentWrite() {
   const params = useParams(); // URL에서 boardId 파라미터 추출
@@ -9,21 +10,27 @@ export default function useCommentWrite() {
   const [name, setName] = useState(''); // 작성자명 상태
   const [password, setPassword] = useState('');
   const [contents, setContents] = useState('');
-  const [rating, setrating] = useState(5.0);
+  const [rating, setrating] = useState(1.0);
+  
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   const [createBoardComment] = useMutation(FETCH_CREATE_COMMENT);
   const onClickCommentSubmit = async () => {
     // 입력값 검증
     if (!name.trim()) {
-      alert('작성자를 입력해주세요.');
+      setModalMessage('작성자를 입력해주세요.');
+      setModalOpen(true);
       return;
     }
     if (!password.trim()) {
-      alert('비밀번호를 입력해주세요.');
+      setModalMessage('비밀번호를 입력해주세요.');
+      setModalOpen(true);
       return;
     }
     if (!contents.trim()) {
-      alert('댓글 내용을 입력해주세요.');
+      setModalMessage('댓글 내용을 입력해주세요.');
+      setModalOpen(true);
       return;
     }
 
@@ -66,5 +73,8 @@ export default function useCommentWrite() {
     setContents,
     setrating,
     onClickCommentSubmit,
+    modalOpen,
+    setModalOpen,
+    modalMessage,
   };
 }
