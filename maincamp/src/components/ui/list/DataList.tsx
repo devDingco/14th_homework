@@ -1,5 +1,4 @@
 import styles from './DataList.module.css'
-import Pagination from './Pagination'
 
 export default function DataList ({children, headerCell, flex, textAlign, BoardsCount, currentPage, changeCurrentPage}:{children: React.ReactNode,headerCell: string[], flex: string[], textAlign: CanvasTextAlign[], BoardsCount?: number, currentPage?: number, changeCurrentPage?:(newNum: number) => void}) {
 

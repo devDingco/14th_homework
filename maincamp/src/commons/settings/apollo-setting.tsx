@@ -7,10 +7,10 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
 })
 
-export default function ApolloSetting(props){
+export default function ApolloSetting({pages}: {pages: React.ReactNode}){
     return(
         <ApolloProvider client={client}>
-            {props.pages}
+            {pages}
         </ApolloProvider>
     )
 }

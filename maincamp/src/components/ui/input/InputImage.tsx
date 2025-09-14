@@ -1,7 +1,5 @@
-import { useMutation } from '@apollo/client';
 import styles from './InputImage.module.css'
-import { ChangeEvent, useState } from "react"
-import { UPLOAD_FILE } from '@/graphql/queries/file';
+import { ChangeEvent} from "react"
 
 export default function InputImage (props:{id?: string, onChange?:(event: ChangeEvent<HTMLInputElement>) => void}){
 

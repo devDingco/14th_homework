@@ -6,6 +6,8 @@ import { ChangeEvent, useState } from "react";
 import { ImageUrlArray, IUpdateBoardInput } from "./types";
 import { GraphQLError } from "graphql";
 import { CreateBoardDocument, FetchBoardDocument, UpdateBoardDocument, UploadFileDocument } from "@/commons/graphql/graphql";
+import { Modal } from "antd";
+import { Address } from "react-daum-postcode";
 
 export default function useBoardsWrite({data}:{data?: any}){
     
@@ -108,7 +110,7 @@ export default function useBoardsWrite({data}:{data?: any}){
 
           const boardAddress = {zipcode: zipcode, address: address, addressDetail: addressDetail}
 
-          const handleComplete = (data) => {
+          const handleComplete = (data: Address) => {
             console.log(data); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
             setZipcode(data.zonecode)
             setAddress(data.address)
@@ -177,7 +179,11 @@ export default function useBoardsWrite({data}:{data?: any}){
               )
     
             } catch (error) {
-              alert("에러가 발생하였습니다. 다시 시도해 주세요.");
+              const showErrorModal = () => Modal.error({
+                title: '에러가 발생하였습니다.',
+                content: error as string ?? "에러가 발생하였습니다",
+              });
+              showErrorModal()
             } 
           }
     
@@ -226,9 +232,11 @@ export default function useBoardsWrite({data}:{data?: any}){
               )
             } catch (error) {
               const err = error as GraphQLError
-              console.log(err.message);
-              
-              alert(err.message)
+              const showErrorModal = () => Modal.error({
+                title: '에러가 발생하였습니다.',
+                content: err.message as string ?? "에러가 발생하였습니다",
+              });
+              showErrorModal()
             }
             
           }

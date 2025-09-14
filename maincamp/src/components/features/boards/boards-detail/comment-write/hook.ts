@@ -2,6 +2,7 @@
 
 import { CreateBoardCommentDocument, FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
 import { useMutation } from "@apollo/client";
+import { Modal } from "antd";
 import { useParams } from "next/navigation"
 import { ChangeEvent, useState } from "react";
 
@@ -87,7 +88,11 @@ export default function useCommentWrite(){
             setContents("")
             setIsValid(true)
         } catch (error) {
-            alert("에러가 발생하였습니다. 다시 시도해 주세요.")
+            const showErrorModal = () => Modal.error({
+                title: '에러가 발생하였습니다.',
+                content: error as string ?? "에러가 발생하였습니다",
+              });
+              showErrorModal()
         }
     }
 

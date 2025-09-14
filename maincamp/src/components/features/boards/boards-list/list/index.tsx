@@ -1,17 +1,14 @@
 "use client"
 
 import DataList from "@/components/ui/list/DataList"
-import { FETCH_BOARDS_AND_COUNT } from "@/graphql/queries/board"
-import { useMutation, useQuery } from "@apollo/client"
 import styles from './styles.module.css'
 import ListRow from "@/components/ui/list/ListRow"
 import Button from "@/components/ui/button/Button"
-import { useRouter } from "next/navigation"
 import Sectiontitle from "@/components/ui/section/Sectiontitle"
-import { DELETE_BOARD } from "@/graphql/mutations/board"
-import { Fragment, MouseEvent, useState } from "react"
+import { Fragment } from "react"
 import useBoardsList from "./hook"
 import Pagination from "@/components/ui/list/Pagination"
+import { Board } from "@/commons/graphql/graphql"
 
 
 export default function BoardsList () {
@@ -38,7 +35,7 @@ export default function BoardsList () {
                 // currentPage = {currentPage}
                 // changeCurrentPage={changeCurrentPage}
                 >
-                    {fetchBoards?.map((el: any, index: number) => {
+                    {fetchBoards?.map((el: Board, index: number) => {
                         return(
                             <Fragment key={el._id}>
                             <ListRow
@@ -47,7 +44,7 @@ export default function BoardsList () {
                                 textAlign={textAlign}
                                 _id={el._id}
                                 title={el.title}
-                                writer={el.writer}
+                                writer={el.writer as string}
                                 createdAt={el.createdAt}
                                 currentPage = {currentPage}
                             >

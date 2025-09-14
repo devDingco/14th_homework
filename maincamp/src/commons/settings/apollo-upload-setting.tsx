@@ -4,11 +4,11 @@ import { ApolloClient, ApolloLink, ApolloProvider, InMemoryCache } from "@apollo
 import { createUploadLink } from "apollo-upload-client";
 
 
-// interface IApolloSetting{
-//   children: React.ReactNode
-// }
+interface IApolloSetting{
+  children: React.ReactNode
+}
 
-export default function ApolloUploadSetting(props){
+export default function ApolloUploadSetting({children}: IApolloSetting){
   const uploadLink = createUploadLink({
     uri: "http://main-practice.codebootcamp.co.kr/graphql",
   });
@@ -20,7 +20,7 @@ export default function ApolloUploadSetting(props){
 
   return(
     <ApolloProvider client={client}>
-      {props.pages}
+      {children}
     </ApolloProvider>
   )
 }

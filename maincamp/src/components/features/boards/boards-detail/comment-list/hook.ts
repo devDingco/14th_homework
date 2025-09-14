@@ -1,7 +1,6 @@
 import { FetchBoardCommentsDocument, FetchBoardCommentsQuery, FetchBoardCommentsQueryVariables } from "@/commons/graphql/graphql";
 import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation"
-import { IComment, IUseCommentList } from "./types";
 
 export default function useCommentList(){
 

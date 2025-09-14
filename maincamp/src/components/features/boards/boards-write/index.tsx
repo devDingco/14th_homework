@@ -8,12 +8,12 @@ import styles from './style.module.css'
 import useBoardsWrite from './hook'
 import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
-import { useState } from 'react'
+import { Board } from '@/commons/graphql/graphql'
 
 
 
 
-export default function BoardsWrite({isEdit, data}:{isEdit: boolean, data?:any}){
+export default function BoardsWrite({isEdit, data}:{isEdit: boolean, data?:{fetchBoard: Board}}){
 
     const { onChangeWriter, 
         onChangePassword, 

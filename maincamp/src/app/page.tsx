@@ -1,7 +1,4 @@
 import Button from '@/components/ui/button/Button'
-import { Inputfield, Textareafield } from '@/components/ui/input/Inputfield';
-import InputImage from '@/components/ui/input/InputImage';
-import InputZipcode from '@/components/ui/input/InputBoardAddress';
 import Link from 'next/link';
 
 export default function Home() {

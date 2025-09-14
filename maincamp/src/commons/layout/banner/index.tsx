@@ -7,7 +7,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import styles from './style.module.css'
 
 
-export default function BoardsBanner(){
+export default function LayoutBanner(){
     return(
         <>
         <Swiper
@@ -28,7 +28,7 @@ export default function BoardsBanner(){
                     width={0}
                     height={0}
                     sizes='100vw'
-                    style={{width: "100vw", height:"32rem", objectFit:"cover", objectPosition:"50% 90%"}}    
+                    style={{width: "100%", height:"32rem", objectFit:"cover", objectPosition:"50% 90%"}}    
                 />
             </SwiperSlide>
             <SwiperSlide>
@@ -38,7 +38,7 @@ export default function BoardsBanner(){
                     width={0}
                     height={0}
                     sizes='100vw'
-                    style={{width: "100vw", height:"32rem", objectFit:"cover", objectPosition:"50% 80%"}}    
+                    style={{width: "100%", height:"32rem", objectFit:"cover", objectPosition:"50% 80%"}}    
                 />
             </SwiperSlide>
             <SwiperSlide>
@@ -48,7 +48,7 @@ export default function BoardsBanner(){
                     width={0}
                     height={0}
                     sizes='100vw'
-                    style={{width: "100vw", height:"32rem", objectFit:"cover", objectPosition:"50% 55%"}}    
+                    style={{width: "100%", height:"32rem", objectFit:"cover", objectPosition:"50% 55%"}}    
                 />
             </SwiperSlide>
         </Swiper>

@@ -1,5 +1,6 @@
 import { DislikeBoardDocument, FetchBoardDocument, LikeBoardDocument } from "@/commons/graphql/graphql";
 import { useMutation, useQuery } from "@apollo/client";
+import { Modal } from "antd";
 import { formatInTimeZone } from "date-fns-tz";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -48,7 +49,11 @@ export default function useBoardsDetail () {
             const count = result?.data?.likeBoard as number
             setLikeCount(count)
         } catch(error){
-            alert("에러발생")
+            const showErrorModal = () => Modal.error({
+                title: '에러가 발생하였습니다.',
+                content: error as string ?? "에러가 발생하였습니다",
+              });
+              showErrorModal()
         }
     }
 
@@ -67,9 +72,13 @@ export default function useBoardsDetail () {
             })
             console.log("🚀 ~ onClickdislikeBoard ~ result.dislikeBoard:", result?.data?.dislikeBoard)
             const count = result?.data?.dislikeBoard as number
-            setDislikeCount(count)
+            setDislikeCount(count);
         } catch(error){
-            alert("에러발생")
+            const showErrorModal = () => Modal.error({
+                title: '에러가 발생하였습니다.',
+                content: error as string ?? "에러가 발생하였습니다",
+              });
+              showErrorModal()
         }
     }
 
@@ -105,6 +114,7 @@ export default function useBoardsDetail () {
         onClickLikeBoard,
         likeValue,
         onClickdislikeBoard,
-        dislikeValue
+        dislikeValue,
+
     }
 }
