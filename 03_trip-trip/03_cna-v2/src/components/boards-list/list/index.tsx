@@ -21,7 +21,6 @@ const IMAGE_SRC = {
 export default function BoardsListComponent() {
   const [hoveredId, setHoveredId] = useState('')
   const { data } = useQuery<FetchBoardsQuery, FetchBoardsQueryVariables>(FetchBoardsDocument)
-  console.log('boards 페이지에서 data.fetchBoards::::', data?.fetchBoards)
 
   const { onClickDelete, onClickDetail } = useBoardsList({ hoveredId })
 
@@ -57,7 +56,12 @@ export default function BoardsListComponent() {
                   onClick={onClickDelete}
                   className={hoveredId === el._id ? styles.showButton : styles.hidden}
                 >
-                  <Image src={IMAGE_SRC.deleteImage.src} alt={IMAGE_SRC.deleteImage.alt} />
+                  <Image
+                    src={IMAGE_SRC.deleteImage.src}
+                    alt={IMAGE_SRC.deleteImage.alt}
+                    width={0}
+                    height={0}
+                  />
                 </span>
               </div>
             </button>

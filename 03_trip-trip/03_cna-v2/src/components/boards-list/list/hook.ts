@@ -23,7 +23,7 @@ export default function useBoardsList(props: BoardListProps) {
         variables: { boardId: props.hoveredId },
         refetchQueries: [{ query: FetchBoardsDocument }],
       })
-      console.log('삭제 성공:', response?.data?.deleteBoard?.message)
+      console.log('삭제 성공')
     } catch (err) {
       console.error('삭제실패')
     }

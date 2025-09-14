@@ -1,19 +1,17 @@
-/* styles.module.css */
-
 .boardInnerBody {
   width: 100%;
 }
 
 .boardFrame {
   display: flex;
-
   width: 100%;
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  /* align-self: stretch; */
   padding: 24px 48px;
-  /* background-color: aqua; */
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
 }
 
 .boardHeader {
