@@ -553,13 +553,74 @@ export type FetchBoardQuery = {
   };
 };
 
-export type DeleteBoardMutationVariables = Exact<{
+export type FetchBoardCommentsQueryVariables = Exact<{
   boardId: Scalars["ID"]["input"];
 }>;
 
-export type DeleteBoardMutation = {
+export type FetchBoardCommentsQuery = {
+  __typename?: "Query";
+  fetchBoardComments: Array<{
+    __typename?: "BoardComment";
+    _id: string;
+    writer?: string | null;
+    contents: string;
+    rating: number;
+    createdAt: any;
+    updatedAt: any;
+    deletedAt?: any | null;
+  }>;
+};
+
+export type CreateBoardCommentMutationVariables = Exact<{
+  createBoardCommentInput: CreateBoardCommentInput;
+  boardId: Scalars["ID"]["input"];
+}>;
+
+export type CreateBoardCommentMutation = {
   __typename?: "Mutation";
-  deleteBoard: string;
+  createBoardComment: {
+    __typename?: "BoardComment";
+    _id: string;
+    writer?: string | null;
+    contents: string;
+    rating: number;
+    createdAt: any;
+  };
+};
+
+export type FetchBoardCommentsQueryVariables = Exact<{
+  boardId: Scalars["ID"]["input"];
+}>;
+
+export type FetchBoardCommentsQuery = {
+  __typename?: "Query";
+  fetchBoardComments: Array<{
+    __typename?: "BoardComment";
+    _id: string;
+    writer?: string | null;
+    contents: string;
+    rating: number;
+    createdAt: any;
+  }>;
+};
+
+export type CreateCommentMutationVariables = Exact<{
+  createBoardCommentInput: CreateBoardCommentInput;
+  boardId: Scalars["ID"]["input"];
+}>;
+
+export type CreateCommentMutation = {
+  __typename?: "Mutation";
+  createBoardComment: {
+    __typename?: "BoardComment";
+    _id: string;
+    writer?: string | null;
+    contents: string;
+    rating: number;
+    createdAt: any;
+    updatedAt: any;
+    deletedAt?: any | null;
+  };
 };
 
 export type CreateBoardMutationVariables = Exact<{
@@ -594,6 +655,44 @@ export type UpdateBoardMutation = {
     contents: string;
     createdAt: any;
   };
+};
+
+export type FetchBoardsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type FetchBoardsQuery = {
+  __typename?: "Query";
+  fetchBoards: Array<{
+    __typename?: "Board";
+    _id: string;
+    title: string;
+    writer?: string | null;
+    contents: string;
+    createdAt: any;
+    youtubeUrl?: string | null;
+    likeCount: number;
+    dislikeCount: number;
+    images?: Array<string> | null;
+    updatedAt: any;
+    boardAddress?: {
+      __typename?: "BoardAddress";
+      _id: string;
+      zipcode?: string | null;
+      address?: string | null;
+      addressDetail?: string | null;
+      createdAt: any;
+      updatedAt: any;
+      deletedAt?: any | null;
+    } | null;
+  }>;
+};
+
+export type DeleteBoardMutationVariables = Exact<{
+  boardId: Scalars["ID"]["input"];
+}>;
+
+export type DeleteBoardMutation = {
+  __typename?: "Mutation";
+  deleteBoard: string;
 };
 
 export const FetchBoardDocument = {
@@ -648,13 +747,13 @@ export const FetchBoardDocument = {
     },
   ],
 } as unknown as DocumentNode<FetchBoardQuery, FetchBoardQueryVariables>;
-export const DeleteBoardDocument = {
+export const FetchBoardCommentsDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
-      operation: "mutation",
-      name: { kind: "Name", value: "deleteBoard" },
+      operation: "query",
+      name: { kind: "Name", value: "fetchBoardComments" },
       variableDefinitions: [
         {
           kind: "VariableDefinition",
@@ -673,7 +772,7 @@ export const DeleteBoardDocument = {
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "deleteBoard" },
+            name: { kind: "Name", value: "fetchBoardComments" },
             arguments: [
               {
                 kind: "Argument",
@@ -684,12 +783,183 @@ export const DeleteBoardDocument = {
                 },
               },
             ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "writer" } },
+                { kind: "Field", name: { kind: "Name", value: "contents" } },
+                { kind: "Field", name: { kind: "Name", value: "rating" } },
+                { kind: "Field", name: { kind: "Name", value: "createdAt" } },
+                { kind: "Field", name: { kind: "Name", value: "updatedAt" } },
+                { kind: "Field", name: { kind: "Name", value: "deletedAt" } },
+              ],
+            },
           },
         ],
       },
     },
   ],
-} as unknown as DocumentNode<DeleteBoardMutation, DeleteBoardMutationVariables>;
+} as unknown as DocumentNode<
+  FetchBoardCommentsQuery,
+  FetchBoardCommentsQueryVariables
+>;
+export const CreateBoardCommentDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "CreateBoardComment" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "createBoardCommentInput" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "CreateBoardCommentInput" },
+            },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "boardId" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ID" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "createBoardComment" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "createBoardCommentInput" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "createBoardCommentInput" },
+                },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "boardId" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "boardId" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "writer" } },
+                { kind: "Field", name: { kind: "Name", value: "contents" } },
+                { kind: "Field", name: { kind: "Name", value: "rating" } },
+                { kind: "Field", name: { kind: "Name", value: "createdAt" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  CreateBoardCommentMutation,
+  CreateBoardCommentMutationVariables
+>;
+export const CreateCommentDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "CreateComment" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "createBoardCommentInput" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "CreateBoardCommentInput" },
+            },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "boardId" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ID" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "createBoardComment" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "createBoardCommentInput" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "createBoardCommentInput" },
+                },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "boardId" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "boardId" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "writer" } },
+                { kind: "Field", name: { kind: "Name", value: "contents" } },
+                { kind: "Field", name: { kind: "Name", value: "rating" } },
+                { kind: "Field", name: { kind: "Name", value: "createdAt" } },
+                { kind: "Field", name: { kind: "Name", value: "updatedAt" } },
+                { kind: "Field", name: { kind: "Name", value: "deletedAt" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  CreateCommentMutation,
+  CreateCommentMutationVariables
+>;
 export const CreateBoardDocument = {
   kind: "Document",
   definitions: [
@@ -835,3 +1105,116 @@ export const UpdateBoardDocument = {
     },
   ],
 } as unknown as DocumentNode<UpdateBoardMutation, UpdateBoardMutationVariables>;
+export const FetchBoardsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "fetchBoards" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "fetchBoards" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "writer" } },
+                { kind: "Field", name: { kind: "Name", value: "contents" } },
+                { kind: "Field", name: { kind: "Name", value: "createdAt" } },
+                { kind: "Field", name: { kind: "Name", value: "youtubeUrl" } },
+                { kind: "Field", name: { kind: "Name", value: "likeCount" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "dislikeCount" },
+                },
+                { kind: "Field", name: { kind: "Name", value: "images" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "boardAddress" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "_id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "zipcode" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "address" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "addressDetail" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "createdAt" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "updatedAt" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "deletedAt" },
+                      },
+                    ],
+                  },
+                },
+                { kind: "Field", name: { kind: "Name", value: "updatedAt" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<FetchBoardsQuery, FetchBoardsQueryVariables>;
+export const DeleteBoardDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "deleteBoard" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "boardId" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ID" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "deleteBoard" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "boardId" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "boardId" },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeleteBoardMutation, DeleteBoardMutationVariables>;

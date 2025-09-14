@@ -1,16 +1,17 @@
-import styles from "../boards-detail/style.module.css";
+import styles from "./styles.module.css";
 import Image from "next/image";
-import { useBoardsDetail } from "../boards-detail/hook";
+import { useBoardsDetail } from "./hook";
 
-import 프로필이미지 from "./assets/img.svg";
-import 링크 from "./assets/link.svg";
-import 위치 from "./assets/location.svg";
-import 해변사진 from "./assets/beach.jpg";
-import 비디오사진 from "./assets/video.jpg";
-import 검정하트 from "./assets/bad.svg";
-import 빨강하트 from "./assets/good.svg";
-import 목록 from "./assets/list.svg";
-import 수정 from "./assets/pencil.svg";
+import 프로필이미지 from "../assets/img.svg";
+import 링크 from "../assets/link.svg";
+import 위치 from "../assets/location.svg";
+import 해변사진 from "../assets/beach.jpg";
+import 비디오사진 from "../assets/video.jpg";
+import 검정하트 from "../assets/bad.svg";
+import 빨강하트 from "../assets/good.svg";
+import 목록 from "../assets/list.svg";
+import 수정 from "../assets/pencil.svg";
+
 //-------------------------------
 
 export default function BoardsDetail() {

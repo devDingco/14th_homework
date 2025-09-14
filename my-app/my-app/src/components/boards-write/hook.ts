@@ -49,6 +49,7 @@ export const useBoardsComponentWrite = (isEdit: boolean) => {
   const onClickSignup = async () => {
     try {
       const result = await 게시글등록API요청함수({
+        //여기서 result는 mutation 실행 후 반환된 "변경 결과"
         variables: {
           createBoardInput: { writer, password, title, contents },
         },
