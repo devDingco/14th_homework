@@ -186,16 +186,12 @@
   color: #ffffff;
 }
 
-.enroll-submit-button {
-  opacity: 0.5;
+.enroll-submit-button:disabled {
+  opacity: 1;
   cursor: not-allowed;
-  background-color: gray;
-}
-
-.enroll-submit-button[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
-  background-color: gray;
+  background-color: #cccccc !important;
+  color: #666666 !important;
+  border: 1px solid #dddddd !important;
 }
 
 .enroll-button-container {

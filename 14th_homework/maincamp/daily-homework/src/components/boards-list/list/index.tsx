@@ -1,10 +1,11 @@
 'use client';
 
-import useMapBoardsDeletePage from './hooks';
+import { trackSynchronousRequestDataAccessInDev } from 'next/dist/server/app-render/dynamic-rendering';
+import useNewBoardsPage from './hooks';
 import styles from './styles.module.css';
 
-export default function MapBoardsDeletePage() {
-  const { data, deleteBoard, onClickDelete, number, router } = useMapBoardsDeletePage();
+export default function NewBoardsPage() {
+  const { data, deleteBoard, onClickDelete, number, router } = useNewBoardsPage();
 
   return (
     <div className={styles.layout}>

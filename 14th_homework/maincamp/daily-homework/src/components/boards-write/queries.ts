@@ -7,6 +7,12 @@ export const CREATE_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
       createdAt
       updatedAt
     }
@@ -21,6 +27,12 @@ export const UPDATE_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
       updatedAt
     }
   }
@@ -33,6 +45,12 @@ export const FETCH_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
       createdAt
       updatedAt
     }

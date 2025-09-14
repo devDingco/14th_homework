@@ -1,14 +1,41 @@
 'use client';
 
-import { gql, useQuery } from '@apollo/client';
-import { useRouter, useParams } from 'next/navigation';
 import styles from './styles.module.css';
-import dayjs from 'dayjs';
 import useDetail from './hook';
 import { D_Variables } from './types';
+import { ThumbDown, ThumbUp, List, Edit } from '@mui/icons-material';
+import { Tooltip } from '@mui/material';
+import YouTube from 'react-youtube';
 
 export default function Detail(props: D_Variables) {
   const { url, router, d_variables, data, dt, koreaTime, loading, error } = useDetail();
+
+  // YouTube URL에서 비디오 ID 추출
+  const extractYouTubeVideoId = (url: string): string | null => {
+    if (!url) return null;
+
+    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[7].length === 11 ? match[7] : null;
+  };
+
+  // 주소 정보를 포맷팅
+  const formatAddress = (): string => {
+    const boardAddress = (data?.fetchBoard as any)?.boardAddress;
+    if (!boardAddress) return '';
+
+    const parts = [];
+    if (boardAddress.zipcode) parts.push(`우편번호: ${boardAddress.zipcode}`);
+    if (boardAddress.address) parts.push(`주소: ${boardAddress.address}`);
+    if (boardAddress.addressDetail) parts.push(`상세주소: ${boardAddress.addressDetail}`);
+
+    return parts.length > 0 ? parts.join('\n') : '';
+  };
+
+  // 디버깅용 로그
+  console.log('상세 페이지 데이터:', data);
+  console.log('YouTube URL:', (data?.fetchBoard as any)?.youtubeUrl);
+  console.log('주소 정보:', (data?.fetchBoard as any)?.boardAddress);
 
   if (loading) return <div>로딩 중...</div>;
   if (error) return <div>에러가 발생했습니다: {error.message}</div>;
@@ -42,43 +69,98 @@ export default function Detail(props: D_Variables) {
                 fill="#333333"
               />
             </svg>
-            <svg xmlns="./location.svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M12.0001 19.5135C13.9565 17.7622 15.4536 16.0823 16.4914 14.474C17.5292 12.8657 18.0481 11.457 18.0481 10.248C18.0481 8.425 17.469 6.92633 16.3106 5.752C15.1523 4.57767 13.7155 3.9905 12.0001 3.9905C10.2848 3.9905 8.84798 4.57767 7.68965 5.752C6.53131 6.92633 5.95215 8.425 5.95215 10.248C5.95215 11.457 6.47107 12.8657 7.5089 14.474C8.54673 16.0823 10.0438 17.7622 12.0001 19.5135ZM12.0001 20.9403C11.8053 20.9403 11.6105 20.9067 11.4156 20.8395C11.2206 20.7722 11.0443 20.668 10.8866 20.527C9.98932 19.7 9.14957 18.8483 8.3674 17.972C7.5854 17.0958 6.90565 16.2199 6.32815 15.3443C5.75048 14.4686 5.2934 13.6007 4.9569 12.7405C4.6204 11.8802 4.45215 11.0493 4.45215 10.248C4.45215 7.94033 5.19856 6.07208 6.6914 4.64325C8.1844 3.21442 9.95398 2.5 12.0001 2.5C14.0463 2.5 15.8159 3.21442 17.3089 4.64325C18.8017 6.07208 19.5481 7.94033 19.5481 10.248C19.5481 11.0493 19.3799 11.8785 19.0434 12.7355C18.7069 13.5927 18.2515 14.4607 17.6771 15.3395C17.1026 16.2183 16.4244 17.0943 15.6424 17.9672C14.8604 18.8404 14.0206 19.6904 13.1231 20.5173C12.9678 20.6583 12.7912 20.764 12.5934 20.8345C12.3957 20.905 12.198 20.9403 12.0001 20.9403ZM12.0019 11.8652C12.4994 11.8652 12.9247 11.6881 13.2779 11.3338C13.6312 10.9794 13.8079 10.5535 13.8079 10.056C13.8079 9.5585 13.6307 9.13308 13.2764 8.77975C12.9221 8.42658 12.4961 8.25 11.9984 8.25C11.5009 8.25 11.0756 8.42717 10.7224 8.7815C10.3691 9.13583 10.1924 9.56183 10.1924 10.0595C10.1924 10.557 10.3696 10.9823 10.7239 11.3355C11.0782 11.6887 11.5042 11.8652 12.0019 11.8652Z"
-                fill="#333333"
-              />
-            </svg>
+            <Tooltip
+              title={formatAddress() || '주소 정보가 없습니다'}
+              placement="top"
+              arrow
+              sx={{
+                '& .MuiTooltip-tooltip': {
+                  backgroundColor: '#333',
+                  color: '#fff',
+                  fontSize: '12px',
+                  maxWidth: '300px',
+                  whiteSpace: 'pre-line',
+                },
+                '& .MuiTooltip-arrow': {
+                  color: '#333',
+                },
+              }}
+            >
+              <svg
+                xmlns="./location.svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                style={{ cursor: 'pointer' }}
+              >
+                <path
+                  d="M12.0001 19.5135C13.9565 17.7622 15.4536 16.0823 16.4914 14.474C17.5292 12.8657 18.0481 11.457 18.0481 10.248C18.0481 8.425 17.469 6.92633 16.3106 5.752C15.1523 4.57767 13.7155 3.9905 12.0001 3.9905C10.2848 3.9905 8.84798 4.57767 7.68965 5.752C6.53131 6.92633 5.95215 8.425 5.95215 10.248C5.95215 11.457 6.47107 12.8657 7.5089 14.474C8.54673 16.0823 10.0438 17.7622 12.0001 19.5135ZM12.0001 20.9403C11.8053 20.9403 11.6105 20.9067 11.4156 20.8395C11.2206 20.7722 11.0443 20.668 10.8866 20.527C9.98932 19.7 9.14957 18.8483 8.3674 17.972C7.5854 17.0958 6.90565 16.2199 6.32815 15.3443C5.75048 14.4686 5.2934 13.6007 4.9569 12.7405C4.6204 11.8802 4.45215 11.0493 4.45215 10.248C4.45215 7.94033 5.19856 6.07208 6.6914 4.64325C8.1844 3.21442 9.95398 2.5 12.0001 2.5C14.0463 2.5 15.8159 3.21442 17.3089 4.64325C18.8017 6.07208 19.5481 7.94033 19.5481 10.248C19.5481 11.0493 19.3799 11.8785 19.0434 12.7355C18.7069 13.5927 18.2515 14.4607 17.6771 15.3395C17.1026 16.2183 16.4244 17.0943 15.6424 17.9672C14.8604 18.8404 14.0206 19.6904 13.1231 20.5173C12.9678 20.6583 12.7912 20.764 12.5934 20.8345C12.3957 20.905 12.198 20.9403 12.0001 20.9403ZM12.0019 11.8652C12.4994 11.8652 12.9247 11.6881 13.2779 11.3338C13.6312 10.9794 13.8079 10.5535 13.8079 10.056C13.8079 9.5585 13.6307 9.13308 13.2764 8.77975C12.9221 8.42658 12.4961 8.25 11.9984 8.25C11.5009 8.25 11.0756 8.42717 10.7224 8.7815C10.3691 9.13583 10.1924 9.56183 10.1924 10.0595C10.1924 10.557 10.3696 10.9823 10.7239 11.3355C11.0782 11.6887 11.5042 11.8652 12.0019 11.8652Z"
+                  fill="#333333"
+                />
+              </svg>
+            </Tooltip>
             {/* </div> */}
           </div>
         </div>
       </div>
       <img src="/image1.jpg" width="400" height="531" />
       <div className={styles['D_content']}>{data?.fetchBoard?.contents}</div>
+
+      {/* YouTube 플레이어 */}
       <div className={styles['D_preview']}>
-        <img src="/Frame.png" />
+        {(data?.fetchBoard as any)?.youtubeUrl && (
+          <div className={styles['youtube-container']}>
+            <YouTube
+              videoId={extractYouTubeVideoId((data?.fetchBoard as any)?.youtubeUrl) || ''}
+              opts={{
+                width: '100%',
+                height: '400',
+                playerVars: {
+                  autoplay: 0,
+                  rel: 0,
+                  modestbranding: 1,
+                },
+              }}
+              onError={(error) => console.error('YouTube 플레이어 에러:', error)}
+            />
+          </div>
+        )}
       </div>
 
       <div className={styles.Like}>
         <div className={styles['bad-area']}>
-          <img src="/bad.png" width="24" height="24" />
+          <ThumbDown
+            style={{
+              fontSize: 24,
+              color: '#666',
+              cursor: 'pointer',
+            }}
+          />
           <div>12</div>
         </div>
         <div className={styles['good-area']}>
-          <img src="/good.png" width="24" height="24" />
+          <ThumbUp
+            style={{
+              fontSize: 24,
+              color: '#e74c3c',
+              cursor: 'pointer',
+            }}
+          />
           <div>24</div>
         </div>
       </div>
 
       <div className={styles['D_button']}>
         <button className={styles.button}>
-          <img src="/menu.png" width="24" height="24" />
+          <List style={{ fontSize: 24 }} />
           <p>목록으로</p>
         </button>
         <button
           className={styles.button}
           onClick={() => router.push(`/boards/${url.boardId}/edit`)}
         >
-          <img src="/edit.png" />
+          <Edit style={{ fontSize: 24 }} />
           수정하기
         </button>
       </div>

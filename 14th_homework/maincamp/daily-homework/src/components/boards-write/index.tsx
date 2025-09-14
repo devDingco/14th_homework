@@ -2,6 +2,8 @@
 import styles from './styles.module.css';
 import useBoardsWriteAdvanced from './hook';
 import { BoardVariables } from './types';
+import DaumPostcodeEmbed from 'react-daum-postcode';
+import { Modal } from 'antd';
 
 export default function BoardsWriteAdvanced(props: BoardVariables) {
   const {
@@ -9,16 +11,27 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
     onChangePassword,
     onChangeTitle,
     onChangeContent,
+    onChangeAddressDetail,
+    onChangeYoutubeUrl,
     onclickUpdate,
     onClickSubmit,
     error,
     checkRegister,
+    isModalOpen,
+    showModal,
+    handleOk,
+    handleCancel,
+    handleComplete,
+    zipcode,
+    address,
+    addressDetail,
+    youtubeUrl,
   } = useBoardsWriteAdvanced(props);
-
+  // console.log('🚀 ~ checkRegister:', checkRegister());
   return (
     <div className={styles.layout}>
       <div className={styles['enroll-subject']}>
-        <div className={styles['enroll-subject-text']}>게시물 등록</div>
+        <div className={styles['enroll-subject-text']}>게시물 {props.isEdit ? '수정' : '등록'}</div>
       </div>
       <div className={styles['enroll-row-container']}>
         <div className={styles['enroll-row-section']}>
@@ -97,16 +110,32 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
             <div>주소</div>
           </div>
           <div className={styles['enroll-address-firstrow']}>
-            <input type="number" className={styles['zipcode-input']} placeholder="12345" />
-            <button className={styles['zipcode-search-button']}>우편번호 검색</button>
+            <input
+              type="text"
+              className={styles['zipcode-input']}
+              placeholder="12345"
+              value={zipcode}
+              readOnly
+            />
+            <button className={styles['zipcode-search-button']} onClick={showModal}>
+              우편번호 검색
+            </button>
           </div>
 
           <input
             placeholder="주소를 입력해주세요."
             className={styles['enroll-input']}
             type="text"
+            value={address}
+            readOnly
           />
-          <input placeholder="상세주소" className={styles['enroll-input']} type="text" />
+          <input
+            placeholder="상세주소"
+            className={styles['enroll-input']}
+            type="text"
+            value={addressDetail}
+            onChange={onChangeAddressDetail}
+          />
         </div>
         {/* border */}
         <div className={styles['enroll-border']}></div>
@@ -114,7 +143,12 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
           <div className={styles['enroll-form-title']}>
             <div>유튜브 링크</div>
           </div>
-          <input className={styles['enroll-input']} placeholder="링크를 입력해 주세요." />
+          <input
+            className={styles['enroll-input']}
+            placeholder="링크를 입력해 주세요."
+            value={youtubeUrl}
+            onChange={onChangeYoutubeUrl}
+          />
         </div>
 
         {/* border */}
@@ -142,6 +176,11 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
         </button>
         {/* </Link> */}
       </div>
+      {isModalOpen && (
+        <Modal title="모달 제목" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+          <DaumPostcodeEmbed onComplete={handleComplete} />
+        </Modal>
+      )}
     </div>
   );
 }

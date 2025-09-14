@@ -1,7 +1,13 @@
 'use client';
 
-import MapBoardsDeletePage from '@/components/boards-list';
+import CarouselPage from '@/components/boards-list/banner';
+import NewBoardsPage from '@/components/boards-list/list';
 
 export default function BoardsListPage() {
-  return <MapBoardsDeletePage />;
+  return (
+    <div>
+      <CarouselPage />
+      <NewBoardsPage />
+    </div>
+  );
 }

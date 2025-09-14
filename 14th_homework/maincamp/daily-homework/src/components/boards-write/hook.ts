@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useEffect, useMemo } from 'react';
 
 import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from './queries';
 import { Errors, BoardVariables } from './types';
@@ -19,6 +19,38 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
   const [title, setTitle] = useState<string>(props.data?.fetchBoard?.title || '');
   const [contents, setContents] = useState<string>(props.data?.fetchBoard?.contents || '');
 
+  const [zipcode, setZipcode] = useState<string>(
+    (props.data?.fetchBoard as any)?.boardAddress?.zipcode || ''
+  );
+  const [address, setAddress] = useState<string>(
+    (props.data?.fetchBoard as any)?.boardAddress?.address || ''
+  );
+  const [addressDetail, setAddressDetail] = useState<string>(
+    (props.data?.fetchBoard as any)?.boardAddress?.addressDetail || ''
+  );
+
+  const [youtubeUrl, setYoutubeUrl] = useState<string>(
+    (props.data?.fetchBoard as any)?.youtubeUrl || ''
+  );
+
+  // 데이터가 로드된 후 state 업데이트
+  useEffect(() => {
+    if (props.data?.fetchBoard) {
+      const board = props.data.fetchBoard as any;
+      console.log('데이터 로드됨:', board);
+
+      if (board.boardAddress) {
+        setZipcode(board.boardAddress.zipcode || '');
+        setAddress(board.boardAddress.address || '');
+        setAddressDetail(board.boardAddress.addressDetail || '');
+      }
+
+      if (board.youtubeUrl) {
+        setYoutubeUrl(board.youtubeUrl);
+      }
+    }
+  }, [props.data]);
+
   const [apiRequire] = useMutation<CreateBoardMutation, CreateBoardMutationVariables>(
     CreateBoardDocument
   );
@@ -27,14 +59,30 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     if (!checkRegister()) {
       return;
     }
+    // 주소 정보가 모두 비어있으면 boardAddress를 보내지 않음
+    const createBoardInput: any = {
+      writer,
+      password,
+      title,
+      contents,
+    };
+
+    // 유튜브 URL이 있으면 추가
+    if (youtubeUrl.trim()) {
+      createBoardInput.youtubeUrl = youtubeUrl;
+    }
+
+    // 주소 정보가 하나라도 있으면 boardAddress 추가
+    if (zipcode || address || addressDetail) {
+      createBoardInput.boardAddress = {};
+      if (zipcode) createBoardInput.boardAddress.zipcode = zipcode;
+      if (address) createBoardInput.boardAddress.address = address;
+      if (addressDetail) createBoardInput.boardAddress.addressDetail = addressDetail;
+    }
+
     const result = await apiRequire({
       variables: {
-        createBoardInput: {
-          writer,
-          password,
-          title,
-          contents,
-        },
+        createBoardInput,
       },
     });
     // console.log(result);
@@ -57,14 +105,42 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
       return;
     }
 
-    const updateBoardInput: { title: string; contents: string } = {
+    const updateBoardInput: {
+      title: string;
+      contents: string;
+      youtubeUrl?: string;
+      boardAddress?: {
+        zipcode?: string;
+        address?: string;
+        addressDetail?: string;
+      };
+    } = {
       title: '',
       contents: '',
     };
 
-    // 현재 값 또는 기존 값 사용 (변경되지 않았어도 전송)
+    // 현재 값 또는 기존 값 사용
     updateBoardInput.title = title.trim() || props.data?.fetchBoard?.title || '';
     updateBoardInput.contents = contents.trim() || props.data?.fetchBoard?.contents || '';
+
+    // 유튜브 URL 처리
+    const currentYoutubeUrl = youtubeUrl || (props.data?.fetchBoard as any)?.youtubeUrl || '';
+    if (currentYoutubeUrl.trim()) {
+      updateBoardInput.youtubeUrl = currentYoutubeUrl;
+    }
+
+    // 주소 정보 처리
+    const currentZipcode = zipcode || (props.data?.fetchBoard as any)?.boardAddress?.zipcode || '';
+    const currentAddress = address || (props.data?.fetchBoard as any)?.boardAddress?.address || '';
+    const currentAddressDetail =
+      addressDetail || (props.data?.fetchBoard as any)?.boardAddress?.addressDetail || '';
+
+    if (currentZipcode || currentAddress || currentAddressDetail) {
+      updateBoardInput.boardAddress = {};
+      if (currentZipcode) updateBoardInput.boardAddress.zipcode = currentZipcode;
+      if (currentAddress) updateBoardInput.boardAddress.address = currentAddress;
+      if (currentAddressDetail) updateBoardInput.boardAddress.addressDetail = currentAddressDetail;
+    }
 
     try {
       const result = await reviseApiRequire({
@@ -105,6 +181,13 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     setContents(event.target.value);
     if (error.contents) setErrors((prev) => ({ ...prev, contents: '' }));
   };
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
+  };
+
+  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(event.target.value);
+  };
 
   const checkRegister = (): boolean => {
     const e: Errors = {};
@@ -136,14 +219,55 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
 
   //    const checkSubmit = [writer, password, title, content].every((v) => v.trim().length > 0);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  interface DaumPostcodeData {
+    zonecode: string;
+    address: string;
+    addressType: string;
+    bname: string;
+    buildingName: string;
+  }
+
+  const handleComplete = (data: DaumPostcodeData) => {
+    console.log(data);
+    setZipcode(data.zonecode);
+    setAddress(data.address);
+    setIsModalOpen(false);
+  };
+
   return {
     onChangeWriter,
     onChangePassword,
     onChangeTitle,
     onChangeContent,
+    onChangeAddressDetail,
+    onChangeYoutubeUrl,
     onclickUpdate,
     onClickSubmit,
     error,
     checkRegister,
+    isModalOpen,
+    showModal,
+    handleOk,
+    handleCancel,
+    handleComplete,
+    // 주소 관련 state들
+    zipcode,
+    address,
+    addressDetail,
+    youtubeUrl,
   };
 }

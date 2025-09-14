@@ -1,7 +1,9 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  turbopack: {
+    root: '/Users/choi/Desktop/my-homework/14th_homework/maincamp/daily-homework',
+  },
 };
 
 export default nextConfig;

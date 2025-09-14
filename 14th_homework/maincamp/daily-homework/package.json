@@ -11,12 +11,23 @@
   },
   "dependencies": {
     "@apollo/client": "~3.11.10",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@graphql-typed-document-node/core": "^3.2.0",
+    "@mui/icons-material": "^7.3.2",
+    "@mui/material": "^7.3.2",
+    "antd": "^5.27.3",
     "dayjs": "^1.11.18",
     "graphql": "16.11.0",
     "next": "15.5.2",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-daum-postcode": "^3.2.0",
+    "react-dom": "19.1.0",
+    "react-player": "^3.3.2",
+    "react-rating-stars-component": "^2.2.0",
+    "react-tooltip": "^5.29.1",
+    "react-youtube": "^10.1.0",
+    "swiper": "^12.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

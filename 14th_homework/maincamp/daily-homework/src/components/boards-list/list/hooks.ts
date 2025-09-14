@@ -5,7 +5,7 @@ import { Board } from '@/commons/graphql/graphql';
 import { useRouter } from 'next/navigation';
 import { DELETE_BOARD, FETCH_BOARDS, FETCH_BOARDS_COUNT } from './queries';
 
-export default function useMapBoardsDeletePage() {
+export default function useNewBoardsPage() {
   const { data } = useQuery(FETCH_BOARDS);
   const [deleteBoard] = useMutation(DELETE_BOARD);
 

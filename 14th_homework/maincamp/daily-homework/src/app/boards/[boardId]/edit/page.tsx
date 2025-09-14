@@ -8,12 +8,12 @@ import { useParams } from 'next/navigation';
 export default function BoardComponentEditPage() {
   const myUrl = useParams();
 
-  const { data } = useQuery(FETCH_BOARD, {
+  const { data, loading, error } = useQuery(FETCH_BOARD, {
     variables: {
       boardId: String(myUrl.boardId),
     },
   });
-  // console.log(data);
+  console.log('수정 페이지 데이터:', data);
 
   return <BoardsWriteAdvanced isEdit={true} data={data} />;
 }

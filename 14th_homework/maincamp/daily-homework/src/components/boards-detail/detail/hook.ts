@@ -5,7 +5,6 @@ import { useParams, useRouter } from 'next/navigation';
 import { ChangeEvent, useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import { FETCH_BOARD } from './queries';
-import { D_Variables } from './types';
 
 export default function useDetail() {
   const url = useParams();

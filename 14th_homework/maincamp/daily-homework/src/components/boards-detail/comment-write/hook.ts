@@ -3,7 +3,13 @@ import { useParams, useRouter } from 'next/navigation';
 import { ChangeEvent, useState, useMemo } from 'react';
 import { CommentVariables, Errors } from './types';
 import { CREATE_BOARD_COMMENT } from './queries';
-import { CreateBoardCommentInput, MutationCreateBoardCommentArgs } from '@/commons/graphql/graphql';
+import {
+  CreateBoardCommentInput,
+  MutationCreateBoardCommentArgs,
+  Mutation,
+  Query,
+} from '@/commons/graphql/graphql';
+import { FETCH_BOARD_COMMENTS } from '../comment-list/queries';
 
 export default function useCreateBoardComment(props: CommentVariables) {
   const url = useParams();
@@ -16,7 +22,17 @@ export default function useCreateBoardComment(props: CommentVariables) {
   const [rating, setRating] = useState<number>(0);
 
   const [apiRequire] = useMutation<CreateBoardCommentInput, MutationCreateBoardCommentArgs>(
-    CREATE_BOARD_COMMENT
+    CREATE_BOARD_COMMENT,
+    {
+      // 댓글 등록 후 댓글 목록 다시 불러오기
+      refetchQueries: [
+        {
+          query: FETCH_BOARD_COMMENTS,
+          variables: { boardId: String(url.boardId) },
+        },
+      ],
+      awaitRefetchQueries: true, // refetch 완료까지 기다림
+    }
   );
 
   const onClickCommentSubmit = async () => {
@@ -38,11 +54,12 @@ export default function useCreateBoardComment(props: CommentVariables) {
         },
       });
 
-      // 성공 시 폼 초기화
+      // 성공 시 폼 및 에러 상태 초기화
       setWriter('');
       setPassword('');
       setContents('');
       setRating(0);
+      setErrors({}); // 에러 상태도 초기화
       console.log('댓글 등록 성공:', result);
     } catch (error) {
       console.error('댓글 등록 실패:', error);
@@ -66,6 +83,10 @@ export default function useCreateBoardComment(props: CommentVariables) {
     if (error.contents) setErrors((prev) => ({ ...prev, contents: '' }));
   };
 
+  const onChangeRating = (event: React.SyntheticEvent, newValue: number | null) => {
+    setRating(newValue || 0);
+  };
+
   const validateInputs = (): boolean => {
     const e: Errors = {};
 
@@ -86,11 +107,15 @@ export default function useCreateBoardComment(props: CommentVariables) {
   }, [writer, password, contents]);
 
   return {
+    writer,
+    password,
+    contents,
+    rating,
     onChangeWriter,
     onChangePassword,
     onChangeContent,
+    onChangeRating,
     onClickCommentSubmit,
-    //rating
     isFormValid,
     error,
   };
