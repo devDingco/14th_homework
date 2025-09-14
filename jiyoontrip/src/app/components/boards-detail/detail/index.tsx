@@ -57,13 +57,10 @@ export default function DetailPageComponent() {
           </div>
           <div className={styles.detailContent}>{data?.fetchBoard.contents}</div>
           <div className={styles.detailVideo}>
-            <Image
-              src="/images/sofa.png"
-              alt="SofaImage"
-              width={822}
-              height={464}
-              sizes="100vw"
-            />
+            <iframe
+              src={data?.fetchBoard.youtubeUrl?.replace("watch?v=", "embed/")}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            ></iframe>
           </div>
           <div className={styles.detailHeart}>
             <div className={styles.detailHeart__bad}>

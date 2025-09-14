@@ -5,7 +5,7 @@ export const FETCH_BOARDS = gql`
     fetchBoards {
       _id
       writer
-      title
+      titleㄴ
       contents
       youtubeUrl
       likeCount

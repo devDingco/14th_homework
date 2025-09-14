@@ -66,6 +66,7 @@ export const FETCH_BOARD = gql`
       contents
       likeCount
       dislikeCount
+      youtubeUrl
       images
       boardAddress {
         _id
