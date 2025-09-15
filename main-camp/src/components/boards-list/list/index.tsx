@@ -22,7 +22,7 @@ const BoardsList = () => {
     },[])
 
     return (
-        <div id="main" className={`${styles.list_main}`}>
+        
             <div className={`${styles.board_list_frame} flex_column flex_align_items_center`}>
                 <div className={`${styles.board_list_container}`}>
                     <div className={`${styles.board_list_top} flex_row`}>
@@ -54,7 +54,7 @@ const BoardsList = () => {
                     </ul>
                 </div>
             </div>
-        </div>
+        
     )
 }
 
