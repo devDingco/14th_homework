@@ -39,9 +39,10 @@ const useBoardCommentList = (props?: IUseBoardCommentList) => {
 
     const updateBoardComments = async (event: React.MouseEvent<HTMLImageElement>) => {
         event.stopPropagation()
-        const updateBoardCommentPw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
-        console.log('업데이트 댓글 Id: ', event.currentTarget.dataset.key)
-        console.log('비밀번호 : ', updateBoardCommentPw)
+        alert('아직 구현이 안 됐습니다 :)')
+        // const updateBoardCommentPw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
+        // console.log('업데이트 댓글 Id: ', event.currentTarget.dataset.key)
+        // console.log('비밀번호 : ', updateBoardCommentPw)
     }
 
     const deleteBoardComments = async (event: React.MouseEvent<HTMLImageElement>) => {
@@ -58,7 +59,7 @@ const useBoardCommentList = (props?: IUseBoardCommentList) => {
                 }
             })
             console.log("삭제한 게시글 ID: ",result.data?.deleteBoardComment)
-            
+
         } catch(e: unknown) {
             if (e instanceof ApolloError) {
                 e.graphQLErrors.forEach((e) => {
