@@ -1,6 +1,6 @@
+import { FetchBoardDocument } from "@/commons/gql/graphql";
 import { useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { FetchBoardDocument } from "../../commons/gql/graphql";
 
 export const useBoardsDetail = () => {
   const router = useRouter();

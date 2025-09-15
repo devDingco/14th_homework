@@ -1,8 +1,10 @@
+"use client";
+
 import styles from "../boards-list/style.module.css";
 import Image from "next/image";
-// import { IBoardList } from "./types";
 import deleteIcon from "./assets/delete.svg";
-import { useBoardList } from "../boards-list/hook";
+import { useBoardList } from "./hook";
+// import { IBoardList } from "./types";
 
 export default function BoardList() {
   const { data, onClickMoveDetail, onClickDelete } = useBoardList();
@@ -19,7 +21,7 @@ export default function BoardList() {
       <div className={styles.FetchBoardFrame}>
         <div>
           <div className={styles.FetchBoard}>
-            {data?.fetchBoard?.map(
+            {data?.fetchBoards?.map(
               (
                 el: {
                   _id: string;

@@ -1,21 +1,19 @@
-"use client";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   DeleteBoardDocument,
-  FetchBoardDocument,
+  FetchBoardsDocument,
 } from "../../commons/gql/graphql";
 import { useMutation, useQuery } from "@apollo/client";
 import { MouseEvent } from "react";
 
 export const useBoardList = () => {
   const router = useRouter();
-  const params = useParams<{ boardId: string }>();
-  const { data } = useQuery(FetchBoardDocument, {
-    variables: { boardId: params.boardId },
-  });
-  // ??다시 보기! 잘 모르겠다!
+  // const params = useParams<{ boardId: string }>();
+  const { data } = useQuery(FetchBoardsDocument);
 
   const [deleteBoard] = useMutation(DeleteBoardDocument);
+
+  // ??다시 보기! 잘 모르겠다!
 
   // , {
   // variables: {
@@ -26,9 +24,10 @@ export const useBoardList = () => {
   // params.page가 있다면 params.page를 숫자로 변환해서 쓰고, 없다면 자동으로 page=1
 
   const onClickDelete = async (event: MouseEvent<HTMLImageElement>) => {
+    event.stopPropagation();
     await deleteBoard({
       variables: { boardId: event.currentTarget.id },
-      refetchQueries: [{ query: FetchBoardDocument }],
+      refetchQueries: [{ query: FetchBoardsDocument }],
     });
     alert("삭제되었습니다!!");
   };
