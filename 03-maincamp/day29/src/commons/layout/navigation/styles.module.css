@@ -1,0 +1,44 @@
+.container{
+  width: 192rem;
+  margin: 0 auto;
+  height: 8rem;
+  display: flex;
+  justify-content: center;
+}
+.navigation{
+   width: 128rem;
+   height: 8rem;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+.main{
+  width: 36.4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center; 
+  gap: 2.4rem;
+}
+
+.main__logo{
+  cursor: pointer; 
+}
+.main__menu{
+  display: flex;
+  gap: 1.6rem;
+}
+.main__menu__item{
+font-family: Pretendard Variable;
+font-weight: 700;
+font-style: Bold;
+font-size: 16px; 
+line-height: 24px;
+letter-spacing: 0%;
+text-align: center;
+
+}
+.sub{
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}

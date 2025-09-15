@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import ApolloSetting from "../../commons/providers/06-02-apollo-provider";
-import Layout from "../../commons/layout";
+import ApiProvider from "@/commons/setttings/apollo-setting";
+import Layout from "@/commons/layout";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,15 +27,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+       <head>
+        <link
+          rel="preload"
+          href="/fonts/Pretendard-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ApolloSetting>
-          <Layout>
-          {children}
-          </Layout>
-          </ApolloSetting>
-      </body>
+       <ApiProvider>
+        <Layout>{children}</Layout>
+       </ApiProvider>
+      </body> 
     </html>
   );
 }
