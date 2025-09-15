@@ -1,6 +1,6 @@
+// src/app/layout.tsx
 import "./globals.css";
 import ApolloSetting from "@/commons/settings/apollo-setting";
-import Layout from "@/commons/layout";
 import React from 'react';
 
 export const metadata = {
@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko">
       <body>
         <ApolloSetting>
-          <Layout>{children}</Layout>
+          {children} {/* <= Layout 컴포넌트를 제거하고 children을 직접 렌더링 */}
         </ApolloSetting>
       </body>
     </html>

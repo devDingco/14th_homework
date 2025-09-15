@@ -579,6 +579,7 @@ export type FetchBoardsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type FetchBoardsQuery = { __typename?: 'Query', fetchBoards: Array<{ __typename?: 'Board', _id: string, writer?: string | null, title: string, contents: string, likeCount: number, dislikeCount: number, createdAt: any, updatedAt: any }> };
 
+
 export type DeleteBoardMutationVariables = Exact<{
   boardId: Scalars['ID']['input'];
 }>;
