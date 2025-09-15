@@ -12,7 +12,7 @@ import { Pagination, Scrollbar, Mousewheel, Autoplay } from 'swiper/modules';
 
 
 
-export default function BoardListBannerPage(){
+export default function LayoutBanner(){
 
 // Import Swiper React components
 

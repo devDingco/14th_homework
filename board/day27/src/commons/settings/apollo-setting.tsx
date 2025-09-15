@@ -7,11 +7,11 @@ const client = new ApolloClient({
     cache: new InMemoryCache()
 })
 
-export default function ApolloSetting(props) {
+export default function ApolloSetting({children}) {
 
     return (
         <ApolloProvider client={client}>
-            {props.모든페이지}
+            {children}
         </ApolloProvider>
 
     )

@@ -3,13 +3,20 @@
 
 import style from './style.module.css'
 import useBoardsPage from "./hooks";
+import Modal from 'antd/es/modal/Modal';
+import { useState } from 'react';
 
 
 
 
 
 export default function BoardsPage() {
-    const {data,onclickDelete} = useBoardsPage()
+    const { data,      showModal,
+        handleOk,
+        handleCancel,
+        isModalOpen,
+        saveId
+         } = useBoardsPage()
 
     return (
         <div className={style.page}>
@@ -27,11 +34,22 @@ export default function BoardsPage() {
                             <div className={style.data__title}>{el.title}</div>
                             <div className={style.data__writer}>{el?.writer}</div>
                             <div className={style.data__date}>{el?.createdAt.slice(0, 10).replaceAll("-", ".")}</div>
-                            <div className={style.data__delete}><img src="/assets/icons/delete.png" alt="" id={el?._id} onClick={onclickDelete} /></div>
+                            <div className={style.data__delete}><img src="/assets/icons/delete.png" alt="" id={el?._id} onClick={showModal} /></div>
                         </a>
                     )
                 })}
             </div>
+            <Modal
+                title="게시글 삭제"
+                // closable={{ 'aria-label': 'Custom Close Button' }}
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+            >
+                <p>{saveId}의 게시글을 삭제하시겠습니까?</p>
+            </Modal>
         </div>
+
+
     )
 }
