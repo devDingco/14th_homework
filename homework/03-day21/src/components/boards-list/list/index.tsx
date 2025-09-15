@@ -9,9 +9,9 @@ import useBoardsPage from './hook';
 export default function BoardsPage (props:IBoardsPageProps ) {
     const {
         data,
+        boardsCount,
         onClickBoard,
         onClickDelete,
-        boardsCount,
     } = useBoardsPage()
     
 
@@ -36,7 +36,7 @@ export default function BoardsPage (props:IBoardsPageProps ) {
                                         className={styles.boardsListRow} 
                                         onClick={() => onClickBoard(el._id)}
                                     >
-                                        <p>{boardsCount - index}</p> {/* 게시글 번호 */}
+                                        <p>{(boardsCount - index)}</p> {/* 게시글 번호 */}
                                         <p>{el.title}</p>
                                         <p>{el.writer}</p>
                                         <p>{new Date(el.createdAt).toLocaleDateString("ko-KR")}</p>

@@ -6,7 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { FETCH_BOARD,  } from "./queries";
 import { IDaumPostcodeData, IMyvariables, IUseBoardsWriteProps } from "./types";
 import { CreateBoardDocument, CreateBoardMutation, CreateBoardMutationVariables, FetchBoardDocument, UpdateBoardDocument, UpdateBoardMutation, UpdateBoardMutationVariables } from "@/commons/graphql/graphql";
-
+import { Modal } from "antd";
 
 export default function useBoardsWrite(props: IUseBoardsWriteProps) {
     const router = useRouter()
@@ -97,7 +97,7 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
     // //useState의 초기값을 props.isEdit에 따라 조건부로 설정
     const [isActive, setIsActive] =  useState(props.isEdit ? true : false);
 
-    const [isModalOpen, setIsModalOpen ] = useState()
+    const [isModalOpen, setIsModalOpen ] = useState(false)
 
     const onToggleModal = () => {
         setIsModalOpen((prev) => !prev);
@@ -170,16 +170,17 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
 
             if (result?.data?.createBoard) {
             setInputError("");
-            alert("게시글 등록이 완료되었습니다!");
+            Modal.success({ content: "게시글 등록이 완료되었습니다." })
             } else {
-            setInputError("필수입력 사항입니다.");
+            Modal.error({ content: "필수입력 사항입니다." })
             }
 
             router.push(
             `/boards/${result.data?.createBoard._id}`
             )
         } catch(error){
-            alert("에러가 발생하였습니다. 다시 시도해 주세요.")
+            Modal.error({ content: "에러가 발생하였습니다. 다시 시도해 주세요." })
+
         } finally {
 
         }
@@ -234,7 +235,7 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
 
             if (result?.data?.updateBoard) {
                 setInputError(""); // 성공하면 에러 메시지 초기화
-                alert("게시글이 수정되었습니다!");
+                Modal.success({ content:"게시글이 수정되었습니다!" })
 
                 router.push(`/boards/${result.data.updateBoard._id}`)
             }
@@ -248,7 +249,7 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
               // 3.GraphQL 오류가 있으면 메시지 확인
               if (Array.isArray(maybeGraphQLErrors) && maybeGraphQLErrors.length > 0) {
                 if (maybeGraphQLErrors[0].message.includes("비밀번호")) {
-                  alert("비밀번호가 틀렸습니다.");
+                  Modal.error({ content: "비밀번호가 틀렸습니다." })
                   return;
                 } else {
                   alert(maybeGraphQLErrors[0].message);
@@ -258,7 +259,8 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
             }
           
             // 4. 그 외의 경우 (네트워크 오류 등)
-            alert("에러가 발생하였습니다. 다시 시도해 주세요.");
+            Modal.error({ content: "에러가 발생하였습니다. 다시 시도해 주세요." })
+            
             console.error(error);
         }
           
