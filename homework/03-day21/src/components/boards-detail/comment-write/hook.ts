@@ -6,6 +6,7 @@ import { ChangeEvent, useState } from "react";
 import { ICreateBoardComment, ICreateBoardCommentVariables } from "./types";
 import { CREATE_BOARD_COMMENT } from "./queries";
 import { FETCH_BOARD_COMMENTS } from "../comment-list/queries";
+import { Modal } from "antd";
 
 export default function useBoardCommentWrite() {
     const params = useParams()
@@ -77,17 +78,16 @@ export default function useBoardCommentWrite() {
           });
     
           if (!result.data?.createBoardComment) {
-            setInputError("댓글 등록에 실패했습니다.");
+            Modal.error({ content: "댓글 등록에 실패했습니다." })
             return;
-          }
-    
-          alert("댓글이 등록되었습니다!");
-          setWriter("");
-          setPassword("");
-          setContents("");
-          setRating(0);
+          }    
+            Modal.success({ content:"댓글이 등록되었습니다!" })
+            setWriter("");
+            setPassword("");
+            setContents("");
+            setRating(0);
         } catch {
-          alert("에러가 발생하였습니다. 다시 시도해 주세요.");
+          Modal.error({ content: "에러가 발생하였습니다. 다시 시도해 주세요." })
         }
     };    
     

@@ -1,0 +1,39 @@
+.paginationContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: stretch;
+}
+
+.arrowIcon {
+    width: 24px;
+    height: 24px;
+    transition: filter 0.2s ease;
+  }
+  
+.arrowIcon.disabled {
+    filter: grayscale(100%) brightness(0.9);
+    cursor: not-allowed;
+}
+
+.paginationNumber {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+
+    color: var(--Gray-Gray-600, #777);
+    text-align: center;
+
+    /* r_16_24 */
+    font-family: "Pretendard Variable";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem; /* 150% */
+}

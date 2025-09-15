@@ -1,7 +1,7 @@
 "use client"
 
 // Swiper 컴포넌트 불러오기
-import { Swiper,SwiperSlide, SwiperClass } from "swiper/react";
+import { Swiper,SwiperSlide } from "swiper/react";
 // Swiper 기본 스타일 불러오기
 import 'swiper/css';
 import 'swiper/css/pagination';

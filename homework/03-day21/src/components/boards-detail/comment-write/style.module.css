@@ -71,6 +71,7 @@
 
 }
 .enrollRowFlex {
+    width: 100%;
     max-width: 40rem;
     display: flex;
     align-items: flex-start;
