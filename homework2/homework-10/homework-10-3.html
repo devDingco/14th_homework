@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>일기 보관함 모바일 검색</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Apple SD Gothic Neo", sans-serif;
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 420px;
+      margin: 0 auto;
+      background: #fff;
+      min-height: 100vh;
+      padding: 16px;
+    }
+    .header {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+    .banner {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .banner img {
+      width: 100%;
+      display: block;
+    }
+    .tabs {
+      display: flex;
+      gap: 16px;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+    .tabs .active {
+      font-weight: bold;
+      border-bottom: 2px solid #000;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid #ddd;
+      border-radius: 20px;
+      padding: 6px 10px;
+      margin-bottom: 14px;
+    }
+    .search-box input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 14px;
+    }
+    .filters {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .dropdown {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 14px;
+      background: #fff;
+    }
+    .btn {
+      background: #000;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .card {
+      position: relative;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 42px;
+      flex-direction: column;
+      color: #333;
+    }
+    .card span {
+      margin-top: 6px;
+      font-size: 13px;
+    }
+    .close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #fff;
+      border-radius: 50%;
+      font-size: 14px;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height: 20px;
+      cursor: pointer;
+      border: 1px solid #ddd;
+    }
+    /* 배경색 */
+    .bg-blue { background: #e3f5ff; }
+    .bg-yellow { background: #fff7da; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">민지의 다이어리</div>
+
+    <div class="banner">
+      <img src="https://picsum.photos/600/250?grayscale" alt="banner">
+    </div>
+
+    <div class="tabs">
+      <div class="active">일기보관함</div>
+      <div style="color:#aaa;">사진보관함</div>
+    </div>
+
+    <div class="search-box">
+      🔍 <input type="text" placeholder="검색어를 입력해 주세요.">
+    </div>
+
+    <div class="filters">
+      <select class="dropdown">
+        <option>전체</option>
+        <option>행복해요</option>
+        <option>슬퍼요</option>
+        <option>놀랐어요</option>
+        <option>화나요</option>
+      </select>
+      <button class="btn">+ 일기쓰기</button>
+    </div>
+
+    <div class="cards">
+      <div class="card bg-blue">
+        <div class="close">×</div>
+        🧢😢
+        <span>슬퍼요</span>
+      </div>
+      <div class="card bg-yellow">
+        <div class="close">×</div>
+        🧢😲
+        <span>놀랐어요</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
