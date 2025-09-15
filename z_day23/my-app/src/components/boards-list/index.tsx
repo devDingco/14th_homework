@@ -31,21 +31,25 @@ export default function BoardList() {
                 </div>
                 <div className={styles.list}>
                   {data?.fetchBoards.map((el, index: number) => (
-                    <div key={el._id} className={styles.listItem}>
+                    <div
+                      key={el._id}
+                      className={styles.listItem}
+                      onClick={() => onClickTitle(el._id)}
+                    >
                       <div className={styles.name_written}>
                         <div className={styles.number_written}>{index + 1}</div>
-                        <div
-                          className={styles.title}
-                          onClick={() => onClickTitle(el._id)}
-                        >
-                          {el.title}
-                        </div>
+                        <div className={styles.title}>{el.title}</div>
                         <div className={styles.writer}>{el.writer}</div>
                         <div className={styles.createdat_written}>
                           {formatDate(el.createdAt)}
                         </div>
                         <div className={styles.deleteButtonContainer}>
-                          <button onClick={() => onClickDelete(el._id)}>
+                          <button
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              onClickDelete(el._id);
+                            }}
+                          >
                             <img src="/images/delete.png" alt="삭제" />
                           </button>
                         </div>

@@ -12,6 +12,29 @@ interface InputProps {
   disabled?: boolean;
 }
 
+export const VerySmallInput = (props: InputProps) => {
+  return (
+    <>
+      <div className={styles.게시글_인풋_작은거}>
+        <div className={styles.flex_row_gap4}>
+          {props.Input_Title}
+          <div className={styles.color_red}>{props.Input_Star}</div>
+        </div>
+        <input
+          type="text"
+          placeholder={props.Input_Placeholder}
+          className={styles.완전작은인풋}
+          onChange={props.onChange}
+          value={props.value}
+          defaultValue={props.defaultValue}
+          disabled={props.disabled}
+        />
+        <div className={styles.text_red}>{props.errorMessage}</div>
+      </div>
+    </>
+  );
+};
+
 export const SmallInput = (props: InputProps) => {
   return (
     <>
