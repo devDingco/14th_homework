@@ -1,67 +1,3 @@
-### Day 25 기본 요구사항
-
-## 과제 요구 사항
-
-### 공통
-
-- [x] 완성된 `day25` 폴더를 활용하여 `day26` 을 완성해 주세요.
-  - 폴더를 다시 생성할 필요는 없습니다 !
-  - 해당 폴더에서 계속 작업해서 과제 제출해 주시면 됩니다.
-
-### 게시글 등록/수정
-
-- [x] 게시글 등록/수정 페이지에서 렌더링 되는 게시글작성 컴포넌트를 리팩토링해요.
-  - 주어진 폴더 경로에 파일을 만들고 코드를 적절히 이동합니다.
-  - 폴더 경로: `src/components/boards-write`
-  - 파일 목록:
-    - hook.ts
-    - index.tsx
-    - queires.ts
-    - styles.module.css
-    - types.ts
-
-### 게시글 상세
-
-- [x] 게시글 상세 페이지에서 게시글 상세 컴포넌트를 불러오도록 리팩토링해요.
-  - 주어진 폴더 경로에 파일을 만들고 코드를 적절히 이동합니다.
-  - 폴더 경로: `src/component/boards-detail`
-  - 파일 목록:
-    - hook.ts
-    - index.tsx
-    - queires.ts
-    - styles.module.css
-    - types.ts
-- [x] 게시글 상세 페이지는 새롭게 만든 컴포넌트가 렌더링 될 수 있도록 변경합니다.
-  - 게시글 상세 페이지 경로: `app/boards/[boardId]/page.tsx`
-
-### 게시글 목록
-
-- [x] 게시글 목록 페이지에서 게시글 목록 컴포넌트를 불러오도록 리팩토링해요.
-  - 주어진 폴더 경로에 파일을 만들고 코드를 적절히 이동합니다.
-  - 폴더 경로: `src/component/boards-list`
-  - 파일 목록:
-    - hook.ts
-    - index.tsx
-    - queires.ts
-    - styles.module.css
-    - types.ts
-
-### 타입 스크립트
-
-- [x] GraphQL API와 관련된 데이터의 타입을 모두 보완해요.
-- [x] graphql-codegen 을 설치해요.
-  - 명령어: `pnpm add --dev @graphql-codegen/cli`
-- [x] `codegen.ts` 파일을 복사 후 아래 내용을 변경하세요.
-  - schema: `"http://main-practice.codebootcamp.co.kr/graphql"`
-- [x] `package.json` 의 script에 실행 명령을 추가해 주세요.
-  - `"codegen"`: `"graphql-codegen --config codegen.ts"`
-- [x] codegen 을 통해 생성한 타입이 적용된 Document 를 통해 모든 `useQuery`, `useMutation` 을 변경해요.
-  - `any` 타입으로 정의된 API 관련 데이터 타입은 없어야 합니다.
-  - 예시:
-    - 게시글등록 => useMutation(CreateBoardDocument)
-    - 게시글수정 => useMutation(UpdateBoardDocument)
-
-
 ## Day 26 과제 요구 사항
 
 1. 공통
@@ -75,7 +11,7 @@
         - 페이지 경로: `src/app/boards/page.tsx`
     
 3. 게시글 상세
-    - [ ]  게시글 상세 페이지에 사용될 댓글 영역 구현에 필요한 컴포넌트 2개를 추가로 만들어 주세요.
+    - [x]  게시글 상세 페이지에 사용될 댓글 영역 구현에 필요한 컴포넌트 2개를 추가로 만들어 주세요.
         - 아래 경로의 폴더는 생성해 주세요.
         - 댓글 목록 컴포넌트 경로: `src/components/boards-detail/comment-list`
         - 댓글 등록 컴포넌트 경로: `src/components/boards-detail/comment-write`
@@ -104,7 +40,7 @@
     
     - src/components/boards-detail/comment-list/index.tsx 경로에 위 이미지의 댓글목록 부분을 완성해 주세요.
     => GRAPHQL-API(fetchBoardComments)를 사용하여 댓글목록을 완성합니다.
-    => 별점, 아바타사진, 수정/삭제 아이콘은 아직 기능을 추가하진 않습니다.(따라서, 별점은 0점으로 보여줍니다.)
+    => 별점, 아바타사진, 수정/삭제 아이콘은 아직 기능을 추가하진 않습니다.(따라서, 별점은 0점으로 보여줍니다.)x
 6. 게시글상세[최종조립]
     - 게시글상세페이지 src/app/boards/[boardId]/page.tsx 경로의 파일을 수정합니다.
     => 해당 페이지에 위에서 만든 3개의 컴포넌트(게시글상세, 댓글등록, 댓글목록)를 불러와서 조립합니다.
@@ -117,7 +53,7 @@
 
 ### 공통
 
-- [ ]  완성된 `day26` 폴더를 활용하여 `day27` 을 완성해 주세요.
+- [x]  완성된 `day26` 폴더를 활용하여 `day27` 을 완성해 주세요.
 
 ---
 
@@ -233,3 +169,47 @@
         - [ ]  `queries.ts`
         - [ ]  `styles.ts`
         - [ ]  `types.ts`
+
+
+## ** day 30 과제 요구 사항 **
+
+### **공통**
+
+- [ ]  `day29` 폴더의 코드를 기반으로 `day30` 을 완성해 주세요.
+
+### **게시글 목록**
+
+- [ ]  게시글 목록과 페이지네이션을 **두 개의 컴포넌트로 분리**해 주세요.
+    - [ ]  **게시글 목록 컴포넌트**
+        - **경로:** `src/components/boards-list/list`
+        - 이미 존재하는 컴포넌트입니다.
+    - [ ]  **페이지네이션 컴포넌트**
+        - **새 파일 경로:** `src/components/boards-list/pagination`
+        - 새로 추가해 주세요.
+
+### **게시글 목록 – 페이지네이션**
+
+- [ ]  페이지네이션 컴포넌트를 구현해 주세요.
+    - **경로:** `src/components/boards-list/pagination/index.tsx`
+    - [ ]  **이전 페이지**와 **다음 페이지** 이동 기능이 정상 작동해야 합니다.
+    - [ ]  **마지막 페이지**를 계산하여, 이전/다음 버튼 클릭 시 페이지 한계를 제한해 주세요.
+    - [ ]  페이지 번호는 **마지막 페이지까지만** 노출되도록 해 주세요.
+    - [ ]  현재 선택된 페이지 번호에 **색상을 적용**하여 사용자가 현재 페이지를 인지할 수 있도록 해 주세요.
+
+### **게시글 목록 – 최종 조립**
+
+- [ ]  게시글 목록 페이지에 두 컴포넌트를 조립해 주세요.
+    - **경로:** `src/app/boards/page.tsx`
+    - 위에서 만든 **게시글 목록**과 **페이지네이션** 컴포넌트를 불러와서 조립합니다.
+    - `state` 를 페이지 단으로 끌어올려 `data`, `refetch`, `lastPage` 등의 **변수 및 함수**를 두 컴포넌트가 적절히 공유할 수 있도록 해 주세요.
+
+### **컴포넌트 리팩토링**
+
+- [ ]  페이지네이션 컴포넌트의 **타입스크립트 적용 및 파일 분리**를 진행해 주세요.
+    - 타입 에러로 빨간 밑줄이 생기는 부분을 **타입 정의**로 해결해 주세요.
+    - 유지보수를 위해 아래처럼 파일을 분리합니다.
+        - hook.ts
+        - index.tsx
+        - queries.ts
+        - styles.ts
+        - types.ts
