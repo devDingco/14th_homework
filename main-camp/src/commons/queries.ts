@@ -60,6 +60,7 @@ export const FETCH_COMMENT = gql`
         fetchBoardComments(page: $page, boardId: $boardId) {
             writer
             contents
+            createdAt
         }
     }
 `
