@@ -40,12 +40,12 @@ h2{
 
   color: #5F5F5F;
 }
-body{
+/* body{
   padding: 4rem 32rem;
   display: flex;
   flex-direction: column;
   
-}
+} */
 h2{
   font-family: Pretendard Variable;
   font-weight: 500;
