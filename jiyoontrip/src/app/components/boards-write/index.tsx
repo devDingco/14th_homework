@@ -10,14 +10,23 @@ export default function BoardWrite(props: IBoardWriteProps) {
     onChangePassword,
     onChangeTitle,
     onChangeContent,
+    onChangeAddressDetail,
     onClickSignup,
     onClickUpdate,
+    onToggleModal,
+    onCompleteAddress,
+    onChnageYoutubeUrl,
+    zonecode,
+    address,
     authorError,
     passwordError,
     titleError,
     contentError,
     isActive,
     data,
+    DaumPostcodeEmbed,
+    Modal,
+    isModalOpen,
   } = useBoardWrite();
 
   return (
@@ -130,22 +139,25 @@ export default function BoardWrite(props: IBoardWriteProps) {
                   className={styles.inputArea__addressInput}
                   type="text"
                   placeholder="01234"
-                  // defaultValue={props.data?.fetchBoard.boardAddress.zipcode}
+                  value={zonecode || data?.fetchBoard.boardAddress?.zipcode || ""}
                 />
-                <button className={styles.inputArea__button}>우편번호 검색</button>
+                <button className={styles.inputArea__button} onClick={onToggleModal}>
+                  우편번호 검색
+                </button>
               </div>
             </div>
             <input
               className={styles.inputArea__input}
               type="text"
               placeholder="주소를 입력해 주세요"
-              // defaultValue={props.data?.fetchBoard.boardAddress.address}
+              value={address || data?.fetchBoard.boardAddress?.address || ""}
             />
             <input
               className={styles.inputArea__input}
               type="text"
               placeholder="상세주소"
-              // defaultValue={props.data?.fetchBoard.boardAddress.addressDetail}
+              onChange={onChangeAddressDetail}
+              defaultValue={data?.fetchBoard.boardAddress?.addressDetail ?? ""}
             />
           </div>
           <hr className={styles.line} />
@@ -163,6 +175,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
               className={styles.inputArea__input}
               type="text"
               placeholder="링크를 입력해 주세요."
+              onChange={onChnageYoutubeUrl}
+              defaultValue={data?.fetchBoard?.youtubeUrl ?? ""}
               // defaultValue={props.data?.fetchBoard.youtubeUrl}
             />
             <div className={styles.inputError}></div>
@@ -235,6 +249,17 @@ export default function BoardWrite(props: IBoardWriteProps) {
           </div>
         </div>
       </div>
+      {isModalOpen === true && (
+        <Modal
+          title="Basic Modal"
+          closable={{ "aria-label": "Custom Close Button" }}
+          open={true}
+          onOk={onToggleModal}
+          onCancel={onToggleModal}
+        >
+          <DaumPostcodeEmbed onComplete={onCompleteAddress} />
+        </Modal>
+      )}
     </>
   );
 }

@@ -10,12 +10,12 @@ import {
   FetchBoardDocument,
   UpdateBoardDocument,
 } from "@/commons/graphql/graphql";
+import { Modal } from "antd";
+import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 
 export default function useBoardWrite() {
   const router = useRouter();
   const params = useParams();
-  // const [createBoard] = useMutation(CREAT_BOARD);
-  // const [updateBoard] = useMutation(UPDATE_BOARD);
   const { data } = useQuery(FetchBoardDocument, {
     variables: {
       boardId: String(params.boardId),
@@ -27,7 +27,11 @@ export default function useBoardWrite() {
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
+  const [zonecode, setZonecode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [authorError, setAuthorError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
@@ -58,7 +62,21 @@ export default function useBoardWrite() {
       setIsActive(true);
     }
   };
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
+  };
+  const onChnageYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(event.target.value);
+  };
 
+  const onToggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
+  const onCompleteAddress = (data: Address) => {
+    setZonecode(data.zonecode);
+    setAddress(data.address);
+    setIsModalOpen((prev) => !prev);
+  };
   const onClickSignup = async () => {
     try {
       if (author === "") {
@@ -90,12 +108,12 @@ export default function useBoardWrite() {
               password: password,
               title: title,
               contents: content,
-              youtubeUrl: "",
+              youtubeUrl: youtubeUrl,
               images: [],
               boardAddress: {
-                zipcode: "",
-                address: "",
-                addressDetail: "",
+                zipcode: zonecode,
+                address: address,
+                addressDetail: addressDetail,
               },
             },
           },
@@ -141,12 +159,23 @@ export default function useBoardWrite() {
 
       const updateTite = title || data?.fetchBoard.title;
       const updateContent = content || data?.fetchBoard.contents;
+      const updateZipcode = zonecode || data?.fetchBoard.boardAddress?.zipcode;
+      const updateAddress = address || data?.fetchBoard.boardAddress?.address;
+      const updateAddressDetail =
+        addressDetail || data?.fetchBoard.boardAddress?.addressDetail;
+      const updateYoutubeUrl = youtubeUrl || data?.fetchBoard.youtubeUrl;
+
       const result = await updateBoard({
         variables: {
           updateBoardInput: {
             title: updateTite,
             contents: updateContent,
-            youtubeUrl: "",
+            boardAddress: {
+              zipcode: updateZipcode,
+              address: updateAddress,
+              addressDetail: updateAddressDetail,
+            },
+            youtubeUrl: updateYoutubeUrl,
             images: [],
           },
           password: passwordPrmpt,
@@ -169,13 +198,23 @@ export default function useBoardWrite() {
     onChangePassword,
     onChangeTitle,
     onChangeContent,
+    onChangeAddressDetail,
     onClickSignup,
     onClickUpdate,
+    onToggleModal,
+    onCompleteAddress,
+    onChnageYoutubeUrl,
+    zonecode,
+    address,
+    addressDetail,
     authorError,
     passwordError,
     titleError,
     contentError,
     isActive,
     data,
+    DaumPostcodeEmbed,
+    Modal,
+    isModalOpen,
   };
 }
