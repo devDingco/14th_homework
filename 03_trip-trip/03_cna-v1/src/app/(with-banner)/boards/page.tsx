@@ -16,7 +16,6 @@ import {
   FetchBoardsQuery,
   FetchBoardsQueryVariables,
 } from '@/shared/api/graphql/graphql'
-import HomeBanner from '../(sections)/HomeBanner/HomeBanner'
 
 export default function BoardsPage() {
   const router = useRouter()
@@ -52,7 +51,6 @@ export default function BoardsPage() {
 
   return (
     <div className={styles['board-list-layout']}>
-      <HomeBanner />
       <div className={styles['board-list-container']}>
         <div className={`${styles['board-list']} ${styles['board-title']}`}>
           <p>번호</p>
