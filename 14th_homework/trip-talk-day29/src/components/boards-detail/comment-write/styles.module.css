@@ -1,0 +1,63 @@
+.댓글작성 > * {
+  margin: 24px 0; /* 수직 마진만 주고 싶으면 이렇게 */
+}
+
+.댓글아이콘 {
+  display: flex;
+  gap: 8px;
+}
+
+.작성자_비밀번호 {
+  display: flex;
+  gap: 16px;
+  padding-bottom: 16px;
+}
+.작성자_라벨,
+.비밀번호_라벨 {
+  display: flex;
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 4px; /* 라벨과 아스타기호 사이 간격 */
+  margin-bottom: 4px; /* input과 거리 */
+}
+.댓글작성자,
+.댓글비밀번호 {
+  width: 312px;
+  height: 48px;
+}
+.댓글입력창 {
+  width: 1280px;
+  height: 144px;
+}
+.댓글 {
+  color: #000;
+
+  /* sb_16_24 */
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+}
+.댓글등록버튼 {
+  width: 1280px;
+  display: flex;
+  justify-content: flex-end;
+}
+.댓글버튼 {
+  width: 99px;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--gray-300, #c7c7c7);
+  color: var(--gray-100, #e4e4e4);
+  text-align: center;
+
+  /* sb_18_24 */
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+}

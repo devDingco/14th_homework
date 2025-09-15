@@ -1,0 +1,153 @@
+"use client";
+
+import { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { useParams, useRouter } from "next/navigation";
+import { FETCH_BOARD, graphql_setting, UPDATE_BOARD } from "./queries";
+import { useDaumPostcodePopup } from "react-daum-postcode";
+
+export default function useBoardWrite() {
+  const router = useRouter();
+  const 내주소변수 = useParams();
+
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [title, setTitle] = useState("");
+  const [contents, setContents] = useState("");
+  const [address, setAddress] = useState("");
+  const [zonecode, setZonecode] = useState("");
+  const [address_detail, setAddressDetail] = useState("");
+  const [url, setUrl] = useState("");
+  const [create_request_api_] = useMutation(graphql_setting);
+  const [update_request_api_] = useMutation(UPDATE_BOARD);
+
+  const onClickSubmit = async () => {
+    try {
+      const result = await create_request_api_({
+        variables: {
+          createBoardInput: {
+            writer: name,
+            password: password,
+            title: title,
+            contents: contents,
+            youtubeUrl: url,
+            boardAddress: {
+              zipcode: zonecode,
+              address: address,
+              addressDetail: address_detail,
+            },
+          },
+        },
+      });
+
+      router.push(`/boards/${result.data.createBoard._id}`);
+    } catch (error) {
+      alert(error);
+    } finally {
+    }
+  };
+  const onClickUpdate = async () => {
+    try {
+      const 입력받은비밀번호 = prompt(
+        "글을 입력할때 입력하셨던 비밀번호를 입력해주세요"
+      );
+      if (!입력받은비밀번호) {
+        alert("비밀번호를 입력해야 수정할 수 있습니다.");
+        return;
+      }
+      setPassword(입력받은비밀번호);
+      const updateBoardInput: any = {};
+      if (title) updateBoardInput.title = title;
+      if (contents) updateBoardInput.contents = contents;
+      if (url) updateBoardInput.youtubeUrl = url;
+      updateBoardInput.boardAddress = {
+        zipcode: zonecode,
+        address: address,
+        addressDetail: address_detail,
+      };
+
+      const myvariables = {
+        updateBoardInput,
+        boardId: 내주소변수.boardId,
+        password: 입력받은비밀번호,
+      };
+
+      const result = await update_request_api_({
+        variables: myvariables,
+        refetchQueries: [
+          {
+            query: FETCH_BOARD,
+            variables: { boardId: 내주소변수.boardId },
+          },
+        ],
+      });
+      router.push(`/boards/${result.data.updateBoard._id}`);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const 작성자입력기능 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const 작성자이름 = event.target.value;
+    setName(작성자이름);
+  };
+
+  const 비밀번호입력기능 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const 비밀번호 = event.target.value;
+    setPassword(비밀번호);
+  };
+
+  const 제목입력기능 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const 제목 = event.target.value;
+    setTitle(제목);
+  };
+
+  const 내용입력기능 = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const 내용 = event.target.value;
+    setContents(내용);
+  };
+  const 우편번호상태관리 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const 우편번호 = event.target.value;
+    setZonecode(우편번호);
+  };
+  const 주소상태관리 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const 주소 = event.target.value;
+    setAddress(주소);
+  };
+  const 상세주소입력기능 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const 상세주소 = event.target.value;
+    setAddressDetail(상세주소);
+  };
+  const open = useDaumPostcodePopup();
+
+  const handleComplete = (data) => {
+    console.log(data);
+    setAddress(data.address);
+    setZonecode(data.zonecode);
+  };
+
+  const handleClick = () => {
+    open({ onComplete: handleComplete });
+  };
+
+  const 유튜브링크입력기능 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const 유튜브링크 = event.target.value;
+    setUrl(유튜브링크);
+  };
+  return {
+    onClickSubmit,
+    onClickUpdate,
+    작성자입력기능,
+    비밀번호입력기능,
+    제목입력기능,
+    내용입력기능,
+    우편번호상태관리,
+    주소상태관리,
+    상세주소입력기능,
+    유튜브링크입력기능,
+    handleClick,
+    address,
+    zonecode,
+    address_detail,
+  };
+}
