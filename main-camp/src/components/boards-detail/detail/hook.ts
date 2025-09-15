@@ -9,7 +9,6 @@ const useBoardsDetailPage = () => {
 
     const getBoardDetail = async () => {
         try {
-            console.log('확인')
             const { data } = await client.query<FetchBoardQuery, FetchBoardQueryVariables>({
                 query: FetchBoardDocument,
                 variables: {

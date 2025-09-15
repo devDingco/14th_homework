@@ -3,20 +3,21 @@
 import styles from './style.module.css'
 import useBoardsListPage from './hook'
 import { useEffect, useState } from 'react'
+import { Query } from '@/commons/gql/graphql'
 
 const BoardsList = () => {
     
+    const [boardsData, setBoardsData] = useState<any>()
+
     const {
         goDetailHandler,
         onDeleteHanlder,
         getBoardsList
-    } = useBoardsListPage()
-
-    const [boardsData, setBoardsData] = useState<any>(undefined)
+    } = useBoardsListPage({setBoardsData})
 
     useEffect(()=>{
         (async () => {
-            setBoardsData(await getBoardsList())
+            await getBoardsList()
         })()
     },[])
 

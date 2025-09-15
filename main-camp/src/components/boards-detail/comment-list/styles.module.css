@@ -1,0 +1,17 @@
+/* commentList */
+
+.profile_img {
+    width: 24px;
+    height: 24px;
+    opacity: 1;
+    background: var(--gray-100, rgba(228, 228, 228, 1));
+    border-radius: 100px;
+}
+
+.comment_profile {
+    min-width: 65px;
+    height: 24px;
+    gap: 4px;
+    opacity: 1;
+
+}
