@@ -74,6 +74,12 @@
   align-self: stretch;
   background: var(--gray-50, #f2f2f2);
 }
+.detailVideo__size {
+  display: flex;
+  max-width: 51.375rem;
+  width: 100%;
+  height: 29rem;
+}
 .detailHeart {
   display: flex;
   justify-content: center;

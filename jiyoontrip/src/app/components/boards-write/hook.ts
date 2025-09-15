@@ -159,12 +159,23 @@ export default function useBoardWrite() {
 
       const updateTite = title || data?.fetchBoard.title;
       const updateContent = content || data?.fetchBoard.contents;
+      const updateZipcode = zonecode || data?.fetchBoard.boardAddress?.zipcode;
+      const updateAddress = address || data?.fetchBoard.boardAddress?.address;
+      const updateAddressDetail =
+        addressDetail || data?.fetchBoard.boardAddress?.addressDetail;
+      const updateYoutubeUrl = youtubeUrl || data?.fetchBoard.youtubeUrl;
+
       const result = await updateBoard({
         variables: {
           updateBoardInput: {
             title: updateTite,
             contents: updateContent,
-            youtubeUrl: "",
+            boardAddress: {
+              zipcode: updateZipcode,
+              address: updateAddress,
+              addressDetail: updateAddressDetail,
+            },
+            youtubeUrl: updateYoutubeUrl,
             images: [],
           },
           password: passwordPrmpt,

@@ -58,6 +58,7 @@ export default function DetailPageComponent() {
           <div className={styles.detailContent}>{data?.fetchBoard.contents}</div>
           <div className={styles.detailVideo}>
             <iframe
+              className={styles.detailVideo__size}
               src={data?.fetchBoard.youtubeUrl?.replace("watch?v=", "embed/")}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             ></iframe>
