@@ -1,12 +1,12 @@
 'use client';
 
-import CarouselPage from '@/components/boards-list/banner';
 import NewBoardsPage from '@/components/boards-list/list';
+import BannerCarousel from '@/commons/layout/banner';
 
 export default function BoardsListPage() {
   return (
     <div>
-      <CarouselPage />
+      <BannerCarousel />
       <NewBoardsPage />
     </div>
   );

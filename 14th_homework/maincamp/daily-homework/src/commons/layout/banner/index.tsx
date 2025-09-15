@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 import Image from 'next/image';
 import styles from './styles.module.css';
 
-export default function CarouselPage() {
+export default function BannerCarousel() {
   return (
     <div className={styles.banner_container}>
       <Swiper

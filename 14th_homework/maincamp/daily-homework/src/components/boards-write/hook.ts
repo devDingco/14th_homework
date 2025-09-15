@@ -4,6 +4,7 @@ import { ChangeEvent, useState, useEffect, useMemo } from 'react';
 
 import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from './queries';
 import { Errors, BoardVariables } from './types';
+import { useAlertModal } from '@/commons/components/modal';
 import {
   CreateBoardDocument,
   CreateBoardMutation,
@@ -13,6 +14,7 @@ import {
 export default function useBoardsWriteAdvanced(props: BoardVariables) {
   const router = useRouter();
   const params = useParams();
+  const { showAlert, AlertModalComponent } = useAlertModal();
 
   const [writer, setWriter] = useState<string>(props.data?.fetchBoard?.writer || '');
   const [password, setPassword] = useState<string>('');
@@ -101,7 +103,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     // 비밀번호 검증
     const checkPassword = prompt('비밀번호를 입력해주세요');
     if (!checkPassword) {
-      alert('비밀번호를 입력해주세요.');
+      showAlert('비밀번호를 입력해주세요.');
       return;
     }
 
@@ -152,11 +154,11 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
         refetchQueries: [{ query: FETCH_BOARD, variables: { boardId: params.boardId } }],
       });
 
-      alert('게시글이 수정되었습니다.');
+      showAlert('게시글이 수정되었습니다.');
       router.push(`/boards/${params.boardId}`);
     } catch (error) {
       console.error(error);
-      alert('비밀번호가 일치하지 않습니다!');
+      showAlert('비밀번호가 일치하지 않습니다!');
     }
   };
 
@@ -264,10 +266,10 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     handleOk,
     handleCancel,
     handleComplete,
-    // 주소 관련 state들
     zipcode,
     address,
     addressDetail,
     youtubeUrl,
+    AlertModalComponent,
   };
 }

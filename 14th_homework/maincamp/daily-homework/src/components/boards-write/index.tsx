@@ -26,6 +26,7 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
     address,
     addressDetail,
     youtubeUrl,
+    AlertModalComponent,
   } = useBoardsWriteAdvanced(props);
   // console.log('🚀 ~ checkRegister:', checkRegister());
   return (
@@ -181,6 +182,7 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
           <DaumPostcodeEmbed onComplete={handleComplete} />
         </Modal>
       )}
+      <AlertModalComponent />
     </div>
   );
 }
