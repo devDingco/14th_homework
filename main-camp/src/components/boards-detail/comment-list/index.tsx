@@ -9,7 +9,11 @@ interface IBoardsCommentList {
 }
 
 const BoardsCommentList = (props: IBoardsCommentList) => {
-
+    const {         
+        updateBoardComments,
+        deleteBoardComments
+    } = useBoardCommentList()
+    
     useEffect(()=>{
         (async ()=>{
             await props.getBoardComments()
@@ -20,11 +24,21 @@ const BoardsCommentList = (props: IBoardsCommentList) => {
         console.log('댓글 조회 : ', props.comments)
     },[props.comments])
 
+    const onClickCommentDeleteHandler = async (event: React.MouseEvent<HTMLImageElement>) => {
+        await deleteBoardComments(event)
+        await props.getBoardComments()
+    }
+
+    const onClickCommentUpdateHandler = async (event: React.MouseEvent<HTMLImageElement>) => {
+        await updateBoardComments(event)
+        await props.getBoardComments()
+    }
+
     return (
         <ul id="comment_list_frame">
             {props.comments.map((v, i)=>{
                 return <>
-                            <li className={`${styles.comment_frame} flex_column flex_justi_sb`}>
+                            <li key={i} data-key={v._id}className={`${styles.comment_frame} flex_column flex_justi_sb`}>
                                 <div className={`flex_row flex_justi_sb`}>
                                     <div className={`${styles.comment_profile} flex_row flex_align_items_center`}>
                                         <div className={`${styles.comment_profile_frame} flex_row`}>
@@ -40,12 +54,12 @@ const BoardsCommentList = (props: IBoardsCommentList) => {
                                         </div>
                                     </div>
                                     <div className={`${styles.comment_btn_frame} flex_row flex_justi_sb`}>
-                                        <img src="/svg/edit.png" alt="edit_comment" style={{ cursor: "pointer" }}/>
-                                        <img src="/svg/close.png" alt="delete_comment" style={{ cursor: "pointer" }}/>
-                                    </div>
+                                        <img data-key={v._id} src="/svg/edit.png" alt="edit_comment" style={{ cursor: "pointer" }} onClick={onClickCommentUpdateHandler}/>
+                                        <img data-key={v._id} src="/svg/close.png" alt="delete_comment" style={{ cursor: "pointer" }} onClick={onClickCommentDeleteHandler}/>
+                                    </div> 
                                 </div>                            
                                 <div><p className="r_16_24" style={{ whiteSpace: "pre-line", color: "rgba(51, 51, 51, 1)" }}>{`${v.contents}`}</p></div>
-                                <div><p className="r_14_20" style={{ color: "rgba(129, 129, 129, 1)" }}>{v.createdAt.split("T")[0]}</p></div>
+                                <div><p className="r_14_20" style={{ color: "rgba(129, 129, 129, 1)" }} >{v.createdAt.split("T")[0]}</p></div>
                             </li>
                             {i+1 !== props.comments.length ? <div className={`${styles.comment_line}`}></div> : null}
                         </>

@@ -1,14 +1,19 @@
-import { FetchBoardCommentsDocument, FetchBoardCommentsQuery, FetchBoardCommentsQueryVariables } from "@/commons/gql/graphql"
-import { ApolloError, useApolloClient } from "@apollo/client"
+import { DeleteBoardCommentDocument, DeleteBoardCommentMutation, DeleteBoardCommentMutationVariables, FetchBoardCommentsDocument, FetchBoardCommentsQuery, FetchBoardCommentsQueryVariables } from "@/commons/gql/graphql"
+import { ApolloError, useApolloClient, useMutation } from "@apollo/client"
 import { useParams } from "next/navigation"
 
 interface IUseBoardCommentList {
     setComments: React.Dispatch<React.SetStateAction<any>>
 }
 
-const useBoardCommentList = (props: IUseBoardCommentList) => {
+const useBoardCommentList = (props?: IUseBoardCommentList) => {
     const client = useApolloClient()
     const param = useParams()
+
+    const [deleteBoardCommentAPI] = useMutation<
+        DeleteBoardCommentMutation,
+        DeleteBoardCommentMutationVariables
+    >(DeleteBoardCommentDocument)
 
     const getBoardComments = async () => {
         try {
@@ -21,7 +26,7 @@ const useBoardCommentList = (props: IUseBoardCommentList) => {
                 },
                 fetchPolicy: "network-only"
             })
-            props.setComments(data.fetchBoardComments)
+            props!.setComments(data.fetchBoardComments)
             return data
         } catch(e: unknown) {
             if (e instanceof ApolloError) {
@@ -32,8 +37,41 @@ const useBoardCommentList = (props: IUseBoardCommentList) => {
         }
     }
 
+    const updateBoardComments = async (event: React.MouseEvent<HTMLImageElement>) => {
+        event.stopPropagation()
+        const updateBoardCommentPw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
+        console.log('업데이트 댓글 Id: ', event.currentTarget.dataset.key)
+        console.log('비밀번호 : ', updateBoardCommentPw)
+    }
+
+    const deleteBoardComments = async (event: React.MouseEvent<HTMLImageElement>) => {
+        event.stopPropagation()
+        const deleteBoardCommentPw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
+        console.log('삭제 댓글 Id: ', event.currentTarget.dataset.key)
+        console.log('비밀번호 : ', deleteBoardCommentPw)
+
+        try {
+            const result = await deleteBoardCommentAPI({
+                variables: {
+                    boardCommentId : String(event.currentTarget.dataset.key),
+                    password: deleteBoardCommentPw
+                }
+            })
+            console.log("삭제한 게시글 ID: ",result.data?.deleteBoardComment)
+            
+        } catch(e: unknown) {
+            if (e instanceof ApolloError) {
+                e.graphQLErrors.forEach((e) => {
+                    alert(`${e.message}`)
+                });
+            }
+        }
+    }
+
     return {
-        getBoardComments
+        getBoardComments,
+        updateBoardComments,
+        deleteBoardComments
     }
 }
 

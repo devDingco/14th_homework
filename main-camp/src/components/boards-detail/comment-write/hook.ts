@@ -29,7 +29,6 @@ const useBoardsCommentWrite = (props: IUseBoardsCommentWrite) => {
         CreateBoardCommentMutationVariables
     >(CreateBoardCommentDocument)
 
-
     const creatingBoardComment = async () => {
         try {
             // createBoard 게시글 등록

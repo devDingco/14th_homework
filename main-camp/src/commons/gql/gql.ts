@@ -19,8 +19,9 @@ type Documents = {
     "\n    query fetchBoard($boardId: ID!) {\n        fetchBoard(boardId: $boardId) {\n            _id\n            writer\n            title\n            contents\n            createdAt\n        }\n    }\n": typeof types.FetchBoardDocument,
     "\n    query fetchBoards($page: Int!) {\n        fetchBoards(page: $page) {\n                _id\n                title\n                writer\n                contents\n                createdAt\n        }\n    }\n": typeof types.FetchBoardsDocument,
     "\n    mutation deleteBoard($boardId: ID!) {\n        deleteBoard(boardId: $boardId)\n    }\n": typeof types.DeleteBoardDocument,
-    "\n    query   fetchBoardComments($page: Int, $boardId: ID!) {\n        fetchBoardComments(page: $page, boardId: $boardId) {\n            writer\n            contents\n            createdAt\n        }\n    }\n": typeof types.FetchBoardCommentsDocument,
+    "\n    query   fetchBoardComments($page: Int, $boardId: ID!) {\n        fetchBoardComments(page: $page, boardId: $boardId) {\n            _id\n            writer\n            contents\n            createdAt\n        }\n    }\n": typeof types.FetchBoardCommentsDocument,
     "\n    mutation createBoardComment($createBoardCommentInput: CreateBoardCommentInput!, $boardId: ID!) {\n        createBoardComment (createBoardCommentInput: $createBoardCommentInput, boardId: $boardId) {\n            _id\n        }\n    }\n": typeof types.CreateBoardCommentDocument,
+    "\n    mutation deleteBoardComment($password: String, $boardCommentId: ID!) {\n        deleteBoardComment (password: $password, boardCommentId:$boardCommentId)\n    }\n": typeof types.DeleteBoardCommentDocument,
 };
 const documents: Documents = {
     "\n    mutation createBoard($createBoardInput: CreateBoardInput!) {\n        createBoard(createBoardInput: $createBoardInput) {\n            _id\n            writer\n            title\n        }\n    }\n": types.CreateBoardDocument,
@@ -28,8 +29,9 @@ const documents: Documents = {
     "\n    query fetchBoard($boardId: ID!) {\n        fetchBoard(boardId: $boardId) {\n            _id\n            writer\n            title\n            contents\n            createdAt\n        }\n    }\n": types.FetchBoardDocument,
     "\n    query fetchBoards($page: Int!) {\n        fetchBoards(page: $page) {\n                _id\n                title\n                writer\n                contents\n                createdAt\n        }\n    }\n": types.FetchBoardsDocument,
     "\n    mutation deleteBoard($boardId: ID!) {\n        deleteBoard(boardId: $boardId)\n    }\n": types.DeleteBoardDocument,
-    "\n    query   fetchBoardComments($page: Int, $boardId: ID!) {\n        fetchBoardComments(page: $page, boardId: $boardId) {\n            writer\n            contents\n            createdAt\n        }\n    }\n": types.FetchBoardCommentsDocument,
+    "\n    query   fetchBoardComments($page: Int, $boardId: ID!) {\n        fetchBoardComments(page: $page, boardId: $boardId) {\n            _id\n            writer\n            contents\n            createdAt\n        }\n    }\n": types.FetchBoardCommentsDocument,
     "\n    mutation createBoardComment($createBoardCommentInput: CreateBoardCommentInput!, $boardId: ID!) {\n        createBoardComment (createBoardCommentInput: $createBoardCommentInput, boardId: $boardId) {\n            _id\n        }\n    }\n": types.CreateBoardCommentDocument,
+    "\n    mutation deleteBoardComment($password: String, $boardCommentId: ID!) {\n        deleteBoardComment (password: $password, boardCommentId:$boardCommentId)\n    }\n": types.DeleteBoardCommentDocument,
 };
 
 /**
@@ -69,11 +71,15 @@ export function graphql(source: "\n    mutation deleteBoard($boardId: ID!) {\n  
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    query   fetchBoardComments($page: Int, $boardId: ID!) {\n        fetchBoardComments(page: $page, boardId: $boardId) {\n            writer\n            contents\n            createdAt\n        }\n    }\n"): (typeof documents)["\n    query   fetchBoardComments($page: Int, $boardId: ID!) {\n        fetchBoardComments(page: $page, boardId: $boardId) {\n            writer\n            contents\n            createdAt\n        }\n    }\n"];
+export function graphql(source: "\n    query   fetchBoardComments($page: Int, $boardId: ID!) {\n        fetchBoardComments(page: $page, boardId: $boardId) {\n            _id\n            writer\n            contents\n            createdAt\n        }\n    }\n"): (typeof documents)["\n    query   fetchBoardComments($page: Int, $boardId: ID!) {\n        fetchBoardComments(page: $page, boardId: $boardId) {\n            _id\n            writer\n            contents\n            createdAt\n        }\n    }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n    mutation createBoardComment($createBoardCommentInput: CreateBoardCommentInput!, $boardId: ID!) {\n        createBoardComment (createBoardCommentInput: $createBoardCommentInput, boardId: $boardId) {\n            _id\n        }\n    }\n"): (typeof documents)["\n    mutation createBoardComment($createBoardCommentInput: CreateBoardCommentInput!, $boardId: ID!) {\n        createBoardComment (createBoardCommentInput: $createBoardCommentInput, boardId: $boardId) {\n            _id\n        }\n    }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    mutation deleteBoardComment($password: String, $boardCommentId: ID!) {\n        deleteBoardComment (password: $password, boardCommentId:$boardCommentId)\n    }\n"): (typeof documents)["\n    mutation deleteBoardComment($password: String, $boardCommentId: ID!) {\n        deleteBoardComment (password: $password, boardCommentId:$boardCommentId)\n    }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
