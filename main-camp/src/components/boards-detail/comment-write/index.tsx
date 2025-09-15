@@ -21,7 +21,7 @@ const BoardsCommentWrite = (props: IBoardsCommentWrite) => {
     const [commentContentsErr, setCommentContentsErr] = useState<string>("")
 
     const {
-        creatingBoardComment
+        creatingBoardComment, isActive, activeButton
     } = useBoardsCommentWrite({commentWriter, commentPassword, commentContents, getBoardComments: props.getBoardComments})
 
     const onChangeWriting = (props: IOnChangeWriting) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -66,7 +66,6 @@ const BoardsCommentWrite = (props: IBoardsCommentWrite) => {
             setCommentWriterErr("")
             setCommentPasswordErr("")
             setCommentContentsErr("")
-            
             // createComment 시작!
             console.log('createComment 시작!')
             creatingBoardComment()
@@ -74,7 +73,7 @@ const BoardsCommentWrite = (props: IBoardsCommentWrite) => {
     }
 
     useEffect(()=>{
-        console.log('입력확인 : ', commentWriter, commentContents, commentPassword)
+        activeButton({ commentWriter, commentContents, commentPassword})
     },[commentWriter, commentContents, commentPassword])
 
     return (
@@ -107,7 +106,7 @@ const BoardsCommentWrite = (props: IBoardsCommentWrite) => {
                         <p className={`me_16_24`} style={{ color: "rgba(246, 106, 106, 1)" }}>{commentContentsErr}</p>
                     </form>
                 </div>
-                <button className={`${styles.comment_resist_btn} flex_align_self_flexend`} onClick={onClickCommentWrite}>
+                <button className={`${styles.comment_resist_btn} flex_align_self_flexend`} onClick={onClickCommentWrite} style={{ background: isActive === true ? "rgba(41, 116, 229, 1)" : "rgba(199, 199, 199, 1)" }}>
                     <p className='sb_18_24' style={{ color: "rgba(228, 228, 228, 1)", whiteSpace: "nowrap" }}>댓글 등록</p>
                 </button>
             </section>

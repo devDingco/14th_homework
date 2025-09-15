@@ -3,10 +3,10 @@
 /* main */
 
 .detail_main {
-    max-width: 1280px;
+    /* max-width: 1280px;
     min-width: 781px;
     margin-left: 320px;
-    margin-right: 320px;
+    margin-right: 320px; */
   
     /* height: 100vh; */
 }
@@ -102,4 +102,14 @@
     background: var(--gray-w, rgba(255, 255, 255, 1));
     border: 1px solid var(--gray-B, rgba(0, 0, 0, 1));
     cursor: pointer;
+}
+
+.detail_line {
+    width: 1280px;
+    height: 0px;
+    opacity: 1;
+    border-width: 1px;
+    border: 1px solid var(--gray-100, rgba(228, 228, 228, 1));
+    margin-top: 40px;
+    margin-bottom: 40px;
 }

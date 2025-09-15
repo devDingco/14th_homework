@@ -25,17 +25,23 @@ const BoardsCommentList = (props: IBoardsCommentList) => {
             {props.comments.map((v, i)=>{
                 return <>
                             <li className={`${styles.comment_frame} flex_column flex_justi_sb`}>
-                                <div className={`flex_row`}>
+                                <div className={`flex_row flex_justi_sb`}>
                                     <div className={`${styles.comment_profile} flex_row flex_align_items_center`}>
-                                        <img className={`${styles.profile_img}`} src="/svg/person.png" alt="profile"/>
-                                        <p className="l_14_20 flex_justi_center">{v.writer}</p>
+                                        <div className={`${styles.comment_profile_frame} flex_row`}>
+                                            <img className={`${styles.profile_img}`} src="/svg/person.png" alt="profile"/>
+                                            <p className="l_14_20 flex_row flex_justi_center flex_align_items_center" style={{ whiteSpace: "nowrap" }}>{v.writer}</p>
+                                        </div>
+                                        <div className={`${styles.commnt_star} flex_row`}>
+                                            <img src="/image/star.png" />
+                                            <img src="/image/star.png" />
+                                            <img src="/image/star.png" />
+                                            <img src="/image/star.png" />
+                                            <img src="/image/star.png" />
+                                        </div>
                                     </div>
-                                    <div className={`${styles.commnt_star} flex_row`}>
-                                        <img src="/image/star.png" />
-                                        <img src="/image/star.png" />
-                                        <img src="/image/star.png" />
-                                        <img src="/image/star.png" />
-                                        <img src="/image/star.png" />
+                                    <div className={`${styles.comment_btn_frame} flex_row flex_justi_sb`}>
+                                        <img src="/svg/edit.png" alt="edit_comment" style={{ cursor: "pointer" }}/>
+                                        <img src="/svg/close.png" alt="delete_comment" style={{ cursor: "pointer" }}/>
                                     </div>
                                 </div>                            
                                 <div><p className="r_16_24" style={{ whiteSpace: "pre-line", color: "rgba(51, 51, 51, 1)" }}>{`${v.contents}`}</p></div>

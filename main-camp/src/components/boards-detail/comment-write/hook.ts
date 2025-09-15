@@ -14,13 +14,21 @@ interface IUseBoardsCommentWrite {
     getBoardComments: () => Promise<FetchBoardCommentsQuery | undefined>,
 }
 
+interface ICommentValObj {
+    commentWriter: string,
+    commentPassword: string,
+    commentContents: string
+}
+
 const useBoardsCommentWrite = (props: IUseBoardsCommentWrite) => {
     const param = useParams()
+    const [isActive, setIsActive] = useState<boolean>(false)
 
     const [createBoardCommentAPI] = useMutation<
         CreateBoardCommentMutation,
         CreateBoardCommentMutationVariables
     >(CreateBoardCommentDocument)
+
 
     const creatingBoardComment = async () => {
         try {
@@ -49,8 +57,21 @@ const useBoardsCommentWrite = (props: IUseBoardsCommentWrite) => {
         }
     }
 
+    const activeButton = (valObj: ICommentValObj) => {
+        if (isActive) {
+            if (valObj.commentWriter === "" || valObj.commentPassword === "" || valObj.commentContents === "") {
+                setIsActive(false)
+            }
+        } else {
+            if (valObj.commentWriter && valObj.commentPassword && valObj.commentContents) {
+                setIsActive(true)
+            }
+        }
+    }
+
     return {
-        creatingBoardComment
+        creatingBoardComment,
+        activeButton, isActive
     }
 }
 

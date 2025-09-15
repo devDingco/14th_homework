@@ -23,8 +23,10 @@ const BoardsDetailPage = () => {
         }}>
             <BoardsDetail />
             <div style={{
+                display: "flex",
+                flexDirection: "column",
                 width: "1280px",
-                height: "460px",
+                minHeight: "460px",
                 gap: "40px",
                 opacity: "1"
             }}>

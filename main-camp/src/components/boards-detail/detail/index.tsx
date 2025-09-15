@@ -26,7 +26,7 @@ const BoardsDetail = () => {
     },[])
 
     return (
-        <>
+        <div className={`${styles.detail_main}`}>
             <h1 className={`b_28_36`}>
             {fetchBoard?.fetchBoard.title}
             </h1>
@@ -71,7 +71,8 @@ const BoardsDetail = () => {
                     <p className={`sb_14_20`} style={{ whiteSpace: "nowrap" }}>수정하기</p>
                 </button>
             </div>
-        </>
+            <div className={`${styles.detail_line}`}></div>
+        </div>
     )
 }
 
