@@ -3,9 +3,10 @@
 import Image from 'next/image';
 import styles from './page.module.css';
 import useBoardsList from './hooks';
+import AllModal from '@/components/all-modal';
 
 export default function BoardsList() {
-  const { data, onClickTitle, onClickDelete } = useBoardsList();
+  const { data, onClickTitle, onClickDelete, modalOpen, modalMessage, closeModal } = useBoardsList();
 
   return (
     <div className={styles.container}>
@@ -66,6 +67,11 @@ export default function BoardsList() {
           );
         })}
       </div>
+      <AllModal
+        open={modalOpen}
+        message={modalMessage}
+        onClose={closeModal}
+      />
     </div>
   );
 }

@@ -5,10 +5,9 @@ import Image from 'next/image';
 import styles from './CommentList.module.css';
 import useCommentList from './hooks';
 import Star from '../comment-write/star';
-import AllModal from '@/components/all-modal';
 
 export default function CommentList({ boardId }) {
-  const { data, onClickDeleteComment, modalOpen, modalMessage, closeModal } = useCommentList({ boardId });
+  const { data, onClickDeleteComment } = useCommentList({ boardId });
   return (
     <div className="container">
       <div>
@@ -27,7 +26,7 @@ export default function CommentList({ boardId }) {
                     <span>{el.writer}</span>
                   </div>
                   <div>
-                    <Star rating={el.rating} disabled={true} />
+                    <star />
                   </div>
                 </div>
                 <div>
@@ -65,11 +64,6 @@ export default function CommentList({ boardId }) {
           );
         })}
       </div>
-      <AllModal
-        open={modalOpen}
-        message={modalMessage}
-        onClose={closeModal}
-      />
     </div>
   );
 }

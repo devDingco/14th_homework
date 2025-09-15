@@ -1,10 +1,14 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/navigation';
-import { MouseEvent } from 'react';
+import { MouseEvent, useState } from 'react';
 import { FetchBoardsQuery } from '@/commons/graphql/graphql';
 import { FETCH_BOARDS, DELETE_BOARD } from './queries';
 
 export default function useBoardsList() {
+  // 모달 상태 관리
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+
   // 게시글 목록 데이터를 가져오는 훅 (자동으로 실행됨)
   const { data } = useQuery<FetchBoardsQuery>(FETCH_BOARDS);
   console.log(data);
@@ -35,7 +39,8 @@ export default function useBoardsList() {
 
     // boardId가 비어있으면 삭제 중단
     if (!boardId) {
-      alert('게시글 ID를 찾을 수 없습니다.');
+      setModalMessage('게시글 ID를 찾을 수 없습니다.');
+      setModalOpen(true);
       return;
     }
 
@@ -47,11 +52,24 @@ export default function useBoardsList() {
         },
         refetchQueries: [{ query: FETCH_BOARDS }], // 삭제 후 목록 다시 불러오기
       });
-      alert('게시글이 삭제되었습니다.'); // 성공 알림
+      setModalMessage('게시글이 삭제되었습니다.');
+      setModalOpen(true);
     } catch (error) {
       console.error('삭제 실패:', error); // 에러 로그
-      alert('삭제에 실패했습니다.'); // 실패 알림
+      setModalMessage('삭제에 실패했습니다.');
+      setModalOpen(true);
     }
   };
-  return { data, onClickTitle, onClickDelete };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  return {
+    data,
+    onClickTitle,
+    onClickDelete,
+    modalOpen,
+    modalMessage,
+    closeModal,
+  };
 }

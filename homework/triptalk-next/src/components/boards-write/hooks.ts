@@ -39,6 +39,10 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
   const [titleError, setTitleError] = useState(''); // 제목 에러메시지
   const [contentError, setContentError] = useState(''); // 내용 에러메시지
 
+  // 모달 상태 관리
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+
   // GraphQL 뮤테이션 훅들
   const [createBoard] = useMutation<
     CreateBoardMutation,
@@ -77,7 +81,8 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
       console.log(result); // 개발용 로그
     } catch {
       // 에러 발생 시 사용자에게 알림
-      alert('에러가 발생하였습니다. 다시 시도해 주세요.');
+      setModalMessage('에러가 발생하였습니다. 다시 시도해 주세요.');
+      setModalOpen(true);
     } finally {
       // 성공/실패와 관계없이 실행할 코드 (현재 비어있음)
     }
@@ -92,7 +97,8 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
 
     // 비밀번호가 입력되지 않으면 함수 종료
     if (!inputPassword) {
-      alert('글을 입력할때 입력하셨던 비밀번호를 입력해주세요');
+      setModalMessage('글을 입력할때 입력하셨던 비밀번호를 입력해주세요');
+      setModalOpen(true);
       return;
     }
 
@@ -137,11 +143,13 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
       const boardId = data?.fetchBoard?._id;
       if (boardId) {
         router.push(`/boards/detail/${boardId}`);
-        alert('수정되었습니다!');
+        setModalMessage('수정되었습니다!');
+        setModalOpen(true);
       }
     } catch {
       // 비밀번호 불일치 또는 기타 에러 처리
-      alert('비밀번호가 틀렸거나 수정 중 에러가 발생했습니다.');
+      setModalMessage('비밀번호가 틀렸거나 수정 중 에러가 발생했습니다.');
+      setModalOpen(true);
     }
   };
 
@@ -276,8 +284,13 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
     // 5. 모든 검증을 통과했을 때만 게시글 등록 진행
     if (hasError === false) {
       await onClickSubmit(); // 게시글 등록 API 요청 (완료까지 대기)
-      alert('게시물이 등록되었습니다!'); // 등록 완료 후 알림
+      setModalMessage('게시물이 등록되었습니다!');
+      setModalOpen(true);
     }
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
   };
 
   return {
@@ -299,6 +312,9 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
     passwordError,
     titleError,
     contentError,
+    modalOpen,
+    modalMessage,
+    closeModal,
     onChangeName,
     onChangePassword,
     onChangeTitle,
