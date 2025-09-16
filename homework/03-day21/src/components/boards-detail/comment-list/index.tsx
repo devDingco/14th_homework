@@ -1,60 +1,57 @@
 "use client"
 
-import { Rate } from "antd"
 import useBoardCommentList from "./hook"
 import styles from "./style.module.css"
+import BoardCommentListItem from "../comment-list-item"
+import InfiniteScroll from "react-infinite-scroll-component"
+import { useState } from "react"
+import { useQuery } from "@apollo/client"
+import { FETCH_BOARD_COMMENTS } from "./queries"
 import { IFetchBoardComments } from "./types"
 
-export default function BoardCommentList() {
 
-    const {
-        data,   
-    } = useBoardCommentList()
+interface IProps {
+    boardId: string
+}
+
+export default function BoardCommentList({ boardId }: IProps) {
+    const [ hasMore, setHasMore ] = useState(true)
+    const { data, fetchMore } = useQuery<IFetchBoardComments>(FETCH_BOARD_COMMENTS, {
+        variables: { boardId, page: 1 },
+    })
+
+    const onNext = () => {
+        if(data === undefined) return
+        
+        fetchMore({
+            variables: { boardId, page: Math.ceil(data.fetchBoardComments.length / 10) + 1 },
+            updateQuery: (prev, { fetchMoreResult }) => {
+                if (!fetchMoreResult?.fetchBoardComments?.length) {
+                    setHasMore(false)
+                    return
+                }
+
+                return {
+                    fetchBoardComments: [...prev.fetchBoardComments, ...fetchMoreResult.fetchBoardComments]
+                }
+            }
+        })
+    }
 
     return (
         <div className={styles.layout}>
-            {data?.fetchBoardComments?.map((el) => {
-                return(
-                <div 
-                    key={el._id} 
-                    id={el._id}
-                    className={styles.container}
+                <InfiniteScroll
+                    dataLength={data?.fetchBoardComments.length ?? 0}
+                    next={onNext}
+                    hasMore={hasMore}
+                    loader={<div>댓글을 불러오는 중...</div>}
                 >
-                    <div className={styles.detailMetadataContainer}>
-                        <div className={styles.detailRowFlex}>
-                            <div className={styles.detailMetadataProfile}>
-                                <img src="/images/userprofile_default.png" alt="프로필"/>
-                                <div>{el.writer}</div>
-                            </div>
 
-                            <div className={styles.starGroup}>
-                                <Rate value={el.rating} disabled />
-                                {/* {[1, 2, 3, 4, 5].map((star)=>
-                                <img
-                                key={star}
-                                src={star <= el.rating ? StarActive : StarDisabled}
-                                alt={`${star}점 별`}
-                                className={styles.starImage}
-                                />      
-                                )}  */}
-                            </div>
-
-                            </div>
-                            
-                            <div className={styles.detailMetadataIconContainer}>
-                                <img src="/images/edit.png" alt="수정아이콘" />
-                                <img src="/images/close.png" alt="삭제아이콘" />
-                        </div>
-                    </div>
-
-                    <p className={styles.commentContent}>{el.contents}</p>
-                    <p className={styles.commentDate}>{new Date(el.createdAt).toLocaleDateString("ko-KR")}</p>
-
-                    <hr className={styles.detailBorder}/>
-
-                </div>
-                )
-            })}
+            {data?.fetchBoardComments?.map((el) => (
+                // ✅ 분리된 컴포넌트 사용
+                 <BoardCommentListItem key={el._id} el={el} />                
+            ))}
+            </InfiniteScroll>
         </div>
     )
 }
