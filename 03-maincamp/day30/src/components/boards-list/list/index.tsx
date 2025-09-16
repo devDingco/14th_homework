@@ -3,14 +3,17 @@
 import styles from './styles.module.css'
 import useBoardsList from './hook'
 import { FetchBoardQuery } from '@/gql/graphql'
+import { IBoardsListProps } from './type'
+import { usePagination } from '../pagination/hook'
 
-export default function BoardsList() {
+export default function BoardsList(props:IBoardsListProps) {
+
 
   const {
-    data,
     onClickDelete,
     onClickMove,
   } = useBoardsList()
+  const boardNumber = (props?.currentPage -1 ) * 10 + 1
   return (
 
     <div className={styles.box}>
@@ -25,9 +28,9 @@ export default function BoardsList() {
                             <div className={styles.board__main__titlebox__date}>날짜</div>
                         </div>
                         <div className={styles.board__main__articlebox}>
-                            {data?.fetchBoards.map((el: FetchBoardQuery["fetchBoard"], index:number) => (
+                            {props.data?.map((el: FetchBoardQuery['fetchBoard'], index:number) => (
                                 <div key={el._id} className={styles.board__main__articlebox__item} onClick={() => onClickMove(el._id)}>
-                                    <div className={styles.board__main__articlebox__item__number}>{index + 1}</div>
+                                    <div className={styles.board__main__articlebox__item__number}>{boardNumber + index}</div>
                                     <div className={styles.board__main__articlebox__item__title} >{el.title}</div>
                                     <div className={styles.board__main__articlebox__item__writer}>{el.writer}</div>
                                     <div className={styles.board__main__articlebox__item__date}>{new Date(el.createdAt).toISOString().split("T")[0]}</div>

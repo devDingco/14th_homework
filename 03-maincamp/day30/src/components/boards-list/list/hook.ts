@@ -28,7 +28,7 @@ export default function useBoardsList() {
     });
   };
 
-  const { data } = useQuery(FETCH_BOARDS);
+  // const { data } = useQuery(FETCH_BOARDS);
   const [deleteBoard] = useMutation(DELETE_BOARD);
 
   const onClickMove = (boardId: string) => {
@@ -39,6 +39,6 @@ export default function useBoardsList() {
   return{
     onClickMove,
     onClickDelete,
-    data,
+    // data,
   }
 }
