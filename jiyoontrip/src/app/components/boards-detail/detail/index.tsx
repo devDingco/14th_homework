@@ -3,9 +3,12 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import useDetailPage from "./hook";
-
+import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
+import React from "react";
+import { Tooltip } from "antd";
+import YouTube from "react-youtube";
 export default function DetailPageComponent() {
-  const { onClickMove, data } = useDetailPage();
+  const { onClickMove, onClickLikeCount, onClickDislikeCount, data } = useDetailPage();
 
   return (
     <>
@@ -37,13 +40,17 @@ export default function DetailPageComponent() {
                 height={24}
                 sizes="100vw"
               />
-              <Image
-                src="/icons/outline/location.svg"
-                alt="LocationIcon"
-                width={24}
-                height={24}
-                sizes="100vw"
-              />
+              <Tooltip
+                title={`${data?.fetchBoard.boardAddress?.address} ${data?.fetchBoard.boardAddress?.addressDetail}`}
+              >
+                <Image
+                  src="/icons/outline/location.svg"
+                  alt="LocationIcon"
+                  width={24}
+                  height={24}
+                  sizes="100vw"
+                />
+              </Tooltip>
             </div>
           </div>
           <div className={styles.detailPhoto}>
@@ -57,31 +64,24 @@ export default function DetailPageComponent() {
           </div>
           <div className={styles.detailContent}>{data?.fetchBoard.contents}</div>
           <div className={styles.detailVideo}>
-            <iframe
-              className={styles.detailVideo__size}
-              src={data?.fetchBoard.youtubeUrl?.replace("watch?v=", "embed/")}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            ></iframe>
+            <YouTube
+              videoId={
+                data?.fetchBoard?.youtubeUrl?.split("=")[1] &&
+                data?.fetchBoard?.youtubeUrl.split("=")[1]
+              }
+            />
           </div>
           <div className={styles.detailHeart}>
             <div className={styles.detailHeart__bad}>
-              <Image
-                src="/icons/outline/bad.svg"
-                alt="BadIcon"
-                width={24}
-                height={24}
-                sizes="100vw"
-              />
+              <button onClick={onClickDislikeCount}>
+                <DislikeOutlined />
+              </button>
               {data?.fetchBoard.dislikeCount}
             </div>
             <div className={styles.detailHeart__good}>
-              <Image
-                src="/icons/outline/RedGood.svg"
-                alt="RedGoodIcon"
-                width={24}
-                height={24}
-                sizes="100vw"
-              />
+              <button onClick={onClickLikeCount}>
+                <LikeOutlined />
+              </button>
               {data?.fetchBoard.likeCount}
             </div>
           </div>
@@ -89,7 +89,7 @@ export default function DetailPageComponent() {
             <button className={styles.detailButtonList}>
               <Image
                 src="/icons/outline/menu.svg"
-                alt="MenuIcon"
+                alt="RedGoodIcon"
                 width={24}
                 height={24}
                 sizes="100vw"
@@ -99,7 +99,7 @@ export default function DetailPageComponent() {
             <button className={styles.detailButtonEdit} onClick={onClickMove}>
               <Image
                 src="/icons/outline/edit.svg"
-                alt="EditIcon"
+                alt="RedGoodIcon"
                 width={24}
                 height={24}
                 sizes="100vw"

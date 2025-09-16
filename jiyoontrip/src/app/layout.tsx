@@ -3,16 +3,16 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ApolloSetting from "./commons/settings/apollo-setting";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+// const geistSans = localFont({
+//   src: "./fonts/GeistVF.woff",
+//   variable: "--font-geist-sans",
+//   weight: "100 900",
+// });
+// const geistMono = localFont({
+//   src: "./fonts/GeistMonoVF.woff",
+//   variable: "--font-geist-mono",
+//   weight: "100 900",
+// });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,12 +23,15 @@ interface IProps {
   children: React.ReactNode;
 }
 
+const globalFont = localFont({
+  src: "./fonts/Pretendard-Regular.woff2",
+  variable: "--globalFont",
+});
+
 export default function RootLayout(props: IProps) {
   return (
     <html lang="ko">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable}  font-sans antialiased`}
-      >
+      <body className={`${globalFont.variable} font-sans antialiased`}>
         <ApolloSetting>{props.children}</ApolloSetting>
       </body>
     </html>

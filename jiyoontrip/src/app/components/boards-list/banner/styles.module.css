@@ -1,0 +1,9 @@
+.bannerImages {
+  width: 100%;
+  height: 400px;
+  object-position: center 80%;
+  object-fit: cover;
+}
+.swiper {
+  padding-bottom: 2.5rem;
+}

@@ -14,8 +14,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
     onClickSignup,
     onClickUpdate,
     onToggleModal,
+    onSubmitModal,
+    onToggleCompleteModal,
     onCompleteAddress,
-    onChnageYoutubeUrl,
+    onChangeYoutubeUrl,
     zonecode,
     address,
     authorError,
@@ -27,6 +29,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     DaumPostcodeEmbed,
     Modal,
     isModalOpen,
+    isCompleteModalOpen,
   } = useBoardWrite();
 
   return (
@@ -175,7 +178,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
               className={styles.inputArea__input}
               type="text"
               placeholder="링크를 입력해 주세요."
-              onChange={onChnageYoutubeUrl}
+              onChange={onChangeYoutubeUrl}
               defaultValue={data?.fetchBoard?.youtubeUrl ?? ""}
               // defaultValue={props.data?.fetchBoard.youtubeUrl}
             />
@@ -251,13 +254,26 @@ export default function BoardWrite(props: IBoardWriteProps) {
       </div>
       {isModalOpen === true && (
         <Modal
-          title="Basic Modal"
+          title="우편번호 검색"
           closable={{ "aria-label": "Custom Close Button" }}
           open={true}
           onOk={onToggleModal}
           onCancel={onToggleModal}
         >
           <DaumPostcodeEmbed onComplete={onCompleteAddress} />
+        </Modal>
+      )}
+      {isCompleteModalOpen === true && (
+        <Modal
+          title={isEdit === true ? "수정완료" : "작성완료"}
+          closable={{ "aria-label": "Custom Close Button" }}
+          open={true}
+          onOk={onSubmitModal}
+          onCancel={onToggleCompleteModal}
+        >
+          {isEdit === true
+            ? "게시글이 성공정으로 수정되었습니다."
+            : "게시글이 성공적으로 등록되었습니다."}
         </Modal>
       )}
     </>
