@@ -5,7 +5,7 @@
 
 .boards_detail {
   width: 1920px;
-  height: 2251px;
+  /* height: 2251px; */
   padding-top: 40px;
   padding-bottom: 40px;
   gap: 40px;
@@ -115,7 +115,7 @@
 
 .boards_body {
   width: 1920px;
-  height: 2171px;
+  /* height: 2171px; */
   padding-right: 320px;
   padding-left: 320px;
   gap: 40px;
@@ -126,7 +126,7 @@
 
 .boards_body_main {
   width: 1280px;
-  height: 2171px;
+  /* height: 2171px; */
   gap: 24px;
   display: flex;
   flex-direction: column;
@@ -146,12 +146,12 @@
 .video_div {
   width: 1280px;
   height: 512px;
-  gap: 10px;
+  /* gap: 10px;
   padding-top: 24px;
-  padding-bottom: 24px;
-  display: flex;
+  padding-bottom: 24px; */
+  /* display: flex; */
   background-color: #f2f2f2;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
 .buttons {

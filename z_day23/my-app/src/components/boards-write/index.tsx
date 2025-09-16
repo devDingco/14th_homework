@@ -6,11 +6,13 @@ import Divider from "./line";
 import { useRouter } from "next/navigation";
 import { IBoardsNewProps } from "./types";
 import { useBoardsForm } from "./hook";
+import { useState } from "react";
+import { Modal } from "antd";
+import DaumPostcode from "react-daum-postcode";
 
 export default function BoardsNew(props: IBoardsNewProps) {
   const router = useRouter();
 
-  // Use the custom hook to get states and handler functions
   const {
     writerInput,
     passwordInput,
@@ -27,7 +29,31 @@ export default function BoardsNew(props: IBoardsNewProps) {
     onChangeContent,
     onClickSubmit,
     onClickUpdate,
+    // 주소 관련 상태와 핸들러들
+    zipCode,
+    address,
+    addressDetail,
+    onChangeZipCode,
+    onChangeAddress,
+    onChangeAddressDetail,
+    // 유튜브 URL 상태와 핸들러
+    youtubeUrl,
+    onChangeYoutubeUrl,
   } = useBoardsForm();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // 우편번호 검색 모달 열기
+  const handleAddressSearch = () => {
+    setIsModalOpen(true);
+  };
+
+  // 주소 선택 시 기존 값 변경
+  const handleAddressSelect = (data: any) => {
+    onChangeZipCode(data.zonecode); // 우편번호 변경
+    onChangeAddress(data.address); // 기본주소 변경
+    setIsModalOpen(false);
+  };
 
   return (
     <div className={styles.App}>
@@ -40,13 +66,12 @@ export default function BoardsNew(props: IBoardsNewProps) {
             </div>
             <div className={styles.게시글_폼}>
               <div className={styles.게시글_폼_상세}>
-                {/* 작성자 & 비밀번호 */}
                 <div className={styles.게시글_인풋블록}>
                   <SmallInput
                     Input_Title="작성자"
                     Input_Placeholder="작성자 명을 입력해주세요."
                     Input_Star="*"
-                    defaultValue={props.data?.fetchBoard?.writer ?? ""}
+                    value={writerInput}
                     onChange={onChangeWriter}
                     errorMessage={writerError}
                     disabled={props.isEdit}
@@ -55,7 +80,7 @@ export default function BoardsNew(props: IBoardsNewProps) {
                     Input_Title="비밀번호"
                     Input_Placeholder="비밀번호를 입력해주세요."
                     Input_Star="*"
-                    defaultValue={passwordInput}
+                    value={passwordInput}
                     onChange={onChangePassword}
                     errorMessage={passwordError}
                     disabled={props.isEdit}
@@ -63,55 +88,73 @@ export default function BoardsNew(props: IBoardsNewProps) {
                 </div>
                 <Divider />
 
-                {/* 제목 */}
                 <div className={styles.게시글_인풋블록}>
                   <LongInput
                     Input_Title="제목"
                     Input_Placeholder="제목을 입력해 주세요."
                     Input_Star="*"
-                    defaultValue={props.data?.fetchBoard?.title ?? ""}
+                    value={titleInput}
                     onChange={onChangeTitle}
                     errorMessage={titleError}
                   />
                 </div>
                 <Divider />
 
-                {/* 내용 */}
                 <div className={styles.게시글_인풋블록}>
                   <SuperLongInput
                     Input_Title="내용"
                     Input_Placeholder="내용을 입력해 주세요."
                     Input_Star="*"
-                    defaultValue={props.data?.fetchBoard?.contents ?? ""}
+                    value={contentInput}
                     onChange={onChangeContent}
                     errorMessage={contentError}
                   />
                 </div>
+                <Divider />
 
-                {/* 주소 */}
+                {/* 주소 입력 섹션 */}
                 <div className={styles.게시글_인풋블록쌓기}>
                   <div className={styles.주소인풋이랑버튼}>
                     주소
                     <div className={styles.인풋이랑버튼}>
+                      {/* 우편번호 입력 필드 - 초기값 바인딩 */}
                       <input
                         className={styles.우편번호인풋}
                         placeholder="01234"
+                        value={zipCode}
+                        readOnly
                       />
-                      <button className={styles.우편번호검색}>
+                      {/* 우편번호 검색 버튼 - 클릭 시 기존 값 변경 */}
+                      <button
+                        className={styles.우편번호검색}
+                        onClick={handleAddressSearch}
+                      >
                         우편번호 검색
                       </button>
                     </div>
                   </div>
-                  <LongInput Input_Placeholder="주소를 입력해 주세요." />
-                  <LongInput Input_Placeholder="상세주소" />
+                  {/* 기본 주소 입력 필드 - 초기값 바인딩 */}
+                  <LongInput
+                    Input_Placeholder="주소를 입력해 주세요."
+                    value={address}
+                    readOnly
+                  />
+                  {/* 상세 주소 입력 필드 - 초기값 바인딩 */}
+                  <LongInput
+                    Input_Placeholder="상세주소"
+                    onChange={onChangeAddressDetail}
+                    value={addressDetail}
+                  />
                 </div>
                 <Divider />
 
-                {/* 유튜브 */}
+                {/* 유튜브 URL 입력 섹션 */}
                 <div className={styles.게시글_인풋블록}>
                   <LongInput
                     Input_Title="유튜브링크"
                     Input_Placeholder="링크를 입력해주세요."
+                    onChange={onChangeYoutubeUrl}
+                    value={youtubeUrl}
                   />
                 </div>
                 <Divider />
@@ -148,7 +191,7 @@ export default function BoardsNew(props: IBoardsNewProps) {
                 </div>
               </div>
 
-              {/* 버튼 */}
+              {/* 버튼 섹션 */}
               <div className={styles.게시글_폼_버튼}>
                 <button
                   className="취소"
@@ -158,6 +201,7 @@ export default function BoardsNew(props: IBoardsNewProps) {
                 >
                   취소
                 </button>
+                {/* 수정하기 버튼 클릭 시 updateBoard API 호출 */}
                 <button
                   style={{
                     backgroundColor: isFormValid ? "#2974E5" : "gray",
@@ -172,6 +216,16 @@ export default function BoardsNew(props: IBoardsNewProps) {
           </div>
         </div>
       </header>
+
+      {/* 우편번호 검색 모달 */}
+      <Modal
+        title="우편번호 검색"
+        open={isModalOpen}
+        onCancel={() => setIsModalOpen(false)}
+        footer={null}
+      >
+        <DaumPostcode onComplete={handleAddressSelect} />
+      </Modal>
     </div>
   );
 }

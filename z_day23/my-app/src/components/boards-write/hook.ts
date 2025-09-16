@@ -2,7 +2,7 @@
 
 import { useState, ChangeEvent, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { ApolloError, useMutation } from "@apollo/client";
+import { ApolloError, useMutation, useQuery } from "@apollo/client";
 
 import {
   CreateBoardDocument,
@@ -12,41 +12,79 @@ import {
   UpdateBoardWriteDocument,
   UpdateBoardWriteMutation,
   UpdateBoardWriteMutationVariables,
+  FetchBoardWriteDocument,
+  FetchBoardWriteQuery,
+  FetchBoardWriteQueryVariables,
 } from "@/commons/graphql/graphql";
 
-// Custom hook to handle all board form logic
 export const useBoardsForm = () => {
   const router = useRouter();
-  const params = useParams(); // Get URL parameters
-  const isEdit = !!params.boardId; // Check if in edit mode from URL
+  const params = useParams();
+  const isEdit = !!params.boardId;
   const boardId = params.boardId as string;
 
-  // Input states
+  // 게시글 데이터 불러오기 (fetchBoard API 사용)
+  const { data: boardData } = useQuery<
+    FetchBoardWriteQuery,
+    FetchBoardWriteQueryVariables
+  >(FetchBoardWriteDocument, {
+    variables: { boardId: boardId },
+    skip: !isEdit,
+  });
+
+  // 기본 입력 상태들
   const [writerInput, setWriterInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [titleInput, setTitleInput] = useState("");
   const [contentInput, setContentInput] = useState("");
 
-  // Error states
+  // 주소 관련 상태들
+  const [zipCode, setZipCode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+
+  // 유튜브 URL 상태
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+
+  // 에러 상태들
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
   const [contentError, setContentError] = useState("");
 
-  // Form active state
   const [isFormValid, setIsFormValid] = useState(false);
 
-  // GraphQL mutation hooks
   const [createBoardMutation] = useMutation<
     CreateBoardMutation,
     CreateBoardMutationVariables
   >(CreateBoardDocument);
+
   const [updateBoardMutation] = useMutation<
     UpdateBoardWriteMutation,
     UpdateBoardWriteMutationVariables
   >(UpdateBoardWriteDocument);
 
-  // Activate submit button when all required fields are filled
+  // 게시글 수정 시 기존 데이터를 초기값으로 바인딩
+  useEffect(() => {
+    if (isEdit && boardData?.fetchBoard) {
+      const board = boardData.fetchBoard;
+      setWriterInput(board.writer ?? "");
+      setTitleInput(board.title);
+      setContentInput(board.contents);
+
+      console.log(board);
+
+      // 우편번호, 기본주소, 상세주소 초기값 설정
+      setZipCode(board.boardAddress?.zipcode ?? "");
+      setAddress(board.boardAddress?.address ?? "");
+      setAddressDetail(board.boardAddress?.addressDetail ?? "");
+
+      // 유튜브 URL 초기값 설정
+      setYoutubeUrl(board.youtubeUrl ?? "");
+    }
+  }, [boardData, isEdit]);
+
+  // 폼 유효성 검사
   useEffect(() => {
     if (!isEdit) {
       if (writerInput && passwordInput && titleInput && contentInput) {
@@ -63,7 +101,7 @@ export const useBoardsForm = () => {
     }
   }, [writerInput, passwordInput, titleInput, contentInput, isEdit]);
 
-  // Input change handlers
+  // 입력 핸들러들
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriterInput(event.target.value);
     if (writerError) setWriterError("");
@@ -84,7 +122,17 @@ export const useBoardsForm = () => {
     if (contentError) setContentError("");
   };
 
-  // Handle submit button click
+  // 주소 관련 핸들러들
+  const onChangeZipCode = (value: string) => setZipCode(value);
+  const onChangeAddress = (value: string) => setAddress(value);
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) =>
+    setAddressDetail(event.target.value);
+
+  // 유튜브 URL 핸들러
+  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) =>
+    setYoutubeUrl(event.target.value);
+
+  // 게시글 등록
   const onClickSubmit = async () => {
     let hasError = false;
 
@@ -115,6 +163,12 @@ export const useBoardsForm = () => {
             password: passwordInput,
             title: titleInput,
             contents: contentInput,
+            youtubeUrl: youtubeUrl,
+            boardAddress: {
+              zipcode: zipCode,
+              address: address,
+              addressDetail: addressDetail,
+            },
           },
         },
       });
@@ -127,7 +181,7 @@ export const useBoardsForm = () => {
     }
   };
 
-  // Handle update button click
+  // 게시글 수정 (updateBoard API 사용)
   const onClickUpdate = async () => {
     if (!boardId) return;
 
@@ -141,13 +195,17 @@ export const useBoardsForm = () => {
     }
 
     try {
-      const updateBoardInput: UpdateBoardInput = {};
-      if (titleInput) {
-        updateBoardInput.title = titleInput;
-      }
-      if (contentInput) {
-        updateBoardInput.contents = contentInput;
-      }
+      // updateBoard API를 통해 우편번호, 기본주소, 상세주소, 유튜브 URL 함께 전송
+      const updateBoardInput: UpdateBoardInput = {
+        title: titleInput,
+        contents: contentInput,
+        youtubeUrl: youtubeUrl,
+        boardAddress: {
+          zipcode: zipCode,
+          address: address,
+          addressDetail: addressDetail,
+        },
+      };
 
       const result = await updateBoardMutation({
         variables: {
@@ -173,7 +231,6 @@ export const useBoardsForm = () => {
     }
   };
 
-  // Return the states and functions
   return {
     writerInput,
     passwordInput,
@@ -190,5 +247,15 @@ export const useBoardsForm = () => {
     onChangeContent,
     onClickSubmit,
     onClickUpdate,
+    // 주소 관련 반환값들
+    zipCode,
+    address,
+    addressDetail,
+    onChangeZipCode,
+    onChangeAddress,
+    onChangeAddressDetail,
+    // 유튜브 URL 관련 반환값들
+    youtubeUrl,
+    onChangeYoutubeUrl,
   };
 };
