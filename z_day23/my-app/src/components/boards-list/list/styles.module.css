@@ -34,7 +34,7 @@
 
 .board_list_frame {
   width: 1280px;
-  height: 656px;
+  /* height: 656px; */
   max-width: 1280px;
   angle: 0 deg;
   opacity: 1;
@@ -48,7 +48,7 @@
 
 .board_list {
   width: 1184px;
-  height: 608px;
+  /* height: 608px; */
   angle: 0 deg;
   opacity: 1;
   gap: 8px;
@@ -208,4 +208,10 @@
   align-items: center;
   /* background-color: gainsboro; */
   border: 1px solid #f2f2f2;
+}
+
+.pagination_middle {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 15px;
 }

@@ -7,6 +7,10 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export default function ApolloSetting(props: any) {
-  return <ApolloProvider client={client}>{props.모든페이지}</ApolloProvider>;
+interface IApolloSettingProps {
+  children: React.ReactNode;
+}
+
+export default function ApolloSetting({ children }: IApolloSettingProps) {
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
 }

@@ -1,3 +1,4 @@
+// src/components/boards-detail/hook.ts
 "use client";
 
 import { useState, ChangeEvent, useEffect } from "react";
@@ -20,15 +21,15 @@ import {
 export const useBoardsForm = () => {
   const router = useRouter();
   const params = useParams();
-  const isEdit = !!params.boardId;
-  const boardId = params.boardId as string;
+  const isEdit = !!params?.boardId;
+  const boardId = (params?.boardId as string) ?? "";
 
   // 게시글 데이터 불러오기 (fetchBoard API 사용)
   const { data: boardData } = useQuery<
     FetchBoardWriteQuery,
     FetchBoardWriteQueryVariables
   >(FetchBoardWriteDocument, {
-    variables: { boardId: boardId },
+    variables: { boardId },
     skip: !isEdit,
   });
 
@@ -64,15 +65,16 @@ export const useBoardsForm = () => {
     UpdateBoardWriteMutationVariables
   >(UpdateBoardWriteDocument);
 
-  // 게시글 수정 시 기존 데이터를 초기값으로 바인딩
+  // ---------- 모달 관련 상태 (alert 대체) ----------
+  const [modalMessage, setModalMessage] = useState<string | null>(null);
+  const [modalRedirect, setModalRedirect] = useState<string | null>(null);
+
   useEffect(() => {
     if (isEdit && boardData?.fetchBoard) {
       const board = boardData.fetchBoard;
       setWriterInput(board.writer ?? "");
       setTitleInput(board.title);
       setContentInput(board.contents);
-
-      console.log(board);
 
       // 우편번호, 기본주소, 상세주소 초기값 설정
       setZipCode(board.boardAddress?.zipcode ?? "");
@@ -87,17 +89,11 @@ export const useBoardsForm = () => {
   // 폼 유효성 검사
   useEffect(() => {
     if (!isEdit) {
-      if (writerInput && passwordInput && titleInput && contentInput) {
-        setIsFormValid(true);
-      } else {
-        setIsFormValid(false);
-      }
+      setIsFormValid(
+        !!(writerInput && passwordInput && titleInput && contentInput)
+      );
     } else {
-      if (titleInput && contentInput) {
-        setIsFormValid(true);
-      } else {
-        setIsFormValid(false);
-      }
+      setIsFormValid(!!(titleInput && contentInput));
     }
   }, [writerInput, passwordInput, titleInput, contentInput, isEdit]);
 
@@ -173,29 +169,27 @@ export const useBoardsForm = () => {
         },
       });
 
-      router.push(`/boards/${result.data?.createBoard._id}`);
-      alert("게시글이 성공적으로 등록되었습니다!");
+      const newId = result.data?.createBoard._id;
+      setModalMessage("게시글이 성공적으로 등록되었습니다!");
+      setModalRedirect(newId ? `/boards/${newId}` : `/boards/`);
     } catch (error) {
       console.error(error);
-      alert("게시글 등록에 실패했습니다.");
+      setModalMessage("게시글 등록에 실패했습니다.");
+      setModalRedirect(null);
     }
   };
 
-  // 게시글 수정 (updateBoard API 사용)
-  const onClickUpdate = async () => {
+  // 게시글 수정 (updateBoard API 사용) — 비밀번호는 외부에서 받아 처리
+  const onClickUpdate = async (inputPassword: string) => {
     if (!boardId) return;
 
-    const inputPassword = prompt("글 작성 시 입력했던 비밀번호를 입력해주세요");
-    if (inputPassword === null) {
-      return;
-    }
     if (!inputPassword) {
-      alert("비밀번호를 입력해야 수정할 수 있습니다.");
+      setModalMessage("비밀번호를 입력해야 수정할 수 있습니다.");
+      setModalRedirect(null);
       return;
     }
 
     try {
-      // updateBoard API를 통해 우편번호, 기본주소, 상세주소, 유튜브 URL 함께 전송
       const updateBoardInput: UpdateBoardInput = {
         title: titleInput,
         contents: contentInput,
@@ -215,19 +209,21 @@ export const useBoardsForm = () => {
         },
       });
 
-      router.push(`/boards/${result.data?.updateBoard._id}`);
-      alert("게시글이 성공적으로 수정되었습니다!");
+      const updatedId = result.data?.updateBoard._id;
+      setModalMessage("게시글이 성공적으로 수정되었습니다!");
+      setModalRedirect(updatedId ? `/boards/${updatedId}` : `/boards/`);
     } catch (error) {
       console.error(error);
       if (error instanceof ApolloError) {
         if (error.graphQLErrors?.[0]?.message.includes("password")) {
-          alert("비밀번호가 틀렸습니다.");
+          setModalMessage("비밀번호가 틀렸습니다.");
         } else {
-          alert("게시글 수정에 실패했습니다.");
+          setModalMessage("게시글 수정에 실패했습니다.");
         }
       } else {
-        alert("게시글 수정에 실패했습니다.");
+        setModalMessage("게시글 수정에 실패했습니다.");
       }
+      setModalRedirect(null);
     }
   };
 
@@ -257,5 +253,10 @@ export const useBoardsForm = () => {
     // 유튜브 URL 관련 반환값들
     youtubeUrl,
     onChangeYoutubeUrl,
+    // 모달 관련
+    modalMessage,
+    setModalMessage,
+    modalRedirect,
+    setModalRedirect,
   };
 };

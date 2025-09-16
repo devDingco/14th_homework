@@ -1,6 +1,5 @@
-import { ApolloError } from "@apollo/client";
-
-export interface IFetchBoard {
+// components/boards-list/list/types.ts
+export interface IBoard {
   _id: string;
   writer: string;
   title: string;
@@ -8,15 +7,7 @@ export interface IFetchBoard {
   createdAt: string;
 }
 
-export interface IFetchBoardsData {
-  fetchBoards: IFetchBoard[];
-}
-
-export interface IUseBoardList {
-  data: IFetchBoardsData | undefined;
-  onClickDelete: (boardIdToDelete: string) => Promise<void>;
-  onClickTitle: (boardId: string) => void;
-  formatDate: (dateString: string) => string;
-  loading: boolean;
-  error?: ApolloError;
+export interface IQuery {
+  fetchBoards: IBoard[];
+  fetchBoardsCount: number;
 }
