@@ -3,9 +3,10 @@
 import Image from 'next/image';
 import styles from './page.module.css';
 import useBoardsList from './hooks';
+import AllModal from '@/components/all-modal';
 
-export default function BoardsList() {
-  const { data, onClickTitle, onClickDelete } = useBoardsList();
+export default function BoardsList({ data }) {
+  const { onClickTitle, onClickDelete, modalOpen, modalMessage, closeModal } = useBoardsList();
 
   return (
     <div className={styles.container}>
@@ -26,7 +27,7 @@ export default function BoardsList() {
           </div>
         </div>
         {/* 게시물 목록을 반복해서 표시 */}
-        {data?.fetchBoards?.map((el, index: number) => {
+        {data?.map((el, index: number) => {
           return (
             <div 
               key={el._id} 
@@ -36,7 +37,7 @@ export default function BoardsList() {
               {/* 각 게시글 항목 */}
               {/* 왼쪽 부분: 번호와 제목 */}
               <div className={styles.leftGroup}>
-                <span>{index + 1}</span> {/* 게시글 번호 (배열 인덱스 + 1) */}
+                <span>{index + 1}</span> {/* 게시글 번호 */}
                 <span>
                   {el.title} {/* 게시글 제목 */}
                 </span>
@@ -66,6 +67,11 @@ export default function BoardsList() {
           );
         })}
       </div>
+      <AllModal
+        open={modalOpen}
+        message={modalMessage}
+        onClose={closeModal}
+      />
     </div>
   );
 }

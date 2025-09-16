@@ -1,0 +1,30 @@
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.pageButton {
+  display: flex;
+  gap: 24px;
+  width: 24px;
+  height: 24px;
+  background-color: red;
+}
+
+.pageButton:hover {
+  background-color: #f5f5f5;
+}
+
+.pageButtonActive {
+  width: 24px;
+  height: 24px;
+}
+
+.navButton {
+}
+
+.navButton:hover {
+}
+
+.navButton:disabled {
+}

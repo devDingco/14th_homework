@@ -1,10 +1,13 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { FETCH_BOARD_COMMENTS, DELETE_BOARD_COMMENT } from './queries';
 import { UseCommentListParams, UseCommentListReturn, FetchBoardCommentsData } from './types';
-import { MouseEvent } from 'react';
+import { MouseEvent, useState } from 'react';
 
 export default function useCommentList({ boardId }: UseCommentListParams): UseCommentListReturn {
   const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+
   const { data, error } = useQuery<FetchBoardCommentsData>(FETCH_BOARD_COMMENTS, {
     variables: { boardId: boardId, page: 1 },
   });
@@ -16,7 +19,8 @@ export default function useCommentList({ boardId }: UseCommentListParams): UseCo
     const button = event.currentTarget as HTMLButtonElement;
     const boardCommentId = button.id;
     if (!boardCommentId) {
-      alert('댓글 ID를 찾을 수 없습니다.');
+      setModalMessage('댓글 ID를 찾을 수 없습니다.');
+      setModalOpen(true);
       return;
     }
 
@@ -25,7 +29,8 @@ export default function useCommentList({ boardId }: UseCommentListParams): UseCo
 
     // 비밀번호가 입력되지 않으면 삭제 중단
     if (!password) {
-      alert('비밀번호를 입력해야 삭제할 수 있습니다.');
+      setModalMessage('비밀번호를 입력해야 삭제할 수 있습니다.');
+      setModalOpen(true);
       return;
     }
 
@@ -43,14 +48,23 @@ export default function useCommentList({ boardId }: UseCommentListParams): UseCo
           },
         ], // 삭제 후 목록 다시 불러오기
       });
-      alert('댓글이 삭제되었습니다.'); // 성공 알림
+      setModalMessage('댓글이 삭제되었습니다.');
+      setModalOpen(true);
     } catch (error) {
       console.error('삭제 실패:', error); // 에러 로그
-      alert('삭제에 실패했습니다.'); // 실패 알림
+      setModalMessage('삭제에 실패했습니다.');
+      setModalOpen(true);
     }
   };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return {
     data,
-    onClickDeleteComment
+    onClickDeleteComment,
+    modalOpen,
+    modalMessage,
+    closeModal
   };
 }
