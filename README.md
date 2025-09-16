@@ -59,10 +59,10 @@
 
 ### 게시글 목록 (공통)
 
-- [ ]  게시글 목록 컴포넌트 (`boards-list`)를 **게시글 목록**과 **배너** 두 개의 하위 컴포넌트로 분리해요.
+- [x]  게시글 목록 컴포넌트 (`boards-list`)를 **게시글 목록**과 **배너** 두 개의 하위 컴포넌트로 분리해요.
     - 목록: `src/components/boards-list/list`
     - 배너: `src/components/boards-list/banner`
-- [ ]  기존 `boards-list` 컴포넌트의 모든 관련 파일을 새로 생성된 `src/components/boards-list/list` 폴더로 옮겨주세요.
+- [x]  기존 `boards-list` 컴포넌트의 모든 관련 파일을 새로 생성된 `src/components/boards-list/list` 폴더로 옮겨주세요.
     - **이동할 파일**:
         - `hook.ts`
         - `index.tsx`
@@ -72,16 +72,16 @@
 
 ### 게시글 목록 (조립)
 
-- [ ]  위에서 생성한 **배너**와 **게시글 목록** 컴포넌트를 불러와 완성된 게시글 목록 페이지를 구성해 주세요.
-    - [ ]  **경로:** `src/app/boards/page.tsx`
+- [x]  위에서 생성한 **배너**와 **게시글 목록** 컴포넌트를 불러와 완성된 게시글 목록 페이지를 구성해 주세요.
+    - [x]  **경로:** `src/app/boards/page.tsx`
 
 ---
 
 ### 게시글 목록 (배너)
 
-- [ ]  배너 UI를 구현해 주세요.
-    - [ ]  경로: `src/components/boards-list/banner/index.tsx`
-    - [ ]  여러 이미지가 슬라이드 되도록 캐러셀(carousel) 라이브러리를 사용해 주세요. **Swiper** 또는 **react-slick**을 추천해요.
+- [x]  배너 UI를 구현해 주세요.
+    - [x]  경로: `src/components/boards-list/banner/index.tsx`
+    - [x]  여러 이미지가 슬라이드 되도록 캐러셀(carousel) 라이브러리를 사용해 주세요. **Swiper** 또는 **react-slick**을 추천해요.
 
 ---
 
