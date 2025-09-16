@@ -4,7 +4,6 @@ import { ApolloError, useMutation } from "@apollo/client"
 import { useParams, useRouter } from "next/navigation"
 import { ChangeEvent } from "react"
 import { IOnChangePosting, IOnUpdateHandler, IUpdateBoardInput } from "./type"
-import { CREATE_BOARD, UPDATE_BOARD } from "./queries"
 import { useIsEdit } from "@/commons/isEditProvider"
 import { CreateBoardDocument, CreateBoardMutation, CreateBoardMutationVariables, UpdateBoardDocument, UpdateBoardMutation, UpdateBoardMutationVariables } from "@/commons/gql/graphql"
 

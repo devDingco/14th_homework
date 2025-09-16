@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ApolloSetting from "../commons/settings/apollo-setting";
 import { IsEditProvider } from "@/commons/isEditProvider";
+import Layout from "@/commons/layout";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +19,7 @@ export default function RootLayout({
       <body className={`root_body`}>
         <ApolloSetting>
           <IsEditProvider>
-            {children}
+            <Layout>{children}</Layout>
           </IsEditProvider>
         </ApolloSetting>
       </body>

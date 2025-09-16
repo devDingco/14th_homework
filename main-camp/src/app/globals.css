@@ -4,6 +4,15 @@
 }
 */
 
+/* react-slick */
+.slick-slider,
+.slick-list,
+.slick-track,
+.slick-slide,
+.slick-slide div {
+    height: 100% !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -79,7 +88,7 @@
   .flex_align_self_flexend {
     align-self: flex-end;
   }
-  
+
   /* typography */
   
   .b_20_28 {
@@ -155,6 +164,15 @@
     text-align: center;
   }
   
+  .sb_16_20 {
+    font-family: Pretendard Variable;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+  }
+
   .sb_18_24 {
     font-family: Pretendard Variable;
     font-weight: 600;

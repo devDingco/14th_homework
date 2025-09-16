@@ -1,0 +1,98 @@
+/* comment */
+
+.comment_write_container {
+    width: 1280px;
+    height: 400px;
+    gap: 24px;
+    opacity: 1;
+}
+
+.comment_icon {
+    width: 60px;
+    height: 24px;
+    gap: 8px;
+    opacity: 1;
+}
+
+.comment_star {
+    width: 1280px;
+    height: 24px;
+    gap: 8px;
+    opacity: 1;    
+}
+
+.comment_write_frame {
+    width: 1280px;
+    height: 304px;
+    /* height: 324px; */
+    gap: 16px;
+    opacity: 1;
+}
+
+.comment_write_form_container {
+    width: 1280px;
+    height: 240px;
+    /* height: 260px; */
+    gap: 25px;
+    opacity: 1;
+}
+
+.comment_write_form_top {
+    width: 640px;
+    height: 80px;
+    gap: 16px;
+    opacity: 1;    
+}
+
+.comment_write_form_bottom {
+    width: 1280px;
+    height: 144px;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    opacity: 1;
+    border-radius: 8px;
+    border-width: 1px;
+    resize: none;
+}
+
+.comment_resist_btn {
+    width: 99px;
+    height: 48px;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    gap: 8px;
+    opacity: 1;
+    border-radius: 8px;
+    background: var(--gray-300, rgba(199, 199, 199, 1));
+}
+
+.input_frame_312w_80h {
+    width: 312px;
+    height: 80px;
+    gap: 3px;
+    opacity: 1;
+}
+
+.label_312w_24h {
+    width: 312px;
+    height: 24px;
+    gap: 4px;
+    opacity: 1;
+}
+
+.input_312w_48h {
+    width: 312px;
+    height: 48px;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    opacity: 1;
+    border-radius: 8px;
+    border-width: 1px;
+
+}
