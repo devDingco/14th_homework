@@ -1,0 +1,58 @@
+
+.writer{
+display: flex;
+align-items: center;
+gap: 0.4rem;
+font-family: Pretendard Variable;
+font-weight: 300;
+font-style: Light;
+font-size: 14px;
+line-height: 20px;
+letter-spacing: 0%;
+
+color: #5F5F5F;
+}
+.header{
+    width: 126rem;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.headerLeft{
+display: flex;    
+gap: 0.8rem;
+}
+.rating{
+    display: flex;
+
+}
+.headerRight{
+    display: flex;
+    gap: 0.8rem;
+}
+
+.edit {
+    padding: 0;
+}
+.delete{
+    padding: 0;
+}
+.contents{
+font-family: Pretendard Variable;
+font-weight: 400;
+font-style: Regular;
+font-size: 16px;
+line-height: 24px;
+letter-spacing: 0%;
+color: #333333;
+
+}
+.creatAt{
+font-family: Pretendard Variable;
+font-weight: 400;
+font-style: Regular;
+font-size: 14px;
+line-height: 20px;
+letter-spacing: 0%;
+color: #818181;
+}

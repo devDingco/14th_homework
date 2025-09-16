@@ -2,9 +2,13 @@ import styles from './styles.module.css'
 import useCommentWrite from './hook'
 import React, { useState } from "react";
 import { Rate } from "antd";
+import { IProps } from "./types";
 
 
-export default function CommentWrite() {
+
+
+
+export default function CommentWrite(props:IProps) {
   const{
     onChangeWriter,
     onChangePassword,
@@ -16,11 +20,13 @@ export default function CommentWrite() {
     rating,
     setRating,
     isComments,
-    setIsComments
-  } = useCommentWrite()
+    setIsComments,
+    onClickCancel,
+    onClickUpdate,
+  } = useCommentWrite(props)
 
 
-
+  
   return (
     <div className={styles.container}>
       <div className={styles.comment__write}>
@@ -40,10 +46,12 @@ export default function CommentWrite() {
                   작성자 <span style={{ color: 'red' }}>*</span>
                 </h3>
                 <input
-                  value={writer}
+                  // value={writer}
                   onChange={onChangeWriter}
                   type="text"
                   placeholder="작성자를 입력해주세요"
+                  disabled={!!props.el}
+                  defaultValue={props.el?.writer ?? writer}
                 />
               </div>
 
@@ -56,26 +64,30 @@ export default function CommentWrite() {
                   onChange={onChangePassword}
                   type="password"
                   placeholder="비밀번호를 입력해주세요"
+                  disabled={!!props.el}
                 />
               </div>
             </div>
 
             <div className={styles.comment__write__form__input__bottom}>
               <input
-                value={contents}
+                // value={contents}
                 onChange={onChangeContents}
                 type="text"
                 placeholder="댓글을 입력해주세요"
+                defaultValue={props.el?.contents ?? contents}
               />
               <div>{contents.length}/100</div>
             </div>
           </div>
-
+          {props.isEdit ? <button onClick={onClickCancel}>취소</button> : ""}
           <button
-            onClick={onSubmit}
+            onClick={props.isEdit ? onClickUpdate : onSubmit} 
+            
             className={styles.comment__write__form__button}
+            
           >
-            댓글등록
+            {props.isEdit ? '수정하기' : "댓글등록"}
           </button>
         </div>
       </div>
