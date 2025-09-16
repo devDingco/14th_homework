@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 
 
-export default function BoardsPage() {
+export default function BoardsPage(props) {
     const { data,      showModal,
         handleOk,
         handleCancel,
@@ -19,15 +19,16 @@ export default function BoardsPage() {
          } = useBoardsPage()
 
     return (
-        <div className={style.page}>
-            <div className={style.boards}>
+        <>
+         {/* <div className={style.page}> */}
+            {/* <div className={style.boards}> */}
                 <div className={style.header}>
                     <div className={style.header__number}>번호</div>
                     <div className={style.header__title}>제목</div>
                     <div className={style.header__writer}>작성자</div>
                     <div className={style.header__date}>날짜</div>
                 </div>
-                {data?.fetchBoards.map((el, index) => {
+                {props?.data?.map((el, index) => {
                     return (
                         <a key={el._id} className={style.data} href={`/board/detail/${el._id}`}>
                             <div className={style.data__number}>{index + 1}</div>
@@ -38,7 +39,7 @@ export default function BoardsPage() {
                         </a>
                     )
                 })}
-            </div>
+            {/* </div> */}
             <Modal
                 title="게시글 삭제"
                 // closable={{ 'aria-label': 'Custom Close Button' }}
@@ -48,7 +49,8 @@ export default function BoardsPage() {
             >
                 <p>{saveId}의 게시글을 삭제하시겠습니까?</p>
             </Modal>
-        </div>
+         {/* </div> */}
+        </>
 
 
     )

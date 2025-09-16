@@ -1,0 +1,20 @@
+
+.paginationPage{
+    display: flex;
+    justify-content: center;
+
+}
+
+.pagination{
+    display: flex;
+    /* gap: px; */
+}
+
+.paginationButton{
+    width: 32px;
+    height: 32px;
+}
+
+.eventButton{
+    background-color: red;
+}
