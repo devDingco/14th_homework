@@ -1,4 +1,4 @@
-.layout {
+/* .layout {
     width: 100%;
     padding: 2.5rem 1.25rem;
     display: flex;
@@ -14,21 +14,16 @@
     align-items: center;
     gap: 2.5rem;  
 
-  }
+  } */
 
   /* Boards Table Container */
 .boardsContainer {
     width: 100%;
-    padding: 1.5rem 3rem;
     display: flex;  
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
-
-    border-radius: 1rem;
-    background: #FFF;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
+    margin-bottom: 0.5rem;
     
 }
 

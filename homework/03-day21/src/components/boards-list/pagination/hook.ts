@@ -7,7 +7,8 @@ export default function usePagination(props){
     const [currentPage, setCurrentPage] = useState(1);
 
      // 페이지네이션 핸들러
-     const onClickPage = (page: number) => {
+     const onClickPage = (event) => {
+        const page = Number(event.target.id)
         setCurrentPage(page);    
         props.refetch({ page });   
     }
@@ -31,6 +32,7 @@ export default function usePagination(props){
     return{
         startPage,
         currentPage,
+        lastPage: props.lastPage,
         onClickPage,
         onClickPrevPage,
         onClickNextPage
