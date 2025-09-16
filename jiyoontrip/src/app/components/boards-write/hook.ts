@@ -32,12 +32,13 @@ export default function useBoardWrite() {
   const [addressDetail, setAddressDetail] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
   const [authorError, setAuthorError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
   const [contentError, setContentError] = useState("");
   const [isActive, setIsActive] = useState(false);
-
+  const [newParams, setNewParams] = useState("");
   const onChangeAuthor = (event: ChangeEvent<HTMLInputElement>) => {
     setAuthor(event.target.value);
     if (event.target.value !== "" && password !== "" && title !== "" && content !== "") {
@@ -65,7 +66,7 @@ export default function useBoardWrite() {
   const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
     setAddressDetail(event.target.value);
   };
-  const onChnageYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
     setYoutubeUrl(event.target.value);
   };
 
@@ -77,6 +78,7 @@ export default function useBoardWrite() {
     setAddress(data.address);
     setIsModalOpen((prev) => !prev);
   };
+
   const onClickSignup = async () => {
     try {
       if (author === "") {
@@ -120,8 +122,8 @@ export default function useBoardWrite() {
         });
         console.log(result);
         console.log(result.data?.createBoard._id);
-        alert("게시글을 등록하였습니다!");
-        router.push(`/boards/${result.data?.createBoard._id}`);
+        setNewParams(result.data?.createBoard._id ?? "");
+        setIsCompleteModalOpen(true);
       }
     } catch (error) {
       alert(error);
@@ -185,12 +187,18 @@ export default function useBoardWrite() {
           { query: FetchBoardDocument, variables: { boardId: String(params.boardId) } },
         ],
       });
-      alert("게시글을 수정하였습니다!");
-      router.push(`/boards/${result.data?.updateBoard._id}`);
+      setNewParams(result.data?.updateBoard._id ?? "");
+      setIsCompleteModalOpen(true);
     } catch (error) {
       alert(error);
     } finally {
     }
+  };
+  const onToggleCompleteModal = () => {
+    setIsCompleteModalOpen((prev) => !prev);
+  };
+  const onSubmitModal = () => {
+    router.push(`/boards/${newParams}`);
   };
 
   return {
@@ -202,8 +210,10 @@ export default function useBoardWrite() {
     onClickSignup,
     onClickUpdate,
     onToggleModal,
+    onSubmitModal,
+    onToggleCompleteModal,
     onCompleteAddress,
-    onChnageYoutubeUrl,
+    onChangeYoutubeUrl,
     zonecode,
     address,
     addressDetail,
@@ -216,5 +226,6 @@ export default function useBoardWrite() {
     DaumPostcodeEmbed,
     Modal,
     isModalOpen,
+    isCompleteModalOpen,
   };
 }
