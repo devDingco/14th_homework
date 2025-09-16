@@ -6,6 +6,7 @@ import PaginationPage from '@/components/boards-list/pagination';
 import { useQuery } from '@apollo/client';
 import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from './queries';
 import usePagination from '@/components/boards-list/pagination/hook';
+import styles from "./styles.module.css";
 
 export default function BoardsListPage () {  
     // 게시글 목록
@@ -18,7 +19,8 @@ export default function BoardsListPage () {
     const { data: boardsCountData } = useQuery(FETCH_BOARDS_COUNT);
     const boardsCount = boardsCountData?.fetchBoardsCount ?? 0; 
     const lastPage = Math.ceil(boardsCount / 10)
-    const { startPage, currentPage, onClickPage, onClickPrevPage, onClickNextPage } = usePagination();
+    const { startPage, currentPage, onClickPage, onClickPrevPage, onClickNextPage} = usePagination({
+        refetch, lastPage })
 
     // const startIndex = (currentPage - 1) * 10;
     // const boardsWithNumber = data?.fetchBoards?.map((el, index) => ({
@@ -29,12 +31,14 @@ export default function BoardsListPage () {
 
 
     return (
-        <>
-            <BoardsPage data={data?.fetchBoards}/>
-            <PaginationPage 
-                refetch={refetch} 
-                lastPage={lastPage}
-            />
-        </>
+        <div className={styles.pageLayout}>
+            <div className={styles.container}>
+                <BoardsPage data={data?.fetchBoards} currentPage={currentPage} boardsCount={boardsCount}/>
+                <PaginationPage 
+                    refetch={refetch} 
+                    lastPage={lastPage}
+                />
+            </div>
+        </div>
     )
 }
