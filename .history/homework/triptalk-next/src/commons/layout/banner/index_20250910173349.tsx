@@ -18,7 +18,7 @@ export default function Banner() {
     >
       <SwiperSlide>
         <Image
-          src="/icons/banner1.svg"
+          src="/icons/banner1.png"
           alt="배너사진"
           width={1920}
           height={516}
@@ -26,7 +26,7 @@ export default function Banner() {
       </SwiperSlide>
       <SwiperSlide>
         <Image
-          src="/icons/banner2.svg"
+          src="/icons/banner2.png"
           alt="배너사진"
           width={1920}
           height={516}
@@ -34,7 +34,7 @@ export default function Banner() {
       </SwiperSlide>
       <SwiperSlide>
         <Image
-          src="/icons/banner3.svg"
+          src="/icons/banner3.png"
           alt="배너사진"
           width={1920}
           height={516}
