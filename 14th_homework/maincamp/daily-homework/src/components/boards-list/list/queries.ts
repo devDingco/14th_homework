@@ -2,9 +2,10 @@
 
 import { gql } from '@apollo/client';
 
+// page를 가져와야 하기 때문에 fetchBoards로 수정
 export const FETCH_BOARDS = gql`
-  query fetchBoards {
-    fetchBoards {
+  query fetchBoards($page: Int) {
+    fetchBoards(page: $page) {
       _id
       writer
       title

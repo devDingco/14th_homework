@@ -21,19 +21,19 @@ export default function useCreateBoardComment(props: CommentVariables) {
   //rate 용 useState
   const [rating, setRating] = useState<number>(0);
 
-  const [apiRequire] = useMutation<CreateBoardCommentInput, MutationCreateBoardCommentArgs>(
-    CREATE_BOARD_COMMENT,
-    {
-      // 댓글 등록 후 댓글 목록 다시 불러오기
-      refetchQueries: [
-        {
-          query: FETCH_BOARD_COMMENTS,
-          variables: { boardId: String(url.boardId) },
-        },
-      ],
-      awaitRefetchQueries: true, // refetch 완료까지 기다림
-    }
-  );
+  const [createBoardApiRequire] = useMutation<
+    CreateBoardCommentInput,
+    MutationCreateBoardCommentArgs
+  >(CREATE_BOARD_COMMENT, {
+    // 댓글 등록 후 댓글 목록 다시 불러오기
+    refetchQueries: [
+      {
+        query: FETCH_BOARD_COMMENTS,
+        variables: { boardId: String(url.boardId) },
+      },
+    ],
+    awaitRefetchQueries: true, // refetch 완료까지 기다림
+  });
 
   const onClickCommentSubmit = async () => {
     // 유효성 검사 먼저 실행
@@ -42,7 +42,7 @@ export default function useCreateBoardComment(props: CommentVariables) {
     }
 
     try {
-      const result = await apiRequire({
+      const result = await createBoardApiRequire({
         variables: {
           createBoardCommentInput: {
             writer,
