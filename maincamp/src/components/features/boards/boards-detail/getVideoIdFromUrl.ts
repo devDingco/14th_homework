@@ -23,6 +23,11 @@ export default function GetVideoFromUrl(url: string){
             videoId = path.substring(1);
             break;
         }
+        case url.includes("shorts/"): {
+            const pathSegments = path.split("/");
+            videoId = pathSegments[pathSegments.length - 1];
+            break;
+        }
         default: {
             videoId = null;
         }

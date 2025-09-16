@@ -1,6 +1,6 @@
 import styles from './DataList.module.css'
 
-export default function DataList ({children, headerCell, flex, textAlign, BoardsCount, currentPage, changeCurrentPage}:{children: React.ReactNode,headerCell: string[], flex: string[], textAlign: CanvasTextAlign[], BoardsCount?: number, currentPage?: number, changeCurrentPage?:(newNum: number) => void}) {
+export default function DataList ({children, headerCell, flex, textAlign}:{children: React.ReactNode,headerCell: string[], flex: string[], textAlign: CanvasTextAlign[], BoardsCount?: number, currentPage?: number, changeCurrentPage?:(newNum: number) => void}) {
 
     const ListHeader = headerCell.map((el, index) => (
         <div 
@@ -18,12 +18,7 @@ export default function DataList ({children, headerCell, flex, textAlign, Boards
             <div className={styles.ListHeader}>
             {ListHeader}           
             </div>
-            {/* List Row ... */}
-            <div className={styles.ListRowContainer}>
                 {children}
-            </div>
-            {/* List Pages */}
-            {/* <Pagination BoardsCount={BoardsCount} currentPage={currentPage} changeCurrentPage={changeCurrentPage}></Pagination> */}
-        </div>
+         </div>
     )
 }

@@ -6,7 +6,7 @@ import useCommentWrite from "./hook";
 
 export default function CommentWrite(){
 
-    const {onChangeWriter, onChangePassword, onChangeContents, onClickCommentSubmit, onClickRate, isValid, rating} = useCommentWrite();
+    const {writer, password, contents, onChangeWriter, onChangePassword, onChangeContents, onClickCommentSubmit, onClickRate, isValid, rating} = useCommentWrite();
 
     return(
         <form className={styles.CommentField} onSubmit={onClickCommentSubmit}>
@@ -35,10 +35,10 @@ export default function CommentWrite(){
         </div>
         <div className={styles.CommentWrite}>
             <div className={styles.CommentWriterGroup}>
-                <Inputfield type='text' label='작성자' required placeholder='작성자 명을 입력해 주세요.' onChange={onChangeWriter} ></Inputfield>
-                <Inputfield type='password' label='비밀번호' required placeholder='비밀번호를 입력해 주세요.' onChange={onChangePassword}></Inputfield>
+                <Inputfield type='text' label='작성자' required placeholder='작성자 명을 입력해 주세요.' value={writer} onChange={onChangeWriter} ></Inputfield>
+                <Inputfield type='password' label='비밀번호' required placeholder='비밀번호를 입력해 주세요.' value={password} onChange={onChangePassword}></Inputfield>
             </div>
-            <Textareafield placeholder="댓글을 입력해 주세요." isCommentField maxLength={100} onChange={onChangeContents}/ >
+            <Textareafield placeholder="댓글을 입력해 주세요." isCommentField maxLength={100} value={contents} onChange={onChangeContents}/ >
             <div className={styles.CommentButtonGroup}>
             <Button variant="CommentBtn" type="submit" disabled={isValid}>댓글 등록</Button>
             </div>

@@ -17,9 +17,9 @@ export default function useBoardsWrite({data}:{data?: any}){
     
         /* 게시물 등록 유효성 검사 */
         // 1. 작성자, 비밀번호, 제목, 컨텐츠 작성 시 setState로 상태 변경
-        const [writer, setWriter] = useState(!data? "" : data.fetchBoard.writer)
-        const [password, setPassword] = useState(!data? "" : data.fetchBoard.password)
-        const [title, setTitle] = useState(!data? "" : data.fetchBoard.title)
+        const [writer, setWriter] = useState(data?.fetchBoard.writer ?? "")
+        const [password, setPassword] = useState(data?.fetchBoard.password ?? "")
+        const [title, setTitle] = useState(data?.fetchBoard.title ?? "")
         const [contents, setContents] = useState(!data? "" : data.fetchBoard.contents)
         const [youtubeUrl, setYoutubeUrl] = useState(!data? "" : data.fetchBoard.youtubeUrl)
         const [zipcode, setZipcode] = useState(!data? "" : data.fetchBoard.boardAddress?.zipcode)
@@ -41,9 +41,9 @@ export default function useBoardsWrite({data}:{data?: any}){
         const [isValid, setIsValid] = useState(true)
     
         // 3. Change Event에 따른 유효성 검증
-        const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
+        const onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => {
           const value = event.target.value
-          
+          console.log(value)
           setWriter(value)
       
           if(value && password && title && contents){
@@ -52,7 +52,7 @@ export default function useBoardsWrite({data}:{data?: any}){
             setIsValid(true)
           }
         }
-        const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+        const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
           const value = event.target.value
     
           setPassword(value)
@@ -63,8 +63,9 @@ export default function useBoardsWrite({data}:{data?: any}){
             setIsValid(true)
           }
         }
-        const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+        const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
           const value = event.target.value
+          console.log("title밸류",value)
           setTitle(value)
       
           if(writer && password && value && contents){
@@ -73,7 +74,7 @@ export default function useBoardsWrite({data}:{data?: any}){
             setIsValid(true)
           }
         }
-        const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        const onChangeContents = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
           const value = event.target.value
           setContents(value)
       
@@ -86,7 +87,7 @@ export default function useBoardsWrite({data}:{data?: any}){
     
           // 3-1. 필수 요소 아닌 ChangeEvent 추가
           // (1) YoutubeUrl
-          const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
+          const onChangeYoutubeUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
             const value = event.target.value
             setYoutubeUrl(value)
           }
@@ -99,7 +100,7 @@ export default function useBoardsWrite({data}:{data?: any}){
             setIsModalOpen((prev) => !prev)
           }
 
-          const onChangeBoardAddress = (event: ChangeEvent<HTMLInputElement>) => {
+          const onChangeBoardAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
             const {id, value} = event.target;
             switch(id){
               case "zipcode": {setZipcode(value);break;}
@@ -266,6 +267,10 @@ export default function useBoardsWrite({data}:{data?: any}){
         setAddress,
         setAddressDetail,
         boardAddress,
-
+        writer,
+        password,
+        title,
+        contents,
+        youtubeUrl
     }
 }

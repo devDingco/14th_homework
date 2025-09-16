@@ -8,7 +8,7 @@ export function Inputfield (props: InputProps) {
     return(
         <div className={styles.Formfield}>
             <div><label>{props.label}</label>{props.required && <span>*</span>}</div>
-            <input type={props.type} placeholder={props.placeholder} defaultValue={ props.type === "password"&&props.isEdit? "*********" : props.defaultValue} disabled={props.isEdit} onChange={props.onChange} />
+            <input type={props.type} placeholder={props.placeholder} value={props.type === "password" && props.isEdit ? "*********" : props.value} disabled={props.isEdit} onChange={props.onChange} />
         </div>
     );
 }
@@ -20,7 +20,7 @@ export function Textareafield (props: TextareaProps){
     return(
         <div className={props.isCommentField? styles.Commentfield :styles.Formfield}>
             {props.isCommentField? "" : <div><label>{props.label}</label>{props.required && <span>*</span>}</div>}
-            <textarea placeholder={props.placeholder} defaultValue={props.defaultValue} onChange={props.onChange} maxLength={props.maxLength}></textarea>
+            <textarea placeholder={props.placeholder} value={props.value} onChange={props.onChange} maxLength={props.maxLength}></textarea>
         </div>
     );
 }

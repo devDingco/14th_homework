@@ -5,6 +5,7 @@
 *{
   font-family: var(--font-pretendard-variable);
   font-style: normal;
+  font-size: 16px;
   line-height: 1.5rem;
   box-sizing: border-box; 
   margin: 0;

@@ -64,9 +64,10 @@ export default function useCommentWrite(){
     }
 
     // 댓글 등록하기 버튼 클릭
-    const onClickCommentSubmit = () => {
+    const onClickCommentSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
         try {
-            const result = createBoardComment({
+            const result = await createBoardComment({
                 variables:{
                     createBoardCommentInput:{
                         writer,

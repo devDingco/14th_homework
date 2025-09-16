@@ -31,6 +31,11 @@ export default function BoardsWrite({isEdit, data}:{isEdit: boolean, data?:{fetc
         onToggleModal,
         handleComplete,
         boardAddress,
+        writer,
+        password,
+        title,
+        contents,
+        youtubeUrl
     } = useBoardsWrite({data});
     // const {images, onChangeFile} = useUploadFile(data);
 
@@ -40,13 +45,13 @@ export default function BoardsWrite({isEdit, data}:{isEdit: boolean, data?:{fetc
             <div className={styles.postForm__title}>게시물 {isEdit? "수정":"등록"}</div>
             {/* 작성자 그룹 */}
             <div className={styles.postForm__writer__group}>
-                <Inputfield type='text' label='작성자' required placeholder='작성자 명을 입력해 주세요.' defaultValue={data?.fetchBoard.writer} isEdit={isEdit} onChange={onChangeWriter}></Inputfield>
+                <Inputfield type='text' label='작성자' required placeholder='작성자 명을 입력해 주세요.' value={writer} isEdit={isEdit} onChange={onChangeWriter}></Inputfield>
                 <Inputfield type='password' label='비밀번호' required placeholder='비밀번호를 입력해 주세요.' isEdit={isEdit} onChange={onChangePassword}></Inputfield>
             </div>
             <hr />
-            <Inputfield type='text' label='제목'required placeholder='제목을 입력해 주세요.' defaultValue={data?.fetchBoard.title} onChange={onChangeTitle} ></Inputfield>
+            <Inputfield type='text' label='제목'required placeholder='제목을 입력해 주세요.' value={title} onChange={onChangeTitle} ></Inputfield>
             <hr/>
-            <Textareafield label='내용' required placeholder='내용을 입력해 주세요.' defaultValue={data?.fetchBoard.contents} onChange={onChangeContents} ></Textareafield>
+            <Textareafield label='내용' required placeholder='내용을 입력해 주세요.' value={contents} onChange={onChangeContents} ></Textareafield>
             <hr />
             <InputBoardAddress placeholder='주소를 입력해 주세요.' placeholder_2='상세주소' isEdit={isEdit} value={boardAddress} onClick={onToggleModal} onChange={onChangeBoardAddress}></InputBoardAddress>
             {isModalOpen && 
@@ -59,7 +64,7 @@ export default function BoardsWrite({isEdit, data}:{isEdit: boolean, data?:{fetc
                     <DaumPostcodeEmbed onComplete={handleComplete} style={{ height: "100%"}}/>
                 </Modal>}
             <hr />
-            <Inputfield type='string' label='유튜브 링크' placeholder='링크를 입력해 주세요.' defaultValue={data?.fetchBoard.youtubeUrl} onChange={onChangeYoutubeUrl}></Inputfield>
+            <Inputfield type='string' label='유튜브 링크' placeholder='링크를 입력해 주세요.' value={youtubeUrl} onChange={onChangeYoutubeUrl}></Inputfield>
             <hr />
             <div className={styles.postForm__attachments__group}>
                 <label>사진 첨부</label>
