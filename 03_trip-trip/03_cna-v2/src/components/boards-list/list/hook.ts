@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/navigation'
 import { MouseEvent } from 'react'
-import { BoardListProps } from './types'
+import { BoardListHookProps } from './types'
 import {
   DeleteBoardDocument,
   DeleteBoardMutation,
@@ -9,7 +9,7 @@ import {
   FetchBoardsDocument,
 } from 'commons/graphql/graphql'
 
-export default function useBoardsList(props: BoardListProps) {
+export default function useBoardsList(props: BoardListHookProps) {
   const [deleteBoard] = useMutation<DeleteBoardMutation, DeleteBoardMutationVariables>(
     DeleteBoardDocument
   )

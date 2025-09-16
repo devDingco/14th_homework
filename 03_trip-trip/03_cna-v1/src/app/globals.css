@@ -82,11 +82,3 @@
     cursor: default;
   }
 }
-.container {
-  width: 100%;
-  max-width: 128rem;
-  /* max-width: 100%; */
-  /* width: 100%; */
-  padding: 4rem 0;
-  display: flex;
-}

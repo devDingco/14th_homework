@@ -1,13 +1,14 @@
-/* styles.module.css */
+.bannerRoot {
+  width: 100%;
+}
+
 .mySwiper {
   display: flex;
   width: 100%;
-  /* background-color: aqua; */
 }
 
 .image_swiper {
   width: 100%;
-  background-color: hotpink;
   height: 515px;
   object-fit: cover;
   object-position: bottom;

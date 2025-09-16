@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import styles from './styles.module.css'
@@ -12,9 +13,9 @@ const IMAGE_SRC = [
   { src: '/images/banner3.webp', alt: '배너이미지3' },
 ] as const
 
-export default function HomeBanner() {
+export default function Banner() {
   return (
-    <div>
+    <div className={styles.bannerRoot}>
       <Swiper
         slidesPerView={1}
         loop
@@ -28,7 +29,7 @@ export default function HomeBanner() {
           clickable: true,
         }}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper"
+        className={styles.mySwiper}
       >
         {IMAGE_SRC.map((slide, idx) => {
           return (
