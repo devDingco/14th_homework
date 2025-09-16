@@ -5,7 +5,18 @@ import useBoardCommentWrite from "./hook";
 import Image from "next/image";
 import { Rate } from "antd";
 
-export default function BoardCommentWrite() {
+interface IProps {
+    isEdit?: boolean
+    el?: {
+      _id: string
+      writer: string
+      contents: string
+      rating: number
+    }
+    onCompleted?: () => void
+}
+
+export default function BoardCommentWrite({ isEdit, el, onCompleted }: IProps) {
     const {
         writer,
         password,
@@ -18,7 +29,7 @@ export default function BoardCommentWrite() {
         onChangeContent,
         onClickSubmit,
         onChangeRating,
-    } = useBoardCommentWrite()
+    } = useBoardCommentWrite({isEdit, el, onCompleted})
 
     return (
         <div className={styles.container}>
@@ -61,6 +72,7 @@ export default function BoardCommentWrite() {
                             placeholder="작성자 명을 입력해 주세요."
                             value={writer} // 훅에서 온 상태값
                             onChange={onChangeWriter}
+                            disabled={isEdit}
                         />
                         <div className={styles.inputErrorMessage}>{inputError}</div>
                     </div>
@@ -99,7 +111,7 @@ export default function BoardCommentWrite() {
                      onClick={onClickSubmit} // 수정 모드 필요 없으니 Submit만
                      disabled={!isActive}
                     >
-                    댓글등록
+                    {isEdit ? "댓글수정" : "댓글등록"}
                     </button>
                 </div>  
                 

@@ -3,12 +3,24 @@
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { ChangeEvent, useState } from "react";
-import { ICreateBoardComment, ICreateBoardCommentVariables } from "./types";
-import { CREATE_BOARD_COMMENT } from "./queries";
+import { ICreateBoardComment, ICreateBoardCommentVariables, IUpdateBoardComment, IUpdateBoardCommentVariables } from "./types";
+import { CREATE_BOARD_COMMENT, UPDATE_BOARD_COMMENT } from "./queries";
 import { FETCH_BOARD_COMMENTS } from "../comment-list/queries";
 import { Modal } from "antd";
 
-export default function useBoardCommentWrite() {
+
+interface IUseBoardCommentWriteProps {
+  isEdit?: boolean
+  el?: {
+    _id: string
+    writer: string
+    contents: string
+    rating: number
+  }
+  onCompleted?: () => void // onCompleted 콜백을 prop으로 내려받도록 수정
+}
+
+export default function useBoardCommentWrite({ isEdit, el, onCompleted }: IUseBoardCommentWriteProps) {
     const params = useParams()
     const boardId = String(params.boardId) 
     
@@ -18,10 +30,13 @@ export default function useBoardCommentWrite() {
     // })
   
     // const [writer, setWriter] = useState(props.isEdit ? data?.fetchBoard.writer : "");
-    const [writer, setWriter] = useState("");
+
+
+    // [수정] props.isEdit, el을 활용해 초기값 세팅
+    const [writer, setWriter] = useState(el?.writer ?? "");
     const [password, setPassword] = useState("");
-    const [contents, setContents] = useState("");
-    const [rating, setRating] = useState(0)
+    const [contents, setContents] = useState(el?.contents ?? "");
+    const [rating, setRating] = useState(1)
 
     const [inputError, setInputError] = useState("");
     const [isActive, setIsActive] =  useState(false);
@@ -33,6 +48,10 @@ export default function useBoardCommentWrite() {
         ICreateBoardComment,
         ICreateBoardCommentVariables
     >(CREATE_BOARD_COMMENT);
+
+    const [updateBoardComment] = useMutation<IUpdateBoardComment, IUpdateBoardCommentVariables>(
+      UPDATE_BOARD_COMMENT
+    )
 
     // const StarActive = '/images/star-active.png'
     // const StarDisabled = '/images/star-disabled.png'
@@ -62,147 +81,58 @@ export default function useBoardCommentWrite() {
 
     const onClickSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
         try {
-          const result = await createBoardComment({
-            variables: {
-              boardId,
-              createBoardCommentInput: {
-                writer,
-                password,
-                contents,
-                rating,
+          if (!isEdit){
+            // 댓글 등록
+            const result = await createBoardComment({
+              variables: {
+                boardId,
+                createBoardCommentInput: {
+                  writer,
+                  password,
+                  contents,
+                  rating,
+                },
               },
-            },
-            refetchQueries: [
-              {query: FETCH_BOARD_COMMENTS, variables: { boardId },}
-            ], 
-          });
-    
-          if (!result.data?.createBoardComment) {
-            Modal.error({ content: "댓글 등록에 실패했습니다." })
-            return;
-          }    
-            Modal.success({ content:"댓글이 등록되었습니다!" })
-            setWriter("");
-            setPassword("");
-            setContents("");
-            setRating(0);
-        } catch {
+              refetchQueries: [
+                { query: FETCH_BOARD_COMMENTS, variables: { boardId, page: 1 } },
+              ], 
+            });
+      
+            if (!result.data?.createBoardComment) {
+              Modal.error({ content: "댓글 등록에 실패했습니다." })
+              return;
+            }    
+              Modal.success({ content:"댓글이 등록되었습니다!" })
+              setWriter("");
+              setPassword("");
+              setContents("");
+              setRating(0);
+          } else {
+            // 수정
+            const result = await updateBoardComment({
+              variables: {
+                boardCommentId: el!._id,
+                password,
+                updateBoardCommentInput: { contents, rating },
+              },
+              refetchQueries: [
+                { query: FETCH_BOARD_COMMENTS, variables: { boardId, page: 1 } },
+              ],              
+            })
+
+            if(!result.data?.updateBoardComment) {
+              Modal.error({ content: "댓글 수정에 실패했습니다."})
+              return
+            }
+            Modal.success({content: "댓글이 수정되었습니다!"})
+            if (onCompleted) onCompleted()
+          }
+        } catch (error) {
           Modal.error({ content: "에러가 발생하였습니다. 다시 시도해 주세요." })
         }
     };    
     
-    // // 등록 페이지와 수정 페이지의 isActive 조건 분리
-    // const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-    // setWriter(event.target.value);
-    // setIsActive(props.isEdit ? (title && contents) : (event.target.value && password && title && contents));
-    // };
-    // const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    // setPassword(event.target.value);
-    // setIsActive(props.isEdit ? (title && contents) : (writer && event.target.value && title && contents));
-    // };
-    // const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    // setTitle(event.target.value);
-    // setIsActive(props.isEdit ? (event.target.value && contents) : (writer && password && event.target.value && contents));
-    // };
-    // const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    // setContents(event.target.value);
-    // setIsActive(props.isEdit ? (title && event.target.value) : (writer && password && title && event.target.value));
-    // };
-
-    // const onClickSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
-    //     try {
-    //         const result = await createBoard({
-    //             variables: {
-    //                 createBoardInput: {
-    //                 writer: writer,
-    //                 password: password,
-    //                 title: title,
-    //                 contents: contents,
-    //                 youtubeUrl: "",
-    //                 images: []
-    //                 } ,
-    //             },
-    //         })
-    //         console.log(result.data?.createBoard);
-
-    //         if (result?.data?.createBoard) {
-    //         setInputError("");
-    //         alert("게시글 등록이 가능한 상태입니다!");
-    //         } else {
-    //         setInputError("필수입력 사항입니다.");
-    //         }
-
-    //         router.push(
-    //         `/boards/${result.data?.createBoard._id}`
-    //         )
-    //     } catch(error){
-    //         alert("에러가 발생하였습니다. 다시 시도해 주세요.")
-    //     } finally {
-
-    //     }
-    // }    
-
-
-    // const onClickUpdate = async (event: MouseEvent<HTMLButtonElement>) => {
-    //     try {
-
-    //         const enteredPassword = prompt("글을 입력할 때 설정한 비밀번호를 입력해주세요.")
-    //         if(!enteredPassword) return
-            
-            
-    //         const myvariables: IMyvariables = {
-    //             updateBoardInput: {} ,
-    //             boardId: boardId,
-    //             password: enteredPassword, 
-    //         }
-
-    //         if(title !== "") myvariables.updateBoardInput.title = title
-    //         if(contents !=="") myvariables.updateBoardInput.contents = contents
-
-    //         const result = await updateBoard({
-    //             variables: {
-    //                 updateBoardInput: myvariables.updateBoardInput,
-    //                 boardId: myvariables.boardId,
-    //                 password: enteredPassword,
-    //             },
-    //             refetchQueries: [
-    //                 {query: FETCH_BOARD, variables: {boardId }},
-    //             ]                                
-    //         })
-
-    //         console.log(result.errors)
-
-    //         if (result?.data?.updateBoard) {
-    //             setInputError(""); // 성공하면 에러 메시지 초기화
-    //             alert("게시글이 수정되었습니다!");
-
-    //             router.push(`/boards/${result.data.updateBoard._id}`)
-    //         }
-
-    //     } catch (error: unknown) {
-    //         // 1. error가 객체인지 확인
-    //         if (typeof error === "object" && error !== null) {
-    //           // 2. graphQLErrors 속성이 있는지 확인
-    //           const maybeGraphQLErrors = (error as { graphQLErrors?: { message: string }[] }).graphQLErrors;
-          
-    //           // 3.GraphQL 오류가 있으면 메시지 확인
-    //           if (Array.isArray(maybeGraphQLErrors) && maybeGraphQLErrors.length > 0) {
-    //             if (maybeGraphQLErrors[0].message.includes("비밀번호")) {
-    //               alert("비밀번호가 틀렸습니다.");
-    //               return;
-    //             } else {
-    //               alert(maybeGraphQLErrors[0].message);
-    //               return;
-    //             }
-    //           }
-    //         }
-          
-    //         // 4. 그 외의 경우 (네트워크 오류 등)
-    //         alert("에러가 발생하였습니다. 다시 시도해 주세요.");
-    //         console.error(error);
-    //     }        
-
-    // }      
+    
 
     return {
         writer,
