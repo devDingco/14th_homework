@@ -1,4 +1,4 @@
-export interface Board {
+export interface IBoard {
   _id: string;
   writer: string;
   title: string;
@@ -10,7 +10,15 @@ export interface Board {
 }
 
 export interface FetchBoardsData {
-  fetchBoards: Board[];
+  fetchBoards: {
+    boards: IBoard[];
+    count: number;
+  }
 }
 
-
+export interface BoardsListProps {
+  boards: IBoard[];
+  onClickDelete: (boardId: string) => void;
+  onClickNew: () => void;
+  onClickRow: (boardId: string) => void;
+}
