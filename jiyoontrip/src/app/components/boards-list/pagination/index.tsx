@@ -1,50 +1,28 @@
 "use client";
 
-import { gql, useQuery } from "@apollo/client";
-
-const FERTCH_BOARDS_COUNT = gql`
-  query {
-    fetchBoardsCount
-  }
-`;
-
-export const FETCH_BOARDS = gql`
-  query fetchBoards {
-    fetchBoards {
-      _id
-      writer
-      title
-      contents
-      youtubeUrl
-      likeCount
-      dislikeCount
-      images
-      boardAddress {
-        _id
-        zipcode
-        address
-        addressDetail
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
+import usePagination from "./hook";
 
 export default function PaginationComponent() {
-  const { data, refetch } = useQuery(FETCH_BOARDS);
-  const { data: dataBoardsCount } = useQuery(FERTCH_BOARDS_COUNT);
-  const onClickPage = () => {};
+  const { onClickNextPage, onClickPrevPage, onClickPage, lastPage, startPage } =
+    usePagination();
+
   return (
     <>
       <div>
-        {new Array(10).fill("지윤").map((_, index) => (
-          <button key={index + 1} onClick={onClickPage}>
-            {index + 1}
-          </button>
-        ))}
+        <button onClick={onClickPrevPage}>이전페이지</button>
+        {new Array(10).fill("지윤").map(
+          (_, index) =>
+            index + startPage <= lastPage && ( // 마지막 페이지가 13페이지이고 스타트페이지가 11이면 11,12,13만 출력한다 ~
+              <button
+                id={String(index + startPage)}
+                key={index + startPage}
+                onClick={onClickPage}
+              >
+                {index + startPage}
+              </button>
+            )
+        )}
+        <button onClick={onClickNextPage}>다음페이지</button>
       </div>
     </>
   );
