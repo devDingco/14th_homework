@@ -10,7 +10,11 @@ export default function BoardsDetailPage() {
   return (
     <>
       <BoardsDetail boardId={boardId} />
-      <CommentWrite boardId={boardId} />
+      <CommentWrite
+        boardId={boardId}
+        boardCommentId=""
+        isEdit={false}
+      />
       <CommentList boardId={boardId} />
     </>
   );

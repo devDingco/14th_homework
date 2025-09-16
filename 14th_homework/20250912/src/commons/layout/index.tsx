@@ -1,7 +1,10 @@
 import React from "react";
 import Navigation from "./navigation/index";
 import Banner from "./banner/index";
-import { LayoutProps } from "./types";
+
+interface LayoutProps {
+  children: React.ReactNode;
+}
 
 export default function Layout({ children }: LayoutProps) {
   return (

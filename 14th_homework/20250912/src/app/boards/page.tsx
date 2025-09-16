@@ -73,7 +73,7 @@ export default function BoardsPage() {
   if (boardsLoading || countLoading) return <div className="text-center mt-20">로딩 중입니다...</div>;
   if (boardsError || countError) return <div className="text-center mt-20 text-red-500">에러가 발생했습니다.</div>;
 
-  const onClickNew = () => { router.push("/boards-new"); };
+  const onClickNew = () => { router.push("/boards/new"); };
   const onClickRow = (boardId: string) => { router.push(`/boards/${boardId}`); };
   const onClickDelete = (boardId: string) => { console.log(`게시글 ID ${boardId} 삭제`); };
 
