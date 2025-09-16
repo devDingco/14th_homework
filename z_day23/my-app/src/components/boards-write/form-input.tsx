@@ -1,3 +1,4 @@
+// src/components/boards-write/form-input.tsx
 import styles from "./styles.module.css";
 import React from "react";
 
@@ -10,6 +11,7 @@ interface InputProps {
   value?: string;
   defaultValue?: string;
   disabled?: boolean;
+  readOnly?: boolean;
 }
 
 export const VerySmallInput = (props: InputProps) => {
@@ -28,6 +30,7 @@ export const VerySmallInput = (props: InputProps) => {
           value={props.value}
           defaultValue={props.defaultValue}
           disabled={props.disabled}
+          readOnly={props.readOnly}
         />
         <div className={styles.text_red}>{props.errorMessage}</div>
       </div>
@@ -51,6 +54,7 @@ export const SmallInput = (props: InputProps) => {
           value={props.value}
           defaultValue={props.defaultValue}
           disabled={props.disabled}
+          readOnly={props.readOnly}
         />
         <div className={styles.text_red}>{props.errorMessage}</div>
       </div>
@@ -74,6 +78,7 @@ export const LongInput = (props: InputProps) => {
           value={props.value}
           defaultValue={props.defaultValue}
           disabled={props.disabled}
+          readOnly={props.readOnly}
         />
         <div className={styles.text_red}>{props.errorMessage}</div>
       </div>
@@ -96,6 +101,7 @@ export const SuperLongInput = (props: InputProps) => {
           value={props.value}
           defaultValue={props.defaultValue}
           disabled={props.disabled}
+          readOnly={props.readOnly}
         />
         <div className={styles.text_red}>{props.errorMessage}</div>
       </div>
