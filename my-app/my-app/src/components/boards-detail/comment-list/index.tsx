@@ -4,10 +4,11 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
+
+import { useCommentList } from "./hook";
 import profileIcon from "./icon/img.svg";
 import editIcon from "./icon/edit.svg";
 import closeIcon from "./icon/close.svg";
-
 const IMAGE_SRC = {
   profileIcon: {
     src: profileIcon,
@@ -23,25 +24,8 @@ const IMAGE_SRC = {
   },
 };
 
-const FETCH_BOARD_COMMENTS = gql`
-  query FetchBoardComments($boardId: ID!) {
-    fetchBoardComments(boardId: $boardId) {
-      _id
-      writer
-      contents
-      rating
-      createdAt
-      updatedAt
-      deletedAt
-    }
-  }
-`;
-
 export default function CommentList() {
-  const params = useParams();
-  const { data } = useQuery(FETCH_BOARD_COMMENTS, {
-    variables: { boardId: String(params.boardId) },
-  });
+  const { data } = useCommentList();
 
   return (
     <>
