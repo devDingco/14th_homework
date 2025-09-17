@@ -13,8 +13,8 @@ const BoardDetail = () => {
     return (
         <>
             <BoardsDetail />
-            <CommentWritePage />
-            <CommentListPage/>
+            <CommentWritePage/>
+            <CommentListPage />
         </>
     )
 

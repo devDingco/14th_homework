@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client"
 import { useParams } from "next/navigation"
 import { ChangeEvent, useState } from "react";
 import { Fetch_Board_Comments } from "../comment-list/queries";
-import { Create_Board_Comment } from "./queries";
+import { Create_Board_Comment, Update_Board_Comment } from "./queries";
 
 
 
@@ -12,6 +12,7 @@ export default function useCommentWritePage() {
 
     const Id = useParams();
     const [createBoardComment] = useMutation(Create_Board_Comment)
+    const [updateBoardComment] = useMutation(Update_Board_Comment)
     console.log(Id)
 
     const [writer, setWriter] = useState("")
@@ -41,29 +42,69 @@ export default function useCommentWritePage() {
 
     const onClickSubmit = async() => {
         try{
-        await createBoardComment({
-            variables: {
-                boardId: String(Id.id) ,
-                createBoardCommentInput: {
-                    writer: writer,
-                    password: password,
-                    contents: comment,
-                    rating: rating
-                }
-            },
-            refetchQueries: [
-                {query: Fetch_Board_Comments, 
-                    variables: {
-                        boardId: String(Id.id)
+            await createBoardComment({
+                variables: {
+                    boardId: String(Id.id) ,
+                    createBoardCommentInput: {
+                        writer: writer,
+                        password: password,
+                        contents: comment,
+                        rating: rating
                     }
-                }
-            ]
-        })
-        alert("댓글등록 완료")
-
+                },
+                refetchQueries: [
+                    {query: Fetch_Board_Comments, 
+                        variables: {
+                            boardId: String(Id.id),
+                            page: 1
+                        }
+                    }
+                ],
+            })
+            // reset input fields after successful submit
+            setWriter("");
+            setPassword("");
+            setComment("");
+            setPassword("");
+            setRating(3);
+            alert("댓글등록 완료")
         }catch(error){
             console.log(error)
             alert("댓글등록중 에러 발생")
+        }
+    }
+
+    const onClickUpdate = async(data) => {
+        console.log('variables:', {
+            boardCommentId: String(data._id),
+            password,
+            updateBoardCommentInput: {
+              contents: comment,
+              rating: rating
+            }
+          });
+        try{
+            await updateBoardComment({
+                variables: {
+                    boardCommentId: String(data._id),
+                   
+                    password: password,
+                    updateBoardCommentInput: {
+                        contents: comment,
+                        rating: rating
+                    }
+                },
+                refetchQueries: [
+                    {query: Fetch_Board_Comments, 
+                        variables: {
+                            boardId: String(Id.id),
+                            page:1
+                        }
+                    }
+                ],  awaitRefetchQueries: true 
+            }); alert("수정완료"); 
+        }catch(error){
+            alert(error)
         }
     }
 
@@ -72,6 +113,12 @@ export default function useCommentWritePage() {
         onChangePassword,
         onChangeComment,
         onClickSubmit,
-        onclickRating
+        onclickRating,
+        onClickUpdate,
+        writer,
+        comment,
+        rating,
+        setWriter,
+        setComment
     }
 }

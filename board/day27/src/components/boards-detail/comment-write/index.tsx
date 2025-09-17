@@ -6,15 +6,23 @@ import { Rate } from "antd";
 
 
 
-export default function CommentWritePage() {
+export default function CommentWritePage(props) {
 
     const { 
         onChangeWriter,
         onChangePassword,
         onChangeComment,
         onClickSubmit,
-        onclickRating
+        onclickRating,
+        onClickUpdate,
+        writer,
+        comment,
+        rating,
+        setWriter,
+        setComment
     } = useCommentWritePage()
+
+
 
 
 
@@ -24,10 +32,10 @@ export default function CommentWritePage() {
             <div className={style.comment}>
                 <hr className={style.comment__hr} />
                 <div className={style.comment__head}>
-                    <img src="/assets/icons/chat.png"></img>
-                    <div>댓글</div>
+                    {!props.isEdit && <img src="/assets/icons/chat.png"></img>}
+                    {!props.isEdit && <div >댓글</div>}
                 </div>
-                <Rate allowHalf className={style.comment__star} onChange={onclickRating} />
+                <Rate allowHalf className={style.comment__star} onChange={onclickRating} value={rating} />
                 
                 {/* <span>점수:{rating} </span> */}
                 {/* <div className={style.comment__star}>별 별 별 별 별</div> */}
@@ -35,15 +43,18 @@ export default function CommentWritePage() {
                     <div className={style.comment__info}>
                         <div className={style.comment__info__write}>
                             <div>작성자<span className={style.st}> *</span></div>
-                            <input onChange={onChangeWriter} className={style.comment__info__input} type="text" placeholder="작성자 명을 입력해 주세요."></input>
+                            <input onChange={onChangeWriter} className={style.comment__info__input} type="text" placeholder="작성자 명을 입력해 주세요." defaultValue={props.data} disabled={props.isEdit} value={writer} ></input>
                         </div>
                         <div className={style.comment__info__password}>
                             <div>비밀번호<span className={style.st}> *</span></div>
                             <input onChange={onChangePassword} className={style.comment__info__input} type="password" placeholder="비밀번호를 입력해주세요."></input>
                         </div>
                     </div>
-                    <textarea onChange={onChangeComment} className={style.comment__textarea} placeholder="댓글을 입력해주세요." ></textarea>
-                    <button onClick={onClickSubmit} className={style.comment__submit}>등록하기</button>
+                    <textarea onChange={onChangeComment} className={style.comment__textarea} placeholder="댓글을 입력해주세요." defaultValue={props?.data?.fetchBoardComments?.comment ?? ""} value={comment} ></textarea>
+                    {props.isEdit && <button >취소</button>}
+                    {props.isEdit ? <button onClick={async () => { await onClickUpdate(props.data); props.onDone?.(); }} className={style.comment__submit}>수정하기</button> :
+                    <button onClick={onClickSubmit} className={style.comment__submit}>등록하기</button>}
+                
                 </div>
             </div>
         </div>

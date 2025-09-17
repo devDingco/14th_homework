@@ -10,15 +10,18 @@ import { Fetch_Board_Comments } from "./queries";
 export default function useCommentListPage() {
 
     const param = useParams();
-    const { data } = useQuery(Fetch_Board_Comments, {
+    const { data, fetchMore } = useQuery(Fetch_Board_Comments, {
         variables: {
+            page: 1,
             boardId: param.id
         }
     })
 
 
     return (
-       {data} 
+       {data,
+        fetchMore
+       } 
     )
 
 

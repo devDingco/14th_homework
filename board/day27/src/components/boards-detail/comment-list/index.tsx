@@ -3,42 +3,51 @@
 import style from "./style.module.css"
 import useCommentListPage from "./hooks";
 import { Rate } from "antd";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useState } from "react";
+import { FetchBoardDocument } from "@/commons/graphql/graphql";
+import { gql, useQuery } from "@apollo/client";
+import CommentItem from "../comment-list-item";
 
 
 
 
 export default function CommentListPage() {
-    const {data} = useCommentListPage()
+    const {data, fetchMore} = useCommentListPage()
+    const [hasMore, setHasMore] = useState(true);
+
+
+    const onNext = () => {
+        console.log("11")
+        if (data === undefined) return;
+        fetchMore({
+            variables: {
+                page: Math.ceil((data?.fetchBoardComments.length ?? 10 ) / 10) + 1},
+            updateQuery: (prev, {fetchMoreResult}) => {
+                if(!fetchMoreResult?.fetchBoardComments?.length){
+                    setHasMore(false);
+                    return ;
+                }return{
+                    fetchBoardComments: [...prev.fetchBoardComments, ...fetchMoreResult.fetchBoardComments]
+                }
+            }
+        })
+    }
 
     return (
         <>
-            {data?.fetchBoardComments.map((el) => {
-                return (
-                    <div className={style.commentlist} key={el._id}>
+        <InfiniteScroll
+            next={onNext}
+            hasMore={hasMore}
+            dataLength={data?.fetchBoardComments.length ?? 0}
+            loader={<div>로딩중...</div>}
+        >
+            {data?.fetchBoardComments.map((el) => (
+                <CommentItem key={el._id} el={el}/>
 
-                        <div className={style.commentlist__info}>
-                            <div className={style.commentlist__info__left}>
-                                <div className={style.commentlist__info__left__1}>
-                                    <div className={style.commentlist__info__left__1__border}>
-                                        <img className={style.commentlist__info__left__1__img} src="/assets/icons/profile.png" alt="" />
-                                    </div>
-                                    <div>{el.writer}</div>
-                                </div>
-                                <Rate allowHalf disabled defaultValue={el.rating} />
-                                
-                            </div>
-                            <div className={style.commentlist__info__right}>
-                                <img className={style.commentlist__info__right__edit} src="/assets/icons/left_icon.png" alt="" />
-                                <img className={style.commentlist__info__right__X} src="/assets/icons/X.png" alt="" />
-                            </div>
-                        </div>
-                        <div className={style.commentlist__contents}>{el.contents}</div>
-                        <div className={style.commentlist__createdAt}>{el.createdAt.slice(0, 10).replaceAll("-", ".")}</div>
-                    </div>
-                )
-
-            })
+            ))
             }
+            </InfiniteScroll>
         </>
     )
 
