@@ -7,18 +7,20 @@ import useCommentWrite from './hook'
 import { Rate } from 'antd'
 
 export default function CommentWriteComponent(props: CommentWriteProps) {
+  const { isEdit = false, boardId, onClickEdit, el } = props
   const {
     handleChangeWriter,
     handleChangePassword,
     handleChangeContents,
     handleChangeRating,
     handleSubmit,
+    handleChange,
     isDisabled,
     writer,
     password,
     contents,
     rating,
-  } = useCommentWrite({ boardId: props.boardId })
+  } = useCommentWrite({ boardId, el, onClickEdit })
 
   return (
     <div className={styles.comment_layout}>
@@ -43,6 +45,7 @@ export default function CommentWriteComponent(props: CommentWriteProps) {
               onChange={handleChangeWriter}
               value={writer}
               className={styles.enroll_input}
+              readOnly={isEdit}
             />
           </div>
           <div className={styles.comment_input}>
@@ -51,6 +54,7 @@ export default function CommentWriteComponent(props: CommentWriteProps) {
               <span className={styles.enroll_required_indicator}>*</span>
             </div>
             <input
+              type="password"
               id="comment_password"
               placeholder="비밀번호를 입력해 주세요."
               onChange={handleChangePassword}
@@ -66,16 +70,34 @@ export default function CommentWriteComponent(props: CommentWriteProps) {
             className={`${styles.enroll_input} ${styles.enroll_textarea}`}
             onChange={handleChangeContents}
             value={contents}
+            maxLength={100}
           ></textarea>
-          <p className={styles.comment_len}>{0}/100</p>
+          <p className={styles.comment_len}>{contents.length}/100</p>
         </div>
-        <button
-          className={styles.enroll_submit_button}
-          disabled={isDisabled}
-          onClick={handleSubmit}
-        >
-          댓글 등록
-        </button>
+        <div className={styles.active_buttons}>
+          {isEdit ? (
+            <>
+              <button className={styles.enroll_cancel_button} onClick={onClickEdit}>
+                취소
+              </button>
+              <button
+                className={styles.enroll_submit_button}
+                disabled={isDisabled}
+                onClick={handleChange}
+              >
+                수정 하기
+              </button>
+            </>
+          ) : (
+            <button
+              className={styles.enroll_submit_button}
+              disabled={isDisabled}
+              onClick={handleSubmit}
+            >
+              댓글 등록
+            </button>
+          )}
+        </div>
       </div>
     </div>
   )
