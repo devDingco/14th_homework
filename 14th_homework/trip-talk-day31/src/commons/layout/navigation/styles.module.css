@@ -1,0 +1,25 @@
+.네비게이션 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 80px;
+  position: relative;
+
+  /* padding-left: 320px;
+  padding-right: 320px;
+  padding-top: 24px;
+  padding-bottom: 20px; */
+  /* left: 10%; */
+}
+.페이지선택 {
+  display: flex;
+  align-items: center;
+  width: 364px;
+  height: 40px;
+  gap: 24px;
+}
+.프로필 {
+  display: flex;
+  align-items: center;
+}
