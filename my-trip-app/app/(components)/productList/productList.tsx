@@ -5,13 +5,13 @@ import "../../global.css";
 import Icon from "@utils/iconColor";
 import Image from "next/image";
 import Link from "next/link";
-import InfiniteScroll from "react-infinite-scroll-component";
+import Pagination from "../pagination/pagination";
 import { useProductList } from "../../commons/hooks/useProductList";
 import ProductListSkeleton from "./ProductListSkeleton";
 import LoadingSpinner from "../../commons/components/LoadingSpinner";
 
 export default function ProductList() {
-  const { products, loading, loadingMore, error, hasMore, loadMore, refresh } = useProductList();
+  const { products, loading, error, refresh, page, totalPages, handlePageChange } = useProductList();
 
   const navItems = [
     { name: "single_person_accommodation", label: "1인 전용" },
@@ -51,6 +51,7 @@ export default function ProductList() {
       </section>
     );
   }
+
   return (
     <section className="product_list_section">
       <div className="product_list_header">
@@ -67,26 +68,7 @@ export default function ProductList() {
       </div>
 
       {products.length > 0 ? (
-        <InfiniteScroll
-          dataLength={products.length}
-          next={loadMore}
-          hasMore={hasMore}
-          loader={
-            <div className="infinite_scroll_loader">
-              <LoadingSpinner 
-                size="medium" 
-                text="더 많은 상품을 불러오는 중..." 
-              />
-            </div>
-          }
-          endMessage={
-            <div className="infinite_scroll_end">
-              <p className="end_message">모든 상품을 확인했습니다! 🎉</p>
-            </div>
-          }
-          scrollThreshold={0.9}
-          className="infinite_scroll_container"
-        >
+        <>
           <div className="product_grid">
             {products.map((product) => (
               <Link key={product.id} href={`/product/${product.id}`} className="product_card_link">
@@ -142,7 +124,15 @@ export default function ProductList() {
               </Link>
             ))}
           </div>
-        </InfiniteScroll>
+          
+          {totalPages > 1 && (
+            <Pagination
+              totalPages={totalPages}
+              initialPage={page}
+              onChange={handlePageChange}
+            />
+          )}
+        </>
       ) : (
         <div className="no_products">
           <p className="no_products_message">등록된 상품이 없습니다.</p>
@@ -151,6 +141,3 @@ export default function ProductList() {
     </section>
   );
 }
-
-
-

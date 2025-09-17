@@ -19,6 +19,9 @@
 
 .product_card {
     background: #fff;
+    width: 29.6rem;
+    height: 38.4rem;
+
 }
 
 .product_thumbnail_wrap {
@@ -208,40 +211,15 @@
     color: var(--gray-60);
 }
 
-/* 무한스크롤 관련 스타일 */
-.infinite_scroll_container {
-    width: 100%;
-}
-
-.infinite_scroll_loader {
-    margin-top: 2.4rem;
-    padding: 2rem 0;
+/* 페이지네이션 컨테이너 스타일 */
+.pagination_container {
+    margin-top: 4rem;
     display: flex;
     justify-content: center;
-    align-items: center;
     width: 100%;
-    min-height: 120px;
 }
 
-.loader_grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2.4rem;
-}
-
-.infinite_scroll_end {
-    text-align: center;
-    padding: 4rem 2rem;
-    margin-top: 2.4rem;
-}
-
-.end_message {
-    font-size: 1.6rem;
-    color: var(--gray-60);
-    font-weight: 500;
-}
-
-/* 스켈레톤 로더 스타일 (무한스크롤용) */
+/* 스켈레톤 로더 스타일 */
 .skeleton_product_card {
     display: flex;
     flex-direction: column;
