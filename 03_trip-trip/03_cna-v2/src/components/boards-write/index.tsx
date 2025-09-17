@@ -16,26 +16,14 @@ const IMAGE_SRC = {
 
 export default function BoardWritePage(props: IBoardWriteProps) {
   const {
-    onChangeName,
-    onChangePassword,
-    onChangeTitle,
-    onChangeContent,
+    onChangeValue,
     onChangeAddress,
-    onChangeLink,
     onClickSignup,
     isButtonDisabled,
     data,
-    name,
-    password,
-    title,
-    content,
+    boardValue,
     address,
-    link,
-    nameError,
-    passwordError,
-    titleError,
-    contentError,
-    linkError,
+    boardError,
     isModalOpen,
     onToggleModal,
     handleComplete,
@@ -60,13 +48,14 @@ export default function BoardWritePage(props: IBoardWriteProps) {
               </div>
               <input
                 disabled={props.isEdit}
-                defaultValue={props.isEdit ? data?.fetchBoard?.writer ?? '' : name}
+                value={data?.fetchBoard?.writer ?? boardValue.name}
                 type="text"
+                id="name"
                 placeholder="작성자 명을 입력해 주세요."
                 className={props.isEdit ? styles.disabled_input : styles.enroll_input}
-                onChange={onChangeName}
+                onChange={onChangeValue}
               />
-              <div className={styles.error_msg}>{nameError}</div>
+              <div className={styles.error_msg}>{boardError.nameError}</div>
             </div>
             {/* 비밀번호 */}
             <div className={styles.flex_half}>
@@ -77,12 +66,13 @@ export default function BoardWritePage(props: IBoardWriteProps) {
               <input
                 disabled={props.isEdit}
                 type="password"
+                id="password"
                 placeholder="비밀번호를 입력해 주세요."
                 className={props.isEdit ? styles.disabled_input : styles.enroll_input}
-                onChange={onChangePassword}
-                defaultValue={props.isEdit ? '*********' : password}
+                onChange={onChangeValue}
+                value={props.isEdit ? '*********' : boardValue.password}
               />
-              <div className={styles.error_msg}>{passwordError}</div>
+              <div className={styles.error_msg}>{boardError.passwordError}</div>
             </div>
           </div>
         </div>
@@ -96,13 +86,14 @@ export default function BoardWritePage(props: IBoardWriteProps) {
             <div className={styles.enroll_required_indicator}> *</div>
           </div>
           <input
-            defaultValue={props.isEdit ? data?.fetchBoard?.title : title}
+            value={boardValue.title}
             type="text"
+            id="title"
             className={styles.enroll_input}
             placeholder="제목을 입력해 주세요."
-            onChange={onChangeTitle}
+            onChange={onChangeValue}
           />
-          <div className={styles.error_msg}>{titleError}</div>
+          <div className={styles.error_msg}>{boardError.titleError}</div>
         </div>
         <div className={styles.enroll_border}></div>
         <div className={styles.enroll_row_section}>
@@ -112,12 +103,13 @@ export default function BoardWritePage(props: IBoardWriteProps) {
             <div className={styles.enroll_required_indicator}> *</div>
           </div>
           <textarea
-            defaultValue={props.isEdit ? data?.fetchBoard?.contents : content}
+            id="content"
+            value={boardValue.content}
             placeholder="내용을 입력해 주세요."
             className={`${styles.enroll_input} ${styles.enroll_textarea}`}
-            onChange={onChangeContent}
+            onChange={onChangeValue}
           ></textarea>
-          <div className={styles.error_msg}>{contentError}</div>
+          <div className={styles.error_msg}>{boardError.contentError}</div>
         </div>
 
         {/* 주소 */}
@@ -166,10 +158,11 @@ export default function BoardWritePage(props: IBoardWriteProps) {
           <input
             className={styles.enroll_input}
             placeholder="링크를 입력해 주세요."
-            onChange={onChangeLink}
-            defaultValue={link}
+            onChange={onChangeValue}
+            value={boardValue.link}
+            id="link"
           />
-          <div className={styles.error_msg}>{linkError}</div>
+          <div className={styles.error_msg}>{boardError.linkError}</div>
         </div>
 
         <div className={styles.enroll_border}></div>
