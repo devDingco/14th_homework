@@ -4,6 +4,8 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { DELETE_BOARD, FETCH_BOARDS, FETCH_BOARDS_COUNT } from './queries';
 import { FetchBoardsCountDocument } from '@/commons/graphql/graphql';
+import { Modal } from 'antd';
+import { useState } from 'react';
 
 export default function useBoardsPage () {
 
@@ -15,14 +17,15 @@ export default function useBoardsPage () {
 
     const { data: boardsCountData } = useQuery(FetchBoardsCountDocument);
     const boardsCount = boardsCountData?.fetchBoardsCount ?? 0; // ✅ 총 게시글 수
-
+ 
+    // 라우터 이동
     const router = useRouter()
     const onClickBoard = async (boardId: string) => {
         await router.push(`/boards/${boardId}`)
-    } 
+    }  
 
-    
-    const [deleteBoard] = useMutation(DELETE_BOARD)
+   // 삭제
+   const [deleteBoard] = useMutation(DELETE_BOARD)
 
     const onClickDelete =  async (event: React.MouseEvent<HTMLDivElement>, boardId: string) => {        
         event.stopPropagation(); 
@@ -39,22 +42,21 @@ export default function useBoardsPage () {
                     }
                 ]
             })
-            alert("게시글이 삭제되었습니다.")
+            // alert("게시글이 삭제되었습니다.")
+            Modal.confirm({ content: "게시글이 삭제되었습니다." })
         } catch (error) {
-            alert("에러가 발생하였습니다. 다시 시도해 주세요.")
+            // alert("에러가 발생하였습니다. 다시 시도해 주세요.")
+            Modal.error({ content : "에러가 발생하였습니다. 다시 시도해 주세요."})
         }
         
-    } 
-    
- 
-    
-    
+    }
+
+   
     return {
         data,
-        onClickBoard,
-        onClickDelete,
         boardsCount,
-    
+        onClickBoard,
+        onClickDelete,      
     }
         
 }

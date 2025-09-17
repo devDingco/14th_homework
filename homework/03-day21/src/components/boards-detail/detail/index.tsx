@@ -3,13 +3,18 @@
 import React from 'react';
 import styles from "./styles.module.css";
 import useBoardsDetail from './hook';
+import YoutubePreview from './YoutubePreview';
+
+import { Tooltip } from 'antd';
+import { LikeOutlined, DislikeOutlined } from '@ant-design/icons'
 
 
 export default function BoardsDetail () { 
     const {
         data,
         onClickMove,
-        onClickMoveList
+        onClickMoveList,
+        address,
     } = useBoardsDetail()
 
     return(
@@ -32,8 +37,17 @@ export default function BoardsDetail () {
                     <hr className={styles.detailBorder}/>
                     <div className={styles.detailMetadataIconContainer}>
                         <img src="/images/link_icon.png" alt="링크아이콘" />
-                        <img src="/images/location_icon.png" alt="위치아이콘" />
+
+                        {/* 주소 아이콘→ hover 시 툴팁 */}
+                        <Tooltip 
+                            placement="bottomRight" 
+                            title={address} 
+                            arrow={false}
+                            overlayClassName="addressTooltip">
+                            <img src="/images/location_icon.png" alt="위치아이콘" />
+                        </Tooltip>
                     </div>
+
                 </div>
 
                 <img className={styles.detailContentContainer} src="/images/post_image.png" alt="청산사진"/>
@@ -44,15 +58,30 @@ export default function BoardsDetail () {
 
                 </div>
 
-                <img className={styles.detailVideoPreview} src="/images/video.png" alt="비디오프리뷰"/>
+                {/* {data?.fetchBoard?.youtubeUrl ? (
+                <iframe
+                    width="640"
+                    height="390"
+                    src={`https://www.youtube.com/embed/${data.fetchBoard.youtubeUrl.split("v=")[1]}`}
+                    frameBorder="0"
+                    allowFullScreen
+                />
+                ) : (
+                    null // ✅ 아무것도 안 보이게
+                )} */}
+
+                <YoutubePreview url={data?.fetchBoard?.youtubeUrl} />
+
 
                 <div className={styles.detailContentGoodOrBad}>
                     <div className={styles.detailBadContainer}>
-                        <img src="/images/bad.png" alt="싫어요"/>
+                        {/* <img src="/images/bad.png" alt="싫어요"/> */}
+                        <LikeOutlined />
                         <div>24</div>
                     </div>
                     <div className={styles.detailGoodContainer}>
-                        <img src="/images/good.png" alt="좋아요"/>
+                        {/* <img src="/images/good.png" alt="좋아요"/> */}
+                        <DislikeOutlined color="#F66A6A" />
                         <div>12</div>
                     </div>
                 </div>

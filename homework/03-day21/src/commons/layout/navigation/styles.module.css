@@ -1,0 +1,78 @@
+.navbar {
+    display: flex;
+    padding: 0 1.25rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.navbarInner {
+    display: flex;
+    height: 5rem;
+    width: 100%;
+    max-width: 80rem;
+    padding: 1.25rem 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbarLeft {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navbarLogo {
+    width: 3.22006rem;
+    height: 2rem;
+}
+
+.navbarItem {
+    display: flex; 
+    padding: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    cursor: pointer;
+
+    border-bottom: 2px solid var(--gray-B, #000);
+}
+
+
+.navbarItemActive {
+    border-bottom: 2px solid #000; /* 활성화 표시 */
+
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.5rem; /* 150% */
+}
+
+.navbarItemDisabled {
+    cursor: not-allowed;
+    color: #333;          /* 글씨 연하게 */
+    border-bottom: none;  /* 보더 제거 */
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem; /* 150% */
+}
+
+
+.navbarRight {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.navbarAvatar {
+    width: 2rem;
+    height: 2rem;
+}
+
+.navbarDropdown {
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+}
