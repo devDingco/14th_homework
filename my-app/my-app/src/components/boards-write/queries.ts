@@ -18,6 +18,11 @@ export const CREATE_BOARD = gql`
       _id
       writer
       # password
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
       title
       contents
       createdAt

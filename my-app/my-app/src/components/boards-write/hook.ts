@@ -19,6 +19,11 @@ export const useBoardsComponentWrite = (isEdit: boolean) => {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
 
+  const [zonecode, setZoneCode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+
   const [게시글등록API요청함수] = useMutation(CreateBoardDocument);
   const [게시글업데이트요청함수] = useMutation(UpdateBoardDocument);
 
@@ -44,6 +49,42 @@ export const useBoardsComponentWrite = (isEdit: boolean) => {
 
   const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
+  };
+
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
+  };
+
+  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(event.target.value);
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const onClickOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleComplete = (data) => {
+    let fullAddress = data.address;
+    let extraAddress = "";
+
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== "") {
+        extraAddress +=
+          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+    }
   };
 
   const onClickSignup = async () => {
@@ -108,9 +149,17 @@ export const useBoardsComponentWrite = (isEdit: boolean) => {
     onChangeWriter,
     onChangeTitle,
     onChangePassword,
-    onChangeContents, // shorthand-property
+    onChangeContents,
+    onChangeAddressDetail,
+    onChangeYoutubeUrl,
+
     onClickSignup,
     onClickEdit,
+
+    handleOk,
+    handleCancel,
+    handleComplete,
+
     등록버튼비활성화,
   };
 };

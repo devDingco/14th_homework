@@ -6,6 +6,10 @@ import styles from "./style.module.css";
 import { useBoardsComponentWrite } from "./hook";
 import { IBoardsComponentWriteProps } from "./types";
 import addIcon from "../../app/boards/new/assets/add.svg";
+import { Button, Modal } from "antd";
+
+import { useState } from "react";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 export default function BoardsComponentWrite(
   props: IBoardsComponentWriteProps
@@ -18,13 +22,20 @@ export default function BoardsComponentWrite(
     password,
     title,
     contents,
-
     onChangeWriter,
     onChangeTitle,
     onChangePassword,
-    onChangeContents, // shorthand-property
+    onChangeContents,
+    onChangeAddressDetail,
+    onChangeYoutubeUrl,
+
     onClickSignup,
     onClickEdit,
+
+    handleOk,
+    handleCancel,
+    handleComplete,
+
     등록버튼비활성화,
   } = useBoardsComponentWrite(isEdit);
 
@@ -117,7 +128,10 @@ export default function BoardsComponentWrite(
                 type="text"
                 placeholder="01234"
               />
-              <button className={styles.게시물등록_주소인풋_우편번호버튼}>
+              <button
+                className={styles.게시물등록_주소인풋_우편번호버튼}
+                onClick={onClickOpenModal}
+              >
                 우편번호 검색
               </button>
             </div>
@@ -189,6 +203,15 @@ export default function BoardsComponentWrite(
           </button>
         </div>
       </div>
+      <Modal
+        title="Basic Modal"
+        closable={{ "aria-label": "Custom Close Button" }}
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <DaumPostcodeEmbed onComplete={handleComplete} />
+      </Modal>
     </div>
   );
 }
