@@ -11,7 +11,7 @@ export default function BoardsBoardIdPage() {
     return(
         <div className={styles.boardsDetail}>
             <BoardsBoardDetailPage />
-            <CommentWrite />
+            <CommentWrite isEdit={false} />
             <CommentList />
         </div>
 

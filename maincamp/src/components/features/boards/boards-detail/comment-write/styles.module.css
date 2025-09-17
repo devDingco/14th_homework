@@ -6,6 +6,10 @@
     gap: 1.5rem;
 }
 
+.CommentLabelEdit{
+    display: none;
+}
+
 .CommentLabel{
     display: flex;
     flex-direction: row;
@@ -47,7 +51,8 @@
 .CommentButtonGroup{
     display: flex;
     flex-direction: row;
-    justify-content: flex-end; 
+    justify-content: flex-end;
+    gap: 1rem;
 }
 
 

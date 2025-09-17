@@ -1,25 +1,30 @@
 "use client"
 
-import { CreateBoardCommentDocument, FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
+import { CreateBoardCommentDocument, FetchBoardCommentsDocument, UpdateBoardCommentDocument } from "@/commons/graphql/graphql";
 import { useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import { useParams } from "next/navigation"
 import { ChangeEvent, useState } from "react";
+import { IComment } from "../comment-list/types";
+import { GraphQLError } from "graphql";
 
-export default function useCommentWrite(){
+export default function useCommentWrite({el, onClickEdit}:{el?:IComment, onClickEdit?: () => void}){
     
     // 세팅 - params
     const params = useParams();
 
     // 댓글 등록 유효성 검사
-    const [writer, setWriter] = useState("")
+    const [writer, setWriter] = useState(el?.writer ?? "")
     const [password, setPassword] = useState("")
-    const [contents, setContents] = useState("")
+    const [contents, setContents] = useState(el?.contents ?? "")
     const [isValid, setIsValid] = useState(true)
     const [rating, setRating] = useState(3)
 
     // 게시글 댓글 생성 API
     const [createBoardComment] = useMutation(CreateBoardCommentDocument)
+
+    // 게시글 댓글 수정 API
+    const [updateBoardComment] = useMutation(UpdateBoardCommentDocument)
 
     // ChangeEvent에 따른 유효성 검증
     const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +85,7 @@ export default function useCommentWrite(){
                 refetchQueries: [
                     {
                         query: FetchBoardCommentsDocument,
-                        variables: { boardId: params.boardId}
+                        variables: { page: 1 ,boardId: params.boardId}
                     },
                 ]
             })
@@ -90,12 +95,37 @@ export default function useCommentWrite(){
             setIsValid(true)
         } catch (error) {
             const showErrorModal = () => Modal.error({
-                title: '에러가 발생하였습니다.',
+                title: '댓글 등록에 실패하였습니다.',
                 content: error as string ?? "에러가 발생하였습니다",
               });
               showErrorModal()
         }
     }
 
-    return{writer, password, contents, isValid, rating, onChangeWriter, onChangePassword, onChangeContents, onClickCommentSubmit, onClickRate}
+    // 댓글 수정하기 버튼 클릭
+    const onClickCommentEdit = async(event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        try{
+            const result = await updateBoardComment({
+                variables:{
+                    updateBoardCommentInput:{
+                        contents,
+                        rating
+                    },
+                    password,
+                    boardCommentId: el?._id as string
+                }
+            })
+            onClickEdit?.()
+        } catch (errors){
+            const err = errors as GraphQLError
+            const showErrorModal = () => Modal.error({
+                title: '댓글 수정에 실패하였습니다.',
+                content: err.message ?? "에러가 발생하였습니다",
+              });
+              showErrorModal()
+        }
+    }
+
+    return{writer, password, contents, isValid, rating, onChangeWriter, onChangePassword, onChangeContents, onClickCommentSubmit, onClickCommentEdit, onClickRate}
 }

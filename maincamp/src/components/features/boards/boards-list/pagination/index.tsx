@@ -1,4 +1,3 @@
-import { useState } from "react"
 import styles from './styles.module.css'
 import { usePagination } from "./hook"
 import { IPaginationProps } from "./types";

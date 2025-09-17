@@ -51,8 +51,8 @@ export const FETCH_BOARDS_AND_COUNT = gql`
 `
 
 export const FETCH_BOARD_COMMENTS = gql`
-    query fetchBoardComments($boardId: ID!) {
-        fetchBoardComments(boardId: $boardId) {
+    query fetchBoardComments($page: Int, $boardId: ID!) {
+        fetchBoardComments(page: $page, boardId: $boardId) {
             _id
             writer
             contents

@@ -18,7 +18,8 @@
     white-space: nowrap;
 }
 
-.FormBtn[type="button"]{
+.FormBtn[type="button"],
+.CommentBtn[type="button"]{
     border: 0.0625rem solid var(--color-gray-black);
     background-color: var(--color-gray-white);
     

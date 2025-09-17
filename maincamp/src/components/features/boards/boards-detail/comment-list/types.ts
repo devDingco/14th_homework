@@ -1,7 +1,7 @@
 export interface IComment{
     _id: string;
-    writer: String | null;
-    contents: String
+    writer?: string | null;
+    contents: string
     rating: number;
     createdAt: string;
 }

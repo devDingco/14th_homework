@@ -30,7 +30,7 @@ export type TextareaProps = {
     label?: string;
     required?: boolean;
     placeholder: string;
-    value?:any;
+    value?:string;
     onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
     isCommentField?: boolean;
     maxLength?: number;
@@ -42,8 +42,8 @@ export type ZipcodeProps = {
     required?: boolean;
     placeholder: string;
     placeholder_2?: string;
-    onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-    value?: any;
+    value?: {zipcode: string, address:string, addressDetail:string};
     isEdit?: boolean;
 }
