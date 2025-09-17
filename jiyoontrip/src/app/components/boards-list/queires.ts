@@ -30,3 +30,8 @@ export const DELETE_BOARD = gql`
     deleteBoard(boardId: $boardId)
   }
 `;
+export const FERTCH_BOARDS_COUNT = gql`
+  query {
+    fetchBoardsCount
+  }
+`;

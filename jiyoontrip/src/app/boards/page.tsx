@@ -1,15 +1,15 @@
 "use client";
 
-import { Pagination } from "antd";
-import BannerComponent from "../components/boards-list/banner";
+import useBoardPage from "../components/boards-list/hook";
 import BoardsPageComponent from "../components/boards-list/list";
+import PaginationComponent from "../components/boards-list/pagination";
 
 export default function BoardsPage() {
+  const boardPage = useBoardPage();
   return (
     <>
-      <BannerComponent />
-      <BoardsPageComponent />
-      <Pagination />
+      <BoardsPageComponent {...boardPage} />
+      <PaginationComponent {...boardPage} />
     </>
   );
 }

@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import styles from "./styles.module.css";
-import useBoardPage from "./hook";
+// import useBoardPage from "../hook";
 // import { IFetchBoard } from "./types";
 
-export default function BoardsPageComponent() {
+export default function BoardsPageComponent(props) {
   const {
     onClickDelete,
     onClickDetail,
@@ -14,7 +14,7 @@ export default function BoardsPageComponent() {
     data,
     isModalOpen,
     Modal,
-  } = useBoardPage();
+  } = props;
   return (
     <>
       <div className={styles.page}>

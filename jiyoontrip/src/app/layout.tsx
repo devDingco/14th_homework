@@ -2,17 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import ApolloSetting from "./commons/settings/apollo-setting";
-
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
+import Layout from "./commons/layout";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,11 +18,13 @@ const globalFont = localFont({
   variable: "--globalFont",
 });
 
-export default function RootLayout(props: IProps) {
+export default function RootLayout({ children }: IProps) {
   return (
     <html lang="ko">
-      <body className={`${globalFont.variable} font-sans antialiased`}>
-        <ApolloSetting>{props.children}</ApolloSetting>
+      <body className={`${globalFont.variable}`}>
+        <ApolloSetting>
+          <Layout>{children}</Layout>
+        </ApolloSetting>
       </body>
     </html>
   );

@@ -1,0 +1,36 @@
+.navigation__layout {
+  display: flex;
+  justify-content: center;
+}
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.25rem 0;
+  max-width: 80rem;
+  width: 100%;
+}
+.navigation__left {
+  display: flex;
+  gap: 1.5rem;
+}
+.navigation__left__menu {
+  display: flex;
+  gap: 1rem;
+}
+.navigation__left__menu__size {
+  display: flex;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.navigation__right {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+.logo {
+  width: 3.22006rem;
+  height: 2rem;
+}
