@@ -7,8 +7,7 @@ import { useBoardsWrite } from "./hook";
 import styles from "./styles.module.css";
 import { Modal, Box, Typography, Button, TextField } from "@mui/material";
 
-// 모달 스타일 정의 (MUI Box 컴포넌트용)
-// as const를 사용하여 타입 추론을 더 명확하게 함
+// 모달 스타일 정의
 const modalStyle = {
   position: "absolute",
   top: "50%",
@@ -29,17 +28,14 @@ export default function BoardsWrite(props: BoardsWriteProps) {
   const {
     loading,
     error,
-    writer,
+    formData,
     password,
-    title,
-    contents,
     youtubeUrl,
     boardAddress,
+    images,
     errors,
-    onChangeWriter,
+    handleInputChange,
     onChangePassword,
-    onChangeTitle,
-    onChangeContents,
     onChangeYoutubeUrl,
     onChangeBoardAddressZipcode,
     onChangeBoardAddressAddress,
@@ -52,7 +48,6 @@ export default function BoardsWrite(props: BoardsWriteProps) {
     onClickUpdate,
     onClickCancel,
     isFormValid,
-    // hook에서 새로 추가된 모달 관련 상태와 함수들을 가져옵니다.
     modalState,
     handleCloseModal,
     handlePromptConfirm,
@@ -77,10 +72,11 @@ export default function BoardsWrite(props: BoardsWriteProps) {
           <label className="label-required">작성자</label>
           <input
             type="text"
+            name="writer"
             className="input-field"
             placeholder="작성자를 입력해 주세요."
-            value={writer}
-            onChange={onChangeWriter}
+            value={formData.writer}
+            onChange={handleInputChange}
             disabled={props.isEdit}
           />
           {errors.writer && <div className="error-message">{errors.writer}</div>}
@@ -103,10 +99,11 @@ export default function BoardsWrite(props: BoardsWriteProps) {
         <label className="label-required">제목</label>
         <input
           type="text"
+          name="title"
           className="input-field"
           placeholder="제목을 입력해 주세요."
-          value={title}
-          onChange={onChangeTitle}
+          value={formData.title}
+          onChange={handleInputChange}
         />
         {errors.title && <div className="error-message">{errors.title}</div>}
       </div>
@@ -114,10 +111,11 @@ export default function BoardsWrite(props: BoardsWriteProps) {
       <div className="form-group no-border">
         <label className="label-required">내용</label>
         <textarea
+          name="contents"
           className="textarea-field"
           placeholder="내용을 입력해 주세요."
-          value={contents}
-          onChange={onChangeContents}
+          value={formData.contents}
+          onChange={handleInputChange}
         ></textarea>
         {errors.contents && <div className="error-message">{errors.contents}</div>}
       </div>
@@ -132,7 +130,9 @@ export default function BoardsWrite(props: BoardsWriteProps) {
             value={boardAddress.zipcode}
             onChange={onChangeBoardAddressZipcode}
           />
-          <button type="button" className="button secondary" onClick={onClickPostcodeSearch}>우편번호 검색</button>
+          <button type="button" className="button secondary" onClick={onClickPostcodeSearch}>
+            우편번호 검색
+          </button>
         </div>
         <input
           type="text"
@@ -188,7 +188,9 @@ export default function BoardsWrite(props: BoardsWriteProps) {
       </div>
 
       <div className="button-container">
-        <button className="button secondary" onClick={onClickCancel}>취소</button>
+        <button className="button secondary" onClick={onClickCancel}>
+          취소
+        </button>
         <button
           className={`${(!props.isEdit && !isFormValid) ? styles.buttonDisabled : styles.buttonEnabled} button`}
           onClick={props.isEdit ? onClickUpdate : onClickSubmit}
@@ -243,7 +245,6 @@ export default function BoardsWrite(props: BoardsWriteProps) {
               </Button>
             )}
             <Button
-              // 여기에 올바른 함수를 연결합니다.
               onClick={modalState.isPrompt ? handlePromptConfirm : handleCloseModal}
               className="button primary"
               style={{
