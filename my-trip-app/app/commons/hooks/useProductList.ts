@@ -26,6 +26,18 @@ export function useProductList() {
 
   // TravelProduct를 ProductListItem으로 변환하는 함수
   const transformProduct = useCallback((product: TravelProduct): ProductListItem => {
+    // 이미지 경로 처리 함수
+    const getImageUrl = (imageUrl?: string) => {
+      if (!imageUrl) return "/images/desktop/a.png";
+      
+      // 이미 http/https로 시작하는 경우 그대로 사용
+      if (imageUrl.startsWith("http")) return imageUrl;
+      
+      // codecamp-file-storage 경로인 경우 Google Storage URL로 변환
+      const cleanPath = imageUrl.startsWith("/") ? imageUrl.slice(1) : imageUrl;
+      return `https://storage.googleapis.com/${cleanPath}`;
+    };
+
     return {
       id: product._id,
       title: product.name || "제목 없음",
@@ -34,7 +46,7 @@ export function useProductList() {
       bookmarkCount: product.pickedCount || 0,
       host: product.seller?.name || "판매자 정보 없음",
       tags: product.tags || [],
-      image: product.images?.[0] || "/images/desktop/a.png", // 기본 이미지
+      image: getImageUrl(product.images?.[0]),
       hostAvatar: "/images/mobile/profile/img.png" // 기본 아바타
     };
   }, []);
