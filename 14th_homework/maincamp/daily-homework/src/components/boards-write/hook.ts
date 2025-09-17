@@ -53,7 +53,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     }
   }, [props.data]);
 
-  const [apiRequire] = useMutation<CreateBoardMutation, CreateBoardMutationVariables>(
+  const [CreateBoardApiRequire] = useMutation<CreateBoardMutation, CreateBoardMutationVariables>(
     CreateBoardDocument
   );
 
@@ -82,7 +82,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
       if (addressDetail) createBoardInput.boardAddress.addressDetail = addressDetail;
     }
 
-    const result = await apiRequire({
+    const result = await CreateBoardApiRequire({
       variables: {
         createBoardInput,
       },
@@ -92,7 +92,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
   };
 
   // 게시글수정API요청함수
-  const [reviseApiRequire] = useMutation(UPDATE_BOARD);
+  const [boardReviseApiRequire] = useMutation(UPDATE_BOARD);
 
   const onclickUpdate = async () => {
     // 필수 입력값 검증
@@ -145,7 +145,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     }
 
     try {
-      const result = await reviseApiRequire({
+      const result = await boardReviseApiRequire({
         variables: {
           updateBoardInput,
           password: checkPassword,

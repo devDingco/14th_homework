@@ -1,5 +1,4 @@
-// 레이아웃 관련 GraphQL 쿼리
-// 전역적으로 필요한 데이터나 설정값들을 가져오는 쿼리들
+'use client';
 
 import { gql } from '@apollo/client';
 
@@ -16,7 +15,7 @@ export const FETCH_SITE_CONFIG = gql`
   }
 `;
 
-// 공지사항 조회 (상단 배너용)
+// 공지사항 조회
 export const FETCH_NOTICES = gql`
   query FetchNotices {
     fetchNotices {
