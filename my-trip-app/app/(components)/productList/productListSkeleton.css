@@ -1,0 +1,169 @@
+/* 스켈레톤 애니메이션 */
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton_text,
+.skeleton_thumbnail,
+.skeleton_icon,
+.skeleton_avatar,
+.skeleton_tag,
+.skeleton_nav_icon {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+}
+
+/* 네비게이션 스켈레톤 */
+.skeleton_nav_icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.skeleton_nav_text {
+  width: 60px;
+  height: 16px;
+  margin-top: 8px;
+}
+
+/* 상품 카드 스켈레톤 */
+.skeleton_product_card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.skeleton_thumbnail_wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.skeleton_thumbnail {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+
+.skeleton_badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 6px 8px;
+  border-radius: 16px;
+}
+
+.skeleton_icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.skeleton_badge_text {
+  width: 20px;
+  height: 14px;
+}
+
+.skeleton_product_body {
+  padding: 16px;
+}
+
+.skeleton_product_info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton_title {
+  width: 100%;
+  height: 20px;
+}
+
+.skeleton_subtitle {
+  width: 80%;
+  height: 16px;
+}
+
+.skeleton_tags {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.skeleton_tag {
+  width: 60px;
+  height: 20px;
+  border-radius: 12px;
+}
+
+.skeleton_product_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.skeleton_host_info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skeleton_avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.skeleton_host_name {
+  width: 60px;
+  height: 16px;
+}
+
+.skeleton_price {
+  width: 80px;
+  height: 18px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .skeleton_product_card {
+    border-radius: 8px;
+  }
+  
+  .skeleton_product_body {
+    padding: 12px;
+  }
+  
+  .skeleton_title {
+    height: 18px;
+  }
+  
+  .skeleton_subtitle {
+    height: 14px;
+  }
+  
+  .skeleton_tag {
+    width: 50px;
+    height: 18px;
+  }
+  
+  .skeleton_price {
+    width: 70px;
+    height: 16px;
+  }
+}
