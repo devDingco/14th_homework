@@ -14,11 +14,12 @@ import { IBoardWriteProps } from './types';
 
 export default function BoardsWrite(props:IBoardWriteProps) {
   const {
+    onChangeInputs,
     onClickMoveList,
-    onChangeContents,
+    // onChangeContents,
     onChangePassword,
-    onChangeTitle,
-    onChangeWriter,
+    // onChangeTitle,
+    // onChangeWriter,
     validation,
     onClickSubmit,
     onClickUpdate,
@@ -49,7 +50,7 @@ export default function BoardsWrite(props:IBoardWriteProps) {
                           src={"/images/별표.png"}
                           alt="별표"
                         /></h2>
-                  <input disabled={!!props.data}  onChange={onChangeWriter} type="text" placeholder="작성자 명을 입력해주세요" defaultValue={props.data?.fetchBoard?.writer ?? ""}/>
+                  <input onChange={onChangeInputs} id={"writer"} disabled={!!props.data}  type="text" placeholder="작성자 명을 입력해주세요" defaultValue={props.data?.fetchBoard?.writer ?? ""}/>
                   <div className={`${styles['color-red']} ${styles['Font-h2']}`}>{errorWriter}</div>
               </section>
               <section className={styles.메인__작성자비밀번호섹션__비밀번호섹션}>
@@ -57,7 +58,7 @@ export default function BoardsWrite(props:IBoardWriteProps) {
                           src={"/images/별표.png"}
                           alt="별표"
                         /></h2>
-                  <input disabled={!!props.data} onChange={onChangePassword} type="password" placeholder="비밀번호를 입력해주세요"/>
+                  <input onChange={onChangePassword} id={"password"} disabled={!!props.data} type="password" placeholder="비밀번호를 입력해주세요"/>
                   <div className={`${styles['color-red']} ${styles['Font-h2']}`}>{errorPassword}</div>
               </section>
           </section>
@@ -69,7 +70,7 @@ export default function BoardsWrite(props:IBoardWriteProps) {
                       width={8}
                       height={8}
                     /></h2>
-              <input onChange={onChangeTitle} type="text" placeholder="제목 입력해주세요" defaultValue={props.data?.fetchBoard?.title ?? ""}/>
+              <input onChange={onChangeInputs} id={"title"} type="text" placeholder="제목 입력해주세요" defaultValue={props.data?.fetchBoard?.title ?? ""}/>
               <div className={`${styles['color-red']} ${styles['Font-h2']}`}>{errorTitle}</div>
           </section>
           <hr/>
@@ -80,7 +81,7 @@ export default function BoardsWrite(props:IBoardWriteProps) {
                       width={8}
                       height={8}
                     /></h2>
-              <input onChange={onChangeContents} type="text" placeholder="내용을 입력해주세요" defaultValue={props.data?.fetchBoard?.contents ?? ""}/>
+              <input onChange={onChangeInputs} id={"contents"} type="text" placeholder="내용을 입력해주세요" defaultValue={props.data?.fetchBoard?.contents ?? ""}/>
               <div className={`${styles['color-red']} ${styles['Font-h2']}`}>{errorContents}</div>
           </section>
           <section className={styles.메인__주소섹션}>

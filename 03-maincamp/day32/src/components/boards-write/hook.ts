@@ -3,7 +3,7 @@
 
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {ChangeEvent} from 'react';
 import { CREATE_BOARD, FETCH_BOARD, UPDATE_BOARD } from "./queres";
 import { IMyvariables,Idata } from "./types";
@@ -24,11 +24,17 @@ export default function useBoardsWrite() {
   
 
       const [isModalOpen, setIsModalOpen] = useState(false);
-      const [writer, setWriter] = useState<string>("")
       const [password, setPassword] = useState<string>("")
-      const [title, setTitle] = useState<string>("")
-      const [contents, setContents] = useState<string>("")
-  
+      // const [writer, setWriter] = useState<string>("")
+      // const [title, setTitle] = useState<string>("")
+      // const [contents, setContents] = useState<string>("")
+
+      const [inputs, setInputs] = useState({
+        writer: "",
+        title: "",
+        contents: "",
+      })
+      const { writer, title, contents } = inputs;
       const [errorWriter, setErrorWriter] = useState<string>("")
       const [errorPassword, setErrorPassword] = useState<string>("")
       const [errorTitle, setErrorTitle] = useState<string>("")
@@ -61,30 +67,60 @@ export default function useBoardsWrite() {
       const onChangeAddressDetail = (e:ChangeEvent<HTMLInputElement>) =>{
        setAddressDetail(e.target.value)
   }
-      const onChangeWriter = (event:ChangeEvent<HTMLInputElement>) => {
-          setWriter(event.target.value)
-          if(event.target.value && password && title && contents){
-            setIsActive(true)
-          }else{setIsActive(false)}
-      }
-      const onChangePassword = (event:ChangeEvent<HTMLInputElement>) => {
-          setPassword(event.target.value)
-          if(writer && event.target.value && title && contents){
-            setIsActive(true)
-          }else{setIsActive(false)}
-      }
-      const onChangeTitle = (event:ChangeEvent<HTMLInputElement>) => {
-          setTitle(event.target.value)
-          if(writer && password && event.target.value && contents){
-            setIsActive(true)
-          }else{setIsActive(false)}
-      }
-      const onChangeContents = (event:ChangeEvent<HTMLInputElement>) => {
-          setContents(event.target.value)
-          if(writer && password && title && event.target.value){
-            setIsActive(true)
-          }else{setIsActive(false)}
-      }
+  const onChangePassword = (event:ChangeEvent<HTMLInputElement>) => {
+      setPassword(event.target.value)
+      // if(writer && event.target.value && title && contents){
+      //   setIsActive(true)
+      // }else{setIsActive(false)}
+  }
+  // const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+//   const newPassword = event.target.value;
+//   setPassword(newPassword);
+
+//   if(writer && title && contents && newPassword){
+//     setIsActive(true);
+//   } else {
+//     setIsActive(false);
+//   }
+// }
+  useEffect(()=>{
+    if(inputs.writer && inputs.title && inputs.contents && password){
+      setIsActive(true)
+    }else{setIsActive(false)
+    }
+  },[inputs,password])
+  
+  const onChangeInputs = (event:ChangeEvent<HTMLInputElement>) =>{
+    setInputs({
+        ...inputs,
+        [event.target.id]: event.target.value
+      })
+    };
+  
+  //   if(newInputs.contents && newInputs.title && newInputs.writer && password){
+  //     setIsActive(true)
+  //     }else{setIsActive(false)
+  //   }
+  //   }
+  
+      // const onChangeWriter = (event:ChangeEvent<HTMLInputElement>) => {
+      //     setWriter(event.target.value)
+      //     if(event.target.value && password && title && contents){
+      //       setIsActive(true)
+      //     }else{setIsActive(false)}
+      // }
+      // const onChangeTitle = (event:ChangeEvent<HTMLInputElement>) => {
+      //     setTitle(event.target.value)
+      //     if(writer && password && event.target.value && contents){
+      //       setIsActive(true)
+      //     }else{setIsActive(false)}
+      // }
+      // const onChangeContents = (event:ChangeEvent<HTMLInputElement>) => {
+      //     setContents(event.target.value)
+      //     if(writer && password && title && event.target.value){
+      //       setIsActive(true)
+      //     }else{setIsActive(false)}
+      // }
       const validation = () => {
           if (writer === "") setErrorWriter("필수입력사항입니다");
           else setErrorWriter("");
@@ -182,10 +218,8 @@ try {
   };
 
   return{
-    onChangeContents,
+    onChangeInputs,
     onChangePassword,
-    onChangeTitle,
-    onChangeWriter,
     onClickSubmit,
     onClickUpdate,
     validation,

@@ -1,0 +1,38 @@
+.container{
+    text-align: center;
+    padding: 5rem 2rem;
+}
+
+.title{
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.score{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score h2{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.button{
+     padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: #2974E5;
+    color: white;
+    font-weight: bold;
+}
+
+.cards{
+    display: flex;
+}
