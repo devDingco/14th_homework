@@ -35,6 +35,13 @@ export default function Navigation() {
                     </Link>
 
                     <div className={`${styles.navbarItem} ${styles.navbarItemDisabled}`}>숙박권 구매</div>
+                    <Link
+                        href="/openapis"
+                        className={`${styles.navbarItem} ${pathname === "/openapis" ? styles.navbarItemActive : ""}`}
+                    >
+                        나만의 컨텐츠
+                    </Link>
+                                   
                     <div className={`${styles.navbarItem} ${styles.navbarItemDisabled}`}>마이 페이지</div>
                 </div>
                 <div className={styles.navbarRight}>

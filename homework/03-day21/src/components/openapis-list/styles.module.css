@@ -1,0 +1,20 @@
+.imageGrid {
+    column-count: 3;
+    column-gap: 1rem;
+    padding: 1rem;
+  }
+  
+.imageItem {
+width: 100%;
+margin-bottom: 1rem;
+border-radius: 0.5rem;
+break-inside: avoid;
+display: block;
+}
+
+.loader {
+text-align: center;
+padding: 1rem 0;
+font-size: 1rem;
+color: #555;
+}
