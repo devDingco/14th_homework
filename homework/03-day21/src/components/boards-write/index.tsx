@@ -13,23 +13,19 @@ export default function BoardsWrite(props: IBoardWriteProps) {
     if (props.isEdit && !props.data) return null;
 
     const {
-        writerValue,
         password,
-        titleValue,
-        contentsValue,
-        zipcodeValue,
-        addressValue,
-        addressDetailValue,
-        youtubeUrlValue,
+        inputs,
+        zipcode,
+        address,
+        addressDetail,
+        youtubeUrl,
         inputError,
         isActive,
         isModalOpen,
         onToggleModal,
         handleComplete,
-        onChangeWriter,
         onChangePassword,
-        onChangeTitle,
-        onChangeContent,
+        onChangeInputs,
         onChangeZipcode,
         onChangeAddress,
         onChangeAddressDetail,
@@ -50,11 +46,12 @@ export default function BoardsWrite(props: IBoardWriteProps) {
                 <div className={styles.enrollRequiredIndicator}> *</div>
             </div>
             <input
+                id="writer"
                 className={styles.enrollInput}
                 type="text"
                 placeholder="작성자 명을 입력해 주세요."
-                value={writerValue}
-                onChange={onChangeWriter}
+                value={inputs.writer}
+                onChange={onChangeInputs}
                 disabled={props.isEdit} // 수정페이지면 입력불가
             />
             <div className={styles.inputErrorMessage}>{inputError}</div>
@@ -76,7 +73,7 @@ export default function BoardsWrite(props: IBoardWriteProps) {
             </div>
         </div>
 
-        <hr className={styles.enrollBorder} />
+        <hr className={styles.enrollBorder} />  
 
         <div className={styles.flexHalf}>
             <div className={styles.enrollFormTitle}>
@@ -84,10 +81,11 @@ export default function BoardsWrite(props: IBoardWriteProps) {
             <div className={styles.enrollRequiredIndicator}>*</div>
             </div>
             <input
-            className={styles.enrollInput}
-            placeholder="제목을 입력해 주세요."
-            value={titleValue} 
-            onChange={onChangeTitle}
+                id="title"
+                className={styles.enrollInput}
+                placeholder="제목을 입력해 주세요."
+                value={inputs.title} 
+                onChange={onChangeInputs}
             />
             <div className={styles.inputErrorMessage}>{inputError}</div>
         </div>
@@ -100,10 +98,11 @@ export default function BoardsWrite(props: IBoardWriteProps) {
             <div className={styles.enrollRequiredIndicator}>*</div>
             </div>
             <textarea
-            className={`${styles.enrollInput} ${styles.enrollTextarea}`}
-            placeholder="내용을 입력해 주세요."
-            value={contentsValue}
-            onChange={onChangeContent}
+                id="contents"
+                className={`${styles.enrollInput} ${styles.enrollTextarea}`}
+                placeholder="내용을 입력해 주세요."
+                value={inputs.contents}
+                onChange={onChangeInputs}
             />
             <div className={styles.inputErrorMessage}>{inputError}</div>
         </div>
@@ -121,7 +120,7 @@ export default function BoardsWrite(props: IBoardWriteProps) {
                 className={styles.zipcodeInput} 
                 type="text" 
                 placeholder="01234" 
-                value={zipcodeValue}
+                value={zipcode}
             />
             <button 
                 onClick={onToggleModal} 
@@ -148,14 +147,14 @@ export default function BoardsWrite(props: IBoardWriteProps) {
                 className={styles.enrollInput} 
                 type="text" 
                 placeholder="주소를 입력해 주세요." 
-                value={addressValue}
+                value={address}
             />
             <input 
                 onChange={onChangeAddressDetail} 
                 className={styles.enrollInput} 
                 type="text"
                 placeholder="상세주소"
-                value={addressDetailValue}
+                value={addressDetail}
             />
         </div>
 
@@ -166,7 +165,7 @@ export default function BoardsWrite(props: IBoardWriteProps) {
             <div>유튜브 링크</div>
             </div>
             <YoutubeUrl 
-            value={youtubeUrlValue} 
+            value={youtubeUrl} 
             onChange={onChangeYoutubeUrl} 
             className={styles.enrollInput} 
             />
@@ -193,6 +192,7 @@ export default function BoardsWrite(props: IBoardWriteProps) {
             <button
             className={`${styles.enrollSubmitButton} ${isActive ? styles.active : styles.disabled}`}
             onClick={props.isEdit ? onClickUpdate : onClickSubmit}
+            disabled={!isActive}
             >
             {props.isEdit ? "수정" : "등록"}하기
             </button>

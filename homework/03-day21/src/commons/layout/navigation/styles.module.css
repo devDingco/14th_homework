@@ -35,13 +35,13 @@
     align-items: center;
     gap: 0.625rem;
     cursor: pointer;
-
-    border-bottom: 2px solid var(--gray-B, #000);
+    border-bottom: none;
 }
 
 
 .navbarItemActive {
     border-bottom: 2px solid #000; /* 활성화 표시 */
+    color: #000;
 
     font-size: 1rem;
     font-style: normal;

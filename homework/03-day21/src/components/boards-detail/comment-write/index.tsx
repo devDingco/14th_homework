@@ -105,7 +105,14 @@ export default function BoardCommentWrite({ isEdit, el, onCompleted }: IProps) {
                 
                 {/* 댓글 버튼 */}
                 <div className={styles.enrollButtonContainer}>
-                    <button className={styles.enrollCancelButton}>취소</button>
+                    {isEdit && (
+                        <button 
+                            className={styles.enrollCancelButton}
+                            onClick={onCompleted} // 부모에서 내려준 콜백 실행
+                        >
+                            취소
+                        </button>
+                    )}
                     <button
                      className={`${styles.enrollSubmitButton} ${isActive ? styles.active : styles.disabled}`}
                      onClick={onClickSubmit} // 수정 모드 필요 없으니 Submit만
