@@ -25,10 +25,10 @@ export default function CommentListComponent(props: CommentListProps) {
   if (data?.fetchBoardComments?.length === 0)
     return <div style={{ color: '#777' }}>등록된 댓글이 없습니다.</div>
 
-  const onNext = () => {
+  const onNext = async () => {
     if (!data) return
 
-    fetchMore({
+    await fetchMore({
       variables: {
         page: Math.ceil((data.fetchBoardComments.length ?? PAGE_SIZE) / PAGE_SIZE) + 1,
         boardId: props.boardId,
