@@ -27,9 +27,7 @@ export default function MainLayout({ children, showBanner = false, className }: 
       </main>
 
       <footer className={styles.footer}>
-        <div className={styles.footer_container}>
-          <p>&copy; 2024 게시판 사이트. All rights reserved.</p>
-        </div>
+        <div className={styles.footer_container}>{/* <p></p> */}</div>
       </footer>
     </div>
   );
