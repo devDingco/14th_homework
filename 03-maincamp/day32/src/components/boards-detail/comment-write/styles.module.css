@@ -1,6 +1,7 @@
 .container {
   width: 128rem;
   height: 48rem;
+  margin: 0 auto;
 }
 
 .comment__write {

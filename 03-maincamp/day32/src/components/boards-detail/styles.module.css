@@ -1,6 +1,7 @@
 
 .바디{
   width: 128rem;
+  margin: 0 auto;
   /* padding: 4rem 32rem; */
 } 
 .컨테이너{

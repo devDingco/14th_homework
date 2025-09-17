@@ -13,6 +13,8 @@
 }
 .container{
   width: 128rem;
+  margin: 0 auto;
+  /* display: flex; */
   /* background-color: orange; */
 }
 
