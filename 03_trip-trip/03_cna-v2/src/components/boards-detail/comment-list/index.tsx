@@ -1,6 +1,4 @@
-import profileImage from '@assets/profile_image.png'
-import Image from 'next/image'
-import styles from './styles.module.css'
+'use client'
 import { useQuery } from '@apollo/client'
 import {
   FetchBoardCommentsDocument,
@@ -8,54 +6,60 @@ import {
   FetchBoardCommentsQueryVariables,
 } from 'commons/graphql/graphql'
 import { CommentListProps } from './types'
-import { Rate } from 'antd'
-import { CloseOutlined, EditOutlined } from '@mui/icons-material'
-import { formatDate } from 'commons/utils/formatDate'
-const IMAGE_SRC = {
-  profileImage: {
-    src: profileImage,
-    alt: '프로필이미지',
-  },
-}
+import CommentListItem from '../comment-list-item'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { useState } from 'react'
 
 export default function CommentListComponent(props: CommentListProps) {
-  const { data, loading } = useQuery<FetchBoardCommentsQuery, FetchBoardCommentsQueryVariables>(
-    FetchBoardCommentsDocument,
-    {
-      variables: { boardId: props.boardId },
-    }
-  )
+  const PAGE_SIZE = 10
+  const { data, loading, fetchMore, refetch } = useQuery<
+    FetchBoardCommentsQuery,
+    FetchBoardCommentsQueryVariables
+  >(FetchBoardCommentsDocument, {
+    variables: { boardId: props.boardId, page: 1 },
+  })
   const reverse = data?.fetchBoardComments.toReversed()
+  const [hasMore, setHasMore] = useState(true)
 
   if (loading) return <div>로딩 중 입니다</div>
   if (data?.fetchBoardComments?.length === 0)
     return <div style={{ color: '#777' }}>등록된 댓글이 없습니다.</div>
 
-  return (
-    <>
-      {reverse?.map((el) => {
-        const { _id, writer, contents, rating, createdAt } = el
-        const formattedDate = formatDate(createdAt)
-        return (
-          <>
-            <div className={styles.comment_list_layout} key={_id}>
-              <div className={styles.comment_list_title}>
-                <Image src={IMAGE_SRC.profileImage.src} alt={IMAGE_SRC.profileImage.alt} />
-                <p className={styles.comment_writer}>{writer}</p>
-                <Rate defaultValue={rating} disabled />
-              </div>
-              <p className={styles.comment_contents}>{contents}</p>
-              <p className={styles.comment_date}>{formattedDate}</p>
+  const onNext = () => {
+    if (!data) return
 
-              <div className={styles.active_images}>
-                <EditOutlined style={{ width: '20px', height: '20px' }} />
-                <CloseOutlined style={{ width: '20px', height: '20px' }} />
-              </div>
-            </div>
-            <div className={styles.border_line}></div>
-          </>
-        )
-      })}
-    </>
+    fetchMore({
+      variables: {
+        page: Math.ceil((data.fetchBoardComments.length ?? PAGE_SIZE) / PAGE_SIZE) + 1,
+        boardId: props.boardId,
+      },
+
+      updateQuery: (prev, { fetchMoreResult }) => {
+        const incoming = fetchMoreResult.fetchBoardComments ?? []
+        if (incoming.length === 0) {
+          setHasMore(false)
+          return prev
+        }
+
+        return {
+          fetchBoardComments: [...prev.fetchBoardComments, ...fetchMoreResult.fetchBoardComments],
+        }
+      },
+    })
+  }
+
+  return (
+    <div style={{ width: '100%' }}>
+      <InfiniteScroll
+        dataLength={data?.fetchBoardComments?.length ?? 0}
+        hasMore={hasMore}
+        next={onNext}
+        loader={<div>로딩 중입니다</div>}
+      >
+        {reverse?.map((el) => (
+          <CommentListItem el={el} boardId={props.boardId} key={el._id} />
+        ))}
+      </InfiniteScroll>
+    </div>
   )
 }
