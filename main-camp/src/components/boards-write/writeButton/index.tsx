@@ -4,7 +4,7 @@ import styles from './style.module.css'
 import { IWriteButtonProps } from './type'
 import useWriteButton from './hook'
 import { useEffect } from 'react'
-import { useIsEdit } from '@/commons/isEditProvider'
+import { useIsEdit } from '@/commons/provider/isEditProvider'
 
 const WriteButton = (props: IWriteButtonProps) => {
     const {
@@ -12,11 +12,11 @@ const WriteButton = (props: IWriteButtonProps) => {
         activeButton,
     } = useWriteButton()
 
-    const { writer, password, title, contents} = useIsEdit()
+    const { postData } = useIsEdit()
 
     useEffect(() => {
-        activeButton({ writer, password, title, contents})
-    },[writer, password, title, contents])
+        activeButton(postData)
+    },[postData.writer, postData.password, postData.title, postData.contents])
 
     let btnComponent
     switch (props.p) {
@@ -30,8 +30,8 @@ const WriteButton = (props: IWriteButtonProps) => {
             // <button className={`${styles.write_confirm_btn} sb_18_24`} onClick={props.onClickHandler ? () => props.onClickHandler : undefined} style={{ background: isActive === true ? "rgba(41, 116, 229, 1)" : "rgba(199, 199, 199, 1)" }}>{props.p}</button>
             <button className={`${styles.write_confirm_btn} sb_18_24`} 
                 onClick={async () => {
-                    if (props.onClickHandler && props.postData) {
-                        await props.onClickHandler(props.postData)
+                    if (props.onClickHandler && postData) {
+                        await props.onClickHandler(postData)
                     }
                 }}  
                 style={{ background: isActive === true ? "rgba(41, 116, 229, 1)" : "rgba(199, 199, 199, 1)" }}>{props.p}
@@ -42,8 +42,8 @@ const WriteButton = (props: IWriteButtonProps) => {
             btnComponent =
             <button className={`${styles.write_confirm_btn} sb_18_24`}  
                 onClick={async () => {
-                    if (props.onClickHandler && props.postData) {
-                        await props.onClickHandler(props.postData)
+                    if (props.onClickHandler && postData) {
+                        await props.onClickHandler(postData)
                     }
                 }} 
                 style={{ background: "rgba(41, 116, 229, 1)" }}>{props.p}

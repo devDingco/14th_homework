@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ApolloSetting from "../commons/settings/apollo-setting";
-import { IsEditProvider } from "@/commons/isEditProvider";
+import { IsEditProvider } from "@/commons/provider/isEditProvider";
 import Layout from "@/commons/layout";
 
 export const metadata: Metadata = {

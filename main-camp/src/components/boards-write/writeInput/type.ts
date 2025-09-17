@@ -5,4 +5,6 @@ export interface IWriteInputProps {
     placeholder?: string,
     errMsg?: string
     setState?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined,
+    isModalOpen?: boolean,
+    setIsModalOpen?: React.Dispatch<React.SetStateAction<any>>,
 }
