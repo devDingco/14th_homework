@@ -8,15 +8,27 @@ export const CREATE_BOARD_COMMENT = gql`
   }
 `;
 
+export const UPDATE_BOARD_COMMENT = gql`
+  mutation updateBoardComment($boardCommentId: ID!, $updateBoardCommentInput: UpdateBoardCommentInput!, $password: String) {
+    updateBoardComment(boardCommentId: $boardCommentId, updateBoardCommentInput: $updateBoardCommentInput, password: $password) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const FETCH_BOARD_COMMENTS = gql`
   query fetchBoardComments($boardId: ID!, $page: Int) {
     fetchBoardComments(boardId: $boardId, page: $page) {
       _id
       writer
       contents
+      rating
       createdAt
     }
   }
 `;
-
-
