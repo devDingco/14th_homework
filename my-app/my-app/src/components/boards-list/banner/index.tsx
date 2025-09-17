@@ -31,6 +31,7 @@ const IMAGE_SRC = {
 export default function BannerList() {
   return (
     <Swiper
+      className={styles.Swiper}
       modules={[Pagination]}
       // Swiper는 필요한 기능만 모듈로 불러와야 사용 가능 / 불러온 뒤 아래처럼 pagination={...} 옵션 사용.
       pagination={{
@@ -45,6 +46,7 @@ export default function BannerList() {
         <Image
           src={IMAGE_SRC.banner1.src}
           alt={IMAGE_SRC.banner1.alt}
+          sizes="100vw" // img 태그 속성이라서 CSS로는 대체 불가.
           className={styles.SwiperSlideImg}
         />
       </SwiperSlide>
@@ -52,6 +54,7 @@ export default function BannerList() {
         <Image
           src={IMAGE_SRC.banner2.src}
           alt={IMAGE_SRC.banner2.alt}
+          sizes="100vw"
           className={styles.SwiperSlideImg}
         />
       </SwiperSlide>
@@ -59,6 +62,7 @@ export default function BannerList() {
         <Image
           src={IMAGE_SRC.banner3.src}
           alt={IMAGE_SRC.banner3.alt}
+          sizes="100vw"
           className={styles.SwiperSlideImg}
         />
       </SwiperSlide>
