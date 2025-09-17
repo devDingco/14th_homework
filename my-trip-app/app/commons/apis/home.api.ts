@@ -12,6 +12,10 @@ export async function fetchBoardsOfTheBestApi() {
       query: FETCH_BOARDS_OF_THE_BEST_QUERY,
       fetchPolicy: 'network-only', // 항상 서버에서 최신 데이터 가져오기
       errorPolicy: 'all', // 에러와 데이터 모두 반환
+      context: {
+        // 이 쿼리는 인증이 필요하지 않음을 명시
+        skipAuth: true
+      }
     });
     
     console.log('📊 GraphQL 응답 데이터:', data);

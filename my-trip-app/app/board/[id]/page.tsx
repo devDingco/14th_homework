@@ -14,7 +14,7 @@ export default async function BoardDetailPage({ params }: { params: { id: string
       title: data.title ?? "",
       authorName: data.writer ?? "",
       createdAt: data.createdAt ?? "",
-      coverImage: Array.isArray(data.images) && data.images.length ? (data.images[0]!.startsWith("http") ? data.images[0]! : `https://storage.googleapis.com/${data.images[0]}`) : "",
+      coverImage: Array.isArray(data.images) && data.images.length ? (data.images[0]!.startsWith("http") ? data.images[0]! : `https://storage.googleapis.com/${data.images[0]!.startsWith("/") ? data.images[0]!.slice(1) : data.images[0]}`) : "",
       contents: data.contents ?? "",
       badCount: data.dislikeCount ?? 0,
       likeCount: data.likeCount ?? 0,

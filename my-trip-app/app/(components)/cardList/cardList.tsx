@@ -19,7 +19,7 @@ export default function CardList() {
     let isMounted = true;
     (async () => {
       try {
-        console.log('🚀 CardList: 데이터 로딩 시작');
+        console.log('🚀 CardList: 데이터 로딩 시작 (로그인 상태 무관)');
         setLoading(true);
         const result = await fetchBoardsOfTheBestApi();
         if (!isMounted) return;
@@ -36,12 +36,24 @@ export default function CardList() {
           console.log('⚠️ CardList: 배열이 아닌 데이터 받음, 빈 배열로 설정');
         }
         setError(""); // 성공 시 에러 상태 초기화
-      } catch (err) {
+      } catch (err: any) {
         if (!isMounted) return;
         console.error("🚨 CardList fetch error:", err);
-        // 에러가 발생해도 컴포넌트는 표시되도록 함
-        setBoards([]);
-        setError("데이터를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.");
+        
+        // 인증 관련 에러인지 확인
+        const isAuthError = err?.networkError?.statusCode === 401 || 
+                           err?.graphQLErrors?.some((e: any) => e.extensions?.code === 'UNAUTHENTICATED');
+        
+        if (isAuthError) {
+          console.log('🔓 인증 에러 감지, 공개 데이터로 재시도');
+          // 인증 에러의 경우에도 빈 배열로 설정하여 UI가 정상 동작하도록 함
+          setBoards([]);
+          setError("");
+        } else {
+          // 다른 에러의 경우 에러 메시지 표시
+          setBoards([]);
+          setError("데이터를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.");
+        }
       } finally {
         if (isMounted) {
           setLoading(false);
@@ -71,7 +83,7 @@ export default function CardList() {
           <Link href={`/board/${item._id}`} key={item._id} className="cardList_item_link">           
            <div className="cardList_item">
               <Image
-                src={(item.images?.[0] && (item.images[0]!.startsWith("http") ? item.images[0]! : `https://storage.googleapis.com/${item.images[0]}`)) || "/images/desktop/a.png"}
+                src={(item.images?.[0] && (item.images[0]!.startsWith("http") ? item.images[0]! : `https://storage.googleapis.com/${item.images[0]!.startsWith("/") ? item.images[0]!.slice(1) : item.images[0]}`)) || "/images/desktop/a.png"}
                 alt={item.title}
                 width={112}
                 height={152}

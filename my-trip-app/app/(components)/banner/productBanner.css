@@ -11,8 +11,8 @@
 }
 
 .product_banner_container .banner_image {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: auto !important;
     object-fit: cover;
     filter: contrast(1.2);
     transform: translateZ(0);

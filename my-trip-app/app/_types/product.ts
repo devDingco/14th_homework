@@ -1,3 +1,32 @@
+// GraphQL TravelProduct 타입 (API 응답용)
+export interface TravelProduct {
+  _id: string;
+  name: string;
+  contents: string;
+  price?: number;
+  images?: string[];
+  pickedCount?: number;
+  tags?: string[];
+  remarks: string;
+  seller?: {
+    _id: string;
+    name: string;
+  };
+  buyer?: {
+    _id: string;
+    name: string;
+  };
+  travelproductAddress?: {
+    address: string;
+    addressDetail: string;
+    lat: number;
+    lng: number;
+  };
+  createdAt: string;
+  updatedAt: string;
+  soldAt?: string;
+}
+
 // Product Detail 관련 타입들
 export interface ProductDetailProps {
   id: string;
