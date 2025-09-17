@@ -1,10 +1,9 @@
 "use client";
 
-import usePagination from "./hook";
+// import useBoardPage from "../hook";
 
-export default function PaginationComponent() {
-  const { onClickNextPage, onClickPrevPage, onClickPage, lastPage, startPage } =
-    usePagination();
+export default function PaginationComponent(props) {
+  const { onClickNextPage, onClickPrevPage, onClickPage, lastPage, startPage } = props;
 
   return (
     <>
