@@ -714,7 +714,7 @@
           ]
         ]
       },
-      "properties": { "CTPRVN_CD": "36", "CTP_ENG_NM": "Sejong-si", "CTP_KOR_NM": "세종특별자치시" }
+      "properties": { "CTPRVN_CD": "36", "CTP_ENG_NM": "Sejong", "CTP_KOR_NM": "세종특별자치시" }
     },
     {
       "type": "Feature",
@@ -2063,7 +2063,7 @@
           ]
         ]
       },
-      "properties": { "CTPRVN_CD": "46", "CTP_ENG_NM": "Jellanam-do", "CTP_KOR_NM": "전라남도" }
+      "properties": { "CTPRVN_CD": "46", "CTP_ENG_NM": "Jeollanam-do", "CTP_KOR_NM": "전라남도" }
     },
     {
       "type": "Feature",
