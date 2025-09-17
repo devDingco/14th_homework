@@ -1,0 +1,179 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --gray-100: #e4e4e4;
+}
+
+.body {
+}
+
+.container {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 40px 320px;
+  box-sizing: border-box;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  white-space: nowrap;
+  color: #333;
+}
+
+.post-form {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px;
+}
+
+.form-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--gray-100, #E4E4E4);
+  border: none;
+  margin: 0;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-label.required::after {
+  content: " *";
+  color: #e74c3c;
+}
+
+.form-input,
+.form-textarea,
+.postcode-input {
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  font-size: 14px;
+  line-height: 1.4;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.form-textarea {
+  display: flex;
+  height: 336px;
+  padding: 12px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.address-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  width: 220px;
+}
+
+.photo-upload-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.photo-upload-box {
+  display: flex;
+  width: 160px;
+  height: 160px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--gray-50, #f2f2f2);
+}
+
+.upload-icon,
+.upload-text {
+  color: #6c757d;
+}
+
+.upload-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.upload-text {
+  font-size: 12px;
+  text-align: center;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.cancel-btn,
+.submit-btn,
+.postcode-btn {
+  display: flex;
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+}
+
+.cancel-btn,
+.postcode-btn {
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+  color: var(--gray-B, #000);
+  white-space: nowrap;
+}
+
+.submit-btn {
+  background: #2974e5;
+  color: #fff;
+  border: none;
+}

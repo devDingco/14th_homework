@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>민지의 다이어리 - 일기 상세</title>
+    <link rel="stylesheet" href="../css/diary-detail.css"/>
+</head>
+<body>
+        <header class="header">
+            <h1 class="header__title">민지의 다이어리</h1>
+        </header>
+        
+        <main class="main">
+            <div class="diary-detail" id="diaryDetailView">
+                <div class="diary-detail__header">
+                    <h2 class="diary-detail__title" id="detailTitle"></h2>
+                </div>
+                
+                <div class="diary-detail__meta">
+                    <div class="diary-detail__mood">
+                        <span class="mood-icon"></span>
+                        <span class="mood-text" id="moodText"></span>
+                    </div>
+                    <div class="diary-detail__date" id="detailDate"></div>
+                </div>
+                
+                <div class="diary-detail__content">
+                    <h3 class="content-label">내용</h3>
+                    <div class="content-text" id="contentText">
+                        <p>일기 내용이 여기에 표시됩니다.</p>
+                    </div>
+                </div>
+                
+                <div class="diary-detail__actions">
+                    <button class="edit-button" onclick="showEditForm()">수정</button>
+                </div>
+            </div>
+
+            <div class="diary-edit" id="diaryEditView" style="display: none;">
+                <div class="edit-form">
+                    
+                    <div class="form-section1">
+                        <label class="emotion-label">오늘 기분은 어땠나요?</label>
+                        <div class="emotion-options">
+                            <label class="emotion-option">
+                                <input type="radio" name="emotion" value="happy" id="emotionHappy">
+                                <span class="emotion-text">행복해요</span>
+                            </label>
+                            <label class="emotion-option">
+                                <input type="radio" name="emotion" value="sad" id="emotionSad">
+                                <span class="emotion-text">슬퍼요</span>
+                            </label>
+                            <label class="emotion-option">
+                                <input type="radio" name="emotion" value="surprised" id="emotionSurprised">
+                                <span class="emotion-text">놀랐어요</span>
+                            </label>
+                            <label class="emotion-option">
+                                <input type="radio" name="emotion" value="angry" id="emotionAngry">
+                                <span class="emotion-text">화나요</span>
+                            </label>
+                            <label class="emotion-option">
+                                <input type="radio" name="emotion" value="other" id="emotionOther">
+                                <span class="emotion-text">기타</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-section2">
+                        <label class="form-label">제목</label>
+                        <input type="text" class="form-input" id="editTitle" placeholder="이것은 타이틀 입니다.">
+                    </div>
+
+                    <div class="form-section2">
+                        <label class="form-label">내용</label>
+                        <textarea class="form-textarea" id="editContent" placeholder="내용이 들어갑니다" rows="10"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" onclick="cancelEdit()"><span class="btn-text">취소</span></button>
+                        <button class="btn btn-primary" onclick="saveEdit()"><span class="btn-text">수정 하기</span></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    <script src="../js/diary-detail.js" type="module"></script>
+</body>
+</html> 

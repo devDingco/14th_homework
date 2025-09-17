@@ -1,0 +1,400 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    width: 1168px;
+    min-height: 720px;
+    margin: 0 auto;
+    overflow-y: auto;
+}
+
+.header {
+    display: flex;
+    height: 60px;
+    min-width: 320px;
+    max-width: 1168px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    margin-bottom: 64px;
+}
+
+.header__title {
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: -0.18px;
+}
+
+.diary-detail {
+    display: flex;
+    max-width: 1168px;
+    padding-bottom: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    align-self: stretch;
+}
+
+.diary-detail__header {
+    display: flex;
+    max-width: 1168px;
+    padding-bottom: 12px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-bottom: 2px solid #000;
+}
+
+.diary-detail__title {
+    display: flex;
+    max-width: 1168px;
+    padding-top: 12px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -0.22px;
+}
+
+.diary-detail__meta {
+    display: flex;
+    max-width: 1168px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.diary-detail__mood {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mood-icon {
+    width: 32px;
+    height: 32px;
+    background: 50% / cover no-repeat;
+}
+
+.diary-detail__mood.happy .mood-icon {
+    background-image: url('../assets/images/행복해요-s.png');
+}
+
+.diary-detail__mood.sad .mood-icon {
+    background-image: url('../assets/images/슬퍼요-s.png');
+}
+
+.diary-detail__mood.surprised .mood-icon {
+    background-image: url('../assets/images/놀랐어요-s.png');
+}
+
+.diary-detail__mood.angry .mood-icon {
+    background-image: url('../assets/images/화나요-s.png');
+}
+
+.diary-detail__mood.other .mood-icon {
+    background-image: url('../assets/images/기타-s.png');
+}
+
+.diary-detail__mood.sad .mood-text {
+    color: #28B4E1;
+}
+
+.diary-detail__mood.surprised .mood-text {
+    color: #D59029;
+}
+
+.diary-detail__mood.angry .mood-text {
+    color: #777777;
+}
+
+.diary-detail__mood.happy .mood-text {
+    color: #EA5757;
+}
+
+.diary-detail__mood.other .mood-text {
+    color: #A229ED;
+}
+
+.mood-text {
+    font-family: "Pretendard Variable";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+}
+
+.diary-detail__date {
+    color: var(--Gray-Gray-500, #919191);
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.14px;
+}
+
+.diary-detail__content {
+    display: flex;
+    max-width: 1168px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 13px;
+    align-self: stretch;
+}
+
+.content-label {
+    align-self: stretch;
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; /* 125% */
+    letter-spacing: -0.16px;
+}
+
+.content-text {
+    align-self: stretch;
+    color: var(--Gray-Gray-800, #333);
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
+    letter-spacing: -0.16px;
+}
+
+.diary-detail__actions {
+    display: flex;
+    max-width: 1168px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+}
+
+.edit-button {
+    display: flex;
+    padding: 8px 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+    color: var(--Gray-Gray-900, #1C1C1C);
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.18px;
+}
+
+.diary-edit {
+    display: flex;
+    max-width: 1168px;
+    padding-bottom: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    align-self: stretch;
+}
+
+.edit-form {
+    display: flex;
+    max-width: 1168px;
+    padding-bottom: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    align-self: stretch;
+}
+
+.form-section1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+}
+
+.emotion-label {
+    align-self: stretch;
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 120% */
+    letter-spacing: -0.2px;
+}
+
+.emotion-options {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    gap: 20px;
+    align-self: stretch;
+    flex-wrap: wrap;
+}
+
+.emotion-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.emotion-option:hover {
+    background-color: #f8f9fa;
+}
+
+.emotion-option input[type="radio"] {
+    width: 24px;
+    height: 24px;
+}
+
+.emotion-option .emotion-text {
+    color: var(--Gray-Gray-800, #333);
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.18px;
+}
+
+
+
+.form-section2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    align-self: stretch;
+}
+
+.form-label {
+    align-self: stretch;
+    color: var(--Gray-Gray-800, #333);
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.14px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+    color: var(--Gray-B, #000);
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.16px;
+}
+
+.form-input::placeholder {
+    color: #919191;
+}
+
+.form-textarea {
+    width: 100%;
+    height: 128px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+    color: var(--Gray-B, #000);
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.16px;
+}
+
+.form-textarea::placeholder {
+    color: #919191;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 16px;
+    align-self: stretch;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 16px;
+    align-self: stretch;
+}
+
+.btn-secondary {
+    display: flex;
+    width: 104px;
+    height: 48px;
+    padding: 8px 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-B, #000);
+    background: var(--Gray-W, #FFF);
+}
+
+.btn-primary {
+    display: flex;
+    width: 104px;
+    height: 48px;
+    padding: 8px 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background: var(--Gray-B, #000);
+}
+
+.btn-text {
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.18px;
+}
+
+.btn-secondary .btn-text {
+    color: var(--Gray-Gray-900, #1C1C1C);
+}
+
+.btn-primary .btn-text {
+    color: var(--Gray-Gray-50, #F2F2F2);
+}

@@ -1,0 +1,93 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.가장큰배경 {
+    width: 1920px;
+    height: 1208px;
+    background-image: url("./assets/images/bg1.png");
+}
+
+.헤더 {
+    width: 1920px;
+    height: 80px;
+    display: flex;
+}
+
+.헤더__왼쪽영역 {
+    width: 480px;
+    height: 80px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    padding-right: 16px;
+}
+
+.헤더__오른쪽영역 {
+    width: 1440px;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 80px;
+}
+
+.헤더__오른쪽영역__프로필설정 {
+    width: 163px;
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.바디 {
+    width: 1920px;
+    height: 1048px;
+    display: flex;
+}
+
+.바디__사이드바왼쪽 {
+    width: 80px;
+    height: 1048px;
+
+}
+
+.바디__메인 {
+    width: 1760px;
+    height: 1048px;
+    background-image: url("./assets/images/bg2.png");
+    display: flex;
+}
+
+.바디__메인__메뉴 {
+    width: 400px;
+    height: 1048px;
+}
+
+.바디__메인__회원가입 {
+    width: 680px;
+    height: 1048px;
+}
+
+.바디__메인__사진 {
+    width: 680px;
+    height: 1048px;
+    background-image: url("./assets/images/picture.png");
+}
+
+.바디__사이드바오른쪽 {
+    width: 80px;
+    height: 1048px;
+}
+
+
+
+.푸터 {
+    width: 1920px;
+    height: 80px;
+}
