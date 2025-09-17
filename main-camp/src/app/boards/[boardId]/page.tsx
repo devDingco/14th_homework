@@ -7,8 +7,6 @@ import BoardsCommentWrite from "@/components/boards-detail/comment-write"
 import BoardsDetail from "@/components/boards-detail/detail"
 import { useState } from "react"
 
-// TODO - 댓글 만들기!!!!!!!!
-
 const BoardsDetailPage = () => {
     const [ comments, setComments ] = useState<Query["fetchBoardComments"]>([])
 
