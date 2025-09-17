@@ -19,10 +19,15 @@ export interface ProductListItem {
 export function useProductList() {
   const [products, setProducts] = useState<ProductListItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [isSoldout, setIsSoldout] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  
+  // 페이지당 아이템 수 (4개씩 2줄 = 8개)
+  const ITEMS_PER_PAGE = 8;
 
   // TravelProduct를 ProductListItem으로 변환하는 함수
   const transformProduct = useCallback((product: TravelProduct): ProductListItem => {
@@ -51,68 +56,128 @@ export function useProductList() {
     };
   }, []);
 
-  // 상품 목록 가져오기
-  const fetchProducts = useCallback(async (currentPage: number = 1, searchTerm: string = "", soldout: boolean = false) => {
+  // 초기 상품 목록 가져오기
+  const fetchProducts = useCallback(async (searchTerm: string = "", soldout: boolean = false, resetProducts: boolean = true) => {
     try {
-      setLoading(true);
+      if (resetProducts) {
+        setLoading(true);
+        setProducts([]);
+        setPage(1);
+      } else {
+        setLoadingMore(true);
+      }
       setError(null);
       
+      const currentPage = resetProducts ? 1 : page;
       console.log('🔍 상품 목록 조회 시작:', { page: currentPage, search: searchTerm, isSoldout: soldout });
       
       const travelProducts = await fetchTravelproductsApi(currentPage, searchTerm, soldout);
       
       if (travelProducts && Array.isArray(travelProducts)) {
         const transformedProducts = travelProducts.map(transformProduct);
-        setProducts(transformedProducts);
+        
+        if (resetProducts) {
+          setProducts(transformedProducts);
+        } else {
+          setProducts(prev => [...prev, ...transformedProducts]);
+        }
+        
+        // hasMore 상태 업데이트 (받아온 데이터가 ITEMS_PER_PAGE보다 적으면 더 이상 없음)
+        setHasMore(transformedProducts.length >= ITEMS_PER_PAGE);
+        
         console.log('✅ 상품 목록 조회 성공:', transformedProducts.length, '개');
       } else {
         console.warn('⚠️ 상품 데이터가 배열이 아닙니다:', travelProducts);
-        setProducts([]);
+        if (resetProducts) {
+          setProducts([]);
+        }
+        setHasMore(false);
       }
     } catch (err) {
       console.error('🚨 상품 목록 조회 실패:', err);
       setError(err instanceof Error ? err.message : '상품 목록을 불러오는데 실패했습니다.');
-      setProducts([]);
+      if (resetProducts) {
+        setProducts([]);
+      }
+      setHasMore(false);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
     }
-  }, [transformProduct]);
+  }, [transformProduct, page, ITEMS_PER_PAGE]);
+
+  // 더 많은 상품 로드 (무한스크롤용)
+  const loadMore = useCallback(async () => {
+    if (loadingMore || !hasMore) return;
+    
+    const nextPage = page + 1;
+    setPage(nextPage);
+    
+    try {
+      setLoadingMore(true);
+      setError(null);
+      
+      console.log('🔍 추가 상품 로드:', { page: nextPage, search, isSoldout });
+      
+      const travelProducts = await fetchTravelproductsApi(nextPage, search, isSoldout);
+      
+      if (travelProducts && Array.isArray(travelProducts)) {
+        const transformedProducts = travelProducts.map(transformProduct);
+        setProducts(prev => [...prev, ...transformedProducts]);
+        
+        // hasMore 상태 업데이트
+        setHasMore(transformedProducts.length >= ITEMS_PER_PAGE);
+        
+        console.log('✅ 추가 상품 로드 성공:', transformedProducts.length, '개');
+      } else {
+        console.warn('⚠️ 추가 상품 데이터가 배열이 아닙니다:', travelProducts);
+        setHasMore(false);
+      }
+    } catch (err) {
+      console.error('🚨 추가 상품 로드 실패:', err);
+      setError(err instanceof Error ? err.message : '추가 상품을 불러오는데 실패했습니다.');
+      setHasMore(false);
+    } finally {
+      setLoadingMore(false);
+    }
+  }, [loadingMore, hasMore, page, search, isSoldout, transformProduct, ITEMS_PER_PAGE]);
 
   // 초기 데이터 로드
   useEffect(() => {
-    fetchProducts(page, search, isSoldout);
-  }, [fetchProducts, page, search, isSoldout]);
-
-  // 페이지 변경
-  const handlePageChange = useCallback((newPage: number) => {
-    setPage(newPage);
-  }, []);
+    fetchProducts(search, isSoldout, true);
+  }, [search, isSoldout, fetchProducts]);
 
   // 검색
   const handleSearch = useCallback((searchTerm: string) => {
     setSearch(searchTerm);
-    setPage(1); // 검색 시 첫 페이지로 리셋
+    setPage(1);
+    setHasMore(true);
   }, []);
 
   // 품절 상품 포함/제외 토글
   const handleSoldoutToggle = useCallback(() => {
     setIsSoldout(prev => !prev);
-    setPage(1); // 필터 변경 시 첫 페이지로 리셋
+    setPage(1);
+    setHasMore(true);
   }, []);
 
   // 새로고침
   const refresh = useCallback(() => {
-    fetchProducts(page, search, isSoldout);
-  }, [fetchProducts, page, search, isSoldout]);
+    setPage(1);
+    setHasMore(true);
+    fetchProducts(search, isSoldout, true);
+  }, [search, isSoldout, fetchProducts]);
 
   return {
     products,
     loading,
+    loadingMore,
     error,
+    hasMore,
     page,
     search,
     isSoldout,
-    handlePageChange,
+    loadMore,
     handleSearch,
     handleSoldoutToggle,
     refresh

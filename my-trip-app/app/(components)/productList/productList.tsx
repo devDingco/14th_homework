@@ -5,11 +5,12 @@ import "../../global.css";
 import Icon from "@utils/iconColor";
 import Image from "next/image";
 import Link from "next/link";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { useProductList } from "../../commons/hooks/useProductList";
 import ProductListSkeleton from "./ProductListSkeleton";
 
 export default function ProductList() {
-  const { products, loading, error, refresh } = useProductList();
+  const { products, loading, loadingMore, error, hasMore, loadMore, refresh } = useProductList();
 
   const navItems = [
     { name: "single_person_accommodation", label: "1인 전용" },
@@ -57,67 +58,98 @@ export default function ProductList() {
         </nav>
       </div>
 
-      <div className="product_grid">
-        {products.length > 0 ? (
-          products.map((product) => (
-            <Link key={product.id} href={`/product/${product.id}`} className="product_card_link">
-              <article className="product_card">
-                <div className="product_thumbnail_wrap">
-                  <Image
-                    className="product_thumbnail"
-                    src={product.image}
-                    alt={product.title}
-                    width={384}
-                    height={384}
-                    priority={parseInt(product.id) <= 4}
-                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  />
-                  <span className="head_badge">
-                    <Icon outline default name="bookmark" width={20} height={20} />
-                    <p className="badge_text me_14_20">{product.bookmarkCount}</p>
-                  </span>
-                </div>
-                <div className="product_body">
-                  <div className="product_info">
-                    <p className="product_title b_16_24">{product.title}</p>
-                    <p className="product_subtitle r_14_20">{product.subtitle}</p>
-                    <div className="product_tags">
-                      {product.tags.length > 0 ? (
-                        product.tags.slice(0, 3).map((tag, tagIndex) => (
-                          <span key={tagIndex} className="product_tag me_14_20">
-                            {tag.startsWith('#') ? tag : `#${tag}`}
-                          </span>
-                        ))
-                      ) : (
-                        <span className="product_tag me_14_20">#여행</span>
-                      )}
+      {products.length > 0 ? (
+        <InfiniteScroll
+          dataLength={products.length}
+          next={loadMore}
+          hasMore={hasMore}
+          loader={
+            <div className="infinite_scroll_loader">
+              <div className="loader_grid">
+                {Array.from({ length: 4 }, (_, index) => (
+                  <div key={index} className="skeleton_product_card">
+                    <div className="skeleton_thumbnail_wrap">
+                      <div className="skeleton_thumbnail"></div>
                     </div>
-                    <div className="product_footer">
-                      <div className="host_info">
-                        <Image 
-                          className="host_avatar"
-                          src={product.hostAvatar}
-                          alt={product.host}
-                          width={24}
-                          height={24}
-                          priority={false}
-                          loading="lazy"
-                        />
-                        <span className="r_14_20">{product.host}</span>
-                      </div>
-                      <p className="product_price sb_16_24">{product.price}</p>
+                    <div className="skeleton_product_body">
+                      <div className="skeleton_text skeleton_title"></div>
+                      <div className="skeleton_text skeleton_subtitle"></div>
+                      <div className="skeleton_text skeleton_price"></div>
                     </div>
                   </div>
-                </div>
-              </article>
-            </Link>
-          ))
-        ) : (
-          <div className="no_products">
-            <p className="no_products_message">등록된 상품이 없습니다.</p>
+                ))}
+              </div>
+            </div>
+          }
+          endMessage={
+            <div className="infinite_scroll_end">
+              <p className="end_message">모든 상품을 확인했습니다! 🎉</p>
+            </div>
+          }
+          scrollThreshold={0.8}
+          className="infinite_scroll_container"
+        >
+          <div className="product_grid">
+            {products.map((product) => (
+              <Link key={product.id} href={`/product/${product.id}`} className="product_card_link">
+                <article className="product_card">
+                  <div className="product_thumbnail_wrap">
+                    <Image
+                      className="product_thumbnail"
+                      src={product.image}
+                      alt={product.title}
+                      width={384}
+                      height={384}
+                      priority={parseInt(product.id) <= 4}
+                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                    />
+                    <span className="head_badge">
+                      <Icon outline default name="bookmark" width={20} height={20} />
+                      <p className="badge_text me_14_20">{product.bookmarkCount}</p>
+                    </span>
+                  </div>
+                  <div className="product_body">
+                    <div className="product_info">
+                      <p className="product_title b_16_24">{product.title}</p>
+                      <p className="product_subtitle r_14_20">{product.subtitle}</p>
+                      <div className="product_tags">
+                        {product.tags.length > 0 ? (
+                          product.tags.slice(0, 3).map((tag, tagIndex) => (
+                            <span key={tagIndex} className="product_tag me_14_20">
+                              {tag.startsWith('#') ? tag : `#${tag}`}
+                            </span>
+                          ))
+                        ) : (
+                          <span className="product_tag me_14_20">#여행</span>
+                        )}
+                      </div>
+                      <div className="product_footer">
+                        <div className="host_info">
+                          <Image 
+                            className="host_avatar"
+                            src={product.hostAvatar}
+                            alt={product.host}
+                            width={24}
+                            height={24}
+                            priority={false}
+                            loading="lazy"
+                          />
+                          <span className="r_14_20">{product.host}</span>
+                        </div>
+                        <p className="product_price sb_16_24">{product.price}</p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </Link>
+            ))}
           </div>
-        )}
-      </div>
+        </InfiniteScroll>
+      ) : (
+        <div className="no_products">
+          <p className="no_products_message">등록된 상품이 없습니다.</p>
+        </div>
+      )}
     </section>
   );
 }
