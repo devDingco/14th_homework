@@ -1,0 +1,205 @@
+/* 로딩 스피너 컨테이너 */
+.loading_spinner_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 100%;
+  animation: fade_in 0.3s ease-in-out;
+}
+
+.loading_spinner_container.small {
+  padding: 1rem;
+}
+
+.loading_spinner_container.large {
+  padding: 3rem;
+}
+
+/* 스피너 애니메이션 */
+.loading_spinner {
+  display: inline-block;
+  position: relative;
+}
+
+.spinner_ring {
+  display: inline-block;
+  position: relative;
+}
+
+/* 크기별 스타일 */
+.loading_spinner_container.small .spinner_ring {
+  width: 32px;
+  height: 32px;
+}
+
+.loading_spinner_container.medium .spinner_ring {
+  width: 48px;
+  height: 48px;
+}
+
+.loading_spinner_container.large .spinner_ring {
+  width: 64px;
+  height: 64px;
+}
+
+/* 스피너 링 애니메이션 */
+.spinner_ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  animation: spinner_ring_animation 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.loading_spinner_container.small .spinner_ring div {
+  width: 32px;
+  height: 32px;
+  border-width: 2px;
+}
+
+.loading_spinner_container.medium .spinner_ring div {
+  width: 48px;
+  height: 48px;
+  border-width: 3px;
+}
+
+.loading_spinner_container.large .spinner_ring div {
+  width: 64px;
+  height: 64px;
+  border-width: 4px;
+}
+
+/* 테마별 색상 */
+.loading_spinner_container.primary .spinner_ring div {
+  border: 3px solid var(--main-color, #007bff);
+  border-color: var(--main-color, #007bff) transparent transparent transparent;
+}
+
+.loading_spinner_container.secondary .spinner_ring div {
+  border: 3px solid var(--gray-60, #6b7280);
+  border-color: var(--gray-60, #6b7280) transparent transparent transparent;
+}
+
+.loading_spinner_container.white .spinner_ring div {
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.8) transparent transparent transparent;
+}
+
+/* 크기별 테두리 두께 조정 */
+.loading_spinner_container.small.primary .spinner_ring div,
+.loading_spinner_container.small.secondary .spinner_ring div,
+.loading_spinner_container.small.white .spinner_ring div {
+  border-width: 2px;
+}
+
+.loading_spinner_container.large.primary .spinner_ring div,
+.loading_spinner_container.large.secondary .spinner_ring div,
+.loading_spinner_container.large.white .spinner_ring div {
+  border-width: 4px;
+}
+
+/* 애니메이션 지연 */
+.spinner_ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.spinner_ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.spinner_ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes spinner_ring_animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 로딩 텍스트 */
+.loading_text {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: var(--gray-60, #6b7280);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.loading_spinner_container.small .loading_text {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.loading_spinner_container.large .loading_text {
+  font-size: 1.6rem;
+  margin-top: 1.5rem;
+}
+
+/* 테마별 텍스트 색상 */
+.loading_spinner_container.white .loading_text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.loading_spinner_container.secondary .loading_text {
+  color: var(--gray-70, #4b5563);
+}
+
+/* 부드러운 페이드 인 효과 */
+@keyframes fade_in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 다크 모드 대응 */
+@media (prefers-color-scheme: dark) {
+  .loading_spinner_container.primary .loading_text {
+    color: var(--gray-40, #9ca3af);
+  }
+  
+  .loading_spinner_container.primary .spinner_ring div {
+    border-color: var(--main-color-light, #60a5fa) transparent transparent transparent;
+  }
+  
+  .loading_spinner_container.secondary .loading_text {
+    color: var(--gray-50, #6b7280);
+  }
+  
+  .loading_spinner_container.secondary .spinner_ring div {
+    border-color: var(--gray-50, #6b7280) transparent transparent transparent;
+  }
+}
+
+/* 접근성 개선 */
+@media (prefers-reduced-motion: reduce) {
+  .spinner_ring div {
+    animation-duration: 2s;
+  }
+  
+  .loading_spinner_container {
+    animation: none;
+  }
+}
+
+/* 고대비 모드 지원 */
+@media (prefers-contrast: high) {
+  .loading_spinner_container.primary .spinner_ring div {
+    border-color: #000 transparent transparent transparent;
+  }
+  
+  .loading_spinner_container.primary .loading_text {
+    color: #000;
+  }
+}

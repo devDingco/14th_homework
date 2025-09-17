@@ -163,6 +163,9 @@
 }
 
 .retry_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 1.2rem 2.4rem;
     background: var(--main-color);
     color: white;
@@ -171,11 +174,22 @@
     font-size: 1.4rem;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+    min-height: 48px;
 }
 
-.retry_button:hover {
+.retry_button:hover:not(:disabled) {
     background: var(--main-color-dark, #0056b3);
+    transform: translateY(-1px);
+}
+
+.retry_button:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.retry_button:active {
+    transform: translateY(0);
 }
 
 /* 빈 상품 목록 스타일 */
@@ -202,6 +216,11 @@
 .infinite_scroll_loader {
     margin-top: 2.4rem;
     padding: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 120px;
 }
 
 .loader_grid {

@@ -13,6 +13,16 @@ if (!ENDPOINT) {
 const uploadLink = createUploadLink({
   uri: ENDPOINT,
   credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  fetch: (uri, options) => {
+    console.log('🌐 GraphQL 요청:', { uri, options });
+    return fetch(uri, options).catch(error => {
+      console.error('🚨 Fetch 에러:', error);
+      throw error;
+    });
+  },
 });
 
 const authLink = new ApolloLink((operation, forward) => {

@@ -19,7 +19,7 @@ export async function fetchTravelproductsApi(page?: number, search?: string, isS
         search: search || "",
         isSoldout: isSoldout || false
       },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       errorPolicy: 'all',
       context: {
         skipAuth: true
@@ -84,7 +84,7 @@ export async function fetchTravelproductsOfTheBestApi() {
     
     const { data, error: graphqlError } = await apolloClient.query({
       query: FETCH_TRAVELPRODUCTS_OF_THE_BEST_QUERY,
-      fetchPolicy: 'cache-first',
+      fetchPolicy: 'no-cache',
       errorPolicy: 'all',
       notifyOnNetworkStatusChange: false,
       context: {
@@ -154,7 +154,7 @@ export async function fetchTravelproductApi(travelproductId: string) {
       variables: {
         travelproductId
       },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       errorPolicy: 'all',
       context: {
         skipAuth: true

@@ -8,6 +8,7 @@ import Link from "next/link";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useProductList } from "../../commons/hooks/useProductList";
 import ProductListSkeleton from "./ProductListSkeleton";
+import LoadingSpinner from "../../commons/components/LoadingSpinner";
 
 export default function ProductList() {
   const { products, loading, loadingMore, error, hasMore, loadMore, refresh } = useProductList();
@@ -36,8 +37,15 @@ export default function ProductList() {
         <div className="error_container">
           <p className="error_message">상품을 불러오는데 실패했습니다.</p>
           <p className="error_detail">{error}</p>
-          <button onClick={refresh} className="retry_button">
-            다시 시도
+          <button onClick={refresh} className="retry_button" disabled={loading}>
+            {loading ? (
+              <>
+                <LoadingSpinner size="small" showText={false} theme="white" />
+                <span style={{ marginLeft: '8px' }}>재시도 중...</span>
+              </>
+            ) : (
+              '다시 시도'
+            )}
           </button>
         </div>
       </section>
@@ -65,20 +73,10 @@ export default function ProductList() {
           hasMore={hasMore}
           loader={
             <div className="infinite_scroll_loader">
-              <div className="loader_grid">
-                {Array.from({ length: 4 }, (_, index) => (
-                  <div key={index} className="skeleton_product_card">
-                    <div className="skeleton_thumbnail_wrap">
-                      <div className="skeleton_thumbnail"></div>
-                    </div>
-                    <div className="skeleton_product_body">
-                      <div className="skeleton_text skeleton_title"></div>
-                      <div className="skeleton_text skeleton_subtitle"></div>
-                      <div className="skeleton_text skeleton_price"></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <LoadingSpinner 
+                size="medium" 
+                text="더 많은 상품을 불러오는 중..." 
+              />
             </div>
           }
           endMessage={
@@ -86,7 +84,7 @@ export default function ProductList() {
               <p className="end_message">모든 상품을 확인했습니다! 🎉</p>
             </div>
           }
-          scrollThreshold={0.8}
+          scrollThreshold={0.9}
           className="infinite_scroll_container"
         >
           <div className="product_grid">

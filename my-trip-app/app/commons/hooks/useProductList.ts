@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { fetchTravelproductsApi } from "../apis/product.api";
+import { fetchTravelproductsFetchApi } from "../apis/product-fetch.api";
 import type { TravelProduct } from "../../_types/product";
 
 export interface ProductListItem {
@@ -71,7 +72,8 @@ export function useProductList() {
       const currentPage = resetProducts ? 1 : page;
       console.log('🔍 상품 목록 조회 시작:', { page: currentPage, search: searchTerm, isSoldout: soldout });
       
-      const travelProducts = await fetchTravelproductsApi(currentPage, searchTerm, soldout);
+      // 임시로 직접 fetch 사용
+      const travelProducts = await fetchTravelproductsFetchApi(currentPage, searchTerm, soldout);
       
       if (travelProducts && Array.isArray(travelProducts)) {
         const transformedProducts = travelProducts.map(transformProduct);
@@ -119,7 +121,11 @@ export function useProductList() {
       
       console.log('🔍 추가 상품 로드:', { page: nextPage, search, isSoldout });
       
-      const travelProducts = await fetchTravelproductsApi(nextPage, search, isSoldout);
+      // 부드러운 전환을 위한 최소 로딩 시간 (500ms)
+      const [travelProducts] = await Promise.all([
+        fetchTravelproductsFetchApi(nextPage, search, isSoldout),
+        new Promise(resolve => setTimeout(resolve, 500))
+      ]);
       
       if (travelProducts && Array.isArray(travelProducts)) {
         const transformedProducts = travelProducts.map(transformProduct);
