@@ -8,12 +8,55 @@ export default function useCommentList({ boardId }: UseCommentListParams): UseCo
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
-  const { data, error } = useQuery<FetchBoardCommentsData>(FETCH_BOARD_COMMENTS, {
+  const [hasMore, setHasMore] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1); // 🔥 현재 페이지 상태 (댓글 작성 후 리셋용)
+  const [lastDataLength, setLastDataLength] = useState(0); // 🔥 이전 데이터 길이 (변화 감지용)
+
+  const { data, fetchMore, error } = useQuery<FetchBoardCommentsData>(FETCH_BOARD_COMMENTS, {
     variables: { boardId: boardId, page: 1 },
   });
   console.log('boardId:', boardId);
-  console.log('data:', data); 
-  console.log('error:', error); 
+  console.log('data:', data);
+  console.log('error:', error);
+
+  // 🔥 핵심: 댓글 작성 후 데이터 변화 감지 및 자동 페이지 리셋
+  const currentDataLength = data?.fetchBoardComments?.length || 0;
+  if (currentDataLength !== lastDataLength) {
+    if (currentDataLength < lastDataLength && currentPage > 1) {
+      // 🔥 데이터가 줄어들었으면 (댓글 작성 후 refetchQueries) 페이지 상태 리셋
+      console.log('데이터 감소 감지! 페이지 리셋:', lastDataLength, '→', currentDataLength);
+      setCurrentPage(1); // 다시 1페이지부터 시작
+      setHasMore(true); // 무한스크롤 재개
+    }
+    setLastDataLength(currentDataLength); // 현재 길이를 이전 길이로 저장
+  }
+
+  const onNext = () => {
+    console.log('onNext 호출됨 - currentPage:', currentPage, 'data length:', currentDataLength);
+    if (data === undefined) return;
+
+    // 🔥 핵심: 강의 코드와 다른 점 - 데이터 길이 계산 대신 currentPage 사용
+    const nextPage = currentPage + 1; // 강의: Math.ceil(data.length / 10) + 1
+    console.log('fetchMore 요청: nextPage =', nextPage);
+    fetchMore({
+      variables: {
+        page: nextPage,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult.fetchBoardComments?.length) {
+          setHasMore(false); // 더 이상 데이터 없음
+          return;
+        }
+        setCurrentPage(nextPage); // 🔥 중요: 성공하면 페이지 상태 업데이트
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments, // 기존 댓글
+            ...fetchMoreResult.fetchBoardComments, // 새로운 댓글
+          ],
+        };
+      },
+    });
+  };
 
   const onClickDeleteComment = async (event: MouseEvent<HTMLButtonElement>) => {
     const button = event.currentTarget as HTMLButtonElement;
@@ -62,6 +105,8 @@ export default function useCommentList({ boardId }: UseCommentListParams): UseCo
 
   return {
     data,
+    hasMore,
+    onNext,
     onClickDeleteComment,
     modalOpen,
     modalMessage,

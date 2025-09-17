@@ -7,7 +7,11 @@ import useCommentWrite from './hooks';
 import Star from './star';
 import AllModal from '../../all-modal';
 
-export default function CommentWrite() {
+export default function CommentWrite({
+  isEdit = false,
+  comment,
+  onEditComplete,
+}) {
   const {
     name,
     password,
@@ -17,11 +21,14 @@ export default function CommentWrite() {
     setPassword,
     setContents,
     setrating,
-    onClickCommentSubmit,
+    onClickCreate, // 🆕 댓글 등록 함수
+    onClickUpdate, // ✏️ 댓글 수정 함수
+    onClickCancel, // ❌ 취소 함수
     modalOpen,
     setModalOpen,
     modalMessage,
-  } = useCommentWrite();
+    isButtonDisabled,
+  } = useCommentWrite({ isEdit, comment, onEditComplete });
   return (
     <div className="container">
       <hr />
@@ -58,12 +65,36 @@ export default function CommentWrite() {
         placeholder="댓글을 입력해 주세요."
         className={styles.textInput}
       />
-      <div className={styles.commentbutton}>
-        <button onClick={onClickCommentSubmit}>댓글 등록</button>
+      <div
+        style={{
+          display: 'flex',
+          gap: '8px',
+          justifyContent: 'flex-end',
+          marginBottom: '20px',
+        }}
+      >
+        {isEdit && (
+          <div className={`${styles.commentbutton} ${styles.commentbuttonActive}`}>
+            <button onClick={onClickCancel}>취소</button>
+          </div>
+        )}
+        <div
+          className={`${styles.commentbutton} ${
+            !isButtonDisabled ? styles.commentbuttonActive : ''
+          }`}
+        >
+          {/* 🎯 삼항연산자로 수정/등록 함수 분기 (이전 방식과 동일!) */}
+          <button
+            onClick={isEdit ? onClickUpdate : onClickCreate}
+            disabled={isButtonDisabled}
+          >
+            {isEdit ? '댓글 수정' : '댓글 등록'}
+          </button>
+        </div>
       </div>
-      
-      <AllModal 
-        open={modalOpen} 
+
+      <AllModal
+        open={modalOpen}
         message={modalMessage}
         onClose={() => setModalOpen(false)}
       />
