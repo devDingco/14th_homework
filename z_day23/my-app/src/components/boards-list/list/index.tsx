@@ -1,10 +1,45 @@
-import { useBoardList } from "./hook";
+// components/boards-list/list/index.tsx
+"use client";
+
+import { useState } from "react";
 import styles from "./styles.module.css";
-import React from "react";
+import Pagination from "@/components/boards-list/pagination";
+import { useBoardList } from "./hook";
 
 export default function BoardList() {
-  const { data, onClickDelete, onClickTitle, formatDate, loading, error } =
-    useBoardList();
+  const [startPage, setStartPage] = useState(1);
+  const {
+    data,
+    loading,
+    error,
+    onClickTitle,
+    onClickDelete,
+    formatDate,
+    refetch,
+    currentPage,
+    setCurrentPage,
+    lastPage,
+  } = useBoardList();
+
+  const onClickPage = (page: number) => {
+    setCurrentPage(page);
+    refetch({ page });
+  };
+
+  const onClickPrevPage = () => {
+    if (startPage === 1) return;
+    setStartPage(startPage - 10);
+    setCurrentPage(startPage - 10);
+    refetch({ page: startPage - 10 });
+  };
+
+  const onClickNextPage = () => {
+    if (startPage + 10 <= lastPage) {
+      setStartPage(startPage + 10);
+      setCurrentPage(startPage + 10);
+      refetch({ page: startPage + 10 });
+    }
+  };
 
   if (loading) return <div>게시글 목록을 불러오는 중입니다...</div>;
   if (error)
@@ -37,7 +72,9 @@ export default function BoardList() {
                       onClick={() => onClickTitle(el._id)}
                     >
                       <div className={styles.name_written}>
-                        <div className={styles.number_written}>{index + 1}</div>
+                        <div className={styles.number_written}>
+                          {(currentPage - 1) * 10 + index + 1}
+                        </div>
                         <div className={styles.title}>{el.title}</div>
                         <div className={styles.writer}>{el.writer}</div>
                         <div className={styles.createdat_written}>
@@ -56,6 +93,16 @@ export default function BoardList() {
                       </div>
                     </div>
                   ))}
+                </div>
+                <div className={styles.pagination_middle}>
+                  <Pagination
+                    currentPage={currentPage}
+                    lastPage={lastPage}
+                    startPage={startPage}
+                    onClickPage={onClickPage}
+                    onClickPrevPage={onClickPrevPage}
+                    onClickNextPage={onClickNextPage}
+                  />
                 </div>
               </div>
             </div>

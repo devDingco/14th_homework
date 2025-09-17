@@ -1,13 +1,14 @@
+// src/components/boards-detail/index.tsx
 "use client";
 
+import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { SmallInput, LongInput, SuperLongInput } from "./form-input";
 import Divider from "./line";
 import { useRouter } from "next/navigation";
 import { IBoardsNewProps } from "./types";
 import { useBoardsForm } from "./hook";
-import { useState } from "react";
-import { Modal } from "antd";
+import { Modal, Input } from "antd";
 import DaumPostcode from "react-daum-postcode";
 
 export default function BoardsNew(props: IBoardsNewProps) {
@@ -39,20 +40,38 @@ export default function BoardsNew(props: IBoardsNewProps) {
     // 유튜브 URL 상태와 핸들러
     youtubeUrl,
     onChangeYoutubeUrl,
+    // 모달 관련 (hook에서 반환)
+    modalMessage,
+    setModalMessage,
+    modalRedirect,
+    setModalRedirect,
   } = useBoardsForm();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // 로컬 상태들
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+  const [updatePassword, setUpdatePassword] = useState("");
 
   // 우편번호 검색 모달 열기
   const handleAddressSearch = () => {
-    setIsModalOpen(true);
+    setIsAddressModalOpen(true);
   };
 
   // 주소 선택 시 기존 값 변경
   const handleAddressSelect = (data: any) => {
     onChangeZipCode(data.zonecode); // 우편번호 변경
     onChangeAddress(data.address); // 기본주소 변경
-    setIsModalOpen(false);
+    setIsAddressModalOpen(false);
+  };
+
+  // 메시지 모달 확인(OK) 처리 — 리다이렉트가 있으면 이동
+  const handleMessageOk = () => {
+    const redirect = modalRedirect;
+    setModalMessage(null);
+    setModalRedirect(null);
+    if (redirect) {
+      router.push(redirect);
+    }
   };
 
   return (
@@ -191,23 +210,18 @@ export default function BoardsNew(props: IBoardsNewProps) {
                 </div>
               </div>
 
-              {/* 버튼 섹션 */}
               <div className={styles.게시글_폼_버튼}>
+                <button onClick={() => router.push(`/boards/`)}>취소</button>
                 <button
-                  className="취소"
-                  onClick={() => {
-                    router.push(`/boards/`);
-                  }}
-                >
-                  취소
-                </button>
-                {/* 수정하기 버튼 클릭 시 updateBoard API 호출 */}
-                <button
-                  style={{
-                    backgroundColor: isFormValid ? "#2974E5" : "gray",
-                  }}
+                  style={{ backgroundColor: isFormValid ? "#2974E5" : "gray" }}
                   className={styles.등록}
-                  onClick={props.isEdit ? onClickUpdate : onClickSubmit}
+                  onClick={() => {
+                    if (props.isEdit) {
+                      setIsPasswordModalOpen(true); // 수정 시 비밀번호 모달 열기
+                    } else {
+                      onClickSubmit(); // 등록
+                    }
+                  }}
                 >
                   {props.isEdit ? "수정" : "등록"}하기
                 </button>
@@ -217,11 +231,43 @@ export default function BoardsNew(props: IBoardsNewProps) {
         </div>
       </header>
 
+      {/* 일반 메시지 모달 (등록/수정 성공·실패 메시지) */}
+      <Modal
+        open={!!modalMessage}
+        onOk={handleMessageOk}
+        onCancel={() => setModalMessage(null)}
+        okText="확인"
+      >
+        <div>{modalMessage}</div>
+      </Modal>
+
+      {/* 수정 비밀번호 입력 모달 */}
+      <Modal
+        title="비밀번호 확인"
+        open={isPasswordModalOpen}
+        onOk={() => {
+          // 비밀번호 모달에서 확인 누르면 hook의 onClickUpdate 호출
+          onClickUpdate(updatePassword);
+          setIsPasswordModalOpen(false);
+          setUpdatePassword("");
+        }}
+        onCancel={() => {
+          setIsPasswordModalOpen(false);
+          setUpdatePassword("");
+        }}
+      >
+        <Input.Password
+          placeholder="비밀번호를 입력하세요"
+          value={updatePassword}
+          onChange={(e) => setUpdatePassword(e.target.value)}
+        />
+      </Modal>
+
       {/* 우편번호 검색 모달 */}
       <Modal
         title="우편번호 검색"
-        open={isModalOpen}
-        onCancel={() => setIsModalOpen(false)}
+        open={isAddressModalOpen}
+        onCancel={() => setIsAddressModalOpen(false)}
         footer={null}
       >
         <DaumPostcode onComplete={handleAddressSelect} />

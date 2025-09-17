@@ -1,10 +1,12 @@
+// src/components/comment-write/index.tsx
 "use client";
 
-import { Rate } from "antd";
+import { Rate, Modal } from "antd";
 import { VerySmallInput } from "@/components/boards-write/form-input";
 import styles from "../detail/styles.module.css";
 import { ICommentWriteProps } from "./types";
 import { useCommentWrite } from "./hook";
+import React from "react";
 
 export default function CommentWrite({ boardId }: ICommentWriteProps) {
   const {
@@ -17,6 +19,8 @@ export default function CommentWrite({ boardId }: ICommentWriteProps) {
     rating,
     setRating,
     onClickSubmit,
+    modalMessage,
+    setModalMessage,
   } = useCommentWrite(boardId);
 
   return (
@@ -28,10 +32,12 @@ export default function CommentWrite({ boardId }: ICommentWriteProps) {
               <img src="/images/chat.png" alt="댓글 아이콘" />
               <div className={styles.comment_body_up_title_font}>댓글</div>
             </div>
+
+            {/* 별점 */}
             <Rate onChange={setRating} value={rating} />
-            {rating > 0 && (
-              <span style={{ marginLeft: 8 }}>{rating}점</span>
-            )}{" "}
+            {rating > 0 && <span style={{ marginLeft: 8 }}>{rating}점</span>}
+
+            {/* 입력 필드 */}
             <div className={styles.comment_body_field}>
               <div className={styles.comment_body_field_inside}>
                 <div
@@ -78,6 +84,16 @@ export default function CommentWrite({ boardId }: ICommentWriteProps) {
           <div></div>
         </div>
       </div>
+
+      {/* ✅ 모달로 메시지 출력 */}
+      <Modal
+        open={!!modalMessage}
+        onOk={() => setModalMessage(null)}
+        onCancel={() => setModalMessage(null)}
+        okText="확인"
+      >
+        <div>{modalMessage}</div>
+      </Modal>
     </div>
   );
 }
