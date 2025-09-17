@@ -3,6 +3,7 @@
 
 import React, { useState } from "react";
 import styles from "./styles.module.css";
+// 이제 form-input에서 직접 name 속성을 사용합니다.
 import { SmallInput, LongInput, SuperLongInput } from "./form-input";
 import Divider from "./line";
 import { useRouter } from "next/navigation";
@@ -15,56 +16,44 @@ export default function BoardsNew(props: IBoardsNewProps) {
   const router = useRouter();
 
   const {
-    writerInput,
-    passwordInput,
-    titleInput,
-    contentInput,
+    // ⭐ 리팩토링: 통합된 formFields 객체와 하나의 변경 함수를 사용합니다.
+    formFields,
     writerError,
     passwordError,
     titleError,
     contentError,
     isFormValid,
-    onChangeWriter,
-    onChangePassword,
-    onChangeTitle,
-    onChangeContent,
+    onChangeFormField,
     onClickSubmit,
     onClickUpdate,
-    // 주소 관련 상태와 핸들러들
     zipCode,
     address,
     addressDetail,
     onChangeZipCode,
     onChangeAddress,
     onChangeAddressDetail,
-    // 유튜브 URL 상태와 핸들러
     youtubeUrl,
     onChangeYoutubeUrl,
-    // 모달 관련 (hook에서 반환)
     modalMessage,
     setModalMessage,
     modalRedirect,
     setModalRedirect,
   } = useBoardsForm();
 
-  // 로컬 상태들
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [updatePassword, setUpdatePassword] = useState("");
 
-  // 우편번호 검색 모달 열기
   const handleAddressSearch = () => {
     setIsAddressModalOpen(true);
   };
 
-  // 주소 선택 시 기존 값 변경
   const handleAddressSelect = (data: any) => {
-    onChangeZipCode(data.zonecode); // 우편번호 변경
-    onChangeAddress(data.address); // 기본주소 변경
+    onChangeZipCode(data.zonecode);
+    onChangeAddress(data.address);
     setIsAddressModalOpen(false);
   };
 
-  // 메시지 모달 확인(OK) 처리 — 리다이렉트가 있으면 이동
   const handleMessageOk = () => {
     const redirect = modalRedirect;
     setModalMessage(null);
@@ -86,21 +75,25 @@ export default function BoardsNew(props: IBoardsNewProps) {
             <div className={styles.게시글_폼}>
               <div className={styles.게시글_폼_상세}>
                 <div className={styles.게시글_인풋블록}>
+                  {/* ⭐ SmallInput에 name 속성과 통합된 핸들러를 사용합니다. */}
                   <SmallInput
                     Input_Title="작성자"
                     Input_Placeholder="작성자 명을 입력해주세요."
                     Input_Star="*"
-                    value={writerInput}
-                    onChange={onChangeWriter}
+                    name="writer" // ⭐ name 속성을 추가합니다.
+                    value={formFields.writer}
+                    onChange={onChangeFormField}
                     errorMessage={writerError}
                     disabled={props.isEdit}
                   />
+                  {/* ⭐ SmallInput에 name 속성과 통합된 핸들러를 사용합니다. */}
                   <SmallInput
                     Input_Title="비밀번호"
                     Input_Placeholder="비밀번호를 입력해주세요."
                     Input_Star="*"
-                    value={passwordInput}
-                    onChange={onChangePassword}
+                    name="password" // ⭐ name 속성을 추가합니다.
+                    value={formFields.password}
+                    onChange={onChangeFormField}
                     errorMessage={passwordError}
                     disabled={props.isEdit}
                   />
@@ -108,42 +101,43 @@ export default function BoardsNew(props: IBoardsNewProps) {
                 <Divider />
 
                 <div className={styles.게시글_인풋블록}>
+                  {/* ⭐ LongInput에 name 속성과 통합된 핸들러를 사용합니다. */}
                   <LongInput
                     Input_Title="제목"
                     Input_Placeholder="제목을 입력해 주세요."
                     Input_Star="*"
-                    value={titleInput}
-                    onChange={onChangeTitle}
+                    name="title" // ⭐ name 속성을 추가합니다.
+                    value={formFields.title}
+                    onChange={onChangeFormField}
                     errorMessage={titleError}
                   />
                 </div>
                 <Divider />
 
                 <div className={styles.게시글_인풋블록}>
+                  {/* ⭐ SuperLongInput에 name 속성과 통합된 핸들러를 사용합니다. */}
                   <SuperLongInput
                     Input_Title="내용"
                     Input_Placeholder="내용을 입력해 주세요."
                     Input_Star="*"
-                    value={contentInput}
-                    onChange={onChangeContent}
+                    name="contents" // ⭐ name 속성을 추가합니다.
+                    value={formFields.contents}
+                    onChange={onChangeFormField}
                     errorMessage={contentError}
                   />
                 </div>
                 <Divider />
 
-                {/* 주소 입력 섹션 */}
                 <div className={styles.게시글_인풋블록쌓기}>
                   <div className={styles.주소인풋이랑버튼}>
                     주소
                     <div className={styles.인풋이랑버튼}>
-                      {/* 우편번호 입력 필드 - 초기값 바인딩 */}
                       <input
                         className={styles.우편번호인풋}
                         placeholder="01234"
                         value={zipCode}
                         readOnly
                       />
-                      {/* 우편번호 검색 버튼 - 클릭 시 기존 값 변경 */}
                       <button
                         className={styles.우편번호검색}
                         onClick={handleAddressSearch}
@@ -152,13 +146,11 @@ export default function BoardsNew(props: IBoardsNewProps) {
                       </button>
                     </div>
                   </div>
-                  {/* 기본 주소 입력 필드 - 초기값 바인딩 */}
                   <LongInput
                     Input_Placeholder="주소를 입력해 주세요."
                     value={address}
                     readOnly
                   />
-                  {/* 상세 주소 입력 필드 - 초기값 바인딩 */}
                   <LongInput
                     Input_Placeholder="상세주소"
                     onChange={onChangeAddressDetail}
@@ -167,7 +159,6 @@ export default function BoardsNew(props: IBoardsNewProps) {
                 </div>
                 <Divider />
 
-                {/* 유튜브 URL 입력 섹션 */}
                 <div className={styles.게시글_인풋블록}>
                   <LongInput
                     Input_Title="유튜브링크"
@@ -178,7 +169,6 @@ export default function BoardsNew(props: IBoardsNewProps) {
                 </div>
                 <Divider />
 
-                {/* 사진 첨부 */}
                 <div className={styles.게시글_인풋블록쌓기}>
                   <span>사진첨부</span>
                   <div className={styles.사진첨부_그룹}>
@@ -217,9 +207,9 @@ export default function BoardsNew(props: IBoardsNewProps) {
                   className={styles.등록}
                   onClick={() => {
                     if (props.isEdit) {
-                      setIsPasswordModalOpen(true); // 수정 시 비밀번호 모달 열기
+                      setIsPasswordModalOpen(true);
                     } else {
-                      onClickSubmit(); // 등록
+                      onClickSubmit();
                     }
                   }}
                 >
@@ -231,7 +221,6 @@ export default function BoardsNew(props: IBoardsNewProps) {
         </div>
       </header>
 
-      {/* 일반 메시지 모달 (등록/수정 성공·실패 메시지) */}
       <Modal
         open={!!modalMessage}
         onOk={handleMessageOk}
@@ -241,12 +230,10 @@ export default function BoardsNew(props: IBoardsNewProps) {
         <div>{modalMessage}</div>
       </Modal>
 
-      {/* 수정 비밀번호 입력 모달 */}
       <Modal
         title="비밀번호 확인"
         open={isPasswordModalOpen}
         onOk={() => {
-          // 비밀번호 모달에서 확인 누르면 hook의 onClickUpdate 호출
           onClickUpdate(updatePassword);
           setIsPasswordModalOpen(false);
           setUpdatePassword("");
@@ -263,7 +250,6 @@ export default function BoardsNew(props: IBoardsNewProps) {
         />
       </Modal>
 
-      {/* 우편번호 검색 모달 */}
       <Modal
         title="우편번호 검색"
         open={isAddressModalOpen}

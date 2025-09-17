@@ -1,14 +1,18 @@
-// src/components/comment-write/index.tsx
-"use client";
+// boards-detail/comment-write/index.tsx
 
 import { Rate, Modal } from "antd";
 import { VerySmallInput } from "@/components/boards-write/form-input";
 import styles from "../detail/styles.module.css";
 import { ICommentWriteProps } from "./types";
 import { useCommentWrite } from "./hook";
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function CommentWrite({ boardId }: ICommentWriteProps) {
+export default function CommentWrite({
+  boardId,
+  isEdit,
+  comment,
+  onEditComplete,
+}: ICommentWriteProps) {
   const {
     writer,
     setWriter,
@@ -19,9 +23,25 @@ export default function CommentWrite({ boardId }: ICommentWriteProps) {
     rating,
     setRating,
     onClickSubmit,
+    onClickUpdate,
     modalMessage,
     setModalMessage,
-  } = useCommentWrite(boardId);
+  } = useCommentWrite(boardId, onEditComplete);
+
+  useEffect(() => {
+    if (isEdit && comment) {
+      setWriter(comment.writer);
+      setContents(comment.contents);
+      setRating(comment.rating);
+    }
+  }, [isEdit, comment]);
+
+  // onClickUpdate를 호출하는 함수를 별도로 정의하여 안정성을 높입니다.
+  const handleUpdate = () => {
+    if (comment) {
+      onClickUpdate(comment._id);
+    }
+  };
 
   return (
     <div className={styles.boards}>
@@ -30,14 +50,14 @@ export default function CommentWrite({ boardId }: ICommentWriteProps) {
           <div className={styles.comment_body_up}>
             <div className={styles.comment_body_up_title}>
               <img src="/images/chat.png" alt="댓글 아이콘" />
-              <div className={styles.comment_body_up_title_font}>댓글</div>
+              <div className={styles.comment_body_up_title_font}>
+                {isEdit ? "댓글 수정" : "댓글 작성"}
+              </div>
             </div>
 
-            {/* 별점 */}
             <Rate onChange={setRating} value={rating} />
             {rating > 0 && <span style={{ marginLeft: 8 }}>{rating}점</span>}
 
-            {/* 입력 필드 */}
             <div className={styles.comment_body_field}>
               <div className={styles.comment_body_field_inside}>
                 <div
@@ -51,6 +71,7 @@ export default function CommentWrite({ boardId }: ICommentWriteProps) {
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setWriter(e.target.value)
                     }
+                    disabled={isEdit}
                   />
                   <VerySmallInput
                     Input_Title="비밀번호"
@@ -74,18 +95,16 @@ export default function CommentWrite({ boardId }: ICommentWriteProps) {
               <div className={styles.comment_submit_end}>
                 <button
                   className={styles.comment_submit}
-                  onClick={onClickSubmit}
+                  // 수정 버튼 클릭 시 handleUpdate 함수를 호출합니다.
+                  onClick={isEdit ? handleUpdate : onClickSubmit}
                 >
-                  댓글 등록
+                  {isEdit ? "댓글 수정" : "댓글 등록"}
                 </button>
               </div>
             </div>
           </div>
-          <div></div>
         </div>
       </div>
-
-      {/* ✅ 모달로 메시지 출력 */}
       <Modal
         open={!!modalMessage}
         onOk={() => setModalMessage(null)}

@@ -1,4 +1,3 @@
-// src/components/boards-write/form-input.tsx
 import styles from "./styles.module.css";
 import React from "react";
 
@@ -6,6 +5,7 @@ interface InputProps {
   Input_Title?: React.ReactNode;
   Input_Star?: React.ReactNode;
   Input_Placeholder?: string;
+  name?: string;
   onChange?: React.ChangeEventHandler;
   errorMessage?: string;
   value?: string;
@@ -24,6 +24,7 @@ export const VerySmallInput = (props: InputProps) => {
         </div>
         <input
           type="text"
+          name={props.name}
           placeholder={props.Input_Placeholder}
           className={styles.완전작은인풋}
           onChange={props.onChange}
@@ -48,6 +49,7 @@ export const SmallInput = (props: InputProps) => {
         </div>
         <input
           type="text"
+          name={props.name}
           placeholder={props.Input_Placeholder}
           className={styles.작은인풋}
           onChange={props.onChange}
@@ -72,6 +74,7 @@ export const LongInput = (props: InputProps) => {
         </div>
         <input
           type="text"
+          name={props.name}
           placeholder={props.Input_Placeholder}
           className={styles.긴인풋}
           onChange={props.onChange}
@@ -95,6 +98,7 @@ export const SuperLongInput = (props: InputProps) => {
           <div className={styles.color_red}>{props.Input_Star}</div>
         </div>
         <textarea
+          name={props.name}
           placeholder={props.Input_Placeholder}
           className={styles.큰인풋}
           onChange={props.onChange}

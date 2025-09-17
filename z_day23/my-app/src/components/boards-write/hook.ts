@@ -18,13 +18,19 @@ import {
   FetchBoardWriteQueryVariables,
 } from "@/commons/graphql/graphql";
 
+type FormFields = {
+  writer: string;
+  password: string;
+  title: string;
+  contents: string;
+};
+
 export const useBoardsForm = () => {
   const router = useRouter();
   const params = useParams();
   const isEdit = !!params?.boardId;
   const boardId = (params?.boardId as string) ?? "";
 
-  // 게시글 데이터 불러오기 (fetchBoard API 사용)
   const { data: boardData } = useQuery<
     FetchBoardWriteQuery,
     FetchBoardWriteQueryVariables
@@ -33,21 +39,19 @@ export const useBoardsForm = () => {
     skip: !isEdit,
   });
 
-  // 기본 입력 상태들
-  const [writerInput, setWriterInput] = useState("");
-  const [passwordInput, setPasswordInput] = useState("");
-  const [titleInput, setTitleInput] = useState("");
-  const [contentInput, setContentInput] = useState("");
+  const [formFields, setFormFields] = useState<FormFields>({
+    writer: "",
+    password: "",
+    title: "",
+    contents: "",
+  });
 
-  // 주소 관련 상태들
   const [zipCode, setZipCode] = useState("");
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
 
-  // 유튜브 URL 상태
   const [youtubeUrl, setYoutubeUrl] = useState("");
 
-  // 에러 상태들
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
@@ -65,86 +69,75 @@ export const useBoardsForm = () => {
     UpdateBoardWriteMutationVariables
   >(UpdateBoardWriteDocument);
 
-  // ---------- 모달 관련 상태 (alert 대체) ----------
   const [modalMessage, setModalMessage] = useState<string | null>(null);
   const [modalRedirect, setModalRedirect] = useState<string | null>(null);
 
   useEffect(() => {
     if (isEdit && boardData?.fetchBoard) {
       const board = boardData.fetchBoard;
-      setWriterInput(board.writer ?? "");
-      setTitleInput(board.title);
-      setContentInput(board.contents);
 
-      // 우편번호, 기본주소, 상세주소 초기값 설정
+      setFormFields({
+        writer: board.writer ?? "",
+        password: "",
+        title: board.title,
+        contents: board.contents,
+      });
+
       setZipCode(board.boardAddress?.zipcode ?? "");
       setAddress(board.boardAddress?.address ?? "");
       setAddressDetail(board.boardAddress?.addressDetail ?? "");
-
-      // 유튜브 URL 초기값 설정
       setYoutubeUrl(board.youtubeUrl ?? "");
     }
   }, [boardData, isEdit]);
 
-  // 폼 유효성 검사
   useEffect(() => {
+    const { writer, password, title, contents } = formFields;
     if (!isEdit) {
-      setIsFormValid(
-        !!(writerInput && passwordInput && titleInput && contentInput)
-      );
+      setIsFormValid(!!(writer && password && title && contents));
     } else {
-      setIsFormValid(!!(titleInput && contentInput));
+      setIsFormValid(!!(title && contents));
     }
-  }, [writerInput, passwordInput, titleInput, contentInput, isEdit]);
+  }, [formFields, isEdit]);
 
-  // 입력 핸들러들
-  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-    setWriterInput(event.target.value);
-    if (writerError) setWriterError("");
+  const onChangeFormField = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    setFormFields((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    if (name === "writer" && writerError) setWriterError("");
+    if (name === "password" && passwordError) setPasswordError("");
+    if (name === "title" && titleError) setTitleError("");
+    if (name === "contents" && contentError) setContentError("");
   };
 
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setPasswordInput(event.target.value);
-    if (passwordError) setPasswordError("");
-  };
-
-  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitleInput(event.target.value);
-    if (titleError) setTitleError("");
-  };
-
-  const onChangeContent = (event: ChangeEvent<HTMLInputElement>) => {
-    setContentInput(event.target.value);
-    if (contentError) setContentError("");
-  };
-
-  // 주소 관련 핸들러들
   const onChangeZipCode = (value: string) => setZipCode(value);
   const onChangeAddress = (value: string) => setAddress(value);
   const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) =>
     setAddressDetail(event.target.value);
-
-  // 유튜브 URL 핸들러
   const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) =>
     setYoutubeUrl(event.target.value);
 
-  // 게시글 등록
   const onClickSubmit = async () => {
+    const { writer, password, title, contents } = formFields;
     let hasError = false;
 
-    if (!writerInput.trim()) {
+    if (!writer.trim()) {
       setWriterError("필수입력 사항입니다.");
       hasError = true;
     }
-    if (!passwordInput.trim()) {
+    if (!password.trim()) {
       setPasswordError("필수입력 사항입니다.");
       hasError = true;
     }
-    if (!titleInput.trim()) {
+    if (!title.trim()) {
       setTitleError("필수입력 사항입니다.");
       hasError = true;
     }
-    if (!contentInput.trim()) {
+    if (!contents.trim()) {
       setContentError("필수입력 사항입니다.");
       hasError = true;
     }
@@ -155,15 +148,15 @@ export const useBoardsForm = () => {
       const result = await createBoardMutation({
         variables: {
           createBoardInput: {
-            writer: writerInput,
-            password: passwordInput,
-            title: titleInput,
-            contents: contentInput,
-            youtubeUrl: youtubeUrl,
+            writer,
+            password,
+            title,
+            contents,
+            youtubeUrl,
             boardAddress: {
               zipcode: zipCode,
-              address: address,
-              addressDetail: addressDetail,
+              address,
+              addressDetail,
             },
           },
         },
@@ -179,7 +172,6 @@ export const useBoardsForm = () => {
     }
   };
 
-  // 게시글 수정 (updateBoard API 사용) — 비밀번호는 외부에서 받아 처리
   const onClickUpdate = async (inputPassword: string) => {
     if (!boardId) return;
 
@@ -190,14 +182,15 @@ export const useBoardsForm = () => {
     }
 
     try {
+      const { title, contents } = formFields;
       const updateBoardInput: UpdateBoardInput = {
-        title: titleInput,
-        contents: contentInput,
-        youtubeUrl: youtubeUrl,
+        title,
+        contents,
+        youtubeUrl,
         boardAddress: {
           zipcode: zipCode,
-          address: address,
-          addressDetail: addressDetail,
+          address,
+          addressDetail,
         },
       };
 
@@ -228,32 +221,23 @@ export const useBoardsForm = () => {
   };
 
   return {
-    writerInput,
-    passwordInput,
-    titleInput,
-    contentInput,
+    formFields,
     writerError,
     passwordError,
     titleError,
     contentError,
     isFormValid,
-    onChangeWriter,
-    onChangePassword,
-    onChangeTitle,
-    onChangeContent,
+    onChangeFormField,
     onClickSubmit,
     onClickUpdate,
-    // 주소 관련 반환값들
     zipCode,
     address,
     addressDetail,
     onChangeZipCode,
     onChangeAddress,
     onChangeAddressDetail,
-    // 유튜브 URL 관련 반환값들
     youtubeUrl,
     onChangeYoutubeUrl,
-    // 모달 관련
     modalMessage,
     setModalMessage,
     modalRedirect,
