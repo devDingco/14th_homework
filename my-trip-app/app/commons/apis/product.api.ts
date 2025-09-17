@@ -210,3 +210,4 @@ export async function fetchTravelproductApi(travelproductId: string) {
     return null;
   }
 }
+

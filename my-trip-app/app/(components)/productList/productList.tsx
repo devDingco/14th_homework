@@ -5,13 +5,17 @@ import "../../global.css";
 import Icon from "@utils/iconColor";
 import Image from "next/image";
 import Link from "next/link";
-import Pagination from "../pagination/pagination";
 import { useProductList } from "../../commons/hooks/useProductList";
 import ProductListSkeleton from "./ProductListSkeleton";
 import LoadingSpinner from "../../commons/components/LoadingSpinner";
 
 export default function ProductList() {
-  const { products, loading, error, refresh, page, totalPages, handlePageChange } = useProductList();
+  const { 
+    products, 
+    loading, 
+    error, 
+    refresh 
+  } = useProductList();
 
   const navItems = [
     { name: "single_person_accommodation", label: "1인 전용" },
@@ -68,71 +72,61 @@ export default function ProductList() {
       </div>
 
       {products.length > 0 ? (
-        <>
-          <div className="product_grid">
-            {products.map((product) => (
-              <Link key={product.id} href={`/product/${product.id}`} className="product_card_link">
-                <article className="product_card">
-                  <div className="product_thumbnail_wrap">
-                    <Image
-                      className="product_thumbnail"
-                      src={product.image}
-                      alt={product.title}
-                      width={384}
-                      height={384}
-                      priority={parseInt(product.id) <= 4}
-                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                    />
-                    <span className="head_badge">
-                      <Icon outline default name="bookmark" width={20} height={20} />
-                      <p className="badge_text me_14_20">{product.bookmarkCount}</p>
-                    </span>
-                  </div>
-                  <div className="product_body">
-                    <div className="product_info">
-                      <p className="product_title b_16_24">{product.title}</p>
-                      <p className="product_subtitle r_14_20">{product.subtitle}</p>
-                      <div className="product_tags">
-                        {product.tags.length > 0 ? (
-                          product.tags.slice(0, 3).map((tag, tagIndex) => (
-                            <span key={tagIndex} className="product_tag me_14_20">
-                              {tag.startsWith('#') ? tag : `#${tag}`}
-                            </span>
-                          ))
-                        ) : (
-                          <span className="product_tag me_14_20">#여행</span>
-                        )}
+        <div className="product_grid">
+          {products.map((product) => (
+            <Link key={product.id} href={`/product/${product.id}`} className="product_card_link">
+              <article className="product_card">
+                <div className="product_thumbnail_wrap">
+                  <Image
+                    className="product_thumbnail"
+                    src={product.image}
+                    alt={product.title}
+                    width={384}
+                    height={384}
+                    priority={parseInt(product.id) <= 4}
+                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                  />
+                  <span className="head_badge">
+                    <Icon outline default name="bookmark" width={20} height={20} />
+                    <p className="badge_text me_14_20">{product.bookmarkCount}</p>
+                  </span>
+                </div>
+                <div className="product_body">
+                  <div className="product_info">
+                    <p className="product_title b_16_24">{product.title}</p>
+                    <p className="product_subtitle r_14_20">{product.subtitle}</p>
+                    <div className="product_tags">
+                      {product.tags.length > 0 ? (
+                        product.tags.slice(0, 3).map((tag, tagIndex) => (
+                          <span key={tagIndex} className="product_tag me_14_20">
+                            {tag.startsWith('#') ? tag : `#${tag}`}
+                          </span>
+                        ))
+                      ) : (
+                        <span className="product_tag me_14_20">#여행</span>
+                      )}
+                    </div>
+                    <div className="product_footer">
+                      <div className="host_info">
+                        <Image 
+                          className="host_avatar"
+                          src={product.hostAvatar}
+                          alt={product.host}
+                          width={24}
+                          height={24}
+                          priority={false}
+                          loading="lazy"
+                        />
+                        <span className="r_14_20">{product.host}</span>
                       </div>
-                      <div className="product_footer">
-                        <div className="host_info">
-                          <Image 
-                            className="host_avatar"
-                            src={product.hostAvatar}
-                            alt={product.host}
-                            width={24}
-                            height={24}
-                            priority={false}
-                            loading="lazy"
-                          />
-                          <span className="r_14_20">{product.host}</span>
-                        </div>
-                        <p className="product_price sb_16_24">{product.price}</p>
-                      </div>
+                      <p className="product_price sb_16_24">{product.price}</p>
                     </div>
                   </div>
-                </article>
-              </Link>
-            ))}
-          </div>
-          
-          {totalPages > 1 && (
-            <Pagination
-              totalPages={totalPages}
-              initialPage={page}
-              onChange={handlePageChange}
-            />
-          )}
-        </>
+                </div>
+              </article>
+            </Link>
+          ))}
+        </div>
       ) : (
         <div className="no_products">
           <p className="no_products_message">등록된 상품이 없습니다.</p>

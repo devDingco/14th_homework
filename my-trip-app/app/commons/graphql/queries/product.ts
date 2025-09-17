@@ -83,3 +83,4 @@ export const FETCH_TRAVELPRODUCT_QUERY = gql`
     }
   }
 `;
+
