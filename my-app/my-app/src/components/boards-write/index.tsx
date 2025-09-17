@@ -22,6 +22,11 @@ export default function BoardsComponentWrite(
     password,
     title,
     contents,
+    isModalOpen,
+    zonecode,
+    address,
+    addressDetail,
+    youtubeUrl,
     onChangeWriter,
     onChangeTitle,
     onChangePassword,
@@ -35,6 +40,7 @@ export default function BoardsComponentWrite(
     handleOk,
     handleCancel,
     handleComplete,
+    onClickOpenModal,
 
     등록버튼비활성화,
   } = useBoardsComponentWrite(isEdit);
@@ -127,6 +133,7 @@ export default function BoardsComponentWrite(
                 className={styles.게시물등록_주소인풋_플레이스홀더}
                 type="text"
                 placeholder="01234"
+                value={zonecode || data?.fetchBoard.boardAddress.zipcode || ""}
               />
               <button
                 className={styles.게시물등록_주소인풋_우편번호버튼}
@@ -141,11 +148,16 @@ export default function BoardsComponentWrite(
             className={styles.게시물등록_플레이스홀더}
             type="text"
             placeholder="주소를 입력해 주세요."
+            value={address || data?.fetchBoard.boardAddress.address || ""}
           />
           <input
             className={styles.게시물등록_플레이스홀더}
             type="text"
             placeholder="상세주소"
+            defaultValue={
+              addressDetail || data?.fetchBoard.boardAddress.addressDetail || ""
+            }
+            onChange={onChangeAddressDetail}
           />
         </div>
 
@@ -160,6 +172,8 @@ export default function BoardsComponentWrite(
             className={styles.게시물등록_플레이스홀더}
             type="text"
             placeholder="링크를 입력해 주세요"
+            defaultValue={data?.fetchBoard.youtubeUrl ?? ""}
+            onChange={onChangeYoutubeUrl}
           />
         </div>
 

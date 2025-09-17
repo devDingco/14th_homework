@@ -7,7 +7,24 @@ export const FETCH_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
+      user {
+        _id
+        email
+        name
+        picture
+      }
       createdAt
+      updatedAt
+      deletedAt
     }
   }
 `;
@@ -17,15 +34,19 @@ export const CREATE_BOARD = gql`
     createBoard(createBoardInput: $createBoardInput) {
       _id
       writer
-      # password
+      title
+      contents
+      youtubeUrl
+      likeCount
+      images
       boardAddress {
         zipcode
         address
         addressDetail
       }
-      title
-      contents
       createdAt
+      updatedAt
+      deletedAt
     }
   }
 `;
@@ -45,7 +66,18 @@ export const UPDATE_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
       createdAt
+      updatedAt
+      deletedAt
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;

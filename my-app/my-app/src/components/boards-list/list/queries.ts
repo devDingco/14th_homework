@@ -4,10 +4,9 @@ export const FETCH_BOARDS = gql`
   query fetchBoards {
     fetchBoards {
       _id
-      title
       writer
+      title
       contents
-      createdAt
       youtubeUrl
       likeCount
       dislikeCount
@@ -19,8 +18,8 @@ export const FETCH_BOARDS = gql`
         addressDetail
         createdAt
         updatedAt
-        deletedAt
       }
+      createdAt
       updatedAt
     }
   }
@@ -29,5 +28,10 @@ export const FETCH_BOARDS = gql`
 export const DELETE_BOARD = gql`
   mutation deleteBoard($boardId: ID!) {
     deleteBoard(boardId: $boardId)
+  }
+`;
+export const FERTCH_BOARDS_COUNT = gql`
+  query {
+    fetchBoardsCount
   }
 `;
