@@ -1,7 +1,7 @@
 "use client"
 
 import { FetchBoardDocument, FetchBoardQuery, FetchBoardQueryVariables } from "@/commons/gql/graphql"
-import { useIsEdit } from "@/commons/isEditProvider"
+import { useIsEdit } from "@/commons/provider/isEditProvider"
 import { ApolloError, useApolloClient } from "@apollo/client"
 import { useParams } from "next/navigation"
 
@@ -19,7 +19,7 @@ const useBoardsEditPage = () => {
                         boardId: String(param.boardId),
                     }
                 })
-                console.log(data)
+                return data
             }            
         } catch(e: unknown) {
             if (e instanceof ApolloError) {

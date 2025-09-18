@@ -1,14 +1,10 @@
-import { IFunctionUpdateBoard } from "../type"
+import { IPostData } from "@/commons/provider/type"
 
 export interface IWriteButtonProps {
-    onClickHandler?: (data?: IFunctionUpdateBoard) => void | Promise<void>,
-    postData?: IFunctionUpdateBoard,
+    onClickHandler?: (data?: any) => void | Promise<void>,
     p?: string
 }
 
 export interface IValObj {
-    writer: string,
-    password: string | number,
-    title: string,
-    contents: string
+    postData: IPostData
 }
