@@ -180,11 +180,6 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
     }
   };
 
-  // 비밀번호 입력 시 실행되는 함수
-  const onChangePassword = (event) => {
-    setPassword(event.target.value);
-  };
-
   // 유튜브 URL 입력 시 실행되는 함수
   const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
     setyoutubeUrl(event.target.value); // 입력된 값을 state에 저장
@@ -260,11 +255,11 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
     modalOpen,
     modalMessage,
     closeModal,
-    onChangePassword,
     onChangeYoutubeUrl,
     onClickSubmit,
     onClickUpdate,
     onClickSignUp,
     onChangeInputs,
+    onChangePassword,
   };
 }

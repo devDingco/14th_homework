@@ -1,0 +1,6 @@
+.championimg {
+  display: flex;
+  flex-wrap: wrap; /* 줄바꿈 허용 */
+  gap: 20px; /* 간격 */
+  padding: 20px;
+}
