@@ -6,6 +6,7 @@ import { CommentVariables } from './types';
 import { Rating } from '@mui/material';
 
 export default function CommentWrite(props: CommentVariables) {
+  // console.log('🚀 ~ CommentWrite ~ props:', props);
   const {
     writer,
     password,
@@ -24,6 +25,7 @@ export default function CommentWrite(props: CommentVariables) {
     <div className={styles['commentLayout']}>
       <div className={styles['commentBody']}>
         <div className={styles['commentTop']}>
+          {/* 수정 모드일 때 제목 변경 */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -69,6 +71,8 @@ export default function CommentWrite(props: CommentVariables) {
                     placeholder="작성자 명을 입력해 주세요."
                     value={writer}
                     onChange={onChangeWriter}
+                    disabled={props.isEdit} // 수정 모드에서는 작성자 변경 불가
+                    style={props.isEdit ? { backgroundColor: '#f5f5f5', color: '#999' } : {}}
                   />
                   {error.writer && <p className={styles.error}>{error.writer}</p>}
                 </div>
@@ -103,14 +107,43 @@ export default function CommentWrite(props: CommentVariables) {
             </div>
           </div>
         </div>
-        <button
-          className={styles.commentButton}
-          disabled={!isFormValid}
-          onClick={onClickCommentSubmit}
-          // aria-disabled={!isFormValid}
-        >
-          <span className={styles.buttonText}>댓글 등록</span>
-        </button>
+        {props.isEdit ? (
+          // 수정 모드일 때 취소/저장 버튼
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              alignSelf: 'stretch',
+              gap: '16px',
+            }}
+          >
+            {/* 취소 버튼 */}
+            <button className={styles.cancelButton} onClick={props.onCancel}>
+              <span className={styles.cancelText}>취소</span>
+            </button>
+            {/* 수정 버튼 */}
+            <button
+              className={styles.reviseButton}
+              disabled={!isFormValid}
+              onClick={() => {
+                onClickCommentSubmit();
+                props.onSave?.();
+              }}
+            >
+              <span className={styles.buttonText}>수정 하기</span>
+            </button>
+          </div>
+        ) : (
+          // 일반 등록 모드일 때
+          <button
+            className={styles.commentButton}
+            disabled={!isFormValid}
+            onClick={onClickCommentSubmit}
+          >
+            <span className={styles.buttonText}>댓글 등록</span>
+          </button>
+        )}
       </div>
       <span className={styles.noCommentMs}>등록된 댓글이 없습니다.</span>
     </div>
