@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const FETCH_BOARD_COMMENTS = gql`
-  query FetchBoardComments($boardId: ID!) {
+  query fetchBoardComments($boardId: ID!) {
     fetchBoardComments(boardId: $boardId) {
       _id
       writer
@@ -9,7 +9,6 @@ export const FETCH_BOARD_COMMENTS = gql`
       rating
       createdAt
       updatedAt
-      deletedAt
     }
   }
 `;
