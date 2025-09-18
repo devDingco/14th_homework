@@ -37,27 +37,30 @@ export default function useBoardForm(props: BoardFormProps) {
     UpdateBoardDocument
   )
 
-  // 작성자 변경 불가
-  const [name, setName] = useState('')
-  // 비밀번호 수정 불가
-  const [password, setPassword] = useState('')
-  const [title, setTitle] = useState(props.isEdit ? data?.fetchBoard?.title ?? '' : '')
-  const [content, setContent] = useState(props.isEdit ? data?.fetchBoard?.contents ?? '' : '')
+  const [boardValue, setBoardValue] = useState({
+    name: '',
+    password: '',
+    title: data?.fetchBoard?.title ?? '',
+    content: data?.fetchBoard?.contents ?? '',
+    link: data?.fetchBoard?.youtubeUrl ?? '',
+  })
   // 주소 input
   const [address, setAddress] = useState({
     zipcode: props.isEdit ? data?.fetchBoard?.boardAddress?.zipcode ?? '' : '',
     base: props.isEdit ? data?.fetchBoard?.boardAddress?.address ?? '' : '',
     detail: props.isEdit ? data?.fetchBoard?.boardAddress?.addressDetail ?? '' : '',
   })
-  const [link, setLink] = useState(props.isEdit ? data?.fetchBoard?.youtubeUrl ?? '' : '')
 
-  const [nameError, setNameError] = useState('')
-  const [passwordError, setPasswordError] = useState('')
-  const [titleError, setTitleError] = useState('')
-  const [contentError, setContentError] = useState('')
-  const [linkError, setLinkError] = useState('')
+  const [boardError, setBoardError] = useState({
+    nameError: '',
+    passwordError: '',
+    titleError: '',
+    contentError: '',
+    linkError: '',
+  })
   // 값이 없는 경우, 버튼 비활성화
-  const isButtonDisabled = !name || !password || !title || !content
+  const isButtonDisabled =
+    !boardValue.name || !boardValue.password || !boardValue.title || !boardValue.content
 
   // 모달 + 우편번호
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -79,25 +82,17 @@ export default function useBoardForm(props: BoardFormProps) {
   }
 
   // 변경값 상태관리
-  const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value)
-  }
-
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value)
-  }
-
-  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value)
-  }
-
-  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(event.target.value)
-  }
-
-  const onChangeAddress = (
+  const onChangeValue = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) => {
+    const { id, value } = event.target
+    setBoardValue({
+      ...boardValue,
+      [id]: value,
+    })
+  }
+
+  const onChangeAddress = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target
 
     setAddress({
@@ -106,59 +101,45 @@ export default function useBoardForm(props: BoardFormProps) {
     })
   }
 
-  const onChangeLink = (event: ChangeEvent<HTMLInputElement>) => {
-    setLink(event.target.value)
-  }
-
   const onClickSignup = async () => {
     //새글 등록하기일 경우
     if (props.isEdit === false) {
       let hasError = false
 
-      if (name.trim() === '') {
-        setNameError('필수입력 사항입니다.')
+      if (boardValue.name.trim() === '') {
+        setBoardError({ ...boardError, nameError: '필수입력 사항입니다.' })
         hasError = true
-      } else {
-        setNameError('')
       }
 
-      if (password.length === 0) {
-        setPasswordError('필수입력 사항입니다.')
+      if (boardValue.password.length === 0) {
+        setBoardError({ ...boardError, passwordError: '필수입력 사항입니다.' })
         hasError = true
-      } else {
-        setPasswordError('')
       }
 
-      if (title?.trim() === '') {
-        setTitleError('필수입력 사항입니다.')
+      if (boardValue.title?.trim() === '') {
+        setBoardError({ ...boardError, titleError: '필수입력 사항입니다.' })
         hasError = true
-      } else {
-        setTitleError('')
       }
 
-      if (content?.trim() === '') {
-        setContentError('필수입력 사항입니다.')
+      if (boardValue.content?.trim() === '') {
+        setBoardError({ ...boardError, contentError: '필수입력 사항입니다.' })
         hasError = true
-      } else {
-        setContentError('')
       }
 
-      if (link && !isYouTubeUrl(link)) {
-        setLinkError('유튜브 주소 형식에 알맞지 않습니다.')
+      if (boardValue.link && !isYouTubeUrl(boardValue.link)) {
+        setBoardError({ ...boardError, linkError: '유튜브 주소 형식에 알맞지 않습니다.' })
         hasError = true
-      } else {
-        setLinkError('')
       }
 
       if (!hasError) {
         const { data } = await createBoard({
           variables: {
             createBoardInput: {
-              writer: name,
-              password,
-              title,
-              contents: content,
-              youtubeUrl: link,
+              writer: boardValue.name,
+              password: boardValue.password,
+              title: boardValue.title,
+              contents: boardValue.content,
+              youtubeUrl: boardValue.link,
               boardAddress: {
                 zipcode: address.zipcode,
                 address: address.base,
@@ -180,21 +161,21 @@ export default function useBoardForm(props: BoardFormProps) {
     // 기존의 글을 수정하는 경우
     else if (props.isEdit === true) {
       // 입력값이 비어있는 경우 수정 진행 불가
-      if (content?.trim() === '' && title?.trim() === '') {
-        setContentError('필수입력 사항입니다.')
-        setTitleError('필수입력 사항입니다.')
+      if (boardValue.content?.trim() === '' && boardValue.title?.trim() === '') {
+        setBoardError({ ...boardError, contentError: '필수입력 사항입니다.' })
+        setBoardError({ ...boardError, titleError: '필수입력 사항입니다.' })
         return
       }
-      if (content?.trim() === '') {
-        setContentError('필수입력 사항입니다.')
+      if (boardValue.content?.trim() === '') {
+        setBoardError({ ...boardError, contentError: '필수입력 사항입니다.' })
         return
       }
-      if (title?.trim() === '') {
-        setTitleError('필수입력 사항입니다.')
+      if (boardValue.title?.trim() === '') {
+        setBoardError({ ...boardError, titleError: '필수입력 사항입니다.' })
         return
       }
-      if (link && !isYouTubeUrl(link)) {
-        setLinkError('유튜브 주소 형식에 알맞지 않습니다.')
+      if (boardValue.link && !isYouTubeUrl(boardValue.link)) {
+        setBoardError({ ...boardError, linkError: '유튜브 주소 형식에 알맞지 않습니다.' })
         return
       }
 
@@ -202,16 +183,16 @@ export default function useBoardForm(props: BoardFormProps) {
 
       const 입력받은비밀번호 = prompt('글을 작성할때 입력하셨던 비밀번호를 입력해주세요')
       const updateInput: any = {}
-      if (title?.trim() && title !== data?.fetchBoard?.title) {
-        updateInput.title = title
+      if (boardValue.title?.trim() && boardValue.title !== data?.fetchBoard?.title) {
+        updateInput.title = boardValue.title
       }
 
-      if (content?.trim() && content !== data?.fetchBoard?.contents) {
-        updateInput.contents = content
+      if (boardValue.content?.trim() && boardValue.content !== data?.fetchBoard?.contents) {
+        updateInput.contents = boardValue.content
       }
 
-      if (link !== data?.fetchBoard?.youtubeUrl) {
-        updateInput.youtubeUrl = link
+      if (boardValue.link !== data?.fetchBoard?.youtubeUrl) {
+        updateInput.youtubeUrl = boardValue.link
       }
 
       const boardAddress: any = {}
@@ -274,26 +255,14 @@ export default function useBoardForm(props: BoardFormProps) {
   }
 
   return {
-    onChangeName,
-    onChangePassword,
-    onChangeTitle,
-    onChangeContent,
+    onChangeValue,
     onChangeAddress,
-    onChangeLink,
     onClickSignup,
     isButtonDisabled,
     data,
-    name,
-    password,
-    title,
-    content,
+    boardValue,
     address,
-    link,
-    nameError,
-    passwordError,
-    titleError,
-    contentError,
-    linkError,
+    boardError,
     isModalOpen,
     onToggleModal,
     handleComplete,
