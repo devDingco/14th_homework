@@ -1,15 +1,22 @@
 "use client";
 
-import useBoardPage from "../components/boards-list/hook";
 import BoardsPageComponent from "../components/boards-list/list";
 import PaginationComponent from "../components/boards-list/pagination";
+import styles from "./styles.module.css";
+
+import useBoardPage from "./hook";
 
 export default function BoardsPage() {
   const boardPage = useBoardPage();
+
   return (
     <>
-      <BoardsPageComponent {...boardPage} />
-      <PaginationComponent {...boardPage} />
+      <div className={styles.page}>
+        <div className={styles.container}>
+          <BoardsPageComponent {...boardPage} />
+          <PaginationComponent {...boardPage} />
+        </div>
+      </div>
     </>
   );
 }

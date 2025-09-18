@@ -1,0 +1,44 @@
+.pagination {
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+.buttonEnroll {
+  display: flex;
+  gap: 1rem;
+}
+.button {
+  color: var(--Gray-B, #000);
+  text-align: center;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.625rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.5rem;
+}
+.prevButton {
+  padding-right: 0.5rem;
+}
+.nextButton {
+  padding-left: 0.5rem;
+}
+
+.currentButton {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.625rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.5rem;
+  background: var(--gray-50, #f2f2f2);
+}

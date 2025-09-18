@@ -18,8 +18,8 @@ export default function BannerComponent() {
         pagination={{ clickable: true }}
         spaceBetween={0}
         slidesPerView={1}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log("slide change")}
+        // onSwiper={(swiper) => console.log(swiper)}
       >
         <SwiperSlide>
           <Image
