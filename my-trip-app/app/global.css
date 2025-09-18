@@ -14,28 +14,11 @@
 html,
 body {
   width: 100%;
-  margin: 0 auto;
-  min-height: 72rem;
-  overflow-x: hidden;
+  margin: 0 auto; 
+  height: auto;
   background-color: var(--background-color);
   color: var(--black);
     
-
-  /* @media (max-width: 128rem) {
-    max-width: 128rem;
-  }
-  
-  @media (max-width: 102.4rem) {
-    max-width: 102.4rem;
-  }
-
-  @media (max-width: 76.8rem) {
-    max-width: 76.8rem;
-  }
-
-  @media (max-width: 48rem) {
-    max-width: 48rem;
-  } */
 }
 
 body {

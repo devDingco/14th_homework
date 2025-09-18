@@ -1,7 +1,7 @@
 "use client";
 
-import "./cardList.css";
 import "../../global.css";
+import "./cardList.css";
 import Image from "next/image";
 import Icon from "@utils/iconColor";
 import Link from "next/link";

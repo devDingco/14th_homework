@@ -1,0 +1,17 @@
+@media (max-width: 78.1rem) {
+
+    
+    .head_component_container {
+        width: 100%;
+        padding: 0 2rem;
+        margin-top: 2.4rem;
+        
+    }
+    
+    .searchbar-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.6rem;
+    }
+}

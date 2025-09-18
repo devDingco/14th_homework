@@ -7,11 +7,24 @@
   margin: 0 auto;
   margin-top: 4rem;
   margin-bottom: 4rem;
+
+  @media (max-width: 78.1rem) {
+    width: 78.1rem;
+    height: auto;
+    gap: 2.4rem;
+    padding: 0 2rem;
+  }
 }
 
 .cardList_item_container {
   display: flex;
   gap: 3.2rem;
+
+  @media (max-width: 78.1rem) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3.2rem;
+  }
 }   
 
 .cardList_item_link {

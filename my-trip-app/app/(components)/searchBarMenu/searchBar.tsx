@@ -1,5 +1,6 @@
 "use client";
 import "./searchBar.css";
+import "./seacrhBar.tablet.css"
 import "../../global.css";
 import { useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
@@ -12,9 +13,10 @@ export interface SearchBarMenuProps {
   filtersEnabled?: boolean;
   defaultFilter?: "available" | "soldout";
   postButtonLabel?: string;
+  showMainTitle?: boolean;
 }
 
-export default function SearchBarMenu({ title, filtersEnabled = false, defaultFilter = "available", postButtonLabel = "트립토크 등록" }: SearchBarMenuProps) {
+export default function SearchBarMenu({ title, filtersEnabled = false, defaultFilter = "available", postButtonLabel = "트립토크 등록", showMainTitle = false }: SearchBarMenuProps) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [activeFilter, setActiveFilter] = useState(defaultFilter);
@@ -60,6 +62,9 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
   };
   return (
     <div className="head_component_container">
+      {showMainTitle && (
+        <h1 className="b_28_36" style={{width: "128rem", margin: "0 auto", marginBottom: "2.4rem"}}>트립토크 게시판</h1>
+      )}
       {title && (
         <div className="searchbar-header">
           <h1 className="b_28_36">{title}</h1>
