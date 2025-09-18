@@ -7,10 +7,9 @@ import { Modal } from 'antd';
 
 export default function BoardsWriteAdvanced(props: BoardVariables) {
   const {
-    onChangeWriter,
+    formData,
+    onChangeInput,
     onChangePassword,
-    onChangeTitle,
-    onChangeContent,
     onChangeAddressDetail,
     onChangeYoutubeUrl,
     onclickUpdate,
@@ -47,8 +46,9 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
                   type="text"
                   placeholder="작성자 명을 입력해 주세요."
                   className={styles['enroll-input']}
-                  onChange={onChangeWriter}
-                  //   value={writer}
+                  id="writer"
+                  onChange={onChangeInput}
+                  value={formData.writer}
                   defaultValue={props.data?.fetchBoard?.writer || ''}
                   disabled={props.isEdit}
                 />
@@ -84,9 +84,10 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
             type="text"
             className={styles['enroll-input']}
             placeholder="제목을 입력해 주세요."
-            onChange={onChangeTitle}
+            id="title"
+            onChange={onChangeInput}
+            value={formData.title}
             defaultValue={props.data?.fetchBoard?.title || ''}
-            // value={title}
           />
           {error.title && <p className={styles.error}>{error.title}</p>}
         </div>
@@ -100,9 +101,10 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
             type="text"
             className={styles.contents}
             placeholder="내용을 입력해 주세요."
-            onChange={onChangeContent}
+            id="contents"
+            onChange={onChangeInput}
+            value={formData.contents}
             defaultValue={props.data?.fetchBoard?.contents || ''}
-            // value={content}
           />
           {error.contents && <p className={styles.error}>{error.contents}</p>}
         </div>

@@ -13,6 +13,7 @@ export default function Navigation(props: NavigationProps) {
 
   const navigationItems = [
     { href: '/boards', label: '트립토크', exact: false },
+    { href: '/openapis', label: '🐱 고양이 갤러리', exact: false },
     { href: '/accommodation', label: '숙박권 구매', exact: false },
     { href: '/mypage', label: '마이 페이지', exact: false },
   ];

@@ -3,7 +3,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { ChangeEvent, useState, useEffect, useMemo } from 'react';
 
 import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from './queries';
-import { Errors, BoardVariables } from './types';
+import { Errors, BoardVariables, FormData } from './types';
 import { useAlertModal } from '@/commons/components/modal';
 import {
   CreateBoardDocument,
@@ -16,10 +16,14 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
   const params = useParams();
   const { showAlert, AlertModalComponent } = useAlertModal();
 
-  const [writer, setWriter] = useState<string>(props.data?.fetchBoard?.writer || '');
+  // 통합 state
+  const [formData, setFormData] = useState<FormData>({
+    writer: props.data?.fetchBoard?.writer || '',
+    title: props.data?.fetchBoard?.title || '',
+    contents: props.data?.fetchBoard?.contents || '',
+  });
+
   const [password, setPassword] = useState<string>('');
-  const [title, setTitle] = useState<string>(props.data?.fetchBoard?.title || '');
-  const [contents, setContents] = useState<string>(props.data?.fetchBoard?.contents || '');
 
   const [zipcode, setZipcode] = useState<string>(
     (props.data?.fetchBoard as any)?.boardAddress?.zipcode || ''
@@ -63,10 +67,10 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     }
     // 주소 정보가 모두 비어있으면 boardAddress를 보내지 않음
     const createBoardInput: any = {
-      writer,
+      writer: formData.writer,
+      title: formData.title,
+      contents: formData.contents,
       password,
-      title,
-      contents,
     };
 
     // 유튜브 URL이 있으면 추가
@@ -122,8 +126,8 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     };
 
     // 현재 값 또는 기존 값 사용
-    updateBoardInput.title = title.trim() || props.data?.fetchBoard?.title || '';
-    updateBoardInput.contents = contents.trim() || props.data?.fetchBoard?.contents || '';
+    updateBoardInput.title = formData.title.trim() || props.data?.fetchBoard?.title || '';
+    updateBoardInput.contents = formData.contents.trim() || props.data?.fetchBoard?.contents || '';
 
     // 유튜브 URL 처리
     const currentYoutubeUrl = youtubeUrl || (props.data?.fetchBoard as any)?.youtubeUrl || '';
@@ -164,9 +168,46 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
 
   const [error, setErrors] = useState<Errors>({});
 
+  // const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setWriter(event.target.value);
+  //   if (error.writer) setErrors((prev) => ({ ...prev, writer: '' }));
+  // };
+
+  // const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setTitle(event.target.value);
+  //   if (error.title) setErrors((prev) => ({ ...prev, title: '' }));
+  // };
+
+  // const onChangeContent = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setContents(event.target.value);
+  //   if (error.contents) setErrors((prev) => ({ ...prev, contents: '' }));
+  // };
+
+  const onChangeInput = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    const field = event.target.id as keyof FormData;
+    setFormData((prev) => ({
+      ...prev,
+      [field]: event.target.value,
+    }));
+
+    if (error[field]) {
+      setErrors((prev) => ({ ...prev, [field]: '' }));
+    }
+  };
+
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-    setWriter(event.target.value);
+    setFormData((prev) => ({ ...prev, writer: event.target.value }));
     if (error.writer) setErrors((prev) => ({ ...prev, writer: '' }));
+  };
+
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({ ...prev, title: event.target.value }));
+    if (error.title) setErrors((prev) => ({ ...prev, title: '' }));
+  };
+
+  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, contents: event.target.value }));
+    if (error.contents) setErrors((prev) => ({ ...prev, contents: '' }));
   };
 
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
@@ -174,15 +215,6 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     if (error.password) setErrors((prev) => ({ ...prev, password: '' }));
   };
 
-  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-    if (error.title) setErrors((prev) => ({ ...prev, title: '' }));
-  };
-
-  const onChangeContent = (event: ChangeEvent<HTMLInputElement>) => {
-    setContents(event.target.value);
-    if (error.contents) setErrors((prev) => ({ ...prev, contents: '' }));
-  };
   const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
     setAddressDetail(event.target.value);
   };
@@ -195,16 +227,16 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     const e: Errors = {};
     // 수정 모드가 아닌 경우에만 작성자, 비밀번호 검증
     if (!props.isEdit) {
-      if (!writer.trim()) e.writer = '필수입력 사항 입니다.';
+      if (!formData.writer.trim()) e.writer = '필수입력 사항 입니다.';
       if (!password.trim()) e.password = '필수입력 사항 입니다.';
       // 등록 모드에서는 제목과 내용도 필수
-      if (!title.trim()) e.title = '필수입력 사항 입니다.';
-      if (!contents.trim()) e.contents = '필수입력 사항 입니다.';
+      if (!formData.title.trim()) e.title = '필수입력 사항 입니다.';
+      if (!formData.contents.trim()) e.contents = '필수입력 사항 입니다.';
     } else {
       // 수정 모드에서는 기존 데이터가 있으므로 빈 값이어도 허용
       // 하지만 사용자가 입력한 값이 공백만 있다면 검증
-      const currentTitle = title.trim() || props.data?.fetchBoard?.title || '';
-      const currentContent = contents.trim() || props.data?.fetchBoard?.contents || '';
+      const currentTitle = formData.title.trim() || props.data?.fetchBoard?.title || '';
+      const currentContent = formData.contents.trim() || props.data?.fetchBoard?.contents || '';
 
       if (!currentTitle) e.title = '필수입력 사항 입니다.';
       if (!currentContent) e.contents = '필수입력 사항 입니다.';
@@ -251,10 +283,12 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
   };
 
   return {
+    formData,
+    onChangeInput,
     onChangeWriter,
     onChangePassword,
     onChangeTitle,
-    onChangeContent,
+    onChangeContents,
     onChangeAddressDetail,
     onChangeYoutubeUrl,
     onclickUpdate,
