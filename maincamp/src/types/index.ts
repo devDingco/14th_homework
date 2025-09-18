@@ -18,6 +18,7 @@ export type InputProps = {
     required?: boolean;
     type: string;
     placeholder: string;
+    id?: string;
     isEdit?: boolean;
     value?:string;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -30,6 +31,7 @@ export type TextareaProps = {
     label?: string;
     required?: boolean;
     placeholder: string;
+    id?:string;
     value?:string;
     onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
     isCommentField?: boolean;

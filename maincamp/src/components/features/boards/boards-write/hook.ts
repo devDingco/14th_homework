@@ -17,10 +17,12 @@ export default function useBoardsWrite({data}:{data?: any}){
     
         /* 게시물 등록 유효성 검사 */
         // 1. 작성자, 비밀번호, 제목, 컨텐츠 작성 시 setState로 상태 변경
-        const [writer, setWriter] = useState(data?.fetchBoard.writer ?? "")
-        const [password, setPassword] = useState(data?.fetchBoard.password ?? "")
-        const [title, setTitle] = useState(data?.fetchBoard.title ?? "")
-        const [contents, setContents] = useState(!data? "" : data.fetchBoard.contents)
+        const [inputs, setInputs] = useState({
+          writer: data?.fetchBoard.writer ?? "",
+          password: data?.fetchBoard.password ?? "",
+          title: data?.fetchBoard.title ?? "",
+          contents: data?.fetchBoard.contents ?? "",
+        })
         const [youtubeUrl, setYoutubeUrl] = useState(!data? "" : data.fetchBoard.youtubeUrl)
         const [zipcode, setZipcode] = useState(!data? "" : data.fetchBoard.boardAddress?.zipcode)
         const [address, setAddress] = useState(!data? "" : data.fetchBoard.boardAddress?.address)
@@ -41,44 +43,13 @@ export default function useBoardsWrite({data}:{data?: any}){
         const [isValid, setIsValid] = useState(true)
     
         // 3. Change Event에 따른 유효성 검증
-        const onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => {
-          const value = event.target.value
-          console.log(value)
-          setWriter(value)
-      
-          if(value && password && title && contents){
-            setIsValid(false)
-          } else{
-            setIsValid(true)
-          }
-        }
-        const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-          const value = event.target.value
-    
-          setPassword(value)
-      
-          if(writer && value && title && contents){
-            setIsValid(false)
-          } else{
-            setIsValid(true)
-          }
-        }
-        const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-          const value = event.target.value
-          console.log("title밸류",value)
-          setTitle(value)
-      
-          if(writer && password && value && contents){
-            setIsValid(false)
-          } else{
-            setIsValid(true)
-          }
-        }
-        const onChangeContents = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-          const value = event.target.value
-          setContents(value)
-      
-          if(writer && password && title && value){
+        const onChangeInputs = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+          setInputs({
+            ...inputs,
+            [event.target.id]: event.target.value,
+          })
+
+          if(inputs.writer && inputs.password && inputs.title && inputs.contents){
             setIsValid(false)
           } else{
             setIsValid(true)
@@ -159,10 +130,10 @@ export default function useBoardsWrite({data}:{data?: any}){
               const result = await createBoard({
                 variables:{
                   createBoardInput:{
-                    writer: writer,
-                    password: password,
-                    title: title,
-                    contents: contents,
+                    writer: inputs.writer,
+                    password: inputs.password,
+                    title: inputs.title,
+                    contents: inputs.contents,
                     youtubeUrl: youtubeUrl,
                     boardAddress: {
                       zipcode: zipcode,
@@ -193,8 +164,8 @@ export default function useBoardsWrite({data}:{data?: any}){
           const onClickUpdate = async() => {
                   // 5-1. 수정된 사항만 업데이트 될 수 있도록 variables 설정
           const updateBoardInput: IUpdateBoardInput ={}
-          if (title!==data.fetchBoard.title && title.length>0) updateBoardInput.title = title;
-          if (contents!==data.fetchBoard.contents && title.length>0) updateBoardInput.contents = contents;
+          if (inputs.title!==data.fetchBoard.title && inputs.title.length>0) updateBoardInput.title = inputs.title;
+          if (inputs.contents!==data.fetchBoard.contents && inputs.contents.length>0) updateBoardInput.contents = inputs.contents;
           if (youtubeUrl!==data.fetchBoard.youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
           if (boardAddress!==data.fetchBoard.boardAddress){
             updateBoardInput.boardAddress = {
@@ -248,10 +219,8 @@ export default function useBoardsWrite({data}:{data?: any}){
           }
     
     return{
-        onChangeWriter,
-        onChangePassword,
-        onChangeTitle,
-        onChangeContents,
+        inputs,
+        onChangeInputs,
         onChangeBoardAddress,
         onChangeYoutubeUrl,
         onChangeFile,
@@ -267,10 +236,6 @@ export default function useBoardsWrite({data}:{data?: any}){
         setAddress,
         setAddressDetail,
         boardAddress,
-        writer,
-        password,
-        title,
-        contents,
-        youtubeUrl
+        youtubeUrl,
     }
 }

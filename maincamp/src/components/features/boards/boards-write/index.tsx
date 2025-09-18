@@ -15,10 +15,9 @@ import { Board } from '@/commons/graphql/graphql'
 
 export default function BoardsWrite({isEdit, data}:{isEdit: boolean, data?:{fetchBoard: Board}}){
 
-    const { onChangeWriter, 
-        onChangePassword, 
-        onChangeTitle, 
-        onChangeContents, 
+    const { 
+        inputs,
+        onChangeInputs,
         onChangeBoardAddress, 
         onChangeYoutubeUrl, 
         onClickCancel, 
@@ -31,13 +30,8 @@ export default function BoardsWrite({isEdit, data}:{isEdit: boolean, data?:{fetc
         onToggleModal,
         handleComplete,
         boardAddress,
-        writer,
-        password,
-        title,
-        contents,
         youtubeUrl
     } = useBoardsWrite({data});
-    // const {images, onChangeFile} = useUploadFile(data);
 
     return(
         <div className={styles.Formfield}>
@@ -45,13 +39,13 @@ export default function BoardsWrite({isEdit, data}:{isEdit: boolean, data?:{fetc
             <div className={styles.postForm__title}>게시물 {isEdit? "수정":"등록"}</div>
             {/* 작성자 그룹 */}
             <div className={styles.postForm__writer__group}>
-                <Inputfield type='text' label='작성자' required placeholder='작성자 명을 입력해 주세요.' value={writer} isEdit={isEdit} onChange={onChangeWriter}></Inputfield>
-                <Inputfield type='password' label='비밀번호' required placeholder='비밀번호를 입력해 주세요.' isEdit={isEdit} onChange={onChangePassword}></Inputfield>
+                <Inputfield type='text' label='작성자' required placeholder='작성자 명을 입력해 주세요.' id="writer" value={inputs?.writer} isEdit={isEdit} onChange={onChangeInputs}></Inputfield>
+                <Inputfield type='password' label='비밀번호' required placeholder='비밀번호를 입력해 주세요.' id="password" value={inputs?.password} isEdit={isEdit} onChange={onChangeInputs}></Inputfield>
             </div>
             <hr />
-            <Inputfield type='text' label='제목'required placeholder='제목을 입력해 주세요.' value={title} onChange={onChangeTitle} ></Inputfield>
+            <Inputfield type='text' label='제목'required placeholder='제목을 입력해 주세요.' id="title" value={inputs?.title} onChange={onChangeInputs} ></Inputfield>
             <hr/>
-            <Textareafield label='내용' required placeholder='내용을 입력해 주세요.' value={contents} onChange={onChangeContents} ></Textareafield>
+            <Textareafield label='내용' required placeholder='내용을 입력해 주세요.' id="contents" value={inputs?.contents} onChange={onChangeInputs} ></Textareafield>
             <hr />
             <InputBoardAddress placeholder='주소를 입력해 주세요.' placeholder_2='상세주소' isEdit={isEdit} value={boardAddress} onClick={onToggleModal} onChange={onChangeBoardAddress}></InputBoardAddress>
             {isModalOpen && 
