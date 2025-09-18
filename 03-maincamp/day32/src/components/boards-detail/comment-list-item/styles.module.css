@@ -1,4 +1,8 @@
-
+.comment{
+    margin: 0 auto;
+    width: 128rem;
+    
+}
 .writer{
 display: flex;
 align-items: center;
