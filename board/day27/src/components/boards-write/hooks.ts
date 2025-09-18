@@ -20,6 +20,12 @@ export default function useBoardsWrite(){
     const boardId = useParams()
     const router = useRouter()
 
+    const [inputs, setInputs] = useState({
+        email: "",
+        title: "",
+        content: ""
+    })
+
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [title, setTitle] = useState<string>("")
@@ -44,22 +50,53 @@ export default function useBoardsWrite(){
     const [boardCreate] = useMutation<CreateBoardMutation, CreateBoardMutationVariables>(CreateBoardDocument)
     const [boardUpdate] = useMutation<UpdateBoardMutation, UpdateBoardMutationVariables>(UpdateBoardDocument)
 
+   const onChangeInputs = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setInputs({
+            ...inputs,
+            [event.target.id]: event.target.value
+        });
 
-    const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
-        setEmail(event.target.value)
-
-        if (event.target.value) {
-            setEmailError("")
-        } else {
-            setEmailError("필수입력사항")
+      
+        if (event.target.id === "email") {
+            setEmail(event.target.value);
+            setEmailError(event.target.value ? "" : "필수입력사항");
+        }
+        if (event.target.id === "title") {
+            setTitle(event.target.value)
+            setTitleError(event.target.value ? "" : "필수입력사항");
+        }
+        if (event.target.id === "content") {
+            setContent(event.target.value)
+            setContentError(event.target.value ? "" : "필수입력사항");
         }
 
-        if (event.target.value && password && title && content) {
-            setIsActive(true)
+        if (
+            (event.target.id === "email" ? event.target.value : email) &&
+            password &&
+            (event.target.id === "title" ? event.target.value : title) &&
+            (event.target.id === "content" ? event.target.value : content)
+        ) {
+            setIsActive(true);
         } else {
-            setIsActive(false)
+            setIsActive(false);
         }
     }
+
+    // const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setEmail(event.target.value)
+
+    //     if (event.target.value) {
+    //         setEmailError("")
+    //     } else {
+    //         setEmailError("필수입력사항")
+    //     }
+
+    //     if (event.target.value && password && title && content) {
+    //         setIsActive(true)
+    //     } else {
+    //         setIsActive(false)
+    //     }
+    // }
 
     const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value)
@@ -81,38 +118,38 @@ export default function useBoardsWrite(){
 
     }
 
-    const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-        setTitle(event.target.value)
+    // const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setTitle(event.target.value)
 
-        if (event.target.value) {
-            setTitleError("")
-        } else {
-            setTitleError("필수입력사항")
-        }
+    //     if (event.target.value) {
+    //         setTitleError("")
+    //     } else {
+    //         setTitleError("필수입력사항")
+    //     }
 
 
-        if (email && password && event.target.value && content) {
-            setIsActive(true)
-        } else {
-            setIsActive(false)
-        }
-    }
+    //     if (email && password && event.target.value && content) {
+    //         setIsActive(true)
+    //     } else {
+    //         setIsActive(false)
+    //     }
+    // }
 
-    const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        setContent(event.target.value)
+    // const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    //     setContent(event.target.value)
 
-        if (event.target.value) {
-            setContentError("")
-        } else {
-            setContentError("필수입력사항")
-        }
+    //     if (event.target.value) {
+    //         setContentError("")
+    //     } else {
+    //         setContentError("필수입력사항")
+    //     }
 
-        if (email && password && title && event.target.value) {
-            setIsActive(true)
-        } else {
-            setIsActive(false)
-        }
-    }
+    //     if (email && password && title && event.target.value) {
+    //         setIsActive(true)
+    //     } else {
+    //         setIsActive(false)
+    //     }
+    // }
 
     const onToggleModal = (data) => {
         setIsModalOpen((prev) => !prev);
@@ -213,10 +250,11 @@ export default function useBoardsWrite(){
 
 
     return {
-        onChangeEmail: onChangeEmail,
+        onChangeInputs,
+        // onChangeEmail: onChangeEmail,
         onChangePassword: onChangePassword,
-        onChangeTitle: onChangeTitle,
-        onChangeContent: onChangeContent,
+        // onChangeTitle: onChangeTitle,
+        // onChangeContent: onChangeContent,
         onClickUpdate: onClickUpdate,
         onClickSignUp: onClickSignUp,
         emailError: emailError,

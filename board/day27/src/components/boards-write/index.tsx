@@ -10,10 +10,11 @@ import { IBoardsWriteProps } from "./types";
 
 export default function BoardsWrite(props:IBoardsWriteProps ) {
     const { 
-        onChangeEmail,
-        onChangeTitle,
+        onChangeInputs,
+        // onChangeEmail,
+        // onChangeTitle,
         onChangePassword,
-        onChangeContent, 
+        // onChangeContent, 
         onClickUpdate,
         onClickSignUp,
         emailError,
@@ -39,7 +40,7 @@ export default function BoardsWrite(props:IBoardsWriteProps ) {
                 <div className={style.메인}>
                     <div className={style.메인__1__1}>
                         <div >작성자 <span className={style.필수}>*</span> </div>
-                        <input type="text" placeholder="작성자 명을 입력해 주세요." className={`${style.input} ${style.메인1__인풋}`} onChange={onChangeEmail} disabled={props.isEdit} defaultValue={props?.data?.fetchBoard?.writer ?? ""} />
+                        <input type="text" placeholder="작성자 명을 입력해 주세요." className={`${style.input} ${style.메인1__인풋}`} id="email" onChange={onChangeInputs} disabled={props.isEdit} defaultValue={props?.data?.fetchBoard?.writer ?? ""} />
                         <div className={style.errorMassage}>{emailError}</div>
                     </div>
                     <div className={style.메인__1__1}>
@@ -51,14 +52,14 @@ export default function BoardsWrite(props:IBoardsWriteProps ) {
                 <hr></hr>
                 <div className={style.메인__1__1}>
                     <div>제목 <span className={style.필수}>*</span></div>
-                    <input className={style.input} type="text" placeholder="제목을 입력해 주세요." onChange={onChangeTitle} defaultValue={props.data?.fetchBoard?.title} />
+                    <input className={style.input} type="text" placeholder="제목을 입력해 주세요." id="title" onChange={onChangeInputs} defaultValue={props.data?.fetchBoard?.title} />
                     <div className={style.errorMassage}>{titleError}</div>
                 </div>
                 <hr></hr>
 
                 <div className={style.메인__1__1}>
                     <div>내용 <span className={style.필수}>*</span></div>
-                    <textarea className={style.textarea} placeholder="내용을 입력해 주세요." onChange={onChangeContent} defaultValue={props.data?.fetchBoard.contents} />
+                    <textarea className={style.textarea} placeholder="내용을 입력해 주세요." id="content" onChange={onChangeInputs} defaultValue={props.data?.fetchBoard.contents} />
                     <div className={style.errorMassage}>{contentError}</div>
                 </div>
 
