@@ -1,8 +1,11 @@
-import { QueryFetchBoardCommentsArgs } from '@/commons/graphql/graphql';
+import { QueryFetchBoardCommentsArgs, BoardComment } from '@/commons/graphql/graphql';
 
 export interface CommentVariables {
   data?: QueryFetchBoardCommentsArgs;
-  //   isComment: boolean;
+  isEdit?: boolean;
+  editData?: BoardComment;
+  onCancel?: () => void;
+  onSave?: () => void;
 }
 
 export type Errors = {

@@ -9,6 +9,7 @@ import { useParams } from 'next/navigation';
 export default function useCommentList() {
   const url = useParams();
   const [hasMore, setHasMore] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const commentVariables = {
     boardId: String(url.boardId),
@@ -25,12 +26,13 @@ export default function useCommentList() {
     if (!data?.fetchBoardComments) return;
 
     try {
-      const currentPage = Math.ceil(data.fetchBoardComments.length / 10) + 1;
+      const nextPage = currentPage + 1;
+      setCurrentPage(nextPage);
 
       const result = await fetchMore({
         variables: {
           boardId: String(url.boardId),
-          page: currentPage,
+          page: nextPage,
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           // 더 이상 데이터가 없으면 무한 스크롤 중단
@@ -39,19 +41,30 @@ export default function useCommentList() {
             return prev;
           }
 
-          // 기존 댓글과 새 댓글을 합치기
+          // 기존 댓글 ID들을 Set으로 관리하여 중복 방지
+          const existingIds = new Set(
+            (prev.fetchBoardComments || []).map((comment) => comment._id)
+          );
+
+          // 새로운 댓글 중 중복되지 않은 것만 필터링
+          const newComments = fetchMoreResult.fetchBoardComments.filter(
+            (comment) => !existingIds.has(comment._id)
+          );
+
+          // 중복 제거된 댓글들만 추가
           return {
-            fetchBoardComments: [
-              ...(prev.fetchBoardComments || []),
-              ...fetchMoreResult.fetchBoardComments,
-            ],
+            fetchBoardComments: [...(prev.fetchBoardComments || []), ...newComments],
           };
         },
       });
 
-      // 받아온 댓글이 10개 미만이면 더 이상 댓글이 없다고 판단
-      if (result.data.fetchBoardComments.length < 10) {
-        setHasMore(false);
+      // 새로 받아온 댓글이 10개 미만이면 더 이상 댓글이 없다고 판단
+      if (result.data && result.data.fetchBoardComments) {
+        const newCommentsCount =
+          result.data.fetchBoardComments.length - (data?.fetchBoardComments?.length || 0);
+        if (newCommentsCount < 10) {
+          setHasMore(false);
+        }
       }
     } catch (err) {
       console.error('댓글 추가 로딩 에러:', err);
@@ -60,6 +73,8 @@ export default function useCommentList() {
   };
 
   console.log('data: ', data, 'error: ', error);
+  console.log('현재 페이지:', currentPage);
+  console.log('댓글 개수:', data?.fetchBoardComments?.length);
 
   return {
     url,

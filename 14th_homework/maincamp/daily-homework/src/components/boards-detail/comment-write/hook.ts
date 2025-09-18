@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
 import { ChangeEvent, useState, useMemo } from 'react';
 import { CommentVariables, Errors } from './types';
-import { CREATE_BOARD_COMMENT } from './queries';
+import { CREATE_BOARD_COMMENT, UPDATE_BOARD_COMMENT } from './queries';
 import {
   CreateBoardCommentInput,
   MutationCreateBoardCommentArgs,
@@ -14,12 +14,13 @@ import { FETCH_BOARD_COMMENTS } from '../comment-list/queries';
 export default function useCreateBoardComment(props: CommentVariables) {
   const url = useParams();
 
-  const [writer, setWriter] = useState<string>('');
+  // 수정 모드일 때 초기값 설정
+  const [writer, setWriter] = useState<string>(props.editData?.writer || '');
   const [password, setPassword] = useState<string>('');
-  const [contents, setContents] = useState<string>('');
+  const [contents, setContents] = useState<string>(props.editData?.contents || '');
 
   //rate 용 useState
-  const [rating, setRating] = useState<number>(0);
+  const [rating, setRating] = useState<number>(props.editData?.rating || 0);
 
   const [createBoardApiRequire] = useMutation<
     CreateBoardCommentInput,
@@ -29,10 +30,27 @@ export default function useCreateBoardComment(props: CommentVariables) {
     refetchQueries: [
       {
         query: FETCH_BOARD_COMMENTS,
-        variables: { boardId: String(url.boardId) },
+        variables: {
+          boardId: String(url.boardId),
+          page: 1, // 첫 번째 페이지부터 다시 로드
+        },
       },
     ],
     awaitRefetchQueries: true, // refetch 완료까지 기다림
+  });
+
+  // 댓글 수정용 mutation
+  const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT, {
+    refetchQueries: [
+      {
+        query: FETCH_BOARD_COMMENTS,
+        variables: {
+          boardId: String(url.boardId),
+          page: 1, // 첫 번째 페이지부터 다시 로드
+        },
+      },
+    ],
+    awaitRefetchQueries: true,
   });
 
   const onClickCommentSubmit = async () => {
@@ -42,27 +60,45 @@ export default function useCreateBoardComment(props: CommentVariables) {
     }
 
     try {
-      const result = await createBoardApiRequire({
-        variables: {
-          createBoardCommentInput: {
-            writer,
+      if (props.isEdit && props.editData?._id) {
+        // 수정 모드
+        const result = await updateBoardComment({
+          variables: {
+            updateBoardCommentInput: {
+              contents,
+              rating,
+            },
             password,
-            rating,
-            contents,
+            boardCommentId: props.editData._id,
           },
-          boardId: String(url.boardId),
-        },
-      });
+        });
+        console.log('댓글 수정 성공:', result);
+      } else {
+        // 등록 모드
+        const result = await createBoardApiRequire({
+          variables: {
+            createBoardCommentInput: {
+              writer,
+              password,
+              rating,
+              contents,
+            },
+            boardId: String(url.boardId),
+          },
+        });
 
-      // 성공 시 폼 및 에러 상태 초기화
-      setWriter('');
-      setPassword('');
-      setContents('');
-      setRating(0);
-      setErrors({}); // 에러 상태도 초기화
-      console.log('댓글 등록 성공:', result);
+        // 성공 시 폼 상태 초기화 (등록 모드에서만)
+        setWriter('');
+        setPassword('');
+        setContents('');
+        setRating(0);
+        console.log('댓글 등록 성공:', result);
+      }
+
+      // 공통: 에러 상태 초기화
+      setErrors({});
     } catch (error) {
-      console.error('댓글 등록 실패:', error);
+      console.error(props.isEdit ? '댓글 수정 실패:' : '댓글 등록 실패:', error);
     }
   };
 

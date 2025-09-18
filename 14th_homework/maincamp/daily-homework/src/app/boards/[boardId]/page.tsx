@@ -12,7 +12,7 @@ export default function BoardComponentDetailPage() {
   const boardId = params?.boardId as string;
 
   return (
-    <div className={styles.D_layout}>
+    <div>
       <Detail isEdit={true} ID={boardId} />
       <CommentWrite data={{ boardId }} />
       <CommentList />
