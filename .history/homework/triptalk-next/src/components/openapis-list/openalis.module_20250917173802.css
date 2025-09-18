@@ -1,0 +1,13 @@
+.champion {
+  display: flex;
+  flex-wrap: wrap; /* 줄바꿈 허용 */
+  gap: 20px; /* 간격 */
+}
+.championCard {
+  width: 150px; /* 고정 너비 */
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+.h2 {
+}

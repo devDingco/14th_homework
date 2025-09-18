@@ -19,12 +19,11 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
   const router = useRouter(); // 페이지 이동을 위한 Next.js 라우터
   const params = useParams(); // URL에서 boardId 파라미터 추출
 
-  // 사용자 입력값을 저장하는 통합된 state
-  const [inputs, setInputs] = useState({
-    name: '',
-    title: '',
-    content: '',
-  });
+  // 사용자 입력값을 저장하는 state들
+  const [name, setName] = useState(''); // 작성자명 상태
+
+  const [title, setTitle] = useState(''); // 제목 상태
+  const [content, setContent] = useState(''); // 내용 상태
   const [password, setPassword] = useState(''); // 비밀번호 상태
   const [zipcode, setZipcode] = useState(''); // 우편번호 상태
   const [address, setAddress] = useState(''); // 기본주소 상태
@@ -57,32 +56,7 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
   const { data } = useQuery(FetchBoardForEditDocument, {
     variables: { boardId: params.boardId },
   });
-  const onChangeInputs = (event) => {
-    setInputs({
-      ...inputs,
-      [event.target.id]: event.target.value,
-    });
 
-    // 업데이트된 값으로 검증하기 위해 새로운 객체 생성
-    const newInputs = {
-      ...inputs,
-      [event.target.id]: event.target.value,
-    };
-
-    if (props?.isEdit) {
-      if (newInputs.title && newInputs.content) {
-        setIsActive(true);
-      } else {
-        setIsActive(false);
-      }
-    } else {
-      if (newInputs.name && password && newInputs.title && newInputs.content) {
-        setIsActive(true);
-      } else {
-        setIsActive(false);
-      }
-    }
-  };
   // 게시글 생성 요청 함수
   const onClickSubmit = async () => {
     try {
@@ -90,9 +64,9 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
       const result = await createBoard({
         variables: {
           createBoardInput: {
-            writer: inputs.name, // 작성자명
-            title: inputs.title, // 제목
-            contents: inputs.content, // 내용
+            writer: name, // 작성자명
+            title: title, // 제목
+            contents: content, // 내용
             password: password, // 비밀번호
             boardAddress: {
               zipcode: zipcode, // 우편번호
@@ -141,8 +115,8 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
         };
         youtubeUrl?: string;
       } = {};
-      if (inputs.title !== '') updateBoardInput.title = inputs.title;
-      if (inputs.content !== '') updateBoardInput.contents = inputs.content;
+      if (title !== '') updateBoardInput.title = title;
+      if (content !== '') updateBoardInput.contents = content;
       if (youtubeUrl !== '') updateBoardInput.youtubeUrl = youtubeUrl;
       // 주소는 무조건 기존 데이터로 전송 (간단하게)
       if (data?.fetchBoard.boardAddress) {
@@ -180,9 +154,89 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
     }
   };
 
+  // 작성자명 입력 시 실행되는 함수
+  const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value); // 입력된 값을 state에 저장
+
+    // 수정 모드와 등록 모드에 따라 다른 검증 로직 적용
+    if (props?.isEdit) {
+      // 수정 모드: 제목과 내용만 있으면 버튼 활성화
+      if (title && content) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
+    } else {
+      // 등록 모드: 모든 필수 필드가 입력되어야 버튼 활성화
+      if (event.target.value && password && title && content) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
+    }
+  };
   // 비밀번호 입력 시 실행되는 함수
-  const onChangePassword = (event) => {
-    setPassword(event.target.value);
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value); // 입력된 값을 state에 저장
+
+    // 수정 모드와 등록 모드에 따라 다른 검증 로직 적용
+    if (props?.isEdit) {
+      // 수정 모드: 제목과 내용만 있으면 버튼 활성화
+      if (title && content) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
+    } else {
+      // 등록 모드: 모든 필수 필드가 입력되어야 버튼 활성화
+      if (name && event.target.value && title && content) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
+    }
+  };
+  // 제목 입력 시 실행되는 함수
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value); // 입력된 값을 state에 저장
+
+    // 수정 모드와 등록 모드에 따라 다른 검증 로직 적용
+    if (props?.isEdit) {
+      // 수정 모드: 제목과 내용만 있으면 버튼 활성화
+      if (event.target.value && content) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
+    } else {
+      // 등록 모드: 모든 필수 필드가 입력되어야 버튼 활성화
+      if (name && password && event.target.value && content) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
+    }
+  };
+  // 내용 입력 시 실행되는 함수
+  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(event.target.value); // 입력된 값을 state에 저장
+
+    // 수정 모드와 등록 모드에 따라 다른 검증 로직 적용
+    if (props?.isEdit) {
+      // 수정 모드: 제목과 내용만 있으면 버튼 활성화
+      if (title && event.target.value) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
+    } else {
+      // 등록 모드: 모든 필수 필드가 입력되어야 버튼 활성화
+      if (name && password && title && event.target.value) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
+    }
   };
 
   // 유튜브 URL 입력 시 실행되는 함수
@@ -197,7 +251,7 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
     let hasError = false; // 에러 발생 여부를 추적하는 변수
 
     // 1. 작성자명 유효성 검증
-    if (inputs.name.trim() === '') {
+    if (name.trim() === '') {
       setNameError('필수입력 사항입니다.');
       hasError = true;
     } else {
@@ -213,7 +267,7 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
     }
 
     // 3. 제목 유효성 검증
-    if (inputs.title.trim() === '') {
+    if (title.trim() === '') {
       setTitleError('필수입력 사항입니다.');
       hasError = true;
     } else {
@@ -221,7 +275,7 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
     }
 
     // 4. 내용 유효성 검증
-    if (inputs.content.trim() === '') {
+    if (content.trim() === '') {
       setContentError('필수입력 사항입니다.');
       hasError = true;
     } else {
@@ -242,8 +296,10 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
 
   return {
     data,
-    inputs,
+    name,
     password,
+    title,
+    content,
     zipcode,
     address,
     addressDetail,
@@ -260,11 +316,13 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
     modalOpen,
     modalMessage,
     closeModal,
+    onChangeName,
     onChangePassword,
+    onChangeTitle,
+    onChangeContent,
     onChangeYoutubeUrl,
     onClickSubmit,
     onClickUpdate,
     onClickSignUp,
-    onChangeInputs,
   };
 }

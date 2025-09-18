@@ -22,7 +22,6 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     setAddressDetail,
     onClickSignUp,
     onClickUpdate,
-    onChangePassword,
     onChangeYoutubeUrl,
     nameError,
     passwordError,

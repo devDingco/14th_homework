@@ -13,7 +13,6 @@ import AllModal from '@/components/all-modal';
 export default function BoardsWrite(props: IBoardsWriteProps) {
   const {
     data,
-    inputs,
     zipcode,
     address,
     addressDetail,
@@ -22,7 +21,10 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     setAddressDetail,
     onClickSignUp,
     onClickUpdate,
+    onChangeName,
     onChangePassword,
+    onChangeTitle,
+    onChangeContent,
     onChangeYoutubeUrl,
     nameError,
     passwordError,
@@ -32,7 +34,6 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     modalOpen,
     modalMessage,
     closeModal,
-    onChangeInputs,
   } = useBoardsWrite(props);
 
   // JSX 렌더링 부분 - 실제로 화면에 보여지는 UI
@@ -46,10 +47,10 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
         <div className={styles.작성자컨테이너}>
           <div>작성자</div>
           <input
-            id="name"
+            id="writer"
             type="text"
             placeholder="작성자 명을 입력해주세요."
-            onChange={onChangeInputs}
+            onChange={onChangeName} // 입력값 변경 시 실행
             defaultValue={data?.fetchBoard.writer ?? ''} // 수정 모드일 때 기존값 표시
             disabled={props.isEdit} // 수정 모드에서는 작성자 변경 불가
           ></input>
@@ -79,7 +80,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
           id="title"
           type="text"
           placeholder="제목을 입력해 주세요."
-          onChange={onChangeInputs}
+          onChange={onChangeTitle} // 제목 입력값 변경 시 실행
           defaultValue={data?.fetchBoard.title} // 수정 모드일 때 기존 제목 표시
         ></input>
         <div className={styles.에러메시지}>{titleError}</div>{' '}
@@ -90,9 +91,8 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
       <div className={styles.내용컨테이너}>
         <div>내용</div>
         <textarea
-          id="content"
           placeholder="내용을 입력해 주세요."
-          onChange={onChangeInputs}
+          onChange={onChangeContent} // 내용 입력값 변경 시 실행
           defaultValue={data?.fetchBoard.contents} // 수정 모드일 때 기존 내용 표시
         ></textarea>
         <div className={styles.에러메시지}>{contentError}</div>

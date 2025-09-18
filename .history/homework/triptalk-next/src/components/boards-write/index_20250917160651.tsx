@@ -22,7 +22,6 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     setAddressDetail,
     onClickSignUp,
     onClickUpdate,
-    onChangePassword,
     onChangeYoutubeUrl,
     nameError,
     passwordError,
@@ -33,6 +32,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     modalMessage,
     closeModal,
     onChangeInputs,
+    onChangePassword,
   } = useBoardsWrite(props);
 
   // JSX 렌더링 부분 - 실제로 화면에 보여지는 UI
