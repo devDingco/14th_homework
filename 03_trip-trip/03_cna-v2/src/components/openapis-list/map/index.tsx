@@ -2,6 +2,7 @@
 import { CustomOverlayMap, Map, Polygon, useKakaoLoader } from 'react-kakao-maps-sdk'
 import geo from 'commons/map/SIDO_MAP_2022.json'
 import { useState } from 'react'
+import { useWeather } from './hook'
 
 const COLORS = [
   '#7F5A83',
@@ -28,20 +29,20 @@ const COLORS = [
 
 export default function KoreaMap() {
   useKakaoLoader({ appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_APPKEY!, libraries: [] })
-  const [hoverId, setHoverId] = useState<string | null>(null)
 
-  // [lng, lat] → { lat, lng }
+  const [hoverId, setHoverId] = useState<string | null>(null)
+  const [hoveredCity, setHoveredCity] = useState<string | null>(null)
+
+  const { data: weatherData, isLoading, error } = useWeather(hoveredCity)
+
   const toLatLng = ([lng, lat]: number[]) => ({ lat, lng })
 
-  // 폴리곤/멀티폴리곤을 "한 폴리곤 단위"로 반환 (각 폴리곤은 [outer, hole1, ...])
   const geomToPolygons = (geom: any) => {
     if (!geom) return []
     if (geom.type === 'Polygon') {
-      // [[ring1],[ring2]...] → [[{lat,lng}[], {lat,lng}[], ...]]
       return [geom.coordinates.map((ring: number[][]) => ring.map(toLatLng))]
     }
     if (geom.type === 'MultiPolygon') {
-      // [[[ring...]], [[ring...]], ...]
       return geom.coordinates.map((poly: number[][][]) =>
         poly.map((ring: number[][]) => ring.map(toLatLng))
       )
@@ -75,8 +76,14 @@ export default function KoreaMap() {
                       strokeOpacity={0.9}
                       fillColor={hovered ? color : '#ffffff'}
                       fillOpacity={hovered ? 0.55 : 0.35}
-                      onMouseover={() => setHoverId(id)}
-                      onMouseout={() => setHoverId((cur) => (cur === id ? null : cur))}
+                      onMouseover={() => {
+                        setHoverId(id)
+                        setHoveredCity(en_name)
+                      }}
+                      onMouseout={() => {
+                        setHoverId((cur) => (cur === id ? null : cur))
+                        setHoveredCity(null)
+                      }}
                     />
                     {hovered && (
                       <CustomOverlayMap position={position}>
@@ -86,9 +93,24 @@ export default function KoreaMap() {
                             backgroundColor: 'white',
                             border: '1px solid black',
                             borderRadius: '5px',
+                            display: 'flex',
+                            width: '150px',
                           }}
                         >
-                          {k_name}
+                          {isLoading && <div>날씨 정보 로딩 중...</div>}
+                          {error && <div className="text-red-500">{error}</div>}
+                          {!isLoading && weatherData && (
+                            <div className="flex items-center gap-2 w-auto">
+                              <img
+                                src={`http://openweathermap.org/img/wn/${weatherData?.weather[0]?.icon}.png`}
+                                alt="weather icon"
+                              />
+                              <div className="flex flex-col">
+                                <div className="font-bold">{k_name}</div>
+                                <div>{weatherData?.main?.temp}°C</div>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </CustomOverlayMap>
                     )}
