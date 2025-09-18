@@ -1,18 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useMutation, useQuery, ApolloError } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { CreateBoardDocument, UpdateBoardDocument, FetchBoardForEditDocument } from "@/commons/graphql/graphql";
 import type { BoardsWriteProps, ErrorsState, UpdateBoardInput } from "./types";
 
-// 모달 상태를 위한 인터페이스 추가
 interface ModalState {
   isOpen: boolean;
   message: string;
   isPrompt: boolean;
   input: string;
-  navigatePath: string | null; // 페이지 이동 경로를 저장할 필드 추가
+  navigatePath: string | null;
   resolve: ((value: string | null) => void) | null;
 }
 
@@ -27,10 +26,12 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     skip: !props.isEdit || !props.boardId,
   });
 
-  const [writer, setWriter] = useState("");
+  const [formData, setFormData] = useState({
+    writer: "",
+    title: "",
+    contents: "",
+  });
   const [password, setPassword] = useState("");
-  const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [boardAddress, setBoardAddress] = useState({
     zipcode: "",
@@ -46,7 +47,6 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     contents: "",
   });
 
-  // 모달 상태 초기화
   const [modalState, setModalState] = useState<ModalState>({
     isOpen: false,
     message: "",
@@ -59,9 +59,11 @@ export function useBoardsWrite(props: BoardsWriteProps) {
   useEffect(() => {
     if (props.isEdit && data && data.fetchBoard) {
       const boardData = data.fetchBoard;
-      setWriter(boardData.writer ?? "");
-      setTitle(boardData.title ?? "");
-      setContents(boardData.contents ?? "");
+      setFormData({
+        writer: boardData.writer ?? "",
+        title: boardData.title ?? "",
+        contents: boardData.contents ?? "",
+      });
       setYoutubeUrl(boardData.youtubeUrl ?? "");
       setBoardAddress({
         zipcode: boardData.boardAddress?.zipcode ?? "",
@@ -72,74 +74,47 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     }
   }, [props.isEdit, data]);
 
-  const isFormValid = writer && password && title && contents;
+  const isFormValid = useMemo(
+    () => formData.writer.trim() && password.trim() && formData.title.trim() && formData.contents.trim(),
+    [formData, password]
+  );
 
-  // alert를 대체할 함수 (페이지 이동 경로 추가)
-  const showAlert = (message: string, navigatePath: string | null = null) => {
-    setModalState({
-      isOpen: true,
-      message,
-      isPrompt: false,
-      input: "",
-      navigatePath,
-      resolve: null,
-    });
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    setErrors((prev) => ({
+      ...prev,
+      [name]: value.trim() ? "" : `${name} is required`,
+    }));
   };
 
-  // prompt를 대체할 함수
-  const showPrompt = (message: string): Promise<string | null> => {
-    return new Promise((resolve) => {
-      setModalState({
-        isOpen: true,
-        message,
-        isPrompt: true,
-        input: "",
-        navigatePath: null,
-        resolve,
-      });
-    });
+  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setPassword(value);
+    setErrors((prev) => ({
+      ...prev,
+      password: value.trim() ? "" : "password is required",
+    }));
   };
 
-  // 모달 닫기 (확인 버튼)
-  const handlePromptConfirm = () => {
-    if (modalState.resolve) {
-      modalState.resolve(modalState.input);
-    }
-    setModalState({ ...modalState, isOpen: false });
+  const onChangeYoutubeUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(event.target.value);
   };
 
-  // 모달 닫기 (취소 버튼)
-  const handlePromptCancel = () => {
-    if (modalState.resolve) {
-      modalState.resolve(null);
-    }
-    setModalState({ ...modalState, isOpen: false });
+  const onChangeBoardAddressZipcode = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBoardAddress((prev) => ({ ...prev, zipcode: event.target.value }));
   };
 
-  // 모달의 확인 버튼을 눌렀을 때 페이지 이동
-  const handleCloseModal = () => {
-    setModalState({ ...modalState, isOpen: false });
-    // 페이지 이동 경로가 있을 때만 router.push 실행
-    if (modalState.navigatePath) {
-      router.push(modalState.navigatePath);
-    }
+  const onChangeBoardAddressAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBoardAddress((prev) => ({ ...prev, address: event.target.value }));
   };
 
-  const onChangePromptInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setModalState({ ...modalState, input: event.target.value });
+  const onChangeBoardAddressAddressDetail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBoardAddress((prev) => ({ ...prev, addressDetail: event.target.value }));
   };
-
-  const onChangeWriter = (event: React.ChangeEvent<HTMLInputElement>) => setWriter(event.target.value);
-  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
-  const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => setTitle(event.target.value);
-  const onChangeContents = (event: React.ChangeEvent<HTMLTextAreaElement>) => setContents(event.target.value);
-  const onChangeYoutubeUrl = (event: React.ChangeEvent<HTMLInputElement>) => setYoutubeUrl(event.target.value);
-  const onChangeBoardAddressZipcode = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setBoardAddress({ ...boardAddress, zipcode: event.target.value });
-  const onChangeBoardAddressAddress = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setBoardAddress({ ...boardAddress, address: event.target.value });
-  const onChangeBoardAddressAddressDetail = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setBoardAddress({ ...boardAddress, addressDetail: event.target.value });
 
   const onClickPostcodeSearch = () => {
     setIsPostcodeModalOpen(true);
@@ -158,11 +133,60 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     setIsPostcodeModalOpen(false);
   };
 
+  const showAlert = (message: string, navigatePath: string | null = null) => {
+    setModalState({
+      isOpen: true,
+      message,
+      isPrompt: false,
+      input: "",
+      navigatePath,
+      resolve: null,
+    });
+  };
+
+  const showPrompt = (message: string): Promise<string | null> => {
+    return new Promise((resolve) => {
+      setModalState({
+        isOpen: true,
+        message,
+        isPrompt: true,
+        input: "",
+        navigatePath: null,
+        resolve,
+      });
+    });
+  };
+
+  const handlePromptConfirm = () => {
+    if (modalState.resolve) {
+      modalState.resolve(modalState.input);
+    }
+    setModalState({ ...modalState, isOpen: false });
+  };
+
+  const handlePromptCancel = () => {
+    if (modalState.resolve) {
+      modalState.resolve(null);
+    }
+    setModalState({ ...modalState, isOpen: false });
+  };
+
+  const handleCloseModal = () => {
+    setModalState({ ...modalState, isOpen: false });
+    if (modalState.navigatePath) {
+      router.push(modalState.navigatePath);
+    }
+  };
+
+  const onChangePromptInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setModalState({ ...modalState, input: event.target.value });
+  };
+
   const onClickSubmit = async () => {
     let hasError = false;
     const newErrors: ErrorsState = { writer: "", password: "", title: "", contents: "" };
 
-    if (!writer) {
+    if (!formData.writer) {
       newErrors.writer = "필수입력 사항입니다.";
       hasError = true;
     }
@@ -170,11 +194,11 @@ export function useBoardsWrite(props: BoardsWriteProps) {
       newErrors.password = "필수입력 사항입니다.";
       hasError = true;
     }
-    if (!title) {
+    if (!formData.title) {
       newErrors.title = "필수입력 사항입니다.";
       hasError = true;
     }
-    if (!contents) {
+    if (!formData.contents) {
       newErrors.contents = "필수입력 사항입니다.";
       hasError = true;
     }
@@ -187,10 +211,10 @@ export function useBoardsWrite(props: BoardsWriteProps) {
 
     try {
       const createBoardInput = {
-        writer,
+        writer: formData.writer,
         password,
-        title,
-        contents,
+        title: formData.title,
+        contents: formData.contents,
         youtubeUrl: youtubeUrl || "",
         boardAddress: {
           zipcode: boardAddress.zipcode || "",
@@ -203,7 +227,6 @@ export function useBoardsWrite(props: BoardsWriteProps) {
       const result = await createBoard({
         variables: { createBoardInput },
       });
-      // 성공 메시지를 띄우면서 페이지 이동 경로를 함께 전달
       showAlert("게시글이 성공적으로 등록되었습니다.", `/boards/${result.data.createBoard._id}`);
     } catch (error) {
       const apolloError = error as ApolloError;
@@ -220,8 +243,8 @@ export function useBoardsWrite(props: BoardsWriteProps) {
       const updateBoardInput: UpdateBoardInput = {};
       const originalData = data?.fetchBoard;
 
-      if (title !== originalData?.title) updateBoardInput.title = title;
-      if (contents !== originalData?.contents) updateBoardInput.contents = contents;
+      if (formData.title !== originalData?.title) updateBoardInput.title = formData.title;
+      if (formData.contents !== originalData?.contents) updateBoardInput.contents = formData.contents;
       if (youtubeUrl !== originalData?.youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
       if (
         boardAddress.zipcode !== originalData?.boardAddress?.zipcode ||
@@ -245,8 +268,6 @@ export function useBoardsWrite(props: BoardsWriteProps) {
           updateBoardInput,
         },
       });
-
-      // 성공 메시지를 띄우면서 페이지 이동 경로를 함께 전달
       showAlert("수정 완료!", `/boards/${props.boardId}`);
     } catch (error) {
       const apolloError = error as ApolloError;
@@ -266,26 +287,14 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     data,
     loading,
     error,
-    writer,
+    formData,
     password,
-    title,
-    contents,
     youtubeUrl,
     boardAddress,
     images,
     errors,
-    setWriter,
-    setPassword,
-    setTitle,
-    setContents,
-    setYoutubeUrl,
-    setBoardAddress,
-    setImages,
-    isFormValid,
-    onChangeWriter,
+    handleInputChange,
     onChangePassword,
-    onChangeTitle,
-    onChangeContents,
     onChangeYoutubeUrl,
     onChangeBoardAddressZipcode,
     onChangeBoardAddressAddress,
@@ -294,13 +303,14 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     onCompletePostcode,
     onClosePostcodeModal,
     isPostcodeModalOpen,
-    onClickSubmit,
-    onClickUpdate,
-    onClickCancel,
+    isFormValid,
     modalState,
     handleCloseModal,
     handlePromptConfirm,
     handlePromptCancel,
     onChangePromptInput,
+    onClickSubmit,
+    onClickUpdate,
+    onClickCancel,
   };
 }
