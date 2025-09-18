@@ -359,9 +359,18 @@
 .comment_info {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .comment_contents_with_icons {
   display: flex;
   flex-direction: column;
+}
+
+.comment_icons {
+  display: flex;
+}
+
+.comment_info_row {
+  display: flex;
 }

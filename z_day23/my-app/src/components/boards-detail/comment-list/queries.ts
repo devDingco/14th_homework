@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 export const FETCH_BOARD_COMMENTS = gql`
   query fetchBoardComments($boardId: ID!, $page: Int) {

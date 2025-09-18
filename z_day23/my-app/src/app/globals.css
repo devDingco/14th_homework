@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Pretendard 폰트 적용 */
-@font-face {
-  font-family: "Pretendard";
-  src: url("/fonts/Pretendard-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* 모든 태그 초기화 */
 * {
   margin: 0;
