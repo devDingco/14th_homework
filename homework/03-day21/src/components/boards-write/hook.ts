@@ -1,7 +1,7 @@
 "use client";
 
 import {  useMutation, useQuery } from "@apollo/client"
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { FETCH_BOARD,  } from "./queries";
 import { IDaumPostcodeData, IMyvariables, IUseBoardsWriteProps } from "./types";
@@ -32,14 +32,52 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
     // const [addressDetail, setAddressDetail] = useState(boardAddress.addressDetail);
 
     // ✅ 항상 빈 문자열로 state 초기화
-    const [writer, setWriter] = useState("");
+    const [inputs, setInputs] = useState({
+        writer: "",
+        title: "",
+        contents: "",
+    })
+
     const [password, setPassword] = useState(""); // 항상 선언
-    const [title, setTitle] = useState("");
-    const [contents, setContents] = useState("");
     const [zipcode, setZipcode] = useState("");
     const [address, setAddress] = useState("");
     const [addressDetail, setAddressDetail] = useState("");
     const [youtubeUrl, setYoutubeUrl] = useState("");
+
+    useEffect(() => {
+        if(props.isEdit && data?.fetchBoard) {
+            setInputs({
+                writer: data.fetchBoard.writer ?? "",
+                title: data.fetchBoard.title ?? "",
+                contents: data.fetchBoard.contents ?? "",
+            })
+
+            // 개별 state
+            setZipcode(data.fetchBoard.boardAddress?.zipcode ?? "");
+            setAddress(data.fetchBoard.boardAddress?.address ?? "");
+            setAddressDetail(data.fetchBoard.boardAddress?.addressDetail ?? "");
+            setYoutubeUrl(data.fetchBoard.youtubeUrl ?? "");
+        }
+    }, [props.isEdit, data])
+
+    // 입력값/비밀번호 변경 시 즉시 활성화 상태 재계산
+    useEffect(() => {
+        if (props.isEdit) {
+            setIsActive(inputs.title !== "" && inputs.contents !== "")
+        } else {
+            setIsActive(
+                inputs.writer !== "" &&
+                password !== "" &&
+                inputs.title !== "" &&
+                inputs.contents !== ""
+            )
+        }
+    }, [inputs, password, props.isEdit])
+
+    // const [writer, setWriter] = useState("");   
+    // const [title, setTitle] = useState("");
+    // const [contents, setContents] = useState("");
+
 
 
 
@@ -48,34 +86,34 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
     // const titleValue = props.isEdit && data?.fetchBoard?.title ? (title || data.fetchBoard.title) : title;
     // const contentsValue = props.isEdit && data?.fetchBoard?.contents ? (contents || data.fetchBoard.contents) : contents;
 
-    const writerValue = props.isEdit
-        ? (writer !== "" ? writer : data?.fetchBoard?.writer ?? "")
-        : writer;
+    // const writerValue = props.isEdit
+    //     ? (writer !== "" ? writer : data?.fetchBoard?.writer ?? "")
+    //     : writer;
 
-    const titleValue = props.isEdit
-        ? (title !== "" ? title : data?.fetchBoard?.title ?? "")
-        : title;
+    // const titleValue = props.isEdit
+    //     ? (title !== "" ? title : data?.fetchBoard?.title ?? "")
+    //     : title;
 
-    const contentsValue = props.isEdit
-        ? (contents !== "" ? contents : data?.fetchBoard?.contents ?? "")
-        : contents;
+    // const contentsValue = props.isEdit
+    //     ? (contents !== "" ? contents : data?.fetchBoard?.contents ?? "")
+    //     : contents;
 
-    const zipcodeValue = props.isEdit
-        ? (zipcode !== "" ? zipcode : data?.fetchBoard?.boardAddress?.zipcode ?? "")
-        : zipcode;
+    // const zipcodeValue = props.isEdit
+    //     ? (zipcode !== "" ? zipcode : data?.fetchBoard?.boardAddress?.zipcode ?? "")
+    //     : zipcode;
 
-    const addressValue = props.isEdit
-        ? (address !== "" ? address : data?.fetchBoard?.boardAddress?.address ?? "")
-        : address;
+    // const addressValue = props.isEdit
+    //     ? (address !== "" ? address : data?.fetchBoard?.boardAddress?.address ?? "")
+    //     : address;
 
-    const addressDetailValue = props.isEdit
-        ? (addressDetail !== "" ? addressDetail : data?.fetchBoard?.boardAddress?.addressDetail ?? "")
-        : addressDetail;
+    // const addressDetailValue = props.isEdit
+    //     ? (addressDetail !== "" ? addressDetail : data?.fetchBoard?.boardAddress?.addressDetail ?? "")
+    //     : addressDetail;
 
-    // 수정 모드일 때 값 세팅
-    const youtubeUrlValue = props.isEdit
-        ? (youtubeUrl !== "" ? youtubeUrl : data?.fetchBoard?.youtubeUrl ?? "")
-        : youtubeUrl;
+    // // 수정 모드일 때 값 세팅
+    // const youtubeUrlValue = props.isEdit
+    //     ? (youtubeUrl !== "" ? youtubeUrl : data?.fetchBoard?.youtubeUrl ?? "")
+    //     : youtubeUrl;
 
      
     // && 연산자 사용 시:
@@ -111,21 +149,29 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
     };
 
     // // 등록 페이지와 수정 페이지의 isActive 조건 분리
-    const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-    setWriter(event.target.value);
-    setIsActive(props.isEdit ? (titleValue && contentsValue) : (event.target.value && password && titleValue && contentsValue));
-    };
+    const onChangeInputs = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {                
+        const { id, value } = event.target;
+        setInputs((prev) => ({          
+            ...prev,
+            [id] : value,
+        }))
+    }
+
+    // const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setWriter(event.target.value);
+    //     setIsActive(props.isEdit ? (titleValue && contentsValue) : (event.target.value && password && titleValue && contentsValue));
+    // };
+    // const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setTitle(event.target.value);
+    //     setIsActive(props.isEdit ? (event.target.value && contentsValue) : (writer && password && event.target.value && contentsValue));
+    // };
+    // const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    //     setContents(event.target.value);
+    //     setIsActive(props.isEdit ? (titleValue && event.target.value) : (writer && password && titleValue && event.target.value));
+    // };
+
     const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-    setIsActive(props.isEdit ? (titleValue && contentsValue) : (writer && event.target.value && titleValue && contentsValue));
-    };
-    const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-    setIsActive(props.isEdit ? (event.target.value && contentsValue) : (writer && password && event.target.value && contentsValue));
-    };
-    const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setContents(event.target.value);
-    setIsActive(props.isEdit ? (titleValue && event.target.value) : (writer && password && titleValue && event.target.value));
+        setPassword(event.target.value);       
     };
 
     const onChangeZipcode = (event: ChangeEvent<HTMLInputElement>) => {
@@ -152,10 +198,10 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
             const result = await createBoard({
                 variables: {
                     createBoardInput: {
-                    writer: writer,
+                    writer: inputs.writer,
                     password: password,
-                    title: title,
-                    contents: contents,
+                    title: inputs.title,
+                    contents: inputs.contents,
                     boardAddress: {
                         zipcode: zipcode,
                         address: address,
@@ -206,8 +252,8 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
                 password: enteredPassword, 
             }
 
-            if(title !== "") myvariables.updateBoardInput.title = title
-            if(contents !=="") myvariables.updateBoardInput.contents = contents
+            if(inputs.title !== "") myvariables.updateBoardInput.title = inputs.title
+            if(inputs.contents !=="") myvariables.updateBoardInput.contents = inputs.contents
           
             if(data?.fetchBoard.boardAddress) {
                 myvariables.updateBoardInput.boardAddress = {
@@ -276,30 +322,26 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
     // //  data가 로드되지 않았을 경우 null을 반환하여 렌더링을 막음
     // if (props.isEdit && !data) return null;
 
-    return {
-        writerValue,
+    return {        
         password,
-        titleValue,
-        contentsValue,
-        zipcodeValue,
-        addressValue,
-        addressDetailValue,
-        youtubeUrlValue,
+        inputs,
+        zipcode,
+        address,
+        addressDetail,
+        youtubeUrl,
         inputError,
         isActive,
         isModalOpen,
         onToggleModal,
         handleComplete,
-        onChangeWriter,
         onChangePassword,
-        onChangeTitle,
-        onChangeContent,
         onChangeZipcode,
         onChangeAddress,
         onChangeAddressDetail,
         onChangeYoutubeUrl,
         onClickSubmit,
         onClickUpdate,
+        onChangeInputs,
     };
   
 }
