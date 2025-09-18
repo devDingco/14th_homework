@@ -1,6 +1,5 @@
 "use client";
 import "./searchBar.css";
-import "./seacrhBar.tablet.css"
 import "../../global.css";
 import { useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
@@ -90,7 +89,7 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
       )}
 
       <div className="searchbar-with-calender-container">
-     
+        <div className="search-elements-container">
         <div className="calender-container">
           <Icon outline calendar default className="calendar_icon" />
           <button type="button" className={`date-range-display r_16_24 ${startDate && endDate ? "has-value" : ""}`} onClick={openPicker}>
@@ -119,6 +118,7 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
           <input className="r_16_24" type="text" placeholder="검색어를 입력해주세요." />
         </div>
           <button type="button" className="search-button sb_18_24">검색</button>
+        </div>
         <button type="button" className="post-button sb_18_24" onClick={handlePostButtonClick}>
             <Icon outline write white className="write_icon" />
             {postButtonLabel}

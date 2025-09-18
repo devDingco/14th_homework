@@ -1,7 +1,6 @@
 "use client";
 
 import "./header.css";
-import "./header.tablet.css";
 import "../../global.css";
 import Image from "next/image";
 import Link from "next/link";

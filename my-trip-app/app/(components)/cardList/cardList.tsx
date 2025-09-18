@@ -68,7 +68,7 @@ export default function CardList() {
 
   return(
     <div className="cardList_container">
-      <h1 className="b_28_36">오늘 핫한 트립토크</h1>
+      <h1 className="cardList_title b_28_36">오늘 핫한 트립토크</h1>
       <div className="cardList_item_container">
         {loading && (
           <p className="r_14_20">게시글을 불러오는 중...</p>

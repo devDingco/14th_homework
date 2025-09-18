@@ -1,9 +1,7 @@
 "use client";
 
 import "./listComponent.css";
-import "./listComponent.tablet.css";
 import "../../global.css";
-import SearchBarMenu from "@components/searchBarMenu/searchBar";
 import Pagination from "@components/pagination/pagination";
 import type { BoardListProps, BoardItem } from "@/types/pagination";
 import type { LooseStyle } from "@/types/style";

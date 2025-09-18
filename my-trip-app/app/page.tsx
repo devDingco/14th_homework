@@ -3,7 +3,7 @@ import "@components/header/header";
 import "@components/banner/banner";
 import CardList from "@components/cardList/cardList";
 import SearchBarMenu from "@components/searchBarMenu/searchBar";
-import ListComponent from "@components/listComponent";
+import ListComponent from "@/(components)/listComponent/listComponent";
 import { fetchBoardsSSR, fetchBoardsCountSSR } from "@/commons/apis/board.ssr";
 import { formatDate } from "@/commons/hooks/formatDate";
 import PrefetchProvider from "@/commons/components/PrefetchProvider";
