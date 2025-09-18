@@ -59,8 +59,8 @@
   align-items: center;
 
   @media (max-width: 78.1rem) {
-    width: 48px;
-    height: 28px;
+    width: 56px;
+    height: 32px;
   }
 }
 
@@ -73,13 +73,11 @@
   will-change: transform;
   contain: layout style;
 
-  /* 태블릿: 78.1rem 이상 128rem 이하 */
-  @media (min-width: 78.1rem) and (max-width: 128rem) {
+  @media (max-width: 128rem) and (min-width: 78.1rem) {
     width: 100%;
     height: auto;
   }
 
-  /* 모바일: 78.1rem 미만 */
   @media (max-width: 78.1rem) {
     width: 100%;
     height: auto;

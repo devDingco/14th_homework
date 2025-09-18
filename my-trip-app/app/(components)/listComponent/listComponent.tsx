@@ -9,7 +9,6 @@ import Link from "next/link";
 
 const styles = {
   boardList_container: {
-    width: "100%",
     maxWidth: "128rem",
     margin: "0 auto",
     gap: "2.4rem",
@@ -23,6 +22,7 @@ export default function ListComponent({ data = [],totalPages = 5, initialPage = 
   return (
     <div style={styles.boardList_container as LooseStyle}>
       
+      <div className="padding_container">
       <div className="boardlist_container">
         <div className="board_table">
           <div className="board_thead me_16_20">
@@ -46,6 +46,7 @@ export default function ListComponent({ data = [],totalPages = 5, initialPage = 
         </div>
         <Pagination totalPages={totalPages} initialPage={initialPage} onChange={onChange} />
       </div>
+    </div>
     </div>
   );
 }
