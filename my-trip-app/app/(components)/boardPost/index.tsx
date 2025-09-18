@@ -154,7 +154,7 @@ export default function BoardPost() {
                   {imageUrls[index] ? (
                     <div style={{ position: "relative", width: "100%", height: "100%" }}>
                       <Image
-                        src={imageUrls[index]?.startsWith("http") ? imageUrls[index]! : `https://storage.googleapis.com/${imageUrls[index]}`}
+                        src={imageUrls[index]?.startsWith("http") ? imageUrls[index]! : `https://storage.googleapis.com/${imageUrls[index]!.startsWith("/") ? imageUrls[index]!.slice(1) : imageUrls[index]}`}
                         alt={`preview-${index}`}
                         width={160}
                         height={160}

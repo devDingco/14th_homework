@@ -6,8 +6,14 @@ const nextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx"],
   // types 폴더를 라우팅에서 제외
   images: {
-    domains: ["storage.googleapis.com"],
-    // remotePatterns: [{ protocol: "https", hostname: "storage.googleapis.com" }],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "storage.googleapis.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
     formats: ["image/webp", "image/avif"],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,

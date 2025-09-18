@@ -13,16 +13,12 @@
 
 html,
 body {
-  max-width: 192rem;
   width: 100%;
   margin: 0 auto;
   min-height: 72rem;
   overflow-x: hidden;
   background-color: var(--background-color);
   color: var(--black);
-  @media (max-width: 192rem) {
-    max-width: 192rem;
-  }
     
 
   /* @media (max-width: 128rem) {
