@@ -1,9 +1,9 @@
 'use client';
 
-import { img01, img02, img03 } from '@/assets/images/images';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
+import Image from 'next/image';
+import { img01, img02, img03 } from '@/assets/images/images';
 const images = [img01, img02, img03];
 
 export default function Carousel() {

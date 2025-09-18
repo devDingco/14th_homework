@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 type TextAreaBoxProps = {
-  lable: string;
+  label: string;
   name: string;
   placeholder: string;
   required?: boolean;
@@ -12,7 +12,7 @@ type TextAreaBoxProps = {
 };
 
 export default function TextAreaBox({
-  lable,
+  label,
   name,
   placeholder,
   required,
@@ -29,32 +29,27 @@ export default function TextAreaBox({
   };
 
   const warning = touched && !isInput;
-  console.log(warning);
 
   return (
     <div className='flex w-full flex-col items-start justify-start gap-2'>
       <div className='flex gap-1'>
-        <label className='font-base font-semibold' htmlFor={lable}>
-          {lable}
+        <label className='font-base font-semibold' htmlFor={label}>
+          {label}
         </label>
         {required ? <span className='text-[#f66a6a]'>*</span> : ''}
       </div>
       <textarea
         id={name}
         name={name}
-        className='min-h-[336px] w-full flex-1 rounded-lg px-4 py-3 outline outline-1 outline-gray-200'
+        className='min-h-[120px] w-full flex-1 rounded-lg px-4 py-3 outline outline-1 outline-gray-200'
         placeholder={placeholder}
         required={required}
         onChange={onChange}
         onBlur={handleBlur}
         defaultValue={defaultValue}
+        rows={3}
       ></textarea>
-      <div className='h-10'>
-        <span className='text-[#f66a6a]'>
-          {warning ? '필수입력 사항 입니다.' : ''}
-        </span>
-      </div>
-      {/* <input placeholder={`${placeholder} 입력해 주세요.`}></input> */}
+      {warning && <span className='text-[#f66a6a]'>필수입력 사항 입니다.</span>}
     </div>
   );
 }

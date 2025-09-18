@@ -32,6 +32,15 @@ export const FETCH_BOARD = gql`
       createdAt
       updatedAt
       deletedAt
+      boardAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+        createdAt
+        updatedAt
+        deletedAt
+      }
     }
   }
 `;
@@ -76,5 +85,11 @@ export const UPDATE_BOARD = gql`
       title
       contents
     }
+  }
+`;
+
+export const FETCH_BOARDS_COUNT = gql`
+  query FetchBoardsCount {
+    fetchBoardsCount
   }
 `;

@@ -11,8 +11,8 @@ import { Ioutline_login } from '@/assets/icons/icons';
 
 export default function Header() {
   return (
-    <div className='fixed left-0 right-0 top-0 z-50 bg-white'>
-      <header className='flex h-12 w-full items-center justify-between px-5 desktop:hidden'>
+    <div className='fixed left-0 right-0 top-0 z-50 items-center justify-center bg-white tablet:flex'>
+      <header className='flex h-12 max-w-7xl items-center justify-between px-5 tablet:w-full desktop:hidden'>
         {/* LOGO */}
         <Link href='/'>
           {/* <Image src={Logo} alt='Logo' /> */}
@@ -23,7 +23,7 @@ export default function Header() {
           <Image src={Ioutline_login} alt='login' />
         </Link>
       </header>
-      <header className='top-0 hidden h-12 w-full max-w-7xl items-center justify-between tablet:h-20 desktop:flex'>
+      <header className='top-0 hidden h-12 max-w-7xl items-center justify-between tablet:h-20 tablet:w-full desktop:flex'>
         <div className='flex gap-6'>
           {/* LOGO */}
           <Link href='/'>

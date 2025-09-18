@@ -10,6 +10,18 @@ const nextConfig = {
         port: '',
         pathname: '/codecamp-file-storage/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn1.thecatapi.com',
+        port: '',
+        pathname: '/images/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn2.thecatapi.com',
+        port: '',
+        pathname: '/images/**',
+      },
     ],
   },
 };

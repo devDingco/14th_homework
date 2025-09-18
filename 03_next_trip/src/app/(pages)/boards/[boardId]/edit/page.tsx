@@ -1,11 +1,11 @@
 'use client';
 
-import BoardForm from '@/components/Form/BoardForm';
+import BoardsWrite from '@/components/boards-write';
 
 export default function BoardsEditPage() {
   return (
     <main className='flex h-full w-full max-w-7xl flex-col gap-[16px] p-[16px]'>
-      <BoardForm isEdit={true} />
+      <BoardsWrite isEdit={true} />
     </main>
   );
 }
