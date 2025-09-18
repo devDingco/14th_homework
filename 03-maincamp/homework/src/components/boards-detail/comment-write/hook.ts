@@ -1,6 +1,6 @@
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { useParams } from 'next/navigation'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { FETCH_COMMENTS, CREATE_COMMENT, UPDATE_BOARD_COMMENT } from './queries'
 import { Modal } from "antd";
 import { ApolloError } from "@apollo/client";
@@ -30,7 +30,10 @@ export default function useCommentWrite(props: IUseCommentWriteProps) {
     setContents(e.target.value)
   }
 
-  const [createBoardComment] = useMutation(CREATE_COMMENT)
+  const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT)
+  const [createBoardComment, { data: createData }] = useMutation(CREATE_COMMENT);
+  const { data:fetchData } = useQuery(FETCH_COMMENTS,{
+  variables: { boardId, page: 1 },})
 
   const onSubmit = async () => {
     if (!writer || !password || !contents) {
@@ -55,25 +58,34 @@ export default function useCommentWrite(props: IUseCommentWriteProps) {
         ],
       })
       
-      setWriter('')
-      setPassword('')
-      setContents('')
-      setRating(3)
-      setIsComments(true)
-      Modal.success({ content: "댓글이 등록되었습니다" });
-      // alert('댓글이 등록되었습니다')
+      
     } catch (error) {
       // alert("에러가 발생했습니다 다시 시도해주세요")
        Modal.error({ content: "에러가 발생했습니다 다시 시도해주세요" });
     }
 }
 
+  useEffect(()=>{
+    if(createData){
+      setWriter('')
+      setPassword('')
+      setContents('')
+      setRating(3)
+      Modal.success({ content: "댓글이 등록되었습니다" });
+    }
+  },[createData])
+
   const onClickCancel =()=>{
     props.setIsEdit(false)
   }
-  const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT)
   
-
+  
+  useEffect(()=>{
+  if (fetchData?.fetchBoardComments?.length > 0){
+    setIsComments(true)
+  }else{
+    setIsComments(false)
+  }},[fetchData])
 
   const onClickUpdate = async () => {
     const checkPassword = prompt("비밀번호를 입력해주세요.");
@@ -117,8 +129,23 @@ try {
 }
    
     
-  };
 
+};
+const[isActive,setIsActive]=useState(false)
+
+useEffect(()=>{
+  if(props.isEdit){
+    if (contents) setIsActive(true)
+    else setIsActive(false)
+  }else{
+    if(writer && password && contents) setIsActive(true)
+    else setIsActive(false)
+  }
+
+})
+// const validation =()=>{
+//   if(!writer || !password || !contents){
+// }
 
 return{
     onChangeWriter,
@@ -133,7 +160,8 @@ return{
     isComments,
     setIsComments,
     onClickCancel,
-    onClickUpdate
+    onClickUpdate,
+    isActive
 
 }
 

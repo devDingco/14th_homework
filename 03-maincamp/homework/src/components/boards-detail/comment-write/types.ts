@@ -16,7 +16,8 @@ export interface IMyvariables {
 
   export interface IUseCommentWriteProps {
   setIsEdit: Dispatch<SetStateAction<boolean>>;
-  el: NonNullable<FetchBoardCommentsWriteQuery["fetchBoardComments"]>[number];
+  el?: NonNullable<FetchBoardCommentsWriteQuery["fetchBoardComments"]>[number] | null;
+  isEdit: boolean;
 }
 
 export interface IComment {
@@ -28,7 +29,7 @@ export interface IComment {
 }
 
 export interface IProps {
-  setIsEdit: Dispatch<SetStateAction<boolean>>;
+  setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   isEdit: boolean;
-  el: NonNullable<FetchBoardCommentsListQuery["fetchBoardComments"]>[number];
+  el?: NonNullable<FetchBoardCommentsListQuery["fetchBoardComments"]>[number] | null;
 }

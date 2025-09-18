@@ -35,7 +35,7 @@ export default function BoardsWrite(props:IBoardWriteProps) {
     handleComplete,
     onChangeAddressDetail,
     onChangeYoutubeUrl,
-  } = useBoardWrite()
+  } = useBoardWrite(props)
 
   
   

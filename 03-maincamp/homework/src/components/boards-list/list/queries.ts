@@ -19,3 +19,9 @@ export const DELETE_BOARD = gql`
   }
 
 `;
+
+export const FETCH_BOARD_COUNT = gql`
+  query{
+  fetchBoardsCount
+  }
+`;
