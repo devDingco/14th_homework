@@ -8,7 +8,7 @@ import styles from "./styles.module.css";
 // 1. [수정] 올바른 경로 별칭으로 이미지들을 import 합니다.
 import profileImage from "@assets/profile_image.png";
 import linkImage from "@assets/link.png";
-import locationImage from "@assets/location.png";
+import locationImage from "@assets/locat ion.png";
 import heartImage from "@assets/heart.png";
 import brokenheartImage from "@assets/brokenheart.png";
 import pencilImage from "@assets/pencil.png";
