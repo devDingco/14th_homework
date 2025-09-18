@@ -1,6 +1,7 @@
 "use client";
 
 import "./header.css";
+import "./header.tablet.css";
 import "../../global.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -94,7 +95,7 @@ export default function Header() {
               width={40} 
               height={40} 
             />
-            <h2 className="b_18_24">{user?.name}</h2>
+            <h2 className="me_16_24">{user?.name}</h2>
             <Icon filled name="up_arrow" black className="up_arrow_icon" onClick={toggleProfile} />
           </div>
           <div className="profile_divider"/>

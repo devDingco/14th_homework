@@ -22,7 +22,6 @@ export default function Banner() {
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}
         slidesPerView={1}
-        navigation
         pagination={{ clickable: true }}
         autoplay={{
           delay: 4000,
