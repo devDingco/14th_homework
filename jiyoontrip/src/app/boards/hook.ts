@@ -5,21 +5,22 @@ import { useRouter } from "next/navigation";
 import { MouseEvent, useState } from "react";
 import { Modal } from "antd";
 // import { DELETE_BOARD, FETCH_BOARDS } from "./queires";
-import { DeleteBoardDocument, FetchBoardsDocument } from "@/commons/graphql/graphql";
-import { FERTCH_BOARDS_COUNT, FETCH_BOARDS } from "./queires";
+import {
+  DeleteBoardDocument,
+  FetchBoardsCountDocument,
+  FetchBoardsDocument,
+} from "@/commons/graphql/graphql";
 
 export default function useBoardPage() {
   const router = useRouter();
-  const { data } = useQuery(FetchBoardsDocument);
+  const { data, refetch } = useQuery(FetchBoardsDocument, { variables: { page: 1 } });
+  const { data: dataBoardsCount } = useQuery(FetchBoardsCountDocument);
+  const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10);
   const [deleteBoard] = useMutation(DeleteBoardDocument);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState("");
-
-  const { refetch } = useQuery(FETCH_BOARDS);
-  const { data: dataBoardsCount } = useQuery(FERTCH_BOARDS_COUNT);
   const [startPage, setStartPage] = useState(1);
-  const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10);
-
+  const [currnetPage, setCurrentPage] = useState(1);
   const onClickDetail = (event: MouseEvent<HTMLElement>) => {
     router.push(`/boards/${event.currentTarget.id}`);
   };
@@ -31,17 +32,33 @@ export default function useBoardPage() {
   const onToggleModal = () => {
     setIsModalOpen((prev) => !prev);
   };
+
   const onClickDelete = async () => {
-    await deleteBoard({
-      variables: {
-        boardId: deleteId,
-      },
-      refetchQueries: [{ query: FetchBoardsDocument }],
-    });
-    setIsModalOpen((prev) => !prev);
+    if (!deleteId) return; // 삭제할 ID 없으면 종료
+    try {
+      await deleteBoard({
+        variables: { boardId: deleteId },
+      });
+      setIsModalOpen((prev) => !prev); // 모달 닫기
+      setDeleteId(""); // 삭제 ID 초기화
+      refetch({ page: startPage }); // 현재 페이지 새로고침
+    } catch (error) {
+      console.error("삭제 실패:", error);
+    }
   };
 
-  const onClickPage = (event) => {
+  // const onClickDelete = async () => {
+  //   await deleteBoard({
+  //     variables: {
+  //       boardId: deleteId,
+  //     },
+  //     refetchQueries: [{ query: FetchBoardsDocument }],
+  //   });
+  //   setIsModalOpen((prev) => !prev);
+  // };
+
+  const onClickPage = (event: MouseEvent<HTMLButtonElement>) => {
+    setCurrentPage(Number(event?.target.id));
     refetch({ page: Number(event?.target.id) });
   };
   const onClickPrevPage = () => {
@@ -68,5 +85,6 @@ export default function useBoardPage() {
     onClickPage,
     lastPage,
     startPage,
+    currnetPage,
   };
 }
