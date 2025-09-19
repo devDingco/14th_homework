@@ -13,6 +13,7 @@
 .Formfield input,
 .Formfield textarea,
 .Commentfield textarea{
+    max-width: 80rem;
     width: 100%;
     height: 3rem;
     border-radius: 0.5rem;

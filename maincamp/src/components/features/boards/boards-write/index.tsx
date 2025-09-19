@@ -63,9 +63,9 @@ export default function BoardsWrite({isEdit, data}:{isEdit: boolean, data?:{fetc
             <div className={styles.postForm__attachments__group}>
                 <label>사진 첨부</label>
                 <div className={styles.image__upload__group}>
-                    {images[0] ? <img src={`https://storage.googleapis.com/${images[0]}`} className={styles.upload__image}/>:<InputImage id="0" onChange={onChangeFile} />}
-                    {images[1] ? <img src={`https://storage.googleapis.com/${images[1]}`} className={styles.upload__image}/>:<InputImage id="1" onChange={onChangeFile} />}
-                    {images[2] ? <img src={`https://storage.googleapis.com/${images[2]}`} className={styles.upload__image}/>:<InputImage id="2" onChange={onChangeFile} />}
+                    {images[0] ? <img src={`https://storage.googleapis.com/${images[0]}`} className={styles.upload__image}/>:<InputImage id="0" onChange={onChangeFile} className={styles.upload__image}/>}
+                    {images[1] ? <img src={`https://storage.googleapis.com/${images[1]}`} className={styles.upload__image}/>:<InputImage id="1" onChange={onChangeFile} className={styles.upload__image}/>}
+                    {images[2] ? <img src={`https://storage.googleapis.com/${images[2]}`} className={styles.upload__image}/>:<InputImage id="2" onChange={onChangeFile} className={styles.upload__image}/>}
                 </div>
             </div>
             <div className={styles.postForm__button__group}>

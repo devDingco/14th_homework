@@ -7,22 +7,23 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function OpenApisPage(){
 
-    const [hasMore, setHasMore] = useState(true)
-    const [length, setLength] = useState(5)
+    const [randoms, setRandoms] = useState(()=> 
+        Array.from({length: 10},()=> Math.floor(Math.random()*1010)+1))
     const onNext = () => {
-        setLength(prev => prev + 5)
+        const next = Array.from({ length: 10 }, () => Math.floor(Math.random() * 1010) + 1);
+        setRandoms(prev => [...prev, ...next])
     }
 
     return(
         <>
             <InfiniteScroll
-                dataLength={length}
-                hasMore={hasMore}
+                dataLength={randoms.length}
+                hasMore={true}
                 next={onNext}
                 loader={<div>로딩중입니다</div>}
             >
-            {Array.from({length: length}).map((_,index) => 
-                <PokemonItem number={index + 1} />
+            {randoms.map((id,index) => 
+                <PokemonItem number={id} key={index} />
             )}
             </InfiniteScroll>
         </>

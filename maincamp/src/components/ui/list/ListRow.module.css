@@ -26,6 +26,7 @@
 .ListRow svg{
     position: absolute;
     right: 0.78rem;
+    top: calc(50% - 18px/2);
     display: none;
 }
 

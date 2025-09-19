@@ -24,7 +24,28 @@
     color: var(--color-gray-600);
 }
 
+.textDesktop{
+    display: inline;
+}
 
+.textMobile{
+    display: none;
+}
+
+@media (max-width: 780px){
+    .add__image label{
+        max-width: 10rem;
+        min-width: 6.25rem;
+        width: 100%;
+        flex: 1 1 0; 
+    }
+    .textDesktop{
+        display: none;
+    }
+    .textMobile{
+        display: inline;
+    }
+}
 
 
 

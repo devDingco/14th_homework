@@ -16,7 +16,8 @@ export default function PokemonItem ({number}: {number: number}){
         sprites: "",
         koreanName: "",
         koreanGenus: "",
-        flavor_text_entries: {flavor_text:""}
+        flavor_text_entries: {flavor_text:""},
+        color: {light: "", normal:"", dark:""}
     })
     useEffect(()=>{
         getPokeMon(number).then(setData);
@@ -30,17 +31,28 @@ export default function PokemonItem ({number}: {number: number}){
             sprites,
             koreanName,
             koreanGenus,
-            flavor_text_entries
+            flavor_text_entries,
+            color
         } = data;
 
-
+        const {light, normal, dark} = color;
+        console
         
 
     return(
-        <div className={styles.cardContainer}>
+        <div 
+            className={styles.cardContainer}
+            style={{"--poke-light-color": light, "--poke-dark-color": dark} as React.CSSProperties}
+        >
             <div className={styles.pokemon} style={{backgroundImage: `url(${sprites})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition:"center"}}>
-                <div className={styles.nameGroup}>
-                    <div className={styles.Name}>
+                <div 
+                    className={styles.nameGroup} 
+                    style={{"--poke-light-color": light, "--poke-dark-color": dark} as React.CSSProperties}
+                >
+                    <div 
+                        className={styles.Name}
+                        style={{"--poke-light-color": light} as React.CSSProperties}
+                    >
                         <div>{koreanName?? ""}</div>
                         <p>{name?? ""}</p>
                     </div>
@@ -48,7 +60,10 @@ export default function PokemonItem ({number}: {number: number}){
                 </div>
                 {/* <img src={sprites?? ""} style={{width: "100%", height: "70%", objectFit: "cover", position: "absolute", zIndex: 0}}/> */}
 
-                <div className={styles.ContentsGroup}>
+                <div 
+                    className={styles.ContentsGroup}
+                    style={{"--poke-normal-color": normal,"--poke-light-color": light} as React.CSSProperties}
+                >
                     <div>
                         <p>{koreanGenus?? "???"}</p>
                         <div className={styles.spec}>

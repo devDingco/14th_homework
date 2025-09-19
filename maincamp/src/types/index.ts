@@ -1,5 +1,3 @@
-import { ChangeEvent } from "react"
-
 /* button types */
 export type ButtonType = 'submit' | 'reset' | 'button';
 export type ButtonProps = {

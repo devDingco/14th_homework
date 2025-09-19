@@ -1,8 +1,40 @@
-.searchbar{
+.searchbarGroup{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
 
+}
+
+
+.searchbar{
+    /* width: 40rem; */
+    min-width: 11.25rem;
+    max-width: 40rem;
+    flex: 1 0 0;
+}
+
+.searchbarGroup div{
+
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-gray-50);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.searchbarGroup div::placeholder{
+    color: var(--color-gray-500);
+    font-weight: var(--font-weight-regular);
+}
+
+.searchbarGroup div input{
+    width: 100%;
+    background: none;
+    outline: none;
 }

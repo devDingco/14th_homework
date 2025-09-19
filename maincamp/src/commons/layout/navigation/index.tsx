@@ -1,12 +1,22 @@
+"use client"
+
+import { useRouter } from 'next/navigation'
 import styles from './style.module.css'
 
 export default function LayoutNavigation (){
+
+    const router = useRouter();
+
+    const onClickBoards = () => {
+        router.push('/boards')
+    }
+
     return(
         <div className={styles.navigation}>
             <div className={styles.navigation__tab}>
                 <img src="/icons/triptrip_logo.svg" />
                 <div>
-                    <div className={styles.selected}>트립토크</div>
+                    <div className={styles.selected} onClick={onClickBoards}>트립토크</div>
                     <div>숙박권 구매</div>
                     <div>마이 페이지</div>
                 </div>
