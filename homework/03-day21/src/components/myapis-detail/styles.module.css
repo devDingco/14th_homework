@@ -1,0 +1,194 @@
+.layout {
+    width: 100%;
+    padding: 0 1.25rem;
+  } 
+  
+  .container {
+    width: 100%;
+    max-width: 80rem;  
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem;
+    display: flex;  
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .detailSubjectText {
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1.75rem;
+    color: #000;
+  }
+  
+  .detailBorder {
+    width: 100%;
+    height: 1px;
+    background: var(--gray-100, #e4e4e4);
+  }
+  
+  .detailRowFlex {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3.375rem;
+    align-self: stretch;
+  }
+  
+  .detailMetadataProfile {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+  
+    color: var(--gray-700, #5F5F5F);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.25rem;
+    
+  }
+  
+  .detailMetadataDate{
+    white-space: nowrap;
+    color: #818181;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem; 
+
+  }
+  .detailMetadataContainer {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+    align-self: stretch;
+    color: #818181;
+  } 
+  
+  .detailMetadataIconContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Tooltip 전체 컨테이너 */
+  /* .addressTooltip .ant-tooltip-inner{
+    display: inline-flex;
+    max-width: 20rem;
+    padding: 0.5rem 0.75rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+
+    border-radius: 0.25rem;
+    border: 1px solid var(--gray-100, #E4E4E4);
+    background: #FFF;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem; 
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.30), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  } */
+
+  /* Tooltip 화살표 (안쓰지만 혹시 기본 렌더링될 때 대비) */
+  /* .addressTooltip .ant-tooltip-arrow {
+    display: none !important; 
+  } */
+  /* 화살표 아예숨기기 */
+  
+  /* styles.addressTooltip은 실제 DOM에 들어가면 addressTooltip___hash 이런 식으로 랜덤 해시 클래스로 바뀝니다.
+  → 실제 DOM에서는 .addressTooltip___hash .ant-tooltip-inner가 되는데,
+  AntD의 Tooltip DOM 구조를 보면 .ant-tooltip이 최상위 컨테이너라서,
+  해시 클래스가 바깥이 아니라 안쪽에만 붙기 때문에 CSS가 적용 안 되는 것이에요.
+ 
+  overlayClassName="addressTooltip" → 전역 클래스라 OK
+  따라서 툴팁 커스텀은 globals.css 같은 전역 CSS에 작성해야 확실히 적용됩니다 */
+
+  .detailContentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .detailContentText {
+    align-self: stretch;
+  
+    color: #000;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+  }    
+  
+  .detailVideoPreview {
+    width: 100%;
+  }
+  
+  .detailContentGoodOrBad {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    align-self: stretch;
+  }
+  
+  .detailBadContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    color: #000000;
+  }
+  
+  .detailGoodContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    color: #F66A6A;
+  }
+  
+  /* 버튼영역 */
+  .detailButtonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    align-self: stretch;
+  }
+  
+  .detailButton {
+    appearance: none;
+    display: flex;
+    height: 3rem;
+    padding: 0.5rem 0.75rem;
+    align-items: center;
+    gap: 0.5rem;
+  
+    cursor: pointer;
+  
+    border: 1px solid #000;
+    border-radius: 0.5rem;
+    background-color: #fff;
+  
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.25rem;
+    color: #000;
+    text-align: center;
+  }
+  

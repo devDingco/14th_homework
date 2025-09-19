@@ -1,6 +1,6 @@
 "use client"
 
-import { useParams, usePathname } from "next/navigation"
+import { usePathname } from "next/navigation"
 import BoardsBanner from "./banner"
 import Navigation from "./navigation"
 
@@ -20,7 +20,8 @@ export default function Layout({children}: ILayoutProps) {
 
     const isHiddenTop =
         pathname === "/boards/new" || // 등록하기
-        pathname.endsWith("/edit")    // 수정하기 (모든 boardId/edit 에 매칭)
+        pathname.endsWith("/edit") ||
+        pathname === "/openapis/new";    // 수정하기 (모든 boardId/edit 에 매칭)
 
     return(
         <>  
