@@ -1,0 +1,292 @@
+.layout {
+    width: 100%;
+    padding: 0 1.25rem;
+  } 
+  
+  .container {
+    width: 100%;
+    max-width: 80rem;  
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem;
+    display: flex;  
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+  }
+  
+  .enrollSubjectText {
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1.75rem;
+    color: #000;
+  }
+  
+  .enrollContentArea {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .inputArea {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .enrollBorder {
+    width: 100%;
+    height: 1px;
+    background: var(--gray-100, #e4e4e4);
+  }
+  
+  .enrollRowFlex {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 2.5rem;
+  }
+  
+  .flexHalf {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .enrollFormTitle {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.25rem;
+    align-self: stretch;
+  
+    color: #333;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem;
+  }
+  
+  .enrollRequiredIndicator {
+    color: #f66a6a;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem;
+  }
+  
+  .enrollInput {
+    width: 100%;
+    display: flex;
+    padding: 0.75rem 1rem;
+  
+    appearance: none;
+    border-radius: 0.5rem;
+    border: 1px solid #d4d3d3;
+    background-color: #fff;
+
+    color: #000;
+  
+    clear: var(--Gray-Gray-400, #ABABAB);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+  
+    font-family: 'Pretendard Variable', sans-serif;
+  }
+  
+  .enrollInput:disabled {
+    border-radius: 0.5rem;
+    background: var(--gray-50, #F2F2F2);
+    border: none;
+    color: #333;
+  }
+  .inputErrorMessage {
+    color: var(--red, #F66A6A);
+  
+    font-family: "Pretendard Variable";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem;
+  }
+  
+  .enrollTextarea {
+    height: 21rem;
+  }
+  
+  .enrollRowSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .zipcodeInput {
+    width: 13.75rem;
+    display: flex;
+    padding: 0.75rem 1rem;
+  
+    appearance: none;
+    border-radius: 0.5rem;
+    border: 1px solid #d4d3d3;
+    background-color: #fff;
+  
+    color: #333;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+  }
+  
+  .enrollAddressFirstrow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .zipcodeSearchButton {
+    display: flex;
+    height: 3rem;
+    padding: 0.75rem 1rem;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  
+    border-radius: 0.5rem;
+    border: 1px solid #000;
+    background: #fff;
+  
+    color: #000;
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem;
+    white-space: nowrap;
+  }
+  
+  .pictureEnrollRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .pictureEnrollButton {
+    display: flex;
+    width: 20rem;
+    height: 22.5rem;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  
+    cursor: pointer;
+  
+    border-radius: 0.5rem;
+    background: #F2F2F2;
+    overflow: hidden;
+  }
+  
+  .thumbnailImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .picturePlaceholder {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .placeholderIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .pictureEnrollButtonText {
+    color: #777;
+  
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+  }
+  
+  /* 버튼영역 */
+  .enrollButtonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    align-self: stretch;
+    padding-top: 40px;
+  }
+  
+  .enrollCancelButton {
+    appearance: none;
+    display: flex;
+    height: 3rem;
+    padding: 0.75rem 1rem;
+    align-items: center;
+    gap: 0.5rem;
+  
+    cursor: pointer;
+  
+    border: 1px solid #000;
+    border-radius: 0.5rem;
+    background-color: #fff;
+  
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem;
+    color: #000;
+  }
+  
+  .enrollSubmitButton {
+    display: flex;
+    height: 3rem;
+    padding: 0.75rem 1rem;
+    align-items: center;
+    gap: 0.5rem;
+  
+    border: none;
+    border-radius: 0.5rem;
+  
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem;
+  
+    cursor: pointer;
+  }
+  
+  /* 활성화 상태 */
+  .active {
+    background-color: #2974e5;
+    color: #fff;
+  }
+  
+  /* 비활성화 상태 */
+  .disabled {
+    background-color: #c7c7c7;
+    color: #e4e4e4;
+    cursor: not-allowed;
+  }
+  

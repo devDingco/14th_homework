@@ -131,7 +131,7 @@ export default function BoardsWrite(props: IBoardWriteProps) {
 
             {isModalOpen && (
                 <Modal
-                title="모달 제목"        
+                title="주소 검색"        
                 open={isModalOpen}
                 onOk={onToggleModal}
                 onCancel={onToggleModal}
