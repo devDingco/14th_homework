@@ -18,6 +18,12 @@ export interface BoardVariables {
   isEdit: boolean;
 }
 
+export interface FormData {
+  writer: string;
+  title: string;
+  contents: string;
+}
+
 export type Errors = {
   writer?: string;
   password?: string;
