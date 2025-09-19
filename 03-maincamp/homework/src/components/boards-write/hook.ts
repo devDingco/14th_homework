@@ -11,9 +11,10 @@ import { on } from "events";
 import { FetchBoardQuery } from "@/gql/graphql";
 import { ApolloError } from "@apollo/client";
 import { Modal } from "antd";
+import { IBoardWriteProps } from "@/components/boards-write/types";
 
 
-export default function useBoardsWrite() {
+export default function useBoardsWrite(props:IBoardWriteProps) {
 
   const [zipcode, setZonecode] = useState("");
   const [address, setAddress] = useState("");
@@ -84,9 +85,15 @@ export default function useBoardsWrite() {
 //   }
 // }
   useEffect(()=>{
-    if(inputs.writer && inputs.title && inputs.contents && password){
-      setIsActive(true)
-    }else{setIsActive(false)
+    if(props.isEdit){
+      if(inputs.contents && inputs.title) setIsActive(true)
+      else setIsActive(false)
+    }else{
+      if(inputs.writer && inputs.title && inputs.contents && password){
+        setIsActive(true)
+      }else{setIsActive(false)
+      }
+
     }
   },[inputs,password])
   

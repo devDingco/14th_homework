@@ -1,18 +1,58 @@
  "use client"
 
-import { Rate } from "antd"
+import { Modal, Rate } from "antd"
 import style from './styles.module.css'
 import { useState } from "react"
 import CommentWrite from "../comment-write"
    
 import { CommentListItemProps } from "./types"
+import { gql, useMutation } from "@apollo/client"
+import { useParams } from "next/navigation"
 
-
+const DELETE_COMMENT = gql`
+   mutation deleteBoardComment($password:String,$boardCommentId:ID!){
+      deleteBoardComment(password:$password,boardCommentId:$boardCommentId)
+   }
+`
+const FETCH_COMMENTS = gql`
+   query fetchBoardCommentsListItem($boardId:ID!){
+      fetchBoardComments(boardId:$boardId){
+         _id
+         writer
+         contents
+         rating
+         createdAt
+      }
+   }
+`
 
  export default function CommentListItem({ el }: CommentListItemProps){
+   const {boardId} = useParams()
+   const [deleteComment] = useMutation(DELETE_COMMENT)
    const [isEdit,setIsEdit] = useState(false)
    const onClickEdit = () => {
       setIsEdit(true)
+   }
+   const onClickDelete = async () => {
+      const checkPassword = prompt("비밀번호를 입력해주세요")
+      if (!checkPassword) return 
+        try {
+         await deleteComment({
+            variables:{
+               password: checkPassword,
+               boardCommentId:el._id
+            },
+            refetchQueries:[{
+               query:FETCH_COMMENTS,variables:{boardId:boardId}
+            }]
+            
+         
+         })
+        }catch(error){
+         Modal.error({
+            content:"댓글 삭제중 오류가 발생했습니다"
+         })
+        }
    }
     return(
               isEdit ? <CommentWrite isEdit={isEdit} setIsEdit={setIsEdit} el={el}/> :
@@ -29,7 +69,7 @@ import { CommentListItemProps } from "./types"
                                 <button onClick={onClickEdit} className={style.edit}>
                                  <img src="/images/comment_edit.png" alt="" />
                                  </button>
-                                 <button className={style.delete}>
+                                 <button onClick={onClickDelete} className={style.delete}>
                                 <img src="/images/comment_close.png" alt="" />
                                  </button>
                                 

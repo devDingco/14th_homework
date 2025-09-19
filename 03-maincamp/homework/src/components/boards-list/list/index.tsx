@@ -5,6 +5,8 @@ import useBoardsList from './hook'
 import { FetchBoardQuery } from '@/gql/graphql'
 import { IBoardsListProps } from './type'
 import { usePagination } from '../pagination/hook'
+import { FETCH_BOARD_COUNT } from './queries'
+import { useQuery } from '@apollo/client'
 
 export default function BoardsList(props:IBoardsListProps) {
 
@@ -13,7 +15,10 @@ export default function BoardsList(props:IBoardsListProps) {
     onClickDelete,
     onClickMove,
   } = useBoardsList()
-  const boardNumber = (props?.currentPage -1 ) * 10 + 1
+  const { data } = useQuery(FETCH_BOARD_COUNT)
+  const totalCount = data?.fetchBoardsCount ?? 0 
+  const startNumber = totalCount - (props?.currentPage - 1) * 10
+
   return (
 
     <div className={styles.box}>
@@ -30,7 +35,7 @@ export default function BoardsList(props:IBoardsListProps) {
                         <div className={styles.board__main__articlebox}>
                             {props.data?.map((el: FetchBoardQuery['fetchBoard'], index:number) => (
                                 <div key={el._id} className={styles.board__main__articlebox__item} onClick={() => onClickMove(el._id)}>
-                                    <div className={styles.board__main__articlebox__item__number}>{boardNumber + index}</div>
+                                    <div className={styles.board__main__articlebox__item__number}>  {startNumber - index} </div>
                                     <div className={styles.board__main__articlebox__item__title} >{el.title}</div>
                                     <div className={styles.board__main__articlebox__item__writer}>{el.writer}</div>
                                     <div className={styles.board__main__articlebox__item__date}>{new Date(el.createdAt).toISOString().split("T")[0]}</div>

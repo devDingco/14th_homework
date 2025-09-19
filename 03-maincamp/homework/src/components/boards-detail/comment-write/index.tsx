@@ -23,6 +23,7 @@ export default function CommentWrite(props:IProps) {
     setIsComments,
     onClickCancel,
     onClickUpdate,
+    isActive
   } = useCommentWrite(props)
 
 
@@ -51,7 +52,7 @@ export default function CommentWrite(props:IProps) {
                   type="text"
                   placeholder="작성자를 입력해주세요"
                   disabled={!!props.el}
-                  defaultValue={props.el?.writer ?? writer}
+                  value={props.el?.writer ?? writer}
                 />
               </div>
 
@@ -84,7 +85,7 @@ export default function CommentWrite(props:IProps) {
           <button
             onClick={props.isEdit ? onClickUpdate : onSubmit} 
             
-            className={styles.comment__write__form__button}
+            className={isActive ? styles.active : styles.comment__write__form__button}
             
           >
             {props.isEdit ? '수정하기' : "댓글등록"}
