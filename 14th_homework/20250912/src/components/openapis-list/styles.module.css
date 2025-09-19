@@ -91,3 +91,9 @@
       grid-template-columns: 1fr;
     }
   }
+
+  .cardLink {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
