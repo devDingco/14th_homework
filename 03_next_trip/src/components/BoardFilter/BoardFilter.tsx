@@ -1,3 +1,5 @@
+// import { MdOutlineCalendarToday } from 'react-icons/md';
+
 export default function BoardFilter() {
   return (
     <div className='mb-6 px-5'>
@@ -5,6 +7,7 @@ export default function BoardFilter() {
         트립토크 게시판
       </p>
       <form className='flex flex-col gap-3'>
+        {/* <MdOutlineCalendarToday /> */}
         <input
           className='h-10 rounded-lg bg-gray-100'
           type='text'

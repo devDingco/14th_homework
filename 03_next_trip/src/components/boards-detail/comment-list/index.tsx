@@ -5,7 +5,7 @@ import { BoardComment } from '@/types/gql/graphql';
 import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import CommentItem from '../comment-item';
+import CommentListItem from '../comment-list-item';
 
 // export const FETCH_BOARDS = gql`
 //   query FetchBoards($page: Int) {
@@ -72,14 +72,12 @@ export default function CommentList({
   console.log(data && data.fetchBoardComments.length);
   return (
     <>
-      <h1>page</h1>
       <InfiniteScroll
         dataLength={data?.fetchBoardComments.length ?? 0}
         hasMore={hasMore}
         next={onNext}
         loader={<div key={0}>Loading ...</div>}
       >
-        <div className='content'>Content</div>
         {/* {data?.fetchBoardComments.map((el: Partial<Board>) => (
           <div
             key={el._id}
@@ -97,8 +95,8 @@ export default function CommentList({
           </div>
         )}
         {data?.fetchBoardComments &&
-          data?.fetchBoardComments.map((props: BoardComment) => (
-            <CommentItem key={props._id} {...props} />
+          data?.fetchBoardComments.map((comment: BoardComment) => (
+            <CommentListItem key={comment._id} comment={comment} />
           ))}
       </InfiniteScroll>
     </>

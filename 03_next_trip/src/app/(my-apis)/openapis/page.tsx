@@ -1,7 +1,7 @@
 'use client';
 
 import OpenApisList from '@/components/openapis-list';
-import { useFetchCats } from '@/components/openapis-list/hook';
+import { useFetchCats } from '@/components/openapis-list/hooks';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 export default function OpenApisPage() {

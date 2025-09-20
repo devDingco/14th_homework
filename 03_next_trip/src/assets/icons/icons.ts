@@ -1,3 +1,5 @@
+export { default as LOGO } from './logo.svg';
+
 export { default as Ifilled_bookmark } from './filled/bookmark.svg';
 export { default as Ifilled_charge } from './filled/charge.svg';
 export { default as Ifilled_check } from './filled/check.svg';

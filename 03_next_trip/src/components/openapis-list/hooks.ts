@@ -24,7 +24,7 @@ export const useFetchCats = () => {
 
   useEffect(() => {
     fetchCats();
-  }, [ ]);
+  }, []);
 
   const loadMore = () => {
     if (hasMore) {

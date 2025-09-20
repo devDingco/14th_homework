@@ -5,9 +5,9 @@ const navList = [
 ];
 
 import Image from 'next/image';
-import Logo from '@/assets/logo.svg';
+
 import Link from 'next/link';
-import { Ioutline_login } from '@/assets/icons/icons';
+import { Ioutline_login, LOGO } from '@/assets/icons/icons';
 
 export default function Header() {
   return (
@@ -16,7 +16,7 @@ export default function Header() {
         {/* LOGO */}
         <Link href='/'>
           {/* <Image src={Logo} alt='Logo' /> */}
-          <span>트립토크</span>
+          <span className='font-bold'>트립토크</span>
         </Link>
         <Link href='/login' className='flex gap-1'>
           <span>로그인</span>
@@ -27,7 +27,7 @@ export default function Header() {
         <div className='flex gap-6'>
           {/* LOGO */}
           <Link href='/'>
-            <Image src={Logo} alt='Logo' />
+            <Image src={LOGO} alt='Logo' />
           </Link>
           {/* Modile NaVBar */}
           <nav className='desktop:hidden'></nav>
