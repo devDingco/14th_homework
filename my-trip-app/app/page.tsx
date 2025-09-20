@@ -3,7 +3,7 @@ import "@components/header/header";
 import "@components/banner/banner";
 import CardList from "@components/cardList/cardList";
 import SearchBarMenu from "@components/searchBarMenu/searchBar";
-import ListComponent from "@components/listComponent/listComponent";
+import ListComponent from "@/(components)/listComponent/listComponent";
 import { fetchBoardsSSR, fetchBoardsCountSSR } from "@/commons/apis/board.ssr";
 import { formatDate } from "@/commons/hooks/formatDate";
 import PrefetchProvider from "@/commons/components/PrefetchProvider";
@@ -31,9 +31,8 @@ export default async function Home({ searchParams }: { searchParams?: { page?: s
     <PrefetchProvider>
       <div>
         <CardList/>
-        <h1 className="b_28_36" style={{width: "128rem", margin: "0 auto", marginBottom: "2.4rem"}}>트립토크 게시판</h1>
-        <SearchBarMenu  postButtonLabel="트립토크 등록" />
-        <ListComponent data={data} totalPages={totalPages} initialPage={page} />
+        <SearchBarMenu postButtonLabel="트립토크 등록" showMainTitle={true} /> 
+        <ListComponent data={data} totalPages={totalPages} initialPage={page} /> 
       </div>
     </PrefetchProvider>
   );

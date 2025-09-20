@@ -12,9 +12,10 @@ export interface SearchBarMenuProps {
   filtersEnabled?: boolean;
   defaultFilter?: "available" | "soldout";
   postButtonLabel?: string;
+  showMainTitle?: boolean;
 }
 
-export default function SearchBarMenu({ title, filtersEnabled = false, defaultFilter = "available", postButtonLabel = "트립토크 등록" }: SearchBarMenuProps) {
+export default function SearchBarMenu({ title, filtersEnabled = false, defaultFilter = "available", postButtonLabel = "트립토크 등록", showMainTitle = false }: SearchBarMenuProps) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [activeFilter, setActiveFilter] = useState(defaultFilter);
@@ -60,6 +61,9 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
   };
   return (
     <div className="head_component_container">
+      {showMainTitle && (
+        <h1 className="b_28_36" style={{width: "128rem", margin: "0 auto", marginBottom: "2.4rem"}}>트립토크 게시판</h1>
+      )}
       {title && (
         <div className="searchbar-header">
           <h1 className="b_28_36">{title}</h1>
@@ -85,7 +89,7 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
       )}
 
       <div className="searchbar-with-calender-container">
-     
+        <div className="search-elements-container">
         <div className="calender-container">
           <Icon outline calendar default className="calendar_icon" />
           <button type="button" className={`date-range-display r_16_24 ${startDate && endDate ? "has-value" : ""}`} onClick={openPicker}>
@@ -114,6 +118,7 @@ export default function SearchBarMenu({ title, filtersEnabled = false, defaultFi
           <input className="r_16_24" type="text" placeholder="검색어를 입력해주세요." />
         </div>
           <button type="button" className="search-button sb_18_24">검색</button>
+        </div>
         <button type="button" className="post-button sb_18_24" onClick={handlePostButtonClick}>
             <Icon outline write white className="write_icon" />
             {postButtonLabel}

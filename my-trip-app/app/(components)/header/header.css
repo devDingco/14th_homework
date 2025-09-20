@@ -8,19 +8,48 @@
 .header {
   width: 128rem;
   height: 8rem;
-  background-color: #ffffff;
+  background-color: var(--white);
   padding: 2rem 0rem; 
   display: flex;
   margin: 0 auto;
+  justify-content: space-between;
+
+  /* 태블릿: 78.1rem 이상 128rem 이하 */
+  @media (min-width: 78.1rem) and (max-width: 128rem) {
+    width: 100%;
+    min-width: 78.1rem;
+    height: auto;
+    background-color: var(--white);
+    padding: 2rem; 
+  }
+
+  /* 모바일: 78.1rem 미만 */
+  @media (max-width: 78.1rem) {
+    width: 100%;
+    height: auto;
+    background-color: var(--white);
+    padding: 2rem;
+  }
 }
 
+
 .header_left_container {
-  width: 100%;
+  width: 36.4rem;
   height: 100%;
   display: flex;
   flex-direction: row;
-  gap: 2.4rem;
-  align-items: center;
+  gap: 2.4rem;  
+  align-items: flex-start;
+
+  /* 태블릿: 78.1rem 이상 128rem 이하 */
+  @media (min-width: 78.1rem) and (max-width: 128rem) {
+    gap: 2rem;
+  }
+
+  /* 모바일: 78.1rem 미만 */
+  @media (max-width: 78.1rem) {
+    gap: 1.6rem;
+  }
 }
 
 .header_logo_image {
@@ -28,6 +57,11 @@
   height: 32px;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 78.1rem) {
+    width: 56px;
+    height: 32px;
+  }
 }
 
 
@@ -38,8 +72,19 @@
   align-items: center;
   will-change: transform;
   contain: layout style;
-}
 
+  @media (max-width: 128rem) and (min-width: 78.1rem) {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 78.1rem) {
+    width: 100%;
+    height: auto;
+    gap: 0.8rem;
+  }
+}
+    
 .header_menu h1  {
   color: var(--black);
   padding: 0.8rem;
@@ -73,6 +118,11 @@
   justify-content: center;
   text-align: center;
   gap: 0.8rem;
+
+  @media (max-width: 78.1rem) {
+    padding: 0.6rem 1rem;
+    gap: 0.6rem;
+  }
 }
 
 .sign_in_button_text {
@@ -81,6 +131,10 @@
     font-size: 1.4rem;
     width: 100%;
     white-space: nowrap;
+
+    @media (max-width: 78.1rem) {
+      font-size: 1.2rem;
+    }
 }
 
 .arrow_right_icon {
@@ -105,6 +159,11 @@
   height: 4rem;
   border-radius: 50%;
   object-fit: cover;
+
+  @media (max-width: 78.1rem) {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
 }
 
 
@@ -133,6 +192,11 @@
   z-index: 1000;
   will-change: transform, opacity;
   contain: layout style paint;
+
+  @media (max-width: 78.1rem) {
+    width: 20rem;
+    padding: 1.6rem;
+  }
 }
 
 .profile_dropdown.open { 
