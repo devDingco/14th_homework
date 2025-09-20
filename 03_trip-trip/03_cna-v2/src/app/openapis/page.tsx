@@ -4,8 +4,8 @@ import styles from './styles.module.css'
 
 export default function OpenApiPage() {
   return (
-    <main className={styles.mapLayout}>
-      <div className={styles.mapFrame}>
+    <main className={styles.apiLayout}>
+      <div className={styles.apiFrame}>
         <MapComponent />
       </div>
     </main>

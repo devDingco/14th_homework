@@ -32,3 +32,22 @@ export function useWeather(city: string | null) {
 
   return { data, isLoading, error }
 }
+
+export const toLatLng = ([lng, lat]: number[]) => ({ lat, lng })
+
+export const geomToPolygons = (geom: any) => {
+  if (!geom) return []
+  if (geom.type === 'Polygon') {
+    return [geom.coordinates.map((ring: number[][]) => ring.map(toLatLng))]
+  }
+  if (geom.type === 'MultiPolygon') {
+    return geom.coordinates.map((poly: number[][][]) =>
+      poly.map((ring: number[][]) => ring.map(toLatLng))
+    )
+  }
+  return []
+}
+
+export const getWeatherIconUrl = (icon: string) => {
+  return icon ? `http://openweathermap.org/img/wn/${icon}.png ` : ''
+}

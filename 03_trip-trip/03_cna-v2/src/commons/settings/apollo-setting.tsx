@@ -10,7 +10,7 @@ const httpLink = new HttpLink({
   uri: 'http://main-practice.codebootcamp.co.kr/graphql',
 })
 
-export default function ApiProvider({ children }: { children: React.ReactNode }) {
+export default function ApiProvider({ children }: IApolloSetting) {
   const client = new ApolloClient({
     link: httpLink,
     cache: new InMemoryCache(),
