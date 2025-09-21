@@ -1,0 +1,73 @@
+.container {
+    width: 100%;
+    min-width: 120rem;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 4rem 0 2rem;
+    border-bottom: 2px solid #222;
+    padding-bottom: 1rem;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 3rem;
+    margin: 0 auto;
+}
+
+.table th,
+.table td{
+    border-bottom: 1px solid #ddd;
+    padding: 1.4rem 1rem;
+    text-align: center;
+    font-size: 14px;
+}
+.table th{
+    background-color: #f7f7f7;
+    font-weight: 600;
+}
+
+.table td.title{
+    text-align: left;
+    color: #333;
+    font-weight: 500;
+}
+
+.pagination{
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.pagination button{
+    border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 0.6rem 1.2rem;
+    margin: 0 0.2rem;
+    cursor: pointer;
+}
+
+.btnbox{
+    width: 90vw;
+    display: flex;
+    justify-content: end;
+
+}
+
+.btn{
+    display: inline-block;
+    background-color: #1C73E8;
+    color: #fff;
+    padding: 1rem 1.6rem;
+    border: none;
+    border-radius: 0.4rem;
+    font-size: 15px;
+    margin-bottom: 2rem;
+    cursor: pointer;
+
+}
