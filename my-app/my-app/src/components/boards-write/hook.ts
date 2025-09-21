@@ -7,6 +7,7 @@ import {
   UpdateBoardDocument,
 } from "../../commons/gql/graphql";
 import { Address } from "react-daum-postcode";
+import { Modal } from "antd";
 
 export const useBoardsComponentWrite = (isEdit: boolean) => {
   // - 변경되는 입력값 새로 저장하는 상태 설정
@@ -115,12 +116,17 @@ export const useBoardsComponentWrite = (isEdit: boolean) => {
           },
         },
       });
-      alert("등록이 완료되었습니다.");
+      Modal.success({
+        title: "등록 완료",
+        content: "게시글이 성공적으로 등록되었습니다.",
+      });
       router.push(`/boards/${result.data?.createBoard._id}`);
     } catch (error) {
-      alert("에러가 발생하였습니다. 다시 시도해 주세요.");
-    } // finally {
-    // }
+      Modal.error({
+        title: "에러 발생",
+        content: "에러가 발생하였습니다. 다시 시도해 주세요.",
+      });
+    }
   };
 
   const onClickEdit = async () => {
@@ -128,7 +134,10 @@ export const useBoardsComponentWrite = (isEdit: boolean) => {
       "글을 입력할때 입력하셨던 비밀번호를 입력해주세요"
     );
     if (!passwordInput) {
-      alert("비밀번호 입력이 잘못되었습니다");
+      Modal.error({
+        title: "비밀번호 오류",
+        content: "비밀번호가 틀렸습니다. 다시 시도해 주세요.",
+      });
     }
 
     const updateInput: any = {
@@ -167,18 +176,26 @@ export const useBoardsComponentWrite = (isEdit: boolean) => {
         });
 
         if (result.data) {
-          alert("수정이 완료되었습니다.");
+          Modal.success({
+            title: "수정 완료",
+            content: "게시글이 성공적으로 수정되었습니다.",
+          });
         } else {
-          alert("수정이 실패했습니다.");
+          Modal.warning({
+            title: "수정 실패",
+            content: "게시글 수정에 실패했습니다.",
+          });
         }
 
         router.push(`/boards/${editId}`);
       } catch (error) {
-        alert("에러가 발생하였습니다. 다시 시도해 주세요.");
+        Modal.error({
+          title: "에러 발생",
+          content: "에러가 발생하였습니다. 다시 시도해 주세요.",
+        });
       }
     }
   };
-
   return {
     data,
     writer,

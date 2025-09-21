@@ -4,13 +4,28 @@ import {
   FetchBoardsDocument,
 } from "../../../commons/gql/graphql";
 import { useMutation, useQuery } from "@apollo/client";
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
+import { Modal } from "antd";
 
 export const useBoardList = () => {
   const router = useRouter();
   // const params = useParams<{ boardId: string }>();
   const { data } = useQuery(FetchBoardsDocument);
 
+  // const [modalContent, setModalContent] = useState("");
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // const showModal = () => {
+  //   setIsModalOpen(true);
+  // };
+
+  // const handleOk = () => {
+  //   setIsModalOpen(false);
+  // };
+
+  // const handleCancel = () => {
+  //   setIsModalOpen(false);
+  // };
   const [deleteBoard] = useMutation(DeleteBoardDocument);
 
   // ??다시 보기! 잘 모르겠다!
@@ -29,7 +44,10 @@ export const useBoardList = () => {
       variables: { boardId: event.currentTarget.id },
       refetchQueries: [{ query: FetchBoardsDocument }],
     });
-    alert("삭제되었습니다!!");
+    Modal.success({
+      title: "삭제 완료",
+      content: "게시글이 성공적으로 삭제되었습니다.",
+    });
   };
 
   const onClickMoveDetail = async (
@@ -43,7 +61,6 @@ export const useBoardList = () => {
 
   return {
     data,
-
     onClickMoveDetail,
     onClickDelete,
   };

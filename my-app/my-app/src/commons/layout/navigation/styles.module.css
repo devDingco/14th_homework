@@ -1,0 +1,92 @@
+.headerBody {
+  display: flex;
+  padding: 0 1.25rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+}
+
+.headerFrame {
+  display: flex;
+  height: 5rem;
+  max-width: 80rem;
+  width: 100%;
+  padding: 1.25rem 0;
+  justify-content: space-between;
+}
+
+.headerTap {
+  display: flex;
+  width: 22.8rem;
+  height: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header_logo {
+  display: flex;
+  width: 3.22006rem;
+  height: 2rem;
+}
+
+.header_boardsPage {
+  display: flex;
+  width: 4.5rem;
+  height: 2.5rem;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray-B, #000);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.header_voucherPurchase {
+  display: flex;
+  width: 5.63rem;
+  height: 2.5rem;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--gray-800, #333);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.header_myPage {
+  display: flex;
+  width: 5.63rem;
+  height: 2.5rem;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--gray-800, #333);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.header_profile {
+  display: flex;
+  width: 4.5rem;
+  height: 2.5rem;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.header_profileIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.header_profileArrow {
+  width: 1.5rem;
+  height: 1.5rem;
+}
