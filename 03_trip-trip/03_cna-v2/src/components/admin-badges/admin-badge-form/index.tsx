@@ -12,6 +12,7 @@ import {
   UploadFileMutationVariables,
 } from 'commons/graphql/graphql'
 
+// TODO: 코드 수정 및 validation 추가 + 훅 분리
 export default function AdminBadgeForm() {
   const router = useRouter()
   const [badgeInput, setBadgeInput] = useState({
