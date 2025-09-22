@@ -1,0 +1,189 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.detail-frame {
+  display: flex;
+  width: 100%;
+  padding: 40px 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.detail-body {
+  display: flex;
+  width: 100%;
+  padding: 0 320px;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  align-self: stretch;
+}
+
+.detail-container {
+  display: flex;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.detail-title {
+  align-self: stretch;
+  color: #000;
+  font-family: Pretendard;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px;
+}
+
+.detail-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 54px;
+  align-self: stretch;
+  color: #818181;
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.detail-meta-profile {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.profile-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.form-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--gray-100, #e4e4e4);
+  border: none;
+  margin: 0;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+  align-self: stretch;
+  width: 100%;
+}
+
+.header-icons img {
+  width: 24px;
+  height: 24px;
+}
+
+.detail-image {
+  width: 400px;
+  height: 531px;
+}
+
+.detail-image-caption {
+  color: #999;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.detail-content p {
+  margin: 0 0 24px;
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.detail-content p:last-child {
+  margin-bottom: 0;
+}
+
+/*  video-frame (비디오 썸네일) - JS에서는 img 태그로 사용 */
+
+.content-reaction {
+  display: flex;
+  justify-content: center;
+  align-self: stretch;
+  width: 100%;
+  gap: 24px;
+}
+
+.reaction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.reaction img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.reaction .count {
+  color: var(--gray-700, #5f5f5f);
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.reaction.good .count {
+  color: #f66a6a;
+}
+
+/* 10. detail-actions */
+.detail-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.btn {
+  display: flex;
+  height: 40px;
+  padding: 8px 12px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+  color: var(--gray-B, #000);
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.btn img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
