@@ -20,7 +20,7 @@ const useBoardWrite = () => {
         CreateBoardMutationVariables
     >(CreateBoardDocument)
 
-    const [updateBaordAPI] = useMutation<
+    const [updateBoardAPI] = useMutation<
         UpdateBoardMutation, UpdateBoardMutationVariables
     >(UpdateBoardDocument)
 
@@ -131,43 +131,38 @@ const useBoardWrite = () => {
 
     const updatingBoard = async () => {
         const updateBoardInput = boardUpdateSetting()
-        console.log('업데이트 직전 확인!', updateBoardInput)
-        // try {
-        //     const result = await updateBaordAPI({
-        //         // variables: {
-        //         //     updateBoardInput: data.updateBoardInput,
-        //         //     password: data.password,
-        //         //     boardId: String(data.boardId)
-        //         // }
-        //         variables: {
-        //             updateBoardInput: {
-        //                 ...updateBoardInput
-        //             } as UpdateBoardInput
-        //         }
-        //     })
-        //     console.log('업데이트 결과: ',result.data?.updateBoard._id)
-        //     router.push(`/boards/${result.data?.updateBoard._id}`)
-        // } catch(e: unknown) {
-        //     if (e instanceof ApolloError) {
-        //         e.graphQLErrors.forEach((e) => {
-        //             alert(`${e.message}`)
-        //         });
-        //     }
-        // }
+        // console.log(updateBoardInput)
+        // console.log({...updateBoardInput})
+        try {
+            const result = await updateBoardAPI({
+                variables: {
+                    ...updateBoardInput
+                }
+            })
+            console.log('업데이트 결과: ',result.data?.updateBoard._id)
+            router.push(`/boards/${result.data?.updateBoard._id}`)
+        } catch(e: unknown) {
+            if (e instanceof ApolloError) {
+                e.graphQLErrors.forEach((e) => {
+                    alert(`${e.message}`)
+                });
+            }
+        }
     }
 
     const boardUpdateSetting = () => {
         const inputBoardPw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
-        console.log("updateBoard 전에 데이터 정리! ", postData)
-        // 업데이트 시도할 인풋 데이터들
-        // const updateBoardInput: IUpdateBoardInput = {
-        //     updateBoardInput: data,
-        //     password: inputBoardPw,
-        //     boardId: param.boardId,
-        // }
 
-        // console.log('업데이트된 객체 확인: ', updateBoardInput)
-        // return updateBoardInput
+        const { writer, ...forUpdateData } = postData
+        // 업데이트 시도할 인풋 데이터들
+        const updateBoardInput = {
+            updateBoardInput: {...forUpdateData} as UpdateBoardInput,
+            password: String(inputBoardPw),
+            boardId: String(param.boardId),
+        }
+
+        console.log('업데이트된 객체 확인: ', updateBoardInput)
+        return updateBoardInput
     }
 
     return {
