@@ -57,6 +57,7 @@
   width: 100%;
   flex-direction: column;
 }
+
 .detailContentText {
   color: #000;
   font-size: 16px;
@@ -79,10 +80,13 @@
 }
 
 .detailContentImage {
-  width: 480px;
-  height: 531px;
+  width: 400px;
+  object-fit: cover;
+  height: auto;
 }
 
+.detailContentContainer img {
+}
 .detailContentGoodOrBad {
   display: flex;
   justify-content: center;
