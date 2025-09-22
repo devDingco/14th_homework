@@ -21,9 +21,9 @@ export default function CommentWrite({
     setPassword,
     setContents,
     setrating,
-    onClickCreate, // 댓글 등록 함수
-    onClickUpdate, // 댓글 수정 함수
-    onClickCancel, // 취소 함수
+    onClickCreate, // 🆕 댓글 등록 함수
+    onClickUpdate, // ✏️ 댓글 수정 함수
+    onClickCancel, // ❌ 취소 함수
     modalOpen,
     setModalOpen,
     modalMessage,

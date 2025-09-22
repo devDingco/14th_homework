@@ -5,11 +5,7 @@ import CommentWrite from '@/components/boards-detail/comment-write';
 import BoardsDetail from '@/components/boards-detail/detail'; // 분리한 컴포넌트 import
 
 // 게시글 상세보기 페이지 컴포넌트
-export default function BoardsDetailPage({
-  params,
-}: {
-  params: { boardId: string };
-}) {
+export default function BoardsDetailPage({ params }: { params: { boardId: string } }) {
   return (
     <>
       <BoardsDetail />
