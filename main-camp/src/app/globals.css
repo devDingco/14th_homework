@@ -17,6 +17,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: '과제폰트';
+  src: url('/fonts/Pretendard-Regular.woff2') format('woff2')
+}
+
+/* 글로벌폰트 설정 */
+html, body {
+  font-family: '과제폰트', sans-serif;
+}
+
 /* 나만의 테일윈드 작성하기 (내가 만드는 부트스트랩의 css) */
 @layer utilities {
   .root_body {
