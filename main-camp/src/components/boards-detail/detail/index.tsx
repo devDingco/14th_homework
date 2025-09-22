@@ -5,18 +5,29 @@ import useBoardsDetailPage from './hook'
 import { useEffect, useState } from 'react'
 import { FrownOutlined, LikeOutlined } from '@ant-design/icons'
 import { Dropdown, MenuProps, Typography } from 'antd'
-import { FetchBoardQuery } from '@/commons/gql/graphql'
+import { FetchBoardCommentsQuery, FetchBoardQuery } from '@/commons/gql/graphql'
+import BoardDetailYoutube from '../youtube'
 
 const { Text } = Typography;
 
-const BoardsDetail = () => {
+interface IBoardDetail {
+    getBoardComments: () => Promise<FetchBoardCommentsQuery | undefined>,
+    setComments: React.Dispatch<React.SetStateAction<any>>
+}
+
+interface IBoardDetailData {
+    getBoard: FetchBoardQuery | undefined,
+    getBoardComment: FetchBoardCommentsQuery | undefined
+}
+
+const BoardsDetail = (props: IBoardDetail) => {
     const {
         goListHandler,
         goUpdateHandler,
         getBoardDetail
     } = useBoardsDetailPage()
-
-    const [boardData, setBoardData] = useState<FetchBoardQuery>()
+    
+    const [boardDetailData, setBoardDetailData] = useState<IBoardDetailData>()
 
     // 하드코딩
     const goodBad = {
@@ -26,7 +37,9 @@ const BoardsDetail = () => {
 
     useEffect(()=>{
         (async ()=>{
-            setBoardData(await getBoardDetail())
+            const getBoardData = await getBoardDetail()
+            const getBoardComment = await props.getBoardComments()
+            setBoardDetailData({getBoard: getBoardData,getBoardComment: getBoardComment})
         })()
     },[])
 
@@ -35,20 +48,20 @@ const BoardsDetail = () => {
           key: '1',
           label: (
             <Text copyable={true} >
-              {boardData?.fetchBoard.boardAddress?.address} {boardData?.fetchBoard.boardAddress?.addressDetail}
+              {boardDetailData?.getBoard?.fetchBoard.boardAddress?.address} {boardDetailData?.getBoard?.fetchBoard.boardAddress?.addressDetail}
             </Text>
           ),
         }
     ];
 
     let youtubeUrl: MenuProps['items']
-    if (boardData?.fetchBoard.youtubeUrl) {
+    if (boardDetailData?.getBoard?.fetchBoard.youtubeUrl) {
         youtubeUrl = [
             {
                 key: '1',
                 label: (
                 <Text copyable={true} >
-                    {boardData?.fetchBoard.youtubeUrl}
+                    {boardDetailData?.getBoard?.fetchBoard.youtubeUrl}
                 </Text>
                 ),
             }
@@ -56,24 +69,24 @@ const BoardsDetail = () => {
     }
     
     return (
-        <div className={`${styles.detail_main}`}>
+        <div className={`${styles.detail_main} flex_column`}>
             <h1 className={`b_28_36`}>
-            {boardData?.fetchBoard.title}
+            {boardDetailData?.getBoard?.fetchBoard.title}
             </h1>
             <header id="detail_header" className={`${styles.header_1280w_80h} flex_column`}>
                 <div id="detail_header_top" className={`${styles.header_top}`}>
                     <div id="" className={`${styles.detail_profile} flex_align_items_center flex_row flex_justi_sb`}>
                         <div className={`flex_row`}>
                             <img className={`${styles.profile_img}`} src="/svg/person.png" alt="profile"/>
-                            {boardData?.fetchBoard.writer}
+                            {boardDetailData?.getBoard?.fetchBoard.writer}
                         </div>
-                        <p className={`r_14_20`} style={{ color: "rgba(129, 129, 129, 1)" }}>{boardData?.fetchBoard.createdAt.split("T")[0]}</p>
+                        <p className={`r_14_20`} style={{ color: "rgba(129, 129, 129, 1)" }}>{boardDetailData?.getBoard?.fetchBoard.createdAt.split("T")[0]}</p>
                     </div>
                 </div>
                 <hr />
                 <div id="detail_header_bottom" className={`${styles.header_bottom} flex_row flex_align_self_flexend`}>
                     {
-                        boardData?.fetchBoard.youtubeUrl
+                        boardDetailData?.getBoard?.fetchBoard.youtubeUrl
                         ? 
                         <Dropdown menu={{ items: youtubeUrl }} placement="bottomRight">
                             <img className={`${styles.img_24w_24h}`} style={{ cursor: "pointer" }} src="/svg/link.png" alt="link"/>
@@ -82,7 +95,7 @@ const BoardsDetail = () => {
                         <img className={`${styles.img_24w_24h}`} style={{ cursor: "pointer" }} src="/svg/link.png" alt="link"/>
                     }
                     {
-                        boardData?.fetchBoard.boardAddress 
+                        boardDetailData?.getBoard?.fetchBoard.boardAddress 
                         ?
                         <Dropdown menu={{ items: address } }placement="bottomRight">
                             <img className={`${styles.img_24w_24h}`} style={{ cursor: "pointer" }} src="/svg/location.png" alt="location"/>
@@ -93,10 +106,15 @@ const BoardsDetail = () => {
                 </div>
             </header>
             <img src="/image/Tranquil Beachside Serenity 1.png" alt="publish1"/>
-            {boardData?.fetchBoard.contents}
-            <div className={`${styles.detail_video} flex_row flex_justi_center`}>
-                <img src="/image/Frame 427323252.png" alt="publish2"/>
-            </div>
+            {boardDetailData?.getBoard?.fetchBoard.contents}
+            {
+                boardDetailData?.getBoard?.fetchBoard.youtubeUrl
+                ?
+                <BoardDetailYoutube youtubeUrl={boardDetailData?.getBoard?.fetchBoard.youtubeUrl} />
+                : 
+                null
+            }
+            
             <div id="" className={`${styles.bad_good_48h} flex_row flex_justi_center`}>
                 <div id="bad_area" className={`${styles.bad_good_btn_frame} flex_column flex_align_items_center`}>
                     <FrownOutlined />

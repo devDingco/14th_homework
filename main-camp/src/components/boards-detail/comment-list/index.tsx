@@ -13,12 +13,6 @@ const BoardsCommentList = (props: IBoardsCommentList) => {
         updateBoardComments,
         deleteBoardComments
     } = useBoardCommentList()
-    
-    useEffect(()=>{
-        (async ()=>{
-            await props.getBoardComments()
-        })()
-    },[])
 
     useEffect(()=>{
         console.log('댓글 조회 : ', props.comments)

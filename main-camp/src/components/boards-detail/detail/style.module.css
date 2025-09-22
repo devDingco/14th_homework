@@ -1,5 +1,8 @@
 /* /boards/detail */
 
+.detail_main {
+    gap: 15px;
+}
 /* header */
 
 .header_1280w_80h {
@@ -44,15 +47,6 @@
     width: 24px;
     height: 24px;
     opacity: 1;
-}
-
-.detail_video {
-    width: 100%;
-    padding-top: 24px;
-    padding-bottom: 24px;
-    gap: 10px;
-    opacity: 1;
-    background: var(--gray-50, rgba(242, 242, 242, 1));
 }
 
 .bad_good_48h {

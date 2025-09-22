@@ -1,0 +1,11 @@
+/* youtube player */
+
+.detail_video {
+    width: 100%;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    gap: 10px;
+    opacity: 1;
+    background: var(--gray-50, rgba(242, 242, 242, 1));
+}
+    

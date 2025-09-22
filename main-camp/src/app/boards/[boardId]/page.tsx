@@ -11,7 +11,7 @@ const BoardsDetailPage = () => {
     const [ comments, setComments ] = useState<Query["fetchBoardComments"]>([])
 
     const { getBoardComments } = useBoardCommentList({setComments})
-    
+
     return (
         <div id="main" style={{
             maxWidth: "1280px",
@@ -19,7 +19,10 @@ const BoardsDetailPage = () => {
             marginLeft: "320px",
             marginRight: "320px"
         }}>
-            <BoardsDetail />
+            <BoardsDetail 
+                getBoardComments={getBoardComments}
+                setComments={setComments}
+            />
             <div style={{
                 display: "flex",
                 flexDirection: "column",
