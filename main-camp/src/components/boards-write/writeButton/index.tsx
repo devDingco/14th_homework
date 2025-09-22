@@ -30,9 +30,7 @@ const WriteButton = (props: IWriteButtonProps) => {
             // <button className={`${styles.write_confirm_btn} sb_18_24`} onClick={props.onClickHandler ? () => props.onClickHandler : undefined} style={{ background: isActive === true ? "rgba(41, 116, 229, 1)" : "rgba(199, 199, 199, 1)" }}>{props.p}</button>
             <button className={`${styles.write_confirm_btn} sb_18_24`} 
                 onClick={async () => {
-                    if (props.onClickHandler && postData) {
-                        await props.onClickHandler(postData)
-                    }
+                    if (props.onClickHandler) await props.onClickHandler()
                 }}  
                 style={{ background: isActive === true ? "rgba(41, 116, 229, 1)" : "rgba(199, 199, 199, 1)" }}>{props.p}
             </button>
@@ -42,9 +40,7 @@ const WriteButton = (props: IWriteButtonProps) => {
             btnComponent =
             <button className={`${styles.write_confirm_btn} sb_18_24`}  
                 onClick={async () => {
-                    if (props.onClickHandler && postData) {
-                        await props.onClickHandler(postData)
-                    }
+                    if (props.onClickHandler) await props.onClickHandler()
                 }} 
                 style={{ background: "rgba(41, 116, 229, 1)" }}>{props.p}
             </button>

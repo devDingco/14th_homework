@@ -11,7 +11,7 @@ import Postcode from './postcode'
 
 // 게시글 등록/수정 페이지
 const BoardsWrite = () => {
-    const { isEdit, postData, updatingContents, updatingTitle } = useIsEdit()
+    const { isEdit, postData, updatingBoardData, setUpdatingBoardData } = useIsEdit()
     const {
         onChangePosting,
         creatingBoard,
@@ -55,54 +55,38 @@ const BoardsWrite = () => {
         creatingBoard()
     }
 
-    const onUpdateHandler = async (data?: IOnUpdateHandler) => {
-        const makingData = data
+    const onUpdateHandler = async () => {
         
-        const forValArr = [postData.title, postData.contents]
-
-        if (forValArr.includes("")) {
-            for (let i=0; i < forValArr.length; i++) {
-                switch(i) {
-                    case 0: {
-                        if (forValArr[i] === "") {
-                            setTitleErr("필수입력 사항 입니다.")
-                        } else {
-                            setTitleErr("")
-                        }
-                        // forValArr[i] === "" ? setTitleErr("필수입력 사항 입니다.") : setTitleErr("")
-                        break
-                    }
-                    case 1: {
-                        if (forValArr[i] === "") {
-                            setContentsErr("필수입력 사항 입니다.")
-                        } else {
-                            setContentsErr("")                        
-                        }
-                        // forValArr[i] === "" ? setContentsErr("필수입력 사항 입니다.") : setContentsErr("")
-                        break
-                    }
-                    default:
-                }
+        const forValArr = [
+            { value: postData.title, setError: setTitleErr },
+            { value: postData.contents, setError: setContentsErr },
+        ];
+        
+        let hasError = false;
+            forValArr.forEach(({ value, setError }) => {
+            if (value === "") {
+                setError("필수입력 사항 입니다.");
+                hasError = true;
+            } else {
+                setError("");
             }
-            return
-        } else if (updatingContents === postData.contents) {
+        });
+
+        if (hasError) return;
+
+        if (updatingBoardData.contents === postData.contents) {
             alert('내용이 같으면 수정이 불가능 합니다.')
             return
         } else {
-            if (updatingTitle === postData.title) {
-                delete makingData?.title
-            } else if (updatingContents === postData.contents ) {
-                delete makingData?.contents
-            }
             setTitleErr("")
             setContentsErr("")
-            
-            updatingBoard(boardUpdateSetting(makingData!))
         }
+
+        updatingBoard()
     }
 
     useEffect(()=>{
-        console.log('엉?', postData)
+        console.log('postData : ', postData)
     },[postData])
 
     return (

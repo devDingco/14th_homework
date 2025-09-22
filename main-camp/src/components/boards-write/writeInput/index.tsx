@@ -71,15 +71,15 @@ const WriteInput = (props: IWriteInputProps) => {
                 <div className={`${styles.input_frame_220w_80h} flex_column`}>
                     <label className={`${styles.label_220w_24h} me_16_24`}>{props.label}</label>
                     <div className={`${styles.input_frame_220w_48h} flex_row`}>
-                        <input id="zipcode" className={`${styles.input_82w_48h} input_g_border_gray r_16_24`} onChange={props.setState} placeholder="01234" value={postData.boardAddress?.zipcode}></input>
+                        <input id="zipcode" className={`${styles.input_82w_48h} input_g_border_gray r_16_24`} onChange={props.setState} placeholder="01234" value={postData.boardAddress?.zipcode ?? ""}></input>
                         <button className={`${styles.zip_btn} ${styles.sb_18_24}`} style={{ whiteSpace: "nowrap" }} onClick={handlePostcodeClick}>우편번호 검색</button>
                     </div>
                 </div>
                 <div>
-                    <input id="address" className={`${styles.input_1280w_48h} input_g_border_gray r_16_24`} onChange={props.setState} placeholder={props.placeholder} value={postData.boardAddress?.address} ></input>
+                    <input id="address" className={`${styles.input_1280w_48h} input_g_border_gray r_16_24`} onChange={props.setState} placeholder={props.placeholder} value={postData.boardAddress?.address ?? ""} ></input>
                 </div>
                 <div>
-                    <input id="addressDetail" className={`${styles.input_1280w_48h} input_g_border_gray r_16_24`} onChange={props.setState} placeholder="상세주소" value={postData.boardAddress?.addressDetail} ></input>
+                    <input id="addressDetail" className={`${styles.input_1280w_48h} input_g_border_gray r_16_24`} onChange={props.setState} placeholder="상세주소" value={postData.boardAddress?.addressDetail ?? ""} ></input>
                 </div>
             </>
             break

@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, ReactNode, useContext, useState } from "react"
-import { IIsEditContext, IPostData } from "./type"
+import { IIsEditContext, IPostData, IPostUpdateData } from "./type"
 
 const IsEditContext = createContext<IIsEditContext | undefined>(undefined)
 
@@ -15,22 +15,35 @@ export const IsEditProvider = ( {children}: { children:ReactNode } ) => {
         contents: "",
         boardAddress: {
             zipcode: "",
-            address: ""
+            address: "",
+            addressDetail: ""
         },
         youtubeUrl: ""
     })
 
-    const [updatingTitle, setUpdatingTitle] = useState<string | undefined>()
-    const [updatingContents, setUpdatingContents] = useState<string | undefined>("")
+    const [updatingBoardData, setUpdatingBoardData] = useState<IPostUpdateData>({
+        title: "",
+        contents: "",
+        boardAddress: {
+            zipcode: "",
+            address: "",
+            addressDetail: ""
+        },
+        youtubeUrl: ""
+    })
+
+    // const [updatingTitle, setUpdatingTitle] = useState<string | undefined>()
+    // const [updatingContents, setUpdatingContents] = useState<string | undefined>("")
 
     return (
         <IsEditContext.Provider value={{ 
             isEdit, setIsEdit,
             
-            updatingTitle, setUpdatingTitle,
-            updatingContents, setUpdatingContents,
+            // updatingTitle, setUpdatingTitle,
+            // updatingContents, setUpdatingContents,
             
-            postData, setPostData
+            postData, setPostData,
+            updatingBoardData, setUpdatingBoardData
         }}>
             {children}
         </IsEditContext.Provider>

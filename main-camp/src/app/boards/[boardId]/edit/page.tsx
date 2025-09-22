@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import useBoardsEditPage from "./hook"
 
 const BoardsEditPage = () => {
-    const { setIsEdit, isEdit, postData, setPostData, setUpdatingTitle, setUpdatingContents} = useIsEdit()
+    const { setIsEdit, isEdit, postData, setPostData, updatingBoardData, setUpdatingBoardData} = useIsEdit()
     const { getBoardDetail } = useBoardsEditPage()
 
     const [fetchBoard, setFetchBoard] = useState<any>()
@@ -28,9 +28,23 @@ const BoardsEditPage = () => {
                 writer: fetchBoard.fetchBoard.writer,
                 title: fetchBoard.fetchBoard.title,
                 contents: fetchBoard.fetchBoard.contents,
+                boardAddress: {
+                    zipcode: fetchBoard.fetchBoard.boardAddress?.zipcode,
+                    address: fetchBoard.fetchBoard.boardAddress?.address,
+                    addressDetail: fetchBoard.fetchBoard.boardAddress?.addressDetail,
+                },
+                youtubeUrl: fetchBoard.fetchBoard?.youtubeUrl
             })
-            setUpdatingTitle(fetchBoard?.fetchBoard.title)
-            setUpdatingContents(fetchBoard?.fetchBoard.contents)
+            setUpdatingBoardData({
+                title: fetchBoard.fetchBoard.title,
+                contents: fetchBoard.fetchBoard.contents,
+                boardAddress: {
+                    zipcode: fetchBoard.fetchBoard.boardAddress?.zipcode,
+                    address: fetchBoard.fetchBoard.boardAddress?.address,
+                    addressDetail: fetchBoard.fetchBoard.boardAddress?.addressDetail,
+                },
+                youtubeUrl: fetchBoard.fetchBoard?.youtubeUrl
+            })
         }
     },[fetchBoard])
 
@@ -38,6 +52,10 @@ const BoardsEditPage = () => {
         console.log('postData는? ', postData)
     },[postData])
 
+    useEffect(()=>{
+        console.log('updateData는? ', updatingBoardData)
+    },[updatingBoardData])
+    
     return (
         <BoardsWrite />
     )
