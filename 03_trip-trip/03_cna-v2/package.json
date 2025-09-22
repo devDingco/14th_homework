@@ -18,12 +18,11 @@
     "@mui/icons-material": "^7.3.2",
     "@mui/material": "^7.3.2",
     "@supabase/supabase-js": "^2.57.4",
-    "@types/apollo-upload-client": "17.0.0",
     "@types/node": "22.5.4",
     "@types/react": "18.3.5",
     "@types/react-dom": "18.3.0",
     "antd": "^5.27.3",
-    "apollo-upload-client": "17.0.0",
+    "apollo-upload-client": "18.0.1",
     "autoprefixer": "10.4.20",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.8",
@@ -43,6 +42,7 @@
   "devDependencies": {
     "@graphql-codegen/cli": "6.0.0",
     "@graphql-codegen/client-preset": "5.0.0",
+    "@types/apollo-upload-client": "^18.0.0",
     "typescript": "5.5.4"
   }
 }
