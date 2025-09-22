@@ -9,6 +9,8 @@ import { useCommentList } from "./hook";
 import profileIcon from "./icon/img.svg";
 import editIcon from "./icon/edit.svg";
 import closeIcon from "./icon/close.svg";
+import { Rate } from "antd";
+
 const IMAGE_SRC = {
   profileIcon: {
     src: profileIcon,
@@ -31,7 +33,7 @@ export default function CommentList() {
     <>
       {data?.fetchBoardComments?.map((el: any) => {
         return (
-          <div key={el._id}>
+          <div key={el?._id}>
             {/* ->  key: React가 리스트 렌더링 시 각 항목을 구분하고 효율적으로 업데이트하기 위해 필수적으로 주는 값 */}
             <div className={styles.commentContainer}>
               <div className={styles.commentBody}>
@@ -43,9 +45,13 @@ export default function CommentList() {
                         alt={IMAGE_SRC.profileIcon.alt}
                       />
                       <div className={styles.header_Profile_writer}>
-                        {el.writer}
+                        {el?.writer}
                       </div>
-                      <div className={styles.header_Rating}>{el.rating}</div>
+                      <Rate
+                        disabled
+                        className={styles.header_Rating}
+                        defaultValue={el?.rating}
+                      />
                     </div>
                     <div className={styles.header_Edit_Close}>
                       <Image
@@ -60,7 +66,7 @@ export default function CommentList() {
                   </div>
                   <div className={styles.commentContents}>{el.contents}</div>
                   <div className={styles.commentDate}>
-                    {el.createdAt.split("T")[0]}
+                    {el?.createdAt.split("T")[0]}
                   </div>
                 </div>
               </div>

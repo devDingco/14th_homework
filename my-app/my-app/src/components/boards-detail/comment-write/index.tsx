@@ -5,6 +5,8 @@ import chatIcon from "./icon/chat.svg";
 import styles from "./styles.module.css";
 import { useCommentWrite } from "./hook";
 
+import { Modal, Rate } from "antd";
+
 export default function CommentWrite() {
   const {
     writer,
@@ -13,10 +15,14 @@ export default function CommentWrite() {
     rating,
     data,
     댓글등록버튼비활성화,
+    isModalOpen,
+    modalContent,
+    handleOk,
+    handleCancel,
     onChangeWriter,
     onChangePassword,
     onChangeComment,
-    setRating,
+    onChangeRating,
     onClickComment,
   } = useCommentWrite();
 
@@ -28,12 +34,15 @@ export default function CommentWrite() {
             <Image src={chatIcon} alt="chatIcon" />
             <p>댓글</p>
           </div>
-
+          <div>
+            <Rate onChange={(e) => onChangeRating(e)} />
+          </div>
           <div className={styles.commentInputFrame}>
             <div>
               <label className={styles.inputLabel}>
                 작성자 <span className={styles.required}>*</span>
               </label>
+
               <input
                 className={styles.input}
                 type="text"
@@ -68,6 +77,14 @@ export default function CommentWrite() {
           >
             댓글등록
           </button>
+          <Modal
+            title="Message"
+            open={isModalOpen}
+            onOk={handleOk}
+            onCancel={handleCancel}
+          >
+            <p>{modalContent}</p>
+          </Modal>
         </div>
       </div>
     </div>

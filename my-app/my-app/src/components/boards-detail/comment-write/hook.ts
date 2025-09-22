@@ -16,7 +16,10 @@ export const useCommentWrite = () => {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [comment, setComment] = useState("");
-  const [rating, setRating] = useState(3);
+  const [rating, setRating] = useState(0);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
 
   const { data } = useQuery(FetchBoardCommentsDocument);
 
@@ -30,6 +33,17 @@ export const useCommentWrite = () => {
 
   const onChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(event.target.value);
+  };
+
+  const onChangeRating = (e: number) => {
+    setRating(e);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
 
   const 댓글등록버튼비활성화 = !writer || !password || !comment;
@@ -57,18 +71,20 @@ export const useCommentWrite = () => {
           },
         ],
       });
-
       if (data?.createBoardComment) {
-        alert("댓글 등록이 완료되었습니다!");
-        // alert 창 뜬 후에 input들 초기화 형태로 만들어주기
+        setModalContent("댓글 등록이 완료 되었습니다!");
+        setIsModalOpen(true);
+        // modal 창 뜬 후에 input들 초기화 형태로 만들어주기
         setWriter("");
         setPassword("");
         setComment("");
       } else {
-        alert("댓글 등록을 실패하였습니다.");
+        setModalContent("댓글 등록에 실패하였습니다");
+        setIsModalOpen(true);
       }
     } catch (err: any) {
-      alert("에러가 발생하였습니다. 다시 시도해 주세요.");
+      setModalContent("에러가 발생하였습니다. 다시 시도해 주세요.");
+      setIsModalOpen(true);
       console.error(err);
     }
   };
@@ -80,10 +96,14 @@ export const useCommentWrite = () => {
     rating,
     data,
     댓글등록버튼비활성화,
+    isModalOpen,
+    modalContent,
+    handleOk,
+    handleCancel,
     onChangeWriter,
     onChangePassword,
     onChangeComment,
-    setRating,
+    onChangeRating,
     onClickComment,
   };
 };

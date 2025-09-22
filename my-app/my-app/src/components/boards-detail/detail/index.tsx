@@ -1,6 +1,9 @@
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { useBoardsDetail } from "./hook";
+import React from "react";
+import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
+import { Tooltip } from "antd";
 
 import 프로필이미지 from "../assets/img.svg";
 import 링크 from "../assets/link.svg";
@@ -11,6 +14,7 @@ import 검정하트 from "../assets/bad.svg";
 import 빨강하트 from "../assets/good.svg";
 import 목록 from "../assets/list.svg";
 import 수정 from "../assets/pencil.svg";
+import YouTube from "react-youtube";
 
 //-------------------------------
 
@@ -40,7 +44,9 @@ export default function BoardsDetail() {
             </div>
             <div className={styles.링크and위치}>
               <Image className={styles.링크} src={링크} alt="링크" />
-              <Image className={styles.위치} src={위치} alt="위치" />
+              <Tooltip title={data?.fetchBoard?.boardAddress?.address}>
+                <Image className={styles.위치} src={위치} alt="위치" />
+              </Tooltip>
             </div>
             <Image
               className={styles.바디_이미지}
@@ -51,28 +57,22 @@ export default function BoardsDetail() {
               {" "}
               {data?.fetchBoard?.contents}{" "}
             </div>
-            <div>
-              <Image
-                className={styles.바디_동영상}
-                src={비디오사진}
-                alt="비디오사진"
+            <div className={styles.바디_동영상}>
+              <YouTube
+                className={styles.바디_동영상_유튜브링크}
+                videoId={
+                  data?.fetchBoard?.youtubeUrl?.split("=")[1] &&
+                  data?.fetchBoard?.youtubeUrl.split("=")[1]
+                }
               />
             </div>
             <div className={styles.하단_하트}>
               <div className={styles.하단_검정하트}>
-                <Image
-                  className={styles.하단_검정하트_이미지}
-                  src={검정하트}
-                  alt="검정하트"
-                />
+                <DislikeOutlined />
                 <div className={styles.하단_검정하트_숫자}>24</div>
               </div>
               <div className={styles.하단_빨강하트}>
-                <Image
-                  className={styles.하단_빨강하트_이미지}
-                  src={빨강하트}
-                  alt="빨강하트"
-                />
+                <LikeOutlined style={{ color: "red" }} />
                 <div className={styles.하단_빨강하트_숫자}>12</div>
               </div>
             </div>
