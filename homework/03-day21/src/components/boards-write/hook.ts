@@ -1,6 +1,6 @@
 "use client";
 
-import {  useMutation, useQuery } from "@apollo/client"
+import { useMutation, useQuery } from "@apollo/client"
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { FETCH_BOARD,  } from "./queries";
