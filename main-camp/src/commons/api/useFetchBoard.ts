@@ -6,6 +6,7 @@ interface IUseFetchBoard {
 }
 
 const useFetchBoard = (props: IUseFetchBoard) => {
+    console.log('useFectchBoard 진입?')
     let getData
     try {
         const { data, loading, error, refetch } = useQuery<

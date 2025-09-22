@@ -13,8 +13,10 @@ import { useParams } from 'next/navigation'
 const { Text } = Typography;
 
 interface IBoardDetail {
-    getBoardComments: () => Promise<FetchBoardCommentsQuery | undefined>,
+    // board: FetchBoardQuery | undefined,
+    // getBoardComments: () => Promise<FetchBoardCommentsQuery | undefined>,
     setComments: React.Dispatch<React.SetStateAction<any>>
+    boardDetailData: IBoardDetailData | undefined
 }
 
 interface IBoardDetailData {
@@ -30,9 +32,9 @@ const BoardsDetail = (props: IBoardDetail) => {
         goUpdateHandler,
         getBoardDetail
     } = useBoardsDetailPage()
-    const { board, loading, error, refetch } = useFetchBoard({boardId: param.boardId})
+    // const { board, loading, error, refetch } = useFetchBoard({boardId: param.boardId})
     
-    const [boardDetailData, setBoardDetailData] = useState<IBoardDetailData>()
+    // const [boardDetailData, setBoardDetailData] = useState<IBoardDetailData>()
 
     // 하드코딩
     const goodBad = {
@@ -42,10 +44,11 @@ const BoardsDetail = (props: IBoardDetail) => {
 
     useEffect(()=>{
         (async ()=>{
+            // console.log('디테일 컴포넌트 마운트 :', props.board)
             // const getBoardData = await getBoardDetail()
-            const getBoardComment = await props.getBoardComments()
+            // const getBoardComment = await props.getBoardComments()
             // console.log('getBoardData :',getBoardData)
-            setBoardDetailData({getBoard: board, getBoardComment: getBoardComment})
+            // setBoardDetailData({getBoard: props.board, getBoardComment: getBoardComment})
         })()
     },[])
 
@@ -54,20 +57,20 @@ const BoardsDetail = (props: IBoardDetail) => {
           key: '1',
           label: (
             <Text copyable={true} >
-              {boardDetailData?.getBoard?.fetchBoard.boardAddress?.address} {boardDetailData?.getBoard?.fetchBoard.boardAddress?.addressDetail}
+              {props.boardDetailData?.getBoard?.fetchBoard.boardAddress?.address} {props.boardDetailData?.getBoard?.fetchBoard.boardAddress?.addressDetail}
             </Text>
           ),
         }
     ];
 
     let youtubeUrl: MenuProps['items']
-    if (boardDetailData?.getBoard?.fetchBoard.youtubeUrl) {
+    if (props.boardDetailData?.getBoard?.fetchBoard.youtubeUrl) {
         youtubeUrl = [
             {
                 key: '1',
                 label: (
                 <Text copyable={true} >
-                    {boardDetailData?.getBoard?.fetchBoard.youtubeUrl}
+                    {props.boardDetailData?.getBoard?.fetchBoard.youtubeUrl}
                 </Text>
                 ),
             }
@@ -77,22 +80,22 @@ const BoardsDetail = (props: IBoardDetail) => {
     return (
         <div className={`${styles.detail_main} flex_column`}>
             <h1 className={`b_28_36`}>
-            {boardDetailData?.getBoard?.fetchBoard.title}
+            {props.boardDetailData?.getBoard?.fetchBoard.title}
             </h1>
             <header id="detail_header" className={`${styles.header_1280w_80h} flex_column`}>
                 <div id="detail_header_top" className={`${styles.header_top}`}>
                     <div id="" className={`${styles.detail_profile} flex_align_items_center flex_row flex_justi_sb`}>
                         <div className={`flex_row`}>
                             <img className={`${styles.profile_img}`} src="/svg/person.png" alt="profile"/>
-                            {boardDetailData?.getBoard?.fetchBoard.writer}
+                            {props.boardDetailData?.getBoard?.fetchBoard.writer}
                         </div>
-                        <p className={`r_14_20`} style={{ color: "rgba(129, 129, 129, 1)" }}>{boardDetailData?.getBoard?.fetchBoard.createdAt.split("T")[0]}</p>
+                        <p className={`r_14_20`} style={{ color: "rgba(129, 129, 129, 1)" }}>{props.boardDetailData?.getBoard?.fetchBoard.createdAt.split("T")[0]}</p>
                     </div>
                 </div>
                 <hr />
                 <div id="detail_header_bottom" className={`${styles.header_bottom} flex_row flex_align_self_flexend`}>
                     {
-                        boardDetailData?.getBoard?.fetchBoard.youtubeUrl
+                        props.boardDetailData?.getBoard?.fetchBoard.youtubeUrl
                         ? 
                         <Dropdown menu={{ items: youtubeUrl }} placement="bottomRight">
                             <img className={`${styles.img_24w_24h}`} style={{ cursor: "pointer" }} src="/svg/link.png" alt="link"/>
@@ -101,7 +104,7 @@ const BoardsDetail = (props: IBoardDetail) => {
                         <img className={`${styles.img_24w_24h}`} style={{ cursor: "pointer" }} src="/svg/link.png" alt="link"/>
                     }
                     {
-                        boardDetailData?.getBoard?.fetchBoard.boardAddress 
+                        props.boardDetailData?.getBoard?.fetchBoard.boardAddress 
                         ?
                         <Dropdown menu={{ items: address } }placement="bottomRight">
                             <img className={`${styles.img_24w_24h}`} style={{ cursor: "pointer" }} src="/svg/location.png" alt="location"/>
@@ -112,11 +115,11 @@ const BoardsDetail = (props: IBoardDetail) => {
                 </div>
             </header>
             <img src="/image/Tranquil Beachside Serenity 1.png" alt="publish1"/>
-            {boardDetailData?.getBoard?.fetchBoard.contents}
+            {props.boardDetailData?.getBoard?.fetchBoard.contents}
             {
-                boardDetailData?.getBoard?.fetchBoard.youtubeUrl
+                props.boardDetailData?.getBoard?.fetchBoard.youtubeUrl
                 ?
-                <BoardDetailYoutube youtubeUrl={boardDetailData?.getBoard?.fetchBoard.youtubeUrl} />
+                <BoardDetailYoutube youtubeUrl={props.boardDetailData?.getBoard?.fetchBoard.youtubeUrl} />
                 : 
                 null
             }

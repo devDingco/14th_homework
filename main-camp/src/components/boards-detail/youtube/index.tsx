@@ -8,7 +8,8 @@ interface IBoardDetailYoutube {
 const BoardDetailYoutube = (props: IBoardDetailYoutube) => {
     const onPlayerReady: YouTubeProps['onReady'] = (event) => {
         // access to player in all event handlers via event.target
-        event.target.pauseVideo();
+        // event.target.pauseVideo();
+        // event.target.;
     }
     
     // const showError = () => {

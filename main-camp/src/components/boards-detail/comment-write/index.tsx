@@ -4,8 +4,8 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import useBoardsCommentWrite from './hook'
 import styles from './styles.module.css'
 import { IOnChangeWriting } from './type'
-import { BoardComment, FetchBoardCommentsQuery, Query } from '@/commons/gql/graphql'
-
+import { FetchBoardCommentsQuery, Query } from '@/commons/gql/graphql'
+import { Rate } from 'antd'
 interface IBoardsCommentWrite {
     getBoardComments: () => Promise<FetchBoardCommentsQuery | undefined>,
     comments: Query["fetchBoardComments"]
@@ -83,7 +83,8 @@ const BoardsCommentWrite = (props: IBoardsCommentWrite) => {
                 <p className='sb_16_20'>댓글</p>
             </div>
             <div className={`${styles.comment_star} flex_row`}>
-                <img src="/image/star.png" />
+                {/* <img src="/image/star.png" /> */}
+                <Rate />
             </div>
             <section className={`${styles.comment_write_frame} flex_column`}>
                 <div className={`${styles.comment_write_form_container} flex_column`}>

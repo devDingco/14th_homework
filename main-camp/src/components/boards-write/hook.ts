@@ -107,7 +107,13 @@ const useBoardWrite = () => {
                     createBoardInput: {
                         ...createBoardInput
                     } as CreateBoardInput
-                }
+                },
+                refetchQueries: [
+                    {
+                      query: FetchBoardDocument,
+                      variables: { boardId: String(param.boardId) },
+                    },
+                ],
             })
             router.push(`/boards/${result.data?.createBoard._id}`)
         } catch(e: unknown) {
