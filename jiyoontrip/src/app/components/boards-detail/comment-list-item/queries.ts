@@ -22,7 +22,7 @@ export const UPDATE__BOARD__COMMENT = gql`
     updateBoardComment(
       updateBoardCommentInput: $updateBoardCommentInput
       password: $password
-      boardCommentId: $boardCommentID
+      boardCommentId: $boardCommentId
     ) {
       _id
       writer

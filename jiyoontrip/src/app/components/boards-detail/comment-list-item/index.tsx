@@ -3,39 +3,74 @@
 import { ChangeEvent, useState } from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
+import { useMutation } from "@apollo/client";
+import { UPDATE__BOARD__COMMENT } from "./queries";
+import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
 const grayStar = "/images/graystar.webp";
 const yellowStar = "/images/yellowstar.webp";
 
 export default function CommentItem({ el }) {
   const [isCommentEdit, setIsCommentEdit] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [author, setAuthor] = useState("");
+  // const [author, setAuthor] = useState("");
   const [password, setPassword] = useState("");
   const [content, setContent] = useState("");
   const [rating, setRating] = useState(0);
   const stars = [1, 2, 3, 4, 5];
-
-  const onChangeAuthor = (event: ChangeEvent<HTMLInputElement>) => {
-    setAuthor(event.target.value);
-    if (event.target.value !== "" && password !== "" && content !== "") {
-      setIsActive(true);
-    }
-  };
+  const [updateBoardComment] = useMutation(UPDATE__BOARD__COMMENT);
+  // const onChangeAuthor = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setAuthor(event.target.value);
+  //   if (event.target.value !== "" && password !== "" && content !== "") {
+  //     setIsActive(true);
+  //   }
+  // };
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-    if (author !== "" && event.target.value !== "" && content !== "") {
+    if (event.target.value !== "" && content !== "") {
       setIsActive(true);
     }
   };
   const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
-    if (author !== "" && password !== "" && event.target.value !== "") {
+    if (password !== "" && event.target.value !== "") {
       setIsActive(true);
     }
   };
 
+  // const onChangeRating = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setRating(event.target.val)
+  // }
+
   const onClickEdit = () => {
     setIsCommentEdit(true);
+    setRating(el.rating);
+  };
+
+  const updateContent = content || el.contents;
+  const updateStar = rating || el.rating;
+
+  const onClickUpdate = async () => {
+    const result = await updateBoardComment({
+      variables: {
+        updateBoardCommentInput: {
+          contents: updateContent,
+          rating: updateStar,
+        },
+        password: password,
+        boardCommentId: el._id,
+      },
+      refetchQueries: [
+        {
+          query: FetchBoardCommentsDocument,
+          variables: { boardId: el.boardId ?? "" },
+        },
+      ],
+    });
+    console.log(result);
+  };
+
+  const onClickCancel = () => {
+    setIsCommentEdit(false);
   };
 
   return isCommentEdit ? (
@@ -69,7 +104,8 @@ export default function CommentItem({ el }) {
             type="text"
             placeholder="작성자 명을 입력해 주세요."
             value={el.writer}
-            onChange={onChangeAuthor}
+            disabled
+            // onChange={onChangeAuthor}
           />
           <div className={styles.inputError}>{}</div>
         </div>
@@ -99,16 +135,13 @@ export default function CommentItem({ el }) {
           id="author-input-4"
           className={styles.inputArea__textarea}
           placeholder="내용을 입력해 주세요."
-          value={el.contents}
+          value={content || el.contents}
           onChange={onChangeContent}
         />
         {/* <div className={styles.inputError}>{}</div> */}
       </div>
       <div className={styles.enrollButton}>
-        <button
-          className={styles.inputArea__cancelButton}
-          // onClick={}
-        >
+        <button className={styles.inputArea__cancelButton} onClick={onClickCancel}>
           취소
         </button>
         <button
@@ -117,10 +150,12 @@ export default function CommentItem({ el }) {
           style={{
             backgroundColor: isActive === true ? "#000" : "#C7C7C7",
           }}
+          onClick={onClickUpdate}
         >
           수정하기
         </button>
       </div>
+      <hr className={styles.line} />
     </div>
   ) : (
     <div key={el._id} className={styles.commentList__item}>
