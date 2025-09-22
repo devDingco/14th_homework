@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, ChangeEvent, MouseEvent } from "react";
+import  { useState, ChangeEvent, MouseEvent } from "react";
 import styles from "./styles.module.css";
 import addIcon from "@/assets/icons/add.svg";
 import { useMutation, gql } from "@apollo/client";
+import { useRouter } from "next/navigation";
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -26,6 +27,8 @@ const BoardsNew = () => {
 
   const [createBoard, { loading }] = useMutation(CREATE_BOARD);
   const isSubmitDisabled = !name || !password || !title || !content || loading;
+
+  const router = useRouter();
 
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -85,17 +88,13 @@ const BoardsNew = () => {
         },
       });
 
-      const created = data?.createBoard;
-      const boardId = created?.number ?? created?._id;
-      alert(`등록 완료! 게시글 번호/ID: ${boardId ?? "확인 필요"}`);
-
-      // 입력값 초기화
-      setName("");
-      setPassword("");
-      setTitle("");
-      setContent("");
+      const boardId = data?.createBoard?._id;
+      if (boardId) {
+        alert("게시글 등록 완료! 등록한 게시글로 이동합니다.");
+        router.push(`/boards/${boardId}`);
+      }
     } catch (e: any) {
-      alert(e?.message ?? "등록 중 오류가 발생했습니다.");
+      alert(e?.message ?? "에러가 발생하였습니다. 다시 시도해 주세요.");
     }
   };
 

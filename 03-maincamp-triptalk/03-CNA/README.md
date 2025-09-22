@@ -1,12 +1,13 @@
 ## To-Do
 
 1. 공통
-    - [x]  GRAPHQL 통신 설정
-        - [x]  설치 경로: `src/commons/settings/apollo-setting.tsx`
-        - [x]  적용 방법: `src/app/layout.tsx` 파일에 Apollo 설정 적용
-        - [x]  GraphQL 서버 주소: `http://main-practice.codebootcamp.co.kr/graphql`
+    - [x]  day21 폴더를 활용하여 day22 완성
 2. 게시글 등록
-    - [x]  `src/app/boards/new/page.tsx` 기능 수정
-        - [x]  GRAPHQL API(`createBoard`)를 사용하여 작성자, 비밀번호, 제목, 내용 입력 후 등록하기 버튼 클릭 시 게시글 등록 기능 완성
-        - [x]  네트워크 탭에서 게시글 전송이 에러 없이 작동하는지 확인
-        - [x]  전송이 성공하면 게시글 번호를 GraphQL Playground에서 조회
+    - [x]  `src/app/boards/new/page.tsx` 코드 보완
+    - [x]  게시글 등록 실패 시 try-catch 적용 및 에러 메시지 출력
+    - [x]  게시글 등록 성공 시 해당 게시글 상세 페이지로 이동
+3. 게시글 조회
+    - [x]  `src/app/boards/detail/page.tsx` 경로를 `src/app/boards/[boardId]/page.tsx`로 변경
+    - [x]  주소의 boardId 값을 꺼내와 GraphQL API(fetchBoard)로 조회
+    - [x]  조회된 게시물의 작성자, 제목, 내용 출력
+    - [x]  데이터 로딩 전 비어 있는 상태에서 발생하는 에러 해결
