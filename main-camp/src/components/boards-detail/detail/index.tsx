@@ -7,6 +7,8 @@ import { FrownOutlined, LikeOutlined } from '@ant-design/icons'
 import { Dropdown, MenuProps, Typography } from 'antd'
 import { FetchBoardCommentsQuery, FetchBoardQuery } from '@/commons/gql/graphql'
 import BoardDetailYoutube from '../youtube'
+import useFetchBoard from '@/commons/api/useFetchBoard'
+import { useParams } from 'next/navigation'
 
 const { Text } = Typography;
 
@@ -21,11 +23,14 @@ interface IBoardDetailData {
 }
 
 const BoardsDetail = (props: IBoardDetail) => {
+    const param = useParams()
+
     const {
         goListHandler,
         goUpdateHandler,
         getBoardDetail
     } = useBoardsDetailPage()
+    const { board, loading, error, refetch } = useFetchBoard({boardId: param.boardId})
     
     const [boardDetailData, setBoardDetailData] = useState<IBoardDetailData>()
 
@@ -37,9 +42,10 @@ const BoardsDetail = (props: IBoardDetail) => {
 
     useEffect(()=>{
         (async ()=>{
-            const getBoardData = await getBoardDetail()
+            // const getBoardData = await getBoardDetail()
             const getBoardComment = await props.getBoardComments()
-            setBoardDetailData({getBoard: getBoardData,getBoardComment: getBoardComment})
+            // console.log('getBoardData :',getBoardData)
+            setBoardDetailData({getBoard: board, getBoardComment: getBoardComment})
         })()
     },[])
 

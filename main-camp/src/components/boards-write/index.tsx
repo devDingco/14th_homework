@@ -51,7 +51,7 @@ const BoardsWrite = () => {
             alert('주소를 끝까지 입력해 주세요')
             return
         }
-
+        
         creatingBoard()
     }
 

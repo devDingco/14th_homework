@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation"
 import { ChangeEvent } from "react"
 import { IOnChangePosting, IOnUpdateHandler, IUpdateBoardInput } from "./type"
 import { useIsEdit } from "@/commons/provider/isEditProvider"
-import { CreateBoardDocument, CreateBoardInput, CreateBoardMutation, CreateBoardMutationVariables, UpdateBoardDocument, UpdateBoardInput, UpdateBoardMutation, UpdateBoardMutationVariables } from "@/commons/gql/graphql"
+import { CreateBoardDocument, CreateBoardInput, CreateBoardMutation, CreateBoardMutationVariables, FetchBoardDocument, UpdateBoardDocument, UpdateBoardInput, UpdateBoardMutation, UpdateBoardMutationVariables } from "@/commons/gql/graphql"
 import { IPostData } from "@/commons/provider/type"
 
 const useBoardWrite = () => {
@@ -131,13 +131,19 @@ const useBoardWrite = () => {
 
     const updatingBoard = async () => {
         const updateBoardInput = boardUpdateSetting()
-        // console.log(updateBoardInput)
+        console.log('업데이트 직전: ', updateBoardInput)
         // console.log({...updateBoardInput})
         try {
             const result = await updateBoardAPI({
                 variables: {
                     ...updateBoardInput
-                }
+                },
+                refetchQueries: [
+                    {
+                      query: FetchBoardDocument,
+                      variables: { boardId: String(param.boardId) },
+                    },
+                ],
             })
             console.log('업데이트 결과: ',result.data?.updateBoard._id)
             router.push(`/boards/${result.data?.updateBoard._id}`)
