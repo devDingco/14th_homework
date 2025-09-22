@@ -1,7 +1,7 @@
 "use client"
 
 import { useQuery,gql } from "@apollo/client";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import styles from "./styles.module.css";
 import detailImage from "@/assets/images/detail_example.png";
@@ -13,6 +13,7 @@ import goodIcon from "@/assets/icons/good.png";
 import badIcon from "@/assets/icons/bad.svg";
 import menuIcon from "@/assets/icons/menu.png";
 import editIcon from "@/assets/icons/edit.png";
+import { formatDate } from "@/utils/formatDate";
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -20,12 +21,14 @@ const FETCH_BOARD = gql`
       writer
       title
       contents
+      createdAt
     }
   }
 `;
 
 export default function BoardsDetail() {
   const { boardId } = useParams<{ boardId: string }>();
+  const router = useRouter();
   const { data, loading, error } = useQuery(FETCH_BOARD, {
     variables: { boardId },
     skip: !boardId,
@@ -46,7 +49,7 @@ export default function BoardsDetail() {
               <img src={unknownIcon.src} className={styles.profileIcon} />
               <span className={styles.metaAuthor}>{board?.writer}</span>
             </div>
-            <span className={styles.metaDate}>2024.11.11</span>
+            <span className={styles.badge}>{formatDate(board.createdAt)}</span>
           </div>
           <hr className={styles.formDivider} />
           <div className={styles.headerIcons}>
@@ -78,7 +81,7 @@ export default function BoardsDetail() {
           </div>
 
           <div className={styles.detailActions}>
-            <button type="button" className={styles.btn}>
+            <button type="button" className={styles.btn} onClick={() => router.push("/boards")}>
               <img src={menuIcon.src} alt="목록 아이콘" />
               목록으로
             </button>

@@ -1,0 +1,226 @@
+.container {
+  display: flex;
+  padding: 0 clamp(16px, 6vw, 320px);
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.card {
+  margin-top: 40px;
+  display: flex;
+  width: 100%;
+  max-width: 1280px;
+  min-width: 960px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 48px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #ffffff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  padding: 16px 24px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-bottom: none;
+}
+
+/* Header columns */
+.header .noCol,
+.header .titleCol,
+.header .authorCol,
+.header .dateCol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #1c1c1c;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.header .titleCol {
+  justify-content: left;
+}
+
+.noCol {
+  width: 64px;
+  text-align: center;
+}
+
+.titleCol {
+  flex: 1 0 0;
+  justify-content: left;
+}
+
+.authorCol,
+.dateCol {
+  width: clamp(80px, 12vw, 100px);
+  justify-content: center;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+.row {
+  height: 48px;
+  display: flex;
+  padding: 12px 24px;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--gray-50, #f2f2f2);
+}
+
+/* Row columns */
+.row .noCol,
+.row .authorCol,
+.row .dateCol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+}
+
+.row .noCol {
+  width: 64px;
+  color: var(--Gray-50, var(--gray-500, #919191));
+  font-size: 14px;
+}
+
+.titleLink {
+  display: flex;
+  flex: 1 0 0;
+  align-items: center;
+  gap: 10px;
+  justify-content: left;
+  text-decoration: none;
+  color: var(--Gray-90, #1c1c1c);
+  font-size: 14px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.titleText {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Author and date appearance aligned to reference */
+.chip {
+  background: transparent;
+  color: var(--Gray-80, var(--gray-800, #333));
+  padding: 0;
+  border-radius: 0;
+  font-size: 14px;
+}
+
+.badge {
+  background: transparent;
+  color: var(--Gray-50, var(--gray-500, #919191));
+  padding: 0;
+  border-radius: 0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 20px;
+  border: none;
+}
+
+.actionsCol {
+  width: 56px; /* 고정 폭: 레이아웃 흔들림 방지 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteIcon {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0;               /* 기본은 숨김 */
+  transition: opacity .15s; /* 호버 시만 보이게 */
+}
+
+.row:hover .deleteIcon {
+  opacity: 1;
+}
+
+.deleteIcon img {
+  width: 24px;
+  height: 24px;
+}
+.hidden {
+  visibility: hidden;
+}
+
+.showButton {
+  visibility: visible;
+}
+
+.row:hover {
+  background: #f9fafb;
+}
+
+.titleLink:hover .titleText {
+  text-decoration: underline;
+}
+
+.titleLink:focus-visible {
+  outline: 2px solid #c7d2fe;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Optional: small screens can stack padding a bit tighter */
+@media (max-width: 640px) {
+  .container {
+    padding: 0 16px;
+  }
+  .card {
+    padding: 16px 16px;
+  }
+  .header {
+    padding: 12px 12px;
+  }
+  .row {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .header .noCol,
+  .row .noCol {
+    display: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .card {
+    min-width: 0;
+  }
+}
