@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { DELETE_BOARD, FETCH_BOARDS, FETCH_BOARDS_COUNT } from './queries';
 import { FetchBoardsCountDocument } from '@/commons/graphql/graphql';
 import { Modal } from 'antd';
-import { useState } from 'react';
 
 export default function useBoardsPage () {
 
