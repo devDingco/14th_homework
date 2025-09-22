@@ -29,7 +29,7 @@ const useBoardsCommentWrite = (props: IUseBoardsCommentWrite) => {
         CreateBoardCommentMutationVariables
     >(CreateBoardCommentDocument)
 
-    const creatingBoardComment = async () => {
+    const creatingBoardComment = async (rating: number) => {
         try {
             // createBoard 게시글 등록
             console.log(props.commentContents)
@@ -39,8 +39,7 @@ const useBoardsCommentWrite = (props: IUseBoardsCommentWrite) => {
                         writer: props.commentWriter,
                         password: String(props.commentPassword),
                         contents: props.commentContents,
-                        // 하드코딩
-                        rating: 1
+                        rating: rating
                     },
                     boardId: String(param.boardId)
                 }

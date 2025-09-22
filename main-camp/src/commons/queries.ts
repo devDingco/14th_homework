@@ -71,6 +71,7 @@ export const FETCH_COMMENT = gql`
             writer
             contents
             createdAt
+            rating
         }
     }
 `

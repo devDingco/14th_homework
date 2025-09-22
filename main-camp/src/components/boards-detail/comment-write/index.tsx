@@ -20,6 +20,8 @@ const BoardsCommentWrite = (props: IBoardsCommentWrite) => {
     const [commentPasswordErr, setCommentPasswordErr] = useState<string>("")
     const [commentContentsErr, setCommentContentsErr] = useState<string>("")
 
+    const [star, setStar] = useState<number>(0)
+
     const {
         creatingBoardComment, isActive, activeButton
     } = useBoardsCommentWrite({commentWriter, commentPassword, commentContents, getBoardComments: props.getBoardComments})
@@ -68,7 +70,7 @@ const BoardsCommentWrite = (props: IBoardsCommentWrite) => {
             setCommentContentsErr("")
             // createComment 시작!
             console.log('createComment 시작!')
-            creatingBoardComment()
+            creatingBoardComment(star)
         }
     }
 
@@ -84,7 +86,7 @@ const BoardsCommentWrite = (props: IBoardsCommentWrite) => {
             </div>
             <div className={`${styles.comment_star} flex_row`}>
                 {/* <img src="/image/star.png" /> */}
-                <Rate />
+                <Rate onChange={setStar} value={star}/>
             </div>
             <section className={`${styles.comment_write_frame} flex_column`}>
                 <div className={`${styles.comment_write_form_container} flex_column`}>
