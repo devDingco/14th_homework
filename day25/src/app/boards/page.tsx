@@ -99,12 +99,12 @@ export default function BoardsPage() {
         // [핵심!] refetchQueries는 삭제 성공 후, 목록을 다시 불러와서 화면을 갱신하는 기능입니다.
         refetchQueries: [{ query: FETCH_BOARDS }],
       });
-    } catch (err: any) {
+    } catch (error: any) {
       console.error("삭제실패:", err.message);
     }
   };
 
-  // [이벤트 2] 게시글 행 클릭 시
+  // [이벤트 2] 게시글 행 클릭 시도 
   // 게시글 클릭 → 상세 페이지 이동
   const onClickDetail = (id: string) => {
     router.push(`/boards/${id}`);
@@ -126,7 +126,7 @@ export default function BoardsPage() {
             {data?.fetchBoards.map((el: IBoardList, index: number) => (
               // ❗️ 레퍼런스는 div를 사용했지만, 각 행을 button으로 감싸서 클릭 영역을 명확히 하는 것도 좋은 방법입니다.
               <button
-                onClick={() => onClickDetail(el._id)}
+                onClick={() => onClickDetail(el._id)} // 
                 key={el._id}
                 className={styles.contentContainer}
                 onMouseEnter={() => setHoveredId(el._id)} // 상호작용: hover → hoveredId 상태 업데이트 → 삭제 버튼 노출
