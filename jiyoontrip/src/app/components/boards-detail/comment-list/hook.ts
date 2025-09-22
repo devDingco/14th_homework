@@ -28,7 +28,6 @@ export default function useCommentList() {
       },
     });
   };
-  const onClickEdit = () => {};
 
-  return { data, onNext, hasMore, onClickEdit };
+  return { data, onNext, hasMore };
 }
