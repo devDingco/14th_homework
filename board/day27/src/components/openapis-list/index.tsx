@@ -8,7 +8,7 @@ export default function OpenApisList() {
     useEffect(() => {
         const lat = 37.5665;
         const lon = 126.9780;
-        const apiKey = "321e2ad3e777f6631cd14b1ae48f83a5"; // 본인 키 입력
+        const apiKey = "321e2ad3e777f6631cd14b1ae48f83a5"; // 본인 키 입력 
         fetch(
             `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=kr`
         )
