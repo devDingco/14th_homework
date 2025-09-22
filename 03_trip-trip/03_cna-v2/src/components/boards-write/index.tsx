@@ -211,7 +211,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
               return (
                 <div key={idx} className={styles.uploadImageWrapper}>
                   {hasUrl && (
-                    <button className={styles.closeButton} onClick={(e) => onClickDelete(e, idx)}>
+                    <button className={styles.closeButton} onClick={() => onClickDelete(idx)}>
                       <CloseIcon />
                     </button>
                   )}
