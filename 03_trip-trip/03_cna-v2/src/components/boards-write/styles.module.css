@@ -185,3 +185,32 @@
   background-color: #c7c7c7;
   color: #e4e4e4;
 }
+
+.uploadImageWrapper {
+  position: relative;
+}
+
+.uploadImageWrapper:has(:hover) .closeButton {
+  display: block;
+}
+
+.closeButton {
+  display: none;
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  padding: 3.77px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+}
+
+.closeButton svg {
+  color: #fff;
+  size: 16px;
+}
+
+.uploadImage {
+  width: 160px;
+  height: 160px;
+  border-radius: 8px;
+}
