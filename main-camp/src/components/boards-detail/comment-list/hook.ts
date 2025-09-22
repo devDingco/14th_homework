@@ -1,4 +1,5 @@
 import { DeleteBoardCommentDocument, DeleteBoardCommentMutation, DeleteBoardCommentMutationVariables, FetchBoardCommentsDocument, FetchBoardCommentsQuery, FetchBoardCommentsQueryVariables } from "@/commons/gql/graphql"
+import { useIsModal } from "@/commons/provider/isModalProvider"
 import { ApolloError, useApolloClient, useMutation } from "@apollo/client"
 import { useParams } from "next/navigation"
 
@@ -9,6 +10,8 @@ interface IUseBoardCommentList {
 const useBoardCommentList = (props?: IUseBoardCommentList) => {
     const client = useApolloClient()
     const param = useParams()
+
+    const { setIsWarningModal } = useIsModal()
 
     const [deleteBoardCommentAPI] = useMutation<
         DeleteBoardCommentMutation,
@@ -39,7 +42,8 @@ const useBoardCommentList = (props?: IUseBoardCommentList) => {
 
     const updateBoardComments = async (event: React.MouseEvent<HTMLImageElement>) => {
         event.stopPropagation()
-        alert('아직 구현이 안 됐습니다 :)')
+        // alert('아직 구현이 안 됐습니다 :)')
+        setIsWarningModal({open: true, value: '아직 구현이 안 됐습니다 :)'})
         // const updateBoardCommentPw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
         // console.log('업데이트 댓글 Id: ', event.currentTarget.dataset.key)
         // console.log('비밀번호 : ', updateBoardCommentPw)

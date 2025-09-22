@@ -3,6 +3,7 @@ import "./globals.css";
 import ApolloSetting from "../commons/settings/apollo-setting";
 import { IsEditProvider } from "@/commons/provider/isEditProvider";
 import Layout from "@/commons/layout";
+import { IsModalProvider } from "@/commons/provider/isModalProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,9 +19,11 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`root_body`}>
         <ApolloSetting>
-          <IsEditProvider>
-            <Layout>{children}</Layout>
-          </IsEditProvider>
+          <IsModalProvider>
+            <IsEditProvider>
+              <Layout>{children}</Layout>
+            </IsEditProvider>
+          </IsModalProvider>
         </ApolloSetting>
       </body>
     </html>

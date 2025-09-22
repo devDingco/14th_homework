@@ -1,6 +1,7 @@
 import { ApolloError, useApolloClient, useMutation } from "@apollo/client"
 import { useRouter } from "next/navigation"
 import { DeleteBoardDocument, DeleteBoardMutation, DeleteBoardMutationVariables, FetchBoardsDocument, FetchBoardsQuery, FetchBoardsQueryVariables } from "@/commons/gql/graphql"
+import { useIsModal } from "@/commons/provider/isModalProvider"
 
 interface IUseBoardsListPage {
     setBoardsData: React.Dispatch<React.SetStateAction<any>>
@@ -9,6 +10,8 @@ interface IUseBoardsListPage {
 const useBoardsListPage = (props: IUseBoardsListPage) => {
     const client = useApolloClient()
     const router = useRouter()
+
+    const { setIsWarningModal } = useIsModal()
 
     const [deleteBoardAPI] = useMutation<
         DeleteBoardMutation,
@@ -60,7 +63,8 @@ const useBoardsListPage = (props: IUseBoardsListPage) => {
             })
             console.log("삭제한 게시글 ID: ",result.data?.deleteBoard)
             await getBoardsList()
-            alert("게시글이 삭제되었습니다!")
+            // alert("게시글이 삭제되었습니다!")
+            setIsWarningModal({ open: true, value:'게시글이 삭제되었습니다.'})
         } catch(e: unknown) {
             if (e instanceof ApolloError) {
                 e.graphQLErrors.forEach((e) => {

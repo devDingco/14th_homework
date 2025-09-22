@@ -8,6 +8,8 @@ import useBoardWrite from './hook'
 import { useEffect, useState } from 'react'
 import { useIsEdit } from '@/commons/provider/isEditProvider'
 import Postcode from './postcode'
+import { useIsModal } from '@/commons/provider/isModalProvider'
+import WarningModal from '@/commons/modal/warning'
 
 // 게시글 등록/수정 페이지
 const BoardsWrite = () => {
@@ -18,6 +20,7 @@ const BoardsWrite = () => {
         updatingBoard,
         boardUpdateSetting
     } = useBoardWrite()
+    const { isWarningModal, setIsWarningModal, isErrorModal, setIsErrorModal } = useIsModal()
 
     const [writerErr, setWriterErr] = useState<string>("")
     const [passwordErr, setPasswordErr] = useState<string>("")
@@ -75,7 +78,8 @@ const BoardsWrite = () => {
         if (hasError) return;
 
         if (updatingBoardData.contents === postData.contents) {
-            alert('내용이 같으면 수정이 불가능 합니다.')
+            // alert('내용이 같으면 수정이 불가능 합니다.')
+            setIsWarningModal({ open: true, value:'내용이 같으면 수정이 불가능 합니다.'})
             return
         } else {
             setTitleErr("")

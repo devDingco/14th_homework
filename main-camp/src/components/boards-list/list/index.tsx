@@ -1,6 +1,6 @@
 "use client"
 
-import styles from './style.module.css'
+import styles from './styles.module.css'
 import useBoardsListPage from './hook'
 import { useEffect, useState } from 'react'
 import { Query } from '@/commons/gql/graphql'

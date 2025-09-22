@@ -2,7 +2,8 @@
 
 import BoardsList from "@/components/boards-list/list"
 import styles from './styles.module.css'
-import BoardsBanner from "@/components/boards-list/banner"
+import BoardsBanner from "@/components/banner"
+import WarningModal from "@/commons/modal/warning"
 
 const BoardsListPage = () => {
     return (
