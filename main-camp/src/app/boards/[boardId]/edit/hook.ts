@@ -10,7 +10,7 @@ const useBoardsEditPage = () => {
     const param = useParams()
     const { isEdit } = useIsEdit()
 
-    const getBoardDetail = async () => {
+    const getBoardDetail = async (): Promise<FetchBoardQuery | undefined> => {
         try {
             if (isEdit) {
                 const { data } = await client.query<FetchBoardQuery, FetchBoardQueryVariables>({

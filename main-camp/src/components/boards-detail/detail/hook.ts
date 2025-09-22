@@ -7,7 +7,7 @@ const useBoardsDetailPage = () => {
     const router = useRouter()
     const param = useParams()
 
-    const getBoardDetail = async () => {
+    const getBoardDetail = async (): Promise<FetchBoardQuery | undefined> => {
         try {
             const { data } = await client.query<FetchBoardQuery, FetchBoardQueryVariables>({
                 query: FetchBoardDocument,

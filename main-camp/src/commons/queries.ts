@@ -32,6 +32,9 @@ export const FETCH_BOARD = gql`
             }
             youtubeUrl
             createdAt
+            likeCount
+            dislikeCount
+            updatedAt
         }
     }
 `
