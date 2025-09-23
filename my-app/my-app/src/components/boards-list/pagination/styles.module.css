@@ -1,0 +1,20 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.paginationNum {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.paginationNumButton {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.625rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+}
