@@ -3,13 +3,11 @@
 import styles from './style.module.css'
 import WriteButton from './writeButton'
 import WriteInput from './writeInput'
-import { IBoardErr, IOnUpdateHandler } from './type'
+import { IBoardErr } from './type'
 import useBoardWrite from './hook'
 import { useEffect, useState } from 'react'
 import { useIsEdit } from '@/commons/provider/isEditProvider'
 import Postcode from './postcode'
-import { useIsModal } from '@/commons/provider/isModalProvider'
-import WarningModal from '@/commons/modal/warning'
 
 // 게시글 등록/수정 페이지
 const BoardsWrite = () => {

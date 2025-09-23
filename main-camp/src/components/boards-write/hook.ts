@@ -11,8 +11,8 @@ import { useParams } from "next/navigation"
 
 const useBoardWrite = (props: IUseBoardWrite) => {
     const param = useParams()
-    const { postData, setPostData, updatingBoardData, setUpdatingBoardData } = useIsEdit()
-    const { isWarningModal, setIsWarningModal, isErrorModal, setIsErrorModal } = useIsModal()
+    const { postData, setPostData, updatingBoardData } = useIsEdit()
+    const { setIsWarningModal } = useIsModal()
     
     const { postCreateBoard } = useCreateBoard()
     const { postUpdateBoard } = useUpdateBoard()
