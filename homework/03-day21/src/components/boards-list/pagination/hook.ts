@@ -1,14 +1,15 @@
 "use client"
 
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
+import { IPaginationPageProps } from "./types";
 
-export default function usePagination(props){
+export default function usePagination(props: IPaginationPageProps){
     const [startPage, setStartPage] = useState(1)
     const [currentPage, setCurrentPage] = useState(1);
 
      // 페이지네이션 핸들러
-     const onClickPage = (event) => {
-        const page = Number(event.target.id)
+     const onClickPage = (event: MouseEvent<HTMLButtonElement>) => {
+        const page = Number((event.target as HTMLButtonElement).id)
         setCurrentPage(page);    
         props.refetch({ page });   
     }
