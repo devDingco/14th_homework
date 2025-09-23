@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  background-color: hotpink;
 }
 
 .detailBody {
@@ -12,7 +13,8 @@
   max-width: 1280px;
   width: 100%;
   flex-direction: column;
-  gap: 40px;
+  gap: 24px;
+  background-color: aqua;
 }
 
 .boardFrame {

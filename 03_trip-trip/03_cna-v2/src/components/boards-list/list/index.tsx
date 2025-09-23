@@ -13,10 +13,12 @@ const IMAGE_SRC = {
 }
 
 export default function BoardsListComponent(props: BoardsListProps) {
-  const { data, dataBoardsCount, currentPage } = props
+  const { data, dataBoardsCount, currentPage, keyword } = props
   const [hoveredId, setHoveredId] = useState('')
 
   const { onClickDelete, onClickDetail } = useBoardsList({ hoveredId })
+
+  console.log('나 게시글 목록')
 
   return (
     <div className={styles.boardInnerBody}>
@@ -41,7 +43,22 @@ export default function BoardsListComponent(props: BoardsListProps) {
             <div className={styles.contentNumber}>
               {dataBoardsCount?.fetchBoardsCount - index - 10 * (currentPage - 1)}
             </div>
-            <div className={styles.contentTitle}>{el.title}</div>
+            <div className={styles.contentTitle}>
+              {el.title
+                .replaceAll(keyword ?? '', `!@#$${keyword}!@#$`)
+                .split('!@#$')
+                .map((el, idx) => (
+                  <span
+                    key={`${el}_${idx}`}
+                    style={{
+                      color: el === keyword ? 'red' : 'black',
+                      fontWeight: el === keyword ? 'bold' : 'normal',
+                    }}
+                  >
+                    {el}
+                  </span>
+                ))}
+            </div>
             <div className={styles.contentWriter}>{el.writer}</div>
             <div className={styles.contentDate}>
               {el.createdAt.split('T')[0].replace(/-/g, '.')}

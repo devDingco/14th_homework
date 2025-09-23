@@ -13,6 +13,8 @@ export default function Pagination(props: PaginationProps) {
       lastPage,
     })
 
+  console.log('나 페이지네이션')
+
   return (
     <div className={styles.pagination}>
       <KeyboardArrowLeft

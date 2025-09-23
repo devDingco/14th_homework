@@ -8,4 +8,5 @@ export interface BoardsListProps {
   data: FetchBoardsQuery
   dataBoardsCount: FetchBoardsCountQuery
   currentPage: number
+  keyword?: string
 }

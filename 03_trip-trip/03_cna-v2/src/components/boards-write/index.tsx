@@ -6,7 +6,7 @@ import { IBoardWriteProps } from './types'
 import useBoardForm from './hook'
 import { Modal } from 'antd'
 import DaumPostcodeEmbed from 'react-daum-postcode'
-import { useRef } from 'react'
+import { ChangeEvent, useRef } from 'react'
 import { useMutation } from '@apollo/client'
 import {
   UploadFileDocument,
@@ -38,7 +38,11 @@ export default function BoardWritePage(props: IBoardWriteProps) {
     handleComplete,
   } = useBoardForm({ isEdit: props.isEdit })
 
-  const fileRefs = [useRef(null), useRef(null), useRef(null)]
+  const fileRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ]
 
   const onClickImagebyIdx = (idx: number) => {
     fileRefs[idx].current?.click()
@@ -48,8 +52,9 @@ export default function BoardWritePage(props: IBoardWriteProps) {
     UploadFileDocument
   )
 
-  const onChangeFile = async (event, idx: number) => {
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>, idx: number) => {
     const file = event.target.files?.[0]
+    if (!file) return
 
     const isValid = checkValidationFile(file)
     if (!isValid) return
@@ -63,6 +68,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
   const onClickDelete = (idx: number) => {
     setImageByIndex(idx, '')
   }
+
   return (
     <div className={styles.layout}>
       {/* title */}
