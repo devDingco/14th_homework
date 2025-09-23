@@ -4,6 +4,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { ChangeEvent, useState } from 'react'
 import { BoardFormProps } from './types'
 import {
+  BoardAddressInput,
   CreateBoardDocument,
   CreateBoardMutation,
   CreateBoardMutationVariables,
@@ -11,6 +12,7 @@ import {
   FetchBoardQuery,
   FetchBoardQueryVariables,
   UpdateBoardDocument,
+  UpdateBoardInput,
   UpdateBoardMutation,
   UpdateBoardMutationVariables,
 } from 'commons/graphql/graphql'
@@ -192,7 +194,7 @@ export default function useBoardForm(props: BoardFormProps) {
       // 비밀번호 확인하기
       const 입력받은비밀번호 = prompt('글을 작성할때 입력하셨던 비밀번호를 입력해주세요')
 
-      const updateInput: any = {}
+      const updateInput: UpdateBoardInput = {}
       if (boardValue.title?.trim() && boardValue.title !== data?.fetchBoard?.title) {
         updateInput.title = boardValue.title
       }
@@ -209,7 +211,7 @@ export default function useBoardForm(props: BoardFormProps) {
         updateInput.images = boardValue.images
       }
 
-      const boardAddress: any = {}
+      const boardAddress: BoardAddressInput = {}
       if (address.zipcode !== data?.fetchBoard?.boardAddress?.zipcode) {
         boardAddress.zipcode = address.zipcode
       }
