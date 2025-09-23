@@ -68,6 +68,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
   const onClickDelete = (idx: number) => {
     setImageByIndex(idx, '')
   }
+
   return (
     <div className={styles.layout}>
       {/* title */}
