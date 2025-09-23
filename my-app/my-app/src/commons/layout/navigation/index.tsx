@@ -6,7 +6,7 @@ import profileImg from "./assets/img.svg";
 import tripImg from "./assets/logo.svg";
 import Image from "next/image";
 export default function Navigation() {
-  const {} = useNavigation;
+  const { onClickBoardsPage } = useNavigation();
   return (
     <>
       <div className={styles.headerBody}>
@@ -15,9 +15,14 @@ export default function Navigation() {
             <div className={styles.header_logo}>
               <Image src={tripImg} alt="tripImg" />
             </div>
-            <div className={styles.header_boardsPage}>트립토크</div>
+            <div
+              className={styles.header_boardsPage}
+              onClick={onClickBoardsPage}
+            >
+              트립토크
+            </div>
             <div className={styles.header_voucherPurchase}>숙박권 구매</div>
-            <div className={styles.header_myPage}>마이 페이지</div>
+            <div className={styles.header_myPage}>마이페이지</div>
           </div>
           <div className={styles.header_profile}>
             <Image

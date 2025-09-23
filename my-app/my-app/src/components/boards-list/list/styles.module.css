@@ -16,7 +16,7 @@
   flex-direction: column;
 
   max-width: 80rem;
-  min-width: 42.5rem;
+  /* min-width: 42.5rem; */
   width: 100%;
   height: 41rem;
   padding: 1.5rem 3rem;
@@ -35,7 +35,6 @@
   padding: 1rem 1.5rem;
   align-items: center;
   gap: 0.5rem;
-  /* align-self: stretch; */
 }
 
 .BoardFrame_Header_number {
@@ -55,6 +54,7 @@
   justify-content: flex-start;
   align-items: center;
   gap: 0.625rem;
+  flex: 1 0 0;
 }
 
 .BoardFrame_Header_writer {
@@ -144,7 +144,7 @@
   display: flex;
   max-width: 6.25rem;
   width: 100%;
-  justify-content: left;
+  justify-content: center;
   gap: 0.625rem;
 
   overflow: hidden;
@@ -171,4 +171,12 @@
   font-size: 0.875rem;
   font-weight: 300;
   line-height: 1.25rem; /* 142.857% */
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.showButton {
+  visibility: visible;
 }

@@ -1,0 +1,8 @@
+{
+  "className={styles.}": {
+    "prefix": "className={styles.}",
+    "description": "className={styles.}",
+    "scope": "typescriptreact",
+    "body": ["className={styles.}"]
+  }
+}
