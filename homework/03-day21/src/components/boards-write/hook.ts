@@ -1,14 +1,55 @@
 "use client";
 
 import { useMutation, useQuery } from "@apollo/client"
-import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { FETCH_BOARD,  } from "./queries";
+import { FETCH_BOARD, UPLOAD_FILE,  } from "./queries";
 import { IDaumPostcodeData, IMyvariables, IUseBoardsWriteProps } from "./types";
 import { CreateBoardDocument, CreateBoardMutation, CreateBoardMutationVariables, FetchBoardDocument, UpdateBoardDocument, UpdateBoardMutation, UpdateBoardMutationVariables } from "@/commons/graphql/graphql";
 import { Modal } from "antd";
+import { checkValidationFile } from "@/commons/libraries/image-validation";
+
+
 
 export default function useBoardsWrite(props: IUseBoardsWriteProps) {
+
+    const [imageUrls, setImageUrls] =useState<string[]>(["", "", ""])
+    const fileRef = useRef<(HTMLInputElement | null)[]>([]);
+    const [uploadFile] = useMutation(UPLOAD_FILE)
+
+    const onChangeFile = async(event: ChangeEvent<HTMLInputElement>, idx: number) => {
+        const file= event.target.files?.[0]
+        console.log(file)
+
+        const isValid = checkValidationFile(file)
+        if(!isValid) return
+        if(!file) return;
+
+        const result = await uploadFile({ variables: { file } })
+        console.log(result.data?.uploadFile.url)        
+        // setImageUrls(result.data?.uploadFile.url)
+
+        setImageUrls((prev) => {
+            const newUrls = [...prev];
+            newUrls[idx] = result.data?.uploadFile.url || "";
+            return newUrls;
+        })
+    }
+
+    const onClickImage = (idx: number) => {
+        fileRef.current[idx]?.click()
+        
+    }
+
+    const onClickDeleteImage = (idx: number) => {
+        setImageUrls((prev) => {
+            const newUrls = [...prev];
+            newUrls[idx] = ""; // 해당 위치를 빈 문자열로 교체
+            return newUrls;
+        })
+
+    }
+
     const router = useRouter()
     const params = useParams()
     const boardId = String(params.boardId) 
@@ -16,20 +57,7 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
         variables: { boardId },
         skip: !boardId || !props.isEdit
     })
-  
-    // const [writer, setWriter] = useState(props.isEdit ? data?.fetchBoard.writer : "");
-    // const [password, setPassword] = useState("");
-    // const [title, setTitle] = useState(props.isEdit ? data?.fetchBoard.title : "");
-    // const [contents, setContents] = useState(props.isEdit ? data?.fetchBoard.contents : "");
-
-
-    // const boardAddress = props.isEdit && data?.fetchBoard?.boardAddress 
-    //     ? data.fetchBoard.boardAddress 
-    //     : { zipcode: "", address: "", addressDetail: "" };
-
-    // const [zipcode, setZipcode] = useState(boardAddress.zipcode);
-    // const [address, setAddress] = useState(boardAddress.address);
-    // const [addressDetail, setAddressDetail] = useState(boardAddress.addressDetail);
+      
 
     // ✅ 항상 빈 문자열로 state 초기화
     const [inputs, setInputs] = useState({
@@ -57,6 +85,17 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
             setAddress(data.fetchBoard.boardAddress?.address ?? "");
             setAddressDetail(data.fetchBoard.boardAddress?.addressDetail ?? "");
             setYoutubeUrl(data.fetchBoard.youtubeUrl ?? "");
+
+             // ✅ 기존 이미지 불러오기
+            if (data.fetchBoard.images && data.fetchBoard.images.length > 0) {
+                setImageUrls((prev) => {
+                    const newUrls = [...prev];
+                    (data.fetchBoard.images as string[]).forEach((url, idx) => {
+                        newUrls[idx] = url || "";
+                    });
+                    return newUrls;
+                });
+            }
         }
     }, [props.isEdit, data])
 
@@ -72,64 +111,8 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
                 inputs.contents !== ""
             )
         }
-    }, [inputs, password, props.isEdit])
-
-    // const [writer, setWriter] = useState("");   
-    // const [title, setTitle] = useState("");
-    // const [contents, setContents] = useState("");
-
-
-
-
-    // 인풋에 표시될 값 (useEffect 없이 안전하게)
-    // const writerValue = props.isEdit && data?.fetchBoard?.writer ? data.fetchBoard.writer : writer;
-    // const titleValue = props.isEdit && data?.fetchBoard?.title ? (title || data.fetchBoard.title) : title;
-    // const contentsValue = props.isEdit && data?.fetchBoard?.contents ? (contents || data.fetchBoard.contents) : contents;
-
-    // const writerValue = props.isEdit
-    //     ? (writer !== "" ? writer : data?.fetchBoard?.writer ?? "")
-    //     : writer;
-
-    // const titleValue = props.isEdit
-    //     ? (title !== "" ? title : data?.fetchBoard?.title ?? "")
-    //     : title;
-
-    // const contentsValue = props.isEdit
-    //     ? (contents !== "" ? contents : data?.fetchBoard?.contents ?? "")
-    //     : contents;
-
-    // const zipcodeValue = props.isEdit
-    //     ? (zipcode !== "" ? zipcode : data?.fetchBoard?.boardAddress?.zipcode ?? "")
-    //     : zipcode;
-
-    // const addressValue = props.isEdit
-    //     ? (address !== "" ? address : data?.fetchBoard?.boardAddress?.address ?? "")
-    //     : address;
-
-    // const addressDetailValue = props.isEdit
-    //     ? (addressDetail !== "" ? addressDetail : data?.fetchBoard?.boardAddress?.addressDetail ?? "")
-    //     : addressDetail;
-
-    // // 수정 모드일 때 값 세팅
-    // const youtubeUrlValue = props.isEdit
-    //     ? (youtubeUrl !== "" ? youtubeUrl : data?.fetchBoard?.youtubeUrl ?? "")
-    //     : youtubeUrl;
-
-     
-    // && 연산자 사용 시:
-    // props.isEdit && data?.fetchBoard.boardAddress.address
-    // 두 조건이 모두 true일 때만 값이 나옴 → 즉, 수정 모드이고 데이터가 존재할 때만 기존 주소 보여주기
-    // 조건이 하나라도 false면 아무 값도 안 나오거나 false가 됨
-
-    // ? : 삼항 연산자 사용 시:
-    // props.isEdit ? data?.fetchBoard.boardAddress.address : ""
-    // isEdit만 확인
-    // true면 데이터, false면 빈 문자열
-    // 데이터가 없으면 undefined가 나올 수 있음 → 이 부분에서 ?.를 같이 써서 안전하게 접근
-
-    // 수정 페이지에서 데이터가 있어야 기존 데이터 보여주기 → &&
-
-    // 단순 조건 분기 (true면 값, false면 빈 문자열) → ? :
+    }, [inputs, password, props.isEdit])     
+   
 
     const [inputError, setInputError] = useState("");
     // //useState의 초기값을 props.isEdit에 따라 조건부로 설정
@@ -208,7 +191,7 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
                         addressDetail: addressDetail,
                     },         
                     youtubeUrl, 
-                    images: []
+                    images: imageUrls  
                     } ,
                 },
             })
@@ -246,7 +229,8 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
                         zipcode: zipcode,
                         address: address,
                         addressDetail: addressDetail,
-                    }
+                    },
+                    images: imageUrls,   // 반드시 포함
                 } ,
                 boardId: boardId,
                 password: enteredPassword, 
@@ -261,6 +245,7 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
                     address: data.fetchBoard.boardAddress.address,
                     addressDetail:
                         addressDetail || data.fetchBoard.boardAddress.addressDetail,
+                    
                 }
             }
 
@@ -319,9 +304,6 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
         // }
     }    
 
-    // //  data가 로드되지 않았을 경우 null을 반환하여 렌더링을 막음
-    // if (props.isEdit && !data) return null;
-
     return {        
         password,
         inputs,
@@ -342,6 +324,11 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
         onClickSubmit,
         onClickUpdate,
         onChangeInputs,
+        onClickImage,
+        onChangeFile,
+        onClickDeleteImage,  
+        imageUrls,
+        fileRef
     };
   
 }

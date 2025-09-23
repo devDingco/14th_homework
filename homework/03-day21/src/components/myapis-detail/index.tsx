@@ -3,7 +3,7 @@
 import React from 'react';
 import styles from "./styles.module.css";
 import useMyBoardsDetail from './hook';
-import { Tooltip } from 'antd';
+import { Tag, Tooltip } from 'antd';
 
 
 export default function MyBoardsDetail () { 
@@ -12,6 +12,7 @@ export default function MyBoardsDetail () {
         address,
         onClickMove,
         onClickMoveList,
+        tags,    
      } = useMyBoardsDetail()
 
     return(
@@ -25,6 +26,19 @@ export default function MyBoardsDetail () {
                 <div className={styles.detailMetadataContainer}>
                     <div className={styles.detailRowFlex}>
                         <div className={styles.detailMetadataDate}>{new Date(data?.created_at).toLocaleDateString("ko-KR")}</div>
+                        
+                        {/* 태그 표시 */}
+                        <div>
+                            {tags.length > 0 ? (
+                                tags.map((tag, index) => 
+                                <Tag 
+                                    key={tag}
+                                    style={{ marginInlineEnd: index === tags.length - 1 ? 0 : 8 }}
+                                >
+                                    {tag}
+                                </Tag>)
+                            ) : "" }
+                        </div>
                     </div>
                     <hr className={styles.detailBorder}/>
                     <div className={styles.detailMetadataIconContainer}>
