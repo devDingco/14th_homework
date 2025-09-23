@@ -1,17 +1,5 @@
-/**
- * 게시글 상세보기 페이지 컴포넌트
- *
- * 주요 기능:
- * 1. 게시글 상세 정보 표시 (제목, 작성자, 내용, 이미지 등)
- * 2. 업로드된 이미지들을 순서대로 표시
- * 3. 유튜브 동영상 embed 재생
- * 4. 좋아요/싫어요 기능
- * 5. 목록으로 돌아가기, 수정하기 버튼
- *
- * 사용 방법: URL의 boardId 파라미터로 특정 게시글 조회
- * 예: /boards/detail/[boardId]
- */
 'use client'; // 이 컴포넌트를 클라이언트에서 실행하도록 설정
+// 상세페이지 - 게시글의 상세 내용을 보여주는 페이지 컴포넌트
 import styles from './BoardsDetail.module.css'; // CSS 모듈 스타일 import
 import Image from 'next/image'; // Next.js 최적화된 이미지 컴포넌트
 import useBoardsDetail from './hooks';
@@ -83,26 +71,15 @@ export default function BoardsDetail() {
           </TooltipLocation>
         </div>
       </div>
-      {/* 게시글 이미지들 표시 */}
-      <div>
-        {/*
-          배열 렌더링의 핵심 패턴:
-          1. map() 함수로 배열의 각 요소를 순회
-          2. key={index}로 React의 리스트 렌더링 최적화
-          3. Google Cloud Storage URL 조합
-          4. 동적 alt 텍스트 생성
-        */}
-        {data?.fetchBoard.images?.map((imageUrl: string, index: number) => (
-          <Image
-            key={index} // React 리스트 렌더링 최적화를 위한 고유 키
-            src={`https://storage.googleapis.com/${imageUrl}`} // GCS 전체 URL 조합
-            alt={`게시글 이미지 ${index + 1}`} // 접근성을 위한 동적 alt 텍스트
-            width={400}
-            height={300}
-            className={styles.게시글이미지}
-          />
-        ))}
-      </div>
+      {/* 대표 이미지 */}
+      <div>{data?.fetchBoard.images}</div>
+      {/* <Image
+        src="/icons/sea.png"
+        alt="게시글 대표 이미지"
+        className={styles.바다사진}
+        width={400}
+        height={531}
+      /> */}
       {/* 게시글 본문 내용 */}
       <div>{data?.fetchBoard.contents}</div>
       {/* 동영상 섹션 */}

@@ -6,7 +6,6 @@ import './globals.css';
 import ApolloSetting from '@/commons/providers/apollo-provider';
 import Layout from '@/commons/layout';
 import { usePathname } from 'next/navigation';
-import ApiUploadProvider from '@/commons/providers/apollo-provider';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -36,12 +35,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {pathname === '/boards' && <Layout />}
         <ApiUploadProvider>
-          {pathname === '/boards' ? (
-            <Layout>{children}</Layout>
-          ) : (
-            children
-          )}
+          <Layout>{children}</Layout>
         </ApiUploadProvider>
       </body>
     </html>

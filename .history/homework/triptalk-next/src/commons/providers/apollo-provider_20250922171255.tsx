@@ -6,7 +6,7 @@ import {
   ApolloProvider,
   InMemoryCache,
 } from '@apollo/client';
-import { createUploadLink } from 'apollo-upload-client';
+import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 
 export default function ApiUploadProvider(props) {
   const uploadLink = createUploadLink({
@@ -14,7 +14,7 @@ export default function ApiUploadProvider(props) {
   });
 
   const client = new ApolloClient({
-    link: uploadLink,
+    link: ApolloLink.from([uploadLink]),
     cache: new InMemoryCache(),
   });
 

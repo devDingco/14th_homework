@@ -3,11 +3,5 @@ import Banner from './banner';
 import Nav from './nav';
 
 export default function Layout({ children }: { children?: React.ReactNode }) {
-  return (
-    <>
-      <Nav />
-      <Banner />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }
