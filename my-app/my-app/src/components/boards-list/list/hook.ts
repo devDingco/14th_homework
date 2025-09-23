@@ -9,8 +9,9 @@ import { Modal } from "antd";
 
 export const useBoardList = () => {
   const router = useRouter();
+  const [hoveredId, setHoveredId] = useState("");
   // const params = useParams<{ boardId: string }>();
-  const { data } = useQuery(FetchBoardsDocument);
+  const { data, refetch } = useQuery(FetchBoardsDocument);
 
   // const [modalContent, setModalContent] = useState("");
   // const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,7 +42,7 @@ export const useBoardList = () => {
   const onClickDelete = async (event: MouseEvent<HTMLImageElement>) => {
     event.stopPropagation();
     await deleteBoard({
-      variables: { boardId: event.currentTarget.id },
+      variables: { boardId: hoveredId },
       refetchQueries: [{ query: FetchBoardsDocument }],
     });
     Modal.success({
@@ -61,6 +62,8 @@ export const useBoardList = () => {
 
   return {
     data,
+    refetch,
+    hoveredId,
     onClickMoveDetail,
     onClickDelete,
   };
