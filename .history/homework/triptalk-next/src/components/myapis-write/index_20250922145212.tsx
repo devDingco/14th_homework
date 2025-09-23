@@ -1,0 +1,58 @@
+'use client';
+import { supabase } from '@/commons/libraries/supabase';
+import { useState } from 'react';
+
+export default function MyApisWrite() {
+  const [title, setTitle] = useState('');
+  const [director, setDirector] = useState('');
+  const [rating, setRating] = useState(0);
+  const [content, setContent] = useState('');
+  const onClickSubmit = async () => {
+    const result = await supabase.from('movies').insert({
+      title: title,
+      director: director,
+      rating: Number(rating),
+      content: content,
+    });
+    console.log(result);
+  };
+
+  return (
+    <div>
+      <div>
+        <div>영화제목</div>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+      <div>
+        <div>감독</div>
+        <input
+          type="text"
+          value={director}
+          onChange={(e) => setDirector(e.target.value)}
+        />
+      </div>
+      <div>
+        <div>평점</div>
+        <input
+          type="text"
+          value={rating}
+          onChange={(e) => setRating(Number(e.target.value))}
+        />
+      </div>
+      <div>
+        <div>리뷰내용</div>
+        <input
+          type="text"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+      </div>
+
+      <button onClick={onClickSubmit}>등록하기</button>
+    </div>
+  );
+}

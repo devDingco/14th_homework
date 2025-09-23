@@ -12,7 +12,9 @@
   "dependencies": {
     "@ant-design/icons": "^5.6.1",
     "@apollo/client": "~3.11.10",
+    "@supabase/supabase-js": "^2.57.4",
     "antd": "^5.27.3",
+    "apollo-upload-client": "^17.0.0",
     "graphql": "^16.11.0",
     "next": "14.2.32",
     "react": "^18",
@@ -24,6 +26,7 @@
   "devDependencies": {
     "@graphql-codegen/cli": "6.0.0",
     "@graphql-codegen/client-preset": "5.0.0",
+    "@types/apollo-upload-client": "^18.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

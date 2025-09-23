@@ -1,12 +1,22 @@
 'use client';
 
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import {
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
+  InMemoryCache,
+} from '@apollo/client';
+import { createUploadLink } from 'apollo-upload-client';
 
-const client = new ApolloClient({
-  uri: 'http://main-practice.codebootcamp.co.kr/graphql',
-  cache: new InMemoryCache(),
-});
+export default function ApiUploadProvider(props) {
+  const uploadLink = createUploadLink({
+    uri: 'http://main-practice.codebootcamp.co.kr/graphql',
+  });
 
-export default function ApolloSetting(props: { 모든페이지: React.ReactNode }) {
-  return <ApolloProvider client={client}>{props.모든페이지}</ApolloProvider>;
+  const client = new ApolloClient({
+    link: uploadLink,
+    cache: new InMemoryCache(),
+  });
+
+  return <ApolloProvider client={client}>{props.children}</ApolloProvider>;
 }

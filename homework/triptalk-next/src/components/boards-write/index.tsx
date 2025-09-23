@@ -1,38 +1,62 @@
+/**
+ * 게시글 작성/수정 페이지 컴포넌트
+ *
+ * 주요 기능:
+ * 1. 게시글 등록 - 새로운 게시글을 작성하여 서버에 저장
+ * 2. 게시글 수정 - 기존 게시글의 내용을 수정
+ * 3. 이미지 업로드 - 최대 3개의 이미지 파일 업로드 (Google Cloud Storage)
+ * 4. 주소 검색 - 다음 우편번호 API를 이용한 주소 입력
+ * 5. 유튜브 URL 입력 - 동영상 링크 추가
+ *
+ * 사용 방법:
+ * - 등록: <BoardsWrite isEdit={false} />
+ * - 수정: <BoardsWrite isEdit={true} />
+ */
 'use client'; // 이 컴포넌트를 클라이언트에서 실행하도록 설정
 
 import styles from './BoardsNew.module.css'; // CSS 모듈 스타일 import
 
 import Image from 'next/image'; // Next.js 최적화된 이미지 컴포넌트
 
-import useBoardsWrite from './hooks';
-import { IBoardsWriteProps } from './types';
-import AddressModal from '../address-modal';
-import AllModal from '@/components/all-modal';
+import useBoardsWrite from './hooks'; // 커스텀 훅 - 비즈니스 로직 분리
+import { IBoardsWriteProps } from './types'; // TypeScript 타입 정의
+import AddressModal from '../address-modal'; // 주소 검색 모달 컴포넌트
+import AllModal from '@/components/all-modal'; // 공통 모달 컴포넌트
 
-// 게시글 작성/수정 컴포넌트 (props를 통해 수정 모드인지 판단)
+/**
+ * 게시글 작성/수정 메인 컴포넌트
+ * @param props - 컴포넌트 props
+ * @param props.isEdit - 수정 모드 여부 (true: 수정, false: 등록)
+ */
 export default function BoardsWrite(props: IBoardsWriteProps) {
+  // useBoardsWrite 커스텀 훅에서 상태와 함수들을 가져옴
+  // 이 훅은 게시글 작성/수정에 필요한 모든 비즈니스 로직을 담당
   const {
-    data,
-    inputs,
-    zipcode,
-    address,
-    addressDetail,
-    setZipcode,
-    setAddress,
-    setAddressDetail,
-    onClickSignUp,
-    onClickUpdate,
-    onChangePassword,
-    onChangeYoutubeUrl,
-    nameError,
-    passwordError,
-    titleError,
-    contentError,
-    isActive,
-    modalOpen,
-    modalMessage,
-    closeModal,
-    onChangeInputs,
+    data, // 수정 모드일 때 기존 게시글 데이터 (GraphQL로 조회)
+    inputs, // 입력 필드들의 값 객체 {name, title, content}
+    zipcode, // 우편번호
+    address, // 기본 주소 (예: 서울특별시 강남구 테헤란로)
+    addressDetail, // 상세 주소 (예: 123동 456호)
+    setZipcode, // 우편번호 설정 함수
+    setAddress, // 기본 주소 설정 함수
+    setAddressDetail, // 상세 주소 설정 함수
+    onClickSignUp, // 게시글 등록 버튼 클릭 함수 (유효성 검증 + API 호출)
+    onClickUpdate, // 게시글 수정 버튼 클릭 함수 (비밀번호 확인 + API 호출)
+    onChangePassword, // 비밀번호 입력 필드 변경 함수
+    onChangeYoutubeUrl, // 유튜브 URL 입력 필드 변경 함수
+    nameError, // 작성자명 유효성 검증 에러 메시지
+    passwordError, // 비밀번호 유효성 검증 에러 메시지
+    titleError, // 제목 유효성 검증 에러 메시지
+    contentError, // 내용 유효성 검증 에러 메시지
+    isActive, // 등록/수정 버튼 활성화 여부 (모든 필수 입력이 완료되면 true)
+    modalOpen, // 모달 창 표시 여부
+    modalMessage, // 모달 창에 표시할 메시지
+    closeModal, // 모달 창 닫기 함수
+    onChangeInputs, // 공통 입력 필드 변경 함수 (name, title, content)
+    onFileUpload0, // 첫 번째 이미지 업로드 함수 (uploadedFiles[0]에 저장)
+    onFileUpload1, // 두 번째 이미지 업로드 함수 (uploadedFiles[1]에 저장)
+    onFileUpload2, // 세 번째 이미지 업로드 함수 (uploadedFiles[2]에 저장)
+    uploadedFiles, // 업로드된 이미지 파일들의 Google Storage URL 배열
   } = useBoardsWrite(props);
 
   // JSX 렌더링 부분 - 실제로 화면에 보여지는 UI
@@ -152,25 +176,115 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
         </div>
       </div>
       <hr className={styles.hr} /> {/* 구분선 */}
-      {/* 사진 첨부 섹션 (현재 기능 미구현) */}
       <div className={styles.사진첨부컨테이너}>
         <div>사진첨부</div>
         <div className={styles.사진첨부}>
-          {/* 사진 업로드 버튼들 (최대 3개) */}
-          <button>
-            <Image src="/icons/add.png" alt="업로드" width={40} height={40} />
-            <br />
-            클릭해서 사진 업로드
+          {/*
+            이미지 업로드 섹션 - 총 3개의 이미지를 업로드할 수 있음
+            각 버튼은 독립적으로 작동하며, 이미지가 업로드되면 미리보기로 표시
+            클릭 시 숨겨진 file input을 트리거하여 파일 선택 창을 열음
+          */}
+          {/* 첫 번째 이미지 업로드 버튼 */}
+          <button
+            onClick={() => document.getElementById('file-input-0')?.click()} // 숨겨진 파일 input 클릭
+            style={{ position: 'relative', overflow: 'hidden' }} // 이미지가 버튼 영역을 벗어나지 않도록
+          >
+            {uploadedFiles[0] ? (
+              // 이미지가 업로드된 경우: 미리보기 표시
+              <img
+                src={`http://storage.googleapis.com/${uploadedFiles[0]}`} // Google Cloud Storage URL
+                alt="업로드된 이미지"
+                style={{
+                  position: 'absolute', // 버튼 위에 절대 위치로 배치
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover' // 이미지 비율 유지하면서 영역 채우기
+                }}
+              />
+            ) : (
+              // 이미지가 없는 경우: 업로드 아이콘과 텍스트 표시
+              <>
+                <Image src="/icons/add.png" alt="업로드" width={40} height={40} />
+                <br />
+                클릭해서 사진 업로드
+              </>
+            )}
+            {/* 실제 파일 선택을 담당하는 숨겨진 input */}
+            <input
+              id="file-input-0"
+              type="file"
+              accept="image/*" // 이미지 파일만 선택 가능
+              onChange={onFileUpload0} // 파일 선택 시 업로드 함수 실행
+              style={{ display: 'none' }} // 화면에 보이지 않도록 숨김
+            />
           </button>
-          <button>
-            <Image src="/icons/add.png" alt="업로드" width={40} height={40} />
-            <br />
-            클릭해서 사진 업로드
+          {/* 두 번째 이미지 업로드 버튼 (첫 번째와 동일한 구조) */}
+          <button
+            onClick={() => document.getElementById('file-input-1')?.click()}
+            style={{ position: 'relative', overflow: 'hidden' }}
+          >
+            {uploadedFiles[1] ? (
+              <img
+                src={`http://storage.googleapis.com/${uploadedFiles[1]}`}
+                alt="업로드된 이미지"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+              />
+            ) : (
+              <>
+                <Image src="/icons/add.png" alt="업로드" width={40} height={40} />
+                <br />
+                클릭해서 사진 업로드
+              </>
+            )}
+            <input
+              id="file-input-1"
+              type="file"
+              accept="image/*"
+              onChange={onFileUpload1}
+              style={{ display: 'none' }}
+            />
           </button>
-          <button>
-            <Image src="/icons/add.png" alt="업로드" width={40} height={40} />
-            <br />
-            클릭해서 사진 업로드
+          {/* 세 번째 이미지 업로드 버튼 (첫 번째와 동일한 구조) */}
+          <button
+            onClick={() => document.getElementById('file-input-2')?.click()}
+            style={{ position: 'relative', overflow: 'hidden' }}
+          >
+            {uploadedFiles[2] ? (
+              <img
+                src={`http://storage.googleapis.com/${uploadedFiles[2]}`}
+                alt="업로드된 이미지"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+              />
+            ) : (
+              <>
+                <Image src="/icons/add.png" alt="업로드" width={40} height={40} />
+                <br />
+                클릭해서 사진 업로드
+              </>
+            )}
+            <input
+              id="file-input-2"
+              type="file"
+              accept="image/*"
+              onChange={onFileUpload2}
+              style={{ display: 'none' }}
+            />
           </button>
         </div>
       </div>
@@ -191,6 +305,12 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
           {props.isEdit ? '수정' : '등록'}하기
         </button>
       </div>
+      {/*
+        공통 모달 컴포넌트 - 성공/실패/경고 메시지 표시
+        - open: 모달 표시 여부
+        - message: 모달에 표시할 메시지 내용
+        - onClose: 모달 닫기 버튼 클릭 시 실행할 함수
+      */}
       <AllModal open={modalOpen} message={modalMessage} onClose={closeModal} />
     </div>
   );
