@@ -1,18 +1,28 @@
+"use client"
+
 import { createContext, ReactNode, useContext, useState } from "react";
 
+type Modal = {
+    open: boolean,
+    value: string
+}
 interface IIsModalContext {
-    isPostcode: boolean,
-    setIsPostcode: (t: boolean) => void
+    isWarningModal: Modal | undefined,
+    setIsWarningModal: (t: Modal) => void
+    isErrorModal: Modal | undefined,
+    setIsErrorModal: (t: Modal) => void
 }
 
 const IsModalContext = createContext<IIsModalContext | undefined>(undefined)
 
 export const IsModalProvider = ( {children}: { children:ReactNode } ) => {
-    const [isPostcode, setIsPostcode] = useState<boolean>(false)
+    const [isWarningModal, setIsWarningModal] = useState<Modal>()
+    const [isErrorModal, setIsErrorModal] = useState<Modal>()
 
     return (
         <IsModalContext.Provider value={{
-            isPostcode, setIsPostcode
+            isWarningModal, setIsWarningModal,
+            isErrorModal, setIsErrorModal
         }}>
             {children}
         </IsModalContext.Provider>

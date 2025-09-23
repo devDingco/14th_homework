@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation"
 import { ChangeEvent } from "react"
 import { IOnChangePosting, IOnUpdateHandler, IUpdateBoardInput } from "./type"
 import { useIsEdit } from "@/commons/provider/isEditProvider"
-import { CreateBoardDocument, CreateBoardInput, CreateBoardMutation, CreateBoardMutationVariables, UpdateBoardDocument, UpdateBoardMutation, UpdateBoardMutationVariables } from "@/commons/gql/graphql"
+import { CreateBoardDocument, CreateBoardInput, CreateBoardMutation, CreateBoardMutationVariables, FetchBoardDocument, UpdateBoardDocument, UpdateBoardInput, UpdateBoardMutation, UpdateBoardMutationVariables } from "@/commons/gql/graphql"
 import { IPostData } from "@/commons/provider/type"
 
 const useBoardWrite = () => {
@@ -20,7 +20,7 @@ const useBoardWrite = () => {
         CreateBoardMutationVariables
     >(CreateBoardDocument)
 
-    const [updateBaordAPI] = useMutation<
+    const [updateBoardAPI] = useMutation<
         UpdateBoardMutation, UpdateBoardMutationVariables
     >(UpdateBoardDocument)
 
@@ -55,8 +55,9 @@ const useBoardWrite = () => {
                 break
             }
             case "주소": {
+                console.log('주소까지 옴?')
                 if (event.target.id === "addressDetail") {
-                    if (event.target.value === "") {
+                    if (event.target.value === "" && postData.boardAddress) {
                         const { addressDetail, ...rest } = postData.boardAddress
                         console.log("검증시간?", rest)
                         setPostData((prev: IPostData) => ({
@@ -106,7 +107,13 @@ const useBoardWrite = () => {
                     createBoardInput: {
                         ...createBoardInput
                     } as CreateBoardInput
-                }
+                },
+                refetchQueries: [
+                    {
+                      query: FetchBoardDocument,
+                      variables: { boardId: String(param.boardId) },
+                    },
+                ],
             })
             router.push(`/boards/${result.data?.createBoard._id}`)
         } catch(e: unknown) {
@@ -118,41 +125,31 @@ const useBoardWrite = () => {
         }
     }
 
-    // type IPostData = {
-    //     writer: string,
-    //     password: string,
-    //     title: string,
-    //     contents: string,
-    //     boardAddress?: typeBoardAddress | null,
-    //     youtubeUrl?: string | null
-    // }
-
     const boardCreateSetting = () => {
         console.log("createBoard 전에 데이터 정리! ", postData)
-        if (Object.values(postData.boardAddress).filter(v => v === "").length > 0) {
+        if (Object.values(postData.boardAddress ?? {}).filter(v => v === "").length > 0) {
             const { boardAddress, ...updateData } = postData
-            // cleanObj = Object.fromEntries(
-            //     Object.entries(updateData).filter(([_, v]) => v !== "" && v != null)
-            // );
-            // console.log('boardAddress 지우고 : ', cleanObj)
             return Object.fromEntries(Object.entries(updateData).filter(([_, v]) => v !== ""))
         } else {
-            // cleanObj = Object.fromEntries(
-            //     Object.entries(postData).filter(([_, v]) => v !== "" && v != null)
-            // );
-            // console.log('빈 문자열 지우고: ', cleanObj)
             return Object.fromEntries(Object.entries(postData).filter(([_, v]) => v !== ""))
         }
     }
 
-    const updatingBoard = async (data: IUpdateBoardInput) => {
+    const updatingBoard = async () => {
+        const updateBoardInput = boardUpdateSetting()
+        console.log('업데이트 직전: ', updateBoardInput)
+        // console.log({...updateBoardInput})
         try {
-            const result = await updateBaordAPI({
+            const result = await updateBoardAPI({
                 variables: {
-                    updateBoardInput: data.updateBoardInput,
-                    password: data.password,
-                    boardId: String(data.boardId)
-                }
+                    ...updateBoardInput
+                },
+                refetchQueries: [
+                    {
+                      query: FetchBoardDocument,
+                      variables: { boardId: String(param.boardId) },
+                    },
+                ],
             })
             console.log('업데이트 결과: ',result.data?.updateBoard._id)
             router.push(`/boards/${result.data?.updateBoard._id}`)
@@ -165,14 +162,15 @@ const useBoardWrite = () => {
         }
     }
 
-    const boardUpdateSetting = (data: IOnUpdateHandler) => {
+    const boardUpdateSetting = () => {
         const inputBoardPw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
 
+        const { writer, ...forUpdateData } = postData
         // 업데이트 시도할 인풋 데이터들
-        const updateBoardInput: IUpdateBoardInput = {
-            updateBoardInput: data,
-            password: inputBoardPw,
-            boardId: param.boardId,
+        const updateBoardInput = {
+            updateBoardInput: {...forUpdateData} as UpdateBoardInput,
+            password: String(inputBoardPw),
+            boardId: String(param.boardId),
         }
 
         console.log('업데이트된 객체 확인: ', updateBoardInput)

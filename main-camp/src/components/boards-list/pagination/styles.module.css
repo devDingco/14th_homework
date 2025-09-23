@@ -1,0 +1,40 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1184px;
+    height: 32px;
+    gap: 8px;
+    opacity: 1;    
+}
+
+.pagination > img {
+    width: 24px;
+    height: 24px;
+    opacity: 1;
+}
+
+.pageList {
+    width: 224px;
+    height: 32px;
+    gap: 16px;
+    opacity: 1;
+}
+
+.pageList > li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    gap: 10px;
+    opacity: 1;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* .pageList > li > p {
+    align-items: center;
+} */

@@ -2,7 +2,6 @@
 
 import BoardsList from "@/components/boards-list/list"
 import styles from './styles.module.css'
-import BoardsBanner from "@/components/boards-list/banner"
 
 const BoardsListPage = () => {
     return (

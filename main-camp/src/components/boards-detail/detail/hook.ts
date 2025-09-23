@@ -1,4 +1,4 @@
-import { ApolloError, useApolloClient } from "@apollo/client"
+import { ApolloError, useApolloClient, useQuery } from "@apollo/client"
 import { useParams, useRouter } from "next/navigation"
 import { FetchBoardDocument, FetchBoardQuery, FetchBoardQueryVariables } from "@/commons/gql/graphql";
 
@@ -7,7 +7,9 @@ const useBoardsDetailPage = () => {
     const router = useRouter()
     const param = useParams()
 
-    const getBoardDetail = async () => {
+
+
+    const getBoardDetail = async (): Promise<FetchBoardQuery | undefined> => {
         try {
             const { data } = await client.query<FetchBoardQuery, FetchBoardQueryVariables>({
                 query: FetchBoardDocument,
@@ -15,7 +17,6 @@ const useBoardsDetailPage = () => {
                     boardId: String(param.boardId),
                 }
             })
-            console.log(data)
             return data
         } catch(e: unknown) {
             if (e instanceof ApolloError) {

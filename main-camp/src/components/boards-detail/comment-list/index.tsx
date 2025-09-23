@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import useBoardCommentList from "./hook"
 import { FetchBoardCommentsQuery, Query } from "@/commons/gql/graphql"
 import styles from './styles.module.css'
-
+import { Rate } from 'antd'
 interface IBoardsCommentList {
     getBoardComments: () => Promise<FetchBoardCommentsQuery | undefined>,
     comments: Query["fetchBoardComments"]
@@ -13,12 +13,6 @@ const BoardsCommentList = (props: IBoardsCommentList) => {
         updateBoardComments,
         deleteBoardComments
     } = useBoardCommentList()
-    
-    useEffect(()=>{
-        (async ()=>{
-            await props.getBoardComments()
-        })()
-    },[])
 
     useEffect(()=>{
         console.log('댓글 조회 : ', props.comments)
@@ -52,11 +46,7 @@ const BoardsCommentList = (props: IBoardsCommentList) => {
                                                 <p className="l_14_20 flex_row flex_justi_center flex_align_items_center" style={{ whiteSpace: "nowrap" }}>{v.writer}</p>
                                             </div>
                                             <div className={`${styles.commnt_star} flex_row`}>
-                                                <img src="/image/star.png" />
-                                                <img src="/image/star.png" />
-                                                <img src="/image/star.png" />
-                                                <img src="/image/star.png" />
-                                                <img src="/image/star.png" />
+                                                <Rate value={v.rating} disabled/>
                                             </div>
                                         </div>
                                         <div className={`${styles.comment_btn_frame} flex_row flex_justi_sb`}>

@@ -13,7 +13,7 @@
 
 .board_list_frame {
     width: 1280px;
-    height: 656px;
+    height: 696px;
     max-width: 1280px;
     gap: 24px;
     opacity: 1;
@@ -23,7 +23,7 @@
 
 .board_list_container {
     width: 1184px;
-    height: 608px;
+    height: 648px;
     gap: 8px;
     opacity: 1;    
 }

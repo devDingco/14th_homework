@@ -8,16 +8,19 @@ import useBoardWrite from './hook'
 import { useEffect, useState } from 'react'
 import { useIsEdit } from '@/commons/provider/isEditProvider'
 import Postcode from './postcode'
+import { useIsModal } from '@/commons/provider/isModalProvider'
+import WarningModal from '@/commons/modal/warning'
 
 // 게시글 등록/수정 페이지
 const BoardsWrite = () => {
-    const { isEdit, postData, updatingContents, updatingTitle } = useIsEdit()
+    const { isEdit, postData, updatingBoardData, setUpdatingBoardData } = useIsEdit()
     const {
         onChangePosting,
         creatingBoard,
         updatingBoard,
         boardUpdateSetting
     } = useBoardWrite()
+    const { isWarningModal, setIsWarningModal, isErrorModal, setIsErrorModal } = useIsModal()
 
     const [writerErr, setWriterErr] = useState<string>("")
     const [passwordErr, setPasswordErr] = useState<string>("")
@@ -51,58 +54,43 @@ const BoardsWrite = () => {
             alert('주소를 끝까지 입력해 주세요')
             return
         }
-
+        
         creatingBoard()
     }
 
-    const onUpdateHandler = async (data?: IOnUpdateHandler) => {
-        const makingData = data
+    const onUpdateHandler = async () => {
         
-        const forValArr = [postData.title, postData.contents]
-
-        if (forValArr.includes("")) {
-            for (let i=0; i < forValArr.length; i++) {
-                switch(i) {
-                    case 0: {
-                        if (forValArr[i] === "") {
-                            setTitleErr("필수입력 사항 입니다.")
-                        } else {
-                            setTitleErr("")
-                        }
-                        // forValArr[i] === "" ? setTitleErr("필수입력 사항 입니다.") : setTitleErr("")
-                        break
-                    }
-                    case 1: {
-                        if (forValArr[i] === "") {
-                            setContentsErr("필수입력 사항 입니다.")
-                        } else {
-                            setContentsErr("")                        
-                        }
-                        // forValArr[i] === "" ? setContentsErr("필수입력 사항 입니다.") : setContentsErr("")
-                        break
-                    }
-                    default:
-                }
+        const forValArr = [
+            { value: postData.title, setError: setTitleErr },
+            { value: postData.contents, setError: setContentsErr },
+        ];
+        
+        let hasError = false;
+            forValArr.forEach(({ value, setError }) => {
+            if (value === "") {
+                setError("필수입력 사항 입니다.");
+                hasError = true;
+            } else {
+                setError("");
             }
-            return
-        } else if (updatingContents === postData.contents) {
-            alert('내용이 같으면 수정이 불가능 합니다.')
+        });
+
+        if (hasError) return;
+
+        if (updatingBoardData.contents === postData.contents) {
+            // alert('내용이 같으면 수정이 불가능 합니다.')
+            setIsWarningModal({ open: true, value:'내용이 같으면 수정이 불가능 합니다.'})
             return
         } else {
-            if (updatingTitle === postData.title) {
-                delete makingData?.title
-            } else if (updatingContents === postData.contents ) {
-                delete makingData?.contents
-            }
             setTitleErr("")
             setContentsErr("")
-            
-            updatingBoard(boardUpdateSetting(makingData!))
         }
+
+        updatingBoard()
     }
 
     useEffect(()=>{
-        console.log('엉?', postData)
+        console.log('postData : ', postData)
     },[postData])
 
     return (

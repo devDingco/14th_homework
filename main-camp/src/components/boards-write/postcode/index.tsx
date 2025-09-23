@@ -4,13 +4,14 @@ import DaumPostcodeEmbed from 'react-daum-postcode';
 import { Modal } from 'antd'
 import { useIsEdit } from '@/commons/provider/isEditProvider';
 import { IDaumPostcodeData, IPostcode } from './type';
+import { IPostData } from '@/commons/provider/type';
 
 const Postcode = (props: IPostcode) => {
 
     const { setPostData } = useIsEdit()
 
     const handleComplete = (data: IDaumPostcodeData) => {
-        const boardAddressModal = {zipcode: "", address: "", addressDetail: ""}
+        const boardAddressModal = {zipcode: "", address: ""}
         
         if(data.userSelectedType === "R") {
             boardAddressModal.address = data.address
@@ -19,9 +20,10 @@ const Postcode = (props: IPostcode) => {
         }
         boardAddressModal.zipcode = data.zonecode
         
-        setPostData({
+        setPostData((prev: IPostData) => ({
+            ...prev,
             boardAddress: boardAddressModal
-        })
+        }))
         props.setIsModalOpen(false)
     }
 

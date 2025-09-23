@@ -25,7 +25,16 @@ export const FETCH_BOARD = gql`
             writer
             title
             contents
+            boardAddress {
+                zipcode
+                address
+                addressDetail
+            }
+            youtubeUrl
             createdAt
+            likeCount
+            dislikeCount
+            updatedAt
         }
     }
 `
@@ -62,6 +71,7 @@ export const FETCH_COMMENT = gql`
             writer
             contents
             createdAt
+            rating
         }
     }
 `

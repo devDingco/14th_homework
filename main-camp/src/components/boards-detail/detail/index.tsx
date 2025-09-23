@@ -3,15 +3,38 @@
 import styles from './style.module.css'
 import useBoardsDetailPage from './hook'
 import { useEffect, useState } from 'react'
+import { FrownOutlined, LikeOutlined } from '@ant-design/icons'
+import { Dropdown, MenuProps, Typography } from 'antd'
+import { FetchBoardCommentsQuery, FetchBoardQuery } from '@/commons/gql/graphql'
+import BoardDetailYoutube from '../youtube'
+import useFetchBoard from '@/commons/api/useFetchBoard'
+import { useParams } from 'next/navigation'
 
-const BoardsDetail = () => {
+const { Text } = Typography;
+
+interface IBoardDetail {
+    // board: FetchBoardQuery | undefined,
+    // getBoardComments: () => Promise<FetchBoardCommentsQuery | undefined>,
+    setComments: React.Dispatch<React.SetStateAction<any>>
+    boardDetailData: IBoardDetailData | undefined
+}
+
+interface IBoardDetailData {
+    getBoard: FetchBoardQuery | undefined,
+    getBoardComment: FetchBoardCommentsQuery | undefined
+}
+
+const BoardsDetail = (props: IBoardDetail) => {
+    const param = useParams()
+
     const {
         goListHandler,
         goUpdateHandler,
         getBoardDetail
     } = useBoardsDetailPage()
-
-    const [fetchBoard, setFetchBoard] = useState<any>(undefined)
+    // const { board, loading, error, refetch } = useFetchBoard({boardId: param.boardId})
+    
+    // const [boardDetailData, setBoardDetailData] = useState<IBoardDetailData>()
 
     // 하드코딩
     const goodBad = {
@@ -21,43 +44,93 @@ const BoardsDetail = () => {
 
     useEffect(()=>{
         (async ()=>{
-            setFetchBoard(await getBoardDetail())
+            // console.log('디테일 컴포넌트 마운트 :', props.board)
+            // const getBoardData = await getBoardDetail()
+            // const getBoardComment = await props.getBoardComments()
+            // console.log('getBoardData :',getBoardData)
+            // setBoardDetailData({getBoard: props.board, getBoardComment: getBoardComment})
         })()
     },[])
 
+    const address: MenuProps['items'] = [
+        {
+          key: '1',
+          label: (
+            <Text copyable={true} >
+              {props.boardDetailData?.getBoard?.fetchBoard.boardAddress?.address} {props.boardDetailData?.getBoard?.fetchBoard.boardAddress?.addressDetail}
+            </Text>
+          ),
+        }
+    ];
+
+    let youtubeUrl: MenuProps['items']
+    if (props.boardDetailData?.getBoard?.fetchBoard.youtubeUrl) {
+        youtubeUrl = [
+            {
+                key: '1',
+                label: (
+                <Text copyable={true} >
+                    {props.boardDetailData?.getBoard?.fetchBoard.youtubeUrl}
+                </Text>
+                ),
+            }
+        ];
+    }
+    
     return (
-        <div className={`${styles.detail_main}`}>
+        <div className={`${styles.detail_main} flex_column`}>
             <h1 className={`b_28_36`}>
-            {fetchBoard?.fetchBoard.title}
+            {props.boardDetailData?.getBoard?.fetchBoard.title}
             </h1>
             <header id="detail_header" className={`${styles.header_1280w_80h} flex_column`}>
                 <div id="detail_header_top" className={`${styles.header_top}`}>
                     <div id="" className={`${styles.detail_profile} flex_align_items_center flex_row flex_justi_sb`}>
                         <div className={`flex_row`}>
                             <img className={`${styles.profile_img}`} src="/svg/person.png" alt="profile"/>
-                            {fetchBoard?.fetchBoard.writer}
+                            {props.boardDetailData?.getBoard?.fetchBoard.writer}
                         </div>
-                        <p className={`r_14_20`} style={{ color: "rgba(129, 129, 129, 1)" }}>{fetchBoard?.fetchBoard.createdAt.split("T")[0]}</p>
+                        <p className={`r_14_20`} style={{ color: "rgba(129, 129, 129, 1)" }}>{props.boardDetailData?.getBoard?.fetchBoard.createdAt.split("T")[0]}</p>
                     </div>
                 </div>
                 <hr />
                 <div id="detail_header_bottom" className={`${styles.header_bottom} flex_row flex_align_self_flexend`}>
-                    <img className={`${styles.img_24w_24h}`} src="/svg/link.png" alt="link"/>
-                    <img className={`${styles.img_24w_24h}`} src="/svg/location.png" alt="location"/>
+                    {
+                        props.boardDetailData?.getBoard?.fetchBoard.youtubeUrl
+                        ? 
+                        <Dropdown menu={{ items: youtubeUrl }} placement="bottomRight">
+                            <img className={`${styles.img_24w_24h}`} style={{ cursor: "pointer" }} src="/svg/link.png" alt="link"/>
+                        </Dropdown>
+                        : 
+                        <img className={`${styles.img_24w_24h}`} style={{ cursor: "pointer" }} src="/svg/link.png" alt="link"/>
+                    }
+                    {
+                        props.boardDetailData?.getBoard?.fetchBoard.boardAddress 
+                        ?
+                        <Dropdown menu={{ items: address } }placement="bottomRight">
+                            <img className={`${styles.img_24w_24h}`} style={{ cursor: "pointer" }} src="/svg/location.png" alt="location"/>
+                        </Dropdown>
+                        : 
+                        <img className={`${styles.img_24w_24h}`} style={{ cursor: "pointer" }} src="/svg/location.png" alt="location"/>
+                    }
                 </div>
             </header>
             <img src="/image/Tranquil Beachside Serenity 1.png" alt="publish1"/>
-            {fetchBoard?.fetchBoard.contents}
-            <div className={`${styles.detail_video} flex_row flex_justi_center`}>
-                <img src="/image/Frame 427323252.png" alt="publish2"/>
-            </div>
+            {props.boardDetailData?.getBoard?.fetchBoard.contents}
+            {
+                props.boardDetailData?.getBoard?.fetchBoard.youtubeUrl
+                ?
+                <BoardDetailYoutube youtubeUrl={props.boardDetailData?.getBoard?.fetchBoard.youtubeUrl} />
+                : 
+                null
+            }
+            
             <div id="" className={`${styles.bad_good_48h} flex_row flex_justi_center`}>
                 <div id="bad_area" className={`${styles.bad_good_btn_frame} flex_column flex_align_items_center`}>
-                    <img src="/svg/bad.png" alt="bad"/>
+                    <FrownOutlined />
                     <p className={`r_14_20`}>{goodBad.bad}</p>
                 </div>
                 <div id="good_area" className={`${styles.bad_good_btn_frame} flex_column flex_align_items_center`}>
-                    <img src="/svg/good.png" alt="good"/>
+                    <LikeOutlined />
                     <p className={`r_14_20`} style={{ color: "rgba(246, 106, 106, 1)" }}>{goodBad.good}</p>
                 </div>
             </div>
