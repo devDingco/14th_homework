@@ -27,7 +27,11 @@ export interface TravelExpense {
   created_at: string;
 }
 
-export default function TravelDetailExpenseList({ travel_id }) {
+export default function TravelDetailExpenseList({
+  travel_id,
+}: {
+  travel_id: string;
+}) {
   const [expenses, setExpenses] = useState<TravelExpense[]>([]);
   const fetchExpenses = async () => {
     const { data, error } = await supabase
@@ -47,6 +51,8 @@ export default function TravelDetailExpenseList({ travel_id }) {
       fetchExpenses();
     }
   }, [travel_id]);
+
+  type Iconkey = keyof typeof category;
 
   const category = {
     food: <BsApple />,
@@ -88,7 +94,7 @@ export default function TravelDetailExpenseList({ travel_id }) {
                 {el.currency} {el.amount}
               </div>
               <div>
-                {category[el.category]}
+                {category[el.category as Iconkey]}
                 {el.description}
               </div>
               <svg

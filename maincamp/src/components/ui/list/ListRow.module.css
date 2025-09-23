@@ -50,3 +50,30 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* .searchResult {
+  box-shadow: inset 0 -0.75rem 0 #fcd9d9;
+} */
+
+.ListRow:hover .searchResult::after {
+  width: 100%;
+}
+
+.searchResult {
+  display: inline-block;
+  position: relative;
+  font-weight: var(--font-weight-semibold);
+}
+
+.searchResult::after {
+  content: "";
+  width: 0;
+  height: 0.75rem;
+  display: inline-block;
+  background: #fcd9d9;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transition: 0.2s all;
+}

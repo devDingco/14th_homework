@@ -9,7 +9,6 @@ import { DELETE_BOARD } from "@/graphql/mutations/board";
 import { Modal } from "antd";
 import {
   FetchBoardsCountDocument,
-  FetchBoardsDocument,
   FetchBoardsQuery,
   FetchBoardsQueryVariables,
 } from "@/commons/graphql/graphql";
@@ -27,6 +26,7 @@ interface IListRow {
   refetch: (
     variables?: Partial<FetchBoardsQueryVariables>
   ) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
+  search?: string;
 }
 
 export default function ListRow(props: IListRow) {
@@ -77,7 +77,17 @@ export default function ListRow(props: IListRow) {
           className={styles.title}
           style={{ flex: props.flex[1], textAlign: props.textAlign[1] }}
         >
-          {props.title}
+          {props.title
+            .replaceAll(props.search ?? "", `#$%${props.search ?? ""}#$%`)
+            .split("#$%")
+            .map((el, index) => (
+              <span
+                key={`${index}-${el}`}
+                className={el === props.search ? styles.searchResult : ""}
+              >
+                {el}
+              </span>
+            ))}
         </div>
         <div
           className={styles.writer}
