@@ -3,7 +3,11 @@
 import { supabase } from "@/commons/libraries/supabase";
 import { useState } from "react";
 
-export default function useTravelWrite() {
+export default function useTravelWrite({
+  fetchTravels,
+}: {
+  fetchTravels: () => Promise<void>;
+}) {
   // input state 관리 및 유효성 검사
   const [inputs, setInputs] = useState({
     destination: "",
@@ -50,6 +54,7 @@ export default function useTravelWrite() {
       endDate: "",
     });
     setIsValid(false);
+    fetchTravels();
   };
 
   return { inputs, onChangeInputs, onClickSubmit, isValid };

@@ -1,7 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { supabase } from "@/commons/libraries/supabase";
 import styles from "./styles.module.css";
 import {
@@ -15,7 +14,6 @@ import {
   BsCupHotFill,
   BsFillBinocularsFill,
 } from "react-icons/bs";
-import useTravelDetailExpense from "./hook";
 
 export interface TravelExpense {
   expense_id: string;

@@ -2,7 +2,6 @@
 
 import TravelDetailExpenseList from "@/components/myapis-list/travel-detail/expense-list";
 import TravelDetailExpenseWrite from "@/components/myapis-list/travel-detail/expense-write";
-import TravelDetailExpenseWrtie from "@/components/myapis-list/travel-detail/expense-write";
 import Button from "@/components/ui/button/Button";
 import { useParams } from "next/navigation";
 import { useState } from "react";

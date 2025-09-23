@@ -7,10 +7,13 @@ import useTravelWrite from "./hook";
 
 interface Props {
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  fetchTravels: () => Promise<void>;
 }
 
-export default function TravelWrite({ setVisible }: Props) {
-  const { inputs, onChangeInputs, onClickSubmit, isValid } = useTravelWrite();
+export default function TravelWrite({ setVisible, fetchTravels }: Props) {
+  const { inputs, onChangeInputs, onClickSubmit, isValid } = useTravelWrite({
+    fetchTravels,
+  });
 
   return (
     <div className={styles.TravelWriteForm}>

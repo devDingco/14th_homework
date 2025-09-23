@@ -1,28 +1,12 @@
-"use client";
+import { ITravels } from "./hook";
 
-import { supabase } from "@/commons/libraries/supabase";
-import Button from "@/components/ui/button/Button";
-import useTravelList from "./hook";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-
-export default function TravelList() {
-  const router = useRouter();
-  const [travels, setTravels] = useState<any[]>([]);
-
-  const fetchTravels = async () => {
-    const { data, error } = await supabase.from("travel_list").select("*");
-    if (error) return;
-    setTravels(data ?? []);
-  };
-
-  fetchTravels();
-
-  const onClickTravel = (event: React.MouseEvent<HTMLDivElement>) => {
-    const travelId = event.currentTarget.id;
-    router.push(`/myapis/${travelId}`);
-  };
-
+export default function TravelList({
+  travels,
+  onClickTravel,
+}: {
+  travels: ITravels[];
+  onClickTravel: (event: React.MouseEvent<HTMLDivElement>) => void;
+}) {
   return (
     <>
       {travels?.map((el, index) => {
