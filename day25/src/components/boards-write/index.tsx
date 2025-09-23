@@ -30,5 +30,3 @@ export default function BoardWritePage(props: IBoardWriteProps) {
       </button>
     </div>
   );
-}
-₩\

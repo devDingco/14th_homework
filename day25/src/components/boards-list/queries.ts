@@ -1,8 +1,9 @@
-import { gql } from "@apollo/client"
+import { gql } from "@apollo/client";
 
+// [요청서 1] 게시글 목록 조회 (Query) 상세보기용 fetchBoard러
 export const FETCH_BOARDS = gql`
-  query FetchBoards{
-    fetchBoards {
+  query FetchBoardForDetail($boardId: ID!){
+    fetchBoards($boardId: ID!) {
       _id
       writer
       title
@@ -18,81 +19,12 @@ export const FETCH_BOARDS = gql`
   }
 `;
 
+// [요청서 2] 게시글 삭제 (Mutation)
+ // 이거 왜 
 export const DELETE_BOARD = gql`
   mutation deleteBoard($boardId: ID!) {
     deleteBoard(boardId: $boardId)
   }
 `;
 
-
-export const CREATE_BOARD = gql`
-  mutation createBoard($createBoardInput: CreateBoardInput!) {
-    createBoard(createBoardInput: $createBoardInput) {
-      _id
-      writer
-      title
-      contents
-      youtubeUrl
-      likeCount
-      images
-      boardAddress {
-        zipcode
-        address
-        addressDetail
-      }
-      createdAt
-      updatedAt
-      deletedAt
-    }
-  }
-`;
-
-export const UPDATE_BOARD = gql`
-  mutation updateBoard(
-    $updateBoardInput: UpdateBoardInput!
-    $password: String
-    $boardId: ID!
-  ) {
-    updateBoard(
-      updateBoardInput: $updateBoardInput
-      password: $password
-      boardId: $boardId
-    ) {
-      _id
-      writer
-      title
-      contents
-      youtubeUrl
-      likeCount
-      dislikeCount
-      images
-      createdAt
-      updatedAt
-      deletedAt
-    }
-  }
-`;
-
-export const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
-    fetchBoard(boardId: $boardId) {
-      _id
-      writer
-      title
-      contents
-      youtubeUrl
-      likeCount
-      dislikeCount
-      images
-      user {
-        _id
-        email
-        name
-        picture
-      }
-      createdAt
-      updatedAt
-      deletedAt
-    }
-  }
-`;
+//queries.ts (API 요청서를 보관할 레시피 북)cv

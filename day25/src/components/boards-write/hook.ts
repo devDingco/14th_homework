@@ -1,33 +1,29 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter, useParams } from "next/navigation";
 import {
-  CREATE_BOARD,
-  UPDATE_BOARD,
-  FETCH_BOARD,
-} from "./queries";
-import { IBoardWriteInput } from "./types";
+  CreateBoardDocument,
+  UpdateBoardDocument,
+  FetchBoardForWriteDocument,
+} from "commons/graphql/graphql";
+import { type IBoardWriteInput } from "./types";
 
 export const useBoardWrite = (isEdit: boolean) => {
   const router = useRouter();
   const params = useParams();
-  const editId = isEdit ? params.boardId : null;
 
-  const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: editId },
+  const [createBoard] = useMutation(CreateBoardDocument);
+  const [updateBoard] = useMutation(UpdateBoardDocument);
+  const { data } = useQuery(FetchBoardForWriteDocument, {
+    variables: { boardId: String(params.boardId) },
     skip: !isEdit,
   });
 
   const [formData, setFormData] = useState<IBoardWriteInput>({
     writer: "",
     password: "",
-    title: isEdit ? data?.fetchBoard?.title || "" : "",
-    contents: isEdit ? data?.fetchBoard?.contents || "" : "",
-    youtubeUrl: "",
-    boardAddress: { zipcode: "", address: "", addressDetail: "" },
-    images: ["", ""],
+    title: "",
+    contents: "",
   });
 
   const [errors, setErrors] = useState({
@@ -37,12 +33,17 @@ export const useBoardWrite = (isEdit: boolean) => {
     contents: "",
   });
 
-  const handleChange = (key: keyof IBoardWriteInput) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({ ...prev, [key]: e.target.value }));
-  };
+  const handleChange =
+    (key: keyof IBoardWriteInput) =>
+    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setFormData((prev) => ({ ...prev, [key]: e.target.value }));
+    };
 
   const isButtonDisabled =
-    !formData.writer || !formData.password || !formData.title || !formData.contents;
+    !formData.writer ||
+    !formData.password ||
+    !formData.title ||
+    !formData.contents;
 
   const onSubmit = async () => {
     if (!isEdit) {
@@ -50,35 +51,83 @@ export const useBoardWrite = (isEdit: boolean) => {
       let hasError = false;
       const newErrors = { ...errors };
 
-      if (!formData.writer.trim()) { newErrors.name = "필수입력 사항입니다."; hasError = true; } else { newErrors.name = ""; }
-      if (!formData.password) { newErrors.password = "필수입력 사항입니다."; hasError = true; } else { newErrors.password = ""; }
-      if (!formData.title.trim()) { newErrors.title = "필수입력 사항입니다."; hasError = true; } else { newErrors.title = ""; }
-      if (!formData.contents.trim()) { newErrors.contents = "필수입력 사항입니다."; hasError = true; } else { newErrors.contents = ""; }
+      if (!formData.writer.trim()) {
+        newErrors.name = "필수입력 사항입니다.";
+        hasError = true;
+      } else {
+        newErrors.name = "";
+      }
+      if (!formData.password) {
+        newErrors.password = "필수입력 사항입니다.";
+        hasError = true;
+      } else {
+        newErrors.password = "";
+      }
+      if (!formData.title.trim()) {
+        newErrors.title = "필수입력 사항입니다.";
+        hasError = true;
+      } else {
+        newErrors.title = "";
+      }
+      if (!formData.contents.trim()) {
+        newErrors.contents = "필수입력 사항입니다.";
+        hasError = true;
+      } else {
+        newErrors.contents = "";
+      }
 
       setErrors(newErrors);
       if (hasError) return;
 
-      const result = await createBoard({ variables: { createBoardInput: formData } });
+      const result = await createBoard({
+        variables: { createBoardInput: formData },
+      });
       alert("게시글이 등록되었습니다!");
-      router.push(`/boards/${result.data.createBoard._id}`);
+      if (result.data) {
+        router.push(`/boards/${result.data.createBoard._id}`);
+      }
     } else {
       // 수정 로직
-      const 입력받은비밀번호 = prompt("글을 작성할때 입력하셨던 비밀번호를 입력해주세요");
-      const updateInput: Partial<IBoardWriteInput> = {};
-      if (formData.title && formData.title !== data?.fetchBoard?.title) updateInput.title = formData.title;
-      if (formData.contents && formData.contents !== data?.fetchBoard?.contents) updateInput.contents = formData.contents;
+      const updateBoardInput: Partial<IBoardWriteInput> = {};
+      if (formData.title) updateBoardInput.title = formData.title;
+      if (formData.contents) updateBoardInput.contents = formData.contents;
 
-      if (Object.keys(updateInput).length === 0) { alert("수정된 내용이 없습니다."); return; }
+      if (Object.keys(updateBoardInput).length === 0) {
+        alert("수정된 내용이 없습니다.");
+        return;
+      }
 
       try {
-        const result = await updateBoard({ variables: { boardId: editId, password: 입력받은비밀번호, updateBoardInput: updateInput } });
-        if (result.data) alert("게시글이 성공적으로 수정되었습니다!");
-        router.push(`/boards/${editId}`);
+        const result = await updateBoard({
+          variables: {
+            boardId: String(params.boardId),
+            password: formData.password,
+            updateBoardInput,
+          },
+        });
+        if (result.data) {
+          alert("게시글이 성공적으로 수정되었습니다!");
+          router.push(`/boards/${result.data.updateBoard._id}`);
+        }
       } catch (err: any) {
-        alert(err?.graphQLErrors?.map((e: any) => e.message).join(", ") || "수정 실패");
+        alert(
+          err?.graphQLErrors?.map((e: any) => e.message).join(", ") ||
+            "수정 실패"
+        );
       }
     }
   };
+
+  useEffect(() => {
+    if (isEdit && data) {
+      setFormData({
+        writer: data.fetchBoard.writer ?? "",
+        password: "", // 비밀번호는 보안상 불러오지 않음
+        title: data.fetchBoard.title,
+        contents: data.fetchBoard.contents,
+      });
+    }
+  }, [isEdit, data]);
 
   return { formData, errors, handleChange, isButtonDisabled, onSubmit };
 };

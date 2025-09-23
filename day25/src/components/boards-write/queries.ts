@@ -30,7 +30,7 @@ export const UPDATE_BOARD = gql`
 `;
 
 export const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
+  query FetchBoardForWrite ($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
       _id
       title

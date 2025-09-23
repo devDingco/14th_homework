@@ -1,16 +1,20 @@
-// codegen.ts
-import type { CodegenConfig } from "@graphql-codegen/cli";
+// 사용자가 제공한 codegen.ts
+import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
-  overwrite: true,
-  schema: "http://main-practice.codebootcamp.co.kr/graphql", // <-- 이 주소 확인!
-  documents: "src/**/*.ts?(x)", // .ts, .tsx 파일 모두 탐색
+  // 1. 덮어쓰기 설정
+  overwrite: true, 
+  schema: "https://main-practice.codebootcamp.co.kr/graphql",
+
+  // 2. 요청서 스캔 경로
+  documents: ["src/components/**/*.ts", "!src/commons/graphql/**"],
+
   generates: {
-    "src/gql/": { // 생성된 파일은 src/gql 폴더에!
+    // 3. 생성될 파일 경로 및 방식
+    "src/commons/graphql/": {
       preset: "client",
-      plugins: [],
-    },
-  },
+    }
+  }
 };
 
 export default config;
