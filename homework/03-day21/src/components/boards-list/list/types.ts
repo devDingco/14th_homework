@@ -4,6 +4,7 @@ export interface IBoardsPageProps {
     data?: FetchBoardsQuery;
     currentPage?: number;
     boardsCount?: number
+    keyword?: string;
 }
 export interface IFetchBoard {
     _id: string
@@ -11,3 +12,4 @@ export interface IFetchBoard {
     title: string
     createdAt: string
 }
+

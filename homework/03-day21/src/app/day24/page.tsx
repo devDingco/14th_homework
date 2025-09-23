@@ -7,8 +7,8 @@ import { useRouter } from 'next/navigation';
 
 
 const FETCH_BOARDS = gql`  
-    query fetchBoards($page: Int){
-        fetchBoards(page: $page) {
+    query fetchBoards($page: Int, $search: String){
+        fetchBoards(page: $page, search: $search) {
             _id
             writer
             title
