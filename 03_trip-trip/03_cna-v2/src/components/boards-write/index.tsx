@@ -6,6 +6,15 @@ import { IBoardWriteProps } from './types'
 import useBoardForm from './hook'
 import { Modal } from 'antd'
 import DaumPostcodeEmbed from 'react-daum-postcode'
+import { useRef } from 'react'
+import { useMutation } from '@apollo/client'
+import {
+  UploadFileDocument,
+  UploadFileMutation,
+  UploadFileMutationVariables,
+} from 'commons/graphql/graphql'
+import { checkValidationFile } from 'commons/libraries/validation/image-validation'
+import CloseIcon from '@mui/icons-material/Close'
 
 const IMAGE_SRC = {
   addImage: {
@@ -19,8 +28,8 @@ export default function BoardWritePage(props: IBoardWriteProps) {
     onChangeValue,
     onChangeAddress,
     onClickSignup,
+    setImageByIndex,
     isButtonDisabled,
-    data,
     boardValue,
     address,
     boardError,
@@ -29,6 +38,31 @@ export default function BoardWritePage(props: IBoardWriteProps) {
     handleComplete,
   } = useBoardForm({ isEdit: props.isEdit })
 
+  const fileRefs = [useRef(null), useRef(null), useRef(null)]
+
+  const onClickImagebyIdx = (idx: number) => {
+    fileRefs[idx].current?.click()
+  }
+
+  const [uploadFile] = useMutation<UploadFileMutation, UploadFileMutationVariables>(
+    UploadFileDocument
+  )
+
+  const onChangeFile = async (event, idx: number) => {
+    const file = event.target.files?.[0]
+
+    const isValid = checkValidationFile(file)
+    if (!isValid) return
+
+    const { data } = await uploadFile({ variables: { file } })
+    const url = data?.uploadFile?.url ?? ''
+
+    setImageByIndex(idx, url)
+  }
+
+  const onClickDelete = (idx: number) => {
+    setImageByIndex(idx, '')
+  }
   return (
     <div className={styles.layout}>
       {/* title */}
@@ -48,7 +82,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
               </div>
               <input
                 disabled={props.isEdit}
-                value={data?.fetchBoard?.writer ?? boardValue.name}
+                value={boardValue.name}
                 type="text"
                 id="name"
                 placeholder="작성자 명을 입력해 주세요."
@@ -170,9 +204,35 @@ export default function BoardWritePage(props: IBoardWriteProps) {
         <div className={styles.enroll_row_section}>
           <div>사진 첨부</div>
           <div className={styles.picture_enroll_row}>
-            <Image src={IMAGE_SRC.addImage.src} alt="이미지추가" />
-            <Image src={IMAGE_SRC.addImage.src} alt="이미지추가" />
-            <Image src={IMAGE_SRC.addImage.src} alt="이미지추가" />
+            {[0, 1, 2].map((_, idx) => {
+              const url = boardValue.images[idx]
+              const hasUrl = !!url
+              const src = hasUrl ? `https://storage.googleapis.com/${url}` : IMAGE_SRC.addImage.src
+              return (
+                <div key={idx} className={styles.uploadImageWrapper}>
+                  {hasUrl && (
+                    <button className={styles.closeButton} onClick={() => onClickDelete(idx)}>
+                      <CloseIcon />
+                    </button>
+                  )}
+                  <Image
+                    src={src}
+                    alt="이미지추가"
+                    onClick={() => onClickImagebyIdx(idx)}
+                    width={160}
+                    height={0}
+                    className={styles.uploadImage}
+                  />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                    ref={fileRefs[idx]}
+                    onChange={(e) => onChangeFile(e, idx)}
+                  />
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

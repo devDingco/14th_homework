@@ -43,6 +43,7 @@ export default function useBoardForm(props: BoardFormProps) {
     title: data?.fetchBoard?.title ?? '',
     content: data?.fetchBoard?.contents ?? '',
     link: data?.fetchBoard?.youtubeUrl ?? '',
+    images: data?.fetchBoard?.images ?? ['', '', ''],
   })
   // 주소 input
   const [address, setAddress] = useState({
@@ -101,6 +102,15 @@ export default function useBoardForm(props: BoardFormProps) {
     })
   }
 
+  // image index에 일치하게 업로드
+  const setImageByIndex = (idx: number, url: string) => {
+    setBoardValue((prev) => {
+      const next = { ...prev, images: [...prev.images] }
+      next.images[idx] = url
+      return next
+    })
+  }
+
   const onClickSignup = async () => {
     //새글 등록하기일 경우
     if (props.isEdit === false) {
@@ -145,7 +155,7 @@ export default function useBoardForm(props: BoardFormProps) {
                 address: address.base,
                 addressDetail: address.detail,
               },
-              images: ['', ''],
+              images: boardValue.images,
             },
           },
         })
@@ -180,8 +190,8 @@ export default function useBoardForm(props: BoardFormProps) {
       }
 
       // 비밀번호 확인하기
-
       const 입력받은비밀번호 = prompt('글을 작성할때 입력하셨던 비밀번호를 입력해주세요')
+
       const updateInput: any = {}
       if (boardValue.title?.trim() && boardValue.title !== data?.fetchBoard?.title) {
         updateInput.title = boardValue.title
@@ -193,6 +203,10 @@ export default function useBoardForm(props: BoardFormProps) {
 
       if (boardValue.link !== data?.fetchBoard?.youtubeUrl) {
         updateInput.youtubeUrl = boardValue.link
+      }
+
+      if (boardValue.images !== data?.fetchBoard.images) {
+        updateInput.images = boardValue.images
       }
 
       const boardAddress: any = {}
@@ -258,8 +272,8 @@ export default function useBoardForm(props: BoardFormProps) {
     onChangeValue,
     onChangeAddress,
     onClickSignup,
+    setImageByIndex,
     isButtonDisabled,
-    data,
     boardValue,
     address,
     boardError,

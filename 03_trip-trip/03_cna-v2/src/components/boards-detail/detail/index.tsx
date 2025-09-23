@@ -6,7 +6,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import styles from './styles.module.css'
 import profileImage from '@assets/profile_image.png'
-import cheongsanImage from '@assets/cheongsan.png'
 import {
   FetchBoardDocument,
   FetchBoardQuery,
@@ -27,10 +26,6 @@ const IMAGE_SRC = {
   profileImage: {
     src: profileImage,
     alt: '프로필이미지',
-  },
-  cheongsanImage: {
-    src: cheongsanImage,
-    alt: '청산사진',
   },
 } as const
 
@@ -76,11 +71,24 @@ export default function BoardDetailPage() {
         </Tooltip>
       </div>
       <div className={styles.detailContentContainer}>
-        <Image
-          src={IMAGE_SRC.cheongsanImage.src}
-          alt={IMAGE_SRC.cheongsanImage.alt}
-          className={styles.detailContentImage}
-        />
+        {data?.fetchBoard?.images &&
+          data?.fetchBoard?.images?.map((image, idx) => {
+            const isUrl = image !== ''
+            return (
+              <div key={idx}>
+                {isUrl && (
+                  <Image
+                    src={`https://storage.googleapis.com/${image}`}
+                    alt={'불러온 사진'}
+                    width={400}
+                    height={0}
+                    className={styles.detailContentImage}
+                  />
+                )}
+              </div>
+            )
+          })}
+
         <div className={styles.detailContentText}>{data?.fetchBoard?.contents}</div>
         {data?.fetchBoard?.youtubeUrl && (
           <div className={styles.youtube}>
