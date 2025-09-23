@@ -12,6 +12,7 @@ import {
   FetchBoardsQueryVariables,
 } from 'commons/graphql/graphql'
 import { useState } from 'react'
+import BoardsSearch from 'components/boards-list/search'
 
 export default function BoardsPage() {
   const { data, refetch } = useQuery<FetchBoardsQuery, FetchBoardsQueryVariables>(
@@ -28,6 +29,8 @@ export default function BoardsPage() {
   return (
     <div className={styles.detailLayout}>
       <div className={styles.detailBody}>
+        <h1>트립토크 게시판</h1>
+        <BoardsSearch data={data} refetch={refetch} />
         <div className={styles.boardFrame}>
           <BoardsListComponent
             data={data}
