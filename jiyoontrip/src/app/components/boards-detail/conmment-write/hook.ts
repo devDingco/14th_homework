@@ -66,6 +66,7 @@ export default function useCommentWrite() {
       setAuthor("");
       setPassword("");
       setContent("");
+      setRating(0);
       setIsActive(false);
     } catch (error) {
       alert(error);
