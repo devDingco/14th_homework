@@ -1,12 +1,8 @@
 import { ApolloError, useQuery } from "@apollo/client";
 import { FetchBoardDocument, FetchBoardQuery, FetchBoardQueryVariables } from "../gql/graphql";
-
-interface IUseFetchBoard {
-    boardId: string | string[]
-}
+import { IUseFetchBoard } from "./type";
 
 const useFetchBoard = (props: IUseFetchBoard) => {
-    console.log('useFectchBoard 진입?')
     let getData
     try {
         const { data, loading, error, refetch } = useQuery<
@@ -28,10 +24,10 @@ const useFetchBoard = (props: IUseFetchBoard) => {
     }
 
     return {
-        board: getData?.data,
-        loading: getData?.loading,
-        error: getData?.error,
-        refetch: getData?.refetch,
+        boardDetail: getData?.data?.fetchBoard,
+        boardLoading: getData?.loading,
+        boardError: getData?.error,
+        boardRefetch: getData?.refetch,
     };
 }
 

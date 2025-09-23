@@ -1,10 +1,7 @@
 import styles from './style.module.css'
 import YouTube, { YouTubeProps } from 'react-youtube'
-import { Modal } from 'antd'
+import { IBoardDetailYoutube } from './type';
 
-interface IBoardDetailYoutube {
-    youtubeUrl: string | null | undefined
-}
 const BoardDetailYoutube = (props: IBoardDetailYoutube) => {
     const onPlayerReady: YouTubeProps['onReady'] = (event) => {
         // access to player in all event handlers via event.target

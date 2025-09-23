@@ -3,10 +3,14 @@
 import styles from './styles.module.css'
 import useBoardsListPage from './hook'
 import { useEffect, useState } from 'react'
-import { Query } from '@/commons/gql/graphql'
+import { FetchBoardsQuery } from '@/commons/gql/graphql'
 import ListPagination from '../pagination'
 
-const BoardsList = () => {
+interface IBoardsList {
+    boards: FetchBoardsQuery["fetchBoards"] | undefined
+}
+
+const BoardsList = (props: IBoardsList) => {
     
     const [boardsData, setBoardsData] = useState<any>()
 
@@ -41,7 +45,7 @@ const BoardsList = () => {
                 </div>
                 <ul className={`${styles.board_list_bottom} flex_column`}>
                     {/* map */}
-                    {boardsData?.fetchBoards.map((v:any,i:any)=>{
+                    {props.boards?.map((v:any,i:any)=>{
                         // return  <div key={i}>{boardsCount?.fetchBoardsCount-i} {v.title} {v.writer} {v.createdAt.split("T")[0]}</div>
                         return  <li key={i} data-key={v._id} onClick={goDetailHandler} className='flex_row'>
                                     <div style={{ cursor: "pointer" }} className='flex_row flex_justi_center'><p className='l_14_20' style={{ color: "rgba(145, 145, 145, 1)" }}>{i+1}</p></div> 

@@ -1,74 +1,132 @@
 "use client"
 
 import { ChangeEvent, useState } from "react"
-import { IOnChangeWriting } from "./type"
-import { ApolloError, useApolloClient, useMutation } from "@apollo/client"
-import { CreateBoardCommentDocument, CreateBoardCommentMutation, CreateBoardCommentMutationVariables, FetchBoardCommentsDocument, FetchBoardCommentsQuery, FetchBoardCommentsQueryVariables } from "@/commons/gql/graphql"
+import { ICommentErr, IOnChangeWriting, IUseBoardsCommentWrite } from "./type"
+import { CreateBoardCommentInput } from "@/commons/gql/graphql"
 import { useParams } from "next/navigation"
-import useBoardCommentList from "../comment-list/hook"
-
-interface IUseBoardsCommentWrite {
-    commentWriter: string,
-    commentPassword: string,
-    commentContents: string,
-    getBoardComments: () => Promise<FetchBoardCommentsQuery | undefined>,
-}
-
-interface ICommentValObj {
-    commentWriter: string,
-    commentPassword: string,
-    commentContents: string
-}
+import useCreateBoardComment from "@/commons/api/useCreateBoardComment"
 
 const useBoardsCommentWrite = (props: IUseBoardsCommentWrite) => {
     const param = useParams()
     const [isActive, setIsActive] = useState<boolean>(false)
+    const { postCreateBoardComment } = useCreateBoardComment()
 
-    const [createBoardCommentAPI] = useMutation<
-        CreateBoardCommentMutation,
-        CreateBoardCommentMutationVariables
-    >(CreateBoardCommentDocument)
+    const chooseStar = (rating: number) => {
+        props.setCommentInput((prev: CreateBoardCommentInput) => ({
+            ...prev,
+            rating: rating
+        }))
+    }
 
-    const creatingBoardComment = async (rating: number) => {
-        try {
-            // createBoard 게시글 등록
-            console.log(props.commentContents)
-            const result = await createBoardCommentAPI({
-                variables: {
-                    createBoardCommentInput: {
-                        writer: props.commentWriter,
-                        password: String(props.commentPassword),
-                        contents: props.commentContents,
-                        rating: rating
-                    },
-                    boardId: String(param.boardId)
+    const onClickCommentWrite = async () => {
+        const forValArr = [props.commentInput.writer, props.commentInput.password, props.commentInput.contents]
+        
+        if (forValArr.includes("")) {
+            for (let i=0; i < forValArr.length; i++) {
+                switch(i) {
+                    case 0: {
+                        forValArr[i] === "" 
+                        ?  
+                        props.setCommentErr((prev: ICommentErr) => ({
+                            ...prev,
+                            commentWriterErr: "필수입력 사항 입니다."
+                        })) 
+                        :
+                        props.setCommentErr((prev: ICommentErr) => ({
+                            ...prev,
+                            commentWriterErr: ""
+                        }))
+                        break
+                    }
+                    case 1: {
+                        forValArr[i] === "" 
+                        ?
+                        props.setCommentErr((prev: ICommentErr) => ({
+                            ...prev,
+                            commentPasswordErr: "필수입력 사항 입니다."
+                        }))
+                        :
+                        props.setCommentErr((prev: ICommentErr) => ({
+                            ...prev,
+                            commentPasswordErr: ""
+                        }))
+                        break
+                    }
+                    case 2: {
+                        forValArr[i] === "" 
+                        ?
+                        props.setCommentErr((prev: ICommentErr) => ({
+                            ...prev,
+                            commentContentsErr: "필수입력 사항 입니다."
+                        }))
+                        :
+                        props.setCommentErr((prev: ICommentErr) => ({
+                            ...prev,
+                            commentContentsErr: ""
+                        }))
+                        break
+                    }
                 }
-            })
-            console.log("댓글 쓰기 결과: ", result)
-            props.getBoardComments()
-        } catch(e: unknown) {
-            if (e instanceof ApolloError) {
-                e.graphQLErrors.forEach((e) => {
-                    alert(`${e.message}`)
-                });
             }
+        } else {
+            props.setCommentErr({
+                commentWriterErr: "",
+                commentPasswordErr: "",
+                commentContentsErr: ""
+            })
+            postCreateBoardComment({ boardId: param.boardId, commentInput: props.commentInput })
+            props.setCommentInput({
+                writer: "",
+                contents: "",
+                password: "",
+                rating: 1,
+            })
         }
     }
 
-    const activeButton = (valObj: ICommentValObj) => {
+    const onChangeWriting = ({category}: IOnChangeWriting) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        switch (category) {
+            case "작성자": {
+                props.setCommentInput((prev: CreateBoardCommentInput) => ({
+                    ...prev,
+                    writer: event.target.value
+                }))
+                break
+            }
+            case "비밀번호": {
+                props.setCommentInput((prev: CreateBoardCommentInput) => ({
+                    ...prev,
+                    password: event.target.value
+                }))
+                break
+            }
+            case "내용": {
+                props.setCommentInput((prev: CreateBoardCommentInput) => ({
+                    ...prev,
+                    contents: event.target.value
+                }))
+                break
+            }
+            default:
+        }
+    }
+
+    const activeButton = (valObj: CreateBoardCommentInput) => {
         if (isActive) {
-            if (valObj.commentWriter === "" || valObj.commentPassword === "" || valObj.commentContents === "") {
+            if (valObj.writer === "" || valObj.password === "" || valObj.contents === "") {
                 setIsActive(false)
             }
         } else {
-            if (valObj.commentWriter && valObj.commentPassword && valObj.commentContents) {
+            if (valObj.writer && valObj.password && valObj.contents) {
                 setIsActive(true)
             }
         }
     }
 
     return {
-        creatingBoardComment,
+        onChangeWriting,
+        onClickCommentWrite,
+        chooseStar,
         activeButton, isActive
     }
 }

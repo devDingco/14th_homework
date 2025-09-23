@@ -1,42 +1,28 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import useBoardCommentList from "./hook"
-import { FetchBoardCommentsQuery, Query } from "@/commons/gql/graphql"
 import styles from './styles.module.css'
 import { Rate } from 'antd'
-interface IBoardsCommentList {
-    getBoardComments: () => Promise<FetchBoardCommentsQuery | undefined>,
-    comments: Query["fetchBoardComments"]
-}
+import { IBoardsCommentList } from "./type"
 
 const BoardsCommentList = (props: IBoardsCommentList) => {
+
     const {         
-        updateBoardComments,
-        deleteBoardComments
+        onClickCommentDeleteHandler, onClickCommentUpdateHandler
     } = useBoardCommentList()
 
     useEffect(()=>{
-        console.log('댓글 조회 : ', props.comments)
-    },[props.comments])
-
-    const onClickCommentDeleteHandler = async (event: React.MouseEvent<HTMLImageElement>) => {
-        await deleteBoardComments(event)
-        await props.getBoardComments()
-    }
-
-    const onClickCommentUpdateHandler = async (event: React.MouseEvent<HTMLImageElement>) => {
-        await updateBoardComments(event)
-        await props.getBoardComments()
-    }
+        console.log('댓글 조회 : ', props.boardComments)
+    },[props.boardComments])
 
     return (
         <ul id="comment_list_frame">
-            {props.comments.length === 0 
+            {props.boardComments?.length === 0 
                 ? 
                 <div className="flex_row flex_justi_center">
                     <p className="r_14_20" style={{ color: "rgba(119, 119, 119, 1)" }}>등록된 댓글이 없습니다.</p>
                 </div>
                 : 
-                props.comments.map((v, i)=>{
+                props.boardComments?.map((v, i)=>{
                     return <>
                                 <li key={i} data-key={v._id}className={`${styles.comment_frame} flex_column flex_justi_sb`}>
                                     <div className={`flex_row flex_justi_sb`}>
@@ -57,7 +43,7 @@ const BoardsCommentList = (props: IBoardsCommentList) => {
                                     <div><p className="r_16_24" style={{ whiteSpace: "pre-line", color: "rgba(51, 51, 51, 1)" }}>{`${v.contents}`}</p></div>
                                     <div><p className="r_14_20" style={{ color: "rgba(129, 129, 129, 1)" }} >{v.createdAt.split("T")[0]}</p></div>
                                 </li>
-                                {i+1 !== props.comments.length ? <div className={`${styles.comment_line}`}></div> : null}
+                                {i+1 !== props.boardComments?.length ? <div className={`${styles.comment_line}`}></div> : null}
                             </>
                 })
             }
