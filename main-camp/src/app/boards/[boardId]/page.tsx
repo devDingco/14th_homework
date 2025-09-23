@@ -1,7 +1,8 @@
 "use client"
 
-import useFetchBoard from "@/commons/api/useFetchBoard"
-import useFetchBoardComments from "@/commons/api/useFetchBoardComments"
+
+import useFetchBoard from "@/commons/api/query/useFetchBoard"
+import useFetchBoardComments from "@/commons/api/query/useFetchBoardComments"
 import { FetchBoardCommentsQuery, FetchBoardQuery, Query } from "@/commons/gql/graphql"
 import BoardsCommentList from "@/components/boards-detail/comment-list"
 import BoardsCommentWrite from "@/components/boards-detail/comment-write"

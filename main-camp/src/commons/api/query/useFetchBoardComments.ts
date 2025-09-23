@@ -1,6 +1,6 @@
 import { ApolloError, useQuery } from "@apollo/client";
-import { FetchBoardCommentsDocument, FetchBoardCommentsQuery, FetchBoardCommentsQueryVariables } from "../gql/graphql";
-import { IUseFetchBoardComments } from "./type";
+import { FetchBoardCommentsDocument, FetchBoardCommentsQuery, FetchBoardCommentsQueryVariables } from "../../gql/graphql";
+import { IUseFetchBoardComments } from "../type";
 
 const useFetchBoardComments = (props: IUseFetchBoardComments) => {
     let getData

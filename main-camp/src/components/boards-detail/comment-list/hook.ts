@@ -1,4 +1,4 @@
-import useDeleteBoardComment from "@/commons/api/useDeleteBoardComment"
+import useDeleteBoardComment from "@/commons/api/mutation/useDeleteBoardComment"
 import { useIsModal } from "@/commons/provider/isModalProvider"
 import { useParams } from "next/navigation"
 

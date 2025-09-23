@@ -1,7 +1,7 @@
 "use client"
 
 import { ApolloError, useMutation } from "@apollo/client"
-import { DeleteBoardCommentDocument, DeleteBoardCommentMutation, DeleteBoardCommentMutationVariables, FetchBoardCommentsDocument } from "../gql/graphql"
+import { DeleteBoardCommentDocument, DeleteBoardCommentMutation, DeleteBoardCommentMutationVariables, FetchBoardCommentsDocument } from "../../gql/graphql"
 
 const useDeleteBoard = () => {
     const [deleteBoardCommentAPI] = useMutation<

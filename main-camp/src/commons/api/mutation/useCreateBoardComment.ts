@@ -1,8 +1,8 @@
 "use client"
 
 import { ApolloError, useMutation } from "@apollo/client";
-import { CreateBoardCommentDocument, CreateBoardCommentMutation, CreateBoardCommentMutationVariables, FetchBoardCommentsDocument } from "../gql/graphql";
-import { IPostCreateBoardComment } from "./type";
+import { CreateBoardCommentDocument, CreateBoardCommentMutation, CreateBoardCommentMutationVariables, FetchBoardCommentsDocument } from "../../gql/graphql";
+import { IPostCreateBoardComment } from "../type";
 
 const useCreateBoardComment = () => {
     const [createBoardCommentAPI] = useMutation<

@@ -1,6 +1,6 @@
 import { ApolloError, useQuery } from "@apollo/client";
-import { FetchBoardDocument, FetchBoardQuery, FetchBoardQueryVariables } from "../gql/graphql";
-import { IUseFetchBoard } from "./type";
+import { FetchBoardDocument, FetchBoardQuery, FetchBoardQueryVariables } from "../../gql/graphql";
+import { IUseFetchBoard } from "../type";
 
 const useFetchBoard = (props: IUseFetchBoard) => {
     let getData

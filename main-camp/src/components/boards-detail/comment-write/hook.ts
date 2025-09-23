@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from "react"
 import { ICommentErr, IOnChangeWriting, IUseBoardsCommentWrite } from "./type"
 import { CreateBoardCommentInput } from "@/commons/gql/graphql"
 import { useParams } from "next/navigation"
-import useCreateBoardComment from "@/commons/api/useCreateBoardComment"
+import useCreateBoardComment from "@/commons/api/mutation/useCreateBoardComment"
 
 const useBoardsCommentWrite = (props: IUseBoardsCommentWrite) => {
     const param = useParams()

@@ -2,9 +2,9 @@
 
 import BoardsList from "@/components/boards-list/list"
 import styles from './styles.module.css'
-import useFetchBoards from "@/commons/api/useFetchBoards"
 import { useState } from "react"
 import { FetchBoardsQuery } from "@/commons/gql/graphql"
+import useFetchBoards from "@/commons/api/query/useFetchBoards"
 
 const BoardsListPage = () => {
     const { boards } = useFetchBoards()
