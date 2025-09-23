@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react"
+
 export interface IPostUpdateData {
     fetchBoard : {
         writer: string,
@@ -36,4 +38,15 @@ export interface IOnChangePosting {
 export interface IOnUpdateHandler {
     title?: string,
     contents?: string
+}
+
+export interface IBoardErr {
+    boardWriterErr: string,
+    boardTitleErr: string,
+    boardPasswordErr: string,
+    boardContentsErr: string,
+}
+
+export interface IUseBoardWrite {
+    setBoardErr: Dispatch<SetStateAction<IBoardErr>>
 }

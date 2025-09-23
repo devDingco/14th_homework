@@ -3,7 +3,7 @@
 import styles from './style.module.css'
 import WriteButton from './writeButton'
 import WriteInput from './writeInput'
-import { IOnUpdateHandler } from './type'
+import { IBoardErr, IOnUpdateHandler } from './type'
 import useBoardWrite from './hook'
 import { useEffect, useState } from 'react'
 import { useIsEdit } from '@/commons/provider/isEditProvider'
@@ -13,81 +13,19 @@ import WarningModal from '@/commons/modal/warning'
 
 // 게시글 등록/수정 페이지
 const BoardsWrite = () => {
-    const { isEdit, postData, updatingBoardData, setUpdatingBoardData } = useIsEdit()
-    const {
-        onChangePosting,
-        creatingBoard,
-        updatingBoard,
-        boardUpdateSetting
-    } = useBoardWrite()
-    const { isWarningModal, setIsWarningModal, isErrorModal, setIsErrorModal } = useIsModal()
-
-    const [writerErr, setWriterErr] = useState<string>("")
-    const [passwordErr, setPasswordErr] = useState<string>("")
-    const [titleErr, setTitleErr] = useState<string>("")
-    const [contentErr, setContentsErr] = useState<string>("")
-
+    
+    const [boardErr, setBoardErr] = useState<IBoardErr>({
+        boardWriterErr: "",
+        boardTitleErr: "",
+        boardPasswordErr: "",
+        boardContentsErr: ""
+    })
+    
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+    
+    const { isEdit, postData } = useIsEdit()
 
-    const onClickResist = async () => {
-        const forValArr = [
-            { value: postData.writer, setError: setWriterErr },
-            { value: postData.password, setError: setPasswordErr },
-            { value: postData.title, setError: setTitleErr },
-            { value: postData.contents, setError: setContentsErr },
-          ];
-        const forAddressValArr = [postData.boardAddress?.zipcode, postData.boardAddress?.address]
-
-        let hasError = false;
-            forValArr.forEach(({ value, setError }) => {
-            if (value === "") {
-                setError("필수입력 사항 입니다.");
-                hasError = true;
-            } else {
-                setError("");
-            }
-        });
-
-        if (hasError) return;
-
-        if ((forAddressValArr.filter((v) => v === "").length !== forAddressValArr.length) && (forAddressValArr.filter((v) => v === "").length !== 0)) {
-            alert('주소를 끝까지 입력해 주세요')
-            return
-        }
-        
-        creatingBoard()
-    }
-
-    const onUpdateHandler = async () => {
-        
-        const forValArr = [
-            { value: postData.title, setError: setTitleErr },
-            { value: postData.contents, setError: setContentsErr },
-        ];
-        
-        let hasError = false;
-            forValArr.forEach(({ value, setError }) => {
-            if (value === "") {
-                setError("필수입력 사항 입니다.");
-                hasError = true;
-            } else {
-                setError("");
-            }
-        });
-
-        if (hasError) return;
-
-        if (updatingBoardData.contents === postData.contents) {
-            // alert('내용이 같으면 수정이 불가능 합니다.')
-            setIsWarningModal({ open: true, value:'내용이 같으면 수정이 불가능 합니다.'})
-            return
-        } else {
-            setTitleErr("")
-            setContentsErr("")
-        }
-
-        updatingBoard()
-    }
+    const { onChangePosting, onClickResist, onUpdateHandler } = useBoardWrite({setBoardErr})
 
     useEffect(()=>{
         console.log('postData : ', postData)
@@ -100,16 +38,16 @@ const BoardsWrite = () => {
             <div id="" className={`${styles.board_container}`}>
                 <section id="" className={`${styles.write_form_container}`}>
                     <form className={`${styles.write_form_80h} flex_row`}>
-                        <WriteInput setState={onChangePosting({category: "작성자"})} label={"작성자"} placeholder={"작성자 명을 입력해 주세요."} errMsg={writerErr} />
-                        <WriteInput setState={onChangePosting({category: "비밀번호"})} label={"비밀번호"} placeholder={"비밀번호를 입력해 주세요."} errMsg={passwordErr} />
+                        <WriteInput setState={onChangePosting({category: "작성자"})} label={"작성자"} placeholder={"작성자 명을 입력해 주세요."} errMsg={boardErr.boardWriterErr} />
+                        <WriteInput setState={onChangePosting({category: "비밀번호"})} label={"비밀번호"} placeholder={"비밀번호를 입력해 주세요."} errMsg={boardErr.boardPasswordErr} />
                     </form>
                     <hr />
                     <form className={`${styles.write_form_80h} flex_row`}>
-                        <WriteInput setState={onChangePosting({category: "제목"})} label={"제목"} placeholder={"제목을 입력해 주세요."} errMsg={titleErr} />
+                        <WriteInput setState={onChangePosting({category: "제목"})} label={"제목"} placeholder={"제목을 입력해 주세요."} errMsg={boardErr.boardTitleErr} />
                     </form>
                     <hr />
                     <form className={`${styles.write_form_368h} flex_row`}>
-                        <WriteInput setState={onChangePosting({category: "내용"})} label={"내용"} placeholder={"내용을 입력해 주세요."} errMsg={contentErr} />
+                        <WriteInput setState={onChangePosting({category: "내용"})} label={"내용"} placeholder={"내용을 입력해 주세요."} errMsg={boardErr.boardContentsErr} />
                     </form>
                     <form className={`${styles.write_form_192h} flex_column`}>
                         <WriteInput setState={onChangePosting({category: "주소"})} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} label={"주소"} placeholder={"주소를 입력해 주세요."}/>
