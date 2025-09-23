@@ -6,7 +6,6 @@ import type { BoardsWriteProps } from "./types";
 import { useBoardsWrite } from "./hook";
 import styles from "./styles.module.css";
 import { Modal, Box, Typography, Button, TextField } from "@mui/material";
-import { gql, useMutation } from "@apollo/client";
 import { checkValidationFile } from "@/commons/libraries/image-validation";
 
 // 모달 스타일 정의
@@ -26,27 +25,6 @@ const modalStyle = {
   borderRadius: "8px",
 } as const;
 
-// 게시글 등록 GraphQL 쿼리
-const CREATE_BOARD = gql`
-  mutation createBoard($createBoardInput: CreateBoardInput!) {
-    createBoard(createBoardInput: $createBoardInput) {
-      _id
-      writer
-      title
-      contents
-    }
-  }
-`;
-
-// 파일 업로드 GraphQL 쿼리
-const UPLOAD_FILE = gql`
-  mutation uploadFile($file: Upload!) {
-    uploadFile(file: $file) {
-      url
-    }
-  }
-`;
-
 export default function BoardsWrite(props: BoardsWriteProps) {
   const {
     loading,
@@ -56,6 +34,7 @@ export default function BoardsWrite(props: BoardsWriteProps) {
     youtubeUrl,
     boardAddress,
     images,
+    setImages,
     errors,
     handleInputChange,
     onChangePassword,
@@ -76,14 +55,11 @@ export default function BoardsWrite(props: BoardsWriteProps) {
     handlePromptConfirm,
     handlePromptCancel,
     onChangePromptInput,
+    uploadFile,
   } = useBoardsWrite(props);
 
-  // 이미지 업로드 관련 상태 및 ref
-  const [imageUrls, setImageUrls] = useState(["", "", ""]);
+  // 이미지 업로드 관련 ref
   const fileRefs = useRef([null, null, null]);
-
-  const [uploadFile] = useMutation(UPLOAD_FILE);
-  const [createBoard] = useMutation(CREATE_BOARD);
   
   const onChangeFile = async (event, index) => {
     const file = event.target.files?.[0];
@@ -94,9 +70,9 @@ export default function BoardsWrite(props: BoardsWriteProps) {
 
     try {
       const result = await uploadFile({ variables: { file } });
-      const newImageUrls = [...imageUrls];
-      newImageUrls[index] = result.data?.uploadFile.url || "";
-      setImageUrls(newImageUrls);
+      const newImages = [...images];
+      newImages[index] = result.data?.uploadFile.url || "";
+      setImages(newImages);
     } catch (e) {
       console.error(e);
       alert("이미지 업로드에 실패했습니다.");
@@ -109,35 +85,9 @@ export default function BoardsWrite(props: BoardsWriteProps) {
 
   const onClickDelete = (index) => (event) => {
     event.stopPropagation();
-    const newImageUrls = [...imageUrls];
-    newImageUrls[index] = "";
-    setImageUrls(newImageUrls);
-  };
-
-  const finalSubmit = async () => {
-    try {
-      if (props.isEdit) {
-        // 기존 onClickUpdate 로직 호출
-        onClickUpdate();
-      } else {
-        const result = await createBoard({
-          variables: {
-            createBoardInput: {
-              writer: formData.writer,
-              title: formData.title,
-              contents: formData.contents,
-              password: password,
-              images: imageUrls.filter(url => url !== ""),
-            },
-          },
-        });
-        console.log("게시글 등록 성공:", result);
-        // 등록 후 추가 로직 (예: 페이지 이동)
-      }
-    } catch (e) {
-      console.error("게시글 등록/수정 실패:", e);
-      // 에러 모달 등을 띄울 수 있음
-    }
+    const newImages = [...images];
+    newImages[index] = "";
+    setImages(newImages);
   };
 
 
@@ -149,7 +99,7 @@ export default function BoardsWrite(props: BoardsWriteProps) {
     return <div className="text-center mt-20 text-red-500">게시글을 불러오는 중 에러가 발생했습니다.</div>;
   }
   
-  const isAllFormValid = isFormValid && formData.writer && formData.title && formData.contents && password;
+  const isAllFormValid = isFormValid;
 
   return (
     <div className="content-container">
@@ -252,53 +202,58 @@ export default function BoardsWrite(props: BoardsWriteProps) {
       <div className="form-group">
         <label>사진 첨부</label>
         <div className="file-upload-grid">
-          {imageUrls.map((imageUrl, index) => (
-            <div
-              key={index}
-              className="file-upload-box"
-              onClick={onClickImage(index)}
-              style={{
-                backgroundImage: imageUrl ? `url(https://storage.googleapis.com/${imageUrl})` : "none",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                position: "relative",
-              }}
-            >
-              {!imageUrl && (
-                <>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M12 5v14M5 12h14" />
-                  </svg>
-                  <span>클릭해서 사진 업로드</span>
-                </>
-              )}
-              {imageUrl && (
+          {Array(3)
+            .fill(null)
+            .map((_, index) => {
+              const imageUrl = images[index];
+              return (
                 <div
-                  className={styles.deleteButton}
-                  onClick={onClickDelete(index)}
+                  key={index}
+                  className="file-upload-box"
+                  onClick={onClickImage(index)}
+                  style={{
+                    backgroundImage: imageUrl ? `url(${imageUrl.startsWith('http') ? imageUrl : `https://storage.googleapis.com/${imageUrl}`})` : "none",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    position: "relative",
+                  }}
                 >
-                  <img src="/images/picture_delete.png" alt="삭제" />
+                  {!imageUrl && (
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M12 5v14M5 12h14" />
+                      </svg>
+                      <span>클릭해서 사진 업로드</span>
+                    </>
+                  )}
+                  {imageUrl && (
+                    <div
+                      className={styles.deleteButton}
+                      onClick={onClickDelete(index)}
+                    >
+                      <img src="/images/picture_delete.png" alt="삭제" />
+                    </div>
+                  )}
+                  <input
+                    style={{ display: "none" }}
+                    type="file"
+                    onChange={(event) => onChangeFile(event, index)}
+                    ref={(el) => (fileRefs.current[index] = el)}
+                    accept="image/jpeg,image/png"
+                  />
                 </div>
-              )}
-              <input
-                style={{ display: "none" }}
-                type="file"
-                onChange={(event) => onChangeFile(event, index)}
-                ref={(el) => (fileRefs.current[index] = el)}
-                accept="image/jpeg,image/png"
-              />
-            </div>
-          ))}
+              );
+            })}
         </div>
       </div>
 
@@ -307,9 +262,9 @@ export default function BoardsWrite(props: BoardsWriteProps) {
           취소
         </button>
         <button
-          className={`${(props.isEdit && !isAllFormValid) || (!props.isEdit && !isAllFormValid) ? styles.buttonDisabled : styles.buttonEnabled} button`}
-          onClick={finalSubmit}
-          disabled={!props.isEdit && !isAllFormValid}
+          className={`${!isAllFormValid ? styles.buttonDisabled : styles.buttonEnabled} button`}
+          onClick={props.isEdit ? onClickUpdate : onClickSubmit}
+          disabled={!isAllFormValid}
         >
           {props.isEdit ? "수정하기" : "등록하기"}
         </button>

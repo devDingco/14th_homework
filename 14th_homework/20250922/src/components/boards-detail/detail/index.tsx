@@ -17,6 +17,23 @@ const extractYouTubeVideoId = (url: string): string => {
   return (match && match[2].length === 11) ? match[2] : '';
 };
 
+// 이미지 URL을 절대 URL로 변환하는 함수
+const getImageUrl = (imagePath: string): string => {
+  // 이미 절대 URL인 경우 그대로 반환
+  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+    return imagePath;
+  }
+  
+  // storage.googleapis.com 경로인 경우 그대로 반환
+  if (imagePath.startsWith('codecamp-file-storage/')) {
+    return `https://storage.googleapis.com/${imagePath}`;
+  }
+  
+  // 상대 경로인 경우 GraphQL 서버의 기본 URL과 결합
+  const baseUrl = 'https://main-practice.codebootcamp.co.kr';
+  return `${baseUrl}/${imagePath}`;
+};
+
 export default function BoardsDetail(props: BoardsDetailProps) {
   const { data, loading, error, onClickMoveToEdit, onClickMoveToList, onClickLike, onClickDislike } = useBoardsDetail(props);
   const pathname = usePathname();
@@ -61,11 +78,10 @@ export default function BoardsDetail(props: BoardsDetailProps) {
                     {boardData.boardAddress?.address && <div>주소: {boardData.boardAddress?.address}</div>}
                     {boardData.boardAddress?.addressDetail && <div>상세주소: {boardData.boardAddress?.addressDetail}</div>}
                   </div>
-                ) : ''
+                ) : '주소 정보가 없습니다'
               }
               arrow
               placement="bottom"
-              disableHoverListener={!boardData.boardAddress?.address && !boardData.boardAddress?.zipcode}
             >
               <span>
                 <Image src="/images/location.png" alt="주소" width={18} height={18} style={{ cursor: "pointer" }} />
@@ -76,11 +92,25 @@ export default function BoardsDetail(props: BoardsDetailProps) {
       </div>
 
       <div className={styles.body}>
-        <Image src="/images/beach.png" alt="바다 풍경" width={384} height={216} className={styles.beachImage} />
+        {boardData.images && boardData.images.length > 0 && (
+          <div className={styles.imagesContainer}>
+            {boardData.images.map((image: string, index: number) => (
+              <Image 
+                key={index}
+                src={getImageUrl(image)} 
+                alt={`게시글 이미지 ${index + 1}`} 
+                width={384} 
+                height={216} 
+                className={styles.beachImage}
+                style={{ marginBottom: index < boardData.images.length - 1 ? '16px' : '0' }}
+              />
+            ))}
+          </div>
+        )}
         <div className={styles.contents}>{boardData.contents}</div>
       </div>
 
-      {boardData.youtubeUrl ? (
+      {boardData.youtubeUrl && (
         <div className={styles.youtubeSection}>
           <h3 className={styles.youtubeTitle}>관련 영상</h3>
           <div className={styles.youtubeContainer}>
@@ -98,11 +128,6 @@ export default function BoardsDetail(props: BoardsDetailProps) {
               className={styles.youtubePlayer}
             />
           </div>
-        </div>
-      ) : (
-        <div className={styles.videoWrap}>
-          <Image src="/images/video_img.jpg" alt="영상" width={768} height={432} className={styles.videoImage} />
-          <Image src="/images/play_button.png" alt="재생 버튼" width={48} height={48} className={styles.playButton} />
         </div>
       )}
 

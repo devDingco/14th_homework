@@ -19,6 +19,6 @@ export interface FetchBoardsData {
 export interface BoardsListProps {
   boards: IBoard[];
   onClickDelete: (boardId: string) => void;
-  onClickNew: () => void;
   onClickRow: (boardId: string) => void;
+  searchKeyword?: string;
 }

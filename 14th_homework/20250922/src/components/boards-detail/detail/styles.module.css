@@ -11,6 +11,8 @@
 /* Body */
 .body { margin-bottom: var(--space-6); }
 .coverImage { border-radius: var(--radius-md); margin-bottom: var(--space-4); }
+.imagesContainer { margin-bottom: var(--space-4); }
+.beachImage { border-radius: var(--radius-md); width: 100%; height: auto; object-fit: cover; }
 .contents { white-space: pre-wrap; line-height: 1.75; color: var(--color-text-primary); }
 
 /* Address Section */

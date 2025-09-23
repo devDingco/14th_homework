@@ -5,7 +5,23 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import { BoardsListProps } from "./types";
 
-export default function BoardsList({ boards, onClickDelete, onClickNew, onClickRow }: BoardsListProps) {
+// 검색어 강조 표시 함수
+const highlightSearchKeyword = (text: string, keyword: string) => {
+  if (!keyword.trim()) return text;
+  
+  const regex = new RegExp(`(${keyword})`, 'gi');
+  const parts = text.split(regex);
+  
+  return parts.map((part, index) => 
+    regex.test(part) ? (
+      <span key={index} style={{ color: 'red', fontWeight: 'bold' }}>
+        {part}
+      </span>
+    ) : part
+  );
+};
+
+export default function BoardsList({ boards, onClickDelete, onClickRow, searchKeyword }: BoardsListProps) {
   if (!boards || boards.length === 0) {
     return <div className="text-center mt-20">게시글이 없습니다.</div>;
   }
@@ -13,13 +29,6 @@ export default function BoardsList({ boards, onClickDelete, onClickNew, onClickR
   return (
     <div className={styles.container}>
       <div className={styles.inner}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>게시글 목록</h1>
-          <button onClick={onClickNew} className={styles.newButton}>
-            게시글 등록
-          </button>
-        </div>
-
         <div className={styles.tableWrap}>
           <table className={styles.table}>
             <thead className={styles.thead}>
@@ -35,7 +44,9 @@ export default function BoardsList({ boards, onClickDelete, onClickNew, onClickR
               {boards.map((board, index) => (
                 <tr key={board._id} className={styles.tr} onClick={() => onClickRow(board._id)}>
                   <td className={styles.td}>{index + 1}</td>
-                  <td className={styles.td}>{board.title}</td>
+                  <td className={styles.td}>
+                    {highlightSearchKeyword(board.title, searchKeyword || "")}
+                  </td>
                   <td className={`${styles.td} ${styles.tdMuted}`}>{board.writer}</td>
                   <td className={`${styles.td} ${styles.tdMuted}`}>
                     {new Date(board.createdAt).toLocaleDateString("ko-KR")}

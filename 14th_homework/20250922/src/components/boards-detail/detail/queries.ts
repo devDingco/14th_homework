@@ -12,6 +12,7 @@ export const FETCH_BOARD_DETAIL = gql`
       createdAt
       updatedAt
       youtubeUrl
+      images
       boardAddress {
         zipcode
         address
