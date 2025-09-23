@@ -1,12 +1,14 @@
 "use client"
 
 import { useParams, useRouter } from "next/navigation"
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useEffect, useRef, useState } from "react"
 
 import { useMutation } from "@apollo/client"
 import { CreateBoardDocument, CreateBoardMutation, CreateBoardMutationVariables, UpdateBoardDocument, UpdateBoardMutation, UpdateBoardMutationVariables } from "@/commons/graphql/graphql"
 import { IMyvariables } from "./types"
 import { FETCH_BOARD } from "../boards-detail/detail/queries"
+import { mygraphql, mygraphUpdateql, UPLOAD_FILE } from "./queries"
+import { checkVaildationFile } from "@/commons/validation-file"
 
 
 
@@ -16,7 +18,7 @@ import { FETCH_BOARD } from "../boards-detail/detail/queries"
 
 
 
-export default function useBoardsWrite(){
+export default function useBoardsWrite() {
     const boardId = useParams()
     const router = useRouter()
 
@@ -37,6 +39,10 @@ export default function useBoardsWrite(){
     const [detailAddress, setDetailAddress] = useState("")
     const [youtube, setYoutube] = useState<string>("")
 
+    const [uploadFile] = useMutation(UPLOAD_FILE);
+    const [imageUrl, setImageUrl] = useState<string[]>([]);
+    const fileRef = useRef(null);
+
 
 
 
@@ -47,16 +53,16 @@ export default function useBoardsWrite(){
     const [contentError, setContentError] = useState("필수입력사항")
     const [isActive, setIsActive] = useState(false)
 
-    const [boardCreate] = useMutation<CreateBoardMutation, CreateBoardMutationVariables>(CreateBoardDocument)
-    const [boardUpdate] = useMutation<UpdateBoardMutation, UpdateBoardMutationVariables>(UpdateBoardDocument)
+    const [boardCreate] = useMutation(mygraphql)
+    const [boardUpdate] = useMutation(mygraphUpdateql)
 
-   const onChangeInputs = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const onChangeInputs = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setInputs({
             ...inputs,
             [event.target.id]: event.target.value
         });
 
-      
+
         if (event.target.id === "email") {
             setEmail(event.target.value);
             setEmailError(event.target.value ? "" : "필수입력사항");
@@ -169,82 +175,124 @@ export default function useBoardsWrite(){
     }
 
     const onClickSignUp = async () => {
+        console.log([imageUrl])
+        try {
+            if (email && password && title && content) {
+                const result = await boardCreate({
+                    variables: {
+                        createBoardInput: {
+                            writer: email,
+                            password: password,
+                            title: title,
+                            contents: content,
+                            youtubeUrl: youtube,
+                            images: imageUrl,
 
-        try{
-        if (email && password && title && content) {
-            const result = await boardCreate({
-                variables: {
-                    writer: email,
-                    password: password,
-                    title: title,
-                    contents: content,
-                    youtubeUrl:youtube,
-                    boardAddress: {
-                        zipcode: zonecode,
-                        address: address,
-                        addressDetail: detailAddress
+                            boardAddress: {
+                                zipcode: zonecode,
+                                address: address,
+                                addressDetail: detailAddress
+                            },
+                        }
+
                     }
-                    
-                }
-            })
-            console.log(result)
-            const myId=result?.data?.createBoard._id;
-            router.push(`/board/detail/${myId}`);
-            alert("게시글 등록이 완료되었습니다.")
+                })
+                console.log(result)
+                const myId = result?.data?.createBoard._id;
+                router.push(`/board/detail/${myId}`);
+                alert("게시글 등록이 완료되었습니다.")
+            }
+        } catch (error) {
+            console.error(error);
+            alert("에러가 발생하였습니다. 다시 시도해주세요.")
         }
-    }catch(error){
-        console.error(error);
-        alert("에러가 발생하였습니다. 다시 시도해주세요.")
-    }
     }
 
 
 
     const onClickUpdate = async () => {
+
+     
         const inputPassword = prompt("비밀번호를 입력하세요.")
 
 
-        
+
         const myvariables: IMyvariables = {
-            boardId: String(boardId.boardId)  ,
+            boardId: String(boardId.boardId),
             password: inputPassword ?? "",
             updateBoardInput: {}
-           
-        } 
+
+        }
         // if(inputPassword) {myvariables.password = inputPassword}
-        if(title !== "") myvariables.updateBoardInput.title = title;
-        if(content !== "") myvariables.updateBoardInput.contents = content;
-        if(youtube !== "") myvariables.updateBoardInput.youtubeUrl = youtube;
+        if (title !== "") myvariables.updateBoardInput.title = title;
+        if (content !== "") myvariables.updateBoardInput.contents = content;
+        if (youtube !== "") myvariables.updateBoardInput.youtubeUrl = youtube;
+        if (imageUrl !== "") {
+            myvariables.updateBoardInput.images = imageUrl;
+        }
         if (zonecode || address || detailAddress) {
             myvariables.updateBoardInput.boardAddress = {
-              zipcode: zonecode,
-              address: address,
-              addressDetail: detailAddress,
+                zipcode: zonecode,
+                address: address,
+                addressDetail: detailAddress,
             };
-          }
+        }
 
-        try{
-      
+        try {
+
             const result = await boardUpdate({
-                variables: myvariables, 
+                variables: myvariables,
                 refetchQueries: [
-                    {query: FETCH_BOARD, 
-                        variables: {boardId: String(boardId.boardId)}
+                    {
+                        query: FETCH_BOARD,
+                        variables: { boardId: String(boardId.boardId) }
                     }
                 ]
 
             })
             console.log(result)
-            const myId=result?.data?.updateBoard._id
+            const myId = result?.data?.updateBoard._id
             router.push(`/board/detail/${myId}`);
             alert("게시글 수정이 완료되었습니다.")
-        
-    }catch(error){
-        console.error(error);
-        alert("에러가 발생하였습니다. 다시 시도해주세요.")
-    }
+
+        } catch (error) {
+            console.error(error);
+            alert("에러가 발생하였습니다. 다시 시도해주세요.")
+        }
     }
 
+
+    const onChangeFile = async (event) => {
+        const file = event.target.files[0]
+        console.log("파일정보: " + file);
+
+        const isValid = checkVaildationFile(file);
+        if (!isValid) return;
+
+        const result = await uploadFile({
+            variables: { file }
+        })
+        console.log("result: " + result)
+
+        console.log("file: " + result.data?.uploadFile.url)
+        setImageUrl(prev => [
+            ...prev, result.data?.uploadFile.url
+        ])
+
+
+    }
+
+    const onClickImage = () => {
+        fileRef.current?.click()
+    }
+
+    const onDeleteImage = (index: number) => {
+        setImageUrl((prev) => {
+          const updated = [...prev];
+          updated[index] = "";
+          return updated;
+        });
+      };
 
 
 
@@ -269,6 +317,11 @@ export default function useBoardsWrite(){
         detailAddress,
         onChangeDetailaddress,
         onChangeYoutube,
-        youtube
+        youtube,
+        onClickImage,
+        fileRef,
+        onChangeFile,
+        imageUrl,
+        onDeleteImage
     }
 }

@@ -7,6 +7,7 @@ import DaumPostcodeEmbed from 'react-daum-postcode';
 
 
 import { IBoardsWriteProps } from "./types";
+import { ApolloClient } from "@apollo/client";
 
 export default function BoardsWrite(props:IBoardsWriteProps ) {
     const { 
@@ -29,8 +30,13 @@ export default function BoardsWrite(props:IBoardsWriteProps ) {
         detailAddress,
         onChangeDetailaddress,
         onChangeYoutube,
-        
+        onClickImage,
+        fileRef,
+        onChangeFile,
+        imageUrl,
+        onDeleteImage
 
+        
     } = useBoardsWrite()
 
     return (
@@ -90,18 +96,56 @@ export default function BoardsWrite(props:IBoardsWriteProps ) {
                 <div className={style.메인__1__1}>
                     <div>사진 첨부</div>
                     <div className={style.사진첨부목록}>
-                        <div className={style.사진첨부리스트}>
-                            <img src="../assets/icons/add.png"></img>
-                            <div>클릭해서 사진 업로드</div>
-                        </div>
-                        <div className={style.사진첨부리스트}>
-                            <img src="../assets/icons/add.png"></img>
-                            <div>클릭해서 사진 업로드</div>
-                        </div>
-                        <div className={style.사진첨부리스트}>
-                            <img src="../assets/icons/add.png"></img>
-                            <div>클릭해서 사진 업로드</div>
-                        </div>
+                      {Array.from({ length: 6 }).map((_, index) => {
+                        const currentImage =
+                          imageUrl[index] !== undefined && imageUrl[index] !== ""
+                            ? imageUrl[index]
+                            : props?.data?.fetchBoard?.images?.[index] ?? "";
+                        return (
+                          <div
+                            key={index}
+                            className={style.사진첨부리스트}
+                            style={{ position: "relative" }}
+                          >
+                            <input
+                              type="file"
+                              style={{ display: "none" }}
+                              ref={fileRef}
+                              onChange={(e) => onChangeFile(e, index)}
+                            />
+                            {currentImage && (
+                                                      <>
+                                                      <img
+                                                        src={`https://storage.googleapis.com/${currentImage}`}
+                                                        alt={`uploaded ${index}`}
+                                                      />
+                                                      <button
+                                                        type="button"
+                                                        onClick={(e) => {
+                                                          e.stopPropagation();
+                                                          onDeleteImage(index);
+                                                        }}
+                                                        style={{
+                                                          position: "absolute",
+                                                          right: "4px",
+                                                          bottom: "4px",
+                                                          background: "red",
+                                                          color: "white",
+                                                          border: "none",
+                                                          borderRadius: "50%",
+                                                          width: "20px",
+                                                          height: "20px",
+                                                          cursor: "pointer",
+                                                        }}
+                                                      >
+                                                        ×
+                                                      </button>
+                                                    </>
+                            )}
+                            <div onClick={() => onClickImage(index)}>클릭해서 사진 업로드</div>
+                          </div>
+                        );
+                      })}
                     </div>
                 </div>
             </div>

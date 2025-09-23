@@ -11,7 +11,7 @@ import { Button, Tooltip } from 'antd';
 
 
 export default function BoardsDetail() {
-    const { 
+    const {
         onClickMove,
         data,
         onClickdisLike,
@@ -45,7 +45,23 @@ export default function BoardsDetail() {
                     </div>
                 </div>
 
-                <img className={style.image__main} src="/assets/images/BeachsideSerenity 1.png" />
+                {/* {data?.fetchBoard.images && data.fetchBoard.images !== '' && (
+          <img
+            className={style.image__main}
+            src={`https://storage.googleapis.com/${data.fetchBoard.images}`}
+            alt="board image"
+          />
+        )} */}
+      {data?.fetchBoard.images && data.fetchBoard.images.length > 0 && (
+        data.fetchBoard.images.map((img: string, index: number) => (
+          <img
+            key={index}
+            className={style.image__main}
+            src={`https://storage.googleapis.com/${img}`}
+            alt="board image"
+          />
+        ))
+      )}
 
                 <div className={style.text}>
                     {data?.fetchBoard.contents}
