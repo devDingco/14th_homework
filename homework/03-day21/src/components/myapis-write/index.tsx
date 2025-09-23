@@ -4,7 +4,8 @@ import React from "react";
 import styles from "./styles.module.css";
 import { IBoardWriteProps } from "./types";
 import useMyBoardWrite from "./hook";
-import { Modal } from "antd";
+import { Modal, Input, Tag, Tooltip, theme } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import DaumPostcodeEmbed from "react-daum-postcode";
 
 export default function MyBoardWrite(props: IBoardWriteProps) {
@@ -27,6 +28,27 @@ export default function MyBoardWrite(props: IBoardWriteProps) {
         onClickPickRandomImage,
         onClickSubmit,
         onClickUpdate,
+        // 태그 관련 상태 & setter
+        tags,
+        setTags,
+        inputVisible,
+        setInputVisible,
+        inputValue,
+        setInputValue,
+        editInputIndex,
+        setEditInputIndex,
+        editInputValue,
+        setEditInputValue,
+        inputRef,
+        editInputRef,
+        tagInputStyle,
+        tagPlusStyle,
+        handleInputChange,
+        handleInputConfirm,
+        handleEditInputChange,
+        handleEditInputConfirm,
+        handleClose,
+        showInput
      } = useMyBoardWrite({ isEdit: props.isEdit, boardData: props.boardData })
 
     return (
@@ -93,6 +115,7 @@ export default function MyBoardWrite(props: IBoardWriteProps) {
                         <div className={styles.enrollRowSection}>
                             <div className={styles.enrollFormTitle}>
                                 <div>주소</div>
+                                <div className={styles.enrollRequiredIndicator}>*</div>
                             </div>
                             <div className={styles.enrollAddressFirstrow}>
                             <input 
@@ -136,7 +159,69 @@ export default function MyBoardWrite(props: IBoardWriteProps) {
                                 placeholder="상세주소"
                                 value={addressDetail}
                             />
+
                         </div>                                 
+
+                        {/* 태그 입력 영역 */}
+                        <div className={styles.enrollRowSection} style={{ marginTop: 16 }}>
+                            <div className={styles.enrollFormTitle}>
+                                <div>태그</div>
+                            </div>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                                {tags?.map((tag, index) => {
+                                    if (editInputIndex === index) {
+                                        return (
+                                            <Input
+                                                key={tag}
+                                                ref={editInputRef}
+                                                size="small"
+                                                style={tagInputStyle}
+                                                value={editInputValue}
+                                                onChange={handleEditInputChange}
+                                                onBlur={handleEditInputConfirm}
+                                                onPressEnter={handleEditInputConfirm}
+                                            />
+                                        );
+                                    }
+                                    const isLongTag = tag.length > 20;
+                                    const tagElem = (
+                                        <Tag
+                                            key={tag}
+                                            closable
+                                            onClose={() => handleClose(tag)}
+                                            style={{ userSelect: 'none' }}
+                                        >
+                                            <span
+                                                onDoubleClick={(e) => {
+                                                    setEditInputIndex(index);
+                                                    setEditInputValue(tag);
+                                                    e.preventDefault();
+                                                }}
+                                            >
+                                                {isLongTag ? `${tag.slice(0, 20)}...` : tag}
+                                            </span>
+                                        </Tag>
+                                    );
+                                    return isLongTag ? <Tooltip title={tag} key={tag}>{tagElem}</Tooltip> : tagElem;
+                                })}
+                                {inputVisible ? (
+                                    <Input
+                                        ref={inputRef}
+                                        type="text"
+                                        size="small"
+                                        style={tagInputStyle}
+                                        value={inputValue}
+                                        onChange={handleInputChange}
+                                        onBlur={handleInputConfirm}
+                                        onPressEnter={handleInputConfirm}
+                                    />
+                                ) : (
+                                    <Tag style={tagPlusStyle} icon={<PlusOutlined />} onClick={showInput}>
+                                        New Tag
+                                    </Tag>
+                                )}
+                            </div>
+                        </div>
 
                     </div>
                 </div>
