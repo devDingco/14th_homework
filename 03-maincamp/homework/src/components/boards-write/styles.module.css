@@ -29,9 +29,6 @@
 .메인__작성자비밀번호섹션__비밀번호섹션{
   width: 50%;
 }
-.메인__제목섹션{
-  
-}
 .메인__내용섹션 > input{
   height: 33.6rem;
 }
@@ -53,12 +50,6 @@
 .메인__주소섹션__상단아티클__내용 > button {
   width: 13rem;
   height: 4.8rem;
-}
-.메인__유튜브링크섹션{
-  
-}
-.메인__사진첨부섹션{
-  
 }
 .메인__사진첨부섹션__아티클{
   display: flex;
@@ -92,4 +83,27 @@
   background-color: #2974E5;
   color: white;
   border: 0px solid #000;
+}
+
+
+.imageBox {
+  position: relative;
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem; 
+  background-color: #00000066;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 2.4rem;
+  height: 2.4rem;
+  cursor: pointer;
+  padding: 0;
+  display: none;
+}
+.imageBox:hover .deleteBtn {
+  display: block;
 }

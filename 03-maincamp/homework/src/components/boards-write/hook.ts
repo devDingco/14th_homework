@@ -3,7 +3,7 @@
 
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {ChangeEvent} from 'react';
 import { CREATE_BOARD, FETCH_BOARD, UPDATE_BOARD } from "./queres";
 import { IMyvariables,Idata } from "./types";
@@ -12,6 +12,8 @@ import { FetchBoardQuery } from "@/gql/graphql";
 import { ApolloError } from "@apollo/client";
 import { Modal } from "antd";
 import { IBoardWriteProps } from "@/components/boards-write/types";
+import { checkFileValidation } from "@/commons/libraries/image-validation";
+import { UPLOAD_FILE } from "./queres";
 
 
 export default function useBoardsWrite(props:IBoardWriteProps) {
@@ -21,15 +23,12 @@ export default function useBoardsWrite(props:IBoardWriteProps) {
   const [detailAddress, setDetailAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState<string>("");
+  // const [imageUrl, setImageUrl] = useState("");
 
-  
+  const [uploadFile] = useMutation(UPLOAD_FILE)
 
       const [isModalOpen, setIsModalOpen] = useState(false);
       const [password, setPassword] = useState<string>("")
-      // const [writer, setWriter] = useState<string>("")
-      // const [title, setTitle] = useState<string>("")
-      // const [contents, setContents] = useState<string>("")
-
       const [inputs, setInputs] = useState({
         writer: "",
         title: "",
@@ -47,12 +46,43 @@ export default function useBoardsWrite(props:IBoardWriteProps) {
       const [createBoard] = useMutation(CREATE_BOARD);
       const [updateBoard] = useMutation(UPDATE_BOARD);
       const { boardId } = useParams()
+      const [imageUrls, setImageUrls] = useState<string[]>(["", "", ""]);
+      const fileRef = useRef(null);
+
+      const fileRefs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+      const onClickGrayBox = (index: number, event: React.MouseEvent<HTMLDivElement>) => {
+          event.stopPropagation();
+          fileRefs[index].current?.click();
+      };
+    
 
       const onClickMoveList = () =>{
         router.push("/boards")
       }
 
-    
+
+       const onChangeFile = async (index: number, event: ChangeEvent<HTMLInputElement>) => {
+        
+  const file = event.target.files?.[0];
+  if (!file) return;
+  if (!checkFileValidation(file)) return;
+
+    const result = await uploadFile({ variables: { file } });
+    const fileUrl = result.data?.uploadFile.url;
+
+    const newImageUrls = [...imageUrls];
+    newImageUrls[index] = `https://storage.googleapis.com/${fileUrl}`;
+    setImageUrls(newImageUrls);
+    event.target.value = ""
+};
+
+const onClickDeleteFile = (index: number,event: React.MouseEvent<HTMLButtonElement>) => {
+  event.stopPropagation();
+  const newImageUrls = [...imageUrls];
+  newImageUrls[index] = "";
+  setImageUrls(newImageUrls);
+};
+
       const handleComplete = (data : Idata) => {
     setZonecode(data.zonecode); 
     setAddress(data.address);   
@@ -70,20 +100,31 @@ export default function useBoardsWrite(props:IBoardWriteProps) {
   }
   const onChangePassword = (event:ChangeEvent<HTMLInputElement>) => {
       setPassword(event.target.value)
-      // if(writer && event.target.value && title && contents){
-      //   setIsActive(true)
-      // }else{setIsActive(false)}
   }
-  // const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-//   const newPassword = event.target.value;
-//   setPassword(newPassword);
 
-//   if(writer && title && contents && newPassword){
-//     setIsActive(true);
-//   } else {
-//     setIsActive(false);
-//   }
-// }
+
+ useEffect(() => {
+  if (props.isEdit && props.data?.fetchBoard) {
+    const images = props.data.fetchBoard.images || [];
+    setImageUrls([
+      images[0] || "",
+      images[1] || "",
+      images[2] || "",
+    ]);
+
+    setInputs({
+      writer: props.data.fetchBoard.writer || "",
+      title: props.data.fetchBoard.title || "",
+      contents: props.data.fetchBoard.contents || "",
+    });
+    setYoutubeUrl(props.data.fetchBoard.youtubeUrl || "");
+    setZonecode(props.data.fetchBoard.boardAddress?.zipcode || "");
+    setAddress(props.data.fetchBoard.boardAddress?.address || "");
+    setDetailAddress(props.data.fetchBoard.boardAddress?.addressDetail || "");
+  }
+}, [props.isEdit, props.data]);
+
+  
   useEffect(()=>{
     if(props.isEdit){
       if(inputs.contents && inputs.title) setIsActive(true)
@@ -103,32 +144,7 @@ export default function useBoardsWrite(props:IBoardWriteProps) {
         [event.target.id]: event.target.value
       })
     };
-  
-  //   if(newInputs.contents && newInputs.title && newInputs.writer && password){
-  //     setIsActive(true)
-  //     }else{setIsActive(false)
-  //   }
-  //   }
-  
-      // const onChangeWriter = (event:ChangeEvent<HTMLInputElement>) => {
-      //     setWriter(event.target.value)
-      //     if(event.target.value && password && title && contents){
-      //       setIsActive(true)
-      //     }else{setIsActive(false)}
-      // }
-      // const onChangeTitle = (event:ChangeEvent<HTMLInputElement>) => {
-      //     setTitle(event.target.value)
-      //     if(writer && password && event.target.value && contents){
-      //       setIsActive(true)
-      //     }else{setIsActive(false)}
-      // }
-      // const onChangeContents = (event:ChangeEvent<HTMLInputElement>) => {
-      //     setContents(event.target.value)
-      //     if(writer && password && title && event.target.value){
-      //       setIsActive(true)
-      //     }else{setIsActive(false)}
-      // }
-      const validation = () => {
+          const validation = () => {
           if (writer === "") setErrorWriter("필수입력사항입니다");
           else setErrorWriter("");
 
@@ -144,10 +160,22 @@ export default function useBoardsWrite(props:IBoardWriteProps) {
         };
 
   //이벤트 핸들러
+
+  
+
   const onClickSubmit = async () => {
     if (writer !=="" && password !=="" && title !=="" && contents !=="" ){
       Modal.success({ content: "게시글등록에 성공했습니다" });
     }else return
+    console.log({
+  writer,
+  password,
+  title,
+  contents,
+  youtubeUrl,
+  images : imageUrls,
+  boardAddress: { zipcode, address, addressDetail },
+});
       
     const result = await createBoard({
   variables: {
@@ -161,7 +189,8 @@ export default function useBoardsWrite(props:IBoardWriteProps) {
         zipcode,
         address,
         addressDetail,
-      }
+      },
+      images : imageUrls
     },
   },
 });
@@ -198,6 +227,9 @@ if (address !== "") {
     address,
     addressDetail,
   };
+}
+if (imageUrls.some((url) => url !== "")) {
+  myvariables.updateBoardInput.images = imageUrls;
 }
 
 
@@ -251,7 +283,15 @@ try {
     setDetailAddress,
     onChangeAddressDetail,
     addressDetail,
-    onChangeYoutubeUrl
-  
+    onChangeYoutubeUrl,
+    imageUrls,
+    onChangeFile,
+    onClickDeleteFile,
+    setImageUrls,
+    setInputs,
+    setYoutubeUrl,
+    youtubeUrl,
+    fileRefs,
+    onClickGrayBox,
   }
 }

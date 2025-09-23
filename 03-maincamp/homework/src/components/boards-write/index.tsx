@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect , useState } from "react";
 import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
 
@@ -12,14 +12,14 @@ import { IBoardWriteProps } from './types';
 
 
 
+
+
 export default function BoardsWrite(props:IBoardWriteProps) {
+  
   const {
     onChangeInputs,
     onClickMoveList,
-    // onChangeContents,
     onChangePassword,
-    // onChangeTitle,
-    // onChangeWriter,
     validation,
     onClickSubmit,
     onClickUpdate,
@@ -35,10 +35,23 @@ export default function BoardsWrite(props:IBoardWriteProps) {
     handleComplete,
     onChangeAddressDetail,
     onChangeYoutubeUrl,
+    onChangeFile,
+    imageUrls,
+    onClickDeleteFile,
+    setImageUrls,
+    setInputs,
+    setYoutubeUrl,
+    setZonecode,
+    setAddress,
+    setDetailAddress,
+    fileRefs,
+    onClickGrayBox,
+
   } = useBoardWrite(props)
 
+
   
-  
+
   return (  <div className={styles.container}>
       <header>
           <h1>게시물{props.isEdit ? "수정" : "등록"}</h1>
@@ -97,7 +110,7 @@ export default function BoardsWrite(props:IBoardWriteProps) {
           open={true}
           onOk={onToggleModal}
           onCancel={onToggleModal}
-        >
+        > 
           <DaumPostcodeEmbed onComplete={handleComplete}/>
         </Modal>
       )}
@@ -112,29 +125,55 @@ export default function BoardsWrite(props:IBoardWriteProps) {
               <input onChange={onChangeYoutubeUrl} type="text" placeholder="링크를 입력해주세요" defaultValue={props.data?.fetchBoard?.youtubeUrl ?? ""}/>
           </section>
           <hr/>
-          <section className={styles.메인__사진첨부섹션}>
-              <h2>사진첨부</h2>
-              <article className={styles.메인__사진첨부섹션__아티클}>
-                  <button><Image
-                          src={"/images/사진업로드.png"}
-                          alt="사진업로드"
-                          width={200}
-                          height={200}
-                        /></button>
-                  <button><Image
-                          src={"/images/사진업로드.png"}
-                          alt="사진업로드"
-                          width={200}
-                          height={200}
-                        /></button>
-                  <button><Image
-                          src={"/images/사진업로드.png"}
-                          alt="사진업로드"
-                          width={200}
-                          height={200}
-                        /></button>
-              </article>
-          </section>
+      <section className={styles.메인__사진첨부섹션}>
+  <h2>사진첨부</h2>
+    <article className={styles.메인__사진첨부섹션__아티클}>
+      {imageUrls.map((url, index) => (
+        <div key={index} style={{ display: "flex", marginRight: "10px" }}>
+          <div
+            style={{
+              width: "200px",
+              height: "200px",
+              backgroundColor: "gray",
+              cursor: "pointer",
+            }}
+            onClick={(event) => onClickGrayBox(index,event)}
+          >
+          
+            {url ? (
+              <div className={styles.imageBox}>
+              <img
+                src={url}
+                alt={`업로드된 이미지 ${index + 1}`}
+                width={200}
+                height={200}
+                style={{ objectFit: "contain" }}
+              />
+              <button className={styles.deleteBtn} onClick={(event) => onClickDeleteFile(index,event)}>X</button>
+              </div>
+              
+            ) : (
+                <Image
+                  src={"/images/사진업로드.png"}
+                  alt="사진업로드"
+                  width={200}
+                  height={200}
+                />
+            )}
+          </div>
+            
+          <input
+            id={`fileInput_${index}`}
+            style={{ display: "none" }}
+            type="file"
+            ref={fileRefs[index]}
+            accept="image/jpeg, image/png"
+            onChange={(event) => onChangeFile(index, event)}
+          />
+        </div>
+      ))}
+    </article>
+</section>
           <section className={styles.메인__등록하기섹션}>
               <button onClick={onClickMoveList} className={styles.메인__등록하기섹션__취소버튼}>취소</button>
               <button className={isActive === true ? styles.메인__등록하기섹션__등록하기버튼__액티브 : styles.메인__등록하기섹션__등록하기버튼__낫액티브} onClick={() => {
