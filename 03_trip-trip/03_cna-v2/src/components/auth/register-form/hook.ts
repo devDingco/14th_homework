@@ -1,6 +1,6 @@
 'use client'
 
-import { useMutation } from '@apollo/client'
+import { ApolloError, useMutation } from '@apollo/client'
 import {
   CreateUserDocument,
   CreateUserMutation,
@@ -51,6 +51,9 @@ export const useRegister = () => {
       })
       if (data?.createUser?._id) router.push('/login')
     } catch (error) {
+      if (error instanceof ApolloError) {
+        alert(error?.message)
+      }
       console.error('회원가입에 실패하였습니다:', error)
     }
   }
