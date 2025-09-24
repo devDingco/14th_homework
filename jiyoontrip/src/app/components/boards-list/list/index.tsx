@@ -13,6 +13,7 @@ export default function BoardsPageComponent({
   data,
   isModalOpen,
   Modal,
+  keyword,
 }: any) {
   return (
     <>
@@ -35,7 +36,19 @@ export default function BoardsPageComponent({
               onClick={onClickDetail}
             >
               <span className={styles.boardList__item__number}>{index + 1}</span>
-              <span className={styles.boardList__item__title}>{el.title}</span>
+              <span className={styles.boardList__item__title}>
+                {el.title
+                  .replaceAll(keyword, `#$%${keyword}#$%`)
+                  .split("#$%")
+                  .map((el, index) => (
+                    <span
+                      key={`${el}_${index}`}
+                      style={{ color: el === keyword ? "red" : "black" }}
+                    >
+                      {el}
+                    </span>
+                  ))}
+              </span>
               <span className={styles.boardList__item__writer}>{el.writer}</span>
               <span className={styles.boardList__item__date}>
                 {el.createdAt.split("T")[0]}

@@ -2,8 +2,9 @@
 
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/navigation";
-import { MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import { Modal } from "antd";
+import _ from "lodash";
 // import { DELETE_BOARD, FETCH_BOARDS } from "./queires";
 import {
   DeleteBoardDocument,
@@ -20,7 +21,9 @@ export default function useBoardPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState("");
   const [startPage, setStartPage] = useState(1);
-  const [currnetPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [keyword, setKeyword] = useState("");
+
   const onClickDetail = (event: MouseEvent<HTMLElement>) => {
     router.push(`/boards/${event.currentTarget.id}`);
   };
@@ -72,6 +75,18 @@ export default function useBoardPage() {
       refetch({ page: startPage + 10 });
     }
   };
+  const getDebounce = _.debounce((value) => {
+    refetch({
+      search: value,
+      page: 1,
+    });
+    setKeyword(value);
+  }, 500);
+
+  const onChangeKeyword = (event: ChangeEvent<HTMLInputElement>) => {
+    getDebounce(event.target.value);
+  };
+
   return {
     onClickDelete,
     onClickDetail,
@@ -85,6 +100,8 @@ export default function useBoardPage() {
     onClickPage,
     lastPage,
     startPage,
-    currnetPage,
+    currentPage,
+    onChangeKeyword,
+    keyword,
   };
 }
