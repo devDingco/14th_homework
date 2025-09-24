@@ -36,7 +36,19 @@ export default function BoardsList(props:IBoardsListProps) {
                             {props.data?.map((el: FetchBoardQuery['fetchBoard'], index:number) => (
                                 <div key={el._id} className={styles.board__main__articlebox__item} onClick={() => onClickMove(el._id)}>
                                     <div className={styles.board__main__articlebox__item__number}>  {startNumber - index} </div>
-                                    <div className={styles.board__main__articlebox__item__title} >{el.title}</div>
+                                    <div className={styles.board__main__articlebox__item__title} >
+                                          {el.title
+              .replaceAll(`${props.keyword}`, `$%^${props.keyword}$%^`)
+              .split("$%^")
+              .map((el, index) => (
+                <span
+                  key={`${el}_${index}`}
+                  style={{ color: el === `${props.keyword}` ? "red" : "black" }}
+                >
+                  {el}
+                </span>
+              ))}
+                                    </div>
                                     <div className={styles.board__main__articlebox__item__writer}>{el.writer}</div>
                                     <div className={styles.board__main__articlebox__item__date}>{new Date(el.createdAt).toISOString().split("T")[0]}</div>
                                     <button className={styles.board__main__articlebox__item__delete} id={el._id} onClick={onClickDelete}>

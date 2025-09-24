@@ -1,0 +1,84 @@
+.container{
+    width: 192rem;
+    height: 100vh;
+    display: flex;
+    
+    
+}
+
+.signUpHeader{
+     width: 40rem;
+     height: 108rem;
+     padding-top:24.4rem ;
+} 
+
+.signUpBox{
+    width: 32rem ;
+    height: 39.6rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+
+}
+.signUpForm{
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+}
+.signUpForm > h1{
+font-family: Pretendard Variable;
+font-weight: 600;
+font-style: SemiBold;
+font-size: 18px;
+
+line-height: 24px;
+letter-spacing: 0%;
+text-align: center;
+
+}
+.signUpInputBox{
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+.signUpInputBox h2{
+font-family: Pretendard Variable;
+font-weight: 500;
+font-style: Medium;
+font-size: 14px;
+line-height: 20px;
+letter-spacing: 0%;
+display: flex;
+justify-content: center;
+
+}
+.signUpInputs{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+}
+.signUpInputs__item{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+.signUpInputs__item h3{
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+.signUpInputs__item div{
+    color: #F66A6A;
+    
+}
+.signUpBtn{
+    background-color: #2974E5;
+    color: #fff;
+}
+
+.loginBg{
+    width: 152rem;
+    height: 108rem;
+}

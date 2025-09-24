@@ -2,6 +2,8 @@
 
 import BoardsList from '@/components/boards-list/list';
 import Pagination from '@/components/boards-list/pagination';
+import Search from '@/components/boards-list/search';
+import { FetchBoardsSearchQuery, FetchBoardsSearchQueryVariables } from '@/gql/graphql';
 import { useQuery } from '@apollo/client';
 import { gql } from '@apollo/client';
 import { useState } from 'react';
@@ -14,20 +16,24 @@ const FETCH_BOARDS_COUNT = gql`
 `
 
 export const FETCH_BOARDS = gql`
-  query fetchBoards($page: Int) {
-    fetchBoards(page: $page) {
-      _id
-      writer
-      title
-      contents
-      createdAt
+  query fetchBoardsSearch($page: Int, $search: String) {
+    fetchBoards(page: $page, search: $search) {
+        writer
+        title
+        contents
+        createdAt
+        _id
     }
   }
 `;
 
 
 export default function BoardsPage() {
-  const { data, refetch } = useQuery(FETCH_BOARDS, {
+  const [keyword, setKeyword] = useState("");
+  const { data, refetch } = useQuery<
+    FetchBoardsSearchQuery,
+    FetchBoardsSearchQueryVariables
+  >(FETCH_BOARDS, {
     variables: {
       page: 1,
     },
@@ -39,7 +45,8 @@ export default function BoardsPage() {
   // const [startPage, setStartPage] = useState(1);
   return (
     <div style={{position : "relative"}}>
-    <BoardsList data={data?.fetchBoards} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+      <Search refetch={refetch} setKeyword={setKeyword}/>
+    <BoardsList data={data?.fetchBoards} currentPage={currentPage} setCurrentPage={setCurrentPage} keyword={keyword} setKeyword={setKeyword}/>
     <Pagination refetch={refetch} lastPage={lastPage} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
     </div>
   )
