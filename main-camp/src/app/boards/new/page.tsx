@@ -11,9 +11,7 @@ const BoardNewPage = () => {
         setIsEdit(false)
     },[])
     return (
-        <IsModalProvider>
-            <BoardsWrite />
-        </IsModalProvider>
+        <BoardsWrite />
     )
 }
 
