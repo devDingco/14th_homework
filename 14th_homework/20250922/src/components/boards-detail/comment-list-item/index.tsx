@@ -33,7 +33,6 @@ export default function CommentListItem({ comment, onDelete, boardId }: CommentL
         isEdit={true}
         defaultValues={{ contents: comment.contents, rating: comment.rating }}
         onCancel={() => setIsEdit(false)}
-        // 이 부분 추가
         onCompleted={() => setIsEdit(false)}
         />
     );

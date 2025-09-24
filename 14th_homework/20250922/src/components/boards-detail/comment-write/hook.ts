@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/client";
 import { CREATE_BOARD_COMMENT, FETCH_BOARD_COMMENTS, UPDATE_BOARD_COMMENT } from "./queries";
 import type { CommentWriteProps } from "./types";
 
-export function useCommentWrite({ boardId, boardCommentId, isEdit, defaultValues }: CommentWriteProps) {
+export function useCommentWrite({ boardId, boardCommentId, isEdit, defaultValues, onCompleted }: CommentWriteProps) {
   const [writer, setWriter] = useState(isEdit ? (defaultValues?.writer || "") : "");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState(defaultValues?.contents || "");
@@ -29,6 +29,9 @@ export function useCommentWrite({ boardId, boardCommentId, isEdit, defaultValues
       console.log("updateBoardComment boardId:", boardId, "boardCommentId:", boardCommentId);
       console.log("updateBoardComment completed:", data);
       console.log("refetchQueries triggered for FETCH_BOARD_COMMENTS with boardId:", boardId);
+      if (onCompleted) {
+        onCompleted();
+      }
     },
     onError: (error) => {
       console.error("updateBoardComment error:", error.message);

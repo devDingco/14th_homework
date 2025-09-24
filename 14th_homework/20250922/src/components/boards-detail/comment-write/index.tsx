@@ -11,6 +11,7 @@ export default function CommentWrite({
   isEdit = false,
   defaultValues,
   onCancel,
+  onCompleted,
 }: CommentWriteProps) {
   console.log("Sending to useCommentWrite:", { boardId, boardCommentId, isEdit }); // 이거 추가
   const {
@@ -30,6 +31,7 @@ export default function CommentWrite({
     boardCommentId,
     isEdit,
     defaultValues,
+    onCompleted,
   });
 
   const contentsLength = contents.length;

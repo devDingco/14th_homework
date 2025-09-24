@@ -40,7 +40,7 @@ export default function CommentList(props: CommentListProps) {
   const [hasMore, setHasMore] = useState(true);
   const limit = 10;
 
-  const { data, loading, error, refetch } = useQuery(FETCH_BOARD_COMMENTS, {
+  const { data, loading, error, refetch, fetchMore } = useQuery(FETCH_BOARD_COMMENTS, {
     variables: { boardId: props.boardId, page: 1 },
     fetchPolicy: "network-only",
     onCompleted: (data) => {

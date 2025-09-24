@@ -1,10 +1,20 @@
 "use client";
 
 import { useEffect, useState, useMemo } from "react";
-import { useMutation, useQuery, ApolloError } from "@apollo/client";
+import { useMutation, useQuery, ApolloError, gql } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { CreateBoardDocument, UpdateBoardDocument, FetchBoardForEditDocument } from "@/commons/graphql/graphql";
+import { FETCH_BOARD_DETAIL } from "../boards-detail/detail/queries";
 import type { BoardsWriteProps, ErrorsState, UpdateBoardInput } from "./types";
+
+// 파일 업로드 GraphQL 쿼리
+const UPLOAD_FILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      url
+    }
+  }
+`;
 
 interface ModalState {
   isOpen: boolean;
@@ -20,6 +30,7 @@ export function useBoardsWrite(props: BoardsWriteProps) {
 
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
+  const [uploadFile] = useMutation(UPLOAD_FILE);
 
   const { data, loading, error } = useQuery(FetchBoardForEditDocument, {
     variables: { boardId: props.boardId as string },
@@ -38,7 +49,7 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     address: "",
     addressDetail: "",
   });
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<string[]>(["", "", ""]);
   const [isPostcodeModalOpen, setIsPostcodeModalOpen] = useState(false);
   const [errors, setErrors] = useState<ErrorsState>({
     writer: "",
@@ -70,14 +81,18 @@ export function useBoardsWrite(props: BoardsWriteProps) {
         address: boardData.boardAddress?.address ?? "",
         addressDetail: boardData.boardAddress?.addressDetail ?? "",
       });
-      setImages(boardData.images ?? []);
+      setImages(boardData.images ?? ["", "", ""]);
     }
   }, [props.isEdit, data]);
 
-  const isFormValid = useMemo(
-    () => formData.writer.trim() && password.trim() && formData.title.trim() && formData.contents.trim(),
-    [formData, password]
-  );
+  const isFormValid = useMemo(() => {
+    // 수정 모드에서는 비밀번호 검증을 제외
+    if (props.isEdit) {
+      return formData.writer.trim() && formData.title.trim() && formData.contents.trim();
+    }
+    // 새 게시글 작성 모드에서는 모든 필드 검증
+    return formData.writer.trim() && password.trim() && formData.title.trim() && formData.contents.trim();
+  }, [formData, password, props.isEdit]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -221,7 +236,7 @@ export function useBoardsWrite(props: BoardsWriteProps) {
           address: boardAddress.address || "",
           addressDetail: boardAddress.addressDetail || "",
         },
-        images: images || [""],
+        images: images.filter(img => img !== ""),
       };
 
       const result = await createBoard({
@@ -257,17 +272,47 @@ export function useBoardsWrite(props: BoardsWriteProps) {
           addressDetail: boardAddress.addressDetail,
         };
       }
-      if (JSON.stringify(images) !== JSON.stringify(originalData?.images)) {
-        updateBoardInput.images = images;
+      // 이미지 배열 비교 - 빈 문자열 제거 후 비교
+      const filteredImages = images.filter(img => img !== "");
+      const originalImages = originalData?.images?.filter(img => img !== "") || [];
+      
+      console.log("현재 이미지 배열:", images);
+      console.log("필터링된 이미지 배열:", filteredImages);
+      console.log("원본 이미지 배열:", originalData?.images);
+      console.log("필터링된 원본 이미지 배열:", originalImages);
+      
+      if (JSON.stringify(filteredImages) !== JSON.stringify(originalImages)) {
+        updateBoardInput.images = filteredImages;
+        console.log("이미지 변경 감지됨, 업데이트할 이미지:", filteredImages);
       }
 
-      await updateBoard({
+      // 변경사항이 있는지 확인
+      if (Object.keys(updateBoardInput).length === 0) {
+        showAlert("변경된 내용이 없습니다.");
+        return;
+      }
+
+      console.log("updateBoard API 호출 전 - updateBoardInput:", updateBoardInput);
+      
+      const result = await updateBoard({
         variables: {
           boardId: props.boardId as string,
           password: myPassword,
           updateBoardInput,
         },
+        refetchQueries: [
+          { 
+            query: FetchBoardForEditDocument, 
+            variables: { boardId: props.boardId as string } 
+          },
+          { 
+            query: FETCH_BOARD_DETAIL, 
+            variables: { boardId: props.boardId as string } 
+          }
+        ],
       });
+      
+      console.log("updateBoard API 호출 후 - result:", result);
       showAlert("수정 완료!", `/boards/${props.boardId}`);
     } catch (error) {
       const apolloError = error as ApolloError;
@@ -292,6 +337,7 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     youtubeUrl,
     boardAddress,
     images,
+    setImages,
     errors,
     handleInputChange,
     onChangePassword,
@@ -312,5 +358,6 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     onClickSubmit,
     onClickUpdate,
     onClickCancel,
+    uploadFile,
   };
 }
