@@ -1,8 +1,7 @@
 import { ApolloError, useQuery } from "@apollo/client";
 import { FetchBoardDocument, FetchBoardQuery, FetchBoardQueryVariables } from "../../gql/graphql";
-import { IUseFetchBoard } from "../type";
 
-const useFetchBoard = (props: IUseFetchBoard) => {
+const useFetchBoard = (boardId: string) => {
     let getData
     try {
         const { data, loading, error, refetch } = useQuery<
@@ -10,7 +9,7 @@ const useFetchBoard = (props: IUseFetchBoard) => {
             FetchBoardQueryVariables
         >(FetchBoardDocument, {
             variables: {
-                boardId: String(props.boardId) 
+                boardId: String(boardId) 
             },
             fetchPolicy: "cache-and-network",
         })

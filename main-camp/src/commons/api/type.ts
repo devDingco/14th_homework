@@ -13,7 +13,3 @@ export interface IUseFetchBoardComments {
     page?: number
     boardId: string | string[]
 }
-
-export interface IUseFetchBoard {
-    boardId: string | string[]
-}

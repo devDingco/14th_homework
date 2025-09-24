@@ -19,7 +19,7 @@ const BoardsDetailPage = () => {
     const param = useParams()
     const [boardDetailData, setBoardDetailData] = useState<IBoardDetailData>()
 
-    const { boardDetail, boardLoading, boardError, boardRefetch } = useFetchBoard({boardId: param.boardId})
+    const { boardDetail, boardLoading, boardError, boardRefetch } = useFetchBoard(String(param.boardId))
     const { boardComments, boardCommentsLoading, boardCommentsError, boardCommentsRefetch } = useFetchBoardComments({boardId: param.boardId})
 
     return (
