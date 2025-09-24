@@ -3,6 +3,8 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <>
+      <Link href={'/login'}>로그인 페이지</Link>
+      <Link href={'/register'}>회원가입 페이지</Link>
       <Link href={'/boards/new'}>보드 등록하기</Link>
       <Link href={'/boards'}>보드</Link>
       <Link href={'/openapis'}>openapi 활용 과제</Link>
