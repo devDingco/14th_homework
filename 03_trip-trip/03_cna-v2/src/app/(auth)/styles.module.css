@@ -1,0 +1,15 @@
+.authLayout {
+  max-width: 1920px;
+  display: flex;
+  background-color: aqua;
+}
+
+.pageLayout {
+  display: flex;
+  max-width: 400px;
+  padding: 244px 20px 40px 20px;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1 0 0;
+  align-self: stretch;
+}
