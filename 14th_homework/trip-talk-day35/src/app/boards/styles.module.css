@@ -1,0 +1,24 @@
+.top_of_list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; /* 세로 중앙 정렬 */
+
+  width: 100%;
+}
+.date_and_search {
+  display: flex;
+  gap: 12px; /* date picker와 searchbar 사이 간격 */
+  align-items: center;
+}
+.datePicker {
+  width: 289px;
+  height: 48px;
+  border-radius: 8px;
+  background: var(--gray-50, #f2f2f2);
+}
+.datePicker .ant-picker-input > input {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}

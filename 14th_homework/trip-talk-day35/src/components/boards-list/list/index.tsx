@@ -4,6 +4,7 @@ import styles from "./styles.module.css";
 import useBoardsPage from "./hooks";
 import { IFetchBoard } from "./queries";
 import { useState } from "react";
+import SearchBar from "../search";
 
 export default function BoardsListPage(props) {
   const { onClickDeleteBoard, router } = useBoardsPage();
@@ -17,7 +18,19 @@ export default function BoardsListPage(props) {
         onClick={() => router.push(`../boards/${el._id}`)}
       >
         <div className={styles.listNumber}>{index}</div>
-        <div className={styles.listTitle}>{el.title}</div>
+        <div className={styles.listTitle}>
+          {el.title
+            .replaceAll(props.keyword, `!@#${props.keyword}!@#`)
+            .split("!@#")
+            .map((el, index) => (
+              <span
+                key={`${el}_${index}`}
+                style={{ color: el === props.keyword ? "red" : "black" }}
+              >
+                {el}
+              </span>
+            ))}
+        </div>
         <div className={styles.listWriter}>{el.writer}</div>
         <div className={styles.listDate}>{date}</div>
         <Image
@@ -34,14 +47,16 @@ export default function BoardsListPage(props) {
   });
 
   return (
-    <div className={styles.listAll}>
-      <div className={styles.listHeader}>
-        <div className={styles.listNumber}>번호</div>
-        <div className={styles.listTitle}>제목</div>
-        <div className={styles.listWriter}>작성자</div>
-        <div className={styles.listDate}>날짜</div>
+    <>
+      <div className={styles.listAll}>
+        <div className={styles.listHeader}>
+          <div className={styles.listNumber}>번호</div>
+          <div className={styles.listTitle}>제목</div>
+          <div className={styles.listWriter}>작성자</div>
+          <div className={styles.listDate}>날짜</div>
+        </div>
+        {boards}
       </div>
-      {boards}
-    </div>
+    </>
   );
 }

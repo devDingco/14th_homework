@@ -10,8 +10,15 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 
 import HeartBrokenOutlinedIcon from "@mui/icons-material/HeartBrokenOutlined";
 const BoardDetail = () => {
-  const { onClickMove, handleLike, handleDislike, likes, dislikes, data } =
-    useBoardDetail();
+  const {
+    onClickMove,
+    onClickMoveList,
+    handleLike,
+    handleDislike,
+    likes,
+    dislikes,
+    data,
+  } = useBoardDetail();
   const date = data?.fetchBoard?.createdAt
     ? new Date(data.fetchBoard.createdAt).toISOString().split("T")[0]
     : "";
@@ -87,6 +94,7 @@ const BoardDetail = () => {
           src={"/images/목록버튼.png"}
           width={105}
           height={40}
+          onClick={onClickMoveList}
           alt="목록버튼"
         />
         <Image

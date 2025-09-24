@@ -18,14 +18,24 @@ const useBoardDetail = () => {
   const onClickMove = () => {
     router.push(`/boards/${data?.fetchBoard._id}/edit`);
   };
-
+  const onClickMoveList = () => {
+    router.push("/boards");
+  };
   const handleLike = () => {
     setLikes(likes + 1);
   };
   const handleDislike = () => {
     setDislikes(dislikes + 1);
   };
-  return { onClickMove, handleLike, handleDislike, likes, dislikes, data };
+  return {
+    onClickMove,
+    onClickMoveList,
+    handleLike,
+    handleDislike,
+    likes,
+    dislikes,
+    data,
+  };
 };
 
 export default useBoardDetail;
