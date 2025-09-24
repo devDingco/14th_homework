@@ -76,7 +76,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0px 45px 0px;
+  padding: 10px 40px 45px 40px; /* 좌우 40px씩 여백 추가 */
   background-color: #ffffff;
   border-bottom: none;
 }
@@ -117,17 +117,46 @@ body {
   align-items: center;
 }
 
-.user-profile img {
+.user-avatar {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  margin-left: 12px;
+  object-fit: cover;
 }
 
-.user-profile span {
-  color: #555;
-  font-size: 14px;
+/* 로그인 버튼 스타일 */
+.login-section {
+  display: flex;
+  align-items: center;
 }
+
+.login-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.login-button:hover {
+  background-color: #333;
+}
+
+.login-arrow {
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.login-button:hover .login-arrow {
+  transform: translateX(2px);
+}
+
 
 /* 폼 그룹 - 입력 필드 사이의 간격 */
 .form-group {
