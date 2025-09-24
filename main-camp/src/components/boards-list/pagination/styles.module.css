@@ -15,7 +15,7 @@
 }
 
 .pageList {
-    width: 224px;
+    min-width: 224px;
     height: 32px;
     gap: 16px;
     opacity: 1;
@@ -33,6 +33,14 @@
     border-radius: 8px;
     padding: 10px;
     cursor: pointer;
+}
+
+.selected_li {
+    background: rgba(242, 242, 242, 1);
+}
+
+.selected_btn {
+    color: rgba(0, 0, 0, 1);
 }
 
 /* .pageList > li > p {
