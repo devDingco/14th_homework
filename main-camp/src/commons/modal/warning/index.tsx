@@ -2,7 +2,6 @@
 
 import { Modal } from 'antd'
 import { useIsModal } from '@/commons/provider/isModalProvider';
-import { useParams, usePathname, useRouter } from 'next/navigation';
 
 const WarningModal = () => {
     // const router = useRouter()
