@@ -51,8 +51,9 @@
   border-color: #E4E4E4;
 }
 .메인-사진섹션{
-  width: 40rem;
-  height: 53.1rem;
+  /* width: 40rem;
+  height: 53.1rem; */
+  
 }
 .메인-내용섹션{
   width: 100%;

@@ -13,8 +13,7 @@ import { LikeOutlined } from '@ant-design/icons';
 
 
 export default function BoardsDetail() {
-  const {onClickMove,onclickMoveList,data,videoId} = useBoardsDetail();
-  
+  const {onClickMove,onclickMoveList,data,videoId,imageUrls} = useBoardsDetail();
 
   return (
     <div className={styles.바디}>
@@ -57,12 +56,17 @@ export default function BoardsDetail() {
             </div>
           </section>
           <section className={styles['메인-사진섹션']}>
-            <Image
-        src={"/images/사진샘플.png"}
-        alt='샘플'
-        width={400}
-        height={531}
-      />
+            {[0,1,2].map((_, index)=> {
+              return (
+                imageUrls[index] && <Image
+                  key={index}
+                  src={imageUrls[index] || ""}
+                  alt='샘플'
+                  width={400}
+                  height={531}
+                />
+              )
+            })}
           </section>
           <section className={styles['메인-내용섹션']}>
           <div>

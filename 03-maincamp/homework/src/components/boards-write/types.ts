@@ -14,6 +14,7 @@ export interface IMyvariables {
         address?: string
         addressDetail?: string
       }
+      images?: string[]
     }
 
   }
