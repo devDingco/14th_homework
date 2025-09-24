@@ -54,7 +54,7 @@
 .inputs .inputWrapper input:focus {
   border: 1px solid var(--Gray-Gray-200, #9a9a9a);
 }
-.inputs .inputWrapper .error {
+.inputs .error input {
   border: 1px solid var(--red, #f66a6a);
 }
 .inputs p {
