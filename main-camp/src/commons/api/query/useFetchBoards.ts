@@ -13,7 +13,7 @@ const useFetchBoards = (props?: IUseFetchBoards) => {
             variables: {
                 page: props?.page ?? 1
             },
-            fetchPolicy: "cache-only",
+            fetchPolicy: "cache-and-network",
         })
         getData = { data, loading, error, refetch } 
     } catch(e: unknown) {

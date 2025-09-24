@@ -2,7 +2,7 @@
 
 import styles from './styles.module.css'
 import useBoardsListPage from './hook'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { FetchBoardsQuery } from '@/commons/gql/graphql'
 import ListPagination from '../pagination'
 
@@ -17,14 +17,7 @@ const BoardsList = (props: IBoardsList) => {
     const {
         goDetailHandler,
         onDeleteHanlder,
-        getBoardsList
-    } = useBoardsListPage({setBoardsData})
-
-    useEffect(()=>{
-        (async () => {
-            await getBoardsList()
-        })()
-    },[])
+    } = useBoardsListPage()
 
     return (
         <div className={`${styles.board_list_frame} flex_column flex_align_items_center flex_justi_center`}>

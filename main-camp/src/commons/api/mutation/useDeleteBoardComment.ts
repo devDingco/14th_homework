@@ -3,7 +3,7 @@
 import { ApolloError, useMutation } from "@apollo/client"
 import { DeleteBoardCommentDocument, DeleteBoardCommentMutation, DeleteBoardCommentMutationVariables, FetchBoardCommentsDocument } from "../../gql/graphql"
 
-const useDeleteBoard = () => {
+const useDeleteBoardComment = () => {
     const [deleteBoardCommentAPI] = useMutation<
         DeleteBoardCommentMutation,
         DeleteBoardCommentMutationVariables
@@ -44,4 +44,4 @@ const useDeleteBoard = () => {
     }
 }
 
-export default useDeleteBoard
+export default useDeleteBoardComment
