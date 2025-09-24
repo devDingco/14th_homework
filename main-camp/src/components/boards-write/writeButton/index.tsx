@@ -5,8 +5,11 @@ import { IWriteButtonProps } from './type'
 import useWriteButton from './hook'
 import { useEffect } from 'react'
 import { useIsEdit } from '@/commons/provider/isEditProvider'
+import { useRouter } from 'next/navigation'
 
 const WriteButton = (props: IWriteButtonProps) => {
+    const router = useRouter()
+
     const {
         isActive,
         activeButton,
@@ -22,7 +25,7 @@ const WriteButton = (props: IWriteButtonProps) => {
     switch (props.p) {
         case "취소": {
             btnComponent =
-            <button className={`${styles.write_cancel_btn} sb_18_24`} style={{ whiteSpace: "nowrap" }}>{props.p}</button>
+            <button className={`${styles.write_cancel_btn} sb_18_24`} style={{ whiteSpace: "nowrap" }} onClick={() => router.back()}>{props.p}</button>
             break
         }
         case "등록하기": {

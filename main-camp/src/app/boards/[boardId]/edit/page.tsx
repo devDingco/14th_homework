@@ -6,16 +6,13 @@ import { useEffect, useState } from "react"
 import useFetchBoard from "@/commons/api/query/useFetchBoard"
 import { useParams } from "next/navigation"
 import WarningModal from "@/commons/modal/warning"
-import { useIsModal } from "@/commons/provider/isModalProvider"
 
 const BoardsEditPage = () => {
     const param = useParams()
     const { setIsEdit, isEdit, postData, setPostData, updatingBoardData, setUpdatingBoardData} = useIsEdit()
-    const { setIsWarningModal } = useIsModal()
     const { boardDetail } = useFetchBoard(String(param.boardId))
     
     useEffect(() => {
-        isEdit ? null : setIsWarningModal({open: true, value: '잘못된 접근입니다! 게시글에서 수정버튼을 눌러주세요!'})
         return () => {
             setIsEdit(false)
             setPostData({
