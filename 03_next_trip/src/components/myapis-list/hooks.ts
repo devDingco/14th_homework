@@ -17,7 +17,8 @@ export const useGetPosts = () => {
       setHasMore(false);
       return;
     }
-    setPosts((prev) => [...prev, ...res]);
+    // setPosts((prev) => [...prev, ...res]);
+    setPosts(res);
   };
 
   const loadMore = () => {

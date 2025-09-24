@@ -1,7 +1,7 @@
 const navList = [
-  { name: '트립토크', link: '/trip-talk' },
+  { name: '트립토크', link: '/triptalk' },
   { name: '숙박권 구매', link: '/purchase' },
-  { name: '마이 페이지', link: '/my-page' },
+  { name: '마이 페이지', link: '/mypage' },
 ];
 
 import Image from 'next/image';

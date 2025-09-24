@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const NavItems = [
   {
-    href: '/',
+    href: '/triptalk',
     icon: <MdChat />,
     label: '트립토크',
   },
@@ -25,7 +25,7 @@ const NavItems = [
   },
 ];
 
-const activePath = '/';
+const activePath = '/triptalk';
 
 export default function BottomNavBar() {
   return (

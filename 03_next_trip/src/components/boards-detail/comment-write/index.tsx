@@ -90,9 +90,6 @@ export default function CommentForm({
     }
   };
 
-  console.log(isEdit);
-  console.log(comment);
-
   return (
     <div className='flex w-full flex-col items-start gap-10'>
       <div className='flex w-full flex-col items-start gap-2'>

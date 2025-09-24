@@ -2,19 +2,20 @@
 
 import { Ioutline_delete } from '@/assets/icons/icons';
 import { type TBoard } from '@/types';
-import { formatDate } from '@/utils/utils';
+import { formatDate } from '@/utils/formatDate';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useMutation } from '@apollo/client';
 import { DELETE_BOARD, FETCH_BOARDS } from '@/apis/graphql/board';
 import CustomAlert from '../Modal/CustomAlert';
 
-export default function Board({
+export default function BoardItem({
   _id,
   writer,
   title,
   updatedAt,
-}: Partial<TBoard>) {
+  keyword,
+}: Partial<TBoard> & { keyword: string }) {
   const [deleteBoard] = useMutation(DELETE_BOARD);
   const onPreventDefault = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -35,13 +36,36 @@ export default function Board({
         ],
         awaitRefetchQueries: true,
       });
-      console.log(result);
+
+      console.log(result)
       // alert('삭제가 완료되었습니다!');
       // CustomAlert('삭제가 완료되었습니다!');
       // CustomAlert();
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
+  };
+
+  const highlightKeyword = (text: string) => {
+    if (!keyword) return text;
+
+    const regex = new RegExp(`(${keyword})`, 'gi');
+    // console.log(regex)
+    const parts = text.split(regex);
+    // console.log(parts)
+    return (
+      <>
+        {parts.map((part, index) =>
+          part.toLowerCase() === keyword.toLowerCase() ? (
+            <span key={index} className='font-bold text-red-500'>
+              {part}
+            </span>
+          ) : (
+            part
+          )
+        )}
+      </>
+    );
   };
 
   return (
@@ -54,7 +78,7 @@ export default function Board({
         </div>
         <div className='flex flex-1 flex-wrap content-center items-center justify-start gap-2'>
           <span className='w-4 flex-1 justify-start text-xs font-medium leading-tight text-zinc-900'>
-            {title}
+            {highlightKeyword(title || '제목없음')}
           </span>
         </div>
         <div className='flex w-12 items-center justify-center gap-2.5'>

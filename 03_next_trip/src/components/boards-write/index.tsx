@@ -1,31 +1,31 @@
+'use client';
+
 import React, { useState, type ChangeEvent, type FormEvent } from 'react';
-import ImageUpload from '@/components/ImageUpload';
+import ImageUpload from './ImageUpload';
 import InputBox from '@/components/common/InputBox';
 import TextAreaBox from '@/components/common/TextAreaBox';
 import { FETCH_BOARD, UPDATE_BOARD } from '@/apis/graphql/board';
 import { useMutation, useQuery } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
-import { getInputPassword } from '@/utils/utils';
+import { getInputPassword } from '@/utils/getInputPassword';
 import {
   CreateBoardDocument,
   CreateBoardMutation,
   CreateBoardMutationVariables,
 } from '@/types/gql/graphql';
-// import CustomModal from '../Modal/CustomModal';
 import PostCodeModal from '../Modal/PostCodeModal';
-// import { getInputPassword } from '@/utils/utils';
-// import { Board } from '@/types/gql/graphql';
+import { TAddress, TData } from './types';
 
-type TFormProps = {
-  isEdit: boolean;
-};
+// import CustomModal from '../Modal/CustomModal';
+// import { Board } from '@/types/gql/graphql';
 
 const initBoardFormData = {
   writer: '',
   password: '',
   title: '',
   contents: '',
-  youtubeUrl: 'https://www.youtube.com/watch?v=c2Tr4029H9w',
+  images: ['', '', ''],
+  youtubeUrl: '',
   boardAddress: {
     zipcode: '',
     address: '',
@@ -33,20 +33,17 @@ const initBoardFormData = {
   },
 };
 
-type TAddress = {
-  zipcode: string;
-  address: string;
+type TFormProps = {
+  isEdit: boolean;
 };
-
 export default function BoardsWrite({ isEdit }: TFormProps) {
-  const [boardFormData, setBoardFormData] = useState(initBoardFormData);
   const router = useRouter();
+  const [boardFormData, setBoardFormData] = useState(initBoardFormData);
   const [contents, setContents] = useState<string>('');
-  const [youtubeUrl, setYoutubeUrl] = useState<string>();
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const { boardId } = useParams();
 
-  const { data } = useQuery(FETCH_BOARD, {
+  const { data } = useQuery<TData>(FETCH_BOARD, {
     variables: {
       boardId: boardId,
     },
@@ -56,6 +53,33 @@ export default function BoardsWrite({ isEdit }: TFormProps) {
     setBoardFormData({
       ...boardFormData,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const onChangeImages = (idx: number, img: string) => {
+    setBoardFormData((prev) => {
+      const sortedImages = prev.images.map((el, index) =>
+        index === idx ? img : el,
+      );
+      sortedImages.sort((a, b) => b.localeCompare(a));
+
+      return {
+        ...prev,
+        images: sortedImages,
+      };
+    });
+  };
+  const onRemoveImages = (idx: number) => {
+    setBoardFormData((prev) => {
+      const sortedImages = prev.images.map((el, index) =>
+        index === idx ? '' : el,
+      );
+      sortedImages.sort((a, b) => b.localeCompare(a));
+
+      return {
+        ...prev,
+        images: sortedImages,
+      };
     });
   };
 
@@ -97,14 +121,10 @@ export default function BoardsWrite({ isEdit }: TFormProps) {
   ) => {
     setContents(e.target.value);
   };
-  const onChangeYoutubeUrl = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setYoutubeUrl(e.target.value);
-  };
 
   const onEditForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    e.stopPropagation();
 
     try {
       const inputPassword = getInputPassword();
@@ -112,18 +132,7 @@ export default function BoardsWrite({ isEdit }: TFormProps) {
         variables: {
           boardId: boardId,
           password: inputPassword,
-          updateBoardInput: {
-            // ...data,
-            // title,
-            // contents,
-            // password,
-            // writer,
-            // youtubeUrl,
-            // images: [
-            //   'codecamp-file-storage/2024/1/10/IMG_9472.jpeg',
-            //   'codecamp-file-storage/2024/10/25/donggle1.jpeg',
-            // ],
-          },
+          updateBoardInput: boardFormData,
         },
         refetchQueries: [
           {
@@ -140,42 +149,27 @@ export default function BoardsWrite({ isEdit }: TFormProps) {
         alert(error.message);
       }
     } finally {
-      // setWriter('');
-      // setPassword('');
-      // setTitle('');
+      setBoardFormData(initBoardFormData);
       setContents('');
-      setYoutubeUrl('');
     }
+  };
+  const onInputDetailAddress = (e: ChangeEvent<HTMLInputElement>) => {
+    setBoardFormData({
+      ...boardFormData,
+      boardAddress: {
+        ...boardFormData.boardAddress,
+        addressDetail: e.target.value,
+      },
+    });
   };
 
   const onSubmitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const data = new FormData(e.target as HTMLFormElement).get('writer');
-    // const newPost = {
-    //   writer,
-    //   password,
-    //   title,
-    //   contents,
-    //   youtubeUrl,
-    // };
-
     try {
       const result = await createBoard({
         variables: {
           createBoardInput: {
-            // ...newPost,
-            title: boardFormData.title,
-            contents,
-            password: boardFormData.password,
-            writer: boardFormData.writer,
-            youtubeUrl,
-            images: [
-              'codecamp-file-storage/2024/1/10/IMG_9472.jpeg',
-              'codecamp-file-storage/2024/10/25/donggle1.jpeg',
-            ],
-            boardAddress: {
-              ...boardFormData.boardAddress,
-            },
+            ...boardFormData,
           },
         },
       });
@@ -266,6 +260,7 @@ export default function BoardsWrite({ isEdit }: TFormProps) {
                 className='w-20 flex-1 gap-2 rounded-lg px-4 py-3 outline outline-1 outline-gray-200'
                 placeholder='01234'
                 value={boardFormData.boardAddress.zipcode}
+                disabled
               />
 
               <PostCodeModal
@@ -280,6 +275,7 @@ export default function BoardsWrite({ isEdit }: TFormProps) {
               className='w-full flex-1 gap-2 rounded-lg px-4 py-3 outline outline-1 outline-gray-200'
               placeholder='주소를 입력해 주세요.'
               value={boardFormData.boardAddress.address}
+              disabled
             />
             <input
               id='addressdetail'
@@ -287,7 +283,7 @@ export default function BoardsWrite({ isEdit }: TFormProps) {
               type='text'
               className='w-full flex-1 gap-2 rounded-lg px-4 py-3 outline outline-1 outline-gray-200'
               placeholder='상세주소'
-              // onChange={onInputAddress}
+              onChange={onInputDetailAddress}
               value={boardFormData.boardAddress.addressDetail}
             />
             {/* </div> */}
@@ -297,7 +293,8 @@ export default function BoardsWrite({ isEdit }: TFormProps) {
               name='youtubeUrl'
               type='text'
               placeholder='링크를 입력해 주세요.'
-              onChange={onChangeYoutubeUrl}
+              onInput={onChangeBoardFormData}
+              onChange={onChangeBoardFormData}
               defaultValue={data?.fetchBoard.youtubeUrl}
               required={false}
             />
@@ -306,16 +303,46 @@ export default function BoardsWrite({ isEdit }: TFormProps) {
               <label className='flex w-full gap-1' htmlFor='photo'>
                 <span>사진 첨부</span>
               </label>
-              <div className='flex gap-4'>
-                <ImageUpload />
-                <ImageUpload />
-              </div>
+              {isEdit && (
+                <div className='flex gap-4'>
+                  {data?.fetchBoard.images.map((image, index) => {
+                    return (
+                      <ImageUpload
+                        key={index}
+                        image={image}
+                        idx={index}
+                        onChangeImages={onChangeImages}
+                        onRemoveImages={onRemoveImages}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+              {!isEdit && (
+                <div className='flex gap-4'>
+                  {boardFormData.images.map((image, index) => {
+                    return (
+                      <ImageUpload
+                        key={index}
+                        image={image}
+                        idx={index}
+                        onChangeImages={onChangeImages}
+                        onRemoveImages={onRemoveImages}
+                      />
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         </div>
         <div className='mb-20 flex w-full justify-end py-6'>
           <div className={'flex h-10 w-full gap-2'}>
-            <button className='border-1 flex w-full items-center justify-center rounded-xl border border-gray-300 px-4 py-3'>
+            <button
+              type='button'
+              className='border-1 flex w-full items-center justify-center rounded-xl border border-gray-300 px-4 py-3'
+              onClick={() => router.back()}
+            >
               취소
             </button>
             <button
