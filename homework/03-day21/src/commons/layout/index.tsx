@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation"
 import BoardsBanner from "./banner"
 import Navigation from "./navigation"
+import path from "path"
 
 interface ILayoutProps {
     children: React.ReactNode
@@ -21,7 +22,9 @@ export default function Layout({children}: ILayoutProps) {
     const isHiddenTop =
         pathname === "/boards/new" || // 등록하기
         pathname.endsWith("/edit") ||
-        pathname === "/openapis/new";    // 수정하기 (모든 boardId/edit 에 매칭)
+        pathname === "/openapis/new" ||
+        pathname === "/login" ||
+        pathname === "/signup";    // 수정하기 (모든 boardId/edit 에 매칭)
 
     return(
         <>  
