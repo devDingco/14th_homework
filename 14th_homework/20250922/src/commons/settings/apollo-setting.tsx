@@ -1,7 +1,7 @@
 "use client";
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import { createUploadLink } from 'apollo-upload-client';
+import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 import { setContext } from '@apollo/client/link/context';
 import { authManager } from '@/lib/auth';
 import React from 'react';

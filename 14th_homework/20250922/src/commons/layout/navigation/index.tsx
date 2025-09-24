@@ -8,6 +8,7 @@ import { NavigationProps, User } from "./types";
 import { FETCH_USER_LOGGED_IN } from "./queries";
 import { authManager } from "@/lib/auth";
 import { FetchUserLoggedInDocument } from "@/commons/graphql/graphql";
+import styles from "@/styles/header.module.css";
 
 export default function Navigation(props: NavigationProps) {
   const { data, loading, error } = useQuery(FETCH_USER_LOGGED_IN, {
@@ -30,10 +31,10 @@ export default function Navigation(props: NavigationProps) {
   });
 
   return (
-    <header className="header">
-      <div className="header-logo-and-nav">
-        <Image src="/images/logo_area.png" alt="Triptalk Logo" width={100} height={40} className="header-logo" />
-        <nav className="header-nav">
+    <header className={styles.header}>
+      <div className={styles.headerLogoAndNav}>
+        <Image src="/images/logo_area.png" alt="Triptalk Logo" width={100} height={40} className={styles.headerLogo} />
+        <nav className={styles.headerNav}>
           <a href="#">트립토크</a>
           <a href="#">숙박권 구매</a>
           <a href="#">마이 페이지</a>
@@ -42,21 +43,21 @@ export default function Navigation(props: NavigationProps) {
       
       {isLoggedIn && user ? (
         // 로그인 상태: 프로필 사진만 표시 (기존과 동일)
-        <div className="user-profile">
+        <div className={styles.userProfile}>
           <Image 
             src={user.picture || "/images/profile_basic.png"} 
             alt="User Profile" 
             width={36} 
             height={36} 
-            className="user-avatar"
+            className={styles.userAvatar}
           />
         </div>
       ) : (
         // 로그아웃 상태: 로그인 버튼 표시
-        <div className="login-section">
-          <Link href="/auth/login" className="login-button">
+        <div className={styles.loginSection}>
+          <Link href="/auth/login" className={styles.loginButton}>
             로그인
-            <span className="login-arrow">→</span>
+            <span className={styles.loginArrow}>→</span>
           </Link>
         </div>
       )}

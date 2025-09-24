@@ -5,6 +5,9 @@ import DaumPostcode from "react-daum-postcode";
 import type { BoardsWriteProps } from "./types";
 import { useBoardsWrite } from "./hook";
 import styles from "./styles.module.css";
+import formStyles from "@/styles/form.module.css";
+import fileUploadStyles from "@/styles/fileUpload.module.css";
+import utilitiesStyles from "@/styles/utilities.module.css";
 import { Modal, Box, Typography, Button, TextField } from "@mui/material";
 import { checkValidationFile } from "@/commons/libraries/image-validation";
 
@@ -102,106 +105,106 @@ export default function BoardsWrite(props: BoardsWriteProps) {
   const isAllFormValid = isFormValid;
 
   return (
-    <div className="content-container">
-      <h1 className="post-title">{props.isEdit ? "게시글 수정" : "게시글 작성"}</h1>
+    <div className={formStyles.contentContainer}>
+      <h1 className={formStyles.postTitle}>{props.isEdit ? "게시글 수정" : "게시글 작성"}</h1>
 
-      <div className="form-group first-group form-row-group">
-        <div className="flex-1">
-          <label className="label-required">작성자</label>
+      <div className={`${formStyles.formGroup} ${formStyles.firstGroup} ${formStyles.formRowGroup}`}>
+        <div className={utilitiesStyles.flex1}>
+          <label className={formStyles.labelRequired}>작성자</label>
           <input
             type="text"
             name="writer"
-            className="input-field"
+            className={formStyles.inputField}
             placeholder="작성자를 입력해 주세요."
             value={formData.writer}
             onChange={handleInputChange}
             disabled={props.isEdit}
           />
-          {errors.writer && <div className="error-message">{errors.writer}</div>}
+          {errors.writer && <div className={formStyles.errorMessage}>{errors.writer}</div>}
         </div>
-        <div className="flex-1">
-          <label className="label-required">비밀번호</label>
+        <div className={utilitiesStyles.flex1}>
+          <label className={formStyles.labelRequired}>비밀번호</label>
           <input
             type="password"
-            className="input-field"
+            className={formStyles.inputField}
             placeholder="비밀번호를 입력해 주세요."
             value={password}
             onChange={onChangePassword}
             disabled={props.isEdit}
           />
-          {errors.password && <div className="error-message">{errors.password}</div>}
+          {errors.password && <div className={formStyles.errorMessage}>{errors.password}</div>}
         </div>
       </div>
 
-      <div className="form-group">
-        <label className="label-required">제목</label>
+      <div className={formStyles.formGroup}>
+        <label className={formStyles.labelRequired}>제목</label>
         <input
           type="text"
           name="title"
-          className="input-field"
+          className={formStyles.inputField}
           placeholder="제목을 입력해 주세요."
           value={formData.title}
           onChange={handleInputChange}
         />
-        {errors.title && <div className="error-message">{errors.title}</div>}
+        {errors.title && <div className={formStyles.errorMessage}>{errors.title}</div>}
       </div>
 
-      <div className="form-group no-border">
-        <label className="label-required">내용</label>
+      <div className={`${formStyles.formGroup} ${utilitiesStyles.noBorder}`}>
+        <label className={formStyles.labelRequired}>내용</label>
         <textarea
           name="contents"
-          className="textarea-field"
+          className={formStyles.textareaField}
           placeholder="내용을 입력해 주세요."
           value={formData.contents}
           onChange={handleInputChange}
         ></textarea>
-        {errors.contents && <div className="error-message">{errors.contents}</div>}
+        {errors.contents && <div className={formStyles.errorMessage}>{errors.contents}</div>}
       </div>
 
-      <div className="form-group">
+      <div className={formStyles.formGroup}>
         <label>주소</label>
-        <div className="flex-gap-8 mb-8">
+        <div className={`${utilitiesStyles.flexGap8} ${utilitiesStyles.mb8}`}>
           <input
             type="text"
-            className="input-field w-120"
+            className={`${formStyles.inputField} ${utilitiesStyles.w120}`}
             placeholder="01234"
             value={boardAddress.zipcode}
             onChange={onChangeBoardAddressZipcode}
           />
-          <button type="button" className="button secondary" onClick={onClickPostcodeSearch}>
+          <button type="button" className={`${formStyles.button} ${formStyles.secondary}`} onClick={onClickPostcodeSearch}>
             우편번호 검색
           </button>
         </div>
         <input
           type="text"
-          className="input-field mb-8"
+          className={`${formStyles.inputField} ${utilitiesStyles.mb8}`}
           placeholder="주소를 입력해 주세요."
           value={boardAddress.address}
           onChange={onChangeBoardAddressAddress}
         />
         <input
           type="text"
-          className="input-field"
+          className={formStyles.inputField}
           placeholder="상세주소"
           value={boardAddress.addressDetail}
           onChange={onChangeBoardAddressAddressDetail}
         />
       </div>
 
-      <div className="form-group">
+      <div className={formStyles.formGroup}>
         <label>유튜브 링크</label>
         <input
           type="text"
-          className="input-field"
+          className={formStyles.inputField}
           placeholder="링크를 입력해 주세요."
           value={youtubeUrl}
           onChange={onChangeYoutubeUrl}
         />
       </div>
 
-      <div className="form-group">
+      <div className={formStyles.formGroup}>
         <label>사진 첨부</label>
-        <div className="file-upload-grid">
+        <div className={fileUploadStyles.fileUploadGrid}>
           {Array(3)
             .fill(null)
             .map((_, index) => {
@@ -209,7 +212,7 @@ export default function BoardsWrite(props: BoardsWriteProps) {
               return (
                 <div
                   key={index}
-                  className="file-upload-box"
+                  className={fileUploadStyles.fileUploadBox}
                   onClick={onClickImage(index)}
                   style={{
                     backgroundImage: imageUrl ? `url(${imageUrl.startsWith('http') ? imageUrl : `https://storage.googleapis.com/${imageUrl}`})` : "none",
@@ -257,12 +260,12 @@ export default function BoardsWrite(props: BoardsWriteProps) {
         </div>
       </div>
 
-      <div className="button-container">
-        <button className="button secondary" onClick={onClickCancel}>
+      <div className={formStyles.buttonContainer}>
+        <button className={`${formStyles.button} ${formStyles.secondary}`} onClick={onClickCancel}>
           취소
         </button>
         <button
-          className={`${!isAllFormValid ? styles.buttonDisabled : styles.buttonEnabled} button`}
+          className={`${!isAllFormValid ? styles.buttonDisabled : styles.buttonEnabled} ${formStyles.button}`}
           onClick={props.isEdit ? onClickUpdate : onClickSubmit}
           disabled={!isAllFormValid}
         >
@@ -308,18 +311,16 @@ export default function BoardsWrite(props: BoardsWriteProps) {
               onChange={onChangePromptInput}
             />
           )}
-          <div className={styles.buttonContainer} style={{ marginTop: "auto" }}>
+          <div className={formStyles.buttonContainer} style={{ marginTop: "auto" }}>
             {modalState.isPrompt && (
-              <Button onClick={handlePromptCancel} className="button secondary">
+              <Button onClick={handlePromptCancel} className={`${formStyles.button} ${formStyles.secondary}`}>
                 취소
               </Button>
             )}
             <Button
               onClick={modalState.isPrompt ? handlePromptConfirm : handleCloseModal}
-              className="button primary"
+              className={`${formStyles.button} ${formStyles.primary}`}
               style={{
-                backgroundColor: "#4B5563",
-                color: "#BDBDBD",
                 marginLeft: modalState.isPrompt ? "8px" : "0",
               }}
             >
