@@ -7,7 +7,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className={styles.authLayout}>
       <section className={styles.pageLayout}>{children}</section>
-      <section>
+      <section className={styles.imageLayout}>
         <Image src={AuthImage} alt={'로그인 메인 이미지'} width={1520} height={1080} />
       </section>
     </div>
