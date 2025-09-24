@@ -22,17 +22,7 @@ const BoardsDetail = (props: IBoardDetail) => {
         good: 24,
         bad: 12
     }
-
-    useEffect(()=>{
-        (async ()=>{
-            // console.log('디테일 컴포넌트 마운트 :', props.board)
-            // const getBoardData = await getBoardDetail()
-            // const getBoardComment = await props.getBoardComments()
-            // console.log('getBoardData :',getBoardData)
-            // setBoardDetailData({getBoard: props.board, getBoardComment: getBoardComment})
-        })()
-    },[])
-
+    
     const address: MenuProps['items'] = [
         {
           key: '1',

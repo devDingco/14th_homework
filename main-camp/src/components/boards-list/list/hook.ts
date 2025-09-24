@@ -9,9 +9,9 @@ const useBoardsListPage = () => {
     const router = useRouter()
     const { postDeleteBoard } = useDeleteBoard()
 
-    const onDeleteHanlder = (event: React.MouseEvent<HTMLImageElement>) => {
+    const onDeleteHanlder = async (event: React.MouseEvent<HTMLImageElement>) => {
         event.stopPropagation()
-        postDeleteBoard(String(event.currentTarget.dataset.key))
+        await postDeleteBoard(String(event.currentTarget.dataset.key))
     }
 
     const goDetailHandler = (event: React.MouseEvent<HTMLLIElement>) => {

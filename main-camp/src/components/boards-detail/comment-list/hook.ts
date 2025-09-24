@@ -18,12 +18,10 @@ const useBoardCommentList = () => {
 
     const onClickCommentDeleteHandler = (event: React.MouseEvent<HTMLImageElement>) => {
         postDeleteBoardComment(event, String(param.boardId))
-        // await props.getBoardComments()
     }
 
     const onClickCommentUpdateHandler = async (event: React.MouseEvent<HTMLImageElement>) => {
         await updateBoardComments(event)
-        // await props.getBoardComments()
     }
 
     return {
