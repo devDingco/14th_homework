@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation"
 import useDeleteBoard from "@/commons/api/mutation/useDeleteBoard"
+import { useIsEdit } from "@/commons/provider/isEditProvider"
 
 interface IUseBoardsListPage {
     setBoardsData: React.Dispatch<React.SetStateAction<any>>
@@ -7,6 +8,7 @@ interface IUseBoardsListPage {
 
 const useBoardsListPage = () => {
     const router = useRouter()
+    const { setIsEdit } = useIsEdit()
     const { postDeleteBoard } = useDeleteBoard()
 
     const onDeleteHanlder = async (event: React.MouseEvent<HTMLImageElement>) => {
@@ -15,6 +17,7 @@ const useBoardsListPage = () => {
     }
 
     const goDetailHandler = (event: React.MouseEvent<HTMLLIElement>) => {
+        setIsEdit(true)
         router.push(`/boards/${event.currentTarget.dataset.key}`)
     }
 
