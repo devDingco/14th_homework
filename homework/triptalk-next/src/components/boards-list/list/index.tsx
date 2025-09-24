@@ -1,12 +1,24 @@
+// 게시글 목록 컴포넌트
+
 'use client';
-//게시글 목록 페이지
+
 import Image from 'next/image';
 import styles from './page.module.css';
 import useBoardsList from './hooks';
 import AllModal from '@/components/all-modal';
 
-export default function BoardsList({ data }) {
-  const { onClickTitle, onClickDelete, modalOpen, modalMessage, closeModal } = useBoardsList();
+// TypeScript interface 정의
+interface BoardsListProps {
+  data: any; // 게시글 데이터 배열
+  keyword?: string; // 검색어 (선택적 props - ? 사용)
+}
+
+//  기본값 매개변수 (default parameter)
+export default function BoardsList({ data, keyword = '' }: BoardsListProps) {
+  //  커스텀 훅 사용법
+  // 커스텀 훅에서 여러 함수와 상태를 구조분해로 받아오기
+  const { onClickTitle, onClickDelete, modalOpen, modalMessage, closeModal } =
+    useBoardsList();
 
   return (
     <div className={styles.container}>
@@ -29,8 +41,8 @@ export default function BoardsList({ data }) {
         {/* 게시물 목록을 반복해서 표시 */}
         {data?.map((el, index: number) => {
           return (
-            <div 
-              key={el._id} 
+            <div
+              key={el._id}
               className={styles.postItem}
               onClick={() => onClickTitle(el._id)} // div 전체 클릭 시 상세 페이지로 이동
             >
@@ -39,7 +51,32 @@ export default function BoardsList({ data }) {
               <div className={styles.leftGroup}>
                 <span>{index + 1}</span> {/* 게시글 번호 */}
                 <span>
-                  {el.title} {/* 게시글 제목 */}
+                  {/*  조건부 렌더링 및 문자열 처리 (중요!) */}
+                  {keyword
+                    ? // 검색어가 있을 때: 하이라이트 적용
+                      el.title
+                        // 🎯 1단계: replaceAll() - 검색어를 구분자로 감싼
+                        .replaceAll(keyword, `#$%${keyword}#$%`)
+                        // 예시: "Hello World" -> "#$%Hello#$% World" (검색어가 "Hello"일 때)
+
+                        // 🎯 2단계: split() - 구분자로 문자열 나누기
+                        .split('#$%')
+                        // 예시: ["" , "Hello", " World"] 배열로 변환
+
+                        // 🎯 3단계: map() - 각 부분을 JSX로 변환
+                        .map((part, index) => (
+                          <span
+                            key={`${part}_${index}`} // React key props (중요!)
+                            // 🎯 조건부 스타일링: 검색어와 일치하면 빨간색
+                            style={{
+                              color: part === keyword ? 'red' : 'black',
+                            }}
+                          >
+                            {part} {/* 각 부분 텍스트 출력 */}
+                          </span>
+                        ))
+                    : // 검색어가 없을 때: 일반 제목 표시
+                      el.title}
                 </span>
               </div>
               {/* 오른쪽 부분: 작성자와 날짜 */}
@@ -67,11 +104,7 @@ export default function BoardsList({ data }) {
           );
         })}
       </div>
-      <AllModal
-        open={modalOpen}
-        message={modalMessage}
-        onClose={closeModal}
-      />
+      <AllModal open={modalOpen} message={modalMessage} onClose={closeModal} />
     </div>
   );
 }
