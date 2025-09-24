@@ -32,6 +32,11 @@ export default function BoardsWrite(props: IBoardWriteProps) {
         onChangeYoutubeUrl,
         onClickSubmit,
         onClickUpdate,
+        onClickImage,
+        onChangeFile,
+        onClickDeleteImage,  
+        imageUrls,
+        fileRef,
      } = useBoardsWrite({ isEdit: props.isEdit, data: props.data })
 
     return (
@@ -179,20 +184,64 @@ export default function BoardsWrite(props: IBoardWriteProps) {
             </div>
             <div className={styles.pictureEnrollRow}>
             {[...Array(3)].map((_, idx) => (
-                <div key={idx} className={styles.pictureEnrollButton}>
-                <img className={styles.iconImage} src="/images/add_icon.png" alt="추가아이콘" />
-                <div className={styles.pictureEnrollButtonText}>클릭해서 사진 업로드</div>
+                <div key={idx} className={styles.pictureEnrollWrapper}>
+                    <div 
+                        className={styles.pictureEnrollButton}
+                        onClick={() => onClickImage(idx)}
+                    >
+                        {imageUrls[idx] ? (
+                            <div className={styles.previewWrapper}>
+                                <img                         
+                                    className={styles.previewImage}
+                                    src={`https://storage.googleapis.com/${imageUrls[idx]!}`} 
+                                    alt={`미리보기 ${idx}`}
+                                />
+
+                                {/* 삭제 버튼 */}
+                                <img
+                                    className={styles.deleteButton}
+                                    src="/images/close.svg"
+                                    alt="삭제버튼"
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // 이미지 클릭 시 파일창 열리는 이벤트 막기
+                                        onClickDeleteImage(idx);
+                                    }}
+                                /> 
+                            </div>
+
+                        ):(
+                            <>
+                                <img 
+                                    className={styles.iconImage} 
+                                    src="/images/add_icon.png" 
+                                    alt="추가아이콘" 
+                                />
+                                <div className={styles.pictureEnrollButtonText}>
+                                    클릭해서 사진 업로드
+                                </div>  
+                            </>
+
+                        )}     
+                    </div>
+
+                    <input 
+                        style={{ display: "none" }} 
+                        type="file" 
+                        onChange={(event) => onChangeFile(event, idx)} 
+                        ref={(el) => {(fileRef.current[idx] = el)}}
+                        accept="image/jpeg, image/png" // 선택 자체가 안되게 막기
+                    />     
                 </div>
-            ))}
+            ))}   
             </div>
         </div>
 
         <div className={styles.enrollButtonContainer}>
             <button className={styles.enrollCancelButton}>취소</button>
             <button
-            className={`${styles.enrollSubmitButton} ${isActive ? styles.active : styles.disabled}`}
-            onClick={props.isEdit ? onClickUpdate : onClickSubmit}
-            disabled={!isActive}
+                className={`${styles.enrollSubmitButton} ${isActive ? styles.active : styles.disabled}`}
+                onClick={props.isEdit ? onClickUpdate : onClickSubmit}
+                disabled={!isActive}
             >
             {props.isEdit ? "수정" : "등록"}하기
             </button>

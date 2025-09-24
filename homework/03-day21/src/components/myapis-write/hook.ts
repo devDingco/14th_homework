@@ -1,16 +1,17 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { IDaumPostcodeData, IUseBoardsWriteProps } from "@/components/myapis-write/types";
 
-import { Modal } from "antd";
+import { Modal, Input, Tag, Tooltip, theme } from "antd";
 import { supabase } from "@/commons/libraries/supabase";
 
 export default function useMyBoardWrite(props: IUseBoardsWriteProps) {
     const router = useRouter()
-    const params = useParams()
+    const params = useParams() // URL 파라미터에서 게시글 ID 추출용
     const boardId = props.boardId ?? String(params.boardId)
+    
 
     // ✅ 항상 빈 문자열로 state 초기화
     const [inputs, setInputs] = useState({
@@ -21,17 +22,22 @@ export default function useMyBoardWrite(props: IUseBoardsWriteProps) {
     const [zipcode, setZipcode] = useState("");
     const [address, setAddress] = useState("");
     const [addressDetail, setAddressDetail] = useState("");
-    const [selectedImageUrl, setSelectedImageUrl] = useState("");
+    const [selectedImageUrl, setSelectedImageUrl] = useState("");   
+             
 
     useEffect(() => {
         const loadForEdit = async () => {
-            if (!props.isEdit || !boardId) return
+            if (!props.isEdit || !boardId || boardId === "undefined") return;
+
             const { data, error } = await supabase
                 .from("myboard")
-                .select("id,title,contents,zipcode,address,address_detail,images")
+                .select("id,title,contents,zipcode,address,address_detail,images,tags")
                 .eq("id", boardId)
-                .single()
-            if (error || !data) return
+                .single();              // 단일 객체로 반환
+
+
+            if (error) return
+
             setInputs({
                 title: data.title ?? "",
                 contents: data.contents ?? "",
@@ -40,6 +46,8 @@ export default function useMyBoardWrite(props: IUseBoardsWriteProps) {
             setAddress(data.address ?? "")
             setAddressDetail((data as any).address_detail ?? "")
             if (typeof data.images === "string") setSelectedImageUrl(data.images)
+
+            setTags(data.tags ? JSON.parse(data.tags) : []);
         }
         loadForEdit()
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -47,8 +55,15 @@ export default function useMyBoardWrite(props: IUseBoardsWriteProps) {
 
     // 입력값/비밀번호 변경 시 즉시 활성화 상태 재계산
     useEffect(() => {
-        setIsActive(inputs.title !== "" && inputs.contents !== "")
-    }, [inputs, props.isEdit])
+        const allFieldsFilled =    
+            inputs.title !== "" && 
+            inputs.contents !== "" && 
+            zipcode !== "" &&
+            address !== "" && 
+            addressDetail !== "";
+
+            setIsActive(allFieldsFilled);
+    }, [inputs, zipcode, address, addressDetail, props.isEdit])
 
     
 
@@ -114,36 +129,51 @@ export default function useMyBoardWrite(props: IUseBoardsWriteProps) {
                 address_detail: addressDetail,
                 zipcode,
                 images: selectedImageUrl,
+                tags,
             },
         ])
         .select() // ← 삽입된 데이터를 반환
-        .single() // 단일 row 반환
+        // .maybeSingle();
 
         if (error) {
             console.error("등록 실패:", error.message)
             setInputError(error.message)
             Modal.error({ content: "에러가 발생하였습니다. 다시 시도해 주세요." })
+            return
 
         } else {
             console.log("등록 성공!");
             setInputError("");
             Modal.success({ content: "게시글 등록이 완료되었습니다." })
-            router.push(`/openapis/${insertedData.id}`)
+            router.push(`/openapis/${insertedData[0].id}`)
         }
 
     }    
 
     const onClickUpdate = async () => {
+        if (!boardId) {
+            console.error("게시물 ID가 누락되었습니다. 수정할 게시물을 찾을 수 없습니다.");
+            window.alert("게시물 ID가 없어 수정할 수 없습니다.");
+            return;
+        }
+
         try {
-            const { error } = await supabase.from("myboard").update({
+            const { data: updatedData, error } = await supabase
+            .from("myboard")
+            .update({
                 title: inputs.title,
                 contents: inputs.contents,
                 zipcode,
                 address,
                 address_detail: addressDetail,
                 images: selectedImageUrl,
+                tags,
             })
-            .eq("id", boardId )
+            .eq("id", boardId)
+            .select()   //  수정 후 데이터 반환
+            .single()    
+
+
 
             if(error) {
                 console.error("수정실패:",error.message)
@@ -152,17 +182,92 @@ export default function useMyBoardWrite(props: IUseBoardsWriteProps) {
                 return
             }
 
+            if (!updatedData) {
+                Modal.error({ content: "수정된 게시글을 찾을 수 없습니다." });
+                return;
+            }
+
+            console.log("updatedData:", updatedData)
+
             setInputError("")
             Modal.success({ content:"게시글이 수정되었습니다!" })
 
-            router.push(`/openapis/${boardId}`);
+            router.push(`/openapis/${updatedData.id}`);
         } catch (error) { 
             console.error(error);
             Modal.error({ content: "에러가 발생하였습니다. 다시 시도해 주세요." })
         } 
 
     }
-        
+    
+    // ====== 태그  ======
+
+    const { token } = theme.useToken();
+    const [tags, setTags] = useState<string[]>([]);
+    const [inputVisible, setInputVisible] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+    const [editInputIndex, setEditInputIndex] = useState(-1);
+    const [editInputValue, setEditInputValue] = useState('');
+    const inputRef = useRef<Input>(null);
+    const editInputRef = useRef<Input>(null);
+  
+    useEffect(() => {
+      if (inputVisible) {
+        inputRef.current?.focus();
+      }
+    }, [inputVisible]);
+  
+    useEffect(() => {
+      editInputRef.current?.focus();
+    }, [editInputValue]);
+  
+    const handleClose = (removedTag: string) => {
+      const newTags = tags.filter((tag) => tag !== removedTag);
+      console.log(newTags);
+      setTags(newTags);
+    };
+  
+    const showInput = () => {
+      setInputVisible(true);
+    };
+  
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setInputValue(e.target.value);
+    };
+  
+    const handleInputConfirm = () => {
+      if (inputValue && !tags.includes(inputValue)) {
+        setTags([...tags, inputValue]);
+      }
+      setInputVisible(false);
+      setInputValue('');
+    };
+  
+    const handleEditInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setEditInputValue(e.target.value);
+    };
+  
+    const handleEditInputConfirm = () => {
+      const newTags = [...tags];
+      newTags[editInputIndex] = editInputValue;
+      setTags(newTags);
+      setEditInputIndex(-1);
+      setEditInputValue('');
+    };
+    const tagInputStyle: React.CSSProperties = { 
+        width: 64, 
+        height: 22, 
+        marginInlineEnd: 8, 
+        verticalAlign: 'top',        
+    };
+
+    const tagPlusStyle: React.CSSProperties = { 
+        height: 22, 
+        background: token.colorBgContainer, 
+        borderStyle: 'dashed', 
+    };
+
+    
     return {        
         inputs,
         zipcode,
@@ -181,6 +286,28 @@ export default function useMyBoardWrite(props: IUseBoardsWriteProps) {
         onClickSubmit,
         onClickUpdate,
         onChangeInputs,
+        // 태그 관련 상태 & setter
+        tags,
+        setTags,
+        inputVisible,
+        setInputVisible,
+        inputValue,
+        setInputValue,
+        editInputIndex,
+        setEditInputIndex,
+        editInputValue,
+        setEditInputValue,
+        inputRef,
+        editInputRef,
+        tagInputStyle,
+        tagPlusStyle,
+        handleInputChange,
+        handleInputConfirm,
+        handleEditInputChange,
+        handleEditInputConfirm,
+        handleClose,
+        showInput
+
     };
   
     

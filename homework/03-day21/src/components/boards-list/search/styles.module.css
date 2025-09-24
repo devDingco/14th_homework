@@ -1,0 +1,85 @@
+.searchLayout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.searchContainer{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.searchWrapper {
+    display: flex;
+    min-width: 11.25rem;
+    max-width: 40rem;
+    padding: 0.75rem;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1 0 0;
+
+    border-radius: 0.5rem;
+    background: var(--gray-50, #F2F2F2);    
+}
+
+.iconHolder {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.searchInput {
+    border: none;
+    outline: none;
+    background: transparent;
+    min-width: 8.75rem;
+    flex: 1 0 0;
+
+    font-family: "Pretendard Variable";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem; 
+}
+
+.searchButton {
+    display: flex;
+    height: 3rem;
+    padding: 0.75rem 1rem;
+    align-items: center;
+    gap: 0.5rem;
+
+    border-radius: 0.5rem;
+    background: var(--gray-B, #000);
+    cursor: pointer;
+
+    color: #FFF;
+    text-align: center;
+
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem;
+}
+
+.submitWrapper {
+    display: flex;
+    height: 3rem;
+    padding: 0.75rem 1rem;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    background: #2974E5;
+    cursor: pointer;
+
+    color: #FFF;
+    text-align: center;
+
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600; 
+}

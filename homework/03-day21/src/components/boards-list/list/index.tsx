@@ -7,6 +7,8 @@ import useBoardsPage from './hook';
 
 
 export default function BoardsPage (props:IBoardsPageProps ) {
+    const keyword = props.keyword || ""  // undefined 방지
+    
     const {
         data,
         boardsCount,
@@ -29,7 +31,7 @@ export default function BoardsPage (props:IBoardsPageProps ) {
                 </div>
                 <div className={styles.boardsListBody}>
                     {/* 게시글 목록 자리 */}
-                    {(props.data || data?.fetchBoards)?.map((el:IFetchBoard, index: number) => {
+                    {(props.data || data?.fetchBoards || [])?.map((el:IFetchBoard, index: number) => {
                         return(
                             <div 
                                 key={el._id} 
@@ -38,7 +40,15 @@ export default function BoardsPage (props:IBoardsPageProps ) {
                                 onClick={() => onClickBoard(el._id)}
                             >
                                 <p>{totalCount - ((currentPage -1)  * 10 + index )}</p> {/* 게시글 번호 */}
-                                <p>{el.title}</p>
+                                <p>{el.title
+                                        .replaceAll(keyword, `#$%${keyword}#$%`)
+                                        .split("#$%")
+                                        .map((text, idx) => (
+                                            <span key={idx} style={{ color: text === keyword ? 'red' : 'black' }}>
+                                                {text}
+                                            </span>
+                                        ))
+                                        }</p>
                                 <p>{el.writer}</p>
                                 <p>{new Date(el.createdAt).toLocaleDateString("ko-KR")}</p>
 

@@ -1,7 +1,5 @@
 "use client"
 
-import { gql, useQuery } from "@apollo/client"
-import { useState } from "react"
 import styles from "./styles.module.css"
 
 import Image from "next/image"
@@ -10,6 +8,7 @@ import rightArrow from "@assets/right_arrow.svg"
 import leftArrowDisabled from "@assets/leftArrowDisabled.svg"
 import rightArrowDisabled from "@assets/rightArrowDisabled.svg"
 import usePagination from "./hook"
+import { IPaginationPageProps } from "./types"
 
 const IMAGE_SRC = {
     leftArrow: { src: leftArrow, alt: "왼쪽화살표"},
@@ -18,15 +17,8 @@ const IMAGE_SRC = {
     rightArrowDisabled: { src: rightArrowDisabled, alt: "오른쪽화살표비활성"}   
 }
 
-interface PaginationProps {
-    startPage: number
-    lastPage: number
-    onClickPage: (page: number) => void
-    onClickPrevPage: () => void
-    onClickNextPage: () => void
-  }
 
-export default function Pagination(props){
+export default function Pagination(props: IPaginationPageProps){
     const {
         startPage,
         lastPage,

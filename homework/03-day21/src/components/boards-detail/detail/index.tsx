@@ -50,8 +50,18 @@ export default function BoardsDetail () {
 
                 </div>
 
-                <img className={styles.detailContentContainer} src="/images/post_image.png" alt="청산사진"/>
-
+                <img className={styles.detailContentContainer}/>
+                    {(data?.fetchBoard?.images as string[] | undefined)?.map((url, idx) =>
+                        url ? (
+                            <img 
+                                key={idx}
+                                src={`https://storage.googleapis.com/${url}`}
+                                alt={`첨부이미지 ${idx}`}
+                                className={styles.detailContentImage} 
+                            />
+                        ) : null                        
+                    )}
+                    
                 {/* 내용 자리 */}        
                 <div className={styles.detailContentText}>
                     {data?.fetchBoard?.contents ?? "내용을 불러오는 중..."}
