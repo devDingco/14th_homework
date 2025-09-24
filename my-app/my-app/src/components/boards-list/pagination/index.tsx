@@ -3,12 +3,12 @@
 import styles from "./styles.module.css";
 import { usePagination } from "./hook";
 import Image from "next/image";
-import { IPaginationProps } from "./types";
+import { IPagination } from "./types";
 
 import PrevPageImg from "../pagination/assets/chevron_right_24dp_5F6368_FILL1_wght400_GRAD0_opsz24 2.svg";
 import NextPageImg from "../pagination/assets/chevron_right_24dp_5F6368_FILL1_wght400_GRAD0_opsz24 1.svg";
 
-export default function Pagination(props: IPaginationProps) {
+export default function Pagination(props: IPagination) {
   const { startPage, onClickPage, onClickPrevPage, onClickNextPage } =
     usePagination(props);
 
@@ -35,7 +35,11 @@ export default function Pagination(props: IPaginationProps) {
         )}
       </div>
       <button onClick={onClickNextPage}>
-        <Image src={NextPageImg} alt="NextPageImg" />
+        <Image
+          className={styles.pageButton}
+          src={NextPageImg}
+          alt="NextPageImg"
+        />
       </button>
     </div>
   );

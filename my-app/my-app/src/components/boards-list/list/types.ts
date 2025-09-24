@@ -1,4 +1,3 @@
-// import { FetchBoardsQuery, Exact, InputMaybe } from
 import { Exact, FetchBoardsQuery, InputMaybe } from "@/commons/gql/graphql";
 import { ApolloQueryResult } from "@apollo/client";
 
