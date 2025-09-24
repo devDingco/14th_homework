@@ -1,6 +1,6 @@
 "use client";
 
-import BoardList from "@/components/boards-list/list";
+// import BoardList from "@/components/boards-list/list";
 import BannerList from "./banner";
 import Navigation from "./navigation";
 
@@ -13,7 +13,7 @@ export default function Layout(props: ILayout) {
     <>
       <Navigation />
       <BannerList />
-      <BoardList />
+      {props.children}
     </>
   );
 }
