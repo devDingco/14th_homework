@@ -45,17 +45,17 @@ const BoardsCommentWrite = () => {
                     <form className={`${styles.comment_write_form_top} flex_row`}>
                         <div className={`${styles.input_frame_312w_80h} flex_column`}>
                             <label className={`${styles.label_312w_24h} me_16_24 flex_row`} style={{ whiteSpace: "nowrap" }}>작성자<p className={`me_16_24`} style={{ color:"rgba(246, 106, 106, 1)" }}>*</p></label>
-                            <input className={`${styles.input_312w_48h} input_g_border_gray r_16_24`} onChange={onChangeWriting({ category: "작성자" })} placeholder='작성자 명을 입력해 주세요.'></input>
-                            <p className={`me_16_24`} style={{ color: "rgba(246, 106, 106, 1)" }}>{commentErr.commentContentsErr}</p>
+                            <input className={`${styles.input_312w_48h} input_g_border_gray r_16_24`} onChange={onChangeWriting({ category: "작성자" })} placeholder='작성자 명을 입력해 주세요.' value={commentInput.writer || ""}></input>
+                            <p className={`me_16_24`} style={{ color: "rgba(246, 106, 106, 1)" }}>{commentErr.commentWriterErr}</p>
                         </div>
                         <div className={`${styles.input_frame_312w_80h} flex_column`}>
                             <label className={`${styles.label_312w_24h} me_16_24 flex_row`} style={{ whiteSpace: "nowrap" }}>비밀번호<p className={`me_16_24`} style={{ color:"rgba(246, 106, 106, 1)" }}>*</p></label>
-                            <input className={`${styles.input_312w_48h} input_g_border_gray r_16_24`} onChange={onChangeWriting({ category: "비밀번호" })} placeholder='비밀번호를 입력해 주세요.' type='password'></input>
+                            <input className={`${styles.input_312w_48h} input_g_border_gray r_16_24`} onChange={onChangeWriting({ category: "비밀번호" })} placeholder='비밀번호를 입력해 주세요.' type='password' value={commentInput.password || ""}></input>
                             <p className={`me_16_24`} style={{ color: "rgba(246, 106, 106, 1)" }}>{commentErr.commentPasswordErr}</p>
                         </div>
                     </form>
                     <form id="comment_write_contents">
-                        <textarea id="comment_write_contents" className={`${styles.comment_write_form_bottom} input_g_border_gray r_16_24`} onChange={onChangeWriting({ category: "내용" })} placeholder='댓글을 입력해 주세요.'>
+                        <textarea id="comment_write_contents" className={`${styles.comment_write_form_bottom} input_g_border_gray r_16_24`} onChange={onChangeWriting({ category: "내용" })} placeholder='댓글을 입력해 주세요.' value={commentInput.contents || ""}>
 
                         </textarea>
                         <p className={`me_16_24`} style={{ color: "rgba(246, 106, 106, 1)" }}>{commentErr.commentContentsErr}</p>

@@ -26,7 +26,7 @@ const useCreateBoardComment = () => {
                 refetchQueries: [
                     {
                       query: FetchBoardCommentsDocument,
-                      variables: { boardId: String(boardId) },
+                      variables: { page: 1, boardId: String(boardId) },
                     },
                 ],
             })
