@@ -8,7 +8,6 @@ import BoardsCommentList from "@/components/boards-detail/comment-list"
 import BoardsCommentWrite from "@/components/boards-detail/comment-write"
 import BoardsDetail from "@/components/boards-detail/detail"
 import { useParams } from "next/navigation"
-import { useState } from "react"
 
 export interface IBoardDetailData {
     getBoard: FetchBoardQuery["fetchBoard"] | undefined,
@@ -17,10 +16,9 @@ export interface IBoardDetailData {
 
 const BoardsDetailPage = () => {
     const param = useParams()
-    const [boardDetailData, setBoardDetailData] = useState<IBoardDetailData>()
 
-    const { boardDetail, boardLoading, boardError, boardRefetch } = useFetchBoard(String(param.boardId))
-    const { boardComments, boardCommentsLoading, boardCommentsError, boardCommentsRefetch } = useFetchBoardComments({boardId: param.boardId})
+    const { boardDetail } = useFetchBoard(String(param.boardId))
+    const { boardComments, boardCommentsFetchMore } = useFetchBoardComments({boardId: param.boardId})
 
     return (
         <div id="main" style={{
@@ -36,12 +34,11 @@ const BoardsDetailPage = () => {
                 display: "flex",
                 flexDirection: "column",
                 width: "1280px",
-                minHeight: "460px",
                 gap: "40px",
                 opacity: "1"
             }}>
                 <BoardsCommentWrite />
-                <BoardsCommentList boardComments={boardComments}/>
+                <BoardsCommentList boardComments={boardComments} boardCommentsFetchMore={boardCommentsFetchMore} />
             </div>
         </div>
     )

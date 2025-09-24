@@ -6,5 +6,5 @@ export interface IUseBoardCommentList {
 
 export interface IBoardsCommentList {
     boardComments: FetchBoardCommentsQuery["fetchBoardComments"] | undefined,
-    // setBoardDetailData: Dispatch<SetStateAction<IBoardDetailData>>
+    boardCommentsFetchMore: Function | undefined
 }

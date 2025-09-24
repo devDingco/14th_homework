@@ -5,7 +5,7 @@ import { IUseFetchBoardComments } from "../type";
 const useFetchBoardComments = (props: IUseFetchBoardComments) => {
     let getData
     try {
-        const { data, loading, error, refetch } = useQuery<
+        const { data, loading, error, refetch, fetchMore } = useQuery<
             FetchBoardCommentsQuery,
             FetchBoardCommentsQueryVariables
         >(FetchBoardCommentsDocument, {
@@ -15,7 +15,7 @@ const useFetchBoardComments = (props: IUseFetchBoardComments) => {
             },
             fetchPolicy: "cache-and-network",
         })
-        getData = { data, loading, error, refetch } 
+        getData = { data, loading, error, refetch, fetchMore } 
     } catch(e: unknown) {
         if (e instanceof ApolloError) {
             e.graphQLErrors.forEach((e) => {
@@ -24,11 +24,13 @@ const useFetchBoardComments = (props: IUseFetchBoardComments) => {
         }
     }
 
+    console.log('댓글 fetchBaordComments 확인: ',getData?.data?.fetchBoardComments)
     return {
         boardComments: getData?.data?.fetchBoardComments,
         boardCommentsLoading: getData?.loading,
         boardCommentsError: getData?.error,
         boardCommentsRefetch: getData?.refetch,
+        boardCommentsFetchMore: getData?.fetchMore
     };
 }
 

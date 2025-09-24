@@ -1,9 +1,13 @@
 import useDeleteBoardComment from "@/commons/api/mutation/useDeleteBoardComment"
 import { useIsModal } from "@/commons/provider/isModalProvider"
 import { useParams } from "next/navigation"
+import { useState } from "react"
+import { IBoardsCommentList } from "./type"
+import { FetchBoardCommentsQuery } from "@/commons/gql/graphql"
 
 const useBoardCommentList = () => {
     const param = useParams()
+    const [hasMore, setHasMore] = useState<boolean>(true);
     const { postDeleteBoardComment } = useDeleteBoardComment()
     const { setIsWarningModal } = useIsModal()
 
@@ -24,10 +28,32 @@ const useBoardCommentList = () => {
         await updateBoardComments(event)
     }
 
+    const scrollInfiniteFetchComments = (parameter: IBoardsCommentList) => {
+        if (parameter.boardComments === undefined) return
+        if (parameter.boardCommentsFetchMore === undefined) return
+
+        parameter.boardCommentsFetchMore({
+            variables: { page: Math.ceil((parameter.boardComments.length ?? 10) / 10) + 1 },
+            
+            updateQuery: (prev: FetchBoardCommentsQuery, { fetchMoreResult }:any ) => {
+                if (!fetchMoreResult.fetchBoardComments?.length) {
+                    setHasMore(false);
+                    return;
+                }
+      
+                return {
+                    fetchBoardComments: [...prev.fetchBoardComments, ...fetchMoreResult.fetchBoardComments],
+                };
+            },
+        });
+    }
+
     return {
         updateBoardComments,
         onClickCommentDeleteHandler,
-        onClickCommentUpdateHandler
+        onClickCommentUpdateHandler,
+        scrollInfiniteFetchComments,
+        hasMore
     }
 }
 
