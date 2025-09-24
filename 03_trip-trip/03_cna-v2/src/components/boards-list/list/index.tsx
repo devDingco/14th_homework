@@ -14,6 +14,7 @@ const IMAGE_SRC = {
 
 export default function BoardsListComponent(props: BoardsListProps) {
   const { data, dataBoardsCount, currentPage, keyword } = props
+  console.log('🚀 ~ BoardsListComponent ~ data:', data)
   const [hoveredId, setHoveredId] = useState('')
 
   const { onClickDelete, onClickDetail } = useBoardsList({ hoveredId })
