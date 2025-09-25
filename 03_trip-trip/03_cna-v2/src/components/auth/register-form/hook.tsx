@@ -94,5 +94,6 @@ export const useRegister = () => {
       </div>
     </Modal>
   )
+
   return { errors, registerValue, handleChange, handleSubmit, SuccessModal }
 }
