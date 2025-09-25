@@ -190,4 +190,3 @@ const BeachCursorWithText = () => {
 };
 
 export default BeachCursorWithText;
-s;
