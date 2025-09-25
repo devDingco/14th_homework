@@ -10,7 +10,13 @@ export default function useMyBoardsDetail() {
     const { boardId } = useParams()
     const [row, setRow] = useState<MyBoardRow | null>(null)
     const [tags, setTags] = useState<string[]>([]); // ← 태그 상태 추가
-
+    
+    useEffect(() => {
+        if(!localStorage.getItem("accessToken")){
+            alert("로그인 후 이용 가능합니다.")
+            router.push('/boards')
+        }
+    },[])
 
     useEffect(() => {
         const load = async () => {

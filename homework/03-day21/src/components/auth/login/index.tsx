@@ -64,6 +64,7 @@ export default function LoginPage(){
                 // 로그인 성공
                 setAccessToken(API로받은_accessToken)
                 setInputError("");
+                localStorage.setItem("accessToken", API로받은_accessToken)
                 router.push('/boards')
             }         
 

@@ -9,7 +9,7 @@ import { ISearchBoardPageProps } from "./types"
 
 export default function SearchBoardPage(props: ISearchBoardPageProps) {
   
-    const { onChangeKeyword, onClickSearch, keyword } = useSearchBoardPage(props)
+    const { onChangeKeyword, onClickSearch, keyword , onClickSubmit} = useSearchBoardPage(props)
 
 
     return (
@@ -36,14 +36,14 @@ export default function SearchBoardPage(props: ISearchBoardPageProps) {
                 </button>            
             </div>
 
-            <div className={styles.submitWrapper}>
+            <button className={styles.submitWrapper} onClick={onClickSubmit}>
             <img 
-                className={styles.iconHolder} 
+                className={styles.iconHolder}                 
                 src="/images/submit.svg" 
                 alt="등록아이콘"
             />
             트립토크 등록
-            </div>
+            </button>
 
         </div>
     )

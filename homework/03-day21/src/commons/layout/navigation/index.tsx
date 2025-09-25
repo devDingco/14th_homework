@@ -42,12 +42,14 @@ export default function Navigation() {
         <div className={styles.navbar}>
             <div className={styles.navbarInner}>
                 <div className={styles.navbarLeft}>
-                    <div className={styles.navbarLogo}>
+                    <Link 
+                        href="/" 
+                        className={styles.navbarLogo}>
                         <Image 
                             src={IMAGE_SRC.logoImage.src}
                             alt={IMAGE_SRC.logoImage.alt}                            
                         />
-                    </div>
+                    </Link>
                     <Link
                         href="/boards"
                         className={`${styles.navbarItem} ${pathname === "/boards" ? styles.navbarItemActive : ""}`}

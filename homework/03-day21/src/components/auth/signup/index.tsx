@@ -8,7 +8,7 @@ import { ChangeEvent, useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { CreateUserInput, CreateUserResponse, SignupInputs } from './types'
 import { useAccessTokenStore } from '@/commons/stores/token-store'
-import { Modal } from 'antd'
+import { Modal, Button } from 'antd'
 
 
 const IMAGE_SRC = {
@@ -26,6 +26,7 @@ const CREATE_USER = gql`
     }
 `
 export default function SignupPage(){
+    const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 추가
     const [inputs, setInputs] = useState<SignupInputs>({
         email: "",
         name: "",
@@ -90,10 +91,8 @@ export default function SignupPage(){
 
             console.log(result.data?.createUser);
 
-            // 2. 성공 모달
-            Modal.success({
-                content: "회원가입을 축하드려요!!",
-            })
+             // 모달 열기
+            setIsModalOpen(true);            
 
             // 에러 메시지 초기화
             setInputError({ email: "", name: "", password: "", passwordCheck: "" });
@@ -209,6 +208,34 @@ export default function SignupPage(){
                     </div>
                 </div>
             </div>
+
+            // 2. 성공 모달
+            <Modal
+                open={isModalOpen}
+                footer={null} // ✅ OK 버튼 제거
+                closable={false} // ✅ 오른쪽 위 X 버튼 제거 (원하면 true)
+                centered // 가운데 정렬
+                onCancel={() => setIsModalOpen(false)}
+            >                
+                <div style={{ textAlign: "center" }}>
+                    <p style={{ fontSize: "16px", marginBottom: "16px" }}>
+                        회원가입을 축하 드려요.
+                    </p>
+
+                    {/* 로고 이미지 */}
+                    <div style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
+                        <Image src={IMAGE_SRC.logoImage.src} alt={IMAGE_SRC.logoImage.alt} width={120} height={50} />
+                    </div>
+
+                    {/* 로그인 버튼 */}                    
+                    <div style={{ marginTop: "24px" }}>
+                        <Button type="primary" href="/login">
+                            로그인 하기
+                        </Button>
+                    </div>
+                </div>
+                
+            </Modal>
 
             <Image 
                 src={IMAGE_SRC.loginImage.src}
