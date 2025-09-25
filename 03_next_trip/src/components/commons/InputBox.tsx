@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 type InputBoxProps = {
-  label: string;
+  label?: string;
   name: string;
   type: string;
   placeholder: string;
@@ -13,6 +13,7 @@ type InputBoxProps = {
   value?: string;
   defaultValue?: string;
   isEdit?: boolean;
+  loginFailed?: boolean;
 };
 
 export default function InputBox({
@@ -28,6 +29,7 @@ export default function InputBox({
   isSubmitCheck,
   defaultValue,
   isEdit,
+  loginFailed,
 }: InputBoxProps) {
   const [touched, setTouched] = useState(false);
 
@@ -46,19 +48,21 @@ export default function InputBox({
       {!isEdit && (
         <div className='flex w-full flex-col items-start justify-start gap-2'>
           <div className='flex w-full text-sm'>
-            <label
-              className='font-base flex w-full gap-1 font-semibold'
-              htmlFor={label}
-            >
-              <span>{label}</span>
-              {required ? <span className='text-[#f66a6a]'>*</span> : ''}
-            </label>
+            {label && (
+              <label
+                className='font-base flex w-full gap-1 font-semibold'
+                htmlFor={label}
+              >
+                <span>{label}</span>
+                {required ? <span className='text-[#f66a6a]'>*</span> : ''}
+              </label>
+            )}
           </div>
           <input
             id={label}
             name={name}
             type={type}
-            className='w-full flex-1 gap-2 rounded-lg px-4 py-3 outline outline-1 outline-gray-200'
+            className={`${loginFailed ? 'border-red-500' : ''} w-full flex-1 gap-2 rounded-lg border px-4 py-3 outline outline-1 outline-gray-200`}
             placeholder={placeholder}
             required={required}
             onInput={onInput}

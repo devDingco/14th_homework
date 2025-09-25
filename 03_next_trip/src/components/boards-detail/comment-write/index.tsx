@@ -9,7 +9,7 @@ import { useMutation } from '@apollo/client';
 import { useParams } from 'next/navigation';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { MdChatBubbleOutline } from 'react-icons/md';
-import InputBox from '@/components/common/InputBox';
+import InputBox from '@/components/commons/InputBox';
 
 import { Rate } from 'antd';
 import { FETCH_BOARD_COMMENTS } from '@/apis/graphql/boardComment.gql';

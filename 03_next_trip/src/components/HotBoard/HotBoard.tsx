@@ -1,6 +1,6 @@
 'use client';
 
-import { FETCH_BOARDS_OF_THE_BEST } from '@/apis/graphql/hotBoard';
+import { FETCH_BOARDS_OF_THE_BEST } from './queries';
 import { profile_g } from '@/assets/icons/icons';
 import { Board } from '@/types/gql/graphql';
 import { formatDate } from '@/utils/formatDate';
@@ -31,7 +31,7 @@ export default function HotBoard() {
                     height={128}
                     width={96}
                     src={
-                      board?.images?.[0]
+                      board?.images?.[0] && board?.images.length > 0
                         ? `https://storage.googleapis.com/${board.images?.[0]}`
                         : 'https://storage.googleapis.com/codecamp-file-storage/2025/9/11/colley_post_3584_title_a64acc75-8a46-4b3d-85c3-02c9ffce63b2.png'
                     }

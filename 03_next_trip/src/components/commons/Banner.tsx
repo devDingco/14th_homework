@@ -11,8 +11,18 @@ const images = [img01, img02, img03];
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { usePathname } from 'next/navigation';
+
+const excludePaths = ['/auth/login', '/auth/signup'];
 
 export default function Banner() {
+  const pathName = usePathname();
+  console.log(pathName);
+
+  if (excludePaths.includes(pathName)) {
+    return null;
+  }
+
   return (
     <div className='relative mb-6 h-[200px] min-w-[360px] tablet:w-full'>
       <Swiper

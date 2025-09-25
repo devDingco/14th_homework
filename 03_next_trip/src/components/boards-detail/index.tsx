@@ -14,7 +14,7 @@ import { profile_a } from '@/assets/icons/icons';
 import { formatDate } from '@/utils/formatDate';
 import Link from 'next/link';
 // import { IBoardDetail } from '@/types/BoardDetail';
-import TooltipComponent from '../common/TooltipComponent';
+import TooltipComponent from '@/components/commons/TooltipComponent';
 import CommentList from './comment-list';
 import CommentForm from '@/components/boards-detail/comment-write';
 import { useBoardDetailHook } from './hook';

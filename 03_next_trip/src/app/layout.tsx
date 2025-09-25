@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 
-import Header from '@/components/Header';
-import Banner from '@/components/Banner';
+import Header from '@/components/commons/Header';
+import Banner from '@/components/commons/Banner';
 import Providers from './Providers';
 import { Pretendard } from '@/assets/fonts/fonts';
 import BottomNavBar from '@/components/BottomNav/BottomNavBar';

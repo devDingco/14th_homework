@@ -1,3 +1,4 @@
+
 import HotBoard from './HotBoard';
 
 export default function HotBoardList() {

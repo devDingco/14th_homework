@@ -2,8 +2,8 @@
 
 import React, { useState, type ChangeEvent, type FormEvent } from 'react';
 import ImageUpload from './ImageUpload';
-import InputBox from '@/components/common/InputBox';
-import TextAreaBox from '@/components/common/TextAreaBox';
+import InputBox from '@/components/commons/InputBox';
+import TextAreaBox from '@/components/commons/TextAreaBox';
 import { FETCH_BOARD, UPDATE_BOARD } from '@/apis/graphql/board';
 import { useMutation, useQuery } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
