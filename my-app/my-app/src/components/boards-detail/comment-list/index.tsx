@@ -27,7 +27,7 @@ const IMAGE_SRC = {
 };
 
 export default function CommentList() {
-  const { data } = useCommentList();
+  const { data, fetchMore, isHasMore, setIsHasMore } = useCommentList();
 
   return (
     <>

@@ -1,7 +1,6 @@
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   DeleteBoardDocument,
-  FetchBoardsCountDocument,
   FetchBoardsDocument,
 } from "../../../commons/gql/graphql";
 import { useMutation, useQuery } from "@apollo/client";
@@ -11,9 +10,9 @@ import { IBoardList } from "./types";
 
 export const useBoardList = (props: IBoardList) => {
   const router = useRouter();
-  const params = useParams<{ boardId: string }>();
   const [hoveredId, setHoveredId] = useState("");
 
+  // const params = useParams<{ boardId: string }>();
   // const { data, refetch } = useQuery(FetchBoardsDocument);
   // // -> useQuery(FETCH_BOARDS)를 실행하면 객체 하나가 리턴! => 여러 속성들 중 data랑 refetch만 꺼내서 쓴거임!(구조 분해 할당)
   // const { data: dataBoardsCount } = useQuery(FetchBoardsCountDocument);

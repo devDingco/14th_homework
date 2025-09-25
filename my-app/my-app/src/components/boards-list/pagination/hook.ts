@@ -1,16 +1,13 @@
-import { useState } from "react";
-import { IPaginationProps } from "./types";
+import { MouseEvent, useState } from "react";
+import { IPagination } from "./types";
 
-import { useQuery } from "@apollo/client";
-
-import {
-  FetchBoardsCountDocument,
-  FetchBoardsDocument,
-} from "@/commons/gql/graphql";
-
-export const usePagination = (props: IPaginationProps) => {
+export const usePagination = (props: IPagination) => {
   const [startPage, setStartPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
+  // const onClickPage = (event: MouseEvent<HTMLButtonElement>) => {
+  //   props.refetch({ page: Number(event.currentTarget.id) });
+  // };
   const onClickPage = (event: any) => {
     props.refetch({ page: Number(event.target.id) });
   };
@@ -31,6 +28,9 @@ export const usePagination = (props: IPaginationProps) => {
 
   return {
     startPage,
+    currentPage,
+    lastPage: props.lastPage,
+
     onClickPage,
     onClickPrevPage,
     onClickNextPage,
