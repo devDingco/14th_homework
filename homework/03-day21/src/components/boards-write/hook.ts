@@ -41,6 +41,7 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
         
     }
 
+    // 이미지 삭제 
     const onClickDeleteImage = (idx: number) => {
         setImageUrls((prev) => {
             const newUrls = [...prev];
@@ -118,6 +119,8 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
     // //useState의 초기값을 props.isEdit에 따라 조건부로 설정
     const [isActive, setIsActive] =  useState(props.isEdit ? true : false);
 
+    
+    // 우편번호 검색 모달
     const [isModalOpen, setIsModalOpen ] = useState(false)
 
     const onToggleModal = () => {
@@ -131,7 +134,7 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
         onToggleModal();
     };
 
-    // // 등록 페이지와 수정 페이지의 isActive 조건 분리
+    // 등록 페이지와 수정 페이지의 isActive 조건 분리
     const onChangeInputs = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {                
         const { id, value } = event.target;
         setInputs((prev) => ({          
