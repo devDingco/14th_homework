@@ -4,8 +4,8 @@ class AuthManager {
   private token: string | null = null;
 
   private constructor() {
-    // 페이지 로드 시 쿠키에서 토큰 복원
-    this.token = this.getTokenFromCookie();
+    // 생성자에서는 토큰을 초기화하지 않음 (클라이언트 사이드에서만 실행되도록)
+    this.token = null;
   }
 
   public static getInstance(): AuthManager {
@@ -18,7 +18,8 @@ class AuthManager {
   // 토큰 설정
   public setToken(token: string): void {
     this.token = token;
-    // 쿠키에도 저장
+    // localStorage와 쿠키에 모두 저장
+    this.setTokenToStorage(token);
     setTokenCookie(token);
   }
 
@@ -30,7 +31,8 @@ class AuthManager {
   // 토큰 제거
   public clearToken(): void {
     this.token = null;
-    // 쿠키에서도 제거
+    // localStorage와 쿠키에서 모두 제거
+    this.removeTokenFromStorage();
     removeTokenCookie();
   }
 
@@ -39,12 +41,62 @@ class AuthManager {
     return this.token !== null;
   }
 
+  // 토큰 초기화 (클라이언트 사이드에서 호출)
+  public initializeToken(): void {
+    if (typeof window === 'undefined') return;
+    
+    if (!this.token) {
+      this.token = this.getTokenFromStorage();
+    }
+  }
+
   // Authorization 헤더 반환
   public getAuthHeader(): { Authorization: string } | {} {
     if (this.token) {
       return { Authorization: `Bearer ${this.token}` };
     }
     return {};
+  }
+
+  // localStorage에서 토큰 가져오기 (private 메서드)
+  private getTokenFromStorage(): string | null {
+    if (typeof window === 'undefined') return null;
+    
+    try {
+      // localStorage에서 먼저 확인
+      const localToken = localStorage.getItem('accessToken');
+      if (localToken) {
+        return localToken;
+      }
+      
+      // localStorage에 없으면 쿠키에서 확인
+      return this.getTokenFromCookie();
+    } catch (error) {
+      console.error('토큰 불러오기 실패:', error);
+      return null;
+    }
+  }
+
+  // localStorage에 토큰 저장 (private 메서드)
+  private setTokenToStorage(token: string): void {
+    if (typeof window === 'undefined') return;
+    
+    try {
+      localStorage.setItem('accessToken', token);
+    } catch (error) {
+      console.error('토큰 저장 실패:', error);
+    }
+  }
+
+  // localStorage에서 토큰 제거 (private 메서드)
+  private removeTokenFromStorage(): void {
+    if (typeof window === 'undefined') return;
+    
+    try {
+      localStorage.removeItem('accessToken');
+    } catch (error) {
+      console.error('토큰 제거 실패:', error);
+    }
   }
 
   // 쿠키에서 토큰 가져오기 (private 메서드)

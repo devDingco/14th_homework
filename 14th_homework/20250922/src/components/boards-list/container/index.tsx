@@ -5,7 +5,6 @@ import Pagination from "../pagination";
 import Search from "../search";
 import LoadingComponent from "../loading";
 import ErrorComponent from "../error";
-import commonStyles from "@/styles/common.module.css";
 
 interface BoardsListContainerProps {
   initialPage?: number;
@@ -64,7 +63,7 @@ export default function BoardsListContainer({
   }
 
   return (
-    <div className={commonStyles.unifiedContainer}>
+    <div className="container mx-auto p-6">
       <Search onSearch={handleSearch} onReset={handleReset} />
       <BoardsList 
         boards={boards} 

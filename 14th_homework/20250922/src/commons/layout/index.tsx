@@ -11,7 +11,7 @@ export default function Layout({ children }: LayoutProps) {
     <div className="min-h-screen flex flex-col">
       <Navigation />
       <Banner />
-      <main className="flex-grow container mx-auto p-4">
+      <main className="flex-grow container mx-auto">
         {children}
       </main>
       {/* 풋터는 필요시 추가 */}

@@ -4,6 +4,7 @@ import React from "react";
 import { Rating } from "@mui/material";
 import { useCommentWrite } from "./hook";
 import type { CommentWriteProps } from "./types";
+import styles from "./styles.module.css";
 
 export default function CommentWrite({
   boardId,
@@ -37,9 +38,9 @@ export default function CommentWrite({
   const contentsLength = contents.length;
 
   return (
-    <div className="content-container">
+    <div className={styles.contentContainer}>
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
-        <h3 className="post-title" style={{ margin: 0 }}>
+        <h3 className={styles.postTitle} style={{ margin: 0 }}>
           댓글 {isEdit ? "수정" : "작성"}
         </h3>
         <Rating
@@ -50,24 +51,24 @@ export default function CommentWrite({
         />
       </div>
 
-      <div className="form-group first-group">
-        <div className="form-row-group">
-          <div className="flex-1">
-            <label className="label-required">작성자</label>
+      <div className={`${styles.formGroup} ${styles.firstGroup}`}>
+        <div className={styles.formRowGroup}>
+          <div className={styles.flex1}>
+            <label className={styles.labelRequired}>작성자</label>
             <input
               type="text"
-              className="input-field"
+              className={styles.inputField}
               placeholder="작성자를 입력해 주세요."
               value={writer}
               onChange={(e) => setWriter(e.target.value)}
               disabled={isEdit} // 수정 모드에서 작성자 변경 불가
             />
           </div>
-          <div className="flex-1">
-            <label className="label-required">비밀번호</label>
+          <div className={styles.flex1}>
+            <label className={styles.labelRequired}>비밀번호</label>
             <input
               type="password"
-              className="input-field"
+              className={styles.inputField}
               placeholder="비밀번호를 입력해 주세요."
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -76,9 +77,9 @@ export default function CommentWrite({
         </div>
       </div>
 
-      <div className="form-group no-border">
+      <div className={`${styles.formGroup} ${styles.noBorder}`}>
         <textarea
-          className="textarea-field"
+          className={styles.textareaField}
           placeholder="댓글을 입력해 주세요."
           value={contents}
           onChange={(e) => setContents(e.target.value)}
@@ -89,7 +90,7 @@ export default function CommentWrite({
           <span style={{ color: "#9CA3AF", fontSize: 12 }}>{contentsLength}/100</span>
           <div style={{ display: "flex", gap: 8 }}>
             <button
-              className={`button ${isValid ? "primary" : ""}`}
+              className={`${styles.button} ${isValid ? styles.primary : ""}`}
               onClick={onClickSubmit}
               disabled={!isValid || loading}
               style={isValid ? { backgroundColor: "var(--color-primary)", color: "#fff" } : {}}
@@ -98,7 +99,7 @@ export default function CommentWrite({
             </button>
             {isEdit && (
               <button
-                className="button"
+                className={styles.button}
                 onClick={onCancel}
                 style={{ backgroundColor: "#6b7280", color: "#fff" }}
               >

@@ -12,23 +12,21 @@ export function useCommentWrite({ boardId, boardCommentId, isEdit, defaultValues
   const [rating, setRating] = useState(defaultValues?.rating || 0);
 
   const [createBoardComment, { loading: createLoading }] = useMutation(CREATE_BOARD_COMMENT, {
-    refetchQueries: [
-      { query: FETCH_BOARD_COMMENTS, variables: { boardId, page: 1 }, fetchPolicy: "network-only" },
-    ],
+    onCompleted: (data) => {
+      console.log("createBoardComment completed:", data);
+      if (onCompleted) {
+        onCompleted();
+      }
+    },
+    onError: (error) => {
+      console.error("createBoardComment error:", error.message);
+    },
   });
 
   const [updateBoardComment, { loading: updateLoading }] = useMutation(UPDATE_BOARD_COMMENT, {
-    refetchQueries: [
-      {
-        query: FETCH_BOARD_COMMENTS,
-        variables: { boardId, page: 1 },
-        fetchPolicy: "network-only",
-      },
-    ],
     onCompleted: (data) => {
       console.log("updateBoardComment boardId:", boardId, "boardCommentId:", boardCommentId);
       console.log("updateBoardComment completed:", data);
-      console.log("refetchQueries triggered for FETCH_BOARD_COMMENTS with boardId:", boardId);
       if (onCompleted) {
         onCompleted();
       }
