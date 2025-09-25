@@ -8,12 +8,15 @@ const HIDDEN_HEADERS = ["/boards/new", "/boards/[boardId]"];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isHiddenHeader =
-    HIDDEN_HEADERS.includes(pathname) || pathname.startsWith("/boards/");
+  const isHiddenBanner =
+    HIDDEN_HEADERS.includes(pathname) ||
+    pathname.startsWith("/boards/") ||
+    pathname.startsWith("/auth/");
+  const isHiddenNav = pathname.startsWith("/auth/");
   return (
     <>
-      <NavigationComponent />
-      {!isHiddenHeader && <BannerComponent />}
+      {!isHiddenNav && <NavigationComponent />}
+      {!isHiddenBanner && <BannerComponent />}
       {children}
     </>
   );

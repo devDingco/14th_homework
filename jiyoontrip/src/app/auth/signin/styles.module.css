@@ -1,0 +1,112 @@
+.page {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.leftZone {
+  display: flex;
+  width: 25rem;
+  padding: 15.25rem 1.25rem 2.5rem;
+  justify-content: center;
+}
+.leftZoneEnrollTop {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.top {
+  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome {
+  color: #000;
+  text-align: center;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+.logingogo {
+  color: var(--gray-800, #333);
+  text-align: center;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.25rem;
+}
+
+.inputEnroll {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.input {
+  display: flex;
+  min-height: 2.5rem;
+  padding: 0.5rem 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 0.5rem;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  color: var(--Gray-Gray-400, #ababab);
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+}
+.logoIcon {
+  width: 7.5rem;
+  height: 4.65831rem;
+}
+.homepageImage {
+  width: 95rem;
+  height: 67.5rem;
+  object-fit: cover;
+}
+.leftZoneEnroll {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.loginButton {
+  display: flex;
+  max-width: 20rem;
+  width: 100%;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: stretch;
+  background: #2974e5;
+  border-radius: 0.5rem;
+  color: #fff;
+  text-align: center;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+.signinButton {
+  color: var(--gray-800, #333);
+  text-align: center;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+}
+
+.rightZone {
+  position: relative;
+}
