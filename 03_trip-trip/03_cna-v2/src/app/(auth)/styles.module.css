@@ -1,0 +1,21 @@
+.authLayout {
+  max-width: 1920px;
+  display: flex;
+}
+
+.pageLayout {
+  display: flex;
+  min-width: 400px;
+  width: 100%;
+  padding: 244px 20px 40px 20px;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1 0 0;
+  align-self: stretch;
+}
+
+.imageLayout {
+  display: flex;
+  max-width: 1520px;
+  width: 100%;
+}

@@ -28,7 +28,7 @@ export default function BoardsPage() {
   const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10)
   const [currentPage, setCurrentPage] = useState(1)
 
-  if (!data || !dataBoardsCount) return <div>로딩 중 입니다</div>
+  // if (!data || !dataBoardsCount) return <div>로딩 중 입니다</div>
 
   return (
     <div className={styles.detailLayout}>
