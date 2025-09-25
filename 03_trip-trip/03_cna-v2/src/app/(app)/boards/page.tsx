@@ -11,12 +11,13 @@ import {
   FetchBoardsQuery,
   FetchBoardsQueryVariables,
 } from 'commons/graphql/graphql'
-import { ChangeEvent, useState, useEffect } from 'react'
+import { useState } from 'react'
 import BoardsSearch from 'components/boards-list/search'
+import { useCheckTokenExpired } from 'commons/hooks/useAuthGuard'
 
 export default function BoardsPage() {
   const [keyword, setKeyword] = useState('')
-
+  const [currentPage, setCurrentPage] = useState(1)
   const { data, refetch } = useQuery<FetchBoardsQuery, FetchBoardsQueryVariables>(
     FetchBoardsDocument,
     { variables: { search: keyword } }
@@ -26,10 +27,8 @@ export default function BoardsPage() {
     { variables: { search: keyword } }
   )
   const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10)
-  const [currentPage, setCurrentPage] = useState(1)
 
-  // if (!data || !dataBoardsCount) return <div>로딩 중 입니다</div>
-
+  useCheckTokenExpired()
   return (
     <div className={styles.detailLayout}>
       <div className={styles.detailBody}>
