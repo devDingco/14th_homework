@@ -9,7 +9,7 @@ export default function PaginationComponent({
   onClickPage,
   startPage,
   lastPage,
-  currnetPage,
+  currentPage,
 }: any) {
   return (
     <>
@@ -29,7 +29,7 @@ export default function PaginationComponent({
               index + startPage <= lastPage && ( // 마지막 페이지가 13페이지이고 스타트페이지가 11이면 11,12,13만 출력한다 ~
                 <button
                   className={`${styles.button} ${
-                    currnetPage === index + startPage ? styles.currentButton : ""
+                    currentPage === index + startPage ? styles.currentButton : ""
                   } `}
                   id={String(index + startPage)}
                   key={index + startPage}
