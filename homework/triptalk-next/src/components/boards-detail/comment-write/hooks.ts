@@ -30,15 +30,14 @@ import {
 } from './queries';
 import AllModal from '@/components/all-modal'; // 공통 모달 컴포넌트
 
-/**
- * 댓글 작성/수정을 위한 커스텀 훅
- *
- * @param {Object} props - 훅 설정 객체
- * @param {boolean} props.isEdit - 수정 모드 여부 (true: 수정, false: 등록)
- * @param {Object} props.comment - 수정할 댓글 데이터 (수정 모드일 때만 필요)
- * @param {Function} props.onEditComplete - 수정 완료 시 실행할 함수
- * @returns {Object} 댓글 작성/수정에 필요한 상태와 함수들
- */
+// 댓글 작성/수정을 위한 커스텀 훅
+//
+// 받는 값:
+// - isEdit: true면 수정 모드, false면 등록 모드
+// - comment: 수정할 댓글 정보 (수정할 때만 필요)
+// - onEditComplete: 수정 끝나면 실행할 함수
+//
+// 돌려주는 값: 댓글 작성/수정에 필요한 상태와 함수들
 export default function useCommentWrite({
   isEdit = false, // 기본값: 등록 모드
   comment, // 수정할 댓글 정보
@@ -60,16 +59,14 @@ export default function useCommentWrite({
   const [createBoardComment] = useMutation(FETCH_CREATE_COMMENT); // 댓글 생성용
   const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT); // 댓글 수정용
   // === 입력값 유효성 검증 함수 ===
-  /**
-   * 🎯 모든 필수 입력 필드가 채워졌는지 확인하는 함수
-   *
-   * 💡 검증 항목:
-   * 1. 작성자명 (공백 제거 후 빈 문자열인지 확인)
-   * 2. 비밀번호 (공백 제거 후 빈 문자열인지 확인)
-   * 3. 댓글 내용 (공백 제거 후 빈 문자열인지 확인)
-   *
-   * @returns {boolean} true: 모든 입력이 유효, false: 유효하지 않은 입력 있음
-   */
+  // 모든 필수 입력 필드가 채워졌는지 확인
+  //
+  // 검증 항목:
+  // 1. 작성자명 (공백 제거 후 빈 문자열인지 확인)
+  // 2. 비밀번호 (공백 제거 후 빈 문자열인지 확인)
+  // 3. 댓글 내용 (공백 제거 후 빈 문자열인지 확인)
+  //
+  // 돌려주는 값: true면 입력 OK, false면 입력 문제있음
   const validateInputs = () => {
     console.log('🔍 입력값 검증 시작');
 
@@ -102,15 +99,13 @@ export default function useCommentWrite({
   };
 
   // === 새 댓글 등록 함수 ===
-  /**
-   * 🎯 새로운 댓글을 생성하는 함수 (등록 모드 전용)
-   *
-   * 💡 동작 과정:
-   * 1. 입력값 유효성 검증
-   * 2. 서버에 댓글 생성 요청
-   * 3. 성공 시 입력 폼 초기화
-   * 4. 댓글 목록 자동 새로고침
-   */
+  // 새로운 댓글을 생성하는 함수 (등록 모드 전용)
+  //
+  // 동작 과정:
+  // 1. 입력값 유효성 검증
+  // 2. 서버에 댓글 생성 요청
+  // 3. 성공 시 입력 폼 초기화
+  // 4. 댓글 목록 자동 새로고침
   const onClickCreate = async () => {
     console.log('📝 새 댓글 등록 시작');
 
