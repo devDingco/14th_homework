@@ -5,8 +5,8 @@ import { gql, useQuery, useMutation } from "@apollo/client";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CommentListItem from "@/components/boards-detail/comment-list-item";
 
-const FETCH_BOARD_COMMENTS = gql`
-  query fetchBoardComments($boardId: ID!, $page: Int) {
+const FETCH_BOARD_COMMENTS_LIST = gql`
+  query fetchBoardCommentsList($boardId: ID!, $page: Int) {
     fetchBoardComments(boardId: $boardId, page: $page) {
       _id
       writer
@@ -40,7 +40,7 @@ export default function CommentList(props: CommentListProps) {
   const [hasMore, setHasMore] = useState(true);
   const limit = 10;
 
-  const { data, loading, error, refetch, fetchMore } = useQuery(FETCH_BOARD_COMMENTS, {
+  const { data, loading, error, refetch, fetchMore } = useQuery(FETCH_BOARD_COMMENTS_LIST, {
     variables: { boardId: props.boardId, page: 1 },
     fetchPolicy: "network-only",
     onCompleted: (data) => {
@@ -95,7 +95,7 @@ export default function CommentList(props: CommentListProps) {
         variables: { boardCommentId: id, password },
         refetchQueries: [
           {
-            query: FETCH_BOARD_COMMENTS,
+            query: FETCH_BOARD_COMMENTS_LIST,
             variables: { boardId: props.boardId, page: 1 },
             fetchPolicy: "network-only",
           },

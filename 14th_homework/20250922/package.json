@@ -29,7 +29,8 @@
     "react-dom": "^18",
     "react-infinite-scroll-component": "~6.1.0",
     "react-youtube": "^10.1.0",
-    "swiper": "^11.2.10"
+    "swiper": "^11.2.10",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "6.0.0",

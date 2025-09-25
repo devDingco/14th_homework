@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
-export const FETCH_BOARDS = gql`
-  query FetchBoards {
+export const FETCH_BOARDS_LIST = gql`
+  query FetchBoardsList {
     fetchBoards {
       _id
       writer
