@@ -1,7 +1,7 @@
 import { useIsEdit } from "@/commons/provider/isEditProvider"
 import { useParams, useRouter } from "next/navigation"
 
-const useBoardsDetailPage = () => {
+const useBoardsDetail = () => {
     const router = useRouter()
     const param = useParams()
     const { setIsEdit } = useIsEdit()
@@ -21,4 +21,4 @@ const useBoardsDetailPage = () => {
     }
 }
 
-export default useBoardsDetailPage
+export default useBoardsDetail

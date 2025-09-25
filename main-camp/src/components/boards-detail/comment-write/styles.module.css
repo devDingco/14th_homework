@@ -1,5 +1,6 @@
 /* comment */
 
+
 .comment_write_container {
     width: 1280px;
     height: 400px;
@@ -57,7 +58,7 @@
     resize: none;
 }
 
-.comment_resist_btn {
+.comment_btn {
     width: 99px;
     height: 48px;
     padding-top: 12px;
@@ -68,6 +69,38 @@
     opacity: 1;
     border-radius: 8px;
     background: var(--gray-300, rgba(199, 199, 199, 1));
+}
+
+.comment_update_btn_frame {
+    gap: 8px;
+}
+
+.comment_cancel_btn {
+    width: 64px;
+    height: 48px;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    gap: 8px;
+    opacity: 1;
+    border-radius: 8px;
+    border-width: 1px;
+    background: var(--gray-w, rgba(255, 255, 255, 1));
+    border: 1px solid var(--gray-B, rgba(0, 0, 0, 1));
+}
+
+.comment_update_btn {
+    width: 99px;
+    height: 48px;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    gap: 8px;
+    opacity: 1;
+    border-radius: 8px;
+    background: var(--gray-B, rgba(0, 0, 0, 1));
 }
 
 .input_frame_312w_80h {
@@ -94,5 +127,16 @@
     opacity: 1;
     border-radius: 8px;
     border-width: 1px;
+}
 
+.update_input_312w_48h {
+    width: 312px;
+    height: 48px;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    opacity: 1;
+    border-radius: 8px;
+    background: var(--gray-50, rgba(242, 242, 242, 1));
 }

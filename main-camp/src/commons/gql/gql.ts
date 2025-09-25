@@ -23,6 +23,7 @@ type Documents = {
     "\n    query fetchBoardComments($page: Int, $boardId: ID!) {\n        fetchBoardComments(page: $page, boardId: $boardId) {\n            _id\n            writer\n            contents\n            createdAt\n            rating\n        }\n    }\n": typeof types.FetchBoardCommentsDocument,
     "\n    mutation createBoardComment($createBoardCommentInput: CreateBoardCommentInput!, $boardId: ID!) {\n        createBoardComment (createBoardCommentInput: $createBoardCommentInput, boardId: $boardId) {\n            _id\n        }\n    }\n": typeof types.CreateBoardCommentDocument,
     "\n    mutation deleteBoardComment($password: String, $boardCommentId: ID!) {\n        deleteBoardComment (password: $password, boardCommentId:$boardCommentId)\n    }\n": typeof types.DeleteBoardCommentDocument,
+    "\n    mutation updateBoardComment($updateBoardCommentInput: UpdateBoardCommentInput!, $password: String, $boardCommentId: ID!) {\n        updateBoardComment (updateBoardCommentInput: $updateBoardCommentInput, password: $password, boardCommentId: $boardCommentId) {\n            writer\n            deletedAt\n        }\n    }\n": typeof types.UpdateBoardCommentDocument,
 };
 const documents: Documents = {
     "\n    mutation createBoard($createBoardInput: CreateBoardInput!) {\n        createBoard(createBoardInput: $createBoardInput) {\n            _id\n            writer\n            title\n        }\n    }\n": types.CreateBoardDocument,
@@ -34,6 +35,7 @@ const documents: Documents = {
     "\n    query fetchBoardComments($page: Int, $boardId: ID!) {\n        fetchBoardComments(page: $page, boardId: $boardId) {\n            _id\n            writer\n            contents\n            createdAt\n            rating\n        }\n    }\n": types.FetchBoardCommentsDocument,
     "\n    mutation createBoardComment($createBoardCommentInput: CreateBoardCommentInput!, $boardId: ID!) {\n        createBoardComment (createBoardCommentInput: $createBoardCommentInput, boardId: $boardId) {\n            _id\n        }\n    }\n": types.CreateBoardCommentDocument,
     "\n    mutation deleteBoardComment($password: String, $boardCommentId: ID!) {\n        deleteBoardComment (password: $password, boardCommentId:$boardCommentId)\n    }\n": types.DeleteBoardCommentDocument,
+    "\n    mutation updateBoardComment($updateBoardCommentInput: UpdateBoardCommentInput!, $password: String, $boardCommentId: ID!) {\n        updateBoardComment (updateBoardCommentInput: $updateBoardCommentInput, password: $password, boardCommentId: $boardCommentId) {\n            writer\n            deletedAt\n        }\n    }\n": types.UpdateBoardCommentDocument,
 };
 
 /**
@@ -86,6 +88,10 @@ export function graphql(source: "\n    mutation createBoardComment($createBoardC
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n    mutation deleteBoardComment($password: String, $boardCommentId: ID!) {\n        deleteBoardComment (password: $password, boardCommentId:$boardCommentId)\n    }\n"): (typeof documents)["\n    mutation deleteBoardComment($password: String, $boardCommentId: ID!) {\n        deleteBoardComment (password: $password, boardCommentId:$boardCommentId)\n    }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    mutation updateBoardComment($updateBoardCommentInput: UpdateBoardCommentInput!, $password: String, $boardCommentId: ID!) {\n        updateBoardComment (updateBoardCommentInput: $updateBoardCommentInput, password: $password, boardCommentId: $boardCommentId) {\n            writer\n            deletedAt\n        }\n    }\n"): (typeof documents)["\n    mutation updateBoardComment($updateBoardCommentInput: UpdateBoardCommentInput!, $password: String, $boardCommentId: ID!) {\n        updateBoardComment (updateBoardCommentInput: $updateBoardCommentInput, password: $password, boardCommentId: $boardCommentId) {\n            writer\n            deletedAt\n        }\n    }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

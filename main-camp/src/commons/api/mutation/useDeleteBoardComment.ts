@@ -9,7 +9,7 @@ const useDeleteBoardComment = () => {
         DeleteBoardCommentMutationVariables
     >(DeleteBoardCommentDocument)
 
-    const postDeleteBoardComment = async (event: React.MouseEvent<HTMLImageElement>, boardId:string) => {
+    const postDeleteBoardComment = async (event: React.MouseEvent<HTMLImageElement>, page: number, boardId: string) => {
         event.stopPropagation()
         const deleteBoardCommentPw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
         console.log('삭제 댓글 Id: ', event.currentTarget.dataset.key)
@@ -24,7 +24,10 @@ const useDeleteBoardComment = () => {
                 refetchQueries: [
                     {
                       query: FetchBoardCommentsDocument,
-                      variables: { boardId: String(boardId) },
+                      variables: { 
+                            page: page ?? 1,
+                            boardId: boardId
+                        },
                     },
                 ],
             })

@@ -1,11 +1,8 @@
+import { CreateBoardCommentInput } from "../gql/graphql"
+
 export interface IIsEditContext {
     isEdit: boolean,
     setIsEdit: (t: boolean) => void,
-
-    // updatingTitle: string | undefined,
-    // setUpdatingTitle: (t: string | undefined) => void,
-    // updatingContents: string | undefined,
-    // setUpdatingContents: (t: string | undefined) => void,
 
     postData: IPostData,
     setPostData: (t: any) => void,
@@ -18,7 +15,6 @@ type typeBoardAddress = {
     address: string,
     addressDetail?: string
 }
-
 export interface IPostData {
     writer: string | [k: string],
     password: string | [k: string],
@@ -33,4 +29,24 @@ export interface IPostUpdateData {
     contents: string | [k: string],
     boardAddress?: typeBoardAddress,
     youtubeUrl?: string
+}
+
+export interface IIsBoardDetailContext {
+    isCommentEdit: IIsCommentEdit, 
+    setIsCommentEdit: (t: IIsCommentEdit) => void,
+
+    commentInput: CreateBoardCommentInput,
+    setCommentInput: (t: any) => void,
+    commentErr: ICommentErr,
+    setCommentErr: (t: any) => void,
+}
+
+export interface ICommentErr {
+    commentWriterErr: string,
+    commentPasswordErr: string,
+    commentContentsErr: string,
+}
+export interface IIsCommentEdit {
+    isUpdate: boolean,
+    commentId: number
 }
