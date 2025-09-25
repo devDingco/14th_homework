@@ -1,0 +1,29 @@
+.navcontainer {
+  min-height: 80px;
+  padding: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+.nav {
+  display: flex;
+  min-height: 80px;
+  padding: 20px 0px;
+  justify-content: space-between;
+}
+
+.navItem {
+  display: flex;
+  font-size: 16px;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  margin-left: 24px;
+  gap: 16px;
+}
+
+.navlogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
