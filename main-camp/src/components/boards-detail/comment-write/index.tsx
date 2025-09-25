@@ -1,82 +1,34 @@
 "use client"
 
-import { ChangeEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import useBoardsCommentWrite from './hook'
 import styles from './styles.module.css'
-import { IOnChangeWriting } from './type'
-import { FetchBoardCommentsQuery, Query } from '@/commons/gql/graphql'
+import { CreateBoardCommentInput } from '@/commons/gql/graphql'
 import { Rate } from 'antd'
-interface IBoardsCommentWrite {
-    getBoardComments: () => Promise<FetchBoardCommentsQuery | undefined>,
-    comments: Query["fetchBoardComments"]
-}
+import { ICommentErr } from './type'
 
-const BoardsCommentWrite = (props: IBoardsCommentWrite) => {
+const BoardsCommentWrite = () => {
 
-    const [commentWriter, setCommentWriter] = useState<string>("")
-    const [commentPassword, setCommentPassword] = useState<string>("")
-    const [commentContents, setCommentContents] = useState<string>("")
-    const [commentWriterErr, setCommentWriterErr] = useState<string>("")
-    const [commentPasswordErr, setCommentPasswordErr] = useState<string>("")
-    const [commentContentsErr, setCommentContentsErr] = useState<string>("")
+    const [commentInput, setCommentInput] = useState<CreateBoardCommentInput>({
+        writer: "",
+        contents: "",
+        password: "",
+        rating: 1,
+    })
 
-    const [star, setStar] = useState<number>(0)
+    const [commentErr, setCommentErr] = useState<ICommentErr>({
+        commentWriterErr: "",
+        commentPasswordErr: "",
+        commentContentsErr: ""
+    })
 
     const {
-        creatingBoardComment, isActive, activeButton
-    } = useBoardsCommentWrite({commentWriter, commentPassword, commentContents, getBoardComments: props.getBoardComments})
-
-    const onChangeWriting = (props: IOnChangeWriting) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        switch (props.category) {
-            case "작성자": {
-                setCommentWriter(event.target.value)
-                break
-            }
-            case "비밀번호": {
-                setCommentPassword(event.target.value)
-                break
-            }
-            case "내용": {
-                setCommentContents(event.target.value)
-                break
-            }
-            default:
-        }
-    }    
-
-    const onClickCommentWrite = async () => {
-        const forValArr = [commentWriter, commentPassword, commentContents]
-        
-        if (forValArr.includes("")) {
-            for (let i=0; i < forValArr.length; i++) {
-                switch(i) {
-                    case 0: {
-                        forValArr[i] === "" ?  setCommentWriterErr("필수입력 사항 입니다.") : setCommentWriterErr("")
-                        break
-                    }
-                    case 1: {
-                        forValArr[i] === "" ? setCommentPasswordErr("필수입력 사항 입니다.") : setCommentPasswordErr("")
-                        break
-                    }
-                    case 2: {
-                        forValArr[i] === "" ? setCommentContentsErr("필수입력 사항 입니다.") : setCommentContentsErr("")
-                        break
-                    }
-                }
-            }
-        } else {
-            setCommentWriterErr("")
-            setCommentPasswordErr("")
-            setCommentContentsErr("")
-            // createComment 시작!
-            console.log('createComment 시작!')
-            creatingBoardComment(star)
-        }
-    }
+        isActive, activeButton, onChangeWriting, onClickCommentWrite, chooseStar
+    } = useBoardsCommentWrite({setCommentInput, commentInput, setCommentErr})    
 
     useEffect(()=>{
-        activeButton({ commentWriter, commentContents, commentPassword})
-    },[commentWriter, commentContents, commentPassword])
+        activeButton(commentInput)
+    },[commentInput.writer, commentInput.password, commentInput.contents])
 
     return (
         <div id="comment_write" className={`${styles.comment_write_container} flex_column flex_justi_sb`}>
@@ -86,27 +38,27 @@ const BoardsCommentWrite = (props: IBoardsCommentWrite) => {
             </div>
             <div className={`${styles.comment_star} flex_row`}>
                 {/* <img src="/image/star.png" /> */}
-                <Rate onChange={setStar} value={star}/>
+                <Rate onChange={chooseStar} value={commentInput.rating}/>
             </div>
             <section className={`${styles.comment_write_frame} flex_column`}>
                 <div className={`${styles.comment_write_form_container} flex_column`}>
                     <form className={`${styles.comment_write_form_top} flex_row`}>
                         <div className={`${styles.input_frame_312w_80h} flex_column`}>
                             <label className={`${styles.label_312w_24h} me_16_24 flex_row`} style={{ whiteSpace: "nowrap" }}>작성자<p className={`me_16_24`} style={{ color:"rgba(246, 106, 106, 1)" }}>*</p></label>
-                            <input className={`${styles.input_312w_48h} input_g_border_gray r_16_24`} onChange={onChangeWriting({ category: "작성자" })} placeholder='작성자 명을 입력해 주세요.'></input>
-                            <p className={`me_16_24`} style={{ color: "rgba(246, 106, 106, 1)" }}>{commentWriterErr}</p>
+                            <input className={`${styles.input_312w_48h} input_g_border_gray r_16_24`} onChange={onChangeWriting({ category: "작성자" })} placeholder='작성자 명을 입력해 주세요.' value={commentInput.writer || ""}></input>
+                            <p className={`me_16_24`} style={{ color: "rgba(246, 106, 106, 1)" }}>{commentErr.commentWriterErr}</p>
                         </div>
                         <div className={`${styles.input_frame_312w_80h} flex_column`}>
                             <label className={`${styles.label_312w_24h} me_16_24 flex_row`} style={{ whiteSpace: "nowrap" }}>비밀번호<p className={`me_16_24`} style={{ color:"rgba(246, 106, 106, 1)" }}>*</p></label>
-                            <input className={`${styles.input_312w_48h} input_g_border_gray r_16_24`} onChange={onChangeWriting({ category: "비밀번호" })} placeholder='비밀번호를 입력해 주세요.' type='password'></input>
-                            <p className={`me_16_24`} style={{ color: "rgba(246, 106, 106, 1)" }}>{commentPasswordErr}</p>
+                            <input className={`${styles.input_312w_48h} input_g_border_gray r_16_24`} onChange={onChangeWriting({ category: "비밀번호" })} placeholder='비밀번호를 입력해 주세요.' type='password' value={commentInput.password || ""}></input>
+                            <p className={`me_16_24`} style={{ color: "rgba(246, 106, 106, 1)" }}>{commentErr.commentPasswordErr}</p>
                         </div>
                     </form>
                     <form id="comment_write_contents">
-                        <textarea id="comment_write_contents" className={`${styles.comment_write_form_bottom} input_g_border_gray r_16_24`} onChange={onChangeWriting({ category: "내용" })} placeholder='댓글을 입력해 주세요.'>
+                        <textarea id="comment_write_contents" className={`${styles.comment_write_form_bottom} input_g_border_gray r_16_24`} onChange={onChangeWriting({ category: "내용" })} placeholder='댓글을 입력해 주세요.' value={commentInput.contents || ""}>
 
                         </textarea>
-                        <p className={`me_16_24`} style={{ color: "rgba(246, 106, 106, 1)" }}>{commentContentsErr}</p>
+                        <p className={`me_16_24`} style={{ color: "rgba(246, 106, 106, 1)" }}>{commentErr.commentContentsErr}</p>
                     </form>
                 </div>
                 <button className={`${styles.comment_resist_btn} flex_align_self_flexend`} onClick={onClickCommentWrite} style={{ background: isActive === true ? "rgba(41, 116, 229, 1)" : "rgba(199, 199, 199, 1)" }}>

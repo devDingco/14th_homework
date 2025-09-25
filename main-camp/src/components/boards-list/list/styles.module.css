@@ -9,68 +9,6 @@
     /* height: 100vh; */
 }
 
-/* list container */
-
-.board_list_frame {
-    width: 1280px;
-    height: 696px;
-    max-width: 1280px;
-    gap: 24px;
-    opacity: 1;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
-}
-
-.board_list_container {
-    width: 1184px;
-    height: 648px;
-    gap: 8px;
-    opacity: 1;    
-}
-
-.board_list_top {
-    width: 1184px;
-    height: 52px;
-    padding-top: 16px;
-    padding-right: 24px;
-    padding-bottom: 16px;
-    padding-left: 24px;
-    gap: 8px;
-    opacity: 1;
-}
-
-.wrap > p:nth-of-type(2) {
-    color: blue; /* 두번째 p 선택됨 */
-  }
-
-.board_list_top > div:nth-of-type(1) {
-    width: 64px;
-    height: 20px;
-    gap: 10px;
-    opacity: 1;
-}
-
-.board_list_top > div:nth-of-type(2) {
-    width: 848px;
-    height: 20px;
-    gap: 10px;
-    opacity: 1;    
-}
-
-.board_list_top > div:nth-of-type(3) {
-    width: 100px;
-    height: 20px;
-    gap: 10px;
-    opacity: 1;
-}
-
-.board_list_top > div:nth-of-type(4) {
-    width: 100px;
-    height: 20px;
-    gap: 10px;
-    opacity: 1;
-}
-
 .board_list_bottom {
     width: 1184px;
     height: 548px;

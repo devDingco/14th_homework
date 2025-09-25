@@ -1,44 +1,15 @@
-import { DeleteBoardCommentDocument, DeleteBoardCommentMutation, DeleteBoardCommentMutationVariables, FetchBoardCommentsDocument, FetchBoardCommentsQuery, FetchBoardCommentsQueryVariables } from "@/commons/gql/graphql"
+import useDeleteBoardComment from "@/commons/api/mutation/useDeleteBoardComment"
 import { useIsModal } from "@/commons/provider/isModalProvider"
-import { ApolloError, useApolloClient, useMutation } from "@apollo/client"
 import { useParams } from "next/navigation"
+import { useState } from "react"
+import { IBoardsCommentList } from "./type"
+import { FetchBoardCommentsQuery } from "@/commons/gql/graphql"
 
-interface IUseBoardCommentList {
-    setComments: React.Dispatch<React.SetStateAction<any>>
-}
-
-const useBoardCommentList = (props?: IUseBoardCommentList) => {
-    const client = useApolloClient()
+const useBoardCommentList = () => {
     const param = useParams()
-
+    const [hasMore, setHasMore] = useState<boolean>(true);
+    const { postDeleteBoardComment } = useDeleteBoardComment()
     const { setIsWarningModal } = useIsModal()
-
-    const [deleteBoardCommentAPI] = useMutation<
-        DeleteBoardCommentMutation,
-        DeleteBoardCommentMutationVariables
-    >(DeleteBoardCommentDocument)
-
-    const getBoardComments = async () => {
-        try {
-            const { data } = await client.query<FetchBoardCommentsQuery, FetchBoardCommentsQueryVariables>({
-                query: FetchBoardCommentsDocument,
-                variables: {
-                    // 하드코딩
-                    page: 1,
-                    boardId: String(param.boardId)
-                },
-                fetchPolicy: "network-only"
-            })
-            props!.setComments(data.fetchBoardComments)
-            return data
-        } catch(e: unknown) {
-            if (e instanceof ApolloError) {
-                e.graphQLErrors.forEach((e) => {
-                    alert(`${e.message}`)
-                });
-            }
-        }
-    }
 
     const updateBoardComments = async (event: React.MouseEvent<HTMLImageElement>) => {
         event.stopPropagation()
@@ -49,34 +20,40 @@ const useBoardCommentList = (props?: IUseBoardCommentList) => {
         // console.log('비밀번호 : ', updateBoardCommentPw)
     }
 
-    const deleteBoardComments = async (event: React.MouseEvent<HTMLImageElement>) => {
-        event.stopPropagation()
-        const deleteBoardCommentPw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
-        console.log('삭제 댓글 Id: ', event.currentTarget.dataset.key)
-        console.log('비밀번호 : ', deleteBoardCommentPw)
+    const onClickCommentDeleteHandler = (event: React.MouseEvent<HTMLImageElement>) => {
+        postDeleteBoardComment(event, String(param.boardId))
+    }
 
-        try {
-            const result = await deleteBoardCommentAPI({
-                variables: {
-                    boardCommentId : String(event.currentTarget.dataset.key),
-                    password: deleteBoardCommentPw
+    const onClickCommentUpdateHandler = async (event: React.MouseEvent<HTMLImageElement>) => {
+        await updateBoardComments(event)
+    }
+
+    const scrollInfiniteFetchComments = (parameter: IBoardsCommentList) => {
+        if (parameter.boardComments === undefined) return
+        if (parameter.boardCommentsFetchMore === undefined) return
+
+        parameter.boardCommentsFetchMore({
+            variables: { page: Math.ceil((parameter.boardComments.length ?? 10) / 10) + 1 },
+            
+            updateQuery: (prev: FetchBoardCommentsQuery, { fetchMoreResult }:any ) => {
+                if (!fetchMoreResult.fetchBoardComments?.length) {
+                    setHasMore(false);
+                    return;
                 }
-            })
-            console.log("삭제한 게시글 ID: ",result.data?.deleteBoardComment)
-
-        } catch(e: unknown) {
-            if (e instanceof ApolloError) {
-                e.graphQLErrors.forEach((e) => {
-                    alert(`${e.message}`)
-                });
-            }
-        }
+      
+                return {
+                    fetchBoardComments: [...prev.fetchBoardComments, ...fetchMoreResult.fetchBoardComments],
+                };
+            },
+        });
     }
 
     return {
-        getBoardComments,
         updateBoardComments,
-        deleteBoardComments
+        onClickCommentDeleteHandler,
+        onClickCommentUpdateHandler,
+        scrollInfiniteFetchComments,
+        hasMore
     }
 }
 

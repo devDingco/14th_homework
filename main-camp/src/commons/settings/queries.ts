@@ -51,12 +51,11 @@ export const FETCH_BOARDS = gql`
     }
 `
 
-// 게시글 전체 번호 조회
-// const FETCH_BOARDS_COUNT = gql`
-//     query {
-//         fetchBoardsCount(startDate: "2019-12-03T09:54:33Z", endDate: "2025-12-03T09:54:33Z")
-//     }
-// `
+export const FETCH_BOARDS_COUNT = gql`
+    query fetchBoardsCount($endDate: DateTime, $startDate: DateTime, $search: String) {
+        fetchBoardsCount(endDate: $endDate, startDate: $startDate, search: $search)
+    }
+`
 
 export const DELETE_BOARD = gql`
     mutation deleteBoard($boardId: ID!) {
@@ -65,7 +64,7 @@ export const DELETE_BOARD = gql`
 `
 
 export const FETCH_COMMENT = gql`
-    query   fetchBoardComments($page: Int, $boardId: ID!) {
+    query fetchBoardComments($page: Int, $boardId: ID!) {
         fetchBoardComments(page: $page, boardId: $boardId) {
             _id
             writer

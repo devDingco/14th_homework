@@ -1,28 +1,21 @@
 "use client"
 
-import { ApolloError, useMutation } from "@apollo/client"
-import { useParams, useRouter } from "next/navigation"
 import { ChangeEvent } from "react"
-import { IOnChangePosting, IOnUpdateHandler, IUpdateBoardInput } from "./type"
+import { IBoardErr, IOnChangePosting, IUseBoardWrite } from "./type"
 import { useIsEdit } from "@/commons/provider/isEditProvider"
-import { CreateBoardDocument, CreateBoardInput, CreateBoardMutation, CreateBoardMutationVariables, FetchBoardDocument, UpdateBoardDocument, UpdateBoardInput, UpdateBoardMutation, UpdateBoardMutationVariables } from "@/commons/gql/graphql"
 import { IPostData } from "@/commons/provider/type"
+import { useIsModal } from "@/commons/provider/isModalProvider"
+import useCreateBoard from "@/commons/api/mutation/useCreateBoard"
+import useUpdateBoard from "@/commons/api/mutation/useUpdateBoard"
+import { useParams } from "next/navigation"
 
-const useBoardWrite = () => {
-    const router = useRouter()
+const useBoardWrite = (props: IUseBoardWrite) => {
     const param = useParams()
-    const { 
-        postData, setPostData
-     } = useIsEdit()
+    const { postData, setPostData, updatingBoardData } = useIsEdit()
+    const { setIsWarningModal } = useIsModal()
     
-    const [createBoardAPI] = useMutation<
-        CreateBoardMutation,
-        CreateBoardMutationVariables
-    >(CreateBoardDocument)
-
-    const [updateBoardAPI] = useMutation<
-        UpdateBoardMutation, UpdateBoardMutationVariables
-    >(UpdateBoardDocument)
+    const { postCreateBoard } = useCreateBoard()
+    const { postUpdateBoard } = useUpdateBoard()
 
     const onChangePosting = (props: IOnChangePosting) => (event: ChangeEvent<HTMLInputElement>) => {
         switch (props.category) {
@@ -95,93 +88,130 @@ const useBoardWrite = () => {
         }
     }
 
-    const creatingBoard = async () => {
-        const createBoardInput = boardCreateSetting()
+    const onClickResist = async () => {
+        const forValArr = [
+            { value: postData.writer, setError: props.setBoardErr },
+            { value: postData.password, setError: props.setBoardErr },
+            { value: postData.title, setError: props.setBoardErr },
+            { value: postData.contents, setError: props.setBoardErr },
+          ];
+        const forAddressValArr = [postData.boardAddress?.zipcode, postData.boardAddress?.address]
 
-        console.log('직전 확인! ',createBoardInput)
+        let hasError = false;
+            forValArr.forEach(({ value, setError }, i) => {
+            if (value === "") {
+                switch (i) {
+                    case 0: {
+                        setError((prev: IBoardErr) => ({
+                            ...prev,
+                            boardWriterErr: "필수입력 사항 입니다."
+                        }));
+                        hasError = true;
+                        break
+                    }
+                    case 1: {
+                        setError((prev: IBoardErr) => ({
+                            ...prev,
+                            boardPasswordErr: "필수입력 사항 입니다."
+                        }));
+                        hasError = true;
+                        break
+                    }
+                    case 2: {
+                        setError((prev: IBoardErr) => ({
+                            ...prev,
+                            boardTitleErr: "필수입력 사항 입니다."
+                        }));
+                        hasError = true;
+                        break
+                    }
+                    case 3: {
+                        setError((prev: IBoardErr) => ({
+                            ...prev,
+                            boardContentsErr: "필수입력 사항 입니다."
+                        }));
+                        hasError = true;
+                        break
+                    }
+                }
+            } else {
+                setError({
+                    boardWriterErr: "",
+                    boardTitleErr: "",
+                    boardPasswordErr: "",
+                    boardContentsErr: ""
+                });
+            }
+        });
+
+        if (hasError) return;
+
+        if ((forAddressValArr.filter((v) => v === "").length !== forAddressValArr.length) && (forAddressValArr.filter((v) => v === "").length !== 0)) {
+            alert('주소를 끝까지 입력해 주세요')
+            return
+        }
         
-        try {
-            // createBoard 게시글 등록
-            const result = await createBoardAPI({
-                variables: {
-                    createBoardInput: {
-                        ...createBoardInput
-                    } as CreateBoardInput
-                },
-                refetchQueries: [
-                    {
-                      query: FetchBoardDocument,
-                      variables: { boardId: String(param.boardId) },
-                    },
-                ],
-            })
-            router.push(`/boards/${result.data?.createBoard._id}`)
-        } catch(e: unknown) {
-            if (e instanceof ApolloError) {
-                e.graphQLErrors.forEach((e) => {
-                    alert(`${e.message}`)
-                });
-            }
-        }
+        postCreateBoard(String(param.boardId))
     }
 
-    const boardCreateSetting = () => {
-        console.log("createBoard 전에 데이터 정리! ", postData)
-        if (Object.values(postData.boardAddress ?? {}).filter(v => v === "").length > 0) {
-            const { boardAddress, ...updateData } = postData
-            return Object.fromEntries(Object.entries(updateData).filter(([_, v]) => v !== ""))
+    const onUpdateHandler = async () => {
+        
+        const forValArr = [
+            { value: postData.title, setError: props.setBoardErr },
+            { value: postData.contents, setError: props.setBoardErr },
+        ];
+        
+        let hasError = false;
+            forValArr.forEach(({ value, setError }, i) => {
+            if (value === "") {
+                switch (i) {
+                    case 0: {
+                        setError((prev: IBoardErr) => ({
+                            ...prev,
+                            boardTitleErr: "필수입력 사항 입니다."
+                        }))
+                        hasError = true;
+                        break
+                    }
+                    case 1: {
+                        setError((prev: IBoardErr) => ({
+                            ...prev,
+                            boardContentsErr: "필수입력 사항 입니다."
+                        }))
+                        hasError = true;
+                        break
+                    }
+                }
+            } else {
+                setError((prev: IBoardErr) => ({
+                    ...prev,
+                    boardTitleErr: "",
+                    boardContentsErr: ""
+                }))
+            }
+        });
+
+        if (hasError) return;
+
+        if (updatingBoardData.contents === postData.contents) {
+            // alert('내용이 같으면 수정이 불가능 합니다.')
+            setIsWarningModal({ open: true, value: '내용이 같으면 수정이 불가능 합니다.'})
+            return
         } else {
-            return Object.fromEntries(Object.entries(postData).filter(([_, v]) => v !== ""))
-        }
-    }
-
-    const updatingBoard = async () => {
-        const updateBoardInput = boardUpdateSetting()
-        console.log('업데이트 직전: ', updateBoardInput)
-        // console.log({...updateBoardInput})
-        try {
-            const result = await updateBoardAPI({
-                variables: {
-                    ...updateBoardInput
-                },
-                refetchQueries: [
-                    {
-                      query: FetchBoardDocument,
-                      variables: { boardId: String(param.boardId) },
-                    },
-                ],
-            })
-            console.log('업데이트 결과: ',result.data?.updateBoard._id)
-            router.push(`/boards/${result.data?.updateBoard._id}`)
-        } catch(e: unknown) {
-            if (e instanceof ApolloError) {
-                e.graphQLErrors.forEach((e) => {
-                    alert(`${e.message}`)
-                });
-            }
-        }
-    }
-
-    const boardUpdateSetting = () => {
-        const inputBoardPw = prompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요")
-
-        const { writer, ...forUpdateData } = postData
-        // 업데이트 시도할 인풋 데이터들
-        const updateBoardInput = {
-            updateBoardInput: {...forUpdateData} as UpdateBoardInput,
-            password: String(inputBoardPw),
-            boardId: String(param.boardId),
+            props.setBoardErr((prev: IBoardErr) => ({
+                ...prev,
+                boardContentsErr: "",
+                boardTitleErr: ""
+            }))
         }
 
-        console.log('업데이트된 객체 확인: ', updateBoardInput)
-        return updateBoardInput
+        postUpdateBoard(String(param.boardId))
     }
 
     return {
         onChangePosting,
-        boardUpdateSetting,
-        creatingBoard,
-        updatingBoard
+        onClickResist,
+        onUpdateHandler
     }
 }
 
