@@ -9,20 +9,24 @@ import { FetchBoardsDocument, FetchBoardsQuery, FetchBoardsQueryVariables } from
 import { useQuery } from "@apollo/client"
 import { FETCH_BOARDS_COUNT } from "@/components/board-list/pagination/queries"
 import { FETCH_BOARDS } from "@/components/board-list/list/queries"
+import Search from "@/components/board-list/search/page"
+import { useState } from "react"
 
 
 export default function Boardpage() {
+     const [keyword, setKeyword] = useState("")
     const { data, refetch } = useQuery(FETCH_BOARDS
     )
-    const { data: dataCount} = useQuery(FETCH_BOARDS_COUNT)
+    const { data: dataCount } = useQuery(FETCH_BOARDS_COUNT)
     const lastPage = Math.ceil((dataCount?.fetchBoardsCount ?? 10) / 10)
 
     return (
         <div className={style.page}>
 
             <div className={style.boards}>
-                <BoardsPage data={data?.fetchBoards}/>
-                <Pagination refetch={refetch} lastPage={lastPage}/>
+                <Search  refetch={refetch} setKeyword={setKeyword}/>
+                <BoardsPage data={data?.fetchBoards} keyword={keyword} refetch={refetch}/>
+                <Pagination refetch={refetch} lastPage={lastPage} />
             </div>
         </div>
     )

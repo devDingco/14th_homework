@@ -19,7 +19,7 @@ export default function BoardsEdit(){
 
         
     
-
+ 
     return(
         <BoardsWrite isEdit={true} data={data}/>
     )

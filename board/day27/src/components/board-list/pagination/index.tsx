@@ -1,4 +1,4 @@
-"uew client"
+"use client"
 
 import { gql, useQuery } from "@apollo/client"
 import { useState } from "react"
