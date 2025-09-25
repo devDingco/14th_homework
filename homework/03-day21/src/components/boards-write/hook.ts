@@ -17,6 +17,13 @@ export default function useBoardsWrite(props: IUseBoardsWriteProps) {
     const fileRef = useRef<(HTMLInputElement | null)[]>([]);
     const [uploadFile] = useMutation(UPLOAD_FILE)
 
+    useEffect(() => {
+        if(!localStorage.getItem("accessToken")){
+            alert("로그인 후 이용 가능합니다.")
+            router.push('/boards')
+        }
+    },[])
+
     const onChangeFile = async(event: ChangeEvent<HTMLInputElement>, idx: number) => {
         const file= event.target.files?.[0]
         console.log(file)

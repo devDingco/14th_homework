@@ -4,7 +4,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { IDaumPostcodeData, IUseBoardsWriteProps } from "@/components/myapis-write/types";
 
-import { Modal, Input, Tag, Tooltip, theme } from "antd";
+import { Modal, Input, Tag, Tooltip, theme, InputRef } from "antd";
 import { supabase } from "@/commons/libraries/supabase";
 
 export default function useMyBoardWrite(props: IUseBoardsWriteProps) {
@@ -24,6 +24,12 @@ export default function useMyBoardWrite(props: IUseBoardsWriteProps) {
     const [addressDetail, setAddressDetail] = useState("");
     const [selectedImageUrl, setSelectedImageUrl] = useState("");   
              
+    useEffect(() => {
+        if(!localStorage.getItem("accessToken")){
+            alert("로그인 후 이용 가능합니다.")
+            router.push('/boards')
+        }
+    },[])
 
     useEffect(() => {
         const loadForEdit = async () => {
@@ -208,8 +214,8 @@ export default function useMyBoardWrite(props: IUseBoardsWriteProps) {
     const [inputValue, setInputValue] = useState('');
     const [editInputIndex, setEditInputIndex] = useState(-1);
     const [editInputValue, setEditInputValue] = useState('');
-    const inputRef = useRef<Input>(null);
-    const editInputRef = useRef<Input>(null);
+    const inputRef = useRef<InputRef>(null);
+    const editInputRef = useRef<InputRef>(null);
   
     useEffect(() => {
       if (inputVisible) {

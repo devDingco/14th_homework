@@ -43,7 +43,7 @@
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 1.5rem; 
+    line-height: 1rem; 
 }
 
 .searchButton {
@@ -63,7 +63,7 @@
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 600;
-    line-height: 1.5rem;
+    line-height: 1.125rem;
 }
 
 .submitWrapper {

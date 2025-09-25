@@ -1,5 +1,5 @@
-import Image from "next/image";
+import BoardsList from "@/components/boards-list/page";
 
 export default function Home() {
-  return ( <div>메인페이지 입니다.</div> );
+  return <BoardsList />;
 }

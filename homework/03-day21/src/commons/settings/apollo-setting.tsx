@@ -1,9 +1,10 @@
 "use client"
 
 import { ApolloClient, ApolloLink, ApolloProvider, InMemoryCache } from '@apollo/client'
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
 import { useAccessTokenStore } from '../stores/token-store';
+import { set } from 'lodash';
 
 interface IApolloSetting {
     children: ReactNode;
@@ -11,7 +12,12 @@ interface IApolloSetting {
 
 
 export default function ApiProvider(props: IApolloSetting){
-  const { accessToken } = useAccessTokenStore()
+  useEffect(() => {
+    const result = localStorage.getItem("accessToken")
+    setAccessToken(result ?? "")
+  }, [])
+
+  const { accessToken , setAccessToken } = useAccessTokenStore()
 
   const uploadLink = createUploadLink({
     uri: "http://main-practice.codebootcamp.co.kr/graphql",
