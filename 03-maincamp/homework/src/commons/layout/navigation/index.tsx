@@ -1,7 +1,9 @@
 "use client"
 import styles from './styles.module.css'
 
+
 export default function LayoutNavigation(){
+    
     return (
         <div className={styles.container}>
             <div className={styles.navigation}>

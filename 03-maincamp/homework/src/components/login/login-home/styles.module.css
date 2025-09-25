@@ -1,0 +1,86 @@
+.container{
+    width: 192rem;
+    height: 100vh;
+    display: flex;
+    
+    
+}
+
+.loginHeader{
+     width: 40rem;
+     height: 108rem;
+     border: 1px solid #000;
+     padding-top:24.4rem ;
+} 
+
+.loginBox{
+    width: 32rem ;
+    height: 39.6rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+
+}
+.loginBox__input{
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+}
+.loginBox__input__logo{
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+}
+.loginBox__input__logo > img{
+    margin: 0 auto;
+    width: 12rem;
+    height: 8rem; 
+}
+.loginBox__input__logo > h1{
+font-family: Pretendard Variable;
+font-weight: 600;
+font-style: SemiBold;
+font-size: 18px;
+
+line-height: 24px;
+letter-spacing: 0%;
+text-align: center;
+
+}
+.loginBox__input__form{
+    display: flex;
+    flex-direction: column;
+
+}
+.loginBox__input__form > h2{
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 14px;
+    
+    line-height: 20px;
+    letter-spacing: 0%;
+    text-align: center;
+    margin-bottom: 1.6rem;
+    margin: 0 auto;
+}
+.loginBox__input__form input{
+    margin-top: 1.2rem;
+}
+
+.loginBox__button{
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+}
+.loginBox__button__login{
+    background-color: #2974E5;
+    border: none;
+    color: white;
+}
+
+.loginBg{
+    width: 152rem;
+    height: 108rem;
+}
