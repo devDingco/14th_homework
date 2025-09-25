@@ -17,6 +17,13 @@
   height: 4rem;
   display: flex;
   align-items: center; 
+  /* gap: 2.4rem; */
+  justify-content: space-between;
+}
+
+.main__logoWithMenu{
+  display: flex;
+  align-items: center;
   gap: 2.4rem;
 }
 
@@ -27,6 +34,9 @@
   display: flex;
   gap: 1.6rem;
 }
+/* .main__login{
+
+} */
 .main__menu__item{
 font-family: Pretendard Variable;
 font-weight: 700;
@@ -37,8 +47,42 @@ letter-spacing: 0%;
 text-align: center;
 
 }
-.sub{
+
+.login__profileBtn{
   display: flex;
   gap: 0.4rem;
   align-items: center;
 }
+.login__profileBtn > img:first-child{
+  width: 4rem;
+  height: 4rem;
+}
+.login__profileBtn > img:last-child{
+  width: 2.4rem;
+  height: 2.4rem;
+}
+.login__loginBtn{
+  /* appearance: none; */
+   width: 9.3rem;
+   height: 4rem;
+   background-color: black;
+   color: white; 
+   border-radius: 10rem;
+   padding: 0.8rem 1.2rem;
+   
+
+font-family: Pretendard Variable;
+font-weight: 600;
+font-style: SemiBold;
+font-size: 14px;
+
+line-height: 20px;
+letter-spacing: 0%;
+text-align:center;
+   
+}
+.login__profileBtn__menu{
+  display: flex;
+}
+
+

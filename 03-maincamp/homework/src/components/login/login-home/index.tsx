@@ -1,6 +1,6 @@
 "use client"
 
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import { gql, useMutation } from '@apollo/client'
 import { result, set } from 'lodash'
@@ -16,11 +16,16 @@ const LOGIN_USER = gql`
 `
 
 export default function LoginHome(){
+    const [errors, setErrors] = useState({
+        email: "",
+        password: ""
+    })
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loginUser] = useMutation(LOGIN_USER)
     const router = useRouter()
-    const {setAccessToken} = useAccessTokenStore()
+    const { accessToken, setAccessToken } = useAccessTokenStore()
+    
     
     const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
@@ -31,12 +36,24 @@ export default function LoginHome(){
     }
 
     const onClickLogin = async () => {
+        let newErrors = {
+            email: "",
+            password: ""
+        }
+        if(!email) newErrors.email = "이메일을 입력해주세요"
+        if(!password) newErrors.password = "비밀번호를 입력해주세요"
+        setErrors(newErrors)
+        const hasError = Object.values(newErrors).some((error)=> error !== "")
+        if (hasError) return
+
         try{
              const result = await loginUser(
             { variables: { email, password } }
         )
-        const AccessTokenByApi = result?.data?.loginUser.accessToken;
+        const AccessTokenByApi = result.data?.loginUser.accessToken;
         setAccessToken(AccessTokenByApi);
+        localStorage.setItem("accessToken", AccessTokenByApi)
+        
         router.push('/boards')
 
         }catch(error){
@@ -59,8 +76,9 @@ export default function LoginHome(){
                     </div>
                     <div className={styles.loginBox__input__form}>
                         <h2>트립트립에 로그인 하세요</h2>
-                        <input placeholder='이메일을 입력해 주세요' type="text" />
-                        <input placeholder='비밀번호를 입력해 주세요' type="password" />
+                        <input className={errors.email ? styles.red : ""} onChange={onChangeEmail} placeholder='이메일을 입력해 주세요' type="text" />
+                        <input className={errors.password ? styles.red : ""}  onChange={onChangePassword} placeholder='비밀번호를 입력해 주세요' type="password" />
+                        {(errors.email || errors.password) && <div className={styles.error}> 아이디 또는 비밀번호를 확인해주세요 </div>}
                     </div>
                 </div>
                 <div className={styles.loginBox__button}>

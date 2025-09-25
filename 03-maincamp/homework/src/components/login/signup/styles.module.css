@@ -82,3 +82,50 @@ justify-content: center;
     width: 152rem;
     height: 108rem;
 }
+
+.error{
+    border: 1px solid red;
+}
+.modal{
+    display: flex;
+    flex-direction: column;
+    
+}
+.modal__title{
+font-family: Pretendard Variable;
+font-weight: 600;
+font-style: SemiBold;
+font-size: 18px;
+
+line-height: 24px;
+letter-spacing: 0%;
+text-align: center;
+margin: 0 auto;
+
+}
+
+.modal__logo{
+    margin: 0 auto;
+    width: 7.728rem;
+    height: 4.8rem;
+    margin-top: 1.2rem;
+    margin-bottom: 2.4rem; 
+}
+
+.modal__btn{
+    margin: 0 auto;
+    width: 12rem;
+    height: 4rem;
+    background-color: #2974E5;
+    color: white;
+font-family: Pretendard Variable;
+font-weight: 600;
+font-style: SemiBold;
+font-size: 14px;
+
+line-height: 20px;
+letter-spacing: 0%;
+text-align: center;
+
+
+}

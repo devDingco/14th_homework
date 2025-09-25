@@ -84,3 +84,9 @@ text-align: center;
     width: 152rem;
     height: 108rem;
 }
+.error{
+    color: red;
+}
+.red{
+    border: 1px solid red;
+}
