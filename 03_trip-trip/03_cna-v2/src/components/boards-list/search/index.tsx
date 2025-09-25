@@ -2,11 +2,16 @@
 import { DatePicker } from 'antd'
 import styles from './styles.module.css'
 import { Search, DriveFileRenameOutline } from '@mui/icons-material'
-import { ChangeEvent, useEffect } from 'react'
+import { ChangeEvent } from 'react'
 import _ from 'lodash'
+import { useRouter } from 'next/navigation'
 const { RangePicker } = DatePicker
 
 export default function BoardsSearch(props) {
+  const router = useRouter()
+  const handleNavigate = () => {
+    router.push('/boards/new')
+  }
   const { setKeyword, refetch } = props
   // console.log('🚀 ~ BoardsSearch ~ keyword:', keyword)
   const getDebounce = _.debounce((value) => {
@@ -15,7 +20,6 @@ export default function BoardsSearch(props) {
       page: 1,
     })
     setKeyword(value)
-    console.log('새로고침됨?')
   }, 500)
 
   const onChangeKeyword = (event: ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +34,6 @@ export default function BoardsSearch(props) {
 
     getDebounce(keyword)
   }
-  console.log('리렌더링')
 
   return (
     <div className={styles.boardSearchLayout}>
@@ -49,8 +52,6 @@ export default function BoardsSearch(props) {
             placeholder="제목을 검색해 주세요."
             id="searchBar"
             onChange={onChangeKeyword}
-            // defaultValue={keyword}
-            // value={keyword}
           />
         </div>
 
@@ -58,7 +59,7 @@ export default function BoardsSearch(props) {
         <button className={styles.searchButton}>검색</button>
       </div>
       {/* 트립토크 등록 */}
-      <button className={styles.iconButton}>
+      <button className={styles.iconButton} onClick={handleNavigate}>
         <DriveFileRenameOutline />
         <p>트립토크 등록</p>
       </button>
