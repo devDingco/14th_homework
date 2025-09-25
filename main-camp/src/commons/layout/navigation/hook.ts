@@ -17,10 +17,15 @@ const useLayoutNavigation = () => {
         router.push(`/openapis`)
     }
 
+    const goMyApisHandler = () => {
+        router.push(`/myapis`)
+    }
+
     return {
         goDetailHandler,
         goCreateBoardHandler,
-        goGetCatsHandler
+        goGetCatsHandler,
+        goMyApisHandler
     }
 }
 
