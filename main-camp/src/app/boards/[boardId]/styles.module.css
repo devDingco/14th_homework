@@ -1,0 +1,16 @@
+/* comment */
+
+.comment_write_container {
+    width: 1280px;
+    min-height: 50px;
+    max-height: 400px;
+    gap: 24px;
+    opacity: 1;
+}
+
+.comment_icon {
+    width: 60px;
+    height: 24px;
+    gap: 8px;
+    opacity: 1;
+}

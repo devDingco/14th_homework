@@ -5,7 +5,7 @@ import styles from './styles.module.css'
 
 const LayoutNavigation = () => {
 
-    const { goDetailHandler, goCreateBoardHandler } = useLayoutNavigation()
+    const { goDetailHandler, goCreateBoardHandler, goGetCatsHandler, goMyApisHandler } = useLayoutNavigation()
 
     return (
         <div className={`${styles.header_frame} flex_row flex_justi_center`}>
@@ -18,6 +18,8 @@ const LayoutNavigation = () => {
                         <li><p className='me_16_24'>트립토크</p></li>
                         <li><p className='me_16_24'>숙박권 구매</p></li>
                         <li><p className='me_16_24'>마이 페이지</p></li>
+                        <li onClick={goGetCatsHandler}><p className='me_16_24' style={{ whiteSpace: "" }}>고양이를<br/>보러가자</p></li>
+                        <li onClick={goMyApisHandler}><p className='me_16_24' style={{ whiteSpace: "" }}>MyAPIs</p></li>
                         <li onClick={goCreateBoardHandler}><p className='me_16_24'>게시물 등록</p></li>
                     </ul>
                 </div>

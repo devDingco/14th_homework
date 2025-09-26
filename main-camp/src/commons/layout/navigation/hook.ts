@@ -13,9 +13,19 @@ const useLayoutNavigation = () => {
         router.push(`/boards/new`)
     }
 
+    const goGetCatsHandler = () => {
+        router.push(`/openapis`)
+    }
+
+    const goMyApisHandler = () => {
+        router.push(`/myapis`)
+    }
+
     return {
         goDetailHandler,
-        goCreateBoardHandler
+        goCreateBoardHandler,
+        goGetCatsHandler,
+        goMyApisHandler
     }
 }
 
