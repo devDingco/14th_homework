@@ -50,8 +50,6 @@ export default function BoardsLogin() {
       console.log(accessToken);
 
       setAccessToken(accessToken);
-      localStorage.setItem('accessToken', accessToken); // 임시사용 나중에 refreshToken으로 대체예정
-
       router.push('/boards/');
     } catch (error) {
       console.log(error);

@@ -53,7 +53,6 @@ export default function BoardsDetail() {
       router.push('/boards/login');
     }
   }, []);
-
   const {
     data, // hooks에서 데이터 가져오기
     onClickList, // 목록으로 돌아가기 버튼 클릭 핸들러

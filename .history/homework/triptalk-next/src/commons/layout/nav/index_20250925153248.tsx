@@ -3,28 +3,10 @@ import Image from 'next/image';
 import styles from './nav.module.css';
 import { useAccessTokenStore } from '@/commons/stores/access-token-store';
 import { useRouter } from 'next/navigation';
-import { useQuery } from '@apollo/client';
-import { graphql } from '@/commons/graphql/gql';
-
-const FETCH_USER_LOGGED_IN = graphql(`
-  query fetchUserLoggedIn {
-    fetchUserLoggedIn {
-      _id
-      email
-      name
-      picture
-    }
-  }
-`);
 
 export default function Nav() {
   const router = useRouter();
   const { accessToken } = useAccessTokenStore();
-
-  const { data: userData } = useQuery(FETCH_USER_LOGGED_IN, {
-    skip: !accessToken,
-  });
-
   const onClickLogin = () => {
     router.push('/boards/login');
   };
@@ -51,15 +33,12 @@ export default function Nav() {
         <div>
           {' '}
           {accessToken ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Image
-                src="/icons/profile.svg"
-                alt="프로필"
-                width={40}
-                height={40}
-              />
-              <span>{userData?.fetchUserLoggedIn?.name || '사용자'}</span>
-            </div>
+            <Image
+              src="/icons/profile.svg"
+              alt="프로필"
+              width={40}
+              height={40}
+            />
           ) : (
             <button onClick={onClickLogin} className={styles.navlogin}>
               로그인

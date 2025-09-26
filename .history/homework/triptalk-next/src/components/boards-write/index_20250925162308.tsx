@@ -22,8 +22,6 @@ import useBoardsWrite from './hooks'; // 커스텀 훅 - 비즈니스 로직 분
 import { IBoardsWriteProps } from './types'; // TypeScript 타입 정의
 import AddressModal from '../address-modal'; // 주소 검색 모달 컴포넌트
 import AllModal from '@/components/all-modal'; // 공통 모달 컴포넌트
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 /**
  * 게시글 작성/수정 메인 컴포넌트

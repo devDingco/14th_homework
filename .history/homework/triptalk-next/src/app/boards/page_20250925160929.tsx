@@ -1,15 +1,30 @@
-// 게시글 목록 메인 페이지
+/**
+ * 🎯 시험 포인트: 게시글 목록 메인 페이지 - 상태 관리와 Props Drilling
+ */
 'use client';
+
+// 🎯 시험 출제: 컴포넌트 import 방닝
 import BoardsList from '@/components/boards-list/list'; // 게시글 목록 컴포넌트
 import Pagination from '@/components/boards-list/pagination'; // 페이지네이션 컴포넌트
 import { useQuery } from '@apollo/client'; // GraphQL 쿼리 훅
 import { FETCH_BOARDS } from '@/components/boards-list/list/queries'; // GraphQL 쿼리 문
 import { FETCH_BOARDS_COUNT } from './queries'; // 게시글 개수 쿼리
 import Search from '@/components/boards-list/search'; // 검색 컴포넌트
-import { useState } from 'react'; // React 상태 관리 훅
+import { useState, useEffect } from 'react'; // React 상태 관리 훅
+import { useRouter } from 'next/navigation'; // Next.js 라우터 훅
 
 //  메인 페이지 컴포넌트 구조
 export default function BoardsPage() {
+  const router = useRouter();
+
+  // 로그인 체크 - 로그인 안한 사용자는 로그인 페이지로 이동
+  useEffect(() => {
+    if (!localStorage.getItem('accessToken')) {
+      alert('로그인 후 이용 가능합니다!!!');
+      router.push('/boards/login');
+    }
+  }, []);
+
   //  useState 훅 사용법 (중요!)
   // 검색어를 저장하는 상태 - 초기값은 빈 문자열
   const [keyword, setKeyword] = useState('');
