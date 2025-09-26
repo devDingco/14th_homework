@@ -18,15 +18,32 @@
 
 
 *{
-  font-size: 10px;
+  /* font-size: 10px; */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-:root, html, body {
+
+/* :root, html, body {
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI',
                Roboto, 'Noto Sans KR', 'Helvetica Neue', Arial, sans-serif;
+} */
+
+:root {
+  --font-base: 10px;  
+  --icon-base: 18px;
+}
+
+html {
+  font-size: var(--font-base);
+  font-family: Pretendard Variable;
+}
+
+.anticon {
+  font-size: var(--icon-base);
+  /* width: 9px; */
+  /* height: 18px; */
 }
 
 h2{
