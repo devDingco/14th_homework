@@ -2,6 +2,7 @@ import { LoginUserDocument } from "@/commons/graphql/graphql";
 import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";
 import { ApolloError, useMutation, useQuery } from "@apollo/client";
 import { Modal } from "antd";
+import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
@@ -51,8 +52,14 @@ export default function useLogin() {
         variables: { email, password },
       });
 
+      console.log(result);
       const accessToken = result.data?.loginUser.accessToken ?? "";
       setAccessToken(accessToken);
+
+      const decodedExp = String(jwtDecode(accessToken).exp);
+      // freshToken 실습 전까지 localStorage 저장
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("exp", decodedExp);
 
       setEmail("");
       setPassword("");
