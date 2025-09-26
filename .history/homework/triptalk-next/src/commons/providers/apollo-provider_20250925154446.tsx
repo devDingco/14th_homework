@@ -18,7 +18,7 @@ export default function ApiHeaderProvider(props) {
   }, []);
 
   // 프리렌더링 무시
-  const { accessToken, setAccessToken } = useAccessTokenStore();
+  const { accessToken } = useAccessTokenStore();
   const uploadLink = createUploadLink({
     uri: 'http://main-practice.codebootcamp.co.kr/graphql',
     headers: accessToken

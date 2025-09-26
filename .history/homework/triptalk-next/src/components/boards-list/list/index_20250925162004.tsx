@@ -7,7 +7,6 @@ import styles from './page.module.css';
 import useBoardsList from './hooks';
 import AllModal from '@/components/all-modal';
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
 // TypeScript interface 정의
 interface BoardsListProps {
@@ -17,11 +16,10 @@ interface BoardsListProps {
 
 //  기본값 매개변수 (default parameter)
 export default function BoardsList({ data, keyword = '' }: BoardsListProps) {
-  const router = useRouter(); // 로그인 안한사람 막는 코드
   useEffect(() => {
     if (!localStorage.getItem('accessToken')) {
       alert('로그인 후 이용 가능합니다!!!');
-      router.push('/boards/login');
+      router.push('/boards/login'); // 여기를 현재 프로젝트 로그인 경로로 변경
     }
   }, []);
   //  커스텀 훅 사용법
