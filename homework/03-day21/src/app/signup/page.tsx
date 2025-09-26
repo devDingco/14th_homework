@@ -1,6 +1,6 @@
 "use client"
 
-import SignupPage from "@/components/login-header/signup"
+import SignupPage from "@/components/auth/signup"
 
 
 export default function SignupRoutePage() {

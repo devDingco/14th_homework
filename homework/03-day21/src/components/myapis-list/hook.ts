@@ -5,9 +5,18 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 export default function useOpenapisPage (){
+    const router = useRouter()
+
     const [thumbs, setThumbs] = useState<string[]>([])
     const [page, setPage] = useState(1)
     const [boards, setBoards] = useState<Array<{ _id: string; title: string; images: string[] }>>([])
+
+    useEffect(() => {
+        if(!localStorage.getItem("accessToken")){
+            alert("로그인 후 이용 가능합니다.")
+            router.push('/login')
+        }
+    },[])
 
     useEffect(() => {
         
@@ -53,7 +62,7 @@ export default function useOpenapisPage (){
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [boards]) 
 
-    const router = useRouter()
+    
     const onClickMyBoard = async (boardId: string) => {
         await router.push(`/openapis/${boardId}`)
     } 
