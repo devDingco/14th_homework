@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react"; // useEffect 추가
 import { gql, useQuery, useMutation } from "@apollo/client";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CommentListItem from "@/components/boards-detail/comment-list-item";
+import styles from "./styles.module.css";
 
 const FETCH_BOARD_COMMENTS_LIST = gql`
   query fetchBoardCommentsList($boardId: ID!, $page: Int) {
@@ -26,6 +27,7 @@ const DELETE_COMMENT = gql`
 
 interface CommentListProps {
   boardId: string;
+  onRefetch?: (refetchFn: () => void) => void;
 }
 
 interface BoardCommentItem {
@@ -36,17 +38,30 @@ interface BoardCommentItem {
   createdAt: string;
 }
 export default function CommentList(props: CommentListProps) {
+  const { boardId, onRefetch } = props;
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const limit = 10;
 
   const { data, loading, error, refetch, fetchMore } = useQuery(FETCH_BOARD_COMMENTS_LIST, {
-    variables: { boardId: props.boardId, page: 1 },
+    variables: { boardId, page: 1 },
     fetchPolicy: "network-only",
     onCompleted: (data) => {
-      console.log("fetchBoardComments boardId:", props.boardId, "data:", data);
+      console.log("fetchBoardComments boardId:", boardId, "data:", data);
     },
   });
+
+  // refetch 함수를 부모 컴포넌트에 전달
+  React.useEffect(() => {
+    if (onRefetch) {
+      const refetchFunction = () => {
+        setPage(1);
+        setHasMore(true);
+        refetch();
+      };
+      onRefetch(refetchFunction);
+    }
+  }, [onRefetch, refetch]);
 
   console.log("CommentList data:", data?.fetchBoardComments);
 
@@ -64,7 +79,7 @@ export default function CommentList(props: CommentListProps) {
     const nextPage = page + 1;
     try {
       const { data: newData } = await fetchMore({
-        variables: { boardId: props.boardId, page: nextPage },
+        variables: { boardId, page: nextPage },
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult || fetchMoreResult.fetchBoardComments.length === 0) {
             setHasMore(false);
@@ -96,12 +111,12 @@ export default function CommentList(props: CommentListProps) {
         refetchQueries: [
           {
             query: FETCH_BOARD_COMMENTS_LIST,
-            variables: { boardId: props.boardId, page: 1 },
+            variables: { boardId, page: 1 },
             fetchPolicy: "network-only",
           },
         ],
         onCompleted: (data) => {
-          console.log("deleteBoardComment completed:", data, "boardId:", props.boardId);
+          console.log("deleteBoardComment completed:", data, "boardId:", boardId);
           refetch(); // 이미 있음
           setPage(1); // 페이지 초기화
           setHasMore(true); // hasMore 초기화
@@ -132,16 +147,16 @@ export default function CommentList(props: CommentListProps) {
       hasMore={hasMore}
       loader={<div className="text-center mt-4 text-gray-500">로딩 중...</div>}
       endMessage={<div className="text-center mt-4 text-gray-400">댓글 끝!</div>}
-      className="content-container"
+      className={styles.contentContainer}
     >
-      <h3 className="post-title" style={{ marginBottom: 12 }}>댓글</h3>
+      <h3 className={styles.postTitle} style={{ marginBottom: 12 }}>댓글</h3>
       <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
         {comments.map((comment) => (
           <CommentListItem
             key={comment._id}
             comment={comment}
             onDelete={handleDelete}
-            boardId={props.boardId}
+            boardId={boardId}
           />
         ))}
       </ul>

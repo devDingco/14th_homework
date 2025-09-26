@@ -1,6 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useRef } from "react";
 import Layout from "@/commons/layout";
 import BoardsDetail from "@/components/boards-detail/detail";
 import CommentWrite from "@/components/boards-detail/comment-write";
@@ -8,6 +9,18 @@ import CommentList from "@/components/boards-detail/comment-list";
 
 export default function BoardsDetailPage() {
   const { boardId } = useParams() as { boardId: string };
+  const commentListRefetchRef = useRef<(() => void) | null>(null);
+
+  const handleCommentListRefetch = (refetchFn: () => void) => {
+    commentListRefetchRef.current = refetchFn;
+  };
+
+  const handleCommentCompleted = () => {
+    if (commentListRefetchRef.current) {
+      commentListRefetchRef.current();
+    }
+  };
+
   return (
     <Layout>
       <BoardsDetail boardId={boardId} />
@@ -15,8 +28,12 @@ export default function BoardsDetailPage() {
         boardId={boardId}
         boardCommentId=""
         isEdit={false}
+        onCompleted={handleCommentCompleted}
       />
-      <CommentList boardId={boardId} />
+      <CommentList 
+        boardId={boardId} 
+        onRefetch={handleCommentListRefetch}
+      />
     </Layout>
   );
 }
