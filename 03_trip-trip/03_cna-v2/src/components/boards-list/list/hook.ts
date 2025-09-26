@@ -19,9 +19,9 @@ export default function useBoardsList(props: BoardListHookProps) {
     event.stopPropagation()
 
     try {
-      const response = await deleteBoard({
+      await deleteBoard({
         variables: { boardId: props.hoveredId },
-        refetchQueries: [{ query: FetchBoardsDocument }],
+        refetchQueries: [{ query: FetchBoardsDocument, variables: { search: '' } }],
       })
       console.log('삭제 성공')
     } catch (err) {
@@ -29,7 +29,7 @@ export default function useBoardsList(props: BoardListHookProps) {
     }
   }
 
-  const onClickDetail = async (event: MouseEvent<HTMLButtonElement>, id: String) => {
+  const onClickDetail = async (event: MouseEvent<HTMLButtonElement>, id: string) => {
     router.push(`/boards/${id}`)
   }
 

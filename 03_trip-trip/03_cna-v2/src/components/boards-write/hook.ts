@@ -11,6 +11,8 @@ import {
   FetchBoardDocument,
   FetchBoardQuery,
   FetchBoardQueryVariables,
+  FetchBoardsCountDocument,
+  FetchBoardsDocument,
   UpdateBoardDocument,
   UpdateBoardInput,
   UpdateBoardMutation,
@@ -33,10 +35,23 @@ export default function useBoardForm(props: BoardFormProps) {
 
   //그래프큐엘 셋팅
   const [createBoard] = useMutation<CreateBoardMutation, CreateBoardMutationVariables>(
-    CreateBoardDocument
+    CreateBoardDocument,
+    {
+      refetchQueries: [
+        { query: FetchBoardsDocument, variables: { search: '' } },
+        { query: FetchBoardsCountDocument, variables: { search: '' } },
+      ],
+    }
   )
   const [updateBoard] = useMutation<UpdateBoardMutation, UpdateBoardMutationVariables>(
-    UpdateBoardDocument
+    UpdateBoardDocument,
+    {
+      refetchQueries: [
+        { query: FetchBoardsDocument, variables: { search: '' } },
+        { query: FetchBoardsCountDocument, variables: { search: '' } },
+        { query: FetchBoardDocument, variables: { boardId: editId } },
+      ],
+    }
   )
 
   const [boardValue, setBoardValue] = useState({

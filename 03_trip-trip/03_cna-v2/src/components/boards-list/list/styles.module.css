@@ -47,7 +47,10 @@
   border-radius: 8px;
   border: 1px solid var(--gray-50, #f2f2f2);
 }
-
+.contentContainer:disabled {
+  pointer-events: none;
+  opacity: 0.3;
+}
 .contentBody {
   display: flex;
   flex-direction: column;

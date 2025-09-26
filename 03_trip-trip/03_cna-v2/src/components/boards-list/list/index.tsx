@@ -4,6 +4,7 @@ import Image from 'next/image'
 import useBoardsList from './hook'
 import { useState } from 'react'
 import { BoardsListProps } from './types'
+import { useAuthStatus } from 'commons/hooks/useAuthGuard'
 
 const IMAGE_SRC = {
   deleteImage: {
@@ -14,12 +15,10 @@ const IMAGE_SRC = {
 
 export default function BoardsListComponent(props: BoardsListProps) {
   const { data, dataBoardsCount, currentPage, keyword } = props
-  console.log('🚀 ~ BoardsListComponent ~ data:', data)
   const [hoveredId, setHoveredId] = useState('')
 
   const { onClickDelete, onClickDetail } = useBoardsList({ hoveredId })
-
-  console.log('나 게시글 목록')
+  const isAuthenticated = useAuthStatus()
 
   return (
     <div className={styles.boardInnerBody}>
@@ -35,6 +34,7 @@ export default function BoardsListComponent(props: BoardsListProps) {
       <div className={styles.contentBody}>
         {data?.fetchBoards?.map((el, index) => (
           <button
+            disabled={!isAuthenticated}
             onClick={(event) => onClickDetail(event, el?._id)}
             key={el._id}
             className={styles.contentContainer}

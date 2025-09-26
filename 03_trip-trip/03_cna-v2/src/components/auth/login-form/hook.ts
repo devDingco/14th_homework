@@ -43,7 +43,11 @@ export const useLogin = () => {
       })
       const accessToken = data?.loginUser?.accessToken ?? ''
       setAccessToken(accessToken)
-      if (accessToken) router.push('/boards')
+
+      if (accessToken) {
+        localStorage.setItem('accessToken', accessToken)
+        router.push('/boards')
+      }
     } catch (error) {
       if (error instanceof ApolloError) {
         alert(error?.message)
