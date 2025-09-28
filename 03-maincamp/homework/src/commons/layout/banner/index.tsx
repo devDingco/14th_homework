@@ -6,8 +6,13 @@ import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+
 
 export default function LayoutBanner() {
+  const router = useRouter();
   const settings = {
     dots: true,
     infinite: true,
@@ -15,7 +20,17 @@ export default function LayoutBanner() {
     slidesToShow: 1,
     slidesToScroll: 1
   };
+
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      alert("로그인후 이용가능합니다");
+      router.push("/login");
+    }
+  }, []);
+
   return (
+
+
     <div className={styles.slider__container}>
 
     <Slider {...settings}>
