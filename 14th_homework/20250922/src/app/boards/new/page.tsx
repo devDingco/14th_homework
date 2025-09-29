@@ -1,43 +1,15 @@
 "use client";
 
 import BoardsWrite from "@/components/boards-write/";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { authManager } from "@/lib/auth";
+import React from "react";
+import { withAuth, WithAuthProps } from "@/commons/hoc";
 
 /**
- * 게시글 등록 페이지
- * 로그인한 사용자만 접근 가능
+ * 게시글 등록 페이지 컴포넌트
+ * HOC를 통해 인증 상태를 자동으로 관리받음
  */
-export default function BoardsNewPage() {
-  const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const checkAuth = () => {
-      try {
-        // authManager에서 토큰 초기화
-        authManager.initializeToken();
-        
-        if (authManager.isLoggedIn()) {
-          setIsAuthenticated(true);
-        } else {
-          // 로그인하지 않은 경우 로그인 페이지로 리다이렉트
-          router.push('/auth/login');
-        }
-      } catch (error) {
-        console.error('인증 확인 실패:', error);
-        router.push('/auth/login');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    checkAuth();
-  }, [router]);
-
-  // 로딩 중일 때는 로딩 표시
+function BoardsNewPageComponent({ isAuthenticated, isLoading }: WithAuthProps) {
+  // 로딩 중이거나 인증되지 않은 경우는 HOC에서 처리되므로 여기서는 항상 인증된 상태
   if (isLoading) {
     return (
       <div style={{ 
@@ -47,18 +19,26 @@ export default function BoardsNewPage() {
         height: '100vh',
         fontSize: '18px'
       }}>
-        로그인 상태를 확인하는 중...
+        로딩 중...
       </div>
     );
   }
 
-  // 인증되지 않은 경우 아무것도 렌더링하지 않음 (리다이렉트 중)
-  if (!isAuthenticated) {
-    return null;
-  }
-
   // 인증된 사용자만 게시글 작성 컴포넌트 표시
-  return (
-    <BoardsWrite isEdit={false} />
-  );
+  // isAuthenticated는 HOC에서 보장되므로 여기서는 항상 true
+  console.log('인증 상태:', isAuthenticated); // 디버깅용
+  
+  return <BoardsWrite isEdit={false} />;
 }
+
+/**
+ * 게시글 등록 페이지
+ * 로그인한 사용자만 접근 가능
+ * withAuth HOC를 통해 인증 상태를 자동으로 관리
+ */
+const BoardsNewPage = withAuth(BoardsNewPageComponent, {
+  redirectTo: '/auth/login',
+  requireAuth: true
+});
+
+export default BoardsNewPage;

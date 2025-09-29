@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FETCH_BOARDS_DOCUMENT, FETCH_BOARDS_COUNT_DOCUMENT } from "./queries";
 
 export interface UseBoardsListProps {
@@ -41,6 +42,9 @@ export const useBoardsList = ({
   initialStartDate = null,
   initialEndDate = null,
 }: UseBoardsListProps = {}): UseBoardsListReturn => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [searchKeyword, setSearchKeyword] = useState(initialSearch);
   const [startDate, setStartDate] = useState<Date | null>(initialStartDate);
@@ -75,6 +79,11 @@ export const useBoardsList = ({
   const onChangePage = (page: number) => {
     setCurrentPage(page);
     boardsRefetch({ page, search: searchKeyword, startDate, endDate });
+    
+    // URL 업데이트 (브라우저 히스토리에 추가)
+    const params = new URLSearchParams(searchParams?.toString() || '');
+    params.set('page', page.toString());
+    router.push(`/boards?${params.toString()}`, { scroll: false });
   };
 
   const handleSearch = (keyword: string, start: Date | null, end: Date | null) => {
@@ -84,6 +93,14 @@ export const useBoardsList = ({
     setCurrentPage(1); // 검색 시 첫 페이지로 이동
     boardsRefetch({ page: 1, search: keyword, startDate: start, endDate: end });
     countRefetch({ search: keyword, startDate: start, endDate: end });
+    
+    // URL 업데이트 (검색 시 첫 페이지로)
+    const params = new URLSearchParams();
+    params.set('page', '1');
+    if (keyword) params.set('search', keyword);
+    if (start) params.set('startDate', start.toISOString());
+    if (end) params.set('endDate', end.toISOString());
+    router.push(`/boards?${params.toString()}`, { scroll: false });
   };
 
   const handleReset = () => {
@@ -93,6 +110,9 @@ export const useBoardsList = ({
     setCurrentPage(1);
     boardsRefetch({ page: 1, search: "", startDate: null, endDate: null });
     countRefetch({ search: "", startDate: null, endDate: null });
+    
+    // URL 업데이트 (리셋 시 첫 페이지로)
+    router.push('/boards?page=1', { scroll: false });
   };
 
   const refetch = () => {
