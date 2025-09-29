@@ -60,7 +60,7 @@ export default function SignUp(){
         setConfirmPassword(event.target.value)  
     }
     const onClickToLogin = () => {
-        router.push('/login')
+        router.push('/')
     }
     
     const onClickSignUp = async() => {
@@ -87,8 +87,12 @@ export default function SignUp(){
         console.log({email, name, password})
         openModal()
 
-        }catch(error){
-            alert(error.message)
+        }catch(error:unknown){
+            if(error instanceof Error){
+                alert(error.message)
+            }else{
+                alert("알 수 없는 에러가 발생했습니다.")
+            }
         }
         
     }

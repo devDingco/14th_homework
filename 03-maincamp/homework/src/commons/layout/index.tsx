@@ -5,8 +5,8 @@ import { IProps } from "./type"
 import { usePathname } from "next/navigation";
 
 const HIDDEN_BANNER = [
-  "/login", //
-  "/login/signup",
+  "/", //
+  "/signup",
 ];
 
 
