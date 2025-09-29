@@ -6,6 +6,7 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import useBoardsList from './hooks';
 import AllModal from '@/components/all-modal';
+import { withAuth } from '@/commons/hocs/auth';
 
 // TypeScript interface 정의
 interface BoardsListProps {
@@ -14,7 +15,10 @@ interface BoardsListProps {
 }
 
 //  기본값 매개변수 (default parameter)
-export default function BoardsList({ data, keyword = '' }: BoardsListProps) {
+export default withAuth(function BoardsList({
+  data,
+  keyword = '',
+}: BoardsListProps) {
   //  커스텀 훅 사용법
   // 커스텀 훅에서 여러 함수와 상태를 구조분해로 받아오기
   const { onClickTitle, onClickDelete, modalOpen, modalMessage, closeModal } =
@@ -107,4 +111,4 @@ export default function BoardsList({ data, keyword = '' }: BoardsListProps) {
       <AllModal open={modalOpen} message={modalMessage} onClose={closeModal} />
     </div>
   );
-}
+});

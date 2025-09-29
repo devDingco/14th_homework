@@ -31,13 +31,20 @@ import { useEffect } from 'react';
  * @param props.isEdit - 수정 모드 여부 (true: 수정, false: 등록)
  */
 export default function BoardsWrite(props: IBoardsWriteProps) {
+  const router = useRouter(); // 로그인 안한사람 막는 코드
+  useEffect(() => {
+    if (!localStorage.getItem('accessToken')) {
+      alert('로그인 후 이용 가능합니다!!!');
+      router.push('/boards/login');
+    }
+  }, []);
   // useBoardsWrite 커스텀 훅에서 상태와 함수들을 가져옴
   // 이 훅은 게시글 작성/수정에 필요한 모든 비즈니스 로직을 담당
   const {
     data, // 수정 모드일 때 기존 게시글 데이터 (GraphQL로 조회)
     inputs, // 입력 필드들의 값 객체 {name, title, content}
     zipcode, // 우편번호
-    address, // 기본 주소 (예: 서울특별시 강남구 테헤란로)
+    address, // 기본 주소 (예: 서울특별시 강남1구 테헤란로)
     addressDetail, // 상세 주소 (예: 123동 456호)
     setZipcode, // 우편번호 설정 함수
     setAddress, // 기본 주소 설정 함수
