@@ -33,6 +33,10 @@ export default function useBoardForm(props: BoardFormProps) {
     skip: !props.isEdit,
   })
 
+  const handleNavigate = () => {
+    router.push(`/boards/${editId}`)
+  }
+
   //그래프큐엘 셋팅
   const [createBoard] = useMutation<CreateBoardMutation, CreateBoardMutationVariables>(
     CreateBoardDocument,
@@ -297,5 +301,6 @@ export default function useBoardForm(props: BoardFormProps) {
     isModalOpen,
     onToggleModal,
     handleComplete,
+    handleNavigate,
   }
 }
