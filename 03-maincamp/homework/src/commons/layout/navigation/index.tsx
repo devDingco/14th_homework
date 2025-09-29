@@ -3,12 +3,13 @@ import styles from './styles.module.css'
 import { useAccessTokenStore } from '@/stores/use-access-token'
 import { RightOutlined } from '@ant-design/icons'
 import { gql, useQuery } from '@apollo/client'
-import { useEffect } from 'react'
+import { use, useEffect } from 'react'
 
 import React from 'react';
 import { DownOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Dropdown, Space } from 'antd';
+import { useRouter } from 'next/navigation';
 
 const FETCH_USER_LOGGED_IN = gql`
   query {
@@ -21,20 +22,39 @@ const FETCH_USER_LOGGED_IN = gql`
 `;
 
 export default function LayoutNavigation(){
-    const items: MenuProps['items'] = [
+    const router = useRouter()
+  const onClickToLogin = () => {
+    router.push("/login")
+  }
+
+   
+    const { setAccessToken, accessToken } = useAccessTokenStore()
+    useEffect(() => {
+      const accessTokenByLocal =localStorage.getItem("accessToken")
+      if(accessTokenByLocal){
+            setAccessToken(accessTokenByLocal)
+        }
+    }, [])
+    const { data } = useQuery(FETCH_USER_LOGGED_IN);
+    const clearAccessToken = useAccessTokenStore((state) => state.clearAccessToken)
+
+    const onClickLogout =() => {
+        clearAccessToken()
+        router.push("/login")
+    }
+
+     const items: MenuProps['items'] = [
   {
     label: (
-      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-        1st menu item
-      </a>
+      <div>23,000P</div>
     ),
     key: '0',
   },
   {
     label: (
-      <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-        2nd menu item
-      </a>
+      <div>포인트충전</div>
+      
+      
     ),
     key: '1',
   },
@@ -42,19 +62,13 @@ export default function LayoutNavigation(){
     type: 'divider',
   },
   {
-    label: '3rd menu item（disabled）',
+    label: (
+      <div onClick={onClickLogout}>로그아웃</div>
+    ),
     key: '3',
-    disabled: true,
+    
   },
 ];
-    const { setAccessToken, accessToken } = useAccessTokenStore()
-    const accessTokenByLocal =localStorage.getItem("accessToken")
-    useEffect(() => {
-        if(accessTokenByLocal){
-            setAccessToken(accessTokenByLocal)
-        }
-    }, [])
-    const { data } = useQuery(FETCH_USER_LOGGED_IN);
     
     return (
         <div className={styles.container}>
@@ -84,7 +98,7 @@ export default function LayoutNavigation(){
   </Dropdown>
                     </div>
                     
-                        : <button className={styles.login__loginBtn}>로그인<RightOutlined className={styles.anticon} /></button>}
+                        : <button onClick={onClickToLogin} className={styles.login__loginBtn}>로그인<RightOutlined className={styles.anticon} /></button>}
                 </div>
             </div>
         </div>
