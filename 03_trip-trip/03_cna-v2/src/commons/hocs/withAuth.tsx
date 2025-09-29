@@ -14,7 +14,7 @@ export const withAuth =
       const token = localStorage.getItem('accessToken') ?? undefined
       if (!token) {
         alert('로그인 후 서비스를 이용해주세요.')
-        router.replace('/login')
+        router.push('/login')
         return
       }
       if (isTokenExpired(token)) {
@@ -23,6 +23,8 @@ export const withAuth =
         router.push('/login')
       }
     }, [router])
-
+    const token =
+      typeof window !== 'undefined' ? localStorage.getItem('accessToken') ?? undefined : undefined
+    if (!token) return null
     return <컴포넌트 {...props} />
   }
