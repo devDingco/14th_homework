@@ -1,79 +1,50 @@
 "use client";
 
-import Image from "next/image";
-import styles from "./styles.module.css";
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { useParams } from "next/navigation";
+// import Image from "next/image";
+// import styles from "./styles.module.css";
+// import { gql, useMutation, useQuery } from "@apollo/client";
+// import { useState } from "react";
+// import { useParams } from "next/navigation";
 
 import { useCommentList } from "./hook";
-import profileIcon from "./icon/img.svg";
-import editIcon from "./icon/edit.svg";
-import closeIcon from "./icon/close.svg";
-import { Rate } from "antd";
-
-const IMAGE_SRC = {
-  profileIcon: {
-    src: profileIcon,
-    alt: "프로필이미지",
-  },
-  editIcon: {
-    src: editIcon,
-    alt: "편집버튼",
-  },
-  closeIcon: {
-    src: closeIcon,
-    alt: "삭제버튼",
-  },
-};
+import InfiniteScroll from "react-infinite-scroll-component";
+import CommentListItem from "../comment-list-item";
 
 export default function CommentList() {
   const { data, fetchMore, isHasMore, setIsHasMore } = useCommentList();
 
+  const onNext = () => {
+    if (data === undefined) return; // 데이터가 없으면 아래 실행하지않고 리턴으로 끝내기
+
+    fetchMore({
+      variables: {
+        page: Math.ceil((data?.fetchBoardComments.length ?? 10) / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (fetchMoreResult.fetchBoardComments?.length === 0) {
+          setIsHasMore(false);
+          return prev;
+        }
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
+
   return (
     <>
-      {data?.fetchBoardComments?.map((el: any) => {
-        return (
-          <div key={el?._id}>
-            {/* ->  key: React가 리스트 렌더링 시 각 항목을 구분하고 효율적으로 업데이트하기 위해 필수적으로 주는 값 */}
-            <div className={styles.commentContainer}>
-              <div className={styles.commentBody}>
-                <div className={styles.commentFrame}>
-                  <div className={styles.header}>
-                    <div className={styles.header_Profile}>
-                      <Image
-                        src={IMAGE_SRC.profileIcon.src}
-                        alt={IMAGE_SRC.profileIcon.alt}
-                      />
-                      <div className={styles.header_Profile_writer}>
-                        {el?.writer}
-                      </div>
-                      <Rate
-                        disabled
-                        className={styles.header_Rating}
-                        defaultValue={el?.rating}
-                      />
-                    </div>
-                    <div className={styles.header_Edit_Close}>
-                      <Image
-                        src={IMAGE_SRC.editIcon.src}
-                        alt={IMAGE_SRC.editIcon.alt}
-                      />
-                      <Image
-                        src={IMAGE_SRC.closeIcon.src}
-                        alt={IMAGE_SRC.closeIcon.alt}
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.commentContents}>{el.contents}</div>
-                  <div className={styles.commentDate}>
-                    {el?.createdAt.split("T")[0]}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      })}
+      <InfiniteScroll
+        dataLength={data?.fetchBoardComments.length ?? 0}
+        hasMore={isHasMore}
+        next={onNext}
+        loader={<div>로딩중입니다.</div>}
+      >
+        <CommentListItem data={data} />
+      </InfiniteScroll>
     </>
   );
 }

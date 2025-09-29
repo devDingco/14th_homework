@@ -21,7 +21,7 @@ export const useCommentWrite = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
 
-  const { data } = useQuery(FetchBoardCommentsDocument);
+  const { data, refetch } = useQuery(FetchBoardCommentsDocument);
 
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
@@ -39,16 +39,21 @@ export const useCommentWrite = () => {
     setRating(e);
   };
 
-  const handleOk = () => {
+  const onClickComment = () => {
     setIsModalOpen(false);
   };
+
+  const onClickEditComment = () => {
+    setIsModalOpen(false);
+  };
+
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
-  const 댓글등록버튼비활성화 = !writer || !password || !comment;
+  const 등록버튼비활성화 = !writer || !password || !comment;
 
-  const onClickComment = async () => {
+  const handleOk = async () => {
     try {
       const { data } = await createBoardComment({
         // 위에 애랑 밑에 두개랑 같은거. 밑에 애들을 짧게 구조분해한거.
@@ -95,7 +100,7 @@ export const useCommentWrite = () => {
     comment,
     rating,
     data,
-    댓글등록버튼비활성화,
+    등록버튼비활성화,
     isModalOpen,
     modalContent,
     handleOk,
@@ -105,5 +110,6 @@ export const useCommentWrite = () => {
     onChangeComment,
     onChangeRating,
     onClickComment,
+    onClickEditComment,
   };
 };

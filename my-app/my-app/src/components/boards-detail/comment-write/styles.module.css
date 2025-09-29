@@ -62,7 +62,7 @@
   line-height: 1.5rem;
 }
 
-.input {
+.inputWrite {
   width: 100%;
   max-width: 19.5rem;
   display: flex;
@@ -72,9 +72,30 @@
   align-items: flex-start;
   flex: 1 0 0;
 
-  border-radius: 0.5rem;
   border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  border-radius: 0.5rem;
   background: var(--Gray-W, #fff);
+}
+
+.inputEdit {
+  width: 100%;
+  max-width: 19.5rem;
+  display: flex;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  border-radius: 0.5rem;
+  background: var(--gray-50, #f2f2f2);
+
+  color: var(--gray-800, #333);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem;
 }
 
 .commentInput {
@@ -96,8 +117,28 @@
   font-weight: 500;
   line-height: 1.5rem;
 }
+.showCancelButton {
+  display: flex;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
 
-.commentButton:disabled {
+  color: var(--gray-B, #000);
+  text-align: center;
+
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem; /* 133.333% */
+}
+.hiddenCancelButton {
+  display: none;
+}
+.commentWriteButton:disabled,
+.commentEditButton:disabled {
   display: flex;
   margin-left: auto;
   height: 3rem;
@@ -116,7 +157,7 @@
   line-height: 1.5rem;
 }
 
-.commentButton {
+.commentWriteButton {
   display: flex;
   margin-left: auto;
   height: 3rem;
@@ -127,6 +168,25 @@
   border: none;
   border-radius: 0.5rem;
   background: #2974e5;
+
+  color: #fff;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem; /* 133.333% */
+}
+
+.commentEditButton {
+  display: flex;
+  margin-left: auto;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  gap: 0.5rem;
+
+  border: none;
+  border-radius: 0.5rem;
+  background: var(--gray-B, #000);
 
   color: #fff;
   text-align: center;

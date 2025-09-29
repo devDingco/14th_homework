@@ -1,0 +1,75 @@
+.commentContainer {
+  width: 100%;
+  /* max-width: 120rem; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.commentBody {
+  width: 100%;
+  max-width: 80rem;
+}
+
+.commentFrame {
+  width: 100%;
+  max-width: 80rem;
+  height: 8.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.header {
+  width: 100%;
+  max-width: 80rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_Profile {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.header_Profile_writer {
+  color: var(--gray-700, #5f5f5f);
+
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.25rem;
+}
+
+.header_Rating {
+  padding-left: 0.5rem;
+}
+
+.header_Edit_Close {
+  width: 4rem;
+  height: 1.25rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.commentContents {
+  width: 100%;
+  max-width: 80rem;
+}
+
+.commentDate {
+  display: flex;
+  width: 100%;
+  max-width: 80rem;
+  height: 1.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: stretch;
+
+  color: #818181;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem; /* 142.857% */
+}
