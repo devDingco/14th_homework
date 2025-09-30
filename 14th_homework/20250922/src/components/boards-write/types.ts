@@ -1,9 +1,3 @@
-export interface ErrorsState {
-  writer: string;
-  password: string;
-  title: string;
-  contents: string;
-}
 
 export interface UpdateBoardInput {
   title?: string;
