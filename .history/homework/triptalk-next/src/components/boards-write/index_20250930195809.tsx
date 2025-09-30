@@ -28,20 +28,26 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
   // 이 훅은 게시글 작성/수정에 필요한 모든 비즈니스 로직을 담당
   const {
     data, // 수정 모드일 때 기존 게시글 데이터 (GraphQL로 조회)
-
+    inputs, // 입력 필드들의 값 객체 {name, title, content}
     zipcode, // 우편번호
     address, // 기본 주소 (예: 서울특별시 강남구 테헤란로)
+    addressDetail, // 상세 주소 (예: 123동 456호)
     setZipcode, // 우편번호 설정 함수
     setAddress, // 기본 주소 설정 함수
     setAddressDetail, // 상세 주소 설정 함수
-    onClickCreate, // 게시글 등록 버튼 클릭 함수 (유효성 검증 + API 호출)
+    onClickSignUp, // 게시글 등록 버튼 클릭 함수 (유효성 검증 + API 호출)
     onClickUpdate, // 게시글 수정 버튼 클릭 함수 (비밀번호 확인 + API 호출)
+    onChangePassword, // 비밀번호 입력 필드 변경 함수
     onChangeYoutubeUrl, // 유튜브 URL 입력 필드 변경 함수
-
+    nameError, // 작성자명 유효성 검증 에러 메시지
+    passwordError, // 비밀번호 유효성 검증 에러 메시지
+    titleError, // 제목 유효성 검증 에러 메시지
+    contentError, // 내용 유효성 검증 에러 메시지
+    isActive, // 등록/수정 버튼 활성화 여부 (모든 필수 입력이 완료되면 true)
     modalOpen, // 모달 창 표시 여부
     modalMessage, // 모달 창에 표시할 메시지
     closeModal, // 모달 창 닫기 함수
-
+    onChangeInputs, // 공통 입력 필드 변경 함수 (name, title, content)
     onFileUpload0, // 첫 번째 이미지 업로드 함수 (uploadedFiles[0]에 저장)
     onFileUpload1, // 두 번째 이미지 업로드 함수 (uploadedFiles[1]에 저장)
     onFileUpload2, // 세 번째 이미지 업로드 함수 (uploadedFiles[2]에 저장)
@@ -56,11 +62,9 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     <div className="container">
       {/* 페이지 제목 */}
       <form
-        onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickCreate)}
+        onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickSignUp)}
       >
-        <h2 className={styles.h2}>
-          게시물 {props.isEdit ? '수정' : '등록'}하기
-        </h2>
+        <h2 className={styles.h2}>게시물 등록</h2>
         {/* 작성자와 비밀번호 입력 섹션 */}
         <div className={styles.작성자비밀번호컨테이너}>
           {/* 작성자 입력 필드 */}
@@ -71,6 +75,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
               type="text"
               placeholder="작성자 명을 입력해주세요."
               {...register('writer')}
+              defaultValue={data?.fetchBoard.writer ?? ''} // 수정 모드일 때 기존값 표시
               disabled={props.isEdit} // 수정 모드에서는 작성자 변경 불가
             ></input>
 
@@ -103,6 +108,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
             {...register('title')}
             type="text"
             placeholder="제목을 입력해 주세요."
+            defaultValue={data?.fetchBoard.title} // 수정 모드일 때 기존 제목 표시
           ></input>
           <div style={{ color: 'red' }}>{formState.errors.title?.message}</div>
 
@@ -115,6 +121,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
           <textarea
             {...register('contents')}
             placeholder="내용을 입력해 주세요."
+            defaultValue={data?.fetchBoard.contents} // 수정 모드일 때 기존 내용 표시
           ></textarea>
           <div style={{ color: 'red' }}>
             {formState.errors.contents?.message}
@@ -306,18 +313,15 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
         {/* 하단 버튼 섹션 */}
         <div className={styles.취소등록버튼}>
           {/* 취소 버튼 */}
-          <button type="button" className={styles.취소버튼}>
-            취소
-          </button>
+          <button className={styles.취소버튼}>취소</button>
+
           {/* 등록/수정 버튼 */}
           {/* 버튼 활성화 상태에 따라 배경색 변경 (활성화: 파란색, 비활성화: 회색) */}
           {/* 수정 모드인지에 따라 다른 함수 실행 */}
           <button
-            type="submit"
-            disabled={!formState.isValid}
             className={styles.등록하기버튼}
             style={{
-              backgroundColor: formState.isValid ? '#2974E5' : '#C7C7C7',
+              backgroundColor: isActive === true ? '#2974E5' : '#C7C7C7',
             }}
           >
             {/* 수정 모드인지에 따라 버튼 텍스트 변경 */}
