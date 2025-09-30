@@ -8,7 +8,7 @@ export default function BoardsDetailPage() {
   return (
     <>
       <BoardsDetail />
-      <CommentWrite />
+      <CommentWrite isEdit={false} />
       <CommentList />
     </>
   );
