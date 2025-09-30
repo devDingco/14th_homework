@@ -6,8 +6,9 @@ import styles from "./styles.module.css";
 import { useCommentWrite } from "./hook";
 import { Modal, Rate } from "antd";
 import { ICommentWrite } from "./types";
+import { Content } from "antd/es/layout/layout";
 
-export default function CommentWrite(props: ICommentWrite) {
+export default function CommentWrite({ isEdit, el }) {
   const {
     writer,
     password,
@@ -25,9 +26,9 @@ export default function CommentWrite(props: ICommentWrite) {
     onChangeRating,
     onClickComment,
     onClickEditComment,
-  } = useCommentWrite();
-
-  const { isEdit } = props;
+  } = useCommentWrite(el);
+  {
+  }
 
   return (
     <div className={styles.commentContainer}>
@@ -45,13 +46,12 @@ export default function CommentWrite(props: ICommentWrite) {
               <label className={styles.inputLabel}>
                 작성자 <span className={styles.required}>*</span>
               </label>
-
               <input
                 className={isEdit ? styles.inputEdit : styles.inputWrite}
                 type="text"
                 placeholder="작성자 명을 입력해주세요."
-                value={writer}
-                defaultValue={isEdit ? data?.fetchBoardComments?.writer : ""}
+                // value={writer}
+                defaultValue={isEdit ? el?.writer : writer}
                 disabled={isEdit}
                 onChange={onChangeWriter}
               />
@@ -72,8 +72,8 @@ export default function CommentWrite(props: ICommentWrite) {
           <textarea
             className={styles.commentInput}
             placeholder="댓글을 입력해 주세요."
-            value={comment}
-            defaultValue={isEdit ? data?.fetchBoardComments?.contents : ""}
+            // value={comment}
+            defaultValue={isEdit ? el?.contents : comment}
             onChange={onChangeComment}
           />
           <div>
@@ -91,13 +91,14 @@ export default function CommentWrite(props: ICommentWrite) {
               onClick={handleOk}
               disabled={등록버튼비활성화}
             >
-              댓글등록
+              {isEdit ? "수정하기" : "댓글등록"}
             </button>
           </div>
           <Modal
             title="Message"
             open={isModalOpen}
-            onOk={isEdit ? onClickComment : onClickEditComment}
+            onOk={handleOk}
+            // onOk={isEdit ? onClickEditComment : onClickComment}
             onCancel={handleCancel}
           >
             <p>{modalContent}</p>

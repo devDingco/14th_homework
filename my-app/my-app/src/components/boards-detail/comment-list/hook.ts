@@ -8,9 +8,8 @@ import { useState } from "react";
 export const useCommentList = () => {
   const [isHasMore, setIsHasMore] = useState<boolean>(true); // 무한스크롤 여부를 state로 관리
   const params = useParams();
-  const { data, fetchMore,  } = useQuery(FetchBoardCommentsDocument, {
+  const { data, fetchMore } = useQuery(FetchBoardCommentsDocument, {
     variables: { page: 1, boardId: String(params.boardId) },
-    
   });
   // page: 1은 ‘처음 실핼할때 기본으로 1번 페이지 데이터를 달라는 거'!
   // 초기 로딩에서는 page: 1로 댓글 첫 10개를 가져옴.
