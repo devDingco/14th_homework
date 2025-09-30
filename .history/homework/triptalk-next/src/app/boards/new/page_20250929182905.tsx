@@ -1,5 +1,4 @@
 'use client'; // 이 컴포넌트를 클라이언트에서 실행하도록 설정
-import { withAuth } from '@/commons/hocs/auth';
 // 등록페이지 - 새로운 게시글을 작성하는 페이지 컴포넌트
 import BoardsWrite from '@/components/boards-write'; // 게시글 작성/수정 공통 컴포넌트
 

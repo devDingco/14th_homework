@@ -19,6 +19,7 @@ import TooltipLocation from '../tooltip';
 import { DislikeOutlined, LikeOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { withAuth } from '@/commons/hocs/auth';
 
 // 유튜브 URL을 embed URL로 변환하는 함수
 const getYouTubeEmbedUrl = (url: string): string => {
@@ -45,7 +46,7 @@ const getYouTubeEmbedUrl = (url: string): string => {
 };
 
 // 게시글 상세보기 페이지 컴포넌트
-export default function BoardsDetail() {
+export default withAuth(function BoardsDetail() {
   const {
     data, // hooks에서 데이터 가져오기
     onClickList, // 목록으로 돌아가기 버튼 클릭 핸들러
@@ -166,4 +167,4 @@ export default function BoardsDetail() {
       </div>
     </div>
   );
-}
+});

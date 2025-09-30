@@ -6,6 +6,7 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import useBoardsList from './hooks';
 import AllModal from '@/components/all-modal';
+import { withAuth } from '@/commons/hocs/auth';
 
 // TypeScript interface 정의
 interface BoardsListProps {

@@ -6,6 +6,8 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import useBoardsList from './hooks';
 import AllModal from '@/components/all-modal';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 // TypeScript interface 정의
 interface BoardsListProps {
