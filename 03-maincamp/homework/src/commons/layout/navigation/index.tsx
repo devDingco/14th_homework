@@ -24,7 +24,7 @@ const FETCH_USER_LOGGED_IN = gql`
 export default function LayoutNavigation(){
     const router = useRouter()
   const onClickToLogin = () => {
-    router.push("/login")
+    router.push("/")
   }
 
    
@@ -40,7 +40,7 @@ export default function LayoutNavigation(){
 
     const onClickLogout =() => {
         clearAccessToken()
-        router.push("/login")
+        router.push("/")
     }
 
      const items: MenuProps['items'] = [

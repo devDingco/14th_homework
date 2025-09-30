@@ -1,6 +1,13 @@
 import { create } from "zustand";
 
-export const useAccessTokenStore = create((set) => ({
+type AccessTokenStore = {
+  accessToken: string;
+  setAccessToken: (loginToken: string) => void;
+  clearAccessToken: () => void;
+};
+
+
+export const useAccessTokenStore = create<AccessTokenStore>((set) => ({
   accessToken: "",
   setAccessToken: (loginToken: string) => {
     localStorage.setItem("accessToken", loginToken); 
