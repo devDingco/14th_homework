@@ -13,9 +13,10 @@ import {
 } from 'commons/graphql/graphql'
 import { useState } from 'react'
 import BoardsSearch from 'components/boards-list/search'
-import { useCheckTokenExpired } from 'commons/hooks/useAuthGuard'
+// import { useCheckTokenExpired } from 'commons/hooks/useAuthGuard'
+import { withAuth } from 'commons/hocs/withAuth'
 
-export default function BoardsPage() {
+function BoardsPage() {
   const [keyword, setKeyword] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const { data, refetch } = useQuery<FetchBoardsQuery, FetchBoardsQueryVariables>(
@@ -28,7 +29,7 @@ export default function BoardsPage() {
   )
   const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10)
 
-  useCheckTokenExpired()
+  // useCheckTokenExpired()
   return (
     <div className={styles.detailLayout}>
       <div className={styles.detailBody}>
@@ -52,3 +53,4 @@ export default function BoardsPage() {
     </div>
   )
 }
+export default withAuth(BoardsPage)

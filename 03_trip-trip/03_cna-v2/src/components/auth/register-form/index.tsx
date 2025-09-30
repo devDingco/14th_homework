@@ -59,7 +59,7 @@ export default function RegisterForm() {
                 비밀번호 확인 <span>*</span>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="비밀번호를 한 번 더 입력해 주세요"
                 onChange={handleChange}
                 id="passwordConfirm"

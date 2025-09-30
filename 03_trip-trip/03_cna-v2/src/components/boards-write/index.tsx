@@ -36,6 +36,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
     isModalOpen,
     onToggleModal,
     handleComplete,
+    handleNavigate,
   } = useBoardForm({ isEdit: props.isEdit })
 
   const fileRefs = [
@@ -243,7 +244,9 @@ export default function BoardWritePage(props: IBoardWriteProps) {
         </div>
       </div>
       <div className={styles.enroll_button_container}>
-        <button className={styles.enroll_cancel_button}>취소</button>
+        <button className={styles.enroll_cancel_button} onClick={handleNavigate}>
+          취소
+        </button>
         <button
           className={
             !props.isEdit && isButtonDisabled

@@ -1,8 +1,10 @@
 'use client'
-import { useAuthGuard } from 'commons/hooks/useAuthGuard'
+import { withAuth } from 'commons/hocs/withAuth'
+// import { useAuthGuard } from 'commons/hooks/useAuthGuard'
 import BoardWritePage from 'components/boards-write'
 
-export default function BoardsNewPage() {
-  useAuthGuard()
+function BoardsNewPage() {
+  // useAuthGuard()
   return <BoardWritePage isEdit={false} />
 }
+export default withAuth(BoardsNewPage)

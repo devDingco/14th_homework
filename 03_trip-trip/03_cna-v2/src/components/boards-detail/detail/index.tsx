@@ -1,5 +1,5 @@
 'use client'
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { useParams } from 'next/navigation'
 import ReactPlayer from 'react-player'
 import Image from 'next/image'
@@ -7,9 +7,15 @@ import { useRouter } from 'next/navigation'
 import styles from './styles.module.css'
 import profileImage from '@assets/profile_image.png'
 import {
+  DislikeBoardDocument,
+  DislikeBoardMutation,
+  DislikeBoardMutationVariables,
   FetchBoardDocument,
   FetchBoardQuery,
   FetchBoardQueryVariables,
+  LikeBoardDocument,
+  LikeBoardMutation,
+  LikeBoardMutationVariables,
 } from 'commons/graphql/graphql'
 import {
   HeartBrokenOutlined,
@@ -32,20 +38,38 @@ const IMAGE_SRC = {
 export default function BoardDetailPage() {
   const router = useRouter()
   const params = useParams()
-  const id = typeof params.boardId === 'string' ? params.boardId : ''
+  const boardId = typeof params.boardId === 'string' ? params.boardId : ''
 
   const { data } = useQuery<FetchBoardQuery, FetchBoardQueryVariables>(FetchBoardDocument, {
-    variables: { boardId: id },
+    variables: { boardId },
   })
 
   const goToEditPage = () => {
-    router.push(`${id}/edit`)
+    router.push(`${boardId}/edit`)
   }
 
   const goToBoardsPage = () => {
     router.push(`/boards`)
   }
 
+  const [likeBoard] = useMutation<LikeBoardMutation, LikeBoardMutationVariables>(LikeBoardDocument)
+  const [dislikeBoard] = useMutation<DislikeBoardMutation, DislikeBoardMutationVariables>(
+    DislikeBoardDocument
+  )
+
+  const onClickLike = async () => {
+    await likeBoard({
+      variables: { boardId },
+      refetchQueries: [{ query: FetchBoardDocument, variables: { boardId } }],
+    })
+  }
+
+  const onClickDisLike = async () => {
+    await dislikeBoard({
+      variables: { boardId },
+      refetchQueries: [{ query: FetchBoardDocument, variables: { boardId } }],
+    })
+  }
   return (
     <div className={styles.detailFrame}>
       <div className={styles.detailSubject}>{data?.fetchBoard?.title}</div>
@@ -98,11 +122,11 @@ export default function BoardDetailPage() {
 
         <div className={styles.detailContentGoodOrBad}>
           <div className={styles.detailGoodContainer}>
-            <HeartBrokenOutlined style={{ color: '#5F5F5F' }} />
+            <HeartBrokenOutlined style={{ color: '#5F5F5F' }} onClick={onClickDisLike} />
             <div className={styles.detailBadText}>{data?.fetchBoard?.dislikeCount}</div>
           </div>
           <div className={styles.detailGoodContainer}>
-            <FavoriteBorderOutlined style={{ color: '#F66A6A' }} />
+            <FavoriteBorderOutlined style={{ color: '#F66A6A' }} onClick={onClickLike} />
             <div className={styles.detailGoodText}>{data?.fetchBoard?.likeCount}</div>
           </div>
         </div>

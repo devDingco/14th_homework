@@ -22,6 +22,7 @@ export default function LoginForm() {
           <div className={`${styles.inputWrapper} ${isError ? styles.error : ''}`}>
             {/* 이메일 인풋 */}
             <input
+              type="text"
               placeholder="이메일을 입력해 주세요."
               onChange={handleChange}
               name="email"
@@ -29,6 +30,7 @@ export default function LoginForm() {
             />
             {/* 비밀번호 인풋 */}
             <input
+              type="password"
               placeholder="비밀번호를 입력해 주세요."
               onChange={handleChange}
               name="password"
