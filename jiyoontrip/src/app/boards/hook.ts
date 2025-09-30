@@ -61,8 +61,8 @@ export default function useBoardPage() {
   // };
 
   const onClickPage = (event: MouseEvent<HTMLButtonElement>) => {
-    setCurrentPage(Number(event?.target.id));
-    refetch({ page: Number(event?.target.id) });
+    setCurrentPage(Number(event?.currentTarget.id));
+    refetch({ page: Number(event?.currentTarget.id) });
   };
   const onClickPrevPage = () => {
     if (startPage === 1) return;
@@ -86,7 +86,9 @@ export default function useBoardPage() {
   const onChangeKeyword = (event: ChangeEvent<HTMLInputElement>) => {
     getDebounce(event.target.value);
   };
-
+  const onClickSubmit = () => {
+    router.push("/boards/new");
+  };
   return {
     onClickDelete,
     onClickDetail,
@@ -103,5 +105,6 @@ export default function useBoardPage() {
     currentPage,
     onChangeKeyword,
     keyword,
+    onClickSubmit,
   };
 }

@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import { DatePicker, Space } from "antd";
 const { RangePicker } = DatePicker;
 
-export default function SearchBar({ onChangeKeyword }) {
+export default function SearchBar({ onChangeKeyword, onClickSubmit }) {
   return (
     <>
       <div className={styles.page}>
@@ -29,7 +29,7 @@ export default function SearchBar({ onChangeKeyword }) {
             </div>
             <button className={styles.seachBarButton}>검색</button>
           </div>
-          <button className={styles.submitButton}>
+          <button className={styles.submitButton} onClick={onClickSubmit}>
             <Image
               src="/icons/outline/whitewrite.svg"
               alt="writeIcon"

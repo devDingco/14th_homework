@@ -12,6 +12,7 @@ import {
 } from "@/commons/graphql/graphql";
 import { Modal } from "antd";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
+import { UPLOAD_FILE } from "./queires";
 
 export default function useBoardWrite() {
   const router = useRouter();
@@ -21,6 +22,7 @@ export default function useBoardWrite() {
       boardId: String(params.boardId),
     },
   });
+  const [uploadFile] = useMutation(UPLOAD_FILE);
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
   const [author, setAuthor] = useState("");
@@ -31,6 +33,7 @@ export default function useBoardWrite() {
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [imageUrls, setImageUrls] = useState(["", "", ""]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
   const [authorError, setAuthorError] = useState("");
@@ -69,7 +72,18 @@ export default function useBoardWrite() {
   const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
     setYoutubeUrl(event.target.value);
   };
+  const onChangeFile =
+    (index: number) => async (event: ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
 
+      const result = await uploadFile({
+        variables: { file },
+      });
+      const newUrls = [...imageUrls];
+      newUrls[index] = result.data?.uploadFile.url ?? "";
+      setImageUrls(newUrls);
+    };
   const onToggleModal = () => {
     setIsModalOpen((prev) => !prev);
   };
@@ -178,7 +192,7 @@ export default function useBoardWrite() {
               addressDetail: updateAddressDetail,
             },
             youtubeUrl: updateYoutubeUrl,
-            images: [],
+            images: imageUrls,
           },
           password: passwordPrmpt,
           boardId: String(params.boardId),
@@ -214,8 +228,10 @@ export default function useBoardWrite() {
     onToggleCompleteModal,
     onCompleteAddress,
     onChangeYoutubeUrl,
+    onChangeFile,
     zonecode,
     address,
+    imageUrls,
     addressDetail,
     authorError,
     passwordError,

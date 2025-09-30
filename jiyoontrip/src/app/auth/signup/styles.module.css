@@ -6,7 +6,8 @@
 
 .leftZone {
   display: flex;
-  width: 25rem;
+  max-width: 25rem;
+  width: 100%;
   padding: 15.25rem 1.25rem 2.5rem;
   justify-content: center;
 }
@@ -54,11 +55,13 @@
   border-radius: 0.5rem;
   border: 1px solid var(--Gray-Gray-200, #d4d3d3);
   background: var(--Gray-W, #fff);
-  color: var(--Gray-Gray-400, #ababab);
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
   line-height: 1.25rem;
+}
+.input ::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
 }
 .logoIcon {
   width: 7.5rem;
@@ -108,6 +111,8 @@
 }
 
 .rightZone {
+  max-width: 95rem;
+  width: 100%;
   position: relative;
 }
 .star {
@@ -120,8 +125,28 @@
 .inputBlock {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 .inputLabel {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+}
+.label {
+  color: var(--gray-800, #333);
+
+  /* r_12_20 */
+  font-family: "Pretendard Variable";
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem; /* 166.667% */
+}
+.inputError {
+  color: var(--red, #f66a6a);
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
 }

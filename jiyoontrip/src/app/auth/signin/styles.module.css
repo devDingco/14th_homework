@@ -54,11 +54,25 @@
   border-radius: 0.5rem;
   border: 1px solid var(--Gray-Gray-200, #d4d3d3);
   background: var(--Gray-W, #fff);
-  color: var(--Gray-Gray-400, #ababab);
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
   line-height: 1.25rem;
+}
+.input ::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
+}
+.inputError {
+  color: var(--red, #f66a6a);
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+}
+.inputErrorEnroll {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 .logoIcon {
   width: 7.5rem;
