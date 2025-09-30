@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useBoardsList } from "../hook";
 import BoardsList from "../list";
 import Pagination from "../pagination";
@@ -20,6 +20,7 @@ export default function BoardsListContainer({
   initialEndDate = null,
 }: BoardsListContainerProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   
   const {
     boards,
@@ -42,7 +43,9 @@ export default function BoardsListContainer({
   });
 
   const onClickRow = (boardId: string) => { 
-    router.push(`/boards/${boardId}`); 
+    // 현재 페이지 정보를 URL에 포함하여 게시글 상세 페이지로 이동
+    const params = new URLSearchParams(searchParams?.toString() || '');
+    router.push(`/boards/${boardId}?from=${params.toString()}`); 
   };
   
   const onClickDelete = (boardId: string) => { 
