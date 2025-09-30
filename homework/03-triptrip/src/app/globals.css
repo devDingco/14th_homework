@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css");
+
+body {
+  font-family: 'Pretendard Variable', sans-serif;
+  background-color: #fff;
+  color: #000;
+}
+
+/* Swiper 페이지네이션 커스텀 */
+.customSwiper .swiper-pagination-bullet {
+  background-color: rgba(0, 0, 0, 0.5); /* 옅은 흰색 (반투명) */
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3)); 
+}
+
+.customSwiper .swiper-pagination-bullet-active {
+  background-color: #ffffff; /* 활성 점 색상 */
+}
+
+/* 툴팁 */
+.addressTooltip .ant-tooltip-inner {
+  display: inline-flex;
+  max-width: 20rem;
+  padding: 0.5rem 0.75rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+
+  border-radius: 0.25rem;
+  border: 1px solid #E4E4E4;
+  background: #FFF;
+  color: #000;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem; 
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.30), 
+              0 2px 6px 2px rgba(0, 0, 0, 0.15);
+}
+
+.addressTooltip .ant-tooltip-arrow {
+  display: none !important;
+}
+
+/* style.module.css */
+.starGroup :global(.ant-rate-star) {
+  gap: 12px;
+}

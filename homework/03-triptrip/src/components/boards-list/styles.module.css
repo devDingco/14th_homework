@@ -1,0 +1,40 @@
+.pageLayout {
+    width: 100%;
+    padding: 2.5rem 1.25rem;
+    display: flex;
+    flex-direction: column; /* 위에서 아래로 정렬 */
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem; /* 검색바랑 리스트 간격 */
+  }  
+
+.pageTitle {
+  width: 100%;
+  max-width: 80rem;
+
+  display: flex;   
+  align-items: center;
+  justify-content: flex-start; 
+
+  color: #000;
+  font-family: Pretendard;
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.25rem; 
+  
+}
+.searchWrapper {
+  width: 100%;
+  max-width: 80rem; /* 리스트 카드랑 폭 맞춤 */
+}
+.container {
+  width: 100%;
+  max-width: 80rem;
+  align-items: center;
+  padding: 1.5rem 3rem;    
+
+  border-radius: 1rem;
+  background: #FFF;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
+}

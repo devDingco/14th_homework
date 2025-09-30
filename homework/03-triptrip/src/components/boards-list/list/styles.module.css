@@ -1,0 +1,169 @@
+/* .layout {
+    width: 100%;
+    padding: 2.5rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } 
+  
+  .container {
+    width: 100%;
+    max-width: 80rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;  
+
+  } */
+
+  /* Boards Table Container */
+.boardsContainer {
+    width: 100%;
+    display: flex;  
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    
+}
+
+.boardsList {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Table Header */
+.boardsListHeader {
+    display: grid;
+    grid-template-columns: 0.5fr 3fr 1fr 1fr;
+    padding: 1rem 1.5rem;
+}
+
+.boardsListHeader > p:nth-child(1),
+.boardsListHeader > p:nth-child(3),
+.boardsListHeader > p:nth-child(4) {
+    text-align: center;
+    color: #1C1C1C;
+
+    /* me_16_20 */
+    font-family: "Pretendard Variable";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.boardsListHeader > p:nth-child(2) {
+    text-align: left;
+    padding-left: 10px;
+
+    color: #1C1C1C;
+
+    /* me_16_20 */
+    font-family: "Pretendard Variable";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+}
+
+
+/* Table Body */
+.boardsListBody {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    
+}
+
+/* Individual Row */
+.boardsListRow {
+    display: grid;
+    grid-template-columns: 0.5fr 3fr 1fr 1fr;
+    padding: 0.75rem 1.5rem;
+
+    position: relative;
+
+    border-radius: 0.5rem;
+    border: 1px solid #F2F2F2;
+    cursor: pointer;
+}
+
+
+.boardsListRow:hover .deleteButton {
+    display: block; 
+}
+
+.boardsListRow > p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.boardsListRow > p:nth-child(1) {
+    text-align: left;
+    color: var(--Gray-50, #919191);
+
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+
+    /* l_14_20 */
+    font-family: "Pretendard Variable";
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 300;
+
+    cursor: pointer;
+    }
+
+.boardsListRow > p:nth-child(2) {
+    text-align: left;
+    padding-left: 10px;
+
+    overflow: hidden;
+    color: var(--Gray-90, #1C1C1C);
+    text-overflow: ellipsis;
+
+    /* me_14_20 */
+    font-family: "Pretendard Variable";
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.boardsListRow > p:nth-child(3) {
+    overflow: hidden;
+    text-align: center;
+    color: var(--Gray-80, #333);
+    text-overflow: ellipsis;
+
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 300;
+}
+
+.boardsListRow > p:nth-child(4) {
+    overflow: hidden;
+    color: var(--Gray-50, #919191);
+    text-align: center;
+    text-overflow: ellipsis;
+
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 300;
+
+}
+
+.deleteButton {
+    display: none;
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.iconImage {
+    width: 1.5rem;
+    height: 1.5rem;
+}
