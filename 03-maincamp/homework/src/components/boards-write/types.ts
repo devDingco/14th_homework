@@ -27,6 +27,7 @@ export interface IBoardWriteProps {
 export interface Idata {
   zonecode: string; 
   address: string; 
+  addressDetail: string; 
   addressEnglish?: string; 
   addressType?: 'R' | 'J'; 
   bname?: string; 
