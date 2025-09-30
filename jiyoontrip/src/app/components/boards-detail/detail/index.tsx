@@ -9,7 +9,6 @@ import { Tooltip } from "antd";
 import YouTube from "react-youtube";
 export default function DetailPageComponent() {
   const { onClickMove, onClickLikeCount, onClickDislikeCount, data } = useDetailPage();
-
   return (
     <>
       <div className={styles.page}>
@@ -54,12 +53,9 @@ export default function DetailPageComponent() {
             </div>
           </div>
           <div className={styles.detailPhoto}>
-            <Image
-              src="/images/beach.png"
-              alt="BeachImage"
-              width={400}
-              height={531}
-              sizes="100vw"
+            <img
+              className={styles.uploadImage}
+              src={`https://storage.googleapis.com/${data?.fetchBoard.images[0]}`}
             />
           </div>
           <div className={styles.detailContent}>{data?.fetchBoard.contents}</div>

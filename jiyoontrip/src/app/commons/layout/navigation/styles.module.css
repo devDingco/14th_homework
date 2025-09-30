@@ -34,3 +34,18 @@
   width: 3.22006rem;
   height: 2rem;
 }
+.loginButton {
+  display: flex;
+  height: 2.5rem;
+  padding: 0.5rem 0.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 6.25rem;
+  background: var(--gray-B, #000);
+  color: #fff;
+  text-align: center;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.25rem;
+}

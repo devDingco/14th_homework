@@ -18,8 +18,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
     onToggleCompleteModal,
     onCompleteAddress,
     onChangeYoutubeUrl,
+    onChangeFile,
     zonecode,
     address,
+    imageUrls,
     authorError,
     passwordError,
     titleError,
@@ -192,43 +194,54 @@ export default function BoardWrite(props: IBoardWriteProps) {
             <div className={styles.imageUploadInput}>
               <label htmlFor="file-upload-1">
                 <div className={styles.imageUploadInput__drop}>
+                  <img
+                    className={styles.uploadImage}
+                    src={`https://storage.googleapis.com/${imageUrls[0]}`}
+                  />
                   <Image
+                    className={styles.plusIcon}
                     src="/icons/outline/add.svg"
                     alt="AddIcon"
                     width={24}
                     height={24}
                   />
-                  <p>클릭해서 사진 업로드</p>
-                  <input
-                    type="file"
-                    id="file-upload-1"
-                    className={styles.imageUploadInput__drop}
-                  />
+                  <p className={styles.uploadText}>클릭해서 사진 업로드</p>
+                  <input type="file" id="file-upload-1" onChange={onChangeFile(0)} />
                 </div>
               </label>
               <label htmlFor="file-upload-2">
                 <div className={styles.imageUploadInput__drop}>
+                  <img
+                    className={styles.uploadImage}
+                    src={`https://storage.googleapis.com/${imageUrls[1]}`}
+                  />
                   <Image
+                    className={styles.plusIcon}
                     src="/icons/outline/add.svg"
                     alt="AddIcon"
                     width={24}
                     height={24}
                   />
-                  <p>클릭해서 사진 업로드</p>
-                  <input type="file" id="file-upload-2" />
+                  <p className={styles.uploadText}>클릭해서 사진 업로드</p>
+                  <input type="file" id="file-upload-2" onChange={onChangeFile(1)} />
                 </div>
               </label>
               <label htmlFor="file-upload-3">
                 <div className={styles.imageUploadInput__drop}>
+                  <img
+                    className={styles.uploadImage}
+                    src={`https://storage.googleapis.com/${imageUrls[2]}`}
+                  />
                   <Image
+                    className={styles.plusIcon}
                     src="/icons/outline/add.svg"
                     alt="AddIcon"
                     width={24}
                     height={24}
                     sizes="100vw"
                   />
-                  <p>클릭해서 사진 업로드</p>
-                  <input type="file" id="file-upload-3" />
+                  <p className={styles.uploadText}>클릭해서 사진 업로드</p>
+                  <input type="file" id="file-upload-3" onChange={onChangeFile(2)} />
                 </div>
               </label>
             </div>
