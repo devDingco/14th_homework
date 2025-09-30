@@ -53,3 +53,13 @@
   flex-direction: row;
   align-items: flex-start;
 }
+
+.Formfield input:read-only {
+  background-color: var(--color-gray-50);
+  border: none;
+}
+
+.Commentfield textarea:read-only {
+  background-color: var(--color-gray-50);
+  border: none;
+}

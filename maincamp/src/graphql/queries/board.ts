@@ -16,7 +16,6 @@ export const FETCH_BOARD = gql`
         address
         addressDetail
       }
-      user
     }
   }
 `;
@@ -39,7 +38,6 @@ export const FETCH_BOARDS = gql`
       title
       createdAt
       deletedAt
-      user
     }
   }
 `;
@@ -85,7 +83,6 @@ export const FETCH_BOARD_COMMENTS = gql`
       contents
       rating
       createdAt
-      user
     }
   }
 `;

@@ -3,7 +3,6 @@
 import Button from "@/components/ui/button/Button";
 import { Inputfield, Textareafield } from "@/components/ui/input/Inputfield";
 import InputBoardAddress from "@/components/ui/input/InputBoardAddress";
-import InputImage from "@/components/ui/input/InputImage";
 import styles from "./style.module.css";
 import useBoardsWrite from "./hook";
 import { Modal } from "antd";
