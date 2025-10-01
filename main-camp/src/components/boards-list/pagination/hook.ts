@@ -18,6 +18,7 @@ const useListPagination = (props: IUseListPagination) => {
 
     const onClickPage = (event: React.MouseEvent<HTMLLIElement>) => {
         props.boardsRefetch ? props.boardsRefetch({ page: Number(event.currentTarget.dataset.key) }) : null
+        // if (props.lastPage <= 10) return
         setPageState((prev: IPageState) => ({
             ...prev,
             selected: Number(event.currentTarget.dataset.key)

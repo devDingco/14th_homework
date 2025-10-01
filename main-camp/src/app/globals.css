@@ -86,6 +86,10 @@ html, body {
   .flex_justi_end {
     justify-content: end;
   }
+
+  .flex_justi_start {
+    justify-content: start;
+  }
   
   .flex_justi_center {
     justify-content: center;
