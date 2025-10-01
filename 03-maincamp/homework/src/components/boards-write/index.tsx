@@ -14,38 +14,42 @@ import { IBoardWriteProps } from './types';
 
 
 
+
 export default function BoardsWrite(props:IBoardWriteProps) {
   
   const {
-    onChangeInputs,
+    handleSubmit,
+    register,
+    // onChangeInputs,
     onClickMoveList,
-    onChangePassword,
-    validation,
+    // onChangePassword,
+    // validation,
     onClickSubmit,
     onClickUpdate,
     isActive,
-    errorContents,
-    errorPassword,
-    errorTitle,
-    errorWriter,
+    // errorContents,
+    // errorPassword,
+    // errorTitle,
+    // errorWriter,
     zipcode,
     address,
     isModalOpen,
     onToggleModal,
     handleComplete,
-    onChangeAddressDetail,
-    onChangeYoutubeUrl,
+    // onChangeAddressDetail,
+    // onChangeYoutubeUrl,
     onChangeFile,
     imageUrls,
     onClickDeleteFile,
     setImageUrls,
-    setInputs,
-    setYoutubeUrl,
-    setZonecode,
-    setAddress,
-    setDetailAddress,
+    // setInputs,
+    // setYoutubeUrl,
+    // setZonecode,
+    // setAddress,
+    // setDetailAddress,
     fileRefs,
     onClickGrayBox,
+    formState,
 
   } = useBoardWrite(props)
 
@@ -56,23 +60,24 @@ export default function BoardsWrite(props:IBoardWriteProps) {
       <header>
           <h1>게시물{props.isEdit ? "수정" : "등록"}</h1>
       </header>
-      <main>
+      <form onSubmit={handleSubmit(props.isEdit ? onClickUpdate : onClickSubmit)}>
+          
           <section className={styles.메인__작성자비밀번호섹션}>
               <section className={styles.메인__작성자비밀번호섹션__작성자섹션}>
                   <h2>작성자<img
                           src={"/images/별표.png"}
                           alt="별표"
                         /></h2>
-                  <input onChange={onChangeInputs} id={"writer"} disabled={!!props.data}  type="text" placeholder="작성자 명을 입력해주세요" defaultValue={props.data?.fetchBoard?.writer ?? ""}/>
-                  <div className={`${styles['color-red']} ${styles['Font-h2']}`}>{errorWriter}</div>
+                  <input {...register("writer")} id={"writer"}  type="text" placeholder="작성자 명을 입력해주세요" defaultValue={props.data?.fetchBoard?.writer ?? ""}/>
+                  <div className={`${styles['color-red']} ${styles['Font-h2']}`}>{formState.errors.writer?.message}</div>
               </section>
               <section className={styles.메인__작성자비밀번호섹션__비밀번호섹션}>
                   <h2>비밀번호<img
                           src={"/images/별표.png"}
                           alt="별표"
                         /></h2>
-                  <input onChange={onChangePassword} id={"password"} disabled={!!props.data} type="password" placeholder="비밀번호를 입력해주세요"/>
-                  <div className={`${styles['color-red']} ${styles['Font-h2']}`}>{errorPassword}</div>
+                  <input {...register("password")} id={"password"} type="password" placeholder="비밀번호를 입력해주세요"/>
+                 <div className={`${styles['color-red']} ${styles['Font-h2']}`}>{formState.errors.password?.message}</div>
               </section>
           </section>
           <hr/>
@@ -83,8 +88,8 @@ export default function BoardsWrite(props:IBoardWriteProps) {
                       width={8}
                       height={8}
                     /></h2>
-              <input onChange={onChangeInputs} id={"title"} type="text" placeholder="제목 입력해주세요" defaultValue={props.data?.fetchBoard?.title ?? ""}/>
-              <div className={`${styles['color-red']} ${styles['Font-h2']}`}>{errorTitle}</div>
+              <input {...register("title")} id={"title"} type="text" placeholder="제목 입력해주세요" defaultValue={props.data?.fetchBoard?.title ?? ""}/>
+              <div className={`${styles['color-red']} ${styles['Font-h2']}`}>{formState.errors.title?.message}</div>
           </section>
           <hr/>
           <section className={styles.메인__내용섹션}>
@@ -94,15 +99,15 @@ export default function BoardsWrite(props:IBoardWriteProps) {
                       width={8}
                       height={8}
                     /></h2>
-              <input onChange={onChangeInputs} id={"contents"} type="text" placeholder="내용을 입력해주세요" defaultValue={props.data?.fetchBoard?.contents ?? ""}/>
-              <div className={`${styles['color-red']} ${styles['Font-h2']}`}>{errorContents}</div>
+              <input {...register("contents")} id={"contents"} type="text" placeholder="내용을 입력해주세요" defaultValue={props.data?.fetchBoard?.contents ?? ""}/>
+              <div className={`${styles['color-red']} ${styles['Font-h2']}`}>{formState.errors.contents?.message}</div>
           </section>
           <section className={styles.메인__주소섹션}>
               <article className={styles.메인__주소섹션__상단아티클}>
                   <h2>주소</h2>
                   <div className={styles.메인__주소섹션__상단아티클__내용}>
                       <input readOnly value={zipcode || props.data?.fetchBoard?.boardAddress?.zipcode || ""} type="text" disabled/>
-                       <button onClick={onToggleModal} >우편번호 검색</button>
+                       <button type="button" onClick={onToggleModal} >우편번호 검색</button>
     
       {isModalOpen === true && (
         <Modal
@@ -117,12 +122,12 @@ export default function BoardsWrite(props:IBoardWriteProps) {
                   </div>
               </article>
               <input readOnly type="text" placeholder="주소를 입력해주세요" value={address || props.data?.fetchBoard?.boardAddress?.address || ""} />
-              <input onChange={onChangeAddressDetail} type="text" placeholder="상세주소를 입력해주세요" defaultValue={props.data?.fetchBoard?.boardAddress?.addressDetail ?? ""}/>
+              <input {...register("boardAddress.addressDetail")} type="text" placeholder="상세주소를 입력해주세요" defaultValue={props.data?.fetchBoard?.boardAddress?.addressDetail ?? ""}/>
           </section>
           <hr/>
           <section className={styles.메인__유튜브링크섹션}>
               <h2>유튜브링크</h2>
-              <input onChange={onChangeYoutubeUrl} type="text" placeholder="링크를 입력해주세요" defaultValue={props.data?.fetchBoard?.youtubeUrl ?? ""}/>
+              <input {...register("youtubeUrl")} id={"youtubeUrl"}type="text" placeholder="링크를 입력해주세요" defaultValue={props.data?.fetchBoard?.youtubeUrl ?? ""}/>
           </section>
           <hr/>
       <section className={styles.메인__사진첨부섹션}>
@@ -149,7 +154,7 @@ export default function BoardsWrite(props:IBoardWriteProps) {
                 height={200}
                 style={{ objectFit: "contain" }}
               />
-              <button className={styles.deleteBtn} onClick={(event) => onClickDeleteFile(index,event)}>X</button>
+              <button type="button" className={styles.deleteBtn} onClick={(event) => onClickDeleteFile(index,event)}>X</button>
               </div>
               
             ) : (
@@ -169,20 +174,18 @@ export default function BoardsWrite(props:IBoardWriteProps) {
             ref={fileRefs[index]}
             accept="image/jpeg, image/png"
             onChange={(event) => onChangeFile(index, event)}
+            
           />
         </div>
       ))}
     </article>
 </section>
           <section className={styles.메인__등록하기섹션}>
-              <button onClick={onClickMoveList} className={styles.메인__등록하기섹션__취소버튼}>취소</button>
-              <button className={isActive === true ? styles.메인__등록하기섹션__등록하기버튼__액티브 : styles.메인__등록하기섹션__등록하기버튼__낫액티브} onClick={() => {
-    validation();
-    props.isEdit ? onClickUpdate() : onClickSubmit();
-  }}>{props.isEdit ? "수정하기" : "등록하기"}</button>
+              <button type="button" onClick={onClickMoveList} className={styles.메인__등록하기섹션__취소버튼}>취소</button>
+              <button type="submit" >{props.isEdit ? "수정하기" : "등록하기"}</button>
           </section>
 
-      </main>
+      </form>
    </div>
       
   );
