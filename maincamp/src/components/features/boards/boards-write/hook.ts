@@ -7,12 +7,14 @@ import { ImageUrlArray, IUpdateBoardInput } from "./types";
 import { GraphQLError } from "graphql";
 import {
   CreateBoardDocument,
+  CreateBoardInput,
   FetchBoardDocument,
   UpdateBoardDocument,
   UploadFileDocument,
 } from "@/commons/graphql/graphql";
 import { Modal } from "antd";
 import { Address } from "react-daum-postcode";
+import { useForm } from "react-hook-form";
 
 export default function useBoardsWrite({ data }: { data?: any }) {
   // 0. 세팅
@@ -166,25 +168,15 @@ export default function useBoardsWrite({ data }: { data?: any }) {
   };
 
   // 4. 등록하기 버튼
-  const onClickSubmit = async () => {
+
+  const onClickSubmit = async (data: CreateBoardInput) => {
+    console.log(data);
+    const createBoardInput = data;
+    createBoardInput.images = data.images?.filter(Boolean);
+
+    console.log(createBoardInput);
     try {
-      const result = await createBoard({
-        variables: {
-          createBoardInput: {
-            writer: inputs.writer,
-            password: inputs.password,
-            title: inputs.title,
-            contents: inputs.contents,
-            youtubeUrl: youtubeUrl,
-            boardAddress: {
-              zipcode: zipcode,
-              address: address,
-              addressDetail: addressDetail,
-            },
-            images: images.filter(Boolean) as string[],
-          },
-        },
-      });
+      const result = await createBoard({ variables: { createBoardInput } });
       console.log("🚀 ~ onClickBtn ~ result:", result);
       const boardId = result.data?.createBoard._id;
       router.push(`/boards/${boardId}`);
@@ -197,6 +189,40 @@ export default function useBoardsWrite({ data }: { data?: any }) {
       showErrorModal();
     }
   };
+  // const onClickSubmit = async (data: CreateBoardInput) => {
+  //   console.log(data);
+  //   const newImages = data.images?.filter(Boolean)
+
+  // try {
+  //   const result = await createBoard({
+  //     variables: {
+  //       createBoardInput: data,
+  //       // createBoardInput: {
+  //       //   writer: inputs.writer,
+  //       //   password: inputs.password,
+  //       //   title: inputs.title,
+  //       //   contents: inputs.contents,
+  //       //   youtubeUrl: youtubeUrl,
+  //       //   boardAddress: {
+  //       //     zipcode: zipcode,
+  //       //     address: address,
+  //       //     addressDetail: addressDetail,
+  //       //   },
+  //       //   images: images.filter(Boolean) as string[],
+  //       // },
+  //     },
+  //   });
+  //   console.log("🚀 ~ onClickBtn ~ result:", result);
+  //   const boardId = result.data?.createBoard._id;
+  //   router.push(`/boards/${boardId}`);
+  // } catch (error) {
+  //   const showErrorModal = () =>
+  //     Modal.error({
+  //       title: "에러가 발생하였습니다.",
+  //       content: (error as string) ?? "에러가 발생하였습니다",
+  //     });
+  //   showErrorModal();
+  // }
 
   // 5. 수정하기 버튼
   // 수정 버튼 클릭 시 updateBoard 진행

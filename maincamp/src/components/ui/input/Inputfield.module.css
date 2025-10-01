@@ -63,3 +63,8 @@
   background-color: var(--color-gray-50);
   border: none;
 }
+
+.Formfield > span {
+  display: block;
+  margin-top: 0.5rem;
+}

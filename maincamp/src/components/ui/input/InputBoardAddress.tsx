@@ -3,10 +3,20 @@ import Zipstyles from "./InputBoardAddress.module.css";
 import Formstyles from "./Inputfield.module.css";
 import { ZipcodeProps } from "@/types";
 import Button from "../button/Button";
-import styles from "./InputBoardAddress.module.css";
 
-export default function InputBoardAddress(props: ZipcodeProps) {
-  const { zipcode, address, addressDetail } = props.value;
+export default function InputBoardAddress({
+  required,
+  onClick,
+  placeholder,
+  placeholder_2,
+  register,
+}: ZipcodeProps) {
+  console.log(register);
+  // const { zipcode, address, addressDetail } = props.value ?? {
+  //   zipcode: "",
+  //   address: "",
+  //   addressDetail: "",
+  // };
 
   return (
     <div
@@ -15,18 +25,19 @@ export default function InputBoardAddress(props: ZipcodeProps) {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div>
           <label>주소</label>
-          {props.required && <span>*</span>}
+          {required && <span>*</span>}
         </div>
         <div className={Zipstyles.zipCode__group}>
           <input
             type="text"
             id="zipcode"
-            value={zipcode}
+            // value={zipcode}
             readOnly
             placeholder="01234"
-            onChange={props.onChange}
+            // onChange={props.onChange}
+            {...register("boardAddress.zipcode")}
           />
-          <Button variant="FormBtn" type="button" onClick={props.onClick}>
+          <Button variant="FormBtn" type="button" onClick={onClick}>
             우편번호 검색
           </Button>
         </div>
@@ -34,18 +45,20 @@ export default function InputBoardAddress(props: ZipcodeProps) {
       <input
         type="text"
         id="address"
-        placeholder={props.placeholder}
-        value={address}
+        placeholder={placeholder}
+        // value={address}
         readOnly
-        onChange={props.onChange}
+        // onChange={props.onChange}
+        {...register("boardAddress.address")}
       />
-      {props.placeholder_2 && (
+      {placeholder_2 && (
         <input
           type="text"
           id="addressDetail"
-          placeholder={props.placeholder_2}
-          value={addressDetail}
-          onChange={props.onChange}
+          placeholder={placeholder_2}
+          // value={addressDetail}
+          // onChange={props.onChange}
+          {...register("boardAddress.addressDetail")}
         />
       )}
     </div>

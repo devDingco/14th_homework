@@ -1,3 +1,11 @@
+import { CreateBoardInput } from "@/commons/graphql/graphql";
+import {
+  BoardCreateFormValues,
+  BoardFormValues,
+  BoardupdateFormValues,
+} from "@/components/features/boards/boards-write/schema";
+import { FieldError, UseFormRegister } from "react-hook-form";
+
 /* button types */
 export type ButtonType = "submit" | "reset" | "button";
 export type ButtonProps = {
@@ -20,7 +28,8 @@ export type InputProps = {
   value?: string;
   isAuth?: boolean | undefined;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+  error?: string | undefined;
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 /* textarea types */
 export type TextareaProps = {
@@ -34,6 +43,7 @@ export type TextareaProps = {
   isCommentField?: boolean;
   isAuth?: boolean | undefined;
   maxLength?: number;
+  error?: string | undefined;
 };
 
 /* zipcode types */
@@ -45,5 +55,6 @@ export type ZipcodeProps = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   value?: { zipcode: string; address: string; addressDetail: string };
+  register: UseFormRegister<BoardCreateFormValues | BoardupdateFormValues>;
   isEdit?: boolean;
 };
