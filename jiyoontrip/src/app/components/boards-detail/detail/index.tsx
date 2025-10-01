@@ -53,19 +53,25 @@ export default function DetailPageComponent() {
             </div>
           </div>
           <div className={styles.detailPhoto}>
-            <img
-              className={styles.uploadImage}
-              src={`https://storage.googleapis.com/${data?.fetchBoard.images[0]}`}
-            />
+            {data?.fetchBoard.images?.map((el, index) => (
+              <img
+                key={`${el}_${index}`}
+                className={styles.uploadImage}
+                src={`https://storage.googleapis.com/${el}`}
+              />
+            ))}
           </div>
           <div className={styles.detailContent}>{data?.fetchBoard.contents}</div>
           <div className={styles.detailVideo}>
-            <YouTube
-              videoId={
-                data?.fetchBoard?.youtubeUrl?.split("=")[1] &&
-                data?.fetchBoard?.youtubeUrl.split("=")[1]
-              }
-            />
+            {data?.fetchBoard?.youtubeUrl && (
+              <YouTube
+                videoId={
+                  new URLSearchParams(data?.fetchBoard.youtubeUrl.split("?")[1]).get(
+                    "v"
+                  ) || ""
+                }
+              />
+            )}
           </div>
           <div className={styles.detailHeart}>
             <div className={styles.detailHeart__bad}>
