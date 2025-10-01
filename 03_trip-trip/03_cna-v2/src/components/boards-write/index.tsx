@@ -6,14 +6,6 @@ import { IBoardWriteProps } from './types'
 import useBoardForm from './hook'
 import { Modal } from 'antd'
 import DaumPostcodeEmbed from 'react-daum-postcode'
-import { ChangeEvent, useRef } from 'react'
-import { useMutation } from '@apollo/client'
-import {
-  UploadFileDocument,
-  UploadFileMutation,
-  UploadFileMutationVariables,
-} from 'commons/graphql/graphql'
-import { checkValidationFile } from 'commons/libraries/validation/image-validation'
 import CloseIcon from '@mui/icons-material/Close'
 
 const IMAGE_SRC = {
@@ -25,53 +17,27 @@ const IMAGE_SRC = {
 
 export default function BoardWritePage(props: IBoardWriteProps) {
   const {
-    onChangeValue,
-    onChangeAddress,
-    onClickSignup,
-    setImageByIndex,
-    isButtonDisabled,
-    boardValue,
+    isEdit,
+    register,
+    handleSubmit,
+    errors,
+    isValid,
+    onSubmit,
+    handleCancel,
     address,
-    boardError,
+    setAddress,
     isModalOpen,
     onToggleModal,
     handleComplete,
-    handleNavigate,
+    images,
+    fileRefs,
+    onClickImagebyIdx,
+    onChangeFile,
+    onClickDelete,
   } = useBoardForm({ isEdit: props.isEdit })
 
-  const fileRefs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ]
-
-  const onClickImagebyIdx = (idx: number) => {
-    fileRefs[idx].current?.click()
-  }
-
-  const [uploadFile] = useMutation<UploadFileMutation, UploadFileMutationVariables>(
-    UploadFileDocument
-  )
-
-  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>, idx: number) => {
-    const file = event.target.files?.[0]
-    if (!file) return
-
-    const isValid = checkValidationFile(file)
-    if (!isValid) return
-
-    const { data } = await uploadFile({ variables: { file } })
-    const url = data?.uploadFile?.url ?? ''
-
-    setImageByIndex(idx, url)
-  }
-
-  const onClickDelete = (idx: number) => {
-    setImageByIndex(idx, '')
-  }
-
   return (
-    <div className={styles.layout}>
+    <form className={styles.layout} onSubmit={handleSubmit(onSubmit)}>
       {/* title */}
       <div className={styles.enroll_subject}>
         <div className={styles.enroll_subject_text}>
@@ -88,15 +54,16 @@ export default function BoardWritePage(props: IBoardWriteProps) {
                 <div className={styles.enroll_required_indicator}> *</div>
               </div>
               <input
+                {...register('writer')}
                 disabled={props.isEdit}
-                value={boardValue.name}
+                // value={boardValue.name}
                 type="text"
-                id="name"
+                // id="name"
                 placeholder="작성자 명을 입력해 주세요."
                 className={props.isEdit ? styles.disabled_input : styles.enroll_input}
-                onChange={onChangeValue}
+                // onChange={onChangeValue}
               />
-              <div className={styles.error_msg}>{boardError.nameError}</div>
+              {errors.writer && <p className={styles.error_msg}>{errors.writer.message}</p>}
             </div>
             {/* 비밀번호 */}
             <div className={styles.flex_half}>
@@ -105,15 +72,16 @@ export default function BoardWritePage(props: IBoardWriteProps) {
                 <div className={styles.enroll_required_indicator}> *</div>
               </div>
               <input
+                {...register('password')}
                 disabled={props.isEdit}
                 type="password"
-                id="password"
+                // id="password"
                 placeholder="비밀번호를 입력해 주세요."
                 className={props.isEdit ? styles.disabled_input : styles.enroll_input}
-                onChange={onChangeValue}
-                value={props.isEdit ? '*********' : boardValue.password}
+                // onChange={onChangeValue}
+                // value={props.isEdit ? '*********' : boardValue.password}
               />
-              <div className={styles.error_msg}>{boardError.passwordError}</div>
+              {errors.password && <p className={styles.error_msg}>{errors.password.message}</p>}
             </div>
           </div>
         </div>
@@ -127,14 +95,15 @@ export default function BoardWritePage(props: IBoardWriteProps) {
             <div className={styles.enroll_required_indicator}> *</div>
           </div>
           <input
-            value={boardValue.title}
+            {...register('title')}
+            // value={boardValue.title}
             type="text"
-            id="title"
+            // id="title"
             className={styles.enroll_input}
             placeholder="제목을 입력해 주세요."
-            onChange={onChangeValue}
+            // onChange={onChangeValue}
           />
-          <div className={styles.error_msg}>{boardError.titleError}</div>
+          {errors.title && <p className={styles.error_msg}>{errors.title.message}</p>}
         </div>
         <div className={styles.enroll_border}></div>
         <div className={styles.enroll_row_section}>
@@ -144,13 +113,14 @@ export default function BoardWritePage(props: IBoardWriteProps) {
             <div className={styles.enroll_required_indicator}> *</div>
           </div>
           <textarea
-            id="content"
-            value={boardValue.content}
+            {...register('contents')}
+            // id="content"
+            // value={boardValue.content}
             placeholder="내용을 입력해 주세요."
             className={`${styles.enroll_input} ${styles.enroll_textarea}`}
-            onChange={onChangeValue}
+            // onChange={onChangeValue}
           ></textarea>
-          <div className={styles.error_msg}>{boardError.contentError}</div>
+          {errors.contents && <p className={styles.error_msg}>{errors.contents.message}</p>}
         </div>
 
         {/* 주소 */}
@@ -165,7 +135,6 @@ export default function BoardWritePage(props: IBoardWriteProps) {
               placeholder="12345"
               name="zipcode"
               readOnly
-              onChange={onChangeAddress}
               value={address.zipcode}
             />
             <button className={styles.zipcode_search_button} onClick={onToggleModal}>
@@ -179,7 +148,6 @@ export default function BoardWritePage(props: IBoardWriteProps) {
             type="text"
             name="base"
             readOnly
-            onChange={onChangeAddress}
             value={address.base}
           />
           <input
@@ -187,8 +155,8 @@ export default function BoardWritePage(props: IBoardWriteProps) {
             className={styles.enroll_input}
             type="text"
             name="detail"
-            onChange={onChangeAddress}
             value={address.detail}
+            onChange={(e) => setAddress((prev) => ({ ...prev, detail: e.target.value }))}
           />
         </div>
         <div className={styles.enroll_border}></div>
@@ -197,13 +165,14 @@ export default function BoardWritePage(props: IBoardWriteProps) {
             <div>유튜브 링크</div>
           </div>
           <input
+            {...register('youtubeUrl')}
             className={styles.enroll_input}
             placeholder="링크를 입력해 주세요."
-            onChange={onChangeValue}
-            value={boardValue.link}
-            id="link"
+            // onChange={onChangeValue}
+            // value={boardValue.link}
+            // id="link"
           />
-          <div className={styles.error_msg}>{boardError.linkError}</div>
+          {errors.youtubeUrl && <p className={styles.error_msg}>{errors.youtubeUrl.message}</p>}
         </div>
 
         <div className={styles.enroll_border}></div>
@@ -212,7 +181,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
           <div>사진 첨부</div>
           <div className={styles.picture_enroll_row}>
             {[0, 1, 2].map((_, idx) => {
-              const url = boardValue.images[idx]
+              const url = images?.[idx]
               const hasUrl = !!url
               const src = hasUrl ? `https://storage.googleapis.com/${url}` : IMAGE_SRC.addImage.src
               return (
@@ -244,19 +213,18 @@ export default function BoardWritePage(props: IBoardWriteProps) {
         </div>
       </div>
       <div className={styles.enroll_button_container}>
-        <button className={styles.enroll_cancel_button} onClick={handleNavigate}>
+        <button className={styles.enroll_cancel_button} onClick={handleCancel}>
           취소
         </button>
         <button
           className={
-            !props.isEdit && isButtonDisabled
+            !props.isEdit && !isValid
               ? `${styles.enroll_submit_button} ${styles.disabled}`
               : styles.enroll_submit_button
           }
-          onClick={onClickSignup}
-          disabled={!props.isEdit && isButtonDisabled}
+          disabled={!isValid}
         >
-          {props.isEdit ? '수정' : '등록'}하기
+          {isEdit ? '수정' : '등록'}하기
         </button>
       </div>
       {isModalOpen && (
@@ -264,6 +232,6 @@ export default function BoardWritePage(props: IBoardWriteProps) {
           <DaumPostcodeEmbed onComplete={handleComplete} />
         </Modal>
       )}
-    </div>
+    </form>
   )
 }
