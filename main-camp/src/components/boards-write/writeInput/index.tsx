@@ -4,6 +4,7 @@ import { useIsEdit } from '@/commons/provider/isEditProvider'
 import styles from './style.module.css'
 import { IWriteInputProps } from "./type"
 import { MouseEvent } from 'react'
+import { validateSDL } from 'graphql/validation/validate'
 
 const WriteInput = (props: IWriteInputProps) => {
     
@@ -93,9 +94,53 @@ const WriteInput = (props: IWriteInputProps) => {
         }
         case "사진 첨부": {
             inputComponent =
-            <div>
+            <div className={`${styles.input_frame_1280w_192h} flex_column`}>
                 <label className={`${styles.label_1280w_24h}`}>{props.label}</label>
-                <div></div>
+                <ul className={`${styles.ul_512w_160h} flex_row`}>
+                    {
+                        new Array(3).fill("image").map((_,i:number) => {
+                            return (
+                                postData.images?.[i]
+                                ?
+                                <li key={i} className={`${styles.input_image_frame}`}>
+                                    <img className={`${styles.input_image}`}src={`https://storage.googleapis.com/${postData.images?.[i]}`} />
+                                    <img onClick={() =>{
+                                            if (props.onClickImageDelete)
+                                                props.onClickImageDelete(i)
+                                        }} 
+                                        src="/svg/close.png" 
+                                        className={`${styles.input_image_delete}`} 
+                                    />
+                                </li>
+                                :
+                                <>               
+                                    <li key={i}
+                                        id={`${i}`} 
+                                        onClick={() => {
+                                            if (props.onClickImage)
+                                            props.onClickImage(i)
+                                        }} 
+                                        className={`${styles.li_160w_160h} flex_column flex_justi_center flex_align_items_center`}
+                                    >   
+                                        <img src="/svg/add.png" style={{ width: "40px" }}alt="사진 업로드" />    
+                                        <p className='r_16_24' style={{ color: "rgba(119, 119, 119, 1)"}}>클릭해서 사진 업로드</p>
+                                        <input
+                                        id={String(i)}
+                                        style={{ display: "none" }}
+                                        type="file"
+                                        onChange={props.setState}
+                                        ref={(v) => {
+                                            if (props.fileRef)
+                                            (props.fileRef.current[i] = v) 
+                                        }}
+                                        accept="image/jpeg,image/png" // 선택 자체가 안되게 막기
+                                    />
+                                    </li>
+                                </>
+                            )
+                        })
+                    }
+                </ul>
             </div>
             break
         }

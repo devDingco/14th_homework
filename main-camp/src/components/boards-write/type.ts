@@ -32,7 +32,7 @@ export interface IErrSetState {
 }
 
 export interface IOnChangePosting {
-    category: "작성자" | "비밀번호" | "제목" | "내용" | "주소" | "유튜브링크"
+    category: "작성자" | "비밀번호" | "제목" | "내용" | "주소" | "유튜브링크" | "사진첨부"
 }
 
 export interface IOnUpdateHandler {

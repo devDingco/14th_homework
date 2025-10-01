@@ -28,6 +28,13 @@
     opacity: 1;
 }
 
+.input_frame_1280w_192h {
+    width: 1280px;
+    height: 192px;
+    gap: 8px;
+    opacity: 1;
+}
+
 .input_frame_220w_80h {
     width: 220px;
     height: 80px;
@@ -87,6 +94,29 @@
     resize: none;
 }
 
+.input_image {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+}
+
+.input_image_frame {
+    position: relative;
+    display: inline-block;
+}
+
+.input_image_frame:hover .input_image_delete {
+    display: block;
+}
+
+.input_image_delete {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    cursor: pointer;
+    display: none;
+}
+
 /* label */
 
 .label_1280w_24h {
@@ -108,6 +138,27 @@
     height: 24px;
     gap: 4px;
     opacity: 1;
+}
+
+/* ul */
+
+.ul_512w_160h {
+    width: 512px;
+    height: 160px;
+    gap: 16px;
+    opacity: 1;
+}
+
+/* li */
+
+.li_160w_160h {
+    width: 160px;
+    height: 160px;
+    gap: 8px;
+    opacity: 1;
+    border-radius: 8px;
+    background: var(--gray-50, rgba(242, 242, 242, 1));
+    cursor: pointer;
 }
 
 /* button */

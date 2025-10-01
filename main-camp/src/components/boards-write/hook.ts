@@ -1,6 +1,6 @@
 "use client"
 
-import { ChangeEvent } from "react"
+import { ChangeEvent, useRef } from "react"
 import { IBoardErr, IOnChangePosting, IUseBoardWrite } from "./type"
 import { useIsEdit } from "@/commons/provider/isEditProvider"
 import { IPostData } from "@/commons/provider/type"
@@ -8,14 +8,33 @@ import { useIsModal } from "@/commons/provider/isModalProvider"
 import useCreateBoard from "@/commons/api/mutation/useCreateBoard"
 import useUpdateBoard from "@/commons/api/mutation/useUpdateBoard"
 import { useParams } from "next/navigation"
+import { checkValidationFile } from "@/commons/libraries/checkValidationFile"
+import useUploadFile from "@/commons/api/mutation/useUploadFile"
 
 const useBoardWrite = (props: IUseBoardWrite) => {
     const param = useParams()
+    const fileRef = useRef<(HTMLInputElement | null)[]>([]);
+    
     const { postData, setPostData, updatingBoardData } = useIsEdit()
     const { setIsWarningModal } = useIsModal()
     
     const { postCreateBoard } = useCreateBoard()
     const { postUpdateBoard } = useUpdateBoard()
+    const { postUploadFile } = useUploadFile()
+
+    const onClickImageDelete = (deleteIndex: number) => {
+        setPostData((prev: IPostData) => ({
+            ...prev,
+            images: postData.images?.filter((_, i) => i !== deleteIndex)
+            // images: [...(prev.images ?? []), result.data?.uploadFile.url]
+        }))
+    }
+
+    const onClickImage = (index: number) => {
+        // console.log(fileRef.current)
+        console.log(fileRef.current)
+        fileRef.current[index]?.click()
+    }
 
     const onChangePosting = (props: IOnChangePosting) => (event: ChangeEvent<HTMLInputElement>) => {
         switch (props.category) {
@@ -82,6 +101,20 @@ const useBoardWrite = (props: IUseBoardWrite) => {
                     ...prev,
                     youtubeUrl: event.target.value
                 }))
+                break
+            }
+            case "사진첨부": {
+                const file = event.target.files?.[0]
+                console.log("온체인지까지감?",file)
+
+                const isValid = checkValidationFile(file)
+                if (!isValid) return;
+
+                postUploadFile(file)
+                // setPostData((prev: IPostData) => ({
+                //     ...prev,
+                //     images: imageUrlArr
+                // }))
                 break
             }
             default:
@@ -211,7 +244,9 @@ const useBoardWrite = (props: IUseBoardWrite) => {
     return {
         onChangePosting,
         onClickResist,
-        onUpdateHandler
+        onUpdateHandler,
+        onClickImage, fileRef,
+        onClickImageDelete
     }
 }
 

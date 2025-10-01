@@ -16,7 +16,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 type Documents = {
     "\n    mutation createBoard($createBoardInput: CreateBoardInput!) {\n        createBoard(createBoardInput: $createBoardInput) {\n            _id\n            writer\n            title\n        }\n    }\n": typeof types.CreateBoardDocument,
     "\n    mutation updateBoard($updateBoardInput: UpdateBoardInput!, $password: String, $boardId: ID!) {\n        updateBoard(updateBoardInput: $updateBoardInput, password: $password, boardId: $boardId) {\n            _id\n        }\n    }\n": typeof types.UpdateBoardDocument,
-    "\n    query fetchBoard($boardId: ID!) {\n        fetchBoard(boardId: $boardId) {\n            _id\n            writer\n            title\n            contents\n            boardAddress {\n                zipcode\n                address\n                addressDetail\n            }\n            youtubeUrl\n            createdAt\n            likeCount\n            dislikeCount\n            updatedAt\n        }\n    }\n": typeof types.FetchBoardDocument,
+    "\n    query fetchBoard($boardId: ID!) {\n        fetchBoard(boardId: $boardId) {\n            _id\n            writer\n            title\n            contents\n            boardAddress {\n                zipcode\n                address\n                addressDetail\n            }\n            youtubeUrl\n            createdAt\n            likeCount\n            dislikeCount\n            updatedAt\n            images\n        }\n    }\n": typeof types.FetchBoardDocument,
     "\n    query fetchBoards($page: Int!) {\n        fetchBoards(page: $page) {\n                _id\n                title\n                writer\n                contents\n                createdAt\n        }\n    }\n": typeof types.FetchBoardsDocument,
     "\n    query fetchBoardsCount($endDate: DateTime, $startDate: DateTime, $search: String) {\n        fetchBoardsCount(endDate: $endDate, startDate: $startDate, search: $search)\n    }\n": typeof types.FetchBoardsCountDocument,
     "\n    mutation deleteBoard($boardId: ID!) {\n        deleteBoard(boardId: $boardId)\n    }\n": typeof types.DeleteBoardDocument,
@@ -24,11 +24,12 @@ type Documents = {
     "\n    mutation createBoardComment($createBoardCommentInput: CreateBoardCommentInput!, $boardId: ID!) {\n        createBoardComment (createBoardCommentInput: $createBoardCommentInput, boardId: $boardId) {\n            _id\n        }\n    }\n": typeof types.CreateBoardCommentDocument,
     "\n    mutation deleteBoardComment($password: String, $boardCommentId: ID!) {\n        deleteBoardComment (password: $password, boardCommentId:$boardCommentId)\n    }\n": typeof types.DeleteBoardCommentDocument,
     "\n    mutation updateBoardComment($updateBoardCommentInput: UpdateBoardCommentInput!, $password: String, $boardCommentId: ID!) {\n        updateBoardComment (updateBoardCommentInput: $updateBoardCommentInput, password: $password, boardCommentId: $boardCommentId) {\n            writer\n            deletedAt\n        }\n    }\n": typeof types.UpdateBoardCommentDocument,
+    "\n    mutation uploadFile($file: Upload!) {\n        uploadFile(file: $file) {\n            url\n        }\n    }\n": typeof types.UploadFileDocument,
 };
 const documents: Documents = {
     "\n    mutation createBoard($createBoardInput: CreateBoardInput!) {\n        createBoard(createBoardInput: $createBoardInput) {\n            _id\n            writer\n            title\n        }\n    }\n": types.CreateBoardDocument,
     "\n    mutation updateBoard($updateBoardInput: UpdateBoardInput!, $password: String, $boardId: ID!) {\n        updateBoard(updateBoardInput: $updateBoardInput, password: $password, boardId: $boardId) {\n            _id\n        }\n    }\n": types.UpdateBoardDocument,
-    "\n    query fetchBoard($boardId: ID!) {\n        fetchBoard(boardId: $boardId) {\n            _id\n            writer\n            title\n            contents\n            boardAddress {\n                zipcode\n                address\n                addressDetail\n            }\n            youtubeUrl\n            createdAt\n            likeCount\n            dislikeCount\n            updatedAt\n        }\n    }\n": types.FetchBoardDocument,
+    "\n    query fetchBoard($boardId: ID!) {\n        fetchBoard(boardId: $boardId) {\n            _id\n            writer\n            title\n            contents\n            boardAddress {\n                zipcode\n                address\n                addressDetail\n            }\n            youtubeUrl\n            createdAt\n            likeCount\n            dislikeCount\n            updatedAt\n            images\n        }\n    }\n": types.FetchBoardDocument,
     "\n    query fetchBoards($page: Int!) {\n        fetchBoards(page: $page) {\n                _id\n                title\n                writer\n                contents\n                createdAt\n        }\n    }\n": types.FetchBoardsDocument,
     "\n    query fetchBoardsCount($endDate: DateTime, $startDate: DateTime, $search: String) {\n        fetchBoardsCount(endDate: $endDate, startDate: $startDate, search: $search)\n    }\n": types.FetchBoardsCountDocument,
     "\n    mutation deleteBoard($boardId: ID!) {\n        deleteBoard(boardId: $boardId)\n    }\n": types.DeleteBoardDocument,
@@ -36,6 +37,7 @@ const documents: Documents = {
     "\n    mutation createBoardComment($createBoardCommentInput: CreateBoardCommentInput!, $boardId: ID!) {\n        createBoardComment (createBoardCommentInput: $createBoardCommentInput, boardId: $boardId) {\n            _id\n        }\n    }\n": types.CreateBoardCommentDocument,
     "\n    mutation deleteBoardComment($password: String, $boardCommentId: ID!) {\n        deleteBoardComment (password: $password, boardCommentId:$boardCommentId)\n    }\n": types.DeleteBoardCommentDocument,
     "\n    mutation updateBoardComment($updateBoardCommentInput: UpdateBoardCommentInput!, $password: String, $boardCommentId: ID!) {\n        updateBoardComment (updateBoardCommentInput: $updateBoardCommentInput, password: $password, boardCommentId: $boardCommentId) {\n            writer\n            deletedAt\n        }\n    }\n": types.UpdateBoardCommentDocument,
+    "\n    mutation uploadFile($file: Upload!) {\n        uploadFile(file: $file) {\n            url\n        }\n    }\n": types.UploadFileDocument,
 };
 
 /**
@@ -63,7 +65,7 @@ export function graphql(source: "\n    mutation updateBoard($updateBoardInput: U
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    query fetchBoard($boardId: ID!) {\n        fetchBoard(boardId: $boardId) {\n            _id\n            writer\n            title\n            contents\n            boardAddress {\n                zipcode\n                address\n                addressDetail\n            }\n            youtubeUrl\n            createdAt\n            likeCount\n            dislikeCount\n            updatedAt\n        }\n    }\n"): (typeof documents)["\n    query fetchBoard($boardId: ID!) {\n        fetchBoard(boardId: $boardId) {\n            _id\n            writer\n            title\n            contents\n            boardAddress {\n                zipcode\n                address\n                addressDetail\n            }\n            youtubeUrl\n            createdAt\n            likeCount\n            dislikeCount\n            updatedAt\n        }\n    }\n"];
+export function graphql(source: "\n    query fetchBoard($boardId: ID!) {\n        fetchBoard(boardId: $boardId) {\n            _id\n            writer\n            title\n            contents\n            boardAddress {\n                zipcode\n                address\n                addressDetail\n            }\n            youtubeUrl\n            createdAt\n            likeCount\n            dislikeCount\n            updatedAt\n            images\n        }\n    }\n"): (typeof documents)["\n    query fetchBoard($boardId: ID!) {\n        fetchBoard(boardId: $boardId) {\n            _id\n            writer\n            title\n            contents\n            boardAddress {\n                zipcode\n                address\n                addressDetail\n            }\n            youtubeUrl\n            createdAt\n            likeCount\n            dislikeCount\n            updatedAt\n            images\n        }\n    }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -92,6 +94,10 @@ export function graphql(source: "\n    mutation deleteBoardComment($password: St
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n    mutation updateBoardComment($updateBoardCommentInput: UpdateBoardCommentInput!, $password: String, $boardCommentId: ID!) {\n        updateBoardComment (updateBoardCommentInput: $updateBoardCommentInput, password: $password, boardCommentId: $boardCommentId) {\n            writer\n            deletedAt\n        }\n    }\n"): (typeof documents)["\n    mutation updateBoardComment($updateBoardCommentInput: UpdateBoardCommentInput!, $password: String, $boardCommentId: ID!) {\n        updateBoardComment (updateBoardCommentInput: $updateBoardCommentInput, password: $password, boardCommentId: $boardCommentId) {\n            writer\n            deletedAt\n        }\n    }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    mutation uploadFile($file: Upload!) {\n        uploadFile(file: $file) {\n            url\n        }\n    }\n"): (typeof documents)["\n    mutation uploadFile($file: Upload!) {\n        uploadFile(file: $file) {\n            url\n        }\n    }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

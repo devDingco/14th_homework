@@ -35,6 +35,7 @@ export const FETCH_BOARD = gql`
             likeCount
             dislikeCount
             updatedAt
+            images
         }
     }
 `
@@ -94,6 +95,14 @@ export const UPDATE_COMMENT = gql`
         updateBoardComment (updateBoardCommentInput: $updateBoardCommentInput, password: $password, boardCommentId: $boardCommentId) {
             writer
             deletedAt
+        }
+    }
+`
+
+export const UPLOAD_FILE = gql`
+    mutation uploadFile($file: Upload!) {
+        uploadFile(file: $file) {
+            url
         }
     }
 `
