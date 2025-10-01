@@ -4,6 +4,9 @@
 
 # dependencies
 /node_modules
+.pnpm-store/
+.pnpm/
+pnpm-lock.yaml
 /.pnp
 .pnp.js
 .yarn/install-state.gz
@@ -14,6 +17,7 @@
 # next.js
 /.next/
 /out/
+/cache/
 
 # production
 /build
