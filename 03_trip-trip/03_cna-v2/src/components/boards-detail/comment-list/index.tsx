@@ -12,7 +12,7 @@ import { useState } from 'react'
 
 export default function CommentListComponent(props: CommentListProps) {
   const PAGE_SIZE = 10
-  const { data, loading, fetchMore, refetch } = useQuery<
+  const { data, loading, fetchMore } = useQuery<
     FetchBoardCommentsQuery,
     FetchBoardCommentsQueryVariables
   >(FetchBoardCommentsDocument, {

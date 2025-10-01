@@ -1,7 +1,7 @@
 'use client'
 import { ApolloError, useMutation, useQuery } from '@apollo/client'
 import { useParams, useRouter } from 'next/navigation'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { BoardFormProps } from './types'
 import {
   BoardAddressInput,
@@ -17,25 +17,52 @@ import {
   UpdateBoardInput,
   UpdateBoardMutation,
   UpdateBoardMutationVariables,
+  UploadFileDocument,
+  UploadFileMutation,
+  UploadFileMutationVariables,
 } from 'commons/graphql/graphql'
-import { isYouTubeUrl } from 'commons/utils/url'
-import { Modal } from 'antd'
 import { Address } from 'react-daum-postcode'
+import { z } from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { checkValidationFile } from 'commons/libraries/validation/image-validation'
+import { Modal } from 'antd'
+
+export const boardSchema = z.object({
+  writer: z.string().min(1, { message: '작성자를 입력해 주세요.' }),
+  password: z
+    .string()
+    .min(8, { message: '비밀번호는 8 ~ 16자까지 입력해주세요.' })
+    .max(16, { message: '비밀번호는 8 ~ 16자까지 입력해주세요.' })
+    .optional()
+    .or(z.literal('')),
+  title: z.string().min(2, { message: '제목은 2자 이상 입력해 주세요.' }),
+  contents: z.string().min(1, { message: '내용을 입력해 주세요.' }),
+  youtubeUrl: z.string().url({ message: '유효한 URL을 입력해주세요.' }).optional(),
+  images: z.array(z.string()).optional(),
+})
 
 export default function useBoardForm(props: BoardFormProps) {
   const router = useRouter()
   const params = useParams()
-
   const editId = props.isEdit && typeof params.boardId === 'string' ? params.boardId : ''
-  // 수정하는 경우, 수정을 위한 초기값 보여주기
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, dirtyFields },
+    setValue,
+    watch,
+    reset,
+  } = useForm({
+    resolver: zodResolver(boardSchema),
+    mode: 'onChange',
+  })
+
   const { data } = useQuery<FetchBoardQuery, FetchBoardQueryVariables>(FetchBoardDocument, {
     variables: { boardId: editId },
     skip: !props.isEdit,
   })
-
-  const handleNavigate = () => {
-    router.push(`/boards/${editId}`)
-  }
 
   //그래프큐엘 셋팅
   const [createBoard] = useMutation<CreateBoardMutation, CreateBoardMutationVariables>(
@@ -58,37 +85,78 @@ export default function useBoardForm(props: BoardFormProps) {
     }
   )
 
-  const [boardValue, setBoardValue] = useState({
-    name: '',
-    password: '',
-    title: data?.fetchBoard?.title ?? '',
-    content: data?.fetchBoard?.contents ?? '',
-    link: data?.fetchBoard?.youtubeUrl ?? '',
-    images: data?.fetchBoard?.images ?? ['', '', ''],
-  })
-  // 주소 input
-  const [address, setAddress] = useState({
-    zipcode: props.isEdit ? data?.fetchBoard?.boardAddress?.zipcode ?? '' : '',
-    base: props.isEdit ? data?.fetchBoard?.boardAddress?.address ?? '' : '',
-    detail: props.isEdit ? data?.fetchBoard?.boardAddress?.addressDetail ?? '' : '',
-  })
+  useEffect(() => {
+    if (data?.fetchBoard) {
+      const { writer, title, contents, youtubeUrl, images } = data.fetchBoard
+      reset({
+        writer, //'string | null | undefined' 형식은 'string | undefined' 형식에 할당할 수 없습니다. // 'null' 형식은 'string | undefined' 형식에 할당할 수 없습니다.ts(2322)
+        title,
+        contents,
+        youtubeUrl: youtubeUrl ?? '',
+        images: images ?? ['', '', ''],
+      })
 
-  const [boardError, setBoardError] = useState({
-    nameError: '',
-    passwordError: '',
-    titleError: '',
-    contentError: '',
-    linkError: '',
+      if (data?.fetchBoard.boardAddress) {
+        const { zipcode, address, addressDetail } = data.fetchBoard.boardAddress
+        setAddress({
+          zipcode: zipcode ?? '',
+          base: address ?? '',
+          detail: addressDetail ?? '',
+        })
+      }
+    }
+  }, [data, reset])
+  // data랑 reset왜 하는겨
+
+  const [address, setAddress] = useState({
+    zipcode: '',
+    base: '',
+    detail: '',
   })
-  // 값이 없는 경우, 버튼 비활성화
-  const isButtonDisabled =
-    !boardValue.name || !boardValue.password || !boardValue.title || !boardValue.content
 
   // 모달 + 우편번호
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const onToggleModal = () => {
     setIsModalOpen((prev) => !prev)
+  }
+
+  const images = watch('images', [])
+
+  const fileRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ]
+
+  const [uploadFile] = useMutation<UploadFileMutation, UploadFileMutationVariables>(
+    UploadFileDocument
+  )
+
+  const onClickImagebyIdx = (idx: number) => {
+    fileRefs[idx].current?.click()
+  }
+
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>, idx: number) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    const isValid = checkValidationFile(file)
+    if (!isValid) return
+
+    try {
+      const { data } = await uploadFile({ variables: { file } })
+      const url = data?.uploadFile?.url ?? ''
+      setImageByIndex(idx, url)
+    } catch (error) {
+      if (error instanceof ApolloError) {
+        Modal.error({ content: error.message })
+      }
+    }
+  }
+
+  const onClickDelete = (idx: number) => {
+    setImageByIndex(idx, '')
   }
 
   const handleComplete = (data: Address) => {
@@ -103,16 +171,16 @@ export default function useBoardForm(props: BoardFormProps) {
     onToggleModal()
   }
 
-  // 변경값 상태관리
-  const onChangeValue = (
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const { id, value } = event.target
-    setBoardValue({
-      ...boardValue,
-      [id]: value,
-    })
-  }
+  // // 변경값 상태관리
+  // const onChangeValue = (
+  //   event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  // ) => {
+  //   const { id, value } = event.target
+  //   setBoardValue({
+  //     ...boardValue,
+  //     [id]: value,
+  //   })
+  // }
 
   const onChangeAddress = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target
@@ -123,184 +191,118 @@ export default function useBoardForm(props: BoardFormProps) {
     })
   }
 
-  // image index에 일치하게 업로드
+  // // image index에 일치하게 업로드
   const setImageByIndex = (idx: number, url: string) => {
-    setBoardValue((prev) => {
-      const next = { ...prev, images: [...prev.images] }
-      next.images[idx] = url
-      return next
-    })
+    const currentImages = watch('images') || ['', '', '']
+    const newImages = [...currentImages]
+    newImages[idx] = url
+    setValue('images', newImages, { shouldValidate: true })
   }
 
-  const onClickSignup = async () => {
-    //새글 등록하기일 경우
-    if (props.isEdit === false) {
-      let hasError = false
+  const onSubmit = async (formData) => {
+    if (props.isEdit) {
+      const updateInput: UpdateBoardInput = {}
 
-      if (boardValue.name.trim() === '') {
-        setBoardError({ ...boardError, nameError: '필수입력 사항입니다.' })
-        hasError = true
+      if (dirtyFields.title) updateInput.title = data?.title
+      if (dirtyFields.contents) updateInput.contents = data?.contents
+      if (dirtyFields.youtubeUrl) updateInput.youtubeUrl = data?.youtubeUrl
+      if (dirtyFields.images) updateInput.images = data?.images
+
+      const boardAddress: BoardAddressInput = {}
+      if (address.zipcode !== data?.fetchBoard?.boardAddress?.zipcode)
+        boardAddress.zipcode = address.zipcode
+      if (address.base !== data?.fetchBoard?.boardAddress?.address)
+        boardAddress.address = address.base
+      if (address.detail !== data?.fetchBoard?.boardAddress?.addressDetail)
+        boardAddress.addressDetail = address.detail
+
+      if (Object.keys(boardAddress).length > 0) {
+        updateInput.boardAddress = boardAddress
       }
 
-      if (boardValue.password.length === 0) {
-        setBoardError({ ...boardError, passwordError: '필수입력 사항입니다.' })
-        hasError = true
+      if (Object.keys(updateInput).length === 0) {
+        return Modal.warning({ content: '수정된 내용이 없습니다.' })
       }
 
-      if (boardValue.title?.trim() === '') {
-        setBoardError({ ...boardError, titleError: '필수입력 사항입니다.' })
-        hasError = true
+      const password = prompt('비밀번호를 입력해주세요.')
+
+      if (password === null || password.trim() === '') {
+        Modal.error({ content: '비밀번호를 입력해야 수정이 가능합니다.' })
+        return
       }
 
-      if (boardValue.content?.trim() === '') {
-        setBoardError({ ...boardError, contentError: '필수입력 사항입니다.' })
-        hasError = true
+      try {
+        await updateBoard({
+          variables: {
+            boardId: editId,
+            updateBoardInput: updateInput,
+            password,
+          },
+          refetchQueries: [
+            { query: FetchBoardsDocument, variables: { page: 1, search: '' } },
+            { query: FetchBoardsCountDocument, variables: { search: '' } },
+            { query: FetchBoardDocument, variables: { boardId: editId } },
+          ],
+        })
+        Modal.success({ content: '게시글이 수정되었습니다!' })
+        router.push(`/boards/${editId}`)
+      } catch (error) {
+        if (error instanceof ApolloError) {
+          Modal.error({ content: error.message })
+        }
       }
+    }
 
-      if (boardValue.link && !isYouTubeUrl(boardValue.link)) {
-        setBoardError({ ...boardError, linkError: '유튜브 주소 형식에 알맞지 않습니다.' })
-        hasError = true
-      }
-
-      if (!hasError) {
-        const { data } = await createBoard({
+    if (!props.isEdit) {
+      try {
+        const result = await createBoard({
           variables: {
             createBoardInput: {
-              writer: boardValue.name,
-              password: boardValue.password,
-              title: boardValue.title,
-              contents: boardValue.content,
-              youtubeUrl: boardValue.link,
+              ...formData,
               boardAddress: {
                 zipcode: address.zipcode,
                 address: address.base,
                 addressDetail: address.detail,
               },
-              images: boardValue.images,
             },
           },
+          refetchQueries: [
+            { query: FetchBoardsDocument, variables: { page: 1, search: '' } },
+            { query: FetchBoardsCountDocument, variables: { search: '' } },
+          ],
         })
-
-        Modal.success({
-          content: '게시글이 등록되었습니다!',
-        })
-        // 해당글의 상세페이지로 이동하기
-        router.push(`/boards/${data?.createBoard._id}`)
-      }
-    }
-
-    // 기존의 글을 수정하는 경우
-    else if (props.isEdit === true) {
-      // 입력값이 비어있는 경우 수정 진행 불가
-      if (boardValue.content?.trim() === '' && boardValue.title?.trim() === '') {
-        setBoardError({ ...boardError, contentError: '필수입력 사항입니다.' })
-        setBoardError({ ...boardError, titleError: '필수입력 사항입니다.' })
-        return
-      }
-      if (boardValue.content?.trim() === '') {
-        setBoardError({ ...boardError, contentError: '필수입력 사항입니다.' })
-        return
-      }
-      if (boardValue.title?.trim() === '') {
-        setBoardError({ ...boardError, titleError: '필수입력 사항입니다.' })
-        return
-      }
-      if (boardValue.link && !isYouTubeUrl(boardValue.link)) {
-        setBoardError({ ...boardError, linkError: '유튜브 주소 형식에 알맞지 않습니다.' })
-        return
-      }
-
-      // 비밀번호 확인하기
-      const 입력받은비밀번호 = prompt('글을 작성할때 입력하셨던 비밀번호를 입력해주세요')
-
-      const updateInput: UpdateBoardInput = {}
-      if (boardValue.title?.trim() && boardValue.title !== data?.fetchBoard?.title) {
-        updateInput.title = boardValue.title
-      }
-
-      if (boardValue.content?.trim() && boardValue.content !== data?.fetchBoard?.contents) {
-        updateInput.contents = boardValue.content
-      }
-
-      if (boardValue.link !== data?.fetchBoard?.youtubeUrl) {
-        updateInput.youtubeUrl = boardValue.link
-      }
-
-      if (boardValue.images !== data?.fetchBoard.images) {
-        updateInput.images = boardValue.images
-      }
-
-      const boardAddress: BoardAddressInput = {}
-      if (address.zipcode !== data?.fetchBoard?.boardAddress?.zipcode) {
-        boardAddress.zipcode = address.zipcode
-      }
-
-      if (address.base !== data?.fetchBoard?.boardAddress?.address) {
-        boardAddress.address = address.base
-      }
-
-      if (address.detail !== data?.fetchBoard?.boardAddress?.addressDetail) {
-        boardAddress.addressDetail = address.detail
-      }
-      if (Object.keys(boardAddress).length > 0) {
-        updateInput.boardAddress = boardAddress
-      }
-
-      // 수정된 값이 있는 항목만 API 요청
-      if (Object.keys(updateInput).length > 0) {
-        try {
-          const result = await updateBoard({
-            variables: {
-              updateBoardInput: updateInput,
-              password: 입력받은비밀번호,
-              boardId: editId,
-            },
-          })
-
-          if (result.data) {
-            Modal.success({
-              content: '게시글이 성공적으로 수정되었습니다!',
-            })
-          } else {
-            Modal.error({
-              content: '수정에 실패했습니다.',
-            })
-          }
-          // 수정이 완료되면 상세 화면으로 이동하기
-          router.push(`/boards/${editId}`)
-        } catch (error) {
-          // 에러 발생 시 처리
-          if (error instanceof ApolloError) {
-            const errorMessages = error.graphQLErrors.map((err) => err.message)
-            Modal.error({
-              content: errorMessages.join(', '),
-            })
-          } else {
-            Modal.error({
-              content: '네트워크에러 발생',
-            })
-          }
+        Modal.success({ content: '게시글이 등록되었습니다!' })
+        router.push(`/boards/${result.data?.createBoard._id}`)
+      } catch (error) {
+        if (error instanceof ApolloError) {
+          Modal.error({ content: error.message })
         }
-      } else {
-        Modal.warning({
-          content: '수정된 내용이 없습니다.',
-        })
       }
     }
   }
 
+  const handleCancel = () => {
+    router.back()
+  }
+
   return {
-    onChangeValue,
-    onChangeAddress,
-    onClickSignup,
-    setImageByIndex,
-    isButtonDisabled,
-    boardValue,
+    isEdit: props.isEdit,
+    register,
+    handleSubmit,
+    errors,
+    isValid,
+    onSubmit,
+    handleCancel,
     address,
-    boardError,
+    setAddress,
     isModalOpen,
     onToggleModal,
     handleComplete,
-    handleNavigate,
+    images,
+    setImageByIndex,
+    fileRefs,
+    onClickImagebyIdx,
+    onChangeFile,
+    onClickDelete,
   }
 }

@@ -4,42 +4,64 @@ import triptripLogo from '@assets/triptrip.svg'
 import styles from './styles.module.css'
 import Link from 'next/link'
 import { ChevronRight, ArrowDropDown } from '@mui/icons-material'
-import { useQuery } from '@apollo/client'
+import { ApolloError, useMutation, useQuery } from '@apollo/client'
 import {
   FetchUserLoggedInDocument,
   FetchUserLoggedInQuery,
   FetchUserLoggedInQueryVariables,
+  LogoutUserDocument,
+  LogoutUserMutation,
+  LogoutUserMutationVariables,
 } from 'commons/graphql/graphql'
 import { useRouter } from 'next/navigation'
 import { Dropdown, MenuProps, Space } from 'antd'
 import ProfileImage from 'assets/profiles/profile5.webp'
-const items: MenuProps['items'] = [
-  {
-    key: '1',
-    label: 'My Account',
-    // disabled: true,
-  },
-  {
-    type: 'divider',
-  },
-  {
-    key: '2',
-    label: '로그아웃',
-    // extra: '⌘P',
-  },
-]
 
 export default function Navigation() {
   const { data, error } = useQuery<FetchUserLoggedInQuery, FetchUserLoggedInQueryVariables>(
     FetchUserLoggedInDocument
   )
 
+  const [logoutUser] = useMutation<LogoutUserMutation, LogoutUserMutationVariables>(
+    LogoutUserDocument
+  )
   const isLoggedIn = !!data?.fetchUserLoggedIn && !error
   const router = useRouter()
   const handleNavigate = () => {
     router.push('/login')
   }
-  console.log('🚀 ~ Navigation ~ accessToken:', data?.fetchUserLoggedIn?.name)
+
+  const handleLogout = async () => {
+    try {
+      const { data } = await logoutUser()
+      if (data?.logoutUser) {
+        localStorage.removeItem('accessToken')
+        alert('로그아웃 되었습니다.')
+        router.push('/login')
+      }
+    } catch (error) {
+      if (error instanceof ApolloError) {
+        alert(error.message)
+      }
+      console.error(error)
+    }
+  }
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: 'My Account',
+      // disabled: true,
+    },
+    {
+      type: 'divider',
+    },
+    {
+      key: '2',
+      label: '로그아웃',
+      onClick: handleLogout,
+      // extra: '⌘P',
+    },
+  ]
 
   return (
     <header className={styles.navigation}>
