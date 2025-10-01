@@ -66,7 +66,7 @@ export default function BoardsComponentWrite(
               type="text"
               placeholder="작성자 명을 입력해 주세요."
               onChange={onChangeWriter}
-              defaultValue={isEdit ? data?.fetchBoard.writer : writer}
+              defaultValue={isEdit ? : writer}
             />
             {/* <div className={styles.에러메세지_스타일}>{writererror}</div> */}
           </div>

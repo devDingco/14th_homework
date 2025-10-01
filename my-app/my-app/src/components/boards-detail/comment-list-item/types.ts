@@ -1,7 +1,9 @@
 import { FetchBoardCommentsQuery } from "@/commons/gql/graphql";
 
 export interface ICommentListItem {
-  data?: FetchBoardCommentsQuery | undefined;
+  comment: FetchBoardCommentsQuery["fetchBoardComments"][0];
+  index: number;
+  length: number;
 }
 
 //   _id: string;

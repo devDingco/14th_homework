@@ -25,16 +25,17 @@ const IMAGE_SRC = {
   },
 };
 
-export default function CommentListItem(props:ICommentListItem) {
-  const list = data?.fetchBoardComments ?? [];
+export default function CommentListItem({ el, index, length }) {
   const [isEditing, setIsEditing] = useState(false);
 
-  const onClickEditIcon = (id: string) => setIsEditing(id);
-const onClickEditSignUp = () => setIsEditing
+  //   const onClickEditIcon = (id: string) => setIsEditing(id);
+  // const onClickEditSignUp = () => setIsEditing
   return (
     <>
-     {list.map((el, index) => (
-        <div key={el?._id}>
+      <div key={el?._id}>
+        {isEditing ? (
+          <CommentWrite el={el} isEdit={true} />
+        ) : (
           <div className={styles.commentContainer}>
             <div className={styles.commentBody}>
               <div className={styles.commentFrame}>
@@ -57,7 +58,7 @@ const onClickEditSignUp = () => setIsEditing
                     <Image
                       src={IMAGE_SRC.editIcon.src}
                       alt={IMAGE_SRC.editIcon.alt}
-                      onClick={()=>onClickEditIcon(el._id)}
+                      onClick={() => setIsEditing(true)}
                     />
                     <Image
                       src={IMAGE_SRC.closeIcon.src}
@@ -65,17 +66,16 @@ const onClickEditSignUp = () => setIsEditing
                     />
                   </div>
                 </div>
-{setIsEditing === el._id ? (<CommentWrite comment={el}/>): (
+
                 <div className={styles.commentContents}>{el?.contents}</div>
                 <div className={styles.commentDate}>
                   {el?.createdAt ? el.createdAt.split("T")[0] : ""}
                 </div>
-                )}
               </div>
             </div>
           </div>
-        </div>
-     ))}
+        )}
+      </div>
     </>
   );
 }

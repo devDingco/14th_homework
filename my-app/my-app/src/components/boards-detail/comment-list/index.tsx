@@ -43,7 +43,14 @@ export default function CommentList() {
         next={onNext}
         loader={<div>로딩중입니다.</div>}
       >
-        <CommentListItem data={data} />
+        {data?.fetchBoardComments.map((el, index) => (
+          <CommentListItem
+            key={index}
+            el={el}
+            index={index}
+            length={data?.fetchBoardComments.length ?? 0}
+          />
+        ))}
       </InfiniteScroll>
     </>
   );
