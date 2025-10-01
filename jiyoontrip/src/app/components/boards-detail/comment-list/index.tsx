@@ -18,11 +18,6 @@ export default function CommentListComponent() {
               next={onNext}
               hasMore={hasMore}
               loader={<h4>로딩중입니다....</h4>}
-              endMessage={
-                <p style={{ textAlign: "center" }}>
-                  <b>마지막 댓글입니다.</b>
-                </p>
-              }
             >
               {data?.fetchBoardComments?.length === 0 ? (
                 <div className={styles.nocomment}>등록된 댓글이 없습니다.</div>

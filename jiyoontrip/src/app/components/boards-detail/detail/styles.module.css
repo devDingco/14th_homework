@@ -122,3 +122,7 @@
   align-items: center;
   gap: 0.5rem;
 }
+.uploadImage {
+  width: 300px;
+  object-fit: cover;
+}

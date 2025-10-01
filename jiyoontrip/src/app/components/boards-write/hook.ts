@@ -13,6 +13,7 @@ import {
 import { Modal } from "antd";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 import { UPLOAD_FILE } from "./queires";
+import { checkValidationFile } from "@/app/commons/libraries/file-validaton";
 
 export default function useBoardWrite() {
   const router = useRouter();
@@ -77,6 +78,9 @@ export default function useBoardWrite() {
       const file = event.target.files?.[0];
       if (!file) return;
 
+      const isValid = checkValidationFile(file);
+      if (!isValid) return;
+
       const result = await uploadFile({
         variables: { file },
       });
@@ -125,7 +129,7 @@ export default function useBoardWrite() {
               title: title,
               contents: content,
               youtubeUrl: youtubeUrl,
-              images: [],
+              images: imageUrls,
               boardAddress: {
                 zipcode: zonecode,
                 address: address,
@@ -147,27 +151,6 @@ export default function useBoardWrite() {
 
   const onClickUpdate = async () => {
     try {
-      // if (author === "") {
-      //   setAuthorError("필수입력 사항입니다.");
-      // } else {
-      //   setAuthorError("");
-      // }
-      // if (password === "") {
-      //   setPasswordError("필수입력 사항입니다.");
-      // } else {
-      //   setPasswordError("");
-      // }
-      // if (title === "") {
-      //   setTitleError("필수입력 사항입니다.");
-      // } else {
-      //   setTitleError("");
-      // }
-      // if (content === "") {
-      //   setContentError("필수입력 사항입니다.");
-      // } else {
-      //   setContentError("");
-      // }
-
       const passwordPrmpt = prompt("글을 작성할때 입력하셨던 비밀번호를 입력해주세요");
       // || (OR) 연산자는 첫 번째 값이 'falsy' (거짓 같은 값, 예: "", 0, null, undefined)일 때 뒤의 값을 반환하는 특징을 가지고 있어요.
       // title이 빈 문자열("")이면 falsy로 간주되므로, data?.fetchBoard.title이 updateTitle에 할당됩니다.
@@ -180,7 +163,9 @@ export default function useBoardWrite() {
       const updateAddressDetail =
         addressDetail || data?.fetchBoard.boardAddress?.addressDetail;
       const updateYoutubeUrl = youtubeUrl || data?.fetchBoard.youtubeUrl;
-
+      const updateImageUrls = imageUrls.map(
+        (el, index) => el || data?.fetchBoard.images?.[index] || ""
+      );
       const result = await updateBoard({
         variables: {
           updateBoardInput: {
@@ -192,7 +177,7 @@ export default function useBoardWrite() {
               addressDetail: updateAddressDetail,
             },
             youtubeUrl: updateYoutubeUrl,
-            images: imageUrls,
+            images: updateImageUrls,
           },
           password: passwordPrmpt,
           boardId: String(params.boardId),

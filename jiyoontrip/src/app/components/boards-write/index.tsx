@@ -3,6 +3,7 @@ import useBoardWrite from "./hook";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { IBoardWriteProps } from "./types";
+import { CloseCircleFilled } from "@ant-design/icons";
 export default function BoardWrite(props: IBoardWriteProps) {
   const { isEdit } = props;
   const {
@@ -194,54 +195,101 @@ export default function BoardWrite(props: IBoardWriteProps) {
             <div className={styles.imageUploadInput}>
               <label htmlFor="file-upload-1">
                 <div className={styles.imageUploadInput__drop}>
-                  <img
-                    className={styles.uploadImage}
-                    src={`https://storage.googleapis.com/${imageUrls[0]}`}
+                  {imageUrls[0] ? (
+                    <div>
+                      <img
+                        className={styles.uploadImage}
+                        src={`https://storage.googleapis.com/${imageUrls[0]}`}
+                      />
+                      <CloseCircleFilled />
+                    </div>
+                  ) : (
+                    data?.fetchBoard?.images?.[0] && ( // 없으면 DB 값 보여줌
+                      <img
+                        className={styles.uploadImage}
+                        src={`https://storage.googleapis.com/${data.fetchBoard.images[0]}`}
+                      />
+                    )
+                  )}
+                  <div className={styles.plusIcon}>
+                    <Image
+                      src="/icons/outline/add.svg"
+                      alt="AddIcon"
+                      width={24}
+                      height={24}
+                    />
+                    <p>클릭해서 사진 업로드</p>
+                  </div>
+                  <input
+                    type="file"
+                    id="file-upload-1"
+                    onChange={onChangeFile(0)}
+                    accept="image/jpeg, image/png"
                   />
-                  <Image
-                    className={styles.plusIcon}
-                    src="/icons/outline/add.svg"
-                    alt="AddIcon"
-                    width={24}
-                    height={24}
-                  />
-                  <p className={styles.uploadText}>클릭해서 사진 업로드</p>
-                  <input type="file" id="file-upload-1" onChange={onChangeFile(0)} />
                 </div>
               </label>
               <label htmlFor="file-upload-2">
                 <div className={styles.imageUploadInput__drop}>
-                  <img
-                    className={styles.uploadImage}
-                    src={`https://storage.googleapis.com/${imageUrls[1]}`}
+                  {imageUrls[1] ? (
+                    <img
+                      className={styles.uploadImage}
+                      src={`https://storage.googleapis.com/${imageUrls[1]}`}
+                    />
+                  ) : (
+                    data?.fetchBoard?.images?.[1] && (
+                      <img
+                        className={styles.uploadImage}
+                        src={`https://storage.googleapis.com/${data.fetchBoard.images[1]}`}
+                      />
+                    )
+                  )}
+                  <div className={styles.plusIcon}>
+                    <Image
+                      src="/icons/outline/add.svg"
+                      alt="AddIcon"
+                      width={24}
+                      height={24}
+                    />
+                    <p>클릭해서 사진 업로드</p>
+                  </div>
+                  <input
+                    type="file"
+                    id="file-upload-2"
+                    onChange={onChangeFile(1)}
+                    accept="image/jpeg, image/png"
                   />
-                  <Image
-                    className={styles.plusIcon}
-                    src="/icons/outline/add.svg"
-                    alt="AddIcon"
-                    width={24}
-                    height={24}
-                  />
-                  <p className={styles.uploadText}>클릭해서 사진 업로드</p>
-                  <input type="file" id="file-upload-2" onChange={onChangeFile(1)} />
                 </div>
               </label>
               <label htmlFor="file-upload-3">
                 <div className={styles.imageUploadInput__drop}>
-                  <img
-                    className={styles.uploadImage}
-                    src={`https://storage.googleapis.com/${imageUrls[2]}`}
+                  {imageUrls[2] ? (
+                    <img
+                      className={styles.uploadImage}
+                      src={`https://storage.googleapis.com/${imageUrls[2]}`}
+                    />
+                  ) : (
+                    data?.fetchBoard?.images?.[2] && (
+                      <img
+                        className={styles.uploadImage}
+                        src={`https://storage.googleapis.com/${data.fetchBoard.images[2]}`}
+                      />
+                    )
+                  )}
+                  <div className={styles.plusIcon}>
+                    <Image
+                      src="/icons/outline/add.svg"
+                      alt="AddIcon"
+                      width={24}
+                      height={24}
+                    />
+                    <p>클릭해서 사진 업로드</p>
+                  </div>
+                  <input
+                    type="file"
+                    id="file-upload-3"
+                    onChange={onChangeFile(2)}
+                    accept="image/jpeg, image/png"
                   />
-                  <Image
-                    className={styles.plusIcon}
-                    src="/icons/outline/add.svg"
-                    alt="AddIcon"
-                    width={24}
-                    height={24}
-                    sizes="100vw"
-                  />
-                  <p className={styles.uploadText}>클릭해서 사진 업로드</p>
-                  <input type="file" id="file-upload-3" onChange={onChangeFile(2)} />
                 </div>
               </label>
             </div>
