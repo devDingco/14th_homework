@@ -1,0 +1,150 @@
+.전체바탕 {
+
+  padding: 40px 0px 40px 0px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px; 
+}
+
+.input {
+  width: 1280px;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid rgb(184, 171, 171);
+}
+
+.input::placeholder{
+  padding-left: 8px;
+}
+
+.textarea{
+  width: 1280px;
+  height: 336px;
+  border-radius: 10px;
+  border: 1px solid rgb(184, 171, 171);
+}
+
+.textarea::placeholder{
+  padding-top: 8px;
+  padding-left: 8px;
+}
+  
+
+  
+  .main{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .head{
+    width: 1280px;
+    text-align: left;
+    /* width: 100%; */
+    font-size: 24px;
+    font-weight: bold;
+
+  }
+  
+
+  
+  .필수{
+    color: red;
+    font-weight: bold;
+  }
+  
+  .메인{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+  }
+  
+  .메인__1__1{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .메인1__인풋{
+    width: 620px;
+    height: 48px;
+  }
+  
+  .메인__주소__주소검색{
+    display: flex;
+    gap: 8px;
+  }
+  
+  .주소검색인풋{
+    width: 82px;
+    height: 48px;
+  }
+  
+  .주소검색버튼{
+    width: 130px;
+    height: 48px;
+    font-size: 17px;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: bold;
+    border: 1px solid;
+  }
+  
+  .사진첨부목록{
+    display: flex;
+    gap: 16px;
+  }
+  
+  .사진첨부리스트{
+    width: 160px;
+    height: 160px;
+    background-color: rgb(232, 231, 231);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: gray;
+    
+  }
+  
+  
+  .footer{
+    width: 1280px;
+    height: 48px;
+    display: flex;
+    justify-content: end;
+    gap: 16px;
+  }
+  
+  .푸터취소버튼{
+    width: 64px;
+    height: 48px;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 18px;
+    border: 1px solid;
+  }
+  
+  .푸터등록버튼{
+    width: 95px;
+    height: 48px;
+    background-color: .2974E5;
+    color: white;
+    border-radius: 10px;
+    font-size: 18px;
+    border: none;
+  }
+  
+  
+  .errorMassage{
+    color: red;
+  }
+  
+  
+  
+  
+  
