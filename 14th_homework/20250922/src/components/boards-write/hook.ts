@@ -3,9 +3,12 @@
 import { useEffect, useState, useMemo } from "react";
 import { useMutation, useQuery, ApolloError, gql } from "@apollo/client";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateBoardDocument, UpdateBoardDocument, FetchBoardForEditDocument } from "@/commons/graphql/graphql";
 import { FETCH_BOARD_DETAIL } from "../boards-detail/detail/queries";
-import type { BoardsWriteProps, ErrorsState, UpdateBoardInput } from "./types";
+import type { BoardsWriteProps, UpdateBoardInput } from "./types";
+import { boardWriteSchema, boardEditSchema, passwordValidationSchema, type BoardWriteFormData, type BoardEditFormData, type PasswordValidationData } from "./schema";
 
 // 파일 업로드 GraphQL 쿼리
 const UPLOAD_FILE = gql`
@@ -37,26 +40,35 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     skip: !props.isEdit || !props.boardId,
   });
 
-  const [formData, setFormData] = useState({
-    writer: "",
-    title: "",
-    contents: "",
+  // React Hook Form 설정 - 수정 모드에 따라 다른 스키마 사용
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    watch,
+    reset,
+    setError,
+    clearErrors,
+  } = useForm<BoardWriteFormData | BoardEditFormData>({
+    resolver: zodResolver(props.isEdit ? boardEditSchema : boardWriteSchema),
+    defaultValues: {
+      writer: "",
+      ...(props.isEdit ? {} : { password: "" }), // 수정 모드가 아닐 때만 password 포함
+      title: "",
+      contents: "",
+      youtubeUrl: "",
+      boardAddress: {
+        zipcode: "",
+        address: "",
+        addressDetail: "",
+      },
+      images: ["", "", ""],
+    },
   });
-  const [password, setPassword] = useState("");
-  const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [boardAddress, setBoardAddress] = useState({
-    zipcode: "",
-    address: "",
-    addressDetail: "",
-  });
+
   const [images, setImages] = useState<string[]>(["", "", ""]);
   const [isPostcodeModalOpen, setIsPostcodeModalOpen] = useState(false);
-  const [errors, setErrors] = useState<ErrorsState>({
-    writer: "",
-    password: "",
-    title: "",
-    contents: "",
-  });
 
   const [modalState, setModalState] = useState<ModalState>({
     isOpen: false,
@@ -70,65 +82,47 @@ export function useBoardsWrite(props: BoardsWriteProps) {
   useEffect(() => {
     if (props.isEdit && data && data.fetchBoard) {
       const boardData = data.fetchBoard;
-      setFormData({
+      reset({
         writer: boardData.writer ?? "",
         title: boardData.title ?? "",
         contents: boardData.contents ?? "",
-      });
-      setYoutubeUrl(boardData.youtubeUrl ?? "");
-      setBoardAddress({
-        zipcode: boardData.boardAddress?.zipcode ?? "",
-        address: boardData.boardAddress?.address ?? "",
-        addressDetail: boardData.boardAddress?.addressDetail ?? "",
+        youtubeUrl: boardData.youtubeUrl ?? "",
+        boardAddress: {
+          zipcode: boardData.boardAddress?.zipcode ?? "",
+          address: boardData.boardAddress?.address ?? "",
+          addressDetail: boardData.boardAddress?.addressDetail ?? "",
+        },
+        images: boardData.images ?? ["", "", ""],
       });
       setImages(boardData.images ?? ["", "", ""]);
     }
-  }, [props.isEdit, data]);
+  }, [props.isEdit, data, reset]);
 
+  const watchedValues = watch();
+  
   const isFormValid = useMemo(() => {
     // 수정 모드에서는 비밀번호 검증을 제외
     if (props.isEdit) {
-      return formData.writer.trim() && formData.title.trim() && formData.contents.trim();
+      return watchedValues.writer?.trim() && watchedValues.title?.trim() && watchedValues.contents?.trim();
     }
     // 새 게시글 작성 모드에서는 모든 필드 검증
-    return formData.writer.trim() && password.trim() && formData.title.trim() && formData.contents.trim();
-  }, [formData, password, props.isEdit]);
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = event.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    setErrors((prev) => ({
-      ...prev,
-      [name]: value.trim() ? "" : `${name} is required`,
-    }));
-  };
-
-  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setPassword(value);
-    setErrors((prev) => ({
-      ...prev,
-      password: value.trim() ? "" : "password is required",
-    }));
-  };
+    return watchedValues.writer?.trim() && watchedValues.password?.trim() && watchedValues.title?.trim() && watchedValues.contents?.trim();
+  }, [watchedValues, props.isEdit]);
 
   const onChangeYoutubeUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setYoutubeUrl(event.target.value);
+    setValue("youtubeUrl", event.target.value);
   };
 
   const onChangeBoardAddressZipcode = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBoardAddress((prev) => ({ ...prev, zipcode: event.target.value }));
+    setValue("boardAddress.zipcode", event.target.value);
   };
 
   const onChangeBoardAddressAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBoardAddress((prev) => ({ ...prev, address: event.target.value }));
+    setValue("boardAddress.address", event.target.value);
   };
 
   const onChangeBoardAddressAddressDetail = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBoardAddress((prev) => ({ ...prev, addressDetail: event.target.value }));
+    setValue("boardAddress.addressDetail", event.target.value);
   };
 
   const onClickPostcodeSearch = () => {
@@ -136,11 +130,8 @@ export function useBoardsWrite(props: BoardsWriteProps) {
   };
 
   const onCompletePostcode = (data: any) => {
-    setBoardAddress({
-      ...boardAddress,
-      zipcode: data.zonecode,
-      address: data.address,
-    });
+    setValue("boardAddress.zipcode", data.zonecode);
+    setValue("boardAddress.address", data.address);
     setIsPostcodeModalOpen(false);
   };
 
@@ -197,44 +188,18 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     setModalState({ ...modalState, input: event.target.value });
   };
 
-  const onClickSubmit = async () => {
-    let hasError = false;
-    const newErrors: ErrorsState = { writer: "", password: "", title: "", contents: "" };
-
-    if (!formData.writer) {
-      newErrors.writer = "필수입력 사항입니다.";
-      hasError = true;
-    }
-    if (!password) {
-      newErrors.password = "필수입력 사항입니다.";
-      hasError = true;
-    }
-    if (!formData.title) {
-      newErrors.title = "필수입력 사항입니다.";
-      hasError = true;
-    }
-    if (!formData.contents) {
-      newErrors.contents = "필수입력 사항입니다.";
-      hasError = true;
-    }
-
-    setErrors(newErrors);
-    if (hasError) {
-      showAlert("모든 필수 항목을 입력해주세요.");
-      return;
-    }
-
+  const onSubmit = async (data: BoardWriteFormData) => {
     try {
       const createBoardInput = {
-        writer: formData.writer,
-        password,
-        title: formData.title,
-        contents: formData.contents,
-        youtubeUrl: youtubeUrl || "",
+        writer: data.writer,
+        password: data.password,
+        title: data.title,
+        contents: data.contents,
+        youtubeUrl: data.youtubeUrl || "",
         boardAddress: {
-          zipcode: boardAddress.zipcode || "",
-          address: boardAddress.address || "",
-          addressDetail: boardAddress.addressDetail || "",
+          zipcode: data.boardAddress?.zipcode || "",
+          address: data.boardAddress?.address || "",
+          addressDetail: data.boardAddress?.addressDetail || "",
         },
         images: images.filter(img => img !== ""),
       };
@@ -251,25 +216,62 @@ export function useBoardsWrite(props: BoardsWriteProps) {
   };
 
   const onClickUpdate = async () => {
+    // 먼저 기존 에러들 클리어
+    clearErrors();
+    
+    // 폼 유효성 검사 수행
+    const currentValues = watch();
+    try {
+      boardEditSchema.parse(currentValues);
+    } catch (error) {
+      if (error && typeof error === 'object' && 'issues' in error) {
+        const zodError = error as any;
+        zodError.issues.forEach((issue: any) => {
+          setError(issue.path[0] as keyof BoardEditFormData, {
+            type: 'manual',
+            message: issue.message
+          });
+        });
+        return;
+      }
+      return;
+    }
+
     const myPassword = await showPrompt("글을 입력할때 입력하셨던 비밀번호를 입력해주세요");
     if (!myPassword) return;
+
+    // 비밀번호 유효성 검사
+    try {
+      passwordValidationSchema.parse({ password: myPassword });
+    } catch (error) {
+      if (error && typeof error === 'object' && 'issues' in error) {
+        const zodError = error as any;
+        const firstError = zodError.issues[0];
+        if (firstError && firstError.message) {
+          alert(firstError.message);
+          return;
+        }
+      }
+      alert("비밀번호를 확인해 주세요.");
+      return;
+    }
 
     try {
       const updateBoardInput: UpdateBoardInput = {};
       const originalData = data?.fetchBoard;
 
-      if (formData.title !== originalData?.title) updateBoardInput.title = formData.title;
-      if (formData.contents !== originalData?.contents) updateBoardInput.contents = formData.contents;
-      if (youtubeUrl !== originalData?.youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
+      if (currentValues.title !== originalData?.title) updateBoardInput.title = currentValues.title;
+      if (currentValues.contents !== originalData?.contents) updateBoardInput.contents = currentValues.contents;
+      if (currentValues.youtubeUrl !== originalData?.youtubeUrl) updateBoardInput.youtubeUrl = currentValues.youtubeUrl;
       if (
-        boardAddress.zipcode !== originalData?.boardAddress?.zipcode ||
-        boardAddress.address !== originalData?.boardAddress?.address ||
-        boardAddress.addressDetail !== originalData?.boardAddress?.addressDetail
+        currentValues.boardAddress?.zipcode !== originalData?.boardAddress?.zipcode ||
+        currentValues.boardAddress?.address !== originalData?.boardAddress?.address ||
+        currentValues.boardAddress?.addressDetail !== originalData?.boardAddress?.addressDetail
       ) {
         updateBoardInput.boardAddress = {
-          zipcode: boardAddress.zipcode,
-          address: boardAddress.address,
-          addressDetail: boardAddress.addressDetail,
+          zipcode: currentValues.boardAddress?.zipcode || "",
+          address: currentValues.boardAddress?.address || "",
+          addressDetail: currentValues.boardAddress?.addressDetail || "",
         };
       }
       // 이미지 배열 비교 - 빈 문자열 제거 후 비교
@@ -332,15 +334,14 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     data,
     loading,
     error,
-    formData,
-    password,
-    youtubeUrl,
-    boardAddress,
     images,
     setImages,
     errors,
-    handleInputChange,
-    onChangePassword,
+    register,
+    handleSubmit,
+    setError,
+    clearErrors,
+    onSubmit,
     onChangeYoutubeUrl,
     onChangeBoardAddressZipcode,
     onChangeBoardAddressAddress,
@@ -355,9 +356,9 @@ export function useBoardsWrite(props: BoardsWriteProps) {
     handlePromptConfirm,
     handlePromptCancel,
     onChangePromptInput,
-    onClickSubmit,
     onClickUpdate,
     onClickCancel,
     uploadFile,
+    watch,
   };
 }

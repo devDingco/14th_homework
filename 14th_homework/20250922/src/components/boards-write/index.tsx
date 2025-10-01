@@ -29,15 +29,14 @@ export default function BoardsWrite(props: BoardsWriteProps) {
   const {
     loading,
     error,
-    formData,
-    password,
-    youtubeUrl,
-    boardAddress,
     images,
     setImages,
     errors,
-    handleInputChange,
-    onChangePassword,
+    register,
+    handleSubmit,
+    setError,
+    clearErrors,
+    onSubmit,
     onChangeYoutubeUrl,
     onChangeBoardAddressZipcode,
     onChangeBoardAddressAddress,
@@ -46,7 +45,6 @@ export default function BoardsWrite(props: BoardsWriteProps) {
     onCompletePostcode,
     onClosePostcodeModal,
     isPostcodeModalOpen,
-    onClickSubmit,
     onClickUpdate,
     onClickCancel,
     isFormValid,
@@ -56,6 +54,7 @@ export default function BoardsWrite(props: BoardsWriteProps) {
     handlePromptCancel,
     onChangePromptInput,
     uploadFile,
+    watch,
   } = useBoardsWrite(props);
 
   // 이미지 업로드 관련 ref
@@ -102,7 +101,7 @@ export default function BoardsWrite(props: BoardsWriteProps) {
   const isAllFormValid = isFormValid;
 
   return (
-    <div className={styles.contentContainer}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.contentContainer}>
       <h1 className={styles.postTitle}>{props.isEdit ? "게시글 수정" : "게시글 작성"}</h1>
 
       <div className={`${styles.formGroup} ${styles.firstGroup} ${styles.formRowGroup}`}>
@@ -110,14 +109,12 @@ export default function BoardsWrite(props: BoardsWriteProps) {
           <label className={styles.labelRequired}>작성자</label>
           <input
             type="text"
-            name="writer"
             className={styles.inputField}
             placeholder="작성자를 입력해 주세요."
-            value={formData.writer}
-            onChange={handleInputChange}
+            {...register("writer")}
             disabled={props.isEdit}
           />
-          {errors.writer && <div className={styles.errorMessage}>{errors.writer}</div>}
+          {errors.writer && <div className={styles.errorMessage}>{errors.writer.message}</div>}
         </div>
         <div className={styles.flex1}>
           <label className={styles.labelRequired}>비밀번호</label>
@@ -125,11 +122,10 @@ export default function BoardsWrite(props: BoardsWriteProps) {
             type="password"
             className={styles.inputField}
             placeholder="비밀번호를 입력해 주세요."
-            value={password}
-            onChange={onChangePassword}
+            {...register("password")}
             disabled={props.isEdit}
           />
-          {errors.password && <div className={styles.errorMessage}>{errors.password}</div>}
+          {errors.password && <div className={styles.errorMessage}>{errors.password.message}</div>}
         </div>
       </div>
 
@@ -137,25 +133,21 @@ export default function BoardsWrite(props: BoardsWriteProps) {
         <label className={styles.labelRequired}>제목</label>
         <input
           type="text"
-          name="title"
           className={styles.inputField}
           placeholder="제목을 입력해 주세요."
-          value={formData.title}
-          onChange={handleInputChange}
+          {...register("title")}
         />
-        {errors.title && <div className={styles.errorMessage}>{errors.title}</div>}
+        {errors.title && <div className={styles.errorMessage}>{errors.title.message}</div>}
       </div>
 
       <div className={`${styles.formGroup} ${styles.noBorder}`}>
         <label className={styles.labelRequired}>내용</label>
         <textarea
-          name="contents"
           className={styles.textareaField}
           placeholder="내용을 입력해 주세요."
-          value={formData.contents}
-          onChange={handleInputChange}
+          {...register("contents")}
         ></textarea>
-        {errors.contents && <div className={styles.errorMessage}>{errors.contents}</div>}
+        {errors.contents && <div className={styles.errorMessage}>{errors.contents.message}</div>}
       </div>
 
       <div className={styles.formGroup}>
@@ -165,7 +157,7 @@ export default function BoardsWrite(props: BoardsWriteProps) {
             type="text"
             className={`${styles.inputField} ${styles.w120}`}
             placeholder="01234"
-            value={boardAddress.zipcode}
+            {...register("boardAddress.zipcode")}
             onChange={onChangeBoardAddressZipcode}
           />
           <button type="button" className={`${styles.button} ${styles.secondary}`} onClick={onClickPostcodeSearch}>
@@ -176,14 +168,14 @@ export default function BoardsWrite(props: BoardsWriteProps) {
           type="text"
           className={`${styles.inputField} ${styles.mb8}`}
           placeholder="주소를 입력해 주세요."
-          value={boardAddress.address}
+          {...register("boardAddress.address")}
           onChange={onChangeBoardAddressAddress}
         />
         <input
           type="text"
           className={styles.inputField}
           placeholder="상세주소"
-          value={boardAddress.addressDetail}
+          {...register("boardAddress.addressDetail")}
           onChange={onChangeBoardAddressAddressDetail}
         />
       </div>
@@ -194,7 +186,7 @@ export default function BoardsWrite(props: BoardsWriteProps) {
           type="text"
           className={styles.inputField}
           placeholder="링크를 입력해 주세요."
-          value={youtubeUrl}
+          {...register("youtubeUrl")}
           onChange={onChangeYoutubeUrl}
         />
       </div>
@@ -262,8 +254,9 @@ export default function BoardsWrite(props: BoardsWriteProps) {
           취소
         </button>
         <button
+          type={props.isEdit ? "button" : "submit"}
           className={`${!isAllFormValid ? styles.buttonDisabled : styles.buttonEnabled} ${styles.button}`}
-          onClick={props.isEdit ? onClickUpdate : onClickSubmit}
+          onClick={props.isEdit ? onClickUpdate : undefined}
           disabled={!isAllFormValid}
         >
           {props.isEdit ? "수정하기" : "등록하기"}
@@ -326,6 +319,6 @@ export default function BoardsWrite(props: BoardsWriteProps) {
           </div>
         </Box>
       </Modal>
-    </div>
+    </form>
   );
 }
