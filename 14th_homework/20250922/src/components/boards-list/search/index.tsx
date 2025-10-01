@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { DatePicker, Input } from "antd";
+import { DatePicker, Input as AntdInput } from "antd";
 import { debounce } from "lodash";
 import type { Dayjs } from "dayjs";
 import { useRouter } from "next/navigation";
 import { authManager } from "@/lib/auth";
+import { Button, Input } from "@triptalk/ui-components";
 import styles from "./styles.module.css";
 import { SearchProps } from "./types";
 
@@ -88,37 +89,44 @@ export default function Search({ onSearch, onReset }: SearchProps) {
 
       {/* 제목 검색 */}
       <Input
-        className={styles.searchInput}
+        type="search"
         placeholder="제목을 검색해주세요"
         value={searchKeyword}
         onChange={handleSearchInputChange}
         onPressEnter={handleSearchClick}
+        className={styles.searchInput}
       />
 
       {/* 검색 버튼 */}
-      <button
-        className={styles.searchButton}
+      <Button
+        variant="primary"
+        size="medium"
         onClick={handleSearchClick}
         disabled={!searchKeyword.trim() && !dateRange}
+        className={styles.searchButton}
       >
         검색
-      </button>
+      </Button>
 
       {/* 초기화 버튼 */}
-      <button
-        className={styles.resetButton}
+      <Button
+        variant="secondary"
+        size="medium"
         onClick={handleReset}
+        className={styles.resetButton}
       >
         초기화
-      </button>
+      </Button>
 
       {/* 게시글 등록 버튼 */}
-      <button
-        className={styles.newButton}
+      <Button
+        variant="primary"
+        size="medium"
         onClick={handleNewPost}
+        className={styles.newButton}
       >
         게시글 등록
-      </button>
+      </Button>
     </div>
   );
 }

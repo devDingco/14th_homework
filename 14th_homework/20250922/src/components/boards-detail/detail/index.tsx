@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import YouTube from "react-youtube";
 import { useBoardsDetail } from "./hook";
 import type { BoardsDetailProps } from "./types";
+import { Button } from "@triptalk/ui-components";
 import styles from "./styles.module.css";
 
 // 유튜브 URL에서 비디오 ID 추출 함수
@@ -144,14 +145,24 @@ export default function BoardsDetail(props: BoardsDetailProps) {
         </div>
 
         <div className={styles.actions}>
-          <button className={styles.actionButton} onClick={onClickMoveToList}>
+          <Button
+            variant="secondary"
+            size="medium"
+            onClick={onClickMoveToList}
+            className={styles.actionButton}
+          >
             <Image src="/images/list.png" alt="목록" width={20} height={20} className={styles.actionIcon} />
             목록으로
-          </button>
-          <button className={styles.actionButton} onClick={onClickMoveToEdit}>
+          </Button>
+          <Button
+            variant="primary"
+            size="medium"
+            onClick={onClickMoveToEdit}
+            className={styles.actionButton}
+          >
             <Image src="/images/edit_pen.png" alt="수정" width={20} height={20} className={styles.actionIcon} />
             수정하기
-          </button>
+          </Button>
         </div>
       </div>
     </div>

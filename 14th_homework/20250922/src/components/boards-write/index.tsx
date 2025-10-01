@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import DaumPostcode from "react-daum-postcode";
 import type { BoardsWriteProps } from "./types";
 import { useBoardsWrite } from "./hook";
 import styles from "./styles.module.css";
-import { Modal, Box, Typography, Button, TextField } from "@mui/material";
+import { Modal, Box, Typography, Button as MuiButton, TextField } from "@mui/material";
+import { Button, Input } from "@triptalk/ui-components";
 import { checkValidationFile } from "@/commons/libraries/image-validation";
 
 // 모달 스타일 정의
@@ -34,8 +35,6 @@ export default function BoardsWrite(props: BoardsWriteProps) {
     errors,
     register,
     handleSubmit,
-    setError,
-    clearErrors,
     onSubmit,
     onChangeYoutubeUrl,
     onChangeBoardAddressZipcode,
@@ -54,7 +53,6 @@ export default function BoardsWrite(props: BoardsWriteProps) {
     handlePromptCancel,
     onChangePromptInput,
     uploadFile,
-    watch,
   } = useBoardsWrite(props);
 
   // 이미지 업로드 관련 ref
@@ -250,17 +248,24 @@ export default function BoardsWrite(props: BoardsWriteProps) {
       </div>
 
       <div className={styles.buttonContainer}>
-        <button className={`${styles.button} ${styles.secondary}`} onClick={onClickCancel}>
+        <Button
+          variant="secondary"
+          size="large"
+          onClick={onClickCancel}
+          className={styles.button}
+        >
           취소
-        </button>
-        <button
+        </Button>
+        <Button
           type={props.isEdit ? "button" : "submit"}
-          className={`${!isAllFormValid ? styles.buttonDisabled : styles.buttonEnabled} ${styles.button}`}
+          variant="primary"
+          size="large"
           onClick={props.isEdit ? onClickUpdate : undefined}
           disabled={!isAllFormValid}
+          className={styles.button}
         >
           {props.isEdit ? "수정하기" : "등록하기"}
-        </button>
+        </Button>
       </div>
 
       {/* 우편번호 검색 모달 */}

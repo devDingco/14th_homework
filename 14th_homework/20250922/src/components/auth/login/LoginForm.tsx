@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useMutation } from '@apollo/client';
 import { graphql } from '@/commons/graphql/gql';
 import { authManager } from '@/lib/auth';
+import { Button, Input } from '@triptalk/ui-components';
 import styles from './LoginForm.module.css';
 
 // GraphQL mutation 정의
@@ -16,6 +17,7 @@ const LOGIN_USER = graphql(`
   }
 `);
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface LoginFormProps {}
 
 const LoginForm: React.FC<LoginFormProps> = () => {
@@ -76,12 +78,13 @@ const LoginForm: React.FC<LoginFormProps> = () => {
         // 게시글 목록 페이지로 이동
         router.push('/boards');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('로그인 실패:', error);
       // 에러 메시지 표시 (실제 에러 메시지에 따라 조정)
-      if (error.message.includes('이메일')) {
+      const errorMessage = error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다';
+      if (errorMessage.includes('이메일')) {
         setEmailError('이메일을 확인해주세요');
-      } else if (error.message.includes('비밀번호')) {
+      } else if (errorMessage.includes('비밀번호')) {
         setPasswordError('비밀번호를 확인해주세요');
       } else {
         setEmailError('로그인에 실패했습니다');
@@ -111,46 +114,53 @@ const LoginForm: React.FC<LoginFormProps> = () => {
         </div>
 
         <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.inputGroup}>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="이메일을 입력해 주세요."
-              className={`${styles.input} ${emailError ? styles.inputError : ''}`}
-              disabled={isLoading}
-            />
-            {emailError && <div className={styles.errorMessage}>{emailError}</div>}
-          </div>
-
-          <div className={styles.inputGroup}>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="비밀번호를 입력해 주세요."
-              className={`${styles.input} ${passwordError ? styles.inputError : ''}`}
-              disabled={isLoading}
-            />
-            {passwordError && <div className={styles.errorMessage}>{passwordError}</div>}
-          </div>
-
-          <button
-            type="submit"
-            className={styles.loginButton}
+          <Input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="이메일을 입력해 주세요."
+            error={!!emailError}
+            errorMessage={emailError}
             disabled={isLoading}
+            fullWidth
+            className={styles.inputGroup}
+          />
+
+          <Input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="비밀번호를 입력해 주세요."
+            error={!!passwordError}
+            errorMessage={passwordError}
+            disabled={isLoading}
+            fullWidth
+            className={styles.inputGroup}
+          />
+
+          <Button
+            type="submit"
+            variant="primary"
+            size="large"
+            disabled={isLoading}
+            loading={isLoading}
+            fullWidth
+            className={styles.loginButton}
           >
-            {isLoading ? '로그인 중...' : '로그인'}
-          </button>
+            로그인
+          </Button>
         </form>
 
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="large"
           onClick={handleSignUpClick}
+          fullWidth
           className={styles.signUpButton}
         >
           회원가입
-        </button>
+        </Button>
       </div>
     </div>
   );
