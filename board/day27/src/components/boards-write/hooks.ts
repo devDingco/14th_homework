@@ -3,12 +3,13 @@
 import { useParams, useRouter } from "next/navigation"
 import { ChangeEvent, useEffect, useRef, useState } from "react"
 
-import { useMutation } from "@apollo/client"
+import { useMutation, useQuery } from "@apollo/client"
 import { CreateBoardDocument, CreateBoardMutation, CreateBoardMutationVariables, UpdateBoardDocument, UpdateBoardMutation, UpdateBoardMutationVariables } from "@/commons/graphql/graphql"
 import { IMyvariables } from "./types"
 import { FETCH_BOARD } from "../boards-detail/detail/queries"
 import { mygraphql, mygraphUpdateql, UPLOAD_FILE } from "./queries"
 import { checkVaildationFile } from "@/commons/validation-file"
+import { FETCH_USER_LOGGEDIN } from "@/commons/layout/navigation"
 
 
 
@@ -18,9 +19,12 @@ import { checkVaildationFile } from "@/commons/validation-file"
 
 
 
-export default function useBoardsWrite() {
-    const boardId = useParams()
+export default function useBoardsWrite(isEdit) {
+    // console.log("이즈에디터뭐오니" +  isEdit)
+
     const router = useRouter()
+
+    // const { data } = useQuery(FETCH_USER_LOGGEDIN);
 
     const [inputs, setInputs] = useState({
         email: "",
@@ -43,7 +47,48 @@ export default function useBoardsWrite() {
     const [imageUrl, setImageUrl] = useState<string[]>([]);
     const fileRef = useRef(null);
 
+    const params = useParams();
+    const boardId = params.boardId as string;
+    const { data } = useQuery(FETCH_BOARD, {
+        variables: { boardId },
+        skip: !isEdit,
+    });
+    // const param = useParams()
 
+    const newImages = isEdit
+    ? (data?.fetchBoard?.images || []).map((img, index) => ({
+        src: img,
+        alt: `이미지 ${index + 1}`, // alt 텍스트에 인덱스 + 1 추가
+      }))
+    : [
+        { src: "", alt: "이미지 1" },
+        { src: "", alt: "이미지 2" },
+        { src: "", alt: "이미지 3" },
+      ];
+      
+  const [images, setImages] = useState(newImages);
+
+
+    // 새로고침해도 초기값 유지하기 -> 다음주에 배워요.
+    useEffect(() => {
+        if (isEdit && data?.fetchBoard) {
+          console.log("data?.fetchboard;::", data?.fetchBoard);
+          const newImages = (data?.fetchBoard?.images || []).map((img, index) => ({
+            src: img,
+            alt: `이미지 ${index + 1}`,
+          }));
+          setEmail(data.fetchBoard.writer || "");
+          setTitle(data.fetchBoard.title || "");
+          setContent(data.fetchBoard.contents || "");
+          setZonecode(data.fetchBoard.boardAddress?.zipcode || "");
+          setAddress(data.fetchBoard.boardAddress?.address || "");
+          setDetailAddress(data.fetchBoard.boardAddress?.addressDetail || "");
+          setYoutube(data.fetchBoard.youtubeUrl || "");
+          setImages([...newImages]);
+          // 수정 모드에서는 기존 이미지 URL들을 imageUrl에도 세팅
+          setImageUrl(data.fetchBoard.images || []);
+        }
+      }, [data, isEdit]);
 
 
 
@@ -188,6 +233,7 @@ export default function useBoardsWrite() {
                             youtubeUrl: youtube,
                             images: imageUrl,
 
+
                             boardAddress: {
                                 zipcode: zonecode,
                                 address: address,
@@ -212,13 +258,13 @@ export default function useBoardsWrite() {
 
     const onClickUpdate = async () => {
 
-     
+
         const inputPassword = prompt("비밀번호를 입력하세요.")
 
 
 
         const myvariables: IMyvariables = {
-            boardId: String(boardId.boardId),
+            boardId,
             password: inputPassword ?? "",
             updateBoardInput: {}
 
@@ -227,8 +273,9 @@ export default function useBoardsWrite() {
         if (title !== "") myvariables.updateBoardInput.title = title;
         if (content !== "") myvariables.updateBoardInput.contents = content;
         if (youtube !== "") myvariables.updateBoardInput.youtubeUrl = youtube;
-        if (imageUrl !== "") {
-            myvariables.updateBoardInput.images = imageUrl;
+        if (imageUrl && imageUrl.length > 0) {
+            const filteredImages = imageUrl.filter((url) => url && url !== "");
+            myvariables.updateBoardInput.images = filteredImages;
         }
         if (zonecode || address || detailAddress) {
             myvariables.updateBoardInput.boardAddress = {
@@ -262,25 +309,25 @@ export default function useBoardsWrite() {
     }
 
 
-    const onChangeFile = async (event) => {
-        const file = event.target.files[0]
-        console.log("파일정보: " + file);
+    const onChangeFile = async (event: ChangeEvent<HTMLInputElement>, index: number) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
 
         const isValid = checkVaildationFile(file);
         if (!isValid) return;
 
         const result = await uploadFile({
             variables: { file }
-        })
-        console.log("result: " + result)
+        });
 
-        console.log("file: " + result.data?.uploadFile.url)
-        setImageUrl(prev => [
-            ...prev, result.data?.uploadFile.url
-        ])
+        const url = result.data?.uploadFile.url;
 
-
-    }
+        setImageUrl(prev => {
+            const updated = [...prev];
+            updated[index] = url; // index 위치에 새 URL 넣기
+            return updated;
+        });
+    };
 
     const onClickImage = () => {
         fileRef.current?.click()
@@ -288,11 +335,11 @@ export default function useBoardsWrite() {
 
     const onDeleteImage = (index: number) => {
         setImageUrl((prev) => {
-          const updated = [...prev];
-          updated[index] = "";
-          return updated;
+            const updated = [...prev];
+            updated[index] = "";
+            return updated;
         });
-      };
+    };
 
 
 

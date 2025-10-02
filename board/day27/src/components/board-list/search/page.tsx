@@ -4,8 +4,10 @@ import { ChangeEvent, useState } from "react";
 import { buffer } from "stream/consumers";
 import _ from "lodash"
 import style from './style.module.css'
+import { useRouter } from "next/navigation";
 
 export default function Search({ refetch, setKeyword }) {
+    const router = useRouter()
     const { RangePicker } = DatePicker;
     const [inputKeyword, setInputKeyword] = useState("");
     // const [keyword, setKeyword] = useState("")
@@ -48,6 +50,9 @@ export default function Search({ refetch, setKeyword }) {
     //     }
 
     // }
+    const onclickNewMove = () => {
+        router.push("/board/new")
+    }
 
     return (
 
@@ -63,7 +68,7 @@ export default function Search({ refetch, setKeyword }) {
                 {/* <button onClick={onClickSearch}>검색</button> */}
             </div>
             <FormOutlined />
-            <button>트립토크 등록</button>
+            <button onClick={onclickNewMove}>트립토크 등록</button>
         </div>
     )
 }

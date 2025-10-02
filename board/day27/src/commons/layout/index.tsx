@@ -5,7 +5,7 @@ import LayoutBanner from "./banner"
 import LayoutNavigation from "./navigation"
 
 const HIDDEN_HEADERS= [
-    "/board/new"
+    "/board/new", "/auth/login", "/auth/signup","/", "/boards/edit","/boards/{id}/edit"
 ]
 
 export default function Layout({children}) {

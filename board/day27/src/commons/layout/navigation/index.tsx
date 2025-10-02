@@ -6,7 +6,7 @@ import { gql, useQuery } from "@apollo/client";
 import { useAccessTokenStore } from "@/commons/stores";
 import { useRouter } from "next/navigation";
 
-const FETCH_USER_LOGGEDIN = gql`
+export const FETCH_USER_LOGGEDIN = gql`
   query{  fetchUserLoggedIn{
         _id, email, name
     }
@@ -35,7 +35,7 @@ export default function LayoutNavigation() {
                             <div className={style.menu_item}>마이 페이지</div>
                         </div>
                     </div>
-                    {data?.fetchUserLoggedIn?.name}
+                    {data?.fetchUserLoggedIn?.name}님
                     {data?.fetchUserLoggedIn?.name ?
                         <div className={style.user_section}>
                             <div className={style.user_icon}>

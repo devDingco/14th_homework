@@ -5,7 +5,7 @@ import useBoardsWrite from "./hooks";
 import style from "./style.module.css";
 import { Modal } from 'antd';
 import DaumPostcodeEmbed from 'react-daum-postcode';
-
+import {  MyInput, MyButton, MyTextarea} from "@commons/ui"
 
 import { IBoardsWriteProps } from "./types";
 import { ApolloClient } from "@apollo/client";
@@ -48,26 +48,27 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
           <div className={style.메인}>
             <div className={style.메인__1__1}>
               <div >작성자 <span className={style.필수}>*</span> </div>
-              <input type="text" placeholder="작성자 명을 입력해 주세요." className={`${style.input} ${style.메인1__인풋}`} id="email"disabled={props.isEdit} defaultValue={props?.data?.fetchBoard?.writer ?? ""} {...register("writer")} />
+              <MyInput type="text" register={register} name="writer" placeholder="작성자 명을 입력해 주세요." className={`${style.input} ${style.메인1__인풋}`} id="email" disabled={props.isEdit} defaultValue={props?.data?.fetchBoard?.writer ?? ""} />
+              
               <div className={style.errorMassage}>{formState.errors.writer?.message}</div>
             </div>
             <div className={style.메인__1__1}>
               <div>비밀번호 <span className={style.필수}>*</span></div>
-              <input type="password" placeholder="비밀번호를 입력해 주세요." className={`${style.input} ${style.메인1__인풋}`} {...register("password")} disabled={props.isEdit} defaultValue={props.isEdit ? "********" : ""} />
+              <MyInput type="password" placeholder="비밀번호를 입력해 주세요." className={`${style.input} ${style.메인1__인풋}`} register={register} name="password" disabled={props.isEdit} defaultValue={props.isEdit ? "********" : ""} />
               <div className={style.errorMassage}>{formState.errors.password?.message}</div>
             </div>
           </div>
           <hr></hr>
           <div className={style.메인__1__1}>
             <div>제목 <span className={style.필수}>*</span></div>
-            <input className={style.input} type="text" placeholder="제목을 입력해 주세요." id="title" {...register("title")} defaultValue={props.data?.fetchBoard?.title} />
+            <MyInput className={style.input} type="text" placeholder="제목을 입력해 주세요." register={register} name="title" defaultValue={props.data?.fetchBoard?.title} />
             <div className={style.errorMassage}>{formState.errors.title?.message}</div>
           </div>
           <hr></hr>
 
           <div className={style.메인__1__1}>
             <div>내용 <span className={style.필수}>*</span></div>
-            <textarea className={style.textarea} placeholder="내용을 입력해 주세요." id="content" {...register("contents")} defaultValue={props.data?.fetchBoard.contents} />
+            <MyTextarea className={style.textarea} placeholder="내용을 입력해 주세요." register={register} name="contents" defaultValue={props.data?.fetchBoard.contents} />
             <div className={style.errorMassage}>{formState.errors.contents?.message}</div>
           </div>
 
@@ -76,22 +77,22 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
             <div className={style.메인__1__1} id="메인__주소__검색">
               <div>주소</div>
               <div className={style.메인__주소__주소검색}>
-                <input type="number" placeholder="01234" {...register("zipcode")} className={`${style.input} ${style.주소검색인풋}`} />
+                <MyInput type="number" placeholder="01234" register={register} name="zipcode" className={`${style.input} ${style.주소검색인풋}`} />
                 <button type="button" onClick={onToggleModal} className={style.주소검색버튼}>우편번호 검색</button>
               </div>
             </div>
             <div>
-              <input className={style.input} type="text" placeholder="주소를 입력해 주세요." {...register("address") }   />
+              <MyInput className={style.input} type="text" placeholder="주소를 입력해 주세요." register={register} name="address"   />
             </div>
             <div>
-              <input className={style.input} type="text" placeholder="상세주소" {...register("addressDetail")}  />
+              <MyInput className={style.input} type="text" placeholder="상세주소" register={register} name="addressDetail"  />
             </div>
           </div>
           <hr></hr>
 
           <div className={style.메인__1__1}>
             <div>유튜브 링크</div>
-            <input className={style.input} type="text" placeholder="링크를 입력해주세요." {...register("youtubeUrl")} defaultValue={props.data?.fetchBoard.youtubeUrl ?? ""} />
+            <MyInput className={style.input} type="text" placeholder="링크를 입력해주세요." register={register} name="youtubeUrl" defaultValue={props.data?.fetchBoard.youtubeUrl ?? ""} />
           </div>
           <hr></hr>
           <div>{props.data?.fetchBoard.images}</div>
@@ -150,8 +151,8 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
         </div>
 
         <div className={style.footer}>
-          <button type="button" className={style.푸터취소버튼}>취소</button>
-          <button type="submit" className={style.푸터등록버튼}   style={{ backgroundColor: isActive ? "blue" : "gray" }}>등록하기</button>
+          <MyButton type="button" className={style.푸터취소버튼}>취소</MyButton>
+          <MyButton type="submit" className={style.푸터등록버튼}   style={{ backgroundColor: isActive ? "blue" : "gray" }}>등록하기</MyButton>
 
         </div>
       </form>
