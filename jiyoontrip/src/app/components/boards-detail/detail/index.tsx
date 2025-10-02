@@ -53,13 +53,15 @@ export default function DetailPageComponent() {
             </div>
           </div>
           <div className={styles.detailPhoto}>
-            {data?.fetchBoard.images?.map((el, index) => (
-              <img
-                key={`${el}_${index}`}
-                className={styles.uploadImage}
-                src={`https://storage.googleapis.com/${el}`}
-              />
-            ))}
+            {data?.fetchBoard.images
+              ?.filter((el) => el)
+              .map((el, index) => (
+                <img
+                  key={`${el}_${index}`}
+                  className={styles.uploadImage}
+                  src={`https://storage.googleapis.com/${el}`}
+                />
+              ))}
           </div>
           <div className={styles.detailContent}>{data?.fetchBoard.contents}</div>
           <div className={styles.detailVideo}>

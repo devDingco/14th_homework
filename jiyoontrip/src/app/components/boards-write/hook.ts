@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
 
@@ -138,8 +138,6 @@ export default function useBoardWrite() {
             },
           },
         });
-        console.log(result);
-        console.log(result.data?.createBoard._id);
         setNewParams(result.data?.createBoard._id ?? "");
         setIsCompleteModalOpen(true);
       }
@@ -163,9 +161,10 @@ export default function useBoardWrite() {
       const updateAddressDetail =
         addressDetail || data?.fetchBoard.boardAddress?.addressDetail;
       const updateYoutubeUrl = youtubeUrl || data?.fetchBoard.youtubeUrl;
-      const updateImageUrls = imageUrls.map(
-        (el, index) => el || data?.fetchBoard.images?.[index] || ""
-      );
+      const updateImageUrls = imageUrls;
+      // .map(
+      //   (el, index) => el || data?.fetchBoard.images?.[index] || ""
+      // );
       const result = await updateBoard({
         variables: {
           updateBoardInput: {
@@ -199,7 +198,18 @@ export default function useBoardWrite() {
   const onSubmitModal = () => {
     router.push(`/boards/${newParams}`);
   };
-
+  const onClickDeleteImage = (index: number) => (event: React.MouseEvent) => {
+    // event.stopPropagation();
+    event.preventDefault();
+    const newUrls = [...imageUrls];
+    newUrls[index] = "";
+    setImageUrls(newUrls);
+  };
+  useEffect(() => {
+    if (data?.fetchBoard?.images) {
+      setImageUrls([...data.fetchBoard.images]);
+    }
+  }, [data]);
   return {
     onChangeAuthor,
     onChangePassword,
@@ -208,6 +218,7 @@ export default function useBoardWrite() {
     onChangeAddressDetail,
     onClickSignup,
     onClickUpdate,
+    onClickDeleteImage,
     onToggleModal,
     onSubmitModal,
     onToggleCompleteModal,
@@ -217,7 +228,6 @@ export default function useBoardWrite() {
     zonecode,
     address,
     imageUrls,
-    addressDetail,
     authorError,
     passwordError,
     titleError,

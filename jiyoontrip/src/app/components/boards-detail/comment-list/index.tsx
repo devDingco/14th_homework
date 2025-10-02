@@ -17,7 +17,7 @@ export default function CommentListComponent() {
               dataLength={data?.fetchBoardComments.length ?? 0} //This is important field to render the next data
               next={onNext}
               hasMore={hasMore}
-              loader={<h4>로딩중입니다....</h4>}
+              loader={""}
             >
               {data?.fetchBoardComments?.length === 0 ? (
                 <div className={styles.nocomment}>등록된 댓글이 없습니다.</div>

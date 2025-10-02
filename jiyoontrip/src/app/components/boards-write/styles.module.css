@@ -215,6 +215,7 @@
 .uploadImage {
   width: 10rem;
   height: 10rem;
+  border-radius: 0.5rem;
   object-fit: cover;
 }
 .plusIcon {
@@ -224,4 +225,16 @@
   gap: 8px;
   position: absolute;
   z-index: 2;
+}
+.deleteBtn {
+  position: absolute;
+  z-index: 2;
+  cursor: pointer;
+  font-size: 20px;
+  top: 7px;
+  right: 7px;
+  display: none;
+}
+.imageUploadInput__drop:hover .deleteBtn {
+  display: block;
 }
