@@ -1,0 +1,5 @@
+packages:
+  - '@commons/ui'
+  - '01_cdn'
+  - '02_cra'
+  - '03_cna-*'
