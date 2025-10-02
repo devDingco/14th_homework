@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';
-import { useAccessTokenStore } from '@/commons/stores/access-token-store'; //아폴로프로바이더에들어가면 있음
+import { useAccessTokenStore } from '@/commons/stores/access-token-store';
+import { MyInput, MyButton } from '@commons/ui';
 const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
     loginUser(email: $email, password: $password) {
@@ -69,18 +70,16 @@ export default function BoardsLogin() {
         <div className="p-6">트립토크에 오신걸 환영합니다.</div>
         <div className="pb-4">트립토크에 로그인 하세요.</div>
         <div className="flex flex-col gap-3">
-          <input
+          <MyInput
             onChange={onChangeEmail}
-            className="w-[320px] h-[40px] border border-[#D4D3D3] rounded-lg py-2 px-4 "
             type="text"
             placeholder="이메일을 입력해 주세요."
           />
           {emailError && (
             <div className="text-red-500 text-sm">{emailError}</div>
           )}
-          <input
+          <MyInput
             onChange={onChangePassword}
-            className="w-[320px] h-[40px] border border-[#D4D3D3] rounded-lg py-2 px-4 "
             type="password"
             placeholder="비밀번호를 입력해 주세요."
           />
@@ -88,13 +87,12 @@ export default function BoardsLogin() {
             <div className="text-red-500 text-sm">{emailError}</div>
           )}
         </div>
-        <button
-          onClick={onClickLogin}
-          className="w-[320px] h-[48px] bg-[#2974E5] my-[24px] border rounded-lg text-white "
-        >
+        <MyButton onClick={onClickLogin} variant="primary">
           로그인
-        </button>
-        <button onClick={onClickSignUP}>회원가입</button>
+        </MyButton>
+        <MyButton onClick={onClickSignUP} variant="secondary">
+          회원가입
+        </MyButton>
       </div>
       {/* 오른쪽 */}
       <div className="relative flex-1 h-full">
