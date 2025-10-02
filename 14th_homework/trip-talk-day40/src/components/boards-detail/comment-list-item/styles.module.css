@@ -1,0 +1,110 @@
+/* styles.module.css */
+
+/* 댓글 한 줄(외곽) */
+.댓글리스트 {
+  width: 100%;
+  padding: 16px 0;
+  border-bottom: 1px solid #eee; /* 댓글 사이 구분선 */
+  box-sizing: border-box;
+}
+
+/* 댓글 카드(내부 컨테이너) - 세로 흐름 */
+.commentBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+/* 헤더: 왼쪽 그룹(작성자+별점) 과 오른쪽 액션(수정/삭제) */
+.commentHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 작성자 + 별점 그룹 */
+.leftGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 작성자 이름 */
+.commentWriter {
+  font-weight: 600;
+  font-size: 15px;
+  color: #222;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px; /* 길면 ... 처리 (필요에 맞춰 조정) */
+}
+
+/* 별점 */
+.commentRating {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  color: #f5b301; /* 노란 별 색상 */
+  letter-spacing: 2px;
+}
+
+/* 오른쪽 액션 버튼들: margin-left:auto 효과 대신 헤더 flex 구조로 분리했음 */
+.commentActions {
+  margin-left: auto; /* 자동 여백으로 오른쪽 정렬 */
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+/* 버튼 스타일 */
+.editBtn,
+.deleteBtn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #666;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.editBtn:hover,
+.deleteBtn:hover {
+  background: #f5f5f5;
+  color: #111;
+}
+
+/* 본문 */
+.commentBody {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+  word-break: break-word;
+  white-space: pre-wrap; /* 줄바꿈 유지 */
+}
+
+/* 하단(날짜 등) */
+.commentFooter {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 12px;
+  color: #999;
+}
+
+/* 반응형: 화면이 좁아지면 헤더 요소들이 줄바꿈 */
+/* @media (max-width: 480px) {
+  .leftGroup {
+    gap: 8px;
+  }
+  .commentWriter {
+    max-width: 140px;
+  }
+  .commentHeader {
+    gap: 8px;
+  }
+} */

@@ -1,0 +1,347 @@
+/* .App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+.게시물등록영역 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  /* me_16_24 */
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.게시물_등록 {
+  color: #000;
+
+  /* b_20_28 */
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px; /* 140% */
+}
+
+.작성자_비밀번호_영역 {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  border-bottom: solid var(--gray-100, #e4e4e4) 1px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 1280px;
+}
+.작성자_라벨 {
+  display: flex;
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 4px; /* 라벨과 아스타기호 사이 간격 */
+  margin-bottom: 4px; /* input과 거리 */
+}
+
+.작성자 {
+  width: 620px;
+  height: 48px;
+}
+.작성자_비활성 {
+  width: 620px;
+  height: 48px;
+  pointer-events: none;
+  user-select: none;
+  background-color: #f0f0f0;
+  color: #999;
+  margin-top: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+}
+.비밀번호 {
+  width: 620px;
+  height: 48px;
+}
+.비밀번호_비활성 {
+  width: 620px;
+  height: 48px;
+  pointer-events: none;
+  user-select: none;
+  background-color: #f0f0f0;
+  color: #999;
+  margin-top: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+}
+/* .비밀번호_비활성 ::placeholder {
+  display: none;
+} */
+.비밀번호_라벨 {
+  display: flex;
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 4px; /* 라벨과 아스타기호 사이 간격 */
+  margin-bottom: 4px; /* input과 거리 */
+}
+
+.제목등록영역 {
+  border-bottom: solid var(--gray-100, #e4e4e4) 1px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 1280px;
+}
+.제목인풋 {
+  width: 1280px;
+  height: 48px;
+}
+.제목_라벨 {
+  display: flex;
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 4px; /* 라벨과 아스타기호 사이 간격 */
+  margin-bottom: 4px; /* input과 거리 */
+}
+.내용영역 {
+  padding-top: 40px;
+  width: 1280px;
+}
+
+.내용_라벨 {
+  display: flex;
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 4px; /* 라벨과 아스타기호 사이 간격 */
+  margin-bottom: 4px; /* input과 거리 */
+}
+.주소영역 {
+  border-bottom: solid var(--gray-100, #e4e4e4) 1px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 1280px;
+}
+.우편번호 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.우편번호노출영역 {
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  width: 82px;
+  height: 48px;
+}
+.우편번호검색버튼 {
+  width: 130px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+  color: var(--gray-B, #000);
+  text-align: center;
+  margin-top: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  /* sb_18_24 */
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+  cursor: pointer;
+}
+
+.주소노출영역 {
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  width: 1280px;
+  height: 48px;
+}
+.상세주소입력영역 {
+  width: 1280px;
+  height: 48px;
+}
+
+.유튜브링크_첨부영역 {
+  border-bottom: solid var(--gray-100, #e4e4e4) 1px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 1280px;
+}
+.유투브링크입력 {
+  width: 1280px;
+  height: 48px;
+}
+.사진첨부영역 {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 1280px;
+}
+.사진첨부버튼 {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+.버튼영역 {
+  display: flex;
+  justify-content: flex-end;
+  width: 1280px;
+  gap: 8px;
+}
+/* .버튼영역 {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  gap: 8px;
+} */
+.취소버튼 {
+  border-radius: 8px;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #fff);
+  height: 48px;
+  width: 64px;
+  /* padding: 12px 16px; */
+  color: var(--gray-B, #000);
+  text-align: center;
+
+  /* sb_18_24 */
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+}
+.등록버튼 {
+  height: 48px;
+  width: 95px;
+  border-radius: 8px;
+  border: none;
+  background: var(--gray-300, #c7c7c7);
+  color: var(--gray-100, #e4e4e4);
+  text-align: center;
+
+  /* sb_18_24 */
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+}
+.유효성메시지 {
+  color: var(--red, #f66a6a);
+
+  /* me_16_24 */
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}
+
+.제목인풋,
+.작성자,
+.비밀번호,
+.우편번호노출영역,
+.주소노출영역,
+.상세주소입력영역,
+.유투브링크입력 {
+  margin-top: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+}
+
+.제목인풋,
+.작성자,
+.비밀번호,
+.우편번호노출영역,
+.주소노출영역,
+.상세주소입력영역,
+.유투브링크입력::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
+
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.내용입력 {
+  width: 1280px;
+  height: 336px;
+  margin-top: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+}
+.내용입력::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
+
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
