@@ -49,6 +49,10 @@
     opacity: 1;
 }
 
+.input_image {
+    max-width: 50%;
+}
+
 .bad_good_48h {
     width: 100%;
     height: 48px;

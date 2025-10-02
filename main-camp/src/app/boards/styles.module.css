@@ -5,7 +5,8 @@
     min-width: 781px;
     margin-left: 320px;
     margin-right: 320px;
-  
+    
+    gap: 24px;
     /* height: 100vh; */
 }
 

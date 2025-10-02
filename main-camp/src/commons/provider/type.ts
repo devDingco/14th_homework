@@ -21,14 +21,16 @@ export interface IPostData {
     title: string | [k: string],
     contents: string | [k: string],
     boardAddress?: typeBoardAddress,
-    youtubeUrl?: string
+    youtubeUrl?: string,
+    images?: string[]
 }
 
 export interface IPostUpdateData {
     title: string | [k: string],
     contents: string | [k: string],
     boardAddress?: typeBoardAddress,
-    youtubeUrl?: string
+    youtubeUrl?: string,
+    images?: string[]
 }
 
 export interface IIsBoardDetailContext {

@@ -18,7 +18,8 @@ export const IsEditProvider = ( {children}: { children:ReactNode } ) => {
             address: "",
             addressDetail: ""
         },
-        youtubeUrl: ""
+        youtubeUrl: "",
+        images:[]
     })
 
     const [updatingBoardData, setUpdatingBoardData] = useState<IPostUpdateData>({
@@ -29,7 +30,8 @@ export const IsEditProvider = ( {children}: { children:ReactNode } ) => {
             address: "",
             addressDetail: ""
         },
-        youtubeUrl: ""
+        youtubeUrl: "",
+        images:[]
     })
 
     return (

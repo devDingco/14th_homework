@@ -24,7 +24,8 @@ const BoardsEditPage = () => {
                     address: "",
                     addressDetail: "",
                 },
-                youtubeUrl: ""
+                youtubeUrl: "",
+                images: []
             })
             setUpdatingBoardData({
                 writer: "",
@@ -35,7 +36,8 @@ const BoardsEditPage = () => {
                     address: "",
                     addressDetail: "",
                 },
-                youtubeUrl: ""
+                youtubeUrl: "",
+                images: []
             })
         }
     },[])
@@ -50,7 +52,8 @@ const BoardsEditPage = () => {
                 address: boardDetail?.boardAddress?.address,
                 addressDetail: boardDetail?.boardAddress?.addressDetail,
             },
-            youtubeUrl: boardDetail?.youtubeUrl
+            youtubeUrl: boardDetail?.youtubeUrl,
+            images: boardDetail?.images
         })
         setUpdatingBoardData({
             title: boardDetail?.title,
@@ -60,7 +63,8 @@ const BoardsEditPage = () => {
                 address: boardDetail?.boardAddress?.address,
                 addressDetail: boardDetail?.boardAddress?.addressDetail,
             },
-            youtubeUrl: boardDetail?.youtubeUrl
+            youtubeUrl: boardDetail?.youtubeUrl,
+            images: boardDetail?.images
         })
     },[boardDetail && isEdit])
 

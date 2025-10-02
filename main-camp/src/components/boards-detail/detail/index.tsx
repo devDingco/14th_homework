@@ -85,7 +85,17 @@ const BoardsDetail = (props: IBoardDetail) => {
                     }
                 </div>
             </header>
-            <img src="/image/Tranquil Beachside Serenity 1.png" alt="publish1"/>
+            <ul className={`${styles.input_image_frame} flex_column flex_justi_center flex_align_items_center`}>
+            {
+                props.boardDetail?.images
+                ?
+                props.boardDetail?.images.map((_,i:number) => {
+                    return <img className={`${styles.input_image}`}src={`https://storage.googleapis.com/${props.boardDetail?.images?.[i]}`} />
+                })
+                :
+                null
+            }
+            </ul>
             {props.boardDetail?.contents}
             {
                 props.boardDetail?.youtubeUrl

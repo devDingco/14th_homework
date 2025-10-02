@@ -10,7 +10,7 @@ const useFetchBoardsCount = () => {
         >(FetchBoardsCountDocument, {
             fetchPolicy: "cache-and-network",
         })
-        getData = { data, loading, error, refetch } 
+        getData = { data, loading, error, refetch }
     } catch(e: unknown) {
         if (e instanceof ApolloError) {
             e.graphQLErrors.forEach((e) => {

@@ -23,7 +23,7 @@ const BoardsWrite = () => {
     
     const { isEdit, postData } = useIsEdit()
 
-    const { onChangePosting, onClickResist, onUpdateHandler } = useBoardWrite({setBoardErr})
+    const { onChangePosting, onClickResist, onUpdateHandler, onClickImage, onClickImageDelete, fileRef } = useBoardWrite({setBoardErr})
 
     useEffect(()=>{
         console.log('postData : ', postData)
@@ -56,7 +56,7 @@ const BoardsWrite = () => {
                     </form>
                     <hr />
                     <form className={`${styles.write_form_192h} flex_row`}>
-                        <WriteInput label={"사진 첨부"}/>
+                        <WriteInput setState={onChangePosting({category: "사진첨부"})} onClickImage={onClickImage} onClickImageDelete={onClickImageDelete} fileRef={fileRef} label={"사진 첨부"}/>
                     </form>
                 </section>
                 <div id="" className={`${styles.write_confirm_container} flex_row flex_justi_end`}>

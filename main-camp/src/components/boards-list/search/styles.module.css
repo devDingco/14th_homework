@@ -1,0 +1,42 @@
+.input_datepicker {
+    width: 350px;
+    height: 48px;
+    gap: 8px;
+    opacity: 1;
+    border-radius: 8px;
+    /* padding: 12px; */
+    background: var(--gray-50, rgba(242, 242, 242, 1));
+}
+
+.search_frame {
+    gap: 16px;
+}
+
+.input_search {
+    width: 640px;
+    height: 48px;
+    min-width: 180px;
+    max-width: 640px;
+    gap: 8px;
+    opacity: 1;
+    border-radius: 8px;
+    background: var(--gray-50, rgba(242, 242, 242, 1));
+}
+
+.triptalk_add {
+    width: 162px;
+    height: 48px;
+    gap: 8px;
+    opacity: 1;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    border-radius: 8px;
+    background: rgba(41, 116, 229, 1);
+}
+
+.triptalk {
+    color: rgba(255, 255, 255, 1);
+    white-space: nowrap;
+}

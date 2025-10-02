@@ -35,13 +35,14 @@ export const FETCH_BOARD = gql`
             likeCount
             dislikeCount
             updatedAt
+            images
         }
     }
 `
 
 export const FETCH_BOARDS = gql`
-    query fetchBoards($page: Int!) {
-        fetchBoards(page: $page) {
+    query fetchBoards($page: Int!, $endDate: DateTime, $startDate: DateTime, $search: String) {
+        fetchBoards(page: $page, endDate: $endDate, startDate: $startDate, search: $search) {
                 _id
                 title
                 writer
@@ -94,6 +95,14 @@ export const UPDATE_COMMENT = gql`
         updateBoardComment (updateBoardCommentInput: $updateBoardCommentInput, password: $password, boardCommentId: $boardCommentId) {
             writer
             deletedAt
+        }
+    }
+`
+
+export const UPLOAD_FILE = gql`
+    mutation uploadFile($file: Upload!) {
+        uploadFile(file: $file) {
+            url
         }
     }
 `
