@@ -14,6 +14,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     onChangeAddressDetail,
     onClickSignup,
     onClickUpdate,
+    onClickDeleteImage,
     onToggleModal,
     onSubmitModal,
     onToggleCompleteModal,
@@ -146,6 +147,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
                   type="text"
                   placeholder="01234"
                   value={zonecode || data?.fetchBoard.boardAddress?.zipcode || ""}
+                  readOnly
                 />
                 <button className={styles.inputArea__button} onClick={onToggleModal}>
                   우편번호 검색
@@ -157,6 +159,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
               type="text"
               placeholder="주소를 입력해 주세요"
               value={address || data?.fetchBoard.boardAddress?.address || ""}
+              readOnly
             />
             <input
               className={styles.inputArea__input}
@@ -183,33 +186,52 @@ export default function BoardWrite(props: IBoardWriteProps) {
               placeholder="링크를 입력해 주세요."
               onChange={onChangeYoutubeUrl}
               defaultValue={data?.fetchBoard?.youtubeUrl ?? ""}
-              // defaultValue={props.data?.fetchBoard.youtubeUrl}
             />
             <div className={styles.inputError}></div>
           </div>
           <hr className={styles.line} />
-
           {/* ImageUpload: 사진 첨부 */}
           <div className={styles.imageUploadArea}>
             <label className={styles.inputArea__enrollLabel__label}>사진 첨부</label>
             <div className={styles.imageUploadInput}>
               <label htmlFor="file-upload-1">
                 <div className={styles.imageUploadInput__drop}>
-                  {imageUrls[0] ? (
+                  {/* {imageUrls[0] ? (
                     <div>
                       <img
                         className={styles.uploadImage}
                         src={`https://storage.googleapis.com/${imageUrls[0]}`}
                       />
-                      <CloseCircleFilled />
+                      <CloseCircleFilled
+                        className={styles.deleteBtn}
+                        onClick={onClickDeleteImage(0)}
+                      />
                     </div>
                   ) : (
-                    data?.fetchBoard?.images?.[0] && ( // 없으면 DB 값 보여줌
+                    data?.fetchBoard?.images?.[0] && (
+                      <div>
+                        <img
+                          className={styles.uploadImage}
+                          src={`https://storage.googleapis.com/${data.fetchBoard.images[0]}`}
+                        />
+                        <CloseCircleFilled
+                          className={styles.deleteBtn}
+                          onClick={onClickDeleteImage(0)}
+                        />
+                      </div>
+                    )
+                  )} */}
+                  {imageUrls[0] && (
+                    <div>
                       <img
                         className={styles.uploadImage}
-                        src={`https://storage.googleapis.com/${data.fetchBoard.images[0]}`}
+                        src={`https://storage.googleapis.com/${imageUrls[0]}`}
                       />
-                    )
+                      <CloseCircleFilled
+                        className={styles.deleteBtn}
+                        onClick={onClickDeleteImage(0)}
+                      />
+                    </div>
                   )}
                   <div className={styles.plusIcon}>
                     <Image
@@ -230,18 +252,17 @@ export default function BoardWrite(props: IBoardWriteProps) {
               </label>
               <label htmlFor="file-upload-2">
                 <div className={styles.imageUploadInput__drop}>
-                  {imageUrls[1] ? (
-                    <img
-                      className={styles.uploadImage}
-                      src={`https://storage.googleapis.com/${imageUrls[1]}`}
-                    />
-                  ) : (
-                    data?.fetchBoard?.images?.[1] && (
+                  {imageUrls[1] && (
+                    <div>
                       <img
                         className={styles.uploadImage}
-                        src={`https://storage.googleapis.com/${data.fetchBoard.images[1]}`}
+                        src={`https://storage.googleapis.com/${imageUrls[1]}`}
                       />
-                    )
+                      <CloseCircleFilled
+                        className={styles.deleteBtn}
+                        onClick={onClickDeleteImage(1)}
+                      />
+                    </div>
                   )}
                   <div className={styles.plusIcon}>
                     <Image
@@ -262,18 +283,17 @@ export default function BoardWrite(props: IBoardWriteProps) {
               </label>
               <label htmlFor="file-upload-3">
                 <div className={styles.imageUploadInput__drop}>
-                  {imageUrls[2] ? (
-                    <img
-                      className={styles.uploadImage}
-                      src={`https://storage.googleapis.com/${imageUrls[2]}`}
-                    />
-                  ) : (
-                    data?.fetchBoard?.images?.[2] && (
+                  {imageUrls[2] && (
+                    <div>
                       <img
                         className={styles.uploadImage}
-                        src={`https://storage.googleapis.com/${data.fetchBoard.images[2]}`}
+                        src={`https://storage.googleapis.com/${imageUrls[2]}`}
                       />
-                    )
+                      <CloseCircleFilled
+                        className={styles.deleteBtn}
+                        onClick={onClickDeleteImage(2)}
+                      />
+                    </div>
                   )}
                   <div className={styles.plusIcon}>
                     <Image
@@ -327,7 +347,6 @@ export default function BoardWrite(props: IBoardWriteProps) {
       {isCompleteModalOpen === true && (
         <Modal
           title={isEdit === true ? "수정완료" : "작성완료"}
-          closable={{ "aria-label": "Custom Close Button" }}
           open={true}
           onOk={onSubmitModal}
           onCancel={onToggleCompleteModal}

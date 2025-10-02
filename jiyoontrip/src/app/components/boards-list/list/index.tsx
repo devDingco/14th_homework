@@ -73,13 +73,7 @@ export default function BoardsPageComponent({
         </div> */}
       </div>
       {isModalOpen === true && (
-        <Modal
-          title="삭제완료"
-          closable={{ "aria-label": "Custom Close Button" }}
-          open={true}
-          onOk={onClickDelete}
-          onCancel={onToggleModal}
-        >
+        <Modal title="삭제완료" open={true} onOk={onClickDelete} onCancel={onToggleModal}>
           성공적으로 삭제되었습니다.
         </Modal>
       )}
