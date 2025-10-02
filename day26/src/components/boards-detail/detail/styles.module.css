@@ -1,0 +1,14 @@
+/* src/components/boards-detail/styles.module.css */
+.detailLayout { padding: 20px; }
+.detailBody { max-width: 800px; margin: 0 auto; }
+.detailFrame { border: 1px solid #ddd; border-radius: 12px; padding: 20px; }
+.detailSubject { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
+.detailMetadataContainer { display: flex; justify-content: space-between; margin-bottom: 10px; }
+.detailMetadataProfile { display: flex; align-items: center; gap: 8px; }
+.detailMetadataDate { font-size: 12px; color: #999; }
+.enrollBorder { border-top: 1px solid #eee; margin: 10px 0; }
+.detailContentContainer { margin-top: 10px; }
+.detailContentImage { width: 100%; border-radius: 8px; margin-bottom: 10px; }
+.detailContentGoodOrBad { display: flex; gap: 16px; margin-top: 10px; }
+.detailButtonsContainer { display: flex; gap: 16px; margin-top: 20px; }
+.detailButton { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; background: #fff; cursor: pointer; }

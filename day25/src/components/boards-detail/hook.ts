@@ -1,22 +1,26 @@
-// src/components/boards-detail/hook.ts
 
+"use client";
 import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
-// 👇 'src/'를 삭제해서 경로를 수정합니다.
+import { FETCH_BOARD } from "components/boards-write/queries";
+import { useRouter } from "next/navigation";
 import { FetchBoardDocument } from "commons/graphql/graphql";
-import { IBoardDetail } from "./types";
 
 export const useBoardDetail = () => {
+  const router = useRouter();
   const params = useParams();
-
-  const { data, loading, error } = useQuery<{ fetchBoard: IBoardDetail }>(
-    FetchBoardDocument,
-    { variables: { boardId: String(params.boardId) } }
-  );
+  const id = params.boardId.toString();
+  // 보여줄 board 정보 받아오기
+  const { data } = useQuery(FetchBoardDocument, {
+    variables: { boardId: id },
+  });
+  //수정하기 페이지로 이동
+  const goToEditPage = () => {
+    router.push(`${id}/edit`);
+  };
 
   return {
-    board: data?.fetchBoard,
-    loading,
-    error,
+    data,
+    goToEditPage,
   };
 };

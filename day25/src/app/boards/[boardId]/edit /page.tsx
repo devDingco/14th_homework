@@ -7,7 +7,8 @@ import BoardWritePage from "components/boards-write";
 export default function BoardsEditPage() 
   {
     return(
-        // '등록 모드'임을 알려주기 위해 isEdit={false}를 props로 전달합니다.
+       <> 
         <BoardWritePage isEdit={true} />
+      </>
     );
 }
