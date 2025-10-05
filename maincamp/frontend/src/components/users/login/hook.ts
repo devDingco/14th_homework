@@ -1,58 +1,40 @@
-import { LoginUserDocument } from "@/commons/graphql/graphql";
-import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";
-import { ApolloError, useMutation, useQuery } from "@apollo/client";
-import { Modal } from "antd";
-import { jwtDecode } from "jwt-decode";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { useForm } from "react-hook-form";
+import { loginUserFormSchema, LoginUserFormValues } from "./schema";
+import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";
+import { ApolloError, useMutation } from "@apollo/client";
+import { LoginUserDocument } from "@/commons/graphql/graphql";
+import { jwtDecode } from "jwt-decode";
+import { Modal } from "antd";
+import { BaseSyntheticEvent } from "react";
 
-export default function useLogin() {
-  // 페이지 이동을 위한 라우터
+export default function useLoginForm() {
+  // 0. 세팅
   const router = useRouter();
 
-  // state 설정: Email, password, isValid
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isValid, setIsValid] = useState(true);
+  // 1. useForm세팅
+  const { register, handleSubmit, formState } = useForm<LoginUserFormValues>({
+    resolver: zodResolver(loginUserFormSchema),
+    mode: "onChange",
+  });
 
-  // 글로벌 state: setAccessToken
+  // 2. 글로벌 state: setAccessToken
   const { setAccessToken } = useAccessTokenStore();
 
-  // 로그인 mutation
+  // 3. API 요청 세팅
   const [loginUser] = useMutation(LoginUserDocument);
 
-  // onChange 함수
-  const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-
-    if (event.target.value && password) {
-      setIsValid(true);
-    }
-  };
-
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-
-    if (event.target.value && email) {
-      setIsValid(true);
-    }
-  };
-
-  // onClick 함수
-  const onCLickLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (email.trim() === "" || password.trim() === "") {
-      setIsValid(false);
-      return;
-    }
+  // 4. 함수
+  const onClickLogin = async (data: LoginUserFormValues, event?: BaseSyntheticEvent) => {
+    event?.preventDefault();
+    const { email, password } = data;
 
     try {
       const result = await loginUser({
         variables: { email, password },
       });
 
-      console.log(result);
       const accessToken = result.data?.loginUser.accessToken ?? "";
       setAccessToken(accessToken);
 
@@ -60,9 +42,6 @@ export default function useLogin() {
       // freshToken 실습 전까지 localStorage 저장
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("exp", decodedExp);
-
-      setEmail("");
-      setPassword("");
 
       router.push("/boards");
     } catch (error) {
@@ -84,11 +63,5 @@ export default function useLogin() {
     router.push("/signup");
   };
 
-  return {
-    onClickSignup,
-    onChangeEmail,
-    onChangePassword,
-    onCLickLogin,
-    isValid,
-  };
+  return { register, handleSubmit, formState, onClickLogin, onClickSignup };
 }

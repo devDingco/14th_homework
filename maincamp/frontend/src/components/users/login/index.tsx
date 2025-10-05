@@ -2,22 +2,27 @@
 
 import { Button, Inputfield } from "@commons/ui";
 import styles from "./styles.module.css";
-import useLogin from "./hook";
+import useLoginForm from "./hook";
+import classNames from "classnames";
 
 export default function Login() {
-  const { onClickSignup, onChangeEmail, onChangePassword, onCLickLogin, isValid } = useLogin();
+  const { register, handleSubmit, formState, onClickLogin, onClickSignup } = useLoginForm();
   return (
-    <form className={styles.formContainer} onSubmit={onCLickLogin}>
+    <form className={styles.formContainer} onSubmit={handleSubmit(onClickLogin)}>
       <>
         <img src="/icons/triptrip_logo.svg" />
         <span>트립트립에 오신걸 환영합니다.</span>
       </>
       <div>
         <p>트립트립에 로그인 하세요.</p>
-        <div className={isValid ? `${styles.inputContainer}` : `${styles.inputContainer}  ${styles.error}`}>
-          <Inputfield type="text" placeholder="이메일을 입력해 주세요." onChange={onChangeEmail} />
-          <Inputfield type="password" placeholder="비밀번호를 입력해 주세요." onChange={onChangePassword} />
-          <span style={{ display: isValid ? "none" : "block" }}>아이디 또는 비밀번호를 확인해 주세요.</span>
+        <div
+          className={classNames(styles.inputContainer, {
+            [styles.error]: formState.isSubmitted && !formState.isValid,
+          })}
+        >
+          <Inputfield type="text" placeholder="이메일을 입력해 주세요." {...register("email")} />
+          <Inputfield type="password" placeholder="비밀번호를 입력해 주세요." {...register("password")} />
+          {formState.isSubmitted && formState.errors.email && <span>{formState.errors.email.message}</span>}
         </div>
       </div>
       <>

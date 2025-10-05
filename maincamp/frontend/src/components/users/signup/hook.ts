@@ -1,89 +1,36 @@
-import {
-  CreateUserDocument,
-  CreateUserMutationVariables,
-} from "@/commons/graphql/graphql";
-import { ApolloError, useMutation } from "@apollo/client";
-import { Modal } from "antd";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { useForm } from "react-hook-form";
+import { createUserFormSchema, CreateUserFormValues } from "./schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { BaseSyntheticEvent, useState } from "react";
+import { ApolloError, useMutation } from "@apollo/client";
+import { CreateUserDocument } from "@/commons/graphql/graphql";
+import { Modal } from "antd";
 
-export default function useSignUp() {
+export default function useSignupForm() {
+  // 0. 세팅
   const router = useRouter();
-  // state
-  const [inputs, setInputs] = useState({
-    email: "",
-    name: "",
-    password: "",
-    passwordConfirm: "",
-  });
-  const isValid =
-    inputs.email.trim() !== "" &&
-    inputs.name.trim() !== "" &&
-    inputs.password.trim() !== "" &&
-    inputs.passwordConfirm.trim() !== "";
 
-  const [errors, setErrors] = useState({
-    email: false,
-    name: false,
-    password: false,
-    passwordConfirm: false,
+  // 1. useForm 세팅
+  const { register, handleSubmit, formState } = useForm<CreateUserFormValues>({
+    resolver: zodResolver(createUserFormSchema),
+    mode: "onChange",
   });
 
+  // 2. 모달 관련
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 회원가입 mutation
-  const [createUser] =
-    useMutation<CreateUserMutationVariables>(CreateUserDocument);
+  // 3. API 요청 세팅
+  const [createUser] = useMutation(CreateUserDocument);
 
-  // onChange 함수 및 유효성 검증
-  const onChangeInputs = (event: ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = event.target;
-    setInputs({
-      ...inputs,
-      [id]: value,
-    });
-
-    switch (value) {
-      case "": {
-        setErrors({ ...errors, [id]: true });
-        break;
-      }
-      default: {
-        setErrors({ ...errors, [id]: false });
-        break;
-      }
-    }
-  };
-
-  // onClick함수
-  const onClickSignup = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!isValid) {
-      if (inputs.email === "") {
-        setErrors((errors) => ({ ...errors, email: true }));
-      }
-      if (inputs.name === "") {
-        setErrors((errors) => ({ ...errors, name: true }));
-      }
-      if (inputs.password === "") {
-        setErrors((errors) => ({ ...errors, password: true }));
-      }
-      if (inputs.passwordConfirm === "") {
-        setErrors((errors) => ({ ...errors, passwordConfirm: true }));
-      }
-      return;
-    }
+  // 4. 함수
+  const onClickSignup = async (data: CreateUserFormValues, event?: BaseSyntheticEvent) => {
+    event?.preventDefault();
+    const createUserInput = { email: data.email, name: data.name, password: data.password };
 
     try {
       const result = await createUser({
-        variables: {
-          createUserInput: {
-            email: inputs.email,
-            name: inputs.name,
-            password: inputs.password,
-          },
-        },
+        variables: { createUserInput },
       });
 
       setIsModalOpen(true);
@@ -107,11 +54,11 @@ export default function useSignUp() {
   };
 
   return {
-    inputs,
-    errors,
-    onChangeInputs,
+    register,
+    handleSubmit,
+    formState,
+    isModalOpen,
     onClickSignup,
     onClickLogin,
-    isModalOpen,
   };
 }
