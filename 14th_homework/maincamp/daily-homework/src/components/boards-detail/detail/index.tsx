@@ -6,9 +6,10 @@ import { D_Variables } from './types';
 import { ThumbDown, ThumbUp, List, Edit } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import YouTube from 'react-youtube';
+import Image from "next/image";
 
 export default function Detail(props: D_Variables) {
-  const { url, router, d_variables, data, dt, koreaTime, loading, error } = useDetail();
+  const { url, router, boardId, data, dt, koreaTime, loading, error } = useDetail();
 
   // YouTube URL에서 비디오 ID 추출
   const extractYouTubeVideoId = (url: string): string | null => {
@@ -36,6 +37,7 @@ export default function Detail(props: D_Variables) {
   console.log('상세 페이지 데이터:', data);
   console.log('YouTube URL:', (data?.fetchBoard as any)?.youtubeUrl);
   console.log('주소 정보:', (data?.fetchBoard as any)?.boardAddress);
+  console.log(data?.fetchBoard?.images)
 
   if (loading) return <div>로딩 중...</div>;
   if (error) return <div>에러가 발생했습니다: {error.message}</div>;
@@ -126,6 +128,39 @@ export default function Detail(props: D_Variables) {
             />
           </div>
         )}
+      </div>
+
+      <div className={styles['enroll-row-section']}>
+        <div className={styles['picture-enroll-row']}>
+          {data?.fetchBoard?.images?.[0] && (
+            <Image
+              src={`https://storage.googleapis.com/${data?.fetchBoard?.images?.[0]}`}
+              alt="이미지1"
+              width={100}
+              height={100}
+              className={styles.image}
+            />
+          )}
+          <br />
+          {data?.fetchBoard?.images?.[1] && (
+            <Image
+              src={`https://storage.googleapis.com/${data?.fetchBoard?.images?.[1]}`}
+              alt="이미지2"
+              width={100}
+              height={100}
+              className={styles.image}
+            />
+          )}
+          {data?.fetchBoard?.images?.[2] && (
+            <Image
+              src={`https://storage.googleapis.com/${data?.fetchBoard?.images?.[2]}`}
+              alt="이미지3"
+              width={100}
+              height={100}
+              className={styles.image}
+            />
+          )}
+        </div>
       </div>
 
       <div className={styles.Like}>

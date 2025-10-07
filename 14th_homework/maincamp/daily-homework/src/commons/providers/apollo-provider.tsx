@@ -7,6 +7,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export default function ApolloSetting(props: { allPage: React.ReactNode }) {
-  return <ApolloProvider client={client}>{props.allPage}</ApolloProvider>;
+export default function ApolloSetting(props: { children: React.ReactNode }) {
+  return <ApolloProvider client={client}>{props.children}</ApolloProvider>;
 }

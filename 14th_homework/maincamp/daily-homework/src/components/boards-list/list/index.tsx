@@ -13,38 +13,37 @@ export default function NewBoardsPage({ data, refetch, currentPage, totalCount }
       <div className={styles.layout2}>
         <div className={styles.body}>
           <div className={styles.board}>
-            <div className={styles.list_board}>
+            <div className={styles.boardList}>
               <div className={styles.list}>
                 <div className={styles.name}>
-                  <span>번호</span>
-                  <span>제목</span>
-                  <span>작성자</span>
-                  <span>날짜</span>
+                  <span style={{ width: '64px', height: '20px' }}>번호</span>
+                  <span style={{ width: '848px', height: '20px' }}>제목</span>
+                  <span style={{ width: '100px', height: '20px' }}>작성자</span>
+                  <span style={{ width: '100px', height: '20px' }}>날짜</span>
                 </div>
                 <div className={styles.post}>
                   {data?.fetchBoards.map((el: Board, index: number) => {
                     return (
-                      <div key={index}>
-                        <div
+                      <div style={{width: '100%'}} key={index}>
+                        <div 
                           className={styles.post_info}
                           onClick={() => router.push(`/boards/${el._id}`)}
                         >
-                          <span style={{ color: '#919191' }}>
+                          <span style={{ color: '#919191', width: '64px', height: '20px' }}>
                             {/* 게시글 번호 계산 */}
                             {totalCount - (currentPage - 1) * 10 - index}
                           </span>
-                          <span style={{ color: '#1C1C1C' }}>{el.title}</span>
-                          <span style={{ color: '#333' }}>{el.writer}</span>
-                          <span style={{ color: '#919191' }}>
-                            {/* 날짜 표시 영역 - 필요시 날짜 데이터 추가 */}
-                          </span>
-                          <span>
+                          <span style={{ color: '#1C1C1C', width: '848px', height:'20px' }}>{el.title}</span>
+                          <span style={{ color: '#333',width: '100px', height: '20px' }}>{el.writer}</span>
+                          <span style={{ color: '#919191' ,width: '100px', height: '20px'}}>123{/* 날짜 표시 영역 */}</span>
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
                                 onClickDelete(el._id || '');
                               }}
                               style={{
+                                width: '24px',
+                                height: '24px',
                                 background: 'none',
                                 border: '1px solid #ddd',
                                 padding: '4px 8px',
@@ -56,7 +55,6 @@ export default function NewBoardsPage({ data, refetch, currentPage, totalCount }
                             >
                               삭제
                             </button>
-                          </span>
                         </div>
                       </div>
                     );
