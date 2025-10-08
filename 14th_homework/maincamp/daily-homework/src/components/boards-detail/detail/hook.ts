@@ -4,19 +4,25 @@ import { gql, useMutation, useQuery } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
 import { ChangeEvent, useState, useEffect } from 'react';
 import dayjs from 'dayjs';
-import { FETCH_BOARD } from './queries';
+import { 
+  FetchBoardDocument, 
+  FetchBoardQuery, 
+  FetchBoardQueryVariables } from '@/commons/graphql/graphql';
 
 export default function useDetail() {
   const url = useParams();
   const router = useRouter();
   const [koreaTime, setKoreaTime] = useState('');
 
-  const d_variables = {
-    boardId: String(url.boardId),
-  };
+  const boardId = String(url.boardId);
 
   // console.log('boardId:', url.boardId);
-  const { data, loading, error } = useQuery(FETCH_BOARD, { variables: d_variables });
+  const { data, loading, error } = useQuery<
+  FetchBoardQuery,
+  FetchBoardQueryVariables
+>(FetchBoardDocument, {
+  variables: { boardId },
+});
   console.log('GraphQL data:', data, 'loading:', loading, 'error:', error);
 
   const dt = data?.fetchBoard?.createdAt;
@@ -31,8 +37,8 @@ export default function useDetail() {
   return {
     url,
     router,
-    d_variables,
     data,
+    boardId,
     dt,
     koreaTime,
     loading,

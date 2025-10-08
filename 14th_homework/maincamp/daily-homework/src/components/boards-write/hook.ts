@@ -1,14 +1,17 @@
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
-import { ChangeEvent, useState, useEffect, useMemo } from 'react';
+import { ChangeEvent, useState, useEffect, useMemo, useRef } from 'react';
 
-import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from './queries';
+import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD, UPLOAD_FILE } from './queries';
 import { Errors, BoardVariables, FormData } from './types';
 import { useAlertModal } from '@/commons/components/modal';
 import {
   CreateBoardDocument,
   CreateBoardMutation,
   CreateBoardMutationVariables,
+  FetchBoardDocument,
+  FetchBoardQuery,
+  FetchBoardQueryVariables,
 } from '@/commons/graphql/graphql';
 
 export default function useBoardsWriteAdvanced(props: BoardVariables) {
@@ -22,6 +25,25 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     title: props.data?.fetchBoard?.title || '',
     contents: props.data?.fetchBoard?.contents || '',
   });
+
+  const fileRef = useRef<(HTMLInputElement | null)[]>([]);
+  const setFileRef = (index: number) => (el: HTMLInputElement | null) => {
+    fileRef.current[index] = el;
+  };
+
+  const [imageUrl, setImageUrl] = useState<string[]>(() => {
+    const imageData = (props.data?.fetchBoard as any)?.images ?? [];
+    if (Array.isArray(imageData) && imageData.length) {
+      const slots = ['', '', ''];
+      for (let i = 0; i < Math.min(3, imageData.length); i++) {
+        slots[i] = imageData[i] ?? '';
+      }
+      return slots;
+    }
+    return ['', '', ''];
+  });
+
+  const [uploadFile] = useMutation(UPLOAD_FILE);
 
   const [password, setPassword] = useState<string>('');
 
@@ -71,6 +93,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
       title: formData.title,
       contents: formData.contents,
       password,
+      images: imageUrl,
     };
 
     // 유튜브 URL이 있으면 추가
@@ -114,6 +137,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     const updateBoardInput: {
       title: string;
       contents: string;
+      images?: string[];
       youtubeUrl?: string;
       boardAddress?: {
         zipcode?: string;
@@ -128,6 +152,12 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     // 현재 값 또는 기존 값 사용
     updateBoardInput.title = formData.title.trim() || props.data?.fetchBoard?.title || '';
     updateBoardInput.contents = formData.contents.trim() || props.data?.fetchBoard?.contents || '';
+
+    // 이미지 처리 
+    const currentImages = imageUrl.filter((img) => img.trim() !== '');
+    if (currentImages.length > 0) {
+      updateBoardInput.images = currentImages;
+    }
 
     // 유튜브 URL 처리
     const currentYoutubeUrl = youtubeUrl || (props.data?.fetchBoard as any)?.youtubeUrl || '';
@@ -168,21 +198,6 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
 
   const [error, setErrors] = useState<Errors>({});
 
-  // const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setWriter(event.target.value);
-  //   if (error.writer) setErrors((prev) => ({ ...prev, writer: '' }));
-  // };
-
-  // const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setTitle(event.target.value);
-  //   if (error.title) setErrors((prev) => ({ ...prev, title: '' }));
-  // };
-
-  // const onChangeContent = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setContents(event.target.value);
-  //   if (error.contents) setErrors((prev) => ({ ...prev, contents: '' }));
-  // };
-
   const onChangeInput = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const field = event.target.id as keyof FormData;
     setFormData((prev) => ({
@@ -221,6 +236,66 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
 
   const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
     setYoutubeUrl(event.target.value);
+  };
+
+  const onClickImage = (index: number) => () => {
+    // fileRef.current?.click();
+    // console.log(fileRef.current[index])
+    fileRef.current[index]?.click();
+  };
+
+  // 이미지 크기 Validation
+  const checkValidationFile = (file?: File) => {
+    if (typeof file === 'undefined') {
+      alert('파일 없음');
+      return false;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert('파일 용량 제한을 초과했습니다.(5MB)');
+      return false;
+    }
+
+    if (!file.type.includes('jpeg') && !file.type.includes('png')) {
+      alert('jpeg 또는 png 파일만 업로드 가능');
+      return false;
+    }
+    return true;
+  };
+
+  const onChangeFile = (index: number) => async (event: ChangeEvent<HTMLInputElement>) => {
+    // console.log(event.target.files);
+    const file = event.target.files?.[0];
+    // console.log(file);
+    // console.log("123123")
+    const isValid = checkValidationFile(file);
+    // console.log(isValid)
+    if (!isValid) return;
+
+    const result = await uploadFile({ variables: { file } });
+    console.log('업로드 파일 이후 result확인: ', result.data.uploadFile.url);
+
+    const url = result.data?.uploadFile?.url ?? '';
+
+    setImageUrl((prev) => {
+      const next = [...prev];
+      next[index] = url;
+      return next;
+    });
+
+    // 초기화
+    event.target.value = '';
+  };
+
+  const deleteImage = (index: number) => (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setImageUrl((prev) => {
+      const next = [...prev];
+      next[index] = '';
+      return next;
+    });
+    const input = fileRef.current[index];
+    if (input) input.value = '';
   };
 
   const checkRegister = (): boolean => {
@@ -284,6 +359,9 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
 
   return {
     formData,
+    fileRef,
+    setFileRef,
+    imageUrl,
     onChangeInput,
     onChangeWriter,
     onChangePassword,
@@ -291,6 +369,9 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     onChangeContents,
     onChangeAddressDetail,
     onChangeYoutubeUrl,
+    onClickImage,
+    onChangeFile,
+    deleteImage,
     onclickUpdate,
     onClickSubmit,
     error,

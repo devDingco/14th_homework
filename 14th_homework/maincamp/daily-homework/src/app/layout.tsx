@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import ApolloSetting from '@/commons/providers/06-02-apollo-provider';
 import MainLayout from '@/commons/layout';
+import ApiUploadProvider from '@/commons/providers/api-upload-provider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -35,7 +35,15 @@ export default function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ApolloSetting allPage={<MainLayout>{children}</MainLayout>} />
+        {/* <ApolloSetting children={<MainLayout>{children}</MainLayout>} /> */}
+        <ApiUploadProvider>
+          <MainLayout>
+            {children}
+          </MainLayout>
+        </ApiUploadProvider>  
+        {/* <MainLayout>
+          {children}
+        </MainLayout> */}
       </body>
     </html>
   );
