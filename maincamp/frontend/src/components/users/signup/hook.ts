@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { createUserFormSchema, CreateUserFormValues } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,6 +10,8 @@ import { Modal } from "antd";
 export default function useSignupForm() {
   // 0. 세팅
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/";
 
   // 1. useForm 세팅
   const { register, handleSubmit, formState } = useForm<CreateUserFormValues>({
@@ -50,7 +52,7 @@ export default function useSignupForm() {
   };
 
   const onClickLogin = () => {
-    router.push("/login");
+    router.push(`/login?redirect=${redirect}`);
   };
 
   return {

@@ -12,7 +12,7 @@ export default function useNavigation() {
     router.push("/boards");
   };
   const onClickLogin = () => {
-    router.push("/login");
+    router.push(`/login?redirect=${pathname}`);
   };
 
   const onClickMypage = () => {

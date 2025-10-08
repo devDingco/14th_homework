@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { loginUserFormSchema, LoginUserFormValues } from "./schema";
 import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";
@@ -12,6 +12,8 @@ import { BaseSyntheticEvent } from "react";
 export default function useLoginForm() {
   // 0. 세팅
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/";
 
   // 1. useForm세팅
   const { register, handleSubmit, formState } = useForm<LoginUserFormValues>({
@@ -43,7 +45,7 @@ export default function useLoginForm() {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("exp", decodedExp);
 
-      router.push("/boards");
+      router.push(redirect);
     } catch (error) {
       if (error instanceof ApolloError) {
         Modal.error({
@@ -60,7 +62,7 @@ export default function useLoginForm() {
   };
 
   const onClickSignup = () => {
-    router.push("/signup");
+    router.push(`/signup?redirect=${redirect}`);
   };
 
   return { register, handleSubmit, formState, onClickLogin, onClickSignup };

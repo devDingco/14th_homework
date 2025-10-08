@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ComponentType, useEffect, useState } from "react";
 import { Modal } from "antd";
 
@@ -8,6 +8,8 @@ export const withAuth =
   <P extends object>(Component: ComponentType<P>) =>
   (props: P) => {
     const router = useRouter();
+    const pathname = usePathname();
+    console.log("pathname: ", pathname);
     const [isAuth, setIsAuth] = useState<boolean | undefined>(undefined);
 
     useEffect(() => {
@@ -23,7 +25,7 @@ export const withAuth =
         okText: "로그인하기",
         cancelText: "창닫기",
         onOk() {
-          router.push("/login");
+          router.push(`/login?redirect=${pathname}`);
         },
         onCancel() {},
       });
