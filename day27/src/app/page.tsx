@@ -1,7 +1,7 @@
 "use client";
 
-import Banner from "@/src/components/boards-list/banner"
-import List from "@/src/components/boards-list/list"
+import Banner from "@/components/boards-list/banner";
+import List from "@/components/boards-list/list";
 
 export default function  Boardspage() {
   return (

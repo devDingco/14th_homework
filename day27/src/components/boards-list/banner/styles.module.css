@@ -1,51 +1,38 @@
-.bannerBody{
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-padding: 0px;
+/* 반응형 웹을 위해 100%로 수정하고, Swiper 라이브러리의 정확한 클래스 이름을 사용합니다. */
 
-width: 1920px;
-height: 516px;
-flex: none;
-order: 0;
-align-self: stretch;
-flex-grow: 0;
-}
-
-.swiperBox{
-display: flex;
-flex-direction: row;
-align-items: center;
-padding: 0px;
-gap: 12px;
-
-position: absolute;
-width: 68px;
-height: 8px;
-left: calc(50% - 68px/2);
-top: 488px;
-}
-
-.isActiveDot{
-width: 8px;
-height: 8px;
-background: #FFFFFF;
-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-border-radius: 1000px;
-flex: none;
-order: 0;
-flex-grow: 0;
-}
-
-.disActiveDot {
-
-width: 8px;
-height: 8px;
-background: rgba(255, 255, 255, 0.8);
-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-flex: none;
-order: 2;
-flex-grow: 0;
-
-
-}
+.bannerBody {
+    width: 100%; 
+    height: 516px;
+    margin-bottom: 40px;
+  }
+  
+  .mySwiper {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .bannerImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* --- Swiper 페이지네이션(점) 스타일 --- */
+  
+  .mySwiper :global(.swiper-pagination) {
+    bottom: 20px !important; 
+  }
+  
+  /* 비활성 상태의 점 */
+  .mySwiper :global(.swiper-pagination-bullet) {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    opacity: 1;
+  }
+  
+  /* 활성 상태의 점 */
+  .mySwiper :global(.swiper-pagination-bullet-active) {
+    background: #FFFFFF;
+  }

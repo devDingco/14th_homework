@@ -1,83 +1,115 @@
 "use client";
 
-import { useMutation } from "@apollo/client";
-import {
-  CreateBoardCommentDocument,
-  FetchBoardCommentsDocument,
-} from "commons/graphql/graphql";
-import { useParams } from "next/navigation";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import { useRouter, useParams } from "next/navigation";
+import { IUpdateBoardInput, CreateBoardDocument, UpdateBoardDocument, FetchBoardDocument, } from "@/commons/graphql/graphql";
 
-export const useCommentCreate = () => {
-  const [newComment] = useMutation(CreateBoardCommentDocument);
-  const [commentWriter, setCommentWriter] = useState("");
-  const [commentPassword, setCommentPassword] = useState("");
-  const [commentText, setCommentText] = useState("");
 
+
+export const useBoardWrite = (isEdit: boolean) => {
+  const router = useRouter();
   const params = useParams();
-  const id = params.boardId.toString();
+  const boardId = params.boardId as string;
 
-  const isButtonDisabled = !commentWriter || !commentPassword || !commentText;
+  const [writer, setWriter] = useState("");
+  const [password, setPassword] = useState("");
+  const [title, setTitle] = useState("");
+  const [contents, setContents] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState(""); 
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const [createBoard] = useMutation(CreateBoardDocument);
+  const [updateBoard] = useMutation(UpdateBoardDocument);
+  const { data } = useQuery(FetchBoardDocument, { variables: { boardId }, skip: !isEdit });
 
-  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-    setCommentWriter(event.target.value);
+  const onChangeWriter = (e: ChangeEvent<HTMLInputElement>) => setWriter(e.target.value);
+  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
+  const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
+  const onChangeContents = (e: ChangeEvent<HTMLTextAreaElement>) => setContents(e.target.value);
+  const onChangeYoutubeUrl = (e: ChangeEvent<HTMLInputElement>) => setYoutubeUrl(e.target.value); // 👈 유튜브 주소 핸들러
+  const onChangeAddressDetail = (e: ChangeEvent<HTMLInputElement>) => setAddressDetail(e.target.value);
+  
+  const handleToggleModal = () => setIsModalOpen((prev) => !prev);
+  const handleComplete = (data: any) => {
+    setZipcode(data.zonecode);
+    setAddress(data.address);
+    handleToggleModal();
   };
 
-  const onChangePW = (event: ChangeEvent<HTMLInputElement>) => {
-    setCommentPassword(event.target.value);
-  };
+  const onClickSubmit = async () => { /* 등록 로직 */ };
 
-  const onChangeText = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setCommentText(event.target.value);
-  };
-
-  const createComment = async () => {
-    if (isButtonDisabled) {
-      alert("작성자, 비밀번호, 내용을 모두 입력해주세요.");
+  const onClickUpdate = async () => {
+    if (!password) {
+      alert("비밀번호를 입력해주세요.");
       return;
     }
 
-    try {
-      const { data } = await newComment({
-        variables: {
-          createBoardCommentInput: {
-            writer: commentWriter,
-            password: commentPassword,
-            contents: commentText,
-            rating: 0.0,
-          },
-          boardId: id,
-        },
-        refetchQueries: [
-          {
-            query: FetchBoardCommentsDocument,
-            variables: { boardId: id },
-          },
-        ],
-      });
+    const updateBoardInput: IUpdateBoardInput = {};
+    if (title) updateBoardInput.title = title;
+    if (contents) updateBoardInput.contents = contents;
+    if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl; // 👈 변경된 youtubeUrl을 담습니다.
+    if (zipcode || address || addressDetail) {
+      updateBoardInput.boardAddress = {};
+      if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address) updateBoardInput.boardAddress.address = address;
+      if (addressDetail) updateBoardInput.boardAddress.addressDetail = addressDetail;
+    }
 
-      if (data?.createBoardComment) {
-        alert("댓글 등록이 완료 되었습니다!");
-        setCommentText("");
-        setCommentWriter("");
-        setCommentPassword("");
-      } else {
-        alert("댓글 등록에 실패하였습니다");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("댓글 등록 중 오류가 발생했습니다.");
+    try {
+      await updateBoard({
+        variables: {
+          
+          boardId,
+          password,
+          updateBoardInput, 
+        },
+      });
+      alert("게시글이 성공적으로 수정되었습니다.");
+      router.push(`/boards/${boardId}`);
+    } catch (error: any) {
+      alert(error.message);
     }
   };
 
+  useEffect(() => {
+    if (data?.fetchBoard) {
+      setWriter(data.fetchBoard.writer ?? "");
+      setTitle(data.fetchBoard.title);
+      setContents(data.fetchBoard.contents);
+      setYoutubeUrl(data.fetchBoard.youtubeUrl ?? ""); 
+      setZipcode(data.fetchBoard.boardAddress?.zipcode ?? "");
+      setAddress(data.fetchBoard.boardAddress?.address ?? "");
+      setAddressDetail(data.fetchBoard.boardAddress?.addressDetail ?? "");
+    }
+  }, [data]);
+
+  const isActive = writer && password && title && contents;
+
   return {
-    isButtonDisabled,
-    onChangePW,
-    onChangeText,
-    onChangeWriter,
-    commentWriter,
-    commentPassword,
-    commentText,
-    createComment,
+    writer,
+    password, 
+    title, 
+    contents, 
+    youtubeUrl, 
+    zipcode, 
+    address, 
+    addressDetail,
+    isModalOpen, 
+    data, 
+    isActive,
+    onChangeWriter, 
+    onChangePassword, 
+    onChangeTitle, 
+    onChangeContents, 
+    onChangeYoutubeUrl,
+    onChangeAddressDetail,
+    handleToggleModal,
+    handleComplete,
+    onClickSubmit, 
+    onClickUpdate,
   };
 };

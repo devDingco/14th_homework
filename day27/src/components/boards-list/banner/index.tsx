@@ -1,8 +1,5 @@
-// src/components/boards-list/banner/index.tsx
-
 "use client";
 
-// Image 컴포넌트를 next/image에서 import 합니다.
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -11,14 +8,13 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import styles from "./styles.module.css";
 
-import banner1 from "@/src/assets/nowadays.png";
-import banner2 from "@/src/assets/banhang.png";
-import banner3 from "@/src/assets/Vhvj.png";
+import banner1 from "@/assets/nowadays.png";
+import banner2 from "@/assets/banhang.png";
+import banner3 from "@/assets/Vhvj.png";
 
+const bannerImages = [banner1, banner2, banner3];
 
-const bannerImages = [banner1, banner2, banner3]
-
-export default function BannerList() {
+export default function Banner() { 
   return (
     <div className={styles.bannerBody}>
       <Swiper
@@ -33,7 +29,6 @@ export default function BannerList() {
       >
         {bannerImages.map((src, index) => (
           <SwiperSlide key={index}>
-         
             <Image
               src={src}
               alt={`Banner ${index + 1}`}
@@ -41,9 +36,17 @@ export default function BannerList() {
               objectFit="cover"
               className={styles.bannerImage}
             />
+ {/* 최신방식
+<Image
+  src={src}
+  alt={`Banner ${index + 1}`}
+  fill // layout="fill" 대신 사용
+  style={{ objectFit: 'cover' }} // objectFit을 style 객체 안으로 이동
+  className={styles.bannerImage}
+/> */}
           </SwiperSlide>
         ))}
       </Swiper>
     </div>
   );
-} 
+}

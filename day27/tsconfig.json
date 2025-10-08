@@ -26,12 +26,6 @@
       "@/*": [
         "./src/*"
       ],
-      "@assets/*": [
-        "assets/*"
-      ],
-      "commons/*": [
-        "./src/commons/*"
-      ]
     },
     "target": "ES2017"
   },

@@ -1,134 +1,131 @@
+/* src/components/boards-list/list/styles.module.css */
 
 .boardBody {
-    display: flex;
-    padding: 0px 320px;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    align-self: stretch;
-  }
-  
-  .boardInnerBody {
-    width: 100%;
-  }
-  
-  .boardFrame {
-    margin-top: 40px;
-    display: flex;
-    max-width: 1280px;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-    align-self: stretch;
-    padding: 24px 48px;
-  
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08);
-    border-radius: 16px;
-  }
-  
-  .boardHeader {
-    display: flex;
-    padding: 16px 24px;
-    align-items: center;
-    gap: 8px;
-    align-self: stretch;
-  }
-  
-  .headerNumber,
-  .headerTitle,
-  .headerWriter,
-  .headerDate {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    color: #1c1c1c;
-    font-size: 16px;
-    font-weight: 500;
-  }
-  
-  .headerNumber {
-    width: 64px;
-  }
-  
-  .headerTitle {
-    flex: 1 0 0;
-    justify-content: left;
-  }
-  
-  .headerWriter,
-  .headerDate {
-    width: 100px;
-  }
-  
-  .contentContainer {
-    height: 44px;
-    display: flex;
-    padding: 12px 24px;
-    align-items: center;
-    gap: 8px;
-    align-self: stretch;
-    border-radius: 8px;
-    border: 1px solid var(--gray-50, #f2f2f2);
-  }
-  
-  .contentBody {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    align-self: stretch;
-  }
-  
-  .contentNumber,
-  .contentWriter,
-  .contentDate {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    overflow: hidden;
-    text-align: center;
-    text-overflow: ellipsis;
-  }
-  
-  .contentNumber {
-    width: 64px;
-    color: var(--Gray-50, var(--gray-500, #919191));
-    font-size: 14px;
-  }
-  
-  .contentTitle {
-    overflow: hidden;
-    color: var(--Gray-90, #1c1c1c);
-    font-size: 14px;
-    display: flex;
-  
-    align-items: center;
-    gap: 10px;
-    flex: 1 0 0;
-    justify-content: left;
-  }
-  
-  .contentWriter {
-    width: 100px;
-    color: var(--Gray-80, var(--gray-800, #333));
-    font-size: 14px;
-  }
-  
-  .contentDate {
-    width: 100px;
-    color: var(--Gray-50, var(--gray-500, #919191));
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 20px;
-  }
-  
-  .hidden {
-    visibility: hidden;
-  }
-  
-  .showButton {
-    visibility: visible;
-  }
+  width: 100%;       /* 일단 화면을 꽉 채우고, */
+  max-width: 1280px; /* 최대 너비는 1280px로 제한하고, */
+  margin: 40px auto; /* 화면 중앙에 위치시킨다. */
+  padding: 0 20px;   /* 좌우에는 작은 여백만 준다. */
+}
+
+
+.boardInnerBody {
+  width: 100%;
+}
+
+.boardFrame {
+  width: 100%; /* 너비를 100%로 설정하여 boardBody에 맞게 확장 */
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 48px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+}
+
+.boardHeader,
+.contentContainer {
+  display: flex;  /* ❗️ 가로 정렬의 핵심! */
+  align-items : center;
+  width: 100%; /* ❗️ 너비를 100%로 꽉 채웁니다. */
+  border-bottom: 1px solid #f2f2f2;
+  padding: 12px 24px;
+}
+
+.boardHeader {
+  font-weight: 500;
+}
+
+.contentContainer {
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.contentContainer:hover {
+  background-color: #f5f5f5;
+}
+
+.contentBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+  width: 100%;
+}
+
+.headerNumber,
+.contentNumber {
+  width: 10%;
+  text-align: center;
+  justify-content: center;
+}
+
+.headerTitle,
+.contentTitle {
+  width: 60%; /* 제목이 가장 기므로 너비를 많이 줍니다. */
+  text-align: left;
+  justify-content: flex-start; /* 텍스트를 왼쪽으로 정렬합니다. */
+  padding-left: 20px; /* 왼쪽 여백 추가 */
+}
+
+.headerWriter,
+.contentWriter {
+  width: 15%;
+  text-align: center;
+  justify-content: center;
+}
+
+.headerDate,
+.contentDate {
+  width: 15%;
+  text-align: center;
+  justify-content: center;
+}
+
+
+.headerNumber,
+.headerTitle,
+.headerWriter,
+.headerDate {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #1c1c1c;
+  font-size: 16px;
+}
+
+.contentNumber,
+.contentTitle,
+.contentWriter,
+.contentDate {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* 텍스트가 길어지면 줄바꿈 대신 ... 처리 */
+}
+
+.contentTitle {
+  color: var(--Gray-90, #1c1c1c);
+}
+
+.contentNumber,
+.contentDate {
+  color: var(--Gray-50, var(--gray-500, #919191));
+}
+
+.contentWriter {
+  color: var(--Gray-80, var(--gray-800, #333));
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.showButton {
+  visibility: visible;
+}

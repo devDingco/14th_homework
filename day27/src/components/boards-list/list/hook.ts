@@ -4,14 +4,13 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useState, MouseEvent } from "react";
 import { useRouter } from "next/navigation";
 import {
-  // ❗️'목록'을 불러오는 올바른 Document 이름으로 변경했습니다.
+
   FetchBoardsDocument,
   DeleteBoardDocument,
-} from "commons/graphql/graphql";
+} from "@/commons/graphql/graphql";
 
 export const useBoardsList = () => {
   const [hoveredId, setHoveredId] = useState("");
-  // ❗️'목록'을 불러오는 올바른 쿼리를 사용합니다. (boardId 필요 없음)
   const { data } = useQuery(FetchBoardsDocument);
   const [deleteBoard] = useMutation(DeleteBoardDocument);
   const router = useRouter();
