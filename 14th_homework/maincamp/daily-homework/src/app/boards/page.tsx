@@ -1,19 +1,44 @@
 'use client';
 
-import { useState } from 'react';
+import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import NewBoardsPage from '@/components/boards-list/list';
+import BoardListPage from '@/components/boards-list/list';
 import PaginationComponent from '@/components/boards-list/pagination';
 import BannerCarousel from '@/commons/layout/banner';
+import _ from 'lodash';
 import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from '@/components/boards-list/list/queries';
+import SearchComponent from '@/components/boards-list/search';
+import { FetchBoardsQuery, QueryFetchBoardsArgs } from '@/commons/graphql/graphql';
+
 
 export default function BoardsListPage() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [keyword, setKeyword] = useState('');
+  const { data, refetch } = useQuery<FetchBoardsQuery, QueryFetchBoardsArgs>(FETCH_BOARDS);
+
+  const onClickPage = (event: MouseEvent<HTMLSpanElement>) => {
+    refetch({ page: Number(event.currentTarget.id) });
+  };
+
+  const getDebounce = _.debounce((value) => {
+    refetch({
+      search: value,
+      page: 1,
+    });
+    setKeyword(value);
+  }, 500);
+
+  const onChangeKeyword = (event: ChangeEvent<HTMLInputElement>) => {
+    getDebounce(event.target.value);
+  };
 
   // 게시글 데이터 가져오기
-  const { data, refetch } = useQuery(FETCH_BOARDS, {
-    variables: { page: currentPage },
-  });
+  // const { data, refetch } = useQuery(FETCH_BOARDS, {
+  //   variables: { 
+  //     page: currentPage
+  //     search: 
+  //   },
+  // });
 
   // 전체 게시글 수 가져오기
   const { data: countData } = useQuery(FETCH_BOARDS_COUNT);
@@ -30,11 +55,15 @@ export default function BoardsListPage() {
   return (
     <div>
       <BannerCarousel />
-      <NewBoardsPage
+      <SearchComponent 
+        onChange={onChangeKeyword}
+      />
+      <BoardListPage
         data={data}
         refetch={refetch}
         currentPage={currentPage}
         totalCount={countData?.fetchBoardsCount || 0}
+        keyword = {keyword}
       />
       <PaginationComponent
         currentPage={currentPage}
