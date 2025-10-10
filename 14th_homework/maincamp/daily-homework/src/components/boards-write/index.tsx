@@ -170,7 +170,7 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
 
         <div className={styles['enroll-row-section']}>
           <div>사진 첨부</div>
-          {props.isEdit && <div className={styles['existing-images-info']}></div>}
+          {props.isEdit}
           <div className={styles['picture-enroll-row']}>
             {[0, 1, 2].map((idx) => (
               <button

@@ -5,7 +5,7 @@ import { Board } from '@/commons/graphql/graphql';
 import { useRouter } from 'next/navigation';
 import { DELETE_BOARD, FETCH_BOARDS, FETCH_BOARDS_COUNT } from './queries';
 
-export default function useNewBoardsPage(refetch: any) {
+export default function useBoardListPage(refetch: any) {
   const [deleteBoard] = useMutation(DELETE_BOARD);
 
   //   console.log(data?.fetchBoards[0]._id); // 잘 불러왔는지 확인

@@ -3,4 +3,5 @@ export interface Props {
   refetch: any;
   currentPage: number;
   totalCount: number;
+  keyword: string;
 }

@@ -39,6 +39,7 @@
     "@graphql-codegen/client-preset": "5.0.0",
     "@tailwindcss/postcss": "^4",
     "@types/apollo-upload-client": "^18.0.0",
+    "@types/lodash": "^4.17.20",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
