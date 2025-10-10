@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { supabase } from "@/commons/libraries/supabase";
 import styles from "./styles.module.css";
 import {
@@ -27,13 +27,9 @@ export interface TravelExpense {
   created_at: string;
 }
 
-export default function TravelDetailExpenseList({
-  travel_id,
-}: {
-  travel_id: string;
-}) {
+export default function TravelDetailExpenseList({ travel_id }: { travel_id: string }) {
   const [expenses, setExpenses] = useState<TravelExpense[]>([]);
-  const fetchExpenses = async () => {
+  const fetchExpenses = useCallback(async () => {
     const { data, error } = await supabase
       .from("travel_expense")
       .select("*")
@@ -45,12 +41,12 @@ export default function TravelDetailExpenseList({
     if (!error) {
       setExpenses(data ?? []);
     }
-  };
+  }, [travel_id]);
   useEffect(() => {
     if (travel_id) {
       fetchExpenses();
     }
-  }, [travel_id]);
+  }, [travel_id, fetchExpenses]);
 
   type Iconkey = keyof typeof category;
 

@@ -36,8 +36,16 @@ export default function BoardsBoardDetailPage() {
         <Sectiontitle text={title || ""} />
         <Writer writer={writer || ""} date={KSTdate} address={boardAddress?.address} />
         <div className={styles.imagesGroup}>
-          {imagesUrl?.map((url: string) => (
-            <img key={url} src={url} className={styles.addimage1} />
+          {imagesUrl?.map((url: string, index: number) => (
+            <Image
+              key={`${url}-${index}`}
+              src={url}
+              alt={`본문 이미지_${index}`}
+              width={0}
+              height={0}
+              sizes="100vw"
+              className={styles.addimage1}
+            ></Image>
           ))}
         </div>
         <Sectioncontent content={contents || ""} />
@@ -50,11 +58,25 @@ export default function BoardsBoardDetailPage() {
         />
         <div className={styles.boardsDetail__button__group}>
           <Button type="button" variant="FormBtn" onClick={onClickBoardsList}>
-            <img src="/icons/menu.svg" />
+            <Image
+              src="/icons/menu.svg"
+              alt="목록 아이콘"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: "1.5rem", height: "1.5rem" }}
+            ></Image>
             목록으로
           </Button>
           <Button type="button" variant="FormBtn" onClick={onClickBoardsEdit}>
-            <img src="/icons/edit.svg" />
+            <Image
+              src="/icons/edit.svg"
+              alt="수정 아이콘"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: "1.5rem", height: "1.5rem" }}
+            ></Image>
             수정하기
           </Button>
         </div>

@@ -28,7 +28,7 @@ export default function ApolloUploadSetting({ children }: IApolloSetting) {
 
     const result = localStorage.getItem("accessToken");
     setAccessToken(result ?? "");
-  }, []);
+  }, [setAccessToken]);
 
   const uploadLink = createUploadLink({
     uri: "http://main-practice.codebootcamp.co.kr/graphql",

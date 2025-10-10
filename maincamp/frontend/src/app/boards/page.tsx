@@ -9,6 +9,7 @@ import DataList from "@/components/ui/list/DataList";
 import useBoards from "./hook";
 import Pagination from "@/components/features/boards/boards-list/pagination";
 import SearchBar from "@/components/features/boards/boards-list/search";
+import BoardsOfTheBest from "@/components/features/boards/boards-list/best";
 
 export default function BoardsPage() {
   const {
@@ -40,6 +41,7 @@ export default function BoardsPage() {
     <div className={styles.boards}>
       <div className={styles.BoardsList}>
         <Sectiontitle text="오늘 핫한 트립토크"></Sectiontitle>
+        <BoardsOfTheBest></BoardsOfTheBest>
       </div>
       <div className={styles.BoardsList}>
         <Sectiontitle text="트립토크 게시판"></Sectiontitle>

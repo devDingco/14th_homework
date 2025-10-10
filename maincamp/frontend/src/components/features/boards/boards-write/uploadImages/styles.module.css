@@ -54,12 +54,6 @@
   color: var(--color-gray-600);
 }
 
-.add__image img {
-  fill: var(--color-gray-600);
-  width: 1.35rem;
-  height: 1.35rem;
-}
-
 .add__image span {
   color: var(--color-gray-600);
 }

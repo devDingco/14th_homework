@@ -2,7 +2,7 @@ import {
   BoardCreateFormValues,
   BoardupdateFormValues,
 } from "@/components/features/boards/boards-write/schema";
-import { FieldError, UseFormRegister } from "react-hook-form";
+import { UseFormRegister } from "react-hook-form";
 
 /* button types */
 export type ButtonType = "submit" | "reset" | "button";

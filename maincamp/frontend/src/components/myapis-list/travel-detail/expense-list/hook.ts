@@ -1,10 +1,10 @@
 "use client";
 
 import { supabase } from "@/commons/libraries/supabase";
-import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { TravelExpense } from ".";
 
-export default function useTravelDetailExpense({ travel_id }) {
+export default function useTravelDetailExpense({ travel_id }: { travel_id: string }) {
   const [expenses, setExpenses] = useState<TravelExpense[]>([]);
   const fetchExpenses = async () => {
     const { data, error } = await supabase

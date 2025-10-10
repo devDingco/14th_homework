@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 import { Modal } from "antd";
 import useSignupForm from "./hook";
 import classNames from "classnames";
+import Image from "next/image";
 
 export default function Signup() {
   const { register, handleSubmit, formState, isModalOpen, onClickSignup, onClickLogin } = useSignupForm();
@@ -92,7 +93,15 @@ export default function Signup() {
       >
         <div>회원가입을 축하드려요.</div>
         <div>
-          <img src="/icons/triptrip_logo.svg" />
+          {/* <img src="/icons/triptrip_logo.svg" /> */}
+          <Image
+            src="/icons/triptrip_logo.svg"
+            alt="트립트립 로고"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ height: "3rem", width: "100%" }}
+          ></Image>
         </div>
       </Modal>
     </>

@@ -55,9 +55,9 @@ export default function useSearchBar({
     UTCEndDate = UTCDate;
   };
 
-  const onClickSearch = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setStartDate((startDate) => UTCStartDate);
-    setEndDate((endDate) => UTCEndDate);
+  const onClickSearch = () => {
+    setStartDate(() => UTCStartDate);
+    setEndDate(() => UTCEndDate);
     refetch({
       endDate,
       startDate,

@@ -1,15 +1,12 @@
 "use client";
 
 import { withAuth } from "@/commons/hocs/withAuth";
-import { FETCH_USER_LOGGED_IN } from "@/graphql/queries/login";
-import { useQuery } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default withAuth(function MyPagePage({ isAuth }: { isAuth?: boolean }) {
   const router = useRouter();
-  const { data } = useQuery(FETCH_USER_LOGGED_IN);
 
   useEffect(() => {
     if (isAuth === false) {

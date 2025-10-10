@@ -1,103 +1,31 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import styles from "./ListRow.module.css";
-import { Fragment, MouseEvent } from "react";
-import { formatInTimeZone } from "date-fns-tz";
-import { ApolloQueryResult, useMutation } from "@apollo/client";
-import { DELETE_BOARD } from "@/graphql/mutations/board";
-import { Modal } from "antd";
-import {
-  FetchBoardsCountDocument,
-  FetchBoardsQuery,
-  FetchBoardsQueryVariables,
-} from "@/commons/graphql/graphql";
-
-interface IListRow {
-  _id: string;
-  flex: string[];
-  createdAt: string;
-  textAlign: CanvasTextAlign[];
-  num: number | undefined;
-  title: string;
-  writer: string;
-  currentPage: number;
-  children?: React.ReactNode;
-  refetch: (
-    variables?: Partial<FetchBoardsQueryVariables>
-  ) => Promise<ApolloQueryResult<FetchBoardsQuery>>;
-  search?: string;
-}
+import { Fragment } from "react";
+import useListRow from "./useListRow";
+import { IListRow } from "./IListRow";
 
 export default function ListRow(props: IListRow) {
-  const router = useRouter();
-  const onClickBoard = (event: MouseEvent<HTMLDivElement>) => {
-    const boardId = event.currentTarget.id;
-    // console.log(boardId)
-    router.push(`/boards/${boardId}`);
-  };
-
-  const [deleteBoard] = useMutation(DELETE_BOARD);
-  const onClickDelete = async (event: MouseEvent<SVGSVGElement>) => {
-    const parent = event.currentTarget.closest("div");
-    const boardId = parent?.id;
-    console.log("🚀 ~ onClickDelete ~ boardId:", boardId);
-    event.stopPropagation();
-
-    await deleteBoard({
-      variables: {
-        boardId: boardId,
-      },
-      refetchQueries: [{ query: FetchBoardsCountDocument }],
-    });
-    props.refetch({ page: props.currentPage });
-    const showSuccessModal = () =>
-      Modal.success({
-        content: "게시글이 삭제되었습니다.",
-      });
-    showSuccessModal();
-  };
-
-  let KSTDate;
-  if (props.createdAt) {
-    KSTDate = formatInTimeZone(
-      new Date(props.createdAt),
-      "Asia/Seoul",
-      "yyyy.MM.dd"
-    );
-  }
+  const { onClickBoard, onClickDelete, KSTDate } = useListRow(props);
 
   return (
     <Fragment key={props._id}>
       <div id={props._id} className={styles.ListRow} onClick={onClickBoard}>
-        <div style={{ flex: props.flex[0], textAlign: props.textAlign[0] }}>
-          {props.num}
-        </div>
-        <div
-          className={styles.title}
-          style={{ flex: props.flex[1], textAlign: props.textAlign[1] }}
-        >
+        <div style={{ flex: props.flex[0], textAlign: props.textAlign[0] }}>{props.num}</div>
+        <div className={styles.title} style={{ flex: props.flex[1], textAlign: props.textAlign[1] }}>
           {props.title
             .replaceAll(props.search ?? "", `#$%${props.search ?? ""}#$%`)
             .split("#$%")
             .map((el, index) => (
-              <span
-                key={`${index}-${el}`}
-                className={el === props.search ? styles.searchResult : ""}
-              >
+              <span key={`${index}-${el}`} className={el === props.search ? styles.searchResult : ""}>
                 {el}
               </span>
             ))}
         </div>
-        <div
-          className={styles.writer}
-          style={{ flex: props.flex[2], textAlign: props.textAlign[2] }}
-        >
+        <div className={styles.writer} style={{ flex: props.flex[2], textAlign: props.textAlign[2] }}>
           {props.writer}
         </div>
-        <div style={{ flex: props.flex[3], textAlign: props.textAlign[3] }}>
-          {KSTDate}
-        </div>
+        <div style={{ flex: props.flex[3], textAlign: props.textAlign[3] }}>{KSTDate}</div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="15"

@@ -4,13 +4,21 @@ import { Button, Inputfield } from "@commons/ui";
 import styles from "./styles.module.css";
 import useLoginForm from "./hook";
 import classNames from "classnames";
+import Image from "next/image";
 
 export default function Login() {
   const { register, handleSubmit, formState, onClickLogin, onClickSignup } = useLoginForm();
   return (
     <form className={styles.formContainer} onSubmit={handleSubmit(onClickLogin)}>
       <>
-        <img src="/icons/triptrip_logo.svg" />
+        <Image
+          src="/icons/triptrip_logo.svg"
+          alt="트립트립 로고"
+          width={0}
+          height={0}
+          sizes="100vw"
+          className={styles.formContainer_logo}
+        ></Image>
         <span>트립트립에 오신걸 환영합니다.</span>
       </>
       <div>

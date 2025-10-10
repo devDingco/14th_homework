@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { loginUserFormSchema, LoginUserFormValues } from "./schema";
 import { useAccessTokenStore } from "@/commons/stores/accessTokenStore";

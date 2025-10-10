@@ -3,7 +3,7 @@
 import TravelList from "@/components/myapis-list/travel-list";
 import useTravelList from "@/components/myapis-list/travel-list/hook";
 import TravelWrite from "@/components/myapis-list/travel-write";
-import Button from "@/components/ui/button/Button";
+import { Button } from "@commons/ui";
 import { useEffect, useState } from "react";
 
 export default function MyapisPage() {
@@ -12,19 +12,14 @@ export default function MyapisPage() {
 
   useEffect(() => {
     fetchTravels();
-  }, []);
+  }, [fetchTravels]);
 
   return (
     <>
       <Button variant="FormBtn" type="button" onClick={() => setVisible(true)}>
         여행등록하기
       </Button>
-      {visible && (
-        <TravelWrite
-          setVisible={setVisible}
-          fetchTravels={fetchTravels}
-        ></TravelWrite>
-      )}
+      {visible && <TravelWrite setVisible={setVisible} fetchTravels={fetchTravels}></TravelWrite>}
       <TravelList travels={travels} onClickTravel={onClickTravel}></TravelList>
     </>
   );

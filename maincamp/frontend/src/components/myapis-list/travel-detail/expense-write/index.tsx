@@ -7,7 +7,11 @@ import { useState } from "react";
 
 export type ExpenseType = "income" | "expenses" | "";
 
-export default function TravelDetailExpenseWrite({ setVisible }) {
+export default function TravelDetailExpenseWrite({
+  setVisible,
+}: {
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const params = useParams();
   const travel_id = params.travel_id;
 

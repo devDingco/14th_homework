@@ -63,7 +63,7 @@ export default function useCommentForm({ el, onClickEdit }: { el?: IComment; onC
 
     event?.preventDefault();
     try {
-      const result = await createBoardComment({
+      await createBoardComment({
         variables: { createBoardCommentInput, boardId },
         refetchQueries: [
           {
@@ -94,7 +94,7 @@ export default function useCommentForm({ el, onClickEdit }: { el?: IComment; onC
     const boardCommentId: string = el?._id ?? "";
     event?.preventDefault();
     try {
-      const result = await updateBoardComment({
+      await updateBoardComment({
         variables: {
           updateBoardCommentInput,
           password,

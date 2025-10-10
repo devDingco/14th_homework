@@ -31,7 +31,7 @@ export default function useSignupForm() {
     const createUserInput = { email: data.email, name: data.name, password: data.password };
 
     try {
-      const result = await createUser({
+      await createUser({
         variables: { createUserInput },
       });
 

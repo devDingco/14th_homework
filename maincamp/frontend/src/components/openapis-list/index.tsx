@@ -17,13 +17,26 @@ export default function PokemonItem({ number }: { number: number }) {
     color: { light: "", normal: "", dark: "" },
   });
   useEffect(() => {
-    getPokeMon(number).then(setData);
+    getPokeMon(number).then((res) => {
+      setData({
+        id: String(res.id),
+        name: res.name,
+        height: res.height,
+        weight: res.weight,
+        sprites: res.sprites,
+        koreanName: res.koreanName ?? "",
+        koreanGenus: res.koreanGenus ?? "",
+        flavor_text_entries: {
+          flavor_text: res.flavor_text_entries.flavor_text,
+        },
+        color: res.color,
+      });
+    });
   }, [number]);
 
   const { id, name, height, weight, sprites, koreanName, koreanGenus, flavor_text_entries, color } = data;
 
   const { light, normal, dark } = color;
-  console;
 
   return (
     <div

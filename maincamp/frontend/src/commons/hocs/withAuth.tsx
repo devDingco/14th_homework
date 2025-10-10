@@ -4,12 +4,15 @@ import { usePathname, useRouter } from "next/navigation";
 import { ComponentType, useEffect, useState } from "react";
 import { Modal } from "antd";
 
-export const withAuth =
-  <P extends object>(Component: ComponentType<P>) =>
-  (props: P) => {
+interface AuthProps {
+  isAuth?: boolean;
+  handleUnauthClick?: (content: string) => void;
+}
+
+export const withAuth = <P extends object>(Component: ComponentType<P & AuthProps>) => {
+  const WrappedComponent = (props: Omit<P, keyof AuthProps>) => {
     const router = useRouter();
     const pathname = usePathname();
-    console.log("pathname: ", pathname);
     const [isAuth, setIsAuth] = useState<boolean | undefined>(undefined);
 
     useEffect(() => {
@@ -31,5 +34,10 @@ export const withAuth =
       });
     };
 
-    return <Component {...props} isAuth={isAuth} handleUnauthClick={handleUnauthClick} />;
+    return <Component {...(props as P)} isAuth={isAuth} handleUnauthClick={handleUnauthClick} />;
   };
+
+  WrappedComponent.displayName = `withAuth(${Component.displayName || Component.name || "Component"})`;
+
+  return WrappedComponent;
+};

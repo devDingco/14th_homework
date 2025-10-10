@@ -9,7 +9,7 @@ export default function TravelList({
 }) {
   return (
     <>
-      {travels?.map((el, index) => {
+      {travels?.map((el) => {
         return (
           <div
             id={el.travel_id}
