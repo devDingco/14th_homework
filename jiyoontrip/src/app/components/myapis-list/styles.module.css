@@ -1,0 +1,8 @@
+.rowTitle {
+  display: flex;
+  gap: 30px;
+}
+.list {
+  display: flex;
+  gap: 50px;
+}

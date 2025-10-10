@@ -3,17 +3,19 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-// import { CREAT_BOARD, FETCH_BOARD, UPDATE_BOARD } from "./queires";
 import {
   CreateBoardDocument,
   FetchBoardDocument,
   UpdateBoardDocument,
+  UploadFileDocument,
 } from "@/commons/graphql/graphql";
 import { Modal } from "antd";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
-import { UPLOAD_FILE } from "./queires";
 import { checkValidationFile } from "@/app/commons/libraries/file-validaton";
+import { useForm } from "react-hook-form";
+import { ISchema, schema } from "./schema";
 
 export default function useBoardWrite() {
   const router = useRouter();
@@ -23,56 +25,35 @@ export default function useBoardWrite() {
       boardId: String(params.boardId),
     },
   });
-  const [uploadFile] = useMutation(UPLOAD_FILE);
+  const [uploadFile] = useMutation(UploadFileDocument);
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
-  const [author, setAuthor] = useState("");
-  const [password, setPassword] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [zonecode, setZonecode] = useState("");
-  const [address, setAddress] = useState("");
-  const [addressDetail, setAddressDetail] = useState("");
-  const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [imageUrls, setImageUrls] = useState(["", "", ""]);
+
+  const { register, handleSubmit, setValue, reset, watch, formState } = useForm({
+    defaultValues: {
+      writer: "",
+      password: "",
+      title: "",
+      contents: "",
+
+      boardAddress: {
+        zipcode: "",
+        address: "",
+        addressDetail: "",
+      },
+      youtubeUrl: "", //
+      images: ["", "", ""],
+    },
+    resolver: zodResolver(schema),
+    mode: "onChange",
+  });
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
-  const [authorError, setAuthorError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [titleError, setTitleError] = useState("");
-  const [contentError, setContentError] = useState("");
-  const [isActive, setIsActive] = useState(false);
   const [newParams, setNewParams] = useState("");
-  const onChangeAuthor = (event: ChangeEvent<HTMLInputElement>) => {
-    setAuthor(event.target.value);
-    if (event.target.value !== "" && password !== "" && title !== "" && content !== "") {
-      setIsActive(true);
-    }
-  };
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-    if (author !== "" && event.target.value !== "" && title !== "" && content !== "") {
-      setIsActive(true);
-    }
-  };
-  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-    if (author !== "" && password !== "" && event.target.value !== "" && content !== "") {
-      setIsActive(true);
-    }
-  };
-  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(event.target.value);
-    if (author !== "" && password !== "" && title !== "" && event.target.value !== "") {
-      setIsActive(true);
-    }
-  };
-  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddressDetail(event.target.value);
-  };
-  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
-    setYoutubeUrl(event.target.value);
-  };
+
+  const images = watch("images");
+
   const onChangeFile =
     (index: number) => async (event: ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0];
@@ -84,84 +65,66 @@ export default function useBoardWrite() {
       const result = await uploadFile({
         variables: { file },
       });
-      const newUrls = [...imageUrls];
-      newUrls[index] = result.data?.uploadFile.url ?? "";
-      setImageUrls(newUrls);
+
+      const url = result.data?.uploadFile.url ?? "";
+
+      const currentUrls = watch("images") ?? [];
+      const newUrls = [...currentUrls];
+      newUrls[index] = url;
+
+      setValue("images", newUrls);
     };
   const onToggleModal = () => {
     setIsModalOpen((prev) => !prev);
   };
   const onCompleteAddress = (data: Address) => {
-    setZonecode(data.zonecode);
-    setAddress(data.address);
+    setValue("boardAddress.zipcode", data.zonecode);
+    setValue("boardAddress.address", data.address);
     setIsModalOpen((prev) => !prev);
   };
 
-  const onClickSignup = async () => {
+  const onClickSignup = async (formData: ISchema) => {
     try {
-      if (author === "") {
-        setAuthorError("필수입력 사항입니다.");
-      } else {
-        setAuthorError("");
-      }
-      if (password === "") {
-        setPasswordError("필수입력 사항입니다.");
-      } else {
-        setPasswordError("");
-      }
-      if (title === "") {
-        setTitleError("필수입력 사항입니다.");
-      } else {
-        setTitleError("");
-      }
-      if (content === "") {
-        setContentError("필수입력 사항입니다.");
-      } else {
-        setContentError("");
-      }
-
-      if (author !== "" && password !== "" && title !== "" && content !== "") {
-        const result = await createBoard({
-          variables: {
-            createBoardInput: {
-              writer: author,
-              password: password,
-              title: title,
-              contents: content,
-              youtubeUrl: youtubeUrl,
-              images: imageUrls,
-              boardAddress: {
-                zipcode: zonecode,
-                address: address,
-                addressDetail: addressDetail,
-              },
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer: formData.writer,
+            password: formData.password,
+            title: formData.title,
+            contents: formData.contents,
+            youtubeUrl: formData.youtubeUrl,
+            images: formData.images,
+            boardAddress: {
+              zipcode: formData.zipcode,
+              address: formData.address,
+              addressDetail: formData.addressDetail,
             },
           },
-        });
-        setNewParams(result.data?.createBoard._id ?? "");
-        setIsCompleteModalOpen(true);
-      }
+        },
+      });
+      setNewParams(result.data?.createBoard._id ?? "");
+      setIsCompleteModalOpen(true);
     } catch (error) {
       alert(error);
     } finally {
     }
   };
 
-  const onClickUpdate = async () => {
+  const onClickUpdate = async (formData: ISchema) => {
     try {
       const passwordPrmpt = prompt("글을 작성할때 입력하셨던 비밀번호를 입력해주세요");
       // || (OR) 연산자는 첫 번째 값이 'falsy' (거짓 같은 값, 예: "", 0, null, undefined)일 때 뒤의 값을 반환하는 특징을 가지고 있어요.
       // title이 빈 문자열("")이면 falsy로 간주되므로, data?.fetchBoard.title이 updateTitle에 할당됩니다.
       // 반면, title에 값이 있다면 첫 번째 값인 title이 바로 반환됩니다.
 
-      const updateTite = title || data?.fetchBoard.title;
-      const updateContent = content || data?.fetchBoard.contents;
-      const updateZipcode = zonecode || data?.fetchBoard.boardAddress?.zipcode;
-      const updateAddress = address || data?.fetchBoard.boardAddress?.address;
+      const updateTite = formData.title || data?.fetchBoard.title;
+      const updateContent = formData.contents || data?.fetchBoard.contents;
+      const updateZipcode = formData.zipcode || data?.fetchBoard.boardAddress?.zipcode;
+      const updateAddress = formData.address || data?.fetchBoard.boardAddress?.address;
       const updateAddressDetail =
-        addressDetail || data?.fetchBoard.boardAddress?.addressDetail;
-      const updateYoutubeUrl = youtubeUrl || data?.fetchBoard.youtubeUrl;
-      const updateImageUrls = imageUrls;
+        formData.addressDetail || data?.fetchBoard.boardAddress?.addressDetail;
+      const updateYoutubeUrl = formData.youtubeUrl || data?.fetchBoard.youtubeUrl;
+      const updateImageUrls = formData.images;
       // .map(
       //   (el, index) => el || data?.fetchBoard.images?.[index] || ""
       // );
@@ -199,23 +162,34 @@ export default function useBoardWrite() {
     router.push(`/boards/${newParams}`);
   };
   const onClickDeleteImage = (index: number) => (event: React.MouseEvent) => {
-    // event.stopPropagation();
     event.preventDefault();
-    const newUrls = [...imageUrls];
+    const currentUrls = watch("images") ?? [];
+    const newUrls = [...currentUrls];
     newUrls[index] = "";
-    setImageUrls(newUrls);
+    setValue("images", newUrls);
   };
+
   useEffect(() => {
-    if (data?.fetchBoard?.images) {
-      setImageUrls([...data.fetchBoard.images]);
+    if (data?.fetchBoard) {
+      reset({
+        writer: data.fetchBoard.writer ?? "",
+        title: data.fetchBoard.title ?? "",
+        contents: data.fetchBoard.contents,
+        boardAddress: {
+          zipcode: data.fetchBoard.boardAddress?.zipcode ?? "",
+          address: data.fetchBoard.boardAddress?.address ?? "",
+          addressDetail: data.fetchBoard.boardAddress?.addressDetail ?? "",
+        },
+        images: data.fetchBoard.images ?? ["", "", ""],
+        youtubeUrl: data.fetchBoard.youtubeUrl ?? "",
+      });
     }
-  }, [data]);
+  }, [data, reset]);
   return {
-    onChangeAuthor,
-    onChangePassword,
-    onChangeTitle,
-    onChangeContent,
-    onChangeAddressDetail,
+    register,
+    handleSubmit,
+    images,
+    formState,
     onClickSignup,
     onClickUpdate,
     onClickDeleteImage,
@@ -223,17 +197,7 @@ export default function useBoardWrite() {
     onSubmitModal,
     onToggleCompleteModal,
     onCompleteAddress,
-    onChangeYoutubeUrl,
     onChangeFile,
-    zonecode,
-    address,
-    imageUrls,
-    authorError,
-    passwordError,
-    titleError,
-    contentError,
-    isActive,
-    data,
     DaumPostcodeEmbed,
     Modal,
     isModalOpen,

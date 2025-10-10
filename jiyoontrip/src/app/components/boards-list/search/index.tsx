@@ -11,7 +11,7 @@ export default function SearchBar({ onChangeKeyword, onClickSubmit }) {
         <div className={styles.seachBarEnroll}>
           <div className={styles.seachBarEnroll__left}>
             <Space direction="vertical" size={12}>
-              <RangePicker />
+              <RangePicker className={styles.rangePicker} />
             </Space>
             <div className={styles.seachBar}>
               <Image

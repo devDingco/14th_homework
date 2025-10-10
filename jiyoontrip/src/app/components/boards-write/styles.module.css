@@ -15,6 +15,7 @@
 .line {
   border: none;
   border-top: 0.0625rem solid #e4e4e4;
+  margin: 40px 0;
 }
 .postHeader {
   color: #000;
@@ -100,6 +101,7 @@
   gap: 0.5rem;
 }
 .addressArea__search {
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;

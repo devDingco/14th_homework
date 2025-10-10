@@ -3,27 +3,28 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 // import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { gql, useMutation } from "@apollo/client";
+import { ChangeEvent, useState } from "react";
+import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
+import { CreateUserDocument } from "@/commons/graphql/graphql";
 
-const CREAT_USER = gql`
-  mutation createUser($createUserInput: CreateUserInput!) {
-    createUser(createUserInput: $createUserInput) {
-      _id
-      email
-      name
-      picture
-      createdAt
-      updatedAt
-      deletedAt
-    }
-  }
-`;
+// const CREAT_USER = gql`
+//   mutation createUser($createUserInput: CreateUserInput!) {
+//     createUser(createUserInput: $createUserInput) {
+//       _id
+//       email
+//       name
+//       picture
+//       createdAt
+//       updatedAt
+//       deletedAt
+//     }
+//   }
+// `;
 
 export default function Home() {
   const router = useRouter();
-  const [createUser] = useMutation(CREAT_USER);
+  const [createUser] = useMutation(CreateUserDocument);
   const [isActive, setIsActive] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -34,7 +35,7 @@ export default function Home() {
   const [nameError, setNameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [passwordCheckError, setPasswordCheckError] = useState(false);
-  const onChangeEmail = (event) => {
+  const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
     if (
       event.target.value !== "" &&
@@ -45,7 +46,7 @@ export default function Home() {
       setIsActive(true);
     }
   };
-  const onChangeName = (event) => {
+  const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
     if (
       email !== "" &&
@@ -57,7 +58,7 @@ export default function Home() {
     }
   };
 
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
     if (
       email !== "" &&
@@ -69,7 +70,7 @@ export default function Home() {
     }
   };
 
-  const onChangePasswordCheck = (event) => {
+  const onChangePasswordCheck = (event: ChangeEvent<HTMLInputElement>) => {
     setPasswordCheck(event.target.value);
     if (email !== "" && name !== "" && password !== "" && event.target.value !== "") {
       setIsActive(true);

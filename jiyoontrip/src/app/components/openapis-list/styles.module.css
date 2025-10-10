@@ -1,0 +1,7 @@
+.page {
+  width: 100%;
+  /* padding: 0 20rem; */
+  gap: 2.5rem;
+  display: flex;
+  justify-content: center;
+}

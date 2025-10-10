@@ -2,7 +2,6 @@
 
 import { useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-// import { FETCH_BOARD } from "../boards-write/queires";
 import { FetchBoardDocument } from "@/commons/graphql/graphql";
 import { useState } from "react";
 

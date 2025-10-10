@@ -7,11 +7,10 @@ import { CloseCircleFilled } from "@ant-design/icons";
 export default function BoardWrite(props: IBoardWriteProps) {
   const { isEdit } = props;
   const {
-    onChangeAuthor,
-    onChangePassword,
-    onChangeTitle,
-    onChangeContent,
-    onChangeAddressDetail,
+    register,
+    handleSubmit,
+    images,
+    formState,
     onClickSignup,
     onClickUpdate,
     onClickDeleteImage,
@@ -19,17 +18,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
     onSubmitModal,
     onToggleCompleteModal,
     onCompleteAddress,
-    onChangeYoutubeUrl,
     onChangeFile,
-    zonecode,
-    address,
-    imageUrls,
-    authorError,
-    passwordError,
-    titleError,
-    contentError,
-    isActive,
-    data,
     DaumPostcodeEmbed,
     Modal,
     isModalOpen,
@@ -41,302 +30,285 @@ export default function BoardWrite(props: IBoardWriteProps) {
       <div className={styles.page}>
         <div className={styles.container}>
           <header className={styles.postHeader}>게시물 등록</header>
-          <div className={styles.enrollAuthorPassword}>
+          <form onSubmit={handleSubmit(isEdit ? onClickUpdate : onClickSignup)}>
+            <div className={styles.enrollAuthorPassword}>
+              <div className={styles.inputArea}>
+                <div className={styles.inputArea__enrollLabel}>
+                  <label
+                    htmlFor="author-input-1"
+                    className={styles.inputArea__enrollLabel__label}
+                  >
+                    작성자
+                  </label>
+                  <span className={styles.inputArea__enrollLabel__star}>*</span>
+                </div>
+                <input
+                  id="author-input-1"
+                  className={styles.inputArea__input}
+                  type="text"
+                  placeholder="작성자 명을 입력해 주세요."
+                  {...register("writer")}
+                  disabled={isEdit === true ? true : false}
+                  style={{
+                    backgroundColor: isEdit === true ? "#f2f2f2" : "#fff",
+                  }}
+                />
+                <div className={styles.inputError}>
+                  {formState.errors.writer?.message}
+                </div>
+              </div>
+              <div className={styles.inputArea}>
+                <div className={styles.inputArea__enrollLabel}>
+                  <label
+                    htmlFor="author-input-2"
+                    className={styles.inputArea__enrollLabel__label}
+                  >
+                    비밀번호
+                  </label>
+                  <span className={styles.inputArea__enrollLabel__star}>*</span>
+                </div>
+                <input
+                  id="author-input-2"
+                  className={styles.inputArea__input}
+                  type="password"
+                  placeholder="비밀번호를 입력해 주세요."
+                  defaultValue={isEdit === true ? "********" : ""}
+                  {...register("password")}
+                  disabled={isEdit === true ? true : false}
+                  style={{
+                    backgroundColor: isEdit === true ? "#f2f2f2" : "#fff",
+                  }}
+                />
+                <div className={styles.inputError}>
+                  {formState.errors.password?.message}
+                </div>
+              </div>
+            </div>
+            <hr className={styles.line} />
             <div className={styles.inputArea}>
               <div className={styles.inputArea__enrollLabel}>
                 <label
-                  htmlFor="author-input-1"
+                  htmlFor="author-input-3"
                   className={styles.inputArea__enrollLabel__label}
                 >
-                  작성자
+                  제목
                 </label>
                 <span className={styles.inputArea__enrollLabel__star}>*</span>
               </div>
               <input
-                id="author-input-1"
+                id="author-input-3"
                 className={styles.inputArea__input}
                 type="text"
-                placeholder="작성자 명을 입력해 주세요."
-                onChange={onChangeAuthor}
-                defaultValue={data?.fetchBoard.writer ?? ""}
-                disabled={isEdit === true ? true : false}
-                style={{
-                  backgroundColor: isEdit === true ? "#f2f2f2" : "#fff",
-                }}
+                placeholder="제목을 입력해 주세요."
+                {...register("title")}
               />
-              <div className={styles.inputError}>{authorError}</div>
+              <div className={styles.inputError}>
+                {
+                  formState.errors.title?.message // defaultValue={data?.fetchBoard.writer ?? ""}
+                }
+              </div>
             </div>
+            <hr className={styles.line} />
             <div className={styles.inputArea}>
               <div className={styles.inputArea__enrollLabel}>
                 <label
-                  htmlFor="author-input-2"
+                  htmlFor="author-input-4"
                   className={styles.inputArea__enrollLabel__label}
                 >
-                  비밀번호
+                  내용
                 </label>
                 <span className={styles.inputArea__enrollLabel__star}>*</span>
               </div>
-              <input
-                id="author-input-2"
-                className={styles.inputArea__input}
-                type="password"
-                placeholder="비밀번호를 입력해 주세요."
-                defaultValue={isEdit === true ? "********" : ""}
-                onChange={onChangePassword}
-                disabled={isEdit === true ? true : false}
-                style={{
-                  backgroundColor: isEdit === true ? "#f2f2f2" : "#fff",
-                }}
+              <textarea
+                id="author-input-4"
+                className={styles.inputArea__textarea}
+                placeholder="내용을 입력해 주세요."
+                {...register("contents")}
               />
-              <div className={styles.inputError}>{passwordError}</div>
-            </div>
-          </div>
-          <hr className={styles.line} />
-          <div className={styles.inputArea}>
-            <div className={styles.inputArea__enrollLabel}>
-              <label
-                htmlFor="author-input-3"
-                className={styles.inputArea__enrollLabel__label}
-              >
-                제목
-              </label>
-              <span className={styles.inputArea__enrollLabel__star}>*</span>
-            </div>
-            <input
-              id="author-input-3"
-              className={styles.inputArea__input}
-              type="text"
-              placeholder="제목을 입력해 주세요."
-              onChange={onChangeTitle}
-              defaultValue={data?.fetchBoard.title}
-            />
-            <div className={styles.inputError}>{titleError}</div>
-          </div>
-          <hr className={styles.line} />
-          <div className={styles.inputArea}>
-            <div className={styles.inputArea__enrollLabel}>
-              <label
-                htmlFor="author-input-4"
-                className={styles.inputArea__enrollLabel__label}
-              >
-                내용
-              </label>
-              <span className={styles.inputArea__enrollLabel__star}>*</span>
-            </div>
-            <textarea
-              id="author-input-4"
-              className={styles.inputArea__textarea}
-              placeholder="내용을 입력해 주세요."
-              onChange={onChangeContent}
-              defaultValue={data?.fetchBoard.contents}
-            />
-            <div className={styles.inputError}>{contentError}</div>
-          </div>
-          <div className={styles.addressArea}>
-            <div className={styles.addressArea__search}>
-              <label
-                htmlFor="author-input-5"
-                className={styles.inputArea__enrollLabel__label}
-              >
-                주소
-              </label>
-              <div className={styles.addressArea__enrollInputButton}>
-                <input
-                  id="author-input-5"
-                  className={styles.inputArea__addressInput}
-                  type="text"
-                  placeholder="01234"
-                  value={zonecode || data?.fetchBoard.boardAddress?.zipcode || ""}
-                  readOnly
-                />
-                <button className={styles.inputArea__button} onClick={onToggleModal}>
-                  우편번호 검색
-                </button>
+              <div className={styles.inputError}>
+                {formState.errors.contents?.message}
               </div>
             </div>
-            <input
-              className={styles.inputArea__input}
-              type="text"
-              placeholder="주소를 입력해 주세요"
-              value={address || data?.fetchBoard.boardAddress?.address || ""}
-              readOnly
-            />
-            <input
-              className={styles.inputArea__input}
-              type="text"
-              placeholder="상세주소"
-              onChange={onChangeAddressDetail}
-              defaultValue={data?.fetchBoard.boardAddress?.addressDetail ?? ""}
-            />
-          </div>
-          <hr className={styles.line} />
-          <div className={styles.inputArea}>
-            <div className={styles.inputArea__enrollLabel}>
-              <label
-                htmlFor="author-input-6"
-                className={styles.inputArea__enrollLabel__label}
-              >
-                유튜브 링크
-              </label>
+            <div className={styles.addressArea}>
+              <div className={styles.addressArea__search}>
+                <label
+                  htmlFor="author-input-5"
+                  className={styles.inputArea__enrollLabel__label}
+                >
+                  주소
+                </label>
+                <div className={styles.addressArea__enrollInputButton}>
+                  <input
+                    id="author-input-5"
+                    className={styles.inputArea__addressInput}
+                    type="text"
+                    placeholder="01234"
+                    {...register("boardAddress.zipcode")}
+                  />
+                  <button
+                    className={styles.inputArea__button}
+                    type="button"
+                    onClick={onToggleModal}
+                  >
+                    우편번호 검색
+                  </button>
+                </div>
+              </div>
+              <input
+                className={styles.inputArea__input}
+                type="text"
+                placeholder="주소를 입력해 주세요"
+                {...register("boardAddress.address")}
+              />
+              <input
+                className={styles.inputArea__input}
+                type="text"
+                placeholder="상세주소"
+                {...register("boardAddress.addressDetail")}
+              />
             </div>
-            <input
-              id="author-input-6"
-              className={styles.inputArea__input}
-              type="text"
-              placeholder="링크를 입력해 주세요."
-              onChange={onChangeYoutubeUrl}
-              defaultValue={data?.fetchBoard?.youtubeUrl ?? ""}
-            />
-            <div className={styles.inputError}></div>
-          </div>
-          <hr className={styles.line} />
-          {/* ImageUpload: 사진 첨부 */}
-          <div className={styles.imageUploadArea}>
-            <label className={styles.inputArea__enrollLabel__label}>사진 첨부</label>
-            <div className={styles.imageUploadInput}>
-              <label htmlFor="file-upload-1">
-                <div className={styles.imageUploadInput__drop}>
-                  {/* {imageUrls[0] ? (
-                    <div>
-                      <img
-                        className={styles.uploadImage}
-                        src={`https://storage.googleapis.com/${imageUrls[0]}`}
-                      />
-                      <CloseCircleFilled
-                        className={styles.deleteBtn}
-                        onClick={onClickDeleteImage(0)}
-                      />
-                    </div>
-                  ) : (
-                    data?.fetchBoard?.images?.[0] && (
+            <hr className={styles.line} />
+            <div className={styles.inputArea}>
+              <div className={styles.inputArea__enrollLabel}>
+                <label
+                  htmlFor="author-input-6"
+                  className={styles.inputArea__enrollLabel__label}
+                >
+                  유튜브 링크
+                </label>
+              </div>
+              <input
+                id="author-input-6"
+                className={styles.inputArea__input}
+                type="text"
+                placeholder="링크를 입력해 주세요."
+                {...register("youtubeUrl")}
+              />
+              <div className={styles.inputError}></div>
+            </div>
+            <hr className={styles.line} />
+            {/* ImageUpload: 사진 첨부 */}
+            <div className={styles.imageUploadArea}>
+              <label className={styles.inputArea__enrollLabel__label}>사진 첨부</label>
+              <div className={styles.imageUploadInput}>
+                <label htmlFor="file-upload-1">
+                  <div className={styles.imageUploadInput__drop}>
+                    {images?.[0] ? (
                       <div>
                         <img
                           className={styles.uploadImage}
-                          src={`https://storage.googleapis.com/${data.fetchBoard.images[0]}`}
+                          src={`https://storage.googleapis.com/${images?.[0]}`}
                         />
                         <CloseCircleFilled
                           className={styles.deleteBtn}
                           onClick={onClickDeleteImage(0)}
                         />
                       </div>
-                    )
-                  )} */}
-                  {imageUrls[0] && (
-                    <div>
-                      <img
-                        className={styles.uploadImage}
-                        src={`https://storage.googleapis.com/${imageUrls[0]}`}
-                      />
-                      <CloseCircleFilled
-                        className={styles.deleteBtn}
-                        onClick={onClickDeleteImage(0)}
-                      />
-                    </div>
-                  )}
-                  <div className={styles.plusIcon}>
-                    <Image
-                      src="/icons/outline/add.svg"
-                      alt="AddIcon"
-                      width={24}
-                      height={24}
+                    ) : (
+                      <div className={styles.plusIcon}>
+                        <Image
+                          src="/icons/outline/add.svg"
+                          alt="AddIcon"
+                          width={24}
+                          height={24}
+                        />
+                        <p>클릭해서 사진 업로드</p>
+                      </div>
+                    )}
+                    <input
+                      type="file"
+                      id="file-upload-1"
+                      onChange={onChangeFile(0)}
+                      accept="image/jpeg, image/png"
                     />
-                    <p>클릭해서 사진 업로드</p>
                   </div>
-                  <input
-                    type="file"
-                    id="file-upload-1"
-                    onChange={onChangeFile(0)}
-                    accept="image/jpeg, image/png"
-                  />
-                </div>
-              </label>
-              <label htmlFor="file-upload-2">
-                <div className={styles.imageUploadInput__drop}>
-                  {imageUrls[1] && (
-                    <div>
-                      <img
-                        className={styles.uploadImage}
-                        src={`https://storage.googleapis.com/${imageUrls[1]}`}
-                      />
-                      <CloseCircleFilled
-                        className={styles.deleteBtn}
-                        onClick={onClickDeleteImage(1)}
-                      />
-                    </div>
-                  )}
-                  <div className={styles.plusIcon}>
-                    <Image
-                      src="/icons/outline/add.svg"
-                      alt="AddIcon"
-                      width={24}
-                      height={24}
+                </label>
+                <label htmlFor="file-upload-2">
+                  <div className={styles.imageUploadInput__drop}>
+                    {images?.[1] ? (
+                      <div>
+                        <img
+                          className={styles.uploadImage}
+                          src={`https://storage.googleapis.com/${images?.[1]}`}
+                        />
+                        <CloseCircleFilled
+                          className={styles.deleteBtn}
+                          onClick={onClickDeleteImage(1)}
+                        />
+                      </div>
+                    ) : (
+                      <div className={styles.plusIcon}>
+                        <Image
+                          src="/icons/outline/add.svg"
+                          alt="AddIcon"
+                          width={24}
+                          height={24}
+                        />
+                        <p>클릭해서 사진 업로드</p>
+                      </div>
+                    )}
+                    <input
+                      type="file"
+                      id="file-upload-2"
+                      onChange={onChangeFile(1)}
+                      accept="image/jpeg, image/png"
                     />
-                    <p>클릭해서 사진 업로드</p>
                   </div>
-                  <input
-                    type="file"
-                    id="file-upload-2"
-                    onChange={onChangeFile(1)}
-                    accept="image/jpeg, image/png"
-                  />
-                </div>
-              </label>
-              <label htmlFor="file-upload-3">
-                <div className={styles.imageUploadInput__drop}>
-                  {imageUrls[2] && (
-                    <div>
-                      <img
-                        className={styles.uploadImage}
-                        src={`https://storage.googleapis.com/${imageUrls[2]}`}
-                      />
-                      <CloseCircleFilled
-                        className={styles.deleteBtn}
-                        onClick={onClickDeleteImage(2)}
-                      />
-                    </div>
-                  )}
-                  <div className={styles.plusIcon}>
-                    <Image
-                      src="/icons/outline/add.svg"
-                      alt="AddIcon"
-                      width={24}
-                      height={24}
+                </label>
+                <label htmlFor="file-upload-3">
+                  <div className={styles.imageUploadInput__drop}>
+                    {images?.[2] ? (
+                      <div>
+                        <img
+                          className={styles.uploadImage}
+                          src={`https://storage.googleapis.com/${images?.[2]}`}
+                        />
+                        <CloseCircleFilled
+                          className={styles.deleteBtn}
+                          onClick={onClickDeleteImage(2)}
+                        />
+                      </div>
+                    ) : (
+                      <div className={styles.plusIcon}>
+                        <Image
+                          src="/icons/outline/add.svg"
+                          alt="AddIcon"
+                          width={24}
+                          height={24}
+                        />
+                        <p>클릭해서 사진 업로드</p>
+                      </div>
+                    )}
+                    <input
+                      type="file"
+                      id="file-upload-3"
+                      onChange={onChangeFile(2)}
+                      accept="image/jpeg, image/png"
                     />
-                    <p>클릭해서 사진 업로드</p>
                   </div>
-                  <input
-                    type="file"
-                    id="file-upload-3"
-                    onChange={onChangeFile(2)}
-                    accept="image/jpeg, image/png"
-                  />
-                </div>
-              </label>
+                </label>
+              </div>
             </div>
-          </div>
-          <div className={styles.enrollButton}>
-            <button className={styles.inputArea__cancelButton}>취소</button>
-            <button
-              className={styles.inputArea__registerButton}
-              onClick={isEdit === false ? onClickSignup : onClickUpdate}
-              style={{
-                backgroundColor:
-                  isEdit === true
-                    ? "#2974E5" // 수정 페이지에서는 무조건 파란색
-                    : isActive === true
-                    ? "#2974E5" // 등록 페이지에서 활성화 시 파란색
-                    : "#C7C7C7",
-              }}
-            >
-              {isEdit === true ? "수정" : "등록"}하기
-            </button>
-          </div>
+            <div className={styles.enrollButton}>
+              <button type="button" className={styles.inputArea__cancelButton}>
+                취소
+              </button>
+              <button
+                className={styles.inputArea__registerButton}
+                type="submit"
+                style={{
+                  backgroundColor: isEdit ? "#2974E5" : "#C7C7C7",
+                }}
+              >
+                {isEdit ? "수정" : "등록"}하기
+              </button>
+            </div>
+          </form>
         </div>
       </div>
       {isModalOpen === true && (
         <Modal
           title="우편번호 검색"
-          closable={{ "aria-label": "Custom Close Button" }}
           open={true}
           onOk={onToggleModal}
           onCancel={onToggleModal}
