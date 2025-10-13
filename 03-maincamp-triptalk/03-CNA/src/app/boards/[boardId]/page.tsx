@@ -85,7 +85,7 @@ export default function BoardsDetail() {
               <img src={menuIcon.src} alt="목록 아이콘" />
               목록으로
             </button>
-            <button type="button" className={styles.btn}>
+            <button type="button" className={styles.btn} onClick={() => router.push(`/boards/${boardId}/edit`)}>
               <img src={editIcon.src} alt="수정 아이콘" />
               수정하기
             </button>
