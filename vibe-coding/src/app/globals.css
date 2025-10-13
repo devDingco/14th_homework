@@ -1,0 +1,393 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Color Token Variables - Light Theme */
+:root {
+  /* Legacy variables for backward compatibility */
+  --background: #fafafa;
+  --foreground: #171717;
+  
+  /* Background colors */
+  --color-bg-primary: #fafafa;
+  --color-bg-secondary: #f5f5f5;
+  --color-bg-tertiary: #e5e5e5;
+  --color-bg-inverse: #171717;
+  
+  /* Surface colors */
+  --color-surface-primary: #ffffff;
+  --color-surface-secondary: #fafafa;
+  --color-surface-tertiary: #f5f5f5;
+  --color-surface-overlay: rgba(0, 0, 0, 0.5);
+  
+  /* Text colors */
+  --color-text-primary: #171717;
+  --color-text-secondary: #404040;
+  --color-text-tertiary: #737373;
+  --color-text-inverse: #fafafa;
+  --color-text-disabled: #a3a3a3;
+  
+  /* Border colors */
+  --color-border-primary: #e5e5e5;
+  --color-border-secondary: #d4d4d4;
+  --color-border-focus: #0ea5e9;
+  --color-border-error: #ef4444;
+  
+  /* Interactive colors */
+  --color-interactive-primary: #0284c7;
+  --color-interactive-primary-hover: #0369a1;
+  --color-interactive-primary-active: #075985;
+  --color-interactive-secondary: #475569;
+  --color-interactive-secondary-hover: #334155;
+  --color-interactive-secondary-active: #1e293b;
+  
+  /* Semantic colors */
+  --color-success: #16a34a;
+  --color-success-bg: #f0fdf4;
+  --color-success-border: #bbf7d0;
+  --color-warning: #d97706;
+  --color-warning-bg: #fffbeb;
+  --color-warning-border: #fde68a;
+  --color-error: #dc2626;
+  --color-error-bg: #fef2f2;
+  --color-error-border: #fecaca;
+  --color-info: #2563eb;
+  --color-info-bg: #eff6ff;
+  --color-info-border: #bfdbfe;
+  
+  /* Typography Token Variables */
+  /* Font Family */
+  --font-family-korean-primary: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  --font-family-korean-secondary: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --font-family-korean-mono: 'D2Coding', 'Consolas', 'Monaco', 'Courier New', monospace;
+  --font-family-english-primary: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+  --font-family-english-secondary: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  --font-family-english-mono: 'Fira Code', 'Monaco', 'Consolas', 'Courier New', monospace;
+  
+  /* Font Weight */
+  --font-weight-thin: 100;
+  --font-weight-extra-light: 200;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
+  --font-weight-black: 900;
+  
+  /* Font Size - Mobile First */
+  --font-size-display-large: 2.5rem;    /* 40px */
+  --font-size-display-medium: 2.25rem;  /* 36px */
+  --font-size-display-small: 2rem;      /* 32px */
+  --font-size-headline-large: 1.75rem;  /* 28px */
+  --font-size-headline-medium: 1.5rem;  /* 24px */
+  --font-size-headline-small: 1.25rem;  /* 20px */
+  --font-size-title-large: 1.125rem;    /* 18px */
+  --font-size-title-medium: 1rem;       /* 16px */
+  --font-size-title-small: 0.875rem;    /* 14px */
+  --font-size-body-large: 1rem;         /* 16px */
+  --font-size-body-medium: 0.875rem;    /* 14px */
+  --font-size-body-small: 0.75rem;      /* 12px */
+  --font-size-label-large: 0.875rem;    /* 14px */
+  --font-size-label-medium: 0.75rem;    /* 12px */
+  --font-size-label-small: 0.625rem;    /* 10px */
+  
+  /* Line Height */
+  --line-height-tight: 1.2;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+  
+  /* Letter Spacing */
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0em;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+}
+
+/* Color Token Variables - Dark Theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Legacy variables for backward compatibility */
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    
+    /* Background colors */
+    --color-bg-primary: #020617;
+    --color-bg-secondary: #0f172a;
+    --color-bg-tertiary: #1e293b;
+    --color-bg-inverse: #fafafa;
+    
+    /* Surface colors */
+    --color-surface-primary: #0f172a;
+    --color-surface-secondary: #1e293b;
+    --color-surface-tertiary: #334155;
+    --color-surface-overlay: rgba(0, 0, 0, 0.7);
+    
+    /* Text colors */
+    --color-text-primary: #fafafa;
+    --color-text-secondary: #d4d4d4;
+    --color-text-tertiary: #737373;
+    --color-text-inverse: #171717;
+    --color-text-disabled: #525252;
+    
+    /* Border colors */
+    --color-border-primary: #334155;
+    --color-border-secondary: #475569;
+    --color-border-focus: #38bdf8;
+    --color-border-error: #f87171;
+    
+    /* Interactive colors */
+    --color-interactive-primary: #0ea5e9;
+    --color-interactive-primary-hover: #38bdf8;
+    --color-interactive-primary-active: #7dd3fc;
+    --color-interactive-secondary: #94a3b8;
+    --color-interactive-secondary-hover: #cbd5e1;
+    --color-interactive-secondary-active: #e2e8f0;
+    
+    /* Semantic colors */
+    --color-success: #4ade80;
+    --color-success-bg: #052e16;
+    --color-success-border: #166534;
+    --color-warning: #fbbf24;
+    --color-warning-bg: #451a03;
+    --color-warning-border: #92400e;
+    --color-error: #f87171;
+    --color-error-bg: #450a0a;
+    --color-error-border: #991b1b;
+    --color-info: #60a5fa;
+    --color-info-bg: #172554;
+    --color-info-border: #1e40af;
+    
+    /* Typography Token Variables - Same as light theme */
+    /* Font Family */
+    --font-family-korean-primary: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    --font-family-korean-secondary: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    --font-family-korean-mono: 'D2Coding', 'Consolas', 'Monaco', 'Courier New', monospace;
+    --font-family-english-primary: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+    --font-family-english-secondary: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    --font-family-english-mono: 'Fira Code', 'Monaco', 'Consolas', 'Courier New', monospace;
+    
+    /* Font Weight */
+    --font-weight-thin: 100;
+    --font-weight-extra-light: 200;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semi-bold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extra-bold: 800;
+    --font-weight-black: 900;
+    
+    /* Font Size - Mobile First */
+    --font-size-display-large: 2.5rem;    /* 40px */
+    --font-size-display-medium: 2.25rem;  /* 36px */
+    --font-size-display-small: 2rem;      /* 32px */
+    --font-size-headline-large: 1.75rem;  /* 28px */
+    --font-size-headline-medium: 1.5rem;  /* 24px */
+    --font-size-headline-small: 1.25rem;  /* 20px */
+    --font-size-title-large: 1.125rem;    /* 18px */
+    --font-size-title-medium: 1rem;       /* 16px */
+    --font-size-title-small: 0.875rem;    /* 14px */
+    --font-size-body-large: 1rem;         /* 16px */
+    --font-size-body-medium: 0.875rem;    /* 14px */
+    --font-size-body-small: 0.75rem;      /* 12px */
+    --font-size-label-large: 0.875rem;    /* 14px */
+    --font-size-label-medium: 0.75rem;    /* 12px */
+    --font-size-label-small: 0.625rem;    /* 10px */
+    
+    /* Line Height */
+    --line-height-tight: 1.2;
+    --line-height-snug: 1.375;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.625;
+    --line-height-loose: 2;
+    
+    /* Letter Spacing */
+    --letter-spacing-tighter: -0.05em;
+    --letter-spacing-tight: -0.025em;
+    --letter-spacing-normal: 0em;
+    --letter-spacing-wide: 0.025em;
+    --letter-spacing-wider: 0.05em;
+    --letter-spacing-widest: 0.1em;
+  }
+}
+
+/* Desktop Responsive Font Sizes */
+@media (min-width: 768px) {
+  :root {
+    --font-size-display-large: 3.5rem;    /* 56px */
+    --font-size-display-medium: 3rem;     /* 48px */
+    --font-size-display-small: 2.5rem;    /* 40px */
+    --font-size-headline-large: 2.25rem;  /* 36px */
+    --font-size-headline-medium: 2rem;    /* 32px */
+    --font-size-headline-small: 1.75rem;  /* 28px */
+    --font-size-title-large: 1.5rem;      /* 24px */
+    --font-size-title-medium: 1.25rem;    /* 20px */
+    --font-size-title-small: 1.125rem;    /* 18px */
+    --font-size-body-large: 1.125rem;     /* 18px */
+    --font-size-body-medium: 1rem;        /* 16px */
+    --font-size-body-small: 0.875rem;     /* 14px */
+    --font-size-label-large: 1rem;        /* 16px */
+    --font-size-label-medium: 0.875rem;   /* 14px */
+    --font-size-label-small: 0.75rem;     /* 12px */
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-family-korean-primary);
+  font-size: var(--font-size-body-medium);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Typography Utility Classes */
+  /* Display Styles */
+  .typography-display-large {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-display-large);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+  }
+  
+  .typography-display-medium {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-display-medium);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+  }
+  
+  .typography-display-small {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-display-small);
+    font-weight: var(--font-weight-semi-bold);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  /* Headline Styles */
+  .typography-headline-large {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-headline-large);
+    font-weight: var(--font-weight-semi-bold);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  .typography-headline-medium {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-headline-medium);
+    font-weight: var(--font-weight-semi-bold);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  .typography-headline-small {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-headline-small);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  /* Title Styles */
+  .typography-title-large {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-title-large);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  .typography-title-medium {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-title-medium);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  .typography-title-small {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-title-small);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  /* Body Styles */
+  .typography-body-large {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-body-large);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-relaxed);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  .typography-body-medium {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-body-medium);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  .typography-body-small {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-body-small);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  /* Label Styles */
+  .typography-label-large {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-label-large);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  .typography-label-medium {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-label-medium);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  .typography-label-small {
+    font-family: var(--font-family-korean-primary);
+    font-size: var(--font-size-label-small);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-wide);
+  }
+  
+  /* English Typography Variants */
+  .typography-english {
+    font-family: var(--font-family-english-primary);
+  }
+  
+  /* Monospace Typography */
+  .typography-mono {
+    font-family: var(--font-family-korean-mono);
+  }
+  
+  .typography-mono-english {
+    font-family: var(--font-family-english-mono);
+  }
+}
