@@ -121,9 +121,9 @@ export default function Home() {
               >
                 로그인
               </button>
-              <div onClick={onClickSignupGo} className={styles.signinButton}>
+              <button onClick={onClickSignupGo} className={styles.signinButton}>
                 회원가입
-              </div>
+              </button>
             </div>
           </div>
         </div>

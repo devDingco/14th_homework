@@ -4,6 +4,9 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 import { IBoardWriteProps } from "./types";
 import { CloseCircleFilled } from "@ant-design/icons";
+import MyButton from "@/app/commons/components/button";
+import MyInput from "@/app/commons/components/input";
+import { FormProvider } from "react-hook-form";
 export default function BoardWrite(props: IBoardWriteProps) {
   const { isEdit } = props;
   const {
@@ -27,6 +30,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
   return (
     <>
+      {/* <FormProvider register={register} formState={formState} handleSubmit={handleSubmit}> */}
       <div className={styles.page}>
         <div className={styles.container}>
           <header className={styles.postHeader}>게시물 등록</header>
@@ -42,17 +46,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
                   </label>
                   <span className={styles.inputArea__enrollLabel__star}>*</span>
                 </div>
-                <input
-                  id="author-input-1"
-                  className={styles.inputArea__input}
-                  type="text"
-                  placeholder="작성자 명을 입력해 주세요."
-                  {...register("writer")}
-                  disabled={isEdit === true ? true : false}
-                  style={{
-                    backgroundColor: isEdit === true ? "#f2f2f2" : "#fff",
-                  }}
-                />
+                <MyInput />
                 <div className={styles.inputError}>
                   {formState.errors.writer?.message}
                 </div>
@@ -293,15 +287,18 @@ export default function BoardWrite(props: IBoardWriteProps) {
               <button type="button" className={styles.inputArea__cancelButton}>
                 취소
               </button>
-              <button
-                className={styles.inputArea__registerButton}
-                type="submit"
+              <MyButton
                 style={{
-                  backgroundColor: isEdit ? "#2974E5" : "#C7C7C7",
+                  backgroundColor: isEdit
+                    ? "#2974E5"
+                    : formState.isValid
+                    ? "#2974E5"
+                    : "#C7C7C7",
                 }}
+                fromState={formState}
               >
                 {isEdit ? "수정" : "등록"}하기
-              </button>
+              </MyButton>
             </div>
           </form>
         </div>
@@ -328,6 +325,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
             : "게시글이 성공적으로 등록되었습니다."}
         </Modal>
       )}
+      {/* </FormProvider> */}
     </>
   );
 }
