@@ -6,8 +6,10 @@ import { formatDate } from "@/utils/formatDate";
 import deleteIcon from "@/assets/icons/delete.png";
 import React from "react";
 import useBoardList from "@/components/board-list/hook";
+import { useRouter } from "next/navigation";
 
 export default function BoardList() {
+  const router = useRouter();
   const { data, deleteBoard, onClickDelete } = useBoardList();
 
   return (
@@ -23,7 +25,11 @@ export default function BoardList() {
 
         <ul className={styles.list} role="list">
           {data?.fetchBoards.map((board, index) => (
-            <li key={board._id} className={styles.row}>
+            <li
+              key={board._id}
+              className={styles.row}
+              onClick={() => router.push(`/boards/${board._id}`)}
+            >
               <div className={styles.noCol}>{index + 1}</div>
               <Link href={`/boards/${board._id}`} className={styles.titleLink}>
                 <span className={styles.titleText}>{board.title}</span>
@@ -39,7 +45,10 @@ export default function BoardList() {
               <div className={styles.actionsCol}>
                 <button
                   className={styles.deleteIcon}
-                  onClick={(e) => onClickDelete(e, board._id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onClickDelete(e, board._id);
+                  }}
                   aria-label="삭제"
                   title="삭제"
                 >
