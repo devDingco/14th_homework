@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.imageGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dogImage {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.loadingMessage {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+}

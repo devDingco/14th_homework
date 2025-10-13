@@ -6,13 +6,13 @@ interface InputProps {
   errorMessage?: string;
 }
 
-export const 작은인풋 = (props: InputProps) => {
+export const SmallInput = (props: InputProps) => {
   return (
     <>
       <div className="게시글_인풋_작은거">
         <div className="flex_row_gap4">
-          {props.Input_Title}{" "}
-          <div className="color_red">{props.Input_Star}</div>{" "}
+          {props.Input_Title}
+          <div className="color_red">{props.Input_Star}</div>
         </div>
         <input
           type="text"
@@ -26,13 +26,13 @@ export const 작은인풋 = (props: InputProps) => {
   );
 };
 
-export const 긴인풋 = (props: InputProps) => {
+export const LongInput = (props: InputProps) => {
   return (
     <>
       <div className="게시글_인풋_긴거">
         <div className="flex_row_gap4">
-          {props.Input_Title}{" "}
-          <div className="color_red">{props.Input_Star}</div>{" "}
+          {props.Input_Title}
+          <div className="color_red">{props.Input_Star}</div>
         </div>
         <input
           type="text"
@@ -46,13 +46,13 @@ export const 긴인풋 = (props: InputProps) => {
   );
 };
 
-export const 큰인풋 = (props: InputProps) => {
+export const SuperLongInput = (props: InputProps) => {
   return (
     <>
       <div className="게시글_인풋_큰거">
         <div className="flex_row_gap4">
-          {props.Input_Title}{" "}
-          <div className="color_red">{props.Input_Star}</div>{" "}
+          {props.Input_Title}
+          <div className="color_red">{props.Input_Star}</div>
         </div>
         <textarea
           placeholder={props.Input_Placeholder}

@@ -73,7 +73,6 @@ export default function BoardList({
                   </div>
                 ))}
               </div>
-              {/* ✅ Pagination은 여기서 제거 */}
             </div>
           </div>
         </div>

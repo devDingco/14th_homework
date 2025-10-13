@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import "./Boards.css";
-import 분리선 from "./line";
-import { 작은인풋, 긴인풋, 큰인풋 } from "./form-input";
+import Divider from "./line";
+import { SmallInput, LongInput, SuperLongInput } from "./form-input";
 
 import { ChangeEvent, useState } from "react";
 
@@ -108,14 +108,14 @@ function BoardsNew() {
             <div className="게시글_폼">
               <div className="게시글_폼_상세">
                 <div className="게시글_인풋블록">
-                  <작은인풋
+                  <SmallInput
                     Input_Title={작성자_타이틀}
                     Input_Placeholder={작성자}
                     Input_Star={별}
                     onChange={onChangeWriter}
                     errorMessage={writerError}
                   />
-                  <작은인풋
+                  <SmallInput
                     Input_Title={비밀번호_타이틀}
                     Input_Placeholder={비밀번호}
                     Input_Star={별}
@@ -123,9 +123,9 @@ function BoardsNew() {
                     errorMessage={passwordError}
                   />
                 </div>
-                <분리선 />
+                <Divider />
                 <div className="게시글_인풋블록">
-                  <긴인풋
+                  <LongInput
                     Input_Title={제목_타이틀}
                     Input_Placeholder={제목}
                     Input_Star={별}
@@ -133,9 +133,9 @@ function BoardsNew() {
                     errorMessage={titleError}
                   />
                 </div>
-                <분리선 />
+                <Divider />
                 <div className="게시글_인풋블록">
-                  <큰인풋
+                  <SuperLongInput
                     Input_Title={내용_타이틀}
                     Input_Placeholder={내용}
                     Input_Star={별}
@@ -154,30 +154,30 @@ function BoardsNew() {
                       <button className="우편번호검색">우편번호 검색</button>
                     </div>
                   </div>
-                  <긴인풋 Input_Placeholder={주소} />
-                  <긴인풋 Input_Placeholder={상세주소} />
+                  <LongInput Input_Placeholder={주소} />
+                  <LongInput Input_Placeholder={상세주소} />
                 </div>
-                <분리선 />
+                <Divider />
                 <div className="게시글_인풋블록">
-                  <긴인풋
+                  <LongInput
                     Input_Title={유튜브링크_타이틀}
                     Input_Placeholder={링크}
                   />
                 </div>
-                <분리선 />
+                <Divider />
                 <div className="게시글_인풋블록쌓기">
                   <span>사진첨부</span>
                   <div className="사진첨부_그룹">
                     <div className="사진첨부">
-                      <img src="/add.png" className="더하기이미지"></img>
+                      <img src="/add.png" className="더하기이미지" alt=""></img>
                       클릭해서 사진 업로드
                     </div>
                     <div className="사진첨부">
-                      <img src="/add.png" className="더하기이미지"></img>
+                      <img src="/add.png" className="더하기이미지" alt=""></img>
                       클릭해서 사진 업로드
                     </div>
                     <div className="사진첨부">
-                      <img src="/add.png" className="더하기이미지"></img>
+                      <img src="/add.png" className="더하기이미지" alt=""></img>
                       클릭해서 사진 업로드
                     </div>
                   </div>
