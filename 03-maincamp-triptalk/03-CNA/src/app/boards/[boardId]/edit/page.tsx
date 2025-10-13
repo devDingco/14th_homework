@@ -1,22 +1,13 @@
 "use client"
 
 import BoardsComponentWrite from "@/components/boards-write"
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
-
-const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
-    fetchBoard(boardId: $boardId) {
-      writer
-      title
-      contents
-    }
-  }
-`;
+import { FetchBoardForEditDocument } from "@/commons/graphql/graphql"
 
 export default function BoardsEditPage() {
   const { boardId } = useParams<{ boardId: string }>();
-  const { data } = useQuery(FETCH_BOARD, {
+  const { data } = useQuery(FetchBoardForEditDocument, {
     variables: { boardId },
     skip: !boardId,
   });
