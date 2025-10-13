@@ -1,9 +1,5 @@
-const 분리선 = () => {
+const Divider = () => {
+  return <div className="divider"></div>;
+};
 
-    return (
-        <div className="border"></div>
-    )
-}
-
-
-export default 분리선;
+export default Divider;

@@ -14,7 +14,7 @@ const BoardsDetail = () => {
               <div className="글쓴이_날짜">
                 <div className="글쓴이_날짜_좁은거">
                   <div className="글쓴이 글쓴이_font">
-                    <img src="/profile.png"></img>
+                    <img src="/profile.png" alt=""></img>
                     <div className="글쓴이_name">홍길동</div>
                   </div>
                   <div className="날짜 날짜_font">2024.11.11</div>
@@ -22,13 +22,13 @@ const BoardsDetail = () => {
                 <div className="line"></div>
                 <div className="복붙_위치_위치조정">
                   <div className="복붙_위치">
-                    <img src="/copy.png"></img>
-                    <img src="/location.png"></img>
+                    <img src="/copy.png" alt=""></img>
+                    <img src="/location.png" alt=""></img>
                   </div>
                 </div>
               </div>
               <div>
-                <img src="/beach.png"></img>
+                <img src="/beach.png" alt=""></img>
               </div>
               <div className="content">
                 살겠노라 살겠노라. 청산에 살겠노라.
@@ -88,24 +88,24 @@ const BoardsDetail = () => {
                 <br />
               </div>
               <div className="video_div">
-                <img src="/video.png"></img>
+                <img src="/video.png" alt=""></img>
               </div>
               <div className="bad_good">
                 <div className="bad good_bad_font">
-                  <img src="/bad.png"></img>
+                  <img src="/bad.png" alt=""></img>
                   24
                 </div>
                 <div className="good good_bad_font">
-                  <img src="/good.png"></img>
+                  <img src="/good.png" alt=""></img>
                   12
                 </div>
               </div>
               <div className="buttons">
                 <button className="button button_font">
-                  <img src="/list.png"></img>목록으로
+                  <img src="/list.png" alt=""></img>목록으로
                 </button>
                 <button className="button button_font">
-                  <img src="/fix.png"></img>수정하기
+                  <img src="/fix.png" alt=""></img>수정하기
                 </button>
               </div>
             </div>
