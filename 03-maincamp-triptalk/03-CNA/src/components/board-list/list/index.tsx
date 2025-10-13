@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 import { formatDate } from "@/utils/formatDate";
 import deleteIcon from "@/assets/icons/delete.png";
 import React from "react";
-import useBoardList from "@/components/board-list/hook";
+import useBoardList from "@/components/board-list/list/hook";
 import { useRouter } from "next/navigation";
 
 export default function BoardList() {
