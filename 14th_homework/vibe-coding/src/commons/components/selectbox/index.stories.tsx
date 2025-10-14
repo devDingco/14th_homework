@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Selectbox } from "./index";
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import { Selectbox } from './index';
 
 /**
  * Selectbox 컴포넌트는 다양한 variant, size, theme 조합을 제공합니다.
@@ -8,56 +8,56 @@ import { Selectbox } from "./index";
  * - theme: light, dark
  */
 const meta = {
-  title: "Commons/Components/Selectbox",
+  title: 'Commons/Components/Selectbox',
   component: Selectbox,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     variant: {
-      control: "select",
-      options: ["primary", "secondary", "tertiary"],
-      description: "셀렉트박스의 시각적 스타일 변형",
+      control: 'select',
+      options: ['primary', 'secondary', 'tertiary'],
+      description: '셀렉트박스의 시각적 스타일 변형',
     },
     size: {
-      control: "select",
-      options: ["small", "medium", "large"],
-      description: "셀렉트박스의 크기",
+      control: 'select',
+      options: ['small', 'medium', 'large'],
+      description: '셀렉트박스의 크기',
     },
     theme: {
-      control: "select",
-      options: ["light", "dark"],
-      description: "테마 (라이트/다크 모드)",
+      control: 'select',
+      options: ['light', 'dark'],
+      description: '테마 (라이트/다크 모드)',
     },
     fullWidth: {
-      control: "boolean",
-      description: "셀렉트박스의 전체 너비 사용 여부",
+      control: 'boolean',
+      description: '셀렉트박스의 전체 너비 사용 여부',
     },
     error: {
-      control: "boolean",
-      description: "에러 상태",
+      control: 'boolean',
+      description: '에러 상태',
     },
     errorMessage: {
-      control: "text",
-      description: "에러 메시지",
+      control: 'text',
+      description: '에러 메시지',
     },
     disabled: {
-      control: "boolean",
-      description: "비활성화 상태",
+      control: 'boolean',
+      description: '비활성화 상태',
     },
     label: {
-      control: "text",
-      description: "라벨",
+      control: 'text',
+      description: '라벨',
     },
     labelPosition: {
-      control: "select",
-      options: ["top", "left"],
-      description: "라벨 위치",
+      control: 'select',
+      options: ['top', 'left'],
+      description: '라벨 위치',
     },
     placeholder: {
-      control: "text",
-      description: "플레이스홀더 텍스트",
+      control: 'text',
+      description: '플레이스홀더 텍스트',
     },
   },
 } satisfies Meta<typeof Selectbox>;
@@ -67,32 +67,32 @@ type Story = StoryObj<typeof meta>;
 
 // 기본 옵션 데이터
 const defaultOptions = [
-  { value: "option1", label: "옵션 1" },
-  { value: "option2", label: "옵션 2" },
-  { value: "option3", label: "옵션 3" },
-  { value: "option4", label: "옵션 4" },
+  { value: 'option1', label: '옵션 1' },
+  { value: 'option2', label: '옵션 2' },
+  { value: 'option3', label: '옵션 3' },
+  { value: 'option4', label: '옵션 4' },
 ];
 
 const fruitOptions = [
-  { value: "apple", label: "사과" },
-  { value: "banana", label: "바나나" },
-  { value: "orange", label: "오렌지" },
-  { value: "grape", label: "포도" },
-  { value: "strawberry", label: "딸기" },
+  { value: 'apple', label: '사과' },
+  { value: 'banana', label: '바나나' },
+  { value: 'orange', label: '오렌지' },
+  { value: 'grape', label: '포도' },
+  { value: 'strawberry', label: '딸기' },
 ];
 
 const categoryOptions = [
-  { value: "all", label: "전체" },
-  { value: "notice", label: "공지사항" },
-  { value: "event", label: "이벤트" },
-  { value: "update", label: "업데이트" },
+  { value: 'all', label: '전체' },
+  { value: 'notice', label: '공지사항' },
+  { value: 'event', label: '이벤트' },
+  { value: 'update', label: '업데이트' },
 ];
 
 const disabledOptions = [
-  { value: "option1", label: "활성 옵션 1" },
-  { value: "option2", label: "비활성 옵션", disabled: true },
-  { value: "option3", label: "활성 옵션 2" },
-  { value: "option4", label: "비활성 옵션 2", disabled: true },
+  { value: 'option1', label: '활성 옵션 1' },
+  { value: 'option2', label: '비활성 옵션', disabled: true },
+  { value: 'option3', label: '활성 옵션 2' },
+  { value: 'option4', label: '비활성 옵션 2', disabled: true },
 ];
 
 /**
@@ -100,10 +100,10 @@ const disabledOptions = [
  */
 export const Primary: Story = {
   args: {
-    variant: "primary",
-    size: "medium",
-    theme: "light",
-    placeholder: "선택하세요",
+    variant: 'primary',
+    size: 'medium',
+    theme: 'light',
+    placeholder: '선택하세요',
     options: defaultOptions,
   },
 };
@@ -113,10 +113,10 @@ export const Primary: Story = {
  */
 export const Secondary: Story = {
   args: {
-    variant: "secondary",
-    size: "medium",
-    theme: "light",
-    placeholder: "선택하세요",
+    variant: 'secondary',
+    size: 'medium',
+    theme: 'light',
+    placeholder: '선택하세요',
     options: defaultOptions,
   },
 };
@@ -126,11 +126,11 @@ export const Secondary: Story = {
  */
 export const Tertiary: Story = {
   args: {
-    variant: "tertiary",
-    size: "medium",
-    theme: "light",
-    placeholder: "선택하세요",
-    options: defaultOptions,
+    variant: 'tertiary',
+    size: 'medium',
+    theme: 'light',
+    placeholder: '선택하세요',
+    options: fruitOptions,
   },
 };
 
@@ -139,10 +139,10 @@ export const Tertiary: Story = {
  */
 export const Small: Story = {
   args: {
-    variant: "primary",
-    size: "small",
-    theme: "light",
-    placeholder: "Small Selectbox",
+    variant: 'primary',
+    size: 'small',
+    theme: 'light',
+    placeholder: 'Small Selectbox',
     options: defaultOptions,
   },
 };
@@ -152,10 +152,10 @@ export const Small: Story = {
  */
 export const Medium: Story = {
   args: {
-    variant: "primary",
-    size: "medium",
-    theme: "light",
-    placeholder: "Medium Selectbox",
+    variant: 'primary',
+    size: 'medium',
+    theme: 'light',
+    placeholder: 'Medium Selectbox',
     options: defaultOptions,
   },
 };
@@ -165,10 +165,10 @@ export const Medium: Story = {
  */
 export const Large: Story = {
   args: {
-    variant: "primary",
-    size: "large",
-    theme: "light",
-    placeholder: "Large Selectbox",
+    variant: 'primary',
+    size: 'large',
+    theme: 'light',
+    placeholder: 'Large Selectbox',
     options: defaultOptions,
   },
 };
@@ -178,14 +178,14 @@ export const Large: Story = {
  */
 export const DarkTheme: Story = {
   args: {
-    variant: "primary",
-    size: "medium",
-    theme: "dark",
-    placeholder: "Dark Theme Selectbox",
+    variant: 'primary',
+    size: 'medium',
+    theme: 'dark',
+    placeholder: 'Dark Theme Selectbox',
     options: defaultOptions,
   },
   parameters: {
-    backgrounds: { default: "dark" },
+    backgrounds: { default: 'dark' },
   },
 };
 
@@ -194,16 +194,16 @@ export const DarkTheme: Story = {
  */
 export const FullWidth: Story = {
   args: {
-    variant: "primary",
-    size: "medium",
-    theme: "light",
-    placeholder: "Full Width Selectbox",
+    variant: 'primary',
+    size: 'medium',
+    theme: 'light',
+    placeholder: 'Full Width Selectbox',
     options: defaultOptions,
     fullWidth: true,
   },
   decorators: [
     (Story) => (
-      <div style={{ width: "400px" }}>
+      <div style={{ width: '400px' }}>
         <Story />
       </div>
     ),
@@ -215,10 +215,10 @@ export const FullWidth: Story = {
  */
 export const Disabled: Story = {
   args: {
-    variant: "primary",
-    size: "medium",
-    theme: "light",
-    placeholder: "Disabled Selectbox",
+    variant: 'primary',
+    size: 'medium',
+    theme: 'light',
+    placeholder: 'Disabled Selectbox',
     options: defaultOptions,
     disabled: true,
   },
@@ -229,13 +229,13 @@ export const Disabled: Story = {
  */
 export const Error: Story = {
   args: {
-    variant: "primary",
-    size: "medium",
-    theme: "light",
-    placeholder: "에러 상태 셀렉트박스",
+    variant: 'primary',
+    size: 'medium',
+    theme: 'light',
+    placeholder: '에러 상태 셀렉트박스',
     options: defaultOptions,
     error: true,
-    errorMessage: "필수 선택 항목입니다",
+    errorMessage: '필수 선택 항목입니다',
   },
 };
 
@@ -244,13 +244,13 @@ export const Error: Story = {
  */
 export const WithLabel: Story = {
   args: {
-    variant: "primary",
-    size: "medium",
-    theme: "light",
-    placeholder: "카테고리를 선택하세요",
+    variant: 'primary',
+    size: 'medium',
+    theme: 'light',
+    placeholder: '카테고리를 선택하세요',
     options: categoryOptions,
-    label: "카테고리",
-    labelPosition: "top",
+    label: '카테고리',
+    labelPosition: 'top',
   },
 };
 
@@ -259,17 +259,17 @@ export const WithLabel: Story = {
  */
 export const WithLeftLabel: Story = {
   args: {
-    variant: "primary",
-    size: "medium",
-    theme: "light",
-    placeholder: "카테고리를 선택하세요",
+    variant: 'primary',
+    size: 'medium',
+    theme: 'light',
+    placeholder: '카테고리를 선택하세요',
     options: categoryOptions,
-    label: "카테고리",
-    labelPosition: "left",
+    label: '카테고리',
+    labelPosition: 'left',
   },
   decorators: [
     (Story) => (
-      <div style={{ width: "400px" }}>
+      <div style={{ width: '400px' }}>
         <Story />
       </div>
     ),
@@ -281,12 +281,12 @@ export const WithLeftLabel: Story = {
  */
 export const WithDisabledOptions: Story = {
   args: {
-    variant: "primary",
-    size: "medium",
-    theme: "light",
-    placeholder: "옵션을 선택하세요",
+    variant: 'primary',
+    size: 'medium',
+    theme: 'light',
+    placeholder: '옵션을 선택하세요',
     options: disabledOptions,
-    label: "옵션 선택",
+    label: '옵션 선택',
   },
 };
 
@@ -295,12 +295,12 @@ export const WithDisabledOptions: Story = {
  */
 export const FruitSelector: Story = {
   args: {
-    variant: "primary",
-    size: "medium",
-    theme: "light",
-    placeholder: "과일을 선택하세요",
+    variant: 'primary',
+    size: 'medium',
+    theme: 'light',
+    placeholder: '과일을 선택하세요',
     options: fruitOptions,
-    label: "좋아하는 과일",
+    label: '좋아하는 과일',
   },
 };
 
@@ -314,30 +314,20 @@ export const AllVariants: Story = {
   render: () => (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "16px",
-        width: "300px",
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        width: '300px',
       }}
     >
-      <Selectbox
-        variant="primary"
-        theme="light"
-        placeholder="Primary"
-        options={defaultOptions}
-      />
+      <Selectbox variant="primary" theme="light" placeholder="Primary" options={defaultOptions} />
       <Selectbox
         variant="secondary"
         theme="light"
         placeholder="Secondary"
         options={defaultOptions}
       />
-      <Selectbox
-        variant="tertiary"
-        theme="light"
-        placeholder="Tertiary"
-        options={defaultOptions}
-      />
+      <Selectbox variant="tertiary" theme="light" placeholder="Tertiary" options={defaultOptions} />
     </div>
   ),
 };
@@ -352,10 +342,10 @@ export const AllSizes: Story = {
   render: () => (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "16px",
-        width: "300px",
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        width: '300px',
       }}
     >
       <Selectbox
@@ -393,34 +383,24 @@ export const DarkThemeVariants: Story = {
   render: () => (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "16px",
-        width: "300px",
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        width: '300px',
       }}
     >
-      <Selectbox
-        variant="primary"
-        theme="dark"
-        placeholder="Primary"
-        options={defaultOptions}
-      />
+      <Selectbox variant="primary" theme="dark" placeholder="Primary" options={defaultOptions} />
       <Selectbox
         variant="secondary"
         theme="dark"
         placeholder="Secondary"
         options={defaultOptions}
       />
-      <Selectbox
-        variant="tertiary"
-        theme="dark"
-        placeholder="Tertiary"
-        options={defaultOptions}
-      />
+      <Selectbox variant="tertiary" theme="dark" placeholder="Tertiary" options={defaultOptions} />
     </div>
   ),
   parameters: {
-    backgrounds: { default: "dark" },
+    backgrounds: { default: 'dark' },
   },
 };
 
@@ -434,10 +414,10 @@ export const FormExample: Story = {
   render: () => (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "20px",
-        width: "400px",
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
+        width: '400px',
       }}
     >
       <Selectbox
@@ -475,12 +455,12 @@ export const FormExample: Story = {
  */
 export const Interactive: Story = {
   args: {
-    variant: "primary",
-    size: "medium",
-    theme: "light",
-    placeholder: "Select an option...",
+    variant: 'primary',
+    size: 'medium',
+    theme: 'light',
+    placeholder: 'Select an option...',
     options: defaultOptions,
-    onValueChange: (value) => console.log("Selected value:", value),
+    onValueChange: (value) => console.log('Selected value:', value),
   },
 };
 
@@ -489,17 +469,17 @@ export const Interactive: Story = {
  */
 export const NumericValues: Story = {
   args: {
-    variant: "primary",
-    size: "medium",
-    theme: "light",
-    placeholder: "수량을 선택하세요",
-    label: "수량",
+    variant: 'primary',
+    size: 'medium',
+    theme: 'light',
+    placeholder: '수량을 선택하세요',
+    label: '수량',
     options: [
-      { value: 1, label: "1개" },
-      { value: 5, label: "5개" },
-      { value: 10, label: "10개" },
-      { value: 20, label: "20개" },
-      { value: 50, label: "50개" },
+      { value: 1, label: '1개' },
+      { value: 5, label: '5개' },
+      { value: 10, label: '10개' },
+      { value: 20, label: '20개' },
+      { value: 50, label: '50개' },
     ],
   },
 };
@@ -509,22 +489,22 @@ export const NumericValues: Story = {
  */
 export const ManyOptions: Story = {
   args: {
-    variant: "primary",
-    size: "medium",
-    theme: "light",
-    placeholder: "국가를 선택하세요",
-    label: "국가",
+    variant: 'primary',
+    size: 'medium',
+    theme: 'light',
+    placeholder: '국가를 선택하세요',
+    label: '국가',
     options: [
-      { value: "kr", label: "대한민국" },
-      { value: "us", label: "미국" },
-      { value: "jp", label: "일본" },
-      { value: "cn", label: "중국" },
-      { value: "uk", label: "영국" },
-      { value: "fr", label: "프랑스" },
-      { value: "de", label: "독일" },
-      { value: "ca", label: "캐나다" },
-      { value: "au", label: "호주" },
-      { value: "es", label: "스페인" },
+      { value: 'kr', label: '대한민국' },
+      { value: 'us', label: '미국' },
+      { value: 'jp', label: '일본' },
+      { value: 'cn', label: '중국' },
+      { value: 'uk', label: '영국' },
+      { value: 'fr', label: '프랑스' },
+      { value: 'de', label: '독일' },
+      { value: 'ca', label: '캐나다' },
+      { value: 'au', label: '호주' },
+      { value: 'es', label: '스페인' },
     ],
   },
 };
@@ -539,10 +519,10 @@ export const StateVariations: Story = {
   render: () => (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "20px",
-        width: "400px",
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
+        width: '400px',
       }}
     >
       <Selectbox

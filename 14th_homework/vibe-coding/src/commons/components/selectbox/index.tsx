@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, {
   SelectHTMLAttributes,
@@ -7,9 +7,9 @@ import React, {
   useState,
   useRef,
   useEffect,
-} from "react";
-import Image from "next/image";
-import styles from "./styles.module.css";
+} from 'react';
+import Image from 'next/image';
+import styles from './styles.module.css';
 
 /**
  * Selectbox Option Type
@@ -23,15 +23,14 @@ export interface SelectboxOption {
 /**
  * Selectbox Variant Types
  */
-export type SelectboxVariant = "primary" | "secondary" | "tertiary";
-export type SelectboxSize = "small" | "medium" | "large";
-export type SelectboxTheme = "light" | "dark";
+export type SelectboxVariant = 'primary' | 'secondary' | 'tertiary';
+export type SelectboxSize = 'small' | 'medium' | 'large';
+export type SelectboxTheme = 'light' | 'dark';
 
 /**
  * Selectbox Component Props
  */
-export interface SelectboxProps
-  extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> {
+export interface SelectboxProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
   /**
    * 셀렉트박스의 시각적 스타일 변형
    * @default 'primary'
@@ -100,7 +99,7 @@ export interface SelectboxProps
   /**
    * 라벨 위치
    */
-  labelPosition?: "top" | "left";
+  labelPosition?: 'top' | 'left';
 }
 
 /**
@@ -130,20 +129,20 @@ export interface SelectboxProps
 export const Selectbox = forwardRef<HTMLSelectElement, SelectboxProps>(
   (
     {
-      variant = "primary",
-      size = "medium",
-      theme = "light",
+      variant = 'primary',
+      size = 'medium',
+      theme = 'light',
       fullWidth = false,
       options = [],
-      placeholder = "선택하세요",
+      placeholder = '선택하세요',
       onValueChange,
-      className = "",
-      wrapperClassName = "",
+      className = '',
+      wrapperClassName = '',
       disabled = false,
       error = false,
       errorMessage,
       label,
-      labelPosition = "top",
+      labelPosition = 'top',
       value: controlledValue,
       onChange,
       ...rest
@@ -152,12 +151,11 @@ export const Selectbox = forwardRef<HTMLSelectElement, SelectboxProps>(
   ) => {
     const [isFocused, setIsFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-    const [internalValue, setInternalValue] = useState<string | number>("");
+    const [internalValue, setInternalValue] = useState<string | number>('');
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     // controlled vs uncontrolled
-    const value =
-      controlledValue !== undefined ? controlledValue : internalValue;
+    const value = controlledValue !== undefined ? controlledValue : internalValue;
 
     // 선택된 옵션 찾기
     const selectedOption = options.find((opt) => opt.value === value);
@@ -166,12 +164,12 @@ export const Selectbox = forwardRef<HTMLSelectElement, SelectboxProps>(
     // wrapper 클래스명 조합
     const wrapperClasses = [
       styles.wrapper,
-      labelPosition === "left" && styles.wrapperRow,
+      labelPosition === 'left' && styles.wrapperRow,
       fullWidth && styles.fullWidth,
       wrapperClassName,
     ]
       .filter(Boolean)
-      .join(" ");
+      .join(' ');
 
     // selectbox container 클래스명 조합
     const containerClasses = [
@@ -187,7 +185,7 @@ export const Selectbox = forwardRef<HTMLSelectElement, SelectboxProps>(
       className,
     ]
       .filter(Boolean)
-      .join(" ");
+      .join(' ');
 
     // dropdown 클래스명 조합
     const dropdownClasses = [
@@ -198,35 +196,28 @@ export const Selectbox = forwardRef<HTMLSelectElement, SelectboxProps>(
       isOpen && styles.open,
     ]
       .filter(Boolean)
-      .join(" ");
+      .join(' ');
 
     // label 클래스명 조합
-    const labelClasses = [
-      styles.label,
-      styles[theme],
-      labelPosition === "left" && styles.labelLeft,
-    ]
+    const labelClasses = [styles.label, styles[theme], labelPosition === 'left' && styles.labelLeft]
       .filter(Boolean)
-      .join(" ");
+      .join(' ');
 
     // 외부 클릭 감지
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
-        if (
-          dropdownRef.current &&
-          !dropdownRef.current.contains(event.target as Node)
-        ) {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
           setIsOpen(false);
           setIsFocused(false);
         }
       };
 
       if (isOpen) {
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener('mousedown', handleClickOutside);
       }
 
       return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
+        document.removeEventListener('mousedown', handleClickOutside);
       };
     }, [isOpen]);
 
@@ -264,24 +255,22 @@ export const Selectbox = forwardRef<HTMLSelectElement, SelectboxProps>(
       if (disabled) return;
 
       switch (e.key) {
-        case "Enter":
-        case " ":
+        case 'Enter':
+        case ' ':
           e.preventDefault();
           setIsOpen(!isOpen);
           break;
-        case "Escape":
+        case 'Escape':
           setIsOpen(false);
           setIsFocused(false);
           break;
-        case "ArrowDown":
+        case 'ArrowDown':
           e.preventDefault();
           if (!isOpen) {
             setIsOpen(true);
           } else {
             // 다음 옵션으로 이동
-            const currentIndex = options.findIndex(
-              (opt) => opt.value === value
-            );
+            const currentIndex = options.findIndex((opt) => opt.value === value);
             const nextIndex = Math.min(currentIndex + 1, options.length - 1);
             const nextOption = options[nextIndex];
             if (nextOption && !nextOption.disabled) {
@@ -289,15 +278,13 @@ export const Selectbox = forwardRef<HTMLSelectElement, SelectboxProps>(
             }
           }
           break;
-        case "ArrowUp":
+        case 'ArrowUp':
           e.preventDefault();
           if (!isOpen) {
             setIsOpen(true);
           } else {
             // 이전 옵션으로 이동
-            const currentIndex = options.findIndex(
-              (opt) => opt.value === value
-            );
+            const currentIndex = options.findIndex((opt) => opt.value === value);
             const prevIndex = Math.max(currentIndex - 1, 0);
             const prevOption = options[prevIndex];
             if (prevOption && !prevOption.disabled) {
@@ -326,8 +313,8 @@ export const Selectbox = forwardRef<HTMLSelectElement, SelectboxProps>(
             <Image
               src="/icons/arrow_drop_down.svg"
               alt="dropdown"
-              width={24}
-              height={24}
+              width={16}
+              height={16}
               className={styles.dropdownIcon}
             />
           </div>
@@ -336,12 +323,10 @@ export const Selectbox = forwardRef<HTMLSelectElement, SelectboxProps>(
               {options.map((option) => (
                 <div
                   key={option.value}
-                  className={`${styles.option} ${
-                    option.value === value ? styles.selected : ""
-                  } ${option.disabled ? styles.optionDisabled : ""}`}
-                  onClick={() =>
-                    !option.disabled && handleOptionClick(option.value)
-                  }
+                  className={`${styles.option} ${option.value === value ? styles.selected : ''} ${
+                    option.disabled ? styles.optionDisabled : ''
+                  }`}
+                  onClick={() => !option.disabled && handleOptionClick(option.value)}
                   role="option"
                   aria-selected={option.value === value}
                   aria-disabled={option.disabled}
@@ -364,8 +349,7 @@ export const Selectbox = forwardRef<HTMLSelectElement, SelectboxProps>(
           <select
             ref={ref}
             className={styles.hiddenSelect}
-            value={value}
-            onChange={onChange}
+            {...(onChange ? { value, onChange } : { defaultValue: value })}
             disabled={disabled}
             {...rest}
           >
@@ -375,26 +359,20 @@ export const Selectbox = forwardRef<HTMLSelectElement, SelectboxProps>(
               </option>
             )}
             {options.map((option) => (
-              <option
-                key={option.value}
-                value={option.value}
-                disabled={option.disabled}
-              >
+              <option key={option.value} value={option.value} disabled={option.disabled}>
                 {option.label}
               </option>
             ))}
           </select>
         </div>
         {error && errorMessage && (
-          <span className={`${styles.errorMessage} ${styles[theme]}`}>
-            {errorMessage}
-          </span>
+          <span className={`${styles.errorMessage} ${styles[theme]}`}>{errorMessage}</span>
         )}
       </div>
     );
   }
 );
 
-Selectbox.displayName = "Selectbox";
+Selectbox.displayName = 'Selectbox';
 
 export default Selectbox;

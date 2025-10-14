@@ -10,8 +10,8 @@
 
 ==============================================
 
-조건-피그마) 활용할MCP: CursorTalkToFigmaMCP(채널명: tru34zk4)
-조건-피그마) 참고할 공통컴포넌트 노드ID: 3:1295
+조건-피그마) 활용할MCP: CursorTalkToFigmaMCP(채널명: pcnrdnq7)
+조건-피그마) 참고할 공통컴포넌트 노드ID: 3:1561
 
 조건-파일경로) 구현될 TSX 파일경로: src/commons/components/selectbox/index.tsx
 조건-파일경로) 구현될 CSS 파일경로: src/commons/components/selectbox/styles.module.css
@@ -27,7 +27,7 @@
 
 기존히스토리-참고만) 현재 해당 컴포넌트가 피그마 디자인과 다른데, 피그마 디자인과 일치하도록 변경할 것.
 
-기존히스토리-참고만) 메뉴목록의 전체 길이는 스크롤 없이도 메뉴들이 모두 보이도록 설정할 것.
+기존히스토리-참고만) 메뉴목록의 전체 길이는 스크롤 없이, 메뉴들이 모두 보이도록 설정할 것.
 
 기존히스토리-참고만) _dropdown_28grg_75 _primary_28grg_121 _medium_28grg_98 _light_28grg_27 _open_28grg_82의 높이가 전체 옵션 목록들을 감쌀 수 있도록 재설정 할 것.
 
