@@ -1,8 +1,8 @@
-import React from "react";
-import Diaries from "../components/diaries";
+import React from 'react';
+import Diaries from '../components/diaries';
 
 const DiariesPage = () => {
-    return <Diaries />;
+  return <Diaries />;
 };
 
 export default DiariesPage;

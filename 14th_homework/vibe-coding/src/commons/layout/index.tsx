@@ -25,6 +25,7 @@ export default function Layout({ children }: LayoutProps) {
           사진보관함
         </Link>
       </nav>
+      <div className={styles.gap}></div>
       <main className={styles.children}>{children}</main>
       <footer className={styles.footer}>
         <div className={styles.footerContent}>

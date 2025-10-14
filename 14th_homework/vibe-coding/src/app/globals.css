@@ -7,12 +7,10 @@
   --foreground: #171717;
 
   /* Font Families */
-  --font-korean: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui,
+  --font-korean: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  --font-english: 'SUIT Variable', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  --font-default: 'Pretendard', 'SUIT Variable', -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, sans-serif;
-  --font-english: "SUIT Variable", -apple-system, BlinkMacSystemFont, system-ui,
-    Roboto, sans-serif;
-  --font-default: "Pretendard", "SUIT Variable", -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, sans-serif;
 
   /* Font Weights */
   --font-weight-regular: 400;
@@ -47,6 +45,13 @@
   /* Border Colors */
   --border-default: #d1d1d6;
   --border-strong: #8e8e93;
+
+  /* Emotion Colors */
+  --red60: #ea5757;
+  --blue60: #28b4e1;
+  --gray60: #777777;
+  --yellow60: #d59029;
+  --green60: #a229ed;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -80,6 +85,13 @@
     /* Border Colors (Dark) */
     --border-default: #48484a;
     --border-strong: #636366;
+
+    /* Emotion Colors (Dark) */
+    --red60: #ea5757;
+    --blue60: #28b4e1;
+    --gray60: #777777;
+    --yellow60: #d59029;
+    --green60: #a229ed;
   }
 }
 
