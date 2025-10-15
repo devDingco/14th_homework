@@ -401,6 +401,7 @@ export default function Diaries() {
               options={filterOptions}
               onValueChange={handleFilterChange}
               className={styles.filterSelect}
+              value="all"
             />
             <Searchbar
               variant="primary"
