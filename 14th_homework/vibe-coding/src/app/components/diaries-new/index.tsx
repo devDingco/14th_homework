@@ -1,15 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import styles from './styles.module.css';
 import { Input } from '@/commons/components/input';
 import { Button } from '@/commons/components/button';
 import { EMOTION, EMOTION_KEYS, EmotionType } from '@/commons/constants/enum';
-import { URLS } from '@/commons/constants/url';
+import { useModal } from '@/commons/providers/modal/modal.provider';
 
 export default function DiariesNew() {
-  const router = useRouter();
+  const { closeModal } = useModal();
   const [selectedEmotion, setSelectedEmotion] = useState<EmotionType>('Happy');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -19,8 +18,8 @@ export default function DiariesNew() {
   };
 
   const handleClose = () => {
-    // 일기 목록 페이지로 돌아가기
-    router.push(URLS.DIARIES.path);
+    // 모달 닫기
+    closeModal();
   };
 
   const handleSubmit = () => {

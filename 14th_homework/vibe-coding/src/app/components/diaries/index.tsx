@@ -10,6 +10,7 @@ import { URLS } from '@/commons/constants/url';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useDiaryWriteModal } from './hooks/index.link.modal.hook';
 
 // Mock 데이터 타입 정의
 interface DiaryCard {
@@ -340,6 +341,7 @@ const mockDiaries: DiaryCard[] = [
 
 export default function Diaries() {
   const router = useRouter();
+  const { openWriteModal } = useDiaryWriteModal();
 
   // 페이지네이션 상태 관리
   const [currentPage, setCurrentPage] = useState(1);
@@ -365,9 +367,9 @@ export default function Diaries() {
     console.log('필터 변경:', value);
   };
 
-  // 일기쓰기 버튼 핸들러 - URL 상수 활용
+  // 일기쓰기 버튼 핸들러 - 모달로 열기
   const handleWriteDiary = () => {
-    router.push(URLS.DIARY_NEW.path);
+    openWriteModal();
   };
 
   // 일기 카드 클릭 핸들러
@@ -421,6 +423,7 @@ export default function Diaries() {
             leftIcon={
               <Image src="/icons/plus_outline_light_m.svg" alt="일기쓰기" width={16} height={16} />
             }
+            data-testid="diary-write-button"
           >
             일기쓰기
           </Button>
