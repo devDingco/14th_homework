@@ -367,7 +367,7 @@ export default function Diaries() {
 
   // 일기쓰기 버튼 핸들러 - URL 상수 활용
   const handleWriteDiary = () => {
-    router.push(URLS.DIARY_DETAIL.path.replace('[id]', 'new'));
+    router.push(URLS.DIARY_NEW.path);
   };
 
   // 일기 카드 클릭 핸들러
@@ -443,7 +443,59 @@ export default function Diaries() {
                   className={styles.image}
                 />
                 <div className={styles.closeIcon}>
-                  <Image src="/icons/close_outline_light_s.svg" alt="닫기" width={24} height={24} />
+                  {/* <Image src="/icons/close_outline_light_m.svg" alt="닫기" width={24} height={24} /> */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <g filter="url(#filter0_d_3_1314)">
+                      <rect x="0" y="0" width="24" height="24" rx="12" fill="white" />
+                      <path
+                        d="M12 12.84L8.4 16.44C8.2 16.64 7.94 16.74 7.64 16.74C7.34 16.74 7.08 16.64 6.88 16.44C6.68 16.24 6.58 15.98 6.58 15.68C6.58 15.38 6.68 15.12 6.88 14.92L10.48 11.32L6.88 7.72C6.68 7.52 6.58 7.26 6.58 6.96C6.58 6.66 6.68 6.4 6.88 6.2C7.08 6 7.34 5.9 7.64 5.9C7.94 5.9 8.2 6 8.4 6.2L12 9.8L15.6 6.2C15.8 6 16.06 5.9 16.36 5.9C16.66 5.9 16.92 6 17.12 6.2C17.32 6.4 17.42 6.66 17.42 6.96C17.42 7.26 17.32 7.52 17.12 7.72L13.52 11.32L17.12 14.92C17.32 15.12 17.42 15.38 17.42 15.68C17.42 15.98 17.32 16.24 17.12 16.44C16.92 16.64 16.66 16.74 16.36 16.74C16.06 16.74 15.8 16.64 15.6 16.44L12 12.84Z"
+                        fill="black"
+                      />
+                    </g>
+                    <defs>
+                      <filter
+                        id="filter0_d_3_1362"
+                        x="0"
+                        y="0"
+                        width="24"
+                        height="24"
+                        filterUnits="userSpaceOnUse"
+                        color-interpolation-filters="sRGB"
+                      >
+                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                        <feColorMatrix
+                          in="SourceAlpha"
+                          type="matrix"
+                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                          result="hardAlpha"
+                        />
+                        <feOffset />
+                        <feGaussianBlur stdDeviation="4" />
+                        <feComposite in2="hardAlpha" operator="out" />
+                        <feColorMatrix
+                          type="matrix"
+                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"
+                        />
+                        <feBlend
+                          mode="normal"
+                          in2="BackgroundImageFix"
+                          result="effect1_dropShadow_3_1314"
+                        />
+                        <feBlend
+                          mode="normal"
+                          in="SourceGraphic"
+                          in2="effect1_dropShadow_3_1314"
+                          result="shape"
+                        />
+                      </filter>
+                    </defs>
+                  </svg>
                 </div>
               </div>
               <div className={styles.cardContent}>
