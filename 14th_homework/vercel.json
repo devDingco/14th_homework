@@ -1,6 +1,7 @@
 {
-  "installCommand": "npm install --prefix ./vibe-coding",
-  "buildCommand": "npm run build --prefix ./vibe-coding",
-  "devCommand": "npm run dev --prefix ./vibe-coding",
-  "outputDirectory": "vibe-coding/.next"
+  "installCommand": "cd vibe-coding && npm install",
+  "buildCommand": "cd vibe-coding && npm run build",
+  "devCommand": "cd vibe-coding && npm run dev",
+  "outputDirectory": "vibe-coding/.next",
+  "framework": "nextjs"
 }
