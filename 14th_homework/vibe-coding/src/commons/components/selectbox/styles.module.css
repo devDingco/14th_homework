@@ -70,6 +70,7 @@
   justify-content: space-between;
   width: 100%;
   gap: 8px;
+  height: 100%;
 }
 
 /* Select Text */
@@ -82,8 +83,8 @@
 
 /* Dropdown Icon */
 .dropdownIcon {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
   transition: transform 0.2s ease-in-out;
 }
