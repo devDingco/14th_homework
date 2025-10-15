@@ -1,12 +1,28 @@
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useQuery, gql } from '@apollo/client';
 import { UserInfo } from './types';
+
+const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      _id
+      email
+      name
+      picture
+    }
+  }
+`;
 
 export default function useNavigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [user, setUser] = useState<UserInfo | null>(null);
   const pathname = usePathname();
+  const router = useRouter();
+
+  // fetchUserLoggedIn으로 사용자 정보 가져오기
+  const { data } = useQuery(FETCH_USER_LOGGED_IN);
+  const user = data?.fetchUserLoggedIn || null;
 
   // 스크롤 이벤트 감지
   useEffect(() => {
@@ -24,16 +40,6 @@ export default function useNavigation() {
     setIsMenuOpen(false);
   }, [pathname]);
 
-  // 사용자 정보 설정 (임시 데이터)
-  useEffect(() => {
-    setUser({
-      _id: '1',
-      email: 'hong@example.com',
-      name: '홍길동',
-      picture: '/profile.svg',
-    });
-  }, []);
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -47,6 +53,10 @@ export default function useNavigation() {
     // 프로필 드롭다운 토글 또는 프로필 페이지로 이동
   };
 
+  const handleLoginClick = () => {
+    router.push('/login');
+  };
+
   return {
     isMenuOpen,
     isScrolled,
@@ -54,5 +64,6 @@ export default function useNavigation() {
     toggleMenu,
     closeMenu,
     handleProfileClick,
+    handleLoginClick,
   };
 }

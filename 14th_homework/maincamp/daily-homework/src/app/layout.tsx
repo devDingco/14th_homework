@@ -35,15 +35,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {/* <ApolloSetting children={<MainLayout>{children}</MainLayout>} /> */}
-        <ApiUploadProvider>
-          <MainLayout>
-            {children}
-          </MainLayout>
-        </ApiUploadProvider>  
-        {/* <MainLayout>
-          {children}
-        </MainLayout> */}
+        <ApiUploadProvider>{children}</ApiUploadProvider>
       </body>
     </html>
   );
