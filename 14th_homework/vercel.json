@@ -1,0 +1,6 @@
+{
+  "installCommand": "npm install --prefix ./vibe-coding",
+  "buildCommand": "npm run build --prefix ./vibe-coding",
+  "devCommand": "npm run dev --prefix ./vibe-coding",
+  "outputDirectory": "vibe-coding/.next"
+}
