@@ -21,6 +21,8 @@
   line-height: 16px;
   letter-spacing: -0.18px;
   color: #000000;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .gap {
@@ -54,6 +56,7 @@
   letter-spacing: -0.24px;
   color: #ababab;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .tabActive {
