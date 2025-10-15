@@ -145,7 +145,7 @@
 }
 
 .contentTextarea::placeholder {
-  color: #000000;
+  color: #ABABAB;
 }
 
 .contentTextarea:focus {
