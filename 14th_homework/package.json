@@ -1,4 +1,13 @@
 {
+  "name": "14th-homework",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "cd vibe-coding && npm install",
+    "build": "cd vibe-coding && npm run build",
+    "dev": "cd vibe-coding && npm run dev",
+    "start": "cd vibe-coding && npm start"
+  },
   "dependencies": {
     "react-daum-postcode": "^3.2.0"
   }
