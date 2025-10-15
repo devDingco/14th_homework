@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "postinstall": "cd vibe-coding && npm install",
+    "vercel-build": "cd vibe-coding && npm run build",
     "build": "cd vibe-coding && npm run build",
     "dev": "cd vibe-coding && npm run dev",
     "start": "cd vibe-coding && npm start"
