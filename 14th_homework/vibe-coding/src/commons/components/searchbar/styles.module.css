@@ -410,12 +410,12 @@
 /* Icon Color Filters for Theme */
 .light .searchIcon,
 .light .clearIcon {
-  filter: brightness(0) saturate(100%);
+  color: #777;
 }
 
 .dark .searchIcon,
 .dark .clearIcon {
-  filter: brightness(0) saturate(100%) invert(100%);
+  color: #777;
 }
 
 .disabled .searchIcon,
