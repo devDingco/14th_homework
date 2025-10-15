@@ -309,14 +309,16 @@ export const Selectbox = forwardRef<HTMLSelectElement, SelectboxProps>(
             aria-expanded={isOpen}
             aria-disabled={disabled}
           >
-            <span className={styles.selectText}>{displayText}</span>
-            <Image
-              src="/icons/arrow_drop_down.svg"
-              alt="dropdown"
-              width={16}
-              height={16}
-              className={styles.dropdownIcon}
-            />
+            <div className={styles.selectContent}>
+              <span className={styles.selectText}>{displayText}</span>
+              <Image
+                src="/icons/arrow_drop_down.svg"
+                alt="dropdown"
+                width={16}
+                height={16}
+                className={styles.dropdownIcon}
+              />
+            </div>
           </div>
           {isOpen && (
             <div className={dropdownClasses} role="listbox">

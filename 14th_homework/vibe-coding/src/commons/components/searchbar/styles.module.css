@@ -13,7 +13,7 @@
 .searchbarContainer {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 8px;
   border-radius: 100px;
   transition: all 0.2s ease-in-out;
   position: relative;

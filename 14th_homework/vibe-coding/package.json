@@ -9,7 +9,7 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6007",
     "build-storybook": "storybook build",
-    "test": "playwright test",
+    "test:e2e": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",

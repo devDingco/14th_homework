@@ -76,7 +76,7 @@
   position: relative;
   width: 274px;
   height: 208px;
-  border-radius: 16px 16px 0 0;
+  border-radius: 16px 16px 16px 16px;
   overflow: hidden;
 }
 
@@ -88,16 +88,16 @@
 
 .closeIcon {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 24px;
-  height: 24px;
+  top: 8px;
+  right: 8px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  fill: #FFF;
-filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.10));
+  fill: #fff;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.1));
 }
 
 .closeIcon svg {

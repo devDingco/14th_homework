@@ -46,7 +46,6 @@
 .selectboxContainer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   border-radius: 8px;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
@@ -62,6 +61,15 @@
 
 .selectboxContainer.disabled {
   cursor: not-allowed;
+}
+
+/* Select Content Container */
+.selectContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
 }
 
 /* Select Text */
