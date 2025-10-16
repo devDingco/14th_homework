@@ -4,29 +4,32 @@ export const paginationContainer: CSSProperties = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  margin: '40px 0',
-  gap: '4px',
+  margin: '32px 0',
+  gap: '16px',
 };
 
 export const paginationButton: CSSProperties = {
-  minWidth: '40px',
-  height: '40px',
+  width: '32px',
+  height: '32px',
   border: 'none',
   backgroundColor: 'transparent',
-  color: '#666',
+  color: '#777777',
   cursor: 'pointer',
-  borderRadius: '4px',
-  fontSize: '14px',
+  borderRadius: '8px',
+  fontSize: '16px',
+  fontFamily: 'Pretendard Variable, sans-serif',
+  fontWeight: '400',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   transition: 'all 0.2s ease',
+  lineHeight: '24px',
 };
 
 export const activeButton: CSSProperties = {
   ...paginationButton,
-  backgroundColor: '#007bff',
-  color: '#fff',
+  backgroundColor: '#f2f2f2',
+  color: '#000000',
   fontWeight: '500',
 };
 
@@ -37,8 +40,13 @@ export const disabledButton: CSSProperties = {
 };
 
 export const arrowButton: CSSProperties = {
-  ...paginationButton,
-  fontSize: '16px',
-  color: '#007bff',
-  fontWeight: 'bold',
+  width: '24px',
+  height: '24px',
+  border: 'none',
+  background: 'transparent',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '0',
 };

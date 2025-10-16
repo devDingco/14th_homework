@@ -184,6 +184,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+.button .icon img {
+  width: auto;
+  height: auto;
+  max-width: none;
 }
 
 .button .icon:first-child:not(:last-child) {
@@ -207,7 +214,7 @@
 }
 
 .loading::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 16px;
   height: 16px;

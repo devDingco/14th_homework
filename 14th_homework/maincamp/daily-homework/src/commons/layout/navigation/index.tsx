@@ -9,7 +9,7 @@ import useNavigation from './hook';
 
 export default function Navigation(props: NavigationProps) {
   const pathname = usePathname();
-  const { user, handleProfileClick } = useNavigation();
+  const { user, handleProfileClick, handleLoginClick } = useNavigation();
 
   const navigationItems = [
     { href: '/boards', label: '트립토크', exact: false },
@@ -57,25 +57,31 @@ export default function Navigation(props: NavigationProps) {
             ))}
           </div>
 
-          {/* 프로필 */}
+          {/* 프로필 또는 로그인 버튼 */}
           <div className={styles.profile_area}>
-            <div className={styles.profile_container} onClick={handleProfileClick}>
-              <Image
-                src="/profile.png"
-                alt="프로필"
-                width={40}
-                height={40}
-                className={styles.profile_image}
-              />
-              <span className={styles.profile_name}>{user?.name || '홍길동'}</span>
-              <Image
-                src="/down_arrow.png"
-                alt="드롭다운"
-                width={24}
-                height={24}
-                className={styles.dropdown_arrow}
-              />
-            </div>
+            {user ? (
+              <div className={styles.profile_container} onClick={handleProfileClick}>
+                <Image
+                  src="/profile.png"
+                  alt="프로필"
+                  width={40}
+                  height={40}
+                  className={styles.profile_image}
+                />
+                <span className={styles.profile_name}>{user.name}</span>
+                <Image
+                  src="/down_arrow.png"
+                  alt="드롭다운"
+                  width={24}
+                  height={24}
+                  className={styles.dropdown_arrow}
+                />
+              </div>
+            ) : (
+              <div className={styles.profile_container} onClick={handleLoginClick}>
+                <span className={styles.profile_name}>로그인</span>
+              </div>
+            )}
           </div>
         </div>
       </div>

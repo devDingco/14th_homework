@@ -8,7 +8,7 @@
 /**
  * 접근 권한 타입
  */
-export type AccessType = "PUBLIC" | "AUTHENTICATED";
+export type AccessType = 'PUBLIC' | 'AUTHENTICATED';
 
 /**
  * 레이아웃 요소 가시성 인터페이스
@@ -34,12 +34,7 @@ export interface UrlMeta {
 /**
  * URL 경로 키 타입
  */
-export type UrlKey =
-  | "LOGIN"
-  | "SIGNUP"
-  | "DIARIES"
-  | "DIARY_DETAIL"
-  | "PICTURES";
+export type UrlKey = 'LOGIN' | 'SIGNUP' | 'DIARIES' | 'DIARY_DETAIL' | 'DIARY_NEW' | 'PICTURES';
 
 /**
  * URL 경로 상수
@@ -48,8 +43,8 @@ export type UrlKey =
  */
 export const URLS: Record<UrlKey, UrlMeta> = {
   LOGIN: {
-    path: "/auth/login",
-    accessType: "PUBLIC",
+    path: '/auth/login',
+    accessType: 'PUBLIC',
     visibility: {
       header: false,
       logo: false,
@@ -60,8 +55,8 @@ export const URLS: Record<UrlKey, UrlMeta> = {
     },
   },
   SIGNUP: {
-    path: "/auth/signup",
-    accessType: "PUBLIC",
+    path: '/auth/signup',
+    accessType: 'PUBLIC',
     visibility: {
       header: false,
       logo: false,
@@ -72,8 +67,8 @@ export const URLS: Record<UrlKey, UrlMeta> = {
     },
   },
   DIARIES: {
-    path: "/diaries",
-    accessType: "PUBLIC",
+    path: '/diaries',
+    accessType: 'PUBLIC',
     visibility: {
       header: true,
       logo: true,
@@ -84,8 +79,20 @@ export const URLS: Record<UrlKey, UrlMeta> = {
     },
   },
   DIARY_DETAIL: {
-    path: "/diaries/[id]",
-    accessType: "AUTHENTICATED",
+    path: '/diaries/[id]',
+    accessType: 'AUTHENTICATED',
+    visibility: {
+      header: true,
+      logo: true,
+      darkModeToggle: false,
+      banner: false,
+      navigation: false,
+      footer: true,
+    },
+  },
+  DIARY_NEW: {
+    path: '/diaries/new',
+    accessType: 'AUTHENTICATED',
     visibility: {
       header: true,
       logo: true,
@@ -96,8 +103,8 @@ export const URLS: Record<UrlKey, UrlMeta> = {
     },
   },
   PICTURES: {
-    path: "/pictures",
-    accessType: "PUBLIC",
+    path: '/pictures',
+    accessType: 'PUBLIC',
     visibility: {
       header: true,
       logo: true,
@@ -140,7 +147,7 @@ export const getDiaryDetailUrl = (id: string | number): string => {
 export const getUrlMetaByPath = (path: string): UrlMeta | undefined => {
   return Object.values(URLS).find((url) => {
     // 다이나믹 라우트 패턴 매칭 ([id] -> [^/]+)
-    const pattern = url.path.replace(/\[.*?\]/g, "[^/]+");
+    const pattern = url.path.replace(/\[.*?\]/g, '[^/]+');
     const regex = new RegExp(`^${pattern}$`);
     return regex.test(path);
   });
@@ -157,7 +164,7 @@ export const getUrlMetaByPath = (path: string): UrlMeta | undefined => {
  * isAuthenticationRequired("LOGIN") // false
  */
 export const isAuthenticationRequired = (urlKey: UrlKey): boolean => {
-  return URLS[urlKey].accessType === "AUTHENTICATED";
+  return URLS[urlKey].accessType === 'AUTHENTICATED';
 };
 
 /**
@@ -180,7 +187,7 @@ export const getLayoutVisibility = (urlKey: UrlKey): LayoutVisibility => {
  * @returns URL 키이면 true, 아니면 false
  */
 export const isUrlKey = (value: unknown): value is UrlKey => {
-  return typeof value === "string" && value in URLS;
+  return typeof value === 'string' && value in URLS;
 };
 
 /**
@@ -190,7 +197,7 @@ export const isUrlKey = (value: unknown): value is UrlKey => {
  * @returns 접근 타입이면 true, 아니면 false
  */
 export const isAccessType = (value: unknown): value is AccessType => {
-  return value === "PUBLIC" || value === "AUTHENTICATED";
+  return value === 'PUBLIC' || value === 'AUTHENTICATED';
 };
 
 export default URLS;
