@@ -9,6 +9,7 @@ import _ from 'lodash';
 import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from '@/components/boards-list/list/queries';
 import SearchComponent from '@/components/boards-list/search';
 import { FetchBoardsQuery, QueryFetchBoardsArgs } from '@/commons/graphql/graphql';
+import styles from './styles.module.css';
 
 export default function BoardsListPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -53,21 +54,23 @@ export default function BoardsListPage() {
   };
 
   return (
-    <div>
+    <div className={styles.pageContainer}>
       <BannerCarousel />
-      <SearchComponent onChange={onChangeKeyword} />
-      <BoardListPage
-        data={data}
-        refetch={refetch}
-        currentPage={currentPage}
-        totalCount={countData?.fetchBoardsCount || 0}
-        keyword={keyword}
-      />
-      <PaginationComponent
-        currentPage={currentPage}
-        lastPage={lastPage}
-        onPageChange={onPageChange}
-      />
+      <div className={styles.bodyContainer}>
+        <SearchComponent onChange={onChangeKeyword} />
+        <BoardListPage
+          data={data}
+          refetch={refetch}
+          currentPage={currentPage}
+          totalCount={countData?.fetchBoardsCount || 0}
+          keyword={keyword}
+        />
+        <PaginationComponent
+          currentPage={currentPage}
+          lastPage={lastPage}
+          onPageChange={onPageChange}
+        />
+      </div>
     </div>
   );
 }

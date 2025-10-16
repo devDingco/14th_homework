@@ -14,9 +14,8 @@
 }
 
 .content_container {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 320px;
 }
 
 .footer {
@@ -32,27 +31,4 @@
   text-align: center;
   color: #666666;
   font-size: 14px;
-}
-
-@media (max-width: 1920px) {
-  .content_container {
-    padding: 0 160px;
-  }
-}
-
-@media (max-width: 1440px) {
-  .content_container {
-    padding: 0 80px;
-  }
-}
-
-@media (max-width: 768px) {
-  .content_container {
-    padding: 0 20px;
-  }
-
-  .footer_container {
-    padding: 16px;
-    font-size: 13px;
-  }
 }

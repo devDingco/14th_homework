@@ -10,74 +10,41 @@ export default function BoardListPage({ data, refetch, currentPage, totalCount, 
 
   return (
     <div className={styles.layout}>
-      <div className={styles.layout2}>
-        <div className={styles.body}>
-          <div className={styles.board}>
-            <div className={styles.boardList}>
-              <div className={styles.list}>
-                <div className={styles.name}>
-                  <span style={{ width: '64px', height: '20px' }}>번호</span>
-                  <span style={{ width: '848px', height: '20px' }}>제목</span>
-                  <span style={{ width: '100px', height: '20px' }}>작성자</span>
-                  <span style={{ width: '100px', height: '20px' }}>날짜</span>
-                </div>
-                <div className={styles.post}>
-                  {data?.fetchBoards.map((el: Board, index: number) => {
-                    return (
-                      <div style={{ width: '100%' }} key={index}>
-                        <div
-                          className={styles.post_info}
-                          onClick={() => router.push(`/boards/${el._id}`)}
+      <div className={styles.boardList}>
+        <div className={styles.list}>
+          <div className={styles.name}>
+            <span>번호</span>
+            <span>제목</span>
+            <span>작성자</span>
+            <span>날짜</span>
+          </div>
+          <div className={styles.post}>
+            {data?.fetchBoards.map((el: Board, index: number) => {
+              return (
+                <div
+                  key={index}
+                  className={styles.post_info}
+                  onClick={() => router.push(`/boards/${el._id}`)}
+                >
+                  <span>{totalCount - (currentPage - 1) * 10 - index}</span>
+                  <span>
+                    {el.title
+                      .replaceAll(keyword, `#$${keyword}#$`)
+                      .split('#$')
+                      .map((el, index) => (
+                        <span
+                          key={`${el}_${index}`}
+                          style={{ color: el === keyword ? 'red' : 'inherit' }}
                         >
-                          <span style={{ color: '#919191', width: '64px', height: '20px' }}>
-                            {/* 게시글 번호 계산 */}
-                            {totalCount - (currentPage - 1) * 10 - index}
-                          </span>
-                          <span style={{ color: '#1C1C1C', width: '848px', height: '20px' }}>
-                            {el.title
-                              .replaceAll(keyword, `#$${keyword}#$`)
-                              .split('#$')
-                              .map((el, index) => (
-                                <span
-                                  key={`${el}_${index}`}
-                                  style={{ color: el === keyword ? 'red' : 'black' }}
-                                >
-                                  {el}
-                                </span>
-                              ))}
-                          </span>
-                          <span style={{ color: '#333', width: '100px', height: '20px' }}>
-                            {el.writer}
-                          </span>
-                          <span style={{ color: '#919191', width: '100px', height: '20px' }}>
-                            123{/* 날짜 표시 영역 */}
-                          </span>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              onClickDelete(el._id || '');
-                            }}
-                            style={{
-                              width: '24px',
-                              height: '24px',
-                              background: 'none',
-                              border: '1px solid #ddd',
-                              padding: '4px 8px',
-                              borderRadius: '4px',
-                              fontSize: '12px',
-                              cursor: 'pointer',
-                              color: '#666',
-                            }}
-                          >
-                            삭제
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })}
+                          {el}
+                        </span>
+                      ))}
+                  </span>
+                  <span>{el.writer}</span>
+                  <span>2024.12.16</span>
                 </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>
