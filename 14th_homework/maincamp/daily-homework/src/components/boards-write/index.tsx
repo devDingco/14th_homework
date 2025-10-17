@@ -7,6 +7,7 @@ import { BoardVariables } from './types';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 import { Modal } from 'antd';
 import Image from 'next/image';
+import { Button, Input } from '@commons/ui';
 
 export default function BoardsWriteAdvanced(props: BoardVariables) {
   const {
@@ -40,38 +41,32 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
         <div className={styles['enroll-row-section']}>
           <div className={styles['enroll-row-flex']}>
             <div className={styles['flex-half']}>
-              <div className={styles['enroll-form-title']}>
-                <div>작성자 </div>
-                <div className={styles['enroll-required-indicator']}>*</div>
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="작성자 명을 입력해 주세요."
-                  className={styles['enroll-input']}
-                  {...register('writer', {
-                    required: props.isEdit ? false : '필수입력 사항 입니다.',
-                  })}
-                  disabled={props.isEdit}
-                />
-                {error.writer && <p className={styles.error}>{error.writer}</p>}
-              </div>
+              <Input
+                label="작성자"
+                type="text"
+                placeholder="작성자 명을 입력해 주세요."
+                size="medium"
+                required={!props.isEdit}
+                disabled={props.isEdit}
+                error={error.writer}
+                {...register('writer', {
+                  required: props.isEdit ? false : '필수입력 사항 입니다.',
+                })}
+              />
             </div>
             <div className={styles['flex-half']}>
-              <div className={styles['enroll-form-title']}>
-                <div>비밀번호</div>
-                <div className={styles['enroll-required-indicator']}> *</div>
-              </div>
-              <input
+              <Input
+                label="비밀번호"
                 type="password"
                 placeholder="비밀번호를 입력해 주세요."
-                className={styles['enroll-input']}
+                size="medium"
+                required={!props.isEdit}
+                disabled={props.isEdit}
+                error={error.password}
                 {...register('password', {
                   required: props.isEdit ? false : '필수입력 사항 입니다.',
                 })}
-                disabled={props.isEdit}
               />
-              {error.password && <p className={styles.error}>{error.password}</p>}
             </div>
           </div>
         </div>
@@ -79,19 +74,17 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
         <div className={styles['enroll-border']}></div>
 
         <div className={styles['enroll-row-section']}>
-          <div className={styles['enroll-form-title']}>
-            <div>제목</div>
-            <div className={styles['enroll-required-indicator']}> *</div>
-          </div>
-          <input
+          <Input
+            label="제목"
             type="text"
-            className={styles['enroll-input']}
             placeholder="제목을 입력해 주세요."
+            size="medium"
+            required
+            error={error.title}
             {...register('title', {
               required: '필수입력 사항 입니다.',
             })}
           />
-          {error.title && <p className={styles.error}>{error.title}</p>}
         </div>
         <div className={styles['enroll-border']}></div>
         <div className={styles['enroll-row-section']}>
@@ -142,15 +135,14 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
         {/* border */}
         <div className={styles['enroll-border']}></div>
         <div className={styles['enroll-row-section']}>
-          <div className={styles['enroll-form-title']}>
-            <div>유튜브 링크</div>
-          </div>
-          <input
-            className={styles['enroll-input']}
+          <Input
+            label="유튜브 링크"
+            type="text"
             placeholder="링크를 입력해 주세요."
+            size="medium"
+            error={error.youtubeUrl}
             {...register('youtubeUrl')}
           />
-          {error.youtubeUrl && <p className={styles.error}>{error.youtubeUrl}</p>}
         </div>
 
         {/* border */}
@@ -203,17 +195,17 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
         </div>
       </div>
       <div className={styles['enroll-button-container']}>
-        <button className={styles['enroll-cancel-button']}>취소</button>
-        {/* <Link href={'/boards/detail'}> */}
-        <button
-          className={styles['enroll-submit-button']}
+        <Button variant="secondary" size="large">
+          취소
+        </Button>
+        <Button
+          variant="primary"
+          size="large"
           onClick={props.isEdit ? onclickUpdate : onClickSubmit}
           disabled={!checkRegister}
-          aria-disabled={!checkRegister}
         >
           게시글 {props.isEdit ? '수정' : '등록'}하기
-        </button>
-        {/* </Link> */}
+        </Button>
       </div>
       {isModalOpen && (
         <Modal title="모달 제목" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
