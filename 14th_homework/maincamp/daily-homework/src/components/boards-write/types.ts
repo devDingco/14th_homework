@@ -17,4 +17,5 @@ export type Errors = {
   title?: string;
   contents?: string;
   images?: string;
+  youtubeUrl?: string;
 };

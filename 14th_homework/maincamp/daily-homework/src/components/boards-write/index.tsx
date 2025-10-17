@@ -7,18 +7,12 @@ import { BoardVariables } from './types';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 import { Modal } from 'antd';
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
 
 export default function BoardsWriteAdvanced(props: BoardVariables) {
   const {
-    formData,
-    fileRef,
     setFileRef,
     imageUrl,
-    onChangeInput,
-    onChangePassword,
-    onChangeAddressDetail,
-    onChangeYoutubeUrl,
+    register,
     onChangeFile,
     deleteImage,
     onClickImage,
@@ -33,8 +27,6 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
     handleComplete,
     zipcode,
     address,
-    addressDetail,
-    youtubeUrl,
     AlertModalComponent,
   } = useBoardsWriteAdvanced(props);
   // console.log('🚀 ~ checkRegister:', checkRegister());
@@ -57,10 +49,9 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
                   type="text"
                   placeholder="작성자 명을 입력해 주세요."
                   className={styles['enroll-input']}
-                  id="writer"
-                  onChange={onChangeInput}
-                  value={formData.writer}
-                  // defaultValue={props.data?.fetchBoard?.writer || ''}
+                  {...register('writer', {
+                    required: props.isEdit ? false : '필수입력 사항 입니다.',
+                  })}
                   disabled={props.isEdit}
                 />
                 {error.writer && <p className={styles.error}>{error.writer}</p>}
@@ -75,8 +66,9 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
                 type="password"
                 placeholder="비밀번호를 입력해 주세요."
                 className={styles['enroll-input']}
-                onChange={onChangePassword}
-                // defaultValue={'*************'}
+                {...register('password', {
+                  required: props.isEdit ? false : '필수입력 사항 입니다.',
+                })}
                 disabled={props.isEdit}
               />
               {error.password && <p className={styles.error}>{error.password}</p>}
@@ -95,10 +87,9 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
             type="text"
             className={styles['enroll-input']}
             placeholder="제목을 입력해 주세요."
-            id="title"
-            onChange={onChangeInput}
-            value={formData.title}
-            // defaultValue={props.data?.fetchBoard?.title || ''}
+            {...register('title', {
+              required: '필수입력 사항 입니다.',
+            })}
           />
           {error.title && <p className={styles.error}>{error.title}</p>}
         </div>
@@ -108,14 +99,12 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
             <div>내용</div>
             <div className={styles['enroll-required-indicator']}> *</div>
           </div>
-          <input
-            type="text"
+          <textarea
             className={styles.contents}
             placeholder="내용을 입력해 주세요."
-            id="contents"
-            onChange={onChangeInput}
-            value={formData.contents}
-            // defaultValue={props.data?.fetchBoard?.contents || ''}
+            {...register('contents', {
+              required: '필수입력 사항 입니다.',
+            })}
           />
           {error.contents && <p className={styles.error}>{error.contents}</p>}
         </div>
@@ -147,8 +136,7 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
             placeholder="상세주소"
             className={styles['enroll-input']}
             type="text"
-            value={addressDetail}
-            onChange={onChangeAddressDetail}
+            {...register('addressDetail')}
           />
         </div>
         {/* border */}
@@ -160,9 +148,9 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
           <input
             className={styles['enroll-input']}
             placeholder="링크를 입력해 주세요."
-            value={youtubeUrl}
-            onChange={onChangeYoutubeUrl}
+            {...register('youtubeUrl')}
           />
+          {error.youtubeUrl && <p className={styles.error}>{error.youtubeUrl}</p>}
         </div>
 
         {/* border */}

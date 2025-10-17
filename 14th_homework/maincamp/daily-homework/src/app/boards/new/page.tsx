@@ -1,6 +1,6 @@
 'use client';
 
-import { useLoginCheck } from '@/commons/hooks/08-05-use-login-check';
+import { useLoginCheck } from '@/commons/hooks/use-login-check';
 import BoardsWriteAdvanced from '@/components/boards-write';
 // import { useRouter } from 'next/navigation';
 // import { useEffect, useRef } from 'react';
