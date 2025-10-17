@@ -2,21 +2,23 @@
 
 import { useRouter } from 'next/navigation';
 import { useAlertModal } from '@/commons/components/modal';
+import { useEffect, useRef, ComponentType } from 'react';
 
-export const useLoginCheck = () => {
-  const router = useRouter();
-  const { showAlert, AlertModalComponent } = useAlertModal();
+export const useLoginCheck =
+  <P extends object>(Component: ComponentType<P>) =>
+  (props: P) => {
+    const router = useRouter();
+    const hasChecked = useRef(false);
 
-  const loginCheck = () => {
-    // 로그인 검증
+    useEffect(() => {
+      if (hasChecked.current) return;
+      hasChecked.current = true;
 
-    // 로그인 검증 실패 시 알림
-    showAlert('로그인을 먼저 해 주세요!');
-    router.push('로그인페이지로 이동');
+      if (localStorage.getItem('accessToken') === null) {
+        alert('로그인 후 이용 가능합니다');
+        router.push('/');
+      }
+    }, [router]);
+
+    return <Component {...props} />;
   };
-
-  return {
-    loginCheck,
-    AlertModalComponent,
-  };
-};
