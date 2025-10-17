@@ -187,7 +187,10 @@ export default function Detail(props: D_Variables) {
       </div>
 
       <div className={styles['D_button']}>
-        <button className={styles.button}>
+        <button 
+        className={styles.button}
+        onClick={() => router.push(`/boards`)}
+        >
           <List style={{ fontSize: 24 }} />
           <p>목록으로</p>
         </button>
