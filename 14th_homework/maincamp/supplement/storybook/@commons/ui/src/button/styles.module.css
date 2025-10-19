@@ -1,0 +1,140 @@
+/* 기본 버튼 스타일 */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.button:focus {
+  outline: 2px solid #4096ff;
+  outline-offset: 2px;
+}
+
+.button:disabled,
+.button[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* 크기 변형 */
+.small {
+  padding: 6px 12px;
+  font-size: 14px;
+  height: 32px;
+}
+
+.medium {
+  padding: 10px 20px;
+  font-size: 16px;
+  height: 44px;
+}
+
+.large {
+  padding: 12px 16px;
+  font-size: 16px;
+  height: 48px;
+}
+
+/* 색상 변형 */
+.primary {
+  background-color: #2974e5;
+  color: #fff;
+  border: none;
+}
+
+.primary:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: #1e5bb8;
+}
+
+.primary:active:not(:disabled):not([aria-disabled='true']) {
+  background-color: #164a94;
+}
+
+.secondary {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.secondary:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: #f5f5f5;
+  border-color: #999;
+}
+
+.secondary:active:not(:disabled):not([aria-disabled='true']) {
+  background-color: #e0e0e0;
+}
+
+.danger {
+  background-color: #ff4d4f;
+  color: #fff;
+}
+
+.danger:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: #ff7875;
+}
+
+.danger:active:not(:disabled):not([aria-disabled='true']) {
+  background-color: #d9363e;
+}
+
+.ghost {
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #d9d9d9;
+}
+
+.ghost:hover:not(:disabled):not([aria-disabled='true']) {
+  color: #4096ff;
+  border-color: #4096ff;
+}
+
+.ghost:active:not(:disabled):not([aria-disabled='true']) {
+  color: #0958d9;
+  border-color: #0958d9;
+}
+
+.dark {
+  background-color: #000;
+  color: #fff;
+  border: none;
+}
+
+.dark:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: #333;
+}
+
+.dark:active:not(:disabled):not([aria-disabled='true']) {
+  background-color: #000;
+}
+
+/* 전체 너비 */
+.fullWidth {
+  width: 100%;
+}
+
+/* 로딩 상태 */
+.loading {
+  pointer-events: none;
+}
+
+.loadingSpinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
