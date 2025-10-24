@@ -1,0 +1,45 @@
+.title {
+  min-width: 680px;
+  align-self: stretch;
+  color: #000;
+
+  /* b_28_36 */
+  font-family: Pretendard;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px; /* 128.571% */
+  margin-top: 40px;
+  margin-bottom: 24px;
+}
+
+.top_of_list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; /* 세로 중앙 정렬 */
+  margin-bottom: 24px;
+  width: 100%;
+}
+.date_and_search {
+  display: flex;
+  gap: 12px; /* date picker와 searchbar 사이 간격 */
+  align-items: center;
+}
+.datePicker {
+  width: 289px;
+  height: 48px;
+  border-radius: 8px;
+  background: var(--gray-50, #f2f2f2);
+}
+.datePicker .ant-picker-input > input {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.boards {
+  height: 696px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
+}

@@ -1,0 +1,18 @@
+.pagenations {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  /* font-weight: 500; */
+  line-height: 24px;
+}

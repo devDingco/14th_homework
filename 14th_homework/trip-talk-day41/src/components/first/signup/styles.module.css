@@ -1,0 +1,115 @@
+.all {
+  display: flex;
+  width: 100vw;
+  height: 1080px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  padding-top: 244px;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.signup_title {
+  color: #000;
+  text-align: center;
+
+  /* sb_18_24 */
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+.signup_guide {
+  color: var(--gray-800, #333);
+  text-align: center;
+
+  /* me_14_20 */
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  margin-bottom: 16px;
+}
+.inputs {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.email_alert {
+  display: none;
+}
+.password_alert {
+  display: none;
+}
+.show {
+  display: block;
+  color: var(--red, #f66a6a);
+  /* r_12_20 */
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 166.667% */
+  margin-top: 8px;
+}
+.email_label,
+.name_label,
+.password_label,
+.password_confirm_label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+  margin-top: 12px;
+}
+.email_input,
+.name_input,
+.password_input,
+.password_confirm_input {
+  width: 320px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  padding: 8px 16px;
+  /* margin-bottom: 12px; */
+}
+
+.email_input,
+.name_input,
+.password_input,
+.password_comfirm_input::placeholder {
+  color: var(--Gray-Gray-400, #ababab);
+
+  /* r_14_20 */
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+.button {
+  width: 320px;
+  height: 48px;
+  border-radius: 8px;
+  background: #2974e5;
+  color: #fff;
+  text-align: center;
+
+  /* sb_18_24 */
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 133.333% */
+  margin-top: 24px;
+}

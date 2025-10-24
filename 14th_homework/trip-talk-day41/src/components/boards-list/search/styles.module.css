@@ -1,0 +1,9 @@
+.searchBar {
+  width: 640px;
+  height: 48px;
+  border-radius: 8px;
+  background: var(--gray-50, #f2f2f2);
+  display: flex;
+  align-items: center; /* 내부 input 세로 중앙 */
+  padding: 0 12px; /* 좌우 여백만 */
+}
