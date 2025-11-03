@@ -1,20 +1,18 @@
-// 게시글상세 페이지
-
 'use client';
-import CommentWrite from '@/components/boards-detail/comment-write';
-import styles from './styles.module.css';
-import Detail from '@/components/boards-detail/detail';
-import { useParams } from 'next/navigation';
-import CommentList from '@/components/boards-detail/comment-list';
 
-export default function BoardComponentDetailPage() {
+import Detail from '@/components/boards-detail/detail';
+import CommentList from '@/components/boards-detail/comment-list';
+import CommentWrite from '@/components/boards-detail/comment-write';
+import { useParams } from 'next/navigation';
+
+export default function BoardDetailPage() {
   const params = useParams();
-  const boardId = params?.boardId as string;
+  const boardId = String(params.boardId);
 
   return (
     <div>
-      <Detail isEdit={true} ID={boardId} />
-      <CommentWrite data={{ boardId }} />
+      <Detail isEdit={false} ID={boardId} />
+      <CommentWrite />
       <CommentList />
     </div>
   );
