@@ -1,0 +1,3 @@
+packages:
+  - 'daily-homework'
+  - 'supplement/monorepo/@commons/ui'
