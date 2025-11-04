@@ -1,0 +1,22 @@
+.inputArea__registerButton {
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  cursor: pointer;
+}
+
+.inputArea__registerButton:disabled {
+  color: #e4e4e4;
+  cursor: not-allowed;
+}

@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 export default function NavigationComponent() {
   const router = useRouter();
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
-  const [hasToken, setHasToken] = useState();
+  const [hasToken, setHasToken] = useState<boolean>(false);
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");

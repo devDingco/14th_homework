@@ -54,7 +54,7 @@ export default function Home() {
         router.push("/boards");
       }
     } catch (error) {
-      alert(error.message);
+      alert((error as Error).message);
     }
   };
   return (

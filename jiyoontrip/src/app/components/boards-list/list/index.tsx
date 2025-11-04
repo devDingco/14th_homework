@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import Image from "next/image";
 import styles from "./styles.module.css";
@@ -27,7 +28,7 @@ export default function BoardsPageComponent({
         <span className={styles.boardHeader__delete}></span>
       </div>
       <div className={styles.boardList}>
-        {data?.fetchBoards.map((el, index: number) => {
+        {data?.fetchBoards.map((el: any, index: number) => {
           return (
             <div
               id={el._id}
@@ -40,7 +41,7 @@ export default function BoardsPageComponent({
                 {el.title
                   .replaceAll(keyword, `#$%${keyword}#$%`)
                   .split("#$%")
-                  .map((el, index) => (
+                  .map((el: any, index: any) => (
                     <span
                       key={`${el}_${index}`}
                       style={{ color: el === keyword ? "red" : "black" }}

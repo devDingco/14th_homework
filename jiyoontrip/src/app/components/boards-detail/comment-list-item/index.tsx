@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { ChangeEvent, useState } from "react";
 import styles from "./styles.module.css";
@@ -9,7 +10,7 @@ import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
 const grayStar = "/images/graystar.webp";
 const yellowStar = "/images/yellowstar.webp";
 
-export default function CommentItem({ el }) {
+export default function CommentItem({ el }: any) {
   const [isCommentEdit, setIsCommentEdit] = useState(false);
   const [isActive, setIsActive] = useState(false);
   // const [author, setAuthor] = useState("");

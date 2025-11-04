@@ -19,6 +19,7 @@ export default function MyApisList() {
   //     checkConnection();
   //   }, []);
   const router = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [rows, setRows] = useState<any[]>([]);
 
   const fetchRows = async () => {

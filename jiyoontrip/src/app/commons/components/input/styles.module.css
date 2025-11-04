@@ -1,0 +1,13 @@
+.inputArea__input {
+  width: 100%;
+  display: flex;
+  padding: 0.75rem 1rem;
+  align-items: flex-start;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid var(--Gray-Gray-200, #d4d3d3);
+  background: var(--Gray-W, #fff);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+}

@@ -166,21 +166,6 @@
   text-align: center;
 }
 
-.inputArea__registerButton {
-  border-radius: 0.5rem;
-  display: flex;
-  height: 3rem;
-  padding: 0.75rem 1rem;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 1.5rem;
-  color: #fff;
-  text-align: center;
-  border: none;
-}
 
 /* ImageUpload */
 .imageUploadArea {

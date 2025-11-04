@@ -6,7 +6,6 @@ import { IBoardWriteProps } from "./types";
 import { CloseCircleFilled } from "@ant-design/icons";
 import MyButton from "@/app/commons/components/button";
 import MyInput from "@/app/commons/components/input";
-import { FormProvider } from "react-hook-form";
 export default function BoardWrite(props: IBoardWriteProps) {
   const { isEdit } = props;
   const {
@@ -46,7 +45,13 @@ export default function BoardWrite(props: IBoardWriteProps) {
                   </label>
                   <span className={styles.inputArea__enrollLabel__star}>*</span>
                 </div>
-                <MyInput />
+                <MyInput
+                  id="author-input-1"
+                  register={register}
+                  name="writer"
+                  placeholder="작성자 명을 입력해 주세요."
+                  isEdit={isEdit}
+                />
                 <div className={styles.inputError}>
                   {formState.errors.writer?.message}
                 </div>
@@ -61,17 +66,14 @@ export default function BoardWrite(props: IBoardWriteProps) {
                   </label>
                   <span className={styles.inputArea__enrollLabel__star}>*</span>
                 </div>
-                <input
+                <MyInput
                   id="author-input-2"
-                  className={styles.inputArea__input}
                   type="password"
+                  register={register}
+                  name="password"
                   placeholder="비밀번호를 입력해 주세요."
                   defaultValue={isEdit === true ? "********" : ""}
-                  {...register("password")}
-                  disabled={isEdit === true ? true : false}
-                  style={{
-                    backgroundColor: isEdit === true ? "#f2f2f2" : "#fff",
-                  }}
+                  isEdit={isEdit}
                 />
                 <div className={styles.inputError}>
                   {formState.errors.password?.message}
@@ -89,18 +91,13 @@ export default function BoardWrite(props: IBoardWriteProps) {
                 </label>
                 <span className={styles.inputArea__enrollLabel__star}>*</span>
               </div>
-              <input
+              <MyInput
                 id="author-input-3"
-                className={styles.inputArea__input}
-                type="text"
+                register={register}
+                name="title"
                 placeholder="제목을 입력해 주세요."
-                {...register("title")}
               />
-              <div className={styles.inputError}>
-                {
-                  formState.errors.title?.message // defaultValue={data?.fetchBoard.writer ?? ""}
-                }
-              </div>
+              <div className={styles.inputError}>{formState.errors.title?.message}</div>
             </div>
             <hr className={styles.line} />
             <div className={styles.inputArea}>
@@ -132,12 +129,12 @@ export default function BoardWrite(props: IBoardWriteProps) {
                   주소
                 </label>
                 <div className={styles.addressArea__enrollInputButton}>
-                  <input
+                  <MyInput
                     id="author-input-5"
                     className={styles.inputArea__addressInput}
-                    type="text"
+                    register={register}
+                    name="boardAddress.zipcode"
                     placeholder="01234"
-                    {...register("boardAddress.zipcode")}
                   />
                   <button
                     className={styles.inputArea__button}
@@ -148,17 +145,15 @@ export default function BoardWrite(props: IBoardWriteProps) {
                   </button>
                 </div>
               </div>
-              <input
-                className={styles.inputArea__input}
-                type="text"
+              <MyInput
+                register={register}
+                name="boardAddress.address"
                 placeholder="주소를 입력해 주세요"
-                {...register("boardAddress.address")}
               />
-              <input
-                className={styles.inputArea__input}
-                type="text"
+              <MyInput
+                register={register}
+                name="boardAddress.addressDetail"
                 placeholder="상세주소"
-                {...register("boardAddress.addressDetail")}
               />
             </div>
             <hr className={styles.line} />
@@ -171,12 +166,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
                   유튜브 링크
                 </label>
               </div>
-              <input
+              <MyInput
                 id="author-input-6"
-                className={styles.inputArea__input}
-                type="text"
+                register={register}
+                name="youtubeUrl"
                 placeholder="링크를 입력해 주세요."
-                {...register("youtubeUrl")}
               />
               <div className={styles.inputError}></div>
             </div>
@@ -295,7 +289,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
                     ? "#2974E5"
                     : "#C7C7C7",
                 }}
-                fromState={formState}
+                formState={formState}
               >
                 {isEdit ? "수정" : "등록"}하기
               </MyButton>

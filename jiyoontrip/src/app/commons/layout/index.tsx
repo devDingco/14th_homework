@@ -11,7 +11,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const isHiddenBanner =
     HIDDEN_HEADERS.includes(pathname) ||
     pathname.startsWith("/boards/") ||
-    pathname.startsWith("/auth/");
+    pathname.startsWith("/auth/") ||
+    pathname.startsWith("/mypage");
   const isHiddenNav = pathname.startsWith("/auth/");
   return (
     <>

@@ -1,9 +1,10 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { supabase } from "@/app/commons/libraries/supabaseClient";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-export default function MyApisWrite({ isEdit }) {
+export default function MyApisWrite({ isEdit }: any) {
   const router = useRouter();
   const params = useParams();
   const postId = params.id;

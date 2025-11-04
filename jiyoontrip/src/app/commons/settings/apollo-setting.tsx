@@ -12,6 +12,7 @@ export default function ApolloSetting(props: IApolloSetting) {
   useEffect(() => {
     const result = localStorage.getItem("accessToken");
     setAccessToken(result ?? "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const uploadLink = createUploadLink({

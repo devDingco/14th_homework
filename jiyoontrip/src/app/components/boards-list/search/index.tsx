@@ -1,18 +1,17 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
 import styles from "./styles.module.css";
-import { DatePicker, Space } from "antd";
+import { DatePicker } from "antd";
 const { RangePicker } = DatePicker;
 
-export default function SearchBar({ onChangeKeyword, onClickSubmit }) {
+export default function SearchBar({ onChangeKeyword, onClickSubmit }: any) {
   return (
     <>
       <div className={styles.page}>
         <div className={styles.seachBarEnroll}>
           <div className={styles.seachBarEnroll__left}>
-            <Space direction="vertical" size={12}>
-              <RangePicker className={styles.rangePicker} />
-            </Space>
+            <RangePicker className={styles.rangePicker} />
             <div className={styles.seachBar}>
               <Image
                 src="/icons/outline/search.svg"

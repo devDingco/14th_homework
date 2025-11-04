@@ -1,11 +1,12 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { supabase } from "@/app/commons/libraries/supabaseClient";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function MyApisDetail() {
-  const [row, setRow] = useState(null);
+  const [row, setRow] = useState<any>(null);
   const router = useRouter();
   const params = useParams();
   useEffect(() => {
