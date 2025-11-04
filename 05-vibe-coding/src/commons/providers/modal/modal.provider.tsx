@@ -2,11 +2,16 @@
 
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
+import styles from "./modal.module.css";
 
 interface ModalContextType {
-  openModal: (content: ReactNode) => void;
+  openModal: (content: ReactNode, options?: ModalOptions) => void;
   closeModal: () => void;
   isOpen: boolean;
+}
+
+interface ModalOptions {
+  onClose?: () => void;
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
@@ -23,53 +28,74 @@ interface ModalProviderProps {
   children: ReactNode;
 }
 
+interface ModalItem {
+  id: string;
+  content: ReactNode;
+  onClose?: () => void;
+}
+
 export default function ModalProvider({ children }: ModalProviderProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<ReactNode>(null);
+  const [modalStack, setModalStack] = useState<ModalItem[]>([]);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  const openModal = (content: ReactNode) => {
-    setModalContent(content);
-    setIsOpen(true);
+  useEffect(() => {
+    if (modalStack.length > 0) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [modalStack.length]);
+
+  const openModal = (content: ReactNode, options?: ModalOptions) => {
+    const newModal: ModalItem = {
+      id: `modal-${Date.now()}-${Math.random()}`,
+      content,
+      onClose: options?.onClose,
+    };
+    setModalStack((prev) => [...prev, newModal]);
   };
 
   const closeModal = () => {
-    setIsOpen(false);
-    setModalContent(null);
+    setModalStack((prev) => prev.slice(0, -1));
   };
 
   const value: ModalContextType = {
     openModal,
     closeModal,
-    isOpen,
+    isOpen: modalStack.length > 0,
   };
 
   return (
     <ModalContext.Provider value={value}>
       {children}
       {isMounted &&
-        isOpen &&
-        createPortal(
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center"
-            onClick={closeModal}
-          >
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black bg-opacity-50" />
-            
-            {/* Modal Wrapper - max-w-md, w-full 제거됨 */}
+        modalStack.map((modal, index) =>
+          createPortal(
             <div
-              className="relative z-10 bg-white rounded-lg shadow-lg p-6"
-              onClick={(e) => e.stopPropagation()}
+              key={modal.id}
+              className={styles.modalOverlay}
+              style={{ zIndex: 50 + index }}
+              onClick={modal.onClose || closeModal}
+              data-testid="modal-overlay"
             >
-              {modalContent}
-            </div>
-          </div>,
-          document.body
+              <div className={styles.overlay} />
+              <div
+                className={styles.modalWrapper}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {modal.content}
+              </div>
+            </div>,
+            document.body
+          )
         )}
     </ModalContext.Provider>
   );
