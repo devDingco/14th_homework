@@ -23,6 +23,7 @@ export default function LayoutNavigation() {
             트립토크
           </div>
           <div>숙박권 구매</div>
+          <div>마이트립</div>
           <div className={pathname.startsWith("/mypage") ? styles.selected : ""} onClick={onClickMypage}>
             마이 페이지
           </div>

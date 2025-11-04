@@ -3,10 +3,19 @@
 import { withAuth } from "@/commons/hocs/withAuth";
 import { Modal } from "antd";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import MypageUser from "@/components/mypage/user";
+import MypageProduct from "@/components/mypage/product";
+import MypagePoint from "@/components/mypage/point";
+import MypagePassword from "@/components/mypage/password";
+import Sectiontitle from "@/components/ui/section/Sectiontitle";
+import styles from "./styles.module.css";
+
+type TabType = "product" | "point" | "password";
 
 export default withAuth(function MyPagePage({ isAuth }: { isAuth?: boolean }) {
   const router = useRouter();
+  const [activeTab, setActiveTab] = useState<TabType>("product");
 
   useEffect(() => {
     if (isAuth === false) {
@@ -21,5 +30,13 @@ export default withAuth(function MyPagePage({ isAuth }: { isAuth?: boolean }) {
 
   if (isAuth === false) return null;
 
-  return <h1>마이페이지 입니다... 구현 예정 ... </h1>;
+  return (
+    <div className={styles.mypage}>
+      <Sectiontitle text="마이 페이지"></Sectiontitle>
+      <MypageUser activeTab={activeTab} onTabChange={setActiveTab} />
+      {activeTab === "product" && <MypageProduct />}
+      {activeTab === "point" && <MypagePoint />}
+      {activeTab === "password" && <MypagePassword />}
+    </div>
+  );
 });
