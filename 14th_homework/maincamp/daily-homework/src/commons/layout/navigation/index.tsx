@@ -14,7 +14,7 @@ export default function Navigation(props: NavigationProps) {
   const navigationItems = [
     { href: '/boards', label: '트립토크', exact: false },
     { href: '/openapis', label: '🐱 고양이 갤러리', exact: false },
-    { href: '/accommodation', label: '숙박권 구매', exact: false },
+    { href: '/accommodation-main', label: '숙박권 구매', exact: false },
     { href: '/mypage', label: '마이 페이지', exact: false },
   ];
 
@@ -62,7 +62,7 @@ export default function Navigation(props: NavigationProps) {
             {user ? (
               <div className={styles.profile_container} onClick={handleProfileClick}>
                 <Image
-                  src="/profile.png"
+                  src="/profile.svg"
                   alt="프로필"
                   width={40}
                   height={40}
@@ -70,7 +70,7 @@ export default function Navigation(props: NavigationProps) {
                 />
                 <span className={styles.profile_name}>{user.name}</span>
                 <Image
-                  src="/down_arrow.png"
+                  src="/down_arrow.svg"
                   alt="드롭다운"
                   width={24}
                   height={24}

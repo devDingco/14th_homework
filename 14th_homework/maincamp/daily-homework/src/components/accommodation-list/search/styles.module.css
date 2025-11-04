@@ -1,0 +1,207 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px;
+  color: #000000;
+}
+
+.tabs {
+  display: flex;
+  gap: 16px;
+  background: #ffffff;
+  padding: 0;
+  border-radius: 8px;
+  width: fit-content;
+}
+
+.tab {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #ffffff;
+  color: #525252;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tabActive {
+  background: #000000;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.searchBar {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+}
+
+.searchLeft {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+}
+
+.datePicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #f2f2f2;
+  border-radius: 8px;
+  width: 289px;
+  height: 48px;
+  cursor: pointer;
+}
+
+.datePicker svg {
+  width: 24px;
+  height: 24px;
+  color: #777777;
+  flex-shrink: 0;
+}
+
+.dateText {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #777777;
+}
+
+.searchInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #f2f2f2;
+  border-radius: 8px;
+  flex: 1;
+  height: 48px;
+}
+
+.searchInputWrapper svg {
+  width: 24px;
+  height: 24px;
+  color: #777777;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000000;
+}
+
+.searchInput::placeholder {
+  color: #919191;
+}
+
+.searchRight {
+  display: flex;
+  gap: 16px;
+}
+
+.searchButton {
+  padding: 12px 16px;
+  background: #000000;
+  border-radius: 8px;
+  border: none;
+  color: #ffffff;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: pointer;
+  width: 64px;
+  height: 48px;
+  transition: background-color 0.2s ease;
+}
+
+.searchButton:hover {
+  background: #333333;
+}
+
+.sellButton {
+  padding: 12px 16px;
+  background: #2974e5;
+  border-radius: 8px;
+  border: none;
+  color: #ffffff;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: pointer;
+  width: 178px;
+  height: 48px;
+  transition: background-color 0.2s ease;
+}
+
+.sellButton:hover {
+  background: #1e5bb8;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 16px;
+  flex-wrap: wrap;
+}
+
+.filterItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  width: 100px;
+}
+
+.filterItem:hover {
+  transform: translateY(-2px);
+}
+
+.filterIcon {
+  font-size: 40px;
+  line-height: 40px;
+}
+
+.filterLabel {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #333333;
+}

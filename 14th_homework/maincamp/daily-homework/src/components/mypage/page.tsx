@@ -14,7 +14,7 @@ export default function MypageComponent() {
           {/* 최상단 프로필 */}
           <div className={styles.profileCard}>
             <div className={styles.profileImage}>
-              <img src="/profile.png" alt="프로필" />
+              <img src="/profile.svg" alt="프로필" />
             </div>
             <div className={styles.profileInfo}>
               <h2 className={styles.profileName}>홍길동</h2>

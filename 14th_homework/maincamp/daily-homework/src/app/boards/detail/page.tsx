@@ -92,22 +92,22 @@ const Detail = () => {
 
         <div className={styles.Like}>
           <div className={styles['bad-area']}>
-            <img src="/bad.png" width="24" height="24" />
+            <img src="/bad.svg" width="24" height="24" />
             <div>12</div>
           </div>
           <div className={styles['good-area']}>
-            <img src="/good.png" width="24" height="24" />
+            <img src="/good.svg" width="24" height="24" />
             <div>24</div>
           </div>
         </div>
 
         <div className={styles['D_button']}>
           <button className={styles.button}>
-            <img src="/menu.png" width="24" height="24" />
+            <img src="/menu.svg" width="24" height="24" />
             <p>목록으로</p>
           </button>
           <button className={styles.button}>
-            <img src="/edit.png" />
+            <img src="/edit.svg" />
             수정하기
           </button>
         </div>
