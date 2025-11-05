@@ -1,0 +1,445 @@
+.container {
+  display: flex;
+  width: 1280px;
+  max-width: 100%;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  padding: 40px 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.title {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.formContainer {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 40px;
+  align-self: stretch;
+  width: 100%;
+}
+
+.formSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.labelRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
+}
+
+.label {
+  color: #333;
+  font-family: 'Pretendard Variable';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.required {
+  color: #f66a6a;
+  font-family: 'Pretendard Variable';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: #e4e4e4;
+}
+
+/* 에디터 스타일 */
+.editorContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  background: #fff;
+  overflow: hidden;
+}
+
+.editorToolbar {
+  display: flex;
+  width: 100%;
+  height: 56px;
+  padding: 16px;
+  align-items: center;
+  justify-content: flex-start;
+  background: #fff;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.toolbarStandard {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  width: 100%;
+  justify-content: flex-start;
+  gap: 48px;
+}
+
+.toolbarGroup {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 168px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.toolbarGroupMore {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 120px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* More 그룹의 마지막 아이콘은 48px 간격이 적용되지만, 
+   그룹 width가 120px이므로 자동으로 오른쪽 정렬됨 */
+
+.toolbarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  flex-shrink: 0;
+}
+
+.toolbarButton:hover {
+  opacity: 0.7;
+}
+
+.toolbarButton:active {
+  opacity: 0.5;
+}
+
+.toolbarButtonDisabled {
+  opacity: 0.4;
+}
+
+.toolbarButtonDisabled:hover {
+  opacity: 0.4;
+}
+
+.toolbarButton img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.editorDivider {
+  width: 100%;
+  height: 1px;
+  background: #f2f2f2;
+}
+
+.editorContent {
+  width: 100%;
+  min-height: 400px;
+  padding: 16px;
+  border: none;
+  outline: none;
+  font-family: 'Pretendard Variable';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000;
+  resize: vertical;
+}
+
+.editorContent::placeholder {
+  color: #ababab;
+}
+
+/* 위치 섹션 (주소 + 지도) */
+.locationSection {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+}
+
+.addressSection {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  flex: 1;
+  max-width: 396px;
+}
+
+.addressInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.zipcodeRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.zipcodeInput {
+  padding: 12px 16px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  background: #fff;
+  width: 82px;
+  height: 48px;
+  font-family: 'Pretendard Variable';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000;
+}
+
+.addressInput {
+  width: 100%;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  background: #fff;
+  height: 48px;
+  font-family: 'Pretendard Variable';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000;
+  margin-top: 8px;
+}
+
+.addressInput:first-of-type {
+  margin-top: 0;
+}
+
+.addressInput::placeholder {
+  color: #ababab;
+}
+
+.addressInput[readonly] {
+  background: #fff;
+}
+
+/* 위도/경도 입력 스타일 */
+.coordinatesRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+}
+
+.coordinateInput {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  max-width: 396px;
+}
+
+.coordinateInputField {
+  width: 100%;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid #d4d3d3;
+  background: #fff;
+  height: 48px;
+  font-family: 'Pretendard Variable';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000;
+}
+
+.coordinateInputField.disabled {
+  background: #e4e4e4;
+  color: #919191;
+  cursor: not-allowed;
+}
+
+.coordinateInputField::placeholder {
+  color: #ababab;
+}
+
+.coordinateInputField:disabled::placeholder {
+  color: #919191;
+}
+
+/* 지도 스타일 */
+.mapSectionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  max-width: 844px;
+}
+
+.mapContainer {
+  width: 100%;
+  height: 312px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #e4e4e4;
+  background: #d9d9d9;
+  position: relative;
+}
+
+.mapPlaceholder {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background: #e4e4e4;
+  color: #777;
+  font-family: 'Pretendard Variable';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+/* 이미지 업로드 스타일 */
+.imageUploadSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.imageUploadButton {
+  display: flex;
+  width: 160px;
+  height: 160px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: #f2f2f2;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.imageUploadPlaceholder {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #777;
+}
+
+.imageUploadPlaceholder svg {
+  color: #777;
+}
+
+.imageUploadPlaceholder p {
+  margin: 0;
+  font-family: 'Pretendard Variable';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: #777;
+}
+
+.imagePreview {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.deleteImageButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-family: 'Pretendard Variable';
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.deleteImageButton:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* 버튼 컨테이너 */
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+  padding-top: 40px;
+}
+
+/* 에러 텍스트 */
+.errorText {
+  color: #f66a6a;
+  font-family: 'Pretendard Variable';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+  margin-top: 4px;
+}

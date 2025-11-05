@@ -109,22 +109,22 @@ const Detail = () => {
 
         <div className="Like">
           <div className="bad-area">
-            <img src="/bad.png" width="24" height="24" />
+            <img src="/bad.svg" width="24" height="24" />
             <div>12</div>
           </div>
           <div className="good-area">
-            <img src="/good.png" width="24" height="24" />
+            <img src="/good.svg" width="24" height="24" />
             <div>24</div>
           </div>
         </div>
 
         <div className="D_button">
           <button className="button">
-            <img src="/menu.png" width="24" height="24" />
+            <img src="/menu.svg" width="24" height="24" />
             <p>목록으로</p>
           </button>
           <button className="button">
-            <img src="/edit.png" />
+            <img src="/edit.svg" />
             수정하기
           </button>
         </div>

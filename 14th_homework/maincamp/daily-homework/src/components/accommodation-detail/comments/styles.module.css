@@ -1,0 +1,339 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #000000;
+}
+
+.headerTitle svg {
+  width: 24px;
+  height: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.inputContainer {
+  position: relative;
+  width: 100%;
+  border: 1px solid #d4d3d3;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 144px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000000;
+  resize: none;
+  outline: none;
+}
+
+.textarea::placeholder {
+  color: #ababab;
+}
+
+.count {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #ababab;
+}
+
+.submitButton {
+  align-self: flex-end;
+  width: 99px;
+  height: 48px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+  background-color: #333333;
+}
+
+.commentsList {
+  width: 100%;
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.emptyMessage {
+  text-align: center;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #777777;
+  margin: 0;
+  padding: 20px 0;
+}
+
+.commentWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e4e4e4;
+  margin: 0;
+}
+
+.commentItem {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 40px 0;
+  width: 100%;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profileImage {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.profilePlaceholder {
+  width: 100%;
+  height: 100%;
+  background-color: #e4e4e4;
+  border-radius: 50%;
+}
+
+.profileImg {
+  object-fit: cover;
+}
+
+.authorName {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 20px;
+  color: #5f5f5f;
+}
+
+.commentActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.editButton,
+.deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #5f5f5f;
+  padding: 0;
+}
+
+.editButton:hover,
+.deleteButton:hover {
+  opacity: 0.7;
+}
+
+.commentContent {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000000;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.commentFooter {
+  display: flex;
+  align-items: center;
+}
+
+.commentDate {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #818181;
+}
+
+.replyButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 8px;
+  width: fit-content;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 20px;
+  color: #333333;
+}
+
+.replyButton img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.replyButton svg {
+  width: 24px;
+  height: 24px;
+  stroke: #333333;
+}
+
+.replyButton:hover {
+  opacity: 0.7;
+}
+
+.replyForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+  padding-left: 56px;
+}
+
+.replyButtons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.cancelButton {
+  width: 64px;
+  height: 48px;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cancelButton:hover {
+  background-color: #f5f5f5;
+}
+
+.replySubmitButton {
+  width: 99px;
+  height: 48px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.replySubmitButton:hover {
+  background-color: #333333;
+}
+
+.replyItem {
+  display: flex;
+  gap: 16px;
+  padding-left: 24px;
+}
+
+.replyIcon {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
+  flex-shrink: 0;
+}
+
+.replyIcon svg {
+  width: 24px;
+  height: 24px;
+  color: #5f5f5f;
+}
+
+.replyContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 16px;
+}

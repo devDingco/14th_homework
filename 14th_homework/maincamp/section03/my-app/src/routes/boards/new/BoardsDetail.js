@@ -93,11 +93,11 @@ const Detail = () => {
             
             <div className='D_button'>
                 <button className="button">
-                    <img src='/menu.png' width="24" height="24" />
+                    <img src='/menu.svg' width="24" height="24" />
                     <p>목록으로</p>
                 </button>
                 <button className="button">
-                    <img src='/edit.png'/>
+                    <img src='/edit.svg'/>
                     수정하기</button>
             </div>
             </div>
