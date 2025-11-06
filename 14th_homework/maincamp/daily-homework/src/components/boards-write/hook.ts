@@ -166,7 +166,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
   });
 
   // 게시글수정API요청함수
-  const [boardReviseApiRequire] = useMutation(UPDATE_BOARD);
+  const [boardUpdateApiRequire] = useMutation(UPDATE_BOARD);
 
   const onclickUpdate = handleSubmit(async (data) => {
     // 수정 모드에서 호출되므로 IUpdateSchema 타입으로 간주
@@ -219,7 +219,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     }
 
     try {
-      await boardReviseApiRequire({
+      await boardUpdateApiRequire({
         variables: {
           updateBoardInput,
           password: checkPassword,
