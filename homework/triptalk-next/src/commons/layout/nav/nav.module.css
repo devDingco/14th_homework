@@ -31,3 +31,9 @@
   background-color: black;
   color: white;
 }
+
+.profileContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

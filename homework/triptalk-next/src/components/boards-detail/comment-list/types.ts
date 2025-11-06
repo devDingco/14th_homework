@@ -20,6 +20,8 @@ export interface UseCommentListParams {
 
 export interface UseCommentListReturn {
   data: FetchBoardCommentsData | undefined;
+  hasMore: boolean;
+  onNext: () => void;
   onClickDeleteComment: (event: MouseEvent<HTMLButtonElement>) => Promise<void>;
   modalOpen: boolean;
   modalMessage: string;

@@ -21,7 +21,7 @@ export default function AddressModal({ onAddressSelected }: AddressModalProps) {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const handleComplete = (data) => {
+  const handleComplete = (data: { zonecode: string; address: string }) => {
     console.log(data);
     
     // 부모에게 주소 데이터 전달

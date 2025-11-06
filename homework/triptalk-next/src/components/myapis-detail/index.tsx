@@ -21,8 +21,14 @@ export default function MyApisDetail() {
   const router = useRouter();
 
   // useState(): 영화 데이터를 저장할 상태 (초기값: null)
-  // TypeScript 타입 지정: any로 설정하여 movie 객체의 속성에 접근 가능
-  const [movie, setMovie] = useState<any>(null);
+  interface Movie {
+    id: number;
+    title: string;
+    director: string;
+    rating: number;
+    content: string;
+  }
+  const [movie, setMovie] = useState<Movie | null>(null);
 
   // URL에서 영화 ID 추출 (예: /myapis/detail/123 → movieId = "123")
   const movieId = params.boardId;

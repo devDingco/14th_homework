@@ -1,0 +1,441 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 1280px;
+  margin: 0 auto;
+}
+
+/* Gap: 1280 * 40 */
+.gap {
+  width: 1280px;
+  height: 40px;
+}
+
+/* Header: 1280 * 36 */
+.header {
+  width: 1280px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 36px;
+  color: #000000;
+  text-align: left;
+}
+
+/* Banner: 1280 * 332 (사용자 정보) */
+.banner {
+  width: 1280px;
+  min-height: 332px;
+  background-color: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 배너 제목 */
+.bannerTitle {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #000000;
+}
+
+/* 프로필 섹션 */
+.profileSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+}
+
+.profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.profileName {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #333333;
+}
+
+.dropdownIcon {
+  width: 24px;
+  height: 24px;
+  color: #666666;
+  margin-left: 4px;
+}
+
+/* 구분선 */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e4e4e4;
+  margin: 0;
+}
+
+/* 포인트 섹션 */
+.pointSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+}
+
+.pointIcon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #000000;
+  border: 2px solid #000000;
+  border-radius: 50%;
+}
+
+.pointValue {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pointAmount {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.pointUnit {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
+}
+
+/* 메뉴 탭 섹션 */
+.menuTabs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menuTab {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.menuTab:hover {
+  background-color: #f8f8f8;
+}
+
+.menuTabActive {
+  background-color: #f2f2f2;
+  font-weight: 600;
+}
+
+.arrowIcon {
+  width: 20px;
+  height: 20px;
+  color: #666666;
+  flex-shrink: 0;
+}
+
+/* Nav: 1280 * 40 - 탭 네비게이션 */
+.nav {
+  width: 1280px;
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navTab {
+  height: 40px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: transparent;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #525252;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.navTab:hover {
+  background-color: #f5f5f5;
+}
+
+.navTabActive {
+  background-color: #000000;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.navTabActive:hover {
+  background-color: #000000;
+}
+
+/* Gap Small: 1280 * 24 */
+.gapSmall {
+  width: 1280px;
+  height: 24px;
+}
+
+/* Search Bar Container: 1280 * 48 */
+.searchBarContainer {
+  width: 1280px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+/* Search Bar: 640 * 48 */
+.searchBar {
+  width: 640px;
+  height: 48px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+}
+
+.searchIcon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.searchInput::placeholder {
+  color: #919191;
+}
+
+/* Search Button: 64 * 48 */
+.searchButton {
+  width: 64px;
+  height: 48px;
+  background-color: #000000;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.searchButton:hover {
+  opacity: 0.9;
+}
+
+/* Main: 1280 * 656 */
+.main {
+  width: 1280px;
+  height: 656px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 테이블 컨테이너 */
+.tableContainer {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 24px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 테이블 헤더 */
+.tableHeader {
+  width: 100%;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.headerNumber {
+  width: 64px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #1c1c1c;
+  text-align: center;
+}
+
+.headerProductName {
+  flex: 1;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #1c1c1c;
+  text-align: left;
+}
+
+.headerPrice {
+  width: 100px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #1c1c1c;
+  text-align: center;
+}
+
+.headerDate {
+  width: 100px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #1c1c1c;
+  text-align: center;
+}
+
+/* 테이블 바디 */
+.tableBody {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 테이블 행 */
+.tableRow {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  border: 1px solid #f2f2f2;
+  border-radius: 8px;
+}
+
+/* 셀 스타일 */
+.cellNumber {
+  width: 64px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: #919191;
+  text-align: center;
+}
+
+.cellProductName {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.productNameActive {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #1c1c1c;
+}
+
+.productNameInactive {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ababab;
+}
+
+.statusBadge {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #2974e5;
+}
+
+.cellPrice {
+  width: 100px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+  text-align: center;
+}
+
+.cellDate {
+  width: 100px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: #919191;
+  text-align: center;
+}

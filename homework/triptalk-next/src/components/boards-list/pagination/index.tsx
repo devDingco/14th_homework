@@ -4,7 +4,12 @@ import styles from './pagination.module.css';
 import Image from 'next/image';
 import { usePagination } from './hook';
 
-export default function Pagination(props) {
+interface PaginationProps {
+  refetch: (options: { page: number }) => void;
+  lastPage: number;
+}
+
+export default function Pagination(props: PaginationProps) {
   const {
     onClickPrevPage,
     startPage,
@@ -17,11 +22,10 @@ export default function Pagination(props) {
     <div className={styles.paginationContainer}>
       <button className={styles.navButton} onClick={onClickPrevPage}>
         <Image
-          src="/icons/arrow.png"
+          src="/icons/chevron-left.svg"
           alt="화살표"
           width={24}
           height={24}
-          style={{ transform: 'scaleX(-1)' }}
         ></Image>
       </button>
       {new Array(5).fill('철수').map(
@@ -43,7 +47,7 @@ export default function Pagination(props) {
       )}
       <button className={styles.navButton} onClick={onClickNextPage}>
         <Image
-          src="/icons/arrow.png"
+          src="/icons/chevron-right.svg"
           alt="화살표"
           width={24}
           height={24}

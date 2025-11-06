@@ -27,16 +27,16 @@ export default function BoardsSignUp() {
   const [passwordConfirmError, setPasswordConfirmError] = useState('');
   const [createUser] = useMutation(SIGNUP_USER); //밑에 try catch문에서 사용
 
-  const onChangeEmail = (event) => {
+  const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
-  const onChangeName = (event) => {
+  const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
-  const onChangePasswordConfirm = (event) => {
+  const onChangePasswordConfirm = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordConfirm(event.target.value);
   };
 
@@ -74,14 +74,14 @@ export default function BoardsSignUp() {
     }
     // 3. 회원가입 실행
     try {
-      const result = await createUser({
+      await createUser({
         variables: {
           createUserInput: { email, name, password },
         },
       });
       alert('회원가입성공');
       router.push('/boards/login');
-    } catch (error) {
+    } catch {
       alert('회원가입실패');
     }
   };
@@ -136,7 +136,7 @@ export default function BoardsSignUp() {
       {/* 오른쪽 */}
       <div className="relative flex-1 h-full">
         <Image
-          src="/icons/login.png"
+          src="/images/login.png"
           fill
           style={{ objectFit: 'cover' }}
           alt=""

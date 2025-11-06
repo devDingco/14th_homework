@@ -45,7 +45,7 @@ export default function useCommentList({ boardId }: UseCommentListParams): UseCo
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult.fetchBoardComments?.length) {
           setHasMore(false); // 더 이상 데이터 없음
-          return;
+          return prev;
         }
         setCurrentPage(nextPage); // 🔥 중요: 성공하면 페이지 상태 업데이트
         return {

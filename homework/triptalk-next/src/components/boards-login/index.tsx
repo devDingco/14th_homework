@@ -20,10 +20,10 @@ export default function BoardsLogin() {
   const [passwordError, setPasswordError] = useState('');
   const [loginUser] = useMutation(LOGIN_USER);
 
-  const onChangeEmail = (event) => {
+  const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
   const { setAccessToken } = useAccessTokenStore();
@@ -97,7 +97,7 @@ export default function BoardsLogin() {
       {/* 오른쪽 */}
       <div className="relative flex-1 h-full">
         <Image
-          src="/icons/login.png"
+          src="/images/login.png"
           fill
           style={{ objectFit: 'cover' }}
           alt=""

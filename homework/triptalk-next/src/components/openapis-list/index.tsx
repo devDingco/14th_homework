@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import styles from './openapis.module.css';
 import useOpenApisList from './hook';
 
@@ -17,8 +18,11 @@ export default function OpenApisList() {
             className={styles.championCard}
             key={champion.id}
           >
-            <img
+            <Image
               src={`https://ddragon.leagueoflegends.com/cdn/13.18.1/img/champion/${champion.id}.png`}
+              alt={champion.name}
+              width={120}
+              height={120}
             />
             <div>{champion.name}</div> {/* 한국어 이름! */}
           </div>

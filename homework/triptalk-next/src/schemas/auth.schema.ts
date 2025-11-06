@@ -3,8 +3,8 @@ import z from 'zod';
 // 타입 O => 에디터 검사(빨간줄) :컴파일시점
 export interface ISchema {
   title: string;
-  writer: string;
-  password: string;
+  writer?: string;
+  password?: string;
   contents: string;
   youtubeUrl?: string;
   images?: string[];

@@ -19,10 +19,9 @@
  * - event.stopPropagation = 이벤트 전파 막기 (중요!)
  * - refetchQueries = 삭제 후 목록을 다시 불러오기
  */
-import { useMutation, useQuery } from '@apollo/client'; // GraphQL 훅들
+import { useMutation } from '@apollo/client'; // GraphQL 훅들
 import { useRouter } from 'next/navigation'; // Next.js 라우팅 훅
 import { MouseEvent, useState } from 'react'; // React 훅들과 타입
-import { FetchBoardsQuery } from '@/commons/graphql/graphql'; // TypeScript 타입
 import { FETCH_BOARDS, DELETE_BOARD } from './queries'; // GraphQL 쿼리들
 
 /**

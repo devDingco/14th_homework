@@ -170,7 +170,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
               type="text"
               placeholder="링크를 입력해 주세요"
               onChange={onChangeYoutubeUrl} // 유튜브 URL 입력값
-              defaultValue={data?.fetchBoard.youtubeUrl} // 수정 모드일 때 기존 내용 표시
+              defaultValue={data?.fetchBoard.youtubeUrl ?? ''} // 수정 모드일 때 기존 내용 표시
             ></input>
             {/* 유튜브 URL 입력 */}
           </div>
@@ -186,6 +186,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
           */}
             {/* 첫 번째 이미지 업로드 버튼 */}
             <button
+              type="button"
               onClick={() => document.getElementById('file-input-0')?.click()} // 숨겨진 파일 input 클릭
               style={{ position: 'relative', overflow: 'hidden' }} // 이미지가 버튼 영역을 벗어나지 않도록
             >
@@ -207,7 +208,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                 // 이미지가 없는 경우: 업로드 아이콘과 텍스트 표시
                 <>
                   <Image
-                    src="/icons/add.png"
+                    src="/icons/add.svg"
                     alt="업로드"
                     width={40}
                     height={40}
@@ -227,6 +228,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
             </button>
             {/* 두 번째 이미지 업로드 버튼 (첫 번째와 동일한 구조) */}
             <button
+              type="button"
               onClick={() => document.getElementById('file-input-1')?.click()}
               style={{ position: 'relative', overflow: 'hidden' }}
             >
@@ -246,7 +248,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
               ) : (
                 <>
                   <Image
-                    src="/icons/add.png"
+                    src="/icons/add.svg"
                     alt="업로드"
                     width={40}
                     height={40}
@@ -265,6 +267,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
             </button>
             {/* 세 번째 이미지 업로드 버튼 (첫 번째와 동일한 구조) */}
             <button
+              type="button"
               onClick={() => document.getElementById('file-input-2')?.click()}
               style={{ position: 'relative', overflow: 'hidden' }}
             >
@@ -284,7 +287,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
               ) : (
                 <>
                   <Image
-                    src="/icons/add.png"
+                    src="/icons/add.svg"
                     alt="업로드"
                     width={40}
                     height={40}

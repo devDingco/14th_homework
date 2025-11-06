@@ -1,12 +1,9 @@
 'use client';
-import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 // import './BoardsNew.css';
-import ApolloSetting from '@/commons/providers/apollo-provider';
 import Layout from '@/commons/layout';
 import { usePathname } from 'next/navigation';
-import ApiUploadProvider from '@/commons/providers/apollo-provider';
 import ApiHeaderProvider from '@/commons/providers/apollo-provider';
 
 const geistSans = localFont({
@@ -38,7 +35,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ApiHeaderProvider>
-          {pathname === '/boards' ? <Layout>{children}</Layout> : children}
+          {pathname === '/boards' ||
+          pathname === '/mypage' ||
+          pathname?.startsWith('/boards/') ? (
+            <Layout>{children}</Layout>
+          ) : (
+            children
+          )}
         </ApiHeaderProvider>
       </body>
     </html>

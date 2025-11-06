@@ -7,7 +7,11 @@ import useCommentList from './hooks';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import AllModal from '@/components/all-modal';
 
-export default function CommentList({ boardId }) {
+interface CommentListProps {
+  boardId: string;
+}
+
+export default function CommentList({ boardId }: CommentListProps) {
   const {
     data,
     hasMore,
@@ -26,7 +30,7 @@ export default function CommentList({ boardId }) {
           next={onNext}
           loader={<div>로딩중입니다</div>}
         >
-          {data?.fetchBoardComments?.map((el, index: number) => {
+          {data?.fetchBoardComments?.map((el) => {
             return (
               <CommentListItem
                 key={el._id}

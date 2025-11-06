@@ -1,0 +1,414 @@
+/* ¥ ËLt */
+.container {
+  max-width: 1920px;
+  width: 100%;
+  padding: 40px 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ¿t¿ */
+.title {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px;
+  color: #000000;
+  margin: 0;
+}
+
+/* XP  ò| */
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ===== ¥ Ù t‹ ===== */
+.userInfoCard {
+  width: 1280px;
+  padding: 24px;
+  background-color: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionTitle {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #000000;
+  margin: 0;
+}
+
+/* \D 9X */
+.profileSection {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+}
+
+.profileImageWrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileImage {
+  object-fit: cover;
+}
+
+.profileName {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #333333;
+  margin-left: 4px;
+}
+
+.dropdownIcon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+}
+
+/* lÑ  */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e4e4e4;
+}
+
+/* Ïx∏ 9X */
+.pointSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+}
+
+.pointIcon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pointValue {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pointAmount,
+.pointUnit {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #000000;
+}
+
+/* Ì 9X */
+.tabSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tab {
+  width: 100%;
+  height: 40px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tab:hover {
+  background-color: #f9f9f9;
+}
+
+.tabActive {
+  background-color: #f2f2f2;
+}
+
+.tabText {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000000;
+}
+
+.tabActive .tabText {
+  font-weight: 600;
+}
+
+/* ===== ¡à ©] 9X ===== */
+.productSection {
+  width: 1280px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ¡à Ì  */
+.productTabBar {
+  display: flex;
+  gap: 0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.productTab {
+  padding: 8px 16px;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #525252;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.productTabActive {
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #000000;
+}
+
+/* Ä… Ì */
+.searchArea {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.searchBar {
+  width: 640px;
+  height: 48px;
+  padding: 12px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.searchIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.searchInput {
+  flex: 1;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000000;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: #919191;
+}
+
+.searchButton {
+  width: 64px;
+  height: 48px;
+  padding: 12px 16px;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #ffffff;
+  background-color: #000000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.searchButton:hover {
+  background-color: #333333;
+}
+
+/* Lt ò| */
+.tableWrapper {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Lt ‰T */
+.tableHeader {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding: 16px 24px;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #1c1c1c;
+}
+
+/* Lt ¯8 */
+.tableBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tableRow {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 12px 24px;
+  border: 1px solid #f2f2f2;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.tableRow:hover {
+  background-color: #fafafa;
+}
+
+.tableRow:hover .deleteButton {
+  opacity: 1;
+}
+
+.tableRowInactive {
+  opacity: 0.7;
+}
+
+/* Lt Ù */
+.columnNumber {
+  width: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.columnProduct {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.columnPrice {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.columnDate {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Lt @ §¿| */
+.cellNumber {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 20px;
+  color: #919191;
+}
+
+.cellProductName {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #1c1c1c;
+}
+
+.cellProductNameInactive {
+  color: #ababab;
+}
+
+.cellStatus {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #2974e5;
+}
+
+.cellPrice {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 20px;
+  color: #333333;
+}
+
+.cellDate {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 20px;
+  color: #919191;
+}
+
+/* ≠ Ñº */
+.deleteButton {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+
+.deleteButton:hover {
+  opacity: 1;
+}

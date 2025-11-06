@@ -28,7 +28,6 @@ import {
   UPDATE_BOARD_COMMENT, // 댓글 수정 쿼리
   FETCH_BOARD_COMMENTS, // 댓글 목록 조회 쿼리 (새로고침용)
 } from './queries';
-import AllModal from '@/components/all-modal'; // 공통 모달 컴포넌트
 
 // 댓글 작성/수정을 위한 커스텀 훅
 //
@@ -38,11 +37,22 @@ import AllModal from '@/components/all-modal'; // 공통 모달 컴포넌트
 // - onEditComplete: 수정 끝나면 실행할 함수
 //
 // 돌려주는 값: 댓글 작성/수정에 필요한 상태와 함수들
+interface Comment {
+  _id: string;
+  writer?: string;
+  rating?: number;
+  contents?: string;
+}
+
+interface UseCommentWriteParams {
+  comment?: Comment;
+  onEditComplete?: () => void;
+}
+
 export default function useCommentWrite({
-  isEdit = false, // 기본값: 등록 모드
   comment, // 수정할 댓글 정보
   onEditComplete, // 수정 완료 콜백 함수
-}) {
+}: UseCommentWriteParams = {}) {
   const params = useParams(); // URL에서 boardId 파라미터 추출 (예: /boards/detail/123)
 
   // === 댓글 입력 필드 상태 관리 ===
@@ -151,7 +161,7 @@ export default function useCommentWrite({
 
   // ✏️ 댓글 수정 함수 (수정 전용)
   const onClickUpdate = async () => {
-    if (!validateInputs()) return;
+    if (!validateInputs() || !comment) return;
 
     try {
       console.log('수정 시도:', {

@@ -17,8 +17,6 @@ import Image from 'next/image'; // Next.js 최적화된 이미지 컴포넌트
 import useBoardsDetail from './hooks';
 import TooltipLocation from '../tooltip';
 import { DislikeOutlined, LikeOutlined } from '@ant-design/icons';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 // 유튜브 URL을 embed URL로 변환하는 함수
 const getYouTubeEmbedUrl = (url: string): string => {
@@ -60,7 +58,7 @@ export default function BoardsDetail() {
       <div className={styles.작성자날짜}>
         {/* 작성자 정보 (프로필 아이콘 + 작성자명) */}
         <div className={styles.작성자}>
-          <Image src="/icons/profile.svg" alt="프로필" width={24} height={24} />
+          <Image src="/icons/person.svg" alt="프로필" width={24} height={24} />
           <div>{data?.fetchBoard.writer}</div>
         </div>
 
@@ -74,10 +72,10 @@ export default function BoardsDetail() {
       {/* 링크와 위치 아이콘 섹션 */}
       <div>
         <div className={styles.링크위치}>
-          <Image src="/icons/link1.png" alt="링크" width={24} height={24} />
+          <Image src="/icons/link.svg" alt="링크" width={24} height={24} />
           <TooltipLocation address={data?.fetchBoard.boardAddress?.address}>
             <Image
-              src="/icons/location.png"
+              src="/icons/location.svg"
               alt="위치"
               width={24}
               height={24}
@@ -107,8 +105,8 @@ export default function BoardsDetail() {
       </div>
       {/* 게시글 본문 내용 */}
       <div>{data?.fetchBoard.contents}</div>
-      {/* 동영상 섹션 */}
-      {data?.fetchBoard.youtubeUrl ? (
+      {/* 동영상 섹션 - youtubeUrl이 있을 때만 표시 */}
+      {data?.fetchBoard.youtubeUrl && (
         <div className={styles.동영상배경}>
           <iframe
             width="822"
@@ -118,15 +116,6 @@ export default function BoardsDetail() {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-          />
-        </div>
-      ) : (
-        <div className={styles.동영상배경}>
-          <Image
-            src="/icons/video.png"
-            alt="동영상 플레이어"
-            width={822}
-            height={464}
           />
         </div>
       )}
@@ -154,13 +143,13 @@ export default function BoardsDetail() {
       <div className={styles.목록수정}>
         {/* 목록으로 돌아가기 버튼 */}
         <button onClick={onClickList} className={styles.목록버튼}>
-          <Image src="/icons/list.png" alt="목록" width={16} height={16} />
+          <Image src="/icons/return.svg" alt="목록" width={16} height={16} />
           목록으로
         </button>
 
         {/* 게시글 수정하기 버튼 */}
         <button onClick={onClickEdit} className={styles.수정버튼}>
-          <Image src="/icons/pen.png" alt="수정" width={16} height={16} />
+          <Image src="/icons/edit.svg" alt="수정" width={16} height={16} />
           수정하기
         </button>
       </div>

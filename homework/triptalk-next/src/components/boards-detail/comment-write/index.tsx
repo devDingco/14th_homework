@@ -7,11 +7,23 @@ import useCommentWrite from './hooks';
 import Star from './star';
 import AllModal from '../../all-modal';
 
+interface Comment {
+  _id: string;
+  writer?: string;
+  rating?: number;
+  contents?: string;
+}
+
+interface CommentWriteProps {
+  comment?: Comment;
+  onEditComplete?: () => void;
+}
+
 export default function CommentWrite({
-  isEdit = false,
   comment,
   onEditComplete,
-}) {
+}: CommentWriteProps = {}) {
+  const isEdit = !!comment;
   const {
     name,
     password,
@@ -28,12 +40,12 @@ export default function CommentWrite({
     setModalOpen,
     modalMessage,
     isButtonDisabled,
-  } = useCommentWrite({ isEdit, comment, onEditComplete });
+  } = useCommentWrite({ comment, onEditComplete });
   return (
     <div className="container">
       <hr />
       <div className={styles.comment}>
-        <Image src="/icons/chat.png" alt="아이콘" width={24} height={24} />
+        <Image src="/icons/chat.svg" alt="아이콘" width={24} height={24} />
         <div>댓글</div>
       </div>
       <div className={styles.star}>

@@ -8,8 +8,15 @@ import useBoardsList from './hooks';
 import AllModal from '@/components/all-modal';
 
 // TypeScript interface 정의
+interface BoardItem {
+  _id: string;
+  title: string;
+  writer: string;
+  createdAt: string;
+}
+
 interface BoardsListProps {
-  data: any; // 게시글 데이터 배열
+  data: BoardItem[] | undefined; // 게시글 데이터 배열
   keyword?: string; // 검색어 (선택적 props - ? 사용)
 }
 
@@ -94,7 +101,7 @@ export default function BoardsList({ data, keyword = '' }: BoardsListProps) {
                 className={styles.deleteBtn} // 삭제 버튼 스타일
               >
                 <Image
-                  src="/icons/delete.png"
+                  src="/icons/close.svg"
                   alt="delete"
                   width={24}
                   height={24}

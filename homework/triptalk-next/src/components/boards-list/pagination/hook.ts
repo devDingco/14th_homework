@@ -1,13 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 
-export const usePagination = (props) => {
+interface PaginationProps {
+  refetch: (options: { page: number }) => void;
+  lastPage: number;
+}
+
+export const usePagination = (props: PaginationProps) => {
   const [startPage, setStartPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const onClickPage = (event) => {
-    const page = Number(event.target.id);
+  const onClickPage = (event: MouseEvent<HTMLButtonElement>) => {
+    const page = Number(event.currentTarget.id);
     setCurrentPage(page);
     props.refetch({ page });
   };

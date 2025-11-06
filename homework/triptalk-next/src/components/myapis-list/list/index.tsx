@@ -18,7 +18,14 @@ export default function MyApisList() {
   const router = useRouter();
 
   // useState(): 영화 목록을 저장할 상태 (초기값: 빈 배열)
-  const [movies, setMovies] = useState<any[]>([]);
+  interface Movie {
+    id: number;
+    title: string;
+    director: string;
+    rating: number;
+    content: string;
+  }
+  const [movies, setMovies] = useState<Movie[]>([]);
 
   /**
    * 영화 카드 클릭 시 상세페이지로 이동하는 함수

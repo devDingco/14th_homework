@@ -16,8 +16,15 @@ import _ from 'lodash'; // 유틸리티 라이브러리 (debounce 사용)
 import { DatePicker } from 'antd';
 
 //  interface 정의 (TypeScript 타입 정의)
+interface RefetchOptions {
+  search?: string;
+  page?: number;
+  startDate?: string;
+  endDate?: string;
+}
+
 interface SearchProps {
-  refetch: any; // GraphQL 쿼리 다시 실행 함수
+  refetch: (options: RefetchOptions) => void; // GraphQL 쿼리 다시 실행 함수
   onKeywordChange: (keyword: string) => void; // 검색어를 부모로 전달하는 함수
 }
 
@@ -56,12 +63,11 @@ export default function Search({ refetch, onKeywordChange }: SearchProps) {
 
   // RangePicker 이벤트 핸들러
   // 기간 선택 시 실행되는 함수 (시작날짜, 끝날짜 배열로 받음)
-  const onDateRangeChange = (dates: any, dateStrings: [string, string]) => {
-    console.log('Selected dates:', dates);
+  const onDateRangeChange = (_dates: unknown, dateStrings: [string, string]) => {
     console.log('Date strings:', dateStrings); // ["시작날짜", "끝날짜"]
 
     // 기간 검색을 위한 refetch 호출
-    if (dates && dates[0] && dates[1]) {
+    if (dateStrings && dateStrings[0] && dateStrings[1]) {
       refetch({
         startDate: dateStrings[0], // 시작날짜
         endDate: dateStrings[1], // 끝날짜

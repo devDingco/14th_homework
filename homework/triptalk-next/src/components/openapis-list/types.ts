@@ -21,7 +21,7 @@ export interface Champion {
   };
   tags: string[];
   partype: string;
-  stats: any;
+  stats: Record<string, unknown>;
 }
 
 export interface ChampionsData {

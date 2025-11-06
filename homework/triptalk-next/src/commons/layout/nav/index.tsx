@@ -29,6 +29,14 @@ export default function Nav() {
     router.push('/boards/login');
   };
 
+  const onClickMyPage = () => {
+    router.push('/mypage');
+  };
+
+  const onClickBoards = () => {
+    router.push('/boards');
+  };
+
   return (
     <div className="container">
       {/* 상단 네비게이션 바 */}
@@ -36,24 +44,28 @@ export default function Nav() {
         <nav className={styles.nav}>
           <div>
             <Image
-              src="/icons/logoArea.png"
+              src="/icons/logo.svg"
               alt="로고"
               width={50}
               height={50}
             />
           </div>
           <div className={styles.navItem}>
-            <div>트립토크</div>
-            <div>숙박권구매</div>
-            <div>마이 페이지</div>
+            <div onClick={onClickBoards} style={{ cursor: 'pointer' }}>
+              트립토크
+            </div>
+            <div style={{ cursor: 'pointer' }}>숙박권구매</div>
+            <div onClick={onClickMyPage} style={{ cursor: 'pointer' }}>
+              마이 페이지
+            </div>
           </div>
         </nav>
         <div>
           {' '}
           {accessToken ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div className={styles.profileContainer}>
               <Image
-                src="/icons/profile.svg"
+                src="/icons/person.svg"
                 alt="프로필"
                 width={40}
                 height={40}

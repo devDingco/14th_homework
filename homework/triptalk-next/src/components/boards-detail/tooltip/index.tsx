@@ -1,7 +1,6 @@
 'use client';
-import React, { useMemo, useState } from 'react';
-import { Button, ConfigProvider, Flex, Segmented, Tooltip } from 'antd';
-import type { TooltipProps } from 'antd';
+import React, { useState } from 'react';
+import { ConfigProvider, Flex, Segmented, Tooltip } from 'antd';
 import styles from './Tooltip.module.css';
 
 interface TooltipLocationProps {
@@ -17,20 +16,6 @@ export default function TooltipLocation({
 }: TooltipLocationProps) {
   const text = address || '주소 정보 없음';
   const [arrow, setArrow] = useState<'Show' | 'Hide' | 'Center'>('Show');
-
-  const mergedArrow = useMemo<TooltipProps['arrow']>(() => {
-    if (arrow === 'Hide') {
-      return false;
-    }
-
-    if (arrow === 'Show') {
-      return true;
-    }
-
-    return {
-      pointAtCenter: true,
-    };
-  }, [arrow]);
 
   return (
     <ConfigProvider button={{ style: { width: buttonWidth, margin: 4 } }}>

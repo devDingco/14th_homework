@@ -40,7 +40,7 @@ import {
 } from '@/commons/graphql/graphql';
 import { UPLOAD_FILE } from './queries';
 import { useForm } from 'react-hook-form';
-import { createSchema, updateSchema } from '@/schemas/auth.schema';
+import { createSchema, updateSchema, ISchema } from '@/schemas/auth.schema';
 
 export default function useBoardsWrite(props?: IBoardsWriteProps) {
   const router = useRouter(); // 페이지 이동을 위한 Next.js 라우터
@@ -84,8 +84,9 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
   const [uploadFile] = useMutation(UPLOAD_FILE);
 
   // 수정 모드일 때 기존 게시글 데이터를 가져오는 쿼리 훅
+  const boardId = Array.isArray(params.boardId) ? params.boardId[0] : params.boardId;
   const { data } = useQuery(FetchBoardForEditDocument, {
-    variables: { boardId: params.boardId }, // URL에서 가져온 boardId로 게시글 조회
+    variables: { boardId }, // URL에서 가져온 boardId로 게시글 조회
   });
 
   // === useEffect: 수정 모드 데이터 초기화 ===
@@ -165,20 +166,30 @@ export default function useBoardsWrite(props?: IBoardsWriteProps) {
 
     try {
       // 수정할 내용 준비 (react-hook-form 데이터 사용)
-      const updateBoardInput: any = {
+      const updateBoardInput: {
+        title?: string;
+        contents?: string;
+        youtubeUrl?: string;
+        boardAddress?: {
+          zipcode?: string;
+          address?: string;
+          addressDetail?: string;
+        };
+        images?: string[];
+      } = {
         title: formData.title,
         contents: formData.contents,
-        youtubeUrl: youtubeUrl || data?.fetchBoard.youtubeUrl,
+        youtubeUrl: youtubeUrl || data?.fetchBoard.youtubeUrl || undefined,
         images: uploadedFiles.filter((file) => file !== undefined && file !== ''),
       };
 
       // 주소 정보 (기존 데이터 유지)
       if (data?.fetchBoard.boardAddress) {
         updateBoardInput.boardAddress = {
-          zipcode: zipcode || data.fetchBoard.boardAddress.zipcode,
-          address: address || data.fetchBoard.boardAddress.address,
+          zipcode: zipcode || data.fetchBoard.boardAddress.zipcode || undefined,
+          address: address || data.fetchBoard.boardAddress.address || undefined,
           addressDetail:
-            addressDetail || data.fetchBoard.boardAddress.addressDetail,
+            addressDetail || data.fetchBoard.boardAddress.addressDetail || undefined,
         };
       }
 

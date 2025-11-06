@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Pagination, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 import styles from './Banner.module.css';
 
@@ -13,12 +13,17 @@ export default function Banner() {
   return (
     <Swiper
       pagination={true}
-      modules={[Pagination]}
+      modules={[Pagination, Autoplay]}
+      autoplay={{
+        delay: 3000,
+        disableOnInteraction: false,
+      }}
+      loop={true}
       className={styles.mySwiper}
     >
       <SwiperSlide>
         <Image
-          src="/icons/banner1.svg"
+          src="/images/banner1.png"
           alt="배너사진"
           width={1920}
           height={516}
@@ -26,7 +31,7 @@ export default function Banner() {
       </SwiperSlide>
       <SwiperSlide>
         <Image
-          src="/icons/banner2.svg"
+          src="/images/banner2.png"
           alt="배너사진"
           width={1920}
           height={516}
@@ -34,7 +39,7 @@ export default function Banner() {
       </SwiperSlide>
       <SwiperSlide>
         <Image
-          src="/icons/banner3.svg"
+          src="/images/banner3.png"
           alt="배너사진"
           width={1920}
           height={516}
