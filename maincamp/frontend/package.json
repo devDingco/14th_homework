@@ -10,11 +10,12 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
-    "@commons/ui": "workspace:*",
     "@ant-design/icons": "^6.0.1",
     "@apollo/client": "~3.11.10",
+    "@commons/ui": "workspace:*",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@hookform/resolvers": "^5.2.2",
+    "@lexical/react": "^0.38.2",
     "@supabase/supabase-js": "^2.57.4",
     "antd": "^5.27.3",
     "apollo-upload-client": "^17.0.0",
@@ -23,6 +24,7 @@
     "date-fns-tz": "^3.2.0",
     "graphql": "^16.11.0",
     "jwt-decode": "^4.0.0",
+    "lexical": "^0.38.2",
     "lodash": "^4.17.21",
     "next": "14.2.32",
     "react": "^18",

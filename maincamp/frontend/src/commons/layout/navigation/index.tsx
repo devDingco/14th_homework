@@ -5,7 +5,7 @@ import useNavigation from "./hook";
 import Image from "next/image";
 
 export default function LayoutNavigation() {
-  const { onClickBoards, onClickLogin, onClickMypage, data, pathname } = useNavigation();
+  const { onClickBoards, onClickLogin, onClickMypage, onClickProducts, data, pathname } = useNavigation();
 
   return (
     <div className={styles.navigation}>
@@ -22,7 +22,9 @@ export default function LayoutNavigation() {
           <div className={pathname.startsWith("/boards") ? styles.selected : ""} onClick={onClickBoards}>
             트립토크
           </div>
-          <div>숙박권 구매</div>
+          <div className={pathname.startsWith("/products") ? styles.selected : ""} onClick={onClickProducts}>
+            숙박권 구매
+          </div>
           <div>마이트립</div>
           <div className={pathname.startsWith("/mypage") ? styles.selected : ""} onClick={onClickMypage}>
             마이 페이지

@@ -19,5 +19,9 @@ export default function useNavigation() {
     router.push("/mypage");
   };
 
-  return { onClickBoards, onClickLogin, onClickMypage, data, pathname };
+  const onClickProducts = () => {
+    router.push("/products");
+  };
+
+  return { onClickBoards, onClickLogin, onClickMypage, onClickProducts, data, pathname };
 }

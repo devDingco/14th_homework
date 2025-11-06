@@ -17,11 +17,28 @@ const layoutConfig: Record<string, LayoutConfig> = {
   "/login": { navigation: false, banner: false, hero: "/images/hero.jpg" },
   "/signup": { navigation: false, banner: false, hero: "/images/hero.jpg" },
   "/boards": { navigation: true, banner: true },
+  "/mypage": { navigation: true, banner: false },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const config = layoutConfig[pathname] ?? defaultConfig;
+
+  const getConfig = (): LayoutConfig => {
+    if (layoutConfig[pathname]) {
+      return layoutConfig[pathname];
+    }
+
+    if (pathname.startsWith("/products")) {
+      if (pathname === "/products") {
+        return { navigation: true, banner: true };
+      }
+      return { navigation: true, banner: false };
+    }
+
+    return defaultConfig;
+  };
+
+  const config = getConfig();
 
   const showNavigation = config.navigation !== false;
   const showBanner = config.banner !== false;
