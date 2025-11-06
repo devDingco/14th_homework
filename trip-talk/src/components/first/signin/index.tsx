@@ -19,10 +19,10 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginUser] = useMutation(LOGIN_USER);
-  const onChangeEmail = (event) => {
+  const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
 
@@ -48,6 +48,7 @@ export default function SignIn() {
   };
 
   const onClickSignUp = () => {
+    console.log("회원가입 버튼 클릭됨");
     router.push("/first/signUp");
   };
   return (

@@ -31,7 +31,7 @@ export default function BoardsPage() {
     router.push("/boards/new");
   };
 
-  const onChangeDate = (dates) => {
+  const onChangeDate = (dates: [Date, Date] | null) => {
     if (dates) {
       const [start, end] = dates;
 

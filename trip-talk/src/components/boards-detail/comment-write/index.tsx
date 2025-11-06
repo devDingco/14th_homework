@@ -8,7 +8,13 @@ import Image from "next/image";
 import { useMutation, useQuery } from "@apollo/client";
 import { FETCH_BOARD_COMMENTS, UPDATE_BOARD_COMMENT } from "./queries";
 
-export default function CommentWrite({ isEdit, commentId, el }) {
+interface CommentWriteProps {
+  isEdit: boolean;
+  commentId: string | null;
+  el?: any;
+}
+
+export default function CommentWrite({ isEdit, commentId, el }: CommentWriteProps) {
   const {
     writer,
     password,

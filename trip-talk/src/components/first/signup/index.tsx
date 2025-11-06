@@ -22,7 +22,7 @@ export default function SignUP() {
   });
   const [emailError, setEmailError] = useState(false);
   const [passwordErorr, setPasswordError] = useState(false);
-  const onChangeInput = (event) => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => {
       const newInputs = {
         ...prev,
@@ -76,7 +76,11 @@ export default function SignUP() {
       }
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert('회원가입 중 오류가 발생했습니다.');
+      }
     }
   };
 

@@ -1,8 +1,8 @@
 "use client"
-import { Card } from '../ui/card';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { Button } from '../ui/button';
+import { Card } from '../mypage_ui/card';
+import { Input } from '../mypage_ui/input';
+import { Label } from '../mypage_ui/label';
+import { Button } from '../mypage_ui/button';
 import { useState } from 'react';
 
 export function ChangePassword() {

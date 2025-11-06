@@ -1,4 +1,4 @@
-import { Card } from '../ui/card';
+import { Card } from '../mypage_ui/card';
 
 export function PointSales() {
   const salesHistory = [

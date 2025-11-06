@@ -1,4 +1,4 @@
-import { Card } from '../ui/card';
+import { Card } from '../mypage_ui/card';
 import { Heart, Bookmark } from 'lucide-react';
 
 export function Bookmarks() {

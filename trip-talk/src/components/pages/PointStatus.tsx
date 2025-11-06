@@ -1,5 +1,5 @@
 import { Wallet, TrendingUp, TrendingDown } from 'lucide-react';
-import { Card } from '../ui/card';
+import { Card } from '../mypage_ui/card';
 
 export function PointStatus() {
   const pointData = {

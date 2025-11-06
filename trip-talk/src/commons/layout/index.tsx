@@ -7,7 +7,7 @@ const HIDDEN_BANNER_PAGES = ["/boards/new", "/", "/first/signUp"];
 const HIDDEN_NAVIGATION_PAGES = ["/"]; // 루트 페이지에서는 헤더 숨김
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const shouldHideBanner = HIDDEN_BANNER_PAGES.includes(pathname) || pathname.startsWith("/mypage");
+  const shouldHideBanner = HIDDEN_BANNER_PAGES.includes(pathname) || pathname.startsWith("/mypage") || pathname.startsWith("/accommodation");
   const shouldHideNavigation = HIDDEN_NAVIGATION_PAGES.includes(pathname);
   return (
     <div className="w-full h-full">

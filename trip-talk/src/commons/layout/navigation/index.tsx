@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import { gql, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 const FETCH_USER_LOGGED_IN = gql`
   query {
     fetchUserLoggedIn {
@@ -15,6 +15,7 @@ const FETCH_USER_LOGGED_IN = gql`
 `;
 export default function Navigation() {
   const router = useRouter();
+  const pathname = usePathname();
   const [login, setLogin] = useState(false);
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
   useEffect(() => {
@@ -33,8 +34,8 @@ export default function Navigation() {
   const onClickMypage = () =>{
     router.push("/mypage")
   }
-  const onClickTransation = () =>{
-    router.push("/transaction")
+  const onClickAccommodation = () =>{
+    router.push("/accommodation")
   }
   return (
     <>
@@ -46,9 +47,24 @@ export default function Navigation() {
             width={51.52}
             height={32}
           />
-          <div onClick={onClickBoard}>트립토크</div>
-          <div onClick={onClickTransation}>숙박권 구매</div>
-          <div onClick={onClickMypage}>마이페이지</div>
+          <div 
+            onClick={onClickBoard} 
+            className={`${styles.탭} ${pathname?.startsWith('/boards') ? styles.활성탭 : ''}`}
+          >
+            트립토크
+          </div>
+          <div 
+            onClick={onClickAccommodation} 
+            className={`${styles.탭} ${pathname?.startsWith('/accommodation') ? styles.활성탭 : ''}`}
+          >
+            숙박권 구매
+          </div>
+          <div 
+            onClick={onClickMypage} 
+            className={`${styles.탭} ${pathname?.startsWith('/mypage') ? styles.활성탭 : ''}`}
+          >
+            마이페이지
+          </div>
         </div>
         <Image
           src={"/images/button_login.png"}
