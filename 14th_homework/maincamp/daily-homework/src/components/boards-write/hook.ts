@@ -4,6 +4,7 @@ import { ChangeEvent, useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { UPDATE_BOARD, FETCH_BOARD, UPLOAD_FILE } from './queries';
+import { FetchBoardQuery, FetchBoardQueryVariables } from '@/commons/graphql/graphql';
 import { Errors, BoardVariables } from './types';
 import { useAlertModal } from '@/commons/components/modal';
 import {
@@ -165,7 +166,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
   });
 
   // 게시글수정API요청함수
-  const [boardReviseApiRequire] = useMutation(UPDATE_BOARD);
+  const [boardUpdateApiRequire] = useMutation(UPDATE_BOARD);
 
   const onclickUpdate = handleSubmit(async (data) => {
     // 수정 모드에서 호출되므로 IUpdateSchema 타입으로 간주
@@ -218,13 +219,37 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     }
 
     try {
-      await boardReviseApiRequire({
+      await boardUpdateApiRequire({
         variables: {
           updateBoardInput,
           password: checkPassword,
           boardId: params.boardId,
         },
-        refetchQueries: [{ query: FETCH_BOARD, variables: { boardId: params.boardId } }],
+        update: (cache, { data }) => {
+          if (data?.updateBoard) {
+            // 캐시에서 기존 데이터 읽기
+            const existingData = cache.readQuery<FetchBoardQuery, FetchBoardQueryVariables>({
+              query: FETCH_BOARD,
+              variables: { boardId: String(params.boardId) },
+            });
+
+            if (existingData?.fetchBoard) {
+              // 캐시 업데이트: mutation 응답과 기존 데이터를 병합
+              cache.writeQuery<FetchBoardQuery, FetchBoardQueryVariables>({
+                query: FETCH_BOARD,
+                variables: { boardId: String(params.boardId) },
+                data: {
+                  fetchBoard: {
+                    ...existingData.fetchBoard,
+                    ...data.updateBoard,
+                    // createdAt은 mutation 응답에 없으므로 기존 값 유지
+                    createdAt: existingData.fetchBoard.createdAt,
+                  },
+                },
+              });
+            }
+          }
+        },
       });
 
       showAlert('게시글이 수정되었습니다.');
