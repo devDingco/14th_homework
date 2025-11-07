@@ -1,7 +1,6 @@
 import {
   CreateBoardDocument,
   CreateBoardInput,
-  FetchBoardDocument,
   FetchBoardQuery,
   UpdateBoardDocument,
   UpdateBoardInput,
@@ -227,12 +226,12 @@ export default function useBoardForm({ data, isEdit }: { data?: FetchBoardQuery;
       const password = prompt("글을 입력할 때 입력하셨던 비밀번호를 입력해주세요");
       const result = await updateBoard({
         variables: { updateBoardInput, password, boardId },
-        refetchQueries: [
-          {
-            query: FetchBoardDocument,
-            variables: { boardId },
-          },
-        ],
+        // refetchQueries: [
+        //   {
+        //     query: FetchBoardDocument,
+        //     variables: { boardId },
+        //   },
+        // ],
       });
       router.push(`/boards/${result.data?.updateBoard._id}`);
     } catch (error) {

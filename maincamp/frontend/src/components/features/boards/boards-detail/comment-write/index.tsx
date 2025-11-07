@@ -72,15 +72,18 @@ export default withAuth(function CommentWrite({
             {...register("password")}
           ></Inputfield>
         </div>
-        <Textareafield
-          placeholder="댓글을 입력해 주세요."
-          isCommentField
-          maxLength={100}
-          isAuth={isAuth}
-          onClick={() => handleUnauthClick?.("댓글 등록은 로그인 후 가능합니다.")}
-          error={formState.errors.contents?.message}
-          {...register("contents")}
-        />
+        <div className={styles.CommentTextareaWrapper}>
+          <Textareafield
+            placeholder="댓글을 입력해 주세요."
+            isCommentField
+            maxLength={100}
+            isAuth={isAuth}
+            onClick={() => handleUnauthClick?.("댓글 등록은 로그인 후 가능합니다.")}
+            error={formState.errors.contents?.message}
+            {...register("contents")}
+          />
+          <div className={styles.CommentCount}>{watch("contents")?.length || 0}/100</div>
+        </div>
         <div className={styles.CommentButtonGroup}>
           {isEdit && (
             <Button variant="CommentBtn" type="button" onClick={onClickEdit}>

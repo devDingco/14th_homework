@@ -13,7 +13,7 @@ export default function useCommentList() {
       page: 1,
       boardId,
     },
-    fetchPolicy: "cache-and-network",
+    // fetchPolicy: "cache-and-network",
   });
 
   if (!boardId)

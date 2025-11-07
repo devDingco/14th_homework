@@ -31,7 +31,7 @@ export default function ApolloUploadSetting({ children }: IApolloSetting) {
   }, [setAccessToken]);
 
   const uploadLink = createUploadLink({
-    uri: "http://main-practice.codebootcamp.co.kr/graphql",
+    uri: "https://main-practice.codebootcamp.co.kr/graphql",
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },

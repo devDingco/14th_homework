@@ -12,6 +12,8 @@ import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { FORMAT_TEXT_COMMAND } from "lexical";
+import { useEffect, useRef } from "react";
+import { setOptions, importLibrary } from "@googlemaps/js-api-loader";
 import useProductWriteForm from "./hook";
 
 // Lexical 툴바 컴포넌트
@@ -93,6 +95,49 @@ const editorConfig = {
   },
 };
 
+// Google Maps 컴포넌트
+function GoogleMapComponent({ lat, lng }: { lat: string; lng: string }) {
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!lat || !lng || !mapRef.current) return;
+
+    const initMap = async () => {
+      // API 옵션 설정
+      setOptions({
+        key: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY || "",
+      });
+
+      // Maps 라이브러리 로드
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { Map } = (await importLibrary("maps")) as any;
+
+      // Marker 라이브러리 로드
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { Marker } = (await importLibrary("marker")) as any;
+
+      const position = {
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+      };
+
+      const map = new Map(mapRef.current!, {
+        center: position,
+        zoom: 15,
+      });
+
+      new Marker({
+        position,
+        map,
+      });
+    };
+
+    initMap();
+  }, [lat, lng]);
+
+  return <div ref={mapRef} className={styles.map} />;
+}
+
 export default function ProductsWrite() {
   const {
     register,
@@ -107,8 +152,8 @@ export default function ProductsWrite() {
     onClickSubmit,
   } = useProductWriteForm();
 
-  const zipcode = watch("productAddress.zipcode");
-  const address = watch("productAddress.address");
+  const lat = watch("lat");
+  const lng = watch("lng");
 
   return (
     <div className={styles.container}>
@@ -218,13 +263,13 @@ export default function ProductsWrite() {
 
           <div className={styles.mapContainer}>
             <label className={styles.mapLabel}>상세 위치</label>
-            <div className={styles.map}>
-              {zipcode && address ? (
-                <div>지도 표시 영역 (구현 예정)</div>
-              ) : (
+            {lat && lng ? (
+              <GoogleMapComponent lat={lat} lng={lng} />
+            ) : (
+              <div className={styles.map}>
                 <span className={styles.mapPlaceholder}>주소를 먼저 입력해 주세요.</span>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
 

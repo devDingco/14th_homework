@@ -13,6 +13,7 @@
     "@ant-design/icons": "^6.0.1",
     "@apollo/client": "~3.11.10",
     "@commons/ui": "workspace:*",
+    "@googlemaps/js-api-loader": "^2.0.2",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@hookform/resolvers": "^5.2.2",
     "@lexical/react": "^0.38.2",

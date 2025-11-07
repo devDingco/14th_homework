@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Modal } from "antd";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Address } from "react-daum-postcode";
 import { EditorState } from "lexical";
@@ -45,12 +46,37 @@ export default function useProductWriteForm() {
   };
 
   // 2-2. 주소 검색 완료 핸들러
-  const handleComplete = (data: Address) => {
+  const handleComplete = async (data: Address) => {
     setValue("productAddress.zipcode", data.zonecode, { shouldValidate: true });
     setValue("productAddress.address", data.address, { shouldValidate: true });
-    // 임시로 좌표 설정 (실제로는 주소를 좌표로 변환하는 API 사용)
-    setValue("lat", "37.5665", { shouldValidate: true });
-    setValue("lng", "126.9780", { shouldValidate: true });
+
+    // Kakao API를 사용하여 주소를 좌표로 변환
+    try {
+      const response = await fetch(
+        `https://dapi.kakao.com/v2/local/search/address.json?query=${encodeURIComponent(data.address)}`,
+        {
+          headers: {
+            Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_APP_JS_KEY}`,
+          },
+        }
+      );
+
+      const result = await response.json();
+
+      if (result.documents && result.documents.length > 0) {
+        const { x, y } = result.documents[0];
+        setValue("lng", x, { shouldValidate: true }); // x는 경도(longitude)
+        setValue("lat", y, { shouldValidate: true }); // y는 위도(latitude)
+      }
+    } catch (error) {
+      const showErrorModal = () =>
+        Modal.error({
+          title: "좌표 변환에 실패하였습니다.",
+          content: (error as string) ?? "좌표 변환에 실패하였습니다.",
+        });
+      showErrorModal();
+    }
+
     setIsModalOpen(false);
   };
 
@@ -79,7 +105,6 @@ export default function useProductWriteForm() {
     register,
     handleSubmit,
     formState,
-    setValue,
     watch,
     isModalOpen,
     onToggleModal,
