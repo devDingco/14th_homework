@@ -2,7 +2,14 @@
 import usePagination from "./hook";
 import Image from "next/image";
 import styles from "./styles.module.css";
-export default function Pagination(props) {
+
+interface PaginationProps {
+  lastPage: number;
+  setQueryVariables: (fn: (prev: any) => any) => void;
+  currentPage: number;
+}
+
+export default function Pagination(props: PaginationProps) {
   const { onClickPage, onClickPrevPage, onClickNextPage, startPage } =
     usePagination(props);
 
@@ -20,14 +27,16 @@ export default function Pagination(props) {
 
       <div className={styles.pagination}>
         {new Array(5).fill(0).map((el, index) => {
-          if (index + startPage <= props.lastPage)
+          const pageNumber = index + startPage;
+          if (pageNumber <= props.lastPage)
             return (
               <button
-                key={index + startPage}
-                id={String(index + startPage)}
+                key={pageNumber}
+                id={String(pageNumber)}
                 onClick={onClickPage}
+                className={pageNumber === props.currentPage ? styles.active : ""}
               >
-                {index + startPage}
+                {pageNumber}
               </button>
             );
         })}

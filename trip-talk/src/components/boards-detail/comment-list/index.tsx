@@ -37,15 +37,7 @@ export default function CommentList() {
   };
 
   return (
-    <div
-      id="scrollableDiv"
-      style={{
-        height: "500px", // 원하는 높이
-        overflow: "auto",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <div id="scrollableDiv" className={styles.scrollableDiv}>
       <InfiniteScroll
         dataLength={data?.fetchBoardComments.length ?? 0}
         loader={<div>로딩중</div>}

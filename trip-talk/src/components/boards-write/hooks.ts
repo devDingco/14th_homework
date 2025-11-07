@@ -13,15 +13,25 @@ import {
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { useForm } from "react-hook-form";
 import { schema } from "./schema";
+import { z } from "zod";
 
 export default function useBoardWrite() {
   const router = useRouter();
   const 내주소변수 = useParams();
   const isEditMode = !!내주소변수.boardId;
+
+  // 수정 모드일 때는 password를 optional로 만드는 동적 schema
+  const dynamicSchema = isEditMode
+    ? schema.extend({
+        password: z.string().optional(),
+      })
+    : schema;
+
   const { register, handleSubmit, setValue, formState, reset, watch, trigger } =
     useForm({
       defaultValues: {
         writer: "",
+        password: "",
         title: "",
         contents: "",
         zonecode: "",
@@ -30,7 +40,7 @@ export default function useBoardWrite() {
         url: "",
         images: [],
       },
-      resolver: zodResolver(schema),
+      resolver: zodResolver(dynamicSchema),
       mode: "onChange", // 입력 시 유효성 체크
       criteriaMode: "all", // 모든 필드 검증
     });
@@ -125,10 +135,10 @@ export default function useBoardWrite() {
       const result = await create_request_api_({
         variables: {
           createBoardInput: {
-            writer: data.writer,
-            password: data.password,
-            title: data.title,
-            contents: data.contents,
+            writer: data.writer.trim(),
+            password: data.password.trim(),
+            title: data.title.trim(),
+            contents: data.contents.trim(),
             youtubeUrl: data.url,
             boardAddress: {
               zipcode: data.zonecode,
@@ -140,14 +150,15 @@ export default function useBoardWrite() {
         },
         // fetchPolicy: "no-cache",
       });
-      console.log("ㄷㅔ이터 있니", result.data);
+      console.log("등록 성공", result.data);
       router.push(`/boards/${result.data.createBoard._id}`);
     } catch (error) {
+      console.error("등록 실패", error);
       alert(error);
     } finally {
     }
   };
-  const onClickUpdate = async (data) => {
+  const onClickUpdate = async (formData) => {
     try {
       const 입력받은비밀번호 = prompt(
         "글을 입력할때 입력하셨던 비밀번호를 입력해주세요"
@@ -156,12 +167,23 @@ export default function useBoardWrite() {
         alert("비밀번호를 입력해야 수정할 수 있습니다.");
         return;
       }
-      setValue("password", 입력받은비밀번호);
+
+      // 공백 제거
+      const trimmedPassword = 입력받은비밀번호.trim();
+
+      if (!trimmedPassword) {
+        alert("비밀번호를 입력해야 수정할 수 있습니다.");
+        return;
+      }
+
+      console.log("입력받은 비밀번호 길이:", trimmedPassword.length);
+      setValue("password", trimmedPassword);
       const updateBoardInput: any = {};
 
-      if (data.title) updateBoardInput.title = data.title ?? "";
-      if (data.contents) updateBoardInput.contents = data.contents ?? "";
-      if (data.url) updateBoardInput.youtubeUrl = data.url;
+      if (formData.title) updateBoardInput.title = formData.title ?? "";
+      if (formData.contents)
+        updateBoardInput.contents = formData.contents ?? "";
+      if (formData.url) updateBoardInput.youtubeUrl = formData.url;
 
       const imagesToSend = [imageUrl, imageUrl2, imageUrl3]
         .filter((url) => url && url !== "/images/add_image.png")
@@ -174,32 +196,34 @@ export default function useBoardWrite() {
       updateBoardInput.images = imagesToSend;
 
       updateBoardInput.boardAddress = {
-        zipcode: data.zonecode || "",
-        address: data.address || "",
-        addressDetail: data.address_detail || "",
+        zipcode: formData.zonecode || "",
+        address: formData.address || "",
+        addressDetail: formData.address_detail || "",
       };
 
-      const boardId = data?.fetchBoard?._id || 내주소변수.boardId;
-      if (!boardId) {
+      if (!내주소변수.boardId) {
         alert("boardId가 없습니다.");
         return;
       }
+
       const myvariables = {
         updateBoardInput,
         boardId: 내주소변수.boardId,
-        password: 입력받은비밀번호,
+        password: trimmedPassword,
       };
+
+      console.log("=== 수정 요청 변수 ===", myvariables);
+
       const result = await update_request_api_({
         variables: myvariables,
-        refetchQueries: [
-          {
-            query: FETCH_BOARD,
-            variables: { boardId: 내주소변수.boardId },
-          },
-        ],
+        // refetchQueries를 제거하고 Apollo Client의 자동 캐시 업데이트에 의존
+        // UPDATE_BOARD 쿼리는 업데이트된 board를 반환하므로 Apollo가 자동으로 캐시를 업데이트합니다
       });
+
+      console.log("=== 수정 성공 ===", result);
       router.push(`/boards/${result.data.updateBoard._id}`);
     } catch (error) {
+      console.error("=== 수정 실패 ===", error);
       alert(error);
     }
   };

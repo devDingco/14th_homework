@@ -5,6 +5,15 @@
   align-items: center;
   gap: 12px;
 }
+
+.pagenations img {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.pagenations img:hover {
+  opacity: 0.7;
+}
 .pagination {
   display: flex;
   align-items: center;
@@ -15,4 +24,27 @@
   font-style: normal;
   /* font-weight: 500; */
   line-height: 24px;
+}
+
+.pagination button {
+  min-width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  line-height: 24px;
+}
+
+.pagination button:hover {
+  background-color: #f5f5f5;
+}
+
+.pagination button.active {
+  background-color: #e4e4e4;
+  font-weight: 600;
 }

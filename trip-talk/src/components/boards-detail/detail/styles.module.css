@@ -70,3 +70,11 @@
   padding: 24px;
   border-bottom: solid 1px var(--gray-100, #e4e4e4);
 }
+
+.목록_수정_버튼 img {
+  cursor: pointer;
+}
+
+.목록_수정_버튼 img:hover {
+  opacity: 0.8;
+}

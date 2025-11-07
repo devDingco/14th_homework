@@ -14,7 +14,11 @@ interface CommentWriteProps {
   el?: any;
 }
 
-export default function CommentWrite({ isEdit, commentId, el }: CommentWriteProps) {
+export default function CommentWrite({
+  isEdit,
+  commentId,
+  el,
+}: CommentWriteProps) {
   const {
     writer,
     password,
@@ -26,6 +30,7 @@ export default function CommentWrite({ isEdit, commentId, el }: CommentWriteProp
     onClickCreateComment,
     value,
     setValue,
+    isFormValid,
   } = useCommentWrite();
   const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
   const { data } = useQuery(FETCH_BOARD_COMMENTS);
@@ -63,7 +68,7 @@ export default function CommentWrite({ isEdit, commentId, el }: CommentWriteProp
   };
 
   return isEdit ? (
-    <>
+    <div className={styles.댓글수정영역}>
       <div>
         <Rate allowHalf value={value} onChange={setValue} />
       </div>
@@ -116,6 +121,7 @@ export default function CommentWrite({ isEdit, commentId, el }: CommentWriteProp
         </div>
         <div className={styles.댓글취소수정버튼}>
           <button
+            type="button"
             className={styles.댓글취소버튼}
             id="댓글취소버튼"
             // onClick={onClickCancleEdit}
@@ -123,15 +129,19 @@ export default function CommentWrite({ isEdit, commentId, el }: CommentWriteProp
             취소
           </button>
           <button
-            className={styles.댓글수정버튼}
+            type="button"
+            className={`${styles.댓글수정버튼} ${
+              isFormValid ? styles.active : ""
+            }`}
             id="댓글수정버튼"
             onClick={onClickEdit}
+            disabled={!isFormValid}
           >
             수정하기
           </button>
         </div>
       </div>
-    </>
+    </div>
   ) : (
     <div className={styles.댓글작성}>
       <div className={styles.댓글아이콘}>
@@ -195,9 +205,10 @@ export default function CommentWrite({ isEdit, commentId, el }: CommentWriteProp
         </div>
         <div className={styles.댓글등록버튼}>
           <button
-            className={styles.댓글버튼}
+            className={`${styles.댓글버튼} ${isFormValid ? styles.active : ""}`}
             id="댓글등록버튼"
             onClick={onClickCreateComment}
+            disabled={!isFormValid}
           >
             댓글등록
           </button>

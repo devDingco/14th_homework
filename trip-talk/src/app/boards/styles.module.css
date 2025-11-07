@@ -26,6 +26,16 @@
   gap: 12px; /* date picker와 searchbar 사이 간격 */
   align-items: center;
 }
+
+.top_of_list img {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.top_of_list img:hover {
+  opacity: 0.8;
+}
+
 .datePicker {
   width: 289px;
   height: 48px;

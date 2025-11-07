@@ -49,6 +49,7 @@ export default function useCommentWrite() {
       setWriter(""); // useCommentWrite 훅 안에서 setter 받아서 초기화
       setPassword("");
       setComment("");
+      setValue(0); // 별점 초기화
       // router.push(`/boards/${board_params.boardId}`);
     } catch (error) {
       alert(error);
@@ -65,6 +66,10 @@ export default function useCommentWrite() {
     setComment(event.target.value);
   };
 
+  // 폼 유효성 검사: 작성자, 비밀번호, 댓글 내용이 모두 채워졌는지 확인
+  const isFormValid =
+    writer.trim() !== "" && password.trim() !== "" && comment.trim() !== "";
+
   return {
     writer,
     password,
@@ -76,5 +81,6 @@ export default function useCommentWrite() {
     onClickCreateComment,
     value,
     setValue,
+    isFormValid,
   };
 }

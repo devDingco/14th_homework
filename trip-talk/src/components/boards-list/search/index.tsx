@@ -6,10 +6,12 @@ import _ from "lodash";
 export default function SearchBar(props) {
   // const [keyword, setKeyword] = useState("");
   const getDebounce = _.debounce((value) => {
-    props.refetch({
+    // refetch 대신 queryVariables 업데이트
+    props.setQueryVariables((prev) => ({
+      ...prev,
       search: value,
       page: 1,
-    });
+    }));
     props.setKeyword(value);
   }, 500);
   const onChangeSearch = (event) => {

@@ -62,7 +62,7 @@ export default function BoardWrite(props) {
   return (
     <form
       onSubmit={
-        props.수정_둥록
+        props.수정_등록
           ? handleSubmit(onClickUpdate)
           : handleSubmit(onClickSubmit)
       }
@@ -118,7 +118,10 @@ export default function BoardWrite(props) {
                       ? "비밀번호를 수정할 수 없습니다."
                       : "비밀번호를 입력해 주세요."
                   }
-                  {...register("password")}
+                  disabled={props.수정_등록}
+                  {...register("password", {
+                    required: !props.수정_등록,
+                  })}
                 />
                 <div style={{ color: "red" }}>
                   {formState.errors.password?.message}
@@ -259,15 +262,19 @@ export default function BoardWrite(props) {
               </div>
             </div>
             <div className={styles.버튼영역}>
-              <button className={styles.취소버튼} onClick={onClickCancle}>
+              <button
+                type="button"
+                className={styles.취소버튼}
+                onClick={onClickCancle}
+              >
                 취소
               </button>
               <button
                 id="등록버튼ID"
+                type="submit"
                 className={`${styles.등록버튼} ${
                   isFormValid ? styles.active : ""
                 }`}
-                onClick={props.수정_등록 ? onClickUpdate : onClickSubmit}
                 disabled={!isFormValid}
               >
                 {props.수정_등록 ? "수정" : "등록"}

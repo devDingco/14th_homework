@@ -1,5 +1,19 @@
 /* styles.module.css */
 
+/* 스크롤 컨테이너 */
+.scrollableDiv {
+  height: 500px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  /* 스크롤바 숨기기 */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.scrollableDiv::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 /* 댓글 한 줄(외곽) */
 .댓글리스트 {
   width: 100%;

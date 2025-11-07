@@ -16,37 +16,76 @@ const { RangePicker } = DatePicker;
 export default function BoardsPage() {
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
-  const { data, refetch } = useQuery(FETCH_BOARDS, {
-    variables: {
-      search: "",
-      page: 1,
-      endDate: undefined,
-      startDate: undefined,
-    },
+
+  // 쿼리 변수를 상태로 관리
+  const [queryVariables, setQueryVariables] = useState<{
+    search: string;
+    page: number;
+    endDate?: string;
+    startDate?: string;
+  }>({
+    search: "",
+    page: 1,
+    endDate: undefined,
+    startDate: undefined,
   });
-  // refetch();
-  const { data: dataBoardsCount } = useQuery(FETCH_BOARDS_COUNT);
-  const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10);
+
+  const { data } = useQuery(FETCH_BOARDS, {
+    variables: queryVariables,
+    fetchPolicy: "cache-and-network", // ✅ 캐시 사용하면서도 서버 데이터도 가져옴
+  });
+
+  const {
+    data: dataBoardsCount,
+    loading: countLoading,
+    error: countError,
+  } = useQuery(FETCH_BOARDS_COUNT);
+
+  // 디버깅: 서버에서 받은 게시글 수 확인
+  console.log("=== 게시글 수 정보 ===");
+  console.log("전체 게시글 수:", dataBoardsCount?.fetchBoardsCount);
+  console.log("로딩 중:", countLoading);
+  console.log("에러:", countError);
+  console.log("현재 표시된 게시글 수:", data?.fetchBoards?.length);
+
+  const totalBoards = dataBoardsCount?.fetchBoardsCount ?? 0;
+  const lastPage = Math.ceil(totalBoards / 10);
+
+  console.log("총 게시글 수:", totalBoards);
+  console.log("마지막 페이지:", lastPage);
+
   const onClickMoveNew = () => {
     router.push("/boards/new");
   };
 
-  const onChangeDate = (dates: [Date, Date] | null) => {
-    if (dates) {
-      const [start, end] = dates;
-
-      refetch({
-        endDate: end.toISOString(),
-        startDate: start.toISOString(),
+  const onChangeDate = (
+    dates:
+      | null
+      | (
+          | [
+              { toISOString: () => string } | null,
+              { toISOString: () => string } | null
+            ]
+          | null
+        )
+  ) => {
+    if (dates && dates[0] && dates[1]) {
+      const [startDate, endDate] = dates;
+      // refetch 대신 variables 업데이트
+      setQueryVariables((prev) => ({
+        ...prev,
+        endDate: endDate.toISOString(),
+        startDate: startDate.toISOString(),
         page: 1,
-      });
+      }));
     } else {
       // 선택 해제 시 모든 게시물 조회
-      refetch({
+      setQueryVariables((prev) => ({
+        ...prev,
         startDate: undefined,
         endDate: undefined,
         page: 1,
-      });
+      }));
     }
   };
   return (
@@ -75,7 +114,7 @@ export default function BoardsPage() {
           <div>
             <SearchBar
               data={data?.fetchBoards}
-              refetch={refetch}
+              setQueryVariables={setQueryVariables}
               setKeyword={setKeyword}
             />
           </div>
@@ -94,9 +133,13 @@ export default function BoardsPage() {
         <BoardsListPage
           data={data?.fetchBoards}
           keyword={keyword}
-          refetch={refetch}
+          queryVariables={queryVariables}
         />
-        <Pagination lastPage={lastPage} refetch={refetch} />
+        <Pagination
+          lastPage={lastPage}
+          setQueryVariables={setQueryVariables}
+          currentPage={queryVariables.page}
+        />
       </div>
     </div>
   );

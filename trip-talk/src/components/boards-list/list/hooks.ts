@@ -1,10 +1,15 @@
 "use client";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
-import { MouseEvent, useEffect, useState } from "react";
-import { FETCH_BOARDS, DELETE_BOARD, FECTH_BOARDS_COUNT } from "./queries";
+import { MouseEvent } from "react";
+import { FETCH_BOARDS, DELETE_BOARD } from "./queries";
 
-export default function useBoardsPage(refetch) {
+export default function useBoardsPage(queryVariables: {
+  search: string;
+  page: number;
+  endDate?: string;
+  startDate?: string;
+}) {
   const router = useRouter();
   const [deleteBoard] = useMutation(DELETE_BOARD);
   // const [page, setPage] = useState(1);
@@ -27,9 +32,8 @@ export default function useBoardsPage(refetch) {
         variables: {
           boardId_: event.currentTarget.id,
         },
-        refetchQueries: [
-          { query: FETCH_BOARDS, variables: { search: "", page: 1 } },
-        ],
+        // refetchQueries 대신 현재 쿼리 변수로 다시 조회
+        refetchQueries: [{ query: FETCH_BOARDS, variables: queryVariables }],
       });
       console.log("삭제완료");
       // await refetch();

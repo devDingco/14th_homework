@@ -1,5 +1,16 @@
+.댓글작성 {
+  width: 100%;
+  max-width: 1280px;
+  box-sizing: border-box;
+}
 .댓글작성 > * {
   margin: 24px 0; /* 수직 마진만 주고 싶으면 이렇게 */
+}
+/* 수정 모드 래퍼 */
+.댓글수정영역 {
+  width: 100%;
+  max-width: 1280px;
+  box-sizing: border-box;
 }
 
 .댓글아이콘 {
@@ -11,6 +22,7 @@
   display: flex;
   gap: 16px;
   padding-bottom: 16px;
+  flex-wrap: wrap; /* 화면이 좁을 때 줄바꿈 */
 }
 .작성자_라벨,
 .비밀번호_라벨 {
@@ -21,12 +33,37 @@
 }
 .댓글작성자,
 .댓글비밀번호 {
-  width: 312px;
+  width: 100%;
+  min-width: 200px;
+  max-width: 312px;
   height: 48px;
+  border: 1px solid #d9d9d9; /* 회색 경계선 */
+  border-radius: 4px;
+  padding: 0 12px; /* 내부 여백 */
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.댓글작성자:focus,
+.댓글비밀번호:focus {
+  outline: none;
+  border-color: #1890ff; /* 포커스 시 파란색 */
 }
 .댓글입력창 {
-  width: 1280px;
+  width: 100%;
+  max-width: 1280px;
   height: 144px;
+  border: 1px solid #d9d9d9; /* 회색 경계선 */
+  border-radius: 4px;
+  padding: 12px; /* 내부 여백 */
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  resize: none; /* 크기 조절 비활성화 */
+  box-sizing: border-box; /* padding 포함한 너비 계산 */
+}
+.댓글입력창:focus {
+  outline: none;
+  border-color: #1890ff; /* 포커스 시 파란색 */
 }
 .댓글 {
   color: #000;
@@ -39,9 +76,11 @@
   line-height: 24px; /* 150% */
 }
 .댓글등록버튼 {
-  width: 1280px;
+  width: 100%;
+  max-width: 1280px;
   display: flex;
   justify-content: flex-end;
+  box-sizing: border-box;
 }
 .댓글버튼 {
   width: 99px;
@@ -50,9 +89,12 @@
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-  background: var(--gray-300, #c7c7c7);
-  color: var(--gray-100, #e4e4e4);
+  background: var(--gray-300, #c7c7c7); /* 비활성 배경색 */
+  color: var(--gray-100, #e4e4e4); /* 비활성 텍스트색 */
   text-align: center;
+  border: none;
+  cursor: not-allowed; /* 비활성 시 커서 */
+  transition: all 0.3s ease;
 
   /* sb_18_24 */
   font-family: "Pretendard Variable";
@@ -61,11 +103,21 @@
   font-weight: 600;
   line-height: 24px; /* 133.333% */
 }
+.댓글버튼.active {
+  background: #000; /* 활성 배경색 */
+  color: #fff; /* 활성 텍스트색 */
+  cursor: pointer;
+}
+.댓글버튼.active:hover {
+  background: #333; /* 호버 시 약간 밝게 */
+}
 .댓글취소수정버튼 {
-  width: 1280px;
+  width: 100%;
+  max-width: 1280px;
   display: flex;
   justify-content: flex-end;
   gap: 16px;
+  box-sizing: border-box;
 }
 .댓글취소버튼 {
   width: 64px;
@@ -87,9 +139,12 @@
   width: 99px;
   height: 48px;
   border-radius: 8px;
-  background: var(--gray-B, #000);
-  color: #fff;
+  background: var(--gray-300, #c7c7c7); /* 비활성 배경색 */
+  color: var(--gray-100, #e4e4e4); /* 비활성 텍스트색 */
   text-align: center;
+  border: none;
+  cursor: not-allowed;
+  transition: all 0.3s ease;
 
   /* sb_18_24 */
   font-family: "Pretendard Variable";
@@ -97,4 +152,12 @@
   font-style: normal;
   font-weight: 400;
   line-height: 24px; /* 133.333% */
+}
+.댓글수정버튼.active {
+  background: var(--gray-B, #000); /* 활성 배경색 */
+  color: #fff; /* 활성 텍스트색 */
+  cursor: pointer;
+}
+.댓글수정버튼.active:hover {
+  background: #333; /* 호버 시 약간 밝게 */
 }

@@ -46,6 +46,7 @@ export default function Navigation() {
             alt="로고"
             width={51.52}
             height={32}
+            onClick={onClickMove}
           />
           <div 
             onClick={onClickBoard} 

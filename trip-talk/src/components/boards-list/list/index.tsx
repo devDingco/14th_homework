@@ -2,19 +2,27 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import useBoardsPage from "./hooks";
-import { FETCH_BOARDS, IFetchBoard } from "./queries";
-import { useState } from "react";
-import SearchBar from "../search";
-import { useQuery } from "@apollo/client";
+import { IFetchBoard } from "./queries";
 
-export default function BoardsListPage(props) {
+interface BoardsListPageProps {
+  data: IFetchBoard[];
+  keyword: string;
+  queryVariables: {
+    search: string;
+    page: number;
+    endDate?: string;
+    startDate?: string;
+  };
+}
+
+export default function BoardsListPage(props: BoardsListPageProps) {
   // const [page, setPage] = useState(1);
 
   // const { data } = useQuery(FETCH_BOARDS, {
   //   variables: { page },
   //   fetchPolicy: "cache-and-network", // ✅ 캐시 무시하고 서버 데이터 우선
   // });
-  const { onClickDeleteBoard, router } = useBoardsPage(props.refetch);
+  const { onClickDeleteBoard, router } = useBoardsPage(props.queryVariables);
 
   const boards = props.data?.map((el: IFetchBoard, index: number) => {
     const date = new Date(el.createdAt).toISOString().split("T")[0];

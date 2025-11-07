@@ -26,6 +26,10 @@
   gap: 24px;
 }
 
+.페이지선택 img {
+  cursor: pointer;
+}
+
 .탭 {
   cursor: pointer;
   padding-bottom: 4px;
@@ -55,9 +59,11 @@
 .프로필 {
   display: none;
   align-items: center;
+  cursor: pointer;
 }
 .login {
   display: none;
+  cursor: pointer;
 }
 
 /* .profile {
