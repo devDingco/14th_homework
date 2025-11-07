@@ -2,10 +2,12 @@
 
 import { useState } from 'react';
 import styles from './styles.module.css';
+import { useRouter } from 'next/navigation';
 
 export default function AccommodationSearch() {
   const [activeTab, setActiveTab] = useState<'available' | 'closed'>('available');
   const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter()
 
   const filters = [
     { id: 'single', label: '1인 전용', icon: '👤' },
@@ -84,7 +86,11 @@ export default function AccommodationSearch() {
         </div>
         <div className={styles.searchRight}>
           <button className={styles.searchButton}>검색</button>
-          <button className={styles.sellButton}>숙박권 판매하기</button>
+          <button 
+            className={styles.sellButton} 
+            onClick={() => router.push(`/accommodation/sell`)}>
+            숙박권 판매하기
+          </button>
         </div>
       </div>
 

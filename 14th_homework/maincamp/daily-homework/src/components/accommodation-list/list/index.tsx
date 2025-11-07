@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import styles from './styles.module.css';
 import { Props } from './types';
 
@@ -104,11 +105,16 @@ const mockData = [
 ];
 
 export default function AccommodationList({ accommodations = mockData }: Props) {
+  const route = useRouter();
   return (
     <div className={styles.layout}>
       <div className={styles.cardGrid}>
         {accommodations.map((accommodation) => (
-          <div key={accommodation.id} className={styles.card}>
+          <div
+            key={accommodation.id}
+            className={styles.card}
+            onClick={() => route.push(`accommodation-main/detail`)}
+          >
             <div className={styles.imageContainer}>
               <img
                 src={accommodation.imageUrl}
