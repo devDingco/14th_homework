@@ -1,0 +1,251 @@
+/* 배경 레이아웃 (백드롭) */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 모달 */
+.modal {
+  width: 480px;
+  min-height: 400px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease-out;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 콘텐츠 영역 */
+.content {
+  padding: 32px 24px 24px 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 타이틀 */
+.title {
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+}
+
+/* 충전 금액 표시 */
+.amountInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+}
+
+.amountLabel {
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666666;
+}
+
+.amount {
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2974e5;
+}
+
+/* 결제 수단 영역 */
+.paymentMethods {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 결제 카드 */
+.paymentCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #ffffff;
+}
+
+.paymentCard:hover {
+  border-color: #2974e5;
+  background-color: #f8f9ff;
+}
+
+.paymentCardActive {
+  border-color: #2974e5;
+  background-color: #f0f5ff;
+}
+
+/* 라디오 버튼 */
+.radioButton {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #c7c7c7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.paymentCardActive .radioButton {
+  border-color: #2974e5;
+}
+
+.radioButtonInner {
+  width: 12px;
+  height: 12px;
+  background-color: #2974e5;
+  border-radius: 50%;
+  animation: scaleIn 0.2s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* 결제 정보 */
+.paymentInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.paymentLogo {
+  display: flex;
+  align-items: center;
+}
+
+.kakaoPayLogo {
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.nicePayLogo {
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.paymentDescription {
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #666666;
+  margin: 0;
+  line-height: 18px;
+}
+
+/* 버튼 영역 */
+.buttonArea {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* 취소 버튼 */
+.cancelButton {
+  width: 120px;
+  height: 44px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #000000;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: #f5f5f5;
+}
+
+.cancelButton:active {
+  background-color: #e8e8e8;
+}
+
+/* 결제하기 버튼 */
+.paymentButton {
+  width: 120px;
+  height: 44px;
+  background-color: #2974e5;
+  border: none;
+  border-radius: 8px;
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.paymentButton:hover:not(:disabled) {
+  background-color: #1e5bbf;
+}
+
+.paymentButton:active:not(:disabled) {
+  background-color: #174a9a;
+}
+
+.paymentButton:disabled {
+  background-color: #c7c7c7;
+  cursor: not-allowed;
+}

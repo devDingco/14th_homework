@@ -1,4 +1,4 @@
-import { Bookmarks } from '../../../../components/pages/Bookmarks';
+import { Bookmarks } from "../../../../components/mypages/Bookmarks";
 
 export default function BookmarksPage() {
   return <Bookmarks />;

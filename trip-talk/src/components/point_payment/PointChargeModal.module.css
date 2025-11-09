@@ -1,0 +1,247 @@
+/* 배경 레이아웃 (백드롭) */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 모달 */
+.modal {
+  width: 480px;
+  height: 256px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease-out;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 콘텐츠 영역 */
+.content {
+  padding: 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 타이틀 */
+.title {
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+  color: #000000;
+  margin: 32px 0 24px 0;
+}
+
+/* 드롭다운 컨테이너 */
+.dropdownContainer {
+  position: relative;
+  width: 432px;
+  margin: 0 auto;
+}
+
+/* 드롭다운 */
+.dropdown {
+  width: 100%;
+  height: 40px;
+  background-color: #ffffff;
+  border: 1px solid #c7c7c7;
+  border-radius: 8px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dropdown:hover {
+  border-color: #2974e5;
+}
+
+.dropdownOpen {
+  border-color: #000000;
+}
+
+.placeholder {
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #919191;
+}
+
+.selectedText {
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #000000;
+}
+
+/* 화살표 아이콘 */
+.arrow {
+  transition: transform 0.3s ease;
+  color: #5f5f5f;
+}
+
+.arrowUp {
+  transform: rotate(180deg);
+}
+
+/* 드롭다운 리스트 */
+.dropdownList {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 10000;
+  animation: dropdownSlideDown 0.2s ease-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes dropdownSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 드롭다운 아이템 */
+.dropdownItem {
+  height: 40px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #5f5f5f;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdownItem:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.dropdownItem:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.dropdownItem:hover {
+  background-color: #f5f5f5;
+}
+
+.dropdownItemActive {
+  font-weight: 500;
+  color: #2974e5;
+}
+
+.checkIcon {
+  color: #2974e5;
+}
+
+/* 버튼 영역 */
+.buttonArea {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+/* 취소 버튼 */
+.cancelButton {
+  width: 120px;
+  height: 40px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #000000;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: #f5f5f5;
+}
+
+.cancelButton:active {
+  background-color: #e8e8e8;
+}
+
+/* 충전하기 버튼 */
+.chargeButton {
+  width: 120px;
+  height: 40px;
+  background-color: #2974e5;
+  border: none;
+  border-radius: 8px;
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chargeButton:hover:not(:disabled) {
+  background-color: #1e5bbf;
+}
+
+.chargeButton:active:not(:disabled) {
+  background-color: #174a9a;
+}
+
+.chargeButton:disabled {
+  background-color: #c7c7c7;
+  cursor: not-allowed;
+}

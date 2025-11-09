@@ -1,4 +1,4 @@
-import { PointStatus } from '../../../components/pages/PointStatus';
+import { PointStatus } from "../../../components/mypages/PointStatus";
 
 export default function PointStatusPage() {
   return <PointStatus />;

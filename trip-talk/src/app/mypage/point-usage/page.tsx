@@ -1,4 +1,4 @@
-import { PointUsageAll } from '../../../components/pages/PointUsageAll';
+import { PointUsageAll } from "../../../components/mypages/PointUsageAll";
 
 export default function PointUsagePage() {
   return <PointUsageAll />;

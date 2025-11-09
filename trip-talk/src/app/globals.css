@@ -234,3 +234,37 @@ body {
 html {
   font-size: var(--font-size);
 }
+
+/* React Day Picker Custom Styles */
+.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #2974e5;
+  --rdp-background-color: #e7f3ff;
+  --rdp-accent-color-dark: #1e5bbf;
+  --rdp-background-color-dark: #2974e5;
+  --rdp-outline: 2px solid var(--rdp-accent-color);
+  --rdp-outline-selected: 2px solid var(--rdp-accent-color);
+}
+
+.rdp-day_selected {
+  background-color: var(--rdp-accent-color) !important;
+  color: white !important;
+}
+
+.rdp-day_selected:hover {
+  background-color: var(--rdp-accent-color-dark) !important;
+}
+
+.rdp-day:hover:not(.rdp-day_selected):not(.rdp-day_disabled) {
+  background-color: var(--rdp-background-color);
+}
+
+.rdp-day_disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.rdp-day_today {
+  font-weight: bold;
+  border: 1px solid var(--rdp-accent-color);
+}

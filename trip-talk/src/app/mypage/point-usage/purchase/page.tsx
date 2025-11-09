@@ -1,4 +1,4 @@
-import { PointPurchase } from '../../../../components/pages/PointPurchase';
+import { PointPurchase } from "../../../../components/mypages/PointPurchase";
 
 export default function PurchasePage() {
   return <PointPurchase />;
