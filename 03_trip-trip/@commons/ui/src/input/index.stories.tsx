@@ -1,11 +1,639 @@
-import { Input } from '.'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { Input, Textarea } from '.'
 
-export default {
+const meta = {
+  title: 'Commons/Components/Input',
   component: Input,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    status: {
+      control: 'select',
+      options: ['filled', 'error', 'selected&typing', 'disabled', 'read-only', 'enabled'],
+      description: 'Input 상태',
+    },
+    size: {
+      control: 'select',
+      options: ['s', 'm'],
+      description: 'Input 크기',
+    },
+    filled: {
+      control: 'select',
+      options: ['on', 'off'],
+      description: '값 입력 여부',
+    },
+    label: {
+      control: 'text',
+      description: '라벨 텍스트',
+    },
+    required: {
+      control: 'boolean',
+      description: '필수 입력 여부',
+    },
+    errorMessage: {
+      control: 'text',
+      description: '에러 메시지',
+    },
+    showButton: {
+      control: 'boolean',
+      description: '버튼 표시 여부',
+    },
+    buttonText: {
+      control: 'text',
+      description: '버튼 텍스트',
+    },
+    onButtonClick: {
+      action: 'button-clicked',
+      description: '버튼 클릭 핸들러',
+    },
+    placeholder: {
+      control: 'text',
+      description: '플레이스홀더 텍스트',
+    },
+    className: {
+      control: 'text',
+      description: '추가 CSS 클래스',
+    },
+  },
+} satisfies Meta<typeof Input>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+  args: {
+    placeholder: '입력하세요',
+  },
 }
 
-export const Basic = {
-  render: () => {
-    return <Input />
+export const WithLabel: Story = {
+  args: {
+    label: '라벨',
+    placeholder: '입력하세요',
   },
+}
+
+export const Required: Story = {
+  args: {
+    label: '필수 입력',
+    required: true,
+    placeholder: '입력하세요',
+  },
+}
+
+export const Small: Story = {
+  args: {
+    size: 's',
+    label: 'Small 크기',
+    placeholder: '입력하세요',
+  },
+}
+
+export const Medium: Story = {
+  args: {
+    size: 'm',
+    label: 'Medium 크기',
+    placeholder: '입력하세요',
+  },
+}
+
+export const Enabled: Story = {
+  args: {
+    status: 'enabled',
+    label: 'Enabled 상태',
+    placeholder: '입력하세요',
+  },
+}
+
+export const EnabledFilled: Story = {
+  args: {
+    status: 'enabled',
+    filled: 'on',
+    label: 'Enabled (값 입력됨)',
+    defaultValue: '입력된 값',
+  },
+}
+
+export const Filled: Story = {
+  args: {
+    status: 'filled',
+    filled: 'on',
+    label: 'Filled 상태',
+    defaultValue: '입력된 값',
+  },
+}
+
+export const SelectedTyping: Story = {
+  args: {
+    status: 'selected&typing',
+    label: 'Selected & Typing 상태',
+    placeholder: '입력하세요',
+  },
+}
+
+export const SelectedTypingFilled: Story = {
+  args: {
+    status: 'selected&typing',
+    filled: 'on',
+    label: 'Selected & Typing (값 입력됨)',
+    defaultValue: '입력된 값',
+  },
+}
+
+export const Error: Story = {
+  args: {
+    status: 'error',
+    label: '에러 상태',
+    errorMessage: '에러 메시지가 표시됩니다',
+    placeholder: '입력하세요',
+  },
+}
+
+export const ErrorFilled: Story = {
+  args: {
+    status: 'error',
+    filled: 'on',
+    label: '에러 상태 (값 입력됨)',
+    errorMessage: '에러 메시지가 표시됩니다',
+    defaultValue: '잘못된 값',
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    status: 'disabled',
+    label: 'Disabled 상태',
+    placeholder: '입력할 수 없습니다',
+  },
+}
+
+export const ReadOnly: Story = {
+  args: {
+    status: 'read-only',
+    label: 'Read-only 상태',
+    defaultValue: '읽기 전용 값',
+  },
+}
+
+export const DisabledWithButton: Story = {
+  args: {
+    status: 'disabled',
+    label: 'Disabled 상태 + 버튼',
+    showButton: true,
+    buttonText: '우편번호 검색',
+    placeholder: '입력할 수 없습니다',
+  },
+}
+
+export const WithButton: Story = {
+  args: {
+    label: '버튼이 있는 Input',
+    showButton: true,
+    buttonText: '우편번호 검색',
+    placeholder: '입력하세요',
+  },
+}
+
+export const SmallWithButton: Story = {
+  args: {
+    size: 's',
+    label: 'Small 크기 + 버튼',
+    showButton: true,
+    buttonText: '우편번호 검색',
+    placeholder: '입력하세요',
+  },
+}
+
+export const MediumWithButton: Story = {
+  args: {
+    size: 'm',
+    label: 'Medium 크기 + 버튼',
+    showButton: true,
+    buttonText: '우편번호 검색',
+    placeholder: '입력하세요',
+  },
+}
+
+export const AllStatuses: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '400px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>Enabled 상태</h3>
+        <Input
+          status="enabled"
+          filled="off"
+          label="Enabled (filled: off)"
+          placeholder="입력하세요"
+        />
+        <Input status="enabled" filled="on" label="Enabled (filled: on)" defaultValue="입력된 값" />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>Filled 상태</h3>
+        <Input status="filled" filled="on" label="Filled" defaultValue="입력된 값" />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>Selected & Typing 상태</h3>
+        <Input
+          status="selected&typing"
+          filled="off"
+          label="Selected & Typing (filled: off)"
+          placeholder="입력하세요"
+        />
+        <Input
+          status="selected&typing"
+          filled="on"
+          label="Selected & Typing (filled: on)"
+          defaultValue="입력된 값"
+        />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>Error 상태</h3>
+        <Input
+          status="error"
+          filled="off"
+          label="Error (filled: off)"
+          errorMessage="에러 메시지"
+          placeholder="입력하세요"
+        />
+        <Input
+          status="error"
+          filled="on"
+          label="Error (filled: on)"
+          errorMessage="에러 메시지"
+          defaultValue="잘못된 값"
+        />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>
+          Disabled & Read-only 상태
+        </h3>
+        <Input status="disabled" label="Disabled" placeholder="입력할 수 없습니다" />
+        <Input status="read-only" label="Read-only" defaultValue="읽기 전용 값" />
+      </div>
+    </div>
+  ),
+}
+
+export const AllSizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '400px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>Small 크기</h3>
+        <Input size="s" label="Small Input" placeholder="입력하세요" />
+        <Input size="s" label="Small Input (필수)" required placeholder="입력하세요" />
+        <Input
+          size="s"
+          label="Small Input (에러)"
+          status="error"
+          errorMessage="에러 메시지"
+          placeholder="입력하세요"
+        />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>Medium 크기</h3>
+        <Input size="m" label="Medium Input" placeholder="입력하세요" />
+        <Input size="m" label="Medium Input (필수)" required placeholder="입력하세요" />
+        <Input
+          size="m"
+          label="Medium Input (에러)"
+          status="error"
+          errorMessage="에러 메시지"
+          placeholder="입력하세요"
+        />
+      </div>
+    </div>
+  ),
+}
+
+export const WithButtonVariants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '400px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>
+          버튼이 있는 Input (Small)
+        </h3>
+        <Input size="s" label="Small + 버튼" showButton placeholder="입력하세요" />
+        <Input size="s" label="Small + 버튼 (필수)" showButton required placeholder="입력하세요" />
+        <Input
+          size="s"
+          label="Small + 버튼 (에러)"
+          showButton
+          status="error"
+          errorMessage="에러 메시지"
+          placeholder="입력하세요"
+        />
+        <Input
+          size="s"
+          label="Small + 버튼 (Disabled)"
+          showButton
+          status="disabled"
+          placeholder="입력할 수 없습니다"
+        />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>
+          버튼이 있는 Input (Medium)
+        </h3>
+        <Input size="m" label="Medium + 버튼" showButton placeholder="입력하세요" />
+        <Input size="m" label="Medium + 버튼 (필수)" showButton required placeholder="입력하세요" />
+        <Input
+          size="m"
+          label="Medium + 버튼 (에러)"
+          showButton
+          status="error"
+          errorMessage="에러 메시지"
+          placeholder="입력하세요"
+        />
+        <Input
+          size="m"
+          label="Medium + 버튼 (Disabled)"
+          showButton
+          status="disabled"
+          placeholder="입력할 수 없습니다"
+        />
+      </div>
+    </div>
+  ),
+}
+
+// ============================================
+// Textarea Stories
+// ============================================
+
+const textareaMeta = {
+  title: 'Commons/Components/Textarea',
+  component: Textarea,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    status: {
+      control: 'select',
+      options: ['filled', 'error', 'selected&typing', 'disabled', 'read-only', 'enabled'],
+      description: 'Textarea 상태',
+    },
+    size: {
+      control: 'select',
+      options: ['s', 'm'],
+      description: 'Textarea 크기',
+    },
+    filled: {
+      control: 'select',
+      options: ['on', 'off'],
+      description: '값 입력 여부',
+    },
+    label: {
+      control: 'text',
+      description: '라벨 텍스트',
+    },
+    required: {
+      control: 'boolean',
+      description: '필수 입력 여부',
+    },
+    errorMessage: {
+      control: 'text',
+      description: '에러 메시지',
+    },
+    placeholder: {
+      control: 'text',
+      description: '플레이스홀더 텍스트',
+    },
+    className: {
+      control: 'text',
+      description: '추가 CSS 클래스',
+    },
+  },
+} satisfies Meta<typeof Textarea>
+
+// textareaMeta는 타입 체크를 위해 사용됨
+void textareaMeta
+
+type TextareaStory = StoryObj<Meta<typeof Textarea>>
+
+export const TextareaDefault: TextareaStory = {
+  args: {
+    placeholder: '내용을 입력하세요',
+  },
+}
+
+export const TextareaWithLabel: TextareaStory = {
+  args: {
+    label: '내용',
+    placeholder: '내용을 입력하세요',
+  },
+}
+
+export const TextareaRequired: TextareaStory = {
+  args: {
+    label: '필수 입력',
+    required: true,
+    placeholder: '내용을 입력하세요',
+  },
+}
+
+export const TextareaSmall: TextareaStory = {
+  args: {
+    size: 's',
+    label: 'Small 크기',
+    placeholder: '내용을 입력하세요',
+  },
+}
+
+export const TextareaMedium: TextareaStory = {
+  args: {
+    size: 'm',
+    label: 'Medium 크기',
+    placeholder: '내용을 입력하세요',
+  },
+}
+
+export const TextareaEnabled: TextareaStory = {
+  args: {
+    status: 'enabled',
+    label: 'Enabled 상태',
+    placeholder: '내용을 입력하세요',
+  },
+}
+
+export const TextareaEnabledFilled: TextareaStory = {
+  args: {
+    status: 'enabled',
+    filled: 'on',
+    label: 'Enabled (값 입력됨)',
+    defaultValue: '입력된 내용입니다.\n여러 줄의 텍스트를 입력할 수 있습니다.',
+  },
+}
+
+export const TextareaFilled: TextareaStory = {
+  args: {
+    status: 'filled',
+    filled: 'on',
+    label: 'Filled 상태',
+    defaultValue: '입력된 내용입니다.\n여러 줄의 텍스트를 입력할 수 있습니다.',
+  },
+}
+
+export const TextareaSelectedTyping: TextareaStory = {
+  args: {
+    status: 'selected&typing',
+    label: 'Selected & Typing 상태',
+    placeholder: '내용을 입력하세요',
+  },
+}
+
+export const TextareaSelectedTypingFilled: TextareaStory = {
+  args: {
+    status: 'selected&typing',
+    filled: 'on',
+    label: 'Selected & Typing (값 입력됨)',
+    defaultValue: '입력된 내용입니다.\n여러 줄의 텍스트를 입력할 수 있습니다.',
+  },
+}
+
+export const TextareaError: TextareaStory = {
+  args: {
+    status: 'error',
+    label: '에러 상태',
+    errorMessage: '에러 메시지가 표시됩니다',
+    placeholder: '내용을 입력하세요',
+  },
+}
+
+export const TextareaErrorFilled: TextareaStory = {
+  args: {
+    status: 'error',
+    filled: 'on',
+    label: '에러 상태 (값 입력됨)',
+    errorMessage: '에러 메시지가 표시됩니다',
+    defaultValue: '잘못된 내용',
+  },
+}
+
+export const TextareaDisabled: TextareaStory = {
+  args: {
+    status: 'disabled',
+    label: 'Disabled 상태',
+    placeholder: '입력할 수 없습니다',
+  },
+}
+
+export const TextareaReadOnly: TextareaStory = {
+  args: {
+    status: 'read-only',
+    label: 'Read-only 상태',
+    defaultValue: '읽기 전용 내용입니다.\n수정할 수 없습니다.',
+  },
+}
+
+export const TextareaAllStatuses: TextareaStory = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '600px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>Enabled 상태</h3>
+        <Textarea
+          status="enabled"
+          filled="off"
+          label="Enabled (filled: off)"
+          placeholder="내용을 입력하세요"
+        />
+        <Textarea
+          status="enabled"
+          filled="on"
+          label="Enabled (filled: on)"
+          defaultValue="입력된 내용입니다.\n여러 줄의 텍스트를 입력할 수 있습니다."
+        />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>Filled 상태</h3>
+        <Textarea
+          status="filled"
+          filled="on"
+          label="Filled"
+          defaultValue="입력된 내용입니다.\n여러 줄의 텍스트를 입력할 수 있습니다."
+        />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>Selected & Typing 상태</h3>
+        <Textarea
+          status="selected&typing"
+          filled="off"
+          label="Selected & Typing (filled: off)"
+          placeholder="내용을 입력하세요"
+        />
+        <Textarea
+          status="selected&typing"
+          filled="on"
+          label="Selected & Typing (filled: on)"
+          defaultValue="입력된 내용입니다.\n여러 줄의 텍스트를 입력할 수 있습니다."
+        />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>Error 상태</h3>
+        <Textarea
+          status="error"
+          filled="off"
+          label="Error (filled: off)"
+          errorMessage="에러 메시지"
+          placeholder="내용을 입력하세요"
+        />
+        <Textarea
+          status="error"
+          filled="on"
+          label="Error (filled: on)"
+          errorMessage="에러 메시지"
+          defaultValue="잘못된 내용"
+        />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>
+          Disabled & Read-only 상태
+        </h3>
+        <Textarea status="disabled" label="Disabled" placeholder="입력할 수 없습니다" />
+        <Textarea
+          status="read-only"
+          label="Read-only"
+          defaultValue="읽기 전용 내용입니다.\n수정할 수 없습니다."
+        />
+      </div>
+    </div>
+  ),
+}
+
+export const TextareaAllSizes: TextareaStory = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '600px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>Small 크기</h3>
+        <Textarea size="s" label="Small Textarea" placeholder="내용을 입력하세요" />
+        <Textarea size="s" label="Small Textarea (필수)" required placeholder="내용을 입력하세요" />
+        <Textarea
+          size="s"
+          label="Small Textarea (에러)"
+          status="error"
+          errorMessage="에러 메시지"
+          placeholder="내용을 입력하세요"
+        />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>Medium 크기</h3>
+        <Textarea size="m" label="Medium Textarea" placeholder="내용을 입력하세요" />
+        <Textarea
+          size="m"
+          label="Medium Textarea (필수)"
+          required
+          placeholder="내용을 입력하세요"
+        />
+        <Textarea
+          size="m"
+          label="Medium Textarea (에러)"
+          status="error"
+          errorMessage="에러 메시지"
+          placeholder="내용을 입력하세요"
+        />
+      </div>
+    </div>
+  ),
 }
