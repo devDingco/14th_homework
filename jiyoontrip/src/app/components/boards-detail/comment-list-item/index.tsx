@@ -6,7 +6,6 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 import { useMutation } from "@apollo/client";
 import { UPDATE__BOARD__COMMENT } from "./queries";
-import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
 const grayStar = "/images/graystar.webp";
 const yellowStar = "/images/yellowstar.webp";
 
@@ -60,12 +59,6 @@ export default function CommentItem({ el }: any) {
         password: password,
         boardCommentId: el._id,
       },
-      refetchQueries: [
-        {
-          query: FetchBoardCommentsDocument,
-          variables: { boardId: el.boardId ?? "" },
-        },
-      ],
     });
     console.log(result);
   };

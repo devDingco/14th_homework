@@ -1,0 +1,489 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.bestItemArea {
+  width: 1280px;
+  height: 688px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 36px;
+  color: #000000;
+  margin: 0 0 24px 0;
+}
+
+.carouselArea {
+  display: flex;
+  gap: 24px;
+  height: 628px;
+}
+
+.accommodationCard {
+  width: 628px;
+  height: 628px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+}
+
+.cardImage {
+  display: none;
+}
+
+.cardOverlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 29.14%, rgba(0, 0, 0, 0.9) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+}
+
+.bookmarkBadge {
+  display: flex;
+  justify-content: center;
+  align-self: flex-end;
+}
+
+.bookmarkBadgeContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  padding: 4px 8px;
+  width: 53px;
+  height: 32px;
+  color: #ffffff;
+  font-family: Pretendard Variable;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cardContent h3 {
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.description {
+  font-family: Pretendard Variable;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #ffffff;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.priceArea {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.price {
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: #ffffff;
+}
+
+.unit {
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: #ffffff;
+}
+
+.gap {
+  width: 1280px;
+  height: 64px;
+}
+
+.miniBanner {
+  width: 1280px;
+  height: 240px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+}
+
+.bannerContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.bannerImageLeft {
+  flex: 1;
+  display: flex;
+}
+
+.bannerImageLeft img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bannerTextArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 48px 109px;
+  background-color: #cccbb4;
+}
+
+.badgeGroup {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.badge {
+  background-color: #abaa8c;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: Pretendard Variable;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23.4px;
+  color: #ffffff;
+}
+
+.bannerTitle {
+  font-family: Pretendard Variable;
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 44.2px;
+  color: #000000;
+  margin: 0;
+  text-align: right;
+}
+
+.main {
+  width: 1280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainTitle {
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 36px;
+  color: #000000;
+  margin: 0 0 24px 0;
+}
+
+.tabsArea {
+  display: flex;
+  gap: 16px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 0;
+  width: 262px;
+  margin-bottom: 24px;
+}
+
+.tab {
+  width: 123px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  font-family: Pretendard Variable;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #525252;
+  background-color: #ffffff;
+  cursor: pointer;
+  text-align: center;
+}
+
+.tabActive {
+  background-color: #000000;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.searchArea {
+  margin-bottom: 24px;
+}
+
+.searchRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.searchGroup {
+  display: flex;
+  gap: 16px;
+}
+
+.datePicker {
+  width: 289px;
+  height: 48px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  border: none;
+}
+
+.searchInputWrapper {
+  width: 640px;
+  height: 48px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+}
+
+.searchIcon {
+  margin-right: 8px;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: Pretendard Variable;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #919191;
+  outline: none;
+}
+
+.searchButton {
+  width: 64px;
+  height: 48px;
+  background-color: #000000;
+  border-radius: 8px;
+  border: none;
+  font-family: Pretendard Variable;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.sellButton {
+  width: 178px;
+  height: 48px;
+  background-color: #2974e5;
+  border-radius: 8px;
+  border: none;
+  font-family: Pretendard Variable;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.filterArea {
+  display: flex;
+  gap: 47.5px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 16px 0;
+  margin-bottom: 32px;
+  justify-content: center;
+}
+
+.filterItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.filterItem span {
+  font-family: Pretendard Variable;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #333333;
+  text-align: center;
+}
+
+.cardArea {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  row-gap: 32px;
+}
+
+.card {
+  width: 296px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardImageWrapper {
+  width: 296px;
+  height: 296px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+}
+
+.cardImg {
+  display: none;
+}
+
+.cardBookmark {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+.cardBookmarkContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  padding: 4px 8px;
+  width: 53px;
+  height: 32px;
+  color: #ffffff;
+  font-family: Pretendard Variable;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 12px;
+}
+
+.cardTitle {
+  font-family: Pretendard Variable;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #333333;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cardSubtitle {
+  font-family: Pretendard Variable;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #5f5f5f;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tagArea {
+  font-family: Pretendard Variable;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #2974e5;
+  margin: 8px 0;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profileArea {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.profileImg {
+  border-radius: 50%;
+}
+
+.profileName {
+  font-family: Pretendard Variable;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: #5f5f5f;
+}
+
+.cardPriceArea {
+  display: flex;
+  gap: 4px;
+}
+
+.cardPrice {
+  font-family: Pretendard Variable;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #1c1c1c;
+}
+
+.cardUnit {
+  font-family: Pretendard Variable;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #1c1c1c;
+}
+
+.gapLast {
+  width: 1280px;
+  height: 60px;
+}

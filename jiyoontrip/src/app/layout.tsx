@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ApolloSetting from "./commons/settings/apollo-setting";
 import Layout from "./commons/layout";
+import ModalProvider from "./commons/providers/modal/modal.provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,7 +24,9 @@ export default function RootLayout({ children }: IProps) {
     <html lang="ko">
       <body className={`${globalFont.variable}`}>
         <ApolloSetting>
-          <Layout>{children}</Layout>
+          <ModalProvider>
+            <Layout>{children}</Layout>
+          </ModalProvider>
         </ApolloSetting>
       </body>
     </html>

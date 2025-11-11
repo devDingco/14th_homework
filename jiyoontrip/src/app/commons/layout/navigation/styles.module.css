@@ -23,6 +23,11 @@
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
+  cursor: pointer;
+}
+
+.navigation__left__menu__size__active {
+  border-bottom: 1px solid #000;
 }
 
 .navigation__right {
@@ -33,6 +38,7 @@
 .logo {
   width: 3.22006rem;
   height: 2rem;
+  cursor: pointer;
 }
 .loginButton {
   display: flex;

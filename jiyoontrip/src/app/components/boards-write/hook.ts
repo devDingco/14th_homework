@@ -144,9 +144,6 @@ export default function useBoardWrite() {
           password: passwordPrmpt,
           boardId: String(params.boardId),
         },
-        refetchQueries: [
-          { query: FetchBoardDocument, variables: { boardId: String(params.boardId) } },
-        ],
       });
       setNewParams(result.data?.updateBoard._id ?? "");
       setIsCompleteModalOpen(true);

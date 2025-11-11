@@ -6,25 +6,26 @@ import styles from "./styles.module.css";
 import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
-import { CreateUserDocument } from "@/commons/graphql/graphql";
+// import { CreateUserDocument } from "@/commons/graphql/graphql";
+import { gql } from "@apollo/client";
 
-// const CREAT_USER = gql`
-//   mutation createUser($createUserInput: CreateUserInput!) {
-//     createUser(createUserInput: $createUserInput) {
-//       _id
-//       email
-//       name
-//       picture
-//       createdAt
-//       updatedAt
-//       deletedAt
-//     }
-//   }
-// `;
+const CREAT_USER = gql`
+  mutation createUser($createUserInput: CreateUserInput!) {
+    createUser(createUserInput: $createUserInput) {
+      _id
+      email
+      name
+      picture
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;
 
 export default function Home() {
   const router = useRouter();
-  const [createUser] = useMutation(CreateUserDocument);
+  const [createUser] = useMutation(CREAT_USER);
   const [isActive, setIsActive] = useState(false);
 
   const [email, setEmail] = useState("");

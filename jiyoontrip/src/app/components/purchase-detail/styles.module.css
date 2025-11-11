@@ -1,0 +1,522 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  width: 1280px;
+  height: 96px;
+  gap: 8px;
+}
+
+.titleTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 36px;
+}
+
+.titleText {
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 36px;
+  color: #000000;
+  margin: 0;
+}
+
+.titleIcons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.bookmarkBtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 53px;
+  height: 32px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  padding: 4px 8px;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+}
+
+.bookmarkCount {
+  font-family: Pretendard Variable;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffffff;
+}
+
+.subtitle {
+  font-family: Pretendard Variable;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #777777;
+  margin: 0;
+}
+
+.hashtags {
+  font-family: Pretendard Variable;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #2974e5;
+  margin: 0;
+}
+
+.gap24 {
+  width: 1280px;
+  height: 24px;
+}
+
+.purchaseArea {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  width: 1280px;
+  height: 480px;
+  overflow: hidden;
+}
+
+.mainImage {
+  display: flex;
+  width: 640px;
+  height: 480px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.thumbnailList {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  height: 480px;
+}
+
+.thumbnailWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 180px;
+  flex: 1;
+}
+
+.thumbnail {
+  display: flex;
+  width: 180px;
+  height: 136px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.gradient {
+  display: flex;
+  width: 180px;
+  height: 480px;
+  margin-top: -480px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  pointer-events: none;
+}
+
+.gap80 {
+  width: 1280px;
+  height: 80px;
+}
+
+.divider {
+  width: 844px;
+  height: 1px;
+  background-color: #d4d3d3;
+  align-self: flex-start;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 844px;
+  gap: 16px;
+  align-self: flex-start;
+}
+
+.sectionTitle {
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  color: #333333;
+  margin: 0;
+}
+
+.description {
+  font-family: Pretendard Variable;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #333333;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.map {
+  display: flex;
+  flex-direction: column;
+  width: 844px;
+  gap: 16px;
+  align-self: flex-start;
+}
+
+.mapContainer {
+  display: flex;
+  width: 844px;
+  height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.mapImage {
+  width: 100%;
+  height: 100%;
+  background-color: #d9d9d9;
+  border: 1px solid #e4e4e4;
+  border-radius: 16px;
+}
+
+.gap40 {
+  width: 1280px;
+  height: 40px;
+}
+
+.retrospect {
+  display: flex;
+  flex-direction: column;
+  width: 1280px;
+  gap: 20px;
+}
+
+.retrospectContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+}
+
+.retrospectHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.retrospectTitle {
+  font-family: Pretendard Variable;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.inquiryForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 144px;
+  border: 1px solid #d4d3d3;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.inquiryInput {
+  flex: 1;
+  width: 100%;
+  padding: 12px 16px;
+  font-family: Pretendard Variable;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  resize: none;
+  outline: none;
+}
+
+.inquiryInput::placeholder {
+  color: #ababab;
+}
+
+.inputCount {
+  padding: 0 16px 12px 16px;
+  font-family: Pretendard Variable;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ababab;
+  text-align: right;
+}
+
+.inquiryButton {
+  align-self: flex-end;
+  width: 99px;
+  height: 48px;
+  background-color: #000000;
+  border: none;
+  border-radius: 8px;
+  font-family: Pretendard Variable;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.inquiryList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+}
+
+.noInquiry {
+  font-family: Pretendard Variable;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #777777;
+  text-align: center;
+  margin: 0;
+  padding: 20px 0;
+}
+
+.inquiryItem {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+}
+
+.inquiryItemHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 24px;
+}
+
+.inquiryProfile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+
+.inquiryProfileImage {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.inquiryProfileName {
+  font-family: Pretendard Variable;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: #5f5f5f;
+}
+
+.inquiryActions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.inquiryItemContent {
+  font-family: Pretendard Variable;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  margin: 0;
+}
+
+.inquiryItemFooter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 24px;
+}
+
+.inquiryDate {
+  font-family: Pretendard Variable;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #818181;
+}
+
+.purchaseBox {
+  display: flex;
+  flex-direction: column;
+  width: 412px;
+  height: 356px;
+  gap: 24px;
+}
+
+.purchaseCard {
+  display: flex;
+  flex-direction: column;
+  width: 412px;
+  height: 204px;
+  border: 1px solid #e4e4e4;
+  border-radius: 8px;
+  padding: 24px;
+  gap: 20px;
+}
+
+.priceInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.priceRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+}
+
+.priceAmount {
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: #000000;
+  margin: 0;
+}
+
+.priceUnit {
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: #000000;
+  margin: 0;
+}
+
+.purchaseNotice {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.noticeText {
+  font-family: Pretendard Variable;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #5f5f5f;
+  margin: 0;
+}
+
+.noticeTextLight {
+  font-family: Pretendard Variable;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: #5f5f5f;
+  margin: 0;
+}
+
+.purchaseButton {
+  width: 364px;
+  height: 52px;
+  background-color: #2974e5;
+  border: none;
+  border-radius: 8px;
+  font-family: Pretendard Variable;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.sellerCard {
+  display: flex;
+  flex-direction: column;
+  width: 412px;
+  height: 128px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  padding: 24px;
+  gap: 12px;
+}
+
+.sellerTitle {
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  color: #000000;
+  margin: 0;
+}
+
+.sellerProfile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+
+.sellerImageWrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.sellerName {
+  font-family: Pretendard Variable;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #333333;
+  margin: 0;
+}

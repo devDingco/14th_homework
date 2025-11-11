@@ -1,145 +1,6 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  width: 1280px;
-  margin: 0 auto;
-}
-
 .gap {
   width: 1280px;
   height: 40px;
-}
-
-.mypageLabel {
-  display: flex;
-  width: 1280px;
-  height: 36px;
-}
-
-.title {
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 36px;
-  color: #000000;
-  margin: 0;
-}
-
-.myprofile {
-  display: flex;
-  width: 1280px;
-  height: 296px;
-}
-
-.userInfoBox {
-  display: flex;
-  flex-direction: column;
-  width: 1280px;
-  padding: 24px;
-  background-color: #ffffff;
-  border: 1px solid #e4e4e4;
-  border-radius: 8px;
-}
-
-.userInfoTitle {
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px;
-  color: #000000;
-  margin: 0 0 12px 0;
-}
-
-.profileSection {
-  display: flex;
-  align-items: center;
-  height: 40px;
-}
-
-.profileImage {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #e4e4e4;
-  margin-right: 4px;
-}
-
-.profileName {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 20px;
-  color: #333333;
-  margin-right: 6px;
-}
-
-.dropdownIcon {
-  cursor: pointer;
-}
-
-.divider {
-  width: 100%;
-  height: 1px;
-  background-color: #e4e4e4;
-  margin: 12px 0;
-}
-
-.pointSection {
-  display: flex;
-  align-items: center;
-  height: 24px;
-}
-
-.pointValue {
-  display: flex;
-  align-items: center;
-  margin-left: 8px;
-}
-
-.pointNumber {
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 24px;
-  color: #000000;
-  margin-right: 4px;
-}
-
-.pointUnit {
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 24px;
-  color: #000000;
-}
-
-.menuSection {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.menuTab {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 40px;
-  padding: 8px 12px;
-  background-color: transparent;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.menuTabActive {
-  background-color: #f2f2f2;
-}
-
-.menuTabText {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  color: #000000;
-}
-
-.menuTabActive .menuTabText {
-  font-weight: 600;
 }
 
 .tabs {
@@ -253,6 +114,10 @@
   padding: 12px 0;
 }
 
+.tableRow:hover .deleteIconWrapper {
+  visibility: visible;
+}
+
 .tableCell {
   display: flex;
   align-items: center;
@@ -301,4 +166,24 @@
   font-weight: 300;
   line-height: 20px;
   color: #919191;
+}
+
+.deleteIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+  margin-right: 24px;
+  visibility: hidden;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.deleteIcon {
+  width: 24px;
+  height: 24px;
 }

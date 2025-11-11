@@ -1,70 +1,17 @@
 "use client";
-import styles from "./styles.module.css";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import Image from "next/image";
 import MyInput from "@/app/commons/components/input";
 import MyButton from "@/app/commons/components/button";
-import Image from "next/image";
-import { useState } from "react";
+import styles from "./styles.module.css";
 
-export default function Mypage() {
+export default function TransactionBookmark() {
   const { register, formState } = useForm({ mode: "onChange" });
   const [activeTab, setActiveTab] = useState<"myProduct" | "bookmark">("myProduct");
 
   return (
-    <div className={styles.container}>
-      <div className={styles.gap}></div>
-
-      <div className={styles.mypageLabel}>
-        <h1 className={styles.title}>마이 페이지</h1>
-      </div>
-      <div className={styles.gap}></div>
-      <div className={styles.myprofile}>
-        <div className={styles.userInfoBox}>
-          <div className={styles.profileSection}>
-            <div className={styles.profileImage}></div>
-            <span className={styles.profileName}>김상훈</span>
-          </div>
-          <div className={styles.divider}></div>
-          <div className={styles.pointSection}>
-            <Image src="/icons/outline/point.svg" alt="포인트" width={24} height={24} />
-            <div className={styles.pointValue}>
-              <span className={styles.pointNumber}>23,000</span>
-              <span className={styles.pointUnit}>P</span>
-            </div>
-          </div>
-          <div className={styles.divider}></div>
-          <div className={styles.menuSection}>
-            <button className={`${styles.menuTab} ${styles.menuTabActive}`}>
-              <span className={styles.menuTabText}>거래내역&북마크</span>
-              <Image
-                src="/icons/outline/right_arrow.svg"
-                alt="이동"
-                width={20}
-                height={20}
-              />
-            </button>
-            <button className={styles.menuTab}>
-              <span className={styles.menuTabText}>포인트 사용 내역</span>
-              <Image
-                src="/icons/outline/right_arrow.svg"
-                alt="이동"
-                width={20}
-                height={20}
-              />
-            </button>
-            <button className={styles.menuTab}>
-              <span className={styles.menuTabText}>비밀번호 변경</span>
-              <Image
-                src="/icons/outline/right_arrow.svg"
-                alt="이동"
-                width={20}
-                height={20}
-              />
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className={styles.gap}></div>
+    <>
       <div className={styles.tabs}>
         <button
           className={`${styles.tabButton} ${
@@ -168,6 +115,15 @@ export default function Mypage() {
                   >
                     <span className={styles.tableCellDate}>2024.12.16</span>
                   </div>
+                  <button className={styles.deleteIconWrapper}>
+                    <Image
+                      src="/icons/outline/delete.svg"
+                      alt="삭제"
+                      width={24}
+                      height={24}
+                      className={styles.deleteIcon}
+                    />
+                  </button>
                 </div>
               );
             })}
@@ -175,6 +131,6 @@ export default function Mypage() {
         </div>
       </div>
       <div className={styles.gap}></div>
-    </div>
+    </>
   );
 }

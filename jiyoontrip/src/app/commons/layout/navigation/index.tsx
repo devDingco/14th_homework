@@ -4,10 +4,12 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import { useQuery } from "@apollo/client";
 import { FETCH_USER_LOGGED_IN } from "./queires";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ROUTES } from "../../../commons/constants/url";
 export default function NavigationComponent() {
   const router = useRouter();
+  const pathname = usePathname();
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
   const [hasToken, setHasToken] = useState<boolean>(false);
 
@@ -19,17 +21,27 @@ export default function NavigationComponent() {
   const isLoggedIn = !!data?.fetchUserLoggedIn || hasToken;
 
   const onClickLogin = () => {
-    router.push("/auth/signin");
+    router.push(ROUTES.AUTH.SIGNIN);
   };
   const onClickHomepage = () => {
-    router.push("/boards");
+    router.push(ROUTES.BOARDS.LIST);
   };
+  const onClickPurchase = () => {
+    router.push(ROUTES.PURCHASE.LIST);
+  };
+  const onClickMypage = () => {
+    router.push(ROUTES.MYPAGE.TRANSACTION_BOOKMARK);
+  };
+
+  const isActiveBoards = pathname === ROUTES.BOARDS.LIST || pathname.startsWith("/boards");
+  const isActivePurchase = pathname === ROUTES.PURCHASE.LIST || pathname.startsWith("/purchase");
+  const isActiveMypage = pathname.startsWith("/mypage");
   return (
     <>
-      <div className={styles.navigation__layout}>
+      <div className={styles.navigation__layout} data-testid="navigation">
         <div className={styles.navigation}>
           <div className={styles.navigation__left}>
-            <button onClick={onClickHomepage}>
+            <button onClick={onClickHomepage} data-testid="nav-logo">
               <Image
                 className={styles.logo}
                 src="/images/logo.svg"
@@ -41,13 +53,26 @@ export default function NavigationComponent() {
             </button>
             <div className={styles.navigation__left__menu}>
               <button
-                className={styles.navigation__left__menu__size}
+                className={`${styles.navigation__left__menu__size} ${isActiveBoards ? styles.navigation__left__menu__size__active : ""}`}
                 onClick={onClickHomepage}
+                data-testid="nav-boards"
               >
                 트립토크
               </button>
-              <button className={styles.navigation__left__menu__size}>숙박권 구매</button>
-              <button className={styles.navigation__left__menu__size}>마이페이지</button>
+              <button
+                className={`${styles.navigation__left__menu__size} ${isActivePurchase ? styles.navigation__left__menu__size__active : ""}`}
+                onClick={onClickPurchase}
+                data-testid="nav-purchase"
+              >
+                숙박권 구매
+              </button>
+              <button
+                className={`${styles.navigation__left__menu__size} ${isActiveMypage ? styles.navigation__left__menu__size__active : ""}`}
+                onClick={onClickMypage}
+                data-testid="nav-mypage"
+              >
+                마이페이지
+              </button>
             </div>
           </div>
           <div className={styles.navigation__right}>
@@ -69,7 +94,7 @@ export default function NavigationComponent() {
                 />
               </>
             ) : (
-              <button className={styles.loginButton} onClick={onClickLogin}>
+              <button className={styles.loginButton} onClick={onClickLogin} data-testid="nav-login">
                 로그인
                 <Image
                   src="/icons/outline/whiterighticon.svg"

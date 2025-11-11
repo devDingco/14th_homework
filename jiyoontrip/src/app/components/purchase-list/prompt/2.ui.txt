@@ -1,0 +1,71 @@
+아래의 조건을 모두 적용하여, 아래의 요구사항을 모두 구현할 것.
+구현 결과를 체크리스트로 반환할 것.
+
+==============================================
+
+조건-커서룰) 아래의 커서룰을 적용하여 작업하고, 이 작업이 끝나면 해당 rules 적용 결과를 체크리스트로 반환할 것.
+            - @01-common.mdc
+            - @02-wireframe.mdc
+            - @03-ui.mdc
+
+==============================================
+
+조건-피그마) 활용할MCP: CursorTalkToFigmaMCP(채널명: x4qscrmo)
+
+조건-피그마) 구현될 컴포넌트 노드ID(best-item-area): 285:31930
+조건-피그마) 구현될 컴포넌트 노드ID(mini-banner): 285:31937
+조건-피그마) 구현될 컴포넌트 노드ID(main): 285:31948
+
+
+조건-파일경로) 구현될 TSX 파일경로: src/app/components/mypage/password-change/index.tsx
+조건-파일경로) 구현될 CSS 파일경로: src/app/components/mypage/password-change/styles.module.css
+
+
+==============================================
+
+조건-공통목록) 사용할 공통컴포넌트 목록
+            - <MyInput />, <MyButton />
+
+조건-공통목록) 사용할 색상 목록
+            - 피그마 디자인 그대로 구현할 것.
+         
+조건-공통목록) 사용할 타이포그래피 목록
+            - 피그마 디자인 그대로 구현할 것.
+
+조건-공통목록) 이미지, 아이콘 목록
+            - public/ 경로에 있는 이미지와 사진을 사용해서 구현할 것.
+
+
+==============================================
+
+기존히스토리-참고만) MCP를 연동하여 피그마의 디자인을 그대로 와이어프레임의 mypageLabel, myprofile, tabs, searchbar, listArea 영역에 그대로 소스코드로 구현할 것.
+
+기존히스토리-참고만)  적용될 공통컴포넌트 목록을 구현할 것.
+                1) main 
+                    - 예약 가능 숙소, 예약 마감 숙소: <MyButton />
+                    - DatePicker: 설치된 antd 라이브러리로 구현
+                    - 제목 검색 서치바: <MyInput />
+                    - 검색 버튼: <MyButton />
+                    - 숙박권 판매하기: <MyButton />
+
+기존히스토리-참고만) index.tsx,styles.module.css 만 구현할 것. hook 구현 금지
+
+==============================================
+
+기존히스토리-참고만) styles_bookmarkBadge 안에 아이콘이랑 24 숫자는 하나의 div로 묶고 가운데 정렬할 것.
+
+기존히스토리-참고만) bannerContent 안에 좌측 영역에 public/images/Solitary Contemplation Beneath Nature's Arch 1.png 파일 넣어서 피그마 디자인과 동일한 위치에 위치시킬 것.
+
+기존히스토리-참고만) DatePicker, 서치바, 검색버튼은 하나의 div로 묶고 숙박권 판매하기 버튼 사이를 justify-content로 처리해서 숙박권 판매하기 버튼이 오른쪽 끝에 붙게 해줘
+
+기존히스토리-참고만) cardImageWrapper 안에 이미지는 public/images/Rectangle 3011.png 파일 넣어서 피그마와 동일한 위치에 위치시킬 것.
+==============================================
+
+핵심요구사항) cardImageWrapper 안에 이미지는 public/images/Rectangle 3011.png 파일 넣어서 아래 노드ID 참고하여 피그마와 동일한 위치에 위치시킬 것.
+            사진 위에 북마크가 올라오게끔 구현할 것.
+            - 노드ID: 285:31989
+
+핵심요구사항) sellButton 버튼 안에 writeIcon 추가시키고 노드ID: 285:31958 참고해서 배치시킬 것.
+
+핵심요구사항) bannerTextArea 안에 배경색은 그라데이션이 아닌 하나의 색깔로 구현할 것. 아래 노드ID 참고.
+            - 노드ID: 285:31937
