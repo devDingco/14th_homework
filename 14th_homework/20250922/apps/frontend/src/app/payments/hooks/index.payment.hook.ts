@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@apollo/client";
+import { useQueryClient } from "@tanstack/react-query";
 // @ts-ignore - 포트원 SDK 타입 정의 문제로 임시 처리
 import * as PortOne from "@portone/browser-sdk/v2";
 import { v4 } from "uuid";
@@ -12,18 +13,22 @@ import { FETCH_USER_LOGGED_IN } from "@/commons/layout/navigation/queries";
 export function usePaymentSubscription() {
   const [isProcessing, setIsProcessing] = useState(false);
   const router = useRouter();
+  const queryClient = useQueryClient();
+
+  // 토큰을 먼저 초기화하여 첫 렌더에서도 로그인 여부를 정확히 판별
+  authManager.initializeToken();
+  const isLoggedInNow = authManager.isLoggedIn();
 
   // 로그인한 사용자 정보 조회
-  const { data } = useQuery(FETCH_USER_LOGGED_IN, {
-    skip: !authManager.isLoggedIn(),
+  const { data, refetch } = useQuery(FETCH_USER_LOGGED_IN, {
+    skip: !isLoggedInNow,
     errorPolicy: "ignore",
   });
 
-  const user = data?.fetchUserLoggedIn;
+  let user = data?.fetchUserLoggedIn;
 
   const subscribe = async (orderName: string, amount: number) => {
-    // 로그인 상태 확인
-    authManager.initializeToken();
+    // 로그인 상태 재확인
     const isLoggedIn = authManager.isLoggedIn();
 
     if (!isLoggedIn) {
@@ -31,9 +36,18 @@ export function usePaymentSubscription() {
       return;
     }
 
+    // 사용자 정보가 아직 로드되지 않은 경우 재조회
     if (!user?._id) {
-      alert("사용자 정보를 불러올 수 없습니다. 다시 시도해주세요.");
-      return;
+      try {
+        const refreshed = await refetch();
+        user = refreshed.data?.fetchUserLoggedIn;
+      } catch {
+        // noop
+      }
+      if (!user?._id) {
+        alert("사용자 정보를 불러올 수 없습니다. 다시 시도해주세요.");
+        return;
+      }
     }
 
     setIsProcessing(true);
@@ -115,6 +129,33 @@ export function usePaymentSubscription() {
       }
 
       // 1-3) 구독결제 성공 이후 로직
+      try {
+        if (typeof window !== "undefined") {
+          localStorage.setItem("isSubscribed", "true");
+          // 취소를 위해 서버에서 전달한 transactionKey(txId 또는 paymentId fallback)를 저장
+          if (paymentResult?.transactionKey) {
+            localStorage.setItem("lastTransactionKey", String(paymentResult.transactionKey));
+          } else if (paymentResult?.txId) {
+            localStorage.setItem("lastTransactionKey", String(paymentResult.txId));
+          } else if (paymentResult?.paymentId) {
+            localStorage.setItem("lastTransactionKey", String(paymentResult.paymentId));
+          }
+          window.dispatchEvent(new StorageEvent("storage", { key: "isSubscribed", newValue: "true" }));
+        }
+      } catch {
+        // localStorage 접근 실패는 무시
+      }
+      
+      // payment-status 쿼리를 invalidate하고 refetch하여 최신 상태로 갱신
+      // Supabase에 데이터가 저장될 때까지 약간의 지연을 두고 refetch
+      queryClient.invalidateQueries({ queryKey: ["payment-status"] });
+      queryClient.removeQueries({ queryKey: ["payment-status"] });
+      
+      // Supabase 저장 완료를 기다리기 위해 약간의 지연 후 refetch
+      setTimeout(async () => {
+        await queryClient.refetchQueries({ queryKey: ["payment-status"] });
+      }, 1000);
+      
       alert("구독에 성공하였습니다.");
       router.push("/secrets");
     } catch (error) {
