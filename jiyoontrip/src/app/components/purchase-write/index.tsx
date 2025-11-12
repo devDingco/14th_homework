@@ -3,10 +3,14 @@
 import { useForm } from "react-hook-form";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import Script from "next/script";
 import MyInput from "@/app/commons/components/input";
 import MyButton from "@/app/commons/components/button";
 import styles from "./styles.module.css";
 import "suneditor/dist/css/suneditor.min.css";
+import usePurchaseWriteModal from "./hooks/index.modal.hook";
+import usePurchaseWriteMap from "./hooks/index.map.hook";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 const SunEditor = dynamic(() => import("suneditor-react"), { ssr: false });
 
@@ -24,11 +28,19 @@ interface FormData {
 }
 
 export default function PurchaseWrite() {
-  const { register, formState } = useForm<FormData>({ mode: "onChange" });
-
+  const { register, formState, setValue, watch } = useForm<FormData>({ mode: "onChange" });
+  const { openAddressSearchModal } = usePurchaseWriteModal({ setValue });
+  const lat = watch("lat");
+  const lng = watch("lng");
+  usePurchaseWriteMap();
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
+    <>
+      <Script
+        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`}
+        strategy="beforeInteractive"
+      />
+      <div className={styles.page} data-testid="purchase-write-page">
+        <div className={styles.container}>
         <div className={styles.label}>숙박권 판매하기</div>
         <div className={styles.gap}></div>
 
@@ -152,8 +164,16 @@ export default function PurchaseWrite() {
                     name="zipcode"
                     placeholder="01234"
                     style={{ width: "82px", height: "48px" }}
+                    data-testid="zipcode-input"
                   />
-                  <button className={styles.searchButton}>우편번호 검색</button>
+                  <button
+                    type="button"
+                    className={styles.searchButton}
+                    onClick={openAddressSearchModal}
+                    data-testid="zipcode-search-button"
+                  >
+                    우편번호 검색
+                  </button>
                 </div>
               </div>
 
@@ -163,6 +183,7 @@ export default function PurchaseWrite() {
                   name="address"
                   placeholder="상세주소를 입력해 주세요."
                   style={{ width: "396px", height: "48px" }}
+                  data-testid="address-input"
                 />
               </div>
             </div>
@@ -183,6 +204,7 @@ export default function PurchaseWrite() {
                     backgroundColor: "#e4e4e4",
                     color: "#919191",
                   }}
+                  data-testid="lat-input"
                 />
               </div>
               <div className={styles.coordInput}>
@@ -200,6 +222,7 @@ export default function PurchaseWrite() {
                     backgroundColor: "#e4e4e4",
                     color: "#919191",
                   }}
+                  data-testid="lng-input"
                 />
               </div>
             </div>
@@ -207,10 +230,20 @@ export default function PurchaseWrite() {
 
           <div className={styles.addressRight}>
             <div className={styles.mapLabel}>상세 위치</div>
-            <div className={styles.mapPlaceholder}>
-              <span className={styles.mapPlaceholderText}>
-                주소를 먼저 입력해 주세요.
-              </span>
+            <div className={styles.mapPlaceholder} data-testid="map-area">
+              {lat && lng ? (
+                <Map
+                  center={{ lat: parseFloat(lat), lng: parseFloat(lng) }}
+                  style={{ width: "100%", height: "100%", borderRadius: "16px" }}
+                  level={3}
+                >
+                  <MapMarker position={{ lat: parseFloat(lat), lng: parseFloat(lng) }} />
+                </Map>
+              ) : (
+                <span className={styles.mapPlaceholderText} data-testid="map-placeholder">
+                  주소를 먼저 입력해 주세요.
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -247,7 +280,8 @@ export default function PurchaseWrite() {
         </div>
 
         <div className={styles.gap}></div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

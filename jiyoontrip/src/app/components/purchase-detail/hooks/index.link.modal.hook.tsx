@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { useModalStore } from "@/app/commons/stores/store";
 import Modal from "@/app/commons/components/modal";
+import PortOne from "@portone/browser-sdk/v2";
 
-export function usePurchaseModal() {
+export default function usePurchaseModal() {
   const { openModal, closeModal } = useModalStore();
+  const [selectedAmount, setSelectedAmount] = useState<string>("");
 
   const openPurchaseConfirmModal = () => {
     openModal(
@@ -21,7 +24,7 @@ export function usePurchaseModal() {
             openInsufficientPointModal();
           }}
         />
-      </div>
+      </div>,
     );
   };
 
@@ -40,8 +43,47 @@ export function usePurchaseModal() {
             openChargeModal();
           }}
         />
-      </div>
+      </div>,
     );
+  };
+
+  const handlePortOnePayment = async (amount: string) => {
+    try {
+      const storeId = process.env.NEXT_PUBLIC_PORTONE_STORE_ID;
+      const channelKey = process.env.NEXT_PUBLIC_PORTONE_CHANNEL_KEY;
+
+      if (!storeId || !channelKey) {
+        console.error("포트원 환경 변수가 설정되지 않았습니다.");
+        return;
+      }
+
+      const paymentId = `payment-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
+      const response = await PortOne.requestPayment({
+        storeId,
+        channelKey,
+        paymentId,
+        orderName: `포인트 충전 ${parseInt(amount).toLocaleString()}원`,
+        totalAmount: parseInt(amount),
+        currency: "KRW",
+        payMethod: "EASY_PAY",
+      });
+
+      if (!response) {
+        console.error("결제 응답이 없습니다.");
+        return;
+      }
+
+      if (response.code !== undefined) {
+        console.error("결제 실패:", response.message);
+        return;
+      }
+
+      console.log("결제 성공:", response);
+      closeModal();
+    } catch (error) {
+      console.error("결제 처리 중 오류:", error);
+    }
   };
 
   const openChargeModal = () => {
@@ -62,13 +104,17 @@ export function usePurchaseModal() {
           dropdownOptions={chargeOptions}
           onCancel={closeModal}
           onConfirm={() => {
-            closeModal();
+            if (selectedAmount) {
+              handlePortOnePayment(selectedAmount);
+            } else {
+              closeModal();
+            }
           }}
           onDropdownChange={(value) => {
-            console.log("Selected charge amount:", value);
+            setSelectedAmount(value);
           }}
         />
-      </div>
+      </div>,
     );
   };
 

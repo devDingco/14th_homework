@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./styles.module.css";
-import { usePurchaseModal } from "./hooks/index.link.modal.hook";
+import usePurchaseModal from "./hooks/index.link.modal.hook";
 
 export default function PurchaseDetail() {
   const { openPurchaseConfirmModal } = usePurchaseModal();

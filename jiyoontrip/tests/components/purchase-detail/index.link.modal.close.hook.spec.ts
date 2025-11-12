@@ -18,7 +18,9 @@ test.describe("구매 상세 페이지 모달 기능 테스트", () => {
 
     // 모달 내용 확인
     await expect(modal.locator("text=해당 숙박권을 구매 하시겠어요?")).toBeVisible();
-    await expect(modal.locator("text=해당 숙박권은 포인트로만 구매 가능합니다.")).toBeVisible();
+    await expect(
+      modal.locator("text=해당 숙박권은 포인트로만 구매 가능합니다.")
+    ).toBeVisible();
   });
 
   test("모달 배경 클릭시 모달이 닫힌다", async ({ page }) => {
@@ -81,9 +83,7 @@ test.describe("구매 상세 페이지 모달 기능 테스트", () => {
 
     // 모달 내용 확인
     await expect(insufficientModal.locator("text=포인트 부족")).toBeVisible();
-    await expect(
-      insufficientModal.locator("text=포인트가 부족합니다.")
-    ).toBeVisible();
+    await expect(insufficientModal.locator("text=포인트가 부족합니다.")).toBeVisible();
   });
 
   test("포인트 부족 모달에서 취소 버튼 클릭시 모달이 닫힌다", async ({ page }) => {
@@ -117,7 +117,9 @@ test.describe("구매 상세 페이지 모달 기능 테스트", () => {
     await expect(insufficientModal).toBeVisible();
 
     // 충전 버튼 클릭
-    const chargeButton = insufficientModal.locator('[data-testid="modal-confirm-button"]');
+    const chargeButton = insufficientModal.locator(
+      '[data-testid="modal-confirm-button"]'
+    );
     await chargeButton.click();
 
     // 충전 모달이 열렸는지 확인
@@ -137,7 +139,9 @@ test.describe("구매 상세 페이지 모달 기능 테스트", () => {
     await confirmButton.click();
 
     const insufficientModal = page.locator('[data-testid="modal-insufficient-point"]');
-    const chargeButton = insufficientModal.locator('[data-testid="modal-confirm-button"]');
+    const chargeButton = insufficientModal.locator(
+      '[data-testid="modal-confirm-button"]'
+    );
     await chargeButton.click();
 
     const chargeModal = page.locator('[data-testid="modal-charge"]');
@@ -162,7 +166,9 @@ test.describe("구매 상세 페이지 모달 기능 테스트", () => {
     await confirmButton.click();
 
     const insufficientModal = page.locator('[data-testid="modal-insufficient-point"]');
-    const chargeButton = insufficientModal.locator('[data-testid="modal-confirm-button"]');
+    const chargeButton = insufficientModal.locator(
+      '[data-testid="modal-confirm-button"]'
+    );
     await chargeButton.click();
 
     const chargeModal = page.locator('[data-testid="modal-charge"]');
@@ -180,11 +186,12 @@ test.describe("구매 상세 페이지 모달 기능 테스트", () => {
     }
 
     // 충전하기 버튼 클릭
-    const chargeConfirmButton = chargeModal.locator('[data-testid="modal-confirm-button"]');
+    const chargeConfirmButton = chargeModal.locator(
+      '[data-testid="modal-confirm-button"]'
+    );
     await chargeConfirmButton.click();
 
     // 모달이 닫혔는지 확인
     await expect(chargeModal).not.toBeVisible();
   });
 });
-

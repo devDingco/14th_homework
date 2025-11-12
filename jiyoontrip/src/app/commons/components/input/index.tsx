@@ -15,6 +15,7 @@ interface MyInputProps {
   defaultValue?: string;
   style?: CSSProperties;
   className?: string;
+  "data-testid"?: string;
 }
 
 export default function MyInput({
@@ -28,6 +29,7 @@ export default function MyInput({
   defaultValue,
   style,
   className,
+  "data-testid": dataTestId,
 }: MyInputProps) {
   return (
     <>
@@ -43,6 +45,7 @@ export default function MyInput({
           backgroundColor: isEdit === true ? "#f2f2f2" : "#fff",
           ...style,
         }}
+        data-testid={dataTestId}
       />
     </>
   );

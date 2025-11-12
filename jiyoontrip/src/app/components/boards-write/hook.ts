@@ -81,6 +81,7 @@ export default function useBoardWrite() {
     setValue("boardAddress.zipcode", data.zonecode);
     setValue("boardAddress.address", data.address);
     setIsModalOpen((prev) => !prev);
+    console.log(data);
   };
 
   const onClickSignup = async (formData: ISchema) => {
