@@ -5,13 +5,17 @@
 
 .layout {
   display: flex;
-  width: 1280px;
-  padding: 0 320px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   background-color: #fff;
   /* background-color: lightyellow; */
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .enroll-subject {
@@ -105,6 +109,7 @@
   width: 100%;
   height: 1px;
   background: var(--gray-100, #e4e4e4);
+  align-self: stretch;
 }
 
 .contents {
@@ -231,4 +236,3 @@
   flex-direction: column;
   gap: 8px;
 }
-
