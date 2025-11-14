@@ -1,11 +1,15 @@
 "use client";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useRouter, useParams } from "next/navigation";
 import { ChangeEvent, useState, useEffect, useMemo } from "react";
 import { UseFormReturn } from "react-hook-form";
-import { useAccessTokenStore } from "@/app/commons/stores/store";
-import { useModalStore } from "@/app/commons/stores/store";
+import { useRouter, useParams } from "next/navigation";
+import {
+  FetchTravelproductDocument,
+  FetchTravelproductQuery,
+} from "@/commons/graphql/graphql";
+import { print } from "graphql";
+import { useAccessTokenStore, useModalStore } from "@/app/commons/stores/store";
 import { ROUTES } from "@/app/commons/constants/url";
 import { checkValidationFile } from "@/app/commons/libraries/file-validaton";
 import {
@@ -15,43 +19,6 @@ import {
 } from "../queries";
 
 const GRAPHQL_ENDPOINT = "https://main-practice.codebootcamp.co.kr/graphql";
-
-const FETCH_TRAVELPRODUCT_QUERY = `
-  query fetchTravelproduct($travelproductId: ID!) {
-    fetchTravelproduct(travelproductId: $travelproductId) {
-      _id
-      name
-      remarks
-      contents
-      price
-      pickedCount
-      images
-      tags
-      travelproductAddress {
-        _id
-        address
-        addressDetail
-        zipcode
-        lat
-        lng
-      }
-      seller {
-        _id
-        name
-        picture
-      }
-      buyer {
-        _id
-        name
-        picture
-      }
-      createdAt
-      updatedAt
-      soldAt
-      deletedAt
-    }
-  }
-`;
 
 interface FormData {
   productName: string;
@@ -165,64 +132,57 @@ export default function usePurchaseWriteBinding({
   }, [uploadedImages, existingImages, deletedImages]);
 
   // 기존 데이터 로드 (수정 모드)
-  const { data: travelproductData, isLoading: isLoadingData } = useQuery({
+  const { data: travelproductData, isLoading: isLoadingData } = useQuery<
+    FetchTravelproductQuery
+  >({
     queryKey: ["fetchTravelproduct", travelproductId],
     queryFn: async () => {
-      if (!travelproductId) return null;
-      const result = await fetchGraphQL<{
-        fetchTravelproduct: {
-          _id: string;
-          name: string;
-          remarks: string;
-          contents: string;
-          price?: number;
-          tags?: string[];
-          images?: string[];
-          travelproductAddress?: {
-            zipcode?: string;
-            address?: string;
-            addressDetail?: string;
-            lat?: number;
-            lng?: number;
-          };
-        };
-      }>(FETCH_TRAVELPRODUCT_QUERY, { travelproductId }, accessToken);
-      return result.fetchTravelproduct;
+      if (!travelproductId) {
+        throw new Error("Travelproduct ID is required");
+      }
+      const queryString = print(FetchTravelproductDocument);
+      const result = await fetchGraphQL<FetchTravelproductQuery>(
+        queryString,
+        { travelproductId },
+        accessToken
+      );
+      return result;
     },
     enabled: isEditMode && !!travelproductId,
   });
 
   // 기존 데이터로 폼 초기화
   useEffect(() => {
-    if (travelproductData && isEditMode) {
+    if (travelproductData?.fetchTravelproduct && isEditMode) {
+      const data = travelproductData.fetchTravelproduct;
       // 폼 필드 매핑
       reset({
-        productName: travelproductData.name || "",
-        summary: travelproductData.remarks || "",
-        description: travelproductData.contents || "",
-        price: travelproductData.price?.toString() || "",
-        tags: travelproductData.tags?.join(", ") || "",
-        zipcode: travelproductData.travelproductAddress?.zipcode || "",
-        address: travelproductData.travelproductAddress?.address || "",
-        addressDetail: travelproductData.travelproductAddress?.addressDetail || "",
-        lat: travelproductData.travelproductAddress?.lat?.toString() || "",
-        lng: travelproductData.travelproductAddress?.lng?.toString() || "",
-        images: travelproductData.images || [],
+        productName: data.name || "",
+        summary: data.remarks || "",
+        description: data.contents || "",
+        price: data.price?.toString() || "",
+        tags: data.tags?.join(", ") || "",
+        zipcode: data.travelproductAddress?.zipcode || "",
+        address: data.travelproductAddress?.address || "",
+        addressDetail: data.travelproductAddress?.addressDetail || "",
+        lat: data.travelproductAddress?.lat?.toString() || "",
+        lng: data.travelproductAddress?.lng?.toString() || "",
+        images: data.images || [],
       });
 
       // SunEditor에 내용 설정
-      if (editorRef?.current && travelproductData.contents) {
+      if (editorRef?.current && data.contents) {
         const sunEditor = editorRef.current as {
           setContents: (content: string) => void;
         };
         if (sunEditor.setContents) {
-          sunEditor.setContents(travelproductData.contents);
+          sunEditor.setContents(data.contents);
         }
       }
 
       // 기존 이미지 설정
-      if (travelproductData.images && travelproductData.images.length > 0) {
-        setExistingImages(travelproductData.images);
+      if (data.images && data.images.length > 0) {
+        setExistingImages(data.images);
       }
     }
   }, [travelproductData, isEditMode, reset, editorRef]);

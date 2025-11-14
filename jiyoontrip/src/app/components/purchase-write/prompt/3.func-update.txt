@@ -19,7 +19,7 @@
 
 ==============================================
 
-핵심요구사항) 다음의 기능을 playwright 테스트를 활용하여 TDD기반으로 구현하고, 테스트에 통과할 때까지 반복할 것.
+기존히스토리-참고만) 다음의 기능을 playwright 테스트를 활용하여 TDD기반으로 구현하고, 테스트에 통과할 때까지 반복할 것.
             1) 테스트 제외 라이브러리
                 - jest
                 - @testing-library/react
@@ -52,7 +52,7 @@
 
 ==============================================
 
-핵심요구사항)
+기존히스토리-참고만)
             1) 모드 분기 처리
                 1-1) URL 파라미터 확인
                     - URL에 id 파라미터가 있으면 수정 모드로 동작
@@ -203,3 +203,63 @@
                 7-3) 반환값에 isEditMode, isLoadingData 등을 포함하여 컴포넌트에서 활용
                 7-4) 기존 등록 기능은 그대로 유지하면서 수정 기능 추가
                 7-5) 코드 중복 최소화 및 재사용 가능한 로직으로 구현
+==============================================
+
+핵심요구사항)
+            1) 수정 모드 진입 시 기존 데이터 로드 및 기본값 설정
+                1-1) URL 파라미터에서 travelproductId 추출
+                    - useParams를 사용하여 URL의 [id] 파라미터 가져오기
+                    - hooks/index.write.hook.tsx 내부에서 useParams 사용
+                    - travelproductId가 존재하면 수정 모드로 판단
+
+                1-2) fetchTravelproduct 쿼리로 기존 데이터 조회
+                    - GraphQL 쿼리: fetchTravelproduct(travelproductId: ID!): Travelproduct!
+                    - purchase-detail/queries.ts의 FETCH_TRAVELPRODUCT 쿼리 재사용
+                    - @tanstack/react-query의 useQuery 사용
+                    - travelproductId를 변수로 전달
+                    - 수정 모드일 때만 쿼리 실행 (enabled 옵션 사용)
+
+                1-3) 쿼리 반환 필드
+                    - _id: ID!
+                    - name: String!
+                    - remarks: String!
+                    - contents: String!
+                    - price: Int
+                    - tags: [String!]
+                    - images: [String!]
+                    - pickedCount: Int
+                    - travelproductAddress: TravelproductAddress
+                    - buyer: User
+                    - seller: User
+                    - soldAt: DateTime
+                    - createdAt: DateTime!
+                    - updatedAt: DateTime!
+                    - deletedAt: DateTime
+
+                1-4) 폼 필드에 기본값 설정
+                    - react-hook-form의 defaultValues 또는 reset 메서드 사용
+                    - 쿼리 성공 시 반환된 데이터를 각 인풋 필드에 기본값으로 설정
+                    - 폼 필드 매핑:
+                        - name → productName (기본값)
+                        - remarks → summary (기본값)
+                        - contents → description (기본값, SunEditor의 setContents 메서드 사용)
+                        - price → price (기본값, 숫자를 문자열로 변환)
+                        - tags → tags (기본값, 배열을 쉼표로 구분된 문자열로 변환)
+                        - travelproductAddress.zipcode → zipcode (기본값)
+                        - travelproductAddress.address → address (기본값)
+                        - travelproductAddress.addressDetail → addressDetail (기본값)
+                        - travelproductAddress.lat → lat (기본값, 숫자를 문자열로 변환)
+                        - travelproductAddress.lng → lng (기본값, 숫자를 문자열로 변환)
+                        - images → images (기본값, 배열 그대로 설정)
+
+                1-5) 기본값 유지 및 재등록 처리
+                    - 설정된 기본값은 사용자가 수정하지 않아도 그대로 유지
+                    - 재등록 모드(등록 모드로 전환)로 변경해도 기본값이 그대로 보이도록 처리
+                    - 기본값은 폼의 초기값으로 설정되어, 사용자가 명시적으로 변경하지 않는 한 유지
+                    - 등록 모드에서도 기본값이 보이는 상태로 렌더링되도록 구현
+                    - 폼 제출 시 현재 폼에 입력된 값(기본값 포함)을 그대로 사용하여 등록/수정 처리
+
+                1-6) 로딩 및 에러 상태 관리
+                    - 데이터 로딩 중일 때 로딩 표시
+                    - 데이터 로딩 실패 시 에러 처리
+                    - 훅에서 isLoadingData 값을 반환하여 컴포넌트에서 사용 
