@@ -11,12 +11,12 @@
 
 조건-파일경로) 참고할 TSX  파일경로: src/app/components/purchase-write/index.tsx
 조건-파일경로) 참고할 CSS  파일경로: src/app/components/purchase-write/styles.module.css
-조건-파일경로) 구현될 HOOK 파일경로: src/app/components/purchase-write/hooks/index.binding.hook.ts
-조건-파일경로) 구현될 TEST 파일경로: src/app/components/purchase-write/tests/index.binding.hook.spec.ts
+조건-파일경로) 구현될 HOOK 파일경로: src/app/components/purchase-write/hooks/index.write.hook.ts
+조건-파일경로) 구현될 TEST 파일경로: src/app/components/purchase-write/tests/index.write.hook.spec.ts
 
 ==============================================
 
-기존히스토리-참고만) 다음의 기능을 playwright 테스트를 활용하여 TDD기반으로 구현하고, 테스트에 통과할 때까지 반복할 것.
+핵심요구사항) 다음의 기능을 playwright 테스트를 활용하여 TDD기반으로 구현하고, 테스트에 통과할 때까지 반복할 것.
             1) 테스트 제외 라이브러리
                 - jest
                 - @testing-library/react
@@ -86,7 +86,7 @@
                         - updatedAt
                 
                 2-2) @tanstack/react-query를 사용한 뮤테이션 처리
-                    - hooks/index.binding.hook.ts에 useMutation 훅 구현
+                    - hooks/index.write.hook.ts에 useMutation 훅 구현
                     - 성공 시: 등록된 상품 상세 페이지로 이동
                     - 실패 시: 에러 메시지 표시
                     - 로딩 상태 관리

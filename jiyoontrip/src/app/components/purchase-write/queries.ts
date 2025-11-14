@@ -26,6 +26,42 @@ export const CREATE_TRAVELPRODUCT_QUERY = `
   }
 `;
 
+export const UPDATE_TRAVELPRODUCT_QUERY = `
+  mutation updateTravelproduct($updateTravelproductInput: UpdateTravelproductInput!, $travelproductId: ID!) {
+    updateTravelproduct(updateTravelproductInput: $updateTravelproductInput, travelproductId: $travelproductId) {
+      _id
+      name
+      remarks
+      contents
+      price
+      tags
+      images
+      pickedCount
+      travelproductAddress {
+        zipcode
+        address
+        addressDetail
+        lat
+        lng
+      }
+      buyer {
+        _id
+        name
+        picture
+      }
+      seller {
+        _id
+        name
+        picture
+      }
+      soldAt
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;
+
 export const UPLOAD_FILE_QUERY = `
   mutation uploadFile($file: Upload!) {
     uploadFile(file: $file) {

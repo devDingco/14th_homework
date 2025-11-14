@@ -1,13 +1,24 @@
 "use client";
 
 import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
 import styles from "./styles.module.css";
 import usePurchaseModal from "./hooks/index.link.modal.hook";
 import usePurchaseDetailBinding from "./hooks/index.binding.hook";
+import { ROUTES } from "@/app/commons/constants/url";
 
 export default function PurchaseDetail() {
+  const params = useParams();
+  const router = useRouter();
   const { openPurchaseConfirmModal } = usePurchaseModal();
   const { travelproduct, isLoading, formatPrice, formatTags } = usePurchaseDetailBinding();
+
+  const handleEditClick = () => {
+    const id = params?.id as string;
+    if (id) {
+      router.push(ROUTES.PURCHASE.EDIT(id));
+    }
+  };
 
   if (isLoading) {
     return (
@@ -50,6 +61,14 @@ export default function PurchaseDetail() {
               {travelproduct.name}
             </h1>
             <div className={styles.titleIcons}>
+              <Image
+                src="/icons/outline/edit.svg"
+                alt="수정"
+                width={24}
+                height={24}
+                onClick={handleEditClick}
+                style={{ cursor: "pointer" }}
+              />
               <Image
                 src="/icons/outline/blackdelete.svg"
                 alt="삭제"

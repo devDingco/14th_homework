@@ -18,6 +18,7 @@ export const ROUTES = {
     LIST: "/purchase",
     DETAIL: (id: string) => `/purchase/${id}`,
     WRITE: "/purchase/write",
+    EDIT: (id: string) => `/purchase/${id}/edit`,
   },
 } as const;
 
@@ -86,6 +87,11 @@ export const ROUTE_METADATA: Record<string, RouteMetadata> = {
     showBanner: true,
     showNavigation: true,
   },
+  "/purchase/[id]/edit": {
+    access: "MEMBER_ONLY",
+    showBanner: true,
+    showNavigation: true,
+  },
 };
 
 // 현재 경로의 메타데이터 가져오기 헬퍼 함수
@@ -101,6 +107,9 @@ export const getRouteMetadata = (pathname: string): RouteMetadata | null => {
   }
 
   if (pathname.startsWith("/purchase/") && pathname !== "/purchase/write") {
+    if (pathname.endsWith("/edit")) {
+      return ROUTE_METADATA["/purchase/[id]/edit"];
+    }
     return ROUTE_METADATA["/purchase/[id]"];
   }
 

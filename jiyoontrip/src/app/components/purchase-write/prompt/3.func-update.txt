@@ -1,0 +1,205 @@
+아래의 조건을 모두 적용하여, 아래의 요구사항을 모두 구현할 것.
+구현 결과를 체크리스트로 반환할 것.
+
+==============================================
+
+조건-커서룰) 아래의 커서룰을 적용하여 작업하고, 이 작업이 끝나면 해당 rules 적용 결과를 체크리스트로 반환할 것.
+            - @01-common.mdc
+            - @04-func.mdc
+
+==============================================
+
+조건-파일경로) 참고할 TSX  파일경로: src/app/components/purchase-write/index.tsx
+조건-파일경로) 참고할 CSS  파일경로: src/app/components/purchase-write/styles.module.css
+조건-파일경로) 참고할 QUERY 파일경로: src/app/components/purchase-write/queries.ts
+조건-파일경로) 참고할 SCHEMA 파일경로: src/app/components/purchase-write/schema.ts
+조건-파일경로) 참고할 DETAIL QUERY 파일경로: src/app/components/purchase-detail/queries.ts
+조건-파일경로) 구현될 HOOK 파일경로: src/app/components/purchase-write/hooks/index.write.hook.tsx
+조건-파일경로) 구현될 TEST 파일경로: src/app/components/purchase-write/tests/index.write.hook.spec.ts
+
+==============================================
+
+핵심요구사항) 다음의 기능을 playwright 테스트를 활용하여 TDD기반으로 구현하고, 테스트에 통과할 때까지 반복할 것.
+            1) 테스트 제외 라이브러리
+                - jest
+                - @testing-library/react
+
+            2) 테스트 조건
+                - timeout은 설정하지 않거나, 500ms 미만으로 설정할 것.
+                - /purchase/write 페이지가 완전히 로드된 후 테스트할 것.
+                    - 페이지 로드 식별 요구사항: 고정식별자 data-testid 대기 방법
+                    - 페이지 로드 식별 금지사항: networkidle 대기 방법
+                - 수정 모드 테스트 시: URL 파라미터로 travelproductId가 전달된 경우를 테스트할 것.
+                    - 예: /purchase/write?id={travelproductId}
+
+            3) 테스트 API 조건
+                3-1) 데이터
+                    - 실제데이터를 사용할 것.
+                    - Mock데이터 사용하지 말 것.
+
+                3-2) 성공시나리오
+                    - API 모킹하지 말 것.
+
+                3-3) 실패시나리오
+                    - API 모킹하지 말 것.
+
+            4) 테스트 데이터타입
+                - API: GraphQL (주소: https://main-practice.codebootcamp.co.kr/graphql)
+                - 뮤테이션: createTravelproduct (등록 모드), updateTravelproduct (수정 모드)
+                - 쿼리: fetchTravelproduct (기존 데이터 조회용)
+                - 입력타입: CreateTravelproductInput (등록 모드), UpdateTravelproductInput! + travelproductId: ID! (수정 모드)
+                - 반환타입: Travelproduct!
+
+==============================================
+
+핵심요구사항)
+            1) 모드 분기 처리
+                1-1) URL 파라미터 확인
+                    - URL에 id 파라미터가 있으면 수정 모드로 동작
+                    - URL에 id 파라미터가 없으면 등록 모드로 동작
+                    - useSearchParams 또는 useParams를 사용하여 id 파라미터 확인
+                    - hooks/index.write.hook.tsx 내부에서 모드 확인 및 처리
+
+                1-2) 컴포넌트 제목 변경
+                    - 등록 모드: "숙박권 판매하기"
+                    - 수정 모드: "숙박권 수정하기"
+                    - 훅에서 isEditMode 값을 반환하여 컴포넌트에서 사용
+
+                1-3) 버튼 텍스트 변경
+                    - 등록 모드: "등록하기"
+                    - 수정 모드: "수정하기"
+                    - 훅에서 isEditMode 값을 반환하여 컴포넌트에서 사용
+
+            2) 기존 데이터 로드 기능 (수정 모드)
+                2-1) fetchTravelproduct 쿼리 사용
+                    - purchase-detail/queries.ts의 FETCH_TRAVELPRODUCT 쿼리 재사용
+                    - @tanstack/react-query의 useQuery 사용
+                    - travelproductId를 변수로 전달
+                    - 수정 모드일 때만 쿼리 실행 (enabled 옵션 사용)
+
+                2-2) 폼 데이터 초기화
+                    - 쿼리 성공 시 react-hook-form의 reset 메서드 사용
+                    - 폼 필드 매핑:
+                        - name → productName
+                        - remarks → summary
+                        - contents → description
+                        - price → price (숫자를 문자열로 변환)
+                        - tags → tags (배열을 쉼표로 구분된 문자열로 변환)
+                        - travelproductAddress.zipcode → zipcode
+                        - travelproductAddress.address → address
+                        - travelproductAddress.addressDetail → addressDetail
+                        - travelproductAddress.lat → lat (숫자를 문자열로 변환)
+                        - travelproductAddress.lng → lng (숫자를 문자열로 변환)
+                        - images → images (배열 그대로, 기존 이미지로 설정)
+                    - SunEditor의 setContents 메서드를 사용하여 description 필드 설정
+                    - 기존 이미지는 별도 상태로 관리 (existingImages)
+
+                2-3) 로딩 상태 관리
+                    - 데이터 로딩 중일 때 로딩 표시
+                    - 데이터 로딩 실패 시 에러 처리
+                    - 훅에서 isLoadingData 값을 반환하여 컴포넌트에서 사용
+
+            3) GraphQL 뮤테이션 구현
+                3-1) updateTravelproduct 뮤테이션 정의
+                    - queries.ts 파일에 GraphQL 뮤테이션 정의
+                    - 뮤테이션명: updateTravelproduct
+                    - 입력 변수:
+                        - $updateTravelproductInput: UpdateTravelproductInput!
+                        - $travelproductId: ID!
+                    - 반환 필드:
+                        - _id
+                        - name
+                        - remarks
+                        - contents
+                        - price
+                        - tags
+                        - images
+                        - pickedCount
+                        - travelproductAddress (zipcode, address, addressDetail, lat, lng)
+                        - buyer
+                        - seller
+                        - soldAt
+                        - createdAt
+                        - updatedAt
+                        - deletedAt
+
+                3-2) @tanstack/react-query를 사용한 뮤테이션 처리
+                    - hooks/index.write.hook.tsx에 createTravelproduct와 updateTravelproduct 뮤테이션 모두 구현
+                    - 모드에 따라 적절한 뮤테이션 실행
+                    - 등록 모드: createTravelproduct 뮤테이션 사용
+                    - 수정 모드: updateTravelproduct 뮤테이션 사용 (travelproductId 포함)
+                    - 성공 시: 등록/수정된 상품 상세 페이지로 이동
+                    - 실패 시: 에러 메시지 표시
+                    - 로딩 상태 관리 (isLoading)
+
+            4) 이미지 업로드 및 미리보기 기능 개선
+                4-1) FileReader를 사용한 임시 미리보기
+                    - 파일 선택 시 new FileReader()를 사용하여 임시 URL 생성
+                    - readAsDataURL 메서드 사용
+                    - 임시 URL을 별도 상태로 관리 (previewImages)
+                    - 업로드 완료 전까지 임시 URL로 미리보기 표시
+                    - FileReader 사용 후 메모리 누수 방지를 위해 revokeObjectURL 처리
+
+                4-2) 이미지 상태 관리
+                    - previewImages: FileReader로 생성한 임시 URL 배열 (로컬 파일 미리보기용)
+                    - uploadedImages: 서버에 업로드된 URL 배열 (새로 업로드된 이미지)
+                    - existingImages: 수정 모드일 때 기존에 저장된 이미지 URL 배열
+                    - 최종 images 배열: uploadedImages + existingImages (삭제되지 않은 것만)
+                    - deletedImages: 삭제된 기존 이미지 인덱스 목록 (수정 모드에서만 사용)
+
+                4-3) 이미지 업로드 플로우
+                    - 파일 선택 → FileReader로 임시 URL 생성 → previewImages에 추가
+                    - uploadFile 뮤테이션 실행 → 업로드 성공 시 uploadedImages에 추가
+                    - previewImages에서 해당 임시 URL 제거 및 revokeObjectURL 호출
+                    - 업로드 실패 시 previewImages에서 임시 URL 제거, revokeObjectURL 호출 및 에러 표시
+
+                4-4) 이미지 삭제 기능
+                    - 미리보기 이미지 삭제 버튼 클릭 시
+                    - previewImages에 있는 경우: previewImages에서 제거 및 revokeObjectURL 호출
+                    - uploadedImages에 있는 경우: uploadedImages에서 제거
+                    - existingImages에 있는 경우: deletedImages에 인덱스 추가 (실제 삭제는 서버에서 처리)
+                    - 최종 images 배열에서 해당 이미지 제외
+
+                4-5) 수정 모드 이미지 처리
+                    - 기존 이미지는 즉시 미리보기 표시 (existingImages 사용)
+                    - 기존 이미지 URL은 그대로 유지
+                    - 새로 추가한 이미지만 uploadFile 뮤테이션으로 업로드
+                    - 삭제된 기존 이미지는 최종 images 배열에서 제외
+
+            5) 폼 제출 기능 구현
+                5-1) 모드별 뮤테이션 실행
+                    - 등록 모드: createTravelproduct 뮤테이션 실행
+                    - 수정 모드: updateTravelproduct 뮤테이션 실행 (travelproductId 포함)
+                    - hooks/index.write.hook.tsx의 onSubmit 함수에서 모드에 따라 분기 처리
+
+                5-2) 폼 데이터 변환
+                    - react-hook-form의 폼 데이터를 CreateTravelproductInput 또는 UpdateTravelproductInput 형식으로 변환
+                    - tags 문자열을 배열로 변환 (쉼표 또는 공백으로 구분)
+                    - price 문자열을 숫자로 변환
+                    - travelproductAddress 객체 구성:
+                        - zipcode: string
+                        - address: string
+                        - addressDetail: string (선택)
+                        - lat: number (위도가 있을 경우)
+                        - lng: number (경도가 있을 경우)
+                    - images 배열 구성:
+                        - 등록 모드: uploadedImages만 사용
+                        - 수정 모드: uploadedImages + existingImages (deletedImages에 없는 것만)
+
+                5-3) 뮤테이션 실행
+                    - 폼 검증 통과 시 해당 모드의 뮤테이션 실행
+                    - 성공 시: 상품의 _id를 사용하여 상세 페이지로 이동
+                    - 실패 시: 에러 메시지 표시 및 폼 유지
+
+            6) 취소 기능 구현
+                6-1) 취소 버튼 클릭 시
+                    - 확인 모달 표시
+                    - 확인 시 /purchase 페이지로 이동
+                    - 수정 모드일 경우: 수정 중인 상품 상세 페이지로 이동하는 옵션도 제공
+
+            7) 훅 재사용성 및 구조
+                7-1) hooks/index.write.hook.tsx 하나에서 등록/수정 모두 처리
+                7-2) 훅 내부에서 isEditMode, travelproductId 등을 확인하여 모드 분기
+                7-3) 반환값에 isEditMode, isLoadingData 등을 포함하여 컴포넌트에서 활용
+                7-4) 기존 등록 기능은 그대로 유지하면서 수정 기능 추가
+                7-5) 코드 중복 최소화 및 재사용 가능한 로직으로 구현
