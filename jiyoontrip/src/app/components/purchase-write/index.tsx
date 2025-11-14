@@ -343,55 +343,90 @@ export default function PurchaseWrite() {
                 className={styles.hiddenFileInput}
                 onChange={handleImageUpload}
               />
-              <div
-                className={styles.uploadBox}
-                onClick={() => fileInputRef.current?.click()}
-                data-testid="upload-box"
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    fileInputRef.current?.click();
-                  }
-                }}
-              >
-                <Image src="/icons/outline/add.svg" alt="add" width={40} height={40} />
-                <span className={styles.uploadText}>클릭해서 사진 업로드</span>
-              </div>
-              {images.length > 0 && (
-                <div
-                  className={styles.imagePreviewContainer}
-                  data-testid="image-preview-container"
-                >
-                  {images.map((url, index) => {
-                    // 이미지 URL이 전체 URL이 아닌 경우 GCS 경로로 변환
-                    // FileReader로 생성한 data URL은 그대로 사용
-                    const imageUrl =
-                      url.startsWith("data:") ||
-                      url.startsWith("http://") ||
-                      url.startsWith("https://")
-                        ? url
-                        : `https://storage.googleapis.com/${url}`;
-                    return (
-                      <div key={index} className={styles.imagePreviewItem}>
-                        <img
-                          src={imageUrl}
-                          alt={`uploaded-${index}`}
-                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                        />
-                        <button
-                          type="button"
-                          onClick={() => handleImageDelete(index)}
-                          className={styles.imageDeleteButton}
-                        >
-                          ×
-                        </button>
-                      </div>
-                    );
-                  })}
+              <div className={styles.uploadContainer}>
+                <div className={styles.uploadBoxWrapper}>
+                  {images.length > 0 && (
+                    <div
+                      className={styles.firstImagePreview}
+                      data-testid="first-image-preview"
+                    >
+                      {(() => {
+                        const firstImageUrl =
+                          images[0].startsWith("data:") ||
+                          images[0].startsWith("http://") ||
+                          images[0].startsWith("https://")
+                            ? images[0]
+                            : `https://storage.googleapis.com/${images[0]}`;
+                        return (
+                          <div className={styles.imagePreviewItem}>
+                            <img
+                              src={firstImageUrl}
+                              alt="uploaded-0"
+                              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => handleImageDelete(0)}
+                              className={styles.imageDeleteButton}
+                            >
+                              ×
+                            </button>
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  )}
+                  <div
+                    className={styles.uploadBox}
+                    onClick={() => fileInputRef.current?.click()}
+                    data-testid="upload-box"
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        fileInputRef.current?.click();
+                      }
+                    }}
+                  >
+                    <Image src="/icons/outline/add.svg" alt="add" width={40} height={40} />
+                    <span className={styles.uploadText}>클릭해서 사진 업로드</span>
+                  </div>
                 </div>
-              )}
+                {images.length > 1 && (
+                  <div
+                    className={styles.imagePreviewContainer}
+                    data-testid="image-preview-container"
+                  >
+                    {images.slice(1).map((url, index) => {
+                      // 이미지 URL이 전체 URL이 아닌 경우 GCS 경로로 변환
+                      // FileReader로 생성한 data URL은 그대로 사용
+                      const imageUrl =
+                        url.startsWith("data:") ||
+                        url.startsWith("http://") ||
+                        url.startsWith("https://")
+                          ? url
+                          : `https://storage.googleapis.com/${url}`;
+                      return (
+                        <div key={index + 1} className={styles.imagePreviewItem}>
+                          <img
+                            src={imageUrl}
+                            alt={`uploaded-${index + 1}`}
+                            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => handleImageDelete(index + 1)}
+                            className={styles.imageDeleteButton}
+                          >
+                            ×
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className={styles.gap}></div>

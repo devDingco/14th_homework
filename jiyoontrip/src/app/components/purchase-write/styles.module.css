@@ -223,6 +223,20 @@
   gap: 4px;
 }
 
+.uploadContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.uploadBoxWrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+}
+
 .uploadBox {
   width: 160px;
   height: 160px;
@@ -234,6 +248,17 @@
   justify-content: center;
   gap: 8px;
   cursor: pointer;
+  position: relative;
+  z-index: 3;
+}
+
+.firstImagePreview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 160px;
+  height: 160px;
+  z-index: 2;
 }
 
 .uploadText {
@@ -282,8 +307,9 @@
 .imagePreviewContainer {
   display: flex;
   gap: 8px;
-  margin-top: 16px;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
 }
 
 .imagePreviewItem {
@@ -292,6 +318,7 @@
   height: 160px;
   border-radius: 8px;
   overflow: hidden;
+  z-index: 1;
 }
 
 
