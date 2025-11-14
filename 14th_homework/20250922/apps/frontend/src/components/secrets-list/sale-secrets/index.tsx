@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, memo } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Secret } from "../types";
 import { usePaymentSubscription } from "@/app/payments/hooks/index.payment.hook";
 import styles from "./styles.module.css";
@@ -10,21 +11,21 @@ interface SaleSecretsProps {
   secrets: Secret[];
 }
 
-export default function SaleSecrets({ secrets }: SaleSecretsProps) {
+function SaleSecrets({ secrets }: SaleSecretsProps) {
   const { isProcessing, subscribe } = usePaymentSubscription();
 
-  const formatPrice = (price: number) => {
+  const formatPrice = useCallback((price: number) => {
     return `₩${price.toLocaleString()}`;
-  };
+  }, []);
 
-  const handleSubscribe = async () => {
+  const handleSubscribe = useCallback(async () => {
     console.log("구독하기 버튼 클릭됨");
     try {
       await subscribe("구독 결제", 10000);
     } catch (error) {
       console.error("구독하기 처리 중 오류:", error);
     }
-  };
+  }, [subscribe]);
 
   return (
     <section className={styles.saleSecretsSection}>
@@ -46,7 +47,7 @@ export default function SaleSecrets({ secrets }: SaleSecretsProps) {
 
       <div className={styles.secretsGrid}>
         {secrets.map((secret) => (
-          <div key={secret.id} className={styles.secretCard}>
+          <Link key={secret.id} href={`/secrets/${secret.id}`} className={styles.secretCard}>
             <div className={styles.imageWrapper}>
               <Image
                 src={secret.img}
@@ -70,10 +71,12 @@ export default function SaleSecrets({ secrets }: SaleSecretsProps) {
               </div>
               <div className={styles.hoverText}>🔍 비밀의 조각 보기</div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
   );
 }
+
+export default memo(SaleSecrets);
 
