@@ -2,10 +2,9 @@ import { useRouter, useParams } from 'next/navigation';
 import { ChangeEvent, useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Modal } from 'antd';
-import DaumPostcodeEmbed from 'react-daum-postcode';
 import { useMutation } from '@apollo/client';
 import { UPLOAD_FILE } from '@/components/boards-write/queries';
+import { CREATE_TRAVELPRODUCT, UPDATE_TRAVELPRODUCT } from './queries';
 import { useAlertModal } from '@/commons/components/modal';
 import {
   AccommodationSellVariables,
@@ -52,6 +51,8 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
   const [address, setAddress] = useState<string>(props.data?.address || '');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [uploadFile] = useMutation(UPLOAD_FILE);
+  const [createTravelproduct] = useMutation(CREATE_TRAVELPRODUCT);
+  const [updateTravelproduct] = useMutation(UPDATE_TRAVELPRODUCT);
 
   // 주소 변경 시 위도/경도 자동 설정 (실제로는 주소 검색 API를 사용해야 함)
   useEffect(() => {
@@ -86,29 +87,105 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
       return;
     }
 
-    // TODO: 실제 API 호출
-    console.log('등록 데이터:', {
-      ...formData,
-      price: Number(formData.price.replace(/,/g, '')),
-      imageUrl,
-    });
+    try {
+      // tags를 배열로 변환 (쉼표로 구분된 문자열을 배열로)
+      const tagsArray = formData.tags
+        ? formData.tags
+            .split(',')
+            .map((tag) => tag.trim())
+            .filter((tag) => tag)
+        : [];
 
-    showAlert('숙박권이 등록되었습니다.');
-    router.push('/accommodation');
+      // 주소 정보 구성
+      const travelproductAddress = {
+        zipcode: formData.zipcode || undefined,
+        address: formData.address || undefined,
+        addressDetail: formData.addressDetail || undefined,
+        lat: formData.lat ? parseFloat(formData.lat) : undefined,
+        lng: formData.lng ? parseFloat(formData.lng) : undefined,
+      };
+
+      const result = await createTravelproduct({
+        variables: {
+          createTravelproductInput: {
+            name: formData.name,
+            remarks: formData.summary, // summary -> remarks
+            contents: formData.description, // description -> contents
+            price: Number(formData.price.replace(/,/g, '')),
+            images: imageUrl ? [imageUrl] : undefined,
+            tags: tagsArray.length > 0 ? tagsArray : undefined,
+            travelproductAddress: Object.keys(travelproductAddress).some(
+              (key) => travelproductAddress[key as keyof typeof travelproductAddress] !== undefined
+            )
+              ? travelproductAddress
+              : undefined,
+          },
+        },
+      });
+
+      if (result.data?.createTravelproduct) {
+        showAlert('숙박권이 등록되었습니다.');
+        router.push('/accommodation-main');
+      }
+    } catch (error) {
+      console.error('여행 상품 등록 실패:', error);
+      showAlert('여행 상품 등록에 실패했습니다.');
+    }
   });
 
   const onClickUpdate = handleSubmit(async (data) => {
     const formData = data as IUpdateSellSchema;
 
-    // TODO: 실제 API 호출
-    console.log('수정 데이터:', {
-      ...formData,
-      price: Number(formData.price.replace(/,/g, '')),
-      imageUrl,
-    });
+    if (!params?.id || typeof params.id !== 'string') {
+      showAlert('상품 ID를 찾을 수 없습니다.');
+      return;
+    }
 
-    showAlert('숙박권이 수정되었습니다.');
-    router.push(`/accommodation/${params?.id}`);
+    try {
+      // tags를 배열로 변환 (쉼표로 구분된 문자열을 배열로)
+      const tagsArray = formData.tags
+        ? formData.tags
+            .split(',')
+            .map((tag) => tag.trim())
+            .filter((tag) => tag)
+        : [];
+
+      // 주소 정보 구성
+      const travelproductAddress = {
+        zipcode: formData.zipcode || undefined,
+        address: formData.address || undefined,
+        addressDetail: formData.addressDetail || undefined,
+        lat: formData.lat ? parseFloat(formData.lat) : undefined,
+        lng: formData.lng ? parseFloat(formData.lng) : undefined,
+      };
+
+      const result = await updateTravelproduct({
+        variables: {
+          travelproductId: params.id,
+          updateTravelproductInput: {
+            name: formData.name,
+            remarks: formData.summary, // summary -> remarks
+            contents: formData.description, // description -> contents
+            price: Number(formData.price.replace(/,/g, '')),
+            images: imageUrl ? [imageUrl] : undefined,
+            tags: tagsArray.length > 0 ? tagsArray : undefined,
+            travelproductAddress: Object.keys(travelproductAddress).some(
+              (key) => travelproductAddress[key as keyof typeof travelproductAddress] !== undefined
+            )
+              ? travelproductAddress
+              : undefined,
+          },
+        },
+      });
+
+      if (result.data?.updateTravelproduct) {
+        showAlert('숙박권이 수정되었습니다.');
+        router.push(`/accommodation-main/detail/${params.id}`);
+      }
+    } catch (error) {
+      console.error('여행 상품 수정 실패:', error);
+      showAlert('여행 상품 수정에 실패했습니다.');
+    }
   });
 
   const onClickImage = () => {
