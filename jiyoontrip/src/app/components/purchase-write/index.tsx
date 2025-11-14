@@ -1,15 +1,19 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Script from "next/script";
+import { useRef } from "react";
 import MyInput from "@/app/commons/components/input";
 import MyButton from "@/app/commons/components/button";
 import styles from "./styles.module.css";
 import "suneditor/dist/css/suneditor.min.css";
 import usePurchaseWriteModal from "./hooks/index.modal.hook";
 import usePurchaseWriteMap from "./hooks/index.map.hook";
+import usePurchaseWriteBinding from "./hooks/index.binding.hook";
+import { schema } from "./schema";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 const SunEditor = dynamic(() => import("suneditor-react"), { ssr: false });
@@ -19,19 +23,47 @@ interface FormData {
   summary: string;
   description: string;
   price: string;
-  tags: string;
-  zipcode: string;
-  address: string;
-  addressDetail: string;
-  lat: string;
-  lng: string;
+  tags?: string;
+  zipcode?: string;
+  address?: string;
+  addressDetail?: string;
+  lat?: string;
+  lng?: string;
+  images?: string[];
 }
 
 export default function PurchaseWrite() {
-  const { register, formState, setValue, watch } = useForm<FormData>({ mode: "onChange" });
+  const form = useForm<FormData>({
+    mode: "onChange",
+    resolver: zodResolver(schema),
+    defaultValues: {
+      productName: "",
+      summary: "",
+      description: "",
+      price: "",
+      tags: undefined,
+      zipcode: undefined,
+      address: undefined,
+      addressDetail: undefined,
+      lat: undefined,
+      lng: undefined,
+      images: undefined,
+    },
+  });
+  const { register, formState, setValue, watch } = form;
   const { openAddressSearchModal } = usePurchaseWriteModal({ setValue });
+  const {
+    onSubmit,
+    images,
+    handleImageUpload,
+    handleImageDelete,
+    handleCancel,
+    isLoading,
+  } = usePurchaseWriteBinding({ form });
   const lat = watch("lat");
   const lng = watch("lng");
+  const editorRef = useRef<unknown>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   usePurchaseWriteMap();
   return (
     <>
@@ -43,6 +75,7 @@ export default function PurchaseWrite() {
         <div className={styles.container}>
         <div className={styles.label}>숙박권 판매하기</div>
         <div className={styles.gap}></div>
+        <form onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
 
         {/* Input Area 1 - 상품명 */}
         <div className={styles.inputArea}>
@@ -56,6 +89,11 @@ export default function PurchaseWrite() {
             placeholder="상품명을 입력해 주세요."
             style={{ width: "100%", height: "48px" }}
           />
+          {formState.errors.productName && (
+            <div className={styles.inputError} data-testid="error-productName">
+              {formState.errors.productName.message}
+            </div>
+          )}
         </div>
 
         <div className={styles.gapWithDivider}>
@@ -76,6 +114,11 @@ export default function PurchaseWrite() {
             placeholder="상품을 한줄로 요약해 주세요."
             style={{ width: "100%", height: "48px" }}
           />
+          {formState.errors.summary && (
+            <div className={styles.inputError} data-testid="error-summary">
+              {formState.errors.summary.message}
+            </div>
+          )}
         </div>
 
         <div className={styles.gapWithDivider}>
@@ -94,6 +137,12 @@ export default function PurchaseWrite() {
             <SunEditor
               placeholder="내용을 입력해 주세요."
               height="421px"
+              getSunEditorInstance={(sunEditor) => {
+                editorRef.current = sunEditor;
+              }}
+              onChange={(content) => {
+                setValue("description", content);
+              }}
               setOptions={{
                 buttonList: [
                   ["bold", "italic", "underline", "strike"],
@@ -104,6 +153,11 @@ export default function PurchaseWrite() {
               }}
             />
           </div>
+          {formState.errors.description && (
+            <div className={styles.inputError} data-testid="error-description">
+              {formState.errors.description.message}
+            </div>
+          )}
         </div>
 
         <div className={styles.gapWithDivider}>
@@ -124,6 +178,11 @@ export default function PurchaseWrite() {
             placeholder="판매 가격을 입력해 주세요. (원 단위)"
             style={{ width: "100%", height: "48px" }}
           />
+          {formState.errors.price && (
+            <div className={styles.inputError} data-testid="error-price">
+              {formState.errors.price.message}
+            </div>
+          )}
         </div>
 
         <div className={styles.gapWithDivider}>
@@ -260,26 +319,80 @@ export default function PurchaseWrite() {
           <div className={styles.uploadLabelArea}>
             <span className={styles.labelText}>사진 첨부</span>
           </div>
-          <div className={styles.uploadBox}>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/jpeg,image/png"
+            className={styles.hiddenFileInput}
+            onChange={handleImageUpload}
+          />
+          <div
+            className={styles.uploadBox}
+            onClick={() => fileInputRef.current?.click()}
+            data-testid="upload-box"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                fileInputRef.current?.click();
+              }
+            }}
+          >
             <Image src="/icons/outline/add.svg" alt="add" width={40} height={40} />
             <span className={styles.uploadText}>클릭해서 사진 업로드</span>
           </div>
+          {images.length > 0 && (
+            <div className={styles.imagePreviewContainer}>
+              {images.map((url, index) => {
+                // 이미지 URL이 전체 URL이 아닌 경우 GCS 경로로 변환
+                const imageUrl =
+                  url.startsWith("http://") || url.startsWith("https://")
+                    ? url
+                    : `https://storage.googleapis.com/${url}`;
+                return (
+                  <div key={index} className={styles.imagePreviewItem}>
+                    <img
+                      src={imageUrl}
+                      alt={`uploaded-${index}`}
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleImageDelete(index)}
+                      className={styles.imageDeleteButton}
+                    >
+                      ×
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         <div className={styles.gap}></div>
 
         {/* Button Area */}
         <div className={styles.buttonArea}>
-          <button className={styles.cancelButton}>취소</button>
+          <button
+            type="button"
+            className={styles.cancelButton}
+            onClick={handleCancel}
+            disabled={isLoading}
+          >
+            취소
+          </button>
           <MyButton
             formState={formState}
-            style={{ width: "95px", backgroundColor: "#c7c7c7" }}
+            style={{ width: "95px", backgroundColor: isLoading ? "#999" : "#c7c7c7" }}
           >
-            등록하기
+            {isLoading ? "등록 중..." : "등록하기"}
           </MyButton>
         </div>
 
         <div className={styles.gap}></div>
+        </form>
         </div>
       </div>
     </>

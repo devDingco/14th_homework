@@ -1,0 +1,94 @@
+아래의 조건을 모두 적용하여, 아래의 요구사항을 모두 구현할 것.
+구현 결과를 체크리스트로 반환할 것.
+
+==============================================
+
+조건-커서룰) 아래의 커서룰을 적용하여 작업하고, 이 작업이 끝나면 해당 rules 적용 결과를 체크리스트로 반환할 것.
+            - @01-common.mdc
+            - @04-func.mdc
+
+==============================================
+
+조건-파일경로) 참고할 TSX  파일경로: src/app/components/purchase-list/index.tsx
+조건-파일경로) 참고할 CSS  파일경로: src/app/components/purchase-detail/styles.module.css
+조건-파일경로) 구현될 TSX 파일경로: src/app/components/purchase-detail/index.tsx
+조건-파일경로) 구현될 HOOK 파일경로: src/app/components/purchase-detail/hooks/index.binding.hook.ts
+조건-파일경로) 구현될 TEST 파일경로: src/app/components/purchase-detail/tests/index.binding.hook.spec.ts
+
+==============================================
+
+핵심요구사항) 다음의 기능을 playwright 테스트를 활용하여 TDD기반으로 구현하고, 테스트에 통과할 때까지 반복할 것.
+            1) 테스트 제외 라이브러리
+                - jest
+                - @testing-library/react
+
+            2) 테스트 조건
+                - timeout은 설정하지 않거나, 500ms 미만으로 설정할 것.
+                - /purchase/[id] 페이지가 완전히 로드된 후 테스트할 것.
+                    - 페이지 로드 식별 요구사항: 고정식별자 data-testid 대기 방법
+                    - 페이지 로드 식별 금지사항: networkidle 대기 방법
+
+            3) 테스트 API 조건
+                3-1) 데이터
+                    - 실제데이터를 사용할 것.
+                    - Mock데이터 사용하지 말 것.
+
+                3-2) 성공시나리오
+                    - API 모킹하지 말 것.
+
+                3-3) 실패시나리오
+                    - API 모킹하지 말 것.
+
+            4) 테스트 데이터타입
+                - API: GraphQL (주소: https://main-practice.codebootcamp.co.kr/graphql)
+                - 쿼리: fetchTravelproduct
+                - 파라미터: _id: ID!
+                - 반환타입: Travelproduct
+                - Travelproduct 타입: {
+                    _id: string,
+                    name: string,
+                    remarks: string,
+                    contents: string,
+                    price?: number,
+                    pickedCount?: number,
+                    images?: string[],
+                    tags?: string[],
+                    travelproductAddress?: TravelproductAddress,
+                    buyer?: User,
+                    seller?: User,
+                    soldAt?: string,
+                    createdAt: string,
+                    updatedAt: string,
+                    deletedAt?: string
+                }
+
+핵심요구사항) 여행상품 상세 페이지의 Mock데이터를 제거하고, GraphQL API를 통해 실제 데이터를 바인딩할 것.
+            1) 바인딩할 데이터
+                - GraphQL fetchTravelproduct 쿼리를 사용하여 여행상품 상세 조회
+                - @tanstack/react-query를 사용하여 데이터 페칭 처리
+                - URL 파라미터에서 _id를 추출하여 쿼리 파라미터로 전달
+            
+            2) 상세내용
+                - Title Area (제목 영역)
+                    - 제목: Travelproduct의 name
+                    - 부제목: Travelproduct의 remarks
+                    - 해시태그: Travelproduct의 tags 배열을 "#" 접두사와 함께 표시
+                    - 북마크 수: Travelproduct의 pickedCount
+                
+                - Purchase Area (구매 영역)
+                    - 메인 이미지: Travelproduct의 images 배열 첫 번째 이미지
+                    - 썸네일 이미지: Travelproduct의 images 배열 나머지 이미지들
+                    - 가격: Travelproduct의 price (천 단위 콤마 표시)
+                    - 판매자 정보: Travelproduct의 seller 정보
+                
+                - Content Area (상세 설명 영역)
+                    - 상세 설명: Travelproduct의 contents
+                
+                - Map Area (지도 영역)
+                    - 상세 위치: Travelproduct의 travelproductAddress 정보 활용
+
+핵심요구사항) 여행상품 목록 페이지에서 게시글 클릭 시 상세 페이지로 라우팅되도록 구현할 것.
+            1) 라우팅 구현
+                - purchase-list의 각 카드(메인 영역의 product-card) 클릭 시 purchase/[id]로 이동
+                - URL 상수는 src/app/commons/constants/url.ts의 ROUTES.PURCHASE.DETAIL을 사용
+                - Travelproduct의 _id를 파라미터로 전달

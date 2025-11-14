@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import ApolloSetting from "./commons/settings/apollo-setting";
+import ReactQuerySetting from "./commons/settings/react-query-setting";
 import Layout from "./commons/layout";
 import ModalProvider from "./commons/providers/modal/modal.provider";
 
@@ -24,9 +25,11 @@ export default function RootLayout({ children }: IProps) {
     <html lang="ko">
       <body className={`${globalFont.variable}`}>
         <ApolloSetting>
-          <ModalProvider>
-            <Layout>{children}</Layout>
-          </ModalProvider>
+          <ReactQuerySetting>
+            <ModalProvider>
+              <Layout>{children}</Layout>
+            </ModalProvider>
+          </ReactQuerySetting>
         </ApolloSetting>
       </body>
     </html>
