@@ -5,6 +5,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@apollo/client';
 import { UPLOAD_FILE } from '@/components/boards-write/queries';
 import { CREATE_TRAVELPRODUCT, UPDATE_TRAVELPRODUCT } from './queries';
+import { FETCH_TRAVELPRODUCTS } from '@/components/accommodation-list/list/queries';
+import {
+  FetchTravelproductsQuery,
+  FetchTravelproductsQueryVariables,
+} from '@/commons/graphql/graphql';
 import { useAlertModal } from '@/commons/components/modal';
 import {
   AccommodationSellVariables,
@@ -120,6 +125,42 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
               ? travelproductAddress
               : undefined,
           },
+        },
+        update: (cache, { data }) => {
+          if (data?.createTravelproduct) {
+            // 캐시에서 기존 목록 데이터 읽기
+            const existingData = cache.readQuery<
+              FetchTravelproductsQuery,
+              FetchTravelproductsQueryVariables
+            >({
+              query: FETCH_TRAVELPRODUCTS,
+              variables: {
+                page: 1,
+                isSoldout: false,
+              },
+            });
+
+            if (existingData?.fetchTravelproducts) {
+              // 새로 생성된 상품을 목록 앞에 추가
+              const newProduct = {
+                ...data.createTravelproduct,
+                pickedCount: 0, // 새 상품이므로 초기값
+                seller: null, // seller 정보는 서버에서 가져와야 하므로 null
+              };
+
+              // 캐시 업데이트: 새 상품을 배열 앞에 추가
+              cache.writeQuery<FetchTravelproductsQuery, FetchTravelproductsQueryVariables>({
+                query: FETCH_TRAVELPRODUCTS,
+                variables: {
+                  page: 1,
+                  isSoldout: false,
+                },
+                data: {
+                  fetchTravelproducts: [newProduct, ...existingData.fetchTravelproducts],
+                },
+              });
+            }
+          }
         },
       });
 
