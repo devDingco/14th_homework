@@ -1,11 +1,11 @@
 .card {
-  position: fixed;
-  top: 15rem;
-  right: calc(50% - 40rem);
+  position: sticky;
+  top: 2.5rem;
   width: 25.75rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  align-self: flex-start;
 }
 
 .purchaseCard {

@@ -1,9 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
+import { Modal } from "antd";
 import ProductsDetailCard from "../card";
 import styles from "./styles.module.css";
+import useFetchTravelproduct from "./hooks/index.binding.hook";
+import GoogleMapComponent from "@/components/commons/google-map";
 
 // SVG 아이콘 컴포넌트
 const DeleteIcon = () => (
@@ -43,56 +46,39 @@ const BookmarkIcon = () => (
 );
 
 export default function ProductsDetailContents() {
-  // Mock 데이터
-  const mockData = {
-    title: "포항 : 숙박권 명이 여기에 들어갑니다",
-    subtitle: "모던한 분위기의 감도높은 숙소",
-    tags: "#6인 이하 #건식 사우나 #애견동반 가능",
-    bookmarkCount: 24,
-    pictures: [
-      "/images/accommodation_5.jpg",
-      "/images/accommodation_6.jpg",
-      "/images/accommodation_7.jpg",
-      "/images/accommodation_8.jpg",
-      "/images/accommodation_9.jpg",
-      "/images/accommodation_10.jpg",
-    ],
-    content: `살어리 살어리랏다 쳥산(靑山)애 살어리랏다 멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애 살어리랏다 얄리얄리 얄랑셩 얄라리 얄라 우러라 우러라 새여 자고 니러 우러라 새여 널라와 시름 한 나도 자고 니러 우니로라 리얄리 얄라셩 얄라리 얄라 가던 새 가던 새 본다 믈 아래 가던 새 본다 잉무든 장글란 가지고 믈 아래 가던 새 본다 얄리얄리 얄라셩 얄라리 얄라
+  const { data, loading, error } = useFetchTravelproduct();
 
-이링공 뎌링공 ᄒᆞ야 나즈란 디내와손뎌
-오리도 가리도 업슨 바므란 ᄯᅩ 엇디 호리라
-얄리얄리 얄라셩 얄라리 얄라
-
-어듸라 더디던 돌코 누리라 마치던 돌코
-믜리도 괴리도 업시 마자셔 우니노라
-얄리얄리 얄라셩 얄라리 얄라
-
-살어리 살어리랏다 바ᄅᆞ래 살어리랏다
-ᄂᆞᄆᆞ자기 구조개랑 먹고 바ᄅᆞ래 살어리랏다
-얄리얄리 얄라셩 얄라리 얄라
-
-가다가 가다가 드로라 에졍지 가다가 드로라
-사ᄉᆞ미 지ᇝ대예 올아셔 ᄒᆡ금(奚琴)을 혀거를 드로라
-얄리얄리 얄라셩 얄라리 얄라
-
-가다니 ᄇᆡ브른 도긔 설진 강수를 비조라
-조롱곳 누로기 ᄆᆡ와 잡ᄉᆞ와니 내 엇디 ᄒᆞ리잇고
-얄리얄리 얄라셩 얄라리 얄라`,
-  };
+  const product = data?.fetchTravelproduct;
 
   const previewWrapperRef = useRef<HTMLDivElement>(null);
   const [circularPictures, setCircularPictures] = useState<string[]>([]);
-  const [mainPicture, setMainPicture] = useState(mockData.pictures[0]);
+  const [mainPicture, setMainPicture] = useState("");
   const [isInitialized, setIsInitialized] = useState(false);
-  const originalPicturesLength = mockData.pictures.length;
+  const [mapCoordinates, setMapCoordinates] = useState<{ lat: number; lng: number } | null>(null);
+
+  const images = useMemo(
+    () =>
+      product?.images && product.images.length > 0
+        ? product.images.map((img) => `https://storage.googleapis.com/${img}`)
+        : [],
+    [product?.images]
+  );
+  const originalPicturesLength = images.length;
+  const tags = product?.tags?.map((tag) => `#${tag}`).join(" ") || "";
+
+  const address = product?.travelproductAddress?.address;
+  const lat = product?.travelproductAddress?.lat;
+  const lng = product?.travelproductAddress?.lng;
 
   // 캐러셀을 위한 순환 배열 생성
   useEffect(() => {
-    // 무한 스크롤을 위해 배열을 3번 복제 (이전, 현재, 다음)
-    const tripled = [...mockData.pictures, ...mockData.pictures, ...mockData.pictures];
-    setCircularPictures(tripled);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (images.length > 0 && circularPictures.length === 0) {
+      // 무한 스크롤을 위해 배열을 3번 복제 (이전, 현재, 다음)
+      const tripled = [...images, ...images, ...images];
+      setCircularPictures(tripled);
+      setMainPicture(images[0]);
+    }
+  }, [images, circularPictures.length]);
 
   // 초기 스크롤 위치를 중간 섹션으로 설정
   useEffect(() => {
@@ -155,6 +141,51 @@ export default function ProductsDetailContents() {
     };
   }, [circularPictures, originalPicturesLength, isInitialized]);
 
+  // Kakao API를 사용하여 주소를 좌표로 변환
+  useEffect(() => {
+    const fetchCoordinates = async () => {
+      // lat, lng가 이미 있으면 사용
+      if (lat && lng) {
+        setMapCoordinates({ lat, lng });
+        return;
+      }
+
+      // lat, lng가 없고 주소가 있으면 Kakao API로 변환
+      if (address && !lat && !lng) {
+        try {
+          const response = await fetch(
+            `https://dapi.kakao.com/v2/local/search/address.json?query=${encodeURIComponent(address)}`,
+            {
+              headers: {
+                Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_APP_JS_KEY}`,
+              },
+            }
+          );
+
+          const result = await response.json();
+
+          if (result.documents && result.documents.length > 0) {
+            const { x, y } = result.documents[0];
+            setMapCoordinates({ lat: parseFloat(y), lng: parseFloat(x) });
+          } else {
+            setMapCoordinates(null);
+          }
+        } catch (error) {
+          console.error("좌표 변환 실패:", error);
+          const showErrorModal = () =>
+            Modal.error({
+              title: "좌표 변환에 실패하였습니다.",
+              content: (error as Error)?.message ?? "좌표 변환에 실패하였습니다.",
+            });
+          showErrorModal();
+          setMapCoordinates(null);
+        }
+      }
+    };
+
+    fetchCoordinates();
+  }, [address, lat, lng]);
+
   const handlePreviewClick = (picture: string, clickedIndex: number) => {
     setMainPicture(picture);
 
@@ -197,84 +228,130 @@ export default function ProductsDetailContents() {
     });
   };
 
-  return (
-    <div className={styles.productsDetail} data-testid="products-detail-contents">
-      <ProductsDetailCard />
-      {/* Title Section */}
-      <div className={styles.titleSection}>
-        <div className={styles.titleWrapper}>
-          <div className={styles.titleTop}>
-            <h1 className={styles.title} data-testid="product-title">
-              {mockData.title}
-            </h1>
-            <div className={styles.actions}>
-              <button className={styles.iconButton} data-testid="delete-button">
-                <DeleteIcon />
-              </button>
-              <button className={styles.iconButton} data-testid="link-button">
-                <LinkIcon />
-              </button>
-              <button className={styles.iconButton} data-testid="location-button">
-                <LocationIcon />
-              </button>
-              <div className={styles.bookmark} data-testid="bookmark">
-                <BookmarkIcon />
-                <span className={styles.bookmarkCount}>{mockData.bookmarkCount}</span>
-              </div>
+  if (loading) {
+    return (
+      <div className={styles.productsDetail} data-testid="products-detail-contents">
+        <div className={styles.contentsWrapper}>
+          <div className={styles.titleSection}>
+            <div className={styles.titleWrapper}>
+              <p>로딩 중...</p>
             </div>
           </div>
-          <p className={styles.subtitle} data-testid="product-subtitle">
-            {mockData.subtitle}
-          </p>
-          <p className={styles.tags} data-testid="product-tags">
-            {mockData.tags}
-          </p>
         </div>
       </div>
+    );
+  }
 
-      {/* Pictures Section */}
-      <div className={styles.picturesSection} data-testid="pictures-section">
-        <div className={styles.mainPicture} data-testid="main-picture">
-          <Image src={mainPicture} alt="메인 이미지" fill style={{ objectFit: "cover" }} />
-        </div>
-        <div className={styles.previewContainer}>
-          <div className={styles.previewWrapper} ref={previewWrapperRef} data-testid="preview-wrapper">
-            {circularPictures.map((picture, index) => (
-              <div
-                key={index}
-                className={styles.previewPicture}
-                onClick={() => handlePreviewClick(picture, index)}
-                data-testid={`preview-picture-${index}`}
-              >
-                <Image src={picture} alt={`미리보기 ${index + 1}`} fill style={{ objectFit: "cover" }} />
-              </div>
-            ))}
+  if (error || !product) {
+    return (
+      <div className={styles.productsDetail} data-testid="products-detail-contents">
+        <div className={styles.contentsWrapper}>
+          <div className={styles.titleSection}>
+            <div className={styles.titleWrapper}>
+              <p>데이터를 불러올 수 없습니다.</p>
+            </div>
           </div>
-          <div className={styles.previewGradient}></div>
         </div>
       </div>
+    );
+  }
 
-      {/* Divider */}
-      <div className={styles.divider}></div>
-
-      {/* Content Section */}
-      <div className={styles.contentSection} data-testid="content-section">
-        <h2 className={styles.sectionTitle}>상세 설명</h2>
-        <p className={styles.contentText} data-testid="content-text">
-          {mockData.content}
-        </p>
-      </div>
-
-      {/* Divider */}
-      <div className={styles.divider}></div>
-
-      {/* Map Section */}
-      <div className={styles.mapSection} data-testid="map-section">
-        <h2 className={styles.sectionTitle}>상세 위치</h2>
-        <div className={styles.mapPlaceholder} data-testid="map-placeholder">
-          {/* Google Map API 추후 연동 예정 */}
+  return (
+    <div className={styles.productsDetail} data-testid="products-detail-contents">
+      <div className={styles.contentsWrapper}>
+        {/* Title Section */}
+        <div className={styles.titleSection}>
+          <div className={styles.titleWrapper}>
+            <div className={styles.titleTop}>
+              <h1 className={styles.title} data-testid="product-title">
+                {product.name}
+              </h1>
+              <div className={styles.actions}>
+                <button className={styles.iconButton} data-testid="delete-button">
+                  <DeleteIcon />
+                </button>
+                <button className={styles.iconButton} data-testid="link-button">
+                  <LinkIcon />
+                </button>
+                <button className={styles.iconButton} data-testid="location-button">
+                  <LocationIcon />
+                </button>
+                <div className={styles.bookmark} data-testid="bookmark">
+                  <BookmarkIcon />
+                  <span className={styles.bookmarkCount}>{product.pickedCount || 0}</span>
+                </div>
+              </div>
+            </div>
+            <p className={styles.subtitle} data-testid="product-subtitle">
+              {product.remarks}
+            </p>
+            <p className={styles.tags} data-testid="product-tags">
+              {tags}
+            </p>
+          </div>
         </div>
+
+        {/* Pictures Section */}
+        {images.length > 0 && (
+          <div className={styles.picturesSection} data-testid="pictures-section">
+            <div className={styles.mainPicture} data-testid="main-picture">
+              <Image src={mainPicture} alt="메인 이미지" fill style={{ objectFit: "cover" }} />
+            </div>
+            <div className={styles.previewContainer}>
+              <div className={styles.previewWrapper} ref={previewWrapperRef} data-testid="preview-wrapper">
+                {circularPictures.map((picture, index) => (
+                  <div
+                    key={index}
+                    className={styles.previewPicture}
+                    onClick={() => handlePreviewClick(picture, index)}
+                    data-testid={`preview-picture-${index}`}
+                  >
+                    <Image src={picture} alt={`미리보기 ${index + 1}`} fill style={{ objectFit: "cover" }} />
+                  </div>
+                ))}
+              </div>
+              <div className={styles.previewGradient}></div>
+            </div>
+          </div>
+        )}
+
+        {/* Divider */}
+        <div className={styles.divider}></div>
+
+        {/* Content Section */}
+        <div className={styles.contentSection} data-testid="content-section">
+          <h2 className={styles.sectionTitle}>상세 설명</h2>
+          <div
+            className={styles.contentText}
+            data-testid="content-text"
+            dangerouslySetInnerHTML={{ __html: product.contents }}
+          />
+        </div>
+
+        {/* Divider */}
+        {(address || mapCoordinates) && <div className={styles.divider}></div>}
+
+        {/* Map Section - 주소나 좌표가 있을 때만 표시 */}
+        {(address || mapCoordinates) && (
+          <div className={styles.mapSection} data-testid="map-section">
+            <h2 className={styles.sectionTitle}>상세 위치</h2>
+            {mapCoordinates ? (
+              <div className={styles.mapPlaceholder} data-testid="map-placeholder">
+                <GoogleMapComponent lat={mapCoordinates.lat} lng={mapCoordinates.lng} />
+              </div>
+            ) : (
+              <div className={styles.mapPlaceholder} data-testid="map-placeholder">
+                <p>좌표 정보를 불러오는 중입니다...</p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
+      <ProductsDetailCard
+        profileImage={product.seller?.picture || "/images/profile/8.svg"}
+        price={product.price || 0}
+        seller={product.seller?.name || "판매자"}
+      />
     </div>
   );
 }

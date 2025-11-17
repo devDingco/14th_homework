@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Address } from "react-daum-postcode";
 import { EditorState } from "lexical";
 import { $getRoot } from "lexical";
-import { productWriteSchema, ProductWriteFormValues } from "./schema";
+import { productWriteSchema, ProductWriteFormValues } from "../schema";
 
 export default function useProductWriteForm() {
   // 0. 세팅
@@ -15,6 +15,8 @@ export default function useProductWriteForm() {
 
   // 0-2. state
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
   // 1. useForm 세팅
   // 1-1. useForm 초기값세팅
@@ -32,6 +34,7 @@ export default function useProductWriteForm() {
       },
       lat: "",
       lng: "",
+      images: [],
     },
     resolver: zodResolver(productWriteSchema),
     mode: "onChange",
@@ -94,11 +97,34 @@ export default function useProductWriteForm() {
     router.back();
   };
 
-  // 2-5. 등록 버튼 핸들러
-  const onClickSubmit = (data: ProductWriteFormValues) => {
-    console.log("Form Data:", data);
-    // TODO: API 호출하여 상품 등록
-    alert("상품이 등록되었습니다.");
+  // 2-5. 이미지 업로드 핸들러
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+
+    const newFiles = Array.from(files);
+    setImageFiles((prev) => [...prev, ...newFiles]);
+
+    // FileReader를 사용하여 이미지 미리보기 생성
+    newFiles.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result;
+        if (result && typeof result === "string") {
+          setImagePreviews((prev) => [...prev, result]);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // input 초기화
+    event.target.value = "";
+  };
+
+  // 2-6. 이미지 삭제 핸들러
+  const handleImageRemove = (index: number) => {
+    setImageFiles((prev) => prev.filter((_, i) => i !== index));
+    setImagePreviews((prev) => prev.filter((_, i) => i !== index));
   };
 
   return {
@@ -106,12 +132,16 @@ export default function useProductWriteForm() {
     handleSubmit,
     formState,
     watch,
+    setValue,
     isModalOpen,
     onToggleModal,
     handleComplete,
     handleEditorChange,
     onClickCancel,
-    onClickSubmit,
+    imageFiles,
+    imagePreviews,
+    handleImageUpload,
+    handleImageRemove,
   };
 }
 

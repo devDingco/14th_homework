@@ -14,6 +14,7 @@ export const productWriteSchema = z.object({
   }),
   lat: z.string().optional(),
   lng: z.string().optional(),
+  images: z.array(z.string()).optional(),
 });
 
 export type ProductWriteFormValues = z.infer<typeof productWriteSchema>;

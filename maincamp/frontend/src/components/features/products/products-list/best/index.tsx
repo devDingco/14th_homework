@@ -2,54 +2,74 @@
 
 import { useState } from "react";
 import styles from "./styles.module.css";
-
-// Mock 데이터
-const MOCK_ACCOMMODATIONS = [
-  {
-    id: 1,
-    title: "포항 : 당장 가고 싶은 숙소",
-    description:
-      "살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라 우러라 우러라 새여 자고 니러 우러라 새여 널라와 시름 한 나도 자고 니러 우니로라 얄리얄리 얄라셩 얄라리 얄라",
-    price: "32,900",
-    bookmarkCount: 24,
-    imageUrl: "/images/accommodation_1.png",
-  },
-  {
-    id: 2,
-    title: "강릉 : 마음까지 깨끗해지는 하얀 숙소",
-    description: "살어리 살어리랏다 강릉에 평생 살어리랏다",
-    price: "32,900",
-    bookmarkCount: 24,
-    imageUrl: "/images/accommodation_2.png",
-  },
-  {
-    id: 3,
-    title: "제주 : 푸른 바다가 보이는 숙소",
-    description: "제주 바다 앞에서 힐링하기 좋은 곳",
-    price: "45,000",
-    bookmarkCount: 32,
-    imageUrl: "/images/accommodation_3.png",
-  },
-  {
-    id: 4,
-    title: "부산 : 해운대 근처 감성 숙소",
-    description: "부산 여행의 시작과 끝을 함께하는 숙소",
-    price: "38,500",
-    bookmarkCount: 18,
-    imageUrl: "/images/accommodation_4.png",
-  },
-];
+import { useProductsListBest } from "./hooks/index.binding.hook";
 
 export default function ProductsListBest() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { data, loading, error } = useProductsListBest();
+
+  // 데이터를 UI에 맞게 변환
+  const accommodations =
+    data?.fetchTravelproductsOfTheBest?.map((product, index) => {
+      // 이미지 처리: images 배열이 비어있지 않으면 첫 번째 이미지 사용, 아니면 기본 이미지
+      const imageUrl =
+        product.images && product.images.length > 0
+          ? `https://storage.googleapis.com/${product.images[0].replace(/ /g, "%20")}`
+          : `/images/accommodation_${index + 1}.png`;
+
+      return {
+        id: product._id,
+        title: product.name,
+        description: product.remarks,
+        price: product.price.toLocaleString("ko-KR"),
+        bookmarkCount: product.pickedCount,
+        imageUrl,
+      };
+    }) || [];
 
   const handleNext = () => {
-    if (currentIndex < MOCK_ACCOMMODATIONS.length - 2) {
+    if (currentIndex < accommodations.length - 2) {
       setCurrentIndex(currentIndex + 1);
     } else {
       setCurrentIndex(0);
     }
   };
+
+  // 로딩 중일 때
+  if (loading) {
+    return (
+      <div className={styles.container}>
+        <h2 className={styles.title}>2024 끝여름 낭만있게 마무리 하고 싶다면?</h2>
+        <div className={styles.cardArea}>
+          <p>로딩 중...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // 에러 발생 시
+  if (error) {
+    return (
+      <div className={styles.container}>
+        <h2 className={styles.title}>2024 끝여름 낭만있게 마무리 하고 싶다면?</h2>
+        <div className={styles.cardArea}>
+          <p>데이터를 불러오는 중 오류가 발생했습니다.</p>
+        </div>
+      </div>
+    );
+  }
+
+  // 데이터가 없을 때
+  if (accommodations.length === 0) {
+    return (
+      <div className={styles.container}>
+        <h2 className={styles.title}>2024 끝여름 낭만있게 마무리 하고 싶다면?</h2>
+        <div className={styles.cardArea}>
+          <p>표시할 상품이 없습니다.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
@@ -58,14 +78,16 @@ export default function ProductsListBest() {
       <div className={styles.cardArea}>
         <div
           className={styles.cardWrapper}
+          data-testid="product-card-wrapper"
           style={{
             transform: `translateX(-${currentIndex * 40.75}rem)`,
           }}
         >
-          {MOCK_ACCOMMODATIONS.map((accommodation) => (
-            <div key={accommodation.id} className={styles.card}>
+          {accommodations.map((accommodation) => (
+            <div key={accommodation.id} className={styles.card} data-testid="product-card">
               <div
                 className={styles.cardImage}
+                data-testid="product-image"
                 style={{
                   backgroundImage: `url(${accommodation.imageUrl})`,
                   backgroundSize: "cover",
@@ -88,16 +110,24 @@ export default function ProductsListBest() {
                     className={styles.bookmarkIcon}
                   />
                 </svg>
-                <span className={styles.bookmarkCount}>{accommodation.bookmarkCount}</span>
+                <span className={styles.bookmarkCount} data-testid="product-bookmark-count">
+                  {accommodation.bookmarkCount}
+                </span>
               </div>
 
               <div className={styles.contentArea}>
                 <div className={styles.textArea}>
-                  <h3 className={styles.cardTitle}>{accommodation.title}</h3>
-                  <p className={styles.cardDescription}>{accommodation.description}</p>
+                  <h3 className={styles.cardTitle} data-testid="product-title">
+                    {accommodation.title}
+                  </h3>
+                  <p className={styles.cardDescription} data-testid="product-description">
+                    {accommodation.description}
+                  </p>
                 </div>
                 <div className={styles.priceArea}>
-                  <span className={styles.price}>{accommodation.price}</span>
+                  <span className={styles.price} data-testid="product-price">
+                    {accommodation.price}
+                  </span>
                   <span className={styles.priceUnit}>원</span>
                 </div>
               </div>
@@ -106,7 +136,12 @@ export default function ProductsListBest() {
         </div>
       </div>
 
-      <button className={styles.nextButton} onClick={handleNext} aria-label="다음 숙소 보기">
+      <button
+        className={styles.nextButton}
+        onClick={handleNext}
+        aria-label="다음 숙소 보기"
+        data-testid="next-button"
+      >
         <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g filter="url(#filter0_d_285_31935)">
             <rect x="25" y="25" width="40" height="40" rx="20" fill="white" />

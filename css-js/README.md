@@ -1,0 +1,510 @@
+# 민지의 다이어리 📔
+
+바닐라 JavaScript로 구현한 일기 관리 웹 애플리케이션입니다. LocalStorage를 활용하여 클라이언트 측에서 일기 데이터를 관리하며, 다양한 감정별 일기 작성 및 관리 기능을 제공합니다.
+
+## 📋 목차
+
+- [프로젝트 개요](#프로젝트-개요)
+- [주요 기능](#주요-기능)
+- [기술 스택](#기술-스택)
+- [프로젝트 구조](#프로젝트-구조)
+- [실행 방법](#실행-방법)
+- [기능 상세 설명](#기능-상세-설명)
+- [코드 구조](#코드-구조)
+
+## 🎯 프로젝트 개요
+
+일상의 감정과 생각을 기록하고 관리할 수 있는 개인 다이어리 웹 애플리케이션입니다. 기분별로 일기를 분류하고, 검색 및 필터링 기능을 통해 원하는 일기를 쉽게 찾을 수 있습니다.
+
+### 주요 특징
+
+- ✍️ **감정 기반 일기 작성**: 5가지 감정(행복, 슬픔, 놀람, 화남, 기타)으로 분류
+- 🔍 **검색 및 필터링**: 제목 검색, 감정별 필터링
+- 📄 **페이지네이션**: 12개 단위 카드형 목록 표시
+- 💬 **회고 기능**: 일기에 대한 후기 작성
+- 📋 **내용 복사**: 클립보드 복사 기능
+- 🖼️ **사진보관함**: Dog API를 활용한 무한 스크롤 이미지 갤러리
+- 🌙 **다크모드**: UI 테마 전환
+- 💾 **LocalStorage**: 브라우저 기반 데이터 저장
+
+## 🎨 주요 기능
+
+### 1. 일기보관함
+
+#### 일기 작성 ✍️
+- 오늘의 기분 선택 (라디오 버튼)
+- 제목 입력
+- 내용 작성
+- 자동 날짜 기록 (YYYY. MM. DD)
+
+#### 일기 목록 📋
+- 카드형 레이아웃 (12개/페이지)
+- 감정별 아이콘 표시
+- 제목 및 작성일 표시
+- 페이지네이션 (5페이지 단위)
+
+#### 검색 및 필터 🔍
+- **제목 검색**: 1초 디바운싱 적용
+- **감정 필터**: 전체/행복/슬픔/놀람/화남/기타
+- **복합 필터**: 검색 + 감정 필터 동시 적용
+
+#### 일기 상세 보기 👀
+- 제목, 감정, 작성일, 내용 표시
+- 내용 복사 기능 (토스트 메시지)
+- 회고 작성 및 조회
+- 수정/삭제 버튼
+
+#### 일기 수정 ✏️
+- 기존 내용 불러오기
+- 감정, 제목, 내용 수정
+- 회고 조회만 가능 (수정 중 작성 불가)
+
+#### 일기 삭제 🗑️
+- 삭제 확인 모달
+- LocalStorage 업데이트
+- 목록 자동 갱신
+
+### 2. 사진보관함 🖼️
+
+- **Dog API 연동**: 랜덤 강아지 사진 10개씩 로드
+- **무한 스크롤**: 85% 스크롤 시 자동 로드 (1초 쓰로틀링)
+- **이미지 비율 조정**: 기본(1:1) / 가로형(4:3) / 세로형(3:4)
+- **스켈레톤 UI**: 로딩 중 스켈레톤 표시
+
+### 3. 모달 시스템 🔔
+
+#### 일기 작성 모달
+- 입력 폼 검증 (모든 필드 필수)
+- ESC 키 닫기
+- 배경 클릭 닫기
+- 작성 취소 확인
+
+#### 완료 모달
+- 일기 등록 완료 안내
+
+#### 삭제 확인 모달
+- 삭제 재확인
+- 취소/삭제 선택
+
+### 4. UI/UX 기능
+
+- **플로팅 버튼**: 스크롤 상단 이동 (화면 우측 하단 고정)
+- **다크모드 토글**: 테마 전환
+- **반응형 디자인**: 다양한 화면 크기 대응
+- **부드러운 스크롤**: Smooth scrolling 적용
+- **스크롤 제어**: 모달 열릴 때 배경 스크롤 방지
+
+## 🛠 기술 스택
+
+### Frontend
+
+- **HTML5**: 시맨틱 마크업
+- **CSS3**: 
+  - CSS 변수 (`:root`, `--custom-properties`)
+  - Flexbox & Grid 레이아웃
+  - CSS Modules (분리된 스타일시트)
+- **JavaScript (ES6+)**:
+  - 바닐라 JavaScript (프레임워크 없음)
+  - Async/Await
+  - LocalStorage API
+  - Fetch API
+  - DOM 조작
+  - Event Delegation
+
+### External Libraries
+
+- **Pretendard Variable Font**: 한글 웹폰트
+
+### External API
+
+- **Dog CEO API**: `https://dog.ceo/api/breeds/image/random/10`
+
+## 📁 프로젝트 구조
+
+```
+css-js/
+├── index.html              # 메인 페이지 (일기/사진보관함)
+├── detail.html             # 일기 상세 페이지
+├── edit.html               # 일기 수정 페이지
+│
+├── css/                    # 스타일시트
+│   ├── index.css           # 메인 페이지 스타일
+│   ├── detail.css          # 상세 페이지 스타일
+│   └── edit.css            # 수정 페이지 스타일
+│
+├── js/                     # JavaScript 파일
+│   ├── index.js            # 메인 로직 (모달, 페이지네이션, 필터)
+│   ├── index-diary.js      # 일기보관함 HTML 템플릿
+│   ├── index-image.js      # 사진보관함 로직 (API, 무한스크롤)
+│   ├── detail.js           # 상세 페이지 로직 (회고, 복사)
+│   └── edit.js             # 수정 페이지 로직
+│
+└── assets/                 # 정적 리소스
+    ├── icons/              # SVG 아이콘 (16개)
+    │   ├── up_outline_light_xl.svg
+    │   ├── down_fill_light_m.svg
+    │   ├── search_outline_light_m.svg
+    │   ├── plus_outline_light_m.svg
+    │   ├── copy_outline_light_m.svg
+    │   ├── close_outline_light_m.svg
+    │   ├── check_outline_light_xs.svg
+    │   ├── radio_*.svg
+    │   └── (left/right enable/disabled)
+    │
+    └── images/             # 감정 이미지 (11개)
+        ├── banner.jpg
+        ├── happy_M.svg / happy_S.svg
+        ├── sad_M.svg / sad_S.svg
+        ├── surprise_M.svg / surprise_S.svg
+        ├── angry_M.svg / angry_S.svg
+        └── etc_M.svg / etc_S.svg
+```
+
+## 🚀 실행 방법
+
+### 필수 요구사항
+
+- 웹 브라우저 (Chrome, Firefox, Safari 등)
+- 로컬 서버 (CORS 정책 준수)
+
+### 설치 및 실행
+
+```bash
+# 1. 프로젝트 폴더로 이동
+cd css-js
+
+# 2. 로컬 서버 실행 (방법 선택)
+
+# 방법 1: Python 간이 서버
+python -m http.server 8000
+
+# 방법 2: Node.js http-server
+npx http-server -p 8000
+
+# 방법 3: VS Code Live Server 확장 프로그램 사용
+
+# 3. 브라우저에서 접속
+# http://localhost:8000/index.html
+```
+
+### 빠른 시작
+
+1. `index.html`을 브라우저에서 열기
+2. "일기쓰기" 버튼 클릭
+3. 기분 선택 → 제목/내용 입력 → 등록하기
+4. 작성된 일기 카드 클릭하여 상세보기
+
+## 💡 기능 상세 설명
+
+### 데이터 구조
+
+#### 일기 카드 객체
+
+```javascript
+{
+  date: "2025. 01. 15",           // 작성일
+  feeling: "happy",                // 감정 (영문)
+  feeling_title: "행복해요",       // 감정 (한글)
+  card_title: "즐거운 하루",       // 제목
+  card_context: "오늘은...",       // 내용
+  comment: [                       // 회고 배열
+    {
+      comment: "그때가 그립다",
+      date: "2025. 02. 20"
+    }
+  ]
+}
+```
+
+#### LocalStorage 키
+
+- `diaryCardList`: 전체 일기 배열 (JSON)
+- `filteredCardNum`: 필터링된 일기 인덱스 배열
+
+### 주요 함수 설명
+
+#### `index.js` (메인 로직)
+
+```javascript
+// 메뉴 전환 (일기보관함 ↔ 사진보관함)
+changeMenu(clicked)
+
+// 일기 작성 폼 검증
+isDiaryWritten()
+
+// 모달 제어
+viewModal(modal__name)
+closeModal(modal__name)
+keepWrite(modal__name)
+
+// 일기 등록
+getDiaryCard()
+
+// 페이지네이션
+diaryPage(Arr, clickedpage)
+loaddiaryPage(Arr, clickedpage)
+prevPage(Arr)
+nextPage(Arr)
+
+// 검색 (디바운싱 1초)
+inputSearch(event)
+
+// 감정 필터링
+dropdownEvent(event)
+
+// 필터 결과 표시
+filterDiaryCard(result)
+
+// 일기 삭제
+deleteDiaryCard(event, index)
+
+// 플로팅 버튼
+floatingButton()
+scrollpage()
+```
+
+#### `detail.js` (상세 페이지)
+
+```javascript
+// 회고 작성 폼 검증
+isCommentWritten()
+
+// 회고 등록
+getDiaryComment()
+
+// 회고 목록 표시
+addDiaryComment()
+
+// 내용 복사
+copyDiary()
+
+// 토스트 메시지
+copyToastMessage()
+
+// 일기 삭제
+deleteDiaryCard()
+
+// 수정 페이지 이동
+diaryEdit()
+```
+
+#### `edit.js` (수정 페이지)
+
+```javascript
+// 일기 수정 저장
+editDiaryCard()
+
+// 회고 목록 표시
+addDiaryComment()
+
+// 상세 페이지 이동
+diaryDetail()
+```
+
+#### `index-image.js` (사진보관함)
+
+```javascript
+// Dog API 호출
+dogImageAPI()
+
+// 사진보관함 초기화
+addImageCard()
+
+// 이미지 비율 변경
+imageRatio(event)
+
+// 무한 스크롤 (스크롤 85% + 쓰로틀링 1초)
+window.addEventListener("scroll", () => {
+  // 스크롤 감지 로직
+})
+```
+
+### 페이지네이션 상세
+
+- **페이지당 카드 수**: 12개
+- **페이지 그룹**: 5개 단위
+- **이동 방식**: 
+  - 이전 버튼: 이전 그룹의 마지막 페이지로 이동 (예: 7페이지 → 5페이지)
+  - 다음 버튼: 다음 그룹의 첫 페이지로 이동 (예: 5페이지 → 6페이지)
+
+### 검색 및 필터 로직
+
+1. **검색**: 제목에 검색어 포함 여부 확인 (디바운싱 1초)
+2. **감정 필터**: 선택된 감정과 일치하는 일기 필터링
+3. **복합 필터**: 검색 결과 ∩ 감정 필터 결과
+
+```javascript
+// 교집합 찾기
+function findCommonCard(arr1, arr2) {
+  return arr1.filter(el => arr2.includes(el));
+}
+```
+
+### URL 파라미터
+
+- **상세 페이지**: `detail.html?number={index}`
+- **수정 페이지**: `edit.html?number={index}`
+
+```javascript
+const query = location.search
+const params = new URLSearchParams(query)
+const cardIndex = params.get("number")
+```
+
+## 🎨 디자인 특징
+
+### 색상 테마
+
+- **라이트 모드**: 기본 밝은 배경
+- **다크 모드**: 어두운 배경 (다크모드 토글)
+
+### 감정별 색상 코드
+
+- 🟡 **행복**: Yellow 계열
+- 🔵 **슬픔**: Blue 계열
+- 🟣 **놀람**: Purple 계열
+- 🔴 **화남**: Red 계열
+- ⚪ **기타**: Gray 계열
+
+### 레이아웃
+
+- **메인**: Grid 레이아웃 (카드 3-4열)
+- **상세/수정**: Single column 레이아웃
+- **모달**: 중앙 정렬 + 반투명 배경
+
+### 애니메이션
+
+- 모달 페이드인/아웃
+- 토스트 메시지 슬라이드업
+- 스무스 스크롤
+- 스켈레톤 로딩
+
+## 🔐 데이터 관리
+
+### LocalStorage 사용
+
+```javascript
+// 저장
+localStorage.setItem("diaryCardList", JSON.stringify(diaryCard))
+
+// 읽기
+const diaryCards = localStorage.getItem("diaryCardList")
+const diaryCard = JSON.parse(diaryCards === null ? "[]" : diaryCards)
+
+// 삭제
+diaryCard.splice(index, 1)
+localStorage.setItem("diaryCardList", JSON.stringify(diaryCard))
+```
+
+### 데이터 흐름
+
+```
+작성/수정 → diaryCard 배열 → LocalStorage 저장 → 목록 갱신
+```
+
+## 📱 반응형 디자인
+
+- **데스크톱**: 3-4열 그리드
+- **태블릿**: 2-3열 그리드
+- **모바일**: 1-2열 그리드
+
+## 🐛 알려진 이슈 및 개선사항
+
+### 현재 제한사항
+
+- [ ] 백엔드 없음 (LocalStorage만 사용)
+- [ ] 다중 사용자 지원 불가
+- [ ] 이미지 업로드 기능 없음 (일기에)
+- [ ] 일기 공유 기능 없음
+
+### 향후 개선 계획
+
+- [ ] 백엔드 API 연동
+- [ ] 사용자 인증 시스템
+- [ ] 일기 카테고리/태그 기능
+- [ ] 일기 통계 대시보드
+- [ ] PWA 지원 (오프라인 모드)
+- [ ] 일기 내보내기 (PDF, TXT)
+- [ ] 이미지 첨부 기능
+- [ ] 감정 통계 시각화
+
+## 💻 개발 가이드
+
+### 코딩 규칙
+
+- **변수명**: camelCase 사용
+- **상수**: UPPER_SNAKE_CASE 사용
+- **함수**: 동사로 시작하는 명확한 이름
+- **주석**: 복잡한 로직에만 작성
+
+### 새 기능 추가 방법
+
+1. **HTML 마크업 추가**
+2. **CSS 스타일 정의**
+3. **JavaScript 함수 작성**
+4. **이벤트 리스너 등록**
+5. **LocalStorage 연동** (필요시)
+
+### 디버깅 팁
+
+```javascript
+// LocalStorage 확인
+console.log(localStorage.getItem("diaryCardList"))
+
+// 배열 상태 확인
+console.log(diaryCard)
+
+// 이벤트 확인
+event.preventDefault()
+event.stopPropagation()
+```
+
+## 📚 참고 자료
+
+### API 문서
+
+- [Dog CEO API](https://dog.ceo/dog-api/)
+
+### Web APIs
+
+- [LocalStorage](https://developer.mozilla.org/ko/docs/Web/API/Window/localStorage)
+- [Fetch API](https://developer.mozilla.org/ko/docs/Web/API/Fetch_API)
+- [Clipboard API](https://developer.mozilla.org/ko/docs/Web/API/Clipboard_API)
+- [URLSearchParams](https://developer.mozilla.org/ko/docs/Web/API/URLSearchParams)
+
+### CSS
+
+- [Flexbox Guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+- [Grid Guide](https://css-tricks.com/snippets/css/complete-guide-grid/)
+- [CSS Variables](https://developer.mozilla.org/ko/docs/Web/CSS/Using_CSS_custom_properties)
+
+## 🎯 학습 포인트
+
+이 프로젝트를 통해 학습할 수 있는 핵심 개념:
+
+1. ✅ **바닐라 JavaScript**: 프레임워크 없이 SPA 구현
+2. ✅ **DOM 조작**: `querySelector`, `innerHTML`, `addEventListener`
+3. ✅ **이벤트 핸들링**: 버블링, 위임, preventDefault
+4. ✅ **비동기 처리**: `async/await`, `fetch`, Promise
+5. ✅ **데이터 관리**: LocalStorage, JSON 직렬화/역직렬화
+6. ✅ **성능 최적화**: 디바운싱, 쓰로틀링
+7. ✅ **사용자 경험**: 모달, 토스트, 스켈레톤 UI
+8. ✅ **페이지네이션**: 배열 슬라이싱, 동적 렌더링
+9. ✅ **필터링 & 검색**: 배열 메서드 활용
+10. ✅ **무한 스크롤**: 스크롤 이벤트, 스크롤 위치 계산
+
+## 👥 기여
+
+이 프로젝트는 SeSAC 교육 과정의 일환으로 개발되었습니다.
+
+## 📄 라이선스
+
+Educational Project - SeSAC
+
+---
+
+**Made with ❤️ by SeSAC Students**
+
+
+
+

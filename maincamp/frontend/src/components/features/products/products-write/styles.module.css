@@ -223,13 +223,14 @@
   width: 10rem;
   height: 10rem;
   border-radius: 0.5rem;
-  background-color: var(--color-gray-50);
+  background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   cursor: pointer;
+  border: none;
 }
 
 .photoUpload:hover {
@@ -245,6 +246,69 @@
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-regular);
   color: var(--color-gray-600);
+}
+
+.photoList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.photoItem {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.photoPreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photoRemove {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.photoRemove:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.photoUploadButton {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 0.5rem;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  border: none;
+}
+
+.photoUploadButton:hover {
+  opacity: 0.8;
+}
+
+.fileInput {
+  display: none;
 }
 
 .buttonGroup {
