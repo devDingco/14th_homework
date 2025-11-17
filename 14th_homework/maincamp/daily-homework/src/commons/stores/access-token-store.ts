@@ -3,6 +3,7 @@ import { create } from 'zustand';
 interface AccessTokenStore {
   accessToken: string;
   setAccessToken: (loginToken: string) => void;
+  logout: () => void;
 }
 
 export const useAccessTokenStore = create<AccessTokenStore>((set) => {
@@ -10,6 +11,10 @@ export const useAccessTokenStore = create<AccessTokenStore>((set) => {
     accessToken: '',
     setAccessToken: (loginToken: string) => {
       set(() => ({ accessToken: loginToken }));
+    },
+    logout: () => {
+      localStorage.removeItem('accessToken');
+      set(() => ({ accessToken: '' }));
     },
   };
 });

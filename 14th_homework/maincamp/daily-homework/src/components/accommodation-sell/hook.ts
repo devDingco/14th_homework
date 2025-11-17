@@ -50,8 +50,23 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
     },
   });
 
-  const fileRef = useRef<HTMLInputElement | null>(null);
-  const [imageUrl, setImageUrl] = useState<string>(props.data?.imageUrl || '');
+  const fileRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  // 초기 이미지 URL 배열을 8개로 고정
+  const getInitialImageUrls = (): string[] => {
+    const initial: string[] = Array(8).fill('');
+    if (props.data?.images && Array.isArray(props.data.images)) {
+      props.data.images.slice(0, 8).forEach((url: string, index: number) => {
+        initial[index] = url;
+      });
+    } else if (props.data?.imageUrl) {
+      initial[0] = props.data.imageUrl;
+    }
+    return initial;
+  };
+
+  const [imageUrls, setImageUrls] = useState<string[]>(getInitialImageUrls());
+  const [files, setFiles] = useState<(File | undefined)[]>(Array(8).fill(undefined));
   const [zipcode, setZipcode] = useState<string>(props.data?.zipcode || '');
   const [address, setAddress] = useState<string>(props.data?.address || '');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -87,8 +102,36 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
   const onClickSubmit = handleSubmit(async (data) => {
     const formData = data as ISellSchema;
 
-    if (!imageUrl) {
+    // 파일이 없으면 에러 처리
+    const validFiles = files.filter((f): f is File => f !== undefined);
+    if (validFiles.length === 0) {
       showAlert('사진을 첨부해 주세요.');
+      return;
+    }
+
+    // submit 시점에 파일들을 서버에 업로드 (Promise.all로 병렬 처리)
+    const uploadedImageUrls: string[] = [];
+    try {
+      if (validFiles.length > 0) {
+        // 모든 파일을 병렬로 업로드
+        const uploadPromises = validFiles.map((file) => uploadFile({ variables: { file } }));
+        const results = await Promise.all(uploadPromises);
+
+        // 업로드 결과에서 URL 추출
+        for (const result of results) {
+          if (result.data?.uploadFile?.url) {
+            uploadedImageUrls.push(result.data.uploadFile.url);
+          }
+        }
+      }
+    } catch (error) {
+      console.error('파일 업로드 실패:', error);
+      showAlert('파일 업로드에 실패했습니다.');
+      return;
+    }
+
+    if (uploadedImageUrls.length === 0) {
+      showAlert('파일 업로드에 실패했습니다.');
       return;
     }
 
@@ -110,14 +153,21 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
         lng: formData.lng ? parseFloat(formData.lng) : undefined,
       };
 
+      // 가격이 32-bit signed integer 범위를 초과하는지 확인
+      const priceValue = Number(formData.price.replace(/,/g, ''));
+      if (priceValue > 2147483647) {
+        showAlert('가격은 2,147,483,647원 이하여야 합니다.');
+        return;
+      }
+
       const result = await createTravelproduct({
         variables: {
           createTravelproductInput: {
             name: formData.name,
             remarks: formData.summary, // summary -> remarks
             contents: formData.description, // description -> contents
-            price: Number(formData.price.replace(/,/g, '')),
-            images: imageUrl ? [imageUrl] : undefined,
+            price: priceValue,
+            images: uploadedImageUrls.length > 0 ? uploadedImageUrls : undefined,
             tags: tagsArray.length > 0 ? tagsArray : undefined,
             travelproductAddress: Object.keys(travelproductAddress).some(
               (key) => travelproductAddress[key as keyof typeof travelproductAddress] !== undefined
@@ -182,6 +232,53 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
       return;
     }
 
+    // 수정 모드에서는 새 파일이 있을 때만 업로드, 없으면 기존 이미지 사용 (순서 유지)
+    const finalImageUrls: (string | null)[] = Array(imageUrls.length).fill(null);
+    let filteredUrls: string[] = [];
+
+    try {
+      // 업로드가 필요한 파일들만 필터링
+      const filesToUpload: Array<{ index: number; file: File }> = [];
+
+      for (let i = 0; i < imageUrls.length; i++) {
+        const imageUrl = imageUrls[i];
+        const file = files[i];
+
+        if (file) {
+          // 새 파일이 선택된 경우 업로드 목록에 추가
+          filesToUpload.push({ index: i, file });
+        } else if (imageUrl && !imageUrl.startsWith('data:') && !imageUrl.startsWith('blob:')) {
+          // 기존 서버 URL인 경우 그대로 사용
+          finalImageUrls[i] = imageUrl;
+        }
+      }
+
+      // 새 파일들을 병렬로 업로드
+      if (filesToUpload.length > 0) {
+        const uploadPromises = filesToUpload.map(({ file }) => uploadFile({ variables: { file } }));
+        const uploadResults = await Promise.all(uploadPromises);
+
+        // 업로드 결과를 원래 인덱스 위치에 저장 (순서 유지)
+        filesToUpload.forEach(({ index }, i) => {
+          const result = uploadResults[i];
+          if (result.data?.uploadFile?.url) {
+            finalImageUrls[index] = result.data.uploadFile.url;
+          }
+        });
+      }
+
+      // null 값 제거하여 최종 배열 생성
+      filteredUrls = finalImageUrls.filter((url): url is string => url !== null);
+      if (filteredUrls.length === 0) {
+        showAlert('사진을 첨부해 주세요.');
+        return;
+      }
+    } catch (error) {
+      console.error('파일 업로드 실패:', error);
+      showAlert('파일 업로드에 실패했습니다.');
+      return;
+    }
+
     try {
       // tags를 배열로 변환 (쉼표로 구분된 문자열을 배열로)
       const tagsArray = formData.tags
@@ -200,6 +297,13 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
         lng: formData.lng ? parseFloat(formData.lng) : undefined,
       };
 
+      // 가격이 32-bit signed integer 범위를 초과하는지 확인
+      const priceValue = Number(formData.price.replace(/,/g, ''));
+      if (priceValue > 2147483647) {
+        showAlert('가격은 2,147,483,647원 이하여야 합니다.');
+        return;
+      }
+
       const result = await updateTravelproduct({
         variables: {
           travelproductId: params.id,
@@ -207,8 +311,8 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
             name: formData.name,
             remarks: formData.summary, // summary -> remarks
             contents: formData.description, // description -> contents
-            price: Number(formData.price.replace(/,/g, '')),
-            images: imageUrl ? [imageUrl] : undefined,
+            price: priceValue,
+            images: filteredUrls.length > 0 ? filteredUrls : undefined,
             tags: tagsArray.length > 0 ? tagsArray : undefined,
             travelproductAddress: Object.keys(travelproductAddress).some(
               (key) => travelproductAddress[key as keyof typeof travelproductAddress] !== undefined
@@ -229,8 +333,8 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
     }
   });
 
-  const onClickImage = () => {
-    fileRef.current?.click();
+  const onClickImage = (index: number) => {
+    fileRefs.current[index]?.click();
   };
 
   const checkValidationFile = (file?: File) => {
@@ -251,25 +355,60 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
     return true;
   };
 
-  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeFile = (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     const isValid = checkValidationFile(file);
-    if (!isValid) return;
-
-    try {
-      const result = await uploadFile({ variables: { file } });
-      const url = result.data?.uploadFile?.url ?? '';
-      setImageUrl(url);
-      event.target.value = '';
-    } catch (error) {
-      console.error(error);
-      showAlert('파일 업로드에 실패했습니다.');
+    if (!isValid) {
+      // 파일 입력 초기화
+      if (event.target) event.target.value = '';
+      return;
     }
+
+    if (!file) return;
+
+    // FileReader를 사용하여 미리보기용 임시 URL 생성 (base64)
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = (event) => {
+      if (typeof event.target?.result === 'string') {
+        // 미리보기용 임시 URL (base64)로 설정
+        setImageUrls((prev) => {
+          const newUrls = [...prev];
+          if (index < 8) {
+            newUrls[index] = event.target?.result as string;
+          }
+          return newUrls;
+        });
+        setFiles((prev) => {
+          const newFiles = [...prev];
+          if (index < 8) {
+            newFiles[index] = file;
+          }
+          return newFiles;
+        });
+      }
+    };
+    fileReader.onerror = () => {
+      showAlert('파일을 읽는 중 오류가 발생했습니다.');
+      if (event.target) event.target.value = '';
+    };
   };
 
-  const deleteImage = () => {
-    setImageUrl('');
-    if (fileRef.current) fileRef.current.value = '';
+  const deleteImage = (index: number) => {
+    if (index >= 8) return;
+    setImageUrls((prev) => {
+      const newUrls = [...prev];
+      newUrls[index] = '';
+      return newUrls;
+    });
+    setFiles((prev) => {
+      const newFiles = [...prev];
+      newFiles[index] = undefined;
+      return newFiles;
+    });
+    if (fileRefs.current[index]) {
+      fileRefs.current[index]!.value = '';
+    }
   };
 
   const showModal = () => {
@@ -322,7 +461,7 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
     deleteImage,
     error,
     isValid,
-    imageUrl,
+    imageUrls,
     zipcode,
     address,
     setValue,
@@ -331,7 +470,7 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
     handleOk,
     handleCancel,
     handleComplete,
-    fileRef,
+    fileRefs,
     price,
     handlePriceChange,
     AlertModalComponent,

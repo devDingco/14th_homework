@@ -14,6 +14,14 @@ export const sellSchema = z.object({
         return !isNaN(num) && num > 0;
       },
       { message: '올바른 가격을 입력해 주세요.' }
+    )
+    .refine(
+      (val) => {
+        const num = Number(val.replace(/,/g, ''));
+        // GraphQL Int 타입은 32-bit signed integer만 지원 (최대값: 2,147,483,647)
+        return num <= 2147483647;
+      },
+      { message: '가격은 2,147,483,647원 이하여야 합니다.' }
     ),
   tags: z.string().min(1, { message: '태그를 입력해 주세요.' }).trim(),
   zipcode: z.string().min(1, { message: '우편번호를 입력해 주세요.' }),
@@ -37,6 +45,14 @@ export const updateSellSchema = z.object({
         return !isNaN(num) && num > 0;
       },
       { message: '올바른 가격을 입력해 주세요.' }
+    )
+    .refine(
+      (val) => {
+        const num = Number(val.replace(/,/g, ''));
+        // GraphQL Int 타입은 32-bit signed integer만 지원 (최대값: 2,147,483,647)
+        return num <= 2147483647;
+      },
+      { message: '가격은 2,147,483,647원 이하여야 합니다.' }
     ),
   tags: z.string().min(1, { message: '태그를 입력해 주세요.' }).trim(),
   zipcode: z.string().min(1, { message: '우편번호를 입력해 주세요.' }),
