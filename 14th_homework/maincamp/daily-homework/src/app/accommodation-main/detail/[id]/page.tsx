@@ -66,6 +66,7 @@ export default function AccommodationDetailPage() {
           description={product.remarks}
           tags={product.tags || []}
           bookmarkCount={product.pickedCount || 0}
+          productId={product._id}
         />
 
         {/* 이미지 갤러리와 Purchase를 같은 행에 배치 */}
