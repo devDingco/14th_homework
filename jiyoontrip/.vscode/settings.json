@@ -1,0 +1,6 @@
+{
+  // 스펠 체커 비활성화 (unknown word 경고 제거)
+  "cSpell.enabled": false,
+  "spellright.language": [],
+  "spellright.documentTypes": []
+}

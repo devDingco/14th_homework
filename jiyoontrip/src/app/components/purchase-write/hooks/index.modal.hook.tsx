@@ -16,12 +16,13 @@ interface FormData {
   summary: string;
   description: string;
   price: string;
-  tags: string;
-  zipcode: string;
-  address: string;
-  addressDetail: string;
-  lat: string;
-  lng: string;
+  tags?: string;
+  zipcode?: string;
+  address?: string;
+  addressDetail?: string;
+  lat?: string;
+  lng?: string;
+  images?: string[];
 }
 
 interface UsePurchaseWriteModalProps {

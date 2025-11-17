@@ -3,73 +3,76 @@
 import Image from "next/image";
 import { DatePicker } from "antd";
 import styles from "./styles.module.css";
+import usePurchaseListBinding from "./hooks/index.binding.hook";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/app/commons/constants/url";
 
 export default function PurchaseList() {
+  const router = useRouter();
+  const {
+    bestProducts,
+    products,
+    isLoadingBest,
+    isLoadingProducts,
+    formatPrice,
+    processImageUrl,
+  } = usePurchaseListBinding();
+
+  const onClickProductCard = (productId: string) => {
+    router.push(ROUTES.PURCHASE.DETAIL(productId));
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="purchase-list-page">
       {/* Best Item Area */}
       <div className={styles.bestItemArea}>
         <h2 className={styles.title}>2024 끝여름 낭만있게 마무리 하고 싶다면?</h2>
-        <div className={styles.carouselArea}>
-          <div
-            className={styles.accommodationCard}
-            style={{ backgroundImage: "url(/images/a.png)" }}
-          >
-            <div className={styles.cardOverlay}>
-              <div className={styles.bookmarkBadge}>
-                <div className={styles.bookmarkBadgeContent}>
-                  <Image
-                    src="/icons/outline/bookmark.svg"
-                    alt="북마크"
-                    width={24}
-                    height={24}
-                  />
-                  <span>24</span>
+        <div className={styles.carouselArea} data-testid="best-item-carousel">
+          {isLoadingBest ? (
+            <div>로딩 중...</div>
+          ) : (
+            bestProducts.slice(0, 2).map((product) => (
+              <div
+                key={product._id}
+                className={styles.accommodationCard}
+                data-testid="best-item-card"
+                style={{
+                  backgroundImage:
+                    product.images && product.images.length > 0 && product.images[0]
+                      ? `url(${processImageUrl(product.images[0])})`
+                      : "url(/images/a.png)",
+                }}
+              >
+                <div className={styles.cardOverlay}>
+                  <div className={styles.bookmarkBadge}>
+                    <div className={styles.bookmarkBadgeContent}>
+                      <Image
+                        src="/icons/outline/bookmark.svg"
+                        alt="북마크"
+                        width={24}
+                        height={24}
+                      />
+                      <span data-testid="best-card-bookmark">
+                        {product.pickedCount || 0}
+                      </span>
+                    </div>
+                  </div>
+                  <div className={styles.cardContent}>
+                    <h3 data-testid="best-card-title">{product.name}</h3>
+                    <p className={styles.description} data-testid="best-card-description">
+                      {product.remarks}
+                    </p>
+                    <div className={styles.priceArea}>
+                      <span className={styles.price} data-testid="best-card-price">
+                        {formatPrice(product.price)}
+                      </span>
+                      <span className={styles.unit}>원</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className={styles.cardContent}>
-                <h3>포항 : 당장 가고 싶은 숙소</h3>
-                <p className={styles.description}>
-                  살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고
-                  쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라 우러라 우러라 새여
-                  자고 니러 우러라 새여 널라와 시름 한 나도 자고 니러 우니로라 얄리얄리
-                  얄라셩 얄라리 얄라
-                </p>
-                <div className={styles.priceArea}>
-                  <span className={styles.price}>32,900</span>
-                  <span className={styles.unit}>원</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            className={styles.accommodationCard}
-            style={{ backgroundImage: "url(/images/b.png)" }}
-          >
-            <div className={styles.cardOverlay}>
-              <div className={styles.bookmarkBadge}>
-                <div className={styles.bookmarkBadgeContent}>
-                  <Image
-                    src="/icons/outline/bookmark.svg"
-                    alt="북마크"
-                    width={24}
-                    height={24}
-                  />
-                  <span>24</span>
-                </div>
-              </div>
-              <div className={styles.cardContent}>
-                <h3>강릉 : 마음까지 깨끗해지는 하얀 숙소</h3>
-                <p className={styles.description}>
-                  살어리 살어리랏다 강릉에 평생 살어리랏다
-                </p>
-                <div className={styles.priceArea}>
-                  <span className={styles.price}>32,900</span>
-                  <span className={styles.unit}>원</span>
-                </div>
-              </div>
-            </div>
-          </div>
+            ))
+          )}
         </div>
       </div>
 
@@ -217,60 +220,93 @@ export default function PurchaseList() {
           </div>
         </div>
 
-        <div className={styles.cardArea}>
-          {[...Array(8)].map((_, index) => (
-            <div key={index} className={styles.card}>
+        <div className={styles.cardArea} data-testid="main-card-area">
+          {isLoadingProducts ? (
+            <div>로딩 중...</div>
+          ) : (
+            products.map((product) => (
               <div
-                className={styles.cardImageWrapper}
-                style={{ backgroundImage: "url('/images/Rectangle 3011.png')" }}
+                key={product._id}
+                className={styles.card}
+                data-testid="product-card"
+                onClick={() => onClickProductCard(product._id)}
+                style={{ cursor: "pointer" }}
               >
-                <div className={styles.cardBookmark}>
-                  <div className={styles.cardBookmarkContent}>
-                    <Image
-                      src="/icons/outline/bookmark.svg"
-                      alt="북마크"
-                      width={24}
-                      height={24}
-                    />
-                    <span>24</span>
+                <div
+                  className={styles.cardImageWrapper}
+                  data-testid="product-card-image"
+                  style={{
+                    backgroundImage:
+                      product.images && product.images.length > 0 && product.images[0]
+                        ? `url(${processImageUrl(product.images[0])})`
+                        : "url('/images/Rectangle 3011.png')",
+                  }}
+                >
+                  <div className={styles.cardBookmark}>
+                    <div className={styles.cardBookmarkContent}>
+                      <Image
+                        src="/icons/outline/bookmark.svg"
+                        alt="북마크"
+                        width={24}
+                        height={24}
+                      />
+                      <span data-testid="product-card-bookmark">
+                        {product.pickedCount || 0}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.cardInfo}>
+                  <h3 className={styles.cardTitle} data-testid="product-card-title">
+                    {product.name}
+                  </h3>
+                  <p className={styles.cardSubtitle} data-testid="product-card-subtitle">
+                    {product.remarks}
+                  </p>
+                  {product.tags && product.tags.length > 0 && (
+                    <div className={styles.tagArea} data-testid="product-card-tags">
+                      {product.tags.map((tag, index) => (
+                        <span key={index}>#{tag} </span>
+                      ))}
+                    </div>
+                  )}
+                  <div className={styles.cardFooter}>
+                    <div
+                      className={styles.profileArea}
+                      data-testid="product-card-profile"
+                    >
+                      {product.seller?.picture ? (
+                        <Image
+                          src={product.seller.picture}
+                          alt="프로필"
+                          width={24}
+                          height={24}
+                          className={styles.profileImg}
+                        />
+                      ) : (
+                        <Image
+                          src="/images/f.png"
+                          alt="프로필"
+                          width={24}
+                          height={24}
+                          className={styles.profileImg}
+                        />
+                      )}
+                      <span className={styles.profileName}>
+                        {product.seller?.name || "판매자"}
+                      </span>
+                    </div>
+                    <div className={styles.cardPriceArea}>
+                      <span className={styles.cardPrice} data-testid="product-card-price">
+                        {formatPrice(product.price)}
+                      </span>
+                      <span className={styles.cardUnit}>원</span>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className={styles.cardInfo}>
-                <h3 className={styles.cardTitle}>
-                  살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고
-                  쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라 우러라 우러라 새여
-                  자고 니러 우러라 새여 널라와 시름 한 나도 자고 니러 우니로라 얄리얄리
-                  얄라셩 얄라리 얄라
-                </h3>
-                <p className={styles.cardSubtitle}>
-                  살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고
-                  쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라 우러라 우러라 새여
-                  자고 니러 우러라 새여 널라와 시름 한 나도 자고 니러 우니로라 얄리얄리
-                  얄라셩 얄라리 얄라
-                </p>
-                <div className={styles.tagArea}>
-                  #6인 이하 #건식 사우나 #애견동반 가능
-                </div>
-                <div className={styles.cardFooter}>
-                  <div className={styles.profileArea}>
-                    <Image
-                      src="/images/f.png"
-                      alt="프로필"
-                      width={24}
-                      height={24}
-                      className={styles.profileImg}
-                    />
-                    <span className={styles.profileName}>빈얀트리</span>
-                  </div>
-                  <div className={styles.cardPriceArea}>
-                    <span className={styles.cardPrice}>32,900</span>
-                    <span className={styles.cardUnit}>원</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
 

@@ -1,19 +1,74 @@
 "use client";
 
 import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
 import styles from "./styles.module.css";
 import usePurchaseModal from "./hooks/index.link.modal.hook";
+import usePurchaseDetailBinding from "./hooks/index.binding.hook";
+import { ROUTES } from "@/app/commons/constants/url";
 
 export default function PurchaseDetail() {
+  const params = useParams();
+  const router = useRouter();
   const { openPurchaseConfirmModal } = usePurchaseModal();
+  const { travelproduct, isLoading, formatPrice, formatTags } = usePurchaseDetailBinding();
+
+  const handleEditClick = () => {
+    const id = params?.id as string;
+    if (id) {
+      router.push(ROUTES.PURCHASE.EDIT(id));
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className={styles.page} data-testid="purchase-detail-page">
+        <div className={styles.container}>
+          <div>로딩 중...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!travelproduct) {
+    return (
+      <div className={styles.page} data-testid="purchase-detail-page">
+        <div className={styles.container}>
+          <div>상품 정보를 불러올 수 없습니다.</div>
+        </div>
+      </div>
+    );
+  }
+
+  const getImageUrl = (imagePath?: string | null): string => {
+    if (!imagePath) return "/images/Rectangle 3011.png";
+    if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+      return imagePath;
+    }
+    return `https://storage.googleapis.com/${imagePath}`;
+  };
+
+  const mainImage = getImageUrl(travelproduct.images?.[0]);
+  const thumbnails = travelproduct.images?.slice(1).map(getImageUrl) || [];
+  const tagsText = formatTags(travelproduct.tags);
 
   return (
     <div className={styles.page} data-testid="purchase-detail-page">
       <div className={styles.container}>
         <div className={styles.title}>
           <div className={styles.titleTop}>
-            <h1 className={styles.titleText}>포항 : 숙박권 명이 여기에 들어갑니다</h1>
+            <h1 className={styles.titleText} data-testid="detail-title">
+              {travelproduct.name}
+            </h1>
             <div className={styles.titleIcons}>
+              <Image
+                src="/icons/outline/edit.svg"
+                alt="수정"
+                width={24}
+                height={24}
+                onClick={handleEditClick}
+                style={{ cursor: "pointer" }}
+              />
               <Image
                 src="/icons/outline/blackdelete.svg"
                 alt="삭제"
@@ -34,62 +89,43 @@ export default function PurchaseDetail() {
                   width={24}
                   height={24}
                 />
-                <span className={styles.bookmarkCount}>24</span>
+                <span className={styles.bookmarkCount} data-testid="detail-bookmark-count">
+                  {travelproduct.pickedCount || 0}
+                </span>
               </div>
             </div>
           </div>
-          <p className={styles.subtitle}>모던한 분위기의 감도높은 숙소</p>
-          <p className={styles.hashtags}>#6인 이하 #건식 사우나 #애견동반 가능</p>
+          <p className={styles.subtitle} data-testid="detail-subtitle">
+            {travelproduct.remarks}
+          </p>
+          {tagsText && (
+            <p className={styles.hashtags} data-testid="detail-hashtags">
+              {tagsText}
+            </p>
+          )}
         </div>
         <div className={styles.gap24}></div>
         <div className={styles.purchaseArea}>
           <div className={styles.mainImage}>
-            <Image
-              src="/images/Rectangle 3011.png"
+            <img
+              src={mainImage}
               alt="숙소 메인 이미지"
-              width={640}
-              height={480}
               style={{ objectFit: "cover", width: "100%", height: "100%" }}
+              data-testid="detail-main-image"
             />
           </div>
           <div className={styles.thumbnailList}>
             <div className={styles.thumbnailWrapper}>
-              <div className={styles.thumbnail}>
-                <Image
-                  src="/images/Rectangle 3028.png"
-                  alt="숙소 이미지 1"
-                  width={180}
-                  height={136}
-                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
-                />
-              </div>
-              <div className={styles.thumbnail}>
-                <Image
-                  src="/images/Rectangle 3029.png"
-                  alt="숙소 이미지 2"
-                  width={180}
-                  height={136}
-                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
-                />
-              </div>
-              <div className={styles.thumbnail}>
-                <Image
-                  src="/images/Rectangle 3030.png"
-                  alt="숙소 이미지 3"
-                  width={180}
-                  height={136}
-                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
-                />
-              </div>
-              <div className={styles.thumbnail}>
-                <Image
-                  src="/images/Rectangle 3031.png"
-                  alt="숙소 이미지 4"
-                  width={180}
-                  height={136}
-                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
-                />
-              </div>
+              {thumbnails.map((thumbnail, index) => (
+                <div key={index} className={styles.thumbnail}>
+                  <img
+                    src={thumbnail}
+                    alt={`숙소 이미지 ${index + 1}`}
+                    style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                    data-testid="detail-thumbnail"
+                  />
+                </div>
+              ))}
             </div>
             <div className={styles.gradient}></div>
           </div>
@@ -97,7 +133,9 @@ export default function PurchaseDetail() {
             <div className={styles.purchaseCard}>
               <div className={styles.priceInfo}>
                 <div className={styles.priceRow}>
-                  <p className={styles.priceAmount}>32,500</p>
+                  <p className={styles.priceAmount} data-testid="detail-price">
+                    {formatPrice(travelproduct.price)}
+                  </p>
                   <p className={styles.priceUnit}>원</p>
                 </div>
                 <div className={styles.purchaseNotice}>
@@ -121,15 +159,17 @@ export default function PurchaseDetail() {
               <p className={styles.sellerTitle}>판매자</p>
               <div className={styles.sellerProfile}>
                 <div className={styles.sellerImageWrapper}>
-                  <Image
-                    src="/images/h.png"
+                  <img
+                    src={travelproduct.seller?.picture 
+                      ? getImageUrl(travelproduct.seller.picture)
+                      : "/images/f.png"}
                     alt="판매자 프로필"
-                    width={40}
-                    height={40}
                     style={{ objectFit: "cover", width: "100%", height: "100%" }}
                   />
                 </div>
-                <p className={styles.sellerName}>김상훈</p>
+                <p className={styles.sellerName} data-testid="detail-seller-name">
+                  {travelproduct.seller?.name || "판매자"}
+                </p>
                 <Image
                   src="/icons/filled/down_arrow.svg"
                   alt="더보기"
@@ -145,56 +185,23 @@ export default function PurchaseDetail() {
         <div className={styles.gap40}></div>
         <div className={styles.content}>
           <h2 className={styles.sectionTitle}>상세 설명</h2>
-          <p className={styles.description}>
-            살어리 살어리랏다 쳥산(靑山)애 살어리랏다 멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애
-            살어리랏다 얄리얄리 얄랑셩 얄라리 얄라 우러라 우러라 새여 자고 니러 우러라
-            새여 널라와 시름 한 나도 자고 니러 우니로라 리얄리 얄라셩 얄라리 얄라 가던 새
-            가던 새 본다 믈 아래 가던 새 본다 잉무든 장글란 가지고 믈 아래 가던 새 본다
-            얄리얄리 얄라셩 얄라리 얄라
-            <br />
-            <br />
-            이링공 뎌링공 ᄒᆞ야 나즈란 디내와손뎌
-            <br />
-            오리도 가리도 업슨 바므란 ᄯᅩ 엇디 호리라
-            <br />
-            얄리얄리 얄라셩 얄라리 얄라
-            <br />
-            <br />
-            어듸라 더디던 돌코 누리라 마치던 돌코
-            <br />
-            믜리도 괴리도 업시 마자셔 우니노라
-            <br />
-            얄리얄리 얄라셩 얄라리 얄라
-            <br />
-            <br />
-            살어리 살어리랏다 바ᄅᆞ래 살어리랏다
-            <br />
-            ᄂᆞᄆᆞ자기 구조개랑 먹고 바ᄅᆞ래 살어리랏다
-            <br />
-            얄리얄리 얄라셩 얄라리 얄라
-            <br />
-            <br />
-            가다가 가다가 드로라 에졍지 가다가 드로라
-            <br />
-            사ᄉᆞ미 지ᇝ대예 올아셔 ᄒᆡ금(奚琴)을 혀거를 드로라
-            <br />
-            얄리얄리 얄라셩 얄라리 얄라
-            <br />
-            <br />
-            가다니 ᄇᆡ브른 도긔 설진 강수를 비조라
-            <br />
-            조롱곳 누로기 ᄆᆡ와 잡ᄉᆞ와니 내 엇디 ᄒᆞ리잇고
-            <br />
-            얄리얄리 얄라셩 얄라리 얄라
-          </p>
+          <div 
+            className={styles.description} 
+            data-testid="detail-contents"
+            dangerouslySetInnerHTML={{ __html: travelproduct.contents }}
+          />
         </div>
         <div className={styles.gap40}></div>
         <div className={styles.divider}></div>
         <div className={styles.gap40}></div>
-        <div className={styles.map}>
+        <div className={styles.map} data-testid="detail-map-area">
           <h2 className={styles.sectionTitle}>상세 위치</h2>
           <div className={styles.mapContainer}>
-            <div className={styles.mapImage}>지도입니다</div>
+            <div className={styles.mapImage}>
+              {travelproduct.travelproductAddress?.address
+                ? travelproduct.travelproductAddress.address
+                : "지도입니다"}
+            </div>
           </div>
         </div>
         <div className={styles.gap40}></div>

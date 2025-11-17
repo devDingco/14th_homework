@@ -20,6 +20,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@portone/browser-sdk": "^0.1.1",
     "@supabase/supabase-js": "^2.58.0",
+    "@tanstack/react-query": "^5.90.8",
     "antd": "~5.20.6",
     "apollo-upload-client": "^18.0.1",
     "graphql": "^16.11.0",
@@ -41,6 +42,7 @@
   "devDependencies": {
     "@graphql-codegen/cli": "6.0.0",
     "@graphql-codegen/client-preset": "5.0.0",
+    "@playwright/test": "^1.56.1",
     "@storybook/addon-essentials": "^8.6.14",
     "@storybook/addon-interactions": "^8.6.14",
     "@storybook/addon-links": "^8.6.14",
