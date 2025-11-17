@@ -185,9 +185,11 @@ export default function PurchaseDetail() {
         <div className={styles.gap40}></div>
         <div className={styles.content}>
           <h2 className={styles.sectionTitle}>상세 설명</h2>
-          <p className={styles.description} data-testid="detail-contents">
-            {travelproduct.contents}
-          </p>
+          <div 
+            className={styles.description} 
+            data-testid="detail-contents"
+            dangerouslySetInnerHTML={{ __html: travelproduct.contents }}
+          />
         </div>
         <div className={styles.gap40}></div>
         <div className={styles.divider}></div>
