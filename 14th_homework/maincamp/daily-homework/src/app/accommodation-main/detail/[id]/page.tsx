@@ -20,6 +20,8 @@ export default function AccommodationDetailPage() {
   const travelproductId = params?.id as string;
 
   // GraphQL 쿼리로 상품 상세 데이터 가져오기
+  // fetchPolicy: 'cache-first' - 캐시에 데이터가 있으면 즉시 표시하고 네트워크 요청 안 함
+  // 캐시에 없을 때만 네트워크 요청
   const { data, loading, error } = useQuery<
     FetchTravelproductQuery,
     FetchTravelproductQueryVariables
@@ -28,6 +30,7 @@ export default function AccommodationDetailPage() {
       travelproductId: travelproductId || '',
     },
     skip: !travelproductId,
+    fetchPolicy: 'cache-first', // 캐시를 먼저 확인하고, 있으면 즉시 표시
   });
 
   const product = data?.fetchTravelproduct;
@@ -67,6 +70,7 @@ export default function AccommodationDetailPage() {
           tags={product.tags || []}
           bookmarkCount={product.pickedCount || 0}
           productId={product._id}
+          author={product.seller?.name}
         />
 
         {/* 이미지 갤러리와 Purchase를 같은 행에 배치 */}

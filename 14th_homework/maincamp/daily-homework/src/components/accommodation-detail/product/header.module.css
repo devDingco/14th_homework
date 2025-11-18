@@ -74,6 +74,13 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
+.descriptionContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .description {
   font-family: 'Pretendard Variable', sans-serif;
   font-size: 16px;
@@ -81,6 +88,17 @@
   line-height: 24px;
   color: #777777;
   margin: 0;
+  flex: 1;
+}
+
+.author {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #777777;
+  margin-left: 16px;
+  white-space: nowrap;
 }
 
 .tags {

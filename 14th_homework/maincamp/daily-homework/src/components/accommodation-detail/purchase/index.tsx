@@ -99,9 +99,9 @@ export default function Purchase({
 
       // 포트원 결제 요청
       const response = await PortOne.requestPayment({
-        // Store ID 설정
+        // Store ID 설정 (mypage와 동일하게 설정)
         storeId: 'store-abc39db7-8ee1-4898-919e-0af603a68317',
-        // 채널 키 설정
+        // 채널 키 설정 (mypage와 동일하게 설정)
         channelKey: 'channel-key-1dc10cea-ec89-471d-aedf-f4bd68993f33',
         paymentId: paymentId,
         orderName: '포인트 충전',
@@ -133,13 +133,36 @@ export default function Purchase({
         return;
       }
 
-      // 결제 성공 시
-      if (response.code === 'PAYMENT_SUCCESS') {
+      // 디버깅: 응답 구조 확인 - 모든 필드 출력
+      // console.log('PortOne 응답 전체:', JSON.stringify(response, null, 2));
+      // console.log('응답 객체 키들:', Object.keys(response || {}));
+      // console.log('응답 코드:', (response as any).code);
+      // console.log('응답 상태:', (response as any).status);
+      // console.log('거래 타입:', (response as any).transactionType);
+      // console.log('거래 ID:', (response as any).txId);
+      // console.log('Payment ID:', (response as any).paymentId);
+      // console.log('impUid:', (response as any).impUid);
+      // console.log('모든 필드:', response);
+
+      // 결제 성공 시 - PortOne V2에서는 transactionType과 txId로 성공 여부를 판단
+      // transactionType이 "PAYMENT"이고 txId가 존재하면 결제 성공으로 간주
+      const isSuccess =
+        ((response as any).transactionType === 'PAYMENT' && (response as any).txId) ||
+        (response as any).code === 'PAYMENT_SUCCESS' ||
+        (response as any).code === 'SUCCESS' ||
+        (response as any).status === 'PAID' ||
+        (response as any).status === 'SUCCESS';
+
+      if (isSuccess) {
         // GraphQL mutation 호출하여 포인트 충전 처리
+        // PortOne 응답에서 실제 paymentId를 가져옴 (응답에 없으면 요청 시 사용한 paymentId 사용)
+        const actualPaymentId = (response as any).paymentId || paymentId;
+        console.log('Mutation에 전달할 paymentId:', actualPaymentId);
+
         try {
           const result = await createPointTransactionOfLoading({
             variables: {
-              paymentId: paymentId,
+              paymentId: actualPaymentId,
             },
           });
 
@@ -152,12 +175,55 @@ export default function Purchase({
           window.location.reload();
         } catch (mutationError: any) {
           console.error('포인트 충전 mutation 실패:', mutationError);
+          console.error('에러 상세:', {
+            message: mutationError.message,
+            graphQLErrors: mutationError.graphQLErrors,
+            networkError: mutationError.networkError,
+            usedPaymentId: actualPaymentId,
+            responsePaymentId: (response as any).paymentId,
+            responseTxId: (response as any).txId,
+          });
+
+          // 404 에러인 경우 paymentId 대신 txId를 시도
+          // networkError 또는 message에 404가 포함되어 있으면 재시도
+          const is404Error =
+            mutationError.networkError?.statusCode === 404 ||
+            mutationError.message?.includes('404') ||
+            mutationError.graphQLErrors?.some(
+              (err: any) => err.message?.includes('404') || err.extensions?.statusCode === 404
+            );
+
+          if (is404Error && (response as any).txId) {
+            console.log('404 에러 발생, txId로 재시도:', (response as any).txId);
+            try {
+              const retryResult = await createPointTransactionOfLoading({
+                variables: {
+                  paymentId: (response as any).txId,
+                },
+              });
+              console.log('txId로 포인트 충전 성공:', retryResult.data);
+              alert('포인트 충전이 완료되었습니다.');
+              setIsChargeModalOpen(false);
+              setChargeAmount('');
+              window.location.reload();
+              return;
+            } catch (retryError: any) {
+              console.error('txId로도 실패:', retryError);
+            }
+          }
+
           alert('포인트 충전 처리 중 오류가 발생했습니다. 고객센터로 문의해 주세요.');
         }
       } else {
         // 결제 실패 또는 취소
         console.log('결제 실패 또는 취소:', response);
-        if (response.code !== 'USER_CANCEL') {
+        const isUserCancel =
+          (response as any).code === 'USER_CANCEL' ||
+          (response as any).code === 'CANCEL' ||
+          (response as any).status === 'CANCELLED' ||
+          (response as any).transactionType === 'CANCELLATION';
+
+        if (!isUserCancel) {
           alert('결제가 완료되지 않았습니다.');
         }
       }

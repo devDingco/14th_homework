@@ -1,17 +1,20 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery, useMutation, useApolloClient } from '@apollo/client';
 import Image from 'next/image';
 import styles from './styles.module.css';
 import { Props, AccommodationCard } from './types';
 import { FETCH_TRAVELPRODUCTS, DELETE_TRAVELPRODUCT, FETCH_USER_LOGGED_IN } from './queries';
+import { FETCH_TRAVELPRODUCT } from '@/components/accommodation-detail/queries';
 import {
   FetchTravelproductsQuery,
   FetchTravelproductsQueryVariables,
   FetchUserLoggedInQuery,
+  FetchTravelproductQuery,
+  FetchTravelproductQueryVariables,
 } from '@/commons/graphql/graphql';
-import { useMemo, useCallback, useState } from 'react';
+import { useMemo, useCallback, useState, useRef, useEffect } from 'react';
 
 // DeleteTravelproduct mutation 타입 정의
 type DeleteTravelproductMutationVariables = {
@@ -42,7 +45,11 @@ const getImageUrl = (imageUrl: string | null | undefined): string => {
 
 export default function AccommodationList({ accommodations }: Props) {
   const route = useRouter();
+  const client = useApolloClient();
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+
+  // 디바운싱을 위한 ref (각 카드별로 타이머 관리)
+  const prefetchTimers = useRef<Map<string, NodeJS.Timeout>>(new Map());
 
   // 현재 로그인한 사용자 정보 가져오기
   const { data: userData } = useQuery<FetchUserLoggedInQuery>(FETCH_USER_LOGGED_IN);
@@ -103,6 +110,61 @@ export default function AccommodationList({ accommodations }: Props) {
     return transformedAccommodations.length > 0 ? transformedAccommodations : accommodations || [];
   }, [transformedAccommodations, accommodations]);
 
+  // Prefetch 핸들러 (디바운싱 적용)
+  const handlePrefetch = useCallback(
+    (travelproductId: string) => {
+      // 기존 타이머가 있으면 취소
+      const existingTimer = prefetchTimers.current.get(travelproductId);
+      if (existingTimer) {
+        clearTimeout(existingTimer);
+      }
+
+      // 0.2초 후에 prefetch 실행
+      const timer = setTimeout(() => {
+        client
+          .query<FetchTravelproductQuery, FetchTravelproductQueryVariables>({
+            query: FETCH_TRAVELPRODUCT,
+            variables: {
+              travelproductId,
+            },
+            // fetchPolicy를 'cache-first'로 설정하여 캐시가 있으면 네트워크 요청 안 함
+            fetchPolicy: 'cache-first',
+          })
+          .catch((error) => {
+            // 에러는 조용히 처리 (prefetch이므로 사용자에게 노출하지 않음)
+            console.debug('Prefetch 실패:', error);
+          });
+
+        // 실행 후 타이머 맵에서 제거
+        prefetchTimers.current.delete(travelproductId);
+      }, 200);
+
+      // 새 타이머 저장
+      prefetchTimers.current.set(travelproductId, timer);
+    },
+    [client]
+  );
+
+  // 마우스가 카드에서 벗어났을 때 타이머 취소
+  const handleMouseLeave = useCallback((travelproductId: string) => {
+    const timer = prefetchTimers.current.get(travelproductId);
+    if (timer) {
+      clearTimeout(timer);
+      prefetchTimers.current.delete(travelproductId);
+    }
+    setHoveredCardId(null);
+  }, []);
+
+  // 컴포넌트 언마운트 시 모든 타이머 정리
+  useEffect(() => {
+    return () => {
+      prefetchTimers.current.forEach((timer) => {
+        clearTimeout(timer);
+      });
+      prefetchTimers.current.clear();
+    };
+  }, []);
+
   // 카드 클릭 핸들러 메모이제이션
   const handleCardClick = useCallback(
     (id: string) => {
@@ -154,8 +216,11 @@ export default function AccommodationList({ accommodations }: Props) {
             key={accommodation.id}
             className={styles.card}
             onClick={() => handleCardClick(accommodation.id)}
-            onMouseEnter={() => setHoveredCardId(accommodation.id)}
-            onMouseLeave={() => setHoveredCardId(null)}
+            onMouseEnter={() => {
+              setHoveredCardId(accommodation.id);
+              handlePrefetch(accommodation.id);
+            }}
+            onMouseLeave={() => handleMouseLeave(accommodation.id)}
           >
             <div className={styles.imageContainer}>
               <Image
