@@ -175,7 +175,11 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
                 {imageUrl[idx] ? (
                   <>
                     <Image
-                      src={`https://storage.googleapis.com/${imageUrl[idx]}`}
+                      src={
+                        imageUrl[idx].startsWith('data:') || imageUrl[idx].startsWith('blob:')
+                          ? imageUrl[idx] // base64 또는 blob URL인 경우 그대로 사용 (미리보기)
+                          : `https://storage.googleapis.com/${imageUrl[idx]}` // 서버 URL인 경우
+                      }
                       alt={`이미지${idx + 1}`}
                       width={100}
                       height={100}

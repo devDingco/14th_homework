@@ -346,9 +346,14 @@
 
 /* 이미지 업로드 스타일 */
 .imageUploadSection {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.imageUploadWrapper {
+  position: relative;
 }
 
 .imageUploadButton {
@@ -401,6 +406,11 @@
   object-fit: cover;
 }
 
+.imageUploadButton:hover .deleteImageButton {
+  opacity: 1;
+  visibility: visible;
+}
+
 .deleteImageButton {
   position: absolute;
   top: 8px;
@@ -416,6 +426,9 @@
   font-weight: 500;
   cursor: pointer;
   z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
 .deleteImageButton:hover {

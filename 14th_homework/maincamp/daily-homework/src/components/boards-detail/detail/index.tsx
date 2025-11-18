@@ -6,10 +6,11 @@ import { D_Variables } from './types';
 import { ThumbDown, ThumbUp, List, Edit } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import YouTube from 'react-youtube';
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function Detail(props: D_Variables) {
-  const { url, router, boardId, data, dt, koreaTime, loading, error } = useDetail();
+  const { url, router, boardId, data, dt, koreaTime, loading, error, handleLike, handleDislike } =
+    useDetail();
 
   // YouTube URL에서 비디오 ID 추출
   const extractYouTubeVideoId = (url: string): string | null => {
@@ -37,7 +38,7 @@ export default function Detail(props: D_Variables) {
   console.log('상세 페이지 데이터:', data);
   console.log('YouTube URL:', (data?.fetchBoard as any)?.youtubeUrl);
   console.log('주소 정보:', (data?.fetchBoard as any)?.boardAddress);
-  console.log(data?.fetchBoard?.images)
+  console.log(data?.fetchBoard?.images);
 
   if (loading) return <div>로딩 중...</div>;
   if (error) return <div>에러가 발생했습니다: {error.message}</div>;
@@ -164,17 +165,7 @@ export default function Detail(props: D_Variables) {
       </div>
 
       <div className={styles.Like}>
-        <div className={styles['bad-area']}>
-          <ThumbDown
-            style={{
-              fontSize: 24,
-              color: '#666',
-              cursor: 'pointer',
-            }}
-          />
-          <div>12</div>
-        </div>
-        <div className={styles['good-area']}>
+        <div className={styles['good-area']} onClick={handleLike}>
           <ThumbUp
             style={{
               fontSize: 24,
@@ -182,15 +173,22 @@ export default function Detail(props: D_Variables) {
               cursor: 'pointer',
             }}
           />
-          <div>24</div>
+          <div>{data?.fetchBoard?.likeCount || 0}</div>
+        </div>
+        <div className={styles['bad-area']} onClick={handleDislike}>
+          <ThumbDown
+            style={{
+              fontSize: 24,
+              color: '#666',
+              cursor: 'pointer',
+            }}
+          />
+          <div>{data?.fetchBoard?.dislikeCount || 0}</div>
         </div>
       </div>
 
       <div className={styles['D_button']}>
-        <button 
-        className={styles.button}
-        onClick={() => router.push(`/boards`)}
-        >
+        <button className={styles.button} onClick={() => router.push(`/boards`)}>
           <List style={{ fontSize: 24 }} />
           <p>목록으로</p>
         </button>

@@ -90,6 +90,9 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     return ['', '', ''];
   });
 
+  // FileReader를 사용하기 위한 파일 저장 state
+  const [files, setFiles] = useState<(File | undefined)[]>(['', '', ''].map(() => undefined));
+
   const [uploadFile] = useMutation(UPLOAD_FILE);
 
   const board = props.data?.fetchBoard as Record<string, unknown> | undefined;
@@ -129,13 +132,35 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     // 등록 모드에서만 호출되므로 ISchema 타입으로 간주
     const formData = data as ISchema;
 
+    // submit 시점에 파일들을 서버에 업로드 (Promise.all로 병렬 처리)
+    const uploadedImageUrls: string[] = [];
+    try {
+      const validFiles = files.filter((f): f is File => f !== undefined);
+      if (validFiles.length > 0) {
+        // 모든 파일을 병렬로 업로드
+        const uploadPromises = validFiles.map((file) => uploadFile({ variables: { file } }));
+        const results = await Promise.all(uploadPromises);
+
+        // 업로드 결과에서 URL 추출
+        for (const result of results) {
+          if (result.data?.uploadFile?.url) {
+            uploadedImageUrls.push(result.data.uploadFile.url);
+          }
+        }
+      }
+    } catch (error) {
+      console.error('파일 업로드 실패:', error);
+      showAlert('파일 업로드에 실패했습니다.');
+      return;
+    }
+
     // 주소 정보가 모두 비어있으면 boardAddress를 보내지 않음
     const createBoardInput: CreateBoardInputType = {
       writer: formData.writer,
       title: formData.title,
       contents: formData.contents,
       password: formData.password,
-      images: imageUrl,
+      images: uploadedImageUrls,
     };
 
     // 유튜브 URL이 있으면 추가
@@ -193,10 +218,52 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     updateBoardInput.contents =
       formData.contents.trim() || (fetchedBoard?.contents as string | undefined) || '';
 
-    // 이미지 처리
-    const currentImages = imageUrl.filter((img) => img.trim() !== '');
-    if (currentImages.length > 0) {
-      updateBoardInput.images = currentImages;
+    // 이미지 처리: 새 파일이 있으면 업로드, 없으면 기존 URL 사용 (순서 유지)
+    const finalImageUrls: (string | null)[] = Array(imageUrl.length).fill(null);
+    try {
+      // 업로드가 필요한 파일들만 필터링
+      const filesToUpload: Array<{ index: number; file: File }> = [];
+
+      for (let i = 0; i < imageUrl.length; i++) {
+        const imageUrlItem = imageUrl[i];
+        const file = files[i];
+
+        if (file) {
+          // 새 파일이 선택된 경우 업로드 목록에 추가
+          filesToUpload.push({ index: i, file });
+        } else if (
+          imageUrlItem &&
+          !imageUrlItem.startsWith('data:') &&
+          !imageUrlItem.startsWith('blob:')
+        ) {
+          // 기존 서버 URL인 경우 그대로 사용
+          finalImageUrls[i] = imageUrlItem;
+        }
+      }
+
+      // 새 파일들을 병렬로 업로드
+      if (filesToUpload.length > 0) {
+        const uploadPromises = filesToUpload.map(({ file }) => uploadFile({ variables: { file } }));
+        const uploadResults = await Promise.all(uploadPromises);
+
+        // 업로드 결과를 원래 인덱스 위치에 저장 (순서 유지)
+        filesToUpload.forEach(({ index }, i) => {
+          const result = uploadResults[i];
+          if (result.data?.uploadFile?.url) {
+            finalImageUrls[index] = result.data.uploadFile.url;
+          }
+        });
+      }
+
+      // null 값 제거하여 최종 배열 생성
+      const filteredUrls = finalImageUrls.filter((url): url is string => url !== null);
+      if (filteredUrls.length > 0) {
+        updateBoardInput.images = filteredUrls;
+      }
+    } catch (error) {
+      console.error('파일 업로드 실패:', error);
+      showAlert('파일 업로드에 실패했습니다.');
+      return;
     }
 
     // 유튜브 URL 처리
@@ -294,28 +361,43 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     return true;
   };
 
-  const onChangeFile = (index: number) => async (event: ChangeEvent<HTMLInputElement>) => {
-    // console.log(event.target.files);
+  const onChangeFile = (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    // console.log(file);
-    // console.log("123123")
     const isValid = checkValidationFile(file);
-    // console.log(isValid)
-    if (!isValid) return;
+    if (!isValid) {
+      // 파일 입력 초기화
+      if (event.target) event.target.value = '';
+      return;
+    }
 
-    const result = await uploadFile({ variables: { file } });
-    console.log('업로드 파일 이후 result확인: ', result.data.uploadFile.url);
+    if (!file) return;
 
-    const url = result.data?.uploadFile?.url ?? '';
-
-    setImageUrl((prev) => {
-      const next = [...prev];
-      next[index] = url;
-      return next;
-    });
-
-    // 초기화
-    event.target.value = '';
+    // FileReader를 사용하여 미리보기용 임시 URL 생성 (base64)
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = (e) => {
+      if (typeof e.target?.result === 'string') {
+        // 미리보기용 임시 URL (base64)로 설정
+        setImageUrl((prev) => {
+          const next = [...prev];
+          if (index < 3) {
+            next[index] = e.target?.result as string;
+          }
+          return next;
+        });
+        setFiles((prev) => {
+          const next = [...prev];
+          if (index < 3) {
+            next[index] = file;
+          }
+          return next;
+        });
+      }
+    };
+    fileReader.onerror = () => {
+      showAlert('파일을 읽는 중 오류가 발생했습니다.');
+      if (event.target) event.target.value = '';
+    };
   };
 
   const deleteImage = (index: number) => (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -323,6 +405,11 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     setImageUrl((prev) => {
       const next = [...prev];
       next[index] = '';
+      return next;
+    });
+    setFiles((prev) => {
+      const next = [...prev];
+      next[index] = undefined;
       return next;
     });
     const input = fileRef.current[index];

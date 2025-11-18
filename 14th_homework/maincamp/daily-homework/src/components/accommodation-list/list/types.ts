@@ -7,6 +7,7 @@ export interface AccommodationCard {
   bookmarkCount: number;
   tags: string[];
   sellerName: string;
+  sellerId?: string;
   sellerImage?: string;
 }
 

@@ -20,7 +20,7 @@ export default function AccommodationSell(props: AccommodationSellVariables) {
     deleteImage,
     error,
     isValid,
-    imageUrl,
+    imageUrls,
     zipcode,
     address,
     setValue,
@@ -29,7 +29,7 @@ export default function AccommodationSell(props: AccommodationSellVariables) {
     handleOk,
     handleCancel,
     handleComplete,
-    fileRef,
+    fileRefs,
     price,
     handlePriceChange,
     AlertModalComponent,
@@ -296,43 +296,68 @@ export default function AccommodationSell(props: AccommodationSellVariables) {
             <span className={styles.required}>*</span>
           </div>
           <div className={styles.imageUploadSection}>
-            <button type="button" className={styles.imageUploadButton} onClick={onClickImage}>
-              <input
-                type="file"
-                ref={fileRef}
-                onChange={onChangeFile}
-                accept="image/jpeg,image/png"
-                style={{ display: 'none' }}
-              />
-              {imageUrl ? (
-                <div className={styles.imagePreview}>
-                  <Image
-                    src={`https://storage.googleapis.com/${imageUrl}`}
-                    alt="미리보기"
-                    width={160}
-                    height={160}
-                    className={styles.previewImage}
-                  />
-                  <button type="button" className={styles.deleteImageButton} onClick={deleteImage}>
-                    삭제
-                  </button>
+            {Array.from({ length: 8 }).map((_, index) => {
+              const imageUrl = imageUrls[index] || '';
+              return (
+                <div key={index} className={styles.imageUploadWrapper}>
+                  <div className={styles.imageUploadButton} onClick={() => onClickImage(index)}>
+                    <input
+                      type="file"
+                      ref={(el) => {
+                        if (fileRefs.current) {
+                          fileRefs.current[index] = el;
+                        } else {
+                          fileRefs.current = [];
+                          fileRefs.current[index] = el;
+                        }
+                      }}
+                      onChange={onChangeFile(index)}
+                      accept="image/jpeg,image/png"
+                      style={{ display: 'none' }}
+                    />
+                    {imageUrl ? (
+                      <div className={styles.imagePreview}>
+                        <Image
+                          src={
+                            imageUrl.startsWith('data:') || imageUrl.startsWith('blob:')
+                              ? imageUrl // base64 또는 blob URL인 경우 그대로 사용 (미리보기)
+                              : `https://storage.googleapis.com/${imageUrl}` // 서버 URL인 경우
+                          }
+                          alt="미리보기"
+                          width={160}
+                          height={160}
+                          className={styles.previewImage}
+                        />
+                        <button
+                          type="button"
+                          className={styles.deleteImageButton}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            deleteImage(index);
+                          }}
+                        >
+                          삭제
+                        </button>
+                      </div>
+                    ) : (
+                      <div className={styles.imageUploadPlaceholder}>
+                        <svg
+                          width="40"
+                          height="40"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path d="M12 5v14M5 12h14" />
+                        </svg>
+                        <p>클릭해서 사진 업로드</p>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              ) : (
-                <div className={styles.imageUploadPlaceholder}>
-                  <svg
-                    width="40"
-                    height="40"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M12 5v14M5 12h14" />
-                  </svg>
-                  <p>클릭해서 사진 업로드</p>
-                </div>
-              )}
-            </button>
+              );
+            })}
             {error.images && <p className={styles.errorText}>{error.images}</p>}
           </div>
         </div>
@@ -347,7 +372,7 @@ export default function AccommodationSell(props: AccommodationSellVariables) {
           variant="primary"
           size="large"
           onClick={props.isEdit ? onClickUpdate : onClickSubmit}
-          disabled={!isValid || !imageUrl}
+          disabled={!isValid || imageUrls.filter((url) => url).length === 0}
         >
           {props.isEdit ? '수정하기' : '등록하기'}
         </Button>

@@ -1,16 +1,26 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import Image from 'next/image';
 import styles from './styles.module.css';
 import { Props, AccommodationCard } from './types';
-import { FETCH_TRAVELPRODUCTS } from './queries';
+import { FETCH_TRAVELPRODUCTS, DELETE_TRAVELPRODUCT, FETCH_USER_LOGGED_IN } from './queries';
 import {
   FetchTravelproductsQuery,
   FetchTravelproductsQueryVariables,
+  FetchUserLoggedInQuery,
 } from '@/commons/graphql/graphql';
-import { useMemo, useCallback } from 'react';
+import { useMemo, useCallback, useState } from 'react';
+
+// DeleteTravelproduct mutation 타입 정의
+type DeleteTravelproductMutationVariables = {
+  travelproductId: string;
+};
+
+type DeleteTravelproductMutation = {
+  deleteTravelproduct: string;
+};
 
 // 이미지 URL 처리 헬퍼 함수
 const getImageUrl = (imageUrl: string | null | undefined): string => {
@@ -32,15 +42,36 @@ const getImageUrl = (imageUrl: string | null | undefined): string => {
 
 export default function AccommodationList({ accommodations }: Props) {
   const route = useRouter();
+  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+
+  // 현재 로그인한 사용자 정보 가져오기
+  const { data: userData } = useQuery<FetchUserLoggedInQuery>(FETCH_USER_LOGGED_IN);
+  const currentUserId = userData?.fetchUserLoggedIn?._id;
 
   // GraphQL 쿼리로 상품 목록 데이터 가져오기
-  const { data, loading, error } = useQuery<
+  const { data, loading, error, refetch } = useQuery<
     FetchTravelproductsQuery,
     FetchTravelproductsQueryVariables
   >(FETCH_TRAVELPRODUCTS, {
     variables: {
       page: 1,
       isSoldout: false,
+    },
+  });
+
+  // 삭제 mutation
+  const [deleteTravelproduct] = useMutation<
+    DeleteTravelproductMutation,
+    DeleteTravelproductMutationVariables
+  >(DELETE_TRAVELPRODUCT, {
+    onCompleted: () => {
+      // 삭제 성공 후 목록 다시 불러오기
+      refetch();
+    },
+    onError: (error) => {
+      console.error('삭제 중 오류가 발생했습니다:', error);
+      const errorMessage = error.message || '삭제 중 오류가 발생했습니다.';
+      alert(errorMessage);
     },
   });
 
@@ -61,6 +92,7 @@ export default function AccommodationList({ accommodations }: Props) {
         bookmarkCount: product.pickedCount || 0,
         tags: product.tags || [],
         sellerName: product.seller?.name || '',
+        sellerId: product.seller?._id,
         sellerImage: product.seller?.picture || undefined,
       })
     );
@@ -77,6 +109,25 @@ export default function AccommodationList({ accommodations }: Props) {
       route.push(`accommodation-main/detail/${id}`);
     },
     [route]
+  );
+
+  // 삭제 핸들러
+  const handleDelete = useCallback(
+    async (e: React.MouseEvent, id: string) => {
+      e.stopPropagation(); // 카드 클릭 이벤트 전파 방지
+      if (confirm('정말 이 상품을 삭제하시겠습니까?')) {
+        try {
+          await deleteTravelproduct({
+            variables: {
+              travelproductId: id,
+            },
+          });
+        } catch (error) {
+          console.error('삭제 실패:', error);
+        }
+      }
+    },
+    [deleteTravelproduct]
   );
 
   // 로딩 중이거나 에러가 있을 때 처리
@@ -103,6 +154,8 @@ export default function AccommodationList({ accommodations }: Props) {
             key={accommodation.id}
             className={styles.card}
             onClick={() => handleCardClick(accommodation.id)}
+            onMouseEnter={() => setHoveredCardId(accommodation.id)}
+            onMouseLeave={() => setHoveredCardId(null)}
           >
             <div className={styles.imageContainer}>
               <Image
@@ -112,6 +165,28 @@ export default function AccommodationList({ accommodations }: Props) {
                 className={styles.image}
                 style={{ objectFit: 'cover' }}
               />
+              {hoveredCardId === accommodation.id &&
+                currentUserId &&
+                accommodation.sellerId === currentUserId && (
+                  <button
+                    className={styles.deleteButton}
+                    onClick={(e) => handleDelete(e, accommodation.id)}
+                    aria-label="삭제"
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+                    </svg>
+                  </button>
+                )}
               <div className={styles.bookmark}>
                 <svg
                   className={styles.bookmarkIcon}
