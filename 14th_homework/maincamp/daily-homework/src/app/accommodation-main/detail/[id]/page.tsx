@@ -91,7 +91,12 @@ export default function AccommodationDetailPage() {
           <div className={styles.divider} />
           <Contents description={product.contents} />
           <div className={styles.divider} />
-          <Location address={product.travelproductAddress?.address || ''} />
+          <Location
+            address={product.travelproductAddress?.address || ''}
+            addressDetail={product.travelproductAddress?.addressDetail || ''}
+            lat={product.travelproductAddress?.lat ?? undefined}
+            lng={product.travelproductAddress?.lng ?? undefined}
+          />
           <Comments comments={[]} isSeller={isSeller} />
         </div>
       </div>

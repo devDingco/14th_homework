@@ -1,30 +1,33 @@
 'use client';
 
 import styles from './styles.module.css';
+import KakaoMap from '@/components/apis/kakao-map';
 
 interface LocationProps {
   address?: string;
+  addressDetail?: string;
+  lat?: number;
+  lng?: number;
 }
 
-export default function Location({ address }: LocationProps) {
+export default function Location({ address, addressDetail, lat, lng }: LocationProps) {
+  const fullAddress = [address, addressDetail].filter(Boolean).join(' ');
+
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>상세 위치</h2>
+      <div className={styles.header}>
+        <h2 className={styles.title}>상세 위치</h2>
+        {fullAddress && <p className={styles.address}>{fullAddress}</p>}
+      </div>
       <div className={styles.mapContainer}>
-        <div className={styles.mapPlaceholder}>
-          <svg
-            width="100"
-            height="100"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-            <circle cx="12" cy="10" r="3" />
-          </svg>
-          <p>지도가 여기에 표시됩니다</p>
-        </div>
+        <KakaoMap
+          address={address}
+          lat={lat}
+          lng={lng}
+          width="100%"
+          height="100%"
+          showMarker={true}
+        />
       </div>
     </div>
   );

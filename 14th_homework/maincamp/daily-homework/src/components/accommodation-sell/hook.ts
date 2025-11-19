@@ -11,6 +11,7 @@ import {
   FetchTravelproductsQueryVariables,
 } from '@/commons/graphql/graphql';
 import { useAlertModal } from '@/commons/components/modal';
+import useKakaoMap from '@/components/apis/kakao-map/hook';
 import {
   AccommodationSellVariables,
   Errors,
@@ -73,16 +74,32 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
   const [uploadFile] = useMutation(UPLOAD_FILE);
   const [createTravelproduct] = useMutation(CREATE_TRAVELPRODUCT);
   const [updateTravelproduct] = useMutation(UPDATE_TRAVELPRODUCT);
+  const { addressToCoordinates, isScriptLoaded } = useKakaoMap();
 
-  // 주소 변경 시 위도/경도 자동 설정 (실제로는 주소 검색 API를 사용해야 함)
+  // 주소 변경 시 위도/경도 자동 설정
   useEffect(() => {
-    if (address && zipcode) {
-      // TODO: 실제 주소 검색 API 연동
-      // 예시로 빈 값 설정
-      setValue('lat', '');
-      setValue('lng', '');
+    if (address && zipcode && isScriptLoaded) {
+      const convertAddressToCoords = async () => {
+        try {
+          const coords = await addressToCoordinates(address);
+          if (coords) {
+            setValue('lat', String(coords.lat));
+            setValue('lng', String(coords.lng));
+          } else {
+            // 주소 검색 실패 시 빈 값으로 설정
+            setValue('lat', '');
+            setValue('lng', '');
+          }
+        } catch (error) {
+          console.error('주소 변환 실패:', error);
+          setValue('lat', '');
+          setValue('lng', '');
+        }
+      };
+
+      convertAddressToCoords();
     }
-  }, [address, zipcode, setValue]);
+  }, [address, zipcode, isScriptLoaded, addressToCoordinates, setValue]);
 
   // 가격 포맷팅 (천단위 콤마)
   const formatPrice = (value: string) => {
@@ -452,6 +469,9 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
     lng: formErrors.lng?.message,
   };
 
+  const lat = watch('lat');
+  const lng = watch('lng');
+
   return {
     register,
     onClickSubmit,
@@ -464,6 +484,8 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
     imageUrls,
     zipcode,
     address,
+    lat,
+    lng,
     setValue,
     isModalOpen,
     showModal,

@@ -8,6 +8,7 @@ import { Modal } from 'antd';
 import Image from 'next/image';
 import { Button, Input } from '@commons/ui';
 import { useRouter } from 'next/navigation';
+import KakaoMap from '@/components/apis/kakao-map';
 
 export default function AccommodationSell(props: AccommodationSellVariables) {
   const router = useRouter();
@@ -23,6 +24,8 @@ export default function AccommodationSell(props: AccommodationSellVariables) {
     imageUrls,
     zipcode,
     address,
+    lat,
+    lng,
     setValue,
     isModalOpen,
     showModal,
@@ -273,16 +276,7 @@ export default function AccommodationSell(props: AccommodationSellVariables) {
           <div className={styles.mapSectionWrapper}>
             <label className={styles.label}>상세 위치</label>
             <div className={styles.mapContainer}>
-              {address ? (
-                <div className={styles.mapPlaceholder}>
-                  {/* TODO: 실제 지도 API 연동 (카카오맵, 네이버맵 등) */}
-                  <p>지도가 표시됩니다</p>
-                </div>
-              ) : (
-                <div className={styles.mapPlaceholder}>
-                  <p>주소를 먼저 입력해 주세요.</p>
-                </div>
-              )}
+              <KakaoMap address={address} lat={lat} lng={lng} height="400px" />
             </div>
           </div>
         </div>
