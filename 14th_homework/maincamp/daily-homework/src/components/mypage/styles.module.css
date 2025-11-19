@@ -171,6 +171,9 @@
   margin-bottom: 32px;
   padding-bottom: 24px;
   border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .contentTitle {
@@ -182,11 +185,41 @@
   margin: 0;
 }
 
+.chargeButton {
+  height: 40px;
+  padding: 0 20px;
+  background-color: #2974e5;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.chargeButton:hover {
+  background-color: #1e5bbf;
+}
+
+.chargeButton:active {
+  background-color: #1550a0;
+}
+
 .contentBody {
+  width: 100%;
+  min-height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 400px;
+}
+
+.contentBodyWithData {
+  display: block;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .emptyMessage {
@@ -196,6 +229,362 @@
   line-height: 24px;
   color: #999999;
   text-align: center;
+}
+
+/* 비밀번호 변경 폼 */
+.passwordForm {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  padding: 0 16px;
+  border: 1px solid #d4d3d3;
+  border-radius: 8px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.input::placeholder {
+  color: #ababab;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #2974e5;
+}
+
+.inputError {
+  border-color: #f66a6a !important;
+}
+
+.inputError:focus {
+  border-color: #f66a6a !important;
+}
+
+.errorMessage {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  color: #f66a6a;
+  margin-top: -8px;
+}
+
+.successMessage {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  color: #2974e5;
+  margin-top: -8px;
+}
+
+.submitButton {
+  width: 100%;
+  height: 48px;
+  background-color: #2974e5;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 8px;
+}
+
+.submitButton:hover {
+  background-color: #1e5bbf;
+}
+
+.submitButton:active {
+  background-color: #1550a0;
+}
+
+/* 포인트 충전 내역 */
+.pointHistoryContainer {
+  width: 100%;
+  max-width: 100%;
+}
+
+.totalPointSection {
+  padding: 24px;
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 0;
+}
+
+.totalPointLabel {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 28px;
+  color: #333333;
+}
+
+.totalPointAmount {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  color: #2974e5;
+}
+
+.pointHistoryTable {
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+
+.pointHistoryHeader {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr 1fr;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.pointHistoryHeaderCell {
+  padding: 24px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+  text-align: left;
+}
+
+.pointHistoryBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.pointHistoryRow {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr 1fr;
+  border-bottom: 1px solid #e5e5e5;
+  transition: background-color 0.2s ease;
+}
+
+.pointHistoryRow:last-child {
+  border-bottom: none;
+}
+
+.pointHistoryRow:hover {
+  background-color: #f9f9f9;
+}
+
+.pointHistoryCell {
+  padding: 24px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+  display: flex;
+  align-items: center;
+}
+
+.pointAmount {
+  color: #2974e5;
+  font-weight: 600;
+}
+
+.pointStatus {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.pointStatusSuccess {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.pointStatusPending {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+/* 충전 모달 스타일 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.chargeModalContent {
+  width: 480px;
+  height: 256px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chargeModalHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.chargeModalLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.logoImage {
+  width: 80px;
+  height: 56px;
+  object-fit: contain;
+}
+
+.modalTitle {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #000000;
+  margin: 0;
+  text-align: center;
+}
+
+.chargeModalDropdown {
+  width: 100%;
+}
+
+.dropdownSelect {
+  width: 100%;
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #5f5f5f;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9l6 6 6-6' stroke='%235f5f5f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 40px;
+}
+
+.dropdownSelect:focus {
+  outline: none;
+  border-color: #000000;
+}
+
+.dropdownSelect:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dropdownSelect option {
+  color: #5f5f5f;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.cancelButton {
+  width: 120px;
+  height: 40px;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background-color: #f5f5f5;
+}
+
+.cancelButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.confirmButton {
+  width: 120px;
+  height: 40px;
+  background-color: #2974e5;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.confirmButton:hover:not(:disabled) {
+  background-color: #1e5bb8;
+}
+
+.confirmButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* 반응형 디자인 */
@@ -236,5 +625,48 @@
 
   .menuList {
     grid-template-columns: 1fr;
+  }
+
+  .pointHistoryHeader,
+  .pointHistoryRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .pointHistoryHeaderCell,
+  .pointHistoryCell {
+    padding: 12px;
+  }
+
+  .pointHistoryHeaderCell::before {
+    content: attr(data-label);
+    font-weight: 600;
+    margin-right: 8px;
+  }
+
+  .pointHistoryCell::before {
+    content: attr(data-label);
+    font-weight: 600;
+    margin-right: 8px;
+    color: #666666;
+  }
+
+  .contentHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .chargeButton {
+    width: 100%;
+  }
+
+  .chargeModalContent {
+    width: 90%;
+    max-width: 480px;
+  }
+
+  .chargeModalDropdown {
+    width: 100%;
   }
 }

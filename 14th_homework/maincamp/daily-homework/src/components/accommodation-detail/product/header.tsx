@@ -9,6 +9,7 @@ interface ProductHeaderProps {
   tags?: string[];
   bookmarkCount?: number;
   productId?: string;
+  author?: string;
 }
 
 export default function ProductHeader({
@@ -17,6 +18,7 @@ export default function ProductHeader({
   tags = ['#6인 이하', '#건식 사우나', '#애견동반 가능'],
   bookmarkCount = 24,
   productId,
+  author,
 }: ProductHeaderProps) {
   const router = useRouter();
 
@@ -100,7 +102,10 @@ export default function ProductHeader({
           </button>
         </div>
       </div>
-      <p className={styles.description}>{description}</p>
+      <div className={styles.descriptionContainer}>
+        <p className={styles.description}>{description}</p>
+        {author && <span className={styles.author}>글쓴이: {author}</span>}
+      </div>
       <div className={styles.tags}>{tags.join(' ')}</div>
     </div>
   );
