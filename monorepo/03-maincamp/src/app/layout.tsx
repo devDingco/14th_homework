@@ -4,6 +4,9 @@ import "./globals.css";
 // import ApolloUploadSetting from "@/commons/setttings/apollo-setting";
 import dynamic from "next/dynamic";
 import Layout from "@/commons/layout";
+import ModalProvider from "@/commons/providers/modal/modal.provider";
+import AuthProvider from "@/commons/providers/auth/auth.provider";
+import AuthGuard from "@/commons/providers/auth/auth.guard";
 
 const ApiHeaderProvider = dynamic(
   () => import("@/commons/setttings/apollo-setting"),
@@ -36,9 +39,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-       <ApiHeaderProvider>
-        <Layout>{children}</Layout>
-       </ApiHeaderProvider>
+       <AuthProvider>
+        <ApiHeaderProvider>
+          <ModalProvider>
+            <AuthGuard>
+              <Layout>{children}</Layout>
+            </AuthGuard>
+          </ModalProvider>
+        </ApiHeaderProvider>
+       </AuthProvider>
       </body>
     </html>
   );

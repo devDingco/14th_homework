@@ -1,26 +1,11 @@
 import styles from './styles.module.css'
-import { gql, useMutation } from '@apollo/client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ChangeEvent } from 'react'
-import { set } from 'lodash'
 
 import React from 'react';
-import { ExclamationCircleFilled } from '@ant-design/icons';
-import { Button, Modal, Space } from 'antd';
-import { on } from 'events'
-
-
-
-const CREATE_USER = gql`
-    mutation createUser($createUserInput: CreateUserInput!){
-       createUser(createUserInput: $createUserInput){
-        _id
-        email
-        name
-       } 
-    }
-`
+import { Modal, message } from 'antd';
+import { supabase } from '@/commons/libraries/supabaseClient'
 
 export default function SignUp(){
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,8 +30,6 @@ export default function SignUp(){
     const [confirmPassword, setConfirmPassword] = useState("")
     const router = useRouter()
     
-    const [ createUser ]= useMutation(CREATE_USER)
-
     const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
     }
@@ -79,19 +62,30 @@ export default function SignUp(){
         setErrors(newErrors)
         if (Object.values(newErrors).some((error)=> error !== "")) return
         
-        try{
-            const { data } = await createUser({
-         variables: { createUserInput: { email, name, password } }
-            }
-        )
-        console.log({email, name, password})
-        openModal()
+        try {
+            const { data, error } = await supabase.auth.signUp({
+                email,
+                password,
+                options: {
+                    data: { name },
+                },
+            });
 
-        }catch(error:unknown){
-            if(error instanceof Error){
-                alert(error.message)
-            }else{
-                alert("알 수 없는 에러가 발생했습니다.")
+            if (error) {
+                throw new Error(error.message || '회원가입에 실패했습니다. 다시 시도해 주세요.');
+            }
+
+            if (!data.user) {
+                throw new Error('회원가입에 실패했습니다. 다시 시도해 주세요.');
+            }
+
+            message.success('회원가입이 완료되었습니다. 이메일을 확인해 주세요.');
+            openModal()
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                message.error(error.message)
+            } else {
+                message.error('알 수 없는 에러가 발생했습니다.')
             }
         }
         

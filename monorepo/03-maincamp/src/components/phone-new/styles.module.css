@@ -218,8 +218,19 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
-  color: #ababab;
+  color: #333333;
   background-color: #ffffff;
+}
+
+.selectedAddress {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #555555;
+}
+
+.postcodeButtonWrapper {
+  display: inline-block;
 }
 
 .postcodeButton {
@@ -241,6 +252,40 @@
 .postcodeButton:hover {
   background-color: #000000;
   color: #ffffff;
+}
+
+.postcodeModalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  padding: 16px;
+}
+
+.postcodeModalContent {
+  width: min(520px, 100%);
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.postcodeCloseButton {
+  align-self: flex-end;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #2974e5;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .detailedAddressInput {
@@ -307,6 +352,13 @@
   overflow: hidden;
 }
 
+.mapFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 16px;
+}
+
 /* 주소/지도 레이아웃 */
 .addressMapLayout {
   display: flex;
@@ -347,75 +399,6 @@
   margin: 0;
 }
 
-.imagePreviewGrid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.imagePreviewItem {
-  position: relative;
-  width: 160px;
-  height: 160px;
-  border-radius: 8px;
-  border: 1px solid #e4e4e4;
-  overflow: hidden;
-  background-color: #f2f2f2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.imagePreview {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.imageFileFallback {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  font-size: 12px;
-  color: #666666;
-  padding: 16px;
-  text-align: center;
-}
-
-.imageFileFallbackIcon {
-  font-size: 24px;
-}
-
-.imageFileFallbackName {
-  word-break: break-all;
-}
-
-.imageDeleteButton {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  line-height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease;
-}
-
-.imageDeleteButton:hover {
-  background-color: rgba(0, 0, 0, 0.35);
-}
-
 .imageUploadBox {
   display: flex;
   align-items: center;
@@ -423,15 +406,13 @@
   width: 160px;
   height: 160px;
   border-radius: 8px;
-  background-color: #f5f5f5;
-  border: 2px dashed #ddd;
+  background-color: #f2f2f2;
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .imageUploadBox:hover {
-  background-color: #eaeaea;
-  border-color: #999;
+  background-color: #e4e4e4;
 }
 
 .imageUploadContent {
@@ -456,6 +437,79 @@
   line-height: 24px;
   color: #777777;
   text-align: center;
+}
+
+.fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.imagePreviewGrid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.imagePreviewItem {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 8px;
+  border: 1px solid #e4e4e4;
+  overflow: hidden;
+  background-color: #f2f2f2;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageMeta {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.primaryBadge {
+  background-color: #f66a6a;
+  border-radius: 999px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.deleteImageButton {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 0;
 }
 
 /* 버튼 영역 */
@@ -506,6 +560,21 @@
 
 .submitButton.active:hover {
   background-color: #1e5ac4;
+}
+
+.validationErrors {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  background-color: #fff4f4;
+  border: 1px solid #f66a6a;
+  border-radius: 8px;
+  color: #b30000;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.validationErrors p {
+  margin: 0;
 }
 
 /* 반응형 디자인 */
@@ -562,63 +631,4 @@
     width: 100px;
     height: 100px;
   }
-}
-
-/* 주소 검색 모달 스타일 */
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modalContent {
-  position: relative;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  max-width: 600px;
-  width: 90%;
-  max-height: 90vh;
-  overflow-y: auto;
-  animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.modalCloseButton {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 32px;
-  height: 32px;
-  border: none;
-  background-color: transparent;
-  font-size: 24px;
-  color: #333333;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1001;
-  transition: color 0.2s ease;
-}
-
-.modalCloseButton:hover {
-  color: #000000;
 }

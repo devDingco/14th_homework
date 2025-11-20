@@ -1,55 +1,62 @@
 'use client';
 
-import { useParams } from 'next/navigation';
-import { useFetchPhoneDetail } from '@/components/phone-detail/hooks/index.fetch.hook';
+import { useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import PhoneDetail from '@/components/phone-detail';
-import PhonesInquiry from '@/components/phones-inquiry';
+import Inquiries from '@/components/inquiries';
+import { useInquirySubmit } from '@/components/inquiries/hooks/index.submit.hook';
+import { useInquiryDataBinding } from '@/components/inquiries/hooks/index.data-binding.hook';
 
-/**
- * 중고폰 상세 페이지
- * Supabase에서 폰 정보를 조회하고 표시합니다.
- */
-export default function PhoneDetailPage() {
-  const params = useParams();
-  const phoneId = params.id as string;
+interface PhoneDetailPageProps {
+  params: {
+    id: string;
+  };
+}
 
-  // 폰 데이터 조회
-  const { phone, isLoading, error } = useFetchPhoneDetail(phoneId);
+export default function PhoneDetailTestPage({ params }: PhoneDetailPageProps) {
+  const phoneId = params.id;
+  const router = useRouter();
+  
+  // 문의 데이터 조회
+  const { inquiries, refetch } = useInquiryDataBinding({
+    phoneId,
+  });
+  
+  // 문의 제출
+  const { submitInquiry } = useInquirySubmit({
+    phoneId,
+    onSuccess: () => {
+      refetch(); // 제출 성공 시 데이터 새로고침
+      router.refresh();
+    },
+  });
 
-  if (isLoading) {
-    return (
-      <main style={{ padding: '40px' }}>
-        <div data-testid="loading-spinner" style={{ textAlign: 'center', padding: '40px' }}>
-          <p>로딩 중...</p>
-        </div>
-      </main>
-    );
-  }
-
-  if (error) {
-    return (
-      <main style={{ padding: '40px' }}>
-        <div data-testid="error-message" style={{ textAlign: 'center', padding: '40px', color: '#e74c3c' }}>
-          <p>오류 발생: {error}</p>
-        </div>
-      </main>
-    );
-  }
-
-  if (!phone) {
-    return (
-      <main style={{ padding: '40px' }}>
-        <div data-testid="no-data-message" style={{ textAlign: 'center', padding: '40px' }}>
-          <p>폰 정보를 찾을 수 없습니다.</p>
-        </div>
-      </main>
-    );
-  }
+  const handleSubmitInquiry = useCallback(
+    (content: string) => {
+      return submitInquiry(content);
+    },
+    [submitInquiry]
+  );
 
   return (
     <main style={{ padding: '40px' }}>
-      <PhoneDetail data={phone} />
-      <PhonesInquiry />
+      <PhoneDetail />
+
+      {/* 문의하기 섹션 */}
+      <section style={{ marginTop: '60px' }}>
+        <Inquiries
+          inputSection={{
+            placeholder: '문의사항을 입력해 주세요.',
+            submitButtonText: '문의 하기',
+            maxLength: 100,
+          }}
+          inquiries={inquiries}
+          onSubmitInquiry={handleSubmitInquiry}
+          onSubmitReply={(inquiryId, content) => {
+            console.log('답변 제출:', inquiryId, content);
+          }}
+        />
+      </section>
     </main>
   );
 }
