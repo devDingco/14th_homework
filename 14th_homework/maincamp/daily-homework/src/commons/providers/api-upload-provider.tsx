@@ -1,62 +1,105 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
-import { HttpLink, ApolloLink, ApolloClient, InMemoryCache, from } from '@apollo/client';
+import { useEffect, useMemo, useRef } from 'react';
+import {
+  HttpLink,
+  ApolloLink,
+  ApolloClient,
+  InMemoryCache,
+  from,
+  fromPromise,
+} from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { ApolloProvider } from '@apollo/client/react';
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
-import { useAccessTokenStore } from '../stores/access-token-store';
+import { useAuthStore } from '../stores/auth-store';
 import { useRouter } from 'next/navigation';
+import { useTokenRefresh } from '../hooks/use-token-refresh';
+import { tokenStorage } from '../libraries/token-storage';
 
 interface IApolloSetting {
   children: React.ReactNode;
 }
 
 export default function ApiUploadProvider(props: IApolloSetting) {
-  const { accessToken, setAccessToken, logout } = useAccessTokenStore();
+  const { accessToken, setAccessToken, logout } = useAuthStore();
   const router = useRouter();
+  const { refreshToken } = useTokenRefresh();
+  const isRefreshing = useRef(false);
 
   useEffect(() => {
-    const result = localStorage.getItem('accessToken');
-    if (result) {
-      setAccessToken(result);
+    const storedAccessToken = tokenStorage.getAccessToken();
+    if (storedAccessToken) {
+      setAccessToken(storedAccessToken);
     }
   }, [setAccessToken]);
 
-  // 401 에러 감지 및 자동 처리
+  // 401 에러 감지 및 자동 처리 (Refresh Token으로 재시도)
   const errorLink = useMemo(
     () =>
-      onError(({ graphQLErrors, networkError }) => {
-        if (graphQLErrors) {
-          graphQLErrors.forEach(
-            ({ message, extensions }: { message: string; extensions?: { code?: string } }) => {
-              // 401 Unauthorized 에러 감지
-              if (extensions?.code === 'UNAUTHENTICATED' || message.includes('Unauthorized')) {
-                // 토큰 삭제
+      onError(({ graphQLErrors, networkError, operation, forward }) => {
+        // 401 에러 확인
+        const isUnauthorized =
+          (graphQLErrors &&
+            graphQLErrors.some(
+              ({ message, extensions }) =>
+                extensions?.code === 'UNAUTHENTICATED' || message.includes('Unauthorized')
+            )) ||
+          (networkError && 'statusCode' in networkError && networkError.statusCode === 401);
+
+        if (isUnauthorized) {
+          // 이미 갱신 중이면 무시
+          if (isRefreshing.current) {
+            return;
+          }
+
+          // 쿠키에 저장된 refreshToken을 사용하여 토큰 갱신 시도
+          // restoreAccessToken은 쿠키의 refreshToken을 자동으로 사용합니다
+          isRefreshing.current = true;
+
+          return fromPromise(
+            refreshToken()
+              .then((success) => {
+                if (success) {
+                  // 갱신 성공 시 새로운 Access Token으로 요청 재시도
+                  const newAccessToken = tokenStorage.getAccessToken();
+                  if (newAccessToken) {
+                    operation.setContext({
+                      headers: {
+                        ...operation.getContext().headers,
+                        Authorization: `Bearer ${newAccessToken}`,
+                      },
+                    });
+                    return newAccessToken;
+                  }
+                }
+                // 갱신 실패 시 로그아웃
                 logout();
-                // 로그인 페이지로 리다이렉트 (현재 페이지가 로그인 페이지가 아닐 때만)
                 if (typeof window !== 'undefined' && !window.location.pathname.includes('/login')) {
                   router.push('/login');
                 }
-              }
-            }
-          );
-        }
-
-        // 네트워크 에러 중 401 상태 코드 감지
-        if (networkError && 'statusCode' in networkError && networkError.statusCode === 401) {
-          logout();
-          if (typeof window !== 'undefined' && !window.location.pathname.includes('/login')) {
-            router.push('/login');
-          }
+                throw new Error('Token refresh failed');
+              })
+              .catch((error: unknown) => {
+                isRefreshing.current = false;
+                logout();
+                if (typeof window !== 'undefined' && !window.location.pathname.includes('/login')) {
+                  router.push('/login');
+                }
+                throw error;
+              })
+          ).flatMap(() => {
+            isRefreshing.current = false;
+            return forward(operation);
+          });
         }
       }),
-    [logout, router]
+    [logout, router, refreshToken]
   );
 
   const client = useMemo(() => {
     const uploadLink = createUploadLink({
-      uri: 'http://main-practice.codebootcamp.co.kr/graphql',
+      uri: 'https://main-practice.codebootcamp.co.kr/graphql',
       headers: {
         Authorization: accessToken ? `Bearer ${accessToken}` : '',
       },

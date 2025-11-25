@@ -1,6 +1,7 @@
 'use client';
 
-import { useAccessTokenStore } from '@/commons/stores/access-token-store';
+import { useAuthStore } from '@/commons/stores/auth-store';
+import { tokenStorage } from '@/commons/libraries/token-storage';
 import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -33,7 +34,7 @@ export default function LoginComponent() {
     if (passwordError) setPasswordError(''); // 입력 시 에러 메시지 제거
   };
 
-  const { setAccessToken } = useAccessTokenStore();
+  const { setAccessToken } = useAuthStore();
 
   const onClickLogin = async () => {
     // 유효성 검사
@@ -57,11 +58,12 @@ export default function LoginComponent() {
       });
 
       const Api_accessToken = result.data?.loginUser.accessToken;
-      console.log(Api_accessToken);
 
-      // Zustand store와 localStorage 모두에 저장
-      setAccessToken(Api_accessToken);
-      localStorage.setItem('accessToken', Api_accessToken);
+      // Access Token 저장
+      if (Api_accessToken) {
+        setAccessToken(Api_accessToken);
+        tokenStorage.setAccessToken(Api_accessToken);
+      }
 
       router.push('/boards');
     } catch (error: any) {
