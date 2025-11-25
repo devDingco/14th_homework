@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
 import { useParams, useRouter } from 'next/navigation';
 import { ChangeEvent, useState, useEffect, useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 
 import { UPDATE_BOARD, FETCH_BOARD, UPLOAD_FILE } from './queries';
 import { FetchBoardQuery, FetchBoardQueryVariables } from '@/commons/graphql/graphql';
@@ -52,6 +52,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     watch,
     setValue,
     getValues,
+    control,
   } = useForm<ISchema | IUpdateSchema>({
     resolver: zodResolver(props.isEdit ? updateSchema : schema),
     mode: 'onChange',
@@ -215,8 +216,9 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     // 현재 값 또는 기존 값 사용
     updateBoardInput.title =
       formData.title.trim() || (fetchedBoard?.title as string | undefined) || '';
+    // contents는 HTML이므로 trim() 사용하지 않음 (스키마 검증에서 이미 빈 HTML 체크 완료)
     updateBoardInput.contents =
-      formData.contents.trim() || (fetchedBoard?.contents as string | undefined) || '';
+      formData.contents || (fetchedBoard?.contents as string | undefined) || '';
 
     // 이미지 처리: 새 파일이 있으면 업로드, 없으면 기존 URL 사용 (순서 유지)
     const finalImageUrls: (string | null)[] = Array(imageUrl.length).fill(null);
@@ -457,6 +459,7 @@ export default function useBoardsWriteAdvanced(props: BoardVariables) {
     setFileRef,
     imageUrl,
     register,
+    control,
     onClickImage,
     onChangeFile,
     deleteImage,

@@ -266,18 +266,6 @@ export default function MypageComponent() {
         alert('결제 응답을 받지 못했습니다. 다시 시도해 주세요.');
         return;
       }
-
-      // 디버깅: 응답 구조 확인 - 모든 필드 출력
-      // console.log('PortOne 응답 전체:', JSON.stringify(response, null, 2));
-      // console.log('응답 객체 키들:', Object.keys(response || {}));
-      // console.log('응답 코드:', (response as any).code);
-      // console.log('응답 상태:', (response as any).status);
-      // console.log('거래 타입:', (response as any).transactionType);
-      // console.log('거래 ID:', (response as any).txId);
-      // console.log('Payment ID:', (response as any).paymentId);
-      // console.log('impUid:', (response as any).impUid);
-      // console.log('모든 필드:', response);
-
       // 결제 성공 시 - PortOne V2에서는 transactionType과 txId로 성공 여부를 판단
       // transactionType이 "PAYMENT"이고 txId가 존재하면 결제 성공으로 간주
       const isSuccess =

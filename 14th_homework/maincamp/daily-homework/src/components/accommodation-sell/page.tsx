@@ -1,5 +1,7 @@
 'use client';
-
+// 상품 판매 페이지
+import { useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import styles from './styles.module.css';
 import useAccommodationSell from './hook';
 import { AccommodationSellVariables } from './types';
@@ -9,11 +11,17 @@ import Image from 'next/image';
 import { Button, Input } from '@commons/ui';
 import { useRouter } from 'next/navigation';
 import KakaoMap from '@/components/apis/kakao-map';
+import { Controller } from 'react-hook-form';
+import 'react-quill/dist/quill.snow.css';
+
+// react-quill을 dynamic import로 로드 (SSR 방지)
+const ReactQuill = dynamic(async () => await import('react-quill'), { ssr: false });
 
 export default function AccommodationSell(props: AccommodationSellVariables) {
   const router = useRouter();
   const {
     register,
+    control,
     onClickSubmit,
     onClickUpdate,
     onClickImage,
@@ -37,6 +45,39 @@ export default function AccommodationSell(props: AccommodationSellVariables) {
     handlePriceChange,
     AlertModalComponent,
   } = useAccommodationSell(props);
+
+  // react-quill 모듈 설정
+  const quillModules = useMemo(
+    () => ({
+      toolbar: [
+        [{ header: [1, 2, 3, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ indent: '-1' }, { indent: '+1' }],
+        [{ align: [] }],
+        ['link', 'image'],
+        [{ color: [] }, { background: [] }],
+        ['clean'],
+      ],
+    }),
+    []
+  );
+
+  const quillFormats = [
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'list',
+    'bullet',
+    'indent',
+    'align',
+    'link',
+    'image',
+    'color',
+    'background',
+  ];
 
   return (
     <div className={styles.container}>
@@ -81,87 +122,25 @@ export default function AccommodationSell(props: AccommodationSellVariables) {
             <label className={styles.label}>상품 설명</label>
             <span className={styles.required}>*</span>
           </div>
-          <div className={styles.editorContainer}>
-            <div className={styles.editorToolbar}>
-              <div className={styles.toolbarStandard}>
-                {/* Text (Formatting) - 168px width */}
-                <div className={styles.toolbarGroup}>
-                  <button type="button" className={styles.toolbarButton} title="굵게">
-                    <Image src="/filled/Vector.svg" alt="굵게" width={24} height={24} />
-                  </button>
-                  <button type="button" className={styles.toolbarButton} title="기울임">
-                    <Image src="/filled/Vector-1.svg" alt="기울임" width={24} height={24} />
-                  </button>
-                  <button type="button" className={styles.toolbarButton} title="밑줄">
-                    <Image src="/filled/Vector-2.svg" alt="밑줄" width={24} height={24} />
-                  </button>
-                  <button type="button" className={styles.toolbarButton} title="취소선">
-                    <Image src="/filled/Vector-3.svg" alt="취소선" width={24} height={24} />
-                  </button>
-                </div>
-
-                {/* Block (Paragraph) - 168px width */}
-                <div className={styles.toolbarGroup}>
-                  <button type="button" className={styles.toolbarButton} title="제목 1">
-                    <Image src="/filled/Vector-4.svg" alt="제목 1" width={24} height={24} />
-                  </button>
-                  <button type="button" className={styles.toolbarButton} title="제목 2">
-                    <Image src="/filled/Vector-5.svg" alt="제목 2" width={24} height={24} />
-                  </button>
-                  <button type="button" className={styles.toolbarButton} title="목록">
-                    <Image src="/filled/Vector-6.svg" alt="목록" width={24} height={24} />
-                  </button>
-                  <button type="button" className={styles.toolbarButton} title="인용">
-                    <Image src="/filled/Vector-7.svg" alt="인용" width={24} height={24} />
-                  </button>
-                </div>
-
-                {/* Media (Content) - 168px width */}
-                <div className={styles.toolbarGroup}>
-                  <button type="button" className={styles.toolbarButton} title="이미지">
-                    <Image src="/filled/Vector-8.svg" alt="이미지" width={24} height={24} />
-                  </button>
-                  <button type="button" className={styles.toolbarButton} title="링크">
-                    <Image src="/filled/Vector-9.svg" alt="링크" width={24} height={24} />
-                  </button>
-                  <button type="button" className={styles.toolbarButton} title="비디오">
-                    <Image src="/filled/Vector-10.svg" alt="비디오" width={24} height={24} />
-                  </button>
-                  <button type="button" className={styles.toolbarButton} title="파일">
-                    <Image src="/filled/Vector-11.svg" alt="파일" width={24} height={24} />
-                  </button>
-                </div>
-
-                {/* More - 120px width */}
-                <div className={styles.toolbarGroupMore}>
-                  <button
-                    type="button"
-                    className={`${styles.toolbarButton} ${styles.toolbarButtonDisabled}`}
-                    title="왼쪽 정렬"
-                  >
-                    <Image src="/filled/Vector-12.svg" alt="왼쪽 정렬" width={24} height={24} />
-                  </button>
-                  <button
-                    type="button"
-                    className={`${styles.toolbarButton} ${styles.toolbarButtonDisabled}`}
-                    title="오른쪽 정렬"
-                  >
-                    <Image src="/filled/Vector-13.svg" alt="오른쪽 정렬" width={24} height={24} />
-                  </button>
-                  <button type="button" className={styles.toolbarButton} title="더보기">
-                    <Image src="/filled/Vector-14.svg" alt="더보기" width={24} height={24} />
-                  </button>
-                </div>
+          <Controller
+            name="description"
+            control={control}
+            rules={{ required: '상품 설명을 입력해 주세요.' }}
+            render={({ field }) => (
+              <div className={styles.quillWrapper}>
+                <ReactQuill
+                  theme="snow"
+                  value={field.value || ''}
+                  onChange={field.onChange}
+                  modules={quillModules}
+                  formats={quillFormats}
+                  placeholder="내용을 입력해 주세요."
+                  className={styles.quillEditor}
+                />
               </div>
-            </div>
-            <div className={styles.editorDivider}></div>
-            <textarea
-              className={styles.editorContent}
-              placeholder="내용을 입력해 주세요."
-              {...register('description')}
-            />
-            {error.description && <p className={styles.errorText}>{error.description}</p>}
-          </div>
+            )}
+          />
+          {error.description && <p className={styles.errorText}>{error.description}</p>}
         </div>
 
         <div className={styles.divider}></div>

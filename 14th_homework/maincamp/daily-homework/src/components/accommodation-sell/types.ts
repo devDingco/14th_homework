@@ -1,10 +1,21 @@
 import z from 'zod';
 
+// HTML 내용이 실제로 비어있는지 확인하는 헬퍼 함수
+const isHtmlEmpty = (html: string): boolean => {
+  if (!html || html.trim() === '') return true;
+  // HTML 태그를 제거하고 텍스트만 추출
+  const textContent = html.replace(/<[^>]*>/g, '').trim();
+  return textContent === '';
+};
+
 // 등록용 스키마
 export const sellSchema = z.object({
   name: z.string().min(1, { message: '상품명을 입력해 주세요.' }).trim(),
   summary: z.string().min(1, { message: '한줄 요약을 입력해 주세요.' }).trim(),
-  description: z.string().min(1, { message: '상품 설명을 입력해 주세요.' }).trim(),
+  description: z
+    .string()
+    .min(1, { message: '상품 설명을 입력해 주세요.' })
+    .refine((val) => !isHtmlEmpty(val), { message: '상품 설명을 입력해 주세요.' }),
   price: z
     .string()
     .min(1, { message: '판매 가격을 입력해 주세요.' })
@@ -35,7 +46,10 @@ export const sellSchema = z.object({
 export const updateSellSchema = z.object({
   name: z.string().min(1, { message: '상품명을 입력해 주세요.' }).trim(),
   summary: z.string().min(1, { message: '한줄 요약을 입력해 주세요.' }).trim(),
-  description: z.string().min(1, { message: '상품 설명을 입력해 주세요.' }).trim(),
+  description: z
+    .string()
+    .min(1, { message: '상품 설명을 입력해 주세요.' })
+    .refine((val) => !isHtmlEmpty(val), { message: '상품 설명을 입력해 주세요.' }),
   price: z
     .string()
     .min(1, { message: '판매 가격을 입력해 주세요.' })
