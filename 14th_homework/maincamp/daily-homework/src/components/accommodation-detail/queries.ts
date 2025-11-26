@@ -29,3 +29,41 @@ export const FETCH_TRAVELPRODUCT = gql`
     }
   }
 `;
+
+// 문의 목록 조회
+export const FETCH_TRAVELPRODUCT_QUESTIONS = gql`
+  query fetchTravelproductQuestions($travelproductId: ID!, $page: Int) {
+    fetchTravelproductQuestions(travelproductId: $travelproductId, page: $page) {
+      _id
+      contents
+      createdAt
+      user {
+        _id
+        name
+        picture
+      }
+    }
+  }
+`;
+
+// 문의 등록
+export const CREATE_TRAVELPRODUCT_QUESTION = gql`
+  mutation createTravelproductQuestion(
+    $createTravelproductQuestionInput: CreateTravelproductQuestionInput!
+    $travelproductId: ID!
+  ) {
+    createTravelproductQuestion(
+      createTravelproductQuestionInput: $createTravelproductQuestionInput
+      travelproductId: $travelproductId
+    ) {
+      _id
+      contents
+      createdAt
+      user {
+        _id
+        name
+        picture
+      }
+    }
+  }
+`;

@@ -97,7 +97,7 @@ export default function AccommodationDetailPage() {
             lat={product.travelproductAddress?.lat ?? undefined}
             lng={product.travelproductAddress?.lng ?? undefined}
           />
-          <Comments comments={[]} isSeller={isSeller} />
+          <Comments travelproductId={travelproductId} comments={[]} isSeller={isSeller} />
         </div>
       </div>
     </div>
