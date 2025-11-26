@@ -1,6 +1,6 @@
 import { useRouter, useParams } from 'next/navigation';
 import { ChangeEvent, useState, useEffect, useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@apollo/client';
 import { UPLOAD_FILE } from '@/components/boards-write/queries';
@@ -32,6 +32,7 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
     formState: { errors: formErrors, isValid },
     setValue,
     watch,
+    control,
   } = useForm<ISellSchema | IUpdateSellSchema>({
     resolver: zodResolver(props.isEdit ? updateSellSchema : sellSchema),
     mode: 'onChange',
@@ -182,6 +183,7 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
           createTravelproductInput: {
             name: formData.name,
             remarks: formData.summary, // summary -> remarks
+            // description은 HTML이므로 trim() 사용하지 않음 (스키마 검증에서 이미 빈 HTML 체크 완료)
             contents: formData.description, // description -> contents
             price: priceValue,
             images: uploadedImageUrls.length > 0 ? uploadedImageUrls : undefined,
@@ -327,6 +329,7 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
           updateTravelproductInput: {
             name: formData.name,
             remarks: formData.summary, // summary -> remarks
+            // description은 HTML이므로 trim() 사용하지 않음 (스키마 검증에서 이미 빈 HTML 체크 완료)
             contents: formData.description, // description -> contents
             price: priceValue,
             images: filteredUrls.length > 0 ? filteredUrls : undefined,
@@ -474,6 +477,7 @@ export default function useAccommodationSell(props: AccommodationSellVariables) 
 
   return {
     register,
+    control,
     onClickSubmit,
     onClickUpdate,
     onClickImage,

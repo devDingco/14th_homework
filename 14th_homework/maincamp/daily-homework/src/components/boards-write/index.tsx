@@ -1,6 +1,8 @@
 'use client';
 // 게시물 작성 페이지
 
+import { useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import styles from './styles.module.css';
 import useBoardsWriteAdvanced from './hook';
 import { BoardVariables } from './types';
@@ -8,12 +10,18 @@ import DaumPostcodeEmbed from 'react-daum-postcode';
 import { Modal } from 'antd';
 import Image from 'next/image';
 import { Button, Input } from '@commons/ui';
+import { Controller } from 'react-hook-form';
+import 'react-quill/dist/quill.snow.css';
+
+// react-quill을 dynamic import로 로드 (SSR 방지)
+const ReactQuill = dynamic(async () => await import('react-quill'), { ssr: false });
 
 export default function BoardsWriteAdvanced(props: BoardVariables) {
   const {
     setFileRef,
     imageUrl,
     register,
+    control,
     onChangeFile,
     deleteImage,
     onClickImage,
@@ -30,6 +38,39 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
     address,
     AlertModalComponent,
   } = useBoardsWriteAdvanced(props);
+
+  // react-quill 모듈 설정
+  const quillModules = useMemo(
+    () => ({
+      toolbar: [
+        [{ header: [1, 2, 3, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ indent: '-1' }, { indent: '+1' }],
+        [{ align: [] }],
+        ['link', 'image'],
+        [{ color: [] }, { background: [] }],
+        ['clean'],
+      ],
+    }),
+    []
+  );
+
+  const quillFormats = [
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'list',
+    'bullet',
+    'indent',
+    'align',
+    'link',
+    'image',
+    'color',
+    'background',
+  ];
   // console.log('🚀 ~ checkRegister:', checkRegister());
 
   return (
@@ -92,12 +133,23 @@ export default function BoardsWriteAdvanced(props: BoardVariables) {
             <div>내용</div>
             <div className={styles['enroll-required-indicator']}> *</div>
           </div>
-          <textarea
-            className={styles.contents}
-            placeholder="내용을 입력해 주세요."
-            {...register('contents', {
-              required: '필수입력 사항 입니다.',
-            })}
+          <Controller
+            name="contents"
+            control={control}
+            rules={{ required: '필수입력 사항 입니다.' }}
+            render={({ field }) => (
+              <div className={styles.quillWrapper}>
+                <ReactQuill
+                  theme="snow"
+                  value={field.value || ''}
+                  onChange={field.onChange}
+                  modules={quillModules}
+                  formats={quillFormats}
+                  placeholder="내용을 입력해 주세요."
+                  className={styles.quillEditor}
+                />
+              </div>
+            )}
           />
           {error.contents && <p className={styles.error}>{error.contents}</p>}
         </div>

@@ -456,3 +456,43 @@
   margin: 0;
   margin-top: 4px;
 }
+
+/* react-quill 에디터 스타일 */
+.quillWrapper {
+  width: 100%;
+  align-self: stretch;
+}
+
+.quillEditor {
+  min-height: 400px;
+}
+
+.quillEditor .ql-container {
+  min-height: 400px;
+  border-radius: 0 0 8px 8px;
+  border: 1px solid #d4d3d3;
+  border-top: none;
+}
+
+.quillEditor .ql-toolbar {
+  border-radius: 8px 8px 0 0;
+  border: 1px solid #d4d3d3;
+  border-bottom: none;
+  background: #fff;
+}
+
+.quillEditor .ql-editor {
+  min-height: 400px;
+  padding: 16px;
+  font-family: 'Pretendard Variable';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000;
+}
+
+.quillEditor .ql-editor.ql-blank::before {
+  color: #ababab;
+  font-style: normal;
+}
