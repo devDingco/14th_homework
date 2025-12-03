@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useQuery, useApolloClient } from "@apollo/client";
+import { useQuery, useApolloClient, useMutation } from "@apollo/client";
 import { debounce } from "lodash";
+import { useAccessTokenStore } from "@/commons/stores/access-token-store";
 import TabNavigation from "@/components/mypage/tab-navigation";
 import FeaturedCard from "@/components/trips-list/featured-card";
 import PromoBanner from "@/components/trips-list/promo-banner";
@@ -12,6 +13,7 @@ import AccommodationCard from "@/components/trips-list/accommodation-card";
 import styles from "./styles.module.css";
 import { FETCH_TRAVELPRODUCTS } from "./queries";
 import { FETCH_TRAVELPRODUCT } from "./[tripId]/queries";
+import { TOGGLE_TRAVELPRODUCT_PICK } from "./[tripId]/mutations";
 import type { Travelproduct } from "@/commons/graphql/graphql";
 
 // Mock 데이터 (추천 상품, 최근 본 상품용)
@@ -49,7 +51,10 @@ const TABS = [
 
 export default function TripsPage() {
   const [activeTab, setActiveTab] = useState("available");
+  const [bookmarkingId, setBookmarkingId] = useState<string | null>(null);
   const client = useApolloClient();
+  const { accessToken } = useAccessTokenStore();
+  const [togglePick] = useMutation(TOGGLE_TRAVELPRODUCT_PICK);
 
   // GraphQL 쿼리로 숙소 데이터 조회
   const { data, loading, error } = useQuery(FETCH_TRAVELPRODUCTS, {
@@ -87,6 +92,34 @@ export default function TripsPage() {
   // Prefetch 함수 실행
   const prefetchTravelproduct = (productId: string) => () => {
     prefetchTravelproductDebounce(productId);
+  };
+
+  const handleBookmark = async (productId: string) => {
+    if (!accessToken) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
+
+    setBookmarkingId(productId);
+
+    try {
+      await togglePick({
+        variables: { travelproductId: productId },
+        refetchQueries: [
+          {
+            query: FETCH_TRAVELPRODUCTS,
+            variables: {
+              page: 1,
+              isSoldout: activeTab === "closed",
+            }
+          }
+        ]
+      });
+    } catch (error) {
+      console.error("북마크 토글 실패:", error);
+    } finally {
+      setBookmarkingId(null);
+    }
   };
 
   return (
@@ -134,6 +167,8 @@ export default function TripsPage() {
                   profileImage: product.seller?.picture ?? null,
                 }}
                 onMouseEnter={prefetchTravelproduct(product._id)}
+                onBookmarkClick={handleBookmark}
+                isBookmarkLoading={bookmarkingId === product._id}
               />
             ))}
           </div>

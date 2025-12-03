@@ -24,7 +24,9 @@ import {
   AlertDialogCancel,
 } from "@/components/ui/alert-dialog";
 import { useUserPointsStore } from "@/commons/stores/user-points-store";
+import { useAccessTokenStore } from "@/commons/stores/access-token-store";
 import { FETCH_TRAVELPRODUCT, DELETE_TRAVELPRODUCT } from "./queries";
+import { TOGGLE_TRAVELPRODUCT_PICK } from "./mutations";
 import { FETCH_USER_LOGGED_IN } from "@/lib/queries/user";
 import QuestionWrite from "@/components/trips-detail/question-write";
 import QuestionList from "@/components/trips-detail/question-list";
@@ -41,6 +43,8 @@ export default function TripDetailPage() {
   const { data: userData } = useQuery(FETCH_USER_LOGGED_IN);
 
   const [deleteTravelproduct] = useMutation(DELETE_TRAVELPRODUCT);
+  const [togglePick, { loading: pickLoading }] = useMutation(TOGGLE_TRAVELPRODUCT_PICK);
+  const { accessToken } = useAccessTokenStore();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInsufficientPointsModalOpen, setIsInsufficientPointsModalOpen] = useState(false);
@@ -91,6 +95,29 @@ export default function TripDetailPage() {
     } catch (error) {
       console.error("삭제 실패:", error);
       alert("삭제에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  const handleBookmark = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    if (!accessToken) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
+
+    try {
+      await togglePick({
+        variables: { travelproductId: tripId },
+        refetchQueries: [
+          {
+            query: FETCH_TRAVELPRODUCT,
+            variables: { travelproductId: tripId }
+          }
+        ]
+      });
+    } catch (error) {
+      console.error("북마크 토글 실패:", error);
     }
   };
 
@@ -150,10 +177,18 @@ export default function TripDetailPage() {
             <button className={styles["icon-button"]}>
               <MapPinIcon className={styles["icon"]} />
             </button>
-            <div className={styles["bookmark-badge"]}>
+            <button
+              className={styles["bookmark-badge"]}
+              onClick={handleBookmark}
+              disabled={pickLoading}
+              style={{
+                opacity: pickLoading ? 0.6 : 1,
+                cursor: pickLoading ? 'not-allowed' : 'pointer'
+              }}
+            >
               <BookmarkIcon className={styles["icon"]} />
               <span>{travelproduct.pickedCount}</span>
-            </div>
+            </button>
           </div>
 
         </div>

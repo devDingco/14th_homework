@@ -15,6 +15,8 @@ interface AccommodationCardProps {
     profileImage?: string | null;
   };
   onMouseEnter?: () => void;
+  onBookmarkClick?: (id: string) => void;
+  isBookmarkLoading?: boolean;
 }
 
 export default function AccommodationCard({
@@ -27,11 +29,20 @@ export default function AccommodationCard({
   image,
   seller,
   onMouseEnter,
+  onBookmarkClick,
+  isBookmarkLoading,
 }: AccommodationCardProps) {
   const router = useRouter();
 
   const handleCardClick = () => {
     router.push(`/trips/${id}`);
+  };
+
+  const handleBookmarkClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onBookmarkClick) {
+      onBookmarkClick(id);
+    }
   };
 
   return (
@@ -48,10 +59,18 @@ export default function AccommodationCard({
             }}
           />
         </div>
-        <div className={styles.bookmark}>
+        <button
+          className={styles.bookmark}
+          onClick={handleBookmarkClick}
+          disabled={isBookmarkLoading}
+          style={{
+            opacity: isBookmarkLoading ? 0.6 : 1,
+            cursor: 'pointer'
+          }}
+        >
           <BookmarkIcon className={styles.bookmarkIcon} />
           <span className={styles.bookmarkCount}>{bookmarkCount}</span>
-        </div>
+        </button>
       </div>
 
       {/* 텍스트 영역 */}
