@@ -1,4 +1,7 @@
+'use client';
+
 import { ReactNode } from 'react';
+import Navigation from '@/commons/layout/navigation';
 import styles from './styles.module.css';
 
 interface AccommodationDetailLayoutProps {
@@ -20,6 +23,7 @@ export default function AccommodationDetailLayout({
 }: AccommodationDetailLayoutProps) {
   return (
     <div className={styles.pageContainer}>
+      <Navigation />
       <div className={styles.contentContainer}>
         {/* 제품 헤더 */}
         {header}

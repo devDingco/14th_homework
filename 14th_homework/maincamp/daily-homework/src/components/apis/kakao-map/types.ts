@@ -20,6 +20,8 @@ export interface KakaoMapProps {
 export interface KakaoMapHookResult {
   /** 카카오 맵 스크립트 로드 완료 여부 */
   isScriptLoaded: boolean;
+  /** 로드 에러 메시지 */
+  loadError: string | null;
   /** 주소를 좌표로 변환하는 함수 */
   addressToCoordinates: (address: string) => Promise<{ lat: number; lng: number } | null>;
   /** 지도 인스턴스 */

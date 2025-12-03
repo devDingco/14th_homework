@@ -1,13 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery, useApolloClient } from '@apollo/client';
 import {
   CREATE_TRAVELPRODUCT_QUESTION,
   FETCH_TRAVELPRODUCT_QUESTIONS,
+  FETCH_TRAVELPRODUCT_QUESTION_ANSWERS,
+  CREATE_TRAVELPRODUCT_QUESTION_ANSWER,
+  UPDATE_TRAVELPRODUCT_QUESTION_ANSWER,
+  DELETE_TRAVELPRODUCT_QUESTION_ANSWER,
+  UPDATE_TRAVELPRODUCT_QUESTION,
+  DELETE_TRAVELPRODUCT_QUESTION,
 } from '@/components/accommodation-detail/queries';
-import { MutationCreateTravelproductQuestionArgs } from '@/commons/graphql/graphql';
+import {
+  MutationCreateTravelproductQuestionArgs,
+  MutationCreateTravelproductQuestionAnswerArgs,
+  MutationUpdateTravelproductQuestionAnswerArgs,
+  MutationDeleteTravelproductQuestionAnswerArgs,
+  MutationUpdateTravelproductQuestionArgs,
+  MutationDeleteTravelproductQuestionArgs,
+} from '@/commons/graphql/graphql';
 import styles from './styles.module.css';
 
 // 문의 데이터 타입 정의
@@ -20,6 +33,17 @@ interface TravelproductQuestionType {
     name?: string;
     picture?: string;
   };
+  travelproductQuestionAnswer?: {
+    _id: string;
+    contents: string;
+    createdAt: string;
+    updatedAt: string;
+    user?: {
+      _id: string;
+      name?: string;
+      picture?: string;
+    };
+  } | null;
 }
 
 interface FetchTravelproductQuestionsData {
@@ -64,7 +88,11 @@ export default function Comments({
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState('');
   const [editCommentContent, setEditCommentContent] = useState('');
+  const [answersMap, setAnswersMap] = useState<
+    Record<string, TravelproductQuestionType['travelproductQuestionAnswer']>
+  >({});
   const maxLength = 100;
+  const client = useApolloClient();
 
   // 문의 목록 조회
   const { data: questionsData, refetch } = useQuery<FetchTravelproductQuestionsData>(
@@ -78,11 +106,156 @@ export default function Comments({
     }
   );
 
+  // 문의 목록이 변경될 때 각 문의에 대한 답변 조회
+  useEffect(() => {
+    const questions = questionsData?.fetchTravelproductQuestions || [];
+
+    const fetchAnswers = async () => {
+      const questionIds = new Set(questions.map((q) => q._id));
+
+      // 삭제된 문의의 답변을 answersMap에서 제거
+      const newAnswersMap: Record<
+        string,
+        TravelproductQuestionType['travelproductQuestionAnswer']
+      > = {};
+
+      // 기존 answersMap에서 현재 문의 목록에 있는 것만 유지
+      Object.keys(answersMap).forEach((questionId) => {
+        if (questionIds.has(questionId)) {
+          newAnswersMap[questionId] = answersMap[questionId];
+        }
+      });
+
+      // 새로 추가된 문의에 대해서만 답변 조회
+      await Promise.all(
+        questions.map(async (question) => {
+          // 이미 조회한 답변이 있으면 스킵
+          if (newAnswersMap[question._id]) {
+            return;
+          }
+
+          try {
+            const { data } = await client.query({
+              query: FETCH_TRAVELPRODUCT_QUESTION_ANSWERS,
+              variables: {
+                travelproductQuestionId: question._id,
+                page: 1,
+              },
+            });
+
+            const answers = data?.fetchTravelproductQuestionAnswers || [];
+            if (answers.length > 0) {
+              newAnswersMap[question._id] = answers[0];
+            }
+          } catch (error) {
+            console.error(`답변 조회 실패 (문의 ID: ${question._id}):`, error);
+          }
+        })
+      );
+
+      setAnswersMap(newAnswersMap);
+    };
+
+    if (questions.length === 0) {
+      // 문의가 없으면 answersMap 초기화
+      setAnswersMap({});
+      return;
+    }
+
+    fetchAnswers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questionsData?.fetchTravelproductQuestions]);
+
   // 문의 등록 mutation
   const [createTravelproductQuestion, { loading: createLoading }] = useMutation<
     any,
     MutationCreateTravelproductQuestionArgs
   >(CREATE_TRAVELPRODUCT_QUESTION, {
+    refetchQueries: [
+      {
+        query: FETCH_TRAVELPRODUCT_QUESTIONS,
+        variables: {
+          travelproductId,
+          page: 1,
+        },
+      },
+    ],
+    awaitRefetchQueries: true,
+  });
+
+  // 답변 등록 mutation
+  const [createTravelproductQuestionAnswer, { loading: createAnswerLoading }] = useMutation<
+    any,
+    MutationCreateTravelproductQuestionAnswerArgs
+  >(CREATE_TRAVELPRODUCT_QUESTION_ANSWER, {
+    refetchQueries: [
+      {
+        query: FETCH_TRAVELPRODUCT_QUESTIONS,
+        variables: {
+          travelproductId,
+          page: 1,
+        },
+      },
+    ],
+    awaitRefetchQueries: true,
+  });
+
+  // 답변 수정 mutation
+  const [updateTravelproductQuestionAnswer, { loading: updateAnswerLoading }] = useMutation<
+    any,
+    MutationUpdateTravelproductQuestionAnswerArgs
+  >(UPDATE_TRAVELPRODUCT_QUESTION_ANSWER, {
+    refetchQueries: [
+      {
+        query: FETCH_TRAVELPRODUCT_QUESTIONS,
+        variables: {
+          travelproductId,
+          page: 1,
+        },
+      },
+    ],
+    awaitRefetchQueries: true,
+  });
+
+  // 답변 삭제 mutation
+  const [deleteTravelproductQuestionAnswer, { loading: deleteAnswerLoading }] = useMutation<
+    any,
+    MutationDeleteTravelproductQuestionAnswerArgs
+  >(DELETE_TRAVELPRODUCT_QUESTION_ANSWER, {
+    refetchQueries: [
+      {
+        query: FETCH_TRAVELPRODUCT_QUESTIONS,
+        variables: {
+          travelproductId,
+          page: 1,
+        },
+      },
+    ],
+    awaitRefetchQueries: true,
+  });
+
+  // 문의 수정 mutation
+  const [updateTravelproductQuestion, { loading: updateQuestionLoading }] = useMutation<
+    any,
+    MutationUpdateTravelproductQuestionArgs
+  >(UPDATE_TRAVELPRODUCT_QUESTION, {
+    refetchQueries: [
+      {
+        query: FETCH_TRAVELPRODUCT_QUESTIONS,
+        variables: {
+          travelproductId,
+          page: 1,
+        },
+      },
+    ],
+    awaitRefetchQueries: true,
+  });
+
+  // 문의 삭제 mutation
+  const [deleteTravelproductQuestion, { loading: deleteQuestionLoading }] = useMutation<
+    any,
+    MutationDeleteTravelproductQuestionArgs
+  >(DELETE_TRAVELPRODUCT_QUESTION, {
     refetchQueries: [
       {
         query: FETCH_TRAVELPRODUCT_QUESTIONS,
@@ -126,12 +299,51 @@ export default function Comments({
     setReplyContent('');
   };
 
-  const handleReplySubmit = (e: React.FormEvent, commentId: string) => {
+  const handleReplySubmit = async (e: React.FormEvent, questionId: string) => {
     e.preventDefault();
-    // TODO: 답변하기 API 호출
-    console.log('답변하기:', commentId, replyContent);
-    setReplyingTo(null);
-    setReplyContent('');
+
+    if (!replyContent.trim()) {
+      alert('답변 내용을 입력해 주세요.');
+      return;
+    }
+
+    try {
+      await createTravelproductQuestionAnswer({
+        variables: {
+          createTravelproductQuestionAnswerInput: {
+            contents: replyContent,
+          },
+          travelproductQuestionId: questionId,
+        },
+      });
+
+      // 답변 등록 후 해당 문의의 답변을 다시 조회하여 answersMap 업데이트
+      try {
+        const { data: answerData } = await client.query({
+          query: FETCH_TRAVELPRODUCT_QUESTION_ANSWERS,
+          variables: {
+            travelproductQuestionId: questionId,
+            page: 1,
+          },
+        });
+        const answers = answerData?.fetchTravelproductQuestionAnswers || [];
+        if (answers.length > 0) {
+          setAnswersMap((prev) => ({
+            ...prev,
+            [questionId]: answers[0],
+          }));
+        }
+      } catch (error) {
+        console.error('답변 조회 실패:', error);
+      }
+
+      alert('답변이 등록되었습니다.');
+      setReplyingTo(null);
+      setReplyContent('');
+    } catch (error) {
+      console.error('답변 등록 실패:', error);
+      alert('답변 등록에 실패했습니다. 다시 시도해 주세요.');
+    }
   };
 
   const handleCancelReply = () => {
@@ -149,12 +361,87 @@ export default function Comments({
     setEditContent('');
   };
 
-  const handleEditSubmit = (e: React.FormEvent, replyId: string) => {
+  const handleEditSubmit = async (e: React.FormEvent, answerId: string) => {
     e.preventDefault();
-    // TODO: 수정하기 API 호출
-    console.log('답변 수정하기:', replyId, editContent);
-    setEditingReplyId(null);
-    setEditContent('');
+
+    if (!editContent.trim()) {
+      alert('답변 내용을 입력해 주세요.');
+      return;
+    }
+
+    try {
+      // 답변 ID로 문의 ID 찾기
+      const questionId = Object.keys(answersMap).find((key) => answersMap[key]?._id === answerId);
+
+      await updateTravelproductQuestionAnswer({
+        variables: {
+          travelproductQuestionAnswerId: answerId,
+          updateTravelproductQuestionAnswerInput: {
+            contents: editContent,
+          },
+        },
+      });
+
+      // 답변 수정 후 해당 문의의 답변을 다시 조회
+      if (questionId) {
+        try {
+          const { data: answerData } = await client.query({
+            query: FETCH_TRAVELPRODUCT_QUESTION_ANSWERS,
+            variables: {
+              travelproductQuestionId: questionId,
+              page: 1,
+            },
+          });
+          const answers = answerData?.fetchTravelproductQuestionAnswers || [];
+          if (answers.length > 0) {
+            setAnswersMap((prev) => ({
+              ...prev,
+              [questionId]: answers[0],
+            }));
+          }
+        } catch (error) {
+          console.error('답변 조회 실패:', error);
+        }
+      }
+
+      alert('답변이 수정되었습니다.');
+      setEditingReplyId(null);
+      setEditContent('');
+    } catch (error) {
+      console.error('답변 수정 실패:', error);
+      alert('답변 수정에 실패했습니다. 다시 시도해 주세요.');
+    }
+  };
+
+  const handleDeleteAnswer = async (answerId: string) => {
+    if (!confirm('답변을 삭제하시겠습니까?')) {
+      return;
+    }
+
+    try {
+      // 답변 ID로 문의 ID 찾기
+      const questionId = Object.keys(answersMap).find((key) => answersMap[key]?._id === answerId);
+
+      await deleteTravelproductQuestionAnswer({
+        variables: {
+          travelproductQuestionAnswerId: answerId,
+        },
+      });
+
+      // 답변 삭제 후 answersMap에서 제거
+      if (questionId) {
+        setAnswersMap((prev) => {
+          const newMap = { ...prev };
+          delete newMap[questionId];
+          return newMap;
+        });
+      }
+
+      alert('답변이 삭제되었습니다.');
+    } catch (error) {
+      console.error('답변 삭제 실패:', error);
+      alert('답변 삭제에 실패했습니다. 다시 시도해 주세요.');
+    }
   };
 
   const handleCommentEditClick = (commentId: string, currentContent: string) => {
@@ -167,12 +454,59 @@ export default function Comments({
     setEditCommentContent('');
   };
 
-  const handleCommentEditSubmit = (e: React.FormEvent, commentId: string) => {
+  const handleCommentEditSubmit = async (e: React.FormEvent, questionId: string) => {
     e.preventDefault();
-    // TODO: 문의 수정하기 API 호출
-    console.log('문의 수정하기:', commentId, editCommentContent);
-    setEditingCommentId(null);
-    setEditCommentContent('');
+
+    if (!editCommentContent.trim()) {
+      alert('문의 내용을 입력해 주세요.');
+      return;
+    }
+
+    try {
+      await updateTravelproductQuestion({
+        variables: {
+          travelproductQuestionId: questionId,
+          updateTravelproductQuestionInput: {
+            contents: editCommentContent,
+          },
+        },
+      });
+
+      alert('문의가 수정되었습니다.');
+      setEditingCommentId(null);
+      setEditCommentContent('');
+    } catch (error) {
+      console.error('문의 수정 실패:', error);
+      alert('문의 수정에 실패했습니다. 다시 시도해 주세요.');
+    }
+  };
+
+  const handleDeleteQuestion = async (questionId: string) => {
+    if (!confirm('문의를 삭제하시겠습니까?')) {
+      return;
+    }
+
+    try {
+      await deleteTravelproductQuestion({
+        variables: {
+          travelproductQuestionId: questionId,
+        },
+      });
+
+      // 문의 삭제 후 해당 문의의 답변도 answersMap에서 제거
+      if (answersMap[questionId]) {
+        setAnswersMap((prev) => {
+          const newMap = { ...prev };
+          delete newMap[questionId];
+          return newMap;
+        });
+      }
+
+      alert('문의가 삭제되었습니다.');
+    } catch (error) {
+      console.error('문의 삭제 실패:', error);
+      alert('문의 삭제에 실패했습니다. 다시 시도해 주세요.');
+    }
   };
 
   return (
@@ -250,7 +584,11 @@ export default function Comments({
                         >
                           <img src="/edit.svg" alt="수정" width={20} height={20} />
                         </button>
-                        <button className={styles.deleteButton} aria-label="삭제">
+                        <button
+                          className={styles.deleteButton}
+                          aria-label="삭제"
+                          onClick={() => handleDeleteQuestion(question._id)}
+                        >
                           <img src="/close.svg" alt="삭제" width={20} height={20} />
                         </button>
                       </div>
@@ -261,7 +599,7 @@ export default function Comments({
                         {new Date(question.createdAt).toLocaleDateString('ko-KR')}
                       </span>
                     </div>
-                    {isSeller && (
+                    {isSeller && !answersMap[question._id] && (
                       <button
                         className={styles.replyButton}
                         onClick={() => handleReplyClick(question._id)}
@@ -341,6 +679,123 @@ export default function Comments({
                         </button>
                       </div>
                     </div>
+                  )}
+
+                  {/* 답변 표시 */}
+                  {answersMap[question._id] && (
+                    <>
+                      {editingReplyId === answersMap[question._id]!._id ? (
+                        /* 답변 수정 폼 */
+                        <div className={styles.replyItem}>
+                          <div className={styles.replyIcon}>
+                            <img src="/return.svg" alt="답변" width={24} height={24} />
+                          </div>
+                          <div className={styles.replyContent}>
+                            <div className={styles.replyForm} style={{ paddingLeft: 0 }}>
+                              <div className={styles.inputContainer}>
+                                <textarea
+                                  className={styles.textarea}
+                                  placeholder="답변할 내용을 입력해 주세요."
+                                  value={editContent}
+                                  onChange={(e) => setEditContent(e.target.value)}
+                                  maxLength={maxLength}
+                                  rows={4}
+                                  style={{ color: '#333333', fontWeight: 500 }}
+                                />
+                                <div className={styles.count}>
+                                  {editContent.length}/{maxLength}
+                                </div>
+                              </div>
+                              <div className={styles.replyButtons}>
+                                <button
+                                  type="button"
+                                  className={styles.cancelButton}
+                                  onClick={handleCancelEdit}
+                                >
+                                  취소
+                                </button>
+                                <button
+                                  type="button"
+                                  className={styles.replySubmitButton}
+                                  onClick={(e) =>
+                                    handleEditSubmit(e, answersMap[question._id]!._id)
+                                  }
+                                >
+                                  수정 하기
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        /* 답변 내용 */
+                        <div className={styles.replyItem}>
+                          <div className={styles.replyIcon}>
+                            <img src="/return.svg" alt="답변" width={24} height={24} />
+                          </div>
+                          <div className={styles.replyContent}>
+                            <div className={styles.commentHeader}>
+                              <div className={styles.profile}>
+                                <div className={styles.profileImage}>
+                                  {(() => {
+                                    const answer = answersMap[question._id];
+                                    const userPicture = answer?.user?.picture;
+                                    return userPicture ? (
+                                      <Image
+                                        src={userPicture}
+                                        alt={answer.user?.name || '사용자'}
+                                        fill
+                                        className={styles.profileImg}
+                                      />
+                                    ) : (
+                                      <div className={styles.profilePlaceholder} />
+                                    );
+                                  })()}
+                                </div>
+                                <span className={styles.authorName}>
+                                  {answersMap[question._id]!.user?.name || '익명'}
+                                </span>
+                              </div>
+                              {isSeller && (
+                                <div className={styles.commentActions}>
+                                  <button
+                                    className={styles.editButton}
+                                    aria-label="수정"
+                                    onClick={() =>
+                                      handleEditClick(
+                                        answersMap[question._id]!._id,
+                                        answersMap[question._id]!.contents
+                                      )
+                                    }
+                                  >
+                                    <img src="/edit.svg" alt="수정" width={20} height={20} />
+                                  </button>
+                                  <button
+                                    className={styles.deleteButton}
+                                    aria-label="삭제"
+                                    onClick={() =>
+                                      handleDeleteAnswer(answersMap[question._id]!._id)
+                                    }
+                                  >
+                                    <img src="/close.svg" alt="삭제" width={20} height={20} />
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                            <p className={styles.commentContent}>
+                              {answersMap[question._id]!.contents}
+                            </p>
+                            <div className={styles.commentFooter}>
+                              <span className={styles.commentDate}>
+                                {new Date(answersMap[question._id]!.createdAt).toLocaleDateString(
+                                  'ko-KR'
+                                )}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
               )
