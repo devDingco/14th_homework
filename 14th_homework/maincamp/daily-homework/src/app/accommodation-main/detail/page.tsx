@@ -1,12 +1,10 @@
-'use client';
-
 import ProductHeader from '@/components/accommodation-detail/product/header';
 import ProductGallery from '@/components/accommodation-detail/product/gallery';
 import Contents from '@/components/accommodation-detail/contents';
 import Location from '@/components/accommodation-detail/location';
 import Purchase from '@/components/accommodation-detail/purchase';
 import Comments from '@/components/accommodation-detail/comments';
-import styles from './styles.module.css';
+import AccommodationDetailLayout from '@/commons/components/accommodation-detail-layout';
 
 // Mock 데이터
 const mockComments = [
@@ -53,29 +51,13 @@ export default function AccommodationDetailPage() {
   const isSeller = true; // 테스트를 위해 true로 설정
 
   return (
-    <div className={styles.pageContainer}>
-      <div className={styles.contentContainer}>
-        {/* 제품 헤더 */}
-        <ProductHeader />
-
-        {/* 이미지 갤러리와 Purchase를 같은 행에 배치 */}
-        <div className={styles.topSection}>
-          <div className={styles.productSection}>
-            <ProductGallery />
-          </div>
-          <div className={styles.sidebar}>
-            <Purchase />
-          </div>
-        </div>
-
-        <div className={styles.mainContent}>
-          <div className={styles.divider} />
-          <Contents />
-          <div className={styles.divider} />
-          <Location />
-          <Comments comments={mockComments} isSeller={isSeller} />
-        </div>
-      </div>
-    </div>
+    <AccommodationDetailLayout
+      header={<ProductHeader />}
+      gallery={<ProductGallery />}
+      purchase={<Purchase />}
+      contents={<Contents />}
+      location={<Location />}
+      comments={<Comments travelproductId="" comments={mockComments} isSeller={isSeller} />}
+    />
   );
 }
