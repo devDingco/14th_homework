@@ -13,14 +13,25 @@ const KAKAO_MAP_SCRIPT_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_MAP
 
 export default function useKakaoMap(): KakaoMapHookResult {
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const mapInstanceRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
+  const retryCountRef = useRef(0);
+  const MAX_RETRY_COUNT = 3;
 
   // 카카오 맵 스크립트 로드
   useEffect(() => {
+    // API 키 확인
+    if (!KAKAO_MAP_API_KEY) {
+      setLoadError('카카오 맵 API 키가 설정되지 않았습니다.');
+      console.error('NEXT_PUBLIC_KAKAO_MAP_API_KEY 환경 변수가 설정되지 않았습니다.');
+      return;
+    }
+
     // 이미 로드되어 있고 services도 사용 가능한지 확인
     if (window.kakao && window.kakao.maps && window.kakao.maps.services) {
       setIsScriptLoaded(true);
+      setLoadError(null);
       return;
     }
 
@@ -114,12 +125,16 @@ export default function useKakaoMap(): KakaoMapHookResult {
         }
       }, 100);
 
-      // 타임아웃 설정 (15초 후 중단)
+      // 타임아웃 설정 (20초 후 중단)
       const timeout = setTimeout(() => {
         if (checkKakaoInterval) clearInterval(checkKakaoInterval);
         if (checkServicesInterval) clearInterval(checkServicesInterval);
-        console.error('카카오 맵 SDK 로드 타임아웃');
-      }, 15000);
+        // isScriptLoaded 상태를 직접 확인하지 않고, 현재 상태를 체크
+        if (!window.kakao || !window.kakao.maps || !window.kakao.maps.services) {
+          setLoadError('카카오 맵 SDK 로드 타임아웃. 네트워크 연결을 확인해주세요.');
+          console.error('카카오 맵 SDK 로드 타임아웃');
+        }
+      }, 20000);
 
       return () => {
         if (checkKakaoInterval) clearInterval(checkKakaoInterval);
@@ -141,34 +156,63 @@ export default function useKakaoMap(): KakaoMapHookResult {
             // load() 콜백 후 services 확인
             if (window.kakao.maps.services) {
               setIsScriptLoaded(true);
+              setLoadError(null);
+              retryCountRef.current = 0;
               if (checkServicesInterval) clearInterval(checkServicesInterval);
             } else {
               // services가 아직 로드되지 않았을 수 있으므로 잠시 대기
               checkServicesInterval = setInterval(() => {
                 if (window.kakao && window.kakao.maps && window.kakao.maps.services) {
                   setIsScriptLoaded(true);
+                  setLoadError(null);
+                  retryCountRef.current = 0;
                   if (checkServicesInterval) clearInterval(checkServicesInterval);
                 }
               }, 100);
 
-              // 타임아웃 설정 (10초 후 중단)
+              // 타임아웃 설정 (15초 후 중단)
               setTimeout(() => {
                 if (checkServicesInterval) {
                   clearInterval(checkServicesInterval);
-                  console.error('카카오 맵 services 로드 타임아웃');
+                  if (!isScriptLoaded) {
+                    setLoadError('카카오 맵 services 라이브러리 로드 타임아웃');
+                    console.error('카카오 맵 services 로드 타임아웃');
+                  }
                 }
-              }, 10000);
+              }, 15000);
             }
           });
         } catch (error) {
           console.error('카카오 맵 load() 호출 실패:', error);
+          setLoadError('카카오 맵 초기화 실패');
         }
       } else {
-        console.error('카카오 맵 스크립트는 로드되었지만 window.kakao가 없습니다.');
+        const errorMsg = '카카오 맵 스크립트는 로드되었지만 window.kakao가 없습니다.';
+        console.error(errorMsg);
+        setLoadError(errorMsg);
       }
     };
     script.onerror = () => {
-      console.error('카카오 맵 스크립트 로드 실패');
+      const errorMsg = '카카오 맵 스크립트 로드 실패. 네트워크 연결을 확인해주세요.';
+      console.error(errorMsg);
+      setLoadError(errorMsg);
+
+      // 재시도 로직
+      if (retryCountRef.current < MAX_RETRY_COUNT) {
+        retryCountRef.current += 1;
+        console.log(`카카오 맵 스크립트 재시도 (${retryCountRef.current}/${MAX_RETRY_COUNT})`);
+        setTimeout(() => {
+          // 스크립트를 다시 추가
+          const retryScript = document.createElement('script');
+          retryScript.src = KAKAO_MAP_SCRIPT_URL;
+          retryScript.async = true;
+          retryScript.onload = script.onload;
+          retryScript.onerror = script.onerror;
+          document.head.appendChild(retryScript);
+        }, 2000 * retryCountRef.current); // 재시도 간격 증가
+      } else {
+        setLoadError('카카오 맵 스크립트 로드에 실패했습니다. 페이지를 새로고침해주세요.');
+      }
     };
 
     document.head.appendChild(script);
@@ -267,6 +311,7 @@ export default function useKakaoMap(): KakaoMapHookResult {
 
   return {
     isScriptLoaded,
+    loadError,
     addressToCoordinates,
     mapInstance: mapInstanceRef.current,
     initMap,

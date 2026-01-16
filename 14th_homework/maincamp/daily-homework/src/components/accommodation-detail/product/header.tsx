@@ -1,6 +1,13 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useMutation } from '@apollo/client';
+import {
+  TOGGLE_TRAVELPRODUCT_PICK,
+  FETCH_TRAVELPRODUCT,
+} from '@/components/accommodation-detail/queries';
+import { MutationToggleTravelproductPickArgs } from '@/commons/graphql/graphql';
 import styles from './header.module.css';
 
 interface ProductHeaderProps {
@@ -21,10 +28,58 @@ export default function ProductHeader({
   author,
 }: ProductHeaderProps) {
   const router = useRouter();
+  const [currentBookmarkCount, setCurrentBookmarkCount] = useState(bookmarkCount);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  // props로 전달된 bookmarkCount가 변경되면 동기화
+  useEffect(() => {
+    setCurrentBookmarkCount(bookmarkCount);
+  }, [bookmarkCount]);
+
+  const [toggleTravelproductPick, { loading: toggleLoading }] = useMutation<
+    any,
+    MutationToggleTravelproductPickArgs
+  >(TOGGLE_TRAVELPRODUCT_PICK, {
+    refetchQueries: productId
+      ? [
+          {
+            query: FETCH_TRAVELPRODUCT,
+            variables: {
+              travelproductId: productId,
+            },
+          },
+        ]
+      : [],
+    awaitRefetchQueries: true,
+  });
 
   const handleEditClick = () => {
     if (productId) {
       router.push(`/accommodation/sell/${productId}/edit`);
+    }
+  };
+
+  const handleBookmarkClick = async () => {
+    if (!productId || toggleLoading) return;
+
+    try {
+      // 낙관적 업데이트
+      const newBookmarkedState = !isBookmarked;
+      setIsBookmarked(newBookmarkedState);
+      setCurrentBookmarkCount((prev) => (newBookmarkedState ? prev + 1 : prev - 1));
+
+      await toggleTravelproductPick({
+        variables: {
+          travelproductId: productId,
+        },
+      });
+      // refetchQueries로 자동 업데이트되므로 별도 처리 불필요
+    } catch (error) {
+      console.error('북마크 토글 실패:', error);
+      // 실패 시 롤백
+      setIsBookmarked(!isBookmarked);
+      setCurrentBookmarkCount((prev) => (isBookmarked ? prev + 1 : prev - 1));
+      alert('북마크 처리에 실패했습니다. 다시 시도해 주세요.');
     }
   };
 
@@ -87,18 +142,25 @@ export default function ProductHeader({
               <circle cx="12" cy="10" r="3" />
             </svg>
           </button>
-          <button className={styles.bookmarkButton}>
+          <button
+            className={styles.bookmarkButton}
+            onClick={handleBookmarkClick}
+            disabled={toggleLoading || !productId}
+            style={{
+              background: isBookmarked ? 'rgba(41, 116, 229, 0.8)' : 'rgba(0, 0, 0, 0.4)',
+            }}
+          >
             <svg
               width="24"
               height="24"
               viewBox="0 0 24 24"
-              fill="none"
+              fill={isBookmarked ? 'currentColor' : 'none'}
               stroke="currentColor"
               strokeWidth="2"
             >
               <path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
             </svg>
-            <span>{bookmarkCount}</span>
+            <span>{currentBookmarkCount}</span>
           </button>
         </div>
       </div>

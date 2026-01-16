@@ -16,7 +16,7 @@ export default function KakaoMap({
   onMarkerClick,
 }: KakaoMapProps) {
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const { isScriptLoaded, addressToCoordinates, initMap } = useKakaoMap();
+  const { isScriptLoaded, loadError, addressToCoordinates, initMap } = useKakaoMap();
 
   // 좌표 또는 주소로 지도 초기화 및 업데이트
   useEffect(() => {
@@ -62,6 +62,29 @@ export default function KakaoMap({
     return (
       <div className={styles.placeholder} style={{ width, height }}>
         <p>주소를 먼저 입력해 주세요.</p>
+      </div>
+    );
+  }
+
+  // 에러 상태
+  if (loadError) {
+    return (
+      <div className={styles.loading} style={{ width, height }}>
+        <p style={{ color: '#ff0000' }}>{loadError}</p>
+        <button
+          onClick={() => window.location.reload()}
+          style={{
+            marginTop: '10px',
+            padding: '8px 16px',
+            backgroundColor: '#2974e5',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+          }}
+        >
+          페이지 새로고침
+        </button>
       </div>
     );
   }

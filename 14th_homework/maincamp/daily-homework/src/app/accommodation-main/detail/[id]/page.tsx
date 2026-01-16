@@ -8,12 +8,14 @@ import Contents from '@/components/accommodation-detail/contents';
 import Location from '@/components/accommodation-detail/location';
 import Purchase from '@/components/accommodation-detail/purchase';
 import Comments from '@/components/accommodation-detail/comments';
+import AccommodationDetailLayout from '@/commons/components/accommodation-detail-layout';
+import LoadingState from '@/commons/components/loading-state';
+import ErrorState from '@/commons/components/error-state';
 import { FETCH_TRAVELPRODUCT } from '@/components/accommodation-detail/queries';
 import {
   FetchTravelproductQuery,
   FetchTravelproductQueryVariables,
 } from '@/commons/graphql/graphql';
-import styles from '../styles.module.css';
 
 export default function AccommodationDetailPage() {
   const params = useParams();
@@ -38,22 +40,28 @@ export default function AccommodationDetailPage() {
   // 로딩 중
   if (loading) {
     return (
-      <div className={styles.pageContainer}>
-        <div className={styles.contentContainer}>
-          <div>로딩 중...</div>
-        </div>
-      </div>
+      <AccommodationDetailLayout
+        header={null}
+        gallery={null}
+        purchase={null}
+        contents={<LoadingState />}
+        location={null}
+        comments={null}
+      />
     );
   }
 
   // 에러 처리
   if (error || !product) {
     return (
-      <div className={styles.pageContainer}>
-        <div className={styles.contentContainer}>
-          <div>상품 정보를 불러오는 중 오류가 발생했습니다.</div>
-        </div>
-      </div>
+      <AccommodationDetailLayout
+        header={null}
+        gallery={null}
+        purchase={null}
+        contents={<ErrorState message="상품 정보를 불러오는 중 오류가 발생했습니다." />}
+        location={null}
+        comments={null}
+      />
     );
   }
 
@@ -61,9 +69,8 @@ export default function AccommodationDetailPage() {
   const isSeller = true; // 테스트를 위해 true로 설정
 
   return (
-    <div className={styles.pageContainer}>
-      <div className={styles.contentContainer}>
-        {/* 제품 헤더 */}
+    <AccommodationDetailLayout
+      header={
         <ProductHeader
           title={product.name}
           description={product.remarks}
@@ -72,34 +79,25 @@ export default function AccommodationDetailPage() {
           productId={product._id}
           author={product.seller?.name}
         />
-
-        {/* 이미지 갤러리와 Purchase를 같은 행에 배치 */}
-        <div className={styles.topSection}>
-          <div className={styles.productSection}>
-            <ProductGallery images={product.images || []} title={product.name} />
-          </div>
-          <div className={styles.sidebar}>
-            <Purchase
-              price={product.price || 0}
-              sellerName={product.seller?.name || ''}
-              sellerImage={product.seller?.picture || '/profile.svg'}
-            />
-          </div>
-        </div>
-
-        <div className={styles.mainContent}>
-          <div className={styles.divider} />
-          <Contents description={product.contents} />
-          <div className={styles.divider} />
-          <Location
-            address={product.travelproductAddress?.address || ''}
-            addressDetail={product.travelproductAddress?.addressDetail || ''}
-            lat={product.travelproductAddress?.lat ?? undefined}
-            lng={product.travelproductAddress?.lng ?? undefined}
-          />
-          <Comments travelproductId={travelproductId} comments={[]} isSeller={isSeller} />
-        </div>
-      </div>
-    </div>
+      }
+      gallery={<ProductGallery images={product.images || []} title={product.name} />}
+      purchase={
+        <Purchase
+          price={product.price || 0}
+          sellerName={product.seller?.name || ''}
+          sellerImage={product.seller?.picture || '/profile.svg'}
+        />
+      }
+      contents={<Contents description={product.contents} />}
+      location={
+        <Location
+          address={product.travelproductAddress?.address || ''}
+          addressDetail={product.travelproductAddress?.addressDetail || ''}
+          lat={product.travelproductAddress?.lat ?? undefined}
+          lng={product.travelproductAddress?.lng ?? undefined}
+        />
+      }
+      comments={<Comments travelproductId={travelproductId} comments={[]} isSeller={isSeller} />}
+    />
   );
 }
